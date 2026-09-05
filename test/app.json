@@ -1,0 +1,73 @@
+{
+  "id": "194ecd04-5688-4af6-94bc-732c714251fc",
+  "name": "Bifrost Nornir - Tests",
+  "publisher": "Origo",
+  "version": "28.0.0.0",
+  "brief": "Bifrost Nornir - Tests",
+  "description": "Bifrost Nornir - Tests",
+  "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
+  "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
+  "help": "https://www.origo.is/",
+  "url": "https://www.origo.is/",
+  "logo": "assets/Logo250x250.png",
+  "dependencies": [
+    {
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "name": "Bifrost Foundation",
+      "publisher": "Origo",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "name": "Bifrost Nornir",
+      "publisher": "Origo",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
+      "publisher": "Microsoft",
+      "name": "Tests-TestLibraries",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher": "Microsoft",
+      "name": "Library Assert",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "publisher": "Microsoft",
+      "name": "Test Runner",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
+      "publisher": "Microsoft",
+      "name": "Any",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "5095f467-0a01-4b99-99d1-9ff1237d286f",
+      "publisher": "Microsoft",
+      "name": "Library Variable Storage",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "application": "28.0.0.0",
+  "platform": "28.0.0.0",
+  "target": "Cloud",
+  "idRanges": [
+    {
+      "from": 96300,
+      "to": 96399
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "17.0"
+}
