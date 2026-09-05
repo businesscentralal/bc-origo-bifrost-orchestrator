@@ -171,6 +171,7 @@ def gen():
         a("    local procedure TakeOver%s()" % proc_name(name))
         a("    var")
         a("        Target: Record %s;" % q(name))
+        a("        OldRef: RecordRef;")
         a("        DataTransfer: DataTransfer;")
         if blobs:
             a("        BlobFieldNos: List of [Integer];")
@@ -180,8 +181,11 @@ def gen():
         a("        if not Target.IsEmpty() then")
         a("            exit;")
         a("        DataTransfer.SetTables(%d, Database::%s);" % (old_id, q(name)))
+        a("        OldRef.Open(%d);" % old_id)
         for fno, _ in copyable:
-            a("        DataTransfer.AddFieldValue(%d, %d);" % (fno, fno))
+            a("        if OldRef.FieldExist(%d) then" % fno)
+            a("            DataTransfer.AddFieldValue(%d, %d);" % (fno, fno))
+        a("        OldRef.Close();")
         a("        DataTransfer.UpdateAuditFields(false);")
         a("        DataTransfer.CopyRows();")
         for fno, _ in blobs:
