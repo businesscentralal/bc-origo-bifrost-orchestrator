@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Queue Orchestrator Setup</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/scheduler-setup.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="scheduled-entry-card.html">Orchestrator Entry Card</a>
+    |
+    <a href="recurring-templates.html">Recurring Templates</a>
+    |
+    <a href="job-queue-entries.html">Job Queue Entries</a>
+</nav>
+
+<h1>Job Queue Orchestrator Setup</h1>
+
+<p>The <strong>Job Queue Orchestrator Setup</strong> page is the central configuration page for scheduling in Bifrost Nornir. It holds the settings for the management job queue entry that monitors and restarts scheduled jobs, the Telegram bot token used for notifications, and a list of the orchestrator entries themselves.</p>
+<p>There is a single setup record per company. It is created automatically the first time you open the page.</p>
+
+<h2>Fields</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Job Queue Category Code</strong></td>
+            <td>The job queue category that the management job queue entry belongs to. This field is mandatory &ndash; it groups the orchestrator's own job with the jobs it supervises.</td>
+        </tr>
+        <tr>
+            <td><strong>Log Job Queue Activity</strong></td>
+            <td>Turns on logging of job queue activity so that runs can be reviewed afterwards from the activity log.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue User ID</strong></td>
+            <td>The user that owns the management job queue entry. That user must be allowed to run job queue entries. If left blank the current user is used. The field is shown on-premises only.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Orchestrator Status</strong></td>
+            <td>Read-only status of the management job queue entry. Drill down to open the underlying job queue entry and refresh the status.</td>
+        </tr>
+        <tr>
+            <td><strong>Emit Telemetry</strong></td>
+            <td>When enabled, telemetry is emitted for every execution the orchestrator performs.</td>
+        </tr>
+        <tr>
+            <td><strong>Telegram Bot Token</strong></td>
+            <td>The Telegram Bot API token used to send notifications. The value is masked and stored securely &ndash; once saved it is shown as <code>***</code> and can only be replaced, not read back.</td>
+        </tr>
+        <tr>
+            <td><strong>Bot Token Configured</strong></td>
+            <td>Read-only indicator that shows whether a Telegram bot token has been stored.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Job Queues</h2>
+
+<p>The <strong>Job Queues</strong> part at the bottom of the page lists the orchestrator entries registered in this company. Select a line and open it to reach the <a href="scheduled-entry-card.html">Job Queue Orchestrator Entry Card</a>, where the schedule, retry policy and notification settings for that job are maintained.</p>
+
+<h2>Actions</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Job Queue Entries</strong></td>
+            <td>Opens the standard <a href="job-queue-entries.html">Job Queue Entries</a> list, so you can see the actual job queue entries created from the orchestrator entries.</td>
+        </tr>
+        <tr>
+            <td><strong>Recurring Templates</strong></td>
+            <td>Opens <a href="recurring-templates.html">Job Queue Recurring Templates</a>, where reusable schedule patterns are maintained.</td>
+        </tr>
+        <tr>
+            <td><strong>Restart Job Queue</strong></td>
+            <td>Restarts the management job queue entry. Use it when the orchestrator status shows that the queue has stopped.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Tips</h2>
+
+<ul>
+    <li>If the status field shows that the queue is not running, either use <strong>Restart Job Queue</strong> here or run the <a href="scheduler-setup-wizard.html">setup wizard</a>.</li>
+    <li>The Telegram bot token is only needed when an orchestrator entry or a scheduled playbook uses the <em>Telegram</em> notification type.</li>
+    <li>Client credentials used to call external services are maintained separately on <a href="credentials-list.html">Client Credentials</a>.</li>
+</ul>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

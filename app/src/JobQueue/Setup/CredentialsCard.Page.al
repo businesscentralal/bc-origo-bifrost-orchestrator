@@ -8,7 +8,7 @@ using System.Utilities;
 page 10035545 "Credentials Card ori"
 {
     Caption = 'Client Credentials Card', Comment = 'is-IS=Spjald auðkenni biðlara';
-    ContextSensitiveHelpPage = 'Credentials Card ori".html';
+    ContextSensitiveHelpPage = 'credentials-card.html';
     PageType = Card;
     SourceTable = "Client Credentials ori";
     UsageCategory = None;

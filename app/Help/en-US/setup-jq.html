@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bifrost Setup &ndash; Nornir</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/setup-jq.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="scheduler-setup.html">Orchestrator Setup</a>
+    |
+    <a href="playbooks.html">Playbooks</a>
+    |
+    <a href="scheduler-setup-wizard.html">Setup Wizard</a>
+</nav>
+
+<h1>Bifrost Setup &ndash; Nornir</h1>
+
+<p>Bifrost Nornir adds an <strong>Orchestrator</strong> action group to the Bifrost Setup page, so everything this extension configures is reachable from the same place as the rest of the Bifrost configuration.</p>
+<p>The page also raises a notification when the extension is not ready to run, with a <strong>Run Setup Wizard</strong> action that opens the <a href="scheduler-setup-wizard.html">assisted setup</a>.</p>
+
+<h2>Actions</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Job Queue Orchestrator Setup</strong></td>
+            <td>Opens <a href="scheduler-setup.html">Job Queue Orchestrator Setup</a> to configure job queue scheduling, monitoring and restart policies.</td>
+        </tr>
+        <tr>
+            <td><strong>Bifrost Playbooks</strong></td>
+            <td>Opens <a href="playbooks.html">Bifrost Playbooks</a> to view and configure message playbooks.</td>
+        </tr>
+        <tr>
+            <td><strong>Client Credentials</strong></td>
+            <td>Opens <a href="credentials-list.html">Client Credentials</a> to manage authentication against external services.</td>
+        </tr>
+        <tr>
+            <td><strong>Playbook Execution Log</strong></td>
+            <td>Opens the <a href="playbook-instances.html">Playbook Execution Log</a> for playbook runs.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Setup notification</h2>
+
+<p>When you open Bifrost Setup, the extension checks two things and shows a notification if either is missing:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Situation</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>HTTP blocked and the queue is not running</strong></td>
+            <td>HTTP client requests are blocked and the orchestrator job queue is not running.</td>
+        </tr>
+        <tr>
+            <td><strong>HTTP blocked only</strong></td>
+            <td>HTTP client requests are not enabled for this extension.</td>
+        </tr>
+        <tr>
+            <td><strong>Queue not running only</strong></td>
+            <td>The orchestrator job queue is not running.</td>
+        </tr>
+    </tbody>
+</table>
+<p>Each notification carries a <strong>Run Setup Wizard</strong> action that opens the wizard at the step that fixes the problem.</p>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

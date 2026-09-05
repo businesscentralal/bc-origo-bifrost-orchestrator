@@ -1,5 +1,5 @@
 /// <summary>
-/// Extends the Job Queue Entry Card page with orchestrator actions.
+/// Extends the Job Queue Entry Card page with the Bifrost Nornir scheduling actions.
 /// </summary>
 namespace Origo.Bifrost.Nornir;
 
@@ -7,21 +7,21 @@ using System.Threading;
 
 pageextension 10035535 "JobQueueEntryCard.PageExt ori" extends "Job Queue Entry Card"
 {
-    ContextSensitiveHelpPage = 'JobQueueEntryCard.html';
+    ContextSensitiveHelpPage = 'job-queue-entry-card.html';
 
     layout
     {
         addbefore("No. of Minutes between Runs")
         {
-            field("Orchestrator Enabled ori"; Rec."Orchestrator Enabled ori")
+            field("Scheduler Enabled ori"; Rec."Scheduler Enabled ori")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies if the Job Queue Orchestrator is monitoring this Job Queue Entry.', Comment = 'is-IS=Tilgreinir hvort vinnsluraðari ér á eftirliti með þssarri vinnsluraðafærslu.';
+                ToolTip = 'Specifies whether Bifrost Nornir monitors this job queue entry.', Comment = 'is-IS=Tilgreinir hvort Bifröst Nornir fylgist með þessari vinnsluraðarfærslu.';
             }
         }
         modify(Recurrence)
         {
-            Editable = not Rec."Orchestrator Enabled ori";
+            Editable = not Rec."Scheduler Enabled ori";
         }
     }
 
@@ -29,14 +29,14 @@ pageextension 10035535 "JobQueueEntryCard.PageExt ori" extends "Job Queue Entry 
     {
         addafter(ShowRecord)
         {
-            action("AddToJobQueueOrchestrator ori")
+            action("AddToScheduler ori")
             {
                 ApplicationArea = All;
-                Caption = 'Add to Job Queue Orchestrator', Comment = 'is-IS=Bæta við vinnsluraðara';
+                Caption = 'Add to Bifrost Nornir', Comment = 'is-IS=Bæta við Bifröst Nornir';
                 Image = RefreshPlanningLine;
                 Promoted = true;
                 PromotedCategory = Process;
-                ToolTip = 'Add the selected Job Queue Entry to Job Queue Orchestrator to have the Job Queue Orchestrator monitor and restart the Job Queue Entry when it fails.', Comment = 'is-IS=Bæta valdin vinnsluraðafærslu við vinnsluraðara til að vinnsluraðakti géti eftirlitið og endurrásað vinnsluraðafærslunni ef hún bilst.';
+                ToolTip = 'Add the selected job queue entry to Bifrost Nornir so that it monitors the entry and restarts it when it fails.', Comment = 'is-IS=Bæta valinni vinnsluraðarfærslu við Bifröst Nornir svo hún fylgist með færslunni og endurræsi hana ef hún bregst.';
                 trigger OnAction()
                 var
                     "Scheduled Entry ori": Record "Scheduled Entry ori";

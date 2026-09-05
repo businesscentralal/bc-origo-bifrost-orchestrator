@@ -8,6 +8,7 @@ using Origo.Bifrost;
 page 10035548 "Playbook Card ori"
 {
     Caption = 'Bifrost Playbook', Comment = 'is-IS=Bifröst keðja';
+    ContextSensitiveHelpPage = 'playbook-card.html';
     PageType = Card;
     ApplicationArea = All;
     SourceTable = "Playbook ori";

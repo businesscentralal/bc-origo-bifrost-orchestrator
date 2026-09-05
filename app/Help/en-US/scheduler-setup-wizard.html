@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bifrost Nornir Setup</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/scheduler-setup-wizard.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="scheduler-setup.html">Orchestrator Setup</a>
+    |
+    <a href="setup-jq.html">Bifrost Setup</a>
+</nav>
+
+<h1>Bifrost Nornir Setup</h1>
+
+<p>The <strong>Bifrost Nornir Setup</strong> wizard is the assisted setup for this extension. It takes you through four steps: a short introduction, enabling outbound HTTP, starting the management job queue that the orchestrator depends on, and a confirmation that setup is complete.</p>
+<p>The wizard is offered from the Assisted Setup list, and from the notification shown on <a href="setup-jq.html">Bifrost Setup</a> when HTTP is blocked or the management job queue is not running.</p>
+
+<h2>Steps</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>What happens</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1. Welcome</strong></td>
+            <td>Explains what the extension does: automated job queue scheduling, monitoring, restart and error handling, plus a declarative playbook runner that executes sequences of Bifrost message types. It also points out that a management job queue entry must be running for monitoring and restart to work.</td>
+        </tr>
+        <tr>
+            <td><strong>2. Enable HTTP Client Requests</strong></td>
+            <td>The extension needs outbound HTTP to send notifications and to talk to external services. The <strong>HTTP Client Requests</strong> field shows <em>Enabled</em> or <em>Not Enabled</em>. You cannot continue to step 3 until it is enabled.</td>
+        </tr>
+        <tr>
+            <td><strong>3. Job Queue Orchestrator</strong></td>
+            <td>The <strong>Job Queue Orchestrator Status</strong> field shows whether the management job queue entry is running. Start it here, or open the full setup page for detailed configuration.</td>
+        </tr>
+        <tr>
+            <td><strong>4. Setup Complete</strong></td>
+            <td>Confirms that setup is done. Every setting can be changed later on the <a href="scheduler-setup.html">Job Queue Orchestrator Setup</a> page, which is reached from Bifrost Setup.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Actions</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Back / Next</strong></td>
+            <td>Move between the wizard steps. <strong>Next</strong> is disabled on step 2 until HTTP client requests are enabled.</td>
+        </tr>
+        <tr>
+            <td><strong>Enable HTTP Client Requests</strong></td>
+            <td>Sets <em>Allow HttpClient Requests</em> for this extension. Shown on step 2 only when HTTP is not yet enabled and you have permission to change extension settings.</td>
+        </tr>
+        <tr>
+            <td><strong>Open Extension Settings</strong></td>
+            <td>Opens the Extension Settings page so an administrator can allow HTTP client requests. Shown instead of the button above when you lack write permission.</td>
+        </tr>
+        <tr>
+            <td><strong>Verify</strong></td>
+            <td>Re-reads the current status on step 2 and step 3.</td>
+        </tr>
+        <tr>
+            <td><strong>Start Job Queue</strong></td>
+            <td>Creates and starts the management job queue entry. Shown on step 3 when the queue is not running.</td>
+        </tr>
+        <tr>
+            <td><strong>Open Orchestrator Setup</strong></td>
+            <td>Opens the <a href="scheduler-setup.html">Job Queue Orchestrator Setup</a> page for detailed configuration.</td>
+        </tr>
+        <tr>
+            <td><strong>Finish</strong></td>
+            <td>Marks the assisted setup as complete and closes the wizard.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

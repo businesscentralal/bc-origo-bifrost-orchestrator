@@ -418,7 +418,7 @@ codeunit 96311 "Orchestrator Unit Tests"
 
         // [GIVEN] Open Job Queue Scheduler from the Job Queue Entry Card 
         OrchestratorEntryCard.Trap();
-        JobQueueEntryCard."AddToJobQueueOrchestrator ori".Invoke();
+        JobQueueEntryCard."AddToScheduler ori".Invoke();
 
         // [THEN] 'Blocked' is false
         Assert.IsFalse(OrchestratorEntryCard.Blocked.AsBoolean(), StrSubstNo(InvalidFieldValueTok, OrchestratorEntryCard.Blocked.Caption()));
@@ -494,7 +494,7 @@ codeunit 96311 "Orchestrator Unit Tests"
         // [WHEN] Try to add Job Queue Scheduler Entry from Job Queue Entry Card
         // [AND] User refuses overwrite but confirms to open card
         OrchestratorCardPg.Trap();
-        JobQueueEntryCard."AddToJobQueueOrchestrator ori".Invoke();
+        JobQueueEntryCard."AddToScheduler ori".Invoke();
 
         // [THEN] Job Queue Scheduler Entry card page opens with existing entry
         // Verify by checking Object Type and Object ID match the expected entry

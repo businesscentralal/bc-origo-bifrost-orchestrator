@@ -12,7 +12,7 @@ page 10035544 "Scheduled Entry Card ori"
 {
     Caption = 'Job Queue Orchestrator Entry Card', Comment = 'is-IS=Spjald vinnsluraðarafærslu';
     DataCaptionFields = "Object Type to Run", "Object Caption to Run";
-    ContextSensitiveHelpPage = '"Scheduled Entry Card ori".html';
+    ContextSensitiveHelpPage = 'scheduled-entry-card.html';
     PageType = Card;
     SourceTable = "Scheduled Entry ori";
     UsageCategory = None;

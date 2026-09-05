@@ -7,7 +7,7 @@ page 10035546 "Credentials List ori"
 {
     ApplicationArea = All;
     Caption = 'Client Credentials', Comment = 'is-IS=Auðkenni biðlara';
-    ContextSensitiveHelpPage = 'Credentials List ori".html';
+    ContextSensitiveHelpPage = 'credentials-list.html';
     PageType = List;
     SourceTable = "Client Credentials ori";
     UsageCategory = None;

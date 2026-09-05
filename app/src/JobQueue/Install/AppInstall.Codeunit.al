@@ -16,11 +16,11 @@ codeunit 10035537 "App Install ori"
     var
         SchedulerSetup: Record "Scheduler Setup ori";
         JobQueueManagement: Codeunit "Scheduler Mgt ori";
-        NornirTakeover: Codeunit "Nornir Takeover ori";
+        AppTakeover: Codeunit "App Takeover ori";
     begin
         // The take-over must run before the setup singleton is created, otherwise the target table
         // is no longer empty and the published app's setup would not be copied.
-        NornirTakeover.TakeOverAll();
+        AppTakeover.TakeOverAll();
         SchedulerSetup.OnOpenEmptyRec();
         JobQueueManagement.RegisterJobQueues();
         RegisterRetentionPolicies();

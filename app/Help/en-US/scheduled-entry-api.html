@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Queue Orchestrator API</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/scheduled-entry-api.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="scheduled-entry-card.html">Orchestrator Entry Card</a>
+    |
+    <a href="scheduler-setup.html">Orchestrator Setup</a>
+</nav>
+
+<h1>Job Queue Orchestrator API</h1>
+
+<p>Bifrost Nornir publishes a small set of API pages under the publisher <code>origo</code>, API group <code>jobQueueOrchestrator</code>, version <code>v1.0</code>. They are used programmatically by external integrations and are not opened by users.</p>
+
+<h2>Endpoints</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>API page</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Job Queue Orchestrator Entries API</strong></td>
+            <td><code>/api/origo/jobQueueOrchestrator/v1.0/scheduledEntries</code></td>
+            <td>Read and write orchestrator entries: object to run, schedule, notification settings and blocked state. Bound actions can reschedule, restart or set the linked job queue entry to Ready.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Entries API</strong></td>
+            <td><code>/api/origo/jobQueueOrchestrator/v1.0/queueEntries</code></td>
+            <td>Read-only view of the standard job queue entries, including status, schedule and the last error message.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Log Entries API</strong></td>
+            <td><code>/api/origo/jobQueueOrchestrator/v1.0/queueLogEntries</code></td>
+            <td>Read-only view of the job queue log entries, for checking the outcome of past runs.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Orchestrator Status</strong></td>
+            <td><code>/api/origo/jobQueueOrchestrator/v1.0/status</code></td>
+            <td>Read-only status of the orchestrator itself, for external monitoring.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Categories</strong></td>
+            <td><code>/api/origo/jobQueueOrchestrator/v1.0/queueCategories</code></td>
+            <td>Read-only list of the job queue categories available in the company.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Bound actions</h2>
+
+<p>The orchestrator entries endpoint exposes four bound actions. All of them require that the entry is not blocked.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>ScheduleJobQueueEntryUpdate</strong></td>
+            <td>Deletes the linked job queue entry and returns the updated orchestrator entry. The orchestrator recreates the job on its next pass.</td>
+        </tr>
+        <tr>
+            <td><strong>UpdateJobQueueEntry</strong></td>
+            <td>Deletes the linked job queue entry and immediately schedules a new one from the current definition.</td>
+        </tr>
+        <tr>
+            <td><strong>RestartJobQueueEntry</strong></td>
+            <td>Restarts the linked job queue entry.</td>
+        </tr>
+        <tr>
+            <td><strong>SetStatusToReady</strong></td>
+            <td>Sets the linked job queue entry status to Ready.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

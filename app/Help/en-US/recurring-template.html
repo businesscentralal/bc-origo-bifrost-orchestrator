@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Queue Recurring Template</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/recurring-template.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="recurring-templates.html">Recurring Templates</a>
+    |
+    <a href="scheduled-entry-card.html">Orchestrator Entry Card</a>
+</nav>
+
+<h1>Job Queue Recurring Template</h1>
+
+<p>A <strong>Job Queue Recurring Template</strong> describes one reusable schedule. When an <a href="scheduled-entry-card.html">orchestrator entry</a> or a <a href="schedule-playbook.html">scheduled playbook</a> refers to a template, the entry follows the template instead of its own recurrence fields.</p>
+<p>The schedule is validated when you close the card, so an incomplete pattern cannot be saved.</p>
+
+<h2>General</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Code</strong></td>
+            <td>The unique code of the template.</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td>A description that explains when the pattern applies, for example <em>Every weekday at night</em>.</td>
+        </tr>
+        <tr>
+            <td><strong>Time Zone</strong></td>
+            <td>The time zone the schedule is interpreted in. Use the assist button to pick one; new templates start from your own time zone in User Personalization.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Schedule</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Run on Mondays &hellip; Run on Sundays</strong></td>
+            <td>The weekdays on which entries using this template run.</td>
+        </tr>
+        <tr>
+            <td><strong>Starting Time</strong></td>
+            <td>The earliest time of day at which a run may start.</td>
+        </tr>
+        <tr>
+            <td><strong>Ending Time</strong></td>
+            <td>The latest time of day at which a run may start.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Recurrence</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>No. of Minutes between Runs</strong></td>
+            <td>The minimum number of minutes between two runs inside the time window.</td>
+        </tr>
+        <tr>
+            <td><strong>Next Run Date Formula</strong></td>
+            <td>A date formula used to calculate the next run date, for example <code>1D</code> or <code>1M</code>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

@@ -61,7 +61,7 @@ page 10035538 "Entries API ori"
                     Caption = 'Scheduled', Comment = 'is-IS=Tímasett';
                     ToolTip = 'Specifies if the job queue entry has been scheduled to run automatically, which happens when an entry changes status to Ready. If the field is cleared, the job queue entry is not scheduled to run.', Comment = 'is-IS=Tilgreinir hvort vinnsluraðafærsla hafí verið tímasett.';
                 }
-                field(orchestratorEnabled; Rec."Orchestrator Enabled ori")
+                field(orchestratorEnabled; Rec."Scheduler Enabled ori")
                 {
                     Caption = 'Orchestrator Enabled', Comment = 'is-IS=Vinnsluraðari virkur';
                 }

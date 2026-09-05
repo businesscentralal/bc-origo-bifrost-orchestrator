@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Queue Orchestrator Entry Card</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/scheduled-entry-card.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="scheduler-setup.html">Orchestrator Setup</a>
+    |
+    <a href="recurring-template.html">Recurring Template</a>
+    |
+    <a href="job-queue-entry-card.html">Job Queue Entry Card</a>
+</nav>
+
+<h1>Job Queue Orchestrator Entry Card</h1>
+
+<p>The <strong>Job Queue Orchestrator Entry Card</strong> defines one supervised job: what to run, when to run it, how to react to errors, and who to notify. The orchestrator creates and maintains the underlying job queue entry from this definition and recreates it when it fails or disappears.</p>
+<p>New entries are created blocked, with the earliest start date set to the current date and time, so you can finish the definition before the job goes live.</p>
+
+<h2>General</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Object Type to Run</strong></td>
+            <td>The type of object the job runs &ndash; typically a codeunit or a report.</td>
+        </tr>
+        <tr>
+            <td><strong>Object ID to Run</strong></td>
+            <td>The ID of the object to run. This field is mandatory; the page will not close without it.</td>
+        </tr>
+        <tr>
+            <td><strong>Object Caption to Run</strong></td>
+            <td>The caption of the object, filled in from the object ID.</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td>A description of the entry. Drill down to open the related record when the entry was created from one.</td>
+        </tr>
+        <tr>
+            <td><strong>Report Output Type</strong></td>
+            <td>Output format for the run. Shown only when the object type is <em>Report</em>.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Category Code</strong></td>
+            <td>The job queue category the entry belongs to.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue User ID</strong></td>
+            <td>The user that owns the job queue entry. The user must be allowed to run job queue entries; if blank the current user is used. On-premises only.</td>
+        </tr>
+        <tr>
+            <td><strong>Blocked</strong></td>
+            <td>Stops the orchestrator from scheduling the entry. New entries start blocked &ndash; clear this field when the definition is complete.</td>
+        </tr>
+        <tr>
+            <td><strong>Emit Telemetry</strong></td>
+            <td>Emits telemetry for every execution of this entry.</td>
+        </tr>
+        <tr>
+            <td><strong>Client Credentials Code</strong></td>
+            <td>The <a href="credentials-list.html">client credentials</a> used when this entry calls an external service.</td>
+        </tr>
+        <tr>
+            <td><strong>Earliest Start Date/Time</strong></td>
+            <td>The earliest date and time at which the job may run.</td>
+        </tr>
+        <tr>
+            <td><strong>Recurring Template Code</strong></td>
+            <td>A <a href="recurring-template.html">recurring template</a> that supplies the schedule. When a template is selected, the fields in the Recurrence group become read-only and follow the template.</td>
+        </tr>
+        <tr>
+            <td><strong>Scheduled</strong></td>
+            <td>Shows whether this entry currently has a job queue entry scheduled for it.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Retry Policy</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Retry Policy</strong></td>
+            <td>How the orchestrator reacts when the job fails. <strong>Always</strong> &ndash; the entry is always restarted. <strong>Three Times</strong> &ndash; the entry is restarted only while it has failed fewer than three times. <strong>Never</strong> &ndash; the entry is never restarted automatically.</td>
+        </tr>
+        <tr>
+            <td><strong>Errors Since Last Success</strong></td>
+            <td>The number of consecutive failures since the last successful run. The counter is reset when the entry runs successfully.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Recurrence</h2>
+
+<p>The Recurrence group is editable only when <strong>Recurring Template Code</strong> is blank. The schedule is validated when the page is closed.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Run on Mondays &hellip; Run on Sundays</strong></td>
+            <td>The weekdays on which the job runs. At least one day must be selected for a recurring job.</td>
+        </tr>
+        <tr>
+            <td><strong>Time Zone</strong></td>
+            <td>The time zone the schedule is interpreted in. Use the assist button to pick a time zone.</td>
+        </tr>
+        <tr>
+            <td><strong>Next Run Date Formula</strong></td>
+            <td>A date formula used to calculate the next run date, for example <code>1M</code> for monthly.</td>
+        </tr>
+        <tr>
+            <td><strong>Starting Time</strong></td>
+            <td>The earliest time of day at which the recurring job may run.</td>
+        </tr>
+        <tr>
+            <td><strong>Ending Time</strong></td>
+            <td>The latest time of day at which the recurring job may run.</td>
+        </tr>
+        <tr>
+            <td><strong>No. of Minutes between Runs</strong></td>
+            <td>The minimum number of minutes between two runs of the job.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Notification</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Notification Type</strong></td>
+            <td>How the owner is notified about the run: <em>None</em>, <em>Email</em> or <em>Telegram</em>. Selecting Telegram fills in the recipient from your Telegram chat ID in User Setup when one is stored.</td>
+        </tr>
+        <tr>
+            <td><strong>Notification Recipient</strong></td>
+            <td>The address the notification is sent to &ndash; an email address or a Telegram chat ID. The field is marked as mandatory when the selected notification type requires a recipient. Use the assist button to send a test notification.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Actions</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Run once (foreground)</strong></td>
+            <td>Runs a copy of this job once, immediately, in the foreground. Useful for testing a definition before letting it run on a schedule.</td>
+        </tr>
+        <tr>
+            <td><strong>Reschedule</strong></td>
+            <td>Deletes the current job queue entry. The orchestrator creates a new one on its next pass. The entry must not be blocked.</td>
+        </tr>
+        <tr>
+            <td><strong>Schedule Now</strong></td>
+            <td>Recreates the job queue entry so the job is scheduled for execution now. The entry must not be blocked.</td>
+        </tr>
+        <tr>
+            <td><strong>Activity Log</strong></td>
+            <td>Opens the activity log for this entry, so you can review previous runs and errors.</td>
+        </tr>
+        <tr>
+            <td><strong>Job Queue Entry</strong></td>
+            <td>Opens the <a href="job-queue-entry-card.html">Job Queue Entry Card</a> for the underlying job queue entry. Enabled only while such an entry exists.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

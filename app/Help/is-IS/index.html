@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bifröst Nornir &ndash; Hjálp</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <span>Tungumál:</span>
+    <a href="../en-US/index.html">English</a>
+</nav>
+
+<h1>Bifröst Nornir &ndash; Hjálp</h1>
+
+<p>
+    <strong>Bifröst Nornir</strong> er Business Central viðbót frá Origo sem tekur að sér tímasetta vinnslu.
+    Hún hefur eftirlit með vinnsluraðafærslum &ndash; endurskapar þær og endurræsir samkvæmt endurprófanarstefnu og tilkynnir
+    með tölvupósti eða Telegram þegar eitthvað bregst &ndash; og hún keyrir <em>keðjur</em>: leiðbeinandi runur af
+    Bifröst skilaboðategundum þar sem svar eins skrefs stýrir beiðni þess næsta.
+</p>
+<p>
+    Áætlanir eru skilgreindar einu sinni sem endurtekningarsniðmát og endurnýttar milli verka. Skýrslur má keyra án
+    notanda út frá vistuðum forsendum beiðnisíðu og allur vinnsluraðarinn er aðgengilegur gegnum lítið REST-viðmót fyrir ytra eftirlit.
+</p>
+
+<h2>Síður</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Síða</th>
+            <th>Lýsing</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="scheduler-setup-wizard.html">Uppsetning Bifröst Nornir</a></td>
+            <td>Aðstoðuð uppsetning: virkja útleið HTTP og ræsa stjórnunarvinnsluröð.</td>
+        </tr>
+        <tr>
+            <td><a href="setup-jq.html">Bifröst uppsetning &ndash; Nornir</a></td>
+            <td>Aðgerðahópurinn sem bætist við Bifröst uppsetningu og tilkynningin um viðbúnað.</td>
+        </tr>
+        <tr>
+            <td><a href="scheduler-setup.html">Uppsetning vinnsluraðara</a></td>
+            <td>Miðlæg uppsetning: stjórnunarvinnsluröð, fjarmælingar, Telegram-lykill og listi vinnsluraðarafærslna.</td>
+        </tr>
+        <tr>
+            <td><a href="scheduled-entry-card.html">Spjald vinnsluraðarafærslu</a></td>
+            <td>Eitt verk undir eftirliti: hvað á að keyra, hvenær, endurprófanarstefna og tilkynning.</td>
+        </tr>
+        <tr>
+            <td><a href="recurring-templates.html">Endurtekningarsniðmát vinnsluraða</a></td>
+            <td>Listi yfir endurnýtanleg áætlunarmynstur.</td>
+        </tr>
+        <tr>
+            <td><a href="recurring-template.html">Endurtekningarsniðmát vinnsluraða</a></td>
+            <td>Ein endurnýtanleg áætlun: vikudagar, tímagluggi, bil og tímabelti.</td>
+        </tr>
+        <tr>
+            <td><a href="credentials-list.html">Auðkenni biðlara</a></td>
+            <td>Listi yfir auðkennispör sem notuð eru gagnvart ytri þjónustum.</td>
+        </tr>
+        <tr>
+            <td><a href="credentials-card.html">Spjald auðkenna biðlara</a></td>
+            <td>Búa til og viðhalda einu pari af auðkenni og leyniorði biðlara.</td>
+        </tr>
+        <tr>
+            <td><a href="playbooks.html">Bifröst keðjur</a></td>
+            <td>Listi yfir keðjur ásamt niðurstöðu síðustu keyrslu.</td>
+        </tr>
+        <tr>
+            <td><a href="playbook-card.html">Bifröst keðja</a></td>
+            <td>Skilgreina skref, skilyrði og upphafsbeiðni keðju.</td>
+        </tr>
+        <tr>
+            <td><a href="schedule-playbook.html">Tímasetja keðju</a></td>
+            <td>Gluggi sem gerir keðju að reglulega tímasettu verki.</td>
+        </tr>
+        <tr>
+            <td><a href="playbook-instances.html">Keyrsluskrá keðju</a></td>
+            <td>Allar keyrslur keðja, þær nýjustu efst.</td>
+        </tr>
+        <tr>
+            <td><a href="playbook-instance-card.html">Upplýsingar um keðjukeyrslu</a></td>
+            <td>Ein keyrsla í heild: tímar, teljarar, villa og skrá skrefanna.</td>
+        </tr>
+        <tr>
+            <td><a href="report-preset-card.html">Forsendur skýrslu</a></td>
+            <td>Vista forsendur beiðnisíðu svo keyra megi skýrslu án notanda.</td>
+        </tr>
+        <tr>
+            <td><a href="job-queue-entries.html">Vinnsluraðafærslur</a></td>
+            <td>Reiturinn og aðgerðin sem bætast við staðlaðan vinnsluraðalista.</td>
+        </tr>
+        <tr>
+            <td><a href="job-queue-entry-card.html">Spjald vinnsluraðafærslu</a></td>
+            <td>Reiturinn og aðgerðin sem bætast við staðlað vinnsluraðaspjald.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>API-síður</h2>
+
+<p>Eftirfarandi API-síður eru notuðar af ytri samhæfingum og eru ekki opnaðar beint af notendum:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>API-síða</th>
+            <th>Lýsing</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="scheduled-entry-api.html">API vinnsluraðara</a></td>
+            <td>Les og skrifar vinnsluraðarafærslur, vinnsluraðafærslur, kladdafærslur, stöðu og flokka undir <code>origo/jobQueueOrchestrator/v1.0</code>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Fyrstu skref</h2>
+<ol>
+    <li>Keyrðu leiðsögnina <strong>Uppsetning Bifröst Nornir</strong> úr aðstoðuðum uppsetningum til að virkja útleið HTTP og ræsa stjórnunarvinnsluröðina.</li>
+    <li>Opnaðu <strong>Uppsetningu vinnsluraðara</strong> og stilltu flokk vinnsluraða, og Telegram-lykilinn ef þú notar Telegram-tilkynningar.</li>
+    <li>Settu inn <strong>sýnishorn sniðmáta</strong> eða búðu til þitt eigið áætlunarmynstur.</li>
+    <li>Bættu þegar skráðri vinnsluraðafærslu við vinnsluraðarann eða skilgreindu nýja færslu á spjaldi vinnsluraðarafærslu.</li>
+    <li>Búðu til <strong>keðju</strong>, keyrðu hana einu sinni af spjaldinu og tímasettu hana þegar keyrslan lítur vel út.</li>
+</ol>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifröst Nornir</p>
+
+</body>
+</html>

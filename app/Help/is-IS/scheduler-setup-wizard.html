@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uppsetning Bifröst Nornir</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Heim</a>
+    |
+    <span>Tungumál:</span>
+    <a href="../en-US/scheduler-setup-wizard.html">English</a>
+    |
+    <span>Tengdar síður:</span>
+    <a href="scheduler-setup.html">Uppsetning vinnsluraðara</a>
+    |
+    <a href="setup-jq.html">Bifröst uppsetning</a>
+</nav>
+
+<h1>Uppsetning Bifröst Nornir</h1>
+
+<p>Leiðsögnin <strong>Uppsetning Bifröst Nornir</strong> er aðstoðuð uppsetning fyrir viðbótina. Hún tekur þig í gegnum fjögur skref: stutta kynningu, virkjun á útleið HTTP, ræsingu stjórnunarvinnsluraðar sem vinnsluraðarinn byggir á, og staðfestingu á að uppsetningu sé lokið.</p>
+<p>Leiðsögnin er aðgengileg úr lista yfir aðstoðaðar uppsetningar og úr tilkynningunni sem birtist á <a href="setup-jq.html">Bifröst uppsetningu</a> þegar HTTP er lokað eða stjórnunarvinnsluröðin er ekki í gangi.</p>
+
+<h2>Skref</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Skref</th>
+            <th>Hvað gerist</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1. Velkomin</strong></td>
+            <td>Útskýrir hvað viðbótin gerir: sjálfvirka tímasetningu vinnsluraðar, eftirlit, endurræsingu og villumeðhöndlun, auk leiðbeinandi keðjukeyrslu sem keyrir runur af Bifröst skilaboðategundum. Þar kemur einnig fram að stjórnunarvinnsluraðafærsla verður að vera í gangi til að eftirlit og endurræsing virki.</td>
+        </tr>
+        <tr>
+            <td><strong>2. Virkja HTTP-biðlarabeiðnir</strong></td>
+            <td>Viðbótin þarf útleið HTTP til að senda tilkynningar og eiga samskipti við ytri þjónustur. Reiturinn <strong>HTTP-biðlarabeiðnir</strong> sýnir <em>Virkt</em> eða <em>Ekki virkt</em>. Ekki er hægt að halda áfram í skref 3 fyrr en þetta er virkt.</td>
+        </tr>
+        <tr>
+            <td><strong>3. Vinnsluraðari</strong></td>
+            <td>Reiturinn <strong>Staða vinnsluraðara</strong> sýnir hvort stjórnunarvinnsluraðafærslan sé í gangi. Hægt er að ræsa hana hér eða opna uppsetningarsíðuna fyrir ítarlegri stillingar.</td>
+        </tr>
+        <tr>
+            <td><strong>4. Uppsetningu lokið</strong></td>
+            <td>Staðfestir að uppsetningu sé lokið. Öllum stillingum má breyta síðar á síðunni <a href="scheduler-setup.html">Uppsetning vinnsluraðara</a> sem er aðgengileg úr Bifröst uppsetningu.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Aðgerðir</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Aðgerð</th>
+            <th>Lýsing</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Til baka / Áfram</strong></td>
+            <td>Færir þig milli skrefa. <strong>Áfram</strong> er óvirkt í skrefi 2 þar til HTTP-biðlarabeiðnir hafa verið virkjaðar.</td>
+        </tr>
+        <tr>
+            <td><strong>Virkja HTTP-biðlarabeiðnir</strong></td>
+            <td>Stillir <em>Leyfa HttpClient-beiðnir</em> fyrir þessa viðbót. Birtist í skrefi 2 þegar HTTP er ekki virkt og þú hefur heimild til að breyta stillingum viðbóta.</td>
+        </tr>
+        <tr>
+            <td><strong>Opna stillingar viðbótar</strong></td>
+            <td>Opnar stillingasíðu viðbóta svo kerfisstjóri geti leyft HTTP-biðlarabeiðnir. Birtist í stað hnappsins hér að ofan þegar það vantar skrifréttindi.</td>
+        </tr>
+        <tr>
+            <td><strong>Staðfesta</strong></td>
+            <td>Les stöðuna upp á nýtt í skrefi 2 og skrefi 3.</td>
+        </tr>
+        <tr>
+            <td><strong>Ræsa vinnsluröð</strong></td>
+            <td>Býr til og ræsir stjórnunarvinnsluraðafærsluna. Birtist í skrefi 3 þegar röðin er ekki í gangi.</td>
+        </tr>
+        <tr>
+            <td><strong>Opna uppsetningu stjórnanda</strong></td>
+            <td>Opnar síðuna <a href="scheduler-setup.html">Uppsetning vinnsluraðara</a> fyrir ítarlegri stillingar.</td>
+        </tr>
+        <tr>
+            <td><strong>Ljúka</strong></td>
+            <td>Merkir aðstoðuðu uppsetninguna sem lokið og lokar leiðsögninni.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifröst Nornir</p>
+
+</body>
+</html>

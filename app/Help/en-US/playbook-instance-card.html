@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook Execution Detail</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Home</a>
+    |
+    <span>Language:</span>
+    <a href="../is-IS/playbook-instance-card.html">Íslenska</a>
+    |
+    <span>Related:</span>
+    <a href="playbook-instances.html">Execution Log</a>
+    |
+    <a href="playbook-card.html">Playbook</a>
+</nav>
+
+<h1>Playbook Execution Detail</h1>
+
+<p>The <strong>Playbook Execution Detail</strong> card shows one playbook run in full: the timings, the counters, any error, and the log of every step that was executed. The card is read-only.</p>
+
+<h2>General</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Playbook Code</strong></td>
+            <td>The playbook that was executed.</td>
+        </tr>
+        <tr>
+            <td><strong>Status</strong></td>
+            <td>The execution status of the run.</td>
+        </tr>
+        <tr>
+            <td><strong>Started At</strong></td>
+            <td>When the execution started.</td>
+        </tr>
+        <tr>
+            <td><strong>Completed At</strong></td>
+            <td>When the execution completed.</td>
+        </tr>
+        <tr>
+            <td><strong>Total Duration</strong></td>
+            <td>The total execution time.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Counters</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Steps Executed</strong></td>
+            <td>The number of steps that were executed.</td>
+        </tr>
+        <tr>
+            <td><strong>Steps Failed</strong></td>
+            <td>The number of steps that failed.</td>
+        </tr>
+        <tr>
+            <td><strong>Items Processed</strong></td>
+            <td>The total number of items processed across all iterations.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Error</h2>
+
+<p>The <strong>Error</strong> group is shown only when the run produced an error. It contains the error message that ended the run.</p>
+
+<h2>Step Log</h2>
+
+<p>The <strong>Step Log</strong> part lists every step execution in the run, including one line per iteration when a step iterates over an array. Select a line to see its request, response and timing in the <strong>Selected Step</strong> FactBox.</p>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifrost Nornir</p>
+
+</body>
+</html>

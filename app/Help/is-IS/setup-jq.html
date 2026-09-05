@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bifröst uppsetning &ndash; Nornir</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; color: #333; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        h3 { margin-top: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        a { color: #0078d4; }
+        nav a { text-decoration: none; font-weight: 600; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+
+<nav style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+    <a href="index.html">Heim</a>
+    |
+    <span>Tungumál:</span>
+    <a href="../en-US/setup-jq.html">English</a>
+    |
+    <span>Tengdar síður:</span>
+    <a href="scheduler-setup.html">Uppsetning vinnsluraðara</a>
+    |
+    <a href="playbooks.html">Keðjur</a>
+    |
+    <a href="scheduler-setup-wizard.html">Uppsetningarleiðsögn</a>
+</nav>
+
+<h1>Bifröst uppsetning &ndash; Nornir</h1>
+
+<p>Bifröst Nornir bætir aðgerðahópnum <strong>Stjórnandi</strong> við síðuna Bifröst uppsetning, svo allt sem þessi viðbót stillir sé aðgengilegt á sama stað og önnur uppsetning Bifröst.</p>
+<p>Síðan sýnir einnig tilkynningu þegar viðbótin er ekki tilbúin til keyrslu, með aðgerðinni <strong>Keyra uppsetningarleiðsögn</strong> sem opnar <a href="scheduler-setup-wizard.html">aðstoðuðu uppsetninguna</a>.</p>
+
+<h2>Aðgerðir</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Aðgerð</th>
+            <th>Lýsing</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Uppsetning vinnsluraðara</strong></td>
+            <td>Opnar <a href="scheduler-setup.html">Uppsetningu vinnsluraðara</a> til að stilla tímasetningu, eftirlit og endurræsingarstefnur.</td>
+        </tr>
+        <tr>
+            <td><strong>Bifröst keðjur</strong></td>
+            <td>Opnar <a href="playbooks.html">Bifröst keðjur</a> til að skoða og stilla keðjur skilaþoða.</td>
+        </tr>
+        <tr>
+            <td><strong>Auðkenni biðlara</strong></td>
+            <td>Opnar <a href="credentials-list.html">Auðkenni biðlara</a> til að stjórna auðkenningu gagnvart ytri þjónustum.</td>
+        </tr>
+        <tr>
+            <td><strong>Keyrsluskrá keðju</strong></td>
+            <td>Opnar <a href="playbook-instances.html">Keyrsluskrá keðju</a> yfir keyrslur keðja.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Uppsetningartilkynning</h2>
+
+<p>Þegar Bifröst uppsetning er opnuð athugar viðbótin tvennt og sýnir tilkynningu ef annað hvort vantar:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Aðstæður</th>
+            <th>Skilaboð</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>HTTP lokað og röðin ekki í gangi</strong></td>
+            <td>HTTP-biðlarabeiðnir eru lokaðar og vinnsluröð stjórnanda er ekki í gangi.</td>
+        </tr>
+        <tr>
+            <td><strong>Aðeins HTTP lokað</strong></td>
+            <td>HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót.</td>
+        </tr>
+        <tr>
+            <td><strong>Aðeins röðin ekki í gangi</strong></td>
+            <td>Vinnsluröð stjórnanda er ekki í gangi.</td>
+        </tr>
+    </tbody>
+</table>
+<p>Hver tilkynning ber aðgerðina <strong>Keyra uppsetningarleiðsögn</strong> sem opnar leiðsögnina á því skrefi sem leysir vandann.</p>
+
+<hr>
+<p style="font-size: 0.85em; color: #888;">&copy; Origo &ndash; Bifröst Nornir</p>
+
+</body>
+</html>

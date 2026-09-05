@@ -5,6 +5,7 @@ using System.Reflection;
 page 10035591 "Report Preset Card ori"
 {
     Caption = 'Report Request Preset', Comment = 'is-IS=Forsendur skýrslu';
+    ContextSensitiveHelpPage = 'report-preset-card.html';
     PageType = Card;
     SourceTable = "Report Request Preset ori";
     Permissions = TableData "Report Request Preset ori" = RIMD;
