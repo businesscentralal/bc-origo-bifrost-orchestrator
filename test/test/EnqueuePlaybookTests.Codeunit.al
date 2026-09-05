@@ -4,7 +4,7 @@ using Origo.Bifrost.Nornir;
 using System.TestTools.TestRunner;
 using System.Threading;
 
-codeunit 96314 "Enqueue Playbook Tests"
+codeunit 96414 "Enqueue Playbook Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

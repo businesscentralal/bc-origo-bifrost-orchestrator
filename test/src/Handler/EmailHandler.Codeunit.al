@@ -7,7 +7,7 @@ using System.Threading;
 /// <summary>
 /// Test handler codeunit that captures email items sent by the scheduler notification system.
 /// </summary>
-codeunit 96312 "Email Handler"
+codeunit 96412 "Email Handler"
 {
     EventSubscriberInstance = Manual;
 

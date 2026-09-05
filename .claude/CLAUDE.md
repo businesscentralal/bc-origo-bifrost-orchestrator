@@ -8,7 +8,9 @@ Origo.Bifrost.Nornir (tests: Origo.Bifrost.Nornir.Test)
 
 ## Object ID Range
 App:   10035535-10035634 (migrated from the legacy Orchestrator range 10076035-10076134, offset -40500)
-Tests: 96300-96399 (legacy 93000-93099, offset +3300)
+Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: that block
+  collides with the still-unregistered `Cloud Events Gagnatorg - Tests` app, which also occupies
+  96300-96399 on bc28-is/bc28-w1. Legacy Orchestrator test range was 93000-93099.)
 
 ## Target BC Version
 28.x (application/platform 28.0.0.0, runtime 17.0)

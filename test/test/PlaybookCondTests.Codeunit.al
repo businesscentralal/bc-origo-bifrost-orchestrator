@@ -8,7 +8,7 @@ using System.TestTools.TestRunner;
 /// Conditions and run reporting: the group evaluation rule, Check semantics, and
 /// the _run / _steps workspace namespaces the report email is built from.
 /// </summary>
-codeunit 96318 "Playbook Cond Tests"
+codeunit 96418 "Playbook Cond Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

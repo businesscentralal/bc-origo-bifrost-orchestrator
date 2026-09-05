@@ -4,7 +4,7 @@ using Origo.Bifrost.Nornir;
 /// <summary>
 /// Sample codeunit used in tests to register and run a basic job queue scheduler entry.
 /// </summary>
-codeunit 96310 "Ok Sample"
+codeunit 96410 "Ok Sample"
 {
     Access = Internal;
     EventSubscriberInstance = Manual;

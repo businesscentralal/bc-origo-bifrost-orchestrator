@@ -22,7 +22,7 @@ This app is the successor of *Origo Cloud Events Orchestrator*. Version 28.0.0.0
 | `app/docs/` | AppSource submission material (user scenarios, Partner Center texts) |
 | `app/Help/` | HTML help (en-US, is-IS) published to origopublic blob storage |
 | `app/assets/playbooks/` | Sample playbook step templates |
-| `test/` | Test app (`Bifrost Nornir - Tests`, range 96300-96399) |
+| `test/` | Test app (`Bifrost Nornir - Tests`, range 96400-96499) |
 | `.AL-Go/`, `.github/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
 
 ## Message types

@@ -60,8 +60,8 @@
   "target": "Cloud",
   "idRanges": [
     {
-      "from": 96300,
-      "to": 96399
+      "from": 96400,
+      "to": 96499
     }
   ],
   "resourceExposurePolicy": {

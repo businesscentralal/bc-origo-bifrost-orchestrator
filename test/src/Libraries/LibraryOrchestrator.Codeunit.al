@@ -7,7 +7,7 @@ using System.Threading;
 /// <summary>
 /// Test library codeunit that intercepts Job Queue Entry creation and execution for testing.
 /// </summary>
-codeunit 96313 "Library Orchestrator"
+codeunit 96413 "Library Orchestrator"
 {
     EventSubscriberInstance = Manual;
     Access = Internal;

@@ -5,7 +5,7 @@ using Origo.Bifrost.Nornir;
 /// A processing-only report that always fails, so tests can prove ExecuteRun returns
 /// {status: Error} instead of throwing.
 /// </summary>
-report 96351 "Test Failing Report"
+report 96451 "Test Failing Report"
 {
     Caption = 'Bifrost Test Failing Report';
     ProcessingOnly = true;

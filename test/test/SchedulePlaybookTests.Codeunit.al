@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Nornir.Test;
 using Origo.Bifrost.Nornir;
 using System.Threading;
 
-codeunit 96315 "Schedule Playbook Tests"
+codeunit 96415 "Schedule Playbook Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

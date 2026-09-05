@@ -11,7 +11,7 @@ using System.Threading;
 /// <summary>
 /// Unit tests for the Bifrost Nornir extension covering setup, scheduling, notifications, and recurring templates.
 /// </summary>
-codeunit 96311 "Orchestrator Unit Tests"
+codeunit 96411 "Orchestrator Unit Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Nornir.Test;
 using Origo.Bifrost;
 using Origo.Bifrost.Nornir;
 
-codeunit 96322 "Misc Msg Smoke Tests"
+codeunit 96422 "Misc Msg Smoke Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

@@ -48,7 +48,7 @@ app/              Business Central AL extension (publisher: Origo, ID range 1003
   docs/             AppSource submission material (user scenarios, Partner Center texts)
   assets/           Logo and sample playbook step templates
 
-test/             Separate test app (ID range 96300–96399)
+test/             Separate test app (ID range 96400–96499)
   src/            Installer, libraries, handlers, sample reports and tables
   test/           Test codeunits (Subtype = Test)
 

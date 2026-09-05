@@ -4,7 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Nornir;
 using System.Reflection;
 
-codeunit 96316 "Report Msg Tests"
+codeunit 96416 "Report Msg Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

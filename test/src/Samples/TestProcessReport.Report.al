@@ -8,7 +8,7 @@ using System.Utilities;
 /// executes a batch job. Iterates one Integer row so FirstDataItemTableID is non-zero
 /// and the RecordRef branch of ExecuteRun is exercised.
 /// </summary>
-report 96350 "Test Process Report"
+report 96450 "Test Process Report"
 {
     Caption = 'Bifrost Test Process Report';
     ProcessingOnly = true;

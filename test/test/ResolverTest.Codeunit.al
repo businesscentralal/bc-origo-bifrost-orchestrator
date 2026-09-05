@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Nornir.Test;
 using Origo.Bifrost.Nornir;
 using System.TestTools.TestRunner;
 
-codeunit 96302 "Resolver Test"
+codeunit 96402 "Resolver Test"
 {
     Subtype = Test;
     TestPermissions = Disabled;

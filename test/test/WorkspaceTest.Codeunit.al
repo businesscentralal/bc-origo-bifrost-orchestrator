@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Nornir.Test;
 using Origo.Bifrost.Nornir;
 using System.TestTools.TestRunner;
 
-codeunit 96301 "Workspace Test"
+codeunit 96401 "Workspace Test"
 {
     Subtype = Test;
     TestPermissions = Disabled;

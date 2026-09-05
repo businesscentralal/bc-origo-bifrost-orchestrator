@@ -2,7 +2,7 @@ namespace Origo.Bifrost.Nornir.Test;
 
 using Origo.Bifrost.Nornir;
 /// <summary>Marker written by the sample processing-only report, so tests can prove it ran.</summary>
-table 96350 "Test Run Marker"
+table 96450 "Test Run Marker"
 {
     Caption = 'Bifrost Test Run Marker';
     DataClassification = SystemMetadata;

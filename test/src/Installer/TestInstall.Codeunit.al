@@ -4,7 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Nornir;
 using System.TestTools.TestRunner;
 
-codeunit 96300 "Test Install"
+codeunit 96400 "Test Install"
 {
     Subtype = Install;
 

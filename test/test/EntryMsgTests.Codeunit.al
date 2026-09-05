@@ -4,7 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Nornir;
 using System.Threading;
 
-codeunit 96320 "Entry Msg Tests"
+codeunit 96420 "Entry Msg Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

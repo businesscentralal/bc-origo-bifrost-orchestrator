@@ -11,7 +11,7 @@ using System.TestTools.TestRunner;
 /// transaction has written, so these tests must not share a transaction with the
 /// preset tests that insert records.
 /// </summary>
-codeunit 96317 "Report Run Tests"
+codeunit 96417 "Report Run Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;

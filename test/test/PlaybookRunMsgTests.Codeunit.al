@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Nornir.Test;
 using Origo.Bifrost;
 using Origo.Bifrost.Nornir;
 
-codeunit 96321 "Playbook Run Msg Tests"
+codeunit 96421 "Playbook Run Msg Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
