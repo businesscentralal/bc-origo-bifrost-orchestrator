@@ -87,9 +87,16 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Returns the fixed Guid used for the management Job Queue Entry.
     /// </summary>
     /// <returns>The management Job Queue Entry ID.</returns>
+    /// <remarks>
+    /// This must NOT be the same Guid as the predecessor app's (<c>Origo Cloud Events
+    /// Orchestrator</c>) management job queue entry - both apps are installed side by side and
+    /// share the single base-application "Job Queue Entry" table, so an identical id would make
+    /// Bifrost Nornir find and reuse the legacy app's entry (which still points at the legacy
+    /// handler codeunit) instead of scheduling its own. Freshly generated for this app.
+    /// </remarks>
     internal procedure GetManagementJobQueueId(): Guid
     begin
-        exit('e69e6a8b-a507-442e-ae01-e30f8dde10a5');
+        exit('461b5088-cc5f-4b4a-9e5e-b4cde335df66');
     end;
 
     /// <summary>
