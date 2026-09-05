@@ -21,7 +21,39 @@ All notable changes to Bifrost Nornir are documented here.
 
 - The playbook step executor no longer calls the MCP Tool Server (that server moved to **Bifrost Bragi**). Steps now dispatch through the new internal codeunit `Msg Executor ori` (10035603), which wraps the Bifrost Foundation `Dispatcher ori` in a `Codeunit.Run` scope so a message type that commits or fails is isolated from the surrounding playbook run. Binary responses (any non-text content type) come back base64-encoded inside a JSON envelope (`contentType`, `size`, `base64`) instead of an in-memory blob reference.
 
+### Fixed
+
+- Renamed the data take-over codeunit from `Nornir Takeover ori` to `App Takeover ori` so no
+  object name carries the "Nornir" brand, consistent with `App Install ori` / `App Upgrade ori`
+  and with `bc-origo-bifrost-hnitbjorg`'s `Storage Takeover ori`.
+- Every `TakeOver<Table>` procedure in `App Takeover ori` now checks `RecordRef.FieldExist`
+  before adding a field to the `DataTransfer`, instead of assuming every field number from the
+  source app definition exists on every target environment. `Origo Cloud Events Orchestrator`
+  reports the same version (28.0.0.0) on bc28-is and bc28-w1 but has a different `packageId` on
+  each container, so a hard-coded field list is not safe to assume everywhere.
+- `SchedulerMgt.Codeunit.al`'s `GetManagementJobQueueId()` was returning the exact same Guid as
+  the predecessor app's management Job Queue Entry. Both apps are installed side by side and
+  share the base-application Job Queue Entry table, so Bifrost Nornir was finding and reusing
+  the legacy app's entry (pointing at the legacy handler codeunit) instead of ever scheduling
+  its own - confirmed via two failing unit tests and via `Orchestrator.Status.Get` reporting
+  "Job Queue has not been configured". Generated a fresh Guid for Nornir's own entry.
+- Added HTML help (en-US + is-IS) for all 18 user-facing pages plus the bilingual index, and
+  wired `ContextSensitiveHelpPage` on every page/page extension that was missing it.
+- Renamed field `Orchestrator Enabled ori` to `Scheduler Enabled ori` and action
+  `AddToJobQueueOrchestrator ori` to `AddToScheduler ori` on the Job Queue Entry card/list
+  extensions, with captions/tooltips referring to Bifrost Nornir instead of the legacy
+  "Job Queue Orchestrator" name.
+
 ### Removed
 
 - **Chat integration.** Bifrost Foundation no longer contains the chat module - it moved to the separate app **Bifrost Bragi** - so the "Bifrost Chat" actions and the chat FactBoxes were removed from `Playbooks ori`, `Playbook Card ori`, `Playbook Instances ori`, `Playbook Instance Card ori` and `Scheduled Entry Card ori`. Nornir does not depend on Bragi.
 - The obsolete field `Max Iterations` (field 71 on `Playbook Step ori`) was not migrated.
+
+### Known Issues
+
+- `Orchestrator.Entry.Register` fails via the API/message-type pipeline when registering a
+  Job Queue Entry that is not yet an orchestrator entry (`Scheduled Entry ori.
+  InsertFromJobQueueEntry` opens a card page unconditionally for new entries, which BC's Data
+  Services layer rejects as a client callback). Pre-existing in the predecessor app too - see
+  `app/docs/Bifrost_Nornir_MessageType_TestReport_2026-09-05.md` for the full analysis and
+  suggested fix. Not addressed in this PR; tracked as a follow-up.
