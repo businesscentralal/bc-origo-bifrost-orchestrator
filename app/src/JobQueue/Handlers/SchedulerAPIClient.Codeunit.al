@@ -36,14 +36,11 @@ codeunit 10035545 "Scheduler API Client ori"
         if "Scheduled Entry ori"."Client Credentials Code" = '' then
             exit(false);
 
-        ClientCredentials.SetLoadFields(Code, "Client ID", "Client Secret");
+        ClientCredentials.SetLoadFields(Code);
         if not ClientCredentials.Get("Scheduled Entry ori"."Client Credentials Code") then
             exit(false);
 
-        if IsNullGuid(ClientCredentials."Client ID") or IsNullGuid(ClientCredentials."Client Secret") then
-            exit(false);
-
-        exit(true);
+        exit(ClientCredentials.IsComplete());
     end;
 
     /// <summary>
@@ -122,12 +119,10 @@ codeunit 10035545 "Scheduler API Client ori"
     [NonDebuggable]
     local procedure AcquireToken(): SecretText
     var
-        OAuth2: Codeunit OAuth2;
-        Scopes: List of [Text];
+        Secrets: Codeunit "Secrets ori";
+        ClientIdValue: SecretText;
         ClientSecret: SecretText;
-        ClientId: Text;
         TokenValue: SecretText;
-        AuthorityUrl: Text;
         TokenCacheAcquiredTok: Label 'Token acquired from cache', Locked = true;
         TokenAcquiredTok: Label 'Token acquired', Locked = true;
     begin
@@ -138,15 +133,13 @@ codeunit 10035545 "Scheduler API Client ori"
             exit(AccessToken);
         end;
 
-        ClientId := ClientCredentials.GetClientId(ClientCredentials."Client ID");
-        ClientSecret := ClientCredentials.GetClientSecret(ClientCredentials."Client Secret");
-
-        AuthorityUrl := GetAuthorityUrl();
-        Scopes.Add(BusinessCentralDefaultScopeTok);
-
-        if not OAuth2.AcquireTokenWithClientCredentials(ClientId, ClientSecret, AuthorityUrl, '', Scopes, TokenValue) then
+        if not Secrets.TryGetClientId(ClientCredentials.Code, ClientIdValue) then
+            exit;
+        if not Secrets.TryGetClientSecret(ClientCredentials.Code, ClientSecret) then
             exit;
 
+        if not RequestClientCredentialsToken(ClientIdValue, ClientSecret, TokenValue) then
+            exit;
         if TokenValue.IsEmpty() then
             exit;
 
@@ -157,6 +150,56 @@ codeunit 10035545 "Scheduler API Client ori"
             DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher,
             'Source', 'OAuth2');
         exit(AccessToken);
+    end;
+
+    /// <summary>
+    /// Runs the OAuth 2.0 client credentials grant against the Microsoft Entra token endpoint.
+    /// The request is built by hand rather than with codeunit OAuth2 because every OAuth2 overload
+    /// takes the client id as Text, while the client id of a Bifrost Nornir credential lives in the
+    /// Bifröst secret store and is only available as SecretText - SecretText.Unwrap is not allowed
+    /// in Cloud extensions. The form body is composed with SecretStrSubstNo so neither the client id
+    /// nor the client secret is ever materialised as Text.
+    /// </summary>
+    [NonDebuggable]
+    local procedure RequestClientCredentialsToken(ClientIdValue: SecretText; ClientSecret: SecretText; var TokenValue: SecretText): Boolean
+    var
+        TokenClient: HttpClient;
+        RequestContent: HttpContent;
+        ContentHeaders: HttpHeaders;
+        TokenResponse: HttpResponseMessage;
+        ResponseJson: JsonObject;
+        AccessTokenToken: JsonToken;
+        RequestBody: SecretText;
+        ScopeValue: SecretText;
+        ResponseText: Text;
+        ScopeText: Text;
+        FormUrlEncodedTok: Label 'application/x-www-form-urlencoded', Locked = true;
+        ContentTypeTok: Label 'Content-Type', Locked = true;
+        AccessTokenPropertyTok: Label 'access_token', Locked = true;
+        TokenRequestBodyTok: Label 'grant_type=client_credentials&client_id=%1&client_secret=%2&scope=%3', Locked = true;
+    begin
+        ScopeText := BusinessCentralDefaultScopeTok;
+        ScopeValue := ScopeText;
+        RequestBody := SecretStrSubstNo(TokenRequestBodyTok, ClientIdValue, ClientSecret, ScopeValue);
+        RequestContent.WriteFrom(RequestBody);
+        RequestContent.GetHeaders(ContentHeaders);
+        if ContentHeaders.Contains(ContentTypeTok) then
+            ContentHeaders.Remove(ContentTypeTok);
+        ContentHeaders.Add(ContentTypeTok, FormUrlEncodedTok);
+
+        if not TokenClient.Post(GetAuthorityUrl(), RequestContent, TokenResponse) then
+            exit(false);
+        if not TokenResponse.IsSuccessStatusCode() then
+            exit(false);
+        if not TokenResponse.Content().ReadAs(ResponseText) then
+            exit(false);
+        if not ResponseJson.ReadFrom(ResponseText) then
+            exit(false);
+        if not ResponseJson.Get(AccessTokenPropertyTok, AccessTokenToken) then
+            exit(false);
+
+        TokenValue := AccessTokenToken.AsValue().AsText();
+        exit(true);
     end;
 
     local procedure GetAuthorityUrl(): Text

@@ -25,7 +25,7 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
 
     internal procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     var
-        OrchestratorSetup: Record "Scheduler Setup ori";
+        Secrets: Codeunit "Secrets ori";
         TelegramSend: Codeunit "Telegram Send ori";
         ChatIds: List of [Text];
         ChatId: Text;
@@ -34,21 +34,20 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
         if "Scheduled Entry ori"."Notification Recipient" = '' then
             exit;
 
-        OrchestratorSetup.Get();
-        if not OrchestratorSetup.HasTelegramBotToken() then
+        if not Secrets.IsTelegramBotTokenSet() then
             exit;
 
         MessageText := BuildRestartMessage("Scheduled Entry ori", JobQueueEntry);
         ChatIds := "Scheduled Entry ori"."Notification Recipient".Split(';');
         foreach ChatId in ChatIds do
             if ChatId.Trim() <> '' then
-                if not TelegramSend.SendMessage(OrchestratorSetup.GetTelegramBotToken(), ChatId.Trim(), MessageText) then
+                if not TelegramSend.SendMessage(Secrets.GetTelegramBotToken(), ChatId.Trim(), MessageText) then
                     LogSendError("Scheduled Entry ori", ChatId);
     end;
 
     internal procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
-        OrchestratorSetup: Record "Scheduler Setup ori";
+        Secrets: Codeunit "Secrets ori";
         TelegramSend: Codeunit "Telegram Send ori";
         ChatIds: List of [Text];
         ChatId: Text;
@@ -56,15 +55,14 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
     begin
         VerifyHttpClientEnabled();
         "Scheduled Entry ori".TestField("Notification Recipient");
-        OrchestratorSetup.Get();
-        if not OrchestratorSetup.HasTelegramBotToken() then
+        if not Secrets.IsTelegramBotTokenSet() then
             Error(BotTokenNotConfiguredErr);
 
         MessageText := StrSubstNo(TestMessageLbl, "Scheduled Entry ori".Description);
         ChatIds := "Scheduled Entry ori"."Notification Recipient".Split(';');
         foreach ChatId in ChatIds do
             if ChatId.Trim() <> '' then
-                if not TelegramSend.SendMessage(OrchestratorSetup.GetTelegramBotToken(), ChatId.Trim(), MessageText) then
+                if not TelegramSend.SendMessage(Secrets.GetTelegramBotToken(), ChatId.Trim(), MessageText) then
                     Error(SendFailedErr, ChatId);
     end;
 

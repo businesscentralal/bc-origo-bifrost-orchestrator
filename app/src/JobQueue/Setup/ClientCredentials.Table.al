@@ -1,8 +1,11 @@
 namespace Origo.Bifrost.Nornir;
 
 /// <summary>
-/// Stores OAuth 2.0 client credentials (client_id and client_secret) pairs,
-/// identified by a unique Code and Description for use in Job Queue Orchestrator lines.
+/// Names the OAuth 2.0 client credentials (client_id and client_secret) pairs used by Job Queue
+/// Orchestrator lines. The record itself only carries the code and the description: the two values
+/// live in the Bifröst Foundation secret store under the codes
+/// <c>CREDENTIAL-&lt;Code&gt;-CLIENT-ID</c> and <c>CREDENTIAL-&lt;Code&gt;-CLIENT-SECRET</c>, both with scope
+/// Company. Codeunit <c>Secrets ori</c> composes the codes and reaches the store.
 /// </summary>
 table 10035538 "Client Credentials ori"
 {
@@ -22,16 +25,6 @@ table 10035538 "Client Credentials ori"
             Caption = 'Description', Comment = 'is-IS=Lýsing';
             DataClassification = SystemMetadata;
         }
-        field(30; "Client ID"; Guid)
-        {
-            Caption = 'Client ID', Comment = 'is-IS=Auðkenni biðlara';
-            DataClassification = SystemMetadata;
-        }
-        field(40; "Client Secret"; Guid)
-        {
-            Caption = 'Client Secret', Comment = 'is-IS=Leyniorð biðlara';
-            DataClassification = SystemMetadata;
-        }
     }
 
     keys
@@ -42,63 +35,35 @@ table 10035538 "Client Credentials ori"
         }
     }
 
+    trigger OnInsert()
     var
-        UnableToSetClientIdMsg: Label 'Unable to set Client Id', Comment = 'is-IS=Ekki tókst að setja auðkenni biðlara';
-        UnableToGetClientIdMsg: Label 'Unable to get Client Id', Comment = 'is-IS=Ekki tókst að sækja auðkenni biðlara';
-        UnableToSetClientSecretMsg: Label 'Unable to set Client Secret', Comment = 'is-IS=Ekki tókst að setja leyniorð biðlara';
-        UnableToGetClientSecretMsg: Label 'Unable to get Client Secret', Comment = 'is-IS=Ekki tókst að sækja leyniorð biðlara';
+        Secrets: Codeunit "Secrets ori";
+    begin
+        Secrets.RegisterCredential(Rec.Code);
+    end;
+
+    trigger OnRename()
+    var
+        Secrets: Codeunit "Secrets ori";
+    begin
+        Secrets.RenameCredential(xRec.Code, Rec.Code);
+    end;
 
     trigger OnDelete()
+    var
+        Secrets: Codeunit "Secrets ori";
     begin
-        if not IsNullGuid(Rec."Client ID") then
-            if IsolatedStorage.Delete(Format(Rec."Client ID"), DataScope::Company) then;
-        if not IsNullGuid(Rec."Client Secret") then
-            if IsolatedStorage.Delete(Format(Rec."Client Secret"), DataScope::Company) then;
+        Secrets.ClearCredential(Rec.Code);
     end;
 
-    [NonDebuggable]
-    internal procedure SetClientId(ClientId: Text)
+    /// <summary>
+    /// Reports whether both the client id and the client secret of this record have been entered.
+    /// </summary>
+    /// <returns>Boolean. True when both values are stored.</returns>
+    internal procedure IsComplete(): Boolean
+    var
+        Secrets: Codeunit "Secrets ori";
     begin
-        if ClientId = '' then begin
-            if not IsNullGuid(Rec."Client ID") then
-                if IsolatedStorage.Delete(Format(Rec."Client ID"), DataScope::Company) then;
-            exit;
-        end;
-
-        if IsNullGuid(Rec."Client ID") then
-            Rec."Client ID" := CreateGuid();
-
-        if not IsolatedStorage.Set(Format(Rec."Client ID"), ClientId, DataScope::Company) then
-            Error(UnableToSetClientIdMsg);
-    end;
-
-    [NonDebuggable]
-    internal procedure GetClientId(ClientIdKey: Guid) ClientId: Text
-    begin
-        if not IsolatedStorage.Get(Format(ClientIdKey), DataScope::Company, ClientId) then
-            Error(UnableToGetClientIdMsg);
-    end;
-
-    [NonDebuggable]
-    internal procedure SetClientSecret(ClientSecret: SecretText)
-    begin
-        if ClientSecret.IsEmpty() then begin
-            if not IsNullGuid(Rec."Client Secret") then
-                if IsolatedStorage.Delete(Format(Rec."Client Secret"), DataScope::Company) then;
-            exit;
-        end;
-
-        if IsNullGuid(Rec."Client Secret") then
-            Rec."Client Secret" := CreateGuid();
-
-        if not IsolatedStorage.Set(Format(Rec."Client Secret"), ClientSecret, DataScope::Company) then
-            Error(UnableToSetClientSecretMsg);
-    end;
-
-    [NonDebuggable]
-    internal procedure GetClientSecret(ClientSecretKey: Guid) ClientSecret: SecretText
-    begin
-        if not IsolatedStorage.Get(Format(ClientSecretKey), DataScope::Company, ClientSecret) then
-            Error(UnableToGetClientSecretMsg);
+        exit(Secrets.IsClientIdSet(Rec.Code) and Secrets.IsClientSecretSet(Rec.Code));
     end;
 }

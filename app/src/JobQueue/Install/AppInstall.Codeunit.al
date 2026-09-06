@@ -17,6 +17,7 @@ codeunit 10035537 "App Install ori"
         SchedulerSetup: Record "Scheduler Setup ori";
         JobQueueManagement: Codeunit "Scheduler Mgt ori";
         AppTakeover: Codeunit "App Takeover ori";
+        Secrets: Codeunit "Secrets ori";
     begin
         // The take-over must run before the setup singleton is created, otherwise the target table
         // is no longer empty and the published app's setup would not be copied.
@@ -24,6 +25,9 @@ codeunit 10035537 "App Install ori"
         SchedulerSetup.OnOpenEmptyRec();
         JobQueueManagement.RegisterJobQueues();
         RegisterRetentionPolicies();
+        // Runs after the take-over so the client credentials copied from the published app are
+        // registered too. Secret values themselves cannot be copied - see CHANGELOG 28.0.0.0.
+        Secrets.RegisterAll();
     end;
 
     local procedure RegisterRetentionPolicies()

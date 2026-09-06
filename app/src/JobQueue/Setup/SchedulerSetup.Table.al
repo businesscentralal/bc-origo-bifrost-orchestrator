@@ -50,11 +50,6 @@ table 10035536 "Scheduler Setup ori"
             Caption = 'Emit Telemetry', Comment = 'is-IS=Senda fjarmælingar';
             DataClassification = SystemMetadata;
         }
-        field(60; "Telegram Bot Token ID"; Guid)
-        {
-            Caption = 'Telegram Bot Token ID', Comment = 'is-IS=Auðkenni Telegram-vélmennislykils';
-            DataClassification = SystemMetadata;
-        }
     }
     keys
     {
@@ -66,8 +61,6 @@ table 10035536 "Scheduler Setup ori"
     var
         JobQueueManagement: Codeunit "Scheduler Mgt ori";
         JobQueueOrchestratorDescTok: Label 'Job Queue Orchestrator', MaxLength = 30, Comment = 'is-IS=Vinnsluraðari';
-        UnableToSetBotTokenMsg: Label 'Unable to set Telegram Bot Token', Comment = 'is-IS=Ekki tókst að setja Telegram-vélmennislykil';
-        UnableToGetBotTokenMsg: Label 'Unable to get Telegram Bot Token', Comment = 'is-IS=Ekki tókst að sækja Telegram-vélmennislykil';
         RecordHasBeenRead: Boolean;
 
     /// <summary>
@@ -134,33 +127,5 @@ table 10035536 "Scheduler Setup ori"
         JobQueueCategory.Code := JobQueueCategoryCode;
         JobQueueCategory.Description := JobQueueCategoryDescription;
         JobQueueCategory.Insert();
-    end;
-
-    [NonDebuggable]
-    internal procedure SetTelegramBotToken(BotToken: SecretText)
-    begin
-        if BotToken.IsEmpty() then begin
-            if not IsNullGuid("Telegram Bot Token ID") then
-                if IsolatedStorage.Delete(Format("Telegram Bot Token ID"), DataScope::Company) then;
-            exit;
-        end;
-
-        if IsNullGuid("Telegram Bot Token ID") then
-            "Telegram Bot Token ID" := CreateGuid();
-
-        if not IsolatedStorage.Set(Format("Telegram Bot Token ID"), BotToken, DataScope::Company) then
-            Error(UnableToSetBotTokenMsg);
-    end;
-
-    [NonDebuggable]
-    internal procedure GetTelegramBotToken() BotToken: SecretText
-    begin
-        if not IsolatedStorage.Get(Format("Telegram Bot Token ID"), DataScope::Company, BotToken) then
-            Error(UnableToGetBotTokenMsg);
-    end;
-
-    internal procedure HasTelegramBotToken(): Boolean
-    begin
-        exit(not IsNullGuid("Telegram Bot Token ID") and IsolatedStorage.Contains(Format("Telegram Bot Token ID"), DataScope::Company));
     end;
 }

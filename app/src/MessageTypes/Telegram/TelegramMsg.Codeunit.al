@@ -8,17 +8,14 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
 {
     Access = Internal;
     Permissions =
-        tabledata "Scheduler Setup ori" = R,
         tabledata "User Setup ori" = R;
 
     internal procedure IsEnabled(): Boolean
     var
-        OrchestratorSetup: Record "Scheduler Setup ori";
         UserSetup: Record "User Setup ori";
+        Secrets: Codeunit "Secrets ori";
     begin
-        if not OrchestratorSetup.Get() then
-            exit(false);
-        if not OrchestratorSetup.HasTelegramBotToken() then
+        if not Secrets.IsTelegramBotTokenSet() then
             exit(false);
         if not UserSetup.Get(UserSecurityId()) then
             exit(false);
@@ -51,8 +48,8 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
 
     internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
-        OrchestratorSetup: Record "Scheduler Setup ori";
         UserSetup: Record "User Setup ori";
+        Secrets: Codeunit "Secrets ori";
         TelegramSend: Codeunit "Telegram Send ori";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
@@ -61,8 +58,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
         JsonToken: JsonToken;
     begin
         VerifyHttpClientEnabled();
-        OrchestratorSetup.Get();
-        if not OrchestratorSetup.HasTelegramBotToken() then
+        if not Secrets.IsTelegramBotTokenSet() then
             Error(BotTokenNotConfiguredErr);
 
         UserSetup.Get(UserSecurityId());
@@ -76,7 +72,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
             Error(MissingMessageErr);
         MessageText := JsonToken.AsValue().AsText();
 
-        if not TelegramSend.SendMessage(OrchestratorSetup.GetTelegramBotToken(), ChatId, MessageText) then
+        if not TelegramSend.SendMessage(Secrets.GetTelegramBotToken(), ChatId, MessageText) then
             Error(SendFailedErr, ChatId, TelegramSend.GetLastResponse());
 
         ResponseJson.Add('status', 'Success');
