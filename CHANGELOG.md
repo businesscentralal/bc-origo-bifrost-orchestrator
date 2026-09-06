@@ -19,6 +19,14 @@ All notable changes to Bifrost Nornir are documented here.
 
 ### Changed
 
+- Help and documentation moved to https://bifrost.origo.is - the shared Bifröst site (repository
+  `businesscentralal/bifrost`) now carries the product documentation and the in-product help for every
+  Bifröst app. The `app/docs/` and `app/Help/` folders were removed from this repository together with
+  the blob-storage sync workflow. `app.json` now points `help` at https://bifrost.origo.is/en-us/nornir/
+  and `contextSensitiveHelpUrl` at `https://bifrost.origo.is/{0}/help/nornir/`.
+- Context-sensitive help pages are addressed by slug instead of by file name: the `.html` extension was
+  dropped from `ContextSensitiveHelpPage` on all 16 pages and page extensions (for example
+  `playbooks.html` -> `playbooks`), because the site serves Docusaurus page slugs.
 - The playbook step executor no longer calls the MCP Tool Server (that server moved to **Bifrost Bragi**). Steps now dispatch through the new internal codeunit `Msg Executor ori` (10035603), which wraps the Bifrost Foundation `Dispatcher ori` in a `Codeunit.Run` scope so a message type that commits or fails is isolated from the surrounding playbook run. Binary responses (any non-text content type) come back base64-encoded inside a JSON envelope (`contentType`, `size`, `base64`) instead of an in-memory blob reference.
 
 ### Fixed

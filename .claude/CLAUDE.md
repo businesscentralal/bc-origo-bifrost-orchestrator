@@ -114,8 +114,10 @@ Key rules always in effect:
 - Telegram and Email message types need a configured Bot Token (Isolated Storage, `Scheduler Setup ori`),
   a Telegram Chat ID on `Bifrost User Setup`, and enabled HTTP client requests.
 
-## Help
-- Published help: https://origopublic.blob.core.windows.net/help/BifrostNornir/bc28/en-US/index.html
-  (Icelandic under `is-IS`), context-sensitive help `.../BifrostNornir/bc28/{0}/`.
-- HTML sources in `app/Help/en-US/` and `app/Help/is-IS/`, synced to blob storage by
-  `.github/workflows/SyncHelpToBlob.yaml`.
+## Documentation
+- Documentation lives in businesscentralal/bifrost (site bifrost.origo.is); no Help/ or docs/ folders in
+  this repo - deviation from the Origo PR gateway check 8 approved by the user 2026-09-06.
+- `app.json` points at `https://bifrost.origo.is/en-us/nornir/` (help) and
+  `https://bifrost.origo.is/{0}/help/nornir/` (context-sensitive help).
+- `ContextSensitiveHelpPage` values are Docusaurus slugs without the `.html` extension - each one must
+  match a page under `help/nornir/` in the site repo.

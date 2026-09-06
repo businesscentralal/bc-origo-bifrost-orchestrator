@@ -9,7 +9,7 @@ page 10035589 "Scheduler Setup Wizard ori"
     Caption = 'Bifrost Nornir Setup', Comment = 'is-IS=Uppsetning Bifröst stjórnanda';
     ApplicationArea = All;
     Editable = true;
-    ContextSensitiveHelpPage = 'scheduler-setup-wizard.html';
+    ContextSensitiveHelpPage = 'scheduler-setup-wizard';
 
     layout
     {

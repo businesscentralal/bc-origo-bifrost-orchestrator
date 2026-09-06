@@ -8,7 +8,7 @@ page 10035542 "Recurring Templates ori"
     PageType = List;
     ApplicationArea = All;
     UsageCategory = None;
-    ContextSensitiveHelpPage = 'recurring-templates.html';
+    ContextSensitiveHelpPage = 'recurring-templates';
     SourceTable = "Recurring Template ori";
     CardPageId = "Recurring Template ori";
     Caption = 'Job Queue Recurring Templates', Comment = 'is-IS=Endurtekningarsniðmát vinnsluraða';

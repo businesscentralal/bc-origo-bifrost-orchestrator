@@ -8,7 +8,7 @@ using System.Threading;
 page 10035584 "Schedule Playbook ori"
 {
     Caption = 'Schedule Playbook', Comment = 'is-IS=Tímasetja keðju';
-    ContextSensitiveHelpPage = 'schedule-playbook.html';
+    ContextSensitiveHelpPage = 'schedule-playbook';
     PageType = StandardDialog;
     ApplicationArea = All;
     UsageCategory = None;

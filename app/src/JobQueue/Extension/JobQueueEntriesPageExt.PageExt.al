@@ -7,7 +7,7 @@ using System.Threading;
 
 pageextension 10035536 "JobQueueEntries.PageExt ori" extends "Job Queue Entries"
 {
-    ContextSensitiveHelpPage = 'job-queue-entries.html';
+    ContextSensitiveHelpPage = 'job-queue-entries';
 
     layout
     {

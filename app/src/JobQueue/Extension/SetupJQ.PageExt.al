@@ -8,7 +8,7 @@ using Origo.Bifrost;
 
 pageextension 10035537 "Setup JQ ori" extends "Setup ori"
 {
-    ContextSensitiveHelpPage = 'setup-jq.html';
+    ContextSensitiveHelpPage = 'setup-jq';
 
     actions
     {

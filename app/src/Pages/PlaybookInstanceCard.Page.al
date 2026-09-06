@@ -8,7 +8,7 @@ using Origo.Bifrost;
 page 10035549 "Playbook Instance Card ori"
 {
     Caption = 'Playbook Execution Detail', Comment = 'is-IS=Upplýsingar um keðjukeyrslu';
-    ContextSensitiveHelpPage = 'playbook-instance-card.html';
+    ContextSensitiveHelpPage = 'playbook-instance-card';
     PageType = Card;
     ApplicationArea = All;
     SourceTable = "Playbook Instance ori";

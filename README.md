@@ -1,13 +1,20 @@
 # Bifrost Nornir
 
-**Publisher:** Origo
-**Version:** 28.0.0.0
-**Object ID range:** 10035535-10035634
-**Namespace:** `Origo.Bifrost.Nornir`
+**Publisher:** Origo &nbsp;|&nbsp; **Version:** 28.0.0.0 &nbsp;|&nbsp; **Object ID range:** 10035535-10035634 &nbsp;|&nbsp; **Namespace:** `Origo.Bifrost.Nornir`
 
-Bifrost Nornir adds scheduling and orchestration on top of [Bifrost Foundation](https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core). It manages Job Queue entries (register, run, restart, monitor, notify on failure) and runs **playbooks** - declarative, multi-step sequences of Bifrost message types with a shared workspace, `@path` data flow between steps, forEach iteration, conditional branching and paged execution. Everything the app does is also reachable as message types over the Bifrost queue API (`origo/bifrost/v1.0`), so an external system or an AI agent can drive a playbook the same way a scheduled Job Queue entry does.
+Bifrost Nornir adds scheduling and orchestration on top of [Bifrost Foundation](https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core). It manages Job Queue entries (register, run, restart, monitor, notify on failure) and runs playbooks - declarative, multi-step sequences of Bifrost message types with a shared workspace, `@path` data flow, forEach iteration, conditional branching and paged execution. Everything the app does is also reachable as a message type over the Bifrost queue API (`origo/bifrost/v1.0`), so an external system or an AI agent can drive a playbook the same way a scheduled Job Queue entry does.
 
-This app is the successor of *Origo Cloud Events Orchestrator*. Version 28.0.0.0 is a full rebrand into a new AppSource app with a new object range; see [CHANGELOG.md](CHANGELOG.md) for the migration notes.
+This app is the successor of *Origo Cloud Events Orchestrator*; see [CHANGELOG.md](CHANGELOG.md) for the migration notes.
+
+## Documentation
+
+All public documentation lives in the [businesscentralal/bifrost](https://github.com/businesscentralal/bifrost) site repository - there are no `docs/` or `Help/` folders here.
+
+- Product documentation: https://bifrost.origo.is/en-us/nornir/
+- In-product help (context-sensitive help pages): https://bifrost.origo.is/en-us/help/nornir/
+- Building on Bifröst: https://bifrost.origo.is/en-us/extensibility/
+
+Message type contracts are also available at runtime through the `Help.Orchestrator.Get` message type, or in the help codeunits under `app/src/MessageTypes/Help/`.
 
 ## Repository layout
 
@@ -19,50 +26,19 @@ This app is the successor of *Origo Cloud Events Orchestrator*. Version 28.0.0.0
 | `app/src/Log/` | Playbook instance and step log tables, log management |
 | `app/src/Pages/` | Playbook, instance and template editor pages |
 | `app/src/MessageTypes/` | Message type enum extension, implementations and help codeunits |
-| `app/docs/` | AppSource submission material (user scenarios, Partner Center texts) |
-| `app/Help/` | HTML help (en-US, is-IS) published to origopublic blob storage |
 | `app/assets/playbooks/` | Sample playbook step templates |
 | `test/` | Test app (`Bifrost Nornir - Tests`, range 96400-96499) |
+| `test/reports/` | Internal test reports (not published) |
 | `.AL-Go/`, `.github/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
-
-## Message types
-
-All 20 message types are registered in `app/src/MessageTypes/MsgTypeEnumExt.EnumExt.al`. The keys keep the `Orchestrator.*` prefix - they are the external API contract and carry no brand word.
-
-| Area | Keys |
-| --- | --- |
-| Scheduled entry | `Orchestrator.Entry.Register`, `Orchestrator.Entry.Run`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule` |
-| Status | `Orchestrator.Status.Get`, `Orchestrator.Status.Restart`, `Orchestrator.Status.RestartIfNeeded` |
-| Job Queue entry | `Orchestrator.JobQueueEntry.Restart`, `Orchestrator.JobQueueEntry.RestartIfNeeded` |
-| Playbook | `Orchestrator.Playbook.Run`, `Orchestrator.Playbook.Schedule`, `Orchestrator.Playbook.Enqueue`, `Orchestrator.Workspace.Preview` |
-| Report | `Orchestrator.Report.List`, `Orchestrator.Report.Get`, `Orchestrator.Report.Run`, `Orchestrator.Report.SaveAs` |
-| Delivery | `Orchestrator.Email.Send`, `Orchestrator.Telegram.Message` |
-| Help | `Help.Orchestrator.Get` |
-
-`Help.Orchestrator.Get` is the API directory: it returns the markdown contract of every type above, built from the `<Name> Help ori` codeunits.
-
-## Permission sets
-
-| Set | Purpose |
-| --- | --- |
-| `BIFROST Nornir ori` | Read access to scheduled entries, scheduler setup, recurring templates and credentials |
-| `BIFROST NrnSetup ori` | Setup access - maintain scheduler setup, recurring templates and client credentials |
-| `BIFROST NrnMgt ori` | Management access - maintain scheduled entries |
-| `BIFROST PlaybAdm ori` | Full administration of playbooks, steps, conditions, instances and report presets |
-| `BIFROST PlaybVw ori` | Read-only access to playbooks and execution logs |
 
 ## Development
 
 - Open `al.code-workspace` in VS Code.
 - Development containers: COSMO Alpaca `launch: bc28-is` (CRONUS IS) and `launch: bc28-w1` (W1), both in `app/.vscode/launch.json`.
+- Build locally with `alc.exe` from the AL extension, using `app/.alpackages` as the package cache and the CodeCop, UICop and AppSourceCop analyzers. Zero errors and zero warnings is the bar.
+- Publish and run the tests with `Publish-BifrostApp.ps1` / `Run-BifrostTests.ps1` from `bc-origo-bifrost-core/tools`.
 - Standards: [Origo BC Development Standards](https://github.com/OrigoSoftwareSolutions/bc-dev-standards). Project rules are in `.claude/CLAUDE.md`; agent context is in [AGENTS.md](AGENTS.md).
 - Every object carries the mandatory `ori` suffix; the brand name is carried by the namespace, not by object names.
-
-## Documentation
-
-- Help site: https://origopublic.blob.core.windows.net/help/BifrostNornir/bc28/en-US/index.html (Icelandic under `is-IS`), sources in `app/Help/`.
-- Message type contracts: `Help.Orchestrator.Get`, or the help codeunits under `app/src/MessageTypes/Help/`.
-- AppSource submission material: `app/docs/`.
 
 <!-- AUTO-UPDATE-START -->
 # COSMO Alpaca AL-Go AppSource App Template

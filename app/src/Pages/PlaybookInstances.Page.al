@@ -8,7 +8,7 @@ using Origo.Bifrost;
 page 10035550 "Playbook Instances ori"
 {
     Caption = 'Playbook Execution Log', Comment = 'is-IS=Keyrsluskrá keðju';
-    ContextSensitiveHelpPage = 'playbook-instances.html';
+    ContextSensitiveHelpPage = 'playbook-instances';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = None;
