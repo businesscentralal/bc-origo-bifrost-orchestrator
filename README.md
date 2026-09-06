@@ -1,8 +1,8 @@
-# Bifrost Nornir
+# Bifrost Orchestrator
 
-**Publisher:** Origo &nbsp;|&nbsp; **Version:** 28.0.0.0 &nbsp;|&nbsp; **Object ID range:** 10035535-10035634 &nbsp;|&nbsp; **Namespace:** `Origo.Bifrost.Nornir`
+**Publisher:** Origo &nbsp;|&nbsp; **Version:** 28.0.0.0 &nbsp;|&nbsp; **Object ID range:** 10035535-10035634 &nbsp;|&nbsp; **Namespace:** `Origo.Bifrost.Orchestrator`
 
-Bifrost Nornir adds scheduling and orchestration on top of [Bifrost Foundation](https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core). It manages Job Queue entries (register, run, restart, monitor, notify on failure) and runs playbooks - declarative, multi-step sequences of Bifrost message types with a shared workspace, `@path` data flow, forEach iteration, conditional branching and paged execution. Everything the app does is also reachable as a message type over the Bifrost queue API (`origo/bifrost/v1.0`), so an external system or an AI agent can drive a playbook the same way a scheduled Job Queue entry does.
+Bifrost Orchestrator adds scheduling and orchestration on top of [Bifrost Foundation](https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core). It manages Job Queue entries (register, run, restart, monitor, notify on failure) and runs playbooks - declarative, multi-step sequences of Bifrost message types with a shared workspace, `@path` data flow, forEach iteration, conditional branching and paged execution. Everything the app does is also reachable as a message type over the Bifrost queue API (`origo/bifrost/v1.0`), so an external system or an AI agent can drive a playbook the same way a scheduled Job Queue entry does.
 
 This app is the successor of *Origo Cloud Events Orchestrator*; see [CHANGELOG.md](CHANGELOG.md) for the migration notes.
 
@@ -20,14 +20,14 @@ Message type contracts are also available at runtime through the `Help.Orchestra
 
 | Folder | Content |
 | --- | --- |
-| `app/` | The AppSource app (`Bifrost Nornir`) |
+| `app/` | The AppSource app (`Bifrost Orchestrator`) |
 | `app/src/JobQueue/` | Scheduled entries, scheduler setup and wizard, recurring templates, notifications, Job Queue extension objects, API pages |
 | `app/src/Playbook/` | Playbook, step and condition tables, runner, step executor, workspace and JSON helper |
 | `app/src/Log/` | Playbook instance and step log tables, log management |
 | `app/src/Pages/` | Playbook, instance and template editor pages |
 | `app/src/MessageTypes/` | Message type enum extension, implementations and help codeunits |
 | `app/assets/playbooks/` | Sample playbook step templates |
-| `test/` | Test app (`Bifrost Nornir - Tests`, range 96400-96499) |
+| `test/` | Test app (`Bifrost Orchestrator - Tests`, range 96400-96499) |
 | `test/reports/` | Internal test reports (not published) |
 | `.AL-Go/`, `.github/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
 

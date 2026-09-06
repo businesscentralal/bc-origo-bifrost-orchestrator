@@ -1,6 +1,6 @@
-namespace Origo.Bifrost.Nornir.Test;
+namespace Origo.Bifrost.Orchestrator.Test;
 
-using Origo.Bifrost.Nornir;
+using Origo.Bifrost.Orchestrator;
 /// <summary>Marker written by the sample processing-only report, so tests can prove it ran.</summary>
 table 96450 "Test Run Marker"
 {

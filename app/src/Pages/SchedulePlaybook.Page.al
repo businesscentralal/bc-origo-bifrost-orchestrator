@@ -1,7 +1,7 @@
 /// <summary>
 /// Request page wizard for scheduling a playbook as an Orchestrator Entry.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 

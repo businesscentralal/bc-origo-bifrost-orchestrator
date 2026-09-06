@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 page 10035583 "Playbook Last Run FB ori"
 {

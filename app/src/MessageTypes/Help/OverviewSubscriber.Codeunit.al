@@ -1,7 +1,7 @@
 /// <summary>
 /// Adds the Help.Orchestrator.Get entry to the global Bifrost message type overview.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

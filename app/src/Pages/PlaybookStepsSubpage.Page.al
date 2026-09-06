@@ -1,7 +1,7 @@
 /// <summary>
 /// Subpage for playbook steps — inline editing of step definitions.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 page 10035553 "Playbook Steps Subpage ori"
 {

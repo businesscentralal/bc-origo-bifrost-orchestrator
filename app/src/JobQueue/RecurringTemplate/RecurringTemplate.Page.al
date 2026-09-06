@@ -1,7 +1,7 @@
 /// <summary>
 /// Card page for viewing and editing a Job Queue Recurring Template.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.DateTime;
 

@@ -1,7 +1,7 @@
 /// <summary>
 /// Read-only view permissions for Bifrost playbooks and execution logs.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 permissionset 10035539 "BIFROST PlaybVw ori"
 {

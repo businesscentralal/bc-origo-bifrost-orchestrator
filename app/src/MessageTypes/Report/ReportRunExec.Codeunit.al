@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 /// <summary>
 /// Runs a processing-only report inside its own transaction scope so the caller can

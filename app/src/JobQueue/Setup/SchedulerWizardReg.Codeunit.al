@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Environment.Configuration;
 using System.Media;
@@ -11,8 +11,8 @@ codeunit 10035589 "Scheduler Wizard Reg. ori"
     local procedure RegisterOrchSetupWizard()
     var
         GuidedExperience: Codeunit "Guided Experience";
-        SetupTitleTok: Label 'Set up Bifrost Nornir', Comment = 'is-IS=Setja upp Bifröst stjórnanda';
-        SetupShortTitleTok: Label 'Bifrost Nornir', Comment = 'is-IS=Bifröst stjórnandi';
+        SetupTitleTok: Label 'Set up Bifrost Orchestrator', Comment = 'is-IS=Setja upp Bifröst stjórnanda';
+        SetupShortTitleTok: Label 'Bifrost Orchestrator', Comment = 'is-IS=Bifröst stjórnandi';
         SetupDescriptionTok: Label 'Configure the Job Queue Orchestrator: enable HTTP client requests, verify the management job queue, and set up scheduling policies.', Comment = 'is-IS=Stilla vinnsluraðarann: virkja HTTP-biðlarabeiðnir, staðfesta stjórnunarvinnsluröð og setja upp tímasetningarstefnur.';
     begin
         GuidedExperience.InsertAssistedSetup(

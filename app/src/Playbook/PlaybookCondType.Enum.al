@@ -2,7 +2,7 @@
 /// What a playbook condition governs. Start gates entry, Success classifies the
 /// outcome and picks the branch, Error fails the run without changing the branch.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 enum 10035600 "Playbook Cond. Type ori"
 {

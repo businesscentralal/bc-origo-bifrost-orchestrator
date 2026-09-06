@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Status.Get message type: returns the orchestrator health status
 /// and entry counts.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

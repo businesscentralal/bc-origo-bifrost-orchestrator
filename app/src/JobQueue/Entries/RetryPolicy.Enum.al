@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 /// <summary>
 /// Retry policy enum for Job Queue Orchestrator entries.

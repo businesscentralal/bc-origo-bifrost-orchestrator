@@ -1,10 +1,10 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Security.Encryption;
 
 /// <summary>
-/// Single access point for every secret Bifrost Nornir keeps in the Bifröst Foundation secret
+/// Single access point for every secret Bifrost Orchestrator keeps in the Bifröst Foundation secret
 /// store (codeunit <c>Secret Store ori</c>). The application registers its secret codes on install
 /// and on upgrade, the administrator enters the values once through the shared masked dialog, and
 /// the application reads them back with <c>TryGet</c>. Values live in IsolatedStorage under the
@@ -19,10 +19,10 @@ codeunit 10035606 "Secrets ori"
 
     var
         SecretStore: Codeunit "Secret Store ori";
-        BotTokenNotSetErr: Label 'The Telegram Bot Token has not been entered yet. Open Bifrost Nornir Setup and set it.', Comment = 'is-IS=Telegram-vélmennislykill hefur ekki verið skráður. Opnaðu uppsetningu Bifröst Nornir og skráðu hann.';
+        BotTokenNotSetErr: Label 'The Telegram Bot Token has not been entered yet. Open Bifrost Orchestrator Setup and set it.', Comment = 'is-IS=Telegram-vélmennislykill hefur ekki verið skráður. Opnaðu uppsetningu Bifröst stjórnandans og skráðu hann.';
         ClientIdDescriptionLbl: Label 'OAuth 2.0 client id of client credentials %1.', Comment = '%1 = client credentials code, is-IS=OAuth 2.0 biðlaraauðkenni fyrir auðkenni biðlara %1.';
         ClientSecretDescriptionLbl: Label 'OAuth 2.0 client secret of client credentials %1.', Comment = '%1 = client credentials code, is-IS=OAuth 2.0 leyniorð biðlara fyrir auðkenni biðlara %1.';
-        TelegramBotTokenDescriptionLbl: Label 'Telegram bot token used to send Bifrost Nornir notifications.', Comment = 'is-IS=Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst Nornir.';
+        TelegramBotTokenDescriptionLbl: Label 'Telegram bot token used to send Bifrost Orchestrator notifications.', Comment = 'is-IS=Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst stjórnandans.';
         ClientIdSuffixTok: Label '-CLIENT-ID', Locked = true;
         ClientSecretSuffixTok: Label '-CLIENT-SECRET', Locked = true;
         CredentialPrefixTok: Label 'CREDENTIAL-', Locked = true;
@@ -30,7 +30,7 @@ codeunit 10035606 "Secrets ori"
         TelegramBotTokenCodeTok: Label 'TELEGRAM-BOT-TOKEN', Locked = true;
 
     /// <summary>
-    /// Returns the application id of Bifrost Nornir, the owner of every secret handled here.
+    /// Returns the application id of Bifrost Orchestrator, the owner of every secret handled here.
     /// </summary>
     /// <returns>Guid. The current module id.</returns>
     procedure GetAppId(): Guid
@@ -274,7 +274,7 @@ codeunit 10035606 "Secrets ori"
     end;
 
     /// <summary>
-    /// Counts the secrets Bifrost Nornir has registered that still have no value.
+    /// Counts the secrets Bifrost Orchestrator has registered that still have no value.
     /// Used to warn the administrator that secret values do not migrate from the published
     /// Origo Cloud Events Orchestrator application and must be entered once.
     /// </summary>
@@ -294,7 +294,7 @@ codeunit 10035606 "Secrets ori"
     end;
 
     /// <summary>
-    /// Opens the Bifröst App Secrets list filtered to Bifrost Nornir. Used as the action of the
+    /// Opens the Bifröst App Secrets list filtered to Bifrost Orchestrator. Used as the action of the
     /// "secrets missing" notification on the setup page.
     /// </summary>
     /// <param name="SecretsNotification">The notification that carried the action.</param>

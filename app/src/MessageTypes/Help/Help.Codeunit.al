@@ -3,7 +3,7 @@
 /// Returns Markdown documentation as text; message type implementations pass the
 /// result to <c>Message Argument ori.SetResponseMarkdown</c>.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 codeunit 10035576 "Help ori"
 {

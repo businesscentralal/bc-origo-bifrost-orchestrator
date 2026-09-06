@@ -1,11 +1,11 @@
 {
     "folders": [
         {
-            "name": "Bifröst Nornir",
+            "name": "Bifröst stjórnandi",
             "path": "app"
         },
         {
-            "name": "Bifröst Nornir.Tests",
+            "name": "Bifröst stjórnandi.Tests",
             "path": "test"
         },
         {
@@ -36,7 +36,7 @@
         "al.enableCodeActions": true,
         "al.incrementalBuild": true,
         "al.packageCachePath": "./.alpackages",
-        "al.namespaceTemplate": "Origo.Bifrost.Nornir",
+        "al.namespaceTemplate": "Origo.Bifrost.Orchestrator",
         "dotnetAcquisitionExtension.existingDotnetPath": []
     },
     "extensions": {

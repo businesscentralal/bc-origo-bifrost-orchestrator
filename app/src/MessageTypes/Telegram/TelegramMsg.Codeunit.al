@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Apps;

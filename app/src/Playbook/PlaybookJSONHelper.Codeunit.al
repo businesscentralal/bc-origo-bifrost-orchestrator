@@ -2,7 +2,7 @@
 /// Stateless JSON utilities for the playbook runner: workspace reference resolution,
 /// condition evaluation, array extraction, and simple dot-notation path resolver.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 codeunit 10035546 "Playbook JSON Helper ori"
 {

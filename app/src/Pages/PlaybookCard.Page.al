@@ -1,7 +1,7 @@
 /// <summary>
 /// Card page for configuring a Bifrost Playbook: header fields, steps, and schedule.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

@@ -1,7 +1,7 @@
 /// <summary>
 /// Management codeunit for the Job Queue Orchestrator: scheduling, cancellation, and status.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Microsoft.Utilities;
 using System.Environment;
@@ -91,7 +91,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// This must NOT be the same Guid as the predecessor app's (<c>Origo Cloud Events
     /// Orchestrator</c>) management job queue entry - both apps are installed side by side and
     /// share the single base-application "Job Queue Entry" table, so an identical id would make
-    /// Bifrost Nornir find and reuse the legacy app's entry (which still points at the legacy
+    /// Bifrost Orchestrator find and reuse the legacy app's entry (which still points at the legacy
     /// handler codeunit) instead of scheduling its own. Freshly generated for this app.
     /// </remarks>
     internal procedure GetManagementJobQueueId(): Guid

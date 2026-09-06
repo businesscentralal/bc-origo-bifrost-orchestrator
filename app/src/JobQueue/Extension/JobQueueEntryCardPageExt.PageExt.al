@@ -1,7 +1,7 @@
 /// <summary>
-/// Extends the Job Queue Entry Card page with the Bifrost Nornir scheduling actions.
+/// Extends the Job Queue Entry Card page with the Bifrost Orchestrator scheduling actions.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 
@@ -16,7 +16,7 @@ pageextension 10035535 "JobQueueEntryCard.PageExt ori" extends "Job Queue Entry 
             field("Scheduler Enabled ori"; Rec."Scheduler Enabled ori")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies whether Bifrost Nornir monitors this job queue entry.', Comment = 'is-IS=Tilgreinir hvort Bifröst Nornir fylgist með þessari vinnsluraðarfærslu.';
+                ToolTip = 'Specifies whether Bifrost Orchestrator monitors this job queue entry.', Comment = 'is-IS=Tilgreinir hvort Bifröst stjórnandinn fylgist með þessari vinnsluraðarfærslu.';
             }
         }
         modify(Recurrence)
@@ -32,11 +32,11 @@ pageextension 10035535 "JobQueueEntryCard.PageExt ori" extends "Job Queue Entry 
             action("AddToScheduler ori")
             {
                 ApplicationArea = All;
-                Caption = 'Add to Bifrost Nornir', Comment = 'is-IS=Bæta við Bifröst Nornir';
+                Caption = 'Add to Bifrost Orchestrator', Comment = 'is-IS=Bæta við Bifröst stjórnandann';
                 Image = RefreshPlanningLine;
                 Promoted = true;
                 PromotedCategory = Process;
-                ToolTip = 'Add the selected job queue entry to Bifrost Nornir so that it monitors the entry and restarts it when it fails.', Comment = 'is-IS=Bæta valinni vinnsluraðarfærslu við Bifröst Nornir svo hún fylgist með færslunni og endurræsi hana ef hún bregst.';
+                ToolTip = 'Add the selected job queue entry to Bifrost Orchestrator so that it monitors the entry and restarts it when it fails.', Comment = 'is-IS=Bæta valinni vinnsluraðarfærslu við Bifröst stjórnandann svo hann fylgist með færslunni og endurræsi hana ef hún bregst.';
                 trigger OnAction()
                 var
                     "Scheduled Entry ori": Record "Scheduled Entry ori";

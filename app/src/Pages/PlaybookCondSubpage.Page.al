@@ -1,7 +1,7 @@
 /// <summary>
 /// Conditions for every step in a playbook, in one grid.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 page 10035602 "Playbook Cond. Subpage ori"
 {

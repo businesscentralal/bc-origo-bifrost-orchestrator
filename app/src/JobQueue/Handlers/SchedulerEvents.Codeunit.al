@@ -1,7 +1,7 @@
 /// <summary>
 /// Event subscriber codeunit handling Job Queue Entry lifecycle events for the orchestrator.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Environment;
 using System.Environment.Configuration;

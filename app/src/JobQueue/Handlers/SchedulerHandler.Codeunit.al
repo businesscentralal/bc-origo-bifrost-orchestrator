@@ -1,7 +1,7 @@
 /// <summary>
 /// Main handler codeunit for the Job Queue Orchestrator that processes and reschedules entries.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Microsoft.Utilities;
 using System.Threading;

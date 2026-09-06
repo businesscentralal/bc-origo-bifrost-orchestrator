@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Apps;
@@ -137,7 +137,7 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
     var
         Dimensions: Dictionary of [Text, Text];
     begin
-        Dimensions.Add('Category', 'BifrostNornir');
+        Dimensions.Add('Category', 'BifrostOrchestrator');
         Dimensions.Add('EntryDescription', "Scheduled Entry ori".Description);
         Dimensions.Add('ChatId', ChatId);
         Session.LogMessage(

@@ -3,10 +3,10 @@
 /// codeunit reads the playbook record from the Job Queue Entry's Record ID to Process,
 /// then delegates to the Bifrost Playbook Runner.
 ///
-/// Also subscribes to the Bifrost Nornir registration event to automatically
+/// Also subscribes to the Bifrost Orchestrator registration event to automatically
 /// create orchestrator entries for enabled playbooks.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 using System.Utilities;

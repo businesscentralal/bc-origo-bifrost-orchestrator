@@ -1,7 +1,7 @@
 /// <summary>
 /// CRUD helpers for playbook instance and step log records.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

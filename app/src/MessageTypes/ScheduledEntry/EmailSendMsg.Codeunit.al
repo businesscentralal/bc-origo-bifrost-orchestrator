@@ -3,7 +3,7 @@
 /// previously created as a draft by Email.Draft.Set. Requires the outboxSystemId
 /// from the draft response.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.EMail;

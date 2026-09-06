@@ -2,7 +2,7 @@
 /// Per-step, per-iteration execution detail within a playbook instance.
 /// One record per Dispatcher call — foreach steps produce one record per array element.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

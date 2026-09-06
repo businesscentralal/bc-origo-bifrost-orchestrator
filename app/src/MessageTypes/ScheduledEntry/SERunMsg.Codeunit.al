@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Entry.Run message type: executes an orchestrator entry
 /// immediately as a one-time foreground run.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

@@ -3,7 +3,7 @@
 /// handles foreach iteration over response arrays, applies bindings between steps,
 /// evaluates success conditions, and logs all execution detail.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Utilities;

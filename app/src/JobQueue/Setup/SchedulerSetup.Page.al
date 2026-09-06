@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Environment;
@@ -6,7 +6,7 @@ using System.Threading;
 using System.Utilities;
 
 /// <summary>
-/// Setup page of the Bifrost Nornir application. It is the single entry point the application adds
+/// Setup page of the Bifrost Orchestrator application. It is the single entry point the application adds
 /// to the Bifröst Setup page and carries everything the administrator needs: the job queue
 /// orchestrator configuration, the Telegram bot token, and navigation to playbooks, client
 /// credentials, the playbook execution log and the Bifröst secret list filtered to this application.
@@ -15,7 +15,7 @@ page 10035536 "Scheduler Setup ori"
 {
     AdditionalSearchTerms = 'Manage Job Queues,Job Queue Management,Job Queue Restarted,Job Queue Notification';
     ApplicationArea = All;
-    Caption = 'Bifrost Nornir Setup', Comment = 'is-IS=Uppsetning Bifröst Nornir';
+    Caption = 'Bifrost Orchestrator Setup', Comment = 'is-IS=Uppsetning Bifröst stjórnanda';
     ContextSensitiveHelpPage = 'nornir-setup';
     DeleteAllowed = false;
     InsertAllowed = false;
@@ -119,7 +119,7 @@ page 10035536 "Scheduler Setup ori"
                 ApplicationArea = All;
                 Caption = 'App Secrets', Comment = 'is-IS=Leyndarmál forrits';
                 Image = EncryptionKeys;
-                ToolTip = 'Show the secrets Bifrost Nornir needs and whether a value has been entered for each of them.', Comment = 'is-IS=Sýna leyndarmálin sem Bifröst Nornir þarf og hvort gildi hafi verið skráð fyrir hvert þeirra.';
+                ToolTip = 'Show the secrets Bifrost Orchestrator needs and whether a value has been entered for each of them.', Comment = 'is-IS=Sýna leyndarmálin sem Bifröst stjórnandinn þarf og hvort gildi hafi verið skráð fyrir hvert þeirra.';
 
                 trigger OnAction()
                 var
@@ -235,7 +235,7 @@ page 10035536 "Scheduler Setup ori"
         NotSetLbl: Label 'Not set', Comment = 'is-IS=Ekki skráð';
         OpenAppSecretsLbl: Label 'Open App Secrets', Comment = 'is-IS=Opna leyndarmál forrits';
         RunSetupWizardLbl: Label 'Run Setup Wizard', Comment = 'is-IS=Keyra uppsetningarleiðsögn';
-        SecretsMissingMsg: Label '%1 Bifrost Nornir secrets have no value yet. Secret values are not copied from the published Origo Cloud Events Orchestrator application - enter them once.', Comment = '%1 = number of secrets without a value, is-IS=%1 leyndarmál Bifröst Nornir hafa ekkert gildi enn. Gildi leyndarmála eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator - skráðu þau einu sinni.';
+        SecretsMissingMsg: Label '%1 Bifrost Orchestrator secrets have no value yet. Secret values are not copied from the published Origo Cloud Events Orchestrator application - enter them once.', Comment = '%1 = number of secrets without a value, is-IS=%1 leyndarmál Bifröst stjórnandans hafa ekkert gildi enn. Gildi leyndarmála eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator - skráðu þau einu sinni.';
         SetLbl: Label 'Set', Comment = 'is-IS=Skráð';
 
     trigger OnInit()

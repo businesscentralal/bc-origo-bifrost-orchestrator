@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.JobQueueEntry.RestartIfNeeded message type: restarts a Job Queue Entry
 /// only when it is in Error or a held state.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

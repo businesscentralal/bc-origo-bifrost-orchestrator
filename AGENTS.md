@@ -1,4 +1,4 @@
-# Bifrost Nornir — Agent Context
+# Bifrost Orchestrator — Agent Context
 
 This file gives AI agents the big-picture context needed to work in this repository correctly and safely.
 
@@ -6,7 +6,7 @@ This file gives AI agents the big-picture context needed to work in this reposit
 
 ## What This Extension Does
 
-**Bifrost Nornir** is a Business Central AL extension that adds scheduling and orchestration on top of **Bifrost Foundation**. It does two things:
+**Bifrost Orchestrator** is a Business Central AL extension that adds scheduling and orchestration on top of **Bifrost Foundation**. It does two things:
 
 1. **Job Queue scheduling and supervision** — Job Queue entries are registered as *scheduled entries*, which the app monitors, restarts according to a retry policy, and reports on. Failures raise a notification (None, Email or Telegram).
 2. **Playbooks** — a declarative, multi-step runner. Each step calls one Bifrost message type; results flow into a shared workspace that later steps read with `@path` references. Steps support forEach iteration over an array from an earlier step, conditional branching (success/failure next step, skip-if-failed, conditions), and paged execution over large result sets.
@@ -61,11 +61,11 @@ test/             Separate test app (ID range 96400–96499)
 
 ### Dependency on Bifrost Foundation
 
-Nornir has exactly one AL dependency: **Bifrost Foundation** (`7505e808-6e52-4b96-a328-82573391297a`). It uses Foundation for the message loop (`Message ori`, `Message Argument ori`, `Msg Interface ori`, `Dispatcher ori`), for `User Setup ori` (which Nornir extends with the Telegram Chat ID) and for `Bifrost Setup`. Nornir does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
+Bifrost Orchestrator has exactly one AL dependency: **Bifrost Foundation** (`7505e808-6e52-4b96-a328-82573391297a`). It uses Foundation for the message loop (`Message ori`, `Message Argument ori`, `Msg Interface ori`, `Dispatcher ori`), for `User Setup ori` (which Bifrost Orchestrator extends with the Telegram Chat ID) and for `Bifrost Setup`. Bifrost Orchestrator does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
 
 ### Message Type Registration
 
-Every Nornir message type is:
+Every Bifrost Orchestrator message type is:
 - A value in `enumextension "MsgType.EnumExt ori"` (10035536) extending Foundation's `Message Type ori`
 - An impl codeunit implementing `Msg Interface ori` (`<Area> <Verb> Msg ori`), usually delegating to a shared `<Area> Msg Handler ori`
 - A help codeunit whose markdown is collected by `Help ori` and served through `Help.Orchestrator.Get`
@@ -90,9 +90,9 @@ Keys keep the `Orchestrator.*` prefix — they are the published API contract an
 
 - **Never** call Foundation's `Dispatcher ori` directly from playbook code — always go through `Msg Executor ori` so the `Codeunit.Run` isolation stays intact.
 - **Never** rename an existing `Orchestrator.*` message type key or remove an enum value — they are the published API contract.
-- **Never** reintroduce chat, language model or MCP Tool Server references. Those objects live in Bifrost Bragi and Nornir has no dependency on it.
+- **Never** reintroduce chat, language model or MCP Tool Server references. Those objects live in Bifrost Bragi and Bifrost Orchestrator has no dependency on it.
 - **Always** return errors as a `status = Error` response with a helpful message through the Foundation argument — never let an unhandled exception reach the API.
-- **Always** declare `namespace Origo.Bifrost.Nornir;` at the top of every file, and give every object the `ori` suffix within 30 characters.
+- **Always** declare `namespace Origo.Bifrost.Orchestrator;` at the top of every file, and give every object the `ori` suffix within 30 characters.
 - **Always** write bilingual captions and tooltips (`Comment = 'is-IS=…'`); Icelandic prose uses "Bifröst".
 - **Always** use `SetLoadFields` on record reads, and never `Format()` / `Evaluate()` on enum values.
 

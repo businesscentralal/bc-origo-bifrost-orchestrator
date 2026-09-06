@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Status.RestartIfNeeded message type: restarts the orchestrator only
 /// when it is not already running.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

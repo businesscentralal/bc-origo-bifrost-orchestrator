@@ -2,7 +2,7 @@
 /// Executes the Orchestrator.Status.* message types: report orchestrator health and restart
 /// the orchestrator management Job Queue Entry unconditionally or only when needed.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Threading;

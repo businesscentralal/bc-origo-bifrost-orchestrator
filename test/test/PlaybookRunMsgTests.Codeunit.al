@@ -1,7 +1,7 @@
-namespace Origo.Bifrost.Nornir.Test;
+namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
-using Origo.Bifrost.Nornir;
+using Origo.Bifrost.Orchestrator;
 
 codeunit 96421 "Playbook Run Msg Tests"
 {

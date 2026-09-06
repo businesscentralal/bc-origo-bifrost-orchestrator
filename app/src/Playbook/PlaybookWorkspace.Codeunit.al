@@ -3,7 +3,7 @@
 /// that steps write to and read from. Supports hierarchical dot-notation paths for
 /// both storage and retrieval, preserving JSON types (values, objects, arrays).
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

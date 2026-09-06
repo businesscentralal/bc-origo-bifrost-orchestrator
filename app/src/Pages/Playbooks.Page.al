@@ -1,7 +1,7 @@
 /// <summary>
 /// List page for Bifrost Playbook definitions.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

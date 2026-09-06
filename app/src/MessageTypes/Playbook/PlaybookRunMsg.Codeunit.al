@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Playbook.Run message type: executes a Bifrost Playbook immediately and
 /// returns the execution result.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

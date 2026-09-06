@@ -1,15 +1,15 @@
-namespace Origo.Bifrost.Nornir.Test;
+namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
-using Origo.Bifrost.Nornir;
+using Origo.Bifrost.Orchestrator;
 
 /// <summary>
-/// Covers the move of the Bifrost Nornir secrets into the Bifröst Foundation secret store:
+/// Covers the move of the Bifrost Orchestrator secrets into the Bifröst Foundation secret store:
 /// the composed secret codes, the registration done by install and upgrade, the set / is-set /
 /// clear round trip of the Telegram bot token and of a client credentials pair, the cleanup when a
 /// credential record is deleted or renamed, and the reduced Bifröst Setup page extension.
 /// </summary>
-codeunit 96403 "Nornir Secret Tests"
+codeunit 96403 "Orchestr Secret Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -293,11 +293,11 @@ codeunit 96403 "Nornir Secret Tests"
 
     [Test]
     [HandlerFunctions('SendNotificationHandler,SchedulerSetupPageHandler')]
-    procedure BifrostSetupExposesTheSingleNornirAppsAction()
+    procedure BifrostSetupExposesTheSingleOrchestratorAppsAction()
     var
         BifrostSetup: TestPage "Setup ori";
     begin
-        // [SCENARIO] The Bifröst Setup page carries exactly one Bifrost Nornir action, in group Apps.
+        // [SCENARIO] The Bifröst Setup page carries exactly one Bifrost Orchestrator action, in group Apps.
         // The three navigation actions and the setup notification moved onto the application setup
         // page; referencing any of them here would no longer compile.
 
@@ -308,8 +308,8 @@ codeunit 96403 "Nornir Secret Tests"
         BifrostSetup.OpenView();
 
         // [THEN] the single Apps action is available and opens the application setup page
-        Assert.IsTrue(BifrostSetup.NornirSetup.Enabled(), 'The Bifrost Nornir Setup action must be available on Bifrost Setup');
-        BifrostSetup.NornirSetup.Invoke();
+        Assert.IsTrue(BifrostSetup.OrchestratorSetup.Enabled(), 'The Bifrost Orchestrator Setup action must be available on Bifrost Setup');
+        BifrostSetup.OrchestratorSetup.Invoke();
         BifrostSetup.Close();
     end;
 

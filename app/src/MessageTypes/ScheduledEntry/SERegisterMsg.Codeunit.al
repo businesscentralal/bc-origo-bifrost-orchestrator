@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Entry.Register message type: registers a Job Queue Entry
 /// as a new orchestrator entry.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

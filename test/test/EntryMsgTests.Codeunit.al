@@ -1,7 +1,7 @@
-namespace Origo.Bifrost.Nornir.Test;
+namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
-using Origo.Bifrost.Nornir;
+using Origo.Bifrost.Orchestrator;
 using System.Threading;
 
 codeunit 96420 "Entry Msg Tests"

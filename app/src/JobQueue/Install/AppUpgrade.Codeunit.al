@@ -1,7 +1,7 @@
 /// <summary>
 /// Handles data upgrades for the Job Queue Orchestrator extension.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.DataAdministration;
 using System.Environment.Configuration;

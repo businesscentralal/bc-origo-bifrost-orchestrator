@@ -2,7 +2,7 @@
 /// Executes the Orchestrator.Entry.* message types: run, restart, register,
 /// and schedule for orchestrator entries.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Threading;

@@ -1,7 +1,7 @@
 /// <summary>
 /// Full administration permissions for Bifrost playbooks.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 permissionset 10035538 "BIFROST PlaybAdm ori"
 {

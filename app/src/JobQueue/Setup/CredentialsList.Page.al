@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 /// <summary>
 /// List page for managing Client Credentials records. The Secrets column reports whether both the

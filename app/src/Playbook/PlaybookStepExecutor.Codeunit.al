@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
@@ -58,14 +58,14 @@ codeunit 10035572 "Playbook Step Executor ori"
             CopyStr(MessageType, 1, 50),
             'PLAY',
             '',
-            'Bifrost Nornir Playbook Runner',
+            'Bifrost Orchestrator Playbook Runner',
             0,
             Elapsed,
             Success,
             ErrorText,
             RequestText,
             ResponseText,
-            Enum::"Request Log Type ori"::"Nornir Playbook");
+            Enum::"Request Log Type ori"::"Orchestrator Playbook");
         Logger.Insert();
     end;
 

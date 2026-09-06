@@ -2,7 +2,7 @@
 /// Playbook definition header. A playbook is a named, reusable sequence of Bifrost
 /// message type calls with data flow, foreach iteration, and conditional branching.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 

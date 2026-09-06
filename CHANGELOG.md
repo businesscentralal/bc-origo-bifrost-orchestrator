@@ -1,37 +1,37 @@
 # Changelog
 
-All notable changes to Bifrost Nornir are documented here.
+All notable changes to Bifrost Orchestrator are documented here.
 
 ## [28.0.0.0] - 2026-09-05
 
-### Rebrand: Origo Cloud Events Orchestrator -> Bifrost Nornir
+### Rebrand: Origo Cloud Events Orchestrator -> Bifrost Orchestrator
 
 - New AppSource app identity: app id `7da3f512-5c19-47cd-bbe4-4c2bc713f1db`, test app id `194ecd04-5688-4af6-94bc-732c714251fc`, version reset to 28.0.0.0. The predecessor stays published and installed side by side.
-- App name `Origo Cloud Events Orchestrator` -> **Bifrost Nornir**; test app `Bifrost Nornir - Tests`. Icelandic captions use "Bifröst".
+- App name `Origo Cloud Events Orchestrator` -> **Bifrost Orchestrator**; test app `Bifrost Orchestrator - Tests`. Icelandic captions use "Bifröst".
 - New object ID range 10035535-10035634 (offset -40500 from the legacy range 10076035-10076134; object numbers keep their relative order). Test app range 96400-96499 so the test app can be installed next to the legacy one; the range originally proposed for this app (96300-96399, offset +3300 from 93000-93099) collided with `Cloud Events Gagnatorg - Tests`, which occupies that exact block on bc28-is/bc28-w1 but was not yet registered in the object range workbook, so every test object was shifted +100 before publishing.
-- Namespace `Origo.APP.CloudEvents.Orchestrator` -> `Origo.Bifrost.Nornir`; tests `Origo.Bifrost.Nornir.Test`.
+- Namespace `Origo.APP.CloudEvents.Orchestrator` -> `Origo.Bifrost.Orchestrator`; tests `Origo.Bifrost.Orchestrator.Test`.
 - Dependency retargeted from *Origo Cloud Events Core* to **Bifrost Foundation** (`7505e808-6e52-4b96-a328-82573391297a`, 28.0.0.0).
 - Object names: the `CE` prefix was dropped from every object and every object now carries the mandatory `ori` suffix. The scheduling objects were renamed after what they do rather than after the old product: `CE Orchestrator Entry ori` -> `Scheduled Entry ori`, `CE Orchestrator Setup ori` -> `Scheduler Setup ori`, `CE Orchestrator Handler ori` -> `Scheduler Handler ori`, `CE Orchestrator Mgt ori` -> `Scheduler Mgt ori`, `CE Orchestrator Events ori` -> `Scheduler Events ori`, `CE Orchestrator API Client ori` -> `Scheduler API Client ori`, `CE Orch. Setup Wizard ori` -> `Scheduler Setup Wizard ori`, `CE Playbook ori` -> `Playbook ori`.
-- Permission sets renamed: `CE Orchestrator ori` -> `BIFROST Nornir ori`, `CE Orch. Setup ori` -> `BIFROST NrnSetup ori`, `CE Orch. Mgt ori` -> `BIFROST NrnMgt ori`, `CE PlaybookAdmin ori` -> `BIFROST PlaybAdm ori`, `CE Playbook View ori` -> `BIFROST PlaybVw ori`.
+- Permission sets renamed: `CE Orchestrator ori` -> `BIFROST Orchestr ori`, `CE Orch. Setup ori` -> `BIFROST OrchSet ori`, `CE Orch. Mgt ori` -> `BIFROST OrchMgt ori`, `CE PlaybookAdmin ori` -> `BIFROST PlaybAdm ori`, `CE Playbook View ori` -> `BIFROST PlaybVw ori`.
 - Message type keys are **unchanged**: the 20 types keep their `Orchestrator.*` prefix (and `Help.Orchestrator.Get` as the help directory) because they are the external API contract and contain no brand word.
-- Help moved to https://origopublic.blob.core.windows.net/help/BifrostNornir/bc28/en-US/index.html, context-sensitive help to `.../BifrostNornir/bc28/{0}/`; HTML help sources in `app/Help/en-US/` and `app/Help/is-IS/`.
+- Help moved to https://origopublic.blob.core.windows.net/help/BifrostOrchestrator/bc28/en-US/index.html, context-sensitive help to `.../BifrostOrchestrator/bc28/{0}/`; HTML help sources in `app/Help/en-US/` and `app/Help/is-IS/`.
 - New Bifrost logo (`app/assets/Logo250x250.png`) for the app and the test app.
 
 ### Changed
 
 - **Bifröst Setup is no longer the Nornir setup page.** The page extension `Setup JQ ori` (10035537) on
   Foundation's `Setup ori` is reduced to the single entry point every Bifröst application is allowed to
-  add: one action **Bifrost Nornir Setup** in `group(Apps)` plus its actionref in `Category_Apps`. The
+  add: one action **Bifrost Orchestrator Setup** in `group(Apps)` plus its actionref in `Category_Apps`. The
   `Orchestrator` action group with its four actions, the HTTP/job-queue setup notification and the
   `ContextSensitiveHelpPage = 'setup-jq'` override (which wrongly replaced Foundation's own help page)
   were all removed from it.
-- **`Scheduler Setup ori` (page 10035536) is now the Bifrost Nornir setup page.** It is captioned
-  *Bifrost Nornir Setup*, uses the help slug `nornir-setup`, and carries what moved off Bifröst Setup:
+- **`Scheduler Setup ori` (page 10035536) is now the Bifrost Orchestrator setup page.** It is captioned
+  *Bifrost Orchestrator Setup*, uses the help slug `nornir-setup`, and carries what moved off Bifröst Setup:
   the navigation actions *Bifrost Playbooks*, *Client Credentials* and *Playbook Execution Log*, a new
   *App Secrets* action that opens Foundation's `App Secrets ori` list filtered to this application, and
   the HTTP-blocked / job-queue-not-running notification in its own `OnOpenPage`. Actions are promoted
   into three categories (Process, Setup, Playbooks).
-- **Secrets moved into the Bifröst Foundation secret store.** Bifrost Nornir no longer keeps its own
+- **Secrets moved into the Bifröst Foundation secret store.** Bifrost Orchestrator no longer keeps its own
   GUID-keyed IsolatedStorage entries. The new internal codeunit `Secrets ori` (10035606) composes the
   codes and wraps `Secret Store ori`. All secrets use scope **Company**:
   - `TELEGRAM-BOT-TOKEN` - the Telegram bot token, previously field 60 `Telegram Bot Token ID` on
@@ -79,7 +79,7 @@ All notable changes to Bifrost Nornir are documented here.
   each container, so a hard-coded field list is not safe to assume everywhere.
 - `SchedulerMgt.Codeunit.al`'s `GetManagementJobQueueId()` was returning the exact same Guid as
   the predecessor app's management Job Queue Entry. Both apps are installed side by side and
-  share the base-application Job Queue Entry table, so Bifrost Nornir was finding and reusing
+  share the base-application Job Queue Entry table, so Bifrost Orchestrator was finding and reusing
   the legacy app's entry (pointing at the legacy handler codeunit) instead of ever scheduling
   its own - confirmed via two failing unit tests and via `Orchestrator.Status.Get` reporting
   "Job Queue has not been configured". Generated a fresh Guid for Nornir's own entry.
@@ -87,7 +87,7 @@ All notable changes to Bifrost Nornir are documented here.
   wired `ContextSensitiveHelpPage` on every page/page extension that was missing it.
 - Renamed field `Orchestrator Enabled ori` to `Scheduler Enabled ori` and action
   `AddToJobQueueOrchestrator ori` to `AddToScheduler ori` on the Job Queue Entry card/list
-  extensions, with captions/tooltips referring to Bifrost Nornir instead of the legacy
+  extensions, with captions/tooltips referring to Bifrost Orchestrator instead of the legacy
   "Job Queue Orchestrator" name.
 
 ### Removed
@@ -96,7 +96,7 @@ All notable changes to Bifrost Nornir are documented here.
 - The obsolete field `Max Iterations` (field 71 on `Playbook Step ori`) was not migrated.
 - Field 60 `Telegram Bot Token ID` on `Scheduler Setup ori` and fields 30 `Client ID` / 40
   `Client Secret` on `Client Credentials ori` were dropped outright. They only held the IsolatedStorage
-  key of a value this application wrote itself, and Bifrost Nornir is not released yet, so no
+  key of a value this application wrote itself, and Bifrost Orchestrator is not released yet, so no
   obsoletion period was needed. The take-over from `Origo Cloud Events Orchestrator` no longer copies
   those three fields either - a key is worthless without the other extension's storage.
 
@@ -104,8 +104,8 @@ All notable changes to Bifrost Nornir are documented here.
 
 - **Secret values do not migrate.** IsolatedStorage belongs to the extension that wrote it, so the
   Telegram bot token, the client ids and the client secrets stored by `Origo Cloud Events Orchestrator`
-  cannot be read from Bifrost Nornir. After installing, an administrator must enter each value once on
-  **Bifrost Nornir Setup** (Telegram bot token) and on the **Client Credentials** card (client id and
+  cannot be read from Bifrost Orchestrator. After installing, an administrator must enter each value once on
+  **Bifrost Orchestrator Setup** (Telegram bot token) and on the **Client Credentials** card (client id and
   client secret). Both pages show a *Not set* status and a notification listing how many secrets are
   still empty; *App Secrets* lists all of them.
 - `App Upgrade ori.DropLegacySecretKeys` deletes the values earlier pre-release builds of *this*

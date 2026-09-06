@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Apps;
 using System.Environment.Configuration;
@@ -6,7 +6,7 @@ using System.Environment.Configuration;
 page 10035589 "Scheduler Setup Wizard ori"
 {
     PageType = NavigatePage;
-    Caption = 'Bifrost Nornir Setup', Comment = 'is-IS=Uppsetning Bifröst stjórnanda';
+    Caption = 'Bifrost Orchestrator Setup', Comment = 'is-IS=Uppsetning Bifröst stjórnanda';
     ApplicationArea = All;
     Editable = true;
     ContextSensitiveHelpPage = 'scheduler-setup-wizard';
@@ -20,7 +20,7 @@ page 10035589 "Scheduler Setup Wizard ori"
                 Visible = (CurrentStep = 1);
                 group(WelcomeHeader)
                 {
-                    Caption = 'Welcome to Bifrost Nornir', Comment = 'is-IS=Velkomin í Bifröst stjórnanda';
+                    Caption = 'Welcome to Bifrost Orchestrator', Comment = 'is-IS=Velkomin í Bifröst stjórnanda';
                     ShowCaption = true;
                     InstructionalText = 'This wizard helps you set up the Job Queue Orchestrator for Bifrost. The extension provides automated job queue scheduling, monitoring, restart and error handling, plus a declarative message playbook runner for executing sequences of Bifrost message types.', Comment = 'is-IS=Þessi leiðsögn hjálpar þér að setja upp vinnsluraðara Bifröst. Viðbótin býður upp á sjálfvirka tímasetningu vinnsluraðar, eftirlit, endurræsingu og villameðhöndlun, auk leiðbeinandi keðjukeyrslu til að framkvæma runur af Bifröst skilaboðategundum.';
                 }
@@ -36,7 +36,7 @@ page 10035589 "Scheduler Setup Wizard ori"
                 group(HttpHeader)
                 {
                     Caption = 'Enable HTTP Client Requests', Comment = 'is-IS=Virkja HTTP-biðlarabeiðnir';
-                    InstructionalText = 'The Bifrost Nornir requires outbound HTTP to send notifications and communicate with external services. Please enable Allow HttpClient Requests for this extension.', Comment = 'is-IS=Bifröst stjórnandinn þarf útleið HTTP til að senda tilkynningar og eiga samskipti við ytri þjónustur. Vinsamlegast virkjaðu Leyfa HttpClient-beiðnir fyrir þessa viðbót.';
+                    InstructionalText = 'The Bifrost Orchestrator requires outbound HTTP to send notifications and communicate with external services. Please enable Allow HttpClient Requests for this extension.', Comment = 'is-IS=Bifröst stjórnandinn þarf útleið HTTP til að senda tilkynningar og eiga samskipti við ytri þjónustur. Vinsamlegast virkjaðu Leyfa HttpClient-beiðnir fyrir þessa viðbót.';
                 }
                 group(HttpStatus)
                 {
@@ -76,7 +76,7 @@ page 10035589 "Scheduler Setup Wizard ori"
                 group(FinishHeader)
                 {
                     Caption = 'Setup Complete', Comment = 'is-IS=Uppsetningu lokið';
-                    InstructionalText = 'The Bifrost Nornir setup is complete. You can always change these settings later from the Orchestrator Setup page accessible via Bifrost Setup.', Comment = 'is-IS=Uppsetning Bifröst stjórnanda er lokið. Þú getur alltaf breytt þessum stillingum síðar á uppsetningarsíðu stjórnandans sem er aðgengileg í gegnum Bifröst uppsetningu.';
+                    InstructionalText = 'The Bifrost Orchestrator setup is complete. You can always change these settings later from the Orchestrator Setup page accessible via Bifrost Setup.', Comment = 'is-IS=Uppsetning Bifröst stjórnanda er lokið. Þú getur alltaf breytt þessum stillingum síðar á uppsetningarsíðu stjórnandans sem er aðgengileg í gegnum Bifröst uppsetningu.';
                 }
             }
         }

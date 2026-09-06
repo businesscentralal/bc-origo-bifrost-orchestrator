@@ -2,7 +2,7 @@
 /// Runtime execution log for a playbook run. Created when a playbook starts, updated
 /// as steps execute, finalized when the playbook completes or fails.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 table 10035542 "Playbook Instance ori"
 {

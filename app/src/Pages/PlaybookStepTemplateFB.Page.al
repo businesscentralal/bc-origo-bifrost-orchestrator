@@ -1,7 +1,7 @@
 /// <summary>
 /// Factbox for editing the JSON request template of the selected playbook step.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Utilities;
 

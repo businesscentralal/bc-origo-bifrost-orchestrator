@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.JobQueueEntry.Restart message type: restarts a Job Queue Entry by
 /// setting its status to Ready.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

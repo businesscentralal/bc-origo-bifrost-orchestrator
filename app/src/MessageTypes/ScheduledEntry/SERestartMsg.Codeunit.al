@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Entry.Restart message type: restarts a failed or held
 /// orchestrator entry by re-enqueuing it.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

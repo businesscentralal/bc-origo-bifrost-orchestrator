@@ -1,7 +1,7 @@
 /// <summary>
 /// Status enum for playbook execution instances.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 enum 10035539 "Playbook Inst. Status ori"
 {

@@ -1,7 +1,7 @@
-namespace Origo.Bifrost.Nornir.Test;
+namespace Origo.Bifrost.Orchestrator.Test;
 
 using Microsoft.Sales.Reports;
-using Origo.Bifrost.Nornir;
+using Origo.Bifrost.Orchestrator;
 using System.DateTime;
 using System.EMail;
 using System.Environment.Configuration;
@@ -9,7 +9,7 @@ using System.TestLibraries.Utilities;
 using System.Threading;
 
 /// <summary>
-/// Unit tests for the Bifrost Nornir extension covering setup, scheduling, notifications, and recurring templates.
+/// Unit tests for the Bifrost Orchestrator extension covering setup, scheduling, notifications, and recurring templates.
 /// </summary>
 codeunit 96411 "Orchestrator Unit Tests"
 {

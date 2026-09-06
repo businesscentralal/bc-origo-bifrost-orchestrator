@@ -1,7 +1,7 @@
 /// <summary>
 /// Interface for Job Queue Orchestrator notification implementations.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 

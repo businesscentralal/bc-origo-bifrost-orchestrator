@@ -1,7 +1,7 @@
 /// <summary>
 /// Manual event subscriber codeunit for handling Job Queue Entry deletion prompts.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 using System.Utilities;

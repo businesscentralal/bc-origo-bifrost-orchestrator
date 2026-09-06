@@ -2,7 +2,7 @@
 /// Whether a false Success condition means the step failed, or is simply the
 /// answer to a question.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 enum 10035601 "Playbook Step Type ori"
 {

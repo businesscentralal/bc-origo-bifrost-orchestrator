@@ -1,7 +1,7 @@
 /// <summary>
 /// Codeunit that sends an email item using the Job Queue Orchestrator email scenario.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.EMail;
 

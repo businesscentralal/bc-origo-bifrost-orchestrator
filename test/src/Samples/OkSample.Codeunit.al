@@ -1,6 +1,6 @@
-namespace Origo.Bifrost.Nornir.Test;
+namespace Origo.Bifrost.Orchestrator.Test;
 
-using Origo.Bifrost.Nornir;
+using Origo.Bifrost.Orchestrator;
 /// <summary>
 /// Sample codeunit used in tests to register and run a basic job queue scheduler entry.
 /// </summary>

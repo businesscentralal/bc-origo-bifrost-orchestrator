@@ -1,7 +1,7 @@
 /// <summary>
 /// Executes the Orchestrator.Playbook.* message types: run, schedule, and enqueue for Bifrost Playbooks.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Threading;

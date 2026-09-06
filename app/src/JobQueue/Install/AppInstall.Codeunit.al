@@ -1,9 +1,9 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.DataAdministration;
 
 /// <summary>
-/// Handles fresh installation of the Bifrost Nornir extension: takes the data of the published
+/// Handles fresh installation of the Bifrost Orchestrator extension: takes the data of the published
 /// Origo Cloud Events Orchestrator app over, initialises the setup record, lets subscribers register
 /// their job queue codeunits and registers the retention policies.
 /// </summary>

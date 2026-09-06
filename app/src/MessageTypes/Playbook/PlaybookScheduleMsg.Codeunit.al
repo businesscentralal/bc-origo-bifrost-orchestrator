@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Playbook.Schedule message type: creates an Orchestrator Entry
 /// for a Bifrost Playbook using a recurring template and optional notification settings.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

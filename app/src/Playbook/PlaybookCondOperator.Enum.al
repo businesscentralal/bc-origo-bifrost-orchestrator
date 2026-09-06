@@ -1,7 +1,7 @@
 /// <summary>
 /// Operators for evaluating playbook step success conditions against response JSON values.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 enum 10035538 "Playbook Cond. Operator ori"
 {

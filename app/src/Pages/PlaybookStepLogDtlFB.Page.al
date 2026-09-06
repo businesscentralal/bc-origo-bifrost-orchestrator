@@ -1,7 +1,7 @@
 /// <summary>
 /// Factbox showing the request sent and response received for the selected step log entry.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 page 10035555 "Playbook Step Log Dtl. FB ori"
 {

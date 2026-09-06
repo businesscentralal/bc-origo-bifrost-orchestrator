@@ -1,7 +1,7 @@
 /// <summary>
 /// Subpage showing step-level execution log within a playbook instance.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Utilities;
 

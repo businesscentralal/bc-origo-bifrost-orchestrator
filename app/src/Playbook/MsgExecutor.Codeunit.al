@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Text;
@@ -123,5 +123,5 @@ codeunit 10035603 "Msg Executor ori"
         IsBinaryResponse: Boolean;
         EmptyTaskId: Guid;
         EmptyMessageId: Guid;
-        SourceTok: Label 'Bifrost Nornir Playbook', Locked = true;
+        SourceTok: Label 'Bifrost Orchestrator Playbook', Locked = true;
 }

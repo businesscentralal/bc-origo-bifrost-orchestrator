@@ -1,7 +1,7 @@
 /// <summary>
 /// List page for playbook execution instances (log).
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

@@ -1,7 +1,7 @@
 /// <summary>
 /// List page for browsing and selecting Job Queue Recurring Templates.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 page 10035542 "Recurring Templates ori"
 {

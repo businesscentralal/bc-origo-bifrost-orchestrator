@@ -2,7 +2,7 @@
 /// HTTP client for calling the Job Queue Orchestrator API as an Entra application
 /// using OAuth2 client credentials flow.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Azure.Identity;
 using System.Environment;
@@ -155,7 +155,7 @@ codeunit 10035545 "Scheduler API Client ori"
     /// <summary>
     /// Runs the OAuth 2.0 client credentials grant against the Microsoft Entra token endpoint.
     /// The request is built by hand rather than with codeunit OAuth2 because every OAuth2 overload
-    /// takes the client id as Text, while the client id of a Bifrost Nornir credential lives in the
+    /// takes the client id as Text, while the client id of a Bifrost Orchestrator credential lives in the
     /// Bifröst secret store and is only available as SecretText - SecretText.Unwrap is not allowed
     /// in Cloud extensions. The form body is composed with SecretStrSubstNo so neither the client id
     /// nor the client secret is ever materialised as Text.

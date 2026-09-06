@@ -2,7 +2,7 @@
 /// Implements the Help.Orchestrator.Get message type, returning an AI-friendly overview of all
 /// Job Queue and Playbook Workflow message types. Delegates the document to codeunit "Help ori".
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

@@ -2,7 +2,7 @@
 /// Executes the Orchestrator.JobQueueEntry.* message types: restart a Job Queue Entry
 /// unconditionally or only when it is in a failed/held state.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Threading;

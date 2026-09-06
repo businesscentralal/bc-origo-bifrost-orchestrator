@@ -2,7 +2,7 @@
 /// Calculates the next run DateTime for recurring job queue orchestrator entries,
 /// supporting both date formula-based and weekday/minutes-based scheduling.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Microsoft.Utilities;
 using System.DateTime;

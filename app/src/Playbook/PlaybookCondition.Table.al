@@ -6,7 +6,7 @@
 /// (AND), and any group holding is enough (OR). That gives full boolean
 /// expressiveness with no nesting, precedence or parentheses. An empty set is true.
 /// </remarks>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 table 10035599 "Playbook Condition ori"
 {

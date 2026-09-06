@@ -1,4 +1,4 @@
-﻿namespace Origo.Bifrost.Nornir;
+﻿namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Reflection;
@@ -8,7 +8,7 @@ using System.Utilities;
 
 /// <summary>
 /// Takes the data of the published <c>Origo Cloud Events Orchestrator</c> app over into
-/// Bifrost Nornir the first time this app is installed in a company. For every (old table,
+/// Bifrost Orchestrator the first time this app is installed in a company. For every (old table,
 /// new table) pair the old table is copied with <c>DataTransfer</c> when it still exists in
 /// the database and the new table is empty; each field is only added to the transfer when
 /// <c>RecordRef.FieldExist</c> confirms it is still present on the old table, because the
@@ -225,7 +225,7 @@ codeunit 10035604 "App Takeover ori"
         // Fields 30 and 40 held the published app's IsolatedStorage keys for the client id and the
         // client secret. Those values live in that extension's storage and cannot be reached from
         // here, so only the code and the description are copied; the administrator re-enters the
-        // two secrets once through Bifrost Nornir Setup.
+        // two secrets once through Bifrost Orchestrator Setup.
         OldRef.Close();
         DataTransfer.UpdateAuditFields(false);
         DataTransfer.CopyRows();
@@ -456,9 +456,9 @@ codeunit 10035604 "App Takeover ori"
     var
         Migrated: Integer;
     begin
-        Migrated += MigrateRole('CE Orchestrator ori', 'BIFROST Nornir ori');
-        Migrated += MigrateRole('CE Orch. Setup ori', 'BIFROST NrnSetup ori');
-        Migrated += MigrateRole('CE Orch. Mgt ori', 'BIFROST NrnMgt ori');
+        Migrated += MigrateRole('CE Orchestrator ori', 'BIFROST Orchestr ori');
+        Migrated += MigrateRole('CE Orch. Setup ori', 'BIFROST OrchSet ori');
+        Migrated += MigrateRole('CE Orch. Mgt ori', 'BIFROST OrchMgt ori');
         Migrated += MigrateRole('CE PlaybookAdmin ori', 'BIFROST PlaybAdm ori');
         Migrated += MigrateRole('CE Playbook View ori', 'BIFROST PlaybVw ori');
         if Migrated > 0 then
@@ -600,5 +600,5 @@ codeunit 10035604 "App Takeover ori"
     end;
 
     var
-        TakeOverTelemetryTxt: Label 'Bifrost Nornir took data over from Origo Cloud Events Orchestrator.', Locked = true;
+        TakeOverTelemetryTxt: Label 'Bifrost Orchestrator took data over from Origo Cloud Events Orchestrator.', Locked = true;
 }

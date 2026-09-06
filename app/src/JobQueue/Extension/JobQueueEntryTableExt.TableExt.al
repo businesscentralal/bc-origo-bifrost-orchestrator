@@ -1,9 +1,9 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 
 /// <summary>
-/// Extends the Job Queue Entry table with the Bifrost Nornir scheduling flag.
+/// Extends the Job Queue Entry table with the Bifrost Orchestrator scheduling flag.
 /// </summary>
 tableextension 10035535 "JobQueueEntry.TableExt ori" extends "Job Queue Entry"
 {

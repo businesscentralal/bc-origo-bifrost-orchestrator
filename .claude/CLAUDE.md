@@ -1,10 +1,15 @@
-# Extension: Bifrost Nornir
+# Extension: Bifrost Orchestrator
+
+> Renamed 2026-09-06 from **Bifrost Nornir** (repository `bc-origo-bifrost-nornir`) to the
+> descriptive name **Bifrost Orchestrator** (repository `bc-origo-bifrost-orchestrator`).
+> Message-type keys (`Orchestrator.*`, `Help.Orchestrator.Get`) were already descriptive and
+> did not change.
 
 ## Prefix
-(none - objects use raw names with the mandatory `ori` suffix inside the `Origo.Bifrost.Nornir` namespace)
+(none - objects use raw names with the mandatory `ori` suffix inside the `Origo.Bifrost.Orchestrator` namespace)
 
 ## Namespace
-Origo.Bifrost.Nornir (tests: Origo.Bifrost.Nornir.Test)
+Origo.Bifrost.Orchestrator (tests: Origo.Bifrost.Orchestrator.Test)
 
 ## Object ID Range
 App:   10035535-10035634 (migrated from the legacy Orchestrator range 10076035-10076134, offset -40500)
@@ -16,7 +21,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 - Used app ids: 10035535-10035606. **Free: 10035607-10035634.**
   (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration.)
 - Used test ids: 96400-96403 and 96410-96422. **Free: 96404-96409 and 96423-96499.**
-  (96403 = codeunit `Nornir Secret Tests`, added 2026-09-06.)
+  (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
 
@@ -25,7 +30,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   only** - `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in
   `addlast(Category_Apps)`. No layout changes, no other action group, no notification and **no
   `ContextSensitiveHelpPage` override** - that property belongs to Foundation's own page.
-- `Scheduler Setup ori` (page 10035536, caption *Bifrost Nornir Setup*, help slug `nornir-setup`) is
+- `Scheduler Setup ori` (page 10035536, caption *Bifrost Orchestrator Setup*, help slug `nornir-setup`) is
   the application setup page. It hosts the navigation to Playbooks, Client Credentials, the Playbook
   Execution Log and `App Secrets ori` (filtered with `SetAppFilter(GetAppId())`), and it carries the
   HTTP/job-queue setup notification in its own `OnOpenPage`.
@@ -63,18 +68,26 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 ## Source Control
 Platform: GitHub
 Organization: businesscentralal
-Repository: bc-origo-bifrost-nornir
+Repository: bc-origo-bifrost-orchestrator
 Default branch: main
 
 ## Dependencies
 - Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, 28.0.0.0) - the only AL dependency.
-  Nornir does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
+  Bifrost Orchestrator does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
 
 ## Naming Rules
 - Every object carries the `ori` suffix (AppSource mandatory affix), max 30 characters.
 - The brand name "Bifrost" lives in the namespace, the app name, the permission sets
-  (`BIFROST Nornir ori`, `BIFROST NrnSetup ori`, `BIFROST NrnMgt ori`, `BIFROST PlaybAdm ori`,
+  (`BIFROST Orchestr ori`, `BIFROST OrchSet ori`, `BIFROST OrchMgt ori`, `BIFROST PlaybAdm ori`,
   `BIFROST PlaybVw ori`) and in user-facing captions - never as an object-name prefix.
+- Permission-set object names have a hard 20-character ceiling (the `Role ID` is `Code[20]`).
+  `BIFROST OrchSetup ori` would be 21, so the setup role is `BIFROST OrchSet ori`.
+- Icelandic brand form: the app is **Bifröst stjórnandi** (genitive *Bifröst stjórnanda*,
+  accusative *Bifröst stjórnandann*). English: **Bifrost Orchestrator**.
+- The documentation slug stays `nornir` (`help`, `contextSensitiveHelpUrl`,
+  `ContextSensitiveHelpPage = 'nornir-setup'`) until the folders under
+  `businesscentralal/bifrost` are renamed. Do not change the slugs before the site is renamed -
+  the published help pages would 404.
 - The legacy `CE ` prefix is gone. Scheduling objects are named after what they do:
   `Scheduled Entry ori`, `Scheduler Setup ori`, `Scheduler Handler ori`, `Scheduler Mgt ori`,
   `Scheduler Events ori`, `Scheduler API Client ori`, `Scheduler Setup Wizard ori`, `Playbook ori`.
@@ -92,7 +105,7 @@ Before writing any AL code, load the relevant skills:
 Agent context for this repository is in [AGENTS.md](../AGENTS.md).
 
 Key rules always in effect:
-- Namespace: `Origo.Bifrost.Nornir` at the top of every file
+- Namespace: `Origo.Bifrost.Orchestrator` at the top of every file
 - XML documentation on every object and non-local procedure
 - Bilingual captions (en-US + is-IS) on all user-facing text
 - `SetLoadFields` on all record reads
@@ -106,7 +119,7 @@ Key rules always in effect:
   side, used for the MCP message-type tests) and `launch: bc28-w1` (W1, unit tests).
   Publish and run the unit tests on **both**; select the target with `-LaunchConfiguration 'launch: bc28-w1'`.
 - Compile locally with alc.exe + CodeCop/UICop/AppSourceCop (symbols in `app/.alpackages`, test symbols in
-  `test/.alpackages` including the freshly built Bifrost Foundation and Nornir .app files).
+  `test/.alpackages` including the freshly built Bifrost Foundation and Bifrost Orchestrator .app files).
 - Publish and test without VS Code (pwsh 7, credential from the user-level env vars `BC28IS_USER` /
   `BC28IS_PASSWORD`, never from files - never write them into files, commands or chat), using the shared
   tooling in the Foundation repo:
@@ -157,7 +170,7 @@ Key rules always in effect:
   server reach this app through Foundation (route `origo/bifrost/v1.0`). Keep calls serial - parallel
   bursts crash the server. Test data uses the `BIFT-<letter>` prefix in CRONUS IS.
 - Telegram and Email message types need the `TELEGRAM-BOT-TOKEN` secret (Bifröst secret store, entered
-  on Bifrost Nornir Setup), a Telegram Chat ID on `Bifrost User Setup`, and enabled HTTP client requests.
+  on Bifrost Orchestrator Setup), a Telegram Chat ID on `Bifrost User Setup`, and enabled HTTP client requests.
 
 ## Documentation
 - Documentation lives in businesscentralal/bifrost (site bifrost.origo.is); no Help/ or docs/ folders in

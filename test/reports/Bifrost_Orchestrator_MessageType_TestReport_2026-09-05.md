@@ -1,4 +1,4 @@
-# Bifrost Nornir - Message Type Test Report
+# Bifrost Orchestrator - Message Type Test Report
 
 **Date:** 2026-09-05
 **Environment:** bc28-is (CRONUS IS), via the `origo-bc-bc28-is` MCP server (Bifrost API route `origo/bifrost/v1.0`)
@@ -104,12 +104,12 @@ tests):
 
 1. **Test app object-id collision** - the proposed test range 96300-96399 collided with
    `Cloud Events Gagnatorg - Tests`, which occupies the same block on bc28-is/bc28-w1 but
-   was unregistered in the object range workbook. Every Bifrost Nornir - Tests object was
+   was unregistered in the object range workbook. Every Bifrost Orchestrator - Tests object was
    moved to 96400-96499.
 2. **Management Job Queue Entry Guid collision** - `SchedulerMgt.Codeunit.al`'s
    `GetManagementJobQueueId()` kept the legacy app's exact Guid
    (`e69e6a8b-a507-442e-ae01-e30f8dde10a5`). Since both apps are installed side by side and
-   share the base-application Job Queue Entry table, Bifrost Nornir was finding and reusing
+   share the base-application Job Queue Entry table, Bifrost Orchestrator was finding and reusing
    the legacy app's own management entry instead of ever scheduling its own - confirmed live
    via `Orchestrator.Status.Get` ("Job Queue has not been configured" before the fix,
    "Job Queue is running" after) and via two previously-failing unit tests, now passing.
@@ -123,7 +123,7 @@ All `BIFT-N*` test records were removed after the pass via `Test.Records.Delete`
 - `Playbook Step ori`: 83 rows (broader than intended - the cleanup filter used the
   portfolio-wide `BIFT-*` wildcard instead of `BIFT-N*` for this one call, so it also removed
   pre-existing `BIFT-*` playbook step rows left over from earlier testing of this same app.
-  `Playbook Step ori` is exclusive to Bifrost Nornir - no other app's table or data was
+  `Playbook Step ori` is exclusive to Bifrost Orchestrator - no other app's table or data was
   affected)
 - `Playbook ori`: 1 row (`BIFT-N01`)
 - `Recurring Template ori`: 1 row (`BIFT-N01`)

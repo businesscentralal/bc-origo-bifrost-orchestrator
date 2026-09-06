@@ -2,7 +2,7 @@
 /// A single step within a playbook. Each step calls one Bifrost message type
 /// and can optionally iterate over an array from a prior step's response.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

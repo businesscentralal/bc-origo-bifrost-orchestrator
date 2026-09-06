@@ -1,7 +1,7 @@
 /// <summary>
 /// Notification type enum for the Job Queue Orchestrator with interface implementation.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 enum 10035535 "Notif. Type ori" implements "Notification ori"
 {

@@ -2,7 +2,7 @@
 /// Implements the Orchestrator.Entry.Schedule message type: schedules an
 /// orchestrator entry for immediate execution.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

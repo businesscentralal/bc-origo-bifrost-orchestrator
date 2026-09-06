@@ -1,7 +1,7 @@
 /// <summary>
 /// Defines reusable recurring schedule templates for Job Queue Orchestrator Entries.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.DateTime;
 using System.Environment.Configuration;

@@ -2,7 +2,7 @@
 /// Full-page editor for a playbook step's JSON request template, hosting the
 /// Bifrost Base text editor control add-in.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 

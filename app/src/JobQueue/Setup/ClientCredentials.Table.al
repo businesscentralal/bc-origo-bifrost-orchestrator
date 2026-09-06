@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 /// <summary>
 /// Names the OAuth 2.0 client credentials (client_id and client_secret) pairs used by Job Queue

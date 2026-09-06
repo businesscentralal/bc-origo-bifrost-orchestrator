@@ -1,7 +1,7 @@
 /// <summary>
 /// Email-based notification implementation for the Job Queue Orchestrator.
 /// </summary>
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using System.EMail;
 using System.Environment;

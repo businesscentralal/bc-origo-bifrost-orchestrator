@@ -1,4 +1,4 @@
-namespace Origo.Bifrost.Nornir;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
@@ -8,8 +8,8 @@ using Origo.Bifrost;
 /// </summary>
 enumextension 10035605 "RequestLogType.EnumExt ori" extends "Request Log Type ori"
 {
-    value(10035605; "Nornir Playbook")
+    value(10035605; "Orchestrator Playbook")
     {
-        Caption = 'Nornir Playbook', Comment = 'is-IS=Bifröst keðja';
+        Caption = 'Orchestrator Playbook', Comment = 'is-IS=Bifröst keðja';
     }
 }
