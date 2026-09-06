@@ -19,6 +19,44 @@ All notable changes to Bifrost Nornir are documented here.
 
 ### Changed
 
+- **Bifröst Setup is no longer the Nornir setup page.** The page extension `Setup JQ ori` (10035537) on
+  Foundation's `Setup ori` is reduced to the single entry point every Bifröst application is allowed to
+  add: one action **Bifrost Nornir Setup** in `group(Apps)` plus its actionref in `Category_Apps`. The
+  `Orchestrator` action group with its four actions, the HTTP/job-queue setup notification and the
+  `ContextSensitiveHelpPage = 'setup-jq'` override (which wrongly replaced Foundation's own help page)
+  were all removed from it.
+- **`Scheduler Setup ori` (page 10035536) is now the Bifrost Nornir setup page.** It is captioned
+  *Bifrost Nornir Setup*, uses the help slug `nornir-setup`, and carries what moved off Bifröst Setup:
+  the navigation actions *Bifrost Playbooks*, *Client Credentials* and *Playbook Execution Log*, a new
+  *App Secrets* action that opens Foundation's `App Secrets ori` list filtered to this application, and
+  the HTTP-blocked / job-queue-not-running notification in its own `OnOpenPage`. Actions are promoted
+  into three categories (Process, Setup, Playbooks).
+- **Secrets moved into the Bifröst Foundation secret store.** Bifrost Nornir no longer keeps its own
+  GUID-keyed IsolatedStorage entries. The new internal codeunit `Secrets ori` (10035606) composes the
+  codes and wraps `Secret Store ori`. All secrets use scope **Company**:
+  - `TELEGRAM-BOT-TOKEN` - the Telegram bot token, previously field 60 `Telegram Bot Token ID` on
+    `Scheduler Setup ori`.
+  - `CREDENTIAL-<Code>-CLIENT-ID` and `CREDENTIAL-<Code>-CLIENT-SECRET` - the OAuth 2.0 client id and
+    client secret of a `Client Credentials ori` record, previously fields 30 and 40 of that table.
+    `<Code>` is the record code uppercased. The composed code has to fit `Code[50]`, which leaves 25
+    characters for the record code; a longer code is shortened deterministically to its first 16
+    characters, a hyphen and the first 8 hexadecimal digits of the SHA256 hash of the full uppercased
+    code, so two long codes sharing a prefix never collapse onto one secret.
+- The secrets are registered by `App Install ori` and by `App Upgrade ori` (`Secrets.RegisterAll()`),
+  and again whenever a `Client Credentials ori` record is inserted, renamed or the setup page is opened.
+  `Register` is idempotent. Renaming a credential record moves both stored values onto the new codes and
+  clears the old ones; deleting a record clears both values but keeps the registrations visible.
+- The masked editable fields and the `'***'` sentinel are gone. `Scheduler Setup ori` and
+  `Credentials Card ori` now show a non-editable **Set** / **Not set** status with a Favorable or
+  Unfavorable style, and offer *Set …* / *Clear …* actions that go through Foundation's shared masked
+  dialog (`Secret Store ori.SetFromDialog`). `Credentials List ori` gained the same status as a
+  **Secrets** column.
+- `Scheduler API Client ori` reads both halves of a credential through `Secrets.TryGetClientId` /
+  `TryGetClientSecret` (which stamp `MarkUsed` on the registry row). Because every `OAuth2` overload
+  types the client id as `Text` while a stored secret is only available as `SecretText` - and
+  `SecretText.Unwrap` is not allowed in Cloud extensions - the client credentials grant is now issued
+  directly against the Microsoft Entra token endpoint with a form body composed by `SecretStrSubstNo`,
+  so neither the client id nor the client secret is ever materialised as `Text`.
 - Help and documentation moved to https://bifrost.origo.is - the shared Bifröst site (repository
   `businesscentralal/bifrost`) now carries the product documentation and the in-product help for every
   Bifröst app. The `app/docs/` and `app/Help/` folders were removed from this repository together with
@@ -56,6 +94,26 @@ All notable changes to Bifrost Nornir are documented here.
 
 - **Chat integration.** Bifrost Foundation no longer contains the chat module - it moved to the separate app **Bifrost Bragi** - so the "Bifrost Chat" actions and the chat FactBoxes were removed from `Playbooks ori`, `Playbook Card ori`, `Playbook Instances ori`, `Playbook Instance Card ori` and `Scheduled Entry Card ori`. Nornir does not depend on Bragi.
 - The obsolete field `Max Iterations` (field 71 on `Playbook Step ori`) was not migrated.
+- Field 60 `Telegram Bot Token ID` on `Scheduler Setup ori` and fields 30 `Client ID` / 40
+  `Client Secret` on `Client Credentials ori` were dropped outright. They only held the IsolatedStorage
+  key of a value this application wrote itself, and Bifrost Nornir is not released yet, so no
+  obsoletion period was needed. The take-over from `Origo Cloud Events Orchestrator` no longer copies
+  those three fields either - a key is worthless without the other extension's storage.
+
+### Upgrade Notes
+
+- **Secret values do not migrate.** IsolatedStorage belongs to the extension that wrote it, so the
+  Telegram bot token, the client ids and the client secrets stored by `Origo Cloud Events Orchestrator`
+  cannot be read from Bifrost Nornir. After installing, an administrator must enter each value once on
+  **Bifrost Nornir Setup** (Telegram bot token) and on the **Client Credentials** card (client id and
+  client secret). Both pages show a *Not set* status and a notification listing how many secrets are
+  still empty; *App Secrets* lists all of them.
+- `App Upgrade ori.DropLegacySecretKeys` deletes the values earlier pre-release builds of *this*
+  application wrote under a random GUID key, on a best-effort basis: it reads the three removed fields
+  through `RecordRef` and skips a field the platform no longer exposes. Once schema synchronisation has
+  dropped the columns the keys are unreachable, so a pre-release build's own IsolatedStorage entries may
+  survive in a developer container until the app version's data is deleted. No released environment is
+  affected.
 
 ### Known Issues
 

@@ -103,7 +103,7 @@ Keys keep the `Orchestrator.*` prefix — they are the published API contract an
 - Do not add an AL dependency. The single dependency on Bifrost Foundation is deliberate; new capability that needs chat or MCP belongs in Bifrost Bragi.
 - Do not put the brand word in object names — "Bifrost" lives in the namespace, the app name, the permission sets (`BIFROST … ori`) and user-facing captions.
 - Do not add `Extensible = false` to any enum.
-- Do not write credentials into files. The Telegram Bot Token and client credentials go to Isolated Storage; container credentials come from the `BC28IS_USER` / `BC28IS_PASSWORD` user environment variables.
+- Do not write credentials into files. The Telegram Bot Token and the client credentials go to the Bifröst Foundation secret store through codeunit `Secrets ori` (codes `TELEGRAM-BOT-TOKEN`, `CREDENTIAL-<CODE>-CLIENT-ID`, `CREDENTIAL-<CODE>-CLIENT-SECRET`, scope Company); container credentials come from the `BC28IS_USER` / `BC28IS_PASSWORD` user environment variables.
 - Do not use string concatenation to build markdown in help codeunits — use `TextBuilder.AppendLine()`.
 - Do not resurrect `Max Iterations` (legacy field 71 on `Playbook Step ori`) — it was dropped on purpose.
 

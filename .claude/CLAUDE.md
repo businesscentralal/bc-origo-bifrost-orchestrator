@@ -12,6 +12,51 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   collides with the still-unregistered `Cloud Events Gagnatorg - Tests` app, which also occupies
   96300-96399 on bc28-is/bc28-w1. Legacy Orchestrator test range was 93000-93099.)
 
+### Object IDs in use / free
+- Used app ids: 10035535-10035606. **Free: 10035607-10035634.**
+  (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration.)
+- Used test ids: 96400-96403 and 96410-96422. **Free: 96404-96409 and 96423-96499.**
+  (96403 = codeunit `Nornir Secret Tests`, added 2026-09-06.)
+- Nothing was freed by the secret store migration: only table fields were removed
+  (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
+
+## Setup Page and Secrets (Bifröst platform rules)
+- The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) contains **one action
+  only** - `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in
+  `addlast(Category_Apps)`. No layout changes, no other action group, no notification and **no
+  `ContextSensitiveHelpPage` override** - that property belongs to Foundation's own page.
+- `Scheduler Setup ori` (page 10035536, caption *Bifrost Nornir Setup*, help slug `nornir-setup`) is
+  the application setup page. It hosts the navigation to Playbooks, Client Credentials, the Playbook
+  Execution Log and `App Secrets ori` (filtered with `SetAppFilter(GetAppId())`), and it carries the
+  HTTP/job-queue setup notification in its own `OnOpenPage`.
+- **Secrets live in the Foundation secret store**, never in app-private IsolatedStorage. Codeunit
+  `Secrets ori` (10035606, `Access = Internal`) is the only place that composes secret codes and calls
+  `Secret Store ori`. Codes, all scope `Company`:
+
+  | Code | Value |
+  |---|---|
+  | `TELEGRAM-BOT-TOKEN` | Telegram bot token |
+  | `CREDENTIAL-<CODE>-CLIENT-ID` | OAuth 2.0 client id of a `Client Credentials ori` record |
+  | `CREDENTIAL-<CODE>-CLIENT-SECRET` | OAuth 2.0 client secret of that record |
+
+  `<CODE>` is the record code uppercased. The composed code must fit `Code[50]`, which leaves 25
+  characters; a longer record code is shortened to its first 16 characters + `-` + the first 8 hex
+  digits of its SHA256 hash, so long codes sharing a prefix stay distinct.
+- `RegisterAll()` runs from `App Install ori`, `App Upgrade ori` and `Scheduler Setup ori.OnOpenPage`;
+  `Register` is idempotent. `Client Credentials ori` registers on insert, moves both values on rename
+  and clears both on delete.
+- Pages never show or edit a secret. They show a non-editable **Set** / **Not set** status and offer
+  *Set …* / *Clear …* actions calling `SetFromDialog`. The old masked fields and the `'***'` sentinel
+  are gone.
+
+### Deviations from the shared secret contract
+- `Scheduler API Client ori` does **not** use codeunit `OAuth2`: every overload types the client id as
+  `Text`, a stored secret is only available as `SecretText`, and `SecretText.Unwrap` is `OnPrem` only.
+  The client credentials grant is therefore posted directly to the Entra token endpoint with a form
+  body built by `SecretStrSubstNo`. Trade-off: Microsoft's MSAL token handling is not used (the app
+  keeps its own 3500-second cache) and the access token from the JSON response is briefly a `Text`
+  inside the `[NonDebuggable]` parsing procedure.
+
 ## Target BC Version
 28.x (application/platform 28.0.0.0, runtime 17.0)
 
@@ -111,8 +156,8 @@ Key rules always in effect:
 - `invoke_message_type` / `get_message_type_help` / `get_records` / `set_records` on the `origo-bc-bc28-is`
   server reach this app through Foundation (route `origo/bifrost/v1.0`). Keep calls serial - parallel
   bursts crash the server. Test data uses the `BIFT-<letter>` prefix in CRONUS IS.
-- Telegram and Email message types need a configured Bot Token (Isolated Storage, `Scheduler Setup ori`),
-  a Telegram Chat ID on `Bifrost User Setup`, and enabled HTTP client requests.
+- Telegram and Email message types need the `TELEGRAM-BOT-TOKEN` secret (Bifröst secret store, entered
+  on Bifrost Nornir Setup), a Telegram Chat ID on `Bifrost User Setup`, and enabled HTTP client requests.
 
 ## Documentation
 - Documentation lives in businesscentralal/bifrost (site bifrost.origo.is); no Help/ or docs/ folders in
