@@ -57,11 +57,11 @@ All notable changes to Bifrost Nornir are documented here.
   `SecretText.Unwrap` is not allowed in Cloud extensions - the client credentials grant is now issued
   directly against the Microsoft Entra token endpoint with a form body composed by `SecretStrSubstNo`,
   so neither the client id nor the client secret is ever materialised as `Text`.
-- Help and documentation moved to https://bifrost.origo.is - the shared Bifröst site (repository
+- Help and documentation moved to https://businesscentralal.github.io/bifrost - the shared Bifröst site (repository
   `businesscentralal/bifrost`) now carries the product documentation and the in-product help for every
   Bifröst app. The `app/docs/` and `app/Help/` folders were removed from this repository together with
-  the blob-storage sync workflow. `app.json` now points `help` at https://bifrost.origo.is/en-us/nornir/
-  and `contextSensitiveHelpUrl` at `https://bifrost.origo.is/{0}/help/nornir/`.
+  the blob-storage sync workflow. `app.json` now points `help` at https://businesscentralal.github.io/bifrost/en-us/nornir/
+  and `contextSensitiveHelpUrl` at `https://businesscentralal.github.io/bifrost/{0}/help/nornir/`.
 - Context-sensitive help pages are addressed by slug instead of by file name: the `.html` extension was
   dropped from `ContextSensitiveHelpPage` on all 16 pages and page extensions (for example
   `playbooks.html` -> `playbooks`), because the site serves Docusaurus page slugs.

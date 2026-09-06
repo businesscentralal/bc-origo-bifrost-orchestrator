@@ -10,9 +10,9 @@ This app is the successor of *Origo Cloud Events Orchestrator*; see [CHANGELOG.m
 
 All public documentation lives in the [businesscentralal/bifrost](https://github.com/businesscentralal/bifrost) site repository - there are no `docs/` or `Help/` folders here.
 
-- Product documentation: https://bifrost.origo.is/en-us/nornir/
-- In-product help (context-sensitive help pages): https://bifrost.origo.is/en-us/help/nornir/
-- Building on Bifröst: https://bifrost.origo.is/en-us/extensibility/
+- Product documentation: https://businesscentralal.github.io/bifrost/en-us/nornir/
+- In-product help (context-sensitive help pages): https://businesscentralal.github.io/bifrost/en-us/help/nornir/
+- Building on Bifröst: https://businesscentralal.github.io/bifrost/en-us/extensibility/
 
 Message type contracts are also available at runtime through the `Help.Orchestrator.Get` message type, or in the help codeunits under `app/src/MessageTypes/Help/`.
 

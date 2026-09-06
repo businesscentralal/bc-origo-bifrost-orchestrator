@@ -162,7 +162,7 @@ Key rules always in effect:
 ## Documentation
 - Documentation lives in businesscentralal/bifrost (site bifrost.origo.is); no Help/ or docs/ folders in
   this repo - deviation from the Origo PR gateway check 8 approved by the user 2026-09-06.
-- `app.json` points at `https://bifrost.origo.is/en-us/nornir/` (help) and
-  `https://bifrost.origo.is/{0}/help/nornir/` (context-sensitive help).
+- `app.json` points at `https://businesscentralal.github.io/bifrost/en-us/nornir/` (help) and
+  `https://businesscentralal.github.io/bifrost/{0}/help/nornir/` (context-sensitive help).
 - `ContextSensitiveHelpPage` values are Docusaurus slugs without the `.html` extension - each one must
   match a page under `help/nornir/` in the site repo.

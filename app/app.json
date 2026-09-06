@@ -6,12 +6,12 @@
   "brief": "Bifrost Nornir - scheduling and playbooks",
   "description": "Bifrost Nornir: scheduled tasks, playbooks and orchestration of Bifrost message types on top of Bifrost Foundation. Provides Job Queue scheduling, monitoring, restart and error handling, and a declarative playbook runner with data flow, foreach iteration and conditional branching.",
   "url": "https://www.origo.is/",
-  "help": "https://bifrost.origo.is/en-us/nornir/",
+  "help": "https://businesscentralal.github.io/bifrost/en-us/nornir/",
   "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
   "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
   "logo": "assets/Logo250x250.png",
   "applicationInsightsConnectionString": "InstrumentationKey=88bcc7d2-0aff-4328-a849-0c48ed2756e2;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=ef0cf2b1-129c-4b38-8544-e2763a8c65c6",
-  "contextSensitiveHelpUrl": "https://bifrost.origo.is/{0}/help/nornir/",
+  "contextSensitiveHelpUrl": "https://businesscentralal.github.io/bifrost/{0}/help/nornir/",
   "supportedLocales": [
     "en-US",
     "is-IS"
