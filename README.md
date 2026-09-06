@@ -6,6 +6,8 @@ Bifrost Orchestrator adds scheduling and orchestration on top of [Bifrost Founda
 
 This app is the successor of *Origo Cloud Events Orchestrator*; see [CHANGELOG.md](CHANGELOG.md) for the migration notes.
 
+> The app was migrated under the working name *Bifrost Nornir* and renamed to **Bifrost Orchestrator** before its first release (repository `bc-origo-bifrost-nornir` -> `bc-origo-bifrost-orchestrator`). Message type keys never changed. The documentation slug is still `nornir` until the folders in the site repository are renamed.
+
 ## Documentation
 
 All public documentation lives in the [businesscentralal/bifrost](https://github.com/businesscentralal/bifrost) site repository - there are no `docs/` or `Help/` folders here.
@@ -14,7 +16,25 @@ All public documentation lives in the [businesscentralal/bifrost](https://github
 - In-product help (context-sensitive help pages): https://businesscentralal.github.io/bifrost/en-us/help/nornir/
 - Building on Bifröst: https://businesscentralal.github.io/bifrost/en-us/extensibility/
 
+(The `nornir` path segment is the current site slug, not the app name.)
+
 Message type contracts are also available at runtime through the `Help.Orchestrator.Get` message type, or in the help codeunits under `app/src/MessageTypes/Help/`.
+
+## Permissions
+
+Five assignable permission sets ship with the app. **Each one has to be combined with a Bifröst Foundation permission set** (`BIFROST Full ori` or `BIFROST Read ori`): the message loop, the request log, `User Setup ori` and the secret store live in Foundation, and job queue scheduling additionally needs the base application's own Job Queue permissions.
+
+| Permission set | Role | Grants |
+| --- | --- | --- |
+| `BIFROST Orchestr ori` | Full | Every table, page and codeunit the app owns |
+| `BIFROST OrchSet ori` | Setup | Scheduler setup, client credentials, recurring templates and the setup wizard |
+| `BIFROST OrchMgt ori` | Operations | Monitor, run and restart scheduled entries; read-only on setup and credentials |
+| `BIFROST PlaybAdm ori` | Playbook admin | Author and run playbooks |
+| `BIFROST PlaybVw ori` | Playbook viewer | Read playbooks and their execution log |
+
+## Known issues
+
+- **`Orchestrator.Entry.Register`** fails when it is called over the message-type API for a Job Queue Entry that is not yet a scheduled entry. `Scheduled Entry ori.InsertFromJobQueueEntry` opens a card page unconditionally for new entries, and Business Central's Data Services layer rejects that as a client callback. The defect is pre-existing - the identical code is in the predecessor app - and is **not** fixed in this release. Workaround: register the entry from the *Job Queue Entries* page (action *Add to Bifrost Orchestrator*), then use `Orchestrator.Entry.Schedule` / `Orchestrator.Entry.Run` over the API. Full analysis and the suggested fix are in `test/reports/Bifrost_Orchestrator_MessageType_TestReport_2026-09-05.md`.
 
 ## Repository layout
 

@@ -4,6 +4,45 @@ All notable changes to Bifrost Orchestrator are documented here.
 
 ## [28.0.0.0] - 2026-09-05
 
+### App name: Bifrost Nornir -> Bifrost Orchestrator (2026-09-06, before first release)
+
+The app was migrated under the working name *Bifrost Nornir*. Bifröst apps are named after
+what they do, not after Norse mythology, so it ships as **Bifrost Orchestrator** - which is
+also what the predecessor was called and what the message-type keys already say.
+
+- `app.json` name `Bifrost Nornir` -> **Bifrost Orchestrator**; test app **Bifrost Orchestrator - Tests**.
+  Icelandic brand form: **Bifröst stjórnandi** (genitive *Bifröst stjórnanda*).
+- Namespace `Origo.Bifrost.Nornir` -> `Origo.Bifrost.Orchestrator` (tests `.Test`).
+- Permission sets `BIFROST Nornir ori` -> `BIFROST Orchestr ori`, `BIFROST NrnSetup ori` ->
+  `BIFROST OrchSet ori`, `BIFROST NrnMgt ori` -> `BIFROST OrchMgt ori`. The take-over role
+  mapping in `App Takeover ori` was updated with them. `BIFROST OrchSetup ori` would have been
+  21 characters; permission-set object names are `Code[20]`, hence `BIFROST OrchSet ori`.
+- Page caption *Bifrost Nornir Setup* -> *Bifrost Orchestrator Setup*; the `Setup ori` action,
+  the Job Queue Entry page actions and every Icelandic caption follow.
+- Request-log type enum value `Nornir Playbook` -> `Orchestrator Playbook`.
+- Test codeunit `Nornir Secret Tests` -> `Orchestr Secret Tests`.
+- **Message-type keys are unchanged** (`Orchestrator.*`, `Help.Orchestrator.Get`) - they never
+  carried the working name.
+- Repository renamed `bc-origo-bifrost-nornir` -> `bc-origo-bifrost-orchestrator`.
+- **The documentation slug stays `nornir`** for now: `help`, `contextSensitiveHelpUrl` and
+  `ContextSensitiveHelpPage = 'nornir-setup'` still point at
+  `businesscentralal.github.io/bifrost/.../nornir/`. The folders in the site repository are
+  renamed in a separate change; moving the slugs first would 404 the published help.
+
+### Review follow-ups (2026-09-06)
+
+- `Locked = true` added to all 20 `Orchestrator.*` message-type enum captions, matching
+  Foundation's `Message Type ori`. The keys are the wire contract and must never be translated.
+- `BIFROST Orchestr ori` is no longer a four-table read stub: it now grants every table, page
+  and codeunit the app owns, so it is a usable assignable role. `BIFROST OrchSet ori` and
+  `BIFROST OrchMgt ori` gained the pages and codeunits their data grants imply. All three still
+  require a Bifröst Foundation permission set for the message loop, the request log and the
+  secret store - documented in README.md and in the permission sets' XML docs.
+- The test app no longer deletes and rebuilds the shared `DEFAULT` AL Test Suite (it wiped the
+  suites of the ~15 apps co-installed on bc28-is). `Test Install` now owns the `ORCHESTRAT`
+  suite over its own range `96400..96499`, and a new `Test Upgrade` (96404) refreshes it on
+  republish so a renamed test codeunit is picked up without an uninstall.
+
 ### Rebrand: Origo Cloud Events Orchestrator -> Bifrost Orchestrator
 
 - New AppSource app identity: app id `7da3f512-5c19-47cd-bbe4-4c2bc713f1db`, test app id `194ecd04-5688-4af6-94bc-732c714251fc`, version reset to 28.0.0.0. The predecessor stays published and installed side by side.
@@ -19,7 +58,7 @@ All notable changes to Bifrost Orchestrator are documented here.
 
 ### Changed
 
-- **Bifröst Setup is no longer the Nornir setup page.** The page extension `Setup JQ ori` (10035537) on
+- **Bifröst Setup is no longer the Orchestrator setup page.** The page extension `Setup JQ ori` (10035537) on
   Foundation's `Setup ori` is reduced to the single entry point every Bifröst application is allowed to
   add: one action **Bifrost Orchestrator Setup** in `group(Apps)` plus its actionref in `Category_Apps`. The
   `Orchestrator` action group with its four actions, the HTTP/job-queue setup notification and the
@@ -121,5 +160,5 @@ All notable changes to Bifrost Orchestrator are documented here.
   Job Queue Entry that is not yet an orchestrator entry (`Scheduled Entry ori.
   InsertFromJobQueueEntry` opens a card page unconditionally for new entries, which BC's Data
   Services layer rejects as a client callback). Pre-existing in the predecessor app too - see
-  `app/docs/Bifrost_Nornir_MessageType_TestReport_2026-09-05.md` for the full analysis and
+  `test/reports/Bifrost_Orchestrator_MessageType_TestReport_2026-09-05.md` for the full analysis and
   suggested fix. Not addressed in this PR; tracked as a follow-up.
