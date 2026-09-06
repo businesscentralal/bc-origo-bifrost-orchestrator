@@ -99,7 +99,7 @@ the dialog never reaches `Page.Run`.
 ## Defects fixed during this migration (not pre-existing)
 
 Two genuine, migration-introduced defects were found and fixed while preparing for this test
-pass (both are covered by commits on `feature/bifrost-nornir-migration` and by passing unit
+pass (both are covered by commits on `feature/bifrost-nornir-migration` (the branch kept its original name) and by passing unit
 tests):
 
 1. **Test app object-id collision** - the proposed test range 96300-96399 collided with

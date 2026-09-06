@@ -121,7 +121,7 @@ also what the predecessor was called and what the message-type keys already say.
   share the base-application Job Queue Entry table, so Bifrost Orchestrator was finding and reusing
   the legacy app's entry (pointing at the legacy handler codeunit) instead of ever scheduling
   its own - confirmed via two failing unit tests and via `Orchestrator.Status.Get` reporting
-  "Job Queue has not been configured". Generated a fresh Guid for Nornir's own entry.
+  "Job Queue has not been configured". Generated a fresh Guid for this app's own entry.
 - Added HTML help (en-US + is-IS) for all 18 user-facing pages plus the bilingual index, and
   wired `ContextSensitiveHelpPage` on every page/page extension that was missing it.
 - Renamed field `Orchestrator Enabled ori` to `Scheduler Enabled ori` and action
@@ -131,7 +131,7 @@ also what the predecessor was called and what the message-type keys already say.
 
 ### Removed
 
-- **Chat integration.** Bifrost Foundation no longer contains the chat module - it moved to the separate app **Bifrost Bragi** - so the "Bifrost Chat" actions and the chat FactBoxes were removed from `Playbooks ori`, `Playbook Card ori`, `Playbook Instances ori`, `Playbook Instance Card ori` and `Scheduled Entry Card ori`. Nornir does not depend on Bragi.
+- **Chat integration.** Bifrost Foundation no longer contains the chat module - it moved to the separate app **Bifrost Bragi** - so the "Bifrost Chat" actions and the chat FactBoxes were removed from `Playbooks ori`, `Playbook Card ori`, `Playbook Instances ori`, `Playbook Instance Card ori` and `Scheduled Entry Card ori`. Bifrost Orchestrator does not depend on Bragi.
 - The obsolete field `Max Iterations` (field 71 on `Playbook Step ori`) was not migrated.
 - Field 60 `Telegram Bot Token ID` on `Scheduler Setup ori` and fields 30 `Client ID` / 40
   `Client Secret` on `Client Credentials ori` were dropped outright. They only held the IsolatedStorage

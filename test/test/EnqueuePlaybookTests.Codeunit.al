@@ -126,11 +126,11 @@ codeunit 96414 "Enqueue Playbook Tests"
 
         LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
         BindSubscription(LibraryOrchestrator);
-        JQEntryId := Playbook.EnqueuePlaybook('{}', 'NORNIR', 120);
+        JQEntryId := Playbook.EnqueuePlaybook('{}', 'ORCHESTR', 120);
         UnbindSubscription(LibraryOrchestrator);
 
         JQEntry.Get(JQEntryId);
-        Assert.AreEqual('NORNIR', Format(JQEntry."Job Queue Category Code"), 'Category code mismatch');
+        Assert.AreEqual('ORCHESTR', Format(JQEntry."Job Queue Category Code"), 'Category code mismatch');
 
         CleanupPlaybook(Playbook.Code);
     end;
