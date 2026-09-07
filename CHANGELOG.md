@@ -35,6 +35,10 @@ the single action *Start setup wizard*.
   appears in `App Registry ori.GetApps` under its own module id and points at page
   `Scheduler Setup ori`. `Orchestr Secret Tests` no longer declares a notification handler for the
   application setup page, which raises none any more.
+- **Added** action *Setup Wizard* to `Scheduler Setup ori`, promoted next to *App Secrets*. Unlike the
+  removed banners above, this is a plain navigation action to Foundation's `Setup Wizard ori` - always
+  available, no notification involved - so an administrator can open the wizard from this app's own
+  setup page instead of only from Bifrost Setup or Assisted Setup.
 
 ### Changed (2026-09-07) - tests run on Foundation's public API
 
