@@ -7,6 +7,35 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [28.0.0.0] - 2026-09-07
 
+### Setup notifications and wizard (2026-09-07)
+
+Setup notifications are no longer raised by this app. Every setup banner in the Bifröst family now
+lives on Foundation's **Bifrost Setup** page, which aggregates the HTTP client status and the
+missing credentials of all installed Bifröst applications into one banner per topic, each carrying
+the single action *Start setup wizard*.
+
+- **Added** codeunit 10035607 `Orchestrator Registration ori` (`Access = Internal`). Its only
+  subscriber answers Foundation's `App Registry ori.OnRegisterApps` and registers this application
+  with its module id, its name and page `Scheduler Setup ori` as its setup page. That registration
+  is what lets Bifrost Setup name Bifrost Orchestrator in the aggregated banners and what lets the
+  Bifrost Setup Wizard enable outbound HTTP and walk through the credentials of this app.
+- **Removed** the two notifications on `Scheduler Setup ori`: the HTTP-blocked / job-queue-not-running
+  banner with its *Run Setup Wizard* action, and the "secrets missing" banner with its
+  *Open App Secrets* action, together with their labels and their `OnOpenPage` calls. The page still
+  registers its secrets on open and still reports the Telegram bot token as *Set* / *Not set*.
+- **Removed** the "client id and client secret must be entered once" banner on
+  `Credentials Card ori`. The two status fields already report the same thing without a banner.
+- **Removed** the procedures that existed only to serve those banners:
+  `Scheduler Wizard Reg. ori.OpenSetupWizard` and `Secrets ori.OpenAppSecrets`. The assisted-setup
+  registration in `Scheduler Wizard Reg. ori` is untouched, so the wizard is still discoverable
+  through Assisted Setup and from Bifrost Setup.
+- The `Notifications/` feature of this app - Email, Telegram and None notification implementations
+  used to report job queue outcomes - is a business feature and is untouched.
+- **Added** test codeunit 96423 `Orchestr Registration Tests`, asserting that Bifrost Orchestrator
+  appears in `App Registry ori.GetApps` under its own module id and points at page
+  `Scheduler Setup ori`. `Orchestr Secret Tests` no longer declares a notification handler for the
+  application setup page, which raises none any more.
+
 ### Changed (2026-09-07) - tests run on Foundation's public API
 
 - The test app no longer depends on Bifröst Foundation's internals: Bifrost Orchestrator - Tests has been removed

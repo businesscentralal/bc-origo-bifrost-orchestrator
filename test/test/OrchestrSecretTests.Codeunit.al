@@ -303,7 +303,6 @@ codeunit 96403 "Orchestr Secret Tests"
     // ---------- pages ----------
 
     [Test]
-    [HandlerFunctions('SendNotificationHandler')]
     procedure AppSetupPageReportsTheTelegramSecretStatus()
     var
         SetupPage: TestPage "Scheduler Setup ori";
@@ -337,8 +336,9 @@ codeunit 96403 "Orchestr Secret Tests"
         BifrostSetup: TestPage "Setup ori";
     begin
         // [SCENARIO] The Bifröst Setup page carries exactly one Bifrost Orchestrator action, in group Apps.
-        // The three navigation actions and the setup notification moved onto the application setup
-        // page; referencing any of them here would no longer compile.
+        // The three navigation actions moved onto the application setup page; referencing any of
+        // them here would no longer compile. The setup notifications live on Bifröst Setup, raised
+        // by Foundation for every application in the registry.
 
         // [GIVEN] the Bifröst Setup page
         Initialize();

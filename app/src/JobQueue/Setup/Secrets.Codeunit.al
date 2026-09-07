@@ -316,19 +316,6 @@ codeunit 10035606 "Secrets ori"
     end;
 
     /// <summary>
-    /// Opens the Bifröst App Secrets list filtered to Bifrost Orchestrator. Used as the action of the
-    /// "secrets missing" notification on the setup page.
-    /// </summary>
-    /// <param name="SecretsNotification">The notification that carried the action.</param>
-    procedure OpenAppSecrets(SecretsNotification: Notification)
-    var
-        AppSecretsPage: Page "App Secrets ori";
-    begin
-        AppSecretsPage.SetAppFilter(GetAppId());
-        AppSecretsPage.Run();
-    end;
-
-    /// <summary>
     /// Keeps the credential part of a composed secret code within the 25 characters that are left
     /// after the <c>CREDENTIAL-</c> prefix and the longest suffix (<c>-CLIENT-SECRET</c>).
     /// A code of 25 characters or less is used as it is, uppercased. A longer code is shortened

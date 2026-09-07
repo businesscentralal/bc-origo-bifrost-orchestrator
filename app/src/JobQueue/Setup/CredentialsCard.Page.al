@@ -76,10 +76,8 @@ page 10035545 "Credentials Card ori"
                     trigger OnAction()
                     begin
                         Rec.TestField(Code);
-                        if Secrets.SetClientIdFromDialog(Rec.Code) then begin
+                        if Secrets.SetClientIdFromDialog(Rec.Code) then
                             RefreshStatus();
-                            ShowSecretsMissingNotification();
-                        end;
                     end;
                 }
                 action(SetClientSecret)
@@ -92,10 +90,8 @@ page 10035545 "Credentials Card ori"
                     trigger OnAction()
                     begin
                         Rec.TestField(Code);
-                        if Secrets.SetClientSecretFromDialog(Rec.Code) then begin
+                        if Secrets.SetClientSecretFromDialog(Rec.Code) then
                             RefreshStatus();
-                            ShowSecretsMissingNotification();
-                        end;
                     end;
                 }
                 action(ClearSecrets)
@@ -114,7 +110,6 @@ page 10035545 "Credentials Card ori"
                             exit;
                         Secrets.ClearCredential(Rec.Code);
                         RefreshStatus();
-                        ShowSecretsMissingNotification();
                     end;
                 }
             }
@@ -142,13 +137,11 @@ page 10035545 "Credentials Card ori"
         ConfirmClearSecretsQst: Label 'Remove the stored client id and client secret of client credentials %1?', Comment = '%1 = client credentials code, is-IS=Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir auðkenni biðlara %1?';
         FavorableStyleTok: Label 'Favorable', Locked = true;
         NotSetLbl: Label 'Not set', Comment = 'is-IS=Ekki skráð';
-        SecretsMissingMsg: Label 'The client id and the client secret must be entered once. They are not copied from the published Origo Cloud Events Orchestrator application.', Comment = 'is-IS=Skrá verður biðlaraauðkenni og leyniorð biðlara einu sinni. Þau eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator.';
         SetLbl: Label 'Set', Comment = 'is-IS=Skráð';
 
     trigger OnOpenPage()
     begin
         RefreshStatus();
-        ShowSecretsMissingNotification();
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -171,20 +164,5 @@ page 10035545 "Credentials Card ori"
         end;
         StatusText := NotSetLbl;
         StyleExpr := AttentionStyleTok;
-    end;
-
-    local procedure ShowSecretsMissingNotification()
-    var
-        SecretsNotification: Notification;
-    begin
-        if Rec.Code = '' then
-            exit;
-        if Rec.IsComplete() then
-            exit;
-
-        SecretsNotification.Id := '5f6c1c9e-3f2e-4a41-9f5b-1c2b7d84a610';
-        SecretsNotification.Scope := NotificationScope::LocalScope;
-        SecretsNotification.Message := SecretsMissingMsg;
-        SecretsNotification.Send();
     end;
 }

@@ -1497,10 +1497,6 @@
           <source>Not set</source>
           <target state="translated">Ekki skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - NamedType NotSetLbl</note>
-        </trans-unit><trans-unit id="Page 3564186828 - NamedType 4092720628" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The client id and the client secret must be entered once. They are not copied from the published Origo Cloud Events Orchestrator application.</source>
-          <target state="translated">Skrá verður biðlaraauðkenni og leyniorð biðlara einu sinni. Þau eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator.</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá verður biðlaraauðkenni og leyniorð biðlara einu sinni. Þau eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - NamedType SecretsMissingMsg</note>
         </trans-unit><trans-unit id="Page 3564186828 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set</source>
           <target state="translated">Skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
@@ -3657,34 +3653,10 @@
           <source>Remove the stored Telegram Bot Token?</source>
           <target state="translated">Fjarlægja geymdan Telegram-vélmennislykil?</target><note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymdan Telegram-vélmennislykil?</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType ConfirmClearBotTokenQst</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 4152052173" size-unit="char" translate="yes" xml:space="preserve">
-          <source>HTTP client requests are blocked and the Orchestrator job queue is not running. Run the setup wizard to fix.</source>
-          <target state="translated">HTTP-biðlarabeiðnir eru lokaðar og vinnsluröð stjórnanda er ekki í gangi. Keyrðu uppsetningarleiðsögnina til að laga.</target><note from="Developer" annotates="general" priority="2">is-IS=HTTP-biðlarabeiðnir eru lokaðar og vinnsluröð stjórnanda er ekki í gangi. Keyrðu uppsetningarleiðsögnina til að laga.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType HttpBlockedAndJQNotRunningMsg</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 4166964299" size-unit="char" translate="yes" xml:space="preserve">
-          <source>HTTP client requests are not enabled for this extension. Run the setup wizard to enable.</source>
-          <target state="translated">HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Keyrðu uppsetningarleiðsögnina til að virkja.</target><note from="Developer" annotates="general" priority="2">is-IS=HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Keyrðu uppsetningarleiðsögnina til að virkja.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType HttpBlockedMsg</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 2794766516" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The Orchestrator job queue is not running. Run the setup wizard to start it.</source>
-          <target state="translated">Vinnsluröð stjórnanda er ekki í gangi. Keyrðu uppsetningarleiðsögnina til að ræsa hana.</target><note from="Developer" annotates="general" priority="2">is-IS=Vinnsluröð stjórnanda er ekki í gangi. Keyrðu uppsetningarleiðsögnina til að ræsa hana.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType JQNotRunningMsg</note>
         </trans-unit><trans-unit id="Page 778417224 - NamedType 1999041823" size-unit="char" translate="yes" xml:space="preserve">
           <source>Not set</source>
           <target state="translated">Ekki skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType NotSetLbl</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 3630679694" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Open App Secrets</source>
-          <target state="translated">Opna leyndarmál forrits</target><note from="Developer" annotates="general" priority="2">is-IS=Opna leyndarmál forrits</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType OpenAppSecretsLbl</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 3746426553" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Run Setup Wizard</source>
-          <target state="translated">Keyra uppsetningarleiðsögn</target><note from="Developer" annotates="general" priority="2">is-IS=Keyra uppsetningarleiðsögn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType RunSetupWizardLbl</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 4092720628" size-unit="char" translate="yes" xml:space="preserve">
-          <source>%1 Bifrost Orchestrator secrets have no value yet. Secret values are not copied from the published Origo Cloud Events Orchestrator application - enter them once.</source>
-          <target state="translated">%1 leyndarmál Bifröst stjórnandans hafa ekkert gildi enn. Gildi leyndarmála eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator - skráðu þau einu sinni.</target><note from="Developer" annotates="general" priority="2">%1 = number of secrets without a value, is-IS=%1 leyndarmál Bifröst stjórnandans hafa ekkert gildi enn. Gildi leyndarmála eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator - skráðu þau einu sinni.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType SecretsMissingMsg</note>
         </trans-unit><trans-unit id="Page 778417224 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set</source>
           <target state="translated">Skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>

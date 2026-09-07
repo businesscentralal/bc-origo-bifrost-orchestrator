@@ -229,13 +229,7 @@ page 10035536 "Scheduler Setup ori"
         AttentionStyleTok: Label 'Unfavorable', Locked = true;
         ConfirmClearBotTokenQst: Label 'Remove the stored Telegram Bot Token?', Comment = 'is-IS=Fjarlægja geymdan Telegram-vélmennislykil?';
         FavorableStyleTok: Label 'Favorable', Locked = true;
-        HttpBlockedAndJQNotRunningMsg: Label 'HTTP client requests are blocked and the Orchestrator job queue is not running. Run the setup wizard to fix.', Comment = 'is-IS=HTTP-biðlarabeiðnir eru lokaðar og vinnsluröð stjórnanda er ekki í gangi. Keyrðu uppsetningarleiðsögnina til að laga.';
-        HttpBlockedMsg: Label 'HTTP client requests are not enabled for this extension. Run the setup wizard to enable.', Comment = 'is-IS=HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Keyrðu uppsetningarleiðsögnina til að virkja.';
-        JQNotRunningMsg: Label 'The Orchestrator job queue is not running. Run the setup wizard to start it.', Comment = 'is-IS=Vinnsluröð stjórnanda er ekki í gangi. Keyrðu uppsetningarleiðsögnina til að ræsa hana.';
         NotSetLbl: Label 'Not set', Comment = 'is-IS=Ekki skráð';
-        OpenAppSecretsLbl: Label 'Open App Secrets', Comment = 'is-IS=Opna leyndarmál forrits';
-        RunSetupWizardLbl: Label 'Run Setup Wizard', Comment = 'is-IS=Keyra uppsetningarleiðsögn';
-        SecretsMissingMsg: Label '%1 Bifrost Orchestrator secrets have no value yet. Secret values are not copied from the published Origo Cloud Events Orchestrator application - enter them once.', Comment = '%1 = number of secrets without a value, is-IS=%1 leyndarmál Bifröst stjórnandans hafa ekkert gildi enn. Gildi leyndarmála eru ekki afrituð úr útgefna forritinu Origo Cloud Events Orchestrator - skráðu þau einu sinni.';
         SetLbl: Label 'Set', Comment = 'is-IS=Skráð';
 
     trigger OnInit()
@@ -247,8 +241,6 @@ page 10035536 "Scheduler Setup ori"
     begin
         Rec.OnOpenEmptyRec();
         Secrets.RegisterAll();
-        ShowSetupWizardNotification();
-        ShowSecretsMissingNotification();
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -266,49 +258,5 @@ page 10035536 "Scheduler Setup ori"
         end;
         TelegramBotTokenStatus := NotSetLbl;
         TelegramBotTokenStyleExpr := AttentionStyleTok;
-    end;
-
-    local procedure ShowSetupWizardNotification()
-    var
-        OrchestratorMgt: Codeunit "Scheduler Mgt ori";
-        SetupNotification: Notification;
-        JobQueueStatusText: Text;
-        JobQueueStyleText: Text;
-        HttpEnabled: Boolean;
-        JQRunning: Boolean;
-    begin
-        HttpEnabled := OrchestratorMgt.IsHttpClientEnabled();
-        JQRunning := OrchestratorMgt.GetJobQueueStatus(JobQueueStatusText, JobQueueStyleText);
-
-        if HttpEnabled and JQRunning then
-            exit;
-
-        SetupNotification.Id := 'a7c3e5d1-2f8b-4e9a-b6d4-3c8f1a9e2b07';
-        SetupNotification.Scope := NotificationScope::LocalScope;
-        if not HttpEnabled and not JQRunning then
-            SetupNotification.Message := HttpBlockedAndJQNotRunningMsg
-        else
-            if not HttpEnabled then
-                SetupNotification.Message := HttpBlockedMsg
-            else
-                SetupNotification.Message := JQNotRunningMsg;
-        SetupNotification.AddAction(RunSetupWizardLbl, Codeunit::"Scheduler Wizard Reg. ori", 'OpenSetupWizard');
-        SetupNotification.Send();
-    end;
-
-    local procedure ShowSecretsMissingNotification()
-    var
-        SecretsNotification: Notification;
-        MissingCount: Integer;
-    begin
-        MissingCount := Secrets.CountMissingSecrets();
-        if MissingCount = 0 then
-            exit;
-
-        SecretsNotification.Id := 'c1f0a4b6-8d52-4a0d-9d61-2b7a4e9f3c88';
-        SecretsNotification.Scope := NotificationScope::LocalScope;
-        SecretsNotification.Message := StrSubstNo(SecretsMissingMsg, MissingCount);
-        SecretsNotification.AddAction(OpenAppSecretsLbl, Codeunit::"Secrets ori", 'OpenAppSecrets');
-        SecretsNotification.Send();
     end;
 }

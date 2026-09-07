@@ -34,7 +34,8 @@ scheduled Job Queue Entry does. It is the successor of *Origo Cloud Events Orche
 
 1. **Set the app up.** An administrator opens **Bifrost Orchestrator Setup** (`Scheduler Setup ori`),
    runs the setup wizard, enables *Allow HttpClient Requests* for the extension and starts the
-   management job queue. The setup page raises a notification while either is missing.
+   management job queue. **Bifröst Setup** raises the notification while either is missing — setup
+   notifications live there for the whole Bifröst family, never on an app's own setup page.
 2. **Register what should be watched.** A Job Queue Entry becomes a scheduled entry either from the
    *Job Queue Entries* page (action *Add to Bifrost Orchestrator*) or through
    `Orchestrator.Entry.Register`. The row carries the schedule, the retry policy and the
@@ -174,9 +175,9 @@ Supporting paths:
 
 | Step | Where | What |
 | --- | --- | --- |
-| 1 | Extension Management (page 2500) | Enable **Allow HttpClient Requests** for Bifrost Orchestrator. Needed by Telegram and by the OAuth restart client. The setup page shows a notification with a one-click action while it is off. |
+| 1 | Extension Management (page 2500) | Enable **Allow HttpClient Requests** for Bifrost Orchestrator. Needed by Telegram and by the OAuth restart client. **Bifröst Setup** shows an aggregated notification with a *Start setup wizard* action while it is off. |
 | 2 | **Bifröst Setup** → *Apps* → **Bifrost Orchestrator** | Open `Scheduler Setup ori` (page 10035536), the single place this module is configured. |
-| 3 | **Set up Bifrost Orchestrator** (assisted setup) | `Scheduler Setup Wizard ori` walks through HTTP client requests, the management job queue and the scheduling defaults. Also reachable from the setup notification. |
+| 3 | **Set up Bifrost Orchestrator** (assisted setup) | `Scheduler Setup Wizard ori` walks through HTTP client requests, the management job queue and the scheduling defaults. Also reachable from the *Start setup wizard* action on Bifröst Setup. |
 | 4 | *Restart Job Queue* action | Creates and enqueues the management Job Queue Entry — recurring, every 5 minutes, all seven days, running codeunit `Scheduler Handler ori`. The status field on the setup page reports whether it is running. |
 | 5 | *Client Credentials* action | One `Client Credentials ori` row per Entra app registration used to restart entries through the API. |
 | 6 | *App Secrets* action | The Bifröst secret list, filtered to this app. |
@@ -254,9 +255,9 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 
 ## Objects
 
-111 objects, all inside range 10035535–10035634. Highest id in use: 10035606. Free ids:
+112 objects, all inside range 10035535–10035634. Highest id in use: 10035607. Free ids:
 10035557–10035558, 10035563–10035565, 10035569, 10035573, 10035575, 10035577–10035578, 10035580 and
-10035607–10035634. Every object carries the mandatory ` ori` affix.
+10035608–10035634. Every object carries the mandatory ` ori` affix.
 
 ### Tables
 
@@ -391,7 +392,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035586 | `Telegram Send ori` | Posts one HTML message to the Telegram sendMessage endpoint; the bot token goes in as a secret request URI. |
 | 10035587 | `Telegram Notif. ori` | Telegram `Notification ori` implementation. |
 | 10035588 | `Telegram Msg ori` | `Orchestrator.Telegram.Message` |
-| 10035589 | `Scheduler Wizard Reg. ori` | Registers the setup wizard as an assisted setup and opens it from the setup notification. |
+| 10035589 | `Scheduler Wizard Reg. ori` | Registers the setup wizard as an assisted setup. |
 | 10035590 | `Report Data Restriction ori` | Blocks `Report Request Preset ori` from the generic `Data.Records.*` message types. |
 | 10035592 | `Report Msg Handler ori` | Shared handler behind the `Orchestrator.Report.*` message types. |
 | 10035593 | `Report List Msg ori` | `Orchestrator.Report.List` |
@@ -403,6 +404,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035603 | `Msg Executor ori` | The only path from playbook code to Foundation's `Dispatcher ori`; wraps every dispatch in a `Codeunit.Run` scope. |
 | 10035604 | `App Takeover ori` | One-time data take-over from the published *Origo Cloud Events Orchestrator* app. |
 | 10035606 | `Secrets ori` | Single access point for every secret this app keeps in the Foundation secret store. |
+| 10035607 | `Orchestrator Registration ori` | Registers the app in Foundation's `App Registry ori` so Bifröst Setup can name it in the aggregated setup notifications. |
 
 ### Permission sets
 

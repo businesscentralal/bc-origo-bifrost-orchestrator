@@ -19,15 +19,17 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 
 ### Object IDs in use / free
 - Used app ids: 10035535-10035556, 10035559-10035562, 10035566-10035568, 10035570-10035572,
-  10035574, 10035576, 10035579, 10035581-10035606.
+  10035574, 10035576, 10035579, 10035581-10035607.
   **Free: 10035557-10035558, 10035563-10035565, 10035569, 10035573, 10035575, 10035577-10035578,
-  10035580, 10035607-10035634.**
-  (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration.)
-- Used test ids: 96400-96404, 96410-96422, 96450-96451.
-  **Free: 96405-96409, 96423-96449, 96452-96499.**
+  10035580, 10035608-10035634.**
+  (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration;
+  10035607 = codeunit `Orchestrator Registration ori`, added 2026-09-07 for the Bifröst
+  application registry.)
+- Used test ids: 96400-96404, 96410-96423, 96450-96451.
+  **Free: 96405-96409, 96424-96449, 96452-96499.**
   (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
-  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report
-  `Test Failing Report`.)
+  96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96450 = table `Test Run Marker`
+  and report `Test Process Report`; 96451 = report `Test Failing Report`.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
 
@@ -38,8 +40,16 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   `ContextSensitiveHelpPage` override** - that property belongs to Foundation's own page.
 - `Scheduler Setup ori` (page 10035536, caption *Bifrost Orchestrator Setup*, help slug `nornir-setup`) is
   the application setup page. It hosts the navigation to Playbooks, Client Credentials, the Playbook
-  Execution Log and `App Secrets ori` (filtered with `SetAppFilter(GetAppId())`), and it carries the
-  HTTP/job-queue setup notification in its own `OnOpenPage`.
+  Execution Log and `App Secrets ori` (filtered with `SetAppFilter(GetAppId())`). It shows **no**
+  notification.
+- **Setup notifications live on Bifröst Setup only** (Foundation's `Setup ori`). This app raises no
+  setup banner of its own - no HTTP banner, no missing-credentials banner, no "run the setup wizard"
+  banner, on any page. Foundation aggregates them, one banner per topic naming the applications
+  concerned, and each banner carries the single action *Start setup wizard*. The app makes itself
+  known through codeunit `Orchestrator Registration ori` (10035607, `Access = Internal`), whose only
+  subscriber answers `Codeunit::"App Registry ori", OnRegisterApps` with
+  `AppRegistry.AddApp(Apps, AppInfo.Id(), AppInfo.Name(), Page::"Scheduler Setup ori")`. The
+  subscriber parameter must be named `Apps` - AL matches event-subscriber parameters by name.
 - **Secrets live in the Foundation secret store**, never in app-private IsolatedStorage. Codeunit
   `Secrets ori` (10035606, `Access = Internal`) is the only place that composes secret codes and calls
   `Secret Store ori`. Codes, all scope `Company`:
