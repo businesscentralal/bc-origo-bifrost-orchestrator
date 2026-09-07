@@ -217,7 +217,7 @@ page 10035544 "Scheduled Entry Card ori"
                     trigger OnValidate()
                     begin
                         GetNotificationReceipientMandatory();
-                        TryPopulateTelegramChatId();
+                        PopulateTelegramChatId();
                     end;
                 }
                 field("Notification Recipient"; Rec."Notification Recipient")
@@ -378,7 +378,7 @@ page 10035544 "Scheduled Entry Card ori"
         NotificationReceipientMandatory := NotificationInterface.IsNotificationReceipientMandatory();
     end;
 
-    local procedure TryPopulateTelegramChatId()
+    local procedure PopulateTelegramChatId()
     var
         UserSetup: Record "User Setup ori";
     begin
@@ -386,6 +386,7 @@ page 10035544 "Scheduled Entry Card ori"
             exit;
         if Rec."Notification Recipient" <> '' then
             exit;
+        UserSetup.SetLoadFields("Telegram Chat ID ori");
         if UserSetup.Get(UserSecurityId()) then
             if UserSetup."Telegram Chat ID ori" <> '' then
                 Rec."Notification Recipient" := UserSetup."Telegram Chat ID ori";

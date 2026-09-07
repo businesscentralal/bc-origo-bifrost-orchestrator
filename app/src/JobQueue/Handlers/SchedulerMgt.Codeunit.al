@@ -280,6 +280,12 @@ codeunit 10035536 "Scheduler Mgt ori"
             ActivityLog.DeleteAll();
     end;
 
+    /// <summary>
+    /// Reports whether the administrator has allowed this extension to make outgoing HTTP calls.
+    /// Without it the API client cannot reach the scheduling service, so the setup page raises its
+    /// notification on this rather than letting the first call fail.
+    /// </summary>
+    /// <returns>Boolean. True when Allow HttpClient Requests is set for this app.</returns>
     internal procedure IsHttpClientEnabled(): Boolean
     var
         NAVAppSetting: Record "NAV App Setting";

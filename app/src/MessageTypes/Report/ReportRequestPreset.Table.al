@@ -37,6 +37,11 @@ table 10035590 "Report Request Preset ori"
         }
     }
 
+    /// <summary>
+    /// Writes the Request Page XML blob from text. Only fills the stream; the caller still has to
+    /// <c>Insert</c> or <c>Modify</c> the record.
+    /// </summary>
+    /// <param name="XmlText">The captured request page parameters to store for this report and user.</param>
     procedure SetRequestPageXml(XmlText: Text)
     var
         OutStr: OutStream;
@@ -45,6 +50,11 @@ table 10035590 "Report Request Preset ori"
         OutStr.WriteText(XmlText);
     end;
 
+    /// <summary>
+    /// Reads the Request Page XML blob as text. This is what the report message types feed to
+    /// <c>Report.SaveAs</c> and <c>Report.Execute</c> when the request itself carries no parameters.
+    /// </summary>
+    /// <returns>Text. The stored request page XML, or empty when the preset was never captured.</returns>
     procedure GetRequestPageXml() XmlText: Text
     var
         InStr: InStream;
@@ -56,6 +66,11 @@ table 10035590 "Report Request Preset ori"
         InStr.ReadText(XmlText);
     end;
 
+    /// <summary>
+    /// Reports whether request page parameters have been captured for this report and user, without
+    /// reading the blob itself.
+    /// </summary>
+    /// <returns>Boolean. True when the Request Page XML blob holds a value.</returns>
     procedure HasRequestPageXml(): Boolean
     begin
         CalcFields("Request Page XML");

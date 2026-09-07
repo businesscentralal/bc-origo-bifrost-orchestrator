@@ -53,7 +53,10 @@ table 10035538 "Client Credentials ori"
     var
         Secrets: Codeunit "Secrets ori";
     begin
-        Secrets.ClearCredential(Rec.Code);
+        // Unregister, not Clear: the record is gone, so its registry rows must go too. Clearing
+        // would leave two value-less rows behind for ever and "Secrets ori".CountMissingSecrets
+        // would keep raising the "secrets missing" notification for a credential nobody can enter.
+        Secrets.UnregisterCredential(Rec.Code);
     end;
 
     /// <summary>

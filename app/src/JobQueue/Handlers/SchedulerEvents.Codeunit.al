@@ -27,6 +27,7 @@ codeunit 10035539 "Scheduler Events ori"
     begin
         if not JobQueueEntry."Recurring Job" then exit;
 
+        "Scheduled Entry ori".SetLoadFields("Job Queue User ID");
         if not "Scheduled Entry ori".Get(JobQueueEntry.ID) then
             exit;
         if "Scheduled Entry ori"."Job Queue User ID" = '' then

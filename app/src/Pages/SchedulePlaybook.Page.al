@@ -90,6 +90,11 @@ page 10035584 "Schedule Playbook ori"
         EmitTelemetry: Boolean;
         MissingTemplateErr: Label 'You must select a Recurring Template Code.', Comment = 'is-IS=Þú verður að velja endurtekningarsniðmát.';
 
+    /// <summary>
+    /// Tells the dialog which playbook it is scheduling. Call it before <c>RunModal</c>. Also sets
+    /// the retry policy to Always, so the field opens on the value most schedules want.
+    /// </summary>
+    /// <param name="SourcePlaybook">The playbook the orchestrator entry will be created for.</param>
     procedure SetPlaybook(var SourcePlaybook: Record "Playbook ori")
     begin
         Playbook := SourcePlaybook;

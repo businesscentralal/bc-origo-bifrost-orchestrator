@@ -60,6 +60,13 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori"
             else
                 Error(MissingOutboxIdErr);
 
+        // KNOWN GAP: there is no ownership check here. This codeunit elevates itself with
+        // Permissions = tabledata "Email Outbox" = RIMD, so a caller who learns another user's
+        // outbox SystemId can make this message type send that user's draft. The System
+        // Application does not expose the owner: "Email Outbox"."User Security Id" is
+        // Access = Internal, the only accessors are GetMessageId/GetAccountId/GetConnector, and
+        // query "Outbox Emails" is Access = Internal too. Closing this needs a design decision -
+        // see the PR gateway report of 2026-09-07.
         EmailOutbox.GetBySystemId(OutboxSystemId);
         EmailMessage.Get(EmailOutbox.GetMessageId());
         Email.Send(EmailMessage);

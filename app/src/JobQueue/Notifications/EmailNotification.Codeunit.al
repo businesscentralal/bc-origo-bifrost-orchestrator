@@ -189,7 +189,10 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     begin
         "Scheduled Entry ori".CopyToCustomDimensions(CustomDimensions);
         "Scheduled Entry ori".CopyLastExecutionInformationToCustomDimensions(CustomDimensions);
-        CustomDimensions.Add(DelChr(TempEmailItem.FieldName("Send to"), '=', ' '), TempEmailItem."Send to");
+        // The recipient address is deliberately NOT a telemetry dimension: it is end-user
+        // identifiable information and this message goes to TelemetryScope::All, i.e. to Origo's
+        // own Application Insights as well as the customer's. The entry id and description
+        // dimensions already identify which notification failed.
         CustomDimensions.Add('Error', GetLastErrorText());
 
         Session.LogMessage('O4NJQS-0007', 'Error Sending Email', Verbosity::Error, DataClassification::SystemMetadata, TelemetryScope::All, CustomDimensions);

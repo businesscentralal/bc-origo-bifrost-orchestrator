@@ -25,6 +25,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
         Playbook: Record "Playbook ori";
         Instance: Record "Playbook Instance ori";
         Runner: Codeunit "Playbook Runner ori";
+        Workspace: Codeunit "Playbook Workspace ori";
         InitialRequest: BigText;
         FinalResponse: BigText;
         RequestJson: JsonObject;
@@ -46,7 +47,9 @@ codeunit 10035552 "Playbook Msg Handler ori"
         ResponseJson.Add('status', 'Success');
         ResponseJson.Add('instanceId', Format(InstanceId, 0, 4));
         ResponseJson.Add('playbookCode', Playbook.Code);
-        ResponseJson.Add('playbookStatus', Format(Instance.Status));
+        // StatusToText, not Format: this is a published API response, and plain Format returns the
+        // localised caption ("Lokið" on an is-IS tenant) instead of the invariant enum name.
+        ResponseJson.Add('playbookStatus', Workspace.StatusToText(Instance.Status));
         ResponseJson.Add('stepsExecuted', Instance."Steps Executed");
         ResponseJson.Add('stepsFailed', Instance."Steps Failed");
         ResponseJson.Add('itemsProcessed', Instance."Items Processed");
@@ -94,6 +97,12 @@ codeunit 10035552 "Playbook Msg Handler ori"
         Argument.SetResponseJson(ResponseJson);
     end;
 
+    /// <summary>
+    /// Queues a Bifrost Playbook for a one-off background run instead of executing it in the
+    /// caller's session, and returns the id of the Job Queue Entry that will pick it up. The
+    /// delay defaults to 60 seconds and is raised back to 60 when a shorter one is requested.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteEnqueue(var Argument: Record "Message Argument ori")
     var
         Playbook: Record "Playbook ori";

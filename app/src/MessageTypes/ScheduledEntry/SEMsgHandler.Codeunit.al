@@ -14,6 +14,12 @@ codeunit 10035550 "SE Msg Handler ori"
         tabledata "Scheduled Entry ori" = RIMD,
         tabledata "Job Queue Entry" = RM;
 
+    /// <summary>
+    /// Executes the orchestrator entry once, right now. A throwaway non-recurring Job Queue Entry
+    /// is used, so the entry's own schedule is left alone. The entry is identified by the <c>id</c>
+    /// request property or, failing that, by a GUID subject.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteRun(var Argument: Record "Message Argument ori")
     var
         Entry: Record "Scheduled Entry ori";
@@ -24,6 +30,12 @@ codeunit 10035550 "SE Msg Handler ori"
         RespondWithEntry(Argument, Entry, ExecutedMsg);
     end;
 
+    /// <summary>
+    /// Puts the orchestrator entry's Job Queue Entry back on the schedule, applying the retry
+    /// policy and the notification rules for an entry that stopped in Error or On Hold. The entry
+    /// is identified by the <c>id</c> request property or, failing that, by a GUID subject.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteRestart(var Argument: Record "Message Argument ori")
     var
         Entry: Record "Scheduled Entry ori";
@@ -34,6 +46,12 @@ codeunit 10035550 "SE Msg Handler ori"
         RespondWithEntry(Argument, Entry, RestartedMsg);
     end;
 
+    /// <summary>
+    /// Brings an existing Job Queue Entry under orchestrator control by creating the matching
+    /// orchestrator entry from it. The Job Queue Entry is identified by the
+    /// <c>jobQueueEntryId</c> request property or, failing that, by a GUID subject.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteRegister(var Argument: Record "Message Argument ori")
     var
         JQEntry: Record "Job Queue Entry";
@@ -53,6 +71,13 @@ codeunit 10035550 "SE Msg Handler ori"
         RespondWithEntry(Argument, Entry, RegisteredMsg);
     end;
 
+    /// <summary>
+    /// Rebuilds the schedule of an orchestrator entry from its current recurring settings. When the
+    /// entry has client credentials the update is delegated to the scheduling API; otherwise the
+    /// Job Queue Entry is dropped and created again locally. A blocked entry is refused. The entry
+    /// is identified by the <c>id</c> request property or, failing that, by a GUID subject.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteSchedule(var Argument: Record "Message Argument ori")
     var
         Entry: Record "Scheduled Entry ori";

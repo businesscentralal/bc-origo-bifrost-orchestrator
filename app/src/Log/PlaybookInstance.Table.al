@@ -60,6 +60,8 @@ table 10035542 "Playbook Instance ori"
         field(70; Context; Blob)
         {
             Caption = 'Context', Comment = 'is-IS=Samhengi';
+            // Holds the playbook's initial request payload, which routinely carries customer data.
+            DataClassification = CustomerContent;
         }
     }
 

@@ -247,6 +247,12 @@ table 10035537 "Recurring Template ori"
         exit(Format("Next Run Date Formula") <> '');
     end;
 
+    /// <summary>
+    /// Inserts the five starter recurring templates (weekdays, daily, hourly, nightly, weekly on
+    /// Mondays) so a fresh company has something to schedule against. Each one is skipped when a
+    /// template with that code already exists, which makes the procedure safe to call again from
+    /// install, upgrade or the setup wizard.
+    /// </summary>
     procedure InsertSampleTemplates()
     begin
         InsertIfNotExists('WEEKDAYS', 'Weekdays (Mon-Fri, every 30 min)', true, true, true, true, true, false, false, 080000T, 170000T, 30);

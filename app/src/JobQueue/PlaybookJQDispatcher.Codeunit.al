@@ -66,6 +66,7 @@ codeunit 10035548 "Playbook JQ Dispatcher ori"
     var
         Instance: Record "Playbook Instance ori";
     begin
+        Instance.SetLoadFields(Status);
         if Instance.Get(InstanceId) then
             exit(Instance.Status);
         exit("Playbook Inst. Status ori"::Failed);

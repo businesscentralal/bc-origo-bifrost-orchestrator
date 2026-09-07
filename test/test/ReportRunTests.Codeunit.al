@@ -69,17 +69,33 @@ codeunit 96417 "Report Run Tests"
         ResponseJson: JsonObject;
         Token: JsonToken;
     begin
-        // [SCENARIO] A failing report is caught and returned, not thrown
+        // [SCENARIO] A failing report is caught and returned, not thrown - and the call stack is
+        // withheld, because it names objects, procedures and line numbers of the base application
+        // and of every extension on the stack
+
+        // [GIVEN] Request Debug Mode is off, which is the default
         CreateArgument(TempArgument, StrSubstNo(ReportIdRequestTok, Report::"Test Failing Report"));
+
+        // [WHEN] a report that fails is run
         Handler.ExecuteRun(TempArgument);
 
+        // [THEN] the failure is reported as data, not thrown
         ResponseJson := TempArgument.GetResponseJson();
         ResponseJson.Get('status', Token);
         Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
         ResponseJson.Get('error', Token);
         Assert.AreNotEqual('', Token.AsValue().AsText(), 'Error text should be captured');
-        Assert.IsTrue(ResponseJson.Contains('callstack'), 'Callstack should be captured');
+
+        // [THEN] but the call stack is not handed to the caller
+        Assert.IsFalse(ResponseJson.Contains('callstack'), 'The call stack must not be returned while Request Debug Mode is off');
     end;
+
+    // The mirror case - Request Debug Mode ON, call stack present - is deliberately not a unit
+    // test. Switching the flag on makes Foundation's "Request Logger ori" write inside the test
+    // transaction, which is exactly the isolation breakage that
+    // "Test Install".DisableRequestDebugMode exists to prevent; the run aborts with "An error
+    // occurred and the transaction is stopped". Verify that branch through the MCP message-type
+    // run instead.
 
     [Test]
     procedure RunRejectsReportThatProducesOutput()

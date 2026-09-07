@@ -15,6 +15,12 @@ codeunit 10035583 "Playbook Workspace ori"
     var
         Data: JsonObject;
 
+    /// <summary>
+    /// Clears the workspace and seeds it for a new run. Because the codeunit is SingleInstance the
+    /// document survives between runs in the same session, so every playbook has to start here.
+    /// Seeding adds <c>_sys</c> (dates, company, user) and <c>_who</c> (the Help.WhoAmI.Get result),
+    /// so steps can reference them without asking for them.
+    /// </summary>
     procedure Reset()
     var
         EmptyObj: JsonObject;
@@ -59,6 +65,11 @@ codeunit 10035583 "Playbook Workspace ori"
         exit(GetTokenAtPath(Path, Token));
     end;
 
+    /// <summary>
+    /// Returns the whole workspace document, including the <c>_run</c>, <c>_steps</c>, <c>_sys</c>
+    /// and <c>_who</c> reporting keys.
+    /// </summary>
+    /// <returns>JsonObject. The workspace document as it stands.</returns>
     procedure GetData(): JsonObject
     begin
         exit(Data);
@@ -114,6 +125,11 @@ codeunit 10035583 "Playbook Workspace ori"
         end;
     end;
 
+    /// <summary>
+    /// Serialises the whole workspace to JSON. This is everything the steps collected, so it can be
+    /// large — use <c>ToFilteredText</c> when only some step keys are wanted.
+    /// </summary>
+    /// <returns>Text. The workspace document as JSON.</returns>
     procedure ToText(): Text
     var
         Result: Text;

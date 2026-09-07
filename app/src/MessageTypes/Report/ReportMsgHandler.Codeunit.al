@@ -10,6 +10,12 @@ codeunit 10035592 "Report Msg Handler ori"
     Permissions =
         tabledata "Report Request Preset ori" = RIMD;
 
+    /// <summary>
+    /// Lists every report the current user can see, optionally narrowed to processing-only reports
+    /// or to reports that produce output by the <c>processingOnly</c> request property. Leaving the
+    /// property out returns both kinds.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteList(var Argument: Record "Message Argument ori")
     var
         ReportMeta: Record "Report Metadata";
@@ -48,6 +54,13 @@ codeunit 10035592 "Report Msg Handler ori"
         Argument.SetResponseJson(ResponseJson);
     end;
 
+    /// <summary>
+    /// Describes one report: its metadata, its first data item table, its layouts, and the calling
+    /// user's saved request page preset. The preset row is created empty when the user has none
+    /// yet, so the response can always hand back a URL to the card where the request page XML is
+    /// captured.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteGet(var Argument: Record "Message Argument ori")
     var
         ReportMeta: Record "Report Metadata";
@@ -114,6 +127,13 @@ codeunit 10035592 "Report Msg Handler ori"
         Argument.SetResponseJson(ResponseJson);
     end;
 
+    /// <summary>
+    /// Renders a report to a document and returns it as the response payload, in PDF, Excel, Word
+    /// or XML. Request page parameters come from the request when given, otherwise from the calling
+    /// user's saved preset. A processing-only report is rejected, since it produces no document —
+    /// use Orchestrator.Report.Run for those.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the rendered document.</param>
     procedure ExecuteSaveAs(var Argument: Record "Message Argument ori")
     var
         Preset: Record "Report Request Preset ori";
@@ -163,6 +183,14 @@ codeunit 10035592 "Report Msg Handler ori"
         Argument.SetResponsePdf(TempBlob);
     end;
 
+    /// <summary>
+    /// Runs a processing-only report as a batch job and reports how it went. The report is executed
+    /// through <c>Report Run Exec ori</c> with <c>Codeunit.Run</c>, so a failure comes back as a
+    /// response with status Error, error text and callstack rather than as a thrown error. Only
+    /// processing-only reports are accepted; anything that produces output belongs in
+    /// Orchestrator.Report.SaveAs.
+    /// </summary>
+    /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteRun(var Argument: Record "Message Argument ori")
     var
         Preset: Record "Report Request Preset ori";
@@ -223,7 +251,11 @@ codeunit 10035592 "Report Msg Handler ori"
             ResponseJson.Add('status', 'Error');
             ResponseJson.Add('reportId', ReportMeta.ID);
             ResponseJson.Add('error', GetLastErrorText());
-            ResponseJson.Add('callstack', GetLastErrorCallStack());
+            // The call stack names objects, procedures and line numbers of the base application and
+            // of every extension on the stack, so it is only returned when the administrator has
+            // switched on Request Debug Mode - the same gate the request log uses.
+            if IsRequestDebugMode() then
+                ResponseJson.Add('callstack', GetLastErrorCallStack());
             ClearLastError();
         end;
 
@@ -264,6 +296,16 @@ codeunit 10035592 "Report Msg Handler ori"
             else
                 Error(UnsupportedFormatErr, FormatText);
         end;
+    end;
+
+    local procedure IsRequestDebugMode(): Boolean
+    var
+        Setup: Record "Setup ori";
+    begin
+        Setup.SetLoadFields("Request Debug Mode");
+        if not Setup.Get() then
+            exit(false);
+        exit(Setup."Request Debug Mode");
     end;
 
     var

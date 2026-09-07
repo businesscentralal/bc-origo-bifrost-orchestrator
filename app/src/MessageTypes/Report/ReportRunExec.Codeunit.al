@@ -27,6 +27,13 @@ codeunit 10035598 "Report Run Exec ori"
             Report.Execute(ReportId, XmlParams);
     end;
 
+    /// <summary>
+    /// Hands the report and its parameters to this instance before <c>Run</c> is called. The
+    /// parameters travel in global variables because <c>Codeunit.Run</c> takes none.
+    /// </summary>
+    /// <param name="NewReportId">The processing-only report to execute.</param>
+    /// <param name="NewXmlParams">Request page parameters as XML, or empty to run with the defaults.</param>
+    /// <param name="NewRecRef">The data item record, already filtered. Pass a closed RecordRef to run the report without one.</param>
     procedure SetParameters(NewReportId: Integer; NewXmlParams: Text; var NewRecRef: RecordRef)
     begin
         ReportId := NewReportId;

@@ -19,7 +19,7 @@ enum 10035535 "Notif. Type ori" implements "Notification ori"
     }
     value(2; Telegram)
     {
-        Caption = 'Telegram';
+        Caption = 'Telegram', Locked = true;
         Implementation = "Notification ori" = "Telegram Notif. ori";
     }
 }

@@ -212,7 +212,9 @@ codeunit 96403 "Orchestr Secret Tests"
         ClientCredentials: Record "Client Credentials ori";
         CredentialCode: Code[50];
     begin
-        // [SCENARIO] Removing a credential pair must not leave its values behind in IsolatedStorage
+        // [SCENARIO] Removing a credential pair must leave behind neither its values nor its
+        // registry rows. Foundation's "Secret Store ori".Unregister is documented as the call
+        // belonging in the OnDelete trigger of the record that owns the registration.
 
         // [GIVEN] a client credentials record with both values stored
         Initialize();
@@ -226,15 +228,47 @@ codeunit 96403 "Orchestr Secret Tests"
         ClientCredentials.Get(CredentialCode);
         ClientCredentials.Delete(true);
 
-        // [THEN] both values are gone while the registrations remain visible to the administrator
+        // [THEN] both values are gone
         Assert.IsFalse(Secrets.IsClientIdSet(CredentialCode), 'The client id must be cleared with the record');
         Assert.IsFalse(Secrets.IsClientSecretSet(CredentialCode), 'The client secret must be cleared with the record');
-        Assert.IsTrue(AppSecret.Get(Secrets.GetAppId(), Secrets.ClientIdCode(CredentialCode)), 'The client id registration must survive the delete');
+
+        // [THEN] and so are both registry rows - the credential no longer exists, so nobody could
+        // ever enter a value for them and they would count as missing secrets for ever
+        Assert.IsFalse(AppSecret.Get(Secrets.GetAppId(), Secrets.ClientIdCode(CredentialCode)), 'The client id registration must be removed with the record');
+        Assert.IsFalse(AppSecret.Get(Secrets.GetAppId(), Secrets.ClientSecretCode(CredentialCode)), 'The client secret registration must be removed with the record');
+    end;
+
+    [Test]
+    procedure DeletingACredentialLeavesNoMissingSecretsBehind()
+    var
+        ClientCredentials: Record "Client Credentials ori";
+        CredentialCode: Code[50];
+        MissingAfter: Integer;
+        MissingBefore: Integer;
+    begin
+        // [SCENARIO] The "secrets missing" notification on the setup page must not keep firing for a
+        // credential the administrator has deleted - there would be no way left to clear it
+
+        // [GIVEN] the number of registered secrets without a value before anything is created
+        Initialize();
+        CredentialCode := CopyStr(CredentialCodeTok, 1, 50);
+        MissingBefore := Secrets.CountMissingSecrets();
+
+        // [WHEN] a credential is created without values and then deleted again
+        CreateCredential(CredentialCode);
+        ClientCredentials.SetLoadFields(Code);
+        ClientCredentials.Get(CredentialCode);
+        ClientCredentials.Delete(true);
+
+        // [THEN] the missing-secret count is back where it started
+        MissingAfter := Secrets.CountMissingSecrets();
+        Assert.AreEqual(MissingBefore, MissingAfter, 'Deleting a credential must not leave registered secrets nobody can enter');
     end;
 
     [Test]
     procedure RenamingACredentialMovesItsSecrets()
     var
+        AppSecret: Record "App Secret ori";
         ClientCredentials: Record "Client Credentials ori";
         NewCredentialCode: Code[50];
         OldCredentialCode: Code[50];
@@ -259,6 +293,11 @@ codeunit 96403 "Orchestr Secret Tests"
         Assert.IsTrue(Secrets.IsClientSecretSet(NewCredentialCode), 'The client secret must follow the renamed record');
         Assert.IsFalse(Secrets.IsClientIdSet(OldCredentialCode), 'The client id must be cleared from the old code');
         Assert.IsFalse(Secrets.IsClientSecretSet(OldCredentialCode), 'The client secret must be cleared from the old code');
+
+        // [THEN] the old registrations are gone too - the old code no longer names any record, so
+        // keeping them would count as missing secrets for ever
+        Assert.IsFalse(AppSecret.Get(Secrets.GetAppId(), Secrets.ClientIdCode(OldCredentialCode)), 'The old client id registration must be removed by the rename');
+        Assert.IsFalse(AppSecret.Get(Secrets.GetAppId(), Secrets.ClientSecretCode(OldCredentialCode)), 'The old client secret registration must be removed by the rename');
     end;
 
     // ---------- pages ----------

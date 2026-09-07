@@ -138,8 +138,10 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
         Dimensions: Dictionary of [Text, Text];
     begin
         Dimensions.Add('Category', 'BifrostOrchestrator');
+        // The chat id is a per-person identifier (CustomerContent on "User Setup ori") and is
+        // deliberately not a telemetry dimension. EntryDescription already says which notification
+        // failed.
         Dimensions.Add('EntryDescription', "Scheduled Entry ori".Description);
-        Dimensions.Add('ChatId', ChatId);
         Session.LogMessage(
             'CETEL0001',
             SendFailedTelemetryLbl,

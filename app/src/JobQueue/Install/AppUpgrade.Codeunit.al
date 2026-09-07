@@ -20,9 +20,13 @@ codeunit 10035538 "App Upgrade ori"
 
     trigger OnUpgradePerCompany()
     begin
+        // "Allow HttpClient Requests" is deliberately NOT set here. It is the administrator's
+        // consent switch for outbound HTTP; an upgrade that silently turned it back on would undo
+        // a decision the administrator made on purpose, without a dialog and without a trace.
+        // The setup page and the setup wizard both detect the disabled state and offer to enable
+        // it, and every outbound caller checks it before use.
         CreateJobqueueOrchestratorSetup();
         SetDefaultTypeToCodeunit();
-        EnableHttpClientRequests();
         RegisterRetentionPolicies();
         DropLegacySecretKeys();
         RegisterSecrets();
@@ -42,19 +46,6 @@ codeunit 10035538 "App Upgrade ori"
         "Scheduled Entry ori".SetRange("Object Type to Run", 0);
         if "Scheduled Entry ori".IsEmpty() then exit;
         "Scheduled Entry ori".ModifyAll("Object Type to Run", "Scheduled Entry ori"."Object Type to Run"::Codeunit);
-    end;
-
-    local procedure EnableHttpClientRequests()
-    var
-        NAVAppSetting: Record "NAV App Setting";
-        Info: ModuleInfo;
-    begin
-        NavApp.GetCurrentModuleInfo(Info);
-        if NAVAppSetting.Get(Info.Id) then
-            if not NAVAppSetting."Allow HttpClient Requests" then begin
-                NAVAppSetting."Allow HttpClient Requests" := true;
-                NAVAppSetting.Modify();
-            end;
     end;
 
     local procedure RegisterRetentionPolicies()

@@ -231,6 +231,7 @@ codeunit 10035535 "Scheduler Handler ori"
     begin
         JobQueueLogEntry.SetRange(ID, "Scheduled Entry ori".ID);
         JobQueueLogEntry.SetLoadFields(Status);
+        JobQueueLogEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         if JobQueueLogEntry.FindLast() then
             if JobQueueLogEntry.Status = JobQueueLogEntry.Status::Success then
                 if "Scheduled Entry ori"."Errors Since Last Success" <> 0 then begin

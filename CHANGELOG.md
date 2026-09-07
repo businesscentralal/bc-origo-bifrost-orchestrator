@@ -2,7 +2,10 @@
 
 All notable changes to Bifrost Orchestrator are documented here.
 
-## [28.0.0.0] - 2026-09-05
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
+Business Central release versioning (`major.minor.build.revision`).
+
+## [28.0.0.0] - 2026-09-07
 
 ### App name: Bifrost Nornir -> Bifrost Orchestrator (2026-09-06, before first release)
 
@@ -53,8 +56,41 @@ also what the predecessor was called and what the message-type keys already say.
 - Object names: the `CE` prefix was dropped from every object and every object now carries the mandatory `ori` suffix. The scheduling objects were renamed after what they do rather than after the old product: `CE Orchestrator Entry ori` -> `Scheduled Entry ori`, `CE Orchestrator Setup ori` -> `Scheduler Setup ori`, `CE Orchestrator Handler ori` -> `Scheduler Handler ori`, `CE Orchestrator Mgt ori` -> `Scheduler Mgt ori`, `CE Orchestrator Events ori` -> `Scheduler Events ori`, `CE Orchestrator API Client ori` -> `Scheduler API Client ori`, `CE Orch. Setup Wizard ori` -> `Scheduler Setup Wizard ori`, `CE Playbook ori` -> `Playbook ori`.
 - Permission sets renamed: `CE Orchestrator ori` -> `BIFROST Orchestr ori`, `CE Orch. Setup ori` -> `BIFROST OrchSet ori`, `CE Orch. Mgt ori` -> `BIFROST OrchMgt ori`, `CE PlaybookAdmin ori` -> `BIFROST PlaybAdm ori`, `CE Playbook View ori` -> `BIFROST PlaybVw ori`.
 - Message type keys are **unchanged**: the 20 types keep their `Orchestrator.*` prefix (and `Help.Orchestrator.Get` as the help directory) because they are the external API contract and contain no brand word.
-- Help moved to https://origopublic.blob.core.windows.net/help/BifrostOrchestrator/bc28/en-US/index.html, context-sensitive help to `.../BifrostOrchestrator/bc28/{0}/`; HTML help sources in `app/Help/en-US/` and `app/Help/is-IS/`.
-- New Bifrost logo (`app/assets/Logo250x250.png`) for the app and the test app.
+- New Bifrost logo (`app/assets/Logo250x250.png`) for the app and the test app; the app name was
+  later added under the Bifröst wordmark.
+
+  (An earlier step of this migration moved the help to blob storage with HTML sources under
+  `app/Help/`. That was superseded before release - see *Changed* below: the documentation now
+  lives in `businesscentralal/bifrost` and this repository carries no `Help/` or `docs/` folder.)
+
+### Added
+
+First release of Bifrost Orchestrator as an app in its own right. It succeeds *Origo Cloud Events
+Orchestrator*, which stays published and installed side by side until it is deprecated.
+
+- **Scheduling.** `Scheduled Entry ori` wraps a Job Queue Entry with orchestration settings:
+  recurrence, allowed time range, time zone, retry policy (Always / Three Times / Never) and a
+  notification channel. `Scheduler Handler ori` walks the enabled entries every cycle, restarts
+  failed ones within their policy and reports through `Scheduler Status ori`.
+  `Recurring Template ori` holds reusable schedules; `Scheduler Setup Wizard ori` gets a new
+  tenant from nothing to a running job queue.
+- **Playbooks.** A declarative runner that chains Bifrost message types: `Playbook ori` /
+  `Playbook Step ori` define the sequence, `Playbook Runner ori` executes it,
+  `Playbook Workspace ori` carries a shared JSON document between steps with dot-notation
+  bindings, `Playbook Condition ori` gates and branches on response values, and steps can iterate
+  over an array returned by an earlier step. `Playbook Instance ori` and `Playbook Step Log ori`
+  record every run with request, response and workspace snapshot.
+- **20 message types** under the `Orchestrator.*` key space plus `Help.Orchestrator.Get`, each with
+  help text served through the Foundation help directory - entry run/restart/register/schedule,
+  status get/restart, playbook run/schedule/enqueue, job queue entry restart, report
+  list/get/run/save-as, workspace preview, email send and Telegram message.
+- **Notifications** by email or Telegram through the `Notification ori` interface, with the Telegram
+  chat id kept on `User Setup ori`.
+- **Five assignable permission sets**: `BIFROST Orchestr ori` (everything the app owns),
+  `BIFROST OrchSet ori` (setup), `BIFROST OrchMgt ori` (operations), `BIFROST PlaybAdm ori` and
+  `BIFROST PlaybVw ori` (playbook authoring and read-only).
+- **Data take-over** on first install: `App Takeover ori` copies the configuration of the published
+  Cloud Events app - execution logs and secret values are deliberately not copied.
 
 ### Changed
 
@@ -122,8 +158,9 @@ also what the predecessor was called and what the message-type keys already say.
   the legacy app's entry (pointing at the legacy handler codeunit) instead of ever scheduling
   its own - confirmed via two failing unit tests and via `Orchestrator.Status.Get` reporting
   "Job Queue has not been configured". Generated a fresh Guid for this app's own entry.
-- Added HTML help (en-US + is-IS) for all 18 user-facing pages plus the bilingual index, and
-  wired `ContextSensitiveHelpPage` on every page/page extension that was missing it.
+- Wired `ContextSensitiveHelpPage` on every page and page extension that was missing it, and wrote
+  the matching help pages in both languages. (The pages were first written as HTML under
+  `app/Help/`; they were moved to `businesscentralal/bifrost` before release - see *Changed*.)
 - Renamed field `Orchestrator Enabled ori` to `Scheduler Enabled ori` and action
   `AddToJobQueueOrchestrator ori` to `AddToScheduler ori` on the Job Queue Entry card/list
   extensions, with captions/tooltips referring to Bifrost Orchestrator instead of the legacy
@@ -138,6 +175,57 @@ also what the predecessor was called and what the message-type keys already say.
   key of a value this application wrote itself, and Bifrost Orchestrator is not released yet, so no
   obsoletion period was needed. The take-over from `Origo Cloud Events Orchestrator` no longer copies
   those three fields either - a key is worthless without the other extension's storage.
+
+### Security (2026-09-07, PR gateway review)
+
+- The recipient email address is no longer a telemetry dimension on the "Error Sending Email"
+  message in `Email Notification ori`. It is end-user identifiable information and the message is
+  emitted with `TelemetryScope::All`, so it reached Origo's Application Insights as well as the
+  customer's. The Telegram chat id was removed from the equivalent message in
+  `Telegram Notif. ori` for the same reason.
+- `Orchestrator.Report.Run` no longer returns `callstack` in its error response unless the
+  administrator has switched on Request Debug Mode. The call stack names objects, procedures and
+  line numbers of the base application and of every extension on the stack.
+- `App Upgrade ori` no longer sets `"Allow HttpClient Requests"` on upgrade. That flag is the
+  administrator's consent switch for outbound HTTP; re-enabling it silently on every upgrade undid
+  a deliberate decision with no dialog and no trace. The setup page and the setup wizard both
+  detect the disabled state and offer to turn it on, and every outbound caller checks it first.
+- Data classification corrected where the table-level `SystemMetadata` did not hold: the payload
+  blobs `Playbook Step Log ori`."Request Sent" / "Response Received" / "Iterator Element" /
+  "Workspace Snapshot", `Playbook Instance ori`.Context and `JQ Parameter ori`."Request Data" are
+  now `CustomerContent`, and `Scheduled Entry ori`."Notification Recipient" - which holds an email
+  address and is published on `Scheduled Entry API ori` - is now
+  `EndUserIdentifiableInformation`.
+
+### Fixed (2026-09-07, PR gateway review)
+
+- Deleting or renaming a `Client Credentials ori` record left its two secret registrations behind
+  in the Bifröst secret store with no value. `Secrets ori.CountMissingSecrets` counts registered
+  secrets that have no value, so the Bifrost Orchestrator Setup page raised a "secrets missing"
+  notification for a credential nobody could enter a value for, for ever. `Secrets ori` gained
+  `UnregisterCredential`, and `OnDelete` and `RenameCredential` now use it - which is what
+  Foundation's `Secret Store ori.Unregister` documents as the call belonging in the owning
+  record's `OnDelete`.
+- `Orchestrator.Playbook.Run` returned the localised caption of the playbook status
+  (`"Lokið"` on an is-IS tenant) instead of the invariant enum name, because it used `Format()` on
+  an enum. It now uses the `StatusToText` helper the rest of the app already uses. The request log
+  written by `Playbook Step Executor ori` had the same problem for the message type name and now
+  uses `MessageTypeToText`.
+- A playbook path with a non-numeric array index (`items[x]`) raised a hard error out of
+  `Playbook JSON Helper ori` instead of failing the path like every other bad segment.
+
+### Changed (2026-09-07, PR gateway review)
+
+- `SetLoadFields` added to nine record reads and `ReadIsolation = ReadCommitted` to five read-only
+  scans, across the scheduler, the playbook runner, the secret store facade and the Telegram
+  message type.
+- XML documentation added to 29 non-local procedures that had none.
+- `Notif. Type ori` value `Telegram` marked `Locked = true` - it is a brand name, and its two
+  sibling values already declared their translation.
+- The dead `AS0084` suppression was removed from `app.json`; only `AS0081` (the
+  `internalsVisibleTo` advisory) actually fires.
+- Local page procedure `TryPopulateTelegramChatId` renamed to `PopulateTelegramChatId` - the `Try`
+  prefix is reserved for `[TryFunction]`.
 
 ### Upgrade Notes
 
@@ -162,3 +250,20 @@ also what the predecessor was called and what the message-type keys already say.
   Services layer rejects as a client callback). Pre-existing in the predecessor app too - see
   `test/reports/Bifrost_Orchestrator_MessageType_TestReport_2026-09-05.md` for the full analysis and
   suggested fix. Not addressed in this PR; tracked as a follow-up.
+- `Orchestrator.Entry.Run` reports success over the API without running anything. It delegates to
+  `Scheduler Mgt ori.RunJobQueueEntryOnce`, which opens with
+  `ConfirmManagement.GetResponseOrDefault(RunOnceQst, false)`. `Confirm Management` returns the
+  default button when the session has no GUI, so in a web-service session the answer is `false`
+  and the procedure exits before it creates the throwaway Job Queue Entry - while
+  `SE Msg Handler ori.ExecuteRun` still responds with `ExecutedMsg`. The same procedure then calls
+  `Window.Open`, a client callback the Data Services layer rejects, so simply defaulting the
+  confirm to `true` is not enough. Found by the PR gateway review of 2026-09-07 (the message-type
+  test run of 2026-09-05 recorded "Success" because it read the response envelope rather than
+  checking that the job had run). Same family as `Orchestrator.Entry.Register` above. Fix needs a
+  GUI-free path through `RunJobQueueEntryOnce` - not addressed in this PR.
+- The email draft addressed by `Orchestrator.Email.Send` is not checked for ownership, so a caller
+  who learns another user's outbox SystemId can have that user's draft sent. The System
+  Application exposes no supported way to read the owner (`"Email Outbox"."User Security Id"` and
+  query `Outbox Emails` are both `Access = Internal`, and the only public accessors are
+  `GetMessageId` / `GetAccountId` / `GetConnector`), so closing it needs a design decision - see
+  the PR gateway report of 2026-09-07.

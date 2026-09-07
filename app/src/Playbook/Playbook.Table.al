@@ -94,6 +94,19 @@ table 10035539 "Playbook ori"
         OutStr.WriteText(TemplateText);
     end;
 
+    /// <summary>
+    /// Puts this playbook on a recurring schedule by creating an orchestrator entry that runs the
+    /// Playbook JQ Dispatcher, and stores the new entry id back on the playbook. A playbook that
+    /// already points at a living orchestrator entry is refused; the existing entry has to be
+    /// removed first. A stale id left behind by a deleted entry is simply overwritten.
+    /// </summary>
+    /// <param name="RecurringTemplateCode">The recurring template that sets days, times and interval.</param>
+    /// <param name="NotificationType">How to notify on failure and restart: none, e-mail or Telegram.</param>
+    /// <param name="NotificationRecipient">The address or chat id the notifications go to.</param>
+    /// <param name="JobQueueCategoryCode">The Job Queue category to run under, or empty for none.</param>
+    /// <param name="EmitTelemetry">Whether the entry writes telemetry on every run.</param>
+    /// <param name="RetryPolicy">How often a failed run may be restarted automatically.</param>
+    /// <returns>Guid. The id of the orchestrator entry that was created.</returns>
     procedure CreateOrchestratorEntry(
         RecurringTemplateCode: Code[20];
         NotificationType: Enum "Notif. Type ori";
@@ -133,11 +146,28 @@ table 10035539 "Playbook ori"
         exit(Entry.ID);
     end;
 
+    /// <summary>
+    /// Queues this playbook for a single background run with the defaults: no Job Queue category
+    /// and a 60 second delay. Delegates to the three-parameter overload.
+    /// </summary>
+    /// <param name="RequestData">The initial request JSON handed to the run, or empty to use the playbook's own template.</param>
+    /// <returns>Guid. The id of the Job Queue Entry that will run the playbook.</returns>
     procedure EnqueuePlaybook(RequestData: Text): Guid
     begin
         exit(EnqueuePlaybook(RequestData, '', 60));
     end;
 
+    /// <summary>
+    /// Queues this playbook for a single background run, letting the caller pick the Job Queue
+    /// category and how long to wait before it starts. The request data is parked in a
+    /// <c>JQ Parameter ori</c> row keyed by the Job Queue Entry id, which the dispatcher reads when
+    /// the job fires; when no request data is given the playbook's own initial request template is
+    /// used instead. A delay below 60 seconds is raised to 60.
+    /// </summary>
+    /// <param name="RequestData">The initial request JSON handed to the run, or empty to use the playbook's own template.</param>
+    /// <param name="JobQueueCategoryCode">The Job Queue category to run under, or empty for none.</param>
+    /// <param name="DelaySeconds">Seconds to wait before the earliest start. Values below 60 are raised to 60.</param>
+    /// <returns>Guid. The id of the Job Queue Entry that will run the playbook.</returns>
     procedure EnqueuePlaybook(RequestData: Text; JobQueueCategoryCode: Code[10]; DelaySeconds: Integer): Guid
     var
         JQEntry: Record "Job Queue Entry";

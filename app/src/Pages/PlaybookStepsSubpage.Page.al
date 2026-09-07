@@ -138,6 +138,7 @@ page 10035553 "Playbook Steps Subpage ori"
         StepLog.SetRange("Instance ID", Playbook."Last Run Instance ID");
         StepLog.SetRange("Step No.", Rec."Step No.");
         StepLog.SetLoadFields(Status);
+        StepLog.ReadIsolation := IsolationLevel::ReadCommitted;
         if not StepLog.FindLast() then begin
             LastRunStatusText := NotRunTok;
             StepStatusStyle := 'Subordinate';

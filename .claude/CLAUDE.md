@@ -18,10 +18,16 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   96300-96399 on bc28-is/bc28-w1. Legacy Orchestrator test range was 93000-93099.)
 
 ### Object IDs in use / free
-- Used app ids: 10035535-10035606. **Free: 10035607-10035634.**
+- Used app ids: 10035535-10035556, 10035559-10035562, 10035566-10035568, 10035570-10035572,
+  10035574, 10035576, 10035579, 10035581-10035606.
+  **Free: 10035557-10035558, 10035563-10035565, 10035569, 10035573, 10035575, 10035577-10035578,
+  10035580, 10035607-10035634.**
   (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration.)
-- Used test ids: 96400-96403 and 96410-96422. **Free: 96404-96409 and 96423-96499.**
-  (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06.)
+- Used test ids: 96400-96404, 96410-96422, 96450-96451.
+  **Free: 96405-96409, 96423-96449, 96452-96499.**
+  (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
+  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report
+  `Test Failing Report`.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
 

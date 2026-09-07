@@ -24,6 +24,7 @@ codeunit 10035572 "Playbook Step Executor ori"
     procedure Execute(MessageType: Enum "Message Type ori"; Subject: Text; RequestText: Text; var ResponseText: Text; var ErrorText: Text): Boolean
     var
         MsgExecutor: Codeunit "Msg Executor ori";
+        Workspace: Codeunit "Playbook Workspace ori";
         IsError: Boolean;
         StartTime: DateTime;
     begin
@@ -39,7 +40,9 @@ codeunit 10035572 "Playbook Step Executor ori"
         if IsError then
             ErrorText := ResponseText;
 
-        LogStep(Format(MessageType), RequestText, ResponseText, not IsError, ErrorText, CurrentDateTime() - StartTime);
+        // MessageTypeToText, not Format: the request log stores the invariant dotted message-type
+        // name ("Orchestrator.Report.Run"), while Format would store the localised caption.
+        LogStep(Workspace.MessageTypeToText(MessageType), RequestText, ResponseText, not IsError, ErrorText, CurrentDateTime() - StartTime);
         exit(not IsError);
     end;
 

@@ -37,10 +37,13 @@ table 10035543 "Playbook Step Log ori"
         field(30; "Request Sent"; Blob)
         {
             Caption = 'Request Sent', Comment = 'is-IS=Beiðni send';
+            // Holds a whole message-type request payload, which routinely carries customer data.
+            DataClassification = CustomerContent;
         }
         field(31; "Response Received"; Blob)
         {
             Caption = 'Response Received', Comment = 'is-IS=Svar móttekið';
+            DataClassification = CustomerContent;
         }
         field(40; Duration; Duration)
         {
@@ -53,10 +56,12 @@ table 10035543 "Playbook Step Log ori"
         field(60; "Iterator Element"; Blob)
         {
             Caption = 'Iterator Element', Comment = 'is-IS=Ítranarstök';
+            DataClassification = CustomerContent;
         }
         field(70; "Workspace Snapshot"; Blob)
         {
             Caption = 'Workspace Snapshot', Comment = 'is-IS=Vinnusvæðisafrit';
+            DataClassification = CustomerContent;
         }
     }
 
@@ -133,6 +138,11 @@ table 10035543 "Playbook Step Log ori"
         OutStr.WriteText(ElementText);
     end;
 
+    /// <summary>
+    /// Sets the workspace snapshot blob from text — the state of the playbook workspace as the
+    /// step saw it, kept so a finished run can still be explained.
+    /// </summary>
+    /// <param name="WorkspaceText">The serialised workspace JSON to store.</param>
     procedure SetWorkspaceSnapshot(WorkspaceText: Text)
     var
         OutStr: OutStream;
@@ -141,6 +151,10 @@ table 10035543 "Playbook Step Log ori"
         OutStr.WriteText(WorkspaceText);
     end;
 
+    /// <summary>
+    /// Gets the workspace snapshot blob as text.
+    /// </summary>
+    /// <returns>Text. The stored workspace JSON, or empty when no snapshot was taken.</returns>
     procedure GetWorkspaceSnapshot(): Text
     var
         InStr: InStream;

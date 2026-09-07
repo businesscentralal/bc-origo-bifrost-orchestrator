@@ -82,6 +82,7 @@ codeunit 10035606 "Secrets ori"
         RegisterTelegramBotToken();
 
         ClientCredentials.SetLoadFields(Code);
+        ClientCredentials.ReadIsolation := IsolationLevel::ReadCommitted;
         if not ClientCredentials.FindSet() then
             exit;
         repeat
@@ -132,7 +133,9 @@ codeunit 10035606 "Secrets ori"
 
     /// <summary>
     /// Moves the client id and client secret of a renamed client credentials record onto the secret
-    /// codes of the new record code and clears the values stored under the old codes.
+    /// codes of the new record code, then unregisters the old codes entirely. The old codes contain
+    /// the previous record code, so nothing can ever address them again - leaving their registry rows
+    /// behind would make <c>CountMissingSecrets</c> report a secret nobody is able to enter.
     /// </summary>
     /// <param name="OldCredentialCode">The primary key before the rename.</param>
     /// <param name="NewCredentialCode">The primary key after the rename.</param>
@@ -151,7 +154,7 @@ codeunit 10035606 "Secrets ori"
         if SecretStore.TryGet(GetAppId(), ClientSecretCode(OldCredentialCode), Value) then
             SecretStore.Set(GetAppId(), ClientSecretCode(NewCredentialCode), Value);
 
-        ClearCredential(OldCredentialCode);
+        UnregisterCredential(OldCredentialCode);
     end;
 
     /// <summary>
@@ -285,12 +288,31 @@ codeunit 10035606 "Secrets ori"
     begin
         AppSecret.SetLoadFields("Secret Code");
         AppSecret.SetRange("App Id", GetAppId());
+        AppSecret.ReadIsolation := IsolationLevel::ReadCommitted;
         if not AppSecret.FindSet() then
             exit(0);
         repeat
             if not SecretStore.IsSet(GetAppId(), AppSecret."Secret Code") then
                 MissingCount += 1;
         until AppSecret.Next() = 0;
+    end;
+
+    /// <summary>
+    /// Removes the stored client id and client secret of one client credentials record and deletes
+    /// their registry rows as well. Companion of <c>ClearCredential</c>: clearing keeps the
+    /// registration visible as "Not set" for a record that still exists, while unregistering is what
+    /// the owning record's <c>OnDelete</c> and a rename need, so the registry does not accumulate
+    /// rows for credentials that are gone. Without it those rows stay behind for ever and
+    /// <c>CountMissingSecrets</c> keeps reporting a secret nobody can enter.
+    /// </summary>
+    /// <param name="CredentialCode">The primary key of the <c>Client Credentials ori</c> record.</param>
+    procedure UnregisterCredential(CredentialCode: Code[50])
+    begin
+        if CredentialCode = '' then
+            exit;
+
+        SecretStore.Unregister(GetAppId(), ClientIdCode(CredentialCode));
+        SecretStore.Unregister(GetAppId(), ClientSecretCode(CredentialCode));
     end;
 
     /// <summary>

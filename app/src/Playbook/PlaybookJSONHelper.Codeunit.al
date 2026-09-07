@@ -135,6 +135,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
         GroupHolds: Boolean;
     begin
         Condition.FilterForStep(PlaybookCode, StepNo, CondType);
+        Condition.ReadIsolation := IsolationLevel::ReadCommitted;
         if not Condition.FindSet() then
             exit(true);
 
@@ -263,7 +264,10 @@ codeunit 10035546 "Playbook JSON Helper ori"
             if BracketPos > 0 then begin
                 FieldName := Segment.Substring(1, BracketPos - 1);
                 IndexText := Segment.Substring(BracketPos + 1, Segment.IndexOf(']') - BracketPos - 1);
-                Evaluate(ArrayIndex, IndexText, 9);
+                // A non-numeric index such as items[x] must fail the path like every other bad
+                // segment here, not raise a hard error out of the playbook step.
+                if not Evaluate(ArrayIndex, IndexText, 9) then
+                    exit(false);
 
                 if not CurrentToken.AsObject().Get(FieldName, CurrentToken) then
                     exit(false);

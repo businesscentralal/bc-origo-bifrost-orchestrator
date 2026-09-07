@@ -202,7 +202,10 @@ table 10035535 "Scheduled Entry ori"
         field(110; "Notification Recipient"; Text[2048])
         {
             Caption = 'Notification Recipient', Comment = 'is-IS=Viðtakandi tilkynningar';
-            DataClassification = SystemMetadata;
+            // Holds an email address when Notification Type is EMail, so it overrides the table's
+            // SystemMetadata classification. It is also published as notificationRecipient on
+            // page "Scheduled Entry API ori".
+            DataClassification = EndUserIdentifiableInformation;
             trigger OnValidate()
             var
                 NotificationInterface: Interface "Notification ori";
@@ -512,6 +515,7 @@ table 10035535 "Scheduled Entry ori"
         "Ending Time" := JobQueueEntry."Ending Time";
         "Next Run Date Formula" := JobQueueEntry."Next Run Date Formula";
         // Set Time Zone from current user's personalization
+        UserPersonalization.SetLoadFields("Time Zone");
         if UserPersonalization.Get(UserSecurityId()) then begin
             TimeZone.SetLoadFields("No.");
             TimeZone.SetRange(ID, UserPersonalization."Time Zone");
@@ -605,6 +609,7 @@ table 10035535 "Scheduled Entry ori"
         JobQueueLogEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         JobQueueLogEntry.SetCurrentKey("Start Date/Time", ID);
         JobQueueLogEntry.SetRange(ID, "Scheduled Entry ori".ID);
+        JobQueueLogEntry.SetLoadFields("End Date/Time");
         if JobQueueLogEntry.FindLast() then
             NewRunDateTime := "Schedule Calc ori".CalcNextRunTimeForRecurringSchedule("Scheduled Entry ori", JobQueueLogEntry."End Date/Time", StartingDateTime)
         else

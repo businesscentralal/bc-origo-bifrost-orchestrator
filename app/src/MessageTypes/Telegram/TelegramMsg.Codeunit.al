@@ -17,6 +17,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
     begin
         if not Secrets.IsTelegramBotTokenSet() then
             exit(false);
+        UserSetup.SetLoadFields("Telegram Chat ID ori");
         if not UserSetup.Get(UserSecurityId()) then
             exit(false);
         exit(UserSetup."Telegram Chat ID ori" <> '');
@@ -61,6 +62,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
         if not Secrets.IsTelegramBotTokenSet() then
             Error(BotTokenNotConfiguredErr);
 
+        UserSetup.SetLoadFields("Telegram Chat ID ori");
         UserSetup.Get(UserSecurityId());
         ChatId := UserSetup."Telegram Chat ID ori";
         if ChatId = '' then
