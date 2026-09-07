@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [28.0.0.0] - 2026-09-07
 
+### Changed (2026-09-07) - tests run on Foundation's public API
+
+- The test app no longer depends on Bifröst Foundation's internals: Bifrost Orchestrator - Tests has been removed
+  from Foundation's `internalsVisibleTo`, and the test suite compiles and runs against a Foundation
+  package that does not grant it. No test code had to change - the suite never touched a Foundation internal.
+
+
 ### App name: Bifrost Nornir -> Bifrost Orchestrator (2026-09-06, before first release)
 
 The app was migrated under the working name *Bifrost Nornir*. Bifröst apps are named after
@@ -45,6 +52,27 @@ also what the predecessor was called and what the message-type keys already say.
   suites of the ~15 apps co-installed on bc28-is). `Test Install` now owns the `ORCHESTRAT`
   suite over its own range `96400..96499`, and a new `Test Upgrade` (96404) refreshes it on
   republish so a renamed test codeunit is picked up without an uninstall.
+
+### Review follow-ups (2026-09-07)
+
+- **BLOCKER resolved**: `BIFROST PlaybAdm ori` and `BIFROST PlaybVw ori` granted only `tabledata`
+  and were not usable roles - opening any playbook page or running a playbook required a
+  different permission set entirely. Both now grant the full set of playbook pages (list, card,
+  instance card, subpages, FactBoxes, template editor); `BIFROST PlaybAdm ori` additionally
+  grants execute on every codeunit that runs or dispatches a playbook (`Playbook Runner ori`,
+  `Playbook Step Executor ori`, `Msg Executor ori`, `Playbook JQ Dispatcher ori`) and on
+  `Playbook Log Mgt ori` (writes instance/step log records during a run). `BIFROST PlaybVw ori`
+  withholds all of those codeunits and also withholds the `Schedule Playbook ori` wizard page
+  (a run-only entry point with no "view" use) so scheduling stays blocked at the platform's
+  page-permission check. See the XML doc comments on both permission sets for the full reasoning,
+  including a documented residual risk around the "Run Now" action on `Playbook Card ori`.
+- Fixed four stale/incorrect Icelandic translations found in PR review: the AI overview help text
+  still said "Job Queue +" instead of a proper Icelandic phrase; the `Playbook Condition Operator`
+  enum caption said *Virkja* (verb, "activate") instead of *Virkni* (noun, "function of"); the
+  `BIFROST PlaybAdm ori` and `BIFROST PlaybVw ori` captions used Title Case ("Bifröst Keðja
+  Stjórnandi" / "Bifröst Keðja Skoðun") instead of Icelandic sentence case ("Bifröst
+  keðjustjórnandi" / "Bifröst keðjuskoðun"). Fixed in the `is-IS=` source comments and hand-aligned
+  in `Bifrost Orchestrator.is-IS.xlf`; the gitignored `.g.xlf` regenerates from source on compile.
 
 ### Rebrand: Origo Cloud Events Orchestrator -> Bifrost Orchestrator
 

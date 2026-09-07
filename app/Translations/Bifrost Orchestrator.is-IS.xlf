@@ -1001,8 +1001,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 1345234677 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>AI-friendly overview of all Job Queue + Playbook Workflow message types with setup guide via Data.Records.Set/Get.</source>
-          <target state="translated">Yfirlit fyrir gervigreind yfir allar Job Queue + keðjuvinnslu skilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit fyrir gervigreind yfir allar Job Queue + keðjuvinnslu skilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.</note>
+          <target state="translated">Yfirlit fyrir gervigreind yfir allar vinnsluraða- og keðjuvinnsluskilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit fyrir gervigreind yfir allar vinnsluraða- og keðjuvinnsluskilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help Get Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1910912853 - Method 4183778207 - NamedType 1852605995" size-unit="char" translate="yes" xml:space="preserve">
@@ -4137,8 +4137,8 @@
         </trans-unit>
         <trans-unit id="Enum 3444917139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook Condition Operator</source>
-          <target state="translated">Virkja keðjuskilyrðis</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Virkja keðjuskilyrðis</note>
+          <target state="translated">Virkni keðjuskilyrðis</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Virkni keðjuskilyrðis</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Playbook Cond. Operator ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3444917139 - EnumValue 3705109357 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -4297,14 +4297,14 @@
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST OrchSet ori - Property Caption</note>
         </trans-unit><trans-unit id="PermissionSet 422805903 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Playbook Admin</source>
-          <target state="translated">Bifröst Keðja Stjórnandi</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst Keðja Stjórnandi</note>
+          <target state="translated">Bifröst keðjustjórnandi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjustjórnandi</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybAdm ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 3574014560 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Playbook View</source>
-          <target state="translated">Bifröst Keðja Skoðun</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst Keðja Skoðun</note>
+          <target state="translated">Bifröst keðjuskoðun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjuskoðun</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybVw ori - Property Caption</note>
         </trans-unit>
       </group>

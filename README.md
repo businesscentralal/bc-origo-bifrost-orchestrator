@@ -411,8 +411,8 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035535 | `BIFROST Orchestr ori` | Full set: every table, page and codeunit the app owns. |
 | 10035536 | `BIFROST OrchSet ori` | Setup role: scheduler setup, client credentials, recurring templates and the setup wizard. |
 | 10035537 | `BIFROST OrchMgt ori` | Operations role: monitor, run and restart scheduled entries; read-only on setup and credentials. |
-| 10035538 | `BIFROST PlaybAdm ori` | Playbook administration: author and run playbooks. |
-| 10035539 | `BIFROST PlaybVw ori` | Playbook viewer: read playbooks and their execution log. |
+| 10035538 | `BIFROST PlaybAdm ori` | Playbook administration: every playbook page, full CRUD on playbook data, and execute on every codeunit that runs or dispatches a playbook. |
+| 10035539 | `BIFROST PlaybVw ori` | Playbook viewer: the same playbook pages except the run-only Schedule wizard, read-only on playbook data, no execute on any playbook codeunit. |
 
 ---
 
@@ -445,11 +445,36 @@ needs the base application's own Job Queue permissions.
 | `BIFROST Orchestr ori` | Full | Every table, page and codeunit the app owns |
 | `BIFROST OrchSet ori` | Setup | Scheduler setup, client credentials, recurring templates and the setup wizard |
 | `BIFROST OrchMgt ori` | Operations | Monitor, run and restart scheduled entries; read-only on setup and credentials |
-| `BIFROST PlaybAdm ori` | Playbook admin | Author and run playbooks |
-| `BIFROST PlaybVw ori` | Playbook viewer | Read playbooks and their execution log |
+| `BIFROST PlaybAdm ori` | Playbook admin | All playbook pages (list, card, instances, subpages, FactBoxes, template editor, the Schedule wizard); full CRUD on playbook, step, condition, instance, step log and `JQ Parameter ori`/`Report Request Preset ori`; execute on `Playbook Runner ori`, `Playbook Step Executor ori`, `Msg Executor ori`, `Playbook JQ Dispatcher ori` and `Playbook Log Mgt ori` |
+| `BIFROST PlaybVw ori` | Playbook viewer | The same playbook pages as PlaybAdm **except** the Schedule wizard (a run-only entry point); read-only on the same tables; **no codeunit execute permission at all** — viewing works entirely through the table Read grants, so nothing that runs or writes a playbook is reachable through this role |
 
 The permission-set object names have a hard 20-character ceiling because `Role ID` is `Code[20]` —
 that is why the setup role is `BIFROST OrchSet ori` and not `BIFROST OrchSetup ori`.
+
+### Playbook admin vs. viewer — design notes
+
+`BIFROST PlaybAdm ori` and `BIFROST PlaybVw ori` originally granted only `tabledata` and were not
+usable roles — every playbook page and codeunit was unreachable through either set. Both now carry
+the full page/codeunit grants described above; see the XML doc comments on the two permission set
+objects (`app/src/BIFROSTPlaybAdm.PermissionSet.al`, `app/src/BIFROSTPlaybVw.PermissionSet.al`) for
+the complete reasoning, including:
+
+- Why `Schedule Playbook ori` is the only playbook page withheld from the viewer role (it is a
+  run-only wizard with no "view" use, and Business Central checks page permission whenever a page
+  is opened, so withholding it concretely blocks scheduling for a viewer).
+- Why the viewer role gets **no** codeunit grant, not even `Playbook Log Mgt ori` — that codeunit
+  only exposes write procedures and elevates its own permission to `RIMD` on the instance/step log
+  tables, so granting it would let a "view" role write log data through the codeunit's own
+  elevated permission.
+- A documented, **not yet fixed** residual risk: the "Run Now" action on `Playbook Card ori` calls
+  `Playbook Runner ori` through a plain procedure call rather than `Codeunit.Run`/`PAGE.Run`, so
+  Business Central's codeunit execute-permission gate — which only fires on those two call shapes —
+  does not stop a viewer who has page access to `Playbook Card ori` from triggering it in practice,
+  even without codeunit execute permission on `Playbook Runner ori`. A real UI-level fix (hiding or
+  disabling Run Now / Schedule for non-admins, or an explicit permission check inside the action)
+  is out of scope for this fix.
+- **No automated test** exists in this repository for "a PlaybVw-only user cannot run or schedule a
+  playbook." Verify manually until such a test is added.
 
 ---
 

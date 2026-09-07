@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 enum 10035538 "Playbook Cond. Operator ori"
 {
     Extensible = false;
-    Caption = 'Playbook Condition Operator', Comment = 'is-IS=Virkja keðjuskilyrðis';
+    Caption = 'Playbook Condition Operator', Comment = 'is-IS=Virkni keðjuskilyrðis';
 
     value(0; Equals)
     {

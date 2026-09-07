@@ -34,7 +34,7 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori"
     /// <returns>Description text.</returns>
     internal procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'AI-friendly overview of all Job Queue + Playbook Workflow message types with setup guide via Data.Records.Set/Get.', Comment = 'is-IS=Yfirlit fyrir gervigreind yfir allar Job Queue + keðjuvinnslu skilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.';
+        DescriptionLbl: Label 'AI-friendly overview of all Job Queue + Playbook Workflow message types with setup guide via Data.Records.Set/Get.', Comment = 'is-IS=Yfirlit fyrir gervigreind yfir allar vinnsluraða- og keðjuvinnsluskilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.';
     begin
         exit(DescriptionLbl);
     end;
