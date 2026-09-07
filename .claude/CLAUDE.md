@@ -171,6 +171,14 @@ Key rules always in effect:
   `Scheduled Entry Card ori`. Do not reintroduce chat or MCP Tool Server references.
 - See [CHANGELOG.md](../CHANGELOG.md) for the full migration record.
 
+## Test App Rules
+- **The test app uses Bifröst Foundation's public API only.** Bifrost Orchestrator - Tests is not listed in
+  Foundation's `app.json` `internalsVisibleTo` and must never be added back. A test that needs a
+  message type executed runs it through the public `Dispatcher ori` (`Execute` for a lightweight
+  dispatch, `EnqueueAndProcess` when the persisted queue row is needed); the dispatcher marks the
+  call licensed itself, so the internal `SetLicensed` is never needed. An Impl may still be called
+  directly on a temporary `Message Argument ori` when that Impl does not call `AssertIsLicensed`.
+
 ## Testing Through the MCP Server
 - `invoke_message_type` / `get_message_type_help` / `get_records` / `set_records` on the `origo-bc-bc28-is`
   server reach this app through Foundation (route `origo/bifrost/v1.0`). Keep calls serial - parallel
