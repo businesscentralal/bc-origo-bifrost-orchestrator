@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
+using System.Environment.Configuration;
 
 /// <summary>
 /// Covers the move of the Bifrost Orchestrator secrets into the Bifröst Foundation secret store:
@@ -340,8 +341,11 @@ codeunit 96403 "Orchestr Secret Tests"
         // them here would no longer compile. The setup notifications live on Bifröst Setup, raised
         // by Foundation for every application in the registry.
 
-        // [GIVEN] the Bifröst Setup page
+        // [GIVEN] the Bifröst Setup page, and outbound HTTP disabled for this application so that
+        // Foundation's HTTP notification is raised deterministically (the SendNotificationHandler
+        // must run; whether HTTP is enabled on a shared container is otherwise environment state)
         Initialize();
+        DisableHttpClientRequests(Secrets.GetAppId());
 
         // [WHEN] the page is opened
         BifrostSetup.OpenView();
@@ -367,6 +371,19 @@ codeunit 96403 "Orchestr Secret Tests"
     end;
 
     // ---------- helpers ----------
+
+    local procedure DisableHttpClientRequests(AppId: Guid)
+    var
+        NavAppSetting: Record "NAV App Setting";
+    begin
+        if not NavAppSetting.Get(AppId) then begin
+            NavAppSetting.Init();
+            NavAppSetting."App ID" := AppId;
+            NavAppSetting.Insert();
+        end;
+        NavAppSetting."Allow HttpClient Requests" := false;
+        NavAppSetting.Modify();
+    end;
 
     local procedure CreateCredential(CredentialCode: Code[50])
     var
