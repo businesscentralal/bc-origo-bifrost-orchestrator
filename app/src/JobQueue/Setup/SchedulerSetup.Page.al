@@ -168,6 +168,8 @@ page 10035536 "Scheduler Setup ori"
 
                 trigger OnAction()
                 begin
+                    CurrPage.SaveRecord();
+                    Commit();
                     if Secrets.SetTelegramBotTokenFromDialog() then
                         RefreshSecretStatus();
                 end;
@@ -250,6 +252,8 @@ page 10035536 "Scheduler Setup ori"
     begin
         Rec.OnOpenEmptyRec();
         Secrets.RegisterAll();
+        // End the write transaction from Insert/Register so later Set*FromDialog can RunModal.
+        Commit();
     end;
 
     trigger OnAfterGetCurrRecord()
