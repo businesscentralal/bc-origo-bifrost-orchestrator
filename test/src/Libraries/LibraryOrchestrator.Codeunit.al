@@ -25,22 +25,22 @@ codeunit 96413 "Library Orchestrator"
         MultipleTrackJobQueueEntryErr: Label 'Can''t track multiple job queue entries';
         DoNotSkipProcessBatchInBackground: Boolean;
 
-    Internal procedure SetDoNotHandleCodeunitJobQueueEnqueueEvent(NewDoNotHandleCodeunitJobQueueEnqueueEvent: Boolean)
+    procedure SetDoNotHandleCodeunitJobQueueEnqueueEvent(NewDoNotHandleCodeunitJobQueueEnqueueEvent: Boolean)
     begin
         DoNotHandleCodeunitJobQueueEnqueueEvent := NewDoNotHandleCodeunitJobQueueEnqueueEvent;
     end;
 
-    Internal procedure SetDoNotHandleTableJobQueueEntryEvent(NewDoNotHandleTableJobQueueEntryEvent: Boolean)
+    procedure SetDoNotHandleTableJobQueueEntryEvent(NewDoNotHandleTableJobQueueEntryEvent: Boolean)
     begin
         DoNotHandleTableJobQueueEntryEvent := NewDoNotHandleTableJobQueueEntryEvent;
     end;
 
-    Internal procedure SetDoNotHandleSendNotificationEvent(NewDoNotHandleSendNotificationEvent: Boolean)
+    procedure SetDoNotHandleSendNotificationEvent(NewDoNotHandleSendNotificationEvent: Boolean)
     begin
         DoNotHandleSendNotificationEvent := NewDoNotHandleSendNotificationEvent;
     end;
 
-    Internal procedure SetTrackingJobQueueEntry(JobQueueEntry: Record "Job Queue Entry")
+    procedure SetTrackingJobQueueEntry(JobQueueEntry: Record "Job Queue Entry")
     begin
         if not IsNullGuid(TrackingJobQueueEntryID) then
             Error(MultipleTrackJobQueueEntryErr);
@@ -48,17 +48,17 @@ codeunit 96413 "Library Orchestrator"
         TrackingJobQueueEntryID := JobQueueEntry.ID;
     end;
 
-    Internal procedure GetCollectedJobQueueEntries(var TempJobQueueEntryDst: Record "Job Queue Entry" temporary)
+    procedure GetCollectedJobQueueEntries(var TempJobQueueEntryDst: Record "Job Queue Entry" temporary)
     begin
         TempJobQueueEntryDst.Copy(TempJobQueueEntry, true);
     end;
 
-    Internal procedure FindAndRunJobQueueEntryByRecordId(RecordIdToProcess: RecordId)
+    procedure FindAndRunJobQueueEntryByRecordId(RecordIdToProcess: RecordId)
     begin
         FindAndRunJobQueueEntryByRecordId(RecordIdToProcess, false);
     end;
 
-    Internal procedure FindAndRunJobQueueEntryByRecordId(RecordIdToProcess: RecordId; WithErrorHandler: Boolean)
+    procedure FindAndRunJobQueueEntryByRecordId(RecordIdToProcess: RecordId; WithErrorHandler: Boolean)
     var
         JobQueueEntry: Record "Job Queue Entry";
     begin
@@ -72,7 +72,9 @@ codeunit 96413 "Library Orchestrator"
 #pragma warning disable PTE0007
 #pragma warning disable AA0248
 #pragma warning disable AA0161
+#pragma warning disable AS0058
             asserterror RunJobQueueDispatcher(JobQueueEntry);
+#pragma warning restore AS0058
 #pragma warning restore AA0161
 #pragma warning restore AA0248
 #pragma warning restore PTE0007
@@ -82,22 +84,22 @@ codeunit 96413 "Library Orchestrator"
             RunJobQueueDispatcher(JobQueueEntry);
     end;
 
-    Internal procedure RunJobQueueDispatcher(var JobQueueEntry: Record "Job Queue Entry")
+    procedure RunJobQueueDispatcher(var JobQueueEntry: Record "Job Queue Entry")
     begin
         Codeunit.Run(Codeunit::"Job Queue Dispatcher", JobQueueEntry);
     end;
 
-    Internal procedure RunJobQueueErrorHandler(var JobQueueEntry: Record "Job Queue Entry")
+    procedure RunJobQueueErrorHandler(var JobQueueEntry: Record "Job Queue Entry")
     begin
         Codeunit.Run(Codeunit::"Job Queue Error Handler", JobQueueEntry);
     end;
 
-    Internal procedure RunSendNotification(JobQueueEntry: Record "Job Queue Entry")
+    procedure RunSendNotification(JobQueueEntry: Record "Job Queue Entry")
     begin
         Codeunit.Run(Codeunit::"Job Queue - Send Notification", JobQueueEntry);
     end;
 
-    Internal procedure SetDoNotSkipProcessBatchInBackground(NewDoNotSkipProcessBatchInBackground: Boolean)
+    procedure SetDoNotSkipProcessBatchInBackground(NewDoNotSkipProcessBatchInBackground: Boolean)
     begin
         DoNotSkipProcessBatchInBackground := NewDoNotSkipProcessBatchInBackground;
     end;

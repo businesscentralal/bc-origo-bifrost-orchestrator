@@ -13,7 +13,7 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// Returns that a notification recipient is mandatory for email notifications.
     /// </summary>
     /// <returns>True.</returns>
-    internal procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
+    procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
     begin
         IsMandatory := true;
 
@@ -25,7 +25,7 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry that was executed.</param>
     /// <param name="JobQueueEntry">The Job Queue Entry with execution results.</param>
-    internal procedure SendExecutionCompletedNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry");
+    procedure SendExecutionCompletedNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry");
     begin
         // We are not sending email notification for a completed job
 
@@ -36,7 +36,7 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// No-op for email: heartbeat does not send an email.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to report on.</param>
-    internal procedure SendHeartbeatNotification("Scheduled Entry ori": Record "Scheduled Entry ori");
+    procedure SendHeartbeatNotification("Scheduled Entry ori": Record "Scheduled Entry ori");
     begin
         // We are not sending email notification for a heartbeat job
 
@@ -48,13 +48,13 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry being restarted.</param>
     /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
-    internal procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
+    procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     var
         TempEmailItem: Record "Email Item" temporary;
         OrchestratorSetup: Record "Scheduler Setup ori";
         IsHandled: Boolean;
         Success: Boolean;
-        JobRestartedSubjectMsg: Label 'Job ''%1'' has been restarted', Comment = '%1 = Job Description, is-IS=Verk ''%1'' hefur verið endurræst';
+        JobRestartedSubjectMsg: Label 'Job ''%1'' has been restarted', Comment = '%1 = Job Description, is-IS=Verk ''%1'' hefur veriÃ° endurrÃ¦st';
         BodyText, EMailAddress : Text;
     begin
         OnBeforeSendRestartNotification("Scheduled Entry ori", JobQueueEntry, IsHandled);
@@ -89,14 +89,14 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// Sends a test email notification to validate the notification setup.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to test.</param>
-    internal procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         TempEmailItem: Record "Email Item" temporary;
         JobQueueEntry: Record "Job Queue Entry";
         OrchestratorSetup: Record "Scheduler Setup ori";
         IsHandled: Boolean;
-        JobRestartedSubjectMsg: Label 'Test Email for job ''%1''', Comment = '%1 = Job Description, is-IS=Prófunarpóstur fyrir verk ''%1''';
-        TestEmailMsg: Label 'Test Email', Comment = 'is-IS=Prófunarpóstur';
+        JobRestartedSubjectMsg: Label 'Test Email for job ''%1''', Comment = '%1 = Job Description, is-IS=PrÃ³funarpÃ³stur fyrir verk ''%1''';
+        TestEmailMsg: Label 'Test Email', Comment = 'is-IS=PrÃ³funarpÃ³stur';
         BodyText, EMailAddress : Text;
     begin
         OnBeforeSendTestNotification("Scheduled Entry ori", IsHandled);
@@ -130,7 +130,7 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// Validates that the notification recipient has a valid email address.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to validate.</param>
-    internal procedure ValidateNotificationReceipient("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure ValidateNotificationReceipient("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         MailMgt: Codeunit "Mail Management";
         IsHandled: Boolean;
@@ -147,13 +147,13 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     local procedure BuildRestartNotificationEmailItem(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry"; var OrchestratorSetup: Record "Scheduler Setup ori") BodyText: Text
     var
         EnvironmentInformation: Codeunit "Environment Information";
-        EnvironmentMsg: Label 'Environment information:', Comment = 'is-IS=Upplýsingar um umhverfi:';
-        IsOnPremMsg: Label 'Is OnPrem: ', Comment = 'is-IS=Er staðbundin: ';
-        IsProductionMsg: Label 'Is Production: ', Comment = 'is-IS=Er framleiðsla: ';
-        JobLastErrMsg: Label 'The job last execution error was:', Comment = 'is-IS=Síðasta keyrsluvilla verksins var:';
-        JobQueueEntryMsg: Label 'Open Job Queue Entry', Comment = 'is-IS=Opna vinnsluraðafærslu';
-        JobRestartedMsg: Label 'The following job has been restarted:', Comment = 'is-IS=Eftirfarandi verk hefur verið endurræst:';
-        OrchestratorSetupMsg: Label 'Open Orchestrator Setup', Comment = 'is-IS=Opna uppsetningu vinnsluraðara';
+        EnvironmentMsg: Label 'Environment information:', Comment = 'is-IS=UpplÃ½singar um umhverfi:';
+        IsOnPremMsg: Label 'Is OnPrem: ', Comment = 'is-IS=Er staÃ°bundin: ';
+        IsProductionMsg: Label 'Is Production: ', Comment = 'is-IS=Er framleiÃ°sla: ';
+        JobLastErrMsg: Label 'The job last execution error was:', Comment = 'is-IS=SÃ­Ã°asta keyrsluvilla verksins var:';
+        JobQueueEntryMsg: Label 'Open Job Queue Entry', Comment = 'is-IS=Opna vinnsluraÃ°afÃ¦rslu';
+        JobRestartedMsg: Label 'The following job has been restarted:', Comment = 'is-IS=Eftirfarandi verk hefur veriÃ° endurrÃ¦st:';
+        OrchestratorSetupMsg: Label 'Open Orchestrator Setup', Comment = 'is-IS=Opna uppsetningu vinnsluraÃ°ara';
         UrlTok: Label '<a href="%1">', Locked = true;
         BodyTextBuilder: TextBuilder;
     begin

@@ -14,7 +14,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
     /// Determines whether this message type is enabled.
     /// </summary>
     /// <returns>True; this message type is always enabled.</returns>
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
@@ -23,7 +23,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
     /// Returns the table ID used to filter records for this message type.
     /// </summary>
     /// <returns>Zero; this message type is not bound to a table.</returns>
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
@@ -32,9 +32,9 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
     /// Returns a human-readable description of this message type.
     /// </summary>
     /// <returns>Description text.</returns>
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Restart the orchestrator only if not already running.', Comment = 'is-IS=Endurræsa áætlara aðeins ef hann er ekki þegar í gangi.';
+        DescriptionLbl: Label 'Restart the orchestrator only if not already running.', Comment = 'is-IS=EndurrÃ¦sa Ã¡Ã¦tlara aÃ°eins ef hann er ekki Ã¾egar Ã­ gangi.';
     begin
         exit(DescriptionLbl);
     end;
@@ -43,7 +43,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
     /// Returns the message direction for this message type.
     /// </summary>
     /// <returns>Outbound direction.</returns>
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
     end;
@@ -52,7 +52,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
     /// Returns Markdown help documentation for this message type.
     /// </summary>
     /// <param name="Argument">Message argument that receives the help text as response.</param>
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         Help: Codeunit "Help ori";
     begin
@@ -63,7 +63,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
     /// Executes the message type.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteRestartIfNeeded(Argument);
     end;

@@ -14,36 +14,36 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori"
     Permissions = tabledata "Email Outbox" = RIMD,
                   tabledata "Sent Email" = R;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     var
         DescriptionLbl: Label 'Send an email draft created by Email.Draft.Set.', Comment = 'is-IS=Senda drög tölvupósts stofnuð af Email.Draft.Set.';
     begin
         exit(DescriptionLbl);
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Inbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         Help: Codeunit "Help ori";
     begin
         Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Email.Send'));
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         EmailOutbox: Record "Email Outbox";
         Email: Codeunit Email;

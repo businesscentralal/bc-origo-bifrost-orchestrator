@@ -30,7 +30,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// <summary>
     /// Cancels the management Job Queue Entry if it exists.
     /// </summary>
-    internal procedure CancelJobQueueEntry()
+    procedure CancelJobQueueEntry()
     var
         JobQueueEntry: Record "Job Queue Entry";
     begin
@@ -42,7 +42,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Returns the fixed Job Queue Category token used by the orchestrator.
     /// </summary>
     /// <returns>The orchestrator category token.</returns>
-    internal procedure GetJobQueueOrchestratorTok(): Text[10]
+    procedure GetJobQueueOrchestratorTok(): Text[10]
     var
         JobQueueOrchestratorTok: Label 'JOBSSCHDLR', MaxLength = 10, Locked = true;
     begin
@@ -55,7 +55,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// <param name="JobQueueStatus">Returns a descriptive status text.</param>
     /// <param name="JobQueueStyleExpr">Returns the style expression for the status indicator.</param>
     /// <returns>True if the Job Queue Entry is ready to start.</returns>
-    internal procedure GetJobQueueStatus(var JobQueueStatus: Text; var JobQueueStyleExpr: Text) ReadyToStart: Boolean
+    procedure GetJobQueueStatus(var JobQueueStatus: Text; var JobQueueStyleExpr: Text) ReadyToStart: Boolean
     var
         JobQueueEntry: Record "Job Queue Entry";
     begin
@@ -94,7 +94,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Bifrost Orchestrator find and reuse the legacy app's entry (which still points at the legacy
     /// handler codeunit) instead of scheduling its own. Freshly generated for this app.
     /// </remarks>
-    internal procedure GetManagementJobQueueId(): Guid
+    procedure GetManagementJobQueueId(): Guid
     begin
         exit('461b5088-cc5f-4b4a-9e5e-b4cde335df66');
     end;
@@ -102,7 +102,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// <summary>
     /// Triggers registration of job queue codeunits via the orchestrator entry event.
     /// </summary>
-    internal procedure RegisterJobQueues()
+    procedure RegisterJobQueues()
     var
         "Scheduled Entry ori": Record "Scheduled Entry ori";
     begin
@@ -113,7 +113,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Runs a temporary non-recurrent copy of the selected orchestrator entry once in the foreground.
     /// </summary>
     /// <param name="SelectedJobQueueOrchestratorEntry">The orchestrator entry to execute.</param>
-    internal procedure RunJobQueueEntryOnce(var SelectedJobQueueOrchestratorEntry: Record "Scheduled Entry ori")
+    procedure RunJobQueueEntryOnce(var SelectedJobQueueOrchestratorEntry: Record "Scheduled Entry ori")
     var
         JobQueueEntry: Record "Job Queue Entry";
         JobQueueLogEntry: Record "Job Queue Log Entry";
@@ -181,7 +181,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// </summary>
     /// <param name="JobQueueCategoryCode">The category code for the entry.</param>
     /// <param name="JobQueueUserId">The user ID to run the entry as.</param>
-    internal procedure ScheduleJobQueueEntry(JobQueueCategoryCode: Code[10]; JobQueueUserId: Code[50])
+    procedure ScheduleJobQueueEntry(JobQueueCategoryCode: Code[10]; JobQueueUserId: Code[50])
     var
         JobQueueEntry: Record "Job Queue Entry";
         JobQueueScheduleEntry: Record "Scheduled Entry ori";
@@ -242,7 +242,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Shows the Activity Log entries for a orchestrator entry.
     /// </summary>
     /// <param name="Rec">The orchestrator entry to show logs for.</param>
-    internal procedure ShowActivityLog(var Rec: Record "Scheduled Entry ori")
+    procedure ShowActivityLog(var Rec: Record "Scheduled Entry ori")
     var
         ActivityLog: Record "Activity Log";
     begin
@@ -253,7 +253,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Opens the Job Queue Entries page for the management entry, offering to schedule if missing.
     /// </summary>
     /// <param name="JobQueueGeneralSetup">The orchestrator setup record.</param>
-    internal procedure ShowJobQueueEntry(JobQueueGeneralSetup: Record "Scheduler Setup ori")
+    procedure ShowJobQueueEntry(JobQueueGeneralSetup: Record "Scheduler Setup ori")
     var
         JobQueueEntry: Record "Job Queue Entry";
         ConfirmManagement: Codeunit "Confirm Management";
@@ -286,7 +286,7 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// notification on this rather than letting the first call fail.
     /// </summary>
     /// <returns>Boolean. True when Allow HttpClient Requests is set for this app.</returns>
-    internal procedure IsHttpClientEnabled(): Boolean
+    procedure IsHttpClientEnabled(): Boolean
     var
         NAVAppSetting: Record "NAV App Setting";
         AppInfo: ModuleInfo;

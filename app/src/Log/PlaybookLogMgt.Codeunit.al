@@ -14,7 +14,7 @@ codeunit 10035549 "Playbook Log Mgt ori"
     /// <summary>
     /// Creates a new playbook instance record and returns its ID.
     /// </summary>
-    internal procedure CreateInstance(PlaybookCode: Code[20]; InitialRequestText: Text): Guid
+    procedure CreateInstance(PlaybookCode: Code[20]; InitialRequestText: Text): Guid
     var
         Instance: Record "Playbook Instance ori";
         OutStr: OutStream;
@@ -38,7 +38,7 @@ codeunit 10035549 "Playbook Log Mgt ori"
     /// <summary>
     /// Marks an instance as completed or failed.
     /// </summary>
-    internal procedure CompleteInstance(InstanceId: Guid; NewStatus: Enum "Playbook Inst. Status ori"; StepsExecuted: Integer; StepsFailed: Integer; ItemsProcessed: Integer; ErrorText: Text)
+    procedure CompleteInstance(InstanceId: Guid; NewStatus: Enum "Playbook Inst. Status ori"; StepsExecuted: Integer; StepsFailed: Integer; ItemsProcessed: Integer; ErrorText: Text)
     var
         Instance: Record "Playbook Instance ori";
     begin
@@ -56,7 +56,7 @@ codeunit 10035549 "Playbook Log Mgt ori"
     /// <summary>
     /// Logs a single step execution (one Dispatcher call).
     /// </summary>
-    internal procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text)
+    procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text)
     var
         StepLog: Record "Playbook Step Log ori";
     begin

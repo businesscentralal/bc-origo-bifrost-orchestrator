@@ -11,7 +11,7 @@ codeunit 10035540 "None Notification ori" implements "Notification ori"
     /// Returns that a notification recipient is not mandatory when notifications are disabled.
     /// </summary>
     /// <returns>False.</returns>
-    internal procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
+    procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
     begin
         IsMandatory := false;
 
@@ -23,7 +23,7 @@ codeunit 10035540 "None Notification ori" implements "Notification ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry that was executed.</param>
     /// <param name="JobQueueEntry">The Job Queue Entry with execution results.</param>
-    internal procedure SendExecutionCompletedNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
+    procedure SendExecutionCompletedNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     begin
         OnAfterSendExecutionCompletedNotification("Scheduled Entry ori", JobQueueEntry);
     end;
@@ -32,7 +32,7 @@ codeunit 10035540 "None Notification ori" implements "Notification ori"
     /// No-op: does not send a heartbeat notification.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to report on.</param>
-    internal procedure SendHeartbeatNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure SendHeartbeatNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
     begin
         OnAfterSendHeartbeatNotification("Scheduled Entry ori");
     end;
@@ -42,7 +42,7 @@ codeunit 10035540 "None Notification ori" implements "Notification ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry being restarted.</param>
     /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
-    internal procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
+    procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     begin
         OnAfterSendRestartNotification("Scheduled Entry ori", JobQueueEntry);
     end;
@@ -51,7 +51,7 @@ codeunit 10035540 "None Notification ori" implements "Notification ori"
     /// No-op: does not send a test notification.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to test.</param>
-    internal procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
     begin
     end;
 
@@ -59,7 +59,7 @@ codeunit 10035540 "None Notification ori" implements "Notification ori"
     /// Validates the notification recipient; errors if a recipient is set when notifications are disabled.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to validate.</param>
-    internal procedure ValidateNotificationReceipient("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure ValidateNotificationReceipient("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         IsHandled: Boolean;
         NoNotificationErr: Label '%3 is not supported for %1 %2', Comment = '%1 = Notification Type Caption, %2 = Notification Type, %3 = Notification Recipient Caption, is-IS=%3 er ekki stutt fyrir %1 %2';

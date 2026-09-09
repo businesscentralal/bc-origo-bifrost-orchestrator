@@ -28,7 +28,7 @@ codeunit 10035545 "Scheduler API Client ori"
     /// <param name="Scheduled Entry ori">The orchestrator entry whose client credentials to use.</param>
     /// <returns>True if the entry has client credentials configured.</returns>
     [NonDebuggable]
-    internal procedure Initialize("Scheduled Entry ori": Record "Scheduled Entry ori"): Boolean
+    procedure Initialize("Scheduled Entry ori": Record "Scheduled Entry ori"): Boolean
     begin
         Clear(AccessToken);
         Clear(TokenExpiry);
@@ -48,7 +48,7 @@ codeunit 10035545 "Scheduler API Client ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to update.</param>
     [NonDebuggable]
-    internal procedure CallUpdateJobQueueEntry("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure CallUpdateJobQueueEntry("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         ActionUrl: Text;
     begin
@@ -61,7 +61,7 @@ codeunit 10035545 "Scheduler API Client ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry whose Job Queue Entry to restart.</param>
     [NonDebuggable]
-    internal procedure CallRestartJobQueueEntry("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure CallRestartJobQueueEntry("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         ActionUrl: Text;
     begin
@@ -74,7 +74,7 @@ codeunit 10035545 "Scheduler API Client ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry whose Job Queue Entry status to set to Ready.</param>
     [NonDebuggable]
-    internal procedure CallSetStatusToReady("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure CallSetStatusToReady("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         ActionUrl: Text;
     begin
