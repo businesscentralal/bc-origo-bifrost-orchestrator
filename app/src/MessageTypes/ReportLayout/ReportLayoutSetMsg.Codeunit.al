@@ -6,29 +6,29 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori"
 {
     Access = Internal;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     var
         DescriptionLbl: Label 'Creates or replaces a user-defined report layout via the BC layout import path.', Comment = 'is-IS=Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC.';
     begin
         exit(DescriptionLbl);
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Inbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     begin
         Argument.SetResponseMarkdown(
             '# Orchestrator.ReportLayout.Set\n\n' +
@@ -50,7 +50,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori"
             '(codeunit *Report Layouts Impl.* SetDefault is Access=Internal).');
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteSet(Argument);
     end;
