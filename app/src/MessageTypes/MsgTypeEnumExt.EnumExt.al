@@ -108,4 +108,9 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
         Caption = 'Orchestrator.Workspace.Preview', Locked = true;
         Implementation = "Msg Interface ori" = "Workspace Preview Msg ori";
     }
+    value(10035599; "Orchestrator.ReportLayout.Set")
+    {
+        Caption = 'Orchestrator.ReportLayout.Set', Locked = true;
+        Implementation = "Msg Interface ori" = "Report Layout Set Msg ori";
+    }
 }
