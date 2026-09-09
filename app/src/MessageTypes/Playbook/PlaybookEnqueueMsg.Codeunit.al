@@ -6,36 +6,36 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori"
 {
     Access = Internal;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Enqueue a Bifrost Playbook for one-time execution via Job Queue with custom request data.', Comment = 'is-IS=Setja Bifröst keðju í biðröð til einskiptiskeyrslu með sérsniðnum gögnum.';
+        DescriptionLbl: Label 'Enqueue a Bifrost Playbook for one-time execution via Job Queue with custom request data.', Comment = 'is-IS=Setja BifrÃ¶st keÃ°ju Ã­ biÃ°rÃ¶Ã° til einskiptiskeyrslu meÃ° sÃ©rsniÃ°num gÃ¶gnum.';
     begin
         exit(DescriptionLbl);
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         Help: Codeunit "Help ori";
     begin
         Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Playbook.Enqueue'));
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteEnqueue(Argument);
     end;

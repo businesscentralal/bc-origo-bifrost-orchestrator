@@ -300,7 +300,7 @@ codeunit 96411 "Orchestrator Unit Tests"
         OrchestratorEntry.Init();
         OrchestratorEntry.Validate("Notification Type", OrchestratorEntry."Notification Type"::None);
         // [WHEN] Enter Notification Receipient 
-        asserterror OrchestratorEntry.Validate("Notification Recipient", LibraryRandom.AlphanumericText(10));
+        asserterror OrchestratorEntry.Validate("Notification Recipient", CopyStr(LibraryRandom.AlphanumericText(10), 1, MaxStrLen(OrchestratorEntry."Notification Recipient")));
         // [THEN] Verify Error Should Be Blank
         Assert.ExpectedError(StrSubstNo(NoNotificationErr, OrchestratorEntry.FieldCaption("Notification Type"), OrchestratorEntry."Notification Type", OrchestratorEntry.FieldCaption("Notification Recipient")));
     end;
@@ -311,13 +311,13 @@ codeunit 96411 "Orchestrator Unit Tests"
         OrchestratorEntry: Record "Scheduled Entry ori";
         LibraryRandom: Codeunit Any;
         NotValidErr: Label 'The email address "%1" is not valid.', Locked = true;
-        TestEMailAddress: Text;
+        TestEMailAddress: Text[2048];
     begin
         // [GIVEN] EMail Notification Type 
         OrchestratorEntry.Init();
         OrchestratorEntry.Validate("Notification Type", OrchestratorEntry."Notification Type"::EMail);
         // [WHEN] Non Email Entered 
-        TestEMailAddress := LibraryRandom.AlphanumericText(10);
+        TestEMailAddress := CopyStr(LibraryRandom.AlphanumericText(10), 1, MaxStrLen(TestEMailAddress));
         asserterror OrchestratorEntry.Validate("Notification Recipient", TestEMailAddress);
         // [THEN] Verify Error Should Be Email Address 
         Assert.ExpectedError(StrSubstNo(NotValidErr, TestEMailAddress));

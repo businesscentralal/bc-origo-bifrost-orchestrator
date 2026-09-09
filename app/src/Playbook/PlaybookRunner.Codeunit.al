@@ -37,7 +37,7 @@ codeunit 10035547 "Playbook Runner ori"
     /// <param name="InitialRequest">Initial request parameters as BigText (JSON). Can be empty.</param>
     /// <param name="FinalResponse">Receives the last step's response as BigText.</param>
     /// <param name="InstanceId">Receives the execution instance ID.</param>
-    internal procedure Run(PlaybookCode: Code[20]; var InitialRequest: BigText; var FinalResponse: BigText; var InstanceId: Guid)
+    procedure Run(PlaybookCode: Code[20]; var InitialRequest: BigText; var FinalResponse: BigText; var InstanceId: Guid)
     var
         Playbook: Record "Playbook ori";
         PlaybookStep: Record "Playbook Step ori";
@@ -114,7 +114,7 @@ codeunit 10035547 "Playbook Runner ori"
     end;
 
     /// <summary>Runs a playbook starting from a specific step, using pre-loaded ResponseStore entries.</summary>
-    internal procedure Run(PlaybookCode: Code[20]; var InitialRequest: BigText; var FinalResponse: BigText; var InstanceId: Guid; StartStepNo: Integer)
+    procedure Run(PlaybookCode: Code[20]; var InitialRequest: BigText; var FinalResponse: BigText; var InstanceId: Guid; StartStepNo: Integer)
     var
         Playbook: Record "Playbook ori";
         PlaybookStep: Record "Playbook Step ori";

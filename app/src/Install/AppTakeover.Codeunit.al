@@ -1,4 +1,4 @@
-﻿namespace Origo.Bifrost.Orchestrator;
+namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Reflection;
@@ -32,7 +32,7 @@ codeunit 10035604 "App Takeover ori"
     /// Runs the whole take-over. Called from the install codeunit before the app registers
     /// its own job queues, so the copied schedules are already present.
     /// </summary>
-    internal procedure TakeOverAll()
+    procedure TakeOverAll()
     begin
         TakeOverScheduledEntry();
         TakeOverSchedulerSetup();

@@ -10,20 +10,20 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
 {
     Access = Internal;
 
-    internal procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
+    procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
     begin
         IsMandatory := true;
     end;
 
-    internal procedure SendExecutionCompletedNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
+    procedure SendExecutionCompletedNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     begin
     end;
 
-    internal procedure SendHeartbeatNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure SendHeartbeatNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
     begin
     end;
 
-    internal procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
+    procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     var
         Secrets: Codeunit "Secrets ori";
         TelegramSend: Codeunit "Telegram Send ori";
@@ -45,7 +45,7 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
                     LogSendError("Scheduled Entry ori", ChatId);
     end;
 
-    internal procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure SendTestNotification("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         Secrets: Codeunit "Secrets ori";
         TelegramSend: Codeunit "Telegram Send ori";
@@ -66,7 +66,7 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
                     Error(SendFailedErr, ChatId);
     end;
 
-    internal procedure ValidateNotificationReceipient("Scheduled Entry ori": Record "Scheduled Entry ori")
+    procedure ValidateNotificationReceipient("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         ChatIds: List of [Text];
         ChatId: Text;
@@ -111,22 +111,22 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
         EnvironmentInformation: Codeunit "Environment Information";
         Builder: TextBuilder;
     begin
-        Builder.Append('⚠️ <b>');
+        Builder.Append('âš ï¸ <b>');
         Builder.Append(JobRestartedLbl);
         Builder.AppendLine('</b>');
         Builder.AppendLine();
-        Builder.Append('📋 ');
+        Builder.Append('ðŸ“‹ ');
         Builder.AppendLine("Scheduled Entry ori".Description);
         Builder.AppendLine();
         if JobQueueEntry."Error Message" <> '' then begin
-            Builder.Append('❌ ');
+            Builder.Append('âŒ ');
             Builder.AppendLine(JobQueueEntry."Error Message");
             Builder.AppendLine();
         end;
-        Builder.Append('🏢 ');
+        Builder.Append('ðŸ¢ ');
         Builder.AppendLine(CompanyName());
         if EnvironmentInformation.IsProduction() then
-            Builder.AppendLine('🔴 Production');
+            Builder.AppendLine('ðŸ”´ Production');
         Builder.AppendLine();
         MessageText := Builder.ToText();
     end;
@@ -152,11 +152,11 @@ codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
     end;
 
     var
-        BotTokenNotConfiguredErr: Label 'Telegram Bot Token is not configured in Orchestrator Setup.', Comment = 'is-IS=Telegram-vélmennislykill er ekki stilltur í uppsetningu vinnsluraðara.';
-        HttpClientNotEnabledErr: Label 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram notifications.', Comment = 'is-IS=HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Virkjaðu Leyfa HttpClient-beiðnir í stillingum viðbótar áður en Telegram-tilkynningar eru sendar.';
-        InvalidChatIdErr: Label 'Invalid Telegram Chat ID: %1. Must be numeric.', Comment = '%1 = the invalid chat id, is-IS=Ógilt Telegram-spjallauðkenni: %1. Verður að vera tala.';
-        JobRestartedLbl: Label 'Job has been restarted', Comment = 'is-IS=Verk hefur verið endurræst';
-        SendFailedErr: Label 'Failed to send Telegram message to Chat ID %1.', Comment = '%1 = chat id, is-IS=Ekki tókst að senda Telegram-skilaboð á spjallauðkenni %1.';
+        BotTokenNotConfiguredErr: Label 'Telegram Bot Token is not configured in Orchestrator Setup.', Comment = 'is-IS=Telegram-vÃ©lmennislykill er ekki stilltur Ã­ uppsetningu vinnsluraÃ°ara.';
+        HttpClientNotEnabledErr: Label 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram notifications.', Comment = 'is-IS=HTTP-biÃ°larabeiÃ°nir eru ekki virkar fyrir Ã¾essa viÃ°bÃ³t. VirkjaÃ°u Leyfa HttpClient-beiÃ°nir Ã­ stillingum viÃ°bÃ³tar Ã¡Ã°ur en Telegram-tilkynningar eru sendar.';
+        InvalidChatIdErr: Label 'Invalid Telegram Chat ID: %1. Must be numeric.', Comment = '%1 = the invalid chat id, is-IS=Ã“gilt Telegram-spjallauÃ°kenni: %1. VerÃ°ur aÃ° vera tala.';
+        JobRestartedLbl: Label 'Job has been restarted', Comment = 'is-IS=Verk hefur veriÃ° endurrÃ¦st';
+        SendFailedErr: Label 'Failed to send Telegram message to Chat ID %1.', Comment = '%1 = chat id, is-IS=Ekki tÃ³kst aÃ° senda Telegram-skilaboÃ° Ã¡ spjallauÃ°kenni %1.';
         SendFailedTelemetryLbl: Label 'Telegram send failed', Locked = true;
-        TestMessageLbl: Label '✅ Test notification for: %1', Comment = '%1 = Job Description, is-IS=✅ Prófunartilkynning fyrir: %1';
+        TestMessageLbl: Label 'âœ… Test notification for: %1', Comment = '%1 = Job Description, is-IS=âœ… PrÃ³funartilkynning fyrir: %1';
 }

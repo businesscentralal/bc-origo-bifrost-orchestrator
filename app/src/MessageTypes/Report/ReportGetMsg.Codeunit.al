@@ -8,36 +8,36 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori"
     Permissions =
         tabledata "Report Request Preset ori" = R;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Returns report metadata, available layouts, and saved request page preset.', Comment = 'is-IS=Skilar lýsigögnum skýrslu, tiltækum útlitum og vistuðum forsendum beiðnisíðu.';
+        DescriptionLbl: Label 'Returns report metadata, available layouts, and saved request page preset.', Comment = 'is-IS=Skilar lÃ½sigÃ¶gnum skÃ½rslu, tiltÃ¦kum Ãºtlitum og vistuÃ°um forsendum beiÃ°nisÃ­Ã°u.';
     begin
         exit(DescriptionLbl);
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         Help: Codeunit "Help ori";
     begin
         Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Report.Get'));
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteGet(Argument);
     end;

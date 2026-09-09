@@ -12,7 +12,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
     /// Walks the serialized request JSON and replaces "@path" string values with
     /// workspace data. "@collect:N" gathers forEach iteration objects into an array.
     /// </summary>
-    internal procedure ResolveWorkspaceRefs(var RequestJson: JsonObject)
+    procedure ResolveWorkspaceRefs(var RequestJson: JsonObject)
     var
         Workspace: Codeunit "Playbook Workspace ori";
         RequestText: Text;
@@ -128,7 +128,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
     /// Evaluates every condition of one type for a step: AND within a Group No.,
     /// OR across groups. An empty set is true.
     /// </summary>
-    internal procedure EvaluateConditionSet(SourceJson: JsonObject; PlaybookCode: Code[20]; StepNo: Integer; CondType: Enum "Playbook Cond. Type ori"): Boolean
+    procedure EvaluateConditionSet(SourceJson: JsonObject; PlaybookCode: Code[20]; StepNo: Integer; CondType: Enum "Playbook Cond. Type ori"): Boolean
     var
         Condition: Record "Playbook Condition ori";
         CurrentGroup: Integer;
@@ -164,7 +164,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
     /// <param name="Operator">Comparison operator.</param>
     /// <param name="ConditionValue">Expected value to compare against.</param>
     /// <returns>True if the condition is satisfied.</returns>
-    internal procedure EvaluateCondition(SourceJson: JsonObject; ConditionPath: Text; Operator: Enum "Playbook Cond. Operator ori"; ConditionValue: Text): Boolean
+    procedure EvaluateCondition(SourceJson: JsonObject; ConditionPath: Text; Operator: Enum "Playbook Cond. Operator ori"; ConditionValue: Text): Boolean
     var
         ResolvedToken: JsonToken;
         ActualValue: Text;
@@ -219,7 +219,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
     /// <param name="ArrayPath">Dot-notation path to the array field.</param>
     /// <param name="ResultArray">Returns the extracted array.</param>
     /// <returns>True if the array was found and extracted.</returns>
-    internal procedure ExtractArray(ResponseJson: JsonObject; ArrayPath: Text; var ResultArray: JsonArray): Boolean
+    procedure ExtractArray(ResponseJson: JsonObject; ArrayPath: Text; var ResultArray: JsonArray): Boolean
     var
         Token: JsonToken;
     begin
@@ -243,7 +243,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
     /// <param name="Path">Dot-notation path (e.g., "items[0].uuid").</param>
     /// <param name="Result">Returns the resolved token.</param>
     /// <returns>True if the path was resolved successfully.</returns>
-    internal procedure ResolveJsonPath(Source: JsonObject; Path: Text; var Result: JsonToken): Boolean
+    procedure ResolveJsonPath(Source: JsonObject; Path: Text; var Result: JsonToken): Boolean
     var
         Segments: List of [Text];
         Segment: Text;

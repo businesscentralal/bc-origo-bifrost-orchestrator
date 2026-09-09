@@ -15,7 +15,7 @@ codeunit 10035586 "Telegram Send ori"
     /// <param name="MessageText">The message body. Sent with parse mode HTML.</param>
     /// <returns>Boolean. True when Telegram answered with a success status code.</returns>
     [NonDebuggable]
-    internal procedure SendMessage(BotToken: SecretText; ChatId: Text; MessageText: Text): Boolean
+    procedure SendMessage(BotToken: SecretText; ChatId: Text; MessageText: Text): Boolean
     var
         HttpClient: HttpClient;
         HttpContent: HttpContent;
@@ -56,7 +56,7 @@ codeunit 10035586 "Telegram Send ori"
     /// send returned false.
     /// </summary>
     /// <returns>Text. The last response body or error text, empty before the first send.</returns>
-    internal procedure GetLastResponse(): Text
+    procedure GetLastResponse(): Text
     begin
         exit(LastResponseText);
     end;

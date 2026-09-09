@@ -5,6 +5,7 @@
   "version": "28.0.0.0",
   "brief": "Bifrost Orchestrator - Tests",
   "description": "Bifrost Orchestrator - Tests",
+  "applicationInsightsConnectionString": "InstrumentationKey=88bcc7d2-0aff-4328-a849-0c48ed2756e2;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=ef0cf2b1-129c-4b38-8544-e2763a8c65c6",
   "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
   "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
   "help": "https://www.origo.is/",
