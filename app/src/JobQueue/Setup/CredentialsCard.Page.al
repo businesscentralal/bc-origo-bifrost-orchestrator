@@ -76,6 +76,8 @@ page 10035545 "Credentials Card ori"
                     trigger OnAction()
                     begin
                         Rec.TestField(Code);
+                        CurrPage.SaveRecord();
+                        Commit();
                         if Secrets.SetClientIdFromDialog(Rec.Code) then
                             RefreshStatus();
                     end;
@@ -90,6 +92,8 @@ page 10035545 "Credentials Card ori"
                     trigger OnAction()
                     begin
                         Rec.TestField(Code);
+                        CurrPage.SaveRecord();
+                        Commit();
                         if Secrets.SetClientSecretFromDialog(Rec.Code) then
                             RefreshStatus();
                     end;
