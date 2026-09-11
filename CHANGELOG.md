@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+
+## [Unreleased]
+
 ### Fixed (2026-09-11) - Playbook.Schedule returns SystemId as orchestratorEntryId (#15)
 
 - `Orchestrator.Playbook.Schedule` now returns `orchestratorEntryId` as the Scheduled Entry's
@@ -17,6 +20,17 @@ Business Central release versioning (`major.minor.build.revision`).
   are unchanged.
 - Unit tests in `Schedule Playbook Tests` (96415) cover SystemId round-trip, PK fallback, and
   unknown GUID.
+
+### Fixed (2026-09-11) - Access Control take-over grant for customer tenants
+
+- **`App Takeover ori` grants `tabledata "Access Control" = RI`.** Install/upgrade on a tenant
+  still running Origo Cloud Events Orchestrator re-grants matching `BIFROST ... ori` roles by
+  inserting into Access Control; without the grant the whole publish rolls back. No delete of
+  legacy rows, so R+I is sufficient. The grant lives on the codeunit `Permissions` property
+  (not a user-assignable permission set).
+- **Take-over unit tests TC001–TC003** (`App Takeover Tests`, 96425) seed Access Control via
+  `RecordRef.Open(2000000053)` and cover grant, idempotent re-run, and empty-legacy exit.
+  `TakeOverAccessControl` is no longer local so the tests can call it directly.
 
 ## [28.0.0.0] - 2026-09-07
 
