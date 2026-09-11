@@ -5,6 +5,19 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased]
+
+### Fixed (2026-09-11) - Playbook.Schedule returns SystemId as orchestratorEntryId (#15)
+
+- `Orchestrator.Playbook.Schedule` now returns `orchestratorEntryId` as the Scheduled Entry's
+  SystemId so `Entry.Run` / `Entry.Restart` resolve it, plus `orchestratorEntryPkId` carrying
+  the primary-key ID for backward reference.
+- `FindEntry` falls back to a primary-key lookup when the SystemId lookup fails. Unknown or
+  garbage GUIDs still return the existing not-found error; callers already passing a SystemId
+  are unchanged.
+- Unit tests in `Schedule Playbook Tests` (96415) cover SystemId round-trip, PK fallback, and
+  unknown GUID.
+
 ## [28.0.0.0] - 2026-09-07
 
 ### Setup notifications and wizard (2026-09-07)
