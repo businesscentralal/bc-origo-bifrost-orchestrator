@@ -128,7 +128,7 @@ codeunit 10035576 "Help ori"
                     Help.AppendLine('## Response');
                     Help.AppendLine('');
                     Help.AppendLine('```json');
-                    Help.AppendLine('{ "status": "Success", "playbookCode": "MYPLAYBOOK", "scheduled": true, "orchestratorEntryId": "<guid>" }');
+                    Help.AppendLine('{ "status": "Success", "playbookCode": "MYPLAYBOOK", "scheduled": true, "orchestratorEntryId": "<systemId>", "orchestratorEntryPkId": "<primaryKeyId>" }');
                     Help.AppendLine('```');
                 end;
             'Orchestrator.Playbook.Enqueue':

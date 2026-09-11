@@ -96,9 +96,9 @@ table 10035539 "Playbook ori"
 
     /// <summary>
     /// Puts this playbook on a recurring schedule by creating an orchestrator entry that runs the
-    /// Playbook JQ Dispatcher, and stores the new entry id back on the playbook. A playbook that
-    /// already points at a living orchestrator entry is refused; the existing entry has to be
-    /// removed first. A stale id left behind by a deleted entry is simply overwritten.
+    /// Playbook JQ Dispatcher, and stores the new entry primary-key id back on the playbook. A
+    /// playbook that already points at a living orchestrator entry is refused; the existing entry
+    /// has to be removed first. A stale id left behind by a deleted entry is simply overwritten.
     /// </summary>
     /// <param name="RecurringTemplateCode">The recurring template that sets days, times and interval.</param>
     /// <param name="NotificationType">How to notify on failure and restart: none, e-mail or Telegram.</param>
@@ -106,14 +106,16 @@ table 10035539 "Playbook ori"
     /// <param name="JobQueueCategoryCode">The Job Queue category to run under, or empty for none.</param>
     /// <param name="EmitTelemetry">Whether the entry writes telemetry on every run.</param>
     /// <param name="RetryPolicy">How often a failed run may be restarted automatically.</param>
-    /// <returns>Guid. The id of the orchestrator entry that was created.</returns>
+    /// <param name="OrchestratorEntryPkId">Receives the created entry's primary-key ID (field ID).</param>
+    /// <returns>Guid. The SystemId of the orchestrator entry that was created (for Entry.* APIs).</returns>
     procedure CreateOrchestratorEntry(
         RecurringTemplateCode: Code[20];
         NotificationType: Enum "Notif. Type ori";
         NotificationRecipient: Text[2048];
         JobQueueCategoryCode: Code[10];
         EmitTelemetry: Boolean;
-        RetryPolicy: Enum "Retry Policy ori"): Guid
+        RetryPolicy: Enum "Retry Policy ori";
+        var OrchestratorEntryPkId: Guid): Guid
     var
         Entry: Record "Scheduled Entry ori";
         AlreadyScheduledErr: Label 'Playbook %1 is already scheduled. Remove the existing orchestrator entry first.', Comment = '%1 = playbook code, is-IS=Keðja %1 er þegar tímasett. Fjarlægðu núverandi vinnsluraðarstjórafærslu fyrst.';
@@ -143,7 +145,8 @@ table 10035539 "Playbook ori"
 
         "Orchestrator Entry ID" := Entry.ID;
         Modify();
-        exit(Entry.ID);
+        OrchestratorEntryPkId := Entry.ID;
+        exit(Entry.SystemId);
     end;
 
     /// <summary>

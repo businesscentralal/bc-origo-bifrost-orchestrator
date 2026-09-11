@@ -107,7 +107,8 @@ codeunit 10035550 "SE Msg Handler ori"
             else
                 Error(MissingIdErr);
         Entry.SetLoadFields(Blocked, "Notification Type", "Notification Recipient");
-        Entry.GetBySystemId(EntryId);
+        if not Entry.GetBySystemId(EntryId) then
+            Entry.Get(EntryId);
     end;
 
     local procedure RespondWithEntry(var Argument: Record "Message Argument ori"; Entry: Record "Scheduled Entry ori"; Message: Text)
