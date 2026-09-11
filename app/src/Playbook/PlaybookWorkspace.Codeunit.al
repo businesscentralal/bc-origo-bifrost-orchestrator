@@ -673,6 +673,24 @@ codeunit 10035583 "Playbook Workspace ori"
         JObj.Add(KeyName, NewValue);
     end;
 
+    /// <summary>First calendar day of the month before <paramref name="ReferenceDate"/>.</summary>
+    procedure GetFirstDayOfPreviousMonth(ReferenceDate: Date): Date
+    begin
+        exit(CalcDate('<-CM-1M>', ReferenceDate));
+    end;
+
+    /// <summary>Last calendar day of the month before <paramref name="ReferenceDate"/>.</summary>
+    procedure GetLastDayOfPreviousMonth(ReferenceDate: Date): Date
+    begin
+        exit(CalcDate('<-CM-1D>', ReferenceDate));
+    end;
+
+    /// <summary>First calendar day of the month containing <paramref name="ReferenceDate"/>.</summary>
+    procedure GetFirstDayOfThisMonth(ReferenceDate: Date): Date
+    begin
+        exit(CalcDate('<-CM>', ReferenceDate));
+    end;
+
     local procedure SeedSystemConstants()
     var
         SysObj: JsonObject;
@@ -683,9 +701,9 @@ codeunit 10035583 "Playbook Workspace ori"
         SysObj.Add('workDate', Format(WorkDate(), 0, 9));
         SysObj.Add('now', Format(CurrentDateTime, 0, 9));
         SysObj.Add('year', Date2DMY(TodayDate, 3));
-        SysObj.Add('lastMonthStart', Format(CalcDate('<-CM-1M>', TodayDate), 0, 9));
-        SysObj.Add('lastMonthEnd', Format(CalcDate('<CM-1M>', TodayDate), 0, 9));
-        SysObj.Add('thisMonthStart', Format(CalcDate('<-CM>', TodayDate), 0, 9));
+        SysObj.Add('lastMonthStart', Format(GetFirstDayOfPreviousMonth(TodayDate), 0, 9));
+        SysObj.Add('lastMonthEnd', Format(GetLastDayOfPreviousMonth(TodayDate), 0, 9));
+        SysObj.Add('thisMonthStart', Format(GetFirstDayOfThisMonth(TodayDate), 0, 9));
         SysObj.Add('thisQuarterStart', Format(CalcDate('<-CQ>', TodayDate), 0, 9));
         SysObj.Add('thisYearStart', Format(CalcDate('<-CY>', TodayDate), 0, 9));
         SysObj.Add('companyName', CompanyName);
