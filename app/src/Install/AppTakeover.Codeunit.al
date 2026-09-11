@@ -27,6 +27,7 @@ using System.Utilities;
 codeunit 10035604 "App Takeover ori"
 {
     Access = Internal;
+    Permissions = tabledata "Access Control" = RI;
 
     /// <summary>
     /// Runs the whole take-over. Called from the install codeunit before the app registers
@@ -451,10 +452,13 @@ codeunit 10035604 "App Takeover ori"
             LogTakeOver('User Setup ori.Telegram Chat ID ori', Copied);
     end;
 
-    /// <summary>Grants the Bifrost permission sets to every user that held an old one.</summary>
-    local procedure TakeOverAccessControl()
-    var
-        Migrated: Integer;
+    /// <summary>
+    /// Grants the Bifrost permission sets to every user that held an old one.
+    /// Exposed so unit tests can exercise the Access Control path directly
+    /// (same pattern as Attachments <c>Storage Takeover ori.TakeOverAccessControl</c>).
+    /// </summary>
+    /// <returns>The number of Access Control rows inserted.</returns>
+    procedure TakeOverAccessControl() Migrated: Integer
     begin
         Migrated += MigrateRole('CE Orchestrator ori', 'BIFROST Orchestr ori');
         Migrated += MigrateRole('CE Orch. Setup ori', 'BIFROST OrchSet ori');
