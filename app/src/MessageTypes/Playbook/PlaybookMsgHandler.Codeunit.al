@@ -65,7 +65,8 @@ codeunit 10035552 "Playbook Msg Handler ori"
         Playbook: Record "Playbook ori";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
-        EntryId: Guid;
+        EntrySystemId: Guid;
+        OrchestratorEntryPkId: Guid;
         RecurringTemplateCode: Code[20];
         NotificationType: Enum "Notif. Type ori";
         NotificationRecipient: Text[2048];
@@ -86,14 +87,15 @@ codeunit 10035552 "Playbook Msg Handler ori"
         EmitTelemetry := GetJsonBool(RequestJson, 'emitTelemetry');
         RetryPolicy := ParseRetryPolicy(GetJsonText(RequestJson, 'retryPolicy'));
 
-        EntryId := Playbook.CreateOrchestratorEntry(
+        EntrySystemId := Playbook.CreateOrchestratorEntry(
             RecurringTemplateCode, NotificationType, NotificationRecipient,
-            JobQueueCategoryCode, EmitTelemetry, RetryPolicy);
+            JobQueueCategoryCode, EmitTelemetry, RetryPolicy, OrchestratorEntryPkId);
 
         ResponseJson.Add('status', 'Success');
         ResponseJson.Add('playbookCode', Playbook.Code);
         ResponseJson.Add('scheduled', true);
-        ResponseJson.Add('orchestratorEntryId', Format(EntryId, 0, 4));
+        ResponseJson.Add('orchestratorEntryId', Format(EntrySystemId, 0, 4));
+        ResponseJson.Add('orchestratorEntryPkId', Format(OrchestratorEntryPkId, 0, 4));
         Argument.SetResponseJson(ResponseJson);
     end;
 

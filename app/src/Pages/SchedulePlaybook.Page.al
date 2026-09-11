@@ -102,6 +102,8 @@ page 10035584 "Schedule Playbook ori"
     end;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
+    var
+        OrchestratorEntryPkId: Guid;
     begin
         if CloseAction <> Action::OK then
             exit(true);
@@ -112,7 +114,7 @@ page 10035584 "Schedule Playbook ori"
         Playbook.Get(Playbook.Code);
         Playbook.CreateOrchestratorEntry(
             RecurringTemplateCode, NotificationType, NotificationRecipient,
-            JobQueueCategoryCode, EmitTelemetry, RetryPolicy);
+            JobQueueCategoryCode, EmitTelemetry, RetryPolicy, OrchestratorEntryPkId);
 
         exit(true);
     end;
