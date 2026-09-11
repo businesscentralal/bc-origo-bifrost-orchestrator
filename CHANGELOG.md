@@ -7,6 +7,16 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [28.0.0.0] - 2026-09-07
 
+### Fixed (2026-09-11) - `_sys.lastMonthEnd` off-by-one (#11)
+
+- `Playbook Workspace ori.SeedSystemConstants` computed `lastMonthEnd` with `CalcDate('<CM-1M>', Today)`,
+  which is "closing of the current month minus one month" (e.g. 2026-09-30 → 2026-08-30) and silently
+  missed the last calendar day of 31-day months. It now uses `CalcDate('<-CM-1D>', Today)` via
+  `GetLastDayOfPreviousMonth` (start of this month minus one day). `lastMonthStart` / `thisMonthStart`
+  formulas are unchanged. Unit tests TC001–TC005 cover September, leap February, January cross-year,
+  and May 31 → April 30.
+
+
 ### Setup notifications and wizard (2026-09-07)
 
 Setup notifications are no longer raised by this app. Every setup banner in the Bifröst family now
