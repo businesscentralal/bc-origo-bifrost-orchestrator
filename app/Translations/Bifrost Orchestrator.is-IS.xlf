@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Orchestrator">
     <body>
       <group id="body">
@@ -539,7 +539,7 @@
         </trans-unit>
         <trans-unit id="Table 632664994 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Report Request Preset</source>
-          <target state="translated">Bifröst Skýrsluforsendur</target>
+          <target state="translated">Bifröst skýrsluforsendur</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst Skýrsluforsendur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Report Request Preset ori - Property Caption</note>
         </trans-unit>
@@ -773,7 +773,7 @@
         </trans-unit>
         <trans-unit id="Table 4028614243 - Field 1491485980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Retry Policy</source>
-          <target state="translated">Endurreynslureglur</target>
+          <target state="translated">Endurprófunarreglur</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurprófanarstefna</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Scheduled Entry ori - Field Retry Policy - Property Caption</note>
         </trans-unit>
@@ -1319,21 +1319,29 @@
         </trans-unit>
         <trans-unit id="Codeunit 4100043099 - NamedType 3536930844" size-unit="char" translate="yes" xml:space="preserve">
           <source>The Telegram Bot Token has not been entered yet. Open Bifrost Orchestrator Setup and set it.</source>
-          <target state="translated">Telegram-vélmennislykill hefur ekki verið skráður. Opnaðu uppsetningu Bifröst stjórnandans og skráðu hann.</target><note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill hefur ekki verið skráður. Opnaðu uppsetningu Bifröst stjórnandans og skráðu hann.</note>
+          <target state="translated">Telegram-vélmennislykill hefur ekki verið skráður. Opnaðu uppsetningu Bifröst stjórnandans og skráðu hann.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill hefur ekki verið skráður. Opnaðu uppsetningu Bifröst stjórnandans og skráðu hann.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Secrets ori - NamedType BotTokenNotSetErr</note>
-        </trans-unit><trans-unit id="Codeunit 4100043099 - NamedType 3987857436" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Codeunit 4100043099 - NamedType 3987857436" size-unit="char" translate="yes" xml:space="preserve">
           <source>OAuth 2.0 client id of client credentials %1.</source>
-          <target state="translated">OAuth 2.0 biðlaraauðkenni fyrir auðkenni biðlara %1.</target><note from="Developer" annotates="general" priority="2">%1 = client credentials code, is-IS=OAuth 2.0 biðlaraauðkenni fyrir auðkenni biðlara %1.</note>
+          <target state="translated">OAuth 2.0 biðlaraauðkenni fyrir auðkenni biðlara %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = client credentials code, is-IS=OAuth 2.0 biðlaraauðkenni fyrir auðkenni biðlara %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Secrets ori - NamedType ClientIdDescriptionLbl</note>
-        </trans-unit><trans-unit id="Codeunit 4100043099 - NamedType 1435138637" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Codeunit 4100043099 - NamedType 1435138637" size-unit="char" translate="yes" xml:space="preserve">
           <source>OAuth 2.0 client secret of client credentials %1.</source>
-          <target state="translated">OAuth 2.0 leyniorð biðlara fyrir auðkenni biðlara %1.</target><note from="Developer" annotates="general" priority="2">%1 = client credentials code, is-IS=OAuth 2.0 leyniorð biðlara fyrir auðkenni biðlara %1.</note>
+          <target state="translated">OAuth 2.0 leyniorð biðlara fyrir auðkenni biðlara %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = client credentials code, is-IS=OAuth 2.0 leyniorð biðlara fyrir auðkenni biðlara %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Secrets ori - NamedType ClientSecretDescriptionLbl</note>
-        </trans-unit><trans-unit id="Codeunit 4100043099 - NamedType 3684101241" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Codeunit 4100043099 - NamedType 3684101241" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram bot token used to send Bifrost Orchestrator notifications.</source>
-          <target state="translated">Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst stjórnandans.</target><note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst stjórnandans.</note>
+          <target state="translated">Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst stjórnandans.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst stjórnandans.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Secrets ori - NamedType TelegramBotTokenDescriptionLbl</note>
-        </trans-unit><trans-unit id="Codeunit 3425003177 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Codeunit 3425003177 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Get orchestrator health status and entry counts.</source>
           <target state="translated">Sækja heilsustöðu áætlara og fjölda færslna.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sækja heilsustöðu áætlara og fjölda færslna.</note>
@@ -1491,17 +1499,23 @@
         </trans-unit>
         <trans-unit id="Page 3564186828 - NamedType 444195844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove the stored client id and client secret of client credentials %1?</source>
-          <target state="translated">Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir auðkenni biðlara %1?</target><note from="Developer" annotates="general" priority="2">%1 = client credentials code, is-IS=Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir auðkenni biðlara %1?</note>
+          <target state="translated">Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir auðkenni biðlara %1?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = client credentials code, is-IS=Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir auðkenni biðlara %1?</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - NamedType ConfirmClearSecretsQst</note>
-        </trans-unit><trans-unit id="Page 3564186828 - NamedType 1999041823" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - NamedType 1999041823" size-unit="char" translate="yes" xml:space="preserve">
           <source>Not set</source>
-          <target state="translated">Ekki skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
+          <target state="translated">Ekki skráð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - NamedType NotSetLbl</note>
-        </trans-unit><trans-unit id="Page 3564186828 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set</source>
-          <target state="translated">Skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
+          <target state="translated">Skráð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - NamedType SetLbl</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
           <target state="translated">Almennt</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Almennt</note>
@@ -1521,57 +1535,83 @@
         </trans-unit>
         <trans-unit id="Page 3564186828 - Control 1446995958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Secrets</source>
-          <target state="translated">Leyndarmál</target><note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál</note>
+          <target state="translated">Leyndarmál</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Control SecretsGroup - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Control 2047962726 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Control 2047962726 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies whether the OAuth 2.0 client id has been entered. Use Set Client ID to enter it.</source>
-          <target state="translated">Tilgreinir hvort OAuth 2.0 biðlaraauðkenni hafi verið skráð. Notaðu Skrá auðkenni biðlara til að skrá það.</target><note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort OAuth 2.0 biðlaraauðkenni hafi verið skráð. Notaðu Skrá auðkenni biðlara til að skrá það.</note>
+          <target state="translated">Tilgreinir hvort OAuth 2.0 biðlaraauðkenni hafi verið skráð. Notaðu Skrá auðkenni biðlara til að skrá það.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort OAuth 2.0 biðlaraauðkenni hafi verið skráð. Notaðu Skrá auðkenni biðlara til að skrá það.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Control ClientIdStatusField - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Control 2047962726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Control 2047962726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client ID</source>
-          <target state="translated">Auðkenni biðlara</target><note from="Developer" annotates="general" priority="2">is-IS=Auðkenni biðlara</note>
+          <target state="translated">Auðkenni biðlara</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni biðlara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Control ClientIdStatusField - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Control 1029388635 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Control 1029388635 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies whether the OAuth 2.0 client secret has been entered. Use Set Client Secret to enter it.</source>
-          <target state="translated">Tilgreinir hvort OAuth 2.0 leyniorð biðlara hafi verið skráð. Notaðu Skrá leyniorð biðlara til að skrá það.</target><note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort OAuth 2.0 leyniorð biðlara hafi verið skráð. Notaðu Skrá leyniorð biðlara til að skrá það.</note>
+          <target state="translated">Tilgreinir hvort OAuth 2.0 leyniorð biðlara hafi verið skráð. Notaðu Skrá leyniorð biðlara til að skrá það.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort OAuth 2.0 leyniorð biðlara hafi verið skráð. Notaðu Skrá leyniorð biðlara til að skrá það.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Control ClientSecretStatusField - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Control 1029388635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Control 1029388635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client Secret</source>
-          <target state="translated">Leyniorð biðlara</target><note from="Developer" annotates="general" priority="2">is-IS=Leyniorð biðlara</note>
+          <target state="translated">Leyniorð biðlara</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leyniorð biðlara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Control ClientSecretStatusField - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 1040269973 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 1040269973 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Secrets</source>
-          <target state="translated">Leyndarmál</target><note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál</note>
+          <target state="translated">Leyndarmál</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action SecretActions - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 3929932560 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 3929932560 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove the stored client id and client secret of this credential pair.</source>
-          <target state="translated">Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir þetta auðkennispar.</target><note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir þetta auðkennispar.</note>
+          <target state="translated">Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir þetta auðkennispar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymt biðlaraauðkenni og leyniorð biðlara fyrir þetta auðkennispar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action ClearSecrets - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 3929932560 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 3929932560 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Clear Secrets</source>
-          <target state="translated">Hreinsa leyndarmál</target><note from="Developer" annotates="general" priority="2">is-IS=Hreinsa leyndarmál</note>
+          <target state="translated">Hreinsa leyndarmál</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hreinsa leyndarmál</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action ClearSecrets - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 2849609834 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 2849609834 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Enter the OAuth 2.0 client id. The value is stored in the Bifrost secret store and is never shown again.</source>
-          <target state="translated">Skrá OAuth 2.0 biðlaraauðkenni. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá OAuth 2.0 biðlaraauðkenni. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</note>
+          <target state="translated">Skrá OAuth 2.0 biðlaraauðkenni. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá OAuth 2.0 biðlaraauðkenni. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action SetClientId - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 2849609834 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 2849609834 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Client ID</source>
-          <target state="translated">Skrá auðkenni biðlara</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá auðkenni biðlara</note>
+          <target state="translated">Skrá auðkenni biðlara</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá auðkenni biðlara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action SetClientId - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 2167919815 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 2167919815 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Enter the OAuth 2.0 client secret. The value is stored in the Bifrost secret store and is never shown again.</source>
-          <target state="translated">Skrá OAuth 2.0 leyniorð biðlara. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá OAuth 2.0 leyniorð biðlara. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</note>
+          <target state="translated">Skrá OAuth 2.0 leyniorð biðlara. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá OAuth 2.0 leyniorð biðlara. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action SetClientSecret - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 2167919815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 2167919815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Client Secret</source>
-          <target state="translated">Skrá leyniorð biðlara</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá leyniorð biðlara</note>
+          <target state="translated">Skrá leyniorð biðlara</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá leyniorð biðlara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action SetClientSecret - Property Caption</note>
-        </trans-unit><trans-unit id="Page 3564186828 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 3564186828 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Process</source>
-          <target state="translated">Vinna</target><note from="Developer" annotates="general" priority="2">is-IS=Vinna</note>
+          <target state="translated">Vinna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vinna</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials Card ori - Action Category_Process - Property Caption</note>
-        </trans-unit><trans-unit id="Page 1550786570 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 1550786570 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client Credentials</source>
           <target state="translated">Auðkenni biðlara</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni biðlara</note>
@@ -1579,13 +1619,17 @@
         </trans-unit>
         <trans-unit id="Page 1550786570 - NamedType 1999041823" size-unit="char" translate="yes" xml:space="preserve">
           <source>Not set</source>
-          <target state="translated">Ekki skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
+          <target state="translated">Ekki skráð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials List ori - NamedType NotSetLbl</note>
-        </trans-unit><trans-unit id="Page 1550786570 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 1550786570 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set</source>
-          <target state="translated">Skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
+          <target state="translated">Skráð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials List ori - NamedType SetLbl</note>
-        </trans-unit><trans-unit id="Page 1550786570 - Control 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 1550786570 - Control 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the unique code for this client credential pair.</source>
           <target state="translated">Tilgreinir einstæðan kóða fyrir þetta auðkennispar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir einstæðan kóða fyrir þetta auðkennispar.</note>
@@ -1599,13 +1643,17 @@
         </trans-unit>
         <trans-unit id="Page 1550786570 - Control 228036781 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies whether both the client id and the client secret have been entered. Open the card to enter them.</source>
-          <target state="translated">Tilgreinir hvort bæði biðlaraauðkenni og leyniorð biðlara hafi verið skráð. Opnaðu spjaldið til að skrá þau.</target><note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort bæði biðlaraauðkenni og leyniorð biðlara hafi verið skráð. Opnaðu spjaldið til að skrá þau.</note>
+          <target state="translated">Tilgreinir hvort bæði biðlaraauðkenni og leyniorð biðlara hafi verið skráð. Opnaðu spjaldið til að skrá þau.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort bæði biðlaraauðkenni og leyniorð biðlara hafi verið skráð. Opnaðu spjaldið til að skrá þau.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials List ori - Control SecretsStatusField - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 1550786570 - Control 228036781 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 1550786570 - Control 228036781 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Secrets</source>
-          <target state="translated">Leyndarmál</target><note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál</note>
+          <target state="translated">Leyndarmál</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Credentials List ori - Control SecretsStatusField - Property Caption</note>
-        </trans-unit><trans-unit id="Page 104719386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 104719386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Entries API</source>
           <target state="translated">Vinnsluraðafærslur API</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Vinnsluraðafærslur API</note>
@@ -1817,7 +1865,7 @@
         </trans-unit>
         <trans-unit id="Page 104719386 - Control 4055998963 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies if the job queue entry has been scheduled to run automatically, which happens when an entry changes status to Ready. If the field is cleared, the job queue entry is not scheduled to run.</source>
-          <target state="translated">Tilgreinir hvort vinnsluraðafærsla hafí verið tímasett.</target>
+          <target state="translated">Tilgreinir hvort vinnsluraðarfærsla hafi verið tímasett.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort vinnsluraðafærsla hafí verið tímasett.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Entries API ori - Control scheduled - Property ToolTip</note>
         </trans-unit>
@@ -2015,7 +2063,7 @@
         </trans-unit>
         <trans-unit id="Page 853968823 - Control 1949387513 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>JSON payload passed to the first step when no runtime initialRequest is provided.</source>
-          <target state="translated">JSON gagnahlað sent í fyrsta skref þegar engin keyrslusbeiðni er gefin.</target>
+          <target state="translated">JSON-gagnahluti sem sendur er í fyrsta skref þegar engin keyrslubeiðni er gefin.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=JSON gagnahlað sent í fyrsta skref þegar engin keyrslubeðni er gefin.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Card ori - Control InitialRequestTemplate - Property ToolTip</note>
         </trans-unit>
@@ -2183,7 +2231,7 @@
         </trans-unit>
         <trans-unit id="Page 2641859328 - Control 937277366 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of steps executed.</source>
-          <target state="translated">Tilgreinir fjölda skrefa keyrð.</target>
+          <target state="translated">Tilgreinir fjölda keyrðra skrefa.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fjölda skrefa keyrð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instance Card ori - Control Steps Executed - Property ToolTip</note>
         </trans-unit>
@@ -2297,7 +2345,7 @@
         </trans-unit>
         <trans-unit id="Page 726155029 - Control 937277366 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of steps executed.</source>
-          <target state="translated">Tilgreinir fjölda skrefa keyrð.</target>
+          <target state="translated">Tilgreinir fjölda keyrðra skrefa.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fjölda skrefa keyrð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - Control Steps Executed - Property ToolTip</note>
         </trans-unit>
@@ -2345,7 +2393,7 @@
         </trans-unit>
         <trans-unit id="Page 3865433394 - Control 937277366 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of steps executed.</source>
-          <target state="translated">Tilgreinir fjölda skrefa keyrð.</target>
+          <target state="translated">Tilgreinir fjölda keyrðra skrefa.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fjölda skrefa keyrð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Last Run FB ori - Control Steps Executed - Property ToolTip</note>
         </trans-unit>
@@ -2441,7 +2489,7 @@
         </trans-unit>
         <trans-unit id="Page 611875482 - Control 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the step execution status.</source>
-          <target state="translated">Tilgreinir stöðu keyrsluskautar.</target>
+          <target state="translated">Tilgreinir stöðu keyrslu skrefsins.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir stöðu keyrsluskautar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Status - Property ToolTip</note>
         </trans-unit>
@@ -2693,7 +2741,7 @@
         </trans-unit>
         <trans-unit id="Page 905065511 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
-          <target state="translated">Almænn</target>
+          <target state="translated">Almennt</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Almænn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Recurring Template ori - Control General - Property Caption</note>
         </trans-unit>
@@ -2723,7 +2771,7 @@
         </trans-unit>
         <trans-unit id="Page 905065511 - Control 2993600736 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Recurrence</source>
-          <target state="translated">Endurteking</target>
+          <target state="translated">Endurtekning</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurteking</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Recurring Template ori - Control Recurrence - Property Caption</note>
         </trans-unit>
@@ -2735,7 +2783,7 @@
         </trans-unit>
         <trans-unit id="Page 905065511 - Control 909141965 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of minutes between job queue entries.</source>
-          <target state="translated">Tilgreinir fjölda mínúta milli keyrslu.</target>
+          <target state="translated">Tilgreinir fjölda mínútna milli keyrslna.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fjölda mínúta milli keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Recurring Template ori - Control No. of Minutes between Runs - Property ToolTip</note>
         </trans-unit>
@@ -2933,7 +2981,7 @@
         </trans-unit>
         <trans-unit id="Page 3300858647 - NamedType 3659237721" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Entry has been removed. New entry will be created by the Job Queue Orchestrator.</source>
-          <target state="translated">Vinnsluröðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaráætlara.</target>
+          <target state="translated">Vinnsluraðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaranum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Vinnsluröðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaráætlara.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Sched. Entry Subform ori - NamedType EntryRemovedMsg</note>
         </trans-unit>
@@ -2981,7 +3029,7 @@
         </trans-unit>
         <trans-unit id="Page 3300858647 - Control 3337645662 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the User ID that will own the management job queue entry.  This user must have permission to run the job queue entries.  If no user is specified, the current user will be used.</source>
-          <target state="translated">Tilgreinir notendaauðkenni sem mún eña vinnsluraðafærslunni.</target>
+          <target state="translated">Tilgreinir notandaauðkenni sem á vinnsluraðarfærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðarfærslur. Ef enginn notandi er tilgreindur er núverandi notandi notaður.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir notendaauðkenni sem mún eña vinnsluraðafærslunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Sched. Entry Subform ori - Control Job Queue User ID - Property ToolTip</note>
         </trans-unit>
@@ -2993,7 +3041,7 @@
         </trans-unit>
         <trans-unit id="Page 3300858647 - Control 909141965 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the No. of Minutes between Runs field.</source>
-          <target state="translated">Tilgreinir fjölda mínúta milli keyrslu.</target>
+          <target state="translated">Tilgreinir fjölda mínútna milli keyrslna.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fjölda mínúta milli keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Sched. Entry Subform ori - Control No. of Minutes between Runs - Property ToolTip</note>
         </trans-unit>
@@ -3011,7 +3059,7 @@
         </trans-unit>
         <trans-unit id="Page 3300858647 - Control 3371015643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Object Caption to Run field.</source>
-          <target state="translated">Tilgreinir Heiti hluts til keyrslu.</target>
+          <target state="translated">Tilgreinir heiti hlutarins sem vinnsluraðafærslan á að keyra.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir kafli hluts til keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Sched. Entry Subform ori - Control Object Caption to Run - Property ToolTip</note>
         </trans-unit>
@@ -3113,7 +3161,7 @@
         </trans-unit>
         <trans-unit id="Page 3300858647 - Action 1250604559 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Drill Down</source>
-          <target state="translated">Kafanleg</target>
+          <target state="translated">Færa niður</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Kafanleg</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Sched. Entry Subform ori - Action DrillDown - Property Caption</note>
         </trans-unit>
@@ -3215,7 +3263,7 @@
         </trans-unit>
         <trans-unit id="Page 1606311328 - Control 707275220 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Retry Policy</source>
-          <target state="translated">Endurreynslureglur</target>
+          <target state="translated">Endurprófunarreglur</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurprófanarstefna</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Schedule Playbook ori - Control RetryPolicy - Property Caption</note>
         </trans-unit>
@@ -3317,7 +3365,7 @@
         </trans-unit>
         <trans-unit id="Page 1374223403 - Control 888591927 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>No. of Minutes between Runs</source>
-          <target state="translated">Fjöldi mínúta milli keyrslu</target>
+          <target state="translated">Fjöldi mínútna milli keyrslna</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Fjöldi mínúta milli keyrslu</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry API ori - Control noOfMinutesBetweenRuns - Property Caption</note>
         </trans-unit>
@@ -3371,19 +3419,19 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - NamedType 3659237721" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Entry has been removed. New entry will be created by the Job Queue Orchestrator.</source>
-          <target state="translated">Vinnsluröðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaráætlara.</target>
+          <target state="translated">Vinnsluraðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaranum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Vinnsluröðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaráætlara.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - NamedType EntryRemovedMsg</note>
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
-          <target state="translated">Almænn</target>
+          <target state="translated">Almennt</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Almænn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control General - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 3543129988 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies whether the orchestrator entry is blocked.</source>
-          <target state="translated">Tilgreinir hvort vinnsluraðarfærslan sé lokað.</target>
+          <target state="translated">Tilgreinir hvort vinnsluraðarfærslan sé lokuð.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort vinnsluraðarfærslan sé lokáð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Blocked - Property ToolTip</note>
         </trans-unit>
@@ -3401,7 +3449,7 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 6461729 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the earliest date and time when the job queue entry should be run.</source>
-          <target state="translated">Tilgreinir fyrsti daga og tíma þegar vinnsluraðafærslan skyldi keyrast.</target>
+          <target state="translated">Tilgreinir elstu dagsetningu og tíma þegar vinnsluraðarfærslan á að keyra.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrsti daga og tíma þegar vinnsluraðafærslan skyldi keyrast.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Earliest Start Date/Time - Property ToolTip</note>
         </trans-unit>
@@ -3419,13 +3467,13 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 3337645662 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the User ID that will own the job queue entry. This user must have permission to run the job queue entries. If no user is specified, the current user will be used.</source>
-          <target state="translated">Tilgreinir notendaauðkenni sem mún eña vinnsluraðafærslunni.</target>
+          <target state="translated">Tilgreinir notandaauðkenni sem á vinnsluraðarfærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðarfærslur. Ef enginn notandi er tilgreindur er núverandi notandi notaður.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir notendaauðkenni sem mún eña vinnsluraðafærslunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Job Queue User ID - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 3371015643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the caption of the object to be run by the job queue entry.</source>
-          <target state="translated">Tilgreinir Heiti hluts til keyrslu.</target>
+          <target state="translated">Tilgreinir heiti hlutarins sem vinnsluraðarfærslan á að keyra.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir kafli hluts til keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Object Caption to Run - Property ToolTip</note>
         </trans-unit>
@@ -3455,7 +3503,7 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 3431804371 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies if this schedule entry has been scheduled as a job queue entry.</source>
-          <target state="translated">Tilgreinir hvort þssari vinnsluraðafærslu hér verið tímasett.</target>
+          <target state="translated">Tilgreinir hvort þessi vinnsluraðarfærsla hafi verið tímasett.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort þssari vinnsluraðafærslu hér verið tímasett.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Scheduled - Property ToolTip</note>
         </trans-unit>
@@ -3497,7 +3545,7 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 909141965 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the minimum number of minutes that are to pass between runs of the job queue entry.</source>
-          <target state="translated">Tilgreinir lágmarksfjölda mínútna milli keyrslu vinnsluraðarafærslu.</target>
+          <target state="translated">Tilgreinir lágmarksfjölda mínútna milli keyrslna vinnsluraðarfærslunnar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lágmarksfjölda mínútna milli keyrslu vinnsluraðarafærslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control No. of Minutes between Runs - Property ToolTip</note>
         </trans-unit>
@@ -3563,19 +3611,19 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 707275220 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Retry Policy</source>
-          <target state="translated">Endurreynslureglur</target>
+          <target state="translated">Endurprófunarreglur</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurprófanarstefna</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control RetryPolicy - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 3652064476 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of consecutive errors since the last successful execution. This counter resets when the entry runs successfully.</source>
-          <target state="translated">Tilgreinir fjölda villna frá síðustu velgengni. Þessi teljari endurstillist þegar færslan keyrist með góðum árangri.</target>
+          <target state="translated">Tilgreinir fjölda samfelldra villna frá síðustu villulausu keyrslu. Teljarinn núllstillist þegar færslan keyrist án villu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fjölda villna frá síðustu gangi. Þessi telji endurstillast þegar færslan keyrist með góðum árangri.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Errors Since Last Success - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2105910135 - Control 1491485980 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the retry policy for this orchestrator entry. Always - entry is always restarted on error. Three Times - entry is restarted only if it has failed fewer than 3 times. Never - entry is never automatically restarted on error.</source>
-          <target state="translated">Tilgreinir endurreynslureglur. Alltaf - færsla er alltaf endurræsin við villu. Þrjú sinni - færsla er endurræsin bara ef hún hefur mistekist færri en 3 sinnum. Aldrei - færsla er aldrei endurræsin sjálfkrafa við villu.</target>
+          <target state="translated">Tilgreinir endurprófunarreglur. Alltaf: færsla er alltaf endurræst við villu. Þrisvar sinnum: færsla er aðeins endurræst ef hún hefur mistekist færri en þrisvar sinnum. Aldrei: færsla er aldrei endurræst sjálfkrafa við villu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir endurprófanarstefnu. Alltaf - færsla er alltaf endurræsin við villu. Þrjú sinni - færsla er endurræsin bara ef hún hefur mistekist færri en 3 sinnum. Aldrei - færsla er aldrei endurræsin sjálfkrafa við villu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Control Retry Policy - Property ToolTip</note>
         </trans-unit>
@@ -3605,13 +3653,13 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Action 1736788238 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reschedule this job.</source>
-          <target state="translated">Enduáætla þetta verk.</target>
+          <target state="translated">Endurtímasetja þetta verk.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Enduáætla þetta verk.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Action Reschedule - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2105910135 - Action 1736788238 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reschedule</source>
-          <target state="translated">Enduáætla</target>
+          <target state="translated">Endurtímasetja</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Enduáætla</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Action Reschedule - Property Caption</note>
         </trans-unit>
@@ -3629,7 +3677,7 @@
         </trans-unit>
         <trans-unit id="Page 2105910135 - Action 202294189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reschedule this job for execution now.</source>
-          <target state="translated">Enduáætla þetta verk til keyrslu strax.</target>
+          <target state="translated">Endurtímasetja þetta verk til keyrslu strax.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Enduáætla þetta verk til keyrslu strax.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduled Entry Card ori - Action ScheduleNow - Property ToolTip</note>
         </trans-unit>
@@ -3642,28 +3690,36 @@
         <trans-unit id="Page 778417224 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Orchestrator Setup</source>
           <target state="translated">Uppsetning Bifröst stjórnanda</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note><note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Property Caption</note></trans-unit>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 778417224 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
           <source>Manage Job Queues,Job Queue Management,Job Queue Restarted,Job Queue Notification</source>
           <target state="translated">Stjórna vinnsluröðum,Stjórnun vinnsluraða,Vinnsluröð endurræst,Tilkynning vinnsluraða</target>
-          <note from="Developer" annotates="general" priority="2" />
+          <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Property AdditionalSearchTerms</note>
         </trans-unit>
         <trans-unit id="Page 778417224 - NamedType 2314727737" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove the stored Telegram Bot Token?</source>
-          <target state="translated">Fjarlægja geymdan Telegram-vélmennislykil?</target><note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymdan Telegram-vélmennislykil?</note>
+          <target state="translated">Fjarlægja geymdan Telegram-vélmennislykil?</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymdan Telegram-vélmennislykil?</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType ConfirmClearBotTokenQst</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 1999041823" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - NamedType 1999041823" size-unit="char" translate="yes" xml:space="preserve">
           <source>Not set</source>
-          <target state="translated">Ekki skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
+          <target state="translated">Ekki skráð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType NotSetLbl</note>
-        </trans-unit><trans-unit id="Page 778417224 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - NamedType 1653650412" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set</source>
-          <target state="translated">Skráð</target><note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
+          <target state="translated">Skráð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - NamedType SetLbl</note>
-        </trans-unit><trans-unit id="Page 778417224 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
-          <target state="translated">Almænn</target>
+          <target state="translated">Almennt</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Almænn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Control General - Property Caption</note>
         </trans-unit>
@@ -3682,7 +3738,9 @@
         <trans-unit id="Page 778417224 - Control 3337645662 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the User ID that will own the management job queue entry. This user must have permission to run the job queue entries. If no user is specified, the current user will be used.</source>
           <target state="translated">Tilgreinir notendaauðkenni sem á stjórnunarvinnsluraðafærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðafærslurnar. Ef enginn notandi er tilgreindur er núverandi notandi notaður.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir notendaauðkenni sem á stjórnunarvinnsluraðafærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðafærslurnar. Ef enginn notandi er tilgreindur er núverandi notandi notaður.</note><note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Control Job Queue User ID - Property ToolTip</note></trans-unit>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir notendaauðkenni sem á stjórnunarvinnsluraðafærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðafærslurnar. Ef enginn notandi er tilgreindur er núverandi notandi notaður.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Control Job Queue User ID - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 778417224 - Control 4213393660 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the job queue status that is required for Job Queue Orchestrator</source>
           <target state="translated">Tilgreinir staðu vinnsluraða sem er nauðsynleg fyrir vinnsluraðara</target>
@@ -3709,21 +3767,29 @@
         </trans-unit>
         <trans-unit id="Page 778417224 - Control 3394916679 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies whether the Telegram Bot API token used to send notifications has been entered. Use Set Telegram Bot Token to enter it.</source>
-          <target state="translated">Tilgreinir hvort Telegram-vélmennislykill sem notaður er til að senda tilkynningar hafi verið skráður. Notaðu Skrá Telegram-vélmennislykil til að skrá hann.</target><note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort Telegram-vélmennislykill sem notaður er til að senda tilkynningar hafi verið skráður. Notaðu Skrá Telegram-vélmennislykil til að skrá hann.</note>
+          <target state="translated">Tilgreinir hvort Telegram-vélmennislykill sem notaður er til að senda tilkynningar hafi verið skráður. Notaðu Skrá Telegram-vélmennislykil til að skrá hann.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort Telegram-vélmennislykill sem notaður er til að senda tilkynningar hafi verið skráður. Notaðu Skrá Telegram-vélmennislykil til að skrá hann.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Control TelegramBotTokenStatusField - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Control 3394916679 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Control 3394916679 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token</source>
-          <target state="translated">Telegram-vélmennislykill</target><note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill</note>
+          <target state="translated">Telegram-vélmennislykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Control TelegramBotTokenStatusField - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3760325136 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3760325136 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Show the secrets Bifrost Orchestrator needs and whether a value has been entered for each of them.</source>
-          <target state="translated">Sýna leyndarmálin sem Bifröst stjórnandinn þarf og hvort gildi hafi verið skráð fyrir hvert þeirra.</target><note from="Developer" annotates="general" priority="2">is-IS=Sýna leyndarmálin sem Bifröst stjórnandinn þarf og hvort gildi hafi verið skráð fyrir hvert þeirra.</note>
+          <target state="translated">Sýna leyndarmálin sem Bifröst stjórnandinn þarf og hvort gildi hafi verið skráð fyrir hvert þeirra.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýna leyndarmálin sem Bifröst stjórnandinn þarf og hvort gildi hafi verið skráð fyrir hvert þeirra.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action AppSecrets - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3760325136 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3760325136 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>App Secrets</source>
-          <target state="translated">Leyndarmál forrits</target><note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál forrits</note>
+          <target state="translated">Leyndarmál forrits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leyndarmál forrits</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action AppSecrets - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3853333744 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3853333744 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>See the job queue entries.</source>
           <target state="translated">Sjá vinnsluraðafærslurnar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sjá vinnsluraðafærslurnar.</note>
@@ -3737,31 +3803,43 @@
         </trans-unit>
         <trans-unit id="Page 778417224 - Action 4131186053 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Manage client credentials for external service authentication.</source>
-          <target state="translated">Stjórna auðkennum biðlara fyrir ytri þjónustuvottun.</target><note from="Developer" annotates="general" priority="2">is-IS=Stjórna auðkennum biðlara fyrir ytri þjónustuvottun.</note>
+          <target state="translated">Stjórna auðkennum biðlara fyrir ytri þjónustuvottun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stjórna auðkennum biðlara fyrir ytri þjónustuvottun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action JQCredentials - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 4131186053 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 4131186053 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client Credentials</source>
-          <target state="translated">Auðkenni biðlara</target><note from="Developer" annotates="general" priority="2">is-IS=Auðkenni biðlara</note>
+          <target state="translated">Auðkenni biðlara</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni biðlara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action JQCredentials - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the execution log for playbook runs.</source>
-          <target state="translated">Skoða keyrsluskrá keðjukeyrslna.</target><note from="Developer" annotates="general" priority="2">is-IS=Skoða keyrsluskrá keðjukeyrslna.</note>
+          <target state="translated">Skoða keyrsluskrá keðjukeyrslna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða keyrsluskrá keðjukeyrslna.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action PlaybookInstances - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3732935745 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3732935745 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook Execution Log</source>
-          <target state="translated">Keyrsluskrá keðju</target><note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá keðju</note>
+          <target state="translated">Keyrsluskrá keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá keðju</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action PlaybookInstances - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View and configure Bifrost message playbooks.</source>
-          <target state="translated">Skoða og stilla keðjur Bifröst skilaboða.</target><note from="Developer" annotates="general" priority="2">is-IS=Skoða og stilla keðjur Bifröst skilaboða.</note>
+          <target state="translated">Skoða og stilla keðjur Bifröst skilaboða.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða og stilla keðjur Bifröst skilaboða.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action Playbooks - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Playbooks</source>
-          <target state="translated">Bifröst keðjur</target><note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
+          <target state="translated">Bifröst keðjur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action Playbooks - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 27649286 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 27649286 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Manage recurring schedule templates for job queue entries.</source>
-          <target state="translated">Faraó endurtekningarsniðmát fyrir vinnsluraðafærslur.</target>
+          <target state="translated">Stjórna endurtekningarsniðmátum fyrir vinnsluraðafærslur.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Faraó endurtekningarsniðmát fyrir vinnsluraðafærslur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action RecurringTemplates - Property ToolTip</note>
         </trans-unit>
@@ -3773,45 +3851,59 @@
         </trans-unit>
         <trans-unit id="Page 778417224 - Action 2004717326 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove the stored Telegram Bot API token.</source>
-          <target state="translated">Fjarlægja geymdan Telegram-vélmennislykil.</target><note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymdan Telegram-vélmennislykil.</note>
+          <target state="translated">Fjarlægja geymdan Telegram-vélmennislykil.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja geymdan Telegram-vélmennislykil.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action ClearTelegramBotToken - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 2004717326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 2004717326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Clear Telegram Bot Token</source>
-          <target state="translated">Hreinsa Telegram-vélmennislykil</target><note from="Developer" annotates="general" priority="2">is-IS=Hreinsa Telegram-vélmennislykil</note>
+          <target state="translated">Hreinsa Telegram-vélmennislykil</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hreinsa Telegram-vélmennislykil</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action ClearTelegramBotToken - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 2222922635 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 2222922635 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Restart the management job queue.</source>
-          <target state="translated">Endurræsa stjórnunar verkroð.</target>
+          <target state="translated">Endurræsa stjórnunarvinnsluröðina.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa stjórnunar verkroð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action RestartJobQueue - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 778417224 - Action 2222922635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Restart Job Queue</source>
-          <target state="translated">Endurræsa verkroð</target>
+          <target state="translated">Endurræsa vinnsluröð</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa verkroð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action RestartJobQueue - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 778417224 - Action 3690185275 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Enter the Telegram Bot API token. The value is stored in the Bifrost secret store and is never shown again.</source>
-          <target state="translated">Skrá Telegram-vélmennislykil. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá Telegram-vélmennislykil. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</note>
+          <target state="translated">Skrá Telegram-vélmennislykil. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá Telegram-vélmennislykil. Gildið er geymt í leyndarmálageymslu Bifröst og er aldrei sýnt aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action SetTelegramBotToken - Property ToolTip</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3690185275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3690185275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Telegram Bot Token</source>
-          <target state="translated">Skrá Telegram-vélmennislykil</target><note from="Developer" annotates="general" priority="2">is-IS=Skrá Telegram-vélmennislykil</note>
+          <target state="translated">Skrá Telegram-vélmennislykil</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá Telegram-vélmennislykil</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action SetTelegramBotToken - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
-          <target state="translated">Uppsetning</target><note from="Developer" annotates="general" priority="2">is-IS=Uppsetning</note>
+          <target state="translated">Uppsetning</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action Category_Category4 - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 2224783030 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 2224783030 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbooks</source>
-          <target state="translated">Keðjur</target><note from="Developer" annotates="general" priority="2">is-IS=Keðjur</note>
+          <target state="translated">Keðjur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keðjur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action Category_Category5 - Property Caption</note>
-        </trans-unit><trans-unit id="Page 778417224 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 778417224 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Process</source>
-          <target state="translated">Vinna</target><note from="Developer" annotates="general" priority="2">is-IS=Vinna</note>
+          <target state="translated">Vinna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vinna</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Setup ori - Action Category_Process - Property Caption</note>
-        </trans-unit><trans-unit id="Page 650306273 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="Page 650306273 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Orchestrator Setup</source>
           <target state="translated">Uppsetning Bifröst stjórnanda</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
@@ -4065,13 +4157,17 @@
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Configure Bifrost Orchestrator: job queue scheduling, playbooks, client credentials and secrets.</source>
-          <target state="translated">Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</target><note from="Developer" annotates="general" priority="2">is-IS=Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</note>
+          <target state="translated">Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action OrchestratorSetup - Property ToolTip</note>
-        </trans-unit><trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Bifrost Orchestrator Setup</source>
-          <target state="translated">Uppsetning Bifröst stjórnanda</target><note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
+          <target state="translated">Uppsetning Bifröst stjórnanda</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action OrchestratorSetup - Property Caption</note>
-        </trans-unit><trans-unit id="PageExtension 315781333 - Control 1433572810 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 709338957">
+        </trans-unit>
+        <trans-unit id="PageExtension 315781333 - Control 1433572810 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 709338957">
           <source>Specifies the Telegram Chat ID for this user, used for Telegram notifications.</source>
           <target state="translated">Tilgreinir Telegram-spjallauðkenni þessa notanda, notað fyrir Telegram-tilkynningar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir Telegram-spjallauðkenni þessa notanda, notað fyrir Telegram-tilkynningar.</note>
@@ -4104,7 +4200,7 @@
         <trans-unit id="Enum 1845063620 - EnumValue 1362200107 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram</source>
           <target state="translated">Telegram</target>
-          <note from="Developer" annotates="general" priority="2" />
+          <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Notif. Type ori - EnumValue Telegram - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3444917139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -4241,7 +4337,7 @@
         </trans-unit>
         <trans-unit id="Enum 1582541192 - EnumValue 1018622492 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Three Times</source>
-          <target state="translated">Þrjú sinni</target>
+          <target state="translated">Þrisvar sinnum</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Þrjú sinni</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Retry Policy ori - EnumValue Three Times - Property Caption</note>
         </trans-unit>
@@ -4253,21 +4349,29 @@
         </trans-unit>
         <trans-unit id="EnumExtension 3317012335 - EnumValue 719173853 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 242122731">
           <source>Orchestrator Playbook</source>
-          <target state="translated">Bifröst keðja</target><note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðja</note>
+          <target state="translated">Bifröst keðja</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðja</note>
           <note from="Xliff Generator" annotates="general" priority="3">EnumExtension RequestLogType.EnumExt ori - EnumValue Orchestrator Playbook - Property Caption</note>
-        </trans-unit><trans-unit id="PermissionSet 1202486007 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="PermissionSet 1202486007 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Orchestrator</source>
-          <target state="translated">Bifröst stjórnandi</target><note from="Developer" annotates="general" priority="2">is-IS=Bifröst stjórnandi</note>
+          <target state="translated">Bifröst stjórnandi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst stjórnandi</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST Orchestr ori - Property Caption</note>
-        </trans-unit><trans-unit id="PermissionSet 1000738981 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="PermissionSet 1000738981 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Orchestrator Mgt.</source>
-          <target state="translated">Stjórnun Bifröst stjórnanda</target><note from="Developer" annotates="general" priority="2">is-IS=Stjórnun Bifröst stjórnanda</note>
+          <target state="translated">Stjórnun Bifröst stjórnanda</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stjórnun Bifröst stjórnanda</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST OrchMgt ori - Property Caption</note>
-        </trans-unit><trans-unit id="PermissionSet 835400857 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="PermissionSet 835400857 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Orchestrator Setup</source>
-          <target state="translated">Uppsetning Bifröst stjórnanda</target><note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
+          <target state="translated">Uppsetning Bifröst stjórnanda</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST OrchSet ori - Property Caption</note>
-        </trans-unit><trans-unit id="PermissionSet 422805903 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        </trans-unit>
+        <trans-unit id="PermissionSet 422805903 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Playbook Admin</source>
           <target state="translated">Bifröst keðjustjórnandi</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjustjórnandi</note>
