@@ -19,17 +19,18 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 
 ### Object IDs in use / free
 - Used app ids: 10035535-10035556, 10035559-10035562, 10035566-10035568, 10035570-10035572,
-  10035574, 10035576, 10035579, 10035581-10035607.
+  10035574, 10035576, 10035579, 10035581-10035608.
   **Free: 10035557-10035558, 10035563-10035565, 10035569, 10035573, 10035575, 10035577-10035578,
-  10035580, 10035608-10035634.**
+  10035580, 10035609-10035634.**
   (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration;
   10035607 = codeunit `Orchestrator Registration ori`, added 2026-09-07 for the Bifröst
-  application registry.)
-- Used test ids: 96400-96404, 96410-96423, 96450-96451.
-  **Free: 96405-96409, 96424-96449, 96452-96499.**
+  application registry; 10035608 = codeunit `App Takeover State ori`, added 2026-09-15 for #21.)
+- Used test ids: 96400-96404, 96410-96427, 96450-96451.
+  **Free: 96405-96409, 96428-96449, 96452-96499.**
   (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
-  96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96450 = table `Test Run Marker`
-  and report `Test Process Report`; 96451 = report `Test Failing Report`.)
+  96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96425 = `App Takeover Tests`;
+  96426 = `App Takeover Probe Tests` (#21); 96427 = permission set `Test No Source Read` (#21);
+  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report `Test Failing Report`.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
 
@@ -88,8 +89,13 @@ Repository: bc-origo-bifrost-orchestrator
 Default branch: main
 
 ## Dependencies
-- Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, 28.0.0.0) - the only AL dependency.
+- Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, **28.0.0.87**) - the only AL dependency (≥ core#43).
   Bifrost Orchestrator does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
+
+## Legacy take-over (#21)
+- `App Takeover ori` (10035604) uses permission-tolerant probe via `TryProbeTakeOverPermissions` /
+  `TryRunTakeOverAtInstall`; state seam `App Takeover State ori` (10035608) — telemetry-only skip
+  (A1), never Foundation `Setup ori` migration reads; Telegram Bot Token ID mapping dropped (A2).
 
 ## Naming Rules
 - Every object carries the `ori` suffix (AppSource mandatory affix), max 30 characters.

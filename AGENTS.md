@@ -112,3 +112,9 @@ Keys keep the `Orchestrator.*` prefix — they are the published API contract an
 ## Extending the System
 
 To add a message type: add a value to `MsgType.EnumExt ori`, write the `<Area> <Verb> Msg ori` impl codeunit (delegating to the area's `Msg Handler`), write its help codeunit, register it in `Help ori`, and add tests in `test/test/`. Implementation is not complete without tests, help text and HTML help.
+
+---
+
+## Agent Notes
+
+- #21 (2026-09-15): legacy take-over is permission-tolerant (`TryProbeTakeOverPermissions` / `TryRunTakeOverAtInstall`); skip = telemetry only (A1); never read Foundation `Setup ori` for migration; Telegram Bot Token ID mapping dropped (A2).
