@@ -118,6 +118,12 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument.RespondWithRestrictedTableError(Database::"Report Request Preset ori", BaseRead, false);
         AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedRead, ReportPresetHintTxt);
 
+        // Fresh temp row: Response Content blob on Message Argument ori does not
+        // reliably replace after GetResponseJson/CalcFields on the same record.
+        Clear(TempArgument);
+        TempArgument.Init();
+        TempArgument.Insert();
+
         BaseWrite := StrSubstNo(SetRestrictedErr, Database::"Report Request Preset ori", TableName);
         ExpectedWrite := BaseWrite + ' Use ' + ReportPresetHintTxt + '.';
         Assert.AreEqual(ExpectedWrite, TempArgument.GetRestrictedTableErrorText(Database::"Report Request Preset ori", BaseWrite, true), 'write error text suffix');
