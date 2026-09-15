@@ -17,8 +17,9 @@ Business Central release versioning (`major.minor.build.revision`).
   - **Scheduled Task** (write) → `Orchestrator.Status.Restart` (no generic write)
   - **Report Request Preset ori** (read/write) → `Orchestrator.Report.Get` /
     `Orchestrator.Report.Run` / `Orchestrator.Report.SaveAs`
-- **Tests** `Data Records Hint Tests` (96428) — one test per table via Message Task (Foundation
-  core PR #45 pattern).
+- **Tests** `Data Records Hint Tests` (96428) — one test per table via Foundation public
+  `Message Argument ori` hint APIs + `RespondWithRestrictedTableError` (same shared path as
+  Data.Records; Message Task is Foundation-internal / not visible to this test app).
 - **Help.Orchestrator.Get** Data Reference documents the restricted-table hint table.
 - **Foundation dependency pin** raised to **28.0.0.100** (core#20 / PR #45 APIs; never 28.0.0.87).
   `.AL-Go` core probing `release_status` → **latestBuild**. App version stays **28.0.0.0**.

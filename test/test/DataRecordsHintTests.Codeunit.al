@@ -7,7 +7,10 @@ using System.Threading;
 
 /// <summary>
 /// Unit tests for Orchestrator Data.Records companion hints (#19).
-/// One test per owned restricted table — mirrors Foundation core PR #45 pattern.
+/// One test per owned restricted table. Exercises Foundation's public
+/// Message Argument ori hint APIs + RespondWithRestrictedTableError (same
+/// shared path Data.Records.Get/Set use). Message ori / Message Task are
+/// Foundation-internal and not visible to this test app.
 /// </summary>
 codeunit 96428 "Data Records Hint Tests"
 {
@@ -22,32 +25,12 @@ codeunit 96428 "Data Records Hint Tests"
         SetRestrictedErr: Label 'Table %1 (%2) cannot be written via Data.Records.Set. This is an internal table.', Locked = true;
         GetRestrictedErr: Label 'Table %1 (%2) cannot be read via Data.Records.Get. This is an internal table.', Locked = true;
 
-    local procedure RunMessageType(MessageType: Enum "Message Type ori"; RequestJson: Text) ResponseText: Text
+    local procedure AssertErrorAndHint(ResponseJson: JsonObject; ExpectedError: Text; ExpectedHint: Text)
     var
-        MessageQueue: Record "Message ori";
-        RequestData: BigText;
-        ResponseBigText: BigText;
-    begin
-        MessageQueue.Init();
-        MessageQueue.Type := MessageType;
-        RequestData.AddText(RequestJson);
-        MessageQueue.SetRequestData(RequestData);
-        MessageQueue."Date & Time" := CurrentDateTime() + 10000;
-        MessageQueue.Insert(true);
-        Commit();
-        Codeunit.Run(Codeunit::"Message Task ori", MessageQueue);
-        ResponseBigText := MessageQueue.GetResponseData(0);
-        ResponseBigText.GetSubText(ResponseText, 1);
-    end;
-
-    local procedure AssertErrorAndHint(ResponseText: Text; ExpectedError: Text; ExpectedHint: Text)
-    var
-        ResponseJson: JsonObject;
         StatusToken: JsonToken;
         ErrorToken: JsonToken;
         HintToken: JsonToken;
     begin
-        Assert.IsTrue(ResponseJson.ReadFrom(ResponseText), 'Response should be valid JSON');
         Assert.IsTrue(ResponseJson.Get('status', StatusToken), 'status missing');
         Assert.AreEqual('Error', StatusToken.AsValue().AsText(), 'status');
         Assert.IsTrue(ResponseJson.Get('error', ErrorToken), 'error missing');
@@ -62,20 +45,23 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument: Record "Message Argument ori" temporary;
         TableName: Text;
         BaseError: Text;
-        ResponseText: Text;
+        ExpectedError: Text;
     begin
-        // [SCENARIO] Data.Records.Set on Job Queue Entry names Orchestrator Entry/Schedule/Restart types
+        // [SCENARIO] Job Queue Entry write block names Orchestrator Entry/Schedule/Restart types
         TempArgument.Init();
+        TempArgument.Insert();
+
         Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Job Queue Entry"), 'Job Queue Entry write-restricted');
         Assert.AreEqual(JobQueueEntryWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Job Queue Entry"), 'write companion hint');
         Assert.AreEqual(JobQueueEntryWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Job Queue Entry", 1), 'field companion hint');
 
         TableName := TempArgument.GetTableName(Database::"Job Queue Entry");
         BaseError := StrSubstNo(SetRestrictedErr, Database::"Job Queue Entry", TableName);
-        ResponseText := RunMessageType(
-            "Message Type ori"::"Data.Records.Set",
-            '{"tableName":"Job Queue Entry","data":[{"primaryKey":{"ID":"00000000-0000-0000-0000-000000000001"},"fields":{}}]}');
-        AssertErrorAndHint(ResponseText, BaseError + ' Use ' + JobQueueEntryWriteHintTxt + '.', JobQueueEntryWriteHintTxt);
+        ExpectedError := BaseError + ' Use ' + JobQueueEntryWriteHintTxt + '.';
+        Assert.AreEqual(ExpectedError, TempArgument.GetRestrictedTableErrorText(Database::"Job Queue Entry", BaseError, true), 'error text suffix');
+
+        TempArgument.RespondWithRestrictedTableError(Database::"Job Queue Entry", BaseError, true);
+        AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedError, JobQueueEntryWriteHintTxt);
     end;
 
     [Test]
@@ -84,10 +70,12 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument: Record "Message Argument ori" temporary;
         TableName: Text;
         BaseError: Text;
-        ResponseText: Text;
+        ExpectedError: Text;
     begin
-        // [SCENARIO] Data.Records.Set on Scheduled Task names Orchestrator.Status.Restart (no generic write)
+        // [SCENARIO] Scheduled Task write block names Orchestrator.Status.Restart (no generic write)
         TempArgument.Init();
+        TempArgument.Insert();
+
         Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Scheduled Task"), 'Scheduled Task write-restricted');
         Assert.AreEqual(ScheduledTaskWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Scheduled Task"), 'write companion hint');
         Assert.AreEqual(ScheduledTaskWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Task", 1), 'field companion hint');
@@ -96,10 +84,11 @@ codeunit 96428 "Data Records Hint Tests"
         if TableName = '' then
             TableName := 'Scheduled Task';
         BaseError := StrSubstNo(SetRestrictedErr, Database::"Scheduled Task", TableName);
-        ResponseText := RunMessageType(
-            "Message Type ori"::"Data.Records.Set",
-            '{"tableName":"Scheduled Task","data":[{"primaryKey":{"ID":"00000000-0000-0000-0000-000000000001"},"fields":{}}]}');
-        AssertErrorAndHint(ResponseText, BaseError + ' Use ' + ScheduledTaskWriteHintTxt + '.', ScheduledTaskWriteHintTxt);
+        ExpectedError := BaseError + ' Use ' + ScheduledTaskWriteHintTxt + '.';
+        Assert.AreEqual(ExpectedError, TempArgument.GetRestrictedTableErrorText(Database::"Scheduled Task", BaseError, true), 'error text suffix');
+
+        TempArgument.RespondWithRestrictedTableError(Database::"Scheduled Task", BaseError, true);
+        AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedError, ScheduledTaskWriteHintTxt);
     end;
 
     [Test]
@@ -109,10 +98,13 @@ codeunit 96428 "Data Records Hint Tests"
         TableName: Text;
         BaseRead: Text;
         BaseWrite: Text;
-        ResponseText: Text;
+        ExpectedRead: Text;
+        ExpectedWrite: Text;
     begin
         // [SCENARIO] Report Request Preset ori read/write name Orchestrator.Report.Get/Run/SaveAs
         TempArgument.Init();
+        TempArgument.Insert();
+
         Assert.IsTrue(TempArgument.IsTableReadRestrictedForDataRecords(Database::"Report Request Preset ori"), 'Preset read-restricted');
         Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori"), 'Preset write-restricted');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForRead(Database::"Report Request Preset ori"), 'read companion hint');
@@ -121,13 +113,15 @@ codeunit 96428 "Data Records Hint Tests"
 
         TableName := TempArgument.GetTableName(Database::"Report Request Preset ori");
         BaseRead := StrSubstNo(GetRestrictedErr, Database::"Report Request Preset ori", TableName);
-        ResponseText := RunMessageType("Message Type ori"::"Data.Records.Get", '{"tableName":"Report Request Preset ori","take":1}');
-        AssertErrorAndHint(ResponseText, BaseRead + ' Use ' + ReportPresetHintTxt + '.', ReportPresetHintTxt);
+        ExpectedRead := BaseRead + ' Use ' + ReportPresetHintTxt + '.';
+        Assert.AreEqual(ExpectedRead, TempArgument.GetRestrictedTableErrorText(Database::"Report Request Preset ori", BaseRead, false), 'read error text suffix');
+        TempArgument.RespondWithRestrictedTableError(Database::"Report Request Preset ori", BaseRead, false);
+        AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedRead, ReportPresetHintTxt);
 
         BaseWrite := StrSubstNo(SetRestrictedErr, Database::"Report Request Preset ori", TableName);
-        ResponseText := RunMessageType(
-            "Message Type ori"::"Data.Records.Set",
-            '{"tableName":"Report Request Preset ori","data":[{"primaryKey":{"Report ID":1,"User Security ID":"00000000-0000-0000-0000-000000000001"},"fields":{}}]}');
-        AssertErrorAndHint(ResponseText, BaseWrite + ' Use ' + ReportPresetHintTxt + '.', ReportPresetHintTxt);
+        ExpectedWrite := BaseWrite + ' Use ' + ReportPresetHintTxt + '.';
+        Assert.AreEqual(ExpectedWrite, TempArgument.GetRestrictedTableErrorText(Database::"Report Request Preset ori", BaseWrite, true), 'write error text suffix');
+        TempArgument.RespondWithRestrictedTableError(Database::"Report Request Preset ori", BaseWrite, true);
+        AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedWrite, ReportPresetHintTxt);
     end;
 }
