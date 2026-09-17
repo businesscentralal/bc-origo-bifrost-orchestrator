@@ -4,6 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Environment;
 using System.Threading;
+using Microsoft.Sales.Customer;
 
 /// <summary>
 /// Unit tests for Orchestrator Data.Records companion hints (#19).
@@ -131,4 +132,19 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgumentWrite.RespondWithRestrictedTableError(Database::"Report Request Preset ori", BaseWrite, true);
         AssertErrorAndHint(TempArgumentWrite.GetResponseJson(), ExpectedWrite, ReportPresetHintTxt);
     end;
+
+    [Test]
+    procedure Customer_NoCompanionHints()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+    begin
+        // [SCENARIO] Companion hints must not fire for unrelated tables (Customer)
+        TempArgument.Init();
+        TempArgument.Insert();
+
+        Assert.AreEqual('', TempArgument.GetDedicatedMessageTypeHintForRead(Database::Customer), 'no read companion hint');
+        Assert.AreEqual('', TempArgument.GetDedicatedMessageTypeHintForWrite(Database::Customer), 'no write companion hint');
+        Assert.AreEqual('', TempArgument.GetDedicatedMessageTypeHintForField(Database::Customer, 1), 'no field companion hint');
+    end;
+
 }
