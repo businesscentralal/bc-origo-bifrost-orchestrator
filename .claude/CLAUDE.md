@@ -25,12 +25,13 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration;
   10035607 = codeunit `Orchestrator Registration ori`, added 2026-09-07 for the Bifröst
   application registry; 10035608 = codeunit `App Takeover State ori`, added 2026-09-15 for #21.)
-- Used test ids: 96400-96404, 96410-96427, 96450-96451.
-  **Free: 96405-96409, 96428-96449, 96452-96499.**
+- Used test ids: 96400-96404, 96410-96426, 96428, 96450-96451.
+  **Free: 96405-96409, 96427, 96429-96449, 96452-96499.**
   (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
-  96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96425 = `App Takeover Tests`;
-  96426 = `App Takeover Probe Tests` (#21); 96427 = permission set `Test No Source Read` (#21);
-  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report `Test Failing Report`.)
+  96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96424 = `Report Layout Msg Tests`;
+  96425 = `App Takeover Tests`; 96426 = `App Takeover Probe Tests` (#21); 96428 = `Data Records Hint Tests` (#19);
+  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report `Test Failing Report`.
+  96427 `Test No Source Read` removed — unused empty permission set.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
 
@@ -89,7 +90,7 @@ Repository: bc-origo-bifrost-orchestrator
 Default branch: main
 
 ## Dependencies
-- Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, **28.0.0.87**) - the only AL dependency (≥ core#43).
+- Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, **28.0.0.100**) - the only AL dependency (≥ core#20 / PR #45; take-over probe ≥ core#43). `.AL-Go` core probing uses `release_status: latestBuild`.
   Bifrost Orchestrator does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
 
 ## Legacy take-over (#21)

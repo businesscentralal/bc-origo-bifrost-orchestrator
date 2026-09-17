@@ -7,11 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-### Changed (2026-09-17) - Foundation pin ≥28.0.0.102 + latestBuild probing
+### Changed (2026-09-17) - Foundation pin 28.0.0.100 (avoid colliding 103)
 
-- **Dependencies**: Bifrost Foundation pin → **28.0.0.102** (app + test); `.AL-Go` core probing
-  `release_status` → **latestBuild** (prerelease only had 28.0.0.87). App version stays
-  **28.0.0.0**.
+- **Dependencies**: Bifrost Foundation pin → **28.0.0.100** (app + test). Pin **28.0.0.102** with
+  `latestBuild` resolved to **28.0.0.103**, which CI cannot publish (`duplicate package ID`).
+  Keep `.AL-Go` core probing `release_status` → **latestBuild**. App version stays **28.0.0.0**.
 
 ### Changed (2026-09-15) - permission-tolerant legacy take-over probe (#21)
 
@@ -29,6 +29,23 @@ Business Central release versioning (`major.minor.build.revision`).
 - **Tests** `App Takeover Probe Tests` (96426) cover AC01 probe-denied, AC02 probe-OK, AC03
   legacy absent via the State seam. Existing Access Control mapping tests (96425) unchanged.
   Unused empty permission set `Test No Source Read` (96427) removed.
+
+### Added (2026-09-15) - Data.Records companion hints for Orchestrator-owned tables (#19)
+
+- **`Report Data Restriction ori`** subscribes to Foundation `Message Argument ori` companion
+  events (`OnGetDedicatedMessageTypeHintForRead` / `…ForWrite` / `…ForField`) so blocked
+  `Data.Records.Get` / `Data.Records.Set` name the dedicated Orchestrator message types:
+  - **Job Queue Entry** (write) → `Orchestrator.Entry.Register` / `Orchestrator.Entry.Schedule` /
+    `Orchestrator.JobQueueEntry.Restart`
+  - **Scheduled Task** (write) → `Orchestrator.Status.Restart` (no generic write)
+  - **Report Request Preset ori** (read/write) → `Orchestrator.Report.Get` /
+    `Orchestrator.Report.Run` / `Orchestrator.Report.SaveAs`
+- **Tests** `Data Records Hint Tests` (96428) — one test per table via Foundation public
+  `Message Argument ori` hint APIs + `RespondWithRestrictedTableError` (same shared path as
+  Data.Records; Message Task is Foundation-internal / not visible to this test app).
+- **Help.Orchestrator.Get** Data Reference documents the restricted-table hint table.
+- **Foundation dependency pin** raised to **28.0.0.100** (core#20 / PR #45 APIs; never 28.0.0.87).
+  `.AL-Go` core probing `release_status` → **latestBuild**. App version stays **28.0.0.0**.
 
 ### Fixed (2026-09-11) - Playbook.Schedule returns SystemId as orchestratorEntryId (#15)
 

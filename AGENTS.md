@@ -118,3 +118,4 @@ To add a message type: add a value to `MsgType.EnumExt ori`, write the `<Area> <
 ## Agent Notes
 
 - #21 (2026-09-15): legacy take-over is permission-tolerant (`TryProbeTakeOverPermissions` / `TryRunTakeOverAtInstall`); skip = telemetry only (A1); never read Foundation `Setup ori` for migration; Telegram Bot Token ID mapping dropped (A2).
+- #19 (2026-09-15): Data.Records companion hints for Job Queue Entry / Scheduled Task / Report Request Preset ori via `Report Data Restriction ori`; Foundation pin **28.0.0.100**; `.AL-Go` core probing `release_status: latestBuild` (suite-wide accepted; Sync COSMO Alpaca keyVaultName soft-fails after settings change are Haraldur infra, not AL blockers).
