@@ -7,8 +7,22 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-09-15) - Data.Records companion hints for Orchestrator-owned tables (#19)
 
-## [Unreleased]
+- **`Report Data Restriction ori`** subscribes to Foundation `Message Argument ori` companion
+  events (`OnGetDedicatedMessageTypeHintForRead` / `…ForWrite` / `…ForField`) so blocked
+  `Data.Records.Get` / `Data.Records.Set` name the dedicated Orchestrator message types:
+  - **Job Queue Entry** (write) → `Orchestrator.Entry.Register` / `Orchestrator.Entry.Schedule` /
+    `Orchestrator.JobQueueEntry.Restart`
+  - **Scheduled Task** (write) → `Orchestrator.Status.Restart` (no generic write)
+  - **Report Request Preset ori** (read/write) → `Orchestrator.Report.Get` /
+    `Orchestrator.Report.Run` / `Orchestrator.Report.SaveAs`
+- **Tests** `Data Records Hint Tests` (96428) — one test per table via Foundation public
+  `Message Argument ori` hint APIs + `RespondWithRestrictedTableError` (same shared path as
+  Data.Records; Message Task is Foundation-internal / not visible to this test app).
+- **Help.Orchestrator.Get** Data Reference documents the restricted-table hint table.
+- **Foundation dependency pin** raised to **28.0.0.100** (core#20 / PR #45 APIs; never 28.0.0.87).
+  `.AL-Go` core probing `release_status` → **latestBuild**. App version stays **28.0.0.0**.
 
 ### Fixed (2026-09-11) - Playbook.Schedule returns SystemId as orchestratorEntryId (#15)
 
