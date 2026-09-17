@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-17) - Foundation pin ≥28.0.0.102 + latestBuild probing
+
+- **Dependencies**: Bifrost Foundation pin → **28.0.0.102** (app + test); `.AL-Go` core probing
+  `release_status` → **latestBuild** (prerelease only had 28.0.0.87). App version stays
+  **28.0.0.0**.
+
 ### Changed (2026-09-15) - permission-tolerant legacy take-over probe (#21)
 
 - **`App Takeover ori` probes legacy tabledata before copy** (`TryProbeTakeOverPermissions` /
@@ -18,12 +24,11 @@ Business Central release versioning (`major.minor.build.revision`).
   Ambiguity A2: Telegram Bot Token ID (legacy field 60) stays dropped — no counterpart.
 - **`App Takeover State ori` (10035608)** — SingleInstance probe-denial / last-skip seam for
   unit tests (same role as Foundation `Take-Over State ori`).
-- **`App Install ori`** calls `TryRunTakeOverAtInstall` instead of bare `TakeOverAll`.
+- **`App Install ori`** calls `TryRunTakeOverAtInstall` instead of bare `TakeOverAll`
+  (probe → direct `TakeOverAll`; no nested `Codeunit.Run` isolation on install).
 - **Tests** `App Takeover Probe Tests` (96426) cover AC01 probe-denied, AC02 probe-OK, AC03
-  legacy absent; permission set `Test No Source Read` (96427). Existing Access Control mapping
-  tests (96425) unchanged.
-- **Foundation dependency pin** raised to **28.0.0.87** (Cosmo-available build carrying core#43
-  APIs). App version stays **28.0.0.0**.
+  legacy absent via the State seam. Existing Access Control mapping tests (96425) unchanged.
+  Unused empty permission set `Test No Source Read` (96427) removed.
 
 ### Fixed (2026-09-11) - Playbook.Schedule returns SystemId as orchestratorEntryId (#15)
 
