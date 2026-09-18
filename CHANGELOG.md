@@ -13,6 +13,23 @@ Business Central release versioning (`major.minor.build.revision`).
 - AL-Go `appDependencyProbingPaths` for bc-origo-bifrost-core: `release_status: latestBuild`, `version: 1.0.0.100`.
 - `nuGetFeedSelectMode: Exact` so NuGet does not resolve `[28.0.0.100,)` upward to colliding `.107`.
 
+### Changed (2026-09-15) - permission-tolerant legacy take-over probe (#21)
+
+- **`App Takeover ori` probes legacy tabledata before copy** (`TryProbeTakeOverPermissions` /
+  `TryRunTakeOverAtInstall`), mirroring Foundation core#43 / attachments#8. Sources remain only
+  Cloud Events tables 10076035–10076040, 10076044, 10076090, 10076099 and field-copy source
+  10075509; Access Control write is probed when CE Orchestrator role pairs would move. First
+  denial skips the whole take-over with one telemetry event (`ORI-BIF-0003`), never `Error`.
+  Ambiguity A1: telemetry only + idempotent re-run (no pending flag on Scheduler Setup ori).
+  Ambiguity A2: Telegram Bot Token ID (legacy field 60) stays dropped — no counterpart.
+- **`App Takeover State ori` (10035608)** — SingleInstance probe-denial / last-skip seam for
+  unit tests (same role as Foundation `Take-Over State ori`).
+- **`App Install ori`** calls `TryRunTakeOverAtInstall` instead of bare `TakeOverAll`
+  (probe → direct `TakeOverAll`; no nested `Codeunit.Run` isolation on install).
+- **Tests** `App Takeover Probe Tests` (96426) cover AC01 probe-denied, AC02 probe-OK, AC03
+  legacy absent via the State seam. Existing Access Control mapping tests (96425) unchanged.
+  Unused empty permission set `Test No Source Read` (96427) removed.
+
 ### Added (2026-09-15) - Data.Records companion hints for Orchestrator-owned tables (#19)
 
 - **`Report Data Restriction ori`** subscribes to Foundation `Message Argument ori` companion
