@@ -7,11 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-### Changed (2026-09-17) - Foundation pin 28.0.0.100 (avoid colliding 103)
+### Changed (2026-09-17) - Bifrost Foundation Exact pin 28.0.0.100 (no float)
 
-- **Dependencies**: Bifrost Foundation pin → **28.0.0.100** (app + test). Pin **28.0.0.102** with
-  `latestBuild` resolved to **28.0.0.103**, which CI cannot publish (`duplicate package ID`).
-  Keep `.AL-Go` core probing `release_status` → **latestBuild**. App version stays **28.0.0.0**.
+- App/test Bifrost Foundation dependency set to Exact `28.0.0.100`.
+- AL-Go `appDependencyProbingPaths` for bc-origo-bifrost-core: `release_status: latestBuild`, `version: 1.0.0.100`.
+- `nuGetFeedSelectMode: Exact` so NuGet does not resolve `[28.0.0.100,)` upward to colliding `.107`.
 
 ### Changed (2026-09-15) - permission-tolerant legacy take-over probe (#21)
 
