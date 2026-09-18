@@ -21,7 +21,8 @@ codeunit 10035537 "App Install ori"
     begin
         // The take-over must run before the setup singleton is created, otherwise the target table
         // is no longer empty and the published app's setup would not be copied.
-        AppTakeover.TakeOverAll();
+        // Probe first (#21): missing tabledata on a legacy source skips take-over with telemetry, never Error.
+        AppTakeover.TryRunTakeOverAtInstall();
         SchedulerSetup.OnOpenEmptyRec();
         JobQueueManagement.RegisterJobQueues();
         RegisterRetentionPolicies();

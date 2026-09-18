@@ -52,6 +52,7 @@ permissionset 10035535 "BIFROST Orchestr ori"
         page "Scheduler Status ori" = X,
         codeunit "App Install ori" = X,
         codeunit "App Takeover ori" = X,
+        codeunit "App Takeover State ori" = X,
         codeunit "App Upgrade ori" = X,
         codeunit "Email Notification ori" = X,
         codeunit "Email Send Msg ori" = X,
