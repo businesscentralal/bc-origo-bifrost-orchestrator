@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-21) - Bifröst logo refresh
+
+- App logo: new Bifröst wordmark with "Powered by origo." tagline; app-name line unchanged.
+
 ### Changed (2026-09-17) - Bifrost Foundation Exact pin 28.0.0.100 (no float)
 
 - App/test Bifrost Foundation dependency set to Exact `28.0.0.100`.
