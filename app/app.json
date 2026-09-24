@@ -6,12 +6,12 @@
   "brief": "Bifrost Orchestrator - scheduling and playbooks",
   "description": "Bifrost Orchestrator: scheduled tasks, playbooks and orchestration of Bifrost message types on top of Bifrost Foundation. Provides Job Queue scheduling, monitoring, restart and error handling, and a declarative playbook runner with data flow, foreach iteration and conditional branching.",
   "url": "https://www.origo.is/",
-  "help": "https://businesscentralal.github.io/bifrost/en-us/nornir/",
-  "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
-  "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
+  "help": "https://businesscentralal.github.io/bifrost/en-us/orchestrator/",
+  "privacyStatement": "https://businesscentralal.github.io/bifrost/en-us/foundation/privacy/",
+  "EULA": "https://businesscentralal.github.io/bifrost/en-us/foundation/eula/",
   "logo": "assets/Logo250x250.png",
-  "applicationInsightsConnectionString": "InstrumentationKey=70788cb7-2d17-4a3d-8d14-1f0522b8fcca;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=9b402607-d048-47b2-9854-14c825ab88f1",
-  "contextSensitiveHelpUrl": "https://businesscentralal.github.io/bifrost/{0}/help/nornir/",
+  "applicationInsightsConnectionString": "InstrumentationKey=71e55012-b22f-4ff7-a6e4-7b50d83f8cc2;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=d917dc45-172a-44ac-a0ba-85fd4ec5a725",
+  "contextSensitiveHelpUrl": "https://businesscentralal.github.io/bifrost/{0}/help/orchestrator/",
   "supportedLocales": [
     "en-US",
     "is-IS"
