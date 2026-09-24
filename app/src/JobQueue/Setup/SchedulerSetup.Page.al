@@ -16,7 +16,7 @@ page 10035536 "Scheduler Setup ori"
     AdditionalSearchTerms = 'Manage Job Queues,Job Queue Management,Job Queue Restarted,Job Queue Notification';
     ApplicationArea = All;
     Caption = 'Bifrost Orchestrator Setup', Comment = 'is-IS=Uppsetning Bifröst stjórnanda';
-    ContextSensitiveHelpPage = 'nornir-setup';
+    ContextSensitiveHelpPage = 'orchestrator-setup';
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = Card;

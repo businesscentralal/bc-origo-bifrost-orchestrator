@@ -10,6 +10,9 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Changed (2026-09-24) - AppSource URLs and Application Insights
 
 - `app.json` `help` and `contextSensitiveHelpUrl` now use the orchestrator docs routes, `privacyStatement` and `EULA` use the Foundation privacy and EULA pages, `url` stays `https://www.origo.is/`, and the Application Insights connection string points at the shared telemetry resource.
+### Changed (2026-09-24) - page help links use renamed docs routes
+
+- Page help links (`ContextSensitiveHelpPage`) now use the renamed docs routes (`nornir-setup` → `orchestrator-setup`).
 
 ### Changed (2026-09-21) - Bifröst logo refresh
 
