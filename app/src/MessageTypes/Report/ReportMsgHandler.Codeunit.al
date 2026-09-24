@@ -302,10 +302,7 @@ codeunit 10035592 "Report Msg Handler ori"
     var
         Setup: Record "Setup ori";
     begin
-        Setup.SetLoadFields("Request Debug Mode");
-        if not Setup.Get() then
-            exit(false);
-        exit(Setup."Request Debug Mode");
+        exit(Setup.GetRequestDebugMode());
     end;
 
     var

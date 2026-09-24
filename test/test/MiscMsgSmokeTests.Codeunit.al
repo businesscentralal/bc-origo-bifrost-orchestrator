@@ -13,12 +13,9 @@ codeunit 96422 "Misc Msg Smoke Tests"
         IsInitialized: Boolean;
 
     local procedure Initialize()
-    var
-        TestInstall: Codeunit "Test Install";
     begin
         if IsInitialized then
             exit;
-        TestInstall.DisableRequestDebugMode();
         IsInitialized := true;
     end;
 

@@ -197,6 +197,40 @@ codeunit 10035606 "Secrets ori"
     end;
 
     /// <summary>
+    /// Stores a value under one of this application's secret codes without a dialog. Foundation's
+    /// secret store only accepts calls from the owning application, so the test application reaches
+    /// the store through this procedure instead of calling it directly.
+    /// </summary>
+    /// <param name="SecretCode">The secret code, as composed by this codeunit.</param>
+    /// <param name="Value">The value to store.</param>
+    [NonDebuggable]
+    procedure SetSecret(SecretCode: Code[50]; Value: SecretText)
+    begin
+        SecretStore.Set(GetAppId(), SecretCode, Value);
+    end;
+
+    /// <summary>
+    /// Reads the value stored under one of this application's secret codes without stamping it as used.
+    /// </summary>
+    /// <param name="SecretCode">The secret code, as composed by this codeunit.</param>
+    /// <param name="Value">Receives the stored value.</param>
+    /// <returns>Boolean. True when a value is stored.</returns>
+    [NonDebuggable]
+    procedure TryGetSecret(SecretCode: Code[50]; var Value: SecretText): Boolean
+    begin
+        exit(SecretStore.TryGet(GetAppId(), SecretCode, Value));
+    end;
+
+    /// <summary>
+    /// Removes the value stored under one of this application's secret codes. The registration is kept.
+    /// </summary>
+    /// <param name="SecretCode">The secret code, as composed by this codeunit.</param>
+    procedure ClearSecret(SecretCode: Code[50])
+    begin
+        SecretStore.Clear(GetAppId(), SecretCode);
+    end;
+
+    /// <summary>
     /// Reports whether the client id of a client credentials record has been entered.
     /// </summary>
     /// <param name="CredentialCode">The primary key of the <c>Client Credentials ori</c> record.</param>
@@ -278,8 +312,7 @@ codeunit 10035606 "Secrets ori"
 
     /// <summary>
     /// Counts the secrets Bifrost Orchestrator has registered that still have no value.
-    /// Used to warn the administrator that secret values do not migrate from the published
-    /// Origo Cloud Events Orchestrator application and must be entered once.
+    /// Used to warn the administrator when registered secret values still need to be entered.
     /// </summary>
     /// <returns>Integer. The number of registered secrets without a stored value.</returns>
     procedure CountMissingSecrets() MissingCount: Integer

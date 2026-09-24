@@ -19,12 +19,9 @@ codeunit 96418 "Playbook Cond Tests"
         IsInitialized: Boolean;
 
     local procedure Initialize()
-    var
-        TestInstall: Codeunit "Test Install";
     begin
         if IsInitialized then
             exit;
-        TestInstall.DisableRequestDebugMode();
         IsInitialized := true;
     end;
 

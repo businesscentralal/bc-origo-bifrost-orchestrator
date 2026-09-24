@@ -13,12 +13,9 @@ codeunit 96401 "Workspace Test"
         IsInitialized: Boolean;
 
     local procedure Initialize()
-    var
-        TestInstall: Codeunit "Test Install";
     begin
         if IsInitialized then
             exit;
-        TestInstall.DisableRequestDebugMode();
         IsInitialized := true;
     end;
 

@@ -1,10 +1,10 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
+using Microsoft.Sales.Customer;
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Environment;
 using System.Threading;
-using Microsoft.Sales.Customer;
 
 /// <summary>
 /// Unit tests for Orchestrator Data.Records companion hints (#19).
