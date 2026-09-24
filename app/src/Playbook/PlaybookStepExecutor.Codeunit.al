@@ -51,10 +51,7 @@ codeunit 10035572 "Playbook Step Executor ori"
         Setup: Record "Setup ori";
         Logger: Codeunit "Request Logger ori";
     begin
-        Setup.SetLoadFields("Request Debug Mode");
-        if not Setup.Get() then
-            exit;
-        if not Setup."Request Debug Mode" then
+        if not Setup.GetRequestDebugMode() then
             exit;
 
         Logger.Log(

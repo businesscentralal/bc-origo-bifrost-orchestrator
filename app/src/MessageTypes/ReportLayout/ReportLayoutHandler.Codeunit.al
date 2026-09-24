@@ -128,8 +128,8 @@ codeunit 10035600 "Report Layout Handler ori"
 
     local procedure ParseLayoutFormat(FormatText: Text; ReportId: Integer): Option
     var
-        Upper: Text;
         TenantReportLayout: Record "Tenant Report Layout";
+        Upper: Text;
     begin
         Upper := FormatText.Trim().ToUpper();
         case Upper of

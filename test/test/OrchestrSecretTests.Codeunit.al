@@ -17,7 +17,6 @@ codeunit 96403 "Orchestr Secret Tests"
 
     var
         Assert: Codeunit Assert;
-        SecretStore: Codeunit "Secret Store ori";
         Secrets: Codeunit "Secrets ori";
         CredentialCodeTok: Label 'BIFT-SEC-A', Locked = true;
         LongCredentialCodeATok: Label 'BIFT-SEC-LONG-CODE-THAT-OVERFLOWS-A', Locked = true;
@@ -27,8 +26,6 @@ codeunit 96403 "Orchestr Secret Tests"
         IsInitialized: Boolean;
 
     local procedure Initialize()
-    var
-        TestInstall: Codeunit "Test Install";
     begin
         CleanUpCredential(CopyStr(CredentialCodeTok, 1, 50));
         CleanUpCredential(CopyStr(RenamedCredentialCodeTok, 1, 50));
@@ -36,7 +33,6 @@ codeunit 96403 "Orchestr Secret Tests"
 
         if IsInitialized then
             exit;
-        TestInstall.DisableRequestDebugMode();
         IsInitialized := true;
     end;
 
@@ -106,7 +102,7 @@ codeunit 96403 "Orchestr Secret Tests"
         AppSecret: Record "App Secret ori";
         CredentialCode: Code[50];
     begin
-        // [SCENARIO] The take-over copies credential records without values, so upgrade must register them
+        // [SCENARIO] Upgrade must register existing credential secret metadata when registrations are missing
 
         // [GIVEN] a client credentials record whose registrations were removed
         Initialize();
@@ -163,7 +159,7 @@ codeunit 96403 "Orchestr Secret Tests"
 
         // [THEN] the secret reads back
         Assert.IsTrue(Secrets.IsTelegramBotTokenSet(), 'The bot token must be reported as set');
-        Assert.IsTrue(SecretStore.TryGet(Secrets.GetAppId(), Secrets.TelegramBotTokenCode(), Value), 'The bot token must read back');
+        Assert.IsTrue(Secrets.TryGetSecret(Secrets.TelegramBotTokenCode(), Value), 'The bot token must read back');
         Assert.IsFalse(Value.IsEmpty(), 'The bot token must not read back empty');
 
         // [WHEN] the value is cleared
@@ -171,7 +167,7 @@ codeunit 96403 "Orchestr Secret Tests"
 
         // [THEN] nothing is stored any more, but the registration survives
         Assert.IsFalse(Secrets.IsTelegramBotTokenSet(), 'The bot token must be reported as not set after Clear');
-        Assert.IsFalse(SecretStore.TryGet(Secrets.GetAppId(), Secrets.TelegramBotTokenCode(), Value), 'The bot token must not read back after Clear');
+        Assert.IsFalse(Secrets.TryGetSecret(Secrets.TelegramBotTokenCode(), Value), 'The bot token must not read back after Clear');
         Assert.IsTrue(Secrets.CountMissingSecrets() > 0, 'The cleared bot token must be counted as a missing secret');
     end;
 
@@ -409,7 +405,7 @@ codeunit 96403 "Orchestr Secret Tests"
     var
         AppSecret: Record "App Secret ori";
     begin
-        SecretStore.Clear(Secrets.GetAppId(), SecretCode);
+        Secrets.ClearSecret(SecretCode);
         if AppSecret.Get(Secrets.GetAppId(), SecretCode) then
             AppSecret.Delete(true);
     end;
@@ -421,6 +417,6 @@ codeunit 96403 "Orchestr Secret Tests"
     begin
         ValueText := SecretValueTok;
         Value := ValueText;
-        SecretStore.Set(Secrets.GetAppId(), SecretCode, Value);
+        Secrets.SetSecret(SecretCode, Value);
     end;
 }

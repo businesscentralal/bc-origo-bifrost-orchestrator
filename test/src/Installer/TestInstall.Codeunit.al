@@ -14,23 +14,7 @@ codeunit 96400 "Test Install"
 
     trigger OnInstallAppPerCompany()
     begin
-        DisableRequestDebugMode();
         SetupTestSuite();
-    end;
-
-    /// <summary>Prevents session-starting log writes that break test isolation.</summary>
-    procedure DisableRequestDebugMode()
-    var
-        Setup: Record "Setup ori";
-    begin
-        if not Setup.Get() then begin
-            Setup.Init();
-            Setup.Insert();
-        end;
-        if Setup."Request Debug Mode" then begin
-            Setup."Request Debug Mode" := false;
-            Setup.Modify();
-        end;
     end;
 
     /// <summary>
