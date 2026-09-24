@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-24) - page help links use renamed docs routes
+
+- Page help links (`ContextSensitiveHelpPage`) now use the renamed docs routes (`nornir-setup` → `orchestrator-setup`).
+
 ### Changed (2026-09-21) - Bifröst logo refresh
 
 - App logo: new Bifröst wordmark with "Powered by origo." tagline; app-name line unchanged.
