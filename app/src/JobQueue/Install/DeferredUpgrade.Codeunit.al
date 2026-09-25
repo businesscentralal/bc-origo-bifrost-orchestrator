@@ -8,8 +8,6 @@ using System.Environment.Configuration;
 /// entries, and legacy isolated-storage key cleanup. Idempotent. A missing tabledata grant
 /// skips that step with a warning. No upgrade tag is set, so the next upgrade retries it,
 /// and Scheduler Setup calls <c>EnsureDeferredUpgradeData</c> when the page opens.
-/// This is a normal codeunit so the setup page and tests can run it. Upgrade codeunits
-/// are not referenceable from the test app.
 /// </summary>
 codeunit 10035609 "Deferred Upgrade ori"
 {
@@ -18,10 +16,8 @@ codeunit 10035609 "Deferred Upgrade ori"
     /// <summary>
     /// Repairs a blank Object Type to Run and deletes legacy isolated-storage keys.
     /// Skips either step, with a warning, when the caller lacks the tabledata grant.
-    /// Public on an internal codeunit so apps in internalsVisibleTo (the test app) can call it.
-    /// An internal procedure is not part of that symbol surface.
     /// </summary>
-    procedure EnsureDeferredUpgradeData()
+    internal procedure EnsureDeferredUpgradeData()
     begin
         SetDefaultTypeToCodeunit();
         DropLegacySecretKeys();
