@@ -1,10 +1,13 @@
 /// <summary>
 /// Handles data upgrades for the Job Queue Orchestrator extension.
+/// Each data action is skipped when the upgrading context lacks the tabledata grant.
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
+using Origo.Bifrost;
 using System.DataAdministration;
 using System.Environment.Configuration;
+using System.Threading;
 
 codeunit 10035538 "App Upgrade ori"
 {
@@ -15,6 +18,8 @@ codeunit 10035538 "App Upgrade ori"
     var
         JobQueueManagement: Codeunit "Scheduler Mgt ori";
     begin
+        // Raises OnRegisterJobQueueCodeunits only. This app writes no rows on that event;
+        // subscribers register their own entries and must not be skipped.
         JobQueueManagement.RegisterJobQueues();
     end;
 
@@ -34,24 +39,48 @@ codeunit 10035538 "App Upgrade ori"
 
     local procedure CreateJobqueueOrchestratorSetup()
     var
-        "Scheduler Setup ori": Record "Scheduler Setup ori";
+        SchedulerSetup: Record "Scheduler Setup ori";
+        JobQueueCategory: Record "Job Queue Category";
     begin
-        "Scheduler Setup ori".OnOpenEmptyRec();
+        // OnOpenEmptyRec: IsEmpty + Insert on Scheduler Setup ori, and Get + Insert on Job Queue Category.
+        if not SchedulerSetup.ReadPermission() then
+            exit;
+        if not SchedulerSetup.InsertPermission() then
+            exit;
+        if not JobQueueCategory.ReadPermission() then
+            exit;
+        if not JobQueueCategory.InsertPermission() then
+            exit;
+
+        SchedulerSetup.OnOpenEmptyRec();
     end;
 
     local procedure SetDefaultTypeToCodeunit()
     var
-        "Scheduled Entry ori": Record "Scheduled Entry ori";
+        ScheduledEntry: Record "Scheduled Entry ori";
     begin
-        "Scheduled Entry ori".SetRange("Object Type to Run", 0);
-        if "Scheduled Entry ori".IsEmpty() then exit;
-        "Scheduled Entry ori".ModifyAll("Object Type to Run", "Scheduled Entry ori"."Object Type to Run"::Codeunit);
+        if not ScheduledEntry.ReadPermission() then
+            exit;
+
+        ScheduledEntry.SetRange("Object Type to Run", 0);
+        if ScheduledEntry.IsEmpty() then
+            exit;
+        if not ScheduledEntry.ModifyPermission() then
+            exit;
+
+        ScheduledEntry.ModifyAll("Object Type to Run", ScheduledEntry."Object Type to Run"::Codeunit);
     end;
 
     local procedure RegisterRetentionPolicies()
     var
+        RetentionPolicyAllowedTable: Record "Retention Policy Allowed Table";
         RetenPolAllowedTables: Codeunit "Reten. Pol. Allowed Tables";
     begin
+        if not RetentionPolicyAllowedTable.ReadPermission() then
+            exit;
+        if not RetentionPolicyAllowedTable.InsertPermission() then
+            exit;
+
         RetenPolAllowedTables.AddAllowedTable(Database::"Playbook Instance ori", 30, 28);
         RetenPolAllowedTables.AddAllowedTable(Database::"Playbook Step Log ori");
     end;
@@ -59,11 +88,22 @@ codeunit 10035538 "App Upgrade ori"
     /// <summary>
     /// Registers every secret of this application in the Bifröst Foundation secret store, so an
     /// environment that was upgraded from a build predating the secret store still lists them.
+    /// Skips when the upgrading context cannot read client credentials or write the secret registry.
     /// </summary>
     local procedure RegisterSecrets()
     var
+        ClientCredentials: Record "Client Credentials ori";
+        AppSecret: Record "App Secret ori";
         Secrets: Codeunit "Secrets ori";
     begin
+        // RegisterAll writes App Secret ori, then FindSet on Client Credentials ori.
+        if not AppSecret.ReadPermission() then
+            exit;
+        if not AppSecret.InsertPermission() then
+            exit;
+        if not ClientCredentials.ReadPermission() then
+            exit;
+
         Secrets.RegisterAll();
     end;
 
@@ -89,6 +129,14 @@ codeunit 10035538 "App Upgrade ori"
         StorageKey: Guid;
     begin
         RecRef.Open(TableId);
+        if not RecRef.ReadPermission() then begin
+            RecRef.Close();
+            exit;
+        end;
+        if not RecRef.WritePermission() then begin
+            RecRef.Close();
+            exit;
+        end;
         if not RecRef.FieldExist(FieldNo) then begin
             RecRef.Close();
             exit;

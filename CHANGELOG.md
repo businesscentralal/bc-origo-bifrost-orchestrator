@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-25) - permission-safe install and upgrade
+
+- `App Install ori` and `App Upgrade ori` check tabledata permissions before each data action and skip that step when the grant is missing. A republish that re-runs install or upgrade without those permissions no longer raises `Current permissions prevented the action`.
+- Scheduler Setup ori read and insert, and Job Queue Category read and insert, are required before `OnOpenEmptyRec`. Client Credentials ori read, and App Secret ori read and insert, are required before `Secrets.RegisterAll`. Scheduled Entry ori read and modify are required before `ModifyAll` in `SetDefaultTypeToCodeunit`. `DeleteLegacyKeys` checks `RecordRef.ReadPermission` and `RecordRef.WritePermission` on Scheduler Setup ori and Client Credentials ori before `FindSet`. Retention policy registration requires read and insert on Retention Policy Allowed Table.
+- `RegisterJobQueues` still raises `OnRegisterJobQueueCodeunits` from install and from `OnCheckPreconditionsPerCompany`. This app writes nothing on that event, so subscribers are not skipped.
+- No `[TryFunction]` around the writes. App and test versions are unchanged.
+
 ### Fixed (2026-09-25) - main build AL0132 on GetRequestDebugMode (#33)
 
 - CI/CD run [36066665137](https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/36066665137) on `85d2e3c` failed both builds with AL0132: `Record "Setup ori"` does not contain `GetRequestDebugMode` (ReportMsgHandler, PlaybookStepExecutor).
