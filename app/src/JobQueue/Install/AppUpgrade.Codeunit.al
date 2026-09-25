@@ -73,7 +73,7 @@ codeunit 10035538 "App Upgrade ori"
     var
         ScheduledEntry: Record "Scheduled Entry ori";
         ObjectTypeSkippedMsg: Label 'Bifrost Orchestrator skipped setting a blank Object Type to Run to Codeunit on Scheduled Entry ori: missing TableData permission. The step runs again on the next upgrade, because no upgrade tag is set, and when Scheduler Setup is opened.', Locked = true;
-        ObjectTypeSkippedTok: Label 'ORI-BIF-0424', Locked = true;
+        ObjectTypeSkippedTok: Label 'O4NJQS-0014', Locked = true;
     begin
         if not ScheduledEntry.ReadPermission() then begin
             LogPermissionSkip(ObjectTypeSkippedTok, Database::"Scheduled Entry ori", 'Read', ObjectTypeSkippedMsg);
@@ -136,7 +136,7 @@ codeunit 10035538 "App Upgrade ori"
         SchedulerSetup: Record "Scheduler Setup ori";
         ClientCredentials: Record "Client Credentials ori";
         LegacyKeySkippedMsg: Label 'Bifrost Orchestrator skipped deleting legacy isolated storage keys: missing TableData permission. The step runs again on the next upgrade, because no upgrade tag is set, and when Scheduler Setup is opened.', Locked = true;
-        LegacyKeySkippedTok: Label 'ORI-BIF-0425', Locked = true;
+        LegacyKeySkippedTok: Label 'O4NJQS-0015', Locked = true;
     begin
         // Probe on the record before RecordRef.Open so a missing grant never reaches Open.
         if not SchedulerSetup.ReadPermission() then

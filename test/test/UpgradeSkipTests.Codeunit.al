@@ -38,7 +38,7 @@ codeunit 96429 "Upgrade Skip Tests"
         // [WHEN] the deferred upgrade steps run
         AppUpgrade.EnsureDeferredUpgradeData();
 
-        // [THEN] they return without error and log ORI-BIF-0424 / ORI-BIF-0425. The next upgrade and Scheduler Setup retry them.
+        // [THEN] they return without error and log O4NJQS-0014 / O4NJQS-0015. The next upgrade and Scheduler Setup retry them.
         LibraryLowerPermissions.SetOutsideO365Scope();
     end;
 }
