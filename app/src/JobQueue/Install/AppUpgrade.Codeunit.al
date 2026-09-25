@@ -73,14 +73,10 @@ codeunit 10035538 "App Upgrade ori"
 
     local procedure RegisterRetentionPolicies()
     var
-        RetentionPolicyAllowedTable: Record "Retention Policy Allowed Table";
         RetenPolAllowedTables: Codeunit "Reten. Pol. Allowed Tables";
     begin
-        if not RetentionPolicyAllowedTable.ReadPermission() then
-            exit;
-        if not RetentionPolicyAllowedTable.WritePermission() then
-            exit;
-
+        // "Retention Policy Allowed Table" is Access = Internal, so this app cannot name it
+        // to probe ReadPermission. AddAllowedTable is the public registration API.
         RetenPolAllowedTables.AddAllowedTable(Database::"Playbook Instance ori", 30, 28);
         RetenPolAllowedTables.AddAllowedTable(Database::"Playbook Step Log ori");
     end;
