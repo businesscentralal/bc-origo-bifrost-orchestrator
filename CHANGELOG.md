@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-25) - main build AL0132 on GetRequestDebugMode (#33)
+
+- CI/CD run [36066665137](https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/36066665137) on `85d2e3c` failed both builds with AL0132: `Record "Setup ori"` does not contain `GetRequestDebugMode` (ReportMsgHandler, PlaybookStepExecutor).
+- Cause: `.AL-Go/settings.json` `appDependencyProbingPaths` for bc-origo-bifrost-core pinned `version: 1.0.0.100`, so builds compiled against core build 1.0.0.100, which predates `GetRequestDebugMode` (added in core build 1.0.0.124).
+- Fix: probing version raised to `1.0.0.132`, the core build that is live on the Bifrost sandbox as Foundation 28.0.0.132 (includes core#107 and core#114). App/test app.json unchanged.
+
 ### Changed (2026-09-24) - AppSource URLs and Application Insights
 
 - `app.json` `help` and `contextSensitiveHelpUrl` now use the orchestrator docs routes, `privacyStatement` and `EULA` use the Foundation privacy and EULA pages, `url` stays `https://www.origo.is/`, and the Application Insights connection string points at the shared telemetry resource.
