@@ -250,13 +250,13 @@ page 10035536 "Scheduler Setup ori"
 
     trigger OnOpenPage()
     var
-        AppUpgrade: Codeunit "App Upgrade ori";
+        DeferredUpgrade: Codeunit "Deferred Upgrade ori";
     begin
         Rec.OnOpenEmptyRec();
         Secrets.RegisterAll();
         // Blank object type and legacy secret keys are only written at upgrade. Opening setup
         // retries them. No upgrade tag is set, so the next upgrade retries a permission skip too.
-        AppUpgrade.EnsureDeferredUpgradeData();
+        DeferredUpgrade.EnsureDeferredUpgradeData();
         // End the write transaction from Insert/Register so later Set*FromDialog can RunModal.
         Commit();
     end;

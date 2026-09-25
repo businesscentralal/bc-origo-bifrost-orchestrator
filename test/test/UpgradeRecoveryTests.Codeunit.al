@@ -20,7 +20,7 @@ codeunit 96430 "Upgrade Recovery Tests"
     procedure DeferredUpgrade_WithPermission_SetsBlankObjectTypeToCodeunit()
     var
         ScheduledEntry: Record "Scheduled Entry ori";
-        AppUpgrade: Codeunit "App Upgrade ori";
+        DeferredUpgrade: Codeunit "Deferred Upgrade ori";
         EntryId: Guid;
     begin
         // [GIVEN] a scheduled entry whose object type is the blank option (ordinal 0)
@@ -31,12 +31,12 @@ codeunit 96430 "Upgrade Recovery Tests"
         Assert.AreNotEqual(ScheduledEntry."Object Type to Run"::Report, ScheduledEntry."Object Type to Run", 'The fixture must be the blank object type, not Report.');
 
         // [WHEN] the same procedure upgrade and Scheduler Setup call runs with permission
-        AppUpgrade.EnsureDeferredUpgradeData();
+        DeferredUpgrade.EnsureDeferredUpgradeData();
 
         // [THEN] the blank type is Codeunit, and running it again does not error
         ScheduledEntry.Get(EntryId);
         Assert.AreEqual(ScheduledEntry."Object Type to Run"::Codeunit, ScheduledEntry."Object Type to Run", 'A blank Object Type to Run must become Codeunit.');
-        AppUpgrade.EnsureDeferredUpgradeData();
+        DeferredUpgrade.EnsureDeferredUpgradeData();
         ScheduledEntry.Get(EntryId);
         Assert.AreEqual(ScheduledEntry."Object Type to Run"::Codeunit, ScheduledEntry."Object Type to Run", 'The deferred upgrade must be idempotent.');
 

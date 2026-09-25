@@ -30,6 +30,7 @@ permissionset 10035536 "BIFROST OrchSet ori"
         codeunit "Secrets ori" = X,
         codeunit "Scheduler Wizard Reg. ori" = X,
         codeunit "Scheduler Mgt ori" = X,
+        codeunit "Deferred Upgrade ori" = X,
         codeunit "Scheduler Handler ori" = X,
         codeunit "Scheduler Events ori" = X,
         codeunit "Scheduler Manual Evt ori" = X,
