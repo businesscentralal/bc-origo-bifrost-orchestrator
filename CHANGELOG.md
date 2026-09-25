@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-25) - build against latest Foundation CI
+
+- The app builds against the latest Foundation CI build. AL-Go `appDependencyProbingPaths` for bc-origo-bifrost-core keeps `release_status: latestBuild` and sets `version: latest`, so GetArtifacts uses the last successful CICD run.
+- Foundation dependency floor is `28.0.0.0` in app and test `app.json`. App version stays `28.0.0.0`.
+
 ### Fixed (2026-09-25) - main build AL0132 on GetRequestDebugMode (#33)
 
 - CI/CD run [36066665137](https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/36066665137) on `85d2e3c` failed both builds with AL0132: `Record "Setup ori"` does not contain `GetRequestDebugMode` (ReportMsgHandler, PlaybookStepExecutor).
