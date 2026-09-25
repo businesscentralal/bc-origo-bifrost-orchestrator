@@ -11,6 +11,7 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - The app builds against the latest Foundation CI build. AL-Go `appDependencyProbingPaths` for bc-origo-bifrost-core keeps `release_status: latestBuild` and sets `version: latest`, so GetArtifacts uses the last successful CICD run.
 - Foundation dependency floor is `28.0.0.0` in app and test `app.json`. App version stays `28.0.0.0`.
+- `.AL-Go/settings.json` is listed in `fullBuildPatterns` so a probe-only change triggers a full build.
 
 ### Fixed (2026-09-25) - main build AL0132 on GetRequestDebugMode (#33)
 
