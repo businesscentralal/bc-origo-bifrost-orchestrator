@@ -18,8 +18,10 @@ codeunit 10035609 "Deferred Upgrade ori"
     /// <summary>
     /// Repairs a blank Object Type to Run and deletes legacy isolated-storage keys.
     /// Skips either step, with a warning, when the caller lacks the tabledata grant.
+    /// Public on an internal codeunit so apps in internalsVisibleTo (the test app) can call it.
+    /// An internal procedure is not part of that symbol surface.
     /// </summary>
-    internal procedure EnsureDeferredUpgradeData()
+    procedure EnsureDeferredUpgradeData()
     begin
         SetDefaultTypeToCodeunit();
         DropLegacySecretKeys();

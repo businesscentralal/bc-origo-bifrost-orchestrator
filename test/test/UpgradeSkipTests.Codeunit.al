@@ -24,16 +24,17 @@ codeunit 96429 "Upgrade Skip Tests"
         DeferredUpgrade: Codeunit "Deferred Upgrade ori";
         LibraryLowerPermissions: Codeunit "Library - Lower Permissions";
     begin
-        // [GIVEN] a caller who can run Deferred Upgrade ori but cannot read or write the upgraded tables
+        // [GIVEN] a caller who can run Deferred Upgrade ori but cannot read or write the upgraded tables.
+        // Upg Guard Exec ori is defined in the app: a test permission set cannot name that internal codeunit.
         LibraryLowerPermissions.SetO365Basic();
-        LibraryLowerPermissions.AddPermissionSet('Upgrade Guard Exec');
+        LibraryLowerPermissions.AddPermissionSet('Upg Guard Exec ori');
 
-        Assert.IsFalse(ScheduledEntry.ReadPermission(), 'O365 Basic plus Upgrade Guard Exec must not grant Read on Scheduled Entry ori.');
-        Assert.IsFalse(ScheduledEntry.WritePermission(), 'O365 Basic plus Upgrade Guard Exec must not grant Write on Scheduled Entry ori.');
-        Assert.IsFalse(SchedulerSetup.ReadPermission(), 'O365 Basic plus Upgrade Guard Exec must not grant Read on Scheduler Setup ori.');
-        Assert.IsFalse(SchedulerSetup.WritePermission(), 'O365 Basic plus Upgrade Guard Exec must not grant Write on Scheduler Setup ori.');
-        Assert.IsFalse(ClientCredentials.ReadPermission(), 'O365 Basic plus Upgrade Guard Exec must not grant Read on Client Credentials ori.');
-        Assert.IsFalse(ClientCredentials.WritePermission(), 'O365 Basic plus Upgrade Guard Exec must not grant Write on Client Credentials ori.');
+        Assert.IsFalse(ScheduledEntry.ReadPermission(), 'O365 Basic plus Upg Guard Exec ori must not grant Read on Scheduled Entry ori.');
+        Assert.IsFalse(ScheduledEntry.WritePermission(), 'O365 Basic plus Upg Guard Exec ori must not grant Write on Scheduled Entry ori.');
+        Assert.IsFalse(SchedulerSetup.ReadPermission(), 'O365 Basic plus Upg Guard Exec ori must not grant Read on Scheduler Setup ori.');
+        Assert.IsFalse(SchedulerSetup.WritePermission(), 'O365 Basic plus Upg Guard Exec ori must not grant Write on Scheduler Setup ori.');
+        Assert.IsFalse(ClientCredentials.ReadPermission(), 'O365 Basic plus Upg Guard Exec ori must not grant Read on Client Credentials ori.');
+        Assert.IsFalse(ClientCredentials.WritePermission(), 'O365 Basic plus Upg Guard Exec ori must not grant Write on Client Credentials ori.');
 
         // [WHEN] the deferred upgrade steps run
         DeferredUpgrade.EnsureDeferredUpgradeData();
