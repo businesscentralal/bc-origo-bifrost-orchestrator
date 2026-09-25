@@ -45,11 +45,11 @@ codeunit 10035538 "App Upgrade ori"
         // OnOpenEmptyRec: IsEmpty + Insert on Scheduler Setup ori, and Get + Insert on Job Queue Category.
         if not SchedulerSetup.ReadPermission() then
             exit;
-        if not SchedulerSetup.InsertPermission() then
+        if not SchedulerSetup.WritePermission() then
             exit;
         if not JobQueueCategory.ReadPermission() then
             exit;
-        if not JobQueueCategory.InsertPermission() then
+        if not JobQueueCategory.WritePermission() then
             exit;
 
         SchedulerSetup.OnOpenEmptyRec();
@@ -65,7 +65,7 @@ codeunit 10035538 "App Upgrade ori"
         ScheduledEntry.SetRange("Object Type to Run", 0);
         if ScheduledEntry.IsEmpty() then
             exit;
-        if not ScheduledEntry.ModifyPermission() then
+        if not ScheduledEntry.WritePermission() then
             exit;
 
         ScheduledEntry.ModifyAll("Object Type to Run", ScheduledEntry."Object Type to Run"::Codeunit);
@@ -78,7 +78,7 @@ codeunit 10035538 "App Upgrade ori"
     begin
         if not RetentionPolicyAllowedTable.ReadPermission() then
             exit;
-        if not RetentionPolicyAllowedTable.InsertPermission() then
+        if not RetentionPolicyAllowedTable.WritePermission() then
             exit;
 
         RetenPolAllowedTables.AddAllowedTable(Database::"Playbook Instance ori", 30, 28);
@@ -99,7 +99,7 @@ codeunit 10035538 "App Upgrade ori"
         // RegisterAll writes App Secret ori, then FindSet on Client Credentials ori.
         if not AppSecret.ReadPermission() then
             exit;
-        if not AppSecret.InsertPermission() then
+        if not AppSecret.WritePermission() then
             exit;
         if not ClientCredentials.ReadPermission() then
             exit;
