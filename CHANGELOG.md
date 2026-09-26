@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-25) - build against latest Foundation CI
+
+- The app builds against the latest Foundation CI build. AL-Go `appDependencyProbingPaths` for bc-origo-bifrost-core keeps `release_status: latestBuild` and sets `version: latest`, so GetArtifacts uses the last successful CICD run.
+- Foundation dependency floor is `28.0.0.0` in app and test `app.json`. App version stays `28.0.0.0`.
+- `.AL-Go/settings.json` is listed in `fullBuildPatterns` so a probe-only change triggers a full build.
 ### Security
 
 - Default (release) builds no longer ship the test app's internalsVisibleTo grant; the strip moved to PipelineInitialize.ps1 because Alpaca never ran PreCompileApp.ps1 (core#129).
