@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Security
+
+- Default (release) builds no longer ship the test app's internalsVisibleTo grant; the strip moved to PipelineInitialize.ps1 because Alpaca never ran PreCompileApp.ps1 (core#129).
+
 ### Fixed (2026-09-25) - main build AL0132 on GetRequestDebugMode (#33)
 
 - CI/CD run [36066665137](https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/36066665137) on `85d2e3c` failed both builds with AL0132: `Record "Setup ori"` does not contain `GetRequestDebugMode` (ReportMsgHandler, PlaybookStepExecutor).
