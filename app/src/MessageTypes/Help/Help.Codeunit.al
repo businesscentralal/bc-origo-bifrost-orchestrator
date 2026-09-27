@@ -1179,7 +1179,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('### Restricted tables (dedicated message types)');
         O.AppendLine('');
         O.AppendLine('Foundation / this app block `Data.Records.Get` / `Data.Records.Set` on the tables below.');
-        O.AppendLine('The error text ends with `Use {hint}.` and the response `hint` field carries the same dedicated types:');
+        O.AppendLine('The error text ends with `Use {hint}.` and the response `nextStep` field carries the same dedicated types:');
         O.AppendLine('');
         O.AppendLine('| Table | Direction | Use instead |');
         O.AppendLine('|---|---|---|');
