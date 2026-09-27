@@ -869,6 +869,8 @@ codeunit 10035576 "Help ori"
                     Help.AppendLine('');
                     Help.AppendLine('**Direction**: Both');
                     Help.AppendLine('');
+                    Help.AppendLine('**Side effect**: when you have no preset for the report, Report.Get creates an empty one for your user in this company, so the direction is Both.');
+                    Help.AppendLine('');
                     Help.AppendLine('## Request');
                     Help.AppendLine('');
                     Help.AppendLine('| Parameter | Type | Required | Description |');
@@ -878,7 +880,7 @@ codeunit 10035576 "Help ori"
                     Help.AppendLine('## Response');
                     Help.AppendLine('');
                     Help.AppendLine('Includes `layouts` array with available report layouts and `preset` object with');
-                    Help.AppendLine('the user''s saved `requestPageXml` (null if no preset exists). Also includes');
+                    Help.AppendLine('the user''s saved `requestPageXml` (an empty string, with `hasRequestPageXml` false, when the preset has no saved request). Also includes');
                     Help.AppendLine('`requestPageUrl` to open the report in BC for interactive configuration.');
                     Help.AppendLine('');
                     Help.AppendLine('## Preset Capture Flow');
