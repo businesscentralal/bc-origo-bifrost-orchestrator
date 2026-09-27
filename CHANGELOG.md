@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-27) - Report.Get direction Both (#43)
+
+- `Orchestrator.Report.Get` is registered as direction Both, because it inserts a Report Request Preset row when the caller has none. Behaviour is unchanged.
+
 ### Changed (2026-09-25) - build against latest Foundation CI
 
 - The app builds against the latest Foundation CI build. AL-Go `appDependencyProbingPaths` for bc-origo-bifrost-core keeps `release_status: latestBuild` and sets `version: latest`, so GetArtifacts uses the last successful CICD run.

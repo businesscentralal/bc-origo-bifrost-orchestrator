@@ -867,7 +867,7 @@ codeunit 10035576 "Help ori"
                 begin
                     Help.AppendLine('Returns full report metadata including layouts and saved request page preset XML.');
                     Help.AppendLine('');
-                    Help.AppendLine('**Direction**: Outbound');
+                    Help.AppendLine('**Direction**: Both');
                     Help.AppendLine('');
                     Help.AppendLine('## Request');
                     Help.AppendLine('');
