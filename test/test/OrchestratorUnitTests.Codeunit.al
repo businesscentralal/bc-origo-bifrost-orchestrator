@@ -1582,7 +1582,7 @@ codeunit 96411 "Orchestrator Unit Tests"
         // [GIVEN] An error entry that is configured to send an email restart notification
         CreateRetryPolicyTestEntry(OrchestratorEntry, OrchestratorEntry."Retry Policy"::Always, 0);
         OrchestratorEntry."Notification Type" := OrchestratorEntry."Notification Type"::EMail;
-        OrchestratorEntry."Notification Recipient" := 'gunnar@navision.guru';
+        OrchestratorEntry."Notification Recipient" := 'restart@example.com';
         OrchestratorEntry.Modify();
         CreateErrorJobQueueEntry(JobQueueEntry, OrchestratorEntry);
 
