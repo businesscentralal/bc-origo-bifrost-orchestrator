@@ -1,21 +1,3 @@
-# Bifrost: never ship the test app's internalsVisibleTo grant.
-# COSMO Alpaca replaces .AL-Go/PreCompileApp.ps1 with its own override and never calls ours,
-# so the strip happens here, before anything compiles. Only the Test build mode keeps the grant.
-if ($env:BuildMode -ne 'Test') {
-    $appJsonPath = Join-Path $env:GITHUB_WORKSPACE 'app/app.json'
-    if (Test-Path -LiteralPath $appJsonPath) {
-        $appJson = Get-Content -LiteralPath $appJsonPath -Raw -Encoding UTF8 | ConvertFrom-Json
-        if ($appJson.PSObject.Properties.Name -contains 'internalsVisibleTo') {
-            $appJson.PSObject.Properties.Remove('internalsVisibleTo')
-        }
-        if ($appJson.PSObject.Properties.Name -contains 'suppressWarnings') {
-            $appJson.suppressWarnings = @($appJson.suppressWarnings | Where-Object { $_ -ne 'AS0081' })
-        }
-        $appJson | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $appJsonPath -Encoding UTF8
-        Write-Host "Bifrost: build mode '$($env:BuildMode)' - removed internalsVisibleTo and the AS0081 suppression from app/app.json."
-    }
-}
-
 Write-Host "::group::PipelineInitialize"
 
 if (Test-Path -LiteralPath "$($env:NeedsContext)" -PathType Leaf) {
@@ -99,6 +81,33 @@ $overridePath = Join-Path $overridesPath "PipelineInitialize.ps1"
 if (Test-Path $overridePath) {
     Write-Host "Invoking Alpaca override"
     . $overridePath -Jobs $jobs -ScriptsPath $scriptsPath
+}
+
+# Bifrost (core#129): the Alpaca override above moves .AL-Go/PreCompileApp.ps1 into $AlGoPreCompileApp
+# and sets $PreCompileApp to COSMO Alpaca's own PreCompileApp override. Unlike Alpaca's other overrides,
+# that one never calls its $AlGo... hook, so our PreCompileApp.ps1 (the internalsVisibleTo strip) would
+# never run. Chain them: Alpaca's override first, then $AlGoPreCompileApp with the same parameters.
+# Scope 1 is Run-AlPipeline, the scope the Alpaca override writes both variables to.
+$alpacaPreCompileApp = Get-Variable -Name 'PreCompileApp' -Scope 1 -ValueOnly -ErrorAction Ignore
+$alGoPreCompileApp = Get-Variable -Name 'AlGoPreCompileApp' -Scope 1 -ValueOnly -ErrorAction Ignore
+if (-not $alGoPreCompileApp) {
+    Write-Host "Bifrost: no `$AlGoPreCompileApp to chain (.AL-Go/PreCompileApp.ps1 missing or no Alpaca PreCompileApp override)."
+}
+elseif ($alpacaPreCompileApp -and ($alpacaPreCompileApp.ToString() -match '\$AlGoPreCompileApp')) {
+    Write-Host "Bifrost: the COSMO Alpaca PreCompileApp override already calls `$AlGoPreCompileApp - nothing to chain."
+}
+elseif ($alpacaPreCompileApp) {
+    Set-Variable -Name 'BifrostAlpacaPreCompileApp' -Value $alpacaPreCompileApp -Scope 1
+    Set-Variable -Name 'PreCompileApp' -Scope 1 -Value {
+        param(
+            [string] $AppType,
+            [ref] $CompilationParams
+        )
+        Invoke-Command -ScriptBlock $BifrostAlpacaPreCompileApp -ArgumentList $AppType, $CompilationParams
+        Write-Host "Bifrost: running `$AlGoPreCompileApp (.AL-Go/PreCompileApp.ps1) after the COSMO Alpaca override."
+        Invoke-Command -ScriptBlock $AlGoPreCompileApp -ArgumentList $AppType, $CompilationParams
+    }
+    Write-Host "Bifrost: PreCompileApp chained - COSMO Alpaca override, then `$AlGoPreCompileApp (.AL-Go/PreCompileApp.ps1)."
 }
 
 Write-Host "::endgroup::"

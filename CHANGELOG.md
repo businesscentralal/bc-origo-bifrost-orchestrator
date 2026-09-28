@@ -12,6 +12,22 @@ Business Central release versioning (`major.minor.build.revision`).
 - Setup lookup, body build and send for the e-mail restart notification run in the isolated codeunit `Email Restart Send ori` (10035543) after a `Commit()`. A failure is logged as `O4NJQS-0008` "Error Sending Restart Notification" and the job is still restarted.
 - Removed: codeunit `Email Send ori` (10035543, public); the id is reused by `Email Restart Send ori` (Internal). The telemetry event `O4NJQS-0007` "Error Sending Email" is replaced by `O4NJQS-0008`.
 - Test: `RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted`.
+### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
+
+- **The Default build compiles the app without the `internalsVisibleTo` grant for
+  `Bifrost Orchestrator - Tests`, through the standard AL-Go hook.** COSMO Alpaca's `PreCompileApp` override
+  keeps `.AL-Go/PreCompileApp.ps1` in `$AlGoPreCompileApp` but never calls it. `.AL-Go/PipelineInitialize.ps1`
+  now chains the two (Alpaca's override first, then `$AlGoPreCompileApp` with the same `appType` and
+  compilation parameters). All Alpaca logic is unchanged. The new `.AL-Go/PreCompileApp.ps1` strips
+  `internalsVisibleTo` and the AS0081 suppression in every build mode except `Test`. It replaces the interim
+  strip at the top of `PipelineInitialize.ps1`.
+- **New CI check (`.AL-Go/PostCompileApp.ps1`).** After the app compiles, a build in any mode except `Test`
+  fails if the `app.json` it compiled from or the compiled `.app` (`NavxManifest.xml`) still grants
+  `internalsVisibleTo` to an app outside an explicit allow-list. The allow-list is empty. The `Test` build
+  keeps its grant and only logs it. The script then restores the original `app.json`.
+- `.AL-Go/settings.json`: `fullBuildPatterns` gains `.AL-Go/*.ps1`, so a change to an AL-Go hook script triggers
+  a full build. Before, AL-Go treated such a change as touching no project and skipped the build.
+- Build configuration only: no AL code, `app.json` or version change. Same fix as bc-origo-bifrost-core#129.
 
 ### Changed (2026-09-27) - Report.Get direction Both (#43)
 
