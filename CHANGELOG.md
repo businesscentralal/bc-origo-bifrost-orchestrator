@@ -7,6 +7,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+- Telegram Chat ID has moved to the General group on User Setup, and the NoChatIdErr Icelandic comment encoding is fixed (#42).
+
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
 - **The Default build compiles the app without the `internalsVisibleTo` grant for
