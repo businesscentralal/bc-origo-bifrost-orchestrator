@@ -27,7 +27,7 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori"
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
-        exit("Msg Direction ori"::Outbound);
+        exit("Msg Direction ori"::Both);
     end;
 
     procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")

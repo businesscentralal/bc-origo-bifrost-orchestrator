@@ -867,7 +867,9 @@ codeunit 10035576 "Help ori"
                 begin
                     Help.AppendLine('Returns full report metadata including layouts and saved request page preset XML.');
                     Help.AppendLine('');
-                    Help.AppendLine('**Direction**: Outbound');
+                    Help.AppendLine('**Direction**: Both');
+                    Help.AppendLine('');
+                    Help.AppendLine('**Side effect**: when you have no preset for the report, Report.Get creates an empty one for your user in this company, so the direction is Both.');
                     Help.AppendLine('');
                     Help.AppendLine('## Request');
                     Help.AppendLine('');
@@ -878,7 +880,7 @@ codeunit 10035576 "Help ori"
                     Help.AppendLine('## Response');
                     Help.AppendLine('');
                     Help.AppendLine('Includes `layouts` array with available report layouts and `preset` object with');
-                    Help.AppendLine('the user''s saved `requestPageXml` (null if no preset exists). Also includes');
+                    Help.AppendLine('the user''s saved `requestPageXml` (an empty string, with `hasRequestPageXml` false, when the preset has no saved request). Also includes');
                     Help.AppendLine('`requestPageUrl` to open the report in BC for interactive configuration.');
                     Help.AppendLine('');
                     Help.AppendLine('## Preset Capture Flow');
@@ -1179,7 +1181,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('### Restricted tables (dedicated message types)');
         O.AppendLine('');
         O.AppendLine('Foundation / this app block `Data.Records.Get` / `Data.Records.Set` on the tables below.');
-        O.AppendLine('The error text ends with `Use {hint}.` and the response `hint` field carries the same dedicated types:');
+        O.AppendLine('The error text ends with `Use {hint}.` and the response `nextStep` field carries the same dedicated types:');
         O.AppendLine('');
         O.AppendLine('| Table | Direction | Use instead |');
         O.AppendLine('|---|---|---|');

@@ -36,7 +36,7 @@ codeunit 96428 "Data Records Hint Tests"
         Assert.AreEqual('Error', StatusToken.AsValue().AsText(), 'status');
         Assert.IsTrue(ResponseJson.Get('error', ErrorToken), 'error missing');
         Assert.AreEqual(ExpectedError, ErrorToken.AsValue().AsText(), 'error text');
-        Assert.IsTrue(ResponseJson.Get('hint', HintToken), 'hint missing');
+        Assert.IsTrue(ResponseJson.Get('nextStep', HintToken), 'nextStep missing');
         Assert.AreEqual(ExpectedHint, HintToken.AsValue().AsText(), 'dedicated hint');
     end;
 
