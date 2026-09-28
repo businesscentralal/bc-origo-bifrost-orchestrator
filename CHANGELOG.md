@@ -12,6 +12,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Setup lookup, body build and each e-mail recipient send for the restart notification now run behind `TryFunction` boundaries inside `Email Notification ori`, so a failure is logged as `O4NJQS-0008` "Error Sending Restart Notification" and the job is still restarted.
 - No `Commit()` is introduced in the restart-notification path, so the scheduler keeps its existing lock/transaction behavior while isolating notification failures from the restart flow.
 - Test: `RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted`.
+
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
 - **The Default build compiles the app without the `internalsVisibleTo` grant for
