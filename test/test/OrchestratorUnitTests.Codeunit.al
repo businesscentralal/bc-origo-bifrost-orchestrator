@@ -1565,6 +1565,37 @@ codeunit 96411 "Orchestrator Unit Tests"
         Assert.AreEqual(0, OrchestratorEntry."Errors Since Last Success", 'Counter should reset to 0 after a successful execution.');
     end;
 
+    [Test]
+    procedure RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted()
+    var
+        OrchestratorEntry: Record "Scheduled Entry ori";
+        JobQueueEntry: Record "Job Queue Entry";
+        JobQueueSchedulerHandler: Codeunit "Scheduler Handler ori";
+        LibraryJobQueue: Codeunit "Library Orchestrator";
+    begin
+        // [FEATURE] [JOB QUEUE SCHEDULER] [NOTIFICATION]
+        // [SCENARIO] A failure while sending the restart notification must not abort the scheduler; the job is still restarted.
+
+        // [GIVEN] No Scheduler Setup record exists, so restart-notification preparation fails (OrchestratorSetup.Get())
+        CleanJobQueueSchedulerSetup();
+
+        // [GIVEN] An error entry that is configured to send an email restart notification
+        CreateRetryPolicyTestEntry(OrchestratorEntry, OrchestratorEntry."Retry Policy"::Always, 0);
+        OrchestratorEntry."Notification Type" := OrchestratorEntry."Notification Type"::EMail;
+        OrchestratorEntry."Notification Recipient" := 'gunnar@navision.guru';
+        OrchestratorEntry.Modify();
+        CreateErrorJobQueueEntry(JobQueueEntry, OrchestratorEntry);
+
+        // [WHEN] ScheduleTask processes the error entry (the restart notification fails internally)
+        BindSubscription(LibraryJobQueue);
+        JobQueueSchedulerHandler.ScheduleTask(OrchestratorEntry);
+        UnBindSubscription(LibraryJobQueue);
+
+        // [THEN] ScheduleTask completes without aborting and the job was restarted (counter incremented to 1)
+        OrchestratorEntry.Get(OrchestratorEntry.ID);
+        Assert.AreEqual(1, OrchestratorEntry."Errors Since Last Success", 'A failing restart notification must not prevent the job from being restarted.');
+    end;
+
     local procedure CreateRetryPolicyTestEntry(var OrchestratorEntry: Record "Scheduled Entry ori"; RetryPolicy: Enum "Retry Policy ori"; ErrorsSinceLastSuccess: Integer)
     begin
         OrchestratorEntry.Init();
