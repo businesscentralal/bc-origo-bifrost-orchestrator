@@ -7,6 +7,21 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
+
+- **The Default build compiles the app without the `internalsVisibleTo` grant for
+  `Bifrost Orchestrator - Tests`, through the standard AL-Go hook.** COSMO Alpaca's `PreCompileApp` override
+  keeps `.AL-Go/PreCompileApp.ps1` in `$AlGoPreCompileApp` but never calls it. `.AL-Go/PipelineInitialize.ps1`
+  now chains the two (Alpaca's override first, then `$AlGoPreCompileApp` with the same `appType` and
+  compilation parameters). All Alpaca logic is unchanged. The new `.AL-Go/PreCompileApp.ps1` strips
+  `internalsVisibleTo` and the AS0081 suppression in every build mode except `Test`. It replaces the interim
+  strip at the top of `PipelineInitialize.ps1`.
+- **New CI check (`.AL-Go/PostCompileApp.ps1`).** After the app compiles, a build in any mode except `Test`
+  fails if the `app.json` it compiled from or the compiled `.app` (`NavxManifest.xml`) still grants
+  `internalsVisibleTo` to an app outside an explicit allow-list. The allow-list is empty. The `Test` build
+  keeps its grant and only logs it. The script then restores the original `app.json`.
+- Build configuration only: no AL code, `app.json` or version change. Same fix as bc-origo-bifrost-core#129.
+
 ### Changed (2026-09-27) - Report.Get direction Both (#43)
 
 - `Orchestrator.Report.Get` is registered as direction Both, because it inserts a Report Request Preset row when the caller has none. Behaviour is unchanged. Companion-hint tests and help read the dedicated types from `nextStep`, where Foundation puts them.
