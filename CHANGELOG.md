@@ -20,6 +20,8 @@ Business Central release versioning (`major.minor.build.revision`).
   fails if the `app.json` it compiled from or the compiled `.app` (`NavxManifest.xml`) still grants
   `internalsVisibleTo` to an app outside an explicit allow-list. The allow-list is empty. The `Test` build
   keeps its grant and only logs it. The script then restores the original `app.json`.
+- `.AL-Go/settings.json`: `fullBuildPatterns` gains `.AL-Go/*.ps1`, so a change to an AL-Go hook script triggers
+  a full build. Before, AL-Go treated such a change as touching no project and skipped the build.
 - Build configuration only: no AL code, `app.json` or version change. Same fix as bc-origo-bifrost-core#129.
 
 ### Changed (2026-09-27) - Report.Get direction Both (#43)
