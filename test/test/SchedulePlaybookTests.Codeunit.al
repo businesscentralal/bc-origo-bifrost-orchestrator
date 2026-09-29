@@ -238,7 +238,6 @@ codeunit 96415 "Schedule Playbook Tests"
     end;
 
     [Test]
-    [HandlerFunctions('ConfirmHandlerNo')]
     procedure CreateOrchestratorEntrySetsRecordIdAndSystemId()
     var
         Playbook: Record "Playbook ori";
@@ -379,12 +378,6 @@ codeunit 96415 "Schedule Playbook Tests"
         Assert.AreNotEqual(ResponseSystemId, ResponsePkId, 'Both IDs must be consistent and distinct');
 
         Cleanup(Playbook.Code);
-    end;
-
-    [ConfirmHandler]
-    procedure ConfirmHandlerNo(Question: Text[1024]; var Reply: Boolean)
-    begin
-        Reply := false;
     end;
 
     local procedure CreateArgument(var TempArgument: Record "Message Argument ori" temporary; RequestJsonText: Text)
