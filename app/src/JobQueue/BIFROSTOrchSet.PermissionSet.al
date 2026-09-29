@@ -36,6 +36,7 @@ permissionset 10035536 "BIFROST OrchSet ori"
         codeunit "Scheduler API Client ori" = X,
         codeunit "Schedule Calc ori" = X,
         codeunit "Email Send ori" = X,
+        codeunit "Email Restart Send ori" = X,
         codeunit "Email Notification ori" = X,
         codeunit "None Notification ori" = X,
         codeunit "Telegram Send ori" = X,

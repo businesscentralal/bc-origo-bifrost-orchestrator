@@ -50,8 +50,8 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
     procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     var
+        EmailRestartSend: Codeunit "Email Restart Send ori";
         IsHandled: Boolean;
-        BodyText: Text;
     begin
         OnBeforeSendRestartNotification("Scheduled Entry ori", JobQueueEntry, IsHandled);
         if IsHandled then
@@ -60,74 +60,48 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
         if "Scheduled Entry ori"."Notification Recipient" = '' then exit;
         if not IsValidEMailAddress("Scheduled Entry ori") then exit;
 
-        // A failed notification must never abort the scheduler run, so every write path (setup lookup,
-        // body build and each recipient send) is trapped in-place by a TryFunction and only logged. We must
-        // NOT Commit here: the caller holds an UpdLock on the Job Queue Entry (still in Error) and a commit
-        // would release it before the restart, letting a concurrent run process/restart the same entry.
-        // Each recipient is sent in its own wrapper so one bad address does not suppress the others.
-        if not TryBuildRestartNotificationBody("Scheduled Entry ori", JobQueueEntry, BodyText) then
-            LogRestartNotificationError("Scheduled Entry ori")
-        else
-            SendRestartNotificationToRecipients("Scheduled Entry ori", JobQueueEntry, BodyText);
+        // A failed notification must never abort the scheduler run. The whole write path (setup lookup,
+        // body build and send) runs in an isolated codeunit so any error rolls back and is only logged.
+        // The caller sends this only after the Job Queue Entry has already been restarted, so the Commit()
+        // needed to give Codeunit.Run a clean transaction to trap no longer releases a lock that is still
+        // required (the same pattern the platform Job Queue uses before dispatching a task).
+        Commit();
+        ClearLastError();
+        EmailRestartSend.SetJobQueueEntry(JobQueueEntry);
+        if not EmailRestartSend.Run("Scheduled Entry ori") then
+            LogRestartNotificationError("Scheduled Entry ori");
 
         OnAfterSendRestartNotification("Scheduled Entry ori", JobQueueEntry);
     end;
 
     /// <summary>
-    /// Sends the restart notification body to each configured recipient, trapping and logging a failure
-    /// per recipient so one bad address does not suppress notifications to the remaining recipients.
+    /// Builds and sends the restart notification email to every configured recipient. Runs inside the
+    /// isolated "Email Restart Send ori" codeunit so any failure (missing setup, send error) rolls back
+    /// without aborting the scheduler.
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry being restarted.</param>
     /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
-    /// <param name="BodyText">The HTML notification body.</param>
-    local procedure SendRestartNotificationToRecipients(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry"; BodyText: Text)
+    internal procedure PrepareAndSendRestartNotification(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry")
     var
-        EMailAddress: Text;
-    begin
-        foreach EMailAddress in "Scheduled Entry ori"."Notification Recipient".Split(';') do
-            if not TrySendRestartNotificationToRecipient("Scheduled Entry ori", JobQueueEntry, EMailAddress, BodyText) then
-                LogRestartNotificationError("Scheduled Entry ori");
-    end;
-
-    /// <summary>
-    /// Looks up the setup and builds the restart notification body inside a TryFunction so a missing
-    /// setup is trapped in-place without aborting the scheduler.
-    /// </summary>
-    /// <param name="Scheduled Entry ori">The orchestrator entry being restarted.</param>
-    /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
-    /// <param name="BodyText">Return: the built HTML notification body.</param>
-    [TryFunction]
-    local procedure TryBuildRestartNotificationBody(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry"; var BodyText: Text)
-    var
+        TempEmailItem: Record "Email Item" temporary;
         OrchestratorSetup: Record "Scheduler Setup ori";
+        IsHandled: Boolean;
+        JobRestartedSubjectMsg: Label 'Job ''%1'' has been restarted', Comment = '%1 = Job Description, is-IS=Verk ''%1'' hefur verið endurræst';
+        BodyText, EMailAddress : Text;
     begin
         OrchestratorSetup.Get();
         BodyText := BuildRestartNotificationEmailItem("Scheduled Entry ori", JobQueueEntry, OrchestratorSetup);
-    end;
 
-    /// <summary>
-    /// Sends the restart notification to a single recipient inside a TryFunction so a failure for one
-    /// address is trapped in-place and does not suppress notifications to the remaining recipients.
-    /// </summary>
-    /// <param name="Scheduled Entry ori">The orchestrator entry being restarted.</param>
-    /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
-    /// <param name="EMailAddress">The recipient email address.</param>
-    /// <param name="BodyText">The HTML notification body.</param>
-    [TryFunction]
-    local procedure TrySendRestartNotificationToRecipient(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry"; EMailAddress: Text; BodyText: Text)
-    var
-        TempEmailItem: Record "Email Item" temporary;
-        IsHandled: Boolean;
-        JobRestartedSubjectMsg: Label 'Job ''%1'' has been restarted', Comment = '%1 = Job Description, is-IS=Verk ''%1'' hefur veriÃ° endurrÃ¦st';
-    begin
-        TempEmailItem.Init();
-        TempEmailItem."Send to" := CopyStr(EMailAddress, 1, MaxStrLen(TempEmailItem."Send to"));
-        TempEmailItem.Subject := StrSubstNo(JobRestartedSubjectMsg, "Scheduled Entry ori".Description);
-        TempEmailItem."Plaintext Formatted" := false;
-        OnAfterPreparingEmailItemBeforeSend("Scheduled Entry ori", JobQueueEntry, TempEmailItem, BodyText, IsHandled);
-        TempEmailItem.SetBodyText(BodyText);
-        if not IsHandled then
-            TempEmailItem.Send(true, "Email Scenario"::"Scheduler ori");
+        foreach EMailAddress in "Scheduled Entry ori"."Notification Recipient".Split(';') do begin
+            TempEmailItem.Init();
+            TempEmailItem."Send to" := CopyStr(EMailAddress, 1, MaxStrLen(TempEmailItem."Send to"));
+            TempEmailItem.Subject := StrSubstNo(JobRestartedSubjectMsg, "Scheduled Entry ori".Description);
+            TempEmailItem."Plaintext Formatted" := false;
+            OnAfterPreparingEmailItemBeforeSend("Scheduled Entry ori", JobQueueEntry, TempEmailItem, BodyText, IsHandled);
+            TempEmailItem.SetBodyText(BodyText);
+            if not IsHandled then
+                TempEmailItem.Send(true, "Email Scenario"::"Scheduler ori");
+        end;
     end;
 
     /// <summary>
