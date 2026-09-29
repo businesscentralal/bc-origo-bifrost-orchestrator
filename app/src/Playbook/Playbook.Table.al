@@ -197,7 +197,7 @@ table 10035539 "Playbook ori"
             JQParameter.Insert(true);
         end;
 
-        JQEntry.SetStatus(JQEntry.Status::Ready);
+        Codeunit.Run(Codeunit::"Job Queue - Enqueue", JQEntry);
         exit(JQEntry.ID);
     end;
 }

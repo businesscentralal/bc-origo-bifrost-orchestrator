@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-29) - Playbook.Enqueue schedules the Job Queue Entry (#37)
+
+- `Playbook ori.EnqueuePlaybook` schedules the one-off Job Queue Entry through `Job Queue - Enqueue`, so the entry gets a System Task ID and runs at its earliest start. `Orchestrator.Playbook.Enqueue` reports Success only after that call returns.
+- Tests cover a non-null System Task ID and that the dispatcher creates a Playbook Instance. The existing minimum-delay and parameter-record tests are unchanged.
 ### Fixed (2026-09-29) - RestartIfNeeded uses the management entry primary key (#35)
 
 - `Orchestrator.Status.RestartIfNeeded` looks up the management Job Queue Entry with `Get` on its primary-key ID. A Ready or In Process entry stays running (`restarted: false`) instead of being cancelled and rescheduled.
