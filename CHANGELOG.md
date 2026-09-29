@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-29) - Playbook.Enqueue schedules the Job Queue Entry (#37)
+
+- `Playbook ori.EnqueuePlaybook` schedules the one-off Job Queue Entry through `Job Queue - Enqueue`, so the entry gets a System Task ID and runs at its earliest start. `Orchestrator.Playbook.Enqueue` reports Success only after that call returns.
+- Tests cover a non-null System Task ID and that the dispatcher creates a Playbook Instance. The existing minimum-delay and parameter-record tests are unchanged.
+
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
 - **The Default build compiles the app without the `internalsVisibleTo` grant for

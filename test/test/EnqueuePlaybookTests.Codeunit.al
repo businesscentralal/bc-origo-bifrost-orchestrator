@@ -194,6 +194,7 @@ codeunit 96414 "Enqueue Playbook Tests"
     procedure EnqueuePlaybookFailsWhenDisabled()
     var
         Playbook: Record "Playbook ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
     begin
         // [SCENARIO] EnqueuePlaybook errors when playbook is not enabled
         Playbook.Init();
@@ -202,7 +203,10 @@ codeunit 96414 "Enqueue Playbook Tests"
         if not Playbook.Insert(true) then
             Playbook.Modify(true);
 
+        LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
+        BindSubscription(LibraryOrchestrator);
         Playbook.EnqueuePlaybook('{"key":"value"}');
+        UnbindSubscription(LibraryOrchestrator);
 
         CleanupPlaybook(Playbook.Code);
     end;
@@ -232,6 +236,55 @@ codeunit 96414 "Enqueue Playbook Tests"
 
         Assert.IsFalse(JQParameter.Get(JQEntryId), 'Parameter should be cleaned up on JQ Entry delete');
 
+        CleanupPlaybook(Playbook.Code);
+    end;
+
+    [Test]
+    procedure EnqueuePlaybookSchedulesRealTask()
+    var
+        Playbook: Record "Playbook ori";
+        JQEntry: Record "Job Queue Entry";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        JQEntryId: Guid;
+    begin
+        // [SCENARIO] EnqueuePlaybook schedules a task, so System Task ID is not null
+        CreateEnabledPlaybook(Playbook, 'ENQ-TEST-10');
+
+        LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
+        BindSubscription(LibraryOrchestrator);
+        JQEntryId := Playbook.EnqueuePlaybook('{}', '', 60);
+        UnbindSubscription(LibraryOrchestrator);
+
+        JQEntry.Get(JQEntryId);
+        Assert.IsFalse(IsNullGuid(JQEntry."System Task ID"), 'System Task ID should be scheduled');
+
+        CleanupPlaybook(Playbook.Code);
+    end;
+
+    [Test]
+    procedure EnqueuePlaybookDispatchesAndCreatesInstance()
+    var
+        Playbook: Record "Playbook ori";
+        JQEntry: Record "Job Queue Entry";
+        Instance: Record "Playbook Instance ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        JQEntryId: Guid;
+    begin
+        // [SCENARIO] Running the dispatcher for an enqueued playbook creates a playbook instance
+        CreateEnabledPlaybook(Playbook, 'ENQ-TEST-11');
+
+        LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
+        BindSubscription(LibraryOrchestrator);
+        JQEntryId := Playbook.EnqueuePlaybook('{}');
+        UnbindSubscription(LibraryOrchestrator);
+
+        JQEntry.Get(JQEntryId);
+        Codeunit.Run(Codeunit::"Playbook JQ Dispatcher ori", JQEntry);
+
+        Instance.SetRange("Playbook Code", Playbook.Code);
+        Assert.RecordIsNotEmpty(Instance);
+
+        Instance.DeleteAll(true);
         CleanupPlaybook(Playbook.Code);
     end;
 
