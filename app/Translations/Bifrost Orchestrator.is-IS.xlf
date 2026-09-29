@@ -939,11 +939,11 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Opna uppsetningu vinnsluraðara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method BuildRestartNotificationEmailItem - NamedType OrchestratorSetupMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2492258583 - Method 920117498 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2492258583 - Method 1838471259 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job '%1' has been restarted</source>
           <target state="translated">Verk '%1' hefur verið endurræst</target>
           <note from="Developer" annotates="general" priority="2">%1 = Job Description, is-IS=Verk '%1' hefur verið endurræst</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method SendRestartNotification - NamedType JobRestartedSubjectMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method TrySendRestartNotificationToRecipient - NamedType JobRestartedSubjectMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2492258583 - Method 2463710073 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
           <source>Test Email for job '%1'</source>

@@ -33,6 +33,7 @@ codeunit 10035535 "Scheduler Handler ori"
         CustomDimensions: Dictionary of [Text, Text];
         NotificationInterface: Interface "Notification ori";
         RestartJobQueueEntryTok: Label 'Restart Job Queue Entry', Locked = true;
+        JobErrorMessage: Text;
     begin
         "Scheduled Entry ori".TestField(ID);
         "Scheduled Entry ori".TestField("Object ID to Run");
@@ -43,14 +44,20 @@ codeunit 10035535 "Scheduler Handler ori"
             case JobQueueEntry.Status of
                 JobQueueEntry.Status::Error:
                     begin
-                        NotificationInterface.SendRestartNotification("Scheduled Entry ori", JobQueueEntry);
                         ActivityLog.LogActivity("Scheduled Entry ori", ActivityLog.Status::Failed, ContextTok, Format(JobQueueEntry.Status), JobQueueEntry."Error Message");
+                        JobErrorMessage := JobQueueEntry."Error Message";
                         if not ShouldSkipRestartByPolicy("Scheduled Entry ori") then
                             RestartJobQueueEntryWithCounter("Scheduled Entry ori", JobQueueEntry, ApiClient)
                         else
                             LogRestartSuppressed("Scheduled Entry ori", CustomDimensions);
-                        CustomDimensions.Add(DelChr(JobQueueEntry.FieldName("Error Message"), '=', ' '), JobQueueEntry."Error Message");
+                        CustomDimensions.Add(DelChr(JobQueueEntry.FieldName("Error Message"), '=', ' '), JobErrorMessage);
                         Log('O4NJQS-0002', RestartJobQueueEntryTok, Verbosity::Warning, CustomDimensions);
+                        // Notify only after the restart: SendRestartNotification Commits to give its isolated
+                        // sender a clean transaction, so notifying first would release the Job Queue Entry lock
+                        // while the entry is still in Error and awaiting restart. Restore the captured error
+                        // text in-memory (the restart clears it) so the email still carries the failure detail.
+                        JobQueueEntry."Error Message" := CopyStr(JobErrorMessage, 1, MaxStrLen(JobQueueEntry."Error Message"));
+                        NotificationInterface.SendRestartNotification("Scheduled Entry ori", JobQueueEntry);
                     end;
                 JobQueueEntry.Status::"On Hold":
                     begin
