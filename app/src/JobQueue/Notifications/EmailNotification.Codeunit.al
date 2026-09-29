@@ -50,12 +50,8 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
     procedure SendRestartNotification("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry")
     var
-        TempEmailItem: Record "Email Item" temporary;
-        OrchestratorSetup: Record "Scheduler Setup ori";
+        EmailRestartSend: Codeunit "Email Restart Send ori";
         IsHandled: Boolean;
-        Success: Boolean;
-        JobRestartedSubjectMsg: Label 'Job ''%1'' has been restarted', Comment = '%1 = Job Description, is-IS=Verk ''%1'' hefur veriÃ° endurrÃ¦st';
-        BodyText, EMailAddress : Text;
     begin
         OnBeforeSendRestartNotification("Scheduled Entry ori", JobQueueEntry, IsHandled);
         if IsHandled then
@@ -64,6 +60,35 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
         if "Scheduled Entry ori"."Notification Recipient" = '' then exit;
         if not IsValidEMailAddress("Scheduled Entry ori") then exit;
 
+        // A failed notification must never abort the scheduler run. The whole write path (setup lookup,
+        // body build and send) runs in an isolated codeunit so any error rolls back and is only logged.
+        // The caller sends this only after the Job Queue Entry has already been restarted, so the Commit()
+        // needed to give Codeunit.Run a clean transaction to trap no longer releases a lock that is still
+        // required (the same pattern the platform Job Queue uses before dispatching a task).
+        Commit();
+        ClearLastError();
+        EmailRestartSend.SetJobQueueEntry(JobQueueEntry);
+        if not EmailRestartSend.Run("Scheduled Entry ori") then
+            LogRestartNotificationError("Scheduled Entry ori");
+
+        OnAfterSendRestartNotification("Scheduled Entry ori", JobQueueEntry);
+    end;
+
+    /// <summary>
+    /// Builds and sends the restart notification email to every configured recipient. Runs inside the
+    /// isolated "Email Restart Send ori" codeunit so any failure (missing setup, send error) rolls back
+    /// without aborting the scheduler.
+    /// </summary>
+    /// <param name="Scheduled Entry ori">The orchestrator entry being restarted.</param>
+    /// <param name="JobQueueEntry">The restarted Job Queue Entry.</param>
+    internal procedure PrepareAndSendRestartNotification(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry")
+    var
+        TempEmailItem: Record "Email Item" temporary;
+        OrchestratorSetup: Record "Scheduler Setup ori";
+        IsHandled: Boolean;
+        JobRestartedSubjectMsg: Label 'Job ''%1'' has been restarted', Comment = '%1 = Job Description, is-IS=Verk ''%1'' hefur verið endurræst';
+        BodyText, EMailAddress : Text;
+    begin
         OrchestratorSetup.Get();
         BodyText := BuildRestartNotificationEmailItem("Scheduled Entry ori", JobQueueEntry, OrchestratorSetup);
 
@@ -74,15 +99,9 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
             TempEmailItem."Plaintext Formatted" := false;
             OnAfterPreparingEmailItemBeforeSend("Scheduled Entry ori", JobQueueEntry, TempEmailItem, BodyText, IsHandled);
             TempEmailItem.SetBodyText(BodyText);
-            if not IsHandled then begin
-                ClearLastError();
-                Success := Codeunit.Run(Codeunit::"Email Send ori", TempEmailItem);
-                if not Success then
-                    LogEmailSendError("Scheduled Entry ori", JobQueueEntry, TempEmailItem);
-            end;
+            if not IsHandled then
+                TempEmailItem.Send(true, "Email Scenario"::"Scheduler ori");
         end;
-
-        OnAfterSendRestartNotification("Scheduled Entry ori", JobQueueEntry);
     end;
 
     /// <summary>
@@ -181,9 +200,7 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
         MailMgt.CheckValidEmailAddresses("Scheduled Entry ori"."Notification Recipient");
     end;
 
-#pragma warning disable AA0137
-    local procedure LogEmailSendError("Scheduled Entry ori": Record "Scheduled Entry ori"; JobQueueEntry: Record "Job Queue Entry"; var TempEmailItem: Record "Email Item" temporary)
-#pragma warning restore AA0137
+    local procedure LogRestartNotificationError("Scheduled Entry ori": Record "Scheduled Entry ori")
     var
         CustomDimensions: Dictionary of [Text, Text];
     begin
@@ -195,7 +212,7 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
         // dimensions already identify which notification failed.
         CustomDimensions.Add('Error', GetLastErrorText());
 
-        Session.LogMessage('O4NJQS-0007', 'Error Sending Email', Verbosity::Error, DataClassification::SystemMetadata, TelemetryScope::All, CustomDimensions);
+        Session.LogMessage('O4NJQS-0008', 'Error Sending Restart Notification', Verbosity::Error, DataClassification::SystemMetadata, TelemetryScope::All, CustomDimensions);
     end;
 
     [IntegrationEvent(false, false)]
