@@ -11,6 +11,15 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - `Orchestrator.Status.RestartIfNeeded` looks up the management Job Queue Entry with `Get` on its primary-key ID. A Ready or In Process entry stays running (`restarted: false`) instead of being cancelled and rescheduled.
 - `RestartIfNeededSkipsWhenAlreadyRunning` and `RestartIfNeededSkipsWhenInProcess` assert a Ready or In Process management entry is left alone (`restarted: false`, same SystemId and status). `RestartIfNeededRestartsWhenInError` asserts an Error entry is rescheduled (`restarted: true`, new SystemId, status no longer Error).
+### Changed (2026-09-29) - Telegram Chat ID in General group (#42)
+
+- Telegram Chat ID has moved to the General group on User Setup, and the NoChatIdErr Icelandic comment encoding is fixed (#42).
+- Requires Bifrost Foundation 28.0.0.152 or later (User Setup General group, core#159).
+### Fixed (2026-09-28) - A failed restart notification no longer aborts the scheduler (#46)
+
+- Setup lookup, body build and each e-mail recipient send for the restart notification now run behind `TryFunction` boundaries inside `Email Notification ori`, so a failure is logged as `O4NJQS-0008` "Error Sending Restart Notification" and the job is still restarted.
+- No `Commit()` is introduced in the restart-notification path, so the scheduler keeps its existing lock/transaction behavior while isolating notification failures from the restart flow.
+- Test: `RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted`.
 
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
