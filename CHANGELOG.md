@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-29) - RestartIfNeeded uses the management entry primary key (#35)
+
+- `Orchestrator.Status.RestartIfNeeded` looks up the management Job Queue Entry with `Get` on its primary-key ID. A Ready or In Process entry stays running (`restarted: false`) instead of being cancelled and rescheduled.
+- `RestartIfNeededSkipsWhenAlreadyRunning` and `RestartIfNeededSkipsWhenInProcess` assert a Ready or In Process management entry is left alone (`restarted: false`, same SystemId and status). `RestartIfNeededRestartsWhenInError` asserts an Error entry is rescheduled (`restarted: true`, new SystemId, status no longer Error).
 ### Changed (2026-09-29) - Telegram Chat ID in General group (#42)
 
 - Telegram Chat ID has moved to the General group on User Setup, and the NoChatIdErr Icelandic comment encoding is fixed (#42).

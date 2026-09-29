@@ -80,13 +80,13 @@ codeunit 10035551 "Status Msg Handler ori"
         JQEntry: Record "Job Queue Entry";
         Mgt: Codeunit "Scheduler Mgt ori";
         ResponseJson: JsonObject;
-        MgtJQId: Guid;
+        MgtJQPkId: Guid;
     begin
         Setup.GetRecordOnce();
-        MgtJQId := Mgt.GetManagementJobQueueId();
-        if not IsNullGuid(MgtJQId) then begin
+        MgtJQPkId := Mgt.GetManagementJobQueueId();
+        if not IsNullGuid(MgtJQPkId) then begin
             JQEntry.SetLoadFields(Status);
-            if JQEntry.GetBySystemId(MgtJQId) then
+            if JQEntry.Get(MgtJQPkId) then
                 if JQEntry.Status in [JQEntry.Status::Ready, JQEntry.Status::"In Process"] then begin
                     ResponseJson.Add('status', 'Success');
                     ResponseJson.Add('message', AlreadyRunningMsg);
