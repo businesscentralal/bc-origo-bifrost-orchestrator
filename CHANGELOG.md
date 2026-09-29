@@ -7,7 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-29) - Telegram Chat ID in General group (#42)
+
 - Telegram Chat ID has moved to the General group on User Setup, and the NoChatIdErr Icelandic comment encoding is fixed (#42).
+- Requires Bifrost Foundation 28.0.0.152 or later (User Setup General group, core#159).
 
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
