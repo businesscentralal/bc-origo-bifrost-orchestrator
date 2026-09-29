@@ -278,6 +278,8 @@ codeunit 96414 "Enqueue Playbook Tests"
         JQEntryId := Playbook.EnqueuePlaybook('{}');
         UnbindSubscription(LibraryOrchestrator);
 
+        // Job Queue - Enqueue commits. A fresh transaction keeps the later WhoAmI seed catchable.
+        Commit();
         JQEntry.Get(JQEntryId);
         Codeunit.Run(Codeunit::"Playbook JQ Dispatcher ori", JQEntry);
 
