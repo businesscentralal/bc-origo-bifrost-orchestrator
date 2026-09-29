@@ -55,6 +55,40 @@ codeunit 96427 "SE Run Msg Tests"
     end;
 
     [Test]
+    procedure ExecuteRunReturnsErrorWhenJobFails()
+    var
+        Entry: Record "Scheduled Entry ori";
+        TempJobQueueEntry: Record "Job Queue Entry" temporary;
+        TempArgument: Record "Message Argument ori" temporary;
+        Handler: Codeunit "SE Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+        JobQueueEntryId: Guid;
+    begin
+        // [SCENARIO] AC-2 A job that errors returns Error and the job's own error text
+        CreateCodeunitEntry(Entry, Codeunit::"Fail Sample");
+        CreateArgument(TempArgument, '{"id": "' + Format(Entry.SystemId, 0, 4) + '"}');
+
+        LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRun(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        ResponseJson := TempArgument.GetResponseJson();
+        ResponseJson.Get('status', Token);
+        Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
+        ResponseJson.Get('message', Token);
+        Assert.AreEqual('Deliberate failure from the test codeunit.', Token.AsValue().AsText(), 'Message should be the job error');
+
+        LibraryOrchestrator.GetCollectedJobQueueEntries(TempJobQueueEntry);
+        TempJobQueueEntry.SetRange("Object ID to Run", Codeunit::"Fail Sample");
+        if TempJobQueueEntry.FindFirst() then
+            JobQueueEntryId := TempJobQueueEntry.ID;
+        CleanupEntry(Entry, JobQueueEntryId);
+    end;
+
+    [Test]
     procedure ExecuteRunReturnsErrorWhenDispatchFails()
     var
         Entry: Record "Scheduled Entry ori";
@@ -84,7 +118,7 @@ codeunit 96427 "SE Run Msg Tests"
         ResponseJson.Get('status', Token);
         Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
         ResponseJson.Get('message', Token);
-        Assert.AreNotEqual('', Token.AsValue().AsText(), 'Error message should not be empty');
+        Assert.AreEqual('Deliberate failure from the test codeunit.', Token.AsValue().AsText(), 'Message should be the job error');
 
         LibraryOrchestrator.GetCollectedJobQueueEntries(TempJobQueueEntry);
         TempJobQueueEntry.SetRange("Object ID to Run", Codeunit::"Fail Sample");

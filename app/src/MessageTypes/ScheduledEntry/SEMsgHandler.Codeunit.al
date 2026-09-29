@@ -17,8 +17,9 @@ codeunit 10035550 "SE Msg Handler ori"
     /// <summary>
     /// Executes the orchestrator entry once, right now, with no confirmation dialog. A throwaway
     /// non-recurring Job Queue Entry is used, so the entry's own schedule is left alone. The
-    /// response is Success when the dispatcher or its error handler completed, and Error otherwise.
-    /// The entry is identified by the <c>id</c> request property or, failing that, by a GUID subject.
+    /// response is Success only when the dispatcher returns true. Otherwise the status is Error
+    /// and the message is this run's error text. The entry is identified by the <c>id</c>
+    /// request property or, failing that, by a GUID subject.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteRun(var Argument: Record "Message Argument ori")

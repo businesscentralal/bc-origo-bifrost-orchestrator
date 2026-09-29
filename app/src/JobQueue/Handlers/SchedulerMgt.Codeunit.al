@@ -139,8 +139,8 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// Runs a temporary non-recurrent copy of the selected orchestrator entry once, with no confirmation and no dialog.
     /// </summary>
     /// <param name="SelectedJobQueueOrchestratorEntry">The orchestrator entry to execute.</param>
-    /// <param name="Success">True when the dispatcher or the error handler completed.</param>
-    /// <param name="ErrorText">Error text when Success is false.</param>
+    /// <param name="Success">True only when the dispatcher completed the job. A job that errors returns false.</param>
+    /// <param name="ErrorText">This run's error text when Success is false.</param>
     procedure RunJobQueueEntryOnceHeadless(var SelectedJobQueueOrchestratorEntry: Record "Scheduled Entry ori"; var Success: Boolean; var ErrorText: Text)
     var
         JobQueueLogEntry: Record "Job Queue Log Entry";
@@ -184,14 +184,14 @@ codeunit 10035536 "Scheduler Mgt ori"
         // Run the job queue
         SuccessDispatcher := Codeunit.Run(Codeunit::"Job Queue Dispatcher", JobQueueEntry);
 
-        // If JQ fails, run the error handler
+        // If JQ fails, run the error handler. Capture the job error first: the handler replaces it.
         if not SuccessDispatcher then begin
+            CapturedErrorText := GetLastErrorText();
             SuccessErrorHandler := Codeunit.Run(Codeunit::"Job Queue Error Handler", JobQueueEntry);
 
             // If the error handler fails, save the error (Non-AL errors will automatically surface to end-user)
             // If it is unable to save the error (No permission etc), it should also just be surfaced to the end-user.
             if not SuccessErrorHandler then begin
-                CapturedErrorText := GetLastErrorText();
                 JobQueueEntry.SetError(CapturedErrorText);
                 JobQueueEntry.InsertLogEntry(JobQueueLogEntry);
                 JobQueueEntry.FinalizeLogEntry(JobQueueLogEntry, GetLastErrorCallStack());
@@ -204,9 +204,12 @@ codeunit 10035536 "Scheduler Mgt ori"
         JobQueueLogEntry.SetLoadFields(Status, "Error Message");
         JobQueueLogEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         JobQueueLogEntry.SetRange(ID, JobQueueEntry.ID);
-        LogEntryFound := JobQueueLogEntry.FindFirst();
+        if not SuccessDispatcher then
+            JobQueueLogEntry.SetRange(Status, JobQueueLogEntry.Status::Error);
+        // Newest row for this entry ID. The status filter drops the dispatcher's leftover In Process row.
+        LogEntryFound := JobQueueLogEntry.FindLast();
 
-        Success := SuccessDispatcher or SuccessErrorHandler;
+        Success := SuccessDispatcher;
         if not Success then
             if LogEntryFound and (JobQueueLogEntry."Error Message" <> '') then
                 ErrorText := JobQueueLogEntry."Error Message"
