@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-29) - Entry.Run runs headlessly and uses the entry Record ID (#36)
+
+- `Orchestrator.Entry.Run` runs the scheduled entry with no confirmation dialog. It returns `status: Success` only when the dispatcher completes the job, and `status: Error` with that run's error text when the job fails.
+- The one-time Job Queue Entry copies `Record ID to Process` from the scheduled entry, so a playbook entry runs that playbook.
+- The interactive Run Now action still asks for confirmation and shows the progress and completion messages.
 ### Fixed (2026-09-29) - Playbook.Enqueue schedules the Job Queue Entry (#37)
 
 - `Playbook ori.EnqueuePlaybook` schedules the one-off Job Queue Entry through `Job Queue - Enqueue`, so the entry gets a System Task ID and runs at its earliest start. `Orchestrator.Playbook.Enqueue` reports Success only after that call returns.
