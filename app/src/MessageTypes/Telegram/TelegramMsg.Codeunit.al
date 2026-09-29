@@ -86,7 +86,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
         BotTokenNotConfiguredErr: Label 'Telegram Bot Token is not configured in Orchestrator Setup.', Comment = 'is-IS=Telegram-vÃ©lmennislykill er ekki stilltur Ã­ uppsetningu vinnsluraÃ°ara.';
         HttpClientNotEnabledErr: Label 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', Comment = 'is-IS=HTTP-biÃ°larabeiÃ°nir eru ekki virkar fyrir Ã¾essa viÃ°bÃ³t. VirkjaÃ°u Leyfa HttpClient-beiÃ°nir Ã­ stillingum viÃ°bÃ³tar Ã¡Ã°ur en Telegram-skilaboÃ° eru send.';
         MissingMessageErr: Label '"message" is required in the request data.', Comment = 'is-IS="message" er nauÃ°synlegt Ã­ beiÃ°nigÃ¶gnum.';
-        NoChatIdErr: Label 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', Comment = 'is-IS=Ekkert Telegram-spjallauÃ°kenni stillt fyrir nÃºverandi notanda. Stilltu Ã¾aÃ° Ã­ BifrÃ¶st notandauppsetningu.';
+        NoChatIdErr: Label 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', Comment = 'is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.';
         SendFailedErr: Label 'Failed to send Telegram message to Chat ID %1. Response: %2', Comment = '%1 = chat id, %2 = API response, is-IS=Ekki tÃ³kst aÃ° senda Telegram-skilaboÃ° Ã¡ spjallauÃ°kenni %1. Svar: %2';
 
     local procedure VerifyHttpClientEnabled()

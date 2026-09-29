@@ -6,7 +6,7 @@ pageextension 10035584 "User Setup Ext ori" extends "User Setup Editor ori"
 {
     layout
     {
-        addafter("Location Code")
+        addlast(General)
         {
             field("Telegram Chat ID ori"; Rec."Telegram Chat ID ori")
             {

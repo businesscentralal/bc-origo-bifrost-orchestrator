@@ -1392,7 +1392,7 @@
         <trans-unit id="Codeunit 2638307712 - NamedType 2167751529" size-unit="char" translate="yes" xml:space="preserve">
           <source>No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.</source>
           <target state="translated">Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í Bifröst notandauppsetningu.</note>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType NoChatIdErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 652305382" size-unit="char" translate="yes" xml:space="preserve">
