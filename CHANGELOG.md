@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-29) - RestartIfNeeded uses the management entry primary key (#35)
+
+- `Orchestrator.Status.RestartIfNeeded` looks up the management Job Queue Entry with `Get` on its primary-key ID. A Ready or In Process entry stays running (`restarted: false`) instead of being cancelled and rescheduled.
+- Tests `RestartIfNeededSkipsWhenAlreadyRunning` and `RestartIfNeededRestartsWhenInError` are `[Test]` procedures again.
+
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
 - **The Default build compiles the app without the `internalsVisibleTo` grant for

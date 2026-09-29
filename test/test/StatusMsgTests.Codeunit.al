@@ -114,7 +114,7 @@ codeunit 96419 "Status Msg Tests"
         Assert.IsTrue(Token.AsValue().AsBoolean(), 'Should have restarted');
     end;
 
-    // Handler uses GetBySystemId — can't simulate in tests without creating via ScheduleJobQueueEntry
+    [Test]
     procedure RestartIfNeededSkipsWhenAlreadyRunning()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -149,7 +149,7 @@ codeunit 96419 "Status Msg Tests"
         CleanupManagementJQEntry();
     end;
 
-    // Handler uses GetBySystemId — can't simulate in tests without creating via ScheduleJobQueueEntry
+    [Test]
     procedure RestartIfNeededRestartsWhenInError()
     var
         TempArgument: Record "Message Argument ori" temporary;

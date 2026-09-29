@@ -86,7 +86,7 @@ codeunit 10035551 "Status Msg Handler ori"
         MgtJQId := Mgt.GetManagementJobQueueId();
         if not IsNullGuid(MgtJQId) then begin
             JQEntry.SetLoadFields(Status);
-            if JQEntry.GetBySystemId(MgtJQId) then
+            if JQEntry.Get(MgtJQId) then
                 if JQEntry.Status in [JQEntry.Status::Ready, JQEntry.Status::"In Process"] then begin
                     ResponseJson.Add('status', 'Success');
                     ResponseJson.Add('message', AlreadyRunningMsg);
