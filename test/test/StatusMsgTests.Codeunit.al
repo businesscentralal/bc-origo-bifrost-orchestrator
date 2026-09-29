@@ -119,22 +119,18 @@ codeunit 96419 "Status Msg Tests"
     var
         TempArgument: Record "Message Argument ori" temporary;
         JQEntry: Record "Job Queue Entry";
+        JQEntryBefore: Record "Job Queue Entry";
         Handler: Codeunit "Status Msg Handler ori";
-        Mgt: Codeunit "Scheduler Mgt ori";
         LibraryOrchestrator: Codeunit "Library Orchestrator";
         ResponseJson: JsonObject;
         Token: JsonToken;
     begin
-        // [SCENARIO] RestartIfNeeded is a no-op when management JQ entry is Ready
+        // [SCENARIO] RestartIfNeeded leaves a Ready management JQ entry unchanged
         CleanupManagementJQEntry();
-
         JQEntry.Init();
-        JQEntry.ID := Mgt.GetManagementJobQueueId();
         JQEntry.Status := JQEntry.Status::Ready;
-        JQEntry."Object Type to Run" := JQEntry."Object Type to Run"::Codeunit;
-        JQEntry."Object ID to Run" := Codeunit::"Scheduler Mgt ori";
-        if not JQEntry.Insert(false) then
-            JQEntry.Modify(false);
+        InsertManagementJQEntry(JQEntry);
+        JQEntryBefore := JQEntry;
 
         CreateArgument(TempArgument, '{}');
 
@@ -145,6 +141,39 @@ codeunit 96419 "Status Msg Tests"
         ResponseJson := TempArgument.GetResponseJson();
         ResponseJson.Get('restarted', Token);
         Assert.IsFalse(Token.AsValue().AsBoolean(), 'Should not have restarted');
+        AssertManagementJQEntryUnchanged(JQEntryBefore);
+
+        CleanupManagementJQEntry();
+    end;
+
+    [Test]
+    procedure RestartIfNeededSkipsWhenInProcess()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        JQEntry: Record "Job Queue Entry";
+        JQEntryBefore: Record "Job Queue Entry";
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+    begin
+        // [SCENARIO] RestartIfNeeded leaves an In Process management JQ entry unchanged
+        CleanupManagementJQEntry();
+        JQEntry.Init();
+        JQEntry.Status := JQEntry.Status::"In Process";
+        InsertManagementJQEntry(JQEntry);
+        JQEntryBefore := JQEntry;
+
+        CreateArgument(TempArgument, '{}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        ResponseJson := TempArgument.GetResponseJson();
+        ResponseJson.Get('restarted', Token);
+        Assert.IsFalse(Token.AsValue().AsBoolean(), 'Should not have restarted');
+        AssertManagementJQEntryUnchanged(JQEntryBefore);
 
         CleanupManagementJQEntry();
     end;
@@ -154,22 +183,19 @@ codeunit 96419 "Status Msg Tests"
     var
         TempArgument: Record "Message Argument ori" temporary;
         JQEntry: Record "Job Queue Entry";
+        JQEntryBefore: Record "Job Queue Entry";
         Handler: Codeunit "Status Msg Handler ori";
         Mgt: Codeunit "Scheduler Mgt ori";
         LibraryOrchestrator: Codeunit "Library Orchestrator";
         ResponseJson: JsonObject;
         Token: JsonToken;
     begin
-        // [SCENARIO] RestartIfNeeded restarts when management JQ entry is in Error
+        // [SCENARIO] RestartIfNeeded reschedules a management JQ entry that is in Error
         CleanupManagementJQEntry();
-
         JQEntry.Init();
-        JQEntry.ID := Mgt.GetManagementJobQueueId();
         JQEntry.Status := JQEntry.Status::Error;
-        JQEntry."Object Type to Run" := JQEntry."Object Type to Run"::Codeunit;
-        JQEntry."Object ID to Run" := Codeunit::"Scheduler Mgt ori";
-        if not JQEntry.Insert(false) then
-            JQEntry.Modify(false);
+        InsertManagementJQEntry(JQEntry);
+        JQEntryBefore := JQEntry;
 
         CreateArgument(TempArgument, '{}');
 
@@ -181,7 +207,39 @@ codeunit 96419 "Status Msg Tests"
         ResponseJson.Get('restarted', Token);
         Assert.IsTrue(Token.AsValue().AsBoolean(), 'Should have restarted when in Error');
 
+        JQEntry.SetLoadFields(SystemId, Status);
+        Assert.IsTrue(JQEntry.Get(Mgt.GetManagementJobQueueId()), 'Management entry should exist after restart');
+        Assert.AreNotEqual(JQEntryBefore.SystemId, JQEntry.SystemId, 'SystemId should change when the entry is rescheduled');
+        Assert.AreNotEqual(JQEntry.Status::Error, JQEntry.Status, 'Status should no longer be Error');
+
         CleanupManagementJQEntry();
+    end;
+
+    local procedure InsertManagementJQEntry(var JQEntry: Record "Job Queue Entry")
+    var
+        Mgt: Codeunit "Scheduler Mgt ori";
+    begin
+        JQEntry.ID := Mgt.GetManagementJobQueueId();
+        JQEntry."Earliest Start Date/Time" := CreateDateTime(DMY2Date(15, 6, 2026), 093000T);
+        JQEntry."Object Type to Run" := JQEntry."Object Type to Run"::Codeunit;
+        JQEntry."Object ID to Run" := Codeunit::"Scheduler Mgt ori";
+        if not JQEntry.Insert(false) then
+            JQEntry.Modify(false);
+
+        JQEntry.SetLoadFields(SystemId, Status, "Earliest Start Date/Time");
+        JQEntry.Get(Mgt.GetManagementJobQueueId());
+    end;
+
+    local procedure AssertManagementJQEntryUnchanged(JQEntryBefore: Record "Job Queue Entry")
+    var
+        JQEntry: Record "Job Queue Entry";
+        Mgt: Codeunit "Scheduler Mgt ori";
+    begin
+        JQEntry.SetLoadFields(SystemId, Status, "Earliest Start Date/Time");
+        Assert.IsTrue(JQEntry.Get(Mgt.GetManagementJobQueueId()), 'Management entry should still exist');
+        Assert.AreEqual(JQEntryBefore.SystemId, JQEntry.SystemId, 'SystemId should be unchanged');
+        Assert.AreEqual(JQEntryBefore.Status, JQEntry.Status, 'Status should be unchanged');
+        Assert.AreEqual(JQEntryBefore."Earliest Start Date/Time", JQEntry."Earliest Start Date/Time", 'Earliest Start Date/Time should be unchanged');
     end;
 
     local procedure CreateArgument(var TempArgument: Record "Message Argument ori" temporary; RequestJsonText: Text)
