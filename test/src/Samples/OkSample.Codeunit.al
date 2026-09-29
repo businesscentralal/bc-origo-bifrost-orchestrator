@@ -1,12 +1,14 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost.Orchestrator;
+using System.Threading;
 /// <summary>
 /// Sample codeunit used in tests to register and run a basic job queue scheduler entry.
 /// </summary>
 codeunit 96410 "Ok Sample"
 {
     Access = Internal;
+    TableNo = "Job Queue Entry";
     EventSubscriberInstance = Manual;
 
     trigger OnRun()

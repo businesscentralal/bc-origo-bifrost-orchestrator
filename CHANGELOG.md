@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-09-29) - Entry.Run runs headlessly and uses the entry Record ID (#36)
+
+- `Orchestrator.Entry.Run` runs the scheduled entry with no confirmation dialog, and returns `status: Error` when the dispatcher and its error handler both fail.
+- The one-time Job Queue Entry copies `Record ID to Process` from the scheduled entry, so a playbook entry runs that playbook.
+- The interactive Run Now action still asks for confirmation and shows the progress and completion messages.
+
 ### Fixed (2026-09-28) - Default build never ships internalsVisibleTo; CI check fails it if it does (core#129)
 
 - **The Default build compiles the app without the `internalsVisibleTo` grant for
