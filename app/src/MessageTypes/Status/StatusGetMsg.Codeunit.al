@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori"
+codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -37,6 +37,108 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'Get orchestrator health status and entry counts.', Comment = 'is-IS=SÃ¦kja heilsustÃ¶Ã°u Ã¡Ã¦tlara og fjÃ¶lda fÃ¦rslna.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'orchestrator status, scheduler status, health, entry counts, job queue status', Comment = 'is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Read the orchestrator health status and scheduled entry counts. Read-only. Use Orchestrator.Status.Restart to restart the orchestrator.', Comment = 'is-IS=Lestu heilsustöðu áætlunara og fjölda áætlaðra færslna. Lesaðgerð. Notaðu Orchestrator.Status.Restart til að endurræsa áætlunara.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'Current orchestrator status.');
+        Parts.AddResponseField(Fields, 'jobQueueCategoryCode', 'string', 'Management Job Queue category.');
+        Parts.AddResponseField(Fields, 'logJobQueueActivity', 'boolean', 'Whether Job Queue activity is logged.');
+        Parts.AddResponseField(Fields, 'entries', 'object', 'Total, blocked and active scheduled entries.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.AddRuntimeError(Errors, 'The scheduler setup cannot be read.', 'Check the orchestrator setup.');
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('read', 'Reads scheduler setup and scheduled entry counts.', true, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Related(Related, 'Orchestrator.Status.Restart', 'Use this when the orchestrator must be restarted.');
+        exit(true);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Read status', '{"type":"Orchestrator.Status.Get"}', '{"status":"Success","orchestratorStatus":"Ready","entries":{"total":2,"blocked":0,"active":2}}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Returns the current orchestrator health, setup values and scheduled entry counts.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'The active count is calculated from entries that are not blocked.';
+        exit(true);
     end;
 
     /// <summary>

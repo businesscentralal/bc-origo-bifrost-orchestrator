@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori"
+codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -37,6 +37,99 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'AI-friendly overview of all Job Queue + Playbook Workflow message types with setup guide via Data.Records.Set/Get.', Comment = 'is-IS=Yfirlit fyrir gervigreind yfir allar vinnsluraÃ°a- og keÃ°juvinnsluskilaboÃ°ategundir meÃ° uppsetningarleiÃ°beiningum um Data.Records.Set/Get.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'orchestrator help, message type help, playbook help, setup guide, API overview', Comment = 'is-IS=áætlara hjálp, hjálp skilaboðategundar, keðjuhjálp, uppsetningarleiðbeiningar, API-yfirlit';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Read the Bifrost Orchestrator message type overview and setup guidance. Read-only. Use Help.Implementation.Get for a single type contract.', Comment = 'is-IS=Lestu yfirlit yfir skilaboðategundir Bifröst stjórnanda og uppsetningarleiðbeiningar. Lesaðgerð. Notaðu Help.Implementation.Get fyrir samning einnar tegundar.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'result', 'object', 'Overview markdown result.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('read', 'Reads the Orchestrator help overview.', true, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Read orchestrator help', '{"type":"Help.Orchestrator.Get"}', '{"status":"Success","result":{"format":"markdown"}}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Returns the compatibility overview for Job Queue and Playbook Workflow message types.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'For machine-readable per-type chapters use Help.Implementation.Get.';
+        exit(true);
     end;
 
     /// <summary>

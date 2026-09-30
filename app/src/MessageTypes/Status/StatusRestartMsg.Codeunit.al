@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori"
+codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -37,6 +37,106 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'Unconditionally restart the orchestrator.', Comment = 'is-IS=EndurrÃ¦sa Ã¡Ã¦tlara skilyrÃ°islaust.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'restart orchestrator, restart scheduler, restart management job queue, force restart', Comment = 'is-IS=endurræsa áætlara, endurræsa stjóra, endurræsa stjórnun vinnsluraðar, þvinga endurræsingu';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Write operation. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Restart result.');
+        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'Status after scheduling.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.AddRuntimeError(Errors, 'The scheduler cannot be restarted.', 'Check scheduler setup and Job Queue permissions.');
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('write', 'Cancels and schedules the orchestrator management Job Queue Entry.', false, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Related(Related, 'Orchestrator.Status.RestartIfNeeded', 'Use this when a running orchestrator should not be interrupted.');
+        exit(true);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Restart orchestrator', '{"type":"Orchestrator.Status.Restart"}', '{"status":"Success","orchestratorStatus":"Ready"}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Cancels and schedules the orchestrator management Job Queue Entry.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'This operation is unconditional and can interrupt a currently running management job.';
+        exit(true);
     end;
 
     /// <summary>

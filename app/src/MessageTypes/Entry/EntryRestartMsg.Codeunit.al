@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-codeunit 10035567 "Entry Restart Msg ori" implements "Msg Interface ori"
+codeunit 10035567 "Entry Restart Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -37,6 +37,115 @@ codeunit 10035567 "Entry Restart Msg ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'Restart a Job Queue Entry by setting status to Ready.', Comment = 'is-IS=EndurrÃ¦sa vinnslurÃ¶Ã°arfÃ¦rslu meÃ° Ã¾vÃ­ aÃ° setja stÃ¶Ã°u Ã¡ TilbÃºiÃ°.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'restart job queue entry, restart entry, set ready, retry job queue', Comment = 'is-IS=endurræsa vinnsluröðarfærslu, endurræsa færslu, setja tilbúið, reyna vinnsluröð aftur';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Restart a Job Queue Entry unconditionally by setting it to Ready. Write operation. Use Orchestrator.JobQueueEntry.RestartIfNeeded to restart only failed or held entries.', Comment = 'is-IS=Endurræstu vinnsluröðarfærslu skilyrðislaust með því að setja hana í Tilbúið. Skrifaðgerð. Notaðu Orchestrator.JobQueueEntry.RestartIfNeeded til að endurræsa aðeins bilaðar eða stöðvaðar færslur.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Forms.Add('guid');
+        Envelope := Parts.Envelope(Forms, 'The Job Queue Entry SystemId, supplied in data.id or as subject.', false);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Target := Parts.Target('data.id, subject', 'guid', 'The Job Queue Entry SystemId.');
+        exit(true);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'Job Queue Entry SystemId.'));
+        exit(true);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'Job Queue Entry SystemId.');
+        Parts.AddResponseField(Fields, 'entryStatus', 'string', 'The resulting Job Queue status.');
+        Parts.AddResponseField(Fields, 'description', 'string', 'Entry description.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Result message.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.AddRecordErrors(Errors, 'Job Queue Entry');
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('write', 'Sets the Job Queue Entry status to Ready.', true, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Related(Related, 'Orchestrator.JobQueueEntry.RestartIfNeeded', 'Use this when restart should happen only for Error or On Hold entries.');
+        exit(true);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Restart an entry', '{"type":"Orchestrator.JobQueueEntry.Restart","data":{"id":"<systemId>"}}', '{"status":"Success","entryStatus":"Ready"}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Sets the selected Job Queue Entry to Ready regardless of its current state.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'Use RestartIfNeeded when an already running or ready entry must not be disturbed.';
+        exit(true);
     end;
 
     /// <summary>

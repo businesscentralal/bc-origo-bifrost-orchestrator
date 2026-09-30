@@ -7,6 +7,18 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-29) - Message contracts Batch 1 (#56)
+
+- Added Foundation message contracts and bilingual discovery metadata for Entry, Status, Playbook, Job Queue Entry, Help, Email and Telegram message types.
+- Contract chapters now describe the actual request keys, responses, errors, effects, related types and examples; the legacy markdown provider is retained only as a compatibility shim.
+- Added Batch 1 contract conformance tests and shared contract parts.
+
+### Changed (2026-09-29) - Message contracts Batch 2 (#56)
+
+- Added Foundation message contracts and bilingual discovery metadata for Report, Workspace and ReportLayout message types.
+- Report rendering, processing-only execution and tenant layout import contracts describe their actual JSON and binary response behavior.
+- Added Batch 2 contract conformance tests and shared contract parts.
+
 ### Fixed (2026-09-29) - Entry.Run runs headlessly and uses the entry Record ID (#36)
 
 - `Orchestrator.Entry.Run` runs the scheduled entry with no confirmation dialog. It returns `status: Success` only when the dispatcher completes the job, and `status: Error` with that run's error text when the job fails.

@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori"
+codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -25,6 +25,115 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'Reschedule an orchestrator entry for immediate execution.', Comment = 'is-IS=EndurÃ¡Ã¦tla Ã¡Ã¦tlunarfÃ¦rslu til tafarlausrar keyrslu.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'schedule entry, reschedule entry, rebuild job queue schedule, run entry now', Comment = 'is-IS=áætlun færslu, enduráætlun færslu, endurbyggja vinnsluraðaráætlun, keyra færslu núna';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Reschedule an orchestrator entry for immediate execution. Write operation. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Forms.Add('guid');
+        Envelope := Parts.Envelope(Forms, 'The Scheduled Entry SystemId in data.id or as subject.', false);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Target := Parts.Target('data.id, subject', 'guid', 'The Scheduled Entry SystemId.');
+        exit(true);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'Scheduled Entry SystemId.'));
+        exit(true);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'Scheduled Entry SystemId.');
+        Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Whether the entry is blocked.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Scheduling result.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.AddRecordErrors(Errors, 'Scheduled Entry');
+        Parts.AddRuntimeError(Errors, 'The entry is blocked or cannot be scheduled.', 'Unblock the entry and check scheduling credentials.');
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('write', 'Rebuilds the Job Queue schedule for the orchestrator entry.', false, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Related(Related, 'Orchestrator.Entry.Run', 'Use this for an immediate foreground execution without rebuilding the recurring schedule.');
+        exit(true);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Schedule an entry', '{"type":"Orchestrator.Entry.Schedule","data":{"id":"<systemId>"}}', '{"status":"Success","id":"<systemId>","message":"Orchestrator entry scheduled."}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Rebuilds the Job Queue schedule for an existing orchestrator entry and schedules it for immediate execution.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'Blocked entries are refused; configured API credentials are used when available, otherwise local scheduling is used.';
+        exit(true);
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
