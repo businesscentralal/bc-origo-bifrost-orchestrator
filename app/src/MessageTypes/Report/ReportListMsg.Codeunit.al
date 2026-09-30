@@ -71,8 +71,11 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
     end;
 
     procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        exit(false);
+        Parts.AddRuntimeError(Errors, 'processingOnly is not a boolean.', 'Send true, false, or omit processingOnly.');
+        exit(true);
     end;
 
     procedure GetEffect(var Effect: JsonObject): Boolean

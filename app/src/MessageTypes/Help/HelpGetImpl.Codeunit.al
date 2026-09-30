@@ -84,8 +84,11 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     end;
 
     procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        exit(false);
+        Parts.AddRuntimeError(Errors, 'The request version is not 1.0.', 'Send version 1.0.');
+        exit(true);
     end;
 
     procedure GetEffect(var Effect: JsonObject): Boolean
