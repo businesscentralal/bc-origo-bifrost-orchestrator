@@ -55,6 +55,7 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "Email Notification ori" = X,
         codeunit "Email Send Msg ori" = X,
         codeunit "Email Send ori" = X,
+        codeunit "Email Restart Send ori" = X,
         codeunit "Entry Msg Handler ori" = X,
         codeunit "Entry Restart Msg ori" = X,
         codeunit "Entry RestartIf Msg ori" = X,

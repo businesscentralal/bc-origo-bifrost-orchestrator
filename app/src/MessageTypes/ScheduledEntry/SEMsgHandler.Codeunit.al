@@ -15,8 +15,10 @@ codeunit 10035550 "SE Msg Handler ori"
         tabledata "Job Queue Entry" = RM;
 
     /// <summary>
-    /// Executes the orchestrator entry once, right now. A throwaway non-recurring Job Queue Entry
-    /// is used, so the entry's own schedule is left alone. The entry is identified by the <c>id</c>
+    /// Executes the orchestrator entry once, right now, with no confirmation dialog. A throwaway
+    /// non-recurring Job Queue Entry is used, so the entry's own schedule is left alone. The
+    /// response is Success only when the dispatcher returns true. Otherwise the status is Error
+    /// and the message is this run's error text. The entry is identified by the <c>id</c>
     /// request property or, failing that, by a GUID subject.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
@@ -24,10 +26,15 @@ codeunit 10035550 "SE Msg Handler ori"
     var
         Entry: Record "Scheduled Entry ori";
         Mgt: Codeunit "Scheduler Mgt ori";
+        Success: Boolean;
+        ErrorText: Text;
     begin
         FindEntry(Argument, Entry);
-        Mgt.RunJobQueueEntryOnce(Entry);
-        RespondWithEntry(Argument, Entry, ExecutedMsg);
+        Mgt.RunJobQueueEntryOnceHeadless(Entry, Success, ErrorText);
+        if Success then
+            RespondWithEntry(Argument, Entry, ExecutedMsg)
+        else
+            RespondWithError(Argument, Entry, ErrorText);
     end;
 
     /// <summary>
@@ -106,7 +113,9 @@ codeunit 10035550 "SE Msg Handler ori"
                 Evaluate(EntryId, Argument.Subject)
             else
                 Error(MissingIdErr);
-        Entry.SetLoadFields(Blocked, "Notification Type", "Notification Recipient");
+        Entry.SetLoadFields(
+            Blocked, "Notification Type", "Notification Recipient",
+            "Object Type to Run", "Object ID to Run", "Record ID to Process", Description);
         if not Entry.GetBySystemId(EntryId) then
             Entry.Get(EntryId);
     end;
@@ -119,6 +128,17 @@ codeunit 10035550 "SE Msg Handler ori"
         ResponseJson.Add('id', Format(Entry.SystemId, 0, 4));
         ResponseJson.Add('blocked', Entry.Blocked);
         ResponseJson.Add('message', Message);
+        Argument.SetResponseJson(ResponseJson);
+    end;
+
+    local procedure RespondWithError(var Argument: Record "Message Argument ori"; Entry: Record "Scheduled Entry ori"; ErrorText: Text)
+    var
+        ResponseJson: JsonObject;
+    begin
+        ResponseJson.Add('status', 'Error');
+        ResponseJson.Add('id', Format(Entry.SystemId, 0, 4));
+        ResponseJson.Add('blocked', Entry.Blocked);
+        ResponseJson.Add('message', ErrorText);
         Argument.SetResponseJson(ResponseJson);
     end;
 

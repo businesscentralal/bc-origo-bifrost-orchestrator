@@ -939,11 +939,11 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Opna uppsetningu vinnsluraðara</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method BuildRestartNotificationEmailItem - NamedType OrchestratorSetupMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2492258583 - Method 920117498 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2492258583 - Method 1838471259 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job '%1' has been restarted</source>
           <target state="translated">Verk '%1' hefur verið endurræst</target>
           <note from="Developer" annotates="general" priority="2">%1 = Job Description, is-IS=Verk '%1' hefur verið endurræst</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method SendRestartNotification - NamedType JobRestartedSubjectMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method TrySendRestartNotificationToRecipient - NamedType JobRestartedSubjectMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2492258583 - Method 2463710073 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
           <source>Test Email for job '%1'</source>
@@ -1392,7 +1392,7 @@
         <trans-unit id="Codeunit 2638307712 - NamedType 2167751529" size-unit="char" translate="yes" xml:space="preserve">
           <source>No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.</source>
           <target state="translated">Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í Bifröst notandauppsetningu.</note>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType NoChatIdErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 652305382" size-unit="char" translate="yes" xml:space="preserve">

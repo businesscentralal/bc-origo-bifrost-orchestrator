@@ -32,6 +32,7 @@ permissionset 10035537 "BIFROST OrchMgt ori"
         codeunit "Scheduler Manual Evt ori" = X,
         codeunit "Schedule Calc ori" = X,
         codeunit "Email Send ori" = X,
+        codeunit "Email Restart Send ori" = X,
         codeunit "Email Notification ori" = X,
         codeunit "None Notification ori" = X,
         codeunit "Telegram Send ori" = X,

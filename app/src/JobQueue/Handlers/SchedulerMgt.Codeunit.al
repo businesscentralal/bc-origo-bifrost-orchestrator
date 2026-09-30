@@ -115,19 +115,54 @@ codeunit 10035536 "Scheduler Mgt ori"
     /// <param name="SelectedJobQueueOrchestratorEntry">The orchestrator entry to execute.</param>
     procedure RunJobQueueEntryOnce(var SelectedJobQueueOrchestratorEntry: Record "Scheduled Entry ori")
     var
-        JobQueueEntry: Record "Job Queue Entry";
         JobQueueLogEntry: Record "Job Queue Log Entry";
         ConfirmManagement: Codeunit "Confirm Management";
-        SuccessDispatcher: Boolean;
-        SuccessErrorHandler: Boolean;
         Window: Dialog;
-        CustomDimensions: Dictionary of [Text, Text];
-        JobQueueEntryExecutedTok: Label 'Job Queue Entry Executed', Locked = true;
+        Success: Boolean;
+        ErrorText: Text;
+        LogEntryFound: Boolean;
     begin
         if not ConfirmManagement.GetResponseOrDefault(RunOnceQst, false) then
             exit;
 
         Window.Open(ExecuteBeginMsg);
+        RunJobQueueEntryOnceCore(SelectedJobQueueOrchestratorEntry, Success, ErrorText, JobQueueLogEntry, LogEntryFound);
+        Window.Close();
+        if LogEntryFound then
+            if JobQueueLogEntry.Status = JobQueueLogEntry.Status::Success then
+                Message(ExecuteEndSuccessMsg, JobQueueLogEntry.Status)
+            else
+                Message(ExecuteEndErrorMsg, JobQueueLogEntry.Status, JobQueueLogEntry."Error Message");
+    end;
+
+    /// <summary>
+    /// Runs a temporary non-recurrent copy of the selected orchestrator entry once, with no confirmation and no dialog.
+    /// </summary>
+    /// <param name="SelectedJobQueueOrchestratorEntry">The orchestrator entry to execute.</param>
+    /// <param name="Success">True only when the dispatcher completed the job. A job that errors returns false.</param>
+    /// <param name="ErrorText">This run's error text when Success is false.</param>
+    procedure RunJobQueueEntryOnceHeadless(var SelectedJobQueueOrchestratorEntry: Record "Scheduled Entry ori"; var Success: Boolean; var ErrorText: Text)
+    var
+        JobQueueLogEntry: Record "Job Queue Log Entry";
+        LogEntryFound: Boolean;
+    begin
+        RunJobQueueEntryOnceCore(SelectedJobQueueOrchestratorEntry, Success, ErrorText, JobQueueLogEntry, LogEntryFound);
+    end;
+
+    local procedure RunJobQueueEntryOnceCore(var SelectedJobQueueOrchestratorEntry: Record "Scheduled Entry ori"; var Success: Boolean; var ErrorText: Text; var JobQueueLogEntry: Record "Job Queue Log Entry"; var LogEntryFound: Boolean)
+    var
+        JobQueueEntry: Record "Job Queue Entry";
+        SuccessDispatcher: Boolean;
+        SuccessErrorHandler: Boolean;
+        CustomDimensions: Dictionary of [Text, Text];
+        CapturedErrorText: Text;
+        JobQueueEntryExecutedTok: Label 'Job Queue Entry Executed', Locked = true;
+    begin
+        Success := false;
+        ErrorText := '';
+        LogEntryFound := false;
+        Clear(JobQueueLogEntry);
+
         JobQueueEntry.Init();
         JobQueueEntry.ID := CreateGuid();
         JobQueueEntry."Object Type to Run" := SelectedJobQueueOrchestratorEntry."Object Type to Run";
@@ -136,7 +171,7 @@ codeunit 10035536 "Scheduler Mgt ori"
         JobQueueEntry."Recurring Job" := false;
         JobQueueEntry.Status := JobQueueEntry.Status::Ready;
         JobQueueEntry."Job Queue Category Code" := '';
-        JobQueueEntry."Record ID to Process" := SelectedJobQueueOrchestratorEntry.RecordId;
+        JobQueueEntry."Record ID to Process" := SelectedJobQueueOrchestratorEntry."Record ID to Process";
         Clear(JobQueueEntry."Expiration Date/Time");
         Clear(JobQueueEntry."System Task ID");
         JobQueueEntry.Insert(true);
@@ -149,31 +184,37 @@ codeunit 10035536 "Scheduler Mgt ori"
         // Run the job queue
         SuccessDispatcher := Codeunit.Run(Codeunit::"Job Queue Dispatcher", JobQueueEntry);
 
-        // If JQ fails, run the error handler
+        // If JQ fails, run the error handler. Capture the job error first: the handler replaces it.
         if not SuccessDispatcher then begin
+            CapturedErrorText := GetLastErrorText();
             SuccessErrorHandler := Codeunit.Run(Codeunit::"Job Queue Error Handler", JobQueueEntry);
 
             // If the error handler fails, save the error (Non-AL errors will automatically surface to end-user)
             // If it is unable to save the error (No permission etc), it should also just be surfaced to the end-user.
             if not SuccessErrorHandler then begin
-                JobQueueEntry.SetError(GetLastErrorText());
+                JobQueueEntry.SetError(CapturedErrorText);
                 JobQueueEntry.InsertLogEntry(JobQueueLogEntry);
                 JobQueueEntry.FinalizeLogEntry(JobQueueLogEntry, GetLastErrorCallStack());
                 Commit();
             end;
         end;
 
-        Window.Close();
         if JobQueueEntry.Find() then
             if JobQueueEntry.Delete() then;
         JobQueueLogEntry.SetLoadFields(Status, "Error Message");
         JobQueueLogEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         JobQueueLogEntry.SetRange(ID, JobQueueEntry.ID);
-        if JobQueueLogEntry.FindFirst() then
-            if JobQueueLogEntry.Status = JobQueueLogEntry.Status::Success then
-                Message(ExecuteEndSuccessMsg, JobQueueLogEntry.Status)
+        if not SuccessDispatcher then
+            JobQueueLogEntry.SetRange(Status, JobQueueLogEntry.Status::Error);
+        // Newest row for this entry ID. The status filter drops the dispatcher's leftover In Process row.
+        LogEntryFound := JobQueueLogEntry.FindLast();
+
+        Success := SuccessDispatcher;
+        if not Success then
+            if LogEntryFound and (JobQueueLogEntry."Error Message" <> '') then
+                ErrorText := JobQueueLogEntry."Error Message"
             else
-                Message(ExecuteEndErrorMsg, JobQueueLogEntry.Status, JobQueueLogEntry."Error Message");
+                ErrorText := CapturedErrorText;
     end;
 
     /// <summary>

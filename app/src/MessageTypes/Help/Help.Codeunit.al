@@ -241,6 +241,14 @@ codeunit 10035576 "Help ori"
         Help.AppendLine('```json');
         Help.AppendLine('{ "status": "Success", "id": "<guid>", "blocked": true, "message": "..." }');
         Help.AppendLine('```');
+        if MessageType = 'Orchestrator.Entry.Run' then begin
+            Help.AppendLine('');
+            Help.AppendLine('A failed job returns `status` `Error`. `message` is that run''s error text.');
+            Help.AppendLine('');
+            Help.AppendLine('```json');
+            Help.AppendLine('{ "status": "Error", "id": "<guid>", "blocked": false, "message": "<error text>" }');
+            Help.AppendLine('```');
+        end;
         Help.AppendLine('');
         Help.AppendLine('## Example');
         Help.AppendLine('');
