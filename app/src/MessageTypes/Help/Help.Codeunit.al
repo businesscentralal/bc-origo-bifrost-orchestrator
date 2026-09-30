@@ -1173,7 +1173,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `_who.salesperson.code` | `JS` | Salesperson code |');
         O.AppendLine('| `_who.salesperson.phoneNo` | `5551234` | Phone number |');
         O.AppendLine('| `_who.companyInfo.name` | `CRONUS Ltd.` | Legal company name |');
-        O.AppendLine('| `_who.companyInfo.registrationNo` | `0000000000` | Company kennitala |');
+        O.AppendLine('| `_who.companyInfo.registrationNo` | `5501011490` | Company kennitala |');
         O.AppendLine('| `_who.companyInfo.vatRegistrationNo` | `00000` | VAT number |');
         O.AppendLine('| `_who.companyInfo.address` | `5 The Ring` | Company address |');
         O.AppendLine('| `_who.telegramChatId` | `123456789` | User''s Telegram chat ID |');

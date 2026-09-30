@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-30) - Help examples use a company-form test kennitala (#49)
+
+- The `_who` context example in the help text uses test values: company kennitala `5501011490` (fictitious, legal-entity form), neutral user and salesperson names, and placeholder VAT number and Telegram chat ID.
+
 ### Fixed (2026-09-29) - Entry.Run runs headlessly and uses the entry Record ID (#36)
 
 - `Orchestrator.Entry.Run` runs the scheduled entry with no confirmation dialog. It returns `status: Success` only when the dispatcher completes the job, and `status: Error` with that run's error text when the job fails.
