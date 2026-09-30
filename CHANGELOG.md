@@ -20,6 +20,9 @@ Business Central release versioning (`major.minor.build.revision`).
 - Report rendering, processing-only execution and tenant layout import contracts describe their actual JSON and binary response behavior.
 - Added Batch 2 contract conformance tests and shared contract parts.
 - Review fixes: `Orchestrator.Report.List` documents a non-boolean `processingOnly` error, `Orch B2 Contract Parts ori` (10035610) is in `BIFROST Orchestr ori`, and the new discovery labels are in the is-IS translation file.
+### Changed (2026-09-30) - Help examples use a company-form test kennitala (#49)
+
+- The `_who` context example in the help text uses test values: company kennitala `5501011490` (fictitious, legal-entity form), neutral user and salesperson names, and placeholder VAT number and Telegram chat ID.
 
 ### Fixed (2026-09-29) - Entry.Run runs headlessly and uses the entry Record ID (#36)
 
