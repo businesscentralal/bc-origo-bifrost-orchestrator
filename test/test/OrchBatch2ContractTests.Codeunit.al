@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
+using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Contract and discovery conformance tests for Batch 2 message types.

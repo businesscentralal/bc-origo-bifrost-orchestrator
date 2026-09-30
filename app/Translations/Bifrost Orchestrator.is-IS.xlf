@@ -969,6 +969,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Senda drög tölvupósts stofnuð af Email.Draft.Set.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2518225199 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>send email, send draft, email outbox, deliver email, email message</source>
+          <target state="translated">senda tölvupóst, senda drög, úthólf tölvupósts, afhenda tölvupóst, tölvupóstskilaboð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=senda tölvupóst, senda drög, úthólf tölvupósts, afhenda tölvupóst, tölvupóstskilaboð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2518225199 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send an email draft identified by its outbox SystemId. Irreversible. Use Email.Draft.Set to create the draft first.</source>
+          <target state="translated">Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3713907355 - NamedType 823878488" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "id" (GUID) in the data payload or as the subject.</source>
           <target state="translated">Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.</target>
@@ -993,17 +1005,53 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa vinnsluröðarfærslu með því að setja stöðu á Tilbúið.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Restart Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4020408738 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>restart job queue entry, restart entry, set ready, retry job queue</source>
+          <target state="translated">endurræsa vinnsluröðarfærslu, endurræsa færslu, setja tilbúið, reyna vinnsluröð aftur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=endurræsa vinnsluröðarfærslu, endurræsa færslu, setja tilbúið, reyna vinnsluröð aftur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4020408738 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restart a Job Queue Entry unconditionally by setting it to Ready. Write operation. Use Orchestrator.JobQueueEntry.RestartIfNeeded to restart only failed or held entries.</source>
+          <target state="translated">Endurræstu vinnsluröðarfærslu skilyrðislaust með því að setja hana í Tilbúið. Skrifaðgerð. Notaðu Orchestrator.JobQueueEntry.RestartIfNeeded til að endurræsa aðeins bilaðar eða stöðvaðar færslur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu vinnsluröðarfærslu skilyrðislaust með því að setja hana í Tilbúið. Skrifaðgerð. Notaðu Orchestrator.JobQueueEntry.RestartIfNeeded til að endurræsa aðeins bilaðar eða stöðvaðar færslur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3073378715 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Restart a Job Queue Entry only if in Error or On Hold.</source>
           <target state="translated">Endurræsa vinnsluröðarfærslu aðeins ef hún er í villu eða í bið.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa vinnsluröðarfærslu aðeins ef hún er í villu eða í bið.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry RestartIf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3073378715 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>restart if needed, restart failed entry, restart held entry, conditional job queue restart</source>
+          <target state="translated">endurræsa ef þarf, endurræsa bilaða færslu, endurræsa stöðvaða færslu, skilyrt endurræsing vinnsluraðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=endurræsa ef þarf, endurræsa bilaða færslu, endurræsa stöðvaða færslu, skilyrt endurræsing vinnsluraðar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry RestartIf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3073378715 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restart a Job Queue Entry only when it is in Error or On Hold. Write operation. Use Orchestrator.JobQueueEntry.Restart for an unconditional restart.</source>
+          <target state="translated">Endurræstu vinnsluröðarfærslu aðeins þegar hún er í villu eða í bið. Skrifaðgerð. Notaðu Orchestrator.JobQueueEntry.Restart fyrir skilyrðislausa endurræsingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu vinnsluröðarfærslu aðeins þegar hún er í villu eða í bið. Skrifaðgerð. Notaðu Orchestrator.JobQueueEntry.Restart fyrir skilyrðislausa endurræsingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1345234677 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>AI-friendly overview of all Job Queue + Playbook Workflow message types with setup guide via Data.Records.Set/Get.</source>
           <target state="translated">Yfirlit fyrir gervigreind yfir allar vinnsluraða- og keðjuvinnsluskilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit fyrir gervigreind yfir allar vinnsluraða- og keðjuvinnsluskilaboðategundir með uppsetningarleiðbeiningum um Data.Records.Set/Get.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help Get Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1345234677 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>orchestrator help, message type help, playbook help, setup guide, API overview</source>
+          <target state="translated">áætlara hjálp, hjálp skilaboðategundar, keðjuhjálp, uppsetningarleiðbeiningar, API-yfirlit</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=áætlara hjálp, hjálp skilaboðategundar, keðjuhjálp, uppsetningarleiðbeiningar, API-yfirlit</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help Get Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1345234677 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the Bifrost Orchestrator message type overview and setup guidance. Read-only. Use Help.Implementation.Get for a single type contract.</source>
+          <target state="translated">Lestu yfirlit yfir skilaboðategundir Bifröst stjórnanda og uppsetningarleiðbeiningar. Lesaðgerð. Notaðu Help.Implementation.Get fyrir samning einnar tegundar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu yfirlit yfir skilaboðategundir Bifröst stjórnanda og uppsetningarleiðbeiningar. Lesaðgerð. Notaðu Help.Implementation.Get fyrir samning einnar tegundar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help Get Impl ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1910912853 - Method 4183778207 - NamedType 1852605995" size-unit="char" translate="yes" xml:space="preserve">
           <source>%3 is not supported for %1 %2</source>
@@ -1016,6 +1064,18 @@
           <target state="translated">Setja Bifröst keðju í biðröð til einskiptiskeyrslu í gegnum vinnsluröð með sérsniðnum beiðnigögnum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Setja Bifröst keðju í biðröð til einskiptiskeyrslu með sérsniðnum gögnum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Enqueue Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1379993334 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>enqueue playbook, queue playbook, background playbook, delayed workflow</source>
+          <target state="translated">setja keðju í biðröð, raða keðju, keðja í bakgrunni, seinkað verkflæði</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=setja keðju í biðröð, raða keðju, keðja í bakgrunni, seinkað verkflæði</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Enqueue Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1379993334 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enqueue a Bifrost Playbook for one-time background execution. Write operation. Use Orchestrator.Playbook.Run for immediate foreground execution.</source>
+          <target state="translated">Settu Bifröst-keðju í biðröð fyrir einskiptis bakgrunnsvinnslu. Skrifaðgerð. Notaðu Orchestrator.Playbook.Run fyrir tafarlausa keyrslu í forgrunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Bifröst-keðju í biðröð fyrir einskiptis bakgrunnsvinnslu. Skrifaðgerð. Notaðu Orchestrator.Playbook.Run fyrir tafarlausa keyrslu í forgrunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Enqueue Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4100168724 - NamedType 2208007315" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "playbookCode" in the data payload or as the subject.</source>
@@ -1034,6 +1094,18 @@
           <target state="translated">Keyra Bifröst keðju strax og skila niðurstöðum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Keyra Bifröst keðju strax og skila niðurstöðum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2498592579 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>run playbook, execute playbook, playbook now, run workflow, execute workflow</source>
+          <target state="translated">keyra keðju, framkvæma keðju, keðja núna, keyra verkflæði, framkvæma verkflæði</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=keyra keðju, framkvæma keðju, keðja núna, keyra verkflæði, framkvæma verkflæði</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2498592579 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Execute a Bifrost Playbook immediately and return its results. Write operation. Use Orchestrator.Playbook.Enqueue for background execution.</source>
+          <target state="translated">Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 1018720751" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 exceeded max iterations (%2).</source>
@@ -1065,17 +1137,53 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Áætla Bifröst keðju sem vinnsluraðarstjórafærslu með endurtekningarsniðmáti.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 410476279 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>schedule playbook, recurring playbook, recurring template, schedule workflow</source>
+          <target state="translated">áætlun keðju, endurtekin keðja, endurtekningarsniðmát, áætlun verkflæðis</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=áætlun keðju, endurtekin keðja, endurtekningarsniðmát, áætlun verkflæðis</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 410476279 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule a Bifrost Playbook as an orchestrator entry using a recurring template. Write operation. Use Orchestrator.Playbook.Enqueue for a one-time run.</source>
+          <target state="translated">Áætlun Bifröst-keðju sem áætlunarfærslu með endurtekningarsniðmáti. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir einskiptiskeyrslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Áætlun Bifröst-keðju sem áætlunarfærslu með endurtekningarsniðmáti. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir einskiptiskeyrslu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Returns report metadata, available layouts, and saved request page preset.</source>
           <target state="translated">Skilar lýsigögnum skýrslu, tiltækum útlitum og vistuðum forsendum beiðnisíðu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skilar lýsigögnum skýrslu, tiltækum útlitum og vistuðum forsendum beiðnisíðu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Get Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4069915351 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>get report, report details, report layouts, request page preset, report metadata</source>
+          <target state="translated">sækja skýrslu, upplýsingar skýrslu, útlit skýrslu, forstilling beiðnisíðu, lýsigögn skýrslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=sækja skýrslu, upplýsingar skýrslu, útlit skýrslu, forstilling beiðnisíðu, lýsigögn skýrslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Get Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4069915351 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read one report's metadata, layouts and current user request preset. Read-only. Use Orchestrator.Report.SaveAs or Orchestrator.Report.Run to execute it.</source>
+          <target state="translated">Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Lesaðgerð. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Lesaðgerð. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Get Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1335621907 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Lists available reports with metadata, excluding obsolete reports.</source>
           <target state="translated">Listar tiltækar skýrslur með lýsigögnum, útilokar úreltar skýrslur.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Listar tiltækar skýrslur með lýsigögnum, útilokar úreltar skýrslur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report List Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1335621907 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>list reports, report metadata, available reports, processing-only reports, report catalog</source>
+          <target state="translated">lista skýrslur, lýsigögn skýrslu, tiltækar skýrslur, vinnsluskýrslur, skýrsluskrá</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=lista skýrslur, lýsigögn skýrslu, tiltækar skýrslur, vinnsluskýrslur, skýrsluskrá</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report List Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1335621907 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>List reports visible to the current user, optionally filtered by processing-only status. Read-only. Use Orchestrator.Report.Get for one report.</source>
+          <target state="translated">Lista skýrslur sem núverandi notandi sér, mögulega síaðar eftir því hvort þær séu vinnsluskýrslur. Lesaðgerð. Notaðu Orchestrator.Report.Get fyrir eina skýrslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lista skýrslur sem núverandi notandi sér, mögulega síaðar eftir því hvort þær séu vinnsluskýrslur. Lesaðgerð. Notaðu Orchestrator.Report.Get fyrir eina skýrslu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report List Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3444540953" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.</source>
@@ -1113,11 +1221,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Keyrir vinnsluskýrslu (runuvinnslu) út frá vistuðum forsendum eða uppgefnum breytum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2046287294 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>run report, processing-only report, batch report, processing report, report job</source>
+          <target state="translated">keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2046287294 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run a processing-only report as a batch job and return its result. Write operation. Use Orchestrator.Report.SaveAs for reports that produce output.</source>
+          <target state="translated">Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Skrifaðgerð. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Skrifaðgerð. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3308826164 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Generates report output (PDF, Excel, Word, XML) using saved preset or provided parameters.</source>
           <target state="translated">Býr til skýrsluúttak (PDF, Excel, Word, XML) út frá vistuðum forsendum eða uppgefnum breytum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Býr til skýrsluúttak (PDF, Excel, Word, XML) út frá vistuðum forsendum eða uppgefnum breytum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3308826164 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>save report, render report, report PDF, report Excel, report Word, report XML, report output</source>
+          <target state="translated">vista skýrslu, birta skýrslu, PDF skýrslu, Excel skýrslu, Word skýrslu, XML skýrslu, úttak skýrslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=vista skýrslu, birta skýrslu, PDF skýrslu, Excel skýrslu, Word skýrslu, XML skýrslu, úttak skýrslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3308826164 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Render a non-processing-only report as PDF, Excel, Word or XML. Read-only with binary output. Use Orchestrator.Report.Run for processing-only reports.</source>
+          <target state="translated">Birttu skýrslu sem er ekki eingöngu vinnsluskýrsla sem PDF, Excel, Word eða XML. Lesaðgerð með tvíundarúttaki. Notaðu Orchestrator.Report.Run fyrir vinnsluskýrslur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Birttu skýrslu sem er ekki eingöngu vinnsluskýrsla sem PDF, Excel, Word eða XML. Lesaðgerð með tvíundarúttaki. Notaðu Orchestrator.Report.Run fyrir vinnsluskýrslur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2555341656 - Method 433557723 - NamedType 4235727488" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1: %2 is invalid</source>
@@ -1299,11 +1431,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Skrá vinnsluraðarfærslu sem áætlunarfærslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1062491014 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>register job queue entry, adopt job queue entry, orchestrator entry, supervise job</source>
+          <target state="translated">skrá vinnsluröðarfærslu, taka vinnsluröðarfærslu yfir, áætlunarfærsla, hafa umsjón með vinnslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=skrá vinnsluröðarfærslu, taka vinnsluröðarfærslu yfir, áætlunarfærsla, hafa umsjón með vinnslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1062491014 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Write operation. Use Orchestrator.Entry.Schedule after changing its recurring settings.</source>
+          <target state="translated">Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifaðgerð. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifaðgerð. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Restart a failed or held orchestrator entry.</source>
           <target state="translated">Endurræsa áætlunarfærslu sem mistókst eða er í bið.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa áætlunarfærslu sem mistókst eða er í bið.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1382261728 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>restart orchestrator entry, retry entry, requeue entry, restart failed schedule</source>
+          <target state="translated">endurræsa áætlunarfærslu, reyna færslu aftur, setja færslu aftur í bið, endurræsa bilaða áætlun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=endurræsa áætlunarfærslu, reyna færslu aftur, setja færslu aftur í bið, endurræsa bilaða áætlun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1382261728 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restart a failed or held orchestrator entry according to its retry policy. Write operation. Use Orchestrator.Entry.Run for a one-time foreground run.</source>
+          <target state="translated">Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 251919310 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Execute a orchestrator entry immediately as a one-time run.</source>
@@ -1311,11 +1467,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Keyra áætlunarfærslu strax í eitt skipti.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 251919310 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>run entry, execute entry, run scheduled entry, execute job queue entry, run now</source>
+          <target state="translated">keyra færslu, framkvæma færslu, keyra áætlaða færslu, framkvæma vinnsluröðarfærslu, keyra núna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=keyra færslu, framkvæma færslu, keyra áætlaða færslu, framkvæma vinnsluröðarfærslu, keyra núna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 251919310 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run an orchestrator entry once immediately. Write operation. Use Orchestrator.Entry.Restart to requeue a failed entry instead.</source>
+          <target state="translated">Keyra áætlunarfærslu einu sinni strax. Skrifaðgerð. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyra áætlunarfærslu einu sinni strax. Skrifaðgerð. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3024542026 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reschedule an orchestrator entry for immediate execution.</source>
           <target state="translated">Enduráætla áætlunarfærslu til tafarlausrar keyrslu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Enduráætla áætlunarfærslu til tafarlausrar keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3024542026 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>schedule entry, reschedule entry, rebuild job queue schedule, run entry now</source>
+          <target state="translated">áætlun færslu, enduráætlun færslu, endurbyggja vinnsluraðaráætlun, keyra færslu núna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=áætlun færslu, enduráætlun færslu, endurbyggja vinnsluraðaráætlun, keyra færslu núna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3024542026 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reschedule an orchestrator entry for immediate execution. Write operation. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.</source>
+          <target state="translated">Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4100043099 - NamedType 3536930844" size-unit="char" translate="yes" xml:space="preserve">
           <source>The Telegram Bot Token has not been entered yet. Open Bifrost Orchestrator Setup and set it.</source>
@@ -1347,6 +1527,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Sækja heilsustöðu áætlara og fjölda færslna.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3425003177 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>orchestrator status, scheduler status, health, entry counts, job queue status</source>
+          <target state="translated">staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3425003177 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the orchestrator health status and scheduled entry counts. Read-only. Use Orchestrator.Status.Restart to restart the orchestrator.</source>
+          <target state="translated">Lestu heilsustöðu áætlunara og fjölda áætlaðra færslna. Lesaðgerð. Notaðu Orchestrator.Status.Restart til að endurræsa áætlunara.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu heilsustöðu áætlunara og fjölda áætlaðra færslna. Lesaðgerð. Notaðu Orchestrator.Status.Restart til að endurræsa áætlunara.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1369520475 - NamedType 3046120036" size-unit="char" translate="yes" xml:space="preserve">
           <source>Orchestrator is already running.</source>
           <target state="translated">Áætlari er þegar í gangi.</target>
@@ -1365,11 +1557,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa áætlara skilyrðislaust.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2057945186 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>restart orchestrator, restart scheduler, restart management job queue, force restart</source>
+          <target state="translated">endurræsa áætlara, endurræsa stjóra, endurræsa stjórnun vinnsluraðar, þvinga endurræsingu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=endurræsa áætlara, endurræsa stjóra, endurræsa stjórnun vinnsluraðar, þvinga endurræsingu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2057945186 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restart the orchestrator management Job Queue Entry unconditionally. Write operation. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.</source>
+          <target state="translated">Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Restart the orchestrator only if not already running.</source>
           <target state="translated">Endurræsa áætlara aðeins ef hann er ekki þegar í gangi.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræsa áætlara aðeins ef hann er ekki þegar í gangi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1421266779 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>restart orchestrator if needed, conditional scheduler restart, ensure orchestrator running</source>
+          <target state="translated">endurræsa áætlara ef þarf, skilyrt endurræsing stjóra, tryggja að áætlari sé í gangi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=endurræsa áætlara ef þarf, skilyrt endurræsing stjóra, tryggja að áætlari sé í gangi</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1421266779 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Write operation. Use Orchestrator.Status.Restart for an unconditional restart.</source>
+          <target state="translated">Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token is not configured in Orchestrator Setup.</source>
@@ -1406,6 +1622,18 @@
           <target state="translated">Senda Telegram-skilaboð á núverandi notanda.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Senda Telegram-skilaboð á núverandi notanda.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2638307712 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>send Telegram, Telegram message, notify user, chat message, bot notification</source>
+          <target state="translated">senda Telegram, Telegram-skilaboð, tilkynna notanda, spjallskilaboð, tilkynning frá Telegram-botni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=senda Telegram, Telegram-skilaboð, tilkynna notanda, spjallskilaboð, tilkynning frá Telegram-botni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2638307712 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery.</source>
+          <target state="translated">Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2083975675 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token is not configured in Orchestrator Setup.</source>
@@ -1448,6 +1676,18 @@
           <target state="translated">Skilar forsendum vinnusvæðis (_sys dagsetningar, _who notandaupplýsingar) án þess að keyra skref.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skilar forsendum vinnusvæðis (_sys dagsetningar, _who notandaupplýsingar) án þess að keyra skref.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4247402998 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>workspace preview, preview workspace, seed workspace, sys dates, user context</source>
+          <target state="translated">forskoða vinnusvæði, forskoðun vinnusvæðis, upphafsstilla vinnusvæði, kerfisdagsetningar, notandasamhengi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=forskoða vinnusvæði, forskoðun vinnusvæðis, upphafsstilla vinnusvæði, kerfisdagsetningar, notandasamhengi</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4247402998 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the seeded Playbook workspace without running steps. Read-only. Use Orchestrator.Playbook.Run to execute a playbook.</source>
+          <target state="translated">Lestu forsendu vinnusvæði keðju án þess að keyra skref. Lesaðgerð. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu forsendu vinnusvæði keðju án þess að keyra skref. Lesaðgerð. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Page 3387562382 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Categories</source>
@@ -4382,6 +4622,18 @@
           <target state="translated">Bifröst keðjuskoðun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjuskoðun</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybVw ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1823936061 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>set report layout, import report layout, replace report layout, base64 layout, Word layout, Excel layout, RDLC layout</source>
+          <target state="translated">stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1823936061 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create or replace a user-defined tenant report layout from base64. Write operation. Use Orchestrator.Report.Get to inspect existing layouts.</source>
+          <target state="translated">Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
       </group>
     </body>

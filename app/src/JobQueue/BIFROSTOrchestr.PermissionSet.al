@@ -63,6 +63,8 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "Help ori" = X,
         codeunit "Msg Executor ori" = X,
         codeunit "None Notification ori" = X,
+        codeunit "Orch B1 Contract Parts ori" = X,
+        codeunit "Orch B2 Contract Parts ori" = X,
         codeunit "Overview Subscriber ori" = X,
         codeunit "Playbook Enqueue Msg ori" = X,
         codeunit "Playbook JQ Dispatcher ori" = X,

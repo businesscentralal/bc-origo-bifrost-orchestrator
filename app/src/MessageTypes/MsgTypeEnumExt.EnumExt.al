@@ -30,7 +30,7 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
     value(10035543; "Orchestrator.Status.RestartIfNeeded")
     {
       Caption = 'Orchestrator.Status.RestartIfNeeded', Locked = true;
-      Implementation = "Msg Interface ori" = "Status Restart If Msg ori", "Msg Discovery ori" = "Status Restart If Msg ori", "Msg Contract ori" = "Status Restart If Msg ori";
+      Implementation = "Msg Interface ori" = "Status RestartIf Msg ori", "Msg Discovery ori" = "Status RestartIf Msg ori", "Msg Contract ori" = "Status RestartIf Msg ori";
    }
     value(10035544; "Orchestrator.Playbook.Run")
     {
@@ -45,7 +45,7 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
     value(10035549; "Orchestrator.JobQueueEntry.RestartIfNeeded")
     {
       Caption = 'Orchestrator.JobQueueEntry.RestartIfNeeded', Locked = true;
-      Implementation = "Msg Interface ori" = "Entry Restart If Msg ori", "Msg Discovery ori" = "Entry Restart If Msg ori", "Msg Contract ori" = "Entry Restart If Msg ori";
+      Implementation = "Msg Interface ori" = "Entry RestartIf Msg ori", "Msg Discovery ori" = "Entry RestartIf Msg ori", "Msg Contract ori" = "Entry RestartIf Msg ori";
    }
     value(10035551; "Help.Orchestrator.Get")
     {

@@ -1,6 +1,7 @@
 /// <summary>
-/// Compatibility provider for the legacy markdown help interface.
-/// Detailed machine-readable help now lives in Msg Contract ori chapters.
+/// Central help provider for all Job Queue and Playbook Workflow message types.
+/// Returns Markdown documentation as text; message type implementations pass the
+/// result to <c>Message Argument ori.SetResponseMarkdown</c>.
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
@@ -9,22 +10,61 @@ codeunit 10035576 "Help ori"
     Access = Internal;
 
     /// <summary>
-    /// Returns the legacy overview text. Consumers should use Help.Implementation.Get chapters.
+    /// Returns the AI-friendly overview of every Job Queue and Playbook Workflow message type,
+    /// including the setup guide for building and scheduling playbooks via Data.Records.Set/Get.
     /// </summary>
     /// <returns>Markdown-formatted overview document as Text.</returns>
     procedure GetOverview() OverviewText: Text
+    var
+        O: TextBuilder;
     begin
-        exit('Use Help.Implementation.Get for the Orchestrator message contract chapters.');
+        BuildOverview(O);
+        exit(O.ToText());
     end;
 
     /// <summary>
-    /// Returns an empty legacy document; per-type help is supplied by Msg Contract ori.
+    /// Returns the per-type help document for a single message type.
     /// </summary>
     /// <param name="MessageType">The message type name (e.g. 'Orchestrator.Playbook.Run').</param>
     /// <returns>Markdown-formatted help document as Text.</returns>
     procedure GetHelp(MessageType: Text) HelpText: Text
+    var
+        Help: TextBuilder;
     begin
-        exit('');
+        Help.AppendLine(StrSubstNo(HelpHeadingLbl, MessageType));
+        Help.AppendLine('');
+        Help.AppendLine('## Overview');
+        Help.AppendLine('');
+        case MessageType of
+            'Orchestrator.Playbook.Run',
+            'Orchestrator.Playbook.Schedule',
+            'Orchestrator.Playbook.Enqueue':
+                BuildPlaybookHelp(Help, MessageType);
+            'Orchestrator.JobQueueEntry.Restart',
+            'Orchestrator.JobQueueEntry.RestartIfNeeded':
+                BuildEntryHelp(Help, MessageType);
+            'Orchestrator.Entry.Run',
+            'Orchestrator.Entry.Restart',
+            'Orchestrator.Entry.Register',
+            'Orchestrator.Entry.Schedule':
+                BuildSEHelp(Help, MessageType);
+            'Orchestrator.Status.Get',
+            'Orchestrator.Status.Restart',
+            'Orchestrator.Status.RestartIfNeeded':
+                BuildStatusHelp(Help, MessageType);
+            'Orchestrator.Email.Send':
+                BuildEmailSendHelp(Help);
+            'Orchestrator.Telegram.Message':
+                BuildTelegramHelp(Help);
+            'Orchestrator.Report.List',
+            'Orchestrator.Report.Get',
+            'Orchestrator.Report.SaveAs',
+            'Orchestrator.Report.Run':
+                BuildReportHelp(Help, MessageType);
+            'Orchestrator.Workspace.Preview':
+                BuildWorkspacePreviewHelp(Help);
+        end;
+        exit(Help.ToText());
     end;
 
     local procedure BuildPlaybookHelp(var Help: TextBuilder; MessageType: Text)
