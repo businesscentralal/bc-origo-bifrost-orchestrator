@@ -6,7 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
+codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -37,6 +37,106 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'Restart the orchestrator only if not already running.', Comment = 'is-IS=EndurrÃ¦sa Ã¡Ã¦tlara aÃ°eins ef hann er ekki Ã¾egar Ã­ gangi.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'restart orchestrator if needed, conditional scheduler restart, ensure orchestrator running', Comment = 'is-IS=endurræsa áætlara ef þarf, skilyrt endurræsing stjóra, tryggja að áætlari sé í gangi';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Write operation. Use Orchestrator.Status.Restart for an unconditional restart.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Restart result.');
+        Parts.AddResponseField(Fields, 'restarted', 'boolean', 'Whether a restart was performed.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.AddRuntimeError(Errors, 'The scheduler cannot be inspected or restarted.', 'Check scheduler setup and Job Queue permissions.');
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('write', 'Restarts the orchestrator only when its management entry is not running.', true, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Related(Related, 'Orchestrator.Status.Restart', 'Use this when the orchestrator must be restarted regardless of status.');
+        exit(true);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Ensure running', '{"type":"Orchestrator.Status.RestartIfNeeded"}', '{"status":"Success","restarted":false}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Ensures that the orchestrator management Job Queue Entry is scheduled without interrupting a running entry.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'When the management entry is Ready or In Process, the response reports restarted=false.';
+        exit(true);
     end;
 
     /// <summary>

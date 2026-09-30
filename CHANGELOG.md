@@ -7,6 +7,19 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-09-29) - Message contracts Batch 1 (#56)
+
+- Added Foundation message contracts and bilingual discovery metadata for Entry, Status, Playbook, Job Queue Entry, Help, Email and Telegram message types.
+- Contract chapters now describe the actual request keys, responses, errors, effects, related types and examples; the legacy markdown provider is retained only as a compatibility shim.
+- Added Batch 1 contract conformance tests and shared contract parts.
+- Review fixes: RestartIfNeeded enum implementations use the RestartIf codeunit names, `Help.Orchestrator.Get` returns the overview, decision tree and playbook guide and documents the version 1.0 error, the Bifrost Foundation dependency is 28.0.0.166, `Orch B1 Contract Parts ori` (10035609) is in `BIFROST Orchestr ori`, and the new discovery labels are in the is-IS translation file.
+
+### Changed (2026-09-29) - Message contracts Batch 2 (#56)
+
+- Added Foundation message contracts and bilingual discovery metadata for Report, Workspace and ReportLayout message types.
+- Report rendering, processing-only execution and tenant layout import contracts describe their actual JSON and binary response behavior.
+- Added Batch 2 contract conformance tests and shared contract parts.
+- Review fixes: `Orchestrator.Report.List` documents a non-boolean `processingOnly` error, `Orch B2 Contract Parts ori` (10035610) is in `BIFROST Orchestr ori`, and the new discovery labels are in the is-IS translation file.
 ### Changed (2026-09-30) - Help examples use a company-form test kennitala (#49)
 
 - The `_who` context example in the help text uses test values: company kennitala `5501011490` (fictitious, legal-entity form), neutral user and salesperson names, and placeholder VAT number and Telegram chat ID.

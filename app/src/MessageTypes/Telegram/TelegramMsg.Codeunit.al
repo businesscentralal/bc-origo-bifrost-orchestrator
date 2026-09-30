@@ -4,7 +4,7 @@ using Origo.Bifrost;
 using System.Apps;
 using System.Environment.Configuration;
 
-codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
+codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
     Permissions =
@@ -33,6 +33,109 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori"
         DescriptionLbl: Label 'Send a Telegram message to the current user.', Comment = 'is-IS=Senda Telegram-skilaboÃ° Ã¡ nÃºverandi notanda.';
     begin
         exit(DescriptionLbl);
+    end;
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'send Telegram, Telegram message, notify user, chat message, bot notification', Comment = 'is-IS=senda Telegram, Telegram-skilaboð, tilkynna notanda, spjallskilaboð, tilkynning frá Telegram-botni';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery.', Comment = 'is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Forms: List of [Text];
+    begin
+        Envelope := Parts.Envelope(Forms, 'No subject is used.', true);
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Parameters.Add(ContractMgt.Parameter('message', 'string', true, 'Text sent to the current user''s configured Telegram chat.'));
+        exit(true);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Fields: JsonArray;
+    begin
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
+        Parts.AddResponseField(Fields, 'chatId', 'string', 'Configured Telegram chat identifier.');
+        Response := Parts.Response(Fields, 'text/json');
+        exit(true);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.AddRuntimeError(Errors, 'The Telegram bot token, HTTP permission, chat ID or message is missing.', 'Configure the token and current user chat ID, enable HTTP requests, and send message.');
+        Parts.AddRuntimeError(Errors, 'Telegram rejected the request.', 'Inspect the returned Telegram response and correct the message or configuration.');
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        Preconditions: JsonArray;
+    begin
+        Effect := Parts.Effect('irreversible', 'Sends a message to the current user through Telegram.', false, '', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Related(Related, 'Orchestrator.Email.Send', 'Use this when the notification should be delivered by email.');
+        exit(true);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+    begin
+        Parts.Example(Examples, 'Send Telegram message', '{"type":"Orchestrator.Telegram.Message","data":{"message":"Job completed."}}', '{"status":"Success","chatId":"<chatId>"}');
+        exit(true);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Sends a message to the current user''s Telegram chat using the configured Bifröst bot.';
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'The token, current user chat ID and Allow HttpClient Requests setting must all be configured before sending.';
+        exit(true);
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
