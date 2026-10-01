@@ -48,7 +48,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart a failed or held orchestrator entry according to its retry policy. Write operation. Use Orchestrator.Entry.Run for a one-time foreground run.', Comment = 'is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.';
+        SelectionLbl: Label 'Restart a failed or held orchestrator entry according to its retry policy. Irreversible. Use Orchestrator.Entry.Run for a one-time foreground run.', Comment = 'is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.';
     begin
         exit(SelectionLbl);
     end;
@@ -104,9 +104,8 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Requeues the orchestrator entry and applies retry and notification rules.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Requeues the orchestrator entry and applies its retry and notification rules. An e-mail restart notification commits before it is sent, and a Telegram notification or the scheduling API writes outside this transaction.', false);
         exit(true);
     end;
 

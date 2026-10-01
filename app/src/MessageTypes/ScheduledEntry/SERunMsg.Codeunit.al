@@ -48,7 +48,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Run an orchestrator entry once immediately. Write operation. Use Orchestrator.Entry.Restart to requeue a failed entry instead.', Comment = 'is-IS=Keyra áætlunarfærslu einu sinni strax. Skrifaðgerð. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.';
+        SelectionLbl: Label 'Run an orchestrator entry once immediately. Irreversible. Use Orchestrator.Entry.Restart to requeue a failed entry instead.', Comment = 'is-IS=Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.';
     begin
         exit(SelectionLbl);
     end;
@@ -103,9 +103,8 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Runs the entry and may change its Job Queue state.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Runs the entry''s job once through a one-time Job Queue Entry and commits, on the success and on the error path.', false);
         exit(true);
     end;
 

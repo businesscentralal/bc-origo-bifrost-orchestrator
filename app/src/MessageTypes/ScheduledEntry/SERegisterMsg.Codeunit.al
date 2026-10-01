@@ -36,7 +36,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Register an existing Job Queue Entry under Bifrost Orchestrator control. Write operation. Use Orchestrator.Entry.Schedule after changing its recurring settings.', Comment = 'is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifaðgerð. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.';
+        SelectionLbl: Label 'Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings.', Comment = 'is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.';
     begin
         exit(SelectionLbl);
     end;
@@ -94,9 +94,8 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Creates a Scheduled Entry linked to the existing Job Queue Entry.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Creates the Scheduled Entry ori from the Job Queue Entry, replacing an existing one, and commits it.', false);
         exit(true);
     end;
 

@@ -36,7 +36,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Reschedule an orchestrator entry for immediate execution. Write operation. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.';
+        SelectionLbl: Label 'Reschedule an orchestrator entry for immediate execution. Irreversible. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.';
     begin
         exit(SelectionLbl);
     end;
@@ -93,9 +93,8 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Rebuilds the Job Queue schedule for the orchestrator entry.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Rebuilds the Job Queue schedule of the orchestrator entry. With client credentials the scheduling API commits the change in its own session; otherwise the Job Queue Entry is deleted and created again.', false);
         exit(true);
     end;
 

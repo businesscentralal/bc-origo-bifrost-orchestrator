@@ -48,7 +48,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Execute a Bifrost Playbook immediately and return its results. Write operation. Use Orchestrator.Playbook.Enqueue for background execution.', Comment = 'is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.';
+        SelectionLbl: Label 'Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution.', Comment = 'is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.';
     begin
         exit(SelectionLbl);
     end;
@@ -108,9 +108,8 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Runs the playbook and writes its instance and step log.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. Playbook Runner commits before every step, so the writes of the steps that ran stay when a later step fails.', false);
         exit(true);
     end;
 

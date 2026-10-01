@@ -32,7 +32,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Run a processing-only report as a batch job and return its result. Write operation. Use Orchestrator.Report.SaveAs for reports that produce output.', Comment = 'is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Skrifaðgerð. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.';
+        SelectionLbl: Label 'Run a processing-only report as a batch job and return its result. Irreversible. Use Orchestrator.Report.SaveAs for reports that produce output.', Comment = 'is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.';
     begin
         exit(SelectionLbl);
     end;
@@ -97,9 +97,8 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Runs the processing-only report; the report may commit its own changes.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Runs the processing-only report. Most batch reports commit as they go, and the work they committed stays when they fail.', false);
         exit(true);
     end;
 

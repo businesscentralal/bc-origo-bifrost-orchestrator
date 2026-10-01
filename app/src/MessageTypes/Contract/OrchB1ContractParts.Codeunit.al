@@ -234,6 +234,20 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     end;
 
     /// <summary>
+    /// The effect chapter of a type that commits on its execute path: effect irreversible, and the
+    /// changes text says that Orchestrator's Omit Commit guard refuses the type in a rollback chain.
+    /// </summary>
+    /// <param name="Changes">What the type changes, naming the commit.</param>
+    /// <param name="Idempotent">True when repeating the call changes nothing more.</param>
+    /// <returns>The effect chapter.</returns>
+    internal procedure CommittingEffect(Changes: Text; Idempotent: Boolean): JsonObject
+    var
+        Preconditions: JsonArray;
+    begin
+        exit(Effect('irreversible', Changes + ' It cannot be rolled back with the caller, so Orchestrator''s Omit Commit guard refuses it in a playbook chain that must roll back together.', Idempotent, '', Preconditions));
+    end;
+
+    /// <summary>
     /// Adds an entry to the related chapter.
     /// </summary>
     /// <param name="RelatedEntries">Receives the entry.</param>

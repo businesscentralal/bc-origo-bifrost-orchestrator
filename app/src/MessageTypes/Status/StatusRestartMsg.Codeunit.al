@@ -48,7 +48,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Write operation. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.';
+        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.';
     begin
         exit(SelectionLbl);
     end;
@@ -95,9 +95,8 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Cancels and schedules the orchestrator management Job Queue Entry.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Cancels the orchestrator management Job Queue Entry, schedules a new one and commits.', false);
         exit(true);
     end;
 

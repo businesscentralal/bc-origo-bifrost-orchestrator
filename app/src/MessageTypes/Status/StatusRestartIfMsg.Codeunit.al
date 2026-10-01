@@ -48,7 +48,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Write operation. Use Orchestrator.Status.Restart for an unconditional restart.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.';
+        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.';
     begin
         exit(SelectionLbl);
     end;
@@ -95,9 +95,8 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Restarts the orchestrator only when its management entry is not running.', true, '', Preconditions);
+        Effect := Parts.CommittingEffect('Restarts the orchestrator only when its management entry is not Ready or In Process; the restart cancels and schedules the management Job Queue Entry and commits.', true);
         exit(true);
     end;
 
