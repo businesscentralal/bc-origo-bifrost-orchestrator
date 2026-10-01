@@ -7,6 +7,22 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-01) - Committing message types declare effect irreversible (#60)
+
+- `Orchestrator.Playbook.Run`, `Orchestrator.Entry.Run`, `Orchestrator.Entry.Register`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule`, `Orchestrator.Status.Restart`, `Orchestrator.Status.RestartIfNeeded` and `Orchestrator.Report.Run` commit while they run, so their contracts now declare effect `irreversible` instead of `write`. The `changes` text names the commit and says that the Orchestrator refuses these types in a playbook chain that must roll back together (Omit Commit). Their selection descriptions say "Irreversible." instead of "Write operation.".
+- `Orchestrator.Playbook.Schedule`, `Orchestrator.Playbook.Enqueue`, `Orchestrator.JobQueueEntry.Restart`, `Orchestrator.JobQueueEntry.RestartIfNeeded` and `Orchestrator.ReportLayout.Set` stay `write`; the read types stay `read`. Contract tests check every type's effect.
+
+### Removed (2026-10-01) - Markdown help of the message types (#57)
+
+- The message types no longer have a markdown help procedure (`GetMessageHelpAsMarkdownDocument`); Bifrost Foundation stopped calling it. Each type describes itself only through its contract chapters in `Help.Implementation.Get`. `Help.Orchestrator.Get` still returns the same module overview.
+- The Bifrost Foundation dependency is 28.0.0.187, the first build without the procedure.
+
+### Changed (2026-10-01) - Contracts carry everything the old help said (#56)
+
+- Facts that were only in the old per-type help are now in the contracts: allowed values and defaults (`notificationType`, `retryPolicy`, `format`, `layoutFormat`), response fields of nested objects (`Report.List` reports, `Report.Get` layouts and preset, `Status.Get` entries, `Workspace.Preview` `_sys`), how each type finds its record, the Email draft-and-send and report preset workflows, and notes on inline playbook runs, `itemsProcessed`, `Report.Run` safety and the Telegram prerequisites.
+- Error chapters describe what callers actually receive: every Orchestrator error comes back with code `BusinessCentralError` and its text; the contracts no longer promise `MissingParameter`, `RecordNotFound` or `InvalidParameterFormat`.
+- Corrected contract details that did not match the code: `Entry.Register` takes the Job Queue Entry ID (not its SystemId) and re-registering replaces the orchestrator entry; `Playbook.Enqueue` returns the Job Queue Entry ID; `Playbook.Run` returns the instance ID and answers Success with `playbookStatus` Failed when a step fails; `Status.*` `orchestratorStatus` is a translated sentence, not `Ready`; `Report.SaveAs` has no layout parameter and its answer is marked `application/pdf` for every format.
+
 ### Changed (2026-09-29) - Message contracts Batch 1 (#56)
 
 - Added Foundation message contracts and bilingual discovery metadata for Entry, Status, Playbook, Job Queue Entry, Help, Email and Telegram message types.
