@@ -30,18 +30,18 @@ codeunit 96453 "Orch B2 Contract Tests"
     procedure CommittingTypesDeclareIrreversible()
     begin
         // [SCENARIO #60] Report.Run runs caller-named batch reports that commit, so it declares irreversible
-        AssertEffect("Message Type ori"::"Orchestrator.Report.Run", 'Orchestrator.Report.Run', 'irreversible');
+        AssertEffect("Message Type ori"::"Orchestrator.Report.Run", 'Orchestrator.Report.Run', 'irreversible', true);
     end;
 
     [Test]
     procedure NonCommittingTypesKeepTheirEffect()
     begin
         // [SCENARIO #60] ReportLayout.Set stays write; the reads stay read
-        AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.Set", 'Orchestrator.ReportLayout.Set', 'write');
-        AssertEffect("Message Type ori"::"Orchestrator.Report.List", 'Orchestrator.Report.List', 'read');
-        AssertEffect("Message Type ori"::"Orchestrator.Report.Get", 'Orchestrator.Report.Get', 'read');
-        AssertEffect("Message Type ori"::"Orchestrator.Report.SaveAs", 'Orchestrator.Report.SaveAs', 'read');
-        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'read');
+        AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.Set", 'Orchestrator.ReportLayout.Set', 'write', false);
+        AssertEffect("Message Type ori"::"Orchestrator.Report.List", 'Orchestrator.Report.List', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.Report.Get", 'Orchestrator.Report.Get', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.Report.SaveAs", 'Orchestrator.Report.SaveAs', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'read', false);
     end;
 
     local procedure AssertContract(MessageType: Enum "Message Type ori"; Name: Text)
@@ -62,7 +62,7 @@ codeunit 96453 "Orch B2 Contract Tests"
         Assert.AreNotEqual('', Discovery.GetSelectionDescription(), Name + ' selection');
     end;
 
-    local procedure AssertEffect(MessageType: Enum "Message Type ori"; Name: Text; ExpectedEffect: Text)
+    local procedure AssertEffect(MessageType: Enum "Message Type ori"; Name: Text; ExpectedEffect: Text; NamesCommit: Boolean)
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Contract: JsonObject;
@@ -73,7 +73,7 @@ codeunit 96453 "Orch B2 Contract Tests"
         Contract.Get('effect', EffectToken);
         EffectToken.AsObject().Get('effect', ValueToken);
         Assert.AreEqual(ExpectedEffect, ValueToken.AsValue().AsText(), Name + ' effect');
-        if ExpectedEffect = 'irreversible' then begin
+        if NamesCommit then begin
             EffectToken.AsObject().Get('changes', ValueToken);
             Assert.IsTrue(ValueToken.AsValue().AsText().Contains('commit'), Name + ' changes names the commit');
             Assert.IsTrue(ValueToken.AsValue().AsText().Contains('Omit Commit guard'), Name + ' changes names the Omit Commit guard');
