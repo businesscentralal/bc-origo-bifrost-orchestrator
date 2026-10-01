@@ -48,7 +48,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Write operation. Use Orchestrator.Status.Restart for an unconditional restart.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.';
+        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.';
     begin
         exit(SelectionLbl);
     end;
@@ -78,7 +78,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Restart result.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Orchestrator is already running. or Orchestrator restarted. (translated).');
         Parts.AddResponseField(Fields, 'restarted', 'boolean', 'Whether a restart was performed.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
@@ -95,9 +95,8 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Restarts the orchestrator only when its management entry is not running.', true, '', Preconditions);
+        Effect := Parts.CommittingEffect('Restarts the orchestrator only when its management entry is not Ready or In Process; the restart cancels and schedules the management Job Queue Entry and commits.', true);
         exit(true);
     end;
 
@@ -123,7 +122,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Ensure running', '{"type":"Orchestrator.Status.RestartIfNeeded"}', '{"status":"Success","restarted":false}');
+        Parts.Example(Examples, 'Ensure running', '{"type":"Orchestrator.Status.RestartIfNeeded"}', '{"status":"Success","message":"Orchestrator is already running.","restarted":false}');
         exit(true);
     end;
 
@@ -135,7 +134,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'When the management entry is Ready or In Process, the response reports restarted=false.';
+        Notes := 'When the management Job Queue Entry exists and is Ready or In Process nothing changes and the answer is restarted false. In every other case (no entry, Error, On Hold, ...) it is cancelled and scheduled again as Orchestrator.Status.Restart does, and the answer is restarted true.';
         exit(true);
     end;
 
@@ -146,17 +145,6 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
-    end;
-
-    /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Status.RestartIfNeeded'));
     end;
 
     /// <summary>

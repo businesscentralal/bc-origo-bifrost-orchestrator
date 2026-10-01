@@ -162,8 +162,9 @@ Supporting paths:
 - **Secrets** — `Secrets ori` is the only place that composes secret codes and calls Foundation's
   `Secret Store ori`. It registers its codes from `App Install ori`, `App Upgrade ori` and the setup
   page's `OnOpenPage`; registration is idempotent.
-- **Help** — `Help ori` holds the Markdown contract of all 20 message types; `Help Get Impl ori`
-  serves it as `Help.Orchestrator.Get` and `Overview Subscriber ori` registers the module in
+- **Help** — every message type describes itself through its contract chapters (`Msg Contract ori`,
+  shared parts in `Orch B1/B2 Contract Parts ori`). `Help ori` builds the Markdown module overview;
+  `Help Get Impl ori` serves it as `Help.Orchestrator.Get` and `Overview Subscriber ori` registers the module in
   Foundation's message-type overview.
 - **Lifecycle** — `App Install ori` initialises the setup record, lets subscribers register their job
   queue codeunits and registers the retention policies; `App Takeover ori` copies data over from the
@@ -382,7 +383,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035571 | `Overview Subscriber ori` | Registers the module in Foundation's message-type overview. |
 | 10035572 | `Playbook Step Executor ori` | Executes one step through `Msg Executor ori` and writes its step log entry. |
 | 10035574 | `Playbook Schedule Msg ori` | `Orchestrator.Playbook.Schedule` |
-| 10035576 | `Help ori` | Central help provider — the Markdown contract of all 20 message types. |
+| 10035576 | `Help ori` | Builds the Markdown module overview returned by `Help.Orchestrator.Get`. |
 | 10035579 | `SE Register Msg ori` | `Orchestrator.Entry.Register` |
 | 10035581 | `SE Schedule Msg ori` | `Orchestrator.Entry.Schedule` |
 | 10035582 | `Email Send Msg ori` | `Orchestrator.Email.Send` |
@@ -502,7 +503,7 @@ the complete reasoning, including:
 | `app/src/Playbook/` | Playbook, step and condition tables, runner, step executor, workspace, message executor and JSON helper |
 | `app/src/Log/` | Playbook instance and step log tables, log management |
 | `app/src/Pages/` | Playbook, instance and template editor pages |
-| `app/src/MessageTypes/` | Message type enum extension, implementations, shared handlers and the help codeunit |
+| `app/src/MessageTypes/` | Message type enum extension, implementations and their contracts, shared handlers, contract parts and the overview codeunit `Help ori` |
 | `app/src/Install/` | `App Takeover ori` — data take-over from the published legacy app |
 | `app/assets/playbooks/` | Sample playbook step templates |
 | `test/` | Test app (`Bifrost Orchestrator - Tests`, range 96400–96499) |
@@ -560,7 +561,7 @@ The `nornir` path segment is the current site slug, not the app name. Do not cha
 the folders in the site repository are renamed — the published help pages would 404.
 
 Message-type contracts are also served by the app itself at runtime: `Help.Orchestrator.Get` returns
-the module directory, and every message type answers its own Markdown help through
+the module directory, and every message type answers its contract chapters through
 `get_message_type_help` / `Help.Implementation.Get`.
 
 ### Context-Sensitive Help

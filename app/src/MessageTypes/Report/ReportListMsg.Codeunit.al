@@ -63,8 +63,16 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Fields: JsonArray;
+        ReportFields: JsonArray;
     begin
-        Parts.AddResponseField(Fields, 'reports', 'array', 'Visible report metadata.');
+        Parts.AddResponseField(ReportFields, 'id', 'integer', 'Report object ID.');
+        Parts.AddResponseField(ReportFields, 'name', 'string', 'Report object name.');
+        Parts.AddResponseField(ReportFields, 'caption', 'string', 'Report caption.');
+        Parts.AddResponseField(ReportFields, 'processingOnly', 'boolean', 'True for a batch job that produces no document.');
+        Parts.AddResponseField(ReportFields, 'defaultLayout', 'string', 'Default layout type, e.g. RDLC or Word.');
+        Parts.AddResponseField(ReportFields, 'firstDataItemTableId', 'integer', 'Table of the first data item; 0 when there is none.');
+        Parts.AddResponseField(ReportFields, 'useRequestPage', 'boolean', 'Whether the report has a request page.');
+        Parts.AddResponseField(Fields, 'reports', 'array', 'One entry per report.', ReportFields);
         Parts.AddResponseField(Fields, 'count', 'integer', 'Number of returned reports.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
@@ -109,7 +117,7 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'List processing-only reports', '{"type":"Orchestrator.Report.List","data":{"processingOnly":true}}', '{"reports":[{"id":50100,"processingOnly":true}],"count":1}');
+        Parts.Example(Examples, 'List processing-only reports', '{"type":"Orchestrator.Report.List","data":{"processingOnly":true}}', '{"reports":[{"id":795,"name":"Adjust Cost - Item Entries","caption":"Adjust Cost - Item Entries","processingOnly":true,"defaultLayout":"RDLC","firstDataItemTableId":27,"useRequestPage":true}],"count":1}');
         exit(true);
     end;
 
@@ -121,20 +129,13 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Obsolete reports are excluded by the Report Metadata source.';
+        Notes := 'Obsolete reports are excluded by the Report Metadata source. The answer has no status key. processingOnly is the only filter: destructive batch jobs such as Date Compress G/L Entries and Delete Invoiced Sales Orders are listed next to harmless ones, so confirm a report with Orchestrator.Report.Get before running it.';
         exit(true);
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
-    end;
-
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Report.List'));
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")

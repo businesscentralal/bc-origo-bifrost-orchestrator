@@ -48,7 +48,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Write operation. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.';
+        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.';
     begin
         exit(SelectionLbl);
     end;
@@ -78,8 +78,8 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Restart result.');
-        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'Status after scheduling.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Orchestrator restarted. (translated).');
+        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'State after scheduling, as a sentence in the session language: Job Queue is running, Job Queue execution has expired, please restart, Job Queue execution has failed, please restart, or Job Queue has not been configured.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -95,9 +95,8 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Cancels and schedules the orchestrator management Job Queue Entry.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Cancels the orchestrator management Job Queue Entry, schedules a new one and commits.', false);
         exit(true);
     end;
 
@@ -123,7 +122,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Restart orchestrator', '{"type":"Orchestrator.Status.Restart"}', '{"status":"Success","orchestratorStatus":"Ready"}');
+        Parts.Example(Examples, 'Restart orchestrator', '{"type":"Orchestrator.Status.Restart"}', '{"status":"Success","message":"Orchestrator restarted.","orchestratorStatus":"Job Queue is running"}');
         exit(true);
     end;
 
@@ -146,17 +145,6 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
-    end;
-
-    /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Status.Restart'));
     end;
 
     /// <summary>

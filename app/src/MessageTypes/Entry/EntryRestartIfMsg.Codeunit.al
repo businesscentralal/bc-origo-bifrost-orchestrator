@@ -67,7 +67,7 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Target := Parts.Target('data.id, subject', 'guid', 'The Job Queue Entry SystemId.');
+        Target := Parts.JobQueueEntryTarget();
         exit(true);
     end;
 
@@ -75,7 +75,7 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'Job Queue Entry SystemId.'));
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId of the Job Queue Entry. Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -85,10 +85,10 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'Job Queue Entry SystemId.');
-        Parts.AddResponseField(Fields, 'entryStatus', 'string', 'The resulting Job Queue status.');
-        Parts.AddResponseField(Fields, 'description', 'string', 'Entry description.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Result message.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the Job Queue Entry.');
+        Parts.AddResponseField(Fields, 'entryStatus', 'string', 'Status after the call as its caption in the session language, e.g. Ready.');
+        Parts.AddResponseField(Fields, 'description', 'string', 'Description of the Job Queue Entry.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Job Queue Entry restarted. or No restart needed. (translated to the session language).');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -97,7 +97,8 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Job Queue Entry');
+        Parts.AddJobQueueEntryErrors(Errors);
+        Parts.AddRuntimeError(Errors, 'Business Central refuses to set the Job Queue Entry to Ready.', 'Read the text and fix the Job Queue Entry.');
         exit(true);
     end;
 
@@ -132,7 +133,7 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Restart only when needed', '{"type":"Orchestrator.JobQueueEntry.RestartIfNeeded","data":{"id":"<systemId>"}}', '{"status":"Success","message":"No restart needed."}');
+        Parts.Example(Examples, 'Restart only when needed', '{"type":"Orchestrator.JobQueueEntry.RestartIfNeeded","data":{"id":"<systemId>"}}', '{"status":"Success","id":"<systemId>","entryStatus":"Ready","description":"Post inventory cost","message":"No restart needed."}');
         exit(true);
     end;
 
@@ -144,7 +145,7 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Ready and In Process entries are returned without changing them.';
+        Notes := 'Only Error, On Hold and On Hold with Inactivity Timeout are set to Ready (message Job Queue Entry restarted.). Every other status, Ready and In Process included, is returned unchanged with message No restart needed.';
         exit(true);
     end;
 
@@ -155,17 +156,6 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
-    end;
-
-    /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.JobQueueEntry.RestartIfNeeded'));
     end;
 
     /// <summary>

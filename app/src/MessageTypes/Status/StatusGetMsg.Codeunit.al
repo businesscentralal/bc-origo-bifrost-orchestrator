@@ -76,12 +76,16 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Fields: JsonArray;
+        EntryFields: JsonArray;
     begin
+        Parts.AddResponseField(EntryFields, 'total', 'integer', 'All Scheduled Entry ori records.');
+        Parts.AddResponseField(EntryFields, 'blocked', 'integer', 'Blocked entries.');
+        Parts.AddResponseField(EntryFields, 'active', 'integer', 'Entries that are not blocked.');
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'Current orchestrator status.');
-        Parts.AddResponseField(Fields, 'jobQueueCategoryCode', 'string', 'Management Job Queue category.');
+        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'State of the management Job Queue Entry as a sentence in the session language: Job Queue is running, Job Queue execution has expired, please restart, Job Queue execution has failed, please restart, or Job Queue has not been configured.');
+        Parts.AddResponseField(Fields, 'jobQueueCategoryCode', 'string', 'Job Queue Category Code of the scheduler setup, e.g. JOBSSCHDLR.');
         Parts.AddResponseField(Fields, 'logJobQueueActivity', 'boolean', 'Whether Job Queue activity is logged.');
-        Parts.AddResponseField(Fields, 'entries', 'object', 'Total, blocked and active scheduled entries.');
+        Parts.AddResponseField(Fields, 'entries', 'object', 'Counts of orchestrator entries.', EntryFields);
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -125,7 +129,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Read status', '{"type":"Orchestrator.Status.Get"}', '{"status":"Success","orchestratorStatus":"Ready","entries":{"total":2,"blocked":0,"active":2}}');
+        Parts.Example(Examples, 'Read status', '{"type":"Orchestrator.Status.Get"}', '{"status":"Success","orchestratorStatus":"Job Queue is running","jobQueueCategoryCode":"JOBSSCHDLR","logJobQueueActivity":true,"entries":{"total":10,"blocked":1,"active":9}}');
         exit(true);
     end;
 
@@ -137,7 +141,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The active count is calculated from entries that are not blocked.';
+        Notes := 'orchestratorStatus is meant for a person, not for a comparison: it is translated. Expired means the management Job Queue Entry has expired, or it is ready to start but its earliest start lies more than a minute in the past; any other state of an existing entry is reported as failed. Orchestrator.Status.Restart fixes both; Orchestrator.Status.RestartIfNeeded leaves a Ready or In Process entry alone even when it has expired. The active count is the entries that are not blocked.';
         exit(true);
     end;
 
@@ -148,17 +152,6 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
-    end;
-
-    /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Status.Get'));
     end;
 
     /// <summary>

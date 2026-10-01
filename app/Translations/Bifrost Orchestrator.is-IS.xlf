@@ -1102,9 +1102,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2498592579 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Execute a Bifrost Playbook immediately and return its results. Write operation. Use Orchestrator.Playbook.Enqueue for background execution.</source>
-          <target state="translated">Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</note>
+          <source>Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution.</source>
+          <target state="translated">Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 1018720751" size-unit="char" translate="yes" xml:space="preserve">
@@ -1228,9 +1228,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2046287294 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Run a processing-only report as a batch job and return its result. Write operation. Use Orchestrator.Report.SaveAs for reports that produce output.</source>
-          <target state="translated">Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Skrifaðgerð. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Skrifaðgerð. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</note>
+          <source>Run a processing-only report as a batch job and return its result. Irreversible. Use Orchestrator.Report.SaveAs for reports that produce output.</source>
+          <target state="translated">Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3308826164 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1438,9 +1438,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1062491014 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Write operation. Use Orchestrator.Entry.Schedule after changing its recurring settings.</source>
-          <target state="translated">Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifaðgerð. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifaðgerð. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</note>
+          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings.</source>
+          <target state="translated">Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1456,9 +1456,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart a failed or held orchestrator entry according to its retry policy. Write operation. Use Orchestrator.Entry.Run for a one-time foreground run.</source>
-          <target state="translated">Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</note>
+          <source>Restart a failed or held orchestrator entry according to its retry policy. Irreversible. Use Orchestrator.Entry.Run for a one-time foreground run.</source>
+          <target state="translated">Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 251919310 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1474,9 +1474,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 251919310 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Run an orchestrator entry once immediately. Write operation. Use Orchestrator.Entry.Restart to requeue a failed entry instead.</source>
-          <target state="translated">Keyra áætlunarfærslu einu sinni strax. Skrifaðgerð. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyra áætlunarfærslu einu sinni strax. Skrifaðgerð. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</note>
+          <source>Run an orchestrator entry once immediately. Irreversible. Use Orchestrator.Entry.Restart to requeue a failed entry instead.</source>
+          <target state="translated">Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3024542026 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1492,9 +1492,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3024542026 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Reschedule an orchestrator entry for immediate execution. Write operation. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.</source>
-          <target state="translated">Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.</note>
+          <source>Reschedule an orchestrator entry for immediate execution. Irreversible. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.</source>
+          <target state="translated">Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4100043099 - NamedType 3536930844" size-unit="char" translate="yes" xml:space="preserve">
@@ -1564,9 +1564,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2057945186 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator management Job Queue Entry unconditionally. Write operation. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.</source>
-          <target state="translated">Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifaðgerð. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</note>
+          <source>Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.</source>
+          <target state="translated">Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1582,9 +1582,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Write operation. Use Orchestrator.Status.Restart for an unconditional restart.</source>
-          <target state="translated">Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifaðgerð. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
+          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart.</source>
+          <target state="translated">Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">

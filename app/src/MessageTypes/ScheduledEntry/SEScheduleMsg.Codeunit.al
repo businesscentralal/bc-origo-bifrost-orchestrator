@@ -36,7 +36,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Reschedule an orchestrator entry for immediate execution. Write operation. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Skrifaðgerð. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.';
+        SelectionLbl: Label 'Reschedule an orchestrator entry for immediate execution. Irreversible. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.';
     begin
         exit(SelectionLbl);
     end;
@@ -55,7 +55,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Target := Parts.Target('data.id, subject', 'guid', 'The Scheduled Entry SystemId.');
+        Target := Parts.ScheduledEntryTarget();
         exit(true);
     end;
 
@@ -63,7 +63,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'Scheduled Entry SystemId.'));
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the Scheduled Entry ori. Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -84,17 +84,17 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Scheduled Entry');
-        Parts.AddRuntimeError(Errors, 'The entry is blocked or cannot be scheduled.', 'Unblock the entry and check scheduling credentials.');
+        Parts.AddScheduledEntryErrors(Errors);
+        Parts.AddRuntimeError(Errors, 'The entry is blocked (Business Central''s TestField error on Blocked).', 'Unblock the entry first.');
+        Parts.AddRuntimeError(Errors, 'The scheduling API call or the local scheduling fails.', 'Check the entry''s client credentials and the scheduler setup.');
         exit(true);
     end;
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Rebuilds the Job Queue schedule for the orchestrator entry.', false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Rebuilds the Job Queue schedule of the orchestrator entry. With client credentials the scheduling API commits the change in its own session; otherwise the Job Queue Entry is deleted and created again.', false);
         exit(true);
     end;
 
@@ -126,26 +126,19 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Rebuilds the Job Queue schedule for an existing orchestrator entry and schedules it for immediate execution.';
+        Overview := 'Rebuilds the Job Queue Entry of an existing orchestrator entry from its current recurrence settings.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Blocked entries are refused; configured API credentials are used when available, otherwise local scheduling is used.';
+        Notes := 'Blocked entries are refused. With client credentials the update goes through the scheduling API. Without them the Job Queue Entry is deleted and created again from the entry''s recurrence when its earliest start has passed; when it lies in the future the Job Queue Entry is only deleted and the orchestrator management job creates it later.';
         exit(true);
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Outbound);
-    end;
-
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Entry.Schedule'));
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
