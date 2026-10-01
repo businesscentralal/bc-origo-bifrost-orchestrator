@@ -42,7 +42,7 @@ app/              Business Central AL extension (publisher: Origo, ID range 1003
     Log/                Playbook Instance and Playbook Step Log tables + log management
     Pages/              Playbook list/card, instances, step subpages, template editor, FactBoxes
     MessageTypes/       MsgType enum extension + one folder per area (Entry, ScheduledEntry,
-                        Status, Playbook, Report, Telegram) + Help codeunits
+                        Status, Playbook, Report, Telegram) + Help ori (overview) + contract parts
   Help/             HTML help pages (en-US and is-IS) deployed to Azure Blob
   Translations/     Generated .xlf translation file
   docs/             AppSource submission material (user scenarios, Partner Center texts)
@@ -68,7 +68,7 @@ Bifrost Orchestrator has exactly one AL dependency: **Bifrost Foundation** (`750
 Every Bifrost Orchestrator message type is:
 - A value in `enumextension "MsgType.EnumExt ori"` (10035536) extending Foundation's `Message Type ori`
 - An impl codeunit implementing `Msg Interface ori` (`<Area> <Verb> Msg ori`), usually delegating to a shared `<Area> Msg Handler ori`
-- A help codeunit whose markdown is collected by `Help ori` and served through `Help.Orchestrator.Get`
+- A contract: the impl codeunit also implements `Msg Contract ori` (and `Msg Discovery ori`); `Help.Implementation.Get` returns its chapters. Shared chapter content lives in `Orch B1 Contract Parts ori` / `Orch B2 Contract Parts ori`. There is no per-type markdown help (`GetMessageHelpAsMarkdownDocument` was removed with #57)
 
 Keys keep the `Orchestrator.*` prefix — they are the published API contract and must not be renamed.
 
@@ -104,14 +104,14 @@ Keys keep the `Orchestrator.*` prefix — they are the published API contract an
 - Do not put the brand word in object names — "Bifrost" lives in the namespace, the app name, the permission sets (`BIFROST … ori`) and user-facing captions.
 - Do not add `Extensible = false` to any enum.
 - Do not write credentials into files. The Telegram Bot Token and the client credentials go to the Bifröst Foundation secret store through codeunit `Secrets ori` (codes `TELEGRAM-BOT-TOKEN`, `CREDENTIAL-<CODE>-CLIENT-ID`, `CREDENTIAL-<CODE>-CLIENT-SECRET`, scope Company); container credentials come from the `BC28IS_USER` / `BC28IS_PASSWORD` user environment variables.
-- Do not use string concatenation to build markdown in help codeunits — use `TextBuilder.AppendLine()`.
+- Do not use string concatenation to build the markdown overview in `Help ori` — use `TextBuilder.AppendLine()`.
 - Do not resurrect `Max Iterations` (legacy field 71 on `Playbook Step ori`) — it was dropped on purpose.
 
 ---
 
 ## Extending the System
 
-To add a message type: add a value to `MsgType.EnumExt ori`, write the `<Area> <Verb> Msg ori` impl codeunit (delegating to the area's `Msg Handler`), write its help codeunit, register it in `Help ori`, and add tests in `test/test/`. Implementation is not complete without tests, help text and HTML help.
+To add a message type: add a value to `MsgType.EnumExt ori`, write the `<Area> <Verb> Msg ori` impl codeunit (delegating to the area's `Msg Handler`) implementing `Msg Interface ori`, `Msg Discovery ori` and `Msg Contract ori` (the chapters are its help), add it to the decision tree and type table in `Help ori` when it belongs in the overview, and add tests in `test/test/` (including the batch contract tests). Implementation is not complete without tests, the contract and the documentation site.
 
 ---
 

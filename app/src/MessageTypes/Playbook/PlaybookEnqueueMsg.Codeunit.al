@@ -141,13 +141,6 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
         exit("Msg Direction ori"::Outbound);
     end;
 
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Playbook.Enqueue'));
-    end;
-
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteEnqueue(Argument);

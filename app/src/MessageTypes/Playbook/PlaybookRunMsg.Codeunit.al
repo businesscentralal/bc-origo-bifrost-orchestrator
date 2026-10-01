@@ -169,17 +169,6 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
     end;
 
     /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Playbook.Run'));
-    end;
-
-    /// <summary>
     /// Executes the message type.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>

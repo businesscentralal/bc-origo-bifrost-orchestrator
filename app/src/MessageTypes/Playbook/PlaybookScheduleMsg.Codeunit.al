@@ -179,17 +179,6 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     end;
 
     /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Playbook.Schedule'));
-    end;
-
-    /// <summary>
     /// Executes the message type.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>

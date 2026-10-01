@@ -19,21 +19,26 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 
 ### Object IDs in use / free
 - Used app ids: 10035535-10035556, 10035559-10035562, 10035566-10035568, 10035570-10035572,
-  10035574, 10035576, 10035579, 10035581-10035608.
+  10035574, 10035576, 10035579, 10035581-10035610.
   **Free: 10035557-10035558, 10035563-10035565, 10035569, 10035573, 10035575, 10035577-10035578,
-  10035580, 10035609-10035634.**
+  10035580, 10035611-10035634.**
   (10035606 = codeunit `Secrets ori`, added 2026-09-06 for the secret store migration;
   10035607 = codeunit `Orchestrator Registration ori`, added 2026-09-07 for the Bifröst
-  application registry; 10035608 = codeunit `App Takeover State ori`, added 2026-09-15 for #21.)
-- Used test ids: 96400-96404, 96410-96426, 96428, 96450-96451.
-  **Free: 96405-96409, 96427, 96429-96449, 96452-96499.**
+  application registry; 10035608 = codeunit `App Takeover State ori`, added 2026-09-15 for #21;
+  10035609 = codeunit `Orch B1 Contract Parts ori` and 10035610 = codeunit `Orch B2 Contract Parts ori`,
+  added 2026-09-29 for #56.)
+- Used test ids: 96400-96404, 96410-96426, 96428, 96450-96453.
+  **Free: 96405-96409, 96427, 96429-96449, 96454-96499.**
   (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
   96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96424 = `Report Layout Msg Tests`;
   96425 = `App Takeover Tests`; 96426 = `App Takeover Probe Tests` (#21); 96428 = `Data Records Hint Tests` (#19);
-  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report `Test Failing Report`.
+  96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report `Test Failing Report`;
+  96452 = `Orch B1 Contract Tests` and 96453 = `Orch B2 Contract Tests` (#56).
   96427 `Test No Source Read` removed — unused empty permission set.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.
+- Nothing was freed by the removal of `GetMessageHelpAsMarkdownDocument` (#57): the per-type builders
+  left `Help ori` (10035576), which stays for the `Help.Orchestrator.Get` overview; no object was deleted.
 
 ## Setup Page and Secrets (Bifröst platform rules)
 - The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) contains **one action
@@ -159,8 +164,10 @@ Key rules always in effect:
   Keys keep the `Orchestrator.*` prefix (and `Help.Orchestrator.Get` as the help directory) - they are the
   published external API contract and must never be renamed or removed.
 - Each type has an `<Area> <Verb> Msg ori` impl codeunit implementing `Msg Interface ori`, usually
-  delegating to a shared `<Area> Msg Handler ori` under `app/src/MessageTypes/<Area>/`, plus help text
-  registered in `Help ori` and served through `Help.Orchestrator.Get`.
+  delegating to a shared `<Area> Msg Handler ori` under `app/src/MessageTypes/<Area>/`. The same codeunit
+  implements `Msg Contract ori`: its chapters are the type's only help (`Help.Implementation.Get`); facts
+  go in JSON chapters, explanation in `GetNotes`. There is no `GetMessageHelpAsMarkdownDocument` (#57).
+  `Help ori` builds only the module overview that `Help.Orchestrator.Get` returns.
 - Errors must be returned as `status = Error` with a helpful message through the Foundation argument;
   never let an unhandled exception reach the API.
 

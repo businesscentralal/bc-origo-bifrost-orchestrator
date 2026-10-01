@@ -155,17 +155,6 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     end;
 
     /// <summary>
-    /// Returns Markdown help documentation for this message type.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Status.Get'));
-    end;
-
-    /// <summary>
     /// Executes the message type.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>

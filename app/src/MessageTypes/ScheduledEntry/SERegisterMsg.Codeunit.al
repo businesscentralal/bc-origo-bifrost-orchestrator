@@ -143,13 +143,6 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
         exit("Msg Direction ori"::Outbound);
     end;
 
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Entry.Register'));
-    end;
-
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteRegister(Argument);

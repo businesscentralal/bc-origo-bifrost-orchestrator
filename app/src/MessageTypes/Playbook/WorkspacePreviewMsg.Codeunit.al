@@ -146,13 +146,6 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
         exit("Msg Direction ori"::Outbound);
     end;
 
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Workspace.Preview'));
-    end;
-
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         Workspace: Codeunit "Playbook Workspace ori";

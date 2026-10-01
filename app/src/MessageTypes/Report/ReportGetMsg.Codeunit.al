@@ -164,13 +164,6 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
         exit("Msg Direction ori"::Both);
     end;
 
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Report.Get'));
-    end;
-
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
         Handler.ExecuteGet(Argument);

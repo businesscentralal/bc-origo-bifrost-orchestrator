@@ -152,17 +152,6 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     end;
 
     /// <summary>
-    /// Returns the Markdown overview document as the message help.
-    /// </summary>
-    /// <param name="Argument">Message argument that receives the help text as response.</param>
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetOverview());
-    end;
-
-    /// <summary>
     /// Executes the message type, returning the overview document as a JSON result.
     /// </summary>
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>

@@ -148,13 +148,6 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         exit("Msg Direction ori"::Inbound);
     end;
 
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Telegram.Message'));
-    end;
-
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         UserSetup: Record "User Setup ori";

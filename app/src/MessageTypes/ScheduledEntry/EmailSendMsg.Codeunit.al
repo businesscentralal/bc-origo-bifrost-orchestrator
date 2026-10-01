@@ -154,13 +154,6 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
         exit("Msg Direction ori"::Inbound);
     end;
 
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Help ori";
-    begin
-        Argument.SetResponseMarkdown(Help.GetHelp('Orchestrator.Email.Send'));
-    end;
-
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         EmailOutbox: Record "Email Outbox";
