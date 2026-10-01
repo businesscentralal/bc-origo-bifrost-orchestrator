@@ -15,7 +15,7 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Removed (2026-10-01) - Markdown help of the message types (#57)
 
 - The message types no longer have a markdown help procedure (`GetMessageHelpAsMarkdownDocument`); Bifrost Foundation stopped calling it. Each type describes itself only through its contract chapters in `Help.Implementation.Get`. `Help.Orchestrator.Get` still returns the same module overview.
-- The Bifrost Foundation dependency is 28.0.0.187, the first build without the procedure.
+- The Bifrost Foundation dependency is 28.0.0.186, the first build without the procedure.
 
 ### Changed (2026-10-01) - Contracts carry everything the old help said (#56)
 
