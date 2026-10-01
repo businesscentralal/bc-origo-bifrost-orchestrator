@@ -58,11 +58,17 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Parts: Codeunit "Orch B2 Contract Parts ori";
+        Formats: List of [Text];
     begin
-        Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report Metadata ID.'));
-        Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Request page XML; otherwise the saved preset is used.'));
-        Parameters.Add(ContractMgt.Parameter('format', 'string', false, 'PDF, Excel, Word or XML; defaults to PDF.'));
-        Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Optional view applied to the report data item.'));
+        Formats.Add('PDF');
+        Formats.Add('Excel');
+        Formats.Add('Word');
+        Formats.Add('XML');
+        Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must not be a processing-only report.'));
+        Parts.AddChoiceParameter(Parameters, 'format', false, 'Output format. Case-insensitive.', Formats, 'PDF');
+        Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Request page parameters as XML. When left out, the calling user''s saved preset is used, otherwise the report defaults.'));
+        Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item, e.g. WHERE(Sell-to Customer No.=CONST(10000)). Ignored when the report has no data item table.'));
         exit(true);
     end;
 
@@ -71,8 +77,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Fields: JsonArray;
     begin
-        Parts.AddResponseField(Fields, 'binary', 'binary', 'Rendered report payload.');
-        Response := Parts.Response(Fields, 'application/octet-stream');
+        Parts.AddResponseField(Fields, 'binary', 'binary', 'The rendered document in the requested format.');
+        Response := Parts.Response(Fields, 'application/pdf');
         exit(true);
     end;
 
@@ -80,8 +86,10 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Report');
-        Parts.AddRuntimeError(Errors, 'The report is processing-only or the format is unsupported.', 'Use Report.Run for processing-only reports and send PDF, Excel, Word or XML.');
+        Parts.AddReportErrors(Errors);
+        Parts.AddError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
+        Parts.AddError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
+        Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
         exit(true);
     end;
 
@@ -109,8 +117,17 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Data.Records.Get', 'Read the customers to send to.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.SaveAs', 'forEach customer: {"reportId":206,"format":"PDF","tableView":"WHERE(Sell-to Customer No.=CONST(@_current.no))"}.'));
+        Steps.Add(ContractMgt.WorkflowStep('Email.Draft.Set', 'forEach: create the draft with the rendered document as attachment.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Email.Send', 'forEach: send the draft.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'A playbook that sends a report to each customer by email.');
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -129,7 +146,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run.';
+        Notes := 'Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. There is no layout parameter: the report renders with its default layout. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
         exit(true);
     end;
 

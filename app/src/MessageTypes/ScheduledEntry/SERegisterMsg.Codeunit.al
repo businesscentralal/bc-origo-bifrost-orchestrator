@@ -47,15 +47,16 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
         Forms: List of [Text];
     begin
         Forms.Add('guid');
-        Envelope := Parts.Envelope(Forms, 'The Job Queue Entry SystemId in data.jobQueueEntryId or as subject.', false);
+        Envelope := Parts.Envelope(Forms, 'The ID (primary key) of the Job Queue Entry, in data.jobQueueEntryId or as subject.', false);
         exit(true);
     end;
 
     procedure GetTarget(var Target: JsonArray): Boolean
     var
-        Parts: Codeunit "Orch B1 Contract Parts ori";
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Target := Parts.Target('data.jobQueueEntryId, subject', 'guid', 'The Job Queue Entry SystemId to register.');
+        Target.Add(ContractMgt.TargetEntry('data.jobQueueEntryId', 'guid', 'Read first: the ID (primary key) of the Job Queue Entry, not its SystemId.'));
+        Target.Add(ContractMgt.TargetEntry('subject', 'guid', 'Used only when data.jobQueueEntryId is missing or not a GUID: the ID of the Job Queue Entry.'));
         exit(true);
     end;
 
@@ -63,7 +64,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('jobQueueEntryId', 'string', false, 'Job Queue Entry SystemId.'));
+        Parameters.Add(ContractMgt.Parameter('jobQueueEntryId', 'string', false, 'ID (primary key) of the Job Queue Entry to register. Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -73,9 +74,9 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'Registered Scheduled Entry SystemId.');
-        Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Whether the new entry is blocked.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Registration result.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the Scheduled Entry ori; its ID equals the Job Queue Entry ID.');
+        Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Always false: a registered entry starts unblocked.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Job Queue Entry registered with orchestrator. (translated).');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -84,8 +85,9 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Job Queue Entry');
-        Parts.AddRuntimeError(Errors, 'The Job Queue Entry cannot be registered.', 'Check that it exists and is not already registered.');
+        Parts.AddError(Errors, 'Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.', 'data.jobQueueEntryId is missing or not a GUID, and subject is not a GUID.', 'Send the ID of the Job Queue Entry.');
+        Parts.AddRuntimeError(Errors, 'No Job Queue Entry has that ID (Business Central''s record-not-found text).', 'Send the ID of the Job Queue Entry, not its SystemId.');
+        Parts.AddError(Errors, 'The Job Queue Orchestrator Management Job Queue Entry cannot be one of the Job Queue Orchestrator Entries.', 'The ID is the orchestrator''s own management Job Queue Entry.', 'Register a different Job Queue Entry.');
         exit(true);
     end;
 
@@ -120,7 +122,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Register a Job Queue Entry', '{"type":"Orchestrator.Entry.Register","data":{"jobQueueEntryId":"<systemId>"}}', '{"status":"Success","id":"<systemId>","message":"Job Queue Entry registered with orchestrator."}');
+        Parts.Example(Examples, 'Register a Job Queue Entry', '{"type":"Orchestrator.Entry.Register","data":{"jobQueueEntryId":"<guid>"}}', '{"status":"Success","id":"<systemId>","blocked":false,"message":"Job Queue Entry registered with orchestrator."}');
         exit(true);
     end;
 
@@ -132,7 +134,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The supplied identifier is the Job Queue Entry SystemId, not the Scheduled Entry primary key.';
+        Notes := 'The identifier is the ID (primary key) of the Job Queue Entry, not its SystemId. Registering an entry that is already registered deletes the Scheduled Entry ori and copies it again from the Job Queue Entry, so changes made on the orchestrator entry are lost. The new entry copies the object to run, the record to process, the category, the description and the recurrence fields, takes the calling user''s time zone, and is not blocked.';
         exit(true);
     end;
 

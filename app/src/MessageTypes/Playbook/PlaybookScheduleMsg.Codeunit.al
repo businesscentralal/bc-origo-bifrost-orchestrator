@@ -67,21 +67,30 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Target := Parts.Target('data.playbookCode, subject', 'code', 'The Playbook code.');
+        Target := Parts.PlaybookTarget();
         exit(true);
     end;
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Parts: Codeunit "Orch B1 Contract Parts ori";
+        NotificationTypes: List of [Text];
+        RetryPolicies: List of [Text];
     begin
-        Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to schedule.'));
-        Parameters.Add(ContractMgt.Parameter('recurringTemplateCode', 'string', true, 'Recurring template code.'));
-        Parameters.Add(ContractMgt.Parameter('notificationType', 'string', false, 'None, EMail or Telegram.'));
-        Parameters.Add(ContractMgt.Parameter('notificationRecipient', 'string', false, 'Notification recipient.'));
-        Parameters.Add(ContractMgt.Parameter('jobQueueCategoryCode', 'string', false, 'Job Queue category code.'));
-        Parameters.Add(ContractMgt.Parameter('emitTelemetry', 'boolean', false, 'Whether to emit telemetry.'));
-        Parameters.Add(ContractMgt.Parameter('retryPolicy', 'string', false, 'Never, ThreeTimes or Always.'));
+        NotificationTypes.Add('None');
+        NotificationTypes.Add('EMail');
+        NotificationTypes.Add('Telegram');
+        RetryPolicies.Add('Never');
+        RetryPolicies.Add('ThreeTimes');
+        RetryPolicies.Add('Always');
+        Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to schedule (Code[20]). Required unless subject carries the code.'));
+        Parameters.Add(ContractMgt.Parameter('recurringTemplateCode', 'string', true, 'Code of the Recurring Template ori whose days, times and interval the entry takes. Must exist.'));
+        Parts.AddChoiceParameter(Parameters, 'notificationType', 'How the entry notifies. Case-insensitive; any other value means None.', NotificationTypes, 'None');
+        Parameters.Add(ContractMgt.Parameter('notificationRecipient', 'string', false, 'Where the notification goes (up to 2048 characters). Stored as sent; not checked against notificationType.'));
+        Parameters.Add(ContractMgt.Parameter('jobQueueCategoryCode', 'string', false, 'Job Queue Category Code (Code[10]) of the entry.'));
+        Parameters.Add(ContractMgt.Parameter('emitTelemetry', 'boolean', false, 'Whether the entry emits telemetry. Default false.'));
+        Parts.AddChoiceParameter(Parameters, 'retryPolicy', 'Whether a failed run is restarted: Never, ThreeTimes (until three errors since the last success) or Always. Case-insensitive; any other value means Always.', RetryPolicies, 'Always');
         exit(true);
     end;
 
@@ -92,9 +101,9 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
         Parts.AddResponseField(Fields, 'playbookCode', 'string', 'Scheduled playbook code.');
-        Parts.AddResponseField(Fields, 'scheduled', 'boolean', 'True when the entry was created.');
-        Parts.AddResponseField(Fields, 'orchestratorEntryId', 'string', 'Scheduled Entry SystemId.');
-        Parts.AddResponseField(Fields, 'orchestratorEntryPkId', 'string', 'Scheduled Entry primary key SystemId.');
+        Parts.AddResponseField(Fields, 'scheduled', 'boolean', 'Always true.');
+        Parts.AddResponseField(Fields, 'orchestratorEntryId', 'string', 'SystemId of the new Scheduled Entry ori.');
+        Parts.AddResponseField(Fields, 'orchestratorEntryPkId', 'string', 'ID (primary key) of the new Scheduled Entry ori; its Job Queue Entry gets the same ID.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -103,8 +112,10 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Playbook');
-        Parts.AddRuntimeError(Errors, 'The recurring template or notification settings are invalid.', 'Check the template and notification values.');
+        Parts.AddPlaybookErrors(Errors);
+        Parts.AddError(Errors, 'Request must include "recurringTemplateCode".', 'data.recurringTemplateCode is missing or empty.', 'Send the code of a Recurring Template ori.');
+        Parts.AddError(Errors, 'Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.', 'The playbook already has an orchestrator entry.', 'Delete that Scheduled Entry ori first, or keep the schedule it has.');
+        Parts.AddRuntimeError(Errors, 'No Recurring Template ori has that code (Business Central''s table relation error).', 'Check the code with Data.Records.Get on table Recurring Template ori.');
         exit(true);
     end;
 
@@ -127,6 +138,8 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.Related(Related, 'Orchestrator.Playbook.Enqueue', 'Use this for a one-time delayed execution.');
+        Parts.Related(Related, 'Orchestrator.Playbook.Run', 'Use this to run the playbook now, inline.');
+        Parts.Related(Related, 'Orchestrator.Status.Get', 'Use this to check that the orchestrator, which creates the Job Queue Entry, is running.');
         exit(true);
     end;
 
@@ -139,7 +152,7 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Schedule a playbook', '{"type":"Orchestrator.Playbook.Schedule","data":{"playbookCode":"MYPLAYBOOK","recurringTemplateCode":"DAILY"}}', '{"status":"Success","scheduled":true,"playbookCode":"MYPLAYBOOK"}');
+        Parts.Example(Examples, 'Schedule a playbook', '{"type":"Orchestrator.Playbook.Schedule","data":{"playbookCode":"MYPLAYBOOK","recurringTemplateCode":"WORKDAYS","notificationType":"Telegram","retryPolicy":"Never"}}', '{"status":"Success","playbookCode":"MYPLAYBOOK","scheduled":true,"orchestratorEntryId":"<systemId>","orchestratorEntryPkId":"<guid>"}');
         exit(true);
     end;
 
@@ -151,7 +164,8 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Notification recipient requirements depend on notificationType; omitted values default to None and Always.';
+        Notes := 'The call creates only the Scheduled Entry ori: not blocked, earliest start now, running the Playbook JQ Dispatcher for this playbook on the template''s schedule. The Job Queue Entry is created by the orchestrator management job on its next run, so the orchestrator must be running (Orchestrator.Status.Get, Orchestrator.Status.RestartIfNeeded).' +
+            ' A playbook has at most one orchestrator entry; a second call is refused until the first entry is deleted. notificationRecipient is not checked: a notificationType other than None with no recipient is accepted.';
         exit(true);
     end;
 

@@ -58,13 +58,19 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Parts: Codeunit "Orch B2 Contract Parts ori";
+        Formats: List of [Text];
     begin
-        Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report Metadata ID.'));
-        Parameters.Add(ContractMgt.Parameter('name', 'string', true, 'User-defined layout name.'));
-        Parameters.Add(ContractMgt.Parameter('layoutFormat', 'string', true, 'Word, Excel, RDLC or RDL.'));
-        Parameters.Add(ContractMgt.Parameter('layoutBase64', 'string', true, 'Non-empty base64 layout content.'));
-        Parameters.Add(ContractMgt.Parameter('description', 'string', false, 'Layout description; defaults to name.'));
-        Parameters.Add(ContractMgt.Parameter('companyName', 'string', false, 'Optional company name for the layout.'));
+        Formats.Add('Word');
+        Formats.Add('Excel');
+        Formats.Add('RDLC');
+        Formats.Add('RDL');
+        Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID.'));
+        Parameters.Add(ContractMgt.Parameter('name', 'string', true, 'Name of the user-defined layout, cut to 250 characters. A user-defined layout with this name on the report is replaced.'));
+        Parts.AddChoiceParameter(Parameters, 'layoutFormat', true, 'Layout format. Case-insensitive; RDL is stored as RDLC.', Formats, '');
+        Parameters.Add(ContractMgt.Parameter('layoutBase64', 'string', true, 'The layout file (.docx, .xlsx or .rdl) as non-empty base64.'));
+        Parameters.Add(ContractMgt.Parameter('description', 'string', false, 'Layout description, cut to 250 characters; defaults to name.'));
+        Parameters.Add(ContractMgt.Parameter('companyName', 'string', false, 'Company the layout belongs to, cut to 30 characters; empty for all companies.'));
         exit(true);
     end;
 
@@ -87,8 +93,11 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Report');
-        Parts.AddRuntimeError(Errors, 'A required field is missing, layoutBase64 is empty, or layoutFormat is invalid.', 'Send all required keys and a supported Word, Excel or RDLC layout.');
+        Parts.AddError(Errors, 'Request must include "<key>".', 'reportId, name, layoutFormat or layoutBase64 is missing.', 'Send all four keys.');
+        Parts.AddError(Errors, 'Layout format <layoutFormat> is not valid for report <reportId>.', 'layoutFormat is not Word, Excel, RDLC or RDL.', 'Send one of those formats.');
+        Parts.AddError(Errors, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
+        Parts.AddError(Errors, 'Request must include non-empty "layoutBase64".', 'layoutBase64 is empty.', 'Send the layout file as base64.');
+        Parts.AddRuntimeError(Errors, 'layoutBase64 is not valid base64, or the layout import fails.', 'Send the file content base64-encoded, in the format named by layoutFormat.');
         exit(true);
     end;
 
@@ -135,7 +144,8 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'setAsDefault is intentionally not implemented; isDefault is returned as false. The operation does not use Data.Records.Set.';
+        Notes := 'Only user-defined layouts (no App ID) are created or replaced; a layout an extension ships is never changed. The file is imported through the Tenant Report Layout media field, the path the Report Layouts page uses. Do not write the layout with Data.Records.Set on Tenant Report Layout (2000000232) or Tenant Report Layout Selection (2000000233).' +
+            ' Setting the default layout is not implemented, so isDefault is always false; choose the default on the Report Layouts page.';
         exit(true);
     end;
 

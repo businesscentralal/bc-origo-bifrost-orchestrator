@@ -57,9 +57,10 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetTarget(var Target: JsonArray): Boolean
     var
-        Parts: Codeunit "Orch B1 Contract Parts ori";
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Target := Parts.Target('data.outboxSystemId, subject', 'guid', 'The Email Outbox SystemId.');
+        Target.Add(ContractMgt.TargetEntry('data.outboxSystemId', 'guid', 'Read first: the SystemId of the Email Outbox entry.'));
+        Target.Add(ContractMgt.TargetEntry('subject', 'guid', 'Used only when data.outboxSystemId is missing or not a GUID.'));
         exit(true);
     end;
 
@@ -67,7 +68,7 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('outboxSystemId', 'string', false, 'Email Outbox SystemId returned by Email.Draft.Set.'));
+        Parameters.Add(ContractMgt.Parameter('outboxSystemId', 'string', false, 'SystemId of the Email Outbox entry, from the Email.Draft.Set answer. Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -77,8 +78,8 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'messageId', 'string', 'Sent email message identifier.');
-        Parts.AddResponseField(Fields, 'outboxSystemId', 'string', 'Source outbox SystemId.');
+        Parts.AddResponseField(Fields, 'messageId', 'string', 'ID of the Email Message that was sent.');
+        Parts.AddResponseField(Fields, 'outboxSystemId', 'string', 'The outbox SystemId that was sent.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -87,8 +88,9 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Email Outbox');
-        Parts.AddRuntimeError(Errors, 'The outboxSystemId is missing or the email cannot be sent.', 'Send the GUID of a draft and check the email setup.');
+        Parts.AddError(Errors, '"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.', 'data.outboxSystemId is missing or not a GUID, and subject is not a GUID.', 'Send the outboxSystemId of the draft.');
+        Parts.AddRuntimeError(Errors, 'No Email Outbox entry has that SystemId (Business Central''s record-not-found text).', 'Send the outboxSystemId from the Email.Draft.Set answer.');
+        Parts.AddRuntimeError(Errors, 'The email account or its connector refuses to send.', 'Check the email account of the draft.');
         exit(true);
     end;
 
@@ -107,20 +109,31 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
     end;
 
     procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        exit(false);
+        Parts.Related(Related, 'Email.Draft.Set', 'Use this first to create the draft, or alone for a review-before-send flow.');
+        Parts.Related(Related, 'Orchestrator.Telegram.Message', 'Use this to notify the current user on Telegram instead.');
+        exit(true);
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Email.Draft.Set', 'Create the draft (to, subject, htmlBody, attachments). In a playbook set Result Log Paths to outboxSystemId.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Email.Send', 'Send it with the request template {"outboxSystemId":"@<draft step no.>.outboxSystemId"}.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'Keeping draft and send apart lets a review-before-send flow skip the send step, and gives the send step all of Email.Draft.Set''s features (attachments, scenarios, CC and BCC).');
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Send a draft', '{"type":"Orchestrator.Email.Send","data":{"outboxSystemId":"<systemId>"}}', '{"status":"Success","outboxSystemId":"<systemId>"}');
+        Parts.Example(Examples, 'Send a draft', '{"type":"Orchestrator.Email.Send","data":{"outboxSystemId":"<systemId>"}}', '{"status":"Success","messageId":"<guid>","outboxSystemId":"<systemId>"}');
         exit(true);
     end;
 

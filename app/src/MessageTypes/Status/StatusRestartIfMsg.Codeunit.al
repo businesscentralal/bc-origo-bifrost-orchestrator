@@ -78,7 +78,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Restart result.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Orchestrator is already running. or Orchestrator restarted. (translated).');
         Parts.AddResponseField(Fields, 'restarted', 'boolean', 'Whether a restart was performed.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
@@ -123,7 +123,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Ensure running', '{"type":"Orchestrator.Status.RestartIfNeeded"}', '{"status":"Success","restarted":false}');
+        Parts.Example(Examples, 'Ensure running', '{"type":"Orchestrator.Status.RestartIfNeeded"}', '{"status":"Success","message":"Orchestrator is already running.","restarted":false}');
         exit(true);
     end;
 
@@ -135,7 +135,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'When the management entry is Ready or In Process, the response reports restarted=false.';
+        Notes := 'When the management Job Queue Entry exists and is Ready or In Process nothing changes and the answer is restarted false. In every other case (no entry, Error, On Hold, ...) it is cancelled and scheduled again as Orchestrator.Status.Restart does, and the answer is restarted true.';
         exit(true);
     end;
 

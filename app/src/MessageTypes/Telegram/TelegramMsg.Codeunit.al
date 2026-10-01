@@ -67,7 +67,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('message', 'string', true, 'Text sent to the current user''s configured Telegram chat.'));
+        Parameters.Add(ContractMgt.Parameter('message', 'string', true, 'Text sent to the current user''s Telegram chat, with parse mode HTML: Telegram''s HTML tags format it. There is no chat ID parameter.'));
         exit(true);
     end;
 
@@ -77,7 +77,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'chatId', 'string', 'Configured Telegram chat identifier.');
+        Parts.AddResponseField(Fields, 'chatId', 'string', 'Telegram Chat ID of the calling user that the message went to.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -86,8 +86,12 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRuntimeError(Errors, 'The Telegram bot token, HTTP permission, chat ID or message is missing.', 'Configure the token and current user chat ID, enable HTTP requests, and send message.');
-        Parts.AddRuntimeError(Errors, 'Telegram rejected the request.', 'Inspect the returned Telegram response and correct the message or configuration.');
+        Parts.AddError(Errors, 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', 'Allow HttpClient Requests is off for Bifrost Orchestrator.', 'Enable it in Extension Settings (page 2500).');
+        Parts.AddError(Errors, 'Telegram Bot Token is not configured in Orchestrator Setup.', 'No bot token is stored.', 'Set the Telegram Bot Token in the Orchestrator setup.');
+        Parts.AddRuntimeError(Errors, 'The calling user has no User Setup ori record (Business Central''s record-not-found text).', 'Create the user''s Bifrost User Setup with a Telegram Chat ID.');
+        Parts.AddError(Errors, 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', 'The calling user''s Telegram Chat ID is empty.', 'Set the Telegram Chat ID in Bifrost User Setup.');
+        Parts.AddError(Errors, '"message" is required in the request data.', 'data.message is missing.', 'Send the text in data.message.');
+        Parts.AddError(Errors, 'Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>', 'Telegram rejected the request.', 'Read the Telegram response and correct the message or the configuration.');
         exit(true);
     end;
 
@@ -134,7 +138,8 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The token, current user chat ID and Allow HttpClient Requests setting must all be configured before sending.';
+        Notes := 'Sending needs three things: Allow HttpClient Requests for the extension (Extension Settings, page 2500), the Telegram Bot Token in the Orchestrator setup, and a Telegram Chat ID on the calling user''s Bifrost User Setup. The chat ID always comes from the caller''s setup.' +
+            ' The type is listed for a user only when the bot token is set and that user has a Telegram Chat ID. Allow HttpClient Requests is not part of that check; it is checked when the message is sent.';
         exit(true);
     end;
 

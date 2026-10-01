@@ -76,9 +76,13 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Fields: JsonArray;
+        ResultFields: JsonArray;
     begin
+        Parts.AddResponseField(ResultFields, 'messageType', 'string', 'Always Help.Orchestrator.Get.');
+        Parts.AddResponseField(ResultFields, 'format', 'string', 'Always markdown.');
+        Parts.AddResponseField(ResultFields, 'markdown', 'string', 'The overview document: decision tree, message type table, run reporting, playbook concepts, building playbooks with Data.Records.Set, scheduling, LLM patterns and agent rules.');
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'result', 'object', 'Overview markdown result.');
+        Parts.AddResponseField(Fields, 'result', 'object', 'The overview.', ResultFields);
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -87,7 +91,7 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRuntimeError(Errors, 'The request version is not 1.0.', 'Send version 1.0.');
+        Parts.AddError(Errors, 'Unsupported specification version <version>. Expected version 1.0.', 'The request version is not 1.0.', 'Send version 1.0.');
         exit(true);
     end;
 
@@ -106,8 +110,11 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     end;
 
     procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        exit(false);
+        Parts.Related(Related, 'Help.Implementation.Get', 'Use this for the contract of one message type.');
+        exit(true);
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
@@ -119,7 +126,7 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Read orchestrator help', '{"type":"Help.Orchestrator.Get"}', '{"status":"Success","result":{"format":"markdown"}}');
+        Parts.Example(Examples, 'Read orchestrator help', '{"type":"Help.Orchestrator.Get"}', '{"status":"Success","result":{"messageType":"Help.Orchestrator.Get","format":"markdown","markdown":"# Job Queue Orchestrator & Playbook Workflow Engine ..."}}');
         exit(true);
     end;
 

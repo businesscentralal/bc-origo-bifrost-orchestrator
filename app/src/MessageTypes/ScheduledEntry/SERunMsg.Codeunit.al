@@ -67,7 +67,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Target := Parts.Target('data.id, subject', 'guid', 'The Scheduled Entry SystemId.');
+        Target := Parts.ScheduledEntryTarget();
         exit(true);
     end;
 
@@ -75,7 +75,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'Scheduled Entry SystemId.'));
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the Scheduled Entry ori. Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -84,10 +84,10 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Fields: JsonArray;
     begin
-        Parts.AddResponseField(Fields, 'status', 'string', 'Success or Error.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'Scheduled Entry SystemId.');
+        Parts.AddResponseField(Fields, 'status', 'string', 'Success when the job completed, Error when it failed.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the Scheduled Entry ori.');
         Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Whether the entry is blocked.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Execution result or error text.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Job queue entry executed. on Success; the run''s error text on Error.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -96,8 +96,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Scheduled Entry');
-        Parts.AddRuntimeError(Errors, 'The entry cannot be executed.', 'Inspect the message returned in the response.');
+        Parts.AddScheduledEntryErrors(Errors);
         exit(true);
     end;
 
@@ -133,6 +132,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.Example(Examples, 'Run an entry', '{"type":"Orchestrator.Entry.Run","data":{"id":"<systemId>"}}', '{"status":"Success","id":"<systemId>","blocked":false,"message":"Job queue entry executed."}');
+        Parts.Example(Examples, 'A run that fails', '{"type":"Orchestrator.Entry.Run","subject":"<systemId>"}', '{"status":"Error","id":"<systemId>","blocked":false,"message":"<error text>"}');
         exit(true);
     end;
 
@@ -144,7 +144,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'A failed foreground run is returned as status Error with the run error text.';
+        Notes := 'The entry runs headlessly, with no confirmation dialog, through a one-time non-recurring copy of its Job Queue Entry; the entry''s own schedule and Job Queue Entry are left alone. A failed run is not an error answer: the response has status Error and the run''s error text in message.';
         exit(true);
     end;
 

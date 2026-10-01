@@ -51,7 +51,7 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Target := Parts.Target('data.playbookCode, subject', 'code', 'The Playbook code.');
+        Target := Parts.PlaybookTarget();
         exit(true);
     end;
 
@@ -59,10 +59,10 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to enqueue.'));
-        Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored for the first step.'));
-        Parameters.Add(ContractMgt.Parameter('jobQueueCategory', 'string', false, 'Job Queue category code.'));
-        Parameters.Add(ContractMgt.Parameter('delaySeconds', 'integer', false, 'Delay before execution; values below 60 become 60.'));
+        Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to enqueue (Code[20]). Required unless subject carries the code.'));
+        Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored in JQ Parameter ori and handed to the playbook as its initial request (_initial) when the job runs.'));
+        Parameters.Add(ContractMgt.Parameter('jobQueueCategory', 'string', false, 'Job Queue Category Code (Code[10]) of the Job Queue Entry.'));
+        Parameters.Add(ContractMgt.Parameter('delaySeconds', 'integer', false, 'Seconds before the run starts. Default 60; values below 60 are raised to 60.'));
         exit(true);
     end;
 
@@ -73,9 +73,9 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
         Parts.AddResponseField(Fields, 'playbookCode', 'string', 'Enqueued playbook code.');
-        Parts.AddResponseField(Fields, 'jobQueueEntryId', 'string', 'Created Job Queue Entry SystemId.');
-        Parts.AddResponseField(Fields, 'delaySeconds', 'integer', 'Effective delay.');
-        Parts.AddResponseField(Fields, 'jobQueueCategory', 'string', 'Category when supplied.');
+        Parts.AddResponseField(Fields, 'jobQueueEntryId', 'string', 'ID (primary key) of the one-off Job Queue Entry, not its SystemId.');
+        Parts.AddResponseField(Fields, 'delaySeconds', 'integer', 'Effective delay, at least 60.');
+        Parts.AddResponseField(Fields, 'jobQueueCategory', 'string', 'Present only when a category was sent.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -84,8 +84,8 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddRecordErrors(Errors, 'Playbook');
-        Parts.AddRuntimeError(Errors, 'The playbook could not be enqueued.', 'Check the playbook and Job Queue setup.');
+        Parts.AddPlaybookErrors(Errors);
+        Parts.AddRuntimeError(Errors, 'delaySeconds is not a whole number, or Job Queue - Enqueue refuses the entry.', 'Send delaySeconds as an integer and check the Job Queue setup.');
         exit(true);
     end;
 
@@ -120,7 +120,7 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Enqueue a playbook', '{"type":"Orchestrator.Playbook.Enqueue","data":{"playbookCode":"MYPLAYBOOK","delaySeconds":60}}', '{"status":"Success","playbookCode":"MYPLAYBOOK","delaySeconds":60,"jobQueueEntryId":"<systemId>"}');
+        Parts.Example(Examples, 'Enqueue a playbook', '{"type":"Orchestrator.Playbook.Enqueue","data":{"playbookCode":"MYPLAYBOOK","initialRequest":{"invoiceNo":"103002"},"delaySeconds":60}}', '{"status":"Success","playbookCode":"MYPLAYBOOK","jobQueueEntryId":"<guid>","delaySeconds":60}');
         exit(true);
     end;
 
@@ -132,7 +132,7 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The effective delay is at least 60 seconds; initialRequest is stored for the first step.';
+        Notes := 'The effective delay is at least 60 seconds. The call answers before the playbook runs: the one-off, non-recurring Job Queue Entry is scheduled through Job Queue - Enqueue, so it has a System Task ID and runs at its earliest start in a background session, where it writes a Playbook Instance ori like Orchestrator.Playbook.Run. Follow it in Playbook Instance ori and Playbook Step Log ori.';
         exit(true);
     end;
 

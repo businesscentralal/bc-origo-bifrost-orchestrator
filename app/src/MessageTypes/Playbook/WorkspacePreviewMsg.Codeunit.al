@@ -55,7 +55,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'Optional initial workspace payload.'));
+        Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'Simulates a run''s initial request: stored at _initial. A JSON string that holds an object is accepted too; any other string, number or boolean is ignored.'));
         exit(true);
     end;
 
@@ -63,11 +63,23 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Fields: JsonArray;
+        SysFields: JsonArray;
     begin
+        Parts.AddResponseField(SysFields, 'today', 'string', 'Today''s date.');
+        Parts.AddResponseField(SysFields, 'workDate', 'string', 'The work date.');
+        Parts.AddResponseField(SysFields, 'now', 'string', 'The current date and time.');
+        Parts.AddResponseField(SysFields, 'year', 'integer', 'The current year.');
+        Parts.AddResponseField(SysFields, 'lastMonthStart', 'string', 'First day of the previous month.');
+        Parts.AddResponseField(SysFields, 'lastMonthEnd', 'string', 'Last day of the previous month.');
+        Parts.AddResponseField(SysFields, 'thisMonthStart', 'string', 'First day of this month.');
+        Parts.AddResponseField(SysFields, 'thisQuarterStart', 'string', 'First day of this quarter.');
+        Parts.AddResponseField(SysFields, 'thisYearStart', 'string', 'First day of this year.');
+        Parts.AddResponseField(SysFields, 'companyName', 'string', 'The company.');
+        Parts.AddResponseField(SysFields, 'userId', 'string', 'The calling user.');
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, '_sys', 'object', 'Seeded system date and time context.');
-        Parts.AddResponseField(Fields, '_who', 'object', 'Current user context.');
-        Parts.AddResponseField(Fields, '_initial', 'object', 'Initial request when supplied.');
+        Parts.AddResponseField(Fields, '_sys', 'object', 'System constants, as @_sys.<key>. Dates are ISO 8601.', SysFields);
+        Parts.AddResponseField(Fields, '_who', 'object', 'The Help.WhoAmI.Get answer without its status (user, salesperson, companyInfo, telegramChatId and more), as @_who.<path>. Left out when Help.WhoAmI.Get fails.');
+        Parts.AddResponseField(Fields, '_initial', 'object', 'The initialRequest, when one was sent.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -76,7 +88,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.AddRuntimeError(Errors, 'The initialRequest is not a JSON object.', 'Send an object or omit initialRequest.');
+        Parts.AddRuntimeError(Errors, 'initialRequest is a JSON array.', 'Send an object, a string that holds one, or leave initialRequest out.');
         exit(true);
     end;
 
@@ -98,7 +110,8 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.Related(Related, 'Orchestrator.Playbook.Run', 'Use this when workspace preview should be followed by playbook execution.');
+        Parts.Related(Related, 'Orchestrator.Playbook.Run', 'Use this to execute the playbook once its templates are written.');
+        Parts.Related(Related, 'Help.WhoAmI.Get', 'Use this for the user context alone.');
         exit(true);
     end;
 
@@ -111,7 +124,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Preview the workspace', '{"type":"Orchestrator.Workspace.Preview","data":{"initialRequest":{}}}', '{"status":"Success","_sys":{},"_who":{}}');
+        Parts.Example(Examples, 'Preview the workspace', '{"type":"Orchestrator.Workspace.Preview","data":{"initialRequest":{"invoiceNo":"103002"}}}', '{"status":"Success","_sys":{"today":"2026-09-30","lastMonthStart":"2026-08-01","lastMonthEnd":"2026-08-31","companyName":"CRONUS"},"_who":{"salesperson":{"email":"<email>"},"telegramChatId":"<chatId>"},"_initial":{"invoiceNo":"103002"}}');
         exit(true);
     end;
 
@@ -123,7 +136,8 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The workspace is temporary; this message does not create a Playbook Instance or log.';
+        Notes := 'The workspace is temporary; this message does not create a Playbook Instance or log.' +
+            ' Call it before building a playbook to find the paths the request templates can use, such as @_sys.lastMonthStart and @_sys.lastMonthEnd for monthly filters, @_who.companyInfo.registrationNo, @_who.salesperson.email for recipients and @_who.telegramChatId. When debugging, compare it with the workspace snapshot of a failed step in Playbook Step Log ori.';
         exit(true);
     end;
 

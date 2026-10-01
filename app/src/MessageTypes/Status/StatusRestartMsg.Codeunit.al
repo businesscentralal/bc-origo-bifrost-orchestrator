@@ -78,8 +78,8 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Restart result.');
-        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'Status after scheduling.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Orchestrator restarted. (translated).');
+        Parts.AddResponseField(Fields, 'orchestratorStatus', 'string', 'State after scheduling, as a sentence in the session language: Job Queue is running, Job Queue execution has expired, please restart, Job Queue execution has failed, please restart, or Job Queue has not been configured.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -123,7 +123,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Restart orchestrator', '{"type":"Orchestrator.Status.Restart"}', '{"status":"Success","orchestratorStatus":"Ready"}');
+        Parts.Example(Examples, 'Restart orchestrator', '{"type":"Orchestrator.Status.Restart"}', '{"status":"Success","message":"Orchestrator restarted.","orchestratorStatus":"Job Queue is running"}');
         exit(true);
     end;
 
