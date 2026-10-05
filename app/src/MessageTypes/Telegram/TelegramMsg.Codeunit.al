@@ -7,9 +7,6 @@ using System.Environment.Configuration;
 codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
-    Permissions =
-        tabledata "User Setup ori" = R;
-
     procedure IsEnabled(): Boolean
     var
         UserSetup: Record "User Setup ori";

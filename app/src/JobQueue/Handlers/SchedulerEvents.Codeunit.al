@@ -71,4 +71,24 @@ codeunit 10035539 "Scheduler Events ori"
         "Scheduled Entry ori".CopyToCustomDimensions(CustomDimensions);
         Log('O4NJQS-0006', JobQueueEntryExecutedTok, Verbosity::Normal, CustomDimensions)
     end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnAfterIsFieldWriteRestrictedForDataRecords', '', false, false)]
+    local procedure RestrictRunAsAndRecipient(TableNo: Integer; FieldNo: Integer; var IsRestricted: Boolean)
+    begin
+        // #62: Data.Records.Set must not change who a scheduled job runs as, or who is notified.
+        if (TableNo = Database::"Scheduled Entry ori") and (FieldNo in [140, 110]) then
+            IsRestricted := true;
+        if (TableNo = Database::"Scheduler Setup ori") and (FieldNo = 40) then
+            IsRestricted := true;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnGetDedicatedMessageTypeHintForFieldWrite', '', false, false)]
+    local procedure HintRunAsAndRecipient(TableNo: Integer; FieldNo: Integer; var Hint: Text)
+    begin
+        if ((TableNo = Database::"Scheduled Entry ori") and (FieldNo in [140, 110])) or
+           ((TableNo = Database::"Scheduler Setup ori") and (FieldNo = 40))
+        then
+            Hint := 'Orchestrator.Entry.Register / Orchestrator.Playbook.Schedule, or the Scheduled Entry and Scheduler Setup pages.';
+    end;
+
 }
