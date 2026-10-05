@@ -8,6 +8,7 @@ using Origo.Bifrost;
 
 table 10035543 "Playbook Step Log ori"
 {
+    Extensible = false;
     Caption = 'Bifrost Playbook Step Log', Comment = 'is-IS=Atburðaskrá keðjuskrefs';
     DataClassification = SystemMetadata;
 

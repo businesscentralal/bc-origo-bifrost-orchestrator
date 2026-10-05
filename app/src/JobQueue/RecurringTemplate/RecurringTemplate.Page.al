@@ -7,6 +7,7 @@ using System.DateTime;
 
 page 10035543 "Recurring Template ori"
 {
+    Extensible = false;
     PageType = Card;
     UsageCategory = None;
     ApplicationArea = All;

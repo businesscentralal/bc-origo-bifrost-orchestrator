@@ -5,6 +5,7 @@ using System.Environment.Configuration;
 
 page 10035589 "Scheduler Setup Wizard ori"
 {
+    Extensible = false;
     PageType = NavigatePage;
     Caption = 'Bifrost Orchestrator Setup', Comment = 'is-IS=Uppsetning Bifröst stjórnanda';
     ApplicationArea = All;

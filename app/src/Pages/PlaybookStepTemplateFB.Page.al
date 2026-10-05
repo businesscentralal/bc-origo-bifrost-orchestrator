@@ -7,6 +7,7 @@ using System.Utilities;
 
 page 10035554 "Playbook Step Template FB ori"
 {
+    Extensible = false;
     Caption = 'Request Template', Comment = 'is-IS=Sniðmát beiðni';
     PageType = CardPart;
     SourceTable = "Playbook Step ori";

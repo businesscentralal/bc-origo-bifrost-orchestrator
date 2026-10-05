@@ -8,6 +8,7 @@ using System.Environment.Configuration;
 
 table 10035537 "Recurring Template ori"
 {
+    Extensible = false;
     Caption = 'Job Queue Recurring Template', Comment = 'is-IS=Endurtekningarsniðmát vinnsluraða';
     DataClassification = SystemMetadata;
     LookupPageId = "Recurring Templates ori";

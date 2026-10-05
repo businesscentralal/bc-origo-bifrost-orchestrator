@@ -5,6 +5,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 page 10035602 "Playbook Cond. Subpage ori"
 {
+    Extensible = false;
     Caption = 'Step Conditions', Comment = 'is-IS=Skilyrði skrefa';
     PageType = ListPart;
     SourceTable = "Playbook Condition ori";

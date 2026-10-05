@@ -5,6 +5,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 page 10035553 "Playbook Steps Subpage ori"
 {
+    Extensible = false;
     Caption = 'Playbook Steps', Comment = 'is-IS=Keðjuskref';
     PageType = ListPart;
     SourceTable = "Playbook Step ori";

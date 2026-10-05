@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 table 10035544 "JQ Parameter ori"
 {
+    Extensible = false;
     Caption = 'Bifrost JQ Parameter', Comment = 'is-IS=Færibreyta vinnsluraðar Bifrastar';
     DataClassification = SystemMetadata;
 

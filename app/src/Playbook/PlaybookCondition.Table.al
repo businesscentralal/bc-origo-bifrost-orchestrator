@@ -10,6 +10,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 table 10035599 "Playbook Condition ori"
 {
+    Extensible = false;
     Caption = 'Bifrost Playbook Condition', Comment = 'is-IS=Skilyrði keðjuskrefs';
     DataClassification = SystemMetadata;
 

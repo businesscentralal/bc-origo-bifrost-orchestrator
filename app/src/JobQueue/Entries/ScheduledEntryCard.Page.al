@@ -10,6 +10,7 @@ using System.Threading;
 /// </summary>
 page 10035544 "Scheduled Entry Card ori"
 {
+    Extensible = false;
     Caption = 'Job Queue Orchestrator Entry Card', Comment = 'is-IS=Spjald vinnsluraðarafærslu';
     DataCaptionFields = "Object Type to Run", "Object Caption to Run";
     ContextSensitiveHelpPage = 'scheduled-entry-card';

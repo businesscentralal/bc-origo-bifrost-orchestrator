@@ -8,6 +8,7 @@ using System.Threading;
 /// </summary>
 page 10035535 "Sched. Entry Subform ori"
 {
+    Extensible = false;
     Caption = 'Orchestrator Entries', Comment = 'is-IS=Vinnsluraðarfærslur';
     CardPageId = "Scheduled Entry Card ori";
     DelayedInsert = true;

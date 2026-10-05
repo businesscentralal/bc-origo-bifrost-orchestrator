@@ -15,6 +15,7 @@ using System.Utilities;
 /// </summary>
 table 10035535 "Scheduled Entry ori"
 {
+    Extensible = false;
     Caption = 'Job Queue Orchestrator Entry', Comment = 'is-IS=Vinnsluraðarfærsla';
     DataCaptionFields = "Object Type to Run", "Object Caption to Run";
     DataClassification = SystemMetadata;

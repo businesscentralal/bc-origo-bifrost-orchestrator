@@ -8,6 +8,7 @@ using System.Threading;
 
 table 10035539 "Playbook ori"
 {
+    Extensible = false;
     Caption = 'Bifrost Playbook', Comment = 'is-IS=Bifröst keðja';
     DataClassification = SystemMetadata;
     LookupPageId = "Playbooks ori";

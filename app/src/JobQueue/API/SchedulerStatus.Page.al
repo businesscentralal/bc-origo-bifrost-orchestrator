@@ -7,6 +7,7 @@ using System.Threading;
 /// </summary>
 page 10035539 "Scheduler Status ori"
 {
+    Extensible = false;
     APIGroup = 'jobQueueOrchestrator';
     APIPublisher = 'origo';
     APIVersion = 'v1.0';

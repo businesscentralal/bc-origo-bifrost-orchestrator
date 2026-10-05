@@ -25,7 +25,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetKeywords(): Text
     var
-        KeywordsLbl: Label 'run report, processing-only report, batch report, processing report, report job', Comment = 'is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk';
+        KeywordsLbl: Label 'run report, processing-only report, batch report, processing report, report job', Comment = 'is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk, viðbót1';
     begin
         exit(KeywordsLbl);
     end;

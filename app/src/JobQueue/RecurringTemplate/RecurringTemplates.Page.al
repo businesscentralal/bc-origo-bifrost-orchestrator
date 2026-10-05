@@ -5,6 +5,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 page 10035542 "Recurring Templates ori"
 {
+    Extensible = false;
     PageType = List;
     ApplicationArea = All;
     UsageCategory = None;

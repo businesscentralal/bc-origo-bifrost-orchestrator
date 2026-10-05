@@ -7,6 +7,7 @@ using System.Threading;
 
 page 10035584 "Schedule Playbook ori"
 {
+    Extensible = false;
     Caption = 'Schedule Playbook', Comment = 'is-IS=Tímasetja keðju';
     ContextSensitiveHelpPage = 'schedule-playbook';
     PageType = StandardDialog;
