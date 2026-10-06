@@ -37,10 +37,10 @@ codeunit 96403 "Orchestr Secret Tests"
         IsInitialized := true;
     end;
 
-    /// <summary>Checks Telegram discovery for FoundationRead_Enabled under real lowered permissions.</summary>
+    /// <summary>Checks Telegram discovery for FoundationFull_Enabled under real lowered permissions.</summary>
     [Test]
     [TestPermissions(TestPermissions::Restrictive)]
-    procedure Scenario_AC04_FoundationRead_Enabled()
+    procedure Scenario_AC04_FoundationFull_Enabled()
     begin
         // Story #65 AC04 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
         // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
@@ -106,7 +106,7 @@ codeunit 96403 "Orchestr Secret Tests"
         LowerPermissions.SetO365Basic();
         LowerPermissions.AddPermissionSet('BIFROST Orchestr ori');
         if GrantFoundationRead then
-            LowerPermissions.AddPermissionSet('BIFROST Read ori');
+            LowerPermissions.AddPermissionSet('BIFROST Full ori');
         CanRead := UserSetup.ReadPermission();
         Discovery := "Message Type ori"::"Orchestrator.Telegram.Message";
         Enabled := Discovery.IsEnabled();

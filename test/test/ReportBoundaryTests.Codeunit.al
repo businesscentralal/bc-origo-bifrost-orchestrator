@@ -11,6 +11,7 @@ codeunit 96454 "Report Boundary Tests ori"
 
     var
         Assert: Codeunit Assert;
+        DebugWarningSeen: Boolean;
 
     /// <summary>Rejects UnknownField before Run executes a report.</summary>
     [Test]
@@ -141,17 +142,31 @@ codeunit 96454 "Report Boundary Tests ori"
     procedure Run_BothDebugStates_FailureHasNoCallstack()
     begin
         // PR #67 B4 | Time: independent of Today/WorkDate | Risk: request logging state.
+        DebugWarningSeen := false;
         AssertFailureHasNoCallstack(false);
         AssertFailureHasNoCallstack(true);
+        Assert.IsTrue(DebugWarningSeen, 'Enabling request debugging must raise the real warning notification.');
     end;
 
-    /// <summary>Accepts only the expected warning when the test enables request debugging.</summary>
+    /// <summary>Validates debug and known unprovisioned-setup notifications without changing external permissions.</summary>
     /// <param name="DebugNotification">The setup-page warning notification.</param>
     /// <returns>False to keep the warning local to the test handler.</returns>
     [SendNotificationHandler]
     procedure DebugWarningHandler(var DebugNotification: Notification): Boolean
     begin
-        Assert.IsTrue(StrPos(DebugNotification.Message, 'Request Debug Mode') > 0, 'Only the expected debug warning is allowed.');
+        case LowerCase(Format(DebugNotification.Id, 0, 4)) of
+            'b8e2a714-5c3f-4d91-ae07-6f9d1c4b8e25':
+                begin
+                    Assert.IsTrue(StrPos(DebugNotification.Message, 'Request Debug Mode') = 1, 'Expected the debug warning text.');
+                    DebugWarningSeen := true;
+                end;
+            'a7b3c91d-4e8f-4a2b-9c6d-1f5e8a3b7d02':
+                Assert.IsTrue(StrPos(DebugNotification.Message, 'HTTP client requests are not enabled for:') = 1, 'Expected the disposable setup HTTP warning.');
+            'd8e7f6a5-4b3c-4d2e-9f1a-8c7b6a5d4e3f':
+                Assert.IsTrue(StrPos(DebugNotification.Message, 'The Bifrost End-User License Agreement has not been approved') = 1, 'Expected the disposable setup EULA warning.');
+            else
+                Assert.Fail('Unexpected setup notification: ' + DebugNotification.Message);
+        end;
         exit(false);
     end;
 
