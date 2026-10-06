@@ -43,7 +43,7 @@ page 10035538 "Entries API ori"
                 }
                 field(objectCaptionToRun; Rec."Object Caption to Run")
                 {
-                    Caption = 'Object Caption to Run', Comment = 'is-IS=Kafli hluts til keyrslu';
+                    Caption = 'Object Caption to Run', Comment = 'is-IS=Heiti hluts til keyrslu';
                     ToolTip = 'Specifies the name of the object that is selected in the Object ID to Run field.', Comment = 'is-IS=Tilgreinir nafn hluts til keyrslu.';
                 }
                 field(description; Rec.Description)
@@ -59,7 +59,7 @@ page 10035538 "Entries API ori"
                 field(scheduled; Rec.Scheduled)
                 {
                     Caption = 'Scheduled', Comment = 'is-IS=Tímasett';
-                    ToolTip = 'Specifies if the job queue entry has been scheduled to run automatically, which happens when an entry changes status to Ready. If the field is cleared, the job queue entry is not scheduled to run.', Comment = 'is-IS=Tilgreinir hvort vinnsluraðafærsla hafí verið tímasett.';
+                    ToolTip = 'Specifies if the job queue entry has been scheduled to run automatically, which happens when an entry changes status to Ready. If the field is cleared, the job queue entry is not scheduled to run.', Comment = 'is-IS=Tilgreinir hvort vinnsluraðarfærsla hafi verið tímasett.';
                 }
                 field(orchestratorEnabled; Rec."Scheduler Enabled ori")
                 {

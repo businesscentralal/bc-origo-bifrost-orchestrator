@@ -56,7 +56,7 @@ page 10035536 "Scheduler Setup ori"
                     Editable = false;
                     QuickEntry = false;
                     StyleExpr = JobQueueStyleExpr;
-                    ToolTip = 'Specifies the job queue status that is required for Job Queue Orchestrator', Comment = 'is-IS=Tilgreinir stöðu vinnsluraða sem krafist er fyrir vinnsluraðara';
+                    ToolTip = 'Specifies the job queue status that is required for Job Queue Orchestrator', Comment = 'is-IS=Tilgreinir staðu vinnsluraða sem er nauðsynleg fyrir vinnsluraðara';
                     trigger OnDrillDown()
                     begin
                         JobQueueManagement.ShowJobQueueEntry(Rec);
@@ -154,7 +154,7 @@ page 10035536 "Scheduler Setup ori"
                 ApplicationArea = All;
                 Caption = 'Restart Job Queue', Comment = 'is-IS=Endurræsa vinnsluröð';
                 Image = ResetStatus;
-                ToolTip = 'Restart the management job queue.', Comment = 'is-IS=Endurræsa stjórnunarvinnsluröð.';
+                ToolTip = 'Restart the management job queue.', Comment = 'is-IS=Endurræsa stjórnunarvinnsluröðina.';
                 trigger OnAction()
                 begin
                     Rec.RestartManagementJobQueue();

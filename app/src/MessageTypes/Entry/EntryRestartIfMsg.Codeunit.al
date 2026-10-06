@@ -34,7 +34,7 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Restart a Job Queue Entry only if in Error or On Hold.', Comment = 'is-IS=EndurrÃ¦sa vinnslurÃ¶Ã°arfÃ¦rslu aÃ°eins ef hÃºn er Ã­ villu eÃ°a Ã­ biÃ°.';
+        DescriptionLbl: Label 'Restart a Job Queue Entry only if in Error or On Hold.', Comment = 'is-IS=Endurræsa vinnsluröðarfærslu aðeins ef hún er í villu eða í bið.';
     begin
         exit(DescriptionLbl);
     end;

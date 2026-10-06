@@ -27,7 +27,7 @@ table 10035539 "Playbook ori"
         }
         field(30; "Initial Request Template"; Blob)
         {
-            Caption = 'Initial Request Template', Comment = 'is-IS=Upphafsbeðni sniðmát';
+            Caption = 'Initial Request Template', Comment = 'is-IS=Upphafsbeiðni sniðmát';
         }
         field(70; "Last Run Instance ID"; Guid)
         {

@@ -38,7 +38,7 @@ page 10035535 "Sched. Entry Subform ori"
                 field("Object Caption to Run"; Rec."Object Caption to Run")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Object Caption to Run field.', Comment = 'is-IS=Tilgreinir kafli hluts til keyrslu.';
+                    ToolTip = 'Specifies the value of the Object Caption to Run field.', Comment = 'is-IS=Tilgreinir heiti hlutarins sem vinnsluraðafærslan á að keyra.';
                 }
                 field(Description; Rec.Description)
                 {
@@ -64,7 +64,7 @@ page 10035535 "Sched. Entry Subform ori"
                 {
                     ApplicationArea = All;
                     BlankZero = true;
-                    ToolTip = 'Specifies the value of the No. of Minutes between Runs field.', Comment = 'is-IS=Tilgreinir fjölda mínúta milli keyrslu.';
+                    ToolTip = 'Specifies the value of the No. of Minutes between Runs field.', Comment = 'is-IS=Tilgreinir fjölda mínútna milli keyrslna.';
                 }
                 field("Job Queue Category Code"; Rec."Job Queue Category Code")
                 {
@@ -75,7 +75,7 @@ page 10035535 "Sched. Entry Subform ori"
                 {
                     ApplicationArea = All;
                     Enabled = JobQueueUserEnabled;
-                    ToolTip = 'Specifies the User ID that will own the management job queue entry.  This user must have permission to run the job queue entries.  If no user is specified, the current user will be used.', Comment = 'is-IS=Tilgreinir notendaauðkenni sem mún eña vinnsluraðafærslunni.';
+                    ToolTip = 'Specifies the User ID that will own the management job queue entry.  This user must have permission to run the job queue entries.  If no user is specified, the current user will be used.', Comment = 'is-IS=Tilgreinir notandaauðkenni sem á vinnsluraðarfærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðarfærslur. Ef enginn notandi er tilgreindur er núverandi notandi notaður.';
                     Visible = JobQueueUserEnabled;
                 }
                 field(Blocked; Rec.Blocked)
@@ -254,7 +254,7 @@ page 10035535 "Sched. Entry Subform ori"
             action(DrillDown)
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Drill Down', Comment = 'is-IS=Kafanleg';
+                Caption = 'Drill Down', Comment = 'is-IS=Færa niður';
                 Enabled = JobQueueEntryFound;
                 Image = Card;
                 Scope = Repeater;
@@ -272,7 +272,7 @@ page 10035535 "Sched. Entry Subform ori"
         EnvironmentMgt: Codeunit "Environment Information";
         JobQueueEntryFound: Boolean;
         JobQueueUserEnabled: Boolean;
-        EntryRemovedMsg: Label 'Job Queue Entry has been removed. New entry will be created by the Job Queue Orchestrator.', Comment = 'is-IS=Vinnsluröðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaráætlara.';
+        EntryRemovedMsg: Label 'Job Queue Entry has been removed. New entry will be created by the Job Queue Orchestrator.', Comment = 'is-IS=Vinnsluraðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaranum.';
 
     trigger OnInit()
     begin

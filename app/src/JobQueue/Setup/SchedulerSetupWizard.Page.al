@@ -183,7 +183,7 @@ page 10035589 "Scheduler Setup Wizard ori"
             }
             action(ActionOpenSetup)
             {
-                Caption = 'Open Orchestrator Setup', Comment = 'is-IS=Opna uppsetningu stjórnanda';
+                Caption = 'Open Orchestrator Setup', Comment = 'is-IS=Opna uppsetningu vinnsluraðara';
                 Image = Setup;
                 InFooterBar = true;
                 Visible = (CurrentStep = 3);

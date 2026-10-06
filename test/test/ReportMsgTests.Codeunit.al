@@ -410,7 +410,7 @@ codeunit 96416 "Report Msg Tests"
     begin
         // [SCENARIO] Bifrost Report Request Preset is restricted from generic Data.Records.Set
         Assert.IsTrue(
-            TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori"),
+            TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori", false),
             'Preset table should be write-restricted');
     end;
 

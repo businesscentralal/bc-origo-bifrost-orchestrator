@@ -67,7 +67,7 @@ page 10035584 "Schedule Playbook ori"
                 }
                 field(RetryPolicy; RetryPolicy)
                 {
-                    Caption = 'Retry Policy', Comment = 'is-IS=Endurprófanarstefna';
+                    Caption = 'Retry Policy', Comment = 'is-IS=Endurprófunarreglur';
                     ApplicationArea = All;
                     ToolTip = 'Specify how errors are retried.', Comment = 'is-IS=Tilgreindu hvernig villur eru endurprófaðar.';
                 }

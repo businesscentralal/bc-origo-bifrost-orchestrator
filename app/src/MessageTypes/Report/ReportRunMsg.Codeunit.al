@@ -18,7 +18,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Runs a processing-only report (batch job) using saved preset or provided parameters.', Comment = 'is-IS=Keyrir vinnsluskÃ½rslu (runuvinnslu) Ãºt frÃ¡ vistuÃ°um forsendum eÃ°a uppgefnum breytum.';
+        DescriptionLbl: Label 'Runs a processing-only report (batch job) using saved preset or provided parameters.', Comment = 'is-IS=Keyrir vinnsluskýrslu (runuvinnslu) út frá vistuðum forsendum eða uppgefnum breytum.';
     begin
         exit(DescriptionLbl);
     end;

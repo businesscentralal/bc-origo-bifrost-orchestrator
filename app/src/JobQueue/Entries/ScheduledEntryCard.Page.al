@@ -24,7 +24,7 @@ page 10035544 "Scheduled Entry Card ori"
         {
             group(General)
             {
-                Caption = 'General', Comment = 'is-IS=Almænn';
+                Caption = 'General', Comment = 'is-IS=Almennt';
                 field("Object Type to Run"; Rec."Object Type to Run")
                 {
                     ApplicationArea = All;
@@ -40,12 +40,12 @@ page 10035544 "Scheduled Entry Card ori"
                 field("Object Caption to Run"; Rec."Object Caption to Run")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the caption of the object to be run by the job queue entry.', Comment = 'is-IS=Tilgreinir kafli hluts til keyrslu.';
+                    ToolTip = 'Specifies the caption of the object to be run by the job queue entry.', Comment = 'is-IS=Tilgreinir heiti hlutarins sem vinnsluraðarfærslan á að keyra.';
                 }
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies a description of the job queue orchestrator entry.', Comment = 'is-IS=Tilgreinir lúsingu vinnsluraðarfærslu.';
+                    ToolTip = 'Specifies a description of the job queue orchestrator entry.', Comment = 'is-IS=Tilgreinir lýsingu vinnsluraðarfærslu.';
 
                     trigger OnDrillDown()
                     begin
@@ -71,13 +71,13 @@ page 10035544 "Scheduled Entry Card ori"
                 {
                     ApplicationArea = All;
                     Enabled = JobQueueUserEnabled;
-                    ToolTip = 'Specifies the User ID that will own the job queue entry. This user must have permission to run the job queue entries. If no user is specified, the current user will be used.', Comment = 'is-IS=Tilgreinir notendaauðkenni sem mún eña vinnsluraðafærslunni.';
+                    ToolTip = 'Specifies the User ID that will own the job queue entry. This user must have permission to run the job queue entries. If no user is specified, the current user will be used.', Comment = 'is-IS=Tilgreinir notandaauðkenni sem á vinnsluraðarfærsluna. Þessi notandi verður að hafa heimildir til að keyra vinnsluraðarfærslur. Ef enginn notandi er tilgreindur er núverandi notandi notaður.';
                     Visible = JobQueueUserEnabled;
                 }
                 field(Blocked; Rec.Blocked)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies whether the orchestrator entry is blocked.', Comment = 'is-IS=Tilgreinir hvort vinnsluraðarfærslan sé lokáð.';
+                    ToolTip = 'Specifies whether the orchestrator entry is blocked.', Comment = 'is-IS=Tilgreinir hvort vinnsluraðarfærslan sé lokuð.';
 
                     trigger OnValidate()
                     begin
@@ -92,12 +92,12 @@ page 10035544 "Scheduled Entry Card ori"
                 field("Client Credentials Code"; Rec."Client Credentials Code")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the Client Credentials Code to use for this orchestrator entry.', Comment = 'is-IS=Tilgreinir kóða kliensta auðkeninga.';
+                    ToolTip = 'Specifies the Client Credentials Code to use for this orchestrator entry.', Comment = 'is-IS=Tilgreinir kóða biðlaraauðkenninga.';
                 }
                 field("Earliest Start Date/Time"; Rec."Earliest Start Date/Time")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the earliest date and time when the job queue entry should be run.', Comment = 'is-IS=Tilgreinir fyrsti daga og tíma þegar vinnsluraðafærslan skyldi keyrast.';
+                    ToolTip = 'Specifies the earliest date and time when the job queue entry should be run.', Comment = 'is-IS=Tilgreinir elstu dagsetningu og tíma þegar vinnsluraðarfærslan á að keyra.';
                 }
                 field("Recurring Template Code"; Rec."Recurring Template Code")
                 {
@@ -107,21 +107,21 @@ page 10035544 "Scheduled Entry Card ori"
                 field(Scheduled; Rec.Scheduled)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies if this schedule entry has been scheduled as a job queue entry.', Comment = 'is-IS=Tilgreinir hvort þssari vinnsluraðafærslu hér verið tímasett.';
+                    ToolTip = 'Specifies if this schedule entry has been scheduled as a job queue entry.', Comment = 'is-IS=Tilgreinir hvort þessi vinnsluraðarfærsla hafi verið tímasett.';
                 }
             }
             group(RetryPolicy)
             {
-                Caption = 'Retry Policy', Comment = 'is-IS=Endurprófanarstefna';
+                Caption = 'Retry Policy', Comment = 'is-IS=Endurprófunarreglur';
                 field("Retry Policy"; Rec."Retry Policy")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the retry policy for this orchestrator entry. Always - entry is always restarted on error. Three Times - entry is restarted only if it has failed fewer than 3 times. Never - entry is never automatically restarted on error.', Comment = 'is-IS=Tilgreinir endurprófanarstefnu. Alltaf - færsla er alltaf endurræsin við villu. Þrjú sinni - færsla er endurræsin bara ef hún hefur mistekist færri en 3 sinnum. Aldrei - færsla er aldrei endurræsin sjálfkrafa við villu.';
+                    ToolTip = 'Specifies the retry policy for this orchestrator entry. Always - entry is always restarted on error. Three Times - entry is restarted only if it has failed fewer than 3 times. Never - entry is never automatically restarted on error.', Comment = 'is-IS=Tilgreinir endurprófunarreglur. Alltaf: færsla er alltaf endurræst við villu. Þrisvar sinnum: færsla er aðeins endurræst ef hún hefur mistekist færri en þrisvar sinnum. Aldrei: færsla er aldrei endurræst sjálfkrafa við villu.';
                 }
                 field("Errors Since Last Success"; Rec."Errors Since Last Success")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the number of consecutive errors since the last successful execution. This counter resets when the entry runs successfully.', Comment = 'is-IS=Tilgreinir fjölda villna frá síðustu gangi. Þessi telji endurstillast þegar færslan keyrist með góðum árangri.';
+                    ToolTip = 'Specifies the number of consecutive errors since the last successful execution. This counter resets when the entry runs successfully.', Comment = 'is-IS=Tilgreinir fjölda samfelldra villna frá síðustu villulausu keyrslu. Teljarinn núllstillist þegar færslan keyrist án villu.';
                 }
             }
             group(Recurrence)
@@ -204,7 +204,7 @@ page 10035544 "Scheduled Entry Card ori"
                 {
                     ApplicationArea = All;
                     BlankZero = true;
-                    ToolTip = 'Specifies the minimum number of minutes that are to pass between runs of the job queue entry.', Comment = 'is-IS=Tilgreinir lágmarksfjölda mínútna milli keyrslu vinnsluraðarafærslu.';
+                    ToolTip = 'Specifies the minimum number of minutes that are to pass between runs of the job queue entry.', Comment = 'is-IS=Tilgreinir lágmarksfjölda mínútna milli keyrslna vinnsluraðarfærslunnar.';
                 }
             }
             group(Notification)
@@ -260,9 +260,9 @@ page 10035544 "Scheduled Entry Card ori"
             action(Reschedule)
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Reschedule', Comment = 'is-IS=Enduáætla';
+                Caption = 'Reschedule', Comment = 'is-IS=Endurtímasetja';
                 Image = Refresh;
-                ToolTip = 'Reschedule this job.', Comment = 'is-IS=Enduáætla þetta verk.';
+                ToolTip = 'Reschedule this job.', Comment = 'is-IS=Endurtímasetja þetta verk.';
 
                 trigger OnAction()
                 begin
@@ -276,7 +276,7 @@ page 10035544 "Scheduled Entry Card ori"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Schedule Now', Comment = 'is-IS=Áætla núna';
                 Image = Start;
-                ToolTip = 'Reschedule this job for execution now.', Comment = 'is-IS=Enduáætla þetta verk til keyrslu strax.';
+                ToolTip = 'Reschedule this job for execution now.', Comment = 'is-IS=Endurtímasetja þetta verk til keyrslu strax.';
 
                 trigger OnAction()
                 var
@@ -330,7 +330,7 @@ page 10035544 "Scheduled Entry Card ori"
         JobQueueEntryFound: Boolean;
         JobQueueUserEnabled: Boolean;
         NotificationReceipientMandatory: Boolean;
-        EntryRemovedMsg: Label 'Job Queue Entry has been removed. New entry will be created by the Job Queue Orchestrator.', Comment = 'is-IS=Vinnsluröðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaráætlara.';
+        EntryRemovedMsg: Label 'Job Queue Entry has been removed. New entry will be created by the Job Queue Orchestrator.', Comment = 'is-IS=Vinnsluraðarfærslu hefur verið eytt. Ný færsla verður búin til af vinnsluraðaranum.';
 
     trigger OnInit()
     begin

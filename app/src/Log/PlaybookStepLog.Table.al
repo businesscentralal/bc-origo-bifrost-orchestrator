@@ -56,7 +56,7 @@ table 10035543 "Playbook Step Log ori"
         }
         field(60; "Iterator Element"; Blob)
         {
-            Caption = 'Iterator Element', Comment = 'is-IS=Ítranarstök';
+            Caption = 'Iterator Element', Comment = 'is-IS=Ítrunarstök';
             DataClassification = CustomerContent;
         }
         field(70; "Workspace Snapshot"; Blob)

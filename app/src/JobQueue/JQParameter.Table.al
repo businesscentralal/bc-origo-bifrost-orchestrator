@@ -14,7 +14,7 @@ table 10035544 "JQ Parameter ori"
         }
         field(10; "Request Data"; Blob)
         {
-            Caption = 'Request Data', Comment = 'is-IS=Beðnigögn';
+            Caption = 'Request Data', Comment = 'is-IS=Beiðnigögn';
             // Holds the queued playbook's request payload, which routinely carries customer data.
             DataClassification = CustomerContent;
         }

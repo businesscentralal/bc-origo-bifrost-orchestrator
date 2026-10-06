@@ -48,6 +48,11 @@
 .PARAMETER AppFolder
     The AL app folder (default: ../app next to this script).
 
+.PARAMETER DependencyAppFolder
+    Optional pinned Foundation app folder. Only the reached Message Argument ori.ApplyTableView reader
+    and local callees receiving its request are traced. Dependency message types are never scanned.
+    Supply source matching the compiled Foundation package; missing or ambiguous source fails visibly.
+
 .PARAMETER AllowListPath
     The allow-list file (default: ContractParameterKeys.AllowList.txt next to this script).
 
@@ -66,7 +71,8 @@ param(
     [string]$AppFolder = (Join-Path $PSScriptRoot '..\app'),
     [string]$AllowListPath = (Join-Path $PSScriptRoot 'ContractParameterKeys.AllowList.txt'),
     [switch]$SelfTest,
-    [string]$Explain = ''
+    [string]$Explain = '',
+    [string]$DependencyAppFolder = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -111,7 +117,7 @@ $callRead = [regex]::new("(?:\b\w+\.)?\b\w+\s*\(\s*(?:(?<var>\w+)|(?:\w+\.)?GetR
 # RequestJson.Get('k'...) / ReqJson.Contains('k'...) / GetRequestJson().Contains('k') (#431).
 $memberRead = [regex]::new("(?:\b(?<var>\w+)|GetRequestJson\(\))\.(?:Get|Contains)\(\s*'(?<key>[^']+)'", 'IgnoreCase')
 
-function Read-Source([string]$AppSrc) {
+function Read-Source([string]$AppSrc, [bool]$RejectDuplicates = $false, [string]$OnlyObjectName = '') {
     $objects = @{}
     foreach ($file in Get-ChildItem -LiteralPath $AppSrc -Recurse -Filter '*.al') {
         $lines = @(Get-Content -LiteralPath $file.FullName -Encoding UTF8)
@@ -121,7 +127,10 @@ function Read-Source([string]$AppSrc) {
             $m = $objectStart.Match($lines[$i])
             if ($m.Success) { $kind = $m.Groups[1].Value.ToLowerInvariant(); $objectName = $m.Groups[2].Value; $objectLine = $i; break }
         }
-        if (-not $objectName) { continue }
+        if (-not $objectName -or ($OnlyObjectName -and $objectName -ne $OnlyObjectName)) { continue }
+        if ($RejectDuplicates -and $objects.ContainsKey($objectName)) {
+            throw "Ambiguous dependency object '$objectName': $($objects[$objectName].File), $($file.FullName)"
+        }
         if (-not $objects.ContainsKey($objectName)) {
             $header = ($lines | Select-Object -Skip $objectLine -First 4) -join ' '
             $implements = @()
@@ -152,6 +161,75 @@ function Read-Source([string]$AppSrc) {
     return $objects
 }
 
+# This bounded dependency entry follows source calls carrying the request, not a key-name whitelist.
+# Other Message Argument entry points retain their local-only behavior. A dependency cannot replace a product object.
+function Add-DependencyReader($Objects, [string]$Folder) {
+    $src = Join-Path $Folder 'src'
+    if (-not (Test-Path -LiteralPath $src -PathType Container)) { throw "Missing dependency source: $src" }
+    $dependency = Read-Source $src $true 'Message Argument ori'
+    $name = 'Message Argument ori'
+    if ($Objects.ContainsKey($name)) { throw "Ambiguous product/dependency object '$name'" }
+    if (-not $dependency.ContainsKey($name) -or -not $dependency[$name].Procedures.ContainsKey('applytableview')) {
+        throw "Dependency source does not resolve $name.ApplyTableView"
+    }
+    $reader = $dependency[$name]
+    if ($reader.Kind -ne 'table' -or $reader.Procedures['applytableview'].Count -ne 1) {
+        throw "Ambiguous dependency reader $name.ApplyTableView"
+    }
+    $reader.DependencyReader = $true
+    $keys = New-Object 'System.Collections.Generic.HashSet[string]'
+    $names = New-Object 'System.Collections.Generic.HashSet[string]'
+    [void]$names.Add((Get-FirstParam $reader.Procedures['applytableview'][0]))
+    Get-DependencyReaderReach $reader 'applytableview' $names @{} $keys @{}
+    $reader.DependencyKeys = $keys
+    $Objects[$name] = $reader
+}
+
+function Get-DependencyReaderReach($Object, [string]$ProcedureName, $RequestNames, $Seen, $Keys, $Bindings) {
+    $context = @($Bindings.Keys | Sort-Object | ForEach-Object { "$_=$($Bindings[$_])" }) -join ';'
+    $key = "$($Object.Name)::$ProcedureName|$context|$(@($RequestNames | Sort-Object) -join ',')"
+    if ($Seen.ContainsKey($key)) { return }
+    if (-not $Object.Procedures.ContainsKey($ProcedureName) -or $Object.Procedures[$ProcedureName].Count -ne 1) {
+        throw "Unresolved or ambiguous dependency request reader: $key"
+    }
+    $Seen[$key] = $true
+    $body = Remove-TextStatements $Object.Procedures[$ProcedureName][0]
+    # A key is credited only at an actual JSON read, including a literal forwarded as a helper parameter.
+    $readPattern = "\b(?<receiver>\w+)\.(?:Get|Contains)\(\s*(?:'(?<literal>[^']+)'|(?<parameter>\w+))\s*[,)]"
+    foreach ($read in [regex]::Matches($body, $readPattern, 'IgnoreCase')) {
+        if (-not $RequestNames.Contains($read.Groups['receiver'].Value.ToLowerInvariant())) { continue }
+        if ($read.Groups['literal'].Success) { [void]$Keys.Add($read.Groups['literal'].Value) }
+        elseif ($Bindings.ContainsKey($read.Groups['parameter'].Value.ToLowerInvariant())) {
+            [void]$Keys.Add($Bindings[$read.Groups['parameter'].Value.ToLowerInvariant()])
+        }
+    }
+    foreach ($call in $callWithArgs.Matches($body)) {
+        if ($body.Substring(0, $call.Index) -match '(?i)\b(procedure|trigger)\s+$') { continue }
+        $receiver = $call.Groups['receiver'].Value.ToLowerInvariant()
+        if ($receiver -ne '' -and $receiver -notin @('this', 'rec')) { continue }
+        $positions = Get-RequestArgumentPositions $call.Groups['args'].Value $RequestNames
+        if ($positions.Count -eq 0) { continue }
+        $callee = $call.Groups['callee'].Value.ToLowerInvariant()
+        if (-not $Object.Procedures.ContainsKey($callee) -or $Object.Procedures[$callee].Count -ne 1) {
+            throw "Unresolved or ambiguous dependency request reader: $($Object.Name)::$callee"
+        }
+        $parameters = Get-ParameterNames $Object.Procedures[$callee][0]
+        $names = New-Object 'System.Collections.Generic.HashSet[string]'
+        foreach ($position in $positions) {
+            if ($position -ge $parameters.Count) { throw "Unresolved dependency request argument: $callee" }
+            [void]$names.Add($parameters[$position])
+        }
+        $bindingsForCall = @{}
+        $arguments = $call.Groups['args'].Value.Split(',')
+        for ($i = 0; $i -lt $arguments.Count -and $i -lt $parameters.Count; $i++) {
+            $value = $arguments[$i].Trim()
+            if ($value -match "^'([^']+)'$") { $bindingsForCall[$parameters[$i]] = $Matches[1] }
+            elseif ($Bindings.ContainsKey($value.ToLowerInvariant())) { $bindingsForCall[$parameters[$i]] = $Bindings[$value.ToLowerInvariant()] }
+        }
+        Get-DependencyReaderReach $Object $callee $names $Seen $Keys $bindingsForCall
+    }
+}
+
 # In ReadMode the walk enters "Message Argument ori" only through the procedures that read the request (see the comment
 # at Get-Reach). Everything else in that table is a record lookup or a response writer.
 function Test-FollowCall([bool]$ReadMode, [string]$ObjectName, [string]$Callee) {
@@ -169,6 +247,11 @@ function Get-Reach($Objects, [string]$ObjectName, [string]$ProcedureName, $Seen,
     if ($Seen.ContainsKey($key)) { return }
     $object = $Objects[$ObjectName]
     if (-not $object -or -not $object.Procedures.ContainsKey($ProcedureName)) { return }
+    if ($object.DependencyReader) {
+        if ($ProcedureName -ne 'applytableview') { return }
+        $Seen[$key] = $true
+        return
+    }
     $Seen[$key] = $true
     foreach ($body in $object.Procedures[$ProcedureName]) {
         foreach ($c in $callQualified.Matches($body)) {
@@ -535,6 +618,10 @@ function Get-ReachableLiterals($Objects, [string]$Codeunit) {
     Get-Reach $Objects $Codeunit 'executebifrosttask' $seen
     foreach ($entry in $seen.Keys) {
         $parts = $entry -split '::', 2
+        if ($Objects[$parts[0]].DependencyReader) {
+            foreach ($key in $Objects[$parts[0]].DependencyKeys) { [void]$literals.Add($key) }
+            continue
+        }
         foreach ($body in $Objects[$parts[0]].Procedures[$parts[1]]) {
             $body = Remove-TextStatements $body
             foreach ($m in $stringLiteral.Matches($body)) { [void]$literals.Add($m.Groups[1].Value.Replace("''", "'")) }
@@ -672,6 +759,10 @@ function Get-ReadKeys($Objects, [string]$Codeunit) {
     foreach ($entry in $seen.Keys) {
         $parts = $entry -split '::', 2
         $requestNames = $requestVars[$entry]
+        if ($Objects[$parts[0]].DependencyReader) {
+            foreach ($key in $Objects[$parts[0]].DependencyKeys) { [void]$keys.Add($key) }
+            continue
+        }
         foreach ($body in $Objects[$parts[0]].Procedures[$parts[1]]) {
             foreach ($m in $memberRead.Matches($body)) { Add-CallRead $m $requestNames $keys }
             foreach ($m in $callRead.Matches($body)) { Add-CallRead $m $requestNames $keys }
@@ -683,9 +774,10 @@ function Get-ReadKeys($Objects, [string]$Codeunit) {
     return ,$keys
 }
 
-function Find-Offenders([string]$AppFolder) {
+function Find-Offenders([string]$AppFolder, [string]$DependencyFolder = '') {
     $objects = Read-Source (Join-Path $AppFolder 'src')
     $types = Get-Types $objects
+    if ($DependencyFolder) { Add-DependencyReader $objects $DependencyFolder }
     $found = New-Object 'System.Collections.Generic.List[string]'
     foreach ($typeName in $types.Keys) {
         $contractCodeunit = $types[$typeName].Contract
@@ -1366,13 +1458,115 @@ codeunit $id "Veto $name Impl ori"
     }
 }
 
+# Separate dependency fixtures must prove the read, not just the presence of a helper or a key literal.
+function Invoke-SelfTestDependencyReader {
+    $root = Join-Path ([System.IO.Path]::GetTempPath()) ("contract-dependency-" + [guid]::NewGuid().ToString('N'))
+    $app = Join-Path $root 'product'
+    $dependency = Join-Path $root 'foundation'
+    $src = Join-Path $app 'src'
+    $depSrc = Join-Path $dependency 'src'
+    New-Item -ItemType Directory -Path $src, $depSrc -Force | Out-Null
+    try {
+        @'
+enumextension 1 "Product Types" extends "Message Type ori"
+{
+    value(1; "Product.Report")
+    {
+        Implementation = "Msg Interface ori" = "Product Handler", "Msg Contract ori" = "Product Handler";
+    }
+}
+'@ | Set-Content (Join-Path $src 'Types.al')
+        @'
+codeunit 1 "Product Handler"
+{
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    var
+        RequestJson: JsonObject;
+        RecRef: RecordRef;
+    begin
+        Argument.ApplyTableView(RequestJson, RecRef);
+    end;
+    procedure GetParameters()
+    begin
+        Builder.Parameter('tableView');
+    end;
+}
+'@ | Set-Content (Join-Path $src 'Handler.al')
+        $reader = @'
+table 1 "Message Argument ori"
+{
+    procedure ApplyTableView(RequestJson: JsonObject; var RecRef: RecordRef): Boolean
+    begin
+        exit(ReadTableView(RequestJson));
+    end;
+    local procedure ReadTableView(Payload: JsonObject): Boolean
+    begin
+        exit(TryPrepareParameter(Payload, 'tableView'));
+    end;
+    local procedure TryPrepareParameter(Input: JsonObject; KeyName: Text): Boolean
+    var
+        Token: JsonToken;
+    begin
+        exit(Input.Get(KeyName, Token));
+    end;
+    local procedure Uncalled(RequestJson: JsonObject)
+    var
+        Token: JsonToken;
+    begin
+        RequestJson.Get('unrelatedKey', Token);
+    end;
+}
+'@
+        $readerPath = Join-Path $depSrc 'Argument.al'
+        $reader | Set-Content $readerPath
+        # If dependency enums leak into discovery, this introduces an extra contract offender.
+        (Get-Content (Join-Path $src 'Types.al') -Raw).Replace('Product.Report', 'Dependency.Report') | Set-Content (Join-Path $depSrc 'Types.al')
+        (Get-Content (Join-Path $src 'Handler.al') -Raw).Replace("Builder.Parameter('tableView')", "Builder.Parameter('dependencyOnly')") | Set-Content (Join-Path $depSrc 'Handler.al')
+        $missingRead = 'Product.Report|declared-not-read|tableView'
+        $floor = 'Product.Report|no-reads-seen|*'
+        $local = Find-Offenders $app
+        if ($local.Count -ne 2 -or -not $local.Contains($missingRead) -or -not $local.Contains($floor)) { throw 'Local-only behavior or coverage floor changed' }
+        if ((Find-Offenders $app $dependency).Count -ne 0) { throw 'Reached delegated reader was not resolved, or dependency keys/types leaked' }
+        $reader.Replace("'tableView'", "'renamedView'") | Set-Content $readerPath
+        $renamed = Find-Offenders $app $dependency
+        if ($renamed.Count -ne 2 -or -not $renamed.Contains($missingRead) -or -not $renamed.Contains('Product.Report|read-not-declared|renamedView')) { throw 'Renamed delegated read was hidden' }
+        $reader.Replace('exit(Input.Get(KeyName, Token));', 'exit(true);') | Set-Content $readerPath
+        $dummy = Find-Offenders $app $dependency
+        if ($dummy.Count -ne 2 -or -not $dummy.Contains($missingRead) -or -not $dummy.Contains($floor)) { throw 'A dummy helper or key literal manufactured a read' }
+        $reader | Set-Content $readerPath
+        foreach ($case in @('missing-root', 'missing-reader', 'missing-callee', 'duplicate', 'product-duplicate')) {
+            $folder = $dependency
+            switch ($case) {
+                'missing-root' { $folder = Join-Path $root 'absent' }
+                'missing-reader' { $reader.Replace('procedure ApplyTableView(', 'procedure Renamed(') | Set-Content $readerPath }
+                'missing-callee' { $reader.Replace('local procedure ReadTableView(', 'local procedure Renamed(') | Set-Content $readerPath }
+                'duplicate' { $reader | Set-Content (Join-Path $depSrc 'Duplicate.al') }
+                'product-duplicate' { $reader | Set-Content (Join-Path $src 'Duplicate.al') }
+            }
+            $threw = $false
+            try { $null = Find-Offenders $app $folder } catch { $threw = $true }
+            if (-not $threw) { throw "Dependency source failure was hidden: $case" }
+            $reader | Set-Content $readerPath
+            Remove-Item (Join-Path $depSrc 'Duplicate.al'), (Join-Path $src 'Duplicate.al') -ErrorAction SilentlyContinue
+        }
+        # An existing dependency reader must not make an uncalled product read pass.
+        $handlerPath = Join-Path $src 'Handler.al'
+        (Get-Content $handlerPath -Raw).Replace('Argument.ApplyTableView(RequestJson, RecRef);', '') | Set-Content $handlerPath
+        $uncalled = Find-Offenders $app $dependency
+        if ($uncalled.Count -ne 2 -or -not $uncalled.Contains($missingRead) -or -not $uncalled.Contains($floor)) { throw 'Uncalled dependency reader leaked' }
+        Write-Host 'SelfTest (dependency reader: 10 cases) passed.'
+    }
+    finally { Remove-Item -LiteralPath $root -Recurse -Force -ErrorAction SilentlyContinue }
+}
+
 if ($SelfTest) {
     Invoke-SelfTest
     Invoke-SelfTestConditionalParameters
+    Invoke-SelfTestDependencyReader
     exit 0
 }
 
-$found = Find-Offenders $AppFolder
+$found = Find-Offenders $AppFolder $DependencyAppFolder
 # -Explain prints what the guard sees for one type. The other allow-list entries are not stale just because they were not printed (#430).
 if ($Explain -ne '') {
     if (-not $script:Explained) {

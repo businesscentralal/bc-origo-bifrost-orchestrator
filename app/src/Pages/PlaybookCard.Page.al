@@ -60,13 +60,13 @@ page 10035548 "Playbook Card ori"
             }
             group(InitialRequest)
             {
-                Caption = 'Initial Request', Comment = 'is-IS=Upphafsbeðni';
+                Caption = 'Initial Request', Comment = 'is-IS=Upphafsbeiðni';
 
                 field(InitialRequestTemplate; InitialRequestText)
                 {
                     ApplicationArea = All;
-                    Caption = 'Initial Request JSON', Comment = 'is-IS=Upphafsbeðni JSON';
-                    ToolTip = 'JSON payload passed to the first step when no runtime initialRequest is provided.', Comment = 'is-IS=JSON gagnahlað sent í fyrsta skref þegar engin keyrslubeðni er gefin.';
+                    Caption = 'Initial Request JSON', Comment = 'is-IS=Upphafsbeiðni JSON';
+                    ToolTip = 'JSON payload passed to the first step when no runtime initialRequest is provided.', Comment = 'is-IS=JSON-gagnahluti sem sendur er í fyrsta skref þegar engin keyrslubeiðni er gefin.';
                     MultiLine = true;
 
                     trigger OnValidate()

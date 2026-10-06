@@ -183,7 +183,7 @@ table 10035537 "Recurring Template ori"
 
     var
         NoValidRecurringScheduleErr: Label 'At least one weekday or a next run date formula must be configured.', Comment = 'is-IS=Að minnsta kosti einn vikudag eða næstu keyrsludagsetningarformúlu verður að stilla.';
-        EndingTimeBeforeStartingTimeErr: Label 'Ending Time must be greater than Starting Time.', Comment = 'is-IS=Lokatími verður að vera stærri en upphafstími.';
+        EndingTimeBeforeStartingTimeErr: Label 'Ending Time must be greater than Starting Time.', Comment = 'is-IS=Lokatími verður að vera síðar en upphafstími.';
 
     trigger OnModify()
     begin

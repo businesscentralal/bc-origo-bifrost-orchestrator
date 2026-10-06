@@ -52,7 +52,7 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument.Init();
         TempArgument.Insert();
 
-        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Job Queue Entry"), 'Job Queue Entry write-restricted');
+        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Job Queue Entry", false), 'Job Queue Entry write-restricted');
         Assert.AreEqual(JobQueueEntryWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Job Queue Entry"), 'write companion hint');
         Assert.AreEqual(JobQueueEntryWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Job Queue Entry", 1), 'field companion hint');
 
@@ -77,7 +77,7 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument.Init();
         TempArgument.Insert();
 
-        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Scheduled Task"), 'Scheduled Task write-restricted');
+        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Scheduled Task", false), 'Scheduled Task write-restricted');
         Assert.AreEqual(ScheduledTaskWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Scheduled Task"), 'write companion hint');
         Assert.AreEqual(ScheduledTaskWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Task", 1), 'field companion hint');
 
@@ -108,7 +108,7 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument.Insert();
 
         Assert.IsTrue(TempArgument.IsTableReadRestrictedForDataRecords(Database::"Report Request Preset ori"), 'Preset read-restricted');
-        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori"), 'Preset write-restricted');
+        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori", false), 'Preset write-restricted');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForRead(Database::"Report Request Preset ori"), 'read companion hint');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Report Request Preset ori"), 'write companion hint');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Report Request Preset ori", 1), 'field companion hint');

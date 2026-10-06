@@ -53,7 +53,7 @@ page 10035550 "Playbook Instances ori"
                 field("Steps Executed"; Rec."Steps Executed")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the number of steps executed.', Comment = 'is-IS=Tilgreinir fjölda skrefa keyrð.';
+                    ToolTip = 'Specifies the number of steps executed.', Comment = 'is-IS=Tilgreinir fjölda keyrðra skrefa.';
                 }
                 field("Steps Failed"; Rec."Steps Failed")
                 {
