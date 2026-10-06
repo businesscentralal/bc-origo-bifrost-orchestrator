@@ -1205,7 +1205,7 @@
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 2855561205" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unsupported format "%1". Use PDF, Excel, Word, or XML.</source>
-          <target state="translated">Óstutt snið "%1". Notaðu PDF, Excel, Word eða XML., viðbót1</target>
+          <target>Óstutt snið "%1". Notaðu PDF, Excel, Word eða XML.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Óstutt snið "%1". Notaðu PDF, Excel, Word eða XML.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType UnsupportedFormatErr</note>
         </trans-unit>
@@ -1223,8 +1223,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2046287294 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>run report, processing-only report, batch report, processing report, report job</source>
-          <target state="translated">keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk, viðbót1</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk</note>
+          <target>keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, skýrsla í runu, skýrsluverk</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, skýrsla í runu, skýrsluverk</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2046287294 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
@@ -1529,8 +1529,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3425003177 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>orchestrator status, scheduler status, health, entry counts, job queue status</source>
-          <target state="translated">staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar, viðbót1</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar</note>
+          <target>staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3425003177 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
@@ -2003,7 +2003,7 @@
         </trans-unit>
         <trans-unit id="Page 104719386 - Control 3263456129 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the type of the object, report or codeunit, that is to be run for the job queue entry. After you specify a type, you then select an object ID of that type in the Object ID to Run field.</source>
-          <target state="translated">Tilgreinir gerð hluts til keyrslu., viðbót1, viðbót2, viðbót3</target>
+          <target>Tilgreinir gerð hluts til keyrslu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gerð hluts til keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Entries API ori - Control objectTypeToRun - Property ToolTip</note>
         </trans-unit>
@@ -2141,7 +2141,7 @@
         </trans-unit>
         <trans-unit id="Page 104719386 - Control 2962283328 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the ID of the user who posted the entry, to be used, for example, in the change log.</source>
-          <target state="translated">Tilgreinir notendaauðkenni., viðbót1, viðbót2, viðbót3</target>
+          <target>Tilgreinir notendaauðkenni.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir notendaauðkenni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Entries API ori - Control userID - Property ToolTip</note>
         </trans-unit>
@@ -2243,7 +2243,7 @@
         </trans-unit>
         <trans-unit id="Page 890447424 - Control 2962283328 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the ID of the user who posted the entry, to be used, for example, in the change log.</source>
-          <target state="translated">Tilgreinir notendaauðkenni., viðbót1, viðbót2, viðbót3</target>
+          <target>Tilgreinir notendaauðkenni.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir notendaauðkenni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Log Entry ori - Control userID - Property ToolTip</note>
         </trans-unit>

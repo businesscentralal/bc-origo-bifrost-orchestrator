@@ -90,12 +90,7 @@ codeunit 96417 "Report Run Tests"
         Assert.IsFalse(ResponseJson.Contains('callstack'), 'The call stack must not be returned while Request Debug Mode is off');
     end;
 
-    // The mirror case - Request Debug Mode ON, call stack present - is deliberately not a unit
-    // test. Switching the flag on makes Foundation's "Request Logger ori" write inside the test
-    // transaction, which is exactly the isolation breakage that
-    // "Test Install".DisableRequestDebugMode exists to prevent; the run aborts with "An error
-    // occurred and the transaction is stopped". Verify that branch through the MCP message-type
-    // run instead.
+    // Debug on/off error-response regressions are in Report Boundary Tests ori.
 
     [Test]
     procedure RunRejectsReportThatProducesOutput()

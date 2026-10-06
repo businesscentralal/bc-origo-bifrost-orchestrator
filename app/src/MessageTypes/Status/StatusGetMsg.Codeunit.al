@@ -41,7 +41,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetKeywords(): Text
     var
-        KeywordsLbl: Label 'orchestrator status, scheduler status, health, entry counts, job queue status', Comment = 'is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar, viðbót1';
+        KeywordsLbl: Label 'orchestrator status, scheduler status, health, entry counts, job queue status', Comment = 'is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar';
     begin
         exit(KeywordsLbl);
     end;

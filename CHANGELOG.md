@@ -1,16 +1,3 @@
-## Unreleased
-
-### Changed (2026-10-05) - align with Bifrost Foundation 28.0.1
-
-- `Msg Executor ori` content types are `Text[100]`, matching Foundation after core#378 (#64).
-- `Telegram Msg ori` no longer grants `tabledata "User Setup ori"` (#65). Callers use Foundation's permission sets.
-- Generic `Data.Records.Set` cannot write Scheduled Entry fields 140 and 110, or Scheduler Setup field 40 (#62).
-
-- The Foundation dependency floor is **28.0.1.0** in `app/app.json` and `test/app.json`, the same floor as Bifrost Language Models and Bifrost Attachments.
-- Every table and page now declares `Extensible`. Objects nothing extends are `Extensible = false`; opening one later is non-breaking.
-- `tools/` carries Foundation's source guards. The Source Guards workflow runs the checks that already pass on Attachments: no call stack in answers, validated table views, no obsolete, permission coverage, and Icelandic keyword counts. Contract-parameter and mixed-language guards are copied but not wired in.
-- Help Links is not wired in until `businesscentralal/bifrost` main has `help/orchestrator/`.
-
 # Changelog
 
 All notable changes to Bifrost Orchestrator are documented here.
@@ -19,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
+
+### Changed (2026-10-06) - Foundation 28.0.1 alignment (PR #67)
+
+- Raise the Foundation dependency floor in the app and test manifests to `28.0.1.0`.
+- Retain `Msg Executor ori` (10035603) content types as `Text[100]` for Foundation compatibility; this does not implement or close the separately owned #64.
+- `Telegram Msg ori` (10035588) uses the caller's Foundation permissions and returns disabled before reading User Setup when the caller lacks read access (#65). `Orchestr Secret Tests` (96403) covers permitted access, denied access, missing token and empty chat ID without sending Telegram messages.
+- `Report Msg Handler ori` (10035592) validates both report paths with Foundation `ApplyTableView` and stops on its structured errors before executing a report. Error responses never include call stacks, including debug mode; `Report Run Msg ori` (10035597) documents that response. `Report Boundary Tests ori` (96454), report `Test Output Report ori` (96454) and `Report Run Tests` (96417) cover filter boundaries and error responses.
+- Replace repeated/filler Icelandic keywords in `Report Run Msg ori` (10035597) and `Status Get Msg ori` (10035559); restore the four corrupted error/tooltip translations.
+- Remove the PR-added subscribers from `Scheduler Events ori` (10035539). The separately owned #62 is not implemented by this PR.
+- Remove duplicate `Extensible = false` declarations from the existing `Scheduler Status ori` (10035539), `Entries API ori` (10035538) and `Scheduled Entry API ori` (10035537) pages, retaining one declaration in each.
+- Copy Foundation source guards into `tools/`. Source Guards wiring and omitted-guard dispositions still require infrastructure review; no CI or full-guard pass is implied.
+
 
 ### Changed (2026-10-01) - Committing message types declare effect irreversible (#60)
 

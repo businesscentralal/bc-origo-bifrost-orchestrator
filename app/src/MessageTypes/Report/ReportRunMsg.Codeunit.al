@@ -25,7 +25,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetKeywords(): Text
     var
-        KeywordsLbl: Label 'run report, processing-only report, batch report, processing report, report job', Comment = 'is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, vinnsluskýrsla, skýrsluverk, viðbót1';
+        KeywordsLbl: Label 'run report, processing-only report, batch report, processing report, report job', Comment = 'is-IS=keyra skýrslu, vinnsluskýrsla, runuvinnsla skýrslu, skýrsla í runu, skýrsluverk';
     begin
         exit(KeywordsLbl);
     end;
@@ -79,7 +79,6 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts.AddResponseField(Fields, 'startedAt', 'string', 'Start time, ISO 8601 (Success only).');
         Parts.AddResponseField(Fields, 'durationMs', 'integer', 'Execution duration in milliseconds (Success only).');
         Parts.AddResponseField(Fields, 'error', 'string', 'The report''s error text (Error only).');
-        Parts.AddResponseField(Fields, 'callstack', 'string', 'The error call stack (Error only, and only when Request Debug Mode is on in the Bifröst setup).');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -140,7 +139,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
     begin
         Notes := 'Read this before using it:' +
             ' **Success only means no error was raised.** The report returns no result: a run that matched no records looks the same as one that adjusted 50,000 entries. Check with a following Data.Records.Get on the register or ledger the report writes to.' +
-            ' **Effects are partial on failure.** A failing report is caught and answered with status Error (and the callstack only in Request Debug Mode). Most batch reports commit as they go, and that work stays, so status Error does not mean nothing happened.' +
+            ' **Effects are partial on failure.** A failing report is caught and answered with status Error without a call stack. Most batch reports commit as they go, and that work stays, so status Error does not mean nothing happened.' +
             ' **Do not auto-retry.** Set the retry policy of an orchestrator entry to Never for any chain that contains this step.' +
             ' **Check what you are calling first.** Orchestrator.Report.List with processingOnly true lists Date Compress G/L Entries and Delete Invoiced Sales Orders next to the harmless ones. Confirm a reportId with Orchestrator.Report.Get.' +
             ' **No request page is shown.** Parameters come only from requestPageXml or the saved preset; capture a preset through the URL from Orchestrator.Report.Get.' +

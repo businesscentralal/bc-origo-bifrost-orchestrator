@@ -7,12 +7,16 @@ using System.Environment.Configuration;
 codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
+    /// <summary>Reports whether the caller can read their Telegram setup and has a configured destination.</summary>
+    /// <returns>True when the bot token and caller chat ID are available.</returns>
     procedure IsEnabled(): Boolean
     var
         UserSetup: Record "User Setup ori";
         Secrets: Codeunit "Secrets ori";
     begin
         if not Secrets.IsTelegramBotTokenSet() then
+            exit(false);
+        if not UserSetup.ReadPermission() then
             exit(false);
         UserSetup.SetLoadFields("Telegram Chat ID ori");
         if not UserSetup.Get(UserSecurityId()) then

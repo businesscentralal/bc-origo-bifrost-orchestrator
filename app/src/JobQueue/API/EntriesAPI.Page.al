@@ -7,7 +7,6 @@ using System.Threading;
 /// </summary>
 page 10035538 "Entries API ori"
 {
-    Extensible = false;
     APIGroup = 'jobQueueOrchestrator';
     APIPublisher = 'origo';
     APIVersion = 'v1.0';
