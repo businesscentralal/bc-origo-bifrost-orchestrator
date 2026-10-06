@@ -104,7 +104,6 @@ codeunit 96403 "Orchestr Secret Tests"
             StoreSecret(Secrets.TelegramBotTokenCode());
 
         LowerPermissions.SetO365Basic();
-        LowerPermissions.AddPermissionSet('Test Objects');
         LowerPermissions.AddPermissionSet('BIFROST Orchestr ori');
         if GrantFoundationRead then
             LowerPermissions.AddPermissionSet('BIFROST Read ori');

@@ -146,11 +146,13 @@ codeunit 96454 "Report Boundary Tests ori"
     end;
 
     /// <summary>Accepts only the expected warning when the test enables request debugging.</summary>
-    /// <param name="MessageText">The setup-page warning.</param>
-    [MessageHandler]
-    procedure DebugWarningHandler(MessageText: Text[1024])
+    /// <param name="DebugNotification">The setup-page warning notification.</param>
+    /// <returns>False to keep the warning local to the test handler.</returns>
+    [SendNotificationHandler]
+    procedure DebugWarningHandler(var DebugNotification: Notification): Boolean
     begin
-        Assert.IsTrue(StrPos(MessageText, 'Request Debug Mode') > 0, 'Only the expected debug warning is allowed.');
+        Assert.IsTrue(StrPos(DebugNotification.Message, 'Request Debug Mode') > 0, 'Only the expected debug warning is allowed.');
+        exit(false);
     end;
 
     local procedure AssertFailureHasNoCallstack(DebugMode: Boolean)
