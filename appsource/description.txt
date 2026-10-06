@@ -1,0 +1,22 @@
+Routines that run themselves, and a Job Queue that looks after itself.
+
+Bifrost Orchestrator turns a routine into a playbook, runs it when it should, and tells you when something fails. It is an add-on to Bifrost Foundation.
+
+Who it is for
+Business Central administrators and finance or operations teams with recurring work, and partners who build automated routines for their customers.
+
+What it does
+- Turns a routine into a playbook: a list of steps where one step's answer feeds the next. List the overdue orders, release them, tell the right person. No code.
+- Runs it when it should: by hand, on a schedule through the Job Queue, or when an assistant or another system asks.
+- Looks after the Job Queue: watches entries, restarts them when they fail and retries by the rules you set.
+- Tells you when it matters: an email or a Telegram message when a job fails or restarts.
+- Shows what happened: every playbook run is kept step by step, with what each step was sent and what it answered.
+- Runs reports on demand: list, run and save reports as PDF, Excel or Word.
+
+Requirements and pricing
+- Microsoft Dynamics 365 Business Central 28.0 or later, Essentials or Premium.
+- Bifrost Foundation, available separately on AppSource.
+- For prices, contact Origo (https://www.origo.is/) or your Business Central partner.
+- If you are a partner, contact The App Channel (https://www.theappchannel.com/).
+
+Bifrost Orchestrator does not replace Business Central or its extensions. It makes their data and business logic available to the people, routines and AI platforms your organisation already uses.
