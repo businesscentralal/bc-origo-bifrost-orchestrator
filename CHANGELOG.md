@@ -9,7 +9,7 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ### Fixed (2026-10-07) - Foundation Force argument compatibility
 
-- `Data Records Hint Tests` (96428) and `Report Msg Tests` (96416) pass `Force=false` explicitly to `Message Argument ori.IsTableWriteRestrictedForDataRecords` after core #904 added the required parameter. The four existing restriction assertions remain enabled.
+- `Data Records Hint Tests` (96428) and `Report Msg Tests` (96416) pass `Force=false` explicitly to `Message Argument ori.IsTableWriteRestrictedForDataRecords` after core #904 added the required parameter. The four existing restriction assertions remain enabled. The Job Queue test keeps direct companion hints exact and checks the current Force-tier base error, full next-step guidance, PermissionDenied code and expected access.
 
 ### Changed (2026-10-01) - Committing message types declare effect irreversible (#60)
 

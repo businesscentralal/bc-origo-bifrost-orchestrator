@@ -47,8 +47,12 @@ codeunit 96428 "Data Records Hint Tests"
         TableName: Text;
         BaseError: Text;
         ExpectedError: Text;
+        ResponseJson: JsonObject;
+        ResponseToken: JsonToken;
+        ForceNextStepTxt: Label 'This table opens for writing with force set to true in Data.Records.Set; the user needs the BIFROST Force ori permission set. Connection and credential fields stay closed. The change log write guard allows force only in Via force mode.', Locked = true;
+        WriteExpectedTxt: Label 'a table the user may write through the generic data types', Locked = true;
     begin
-        // [SCENARIO] Job Queue Entry write block names Orchestrator Entry/Schedule/Restart types
+        // [SCENARIO] Ordinary Job Queue Entry writes stay restricted; shared refusals explain the Force tier.
         TempArgument.Init();
         TempArgument.Insert();
 
@@ -58,11 +62,16 @@ codeunit 96428 "Data Records Hint Tests"
 
         TableName := TempArgument.GetTableName(Database::"Job Queue Entry");
         BaseError := StrSubstNo(SetRestrictedErr, Database::"Job Queue Entry", TableName);
-        ExpectedError := BaseError + ' Use ' + JobQueueEntryWriteHintTxt + '.';
-        Assert.AreEqual(ExpectedError, TempArgument.GetRestrictedTableErrorText(Database::"Job Queue Entry", BaseError, true), 'error text suffix');
+        ExpectedError := BaseError;
+        Assert.AreEqual(ExpectedError, TempArgument.GetRestrictedTableErrorText(Database::"Job Queue Entry", BaseError, true), 'Force-tier refusal keeps the base error');
 
         TempArgument.RespondWithRestrictedTableError(Database::"Job Queue Entry", BaseError, true);
-        AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedError, JobQueueEntryWriteHintTxt);
+        ResponseJson := TempArgument.GetResponseJson();
+        AssertErrorAndHint(ResponseJson, ExpectedError, ForceNextStepTxt);
+        Assert.IsTrue(ResponseJson.Get('code', ResponseToken), 'PermissionDenied code missing');
+        Assert.AreEqual('PermissionDenied', ResponseToken.AsValue().AsText(), 'ordinary write refusal code');
+        Assert.IsTrue(ResponseJson.Get('expected', ResponseToken), 'expected access missing');
+        Assert.AreEqual(WriteExpectedTxt, ResponseToken.AsValue().AsText(), 'expected generic write access');
     end;
 
     [Test]
