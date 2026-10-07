@@ -119,3 +119,14 @@ To add a message type: add a value to `MsgType.EnumExt ori`, write the `<Area> <
 
 - #21 (2026-09-15): legacy take-over is permission-tolerant (`TryProbeTakeOverPermissions` / `TryRunTakeOverAtInstall`); skip = telemetry only (A1); never read Foundation `Setup ori` for migration; Telegram Bot Token ID mapping dropped (A2).
 - #19 (2026-09-15): Data.Records companion hints for Job Queue Entry / Scheduled Task / Report Request Preset ori via `Report Data Restriction ori`; Foundation pin **28.0.0.100**; `.AL-Go` core probing `release_status: latestBuild` (suite-wide accepted; Sync COSMO Alpaca keyVaultName soft-fails after settings change are Haraldur infra, not AL blockers).
+
+## Preserve the Bifrost build pipeline during system updates
+
+Run `tools/Test-BifrostPipeline.ps1` and `tools/Test-SharedAlpacaContainer.ps1` before
+opening a pipeline PR; the independent **Bifrost Pipeline Guards** workflow runs both.
+AL-Go and Alpaca updates must retain sequential Default/Test builds, filtered container
+creation, physical container identity, Test production-app republishing, Default internals
+stripping, signing requests, deferred cleanup, merged settings before secrets, and Test-only
+upgrade skipping. Keep this repository's app IDs, action versions, dependency settings and
+deployment variables. Apply compatible upstream updates and reapply the Bifrost custom blocks
+before pushing; do not disable the guard or exclude generated workflows from future updates.
