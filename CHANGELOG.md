@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-07) - Foundation Force argument compatibility
+
+- `Data Records Hint Tests` (96428) and `Report Msg Tests` (96416) pass `Force=false` explicitly to `Message Argument ori.IsTableWriteRestrictedForDataRecords` after core #904 added the required parameter. The four existing restriction assertions remain enabled.
+
 ### Changed (2026-10-01) - Committing message types declare effect irreversible (#60)
 
 - `Orchestrator.Playbook.Run`, `Orchestrator.Entry.Run`, `Orchestrator.Entry.Register`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule`, `Orchestrator.Status.Restart`, `Orchestrator.Status.RestartIfNeeded` and `Orchestrator.Report.Run` commit while they run, so their contracts now declare effect `irreversible` instead of `write`. The `changes` text names the commit and says that the Orchestrator refuses these types in a playbook chain that must roll back together (Omit Commit). Their selection descriptions say "Irreversible." instead of "Write operation.".
