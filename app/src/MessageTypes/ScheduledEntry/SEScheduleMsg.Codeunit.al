@@ -22,7 +22,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Reschedule an orchestrator entry for immediate execution.', Comment = 'is-IS=EndurÃ¡Ã¦tla Ã¡Ã¦tlunarfÃ¦rslu til tafarlausrar keyrslu.';
+        DescriptionLbl: Label 'Reschedule an orchestrator entry for immediate execution.', Comment = 'is-IS=Enduráætla áætlunarfærslu til tafarlausrar keyrslu.';
     begin
         exit(DescriptionLbl);
     end;

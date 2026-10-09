@@ -114,8 +114,8 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
         JobQueueEntry: Record "Job Queue Entry";
         OrchestratorSetup: Record "Scheduler Setup ori";
         IsHandled: Boolean;
-        JobRestartedSubjectMsg: Label 'Test Email for job ''%1''', Comment = '%1 = Job Description, is-IS=PrÃ³funarpÃ³stur fyrir verk ''%1''';
-        TestEmailMsg: Label 'Test Email', Comment = 'is-IS=PrÃ³funarpÃ³stur';
+        JobRestartedSubjectMsg: Label 'Test Email for job ''%1''', Comment = '%1 = Job Description, is-IS=Prófunarpóstur fyrir verk ''%1''';
+        TestEmailMsg: Label 'Test Email', Comment = 'is-IS=Prófunarpóstur';
         BodyText, EMailAddress : Text;
     begin
         OnBeforeSendTestNotification("Scheduled Entry ori", IsHandled);
@@ -166,13 +166,13 @@ codeunit 10035541 "Email Notification ori" implements "Notification ori"
     local procedure BuildRestartNotificationEmailItem(var "Scheduled Entry ori": Record "Scheduled Entry ori"; var JobQueueEntry: Record "Job Queue Entry"; var OrchestratorSetup: Record "Scheduler Setup ori") BodyText: Text
     var
         EnvironmentInformation: Codeunit "Environment Information";
-        EnvironmentMsg: Label 'Environment information:', Comment = 'is-IS=UpplÃ½singar um umhverfi:';
-        IsOnPremMsg: Label 'Is OnPrem: ', Comment = 'is-IS=Er staÃ°bundin: ';
-        IsProductionMsg: Label 'Is Production: ', Comment = 'is-IS=Er framleiÃ°sla: ';
-        JobLastErrMsg: Label 'The job last execution error was:', Comment = 'is-IS=SÃ­Ã°asta keyrsluvilla verksins var:';
-        JobQueueEntryMsg: Label 'Open Job Queue Entry', Comment = 'is-IS=Opna vinnsluraÃ°afÃ¦rslu';
-        JobRestartedMsg: Label 'The following job has been restarted:', Comment = 'is-IS=Eftirfarandi verk hefur veriÃ° endurrÃ¦st:';
-        OrchestratorSetupMsg: Label 'Open Orchestrator Setup', Comment = 'is-IS=Opna uppsetningu vinnsluraÃ°ara';
+        EnvironmentMsg: Label 'Environment information:', Comment = 'is-IS=Upplýsingar um umhverfi:';
+        IsOnPremMsg: Label 'Is OnPrem: ', Comment = 'is-IS=Er staðbundin:';
+        IsProductionMsg: Label 'Is Production: ', Comment = 'is-IS=Er framleiðsla:';
+        JobLastErrMsg: Label 'The job last execution error was:', Comment = 'is-IS=Síðasta keyrsluvilla verksins var:';
+        JobQueueEntryMsg: Label 'Open Job Queue Entry', Comment = 'is-IS=Opna vinnsluraðafærslu';
+        JobRestartedMsg: Label 'The following job has been restarted:', Comment = 'is-IS=Eftirfarandi verk hefur verið endurræst:';
+        OrchestratorSetupMsg: Label 'Open Orchestrator Setup', Comment = 'is-IS=Opna uppsetningu vinnsluraðara';
         UrlTok: Label '<a href="%1">', Locked = true;
         BodyTextBuilder: TextBuilder;
     begin

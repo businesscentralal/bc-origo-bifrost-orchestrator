@@ -2,7 +2,8 @@ namespace Origo.Bifrost.Orchestrator;
 
 table 10035590 "Report Request Preset ori"
 {
-    Caption = 'Bifrost Report Request Preset', Comment = 'is-IS=Bifröst Skýrsluforsendur';
+    Extensible = false;
+    Caption = 'Bifrost Report Request Preset', Comment = 'is-IS=Bifröst skýrsluforsendur';
     DataClassification = CustomerContent;
     Access = Internal;
     InherentEntitlements = X;

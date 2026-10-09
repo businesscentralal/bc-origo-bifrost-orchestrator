@@ -7,6 +7,7 @@ using System.DateTime;
 
 page 10035543 "Recurring Template ori"
 {
+    Extensible = false;
     PageType = Card;
     UsageCategory = None;
     ApplicationArea = All;
@@ -20,7 +21,7 @@ page 10035543 "Recurring Template ori"
         {
             group(General)
             {
-                Caption = 'General', Comment = 'is-IS=Almænn';
+                Caption = 'General', Comment = 'is-IS=Almennt';
                 field(Code; Rec.Code)
                 {
                     ToolTip = 'Specifies the code of the job queue recurring template.', Comment = 'is-IS=Tilgreinir kóða endurtekningarsniðmáts.';
@@ -90,10 +91,10 @@ page 10035543 "Recurring Template ori"
             }
             group(Recurrence)
             {
-                Caption = 'Recurrence', Comment = 'is-IS=Endurteking';
+                Caption = 'Recurrence', Comment = 'is-IS=Endurtekning';
                 field("No. of Minutes between Runs"; Rec."No. of Minutes between Runs")
                 {
-                    ToolTip = 'Specifies the number of minutes between job queue entries.', Comment = 'is-IS=Tilgreinir fjölda mínúta milli keyrslu.';
+                    ToolTip = 'Specifies the number of minutes between job queue entries.', Comment = 'is-IS=Tilgreinir fjölda mínútna milli keyrslna.';
                 }
                 field("Next Run Date Formula"; Rec."Next Run Date Formula")
                 {

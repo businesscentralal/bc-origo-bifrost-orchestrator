@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 page 10035583 "Playbook Last Run FB ori"
 {
+    Extensible = false;
     Caption = 'Last Execution', Comment = 'is-IS=Síðasta keyrsla';
     PageType = CardPart;
     SourceTable = "Playbook Instance ori";
@@ -36,7 +37,7 @@ page 10035583 "Playbook Last Run FB ori"
             field("Steps Executed"; Rec."Steps Executed")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies the number of steps executed.', Comment = 'is-IS=Tilgreinir fjölda skrefa keyrð.';
+                ToolTip = 'Specifies the number of steps executed.', Comment = 'is-IS=Tilgreinir fjölda keyrðra skrefa.';
             }
             field("Steps Failed"; Rec."Steps Failed")
             {

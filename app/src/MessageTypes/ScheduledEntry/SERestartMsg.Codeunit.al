@@ -34,7 +34,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Restart a failed or held orchestrator entry.', Comment = 'is-IS=EndurrÃ¦sa Ã¡Ã¦tlunarfÃ¦rslu sem mistÃ³kst eÃ°a er Ã­ biÃ°.';
+        DescriptionLbl: Label 'Restart a failed or held orchestrator entry.', Comment = 'is-IS=Endurræsa áætlunarfærslu sem mistókst eða er í bið.';
     begin
         exit(DescriptionLbl);
     end;

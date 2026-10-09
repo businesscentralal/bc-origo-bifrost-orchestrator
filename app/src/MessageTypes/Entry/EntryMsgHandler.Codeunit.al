@@ -72,6 +72,6 @@ codeunit 10035566 "Entry Msg Handler ori"
 
     var
         MissingIdErr: Label 'Request must include "id" (GUID) in the data payload or as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.';
-        RestartedMsg: Label 'Job Queue Entry restarted.', Comment = 'is-IS=Vinnsluröðarfærsla endurræst.';
+        RestartedMsg: Label 'Job Queue Entry restarted.', Comment = 'is-IS=Vinnsluraðafærsla endurræst.';
         NoRestartNeededMsg: Label 'No restart needed.', Comment = 'is-IS=Engin endurræsing nauðsynleg.';
 }

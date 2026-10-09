@@ -34,14 +34,14 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Get orchestrator health status and entry counts.', Comment = 'is-IS=SÃ¦kja heilsustÃ¶Ã°u Ã¡Ã¦tlara og fjÃ¶lda fÃ¦rslna.';
+        DescriptionLbl: Label 'Get orchestrator health status and entry counts.', Comment = 'is-IS=Sækja heilsustöðu áætlara og fjölda færslna.';
     begin
         exit(DescriptionLbl);
     end;
 
     procedure GetKeywords(): Text
     var
-        KeywordsLbl: Label 'orchestrator status, scheduler status, health, entry counts, job queue status', Comment = 'is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða vinnsluraðar';
+        KeywordsLbl: Label 'orchestrator status, scheduler status, health, entry counts, job queue status', Comment = 'is-IS=staða áætlunar, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar';
     begin
         exit(KeywordsLbl);
     end;

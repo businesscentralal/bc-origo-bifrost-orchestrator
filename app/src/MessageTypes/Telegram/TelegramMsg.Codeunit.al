@@ -7,15 +7,16 @@ using System.Environment.Configuration;
 codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
-    Permissions =
-        tabledata "User Setup ori" = R;
-
+    /// <summary>Reports whether the caller can read their Telegram setup and has a configured destination.</summary>
+    /// <returns>True when the bot token and caller chat ID are available.</returns>
     procedure IsEnabled(): Boolean
     var
         UserSetup: Record "User Setup ori";
         Secrets: Codeunit "Secrets ori";
     begin
         if not Secrets.IsTelegramBotTokenSet() then
+            exit(false);
+        if not UserSetup.ReadPermission() then
             exit(false);
         UserSetup.SetLoadFields("Telegram Chat ID ori");
         if not UserSetup.Get(UserSecurityId()) then
@@ -30,7 +31,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Send a Telegram message to the current user.', Comment = 'is-IS=Senda Telegram-skilaboÃ° Ã¡ nÃºverandi notanda.';
+        DescriptionLbl: Label 'Send a Telegram message to the current user.', Comment = 'is-IS=Senda Telegram-skilaboð á núverandi notanda.';
     begin
         exit(DescriptionLbl);
     end;
@@ -184,11 +185,11 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     end;
 
     var
-        BotTokenNotConfiguredErr: Label 'Telegram Bot Token is not configured in Orchestrator Setup.', Comment = 'is-IS=Telegram-vÃ©lmennislykill er ekki stilltur Ã­ uppsetningu vinnsluraÃ°ara.';
-        HttpClientNotEnabledErr: Label 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', Comment = 'is-IS=HTTP-biÃ°larabeiÃ°nir eru ekki virkar fyrir Ã¾essa viÃ°bÃ³t. VirkjaÃ°u Leyfa HttpClient-beiÃ°nir Ã­ stillingum viÃ°bÃ³tar Ã¡Ã°ur en Telegram-skilaboÃ° eru send.';
-        MissingMessageErr: Label '"message" is required in the request data.', Comment = 'is-IS="message" er nauÃ°synlegt Ã­ beiÃ°nigÃ¶gnum.';
+        BotTokenNotConfiguredErr: Label 'Telegram Bot Token is not configured in Orchestrator Setup.', Comment = 'is-IS=Telegram-vélmennislykill er ekki stilltur í uppsetningu vinnsluraðara.';
+        HttpClientNotEnabledErr: Label 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', Comment = 'is-IS=HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Virkjaðu Leyfa HttpClient-beiðnir í stillingum viðbótar áður en Telegram-skilaboð eru send.';
+        MissingMessageErr: Label '"message" is required in the request data.', Comment = 'is-IS="message" er nauðsynlegt í beiðnigögnum.';
         NoChatIdErr: Label 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', Comment = 'is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.';
-        SendFailedErr: Label 'Failed to send Telegram message to Chat ID %1. Response: %2', Comment = '%1 = chat id, %2 = API response, is-IS=Ekki tÃ³kst aÃ° senda Telegram-skilaboÃ° Ã¡ spjallauÃ°kenni %1. Svar: %2';
+        SendFailedErr: Label 'Failed to send Telegram message to Chat ID %1. Response: %2', Comment = '%1 = chat id, %2 = API response, is-IS=Ekki tókst að senda Telegram-skilaboð á spjallauðkenni %1. Svar: %2';
 
     local procedure VerifyHttpClientEnabled()
     var

@@ -77,7 +77,7 @@ codeunit 10035603 "Msg Executor ori"
     /// Returns the MIME type of the response produced by the last run.
     /// </summary>
     /// <returns>The response content type.</returns>
-    procedure GetResponseContentType(): Text[50]
+    procedure GetResponseContentType(): Text[100]
     begin
         exit(ResponseContentType);
     end;
@@ -91,7 +91,7 @@ codeunit 10035603 "Msg Executor ori"
         exit(IsBinaryResponse);
     end;
 
-    local procedure IsPassThroughContentType(ContentType: Text[50]): Boolean
+    local procedure IsPassThroughContentType(ContentType: Text[100]): Boolean
     begin
         if ContentType = '' then
             exit(true);
@@ -102,7 +102,7 @@ codeunit 10035603 "Msg Executor ori"
         exit(false);
     end;
 
-    local procedure BuildBinaryEnvelope(Base64Value: Text; ContentType: Text[50]) ResultJson: Text
+    local procedure BuildBinaryEnvelope(Base64Value: Text; ContentType: Text[100]) ResultJson: Text
     var
         ResultObject: JsonObject;
     begin
@@ -118,7 +118,7 @@ codeunit 10035603 "Msg Executor ori"
         SourceText: Text[250];
         RequestText: Text;
         ResponseText: Text;
-        ResponseContentType: Text[50];
+        ResponseContentType: Text[100];
         ResponseTime: Duration;
         IsBinaryResponse: Boolean;
         EmptyTaskId: Guid;

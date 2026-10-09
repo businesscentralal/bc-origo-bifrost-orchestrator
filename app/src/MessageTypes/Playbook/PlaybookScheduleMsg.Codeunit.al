@@ -34,7 +34,7 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Schedule a Bifrost Playbook as an Orchestrator Entry with a recurring template.', Comment = 'is-IS=ÃÃ¦tla BifrÃ¶st keÃ°ju sem vinnsluraÃ°arstjÃ³rafÃ¦rslu meÃ° endurtekningarsniÃ°mÃ¡ti.';
+        DescriptionLbl: Label 'Schedule a Bifrost Playbook as an Orchestrator Entry with a recurring template.', Comment = 'is-IS=Áætla Bifröst keðju sem vinnsluraðarstjórafærslu með endurtekningarsniðmáti.';
     begin
         exit(DescriptionLbl);
     end;

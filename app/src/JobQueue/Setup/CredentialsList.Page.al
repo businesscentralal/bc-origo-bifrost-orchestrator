@@ -6,6 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 /// </summary>
 page 10035546 "Credentials List ori"
 {
+    Extensible = false;
     ApplicationArea = All;
     Caption = 'Client Credentials', Comment = 'is-IS=Auðkenni biðlara';
     ContextSensitiveHelpPage = 'credentials-list';

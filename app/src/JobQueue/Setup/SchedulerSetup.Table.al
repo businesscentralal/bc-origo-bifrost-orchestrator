@@ -9,6 +9,7 @@ using System.Threading;
 /// </summary>
 table 10035536 "Scheduler Setup ori"
 {
+    Extensible = false;
     Caption = 'Job Queue Orchestrator Setup', Comment = 'is-IS=Uppsetning vinnsluraðara';
     DataClassification = SystemMetadata;
 

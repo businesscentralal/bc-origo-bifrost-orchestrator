@@ -34,7 +34,7 @@ codeunit 10035567 "Entry Restart Msg ori" implements "Msg Interface ori", "Msg D
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Restart a Job Queue Entry by setting status to Ready.', Comment = 'is-IS=EndurrÃ¦sa vinnslurÃ¶Ã°arfÃ¦rslu meÃ° Ã¾vÃ­ aÃ° setja stÃ¶Ã°u Ã¡ TilbÃºiÃ°.';
+        DescriptionLbl: Label 'Restart a Job Queue Entry by setting status to Ready.', Comment = 'is-IS=Endurræsa vinnsluröðarfærslu með því að setja stöðu á Tilbúið.';
     begin
         exit(DescriptionLbl);
     end;

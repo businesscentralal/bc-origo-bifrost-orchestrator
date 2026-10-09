@@ -7,6 +7,7 @@ using System.Utilities;
 
 page 10035552 "Playbook Step Logs Sub. ori"
 {
+    Extensible = false;
     Caption = 'Playbook Step Log', Comment = 'is-IS=Atburðaskrá keðjuskrefa';
     PageType = ListPart;
     SourceTable = "Playbook Step Log ori";
@@ -36,7 +37,7 @@ page 10035552 "Playbook Step Logs Sub. ori"
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the step execution status.', Comment = 'is-IS=Tilgreinir stöðu keyrsluskautar.';
+                    ToolTip = 'Specifies the step execution status.', Comment = 'is-IS=Tilgreinir stöðu keyrslu skrefsins.';
                     StyleExpr = StatusStyle;
                 }
                 field(Duration; Rec.Duration)

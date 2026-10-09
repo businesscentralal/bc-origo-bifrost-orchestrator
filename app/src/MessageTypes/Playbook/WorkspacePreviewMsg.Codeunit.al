@@ -18,7 +18,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Returns the seeded workspace (_sys dates, _who user context) without running any steps.', Comment = 'is-IS=Skilar forsendum vinnusvÃ¦Ã°is (_sys dagsetningar, _who notandaupplÃ½singar) Ã¡n Ã¾ess aÃ° keyra skref.';
+        DescriptionLbl: Label 'Returns the seeded workspace (_sys dates, _who user context) without running any steps.', Comment = 'is-IS=Skilar forsendum vinnusvæðis (_sys dagsetningar, _who notandaupplýsingar) án þess að keyra skref.';
     begin
         exit(DescriptionLbl);
     end;

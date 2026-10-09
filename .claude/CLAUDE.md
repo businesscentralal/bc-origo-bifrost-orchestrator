@@ -27,13 +27,14 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   application registry; 10035608 = codeunit `App Takeover State ori`, added 2026-09-15 for #21;
   10035609 = codeunit `Orch B1 Contract Parts ori` and 10035610 = codeunit `Orch B2 Contract Parts ori`,
   added 2026-09-29 for #56.)
-- Used test ids: 96400-96404, 96410-96426, 96428, 96450-96453.
-  **Free: 96405-96409, 96427, 96429-96449, 96454-96499.**
+- Used test ids: 96400-96404, 96410-96426, 96428, 96450-96454.
+  **Free: 96405-96409, 96427, 96429-96449, 96455-96499.**
   (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
   96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96424 = `Report Layout Msg Tests`;
   96425 = `App Takeover Tests`; 96426 = `App Takeover Probe Tests` (#21); 96428 = `Data Records Hint Tests` (#19);
   96450 = table `Test Run Marker` and report `Test Process Report`; 96451 = report `Test Failing Report`;
   96452 = `Orch B1 Contract Tests` and 96453 = `Orch B2 Contract Tests` (#56).
+  96454 = `Report Boundary Tests ori` and report `Test Output Report ori` (PR #67 report validation regressions).
   96427 `Test No Source Read` removed — unused empty permission set.)
 - Nothing was freed by the secret store migration: only table fields were removed
   (`Scheduler Setup ori` field 60, `Client Credentials ori` fields 30 and 40), no objects.

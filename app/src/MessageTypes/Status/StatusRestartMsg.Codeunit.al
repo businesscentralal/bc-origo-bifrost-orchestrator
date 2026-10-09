@@ -34,7 +34,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Unconditionally restart the orchestrator.', Comment = 'is-IS=EndurrÃ¦sa Ã¡Ã¦tlara skilyrÃ°islaust.';
+        DescriptionLbl: Label 'Unconditionally restart the orchestrator.', Comment = 'is-IS=Endurræsa áætlara skilyrðislaust.';
     begin
         exit(DescriptionLbl);
     end;

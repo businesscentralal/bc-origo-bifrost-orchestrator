@@ -8,6 +8,7 @@ using Origo.Bifrost;
 
 table 10035543 "Playbook Step Log ori"
 {
+    Extensible = false;
     Caption = 'Bifrost Playbook Step Log', Comment = 'is-IS=Atburðaskrá keðjuskrefs';
     DataClassification = SystemMetadata;
 
@@ -55,7 +56,7 @@ table 10035543 "Playbook Step Log ori"
         }
         field(60; "Iterator Element"; Blob)
         {
-            Caption = 'Iterator Element', Comment = 'is-IS=Ítranarstök';
+            Caption = 'Iterator Element', Comment = 'is-IS=Ítrunarstök';
             DataClassification = CustomerContent;
         }
         field(70; "Workspace Snapshot"; Blob)

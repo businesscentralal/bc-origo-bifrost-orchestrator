@@ -49,7 +49,7 @@ page 10035537 "Scheduled Entry API ori"
                 }
                 field(noOfMinutesBetweenRuns; Rec."No. of Minutes between Runs")
                 {
-                    Caption = 'No. of Minutes between Runs', Comment = 'is-IS=Fjöldi mínúta milli keyrslu';
+                    Caption = 'No. of Minutes between Runs', Comment = 'is-IS=Fjöldi mínútna milli keyrslna';
                 }
                 field(earliestStartDateTime; Rec."Earliest Start Date/Time")
                 {

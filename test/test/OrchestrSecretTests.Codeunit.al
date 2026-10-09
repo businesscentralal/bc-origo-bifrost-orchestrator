@@ -3,6 +3,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Environment.Configuration;
+using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Covers the move of the Bifrost Orchestrator secrets into the Bifröst Foundation secret store:
@@ -34,6 +35,92 @@ codeunit 96403 "Orchestr Secret Tests"
         if IsInitialized then
             exit;
         IsInitialized := true;
+    end;
+
+    /// <summary>Checks Telegram discovery for FoundationFull_Enabled under real lowered permissions.</summary>
+    [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
+    procedure Scenario_AC04_FoundationFull_Enabled()
+    begin
+        // Story #65 AC04 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
+        // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
+        AssertTelegramDiscovery(true, 'XCHAT', true, true);
+    end;
+
+    /// <summary>Checks Telegram discovery for NoUserSetupRead_Disabled under real lowered permissions.</summary>
+    [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
+    procedure Scenario_AC05_NoUserSetupRead_Disabled()
+    begin
+        // Story #65 AC05 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
+        // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
+        AssertTelegramDiscovery(true, 'XCHAT', false, false);
+    end;
+
+    /// <summary>Checks Telegram discovery for UnsetToken_Disabled under real lowered permissions.</summary>
+    [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
+    procedure Scenario_AC06_UnsetToken_Disabled()
+    begin
+        // Story #65 AC06 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
+        // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
+        AssertTelegramDiscovery(false, 'XCHAT', true, false);
+    end;
+
+    /// <summary>Checks Telegram discovery for EmptyChat_Disabled under real lowered permissions.</summary>
+    [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
+    procedure Scenario_AC06_EmptyChat_Disabled()
+    begin
+        // Story #65 AC06 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
+        // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
+        AssertTelegramDiscovery(true, '', true, false);
+    end;
+
+    local procedure AssertTelegramDiscovery(TokenSet: Boolean; ChatId: Text; GrantFoundationRead: Boolean; ExpectedEnabled: Boolean)
+    var
+        UserSetup: Record "User Setup ori";
+        LowerPermissions: Codeunit "Library - Lower Permissions";
+        Discovery: Interface "Msg Interface ori";
+        CanRead: Boolean;
+        Enabled: Boolean;
+        OriginalChatId: Text;
+        HadUserSetup: Boolean;
+    begin
+        LowerPermissions.SetOutsideO365Scope();
+        Initialize();
+        HadUserSetup := UserSetup.Get(UserSecurityId());
+        if HadUserSetup then
+            OriginalChatId := UserSetup."Telegram Chat ID ori"
+        else begin
+            UserSetup.Init();
+            UserSetup."User Security ID" := UserSecurityId();
+            UserSetup.Insert();
+        end;
+        UserSetup."Telegram Chat ID ori" := CopyStr(ChatId, 1, MaxStrLen(UserSetup."Telegram Chat ID ori"));
+        UserSetup.Modify();
+        Secrets.RegisterAll();
+        if TokenSet then
+            StoreSecret(Secrets.TelegramBotTokenCode());
+
+        LowerPermissions.SetO365Basic();
+        LowerPermissions.AddPermissionSet('BIFROST Orchestr ori');
+        if GrantFoundationRead then
+            LowerPermissions.AddPermissionSet('BIFROST Full ori');
+        CanRead := UserSetup.ReadPermission();
+        Discovery := "Message Type ori"::"Orchestrator.Telegram.Message";
+        Enabled := Discovery.IsEnabled();
+
+        LowerPermissions.SetOutsideO365Scope();
+        Secrets.ClearTelegramBotToken();
+        UserSetup.Get(UserSecurityId());
+        if HadUserSetup then begin
+            UserSetup."Telegram Chat ID ori" := CopyStr(OriginalChatId, 1, MaxStrLen(UserSetup."Telegram Chat ID ori"));
+            UserSetup.Modify();
+        end else
+            UserSetup.Delete();
+        Assert.AreEqual(GrantFoundationRead, CanRead, 'The test must actually add/remove User Setup read permission.');
+        Assert.AreEqual(ExpectedEnabled, Enabled, 'Discovery must respect caller permissions, token and chat ID without sending.');
     end;
 
     // ---------- secret codes ----------
