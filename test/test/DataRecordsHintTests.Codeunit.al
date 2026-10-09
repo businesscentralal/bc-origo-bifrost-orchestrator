@@ -41,31 +41,46 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies ordinary Job Queue Entry write denial, full Force-tier guidance, and direct companion hints.
+    /// </summary>
     procedure JobQueueEntry_WriteHint()
     var
         TempArgument: Record "Message Argument ori" temporary;
         TableName: Text;
         BaseError: Text;
         ExpectedError: Text;
+        ResponseJson: JsonObject;
+        ResponseToken: JsonToken;
+        ForceNextStepTxt: Label 'This table opens for writing with force set to true in Data.Records.Set; the user needs the BIFROST Force ori permission set. Connection and credential fields stay closed. The change log write guard allows force only in Via force mode.', Locked = true;
+        WriteExpectedTxt: Label 'a table the user may write through the generic data types', Locked = true;
     begin
-        // [SCENARIO] Job Queue Entry write block names Orchestrator Entry/Schedule/Restart types
+        // [SCENARIO] Ordinary Job Queue Entry writes stay restricted; shared refusals explain the Force tier.
         TempArgument.Init();
         TempArgument.Insert();
 
-        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Job Queue Entry"), 'Job Queue Entry write-restricted');
+        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Job Queue Entry", false), 'Job Queue Entry write-restricted');
         Assert.AreEqual(JobQueueEntryWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Job Queue Entry"), 'write companion hint');
         Assert.AreEqual(JobQueueEntryWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Job Queue Entry", 1), 'field companion hint');
 
         TableName := TempArgument.GetTableName(Database::"Job Queue Entry");
         BaseError := StrSubstNo(SetRestrictedErr, Database::"Job Queue Entry", TableName);
-        ExpectedError := BaseError + ' Use ' + JobQueueEntryWriteHintTxt + '.';
-        Assert.AreEqual(ExpectedError, TempArgument.GetRestrictedTableErrorText(Database::"Job Queue Entry", BaseError, true), 'error text suffix');
+        ExpectedError := BaseError;
+        Assert.AreEqual(ExpectedError, TempArgument.GetRestrictedTableErrorText(Database::"Job Queue Entry", BaseError, true), 'Force-tier refusal keeps the base error');
 
         TempArgument.RespondWithRestrictedTableError(Database::"Job Queue Entry", BaseError, true);
-        AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedError, JobQueueEntryWriteHintTxt);
+        ResponseJson := TempArgument.GetResponseJson();
+        AssertErrorAndHint(ResponseJson, ExpectedError, ForceNextStepTxt);
+        Assert.IsTrue(ResponseJson.Get('code', ResponseToken), 'PermissionDenied code missing');
+        Assert.AreEqual('PermissionDenied', ResponseToken.AsValue().AsText(), 'ordinary write refusal code');
+        Assert.IsTrue(ResponseJson.Get('expected', ResponseToken), 'expected access missing');
+        Assert.AreEqual(WriteExpectedTxt, ResponseToken.AsValue().AsText(), 'expected generic write access');
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies Scheduled Task write denial and the Orchestrator.Status.Restart companion hint.
+    /// </summary>
     procedure ScheduledTask_WriteHint()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -77,7 +92,7 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument.Init();
         TempArgument.Insert();
 
-        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Scheduled Task"), 'Scheduled Task write-restricted');
+        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Scheduled Task", false), 'Scheduled Task write-restricted');
         Assert.AreEqual(ScheduledTaskWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Scheduled Task"), 'write companion hint');
         Assert.AreEqual(ScheduledTaskWriteHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Task", 1), 'field companion hint');
 
@@ -93,6 +108,9 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies report preset read and write denials and their dedicated report companion hints.
+    /// </summary>
     procedure ReportRequestPreset_ReadWriteHint()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -108,7 +126,7 @@ codeunit 96428 "Data Records Hint Tests"
         TempArgument.Insert();
 
         Assert.IsTrue(TempArgument.IsTableReadRestrictedForDataRecords(Database::"Report Request Preset ori"), 'Preset read-restricted');
-        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori"), 'Preset write-restricted');
+        Assert.IsTrue(TempArgument.IsTableWriteRestrictedForDataRecords(Database::"Report Request Preset ori", false), 'Preset write-restricted');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForRead(Database::"Report Request Preset ori"), 'read companion hint');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForWrite(Database::"Report Request Preset ori"), 'write companion hint');
         Assert.AreEqual(ReportPresetHintTxt, TempArgument.GetDedicatedMessageTypeHintForField(Database::"Report Request Preset ori", 1), 'field companion hint');
@@ -134,6 +152,9 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies unrelated Customer records have no Orchestrator companion hints.
+    /// </summary>
     procedure Customer_NoCompanionHints()
     var
         TempArgument: Record "Message Argument ori" temporary;
