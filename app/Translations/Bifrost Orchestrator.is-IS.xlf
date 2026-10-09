@@ -1571,8 +1571,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3425003177 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>orchestrator status, scheduler status, health, entry counts, job queue status</source>
-          <target>staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=staða áætlunara, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar</note>
+          <target>staða áætlunar, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=staða áætlunar, staða vinnsluraðar, heilsa, fjöldi færslna, staða raðar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3425003177 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
