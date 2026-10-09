@@ -4,6 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Reflection;
 
+/// <summary>Tests report preset storage, report message handlers, and generic data-access restrictions.</summary>
 codeunit 96416 "Report Msg Tests"
 {
     Subtype = Test;
@@ -14,6 +15,7 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Preset Table Tests ---
 
+    /// <summary>Verifies that a saved report preset returns the XML stored for the current user.</summary>
     [Test]
     procedure PresetRoundTripsXml()
     var
@@ -36,6 +38,7 @@ codeunit 96416 "Report Msg Tests"
         Preset.Delete();
     end;
 
+    /// <summary>Verifies that a preset without stored XML returns empty text and reports no XML.</summary>
     [Test]
     procedure PresetReturnsEmptyWhenNoXml()
     var
@@ -54,6 +57,7 @@ codeunit 96416 "Report Msg Tests"
         Preset.Delete();
     end;
 
+    /// <summary>Verifies that a preset reports XML availability after request-page XML is stored.</summary>
     [Test]
     procedure PresetHasRequestPageXmlReturnsTrueWhenPopulated()
     var
@@ -74,6 +78,7 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Report.List Tests ---
 
+    /// <summary>Checks that Report.List returns reports and a positive count.</summary>
     [Test]
     procedure ListReturnsReportsWithCountField()
     var
@@ -94,6 +99,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(CountToken.AsValue().AsInteger() > 0, 'Should find at least one report');
     end;
 
+    /// <summary>Checks that processingOnly=false excludes processing-only reports from the returned list.</summary>
     [Test]
     procedure ListFiltersByProcessingOnly()
     var
@@ -125,6 +131,7 @@ codeunit 96416 "Report Msg Tests"
         end;
     end;
 
+    /// <summary>Checks the expected metadata fields on the first report returned by Report.List.</summary>
     [Test]
     procedure ListReportContainsExpectedFields()
     var
@@ -157,6 +164,7 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Report.Get Tests ---
 
+    /// <summary>Checks that Report.Get returns the requested report ID.</summary>
     [Test]
     procedure GetReturnsReportMetadata()
     var
@@ -178,6 +186,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.AreEqual(TestReportId, IdToken.AsValue().AsInteger(), 'Report ID mismatch');
     end;
 
+    /// <summary>Checks that Report.Get includes at least one layout for the selected report.</summary>
     [Test]
     procedure GetReturnsLayoutsArray()
     var
@@ -199,6 +208,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(LayoutsToken.AsArray().Count() > 0, 'Should have at least one layout');
     end;
 
+    /// <summary>Checks that Report.Get returns the request-page XML saved for the current user.</summary>
     [Test]
     procedure GetReturnsPresetWhenExists()
     var
@@ -230,6 +240,7 @@ codeunit 96416 "Report Msg Tests"
         DeletePreset(TestReportId);
     end;
 
+    /// <summary>Checks that Report.Get creates an empty current-user preset and reports no saved XML.</summary>
     [Test]
     procedure GetCreatesEmptyPresetWhenNoneExists()
     var
@@ -261,6 +272,7 @@ codeunit 96416 "Report Msg Tests"
         DeletePreset(TestReportId);
     end;
 
+    /// <summary>Checks the Report.Get error for a report ID that does not exist.</summary>
     [Test]
     procedure GetErrorsForInvalidReportId()
     var
@@ -274,6 +286,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.ExpectedError('Report 999999999 not found');
     end;
 
+    /// <summary>Checks that Report.Get reports a missing reportId.</summary>
     [Test]
     procedure GetErrorsWhenReportIdMissing()
     var
@@ -289,6 +302,7 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Report.SaveAs Tests ---
 
+    /// <summary>Checks that Report.SaveAs produces response content when PDF output is requested.</summary>
     [Test]
     procedure SaveAsGeneratesPdfOutput()
     var
@@ -307,6 +321,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(TempArgument."Response Content".HasValue(), 'Response should contain PDF data');
     end;
 
+    /// <summary>Checks that Report.SaveAs produces response content when format is omitted.</summary>
     [Test]
     procedure SaveAsDefaultsToPdfWhenFormatOmitted()
     var
@@ -325,6 +340,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(TempArgument."Response Content".HasValue(), 'Should produce output with default format');
     end;
 
+    /// <summary>Checks that Report.SaveAs produces content with an empty saved preset and no requestPageXml input.</summary>
     [Test]
     procedure SaveAsUsesPresetWhenNoXmlProvided()
     var
@@ -348,6 +364,7 @@ codeunit 96416 "Report Msg Tests"
         DeletePreset(TestReportId);
     end;
 
+    /// <summary>Checks that Report.SaveAs rejects an unsupported output format.</summary>
     [Test]
     procedure SaveAsErrorsForInvalidFormat()
     var
@@ -364,6 +381,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.ExpectedError('Unsupported format');
     end;
 
+    /// <summary>Checks that Report.SaveAs reports a missing reportId.</summary>
     [Test]
     procedure SaveAsErrorsForMissingReportId()
     var
@@ -377,6 +395,7 @@ codeunit 96416 "Report Msg Tests"
         Assert.ExpectedError('reportId');
     end;
 
+    /// <summary>Checks the Report.SaveAs error for a report ID that does not exist.</summary>
     [Test]
     procedure SaveAsErrorsForNonExistentReport()
     var
@@ -392,6 +411,7 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Data Restriction Tests ---
 
+    /// <summary>Checks that report presets are restricted from generic Data.Records reads.</summary>
     [Test]
     procedure PresetTableIsBlockedFromDataRecordsRead()
     var
@@ -403,6 +423,7 @@ codeunit 96416 "Report Msg Tests"
             'Preset table should be read-restricted');
     end;
 
+    /// <summary>Checks that report presets are restricted from generic non-forced Data.Records writes.</summary>
     [Test]
     procedure PresetTableIsBlockedFromDataRecordsWrite()
     var
