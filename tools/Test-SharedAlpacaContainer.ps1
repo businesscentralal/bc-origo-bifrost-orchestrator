@@ -19,6 +19,19 @@ try {
     foreach ($hookPath in @('tools/Get-SharedAlpacaBuildOrder.ps1','tools/SharedAlpacaContainer.ps1','tools/Test-SharedAlpacaContainer.ps1')) {
         Assert (@($settings.fullBuildPatterns | Where-Object { $hookPath -like ($_ -replace '\\','/') }).Count -gt 0) "Changes to $hookPath must trigger a full build."
     }
+    # Exercise the real guard against isolated project settings. Removing either
+    # pattern must reject a skipped workflow-only or guard-only paired build.
+    $selectionProject = Join-Path $temp 'selection-project'
+    New-Item -ItemType Directory -Path (Join-Path $selectionProject '.github') -Force | Out-Null
+    Copy-Item -LiteralPath "$PSScriptRoot/../.github/workflows" -Destination (Join-Path $selectionProject '.github') -Recurse
+    Copy-Item -LiteralPath "$PSScriptRoot/../.AL-Go" -Destination $selectionProject -Recurse
+    & "$PSScriptRoot/Test-BifrostPipeline.ps1" -ProjectPath $selectionProject
+    foreach ($missingPattern in @('.github/workflows/**', 'tools/Test-BifrostPipeline.ps1')) {
+        $brokenSettings = Get-Content -LiteralPath "$PSScriptRoot/../.AL-Go/settings.json" -Raw | ConvertFrom-Json
+        $brokenSettings.fullBuildPatterns = @($brokenSettings.fullBuildPatterns | Where-Object { $_ -ne $missingPattern })
+        $brokenSettings | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $selectionProject '.AL-Go/settings.json')
+        MustThrow { & "$PSScriptRoot/Test-BifrostPipeline.ps1" -ProjectPath $selectionProject } "Missing full-build pattern $missingPattern was accepted."
+    }
     $env:GITHUB_OUTPUT = ''; $env:GITHUB_ENV = ''
     $dimension = @{project='.'; buildMode='Default'; githubRunner='["ubuntu-latest"]'; githubRunnerShell='pwsh'}
     $testDimension = $dimension.Clone(); $testDimension.buildMode = 'Test'
@@ -74,7 +87,7 @@ try {
     $env:_buildMode = 'Default'
     Invoke-BifrostSharedPublish -Parameters @{appFile=@($mainAppPath)} -Publisher $publisher
     Assert ($calls.Count -eq 1) 'Default publishing was changed.'
-    Write-Host 'Shared Alpaca pipeline checks passed: plan validation, mode preservation, physical identity, compatibility guard, republish ordering, missing grant, and Default passthrough.'
+    Write-Host 'Shared Alpaca pipeline checks passed: full-build selection regressions, plan validation, mode preservation, physical identity, compatibility guard, republish ordering, missing grant, and Default passthrough.'
 } finally {
     foreach ($name in $saved.Keys) { [Environment]::SetEnvironmentVariable($name,$saved[$name]) }
     $resolved = (Resolve-Path -LiteralPath $temp).Path

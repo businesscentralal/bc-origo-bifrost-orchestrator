@@ -84,10 +84,23 @@ $readSecrets = $sync.IndexOf('/ReadSecrets@', [StringComparison]::Ordinal)
 Require ($readSettings -ge 0 -and $readSecrets -gt $readSettings) 'Settings sync must load merged settings before reading secrets.'
 
 $settings = Read-ProjectFile '.AL-Go/settings.json' | ConvertFrom-Json
+# Match AL-Go v9.2 DetermineProjectsToBuild/IsFullBuildRequired: Join-Path
+# normalizes separators and PowerShell -like matches each changed repository path.
+# Source: microsoft/AL-Go-Actions@f192c6a6ea5bc4c0c85109621b8effae80bdd472.
+$selectionPaths = @(
+    Get-ChildItem -LiteralPath (Join-Path $ProjectPath '.github/workflows') -File -Recurse |
+        ForEach-Object { [IO.Path]::GetRelativePath($ProjectPath, $_.FullName) }
+)
+$selectionPaths += 'tools/Test-BifrostPipeline.ps1'
+foreach ($changedPath in $selectionPaths) {
+    $modifiedFile = Join-Path $ProjectPath $changedPath
+    $matches = @($settings.fullBuildPatterns | Where-Object { $modifiedFile -like (Join-Path $ProjectPath $_) })
+    Require ($matches.Count -gt 0) "A change only to $changedPath must select project . for a full Default/Test build."
+}
 $testSettings = @($settings.conditionalSettings | Where-Object { 'Test' -in $_.buildModes })
 $defaultSettings = @($settings.conditionalSettings | Where-Object { 'Default' -in $_.buildModes })
 Require ($testSettings.settings.skipUpgrade -contains $true) 'Test must skip deployment of the previous release.'
 Require (!$settings.skipUpgrade -and !($defaultSettings.settings.skipUpgrade -contains $true)) 'Default must retain upgrade validation.'
 
 if ($failures.Count) { throw ("Bifrost pipeline contract failed:`n- " + ($failures -join "`n- ")) }
-Write-Host 'Bifrost pipeline contract passed: sequential builds, shared identity, Test republish wiring, production internals stripping, cleanup, signing request, settings sync and upgrade modes.'
+Write-Host 'Bifrost pipeline contract passed: full-build selection, sequential builds, shared identity, Test republish wiring, production internals stripping, cleanup, signing request, settings sync and upgrade modes.'
