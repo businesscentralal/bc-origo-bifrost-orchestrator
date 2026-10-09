@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-09) - PR #67 verification
+
+- Preserve the job queue log existence assertion in `SE Run Msg Tests` (96427) without loading an unused record. Align the source filenames of `Report Boundary Tests ori` (96454) and report `Test Output Report ori` (96454) with their existing object names so test CodeCop validation is warning-free.
+
 ### Changed (2026-10-06) - Foundation 28.0.1 alignment (PR #67)
 
 - Raise the Foundation dependency floor in the app and test manifests to `28.0.1.0`.
