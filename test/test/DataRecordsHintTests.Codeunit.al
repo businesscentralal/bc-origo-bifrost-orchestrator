@@ -41,6 +41,9 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies ordinary Job Queue Entry write denial, full Force-tier guidance, and direct companion hints.
+    /// </summary>
     procedure JobQueueEntry_WriteHint()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -75,6 +78,9 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies Scheduled Task write denial and the Orchestrator.Status.Restart companion hint.
+    /// </summary>
     procedure ScheduledTask_WriteHint()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -102,6 +108,9 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies report preset read and write denials and their dedicated report companion hints.
+    /// </summary>
     procedure ReportRequestPreset_ReadWriteHint()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -143,6 +152,9 @@ codeunit 96428 "Data Records Hint Tests"
     end;
 
     [Test]
+    /// <summary>
+    /// Verifies unrelated Customer records have no Orchestrator companion hints.
+    /// </summary>
     procedure Customer_NoCompanionHints()
     var
         TempArgument: Record "Message Argument ori" temporary;
