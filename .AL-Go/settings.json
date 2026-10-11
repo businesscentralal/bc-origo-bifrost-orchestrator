@@ -29,6 +29,7 @@
   ],
   "fullBuildPatterns": [
     ".AL-Go/settings.json",
+    ".github/Test Current.settings.json",
     ".AL-Go/*.ps1",
     "tools/Get-SharedAlpacaBuildOrder.ps1",
     "tools/SharedAlpacaContainer.ps1",
