@@ -22,6 +22,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - `Data Records Hint Tests` (96428) and `Report Msg Tests` (96416) pass `Force=false` explicitly to `Message Argument ori.IsTableWriteRestrictedForDataRecords` after core #904 added the required parameter. The four existing restriction assertions remain enabled. The Job Queue test keeps direct companion hints exact and checks the current Force-tier base error, full next-step guidance, PermissionDenied code and expected access.
 
+### Changed (2026-10-04) - CI/CD builds only main; every pull request gets a Pull Request Build
+
+- Build policy only, no app change. `CI/CD` runs on pushes to `main` only, and `Pull Request Build` runs for pull requests into any branch. `.github/AL-Go-Settings.json` sets `CICDPushBranches` to `main` and `CICDPullRequestBranches` to `**`, so Update AL-Go System Files keeps the triggers.
+
 ### Changed (2026-10-01) - Committing message types declare effect irreversible (#60)
 
 - `Orchestrator.Playbook.Run`, `Orchestrator.Entry.Run`, `Orchestrator.Entry.Register`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule`, `Orchestrator.Status.Restart`, `Orchestrator.Status.RestartIfNeeded` and `Orchestrator.Report.Run` commit while they run, so their contracts now declare effect `irreversible` instead of `write`. The `changes` text names the commit and says that the Orchestrator refuses these types in a playbook chain that must roll back together (Omit Commit). Their selection descriptions say "Irreversible." instead of "Write operation.".
