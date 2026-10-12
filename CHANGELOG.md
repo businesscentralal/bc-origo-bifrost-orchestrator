@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-11) - CI compiles against BC 28.5
+
+- Current CI/CD and pull request builds compile against sandbox artifact `/sandbox/28.5.54151.55751/w1/latest` (BC 28.5.54151.55751, w1). `.AL-Go/settings.json` sets `artifact`. AL-Go reads that value as storage/type/version/country/select, so the string has one leading slash. A second slash puts `w1` in `select`, and container creation rejects it.
+- The Test Current workflow settings (`.github/Test Current.settings.json`) use the same artifact. That file overrides the project setting, so leaving it at `////latest` would build Test Current against whatever sandbox is newest. `.github/Test Current.settings.json` is also a `fullBuildPatterns` entry, so a pull request that only changes it still builds.
+- `.github/AL-Go-Settings.json` does not set `artifact`, so it is unchanged. Next Minor and Next Major keep `////nextminor` and `////nextmajor`.
+- `app.json` and `test/app.json` already set runtime `17.0` and application and platform `28.0.0.0`. The app version stays `28.0.0.0`. No AL objects change.
 
 ### Fixed (2026-10-10) - UAT dependency installation
 
