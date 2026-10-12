@@ -7,9 +7,24 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-11) - CI compiles against BC 28.5
+
+- Current CI/CD and pull request builds compile against sandbox artifact `/sandbox/28.5.54151.55751/w1/latest` (BC 28.5.54151.55751, w1). `.AL-Go/settings.json` sets `artifact`. AL-Go reads that value as storage/type/version/country/select, so the string has one leading slash. A second slash puts `w1` in `select`, and container creation rejects it.
+- The Test Current workflow settings (`.github/Test Current.settings.json`) use the same artifact. That file overrides the project setting, so leaving it at `////latest` would build Test Current against whatever sandbox is newest. `.github/Test Current.settings.json` is also a `fullBuildPatterns` entry, so a pull request that only changes it still builds.
+- `.github/AL-Go-Settings.json` does not set `artifact`, so it is unchanged. Next Minor and Next Major keep `////nextminor` and `////nextmajor`.
+- `app.json` and `test/app.json` already set runtime `17.0` and application and platform `28.0.0.0`. The app version stays `28.0.0.0`. No AL objects change.
+
+### Fixed (2026-10-10) - UAT dependency installation
+
+- UAT feature-app deployment uses the Foundation app already deployed by its own pipeline in Dev scope, avoiding an unauthorized AppSource Foundation installation. `.github/AL-Go-Settings.json`: `DeployToBifrost.DependencyInstallMode = "ignore"`. AppSource delivery is unchanged; no AL objects or IDs change.
+
 ### Fixed (2026-10-07) - Foundation Force argument compatibility
 
 - `Data Records Hint Tests` (96428) and `Report Msg Tests` (96416) pass `Force=false` explicitly to `Message Argument ori.IsTableWriteRestrictedForDataRecords` after core #904 added the required parameter. The four existing restriction assertions remain enabled. The Job Queue test keeps direct companion hints exact and checks the current Force-tier base error, full next-step guidance, PermissionDenied code and expected access.
+
+### Changed (2026-10-04) - CI/CD builds only main; every pull request gets a Pull Request Build
+
+- Build policy only, no app change. `CI/CD` runs on pushes to `main` only, and `Pull Request Build` runs for pull requests into any branch. `.github/AL-Go-Settings.json` sets `CICDPushBranches` to `main` and `CICDPullRequestBranches` to `**`, so Update AL-Go System Files keeps the triggers.
 
 ### Changed (2026-10-01) - Committing message types declare effect irreversible (#60)
 
