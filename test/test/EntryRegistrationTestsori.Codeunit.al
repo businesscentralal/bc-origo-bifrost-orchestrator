@@ -85,6 +85,7 @@ codeunit 96407 "Entry Registration Tests ori"
         TempJobQueueEntry."Object Type to Run" := TempJobQueueEntry."Object Type to Run"::Codeunit;
         TempJobQueueEntry."Object ID to Run" := Codeunit::"Ok Sample";
         TempJobQueueEntry.Description := 'XHEADLESS';
+        TempJobQueueEntry."Run on Mondays" := true;
         TempJobQueueEntry.Insert();
     end;
 }
