@@ -104,10 +104,10 @@ codeunit 96417 "Report Run Tests"
         FixtureValue: Text;
     begin
         FixtureValue := 'OVERLAY-' + Format(CreateGuid(), 0, 4);
-        Parameters.Add('MarkerText', FixtureValue);
+        Parameters.Add('SampleMarker', FixtureValue);
         Request.Add('reportId', Report::"Test Process Report");
         Request.Add('parameters', Parameters);
-        Request.Add('requestPageXml', '<ReportParameters name="Test Process Report" id="96450"><Options><Field name="MarkerText">base</Field></Options><DataItems/></ReportParameters>');
+        Request.Add('requestPageXml', '<ReportParameters name="Test Process Report" id="96450"><Options><Field name="SampleMarker">base</Field></Options><DataItems/></ReportParameters>');
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);

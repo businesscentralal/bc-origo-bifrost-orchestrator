@@ -629,7 +629,7 @@ Calls without `parameters` retain the existing raw XML / saved-preset behavior.
 For report 1316 the aliases are `StartDate` and `EndDate` (ISO dates), `DateChoice`
 (`Due Date` or `Posting Date`), `PrintAging` (boolean), `AgingBandPeriodLength`
 (an invariant date formula such as `<30D>`), `PrintAllHavingBalance` (boolean),
-and `StatementStyle` (`Balance` or `Open Item`). Actual request control names
+and `StatementStyle` (`Balance` or `Open Item`). Serialized XML field names (report global variables, not UI control names)
 also work when present in the base; supplying both an alias and its control name
 is rejected. Dates must be supplied for a real statement; the report validates them.
 `PrintEntriesNotDue` has no request control in BC 28.5 report 1316 and is rejected.

@@ -28,11 +28,11 @@ codeunit 96431 "Report Parameter Tests ori"
         Result: XmlDocument;
         Node: XmlNode;
     begin
-        Parameters.Add('FixtureText', 'new <text> & "quotes"');
+        Parameters.Add('SampleText', 'new <text> & "quotes"');
         Request := RequestWithBase(Parameters);
         XmlDocument.ReadFrom(Resolver.Resolve(96455, Request), Result);
-        Assert.AreEqual('new <text> & "quotes"', OptionText(Result, 'FixtureText'), 'Text is XML escaped, not markup');
-        Assert.AreEqual('false', OptionText(Result, 'FixtureFlag'), 'Untouched option');
+        Assert.AreEqual('new <text> & "quotes"', OptionText(Result, 'SampleText'), 'Text is XML escaped, not markup');
+        Assert.AreEqual('false', OptionText(Result, 'SampleFlag'), 'Untouched option');
         Result.SelectSingleNode('/ReportParameters/DataItems/DataItem', Node);
         Assert.AreEqual('VERSION(1) SORTING(Field1) WHERE(Field1=CONST(1))', Node.AsXmlElement().InnerText(), 'Caller data item view retained');
     end;
@@ -44,10 +44,10 @@ codeunit 96431 "Report Parameter Tests ori"
         Request: JsonObject;
         Parameters: JsonObject;
     begin
-        Parameters.Add('FixtureText" or @name="FixtureFlag', 'malicious');
+        Parameters.Add('SampleText" or @name="SampleFlag', 'malicious');
         Request := RequestWithBase(Parameters);
         asserterror Resolver.Resolve(96455, Request);
-        Assert.ExpectedError('Unknown request page parameter FixtureText" or @name="FixtureFlag on report 96455.');
+        Assert.ExpectedError('Unknown request page parameter SampleText" or @name="SampleFlag on report 96455.');
     end;
 
     /// <summary>A report without a registered template asks for explicit XML.</summary>
@@ -57,7 +57,7 @@ codeunit 96431 "Report Parameter Tests ori"
         Request: JsonObject;
         Parameters: JsonObject;
     begin
-        Parameters.Add('FixtureText', 'test');
+        Parameters.Add('SampleText', 'test');
         Request.Add('parameters', Parameters);
         asserterror Resolver.Resolve(96455, Request);
         Assert.ExpectedError('Provide requestPageXml.');
@@ -123,7 +123,7 @@ codeunit 96431 "Report Parameter Tests ori"
         NullValue: JsonValue;
     begin
         NullValue.SetValueToNull();
-        Parameters.Add('FixtureText', NullValue);
+        Parameters.Add('SampleText', NullValue);
         Request := RequestWithBase(Parameters);
         asserterror Resolver.Resolve(96455, Request);
         Assert.ExpectedError('non-null scalar');
@@ -137,7 +137,7 @@ codeunit 96431 "Report Parameter Tests ori"
         Parameters: JsonObject;
         Nested: JsonObject;
     begin
-        Parameters.Add('FixtureText', Nested);
+        Parameters.Add('SampleText', Nested);
         Request := RequestWithBase(Parameters);
         asserterror Resolver.Resolve(96455, Request);
         Assert.ExpectedError('non-null scalar');
@@ -160,13 +160,13 @@ codeunit 96431 "Report Parameter Tests ori"
         Parameters.Add('StatementStyle', 'Open Item');
         Request.Add('parameters', Parameters);
         XmlDocument.ReadFrom(Resolver.Resolve(1316, Request), Result);
-        Assert.AreEqual('2026-01-01', OptionText(Result, 'Start Date'), 'Start date');
-        Assert.AreEqual('2026-12-31', OptionText(Result, 'End Date'), 'End date');
-        Assert.AreEqual('1', OptionText(Result, 'AgingBandby'), 'Date option ordinal');
+        Assert.AreEqual('2026-01-01', OptionText(Result, 'StartDate'), 'Start date');
+        Assert.AreEqual('2026-12-31', OptionText(Result, 'EndDate'), 'End date');
+        Assert.AreEqual('1', OptionText(Result, 'DateChoice'), 'Date option ordinal');
         Assert.AreEqual('true', OptionText(Result, 'IncludeAgingBand'), 'Boolean');
-        Assert.AreEqual('<30D>', OptionText(Result, 'AgingBandPeriodLengt'), 'Formula text');
-        Assert.AreEqual('false', OptionText(Result, 'IncludeAllCustomerswithBalance'), 'Balance flag');
-        Assert.AreEqual('1', OptionText(Result, 'Statement Style'), 'Statement ordinal');
+        Assert.AreEqual('<30D>', OptionText(Result, 'PeriodLength'), 'Formula text');
+        Assert.AreEqual('false', OptionText(Result, 'PrintAllHavingBal'), 'Balance flag');
+        Assert.AreEqual('1', OptionText(Result, 'StatementStyle'), 'Statement ordinal');
     end;
 
     /// <summary>Alias and actual control cannot set the same option twice with order-dependent values.</summary>
@@ -181,6 +181,27 @@ codeunit 96431 "Report Parameter Tests ori"
         Request.Add('parameters', Parameters);
         asserterror Resolver.Resolve(1316, Request);
         Assert.ExpectedError('specified more than once');
+    end;
+
+    /// <summary>The platform capture uses globals rather than the request-page control identifiers.</summary>
+    [Test]
+    [HandlerFunctions('CaptureSampleOptions')]
+    procedure NativeCaptureMatchesTemplateSchema()
+    var
+        Document: XmlDocument;
+    begin
+        XmlDocument.ReadFrom(Report.RunRequestPage(Report::"Layout Sample Report ori", SampleTemplate()), Document);
+        Assert.AreEqual('native capture', OptionText(Document, 'SampleText'), 'Native XML serialization name');
+        Assert.AreEqual('true', OptionText(Document, 'SampleFlag'), 'Native boolean serialization');
+    end;
+
+    /// <summary>Provides deterministic options to the test report request page.</summary>
+    [RequestPageHandler]
+    procedure CaptureSampleOptions(var RequestPage: TestRequestPage "Layout Sample Report ori")
+    begin
+        RequestPage.FixtureText.SetValue('native capture');
+        RequestPage.FixtureFlag.SetValue(true);
+        RequestPage.OK().Invoke();
     end;
 
     /// <summary>A nonexistent Statement control fails rather than being mapped to different semantics.</summary>
@@ -218,7 +239,7 @@ codeunit 96431 "Report Parameter Tests ori"
     begin
         Parameters.Add('PrintAging', true);
         Request.Add('parameters', Parameters);
-        Request.Add('requestPageXml', '<ReportParameters id="1316"><Options><Field name="Start Date">2026-01-01</Field></Options></ReportParameters>');
+        Request.Add('requestPageXml', '<ReportParameters id="1316"><Options><Field name="StartDate">2026-01-01</Field></Options></ReportParameters>');
         asserterror Resolver.Resolve(1316, Request);
         Assert.ExpectedError('Unknown request page parameter PrintAging on report 1316.');
     end;
@@ -234,9 +255,9 @@ codeunit 96431 "Report Parameter Tests ori"
         Node: XmlNode;
     begin
         BindSubscription(Subscriber);
-        Parameters.Add('FixtureText', 'observed & <safe>');
-        Parameters.Add('FixtureFlag', true);
-        Parameters.Add('FixtureDate', '2026-10-13');
+        Parameters.Add('SampleText', 'observed & <safe>');
+        Parameters.Add('SampleFlag', true);
+        Parameters.Add('SampleDate', '2026-10-13');
         Request.Add('parameters', Parameters);
         Result := SaveAsXml(Request);
         UnbindSubscription(Subscriber);
@@ -261,7 +282,7 @@ codeunit 96431 "Report Parameter Tests ori"
         Preset."User Security ID" := UserSecurityId();
         Preset.SetRequestPageXml('<invalid-owned-saved-settings/>');
         Preset.Insert();
-        Parameters.Add('FixtureText', 'explicit');
+        Parameters.Add('SampleText', 'explicit');
         Request := RequestWithBase(Parameters);
         SaveAsXml(Request);
         Preset.Get(Report::"Layout Sample Report ori", UserSecurityId());
@@ -364,7 +385,7 @@ codeunit 96431 "Report Parameter Tests ori"
     local procedure SampleTemplate(): Text
     begin
         exit('<ReportParameters name="Layout Sample Report ori" id="96455"><Options>' +
-            '<Field name="FixtureText">base</Field><Field name="FixtureFlag">false</Field><Field name="FixtureDate">0001-01-01</Field>' +
+            '<Field name="SampleText">base</Field><Field name="SampleFlag">false</Field><Field name="SampleDate">0001-01-01</Field>' +
             '</Options><DataItems><DataItem name="Loop">VERSION(1) SORTING(Field1) WHERE(Field1=CONST(1))</DataItem></DataItems></ReportParameters>');
     end;
 

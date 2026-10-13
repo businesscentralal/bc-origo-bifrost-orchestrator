@@ -91,13 +91,9 @@ codeunit 10035614 "Report Parameters ori"
     local procedure StatementControlName(ParameterName: Text): Text
     begin
         case ParameterName of
-            'StartDate': exit('Start Date');
-            'EndDate': exit('End Date');
-            'DateChoice': exit('AgingBandby');
             'PrintAging': exit('IncludeAgingBand');
-            'AgingBandPeriodLength': exit('AgingBandPeriodLengt');
-            'PrintAllHavingBalance': exit('IncludeAllCustomerswithBalance');
-            'StatementStyle': exit('Statement Style');
+            'AgingBandPeriodLength': exit('PeriodLength');
+            'PrintAllHavingBalance': exit('PrintAllHavingBal');
         end;
         exit(ParameterName);
     end;
@@ -105,16 +101,16 @@ codeunit 10035614 "Report Parameters ori"
     local procedure StatementValue(ControlName: Text; Value: Text): Text
     begin
         case ControlName of
-            'AgingBandPeriodLengt':
+            'PeriodLength':
                 if (Value <> '') and not Value.StartsWith('<') then
                     exit('<' + Value + '>');
-            'AgingBandby':
+            'DateChoice':
                 case Value of
                     'Due Date', '0': exit('0');
                     'Posting Date', '1': exit('1');
                     else Error(ChoiceErr, 'DateChoice', 'Due Date, Posting Date');
                 end;
-            'Statement Style':
+            'StatementStyle':
                 case Value of
                     'Balance', '0': exit('0');
                     'Open Item', '1': exit('1');
@@ -126,14 +122,14 @@ codeunit 10035614 "Report Parameters ori"
 
     local procedure StatementTemplate(): Text
     begin
-        // BC 28.5 report 1316 request control names, not translated captions or variable names.
+        // BC 28.5 serializes report global variable names, not request-page control names or captions.
         // PrintEntriesNotDue has no corresponding control and must fail as unknown.
         exit('<ReportParameters name="Standard Statement" id="1316"><Options>' +
-            '<Field name="Start Date">0001-01-01</Field><Field name="End Date">0001-01-01</Field>' +
-            '<Field name="AgingBandby">0</Field><Field name="IncludeAgingBand">false</Field>' +
-            '<Field name="AgingBandPeriodLengt">&lt;1M&gt;</Field>' +
-            '<Field name="IncludeAllCustomerswithBalance">true</Field>' +
-            '<Field name="Statement Style">0</Field>' +
+            '<Field name="StartDate">0001-01-01</Field><Field name="EndDate">0001-01-01</Field>' +
+            '<Field name="DateChoice">0</Field><Field name="IncludeAgingBand">false</Field>' +
+            '<Field name="PeriodLength">&lt;1M&gt;</Field>' +
+            '<Field name="PrintAllHavingBal">true</Field>' +
+            '<Field name="StatementStyle">0</Field>' +
             '</Options><DataItems/></ReportParameters>');
     end;
 
