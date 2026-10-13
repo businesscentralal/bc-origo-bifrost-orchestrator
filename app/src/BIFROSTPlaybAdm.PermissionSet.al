@@ -42,6 +42,7 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         codeunit "Playbook Runner ori" = X,
         codeunit "Playbook Step Executor ori" = X,
         codeunit "Msg Executor ori" = X,
+        codeunit "Playbook Effect Guard ori" = X,
         codeunit "Playbook JQ Dispatcher ori" = X,
         codeunit "Playbook Log Mgt ori" = X;
 }

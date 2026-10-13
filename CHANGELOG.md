@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-10-13) - Effect-contract validation groundwork (#59)
+
+- `Playbook Effect Guard ori` (10035554) accepts only explicit `read` and `write` contracts and rejects irreversible, missing and malformed effects with playbook/step/type context. The chain validator ignores disabled steps and checks enabled Check steps too, because those steps still dispatch a message. Both playbook-admin and Orchestrator permission sets grant execute access.
+- `Playbook Effect Tests ori` (96406), enumextension `Effect Guard Types ori` (96406) and test-only `Effect Contract Fixture ori` (96430) cover actual read/write/external-write contracts, missing and malformed effects, and isolated chain validation with cleanup.
+- This is partial #59 groundwork: the executor signal, dispatch wiring and end-to-end Omit Commit acceptance remain pending a supported binary-preserving Foundation dispatch API. No playbook transaction behavior changes and no runtime protection is claimed yet.
+
+
 ### Fixed (2026-10-13) - Headless registration and WhoAmI contract (#10, #63)
 
 - `Scheduled Entry ori` (10035535) honors `HideDialog` for newly registered Job Queue entries. `Entry Registration Tests ori` (96407) checks fresh and repeated headless registration and preserves the interactive confirmation/card flow.

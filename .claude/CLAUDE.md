@@ -223,5 +223,5 @@ Key rules always in effect:
 
 - #10: test codeunit 96407 `Entry Registration Tests ori`.
 - #63: test codeunit 96408 `WhoAmI Contract Tests ori`; existing app codeunit 10035585.
-- #59: app codeunit 10035554 and test codeunit 96406 reserved for the effect guard; executor integration awaits Foundation API disposition.
+- #59: app codeunit 10035554, test codeunit/enumextension 96406 and test fixture codeunit 96430 implement effect validation; executor integration awaits Foundation API disposition. Check steps still dispatch and must be validated.
 - #62: 10035557 and 96405 remain reserved to Claude; no custody transfer.
