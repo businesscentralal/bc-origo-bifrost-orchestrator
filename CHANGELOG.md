@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-12) - Guard the Bifrost pipeline across AL-Go and Alpaca updates
+
+- `.github/workflows/BifrostPipeline.yaml` runs `tools/Test-BifrostPipeline.ps1` and the isolated `tools/Test-SharedAlpacaContainer.ps1` checks to preserve sequential Default/Test builds, filtered container creation, physical container identity, Test production-app republishing, Default internals stripping, signing requests where applicable, deferred cleanup, merged settings before secrets, and Test-only upgrade skipping. Pull request builds remain unsigned.
+- `.AL-Go/settings.json` adds `.github/workflows/**` and `tools/Test-BifrostPipeline.ps1` to `fullBuildPatterns`; `tools/Test-SharedAlpacaContainer.ps1` rejects settings that omit either entry, so workflow and guard changes select a full build.
+- `AGENTS.md` requires agents to run both guards before opening pipeline PRs, preserve these Bifrost custom blocks during compatible AL-Go and Alpaca updates, and keep repository app IDs, action versions, dependencies and deployment variables.
+
 ### Changed (2026-10-11) - CI compiles against BC 28.5
 
 - Current CI/CD and pull request builds compile against sandbox artifact `/sandbox/28.5.54151.55751/w1/latest` (BC 28.5.54151.55751, w1). `.AL-Go/settings.json` sets `artifact`. AL-Go reads that value as storage/type/version/country/select, so the string has one leading slash. A second slash puts `w1` in `select`, and container creation rejects it.
