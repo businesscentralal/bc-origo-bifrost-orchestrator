@@ -147,9 +147,10 @@ codeunit 96409 "Report Layout Read Tests ori"
         Layout: Record "Report Layout List";
         Selection: Codeunit "Design-time Report Selection";
         Implementation: Codeunit "Report SaveAs Msg ori";
-        XmlContent: BigText;
         Content: InStream;
         XmlText: Text;
+        XmlContent: XmlDocument;
+        SelectedColumn: XmlNode;
         PriorAppId: Guid;
     begin
         FindSampleLayout(Layout);
@@ -163,7 +164,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Selection.ClearLayoutSelection();
         Selection.SetSelectedLayout('OWN-PRIOR', PriorAppId);
         Selection.SetSelectedCustomLayout('OWN-CUSTOM');
-        CreateSaveArgument(TempArgument, Layout, 'XML', '');
+        CreateSaveArgument(TempArgument, Layout, 'XML', 1);
         Implementation.ExecuteBifrostTask(TempArgument);
         Assert.AreEqual('OWN-PRIOR', Selection.GetSelectedLayout(), 'Prior platform selection restored');
         Assert.AreEqual(PriorAppId, Selection.GetSelectedAppID(), 'Prior app identity restored');
@@ -174,9 +175,10 @@ codeunit 96409 "Report Layout Read Tests ori"
         Preset.Delete();
         TempArgument.CalcFields("Response Content");
         TempArgument."Response Content".CreateInStream(Content);
-        XmlContent.Read(Content);
-        XmlContent.GetSubText(XmlText, 1);
-        Assert.IsTrue(XmlText.Contains('>' + Layout.Name + '</SelectedLayoutName>'), 'Report execution observed the requested layout');
+        XmlDocument.ReadFrom(Content, XmlContent);
+        XmlContent.WriteTo(XmlText);
+        Assert.IsTrue(XmlContent.SelectSingleNode('//*[@name="SelectedLayoutName"]', SelectedColumn), 'Selection column in report XML: ' + XmlText);
+        Assert.AreEqual(Layout.Name, SelectedColumn.AsXmlElement().InnerText(), 'Report execution observed the requested layout');
     end;
 
     /// <summary>A real RDLC render produces PDF bytes while preserving a custom-only prior selection.</summary>
@@ -193,7 +195,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         FindSampleLayout(Layout);
         Selection.ClearLayoutSelection();
         Selection.SetSelectedCustomLayout('OWN-CUSTOM');
-        CreateSaveArgument(TempArgument, Layout, 'PDF', '');
+        CreateSaveArgument(TempArgument, Layout, 'PDF', 1);
         Implementation.ExecuteBifrostTask(TempArgument);
         Assert.AreEqual('OWN-CUSTOM', Selection.GetSelectedCustomLayout(), 'Custom-only selection restored');
         Selection.SetSelectedCustomLayout('');
@@ -219,9 +221,9 @@ codeunit 96409 "Report Layout Read Tests ori"
         PriorAppId := CreateGuid();
         Selection.ClearLayoutSelection();
         Selection.SetSelectedLayout('OWN-PRIOR', PriorAppId);
-        CreateSaveArgument(TempArgument, Layout, 'PDF', '<invalid-xml');
+        CreateSaveArgument(TempArgument, Layout, 'PDF', 2);
         asserterror Implementation.ExecuteBifrostTask(TempArgument);
-        Assert.AreNotEqual('', GetLastErrorText(), 'Original rendering error returned');
+        Assert.ExpectedError('Deliberate layout sample rendering failure.');
         Assert.AreEqual('OWN-PRIOR', Selection.GetSelectedLayout(), 'Prior selection restored after failure');
         Assert.AreEqual(PriorAppId, Selection.GetSelectedAppID(), 'Prior identity restored after failure');
         Selection.ClearLayoutSelection();
@@ -237,20 +239,22 @@ codeunit 96409 "Report Layout Read Tests ori"
     begin
         FindSampleLayout(Layout);
         Layout.Name := 'XNONEXISTENT';
-        CreateSaveArgument(TempArgument, Layout, 'PDF', '');
+        CreateSaveArgument(TempArgument, Layout, 'PDF', 1);
         asserterror Implementation.ExecuteBifrostTask(TempArgument);
         Assert.ExpectedError('XNONEXISTENT');
     end;
 
-    local procedure CreateSaveArgument(var TempArgument: Record "Message Argument ori" temporary; Layout: Record "Report Layout List"; OutputFormat: Text; Xml: Text)
+    local procedure CreateSaveArgument(var TempArgument: Record "Message Argument ori" temporary; Layout: Record "Report Layout List"; OutputFormat: Text; RowNumber: Integer)
     var
         Request: JsonObject;
+        RowViewLbl: Label 'WHERE(Number=CONST(%1))', Locked = true;
     begin
         Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('format', OutputFormat);
         Request.Add('layoutName', Layout.Name);
         Request.Add('appId', Format(Layout."Application ID", 0, 4));
-        Request.Add('requestPageXml', Xml);
+        Request.Add('requestPageXml', '');
+        Request.Add('tableView', StrSubstNo(RowViewLbl, RowNumber));
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);

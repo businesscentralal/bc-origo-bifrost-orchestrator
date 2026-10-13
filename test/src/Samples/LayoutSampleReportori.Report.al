@@ -15,9 +15,17 @@ report 96455 "Layout Sample Report ori"
     {
         dataitem(Loop; Integer)
         {
-            DataItemTableView = where(Number = const(1));
+            DataItemTableView = where(Number = filter(1..2));
             column(RowNumber; Number) { }
             column(SelectedLayoutName; Selection.GetSelectedLayout()) { }
+
+            trigger OnAfterGetRecord()
+            var
+                DeliberateErr: Label 'Deliberate layout sample rendering failure.', Locked = true;
+            begin
+                if Number = 2 then
+                    Error(DeliberateErr);
+            end;
         }
     }
 
