@@ -182,6 +182,9 @@ codeunit 96406 "Playbook Effect Tests ori"
         Step.SetRange("Playbook Code", Playbook.Code);
         Step.DeleteAll(true);
         Assert.IsTrue(Step.IsEmpty(), 'Own chain steps deleted');
-        Playbook.Delete(true);
+        // AssertError rolls back an uncommitted fixture; success leaves it for explicit deletion.
+        if Playbook.Get(Playbook.Code) then
+            Playbook.Delete(true);
+        Assert.IsFalse(Playbook.Get(Playbook.Code), 'Own playbook absent after delete or rollback');
     end;
 }
