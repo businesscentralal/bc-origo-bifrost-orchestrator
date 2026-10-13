@@ -13,6 +13,9 @@ permissionset 10035535 "BIFROST Orchestr ori"
     Caption = 'Bifrost Orchestrator', MaxLength = 30, Comment = 'is-IS=Bifröst stjórnandi';
 
     Permissions =
+        codeunit "Report Layout Read Handler ori" = X,
+        codeunit "Report Layout List Msg ori" = X,
+        codeunit "Report Layout Get Msg ori" = X,
         tabledata "Client Credentials ori" = RIMD,
         tabledata "JQ Parameter ori" = RIMD,
         tabledata "Playbook Condition ori" = RIMD,
