@@ -5,10 +5,14 @@ name: Source Guards
 # tableView is validated before SetView, the parameter names a contract declares are the keys the code reads and the
 # other way round, nothing is declared obsolete, every page, query and report is granted by an assignable permission
 # set, no answer mixes a Locked English sentence with translated text, and every Icelandic keyword list is complete.
-# Contract parameter keys and mixed-language labels are copied in tools/ but not run here yet:
-# the shared contract chapters declare keys individual list types do not read, and several Locked
-# telemetry and refusal labels predate the Foundation rule. Enabling those two jobs would fail on main.
-# The Icelandic xlf check (tools/Test-IcelandicXlfInSync.ps1) needs a build and is run by hand before a PR.
+# ContractParameterKeys and MixedLanguageLabels remain tracked in #68 and #71:
+# https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/68
+# https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/71
+# Both require PR67 merge and story-v4 before remediation; retain the unmodified guards.
+# HelpLinks fails on main: help/orchestrator is missing in businesscentralal/bifrost; Tryggvi owns #69:
+# https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/69
+# Wire these guards when their acceptance criteria pass (Architect ruling, 6 Oct).
+# IcelandicXlfInSync (#70) runs in PullRequestHandler against this run's compiled Default app.
 
 on:
   pull_request:
@@ -27,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: No call stack in client responses
         shell: pwsh
@@ -37,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Every applied tableView is validated first
         shell: pwsh
@@ -48,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: The guard checks itself
         shell: pwsh
@@ -62,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: The guard checks itself
         shell: pwsh
@@ -78,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: The guard checks itself
         shell: pwsh

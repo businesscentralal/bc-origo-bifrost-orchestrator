@@ -98,6 +98,53 @@ jobs:
           BUILD_ORDER_JSON: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
         run: ./tools/Get-SharedAlpacaBuildOrder.ps1 -BuildOrderJson $env:BUILD_ORDER_JSON
 
+  # B7: use generated XLF from this run's Default app artifact (BuildOutput is only a text log).
+  IcelandicXlfInSync:
+    needs: [ Initialization, Build ]
+    if: (!cancelled()) && (fromJson(needs.Initialization.outputs.buildOrderJson)[0].projectsCount > 0)
+    runs-on: [ ubuntu-latest ]
+    name: Icelandic XLF in sync (compiled Default artifact)
+    steps:
+      - name: Checkout build source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Download Default app artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: '*-Apps-PR${{ github.event.number }}-*'
+          path: .compiled-default
+          merge-multiple: true
+
+      - name: Extract generated XLF from the compiled product
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.parse import unquote
+          import xml.etree.ElementTree as ET
+          import zipfile
+          matches = []
+          for app in Path('.compiled-default').rglob('*.app'):
+              with zipfile.ZipFile(app) as package:
+                  manifest = ET.fromstring(package.read('NavxManifest.xml'))
+                  identities = [n for n in manifest.iter() if n.tag.split('}')[-1] == 'App']
+                  if not any(n.get('Id', '').lower() == '7da3f512-5c19-47cd-bbe4-4c2bc713f1db' for n in identities):
+                      continue
+                  entries = [n for n in package.namelist() if n.startswith('Translations/') and n.endswith('.g.xlf')]
+                  if len(entries) != 1:
+                      raise RuntimeError('Expected exactly one generated XLF in the Default product app')
+                  entry = entries[0]
+                  matches.append((unquote(Path(entry).name), package.read(entry)))
+          if len(matches) != 1:
+              raise RuntimeError('Expected exactly one Default Orchestrator artifact; no cached or Test substitute')
+          name, content = matches[0]
+          Path('app/Translations', name).write_bytes(content)
+
+      - name: Verify committed Icelandic XLF against compiled source
+        shell: pwsh
+        run: ./tools/Test-IcelandicXlfInSync.ps1
+
   Build:
     needs: [ Initialization, CustomJob-Alpaca-Initialization, CustomJob-CreateAlpaca-Container ]
     if: (!failure()) && (!cancelled()) && fromJson(needs.Initialization.outputs.buildOrderJson)[0].projectsCount > 0
@@ -161,7 +208,7 @@ jobs:
           sha: ${{ github.event.pull_request.head.sha }}
 
   StatusCheck:
-    needs: [ Initialization, Build, CustomJob-RemoveAlpaca-Container ]
+    needs: [ Initialization, Build, IcelandicXlfInSync, CustomJob-RemoveAlpaca-Container ]
     if: (!cancelled())
     runs-on: [ ubuntu-latest ]
     name: Pull Request Status Check
