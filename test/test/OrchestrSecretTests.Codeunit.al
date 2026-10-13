@@ -44,7 +44,7 @@ codeunit 96403 "Orchestr Secret Tests"
     begin
         // Story #65 AC04 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
         // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
-        AssertTelegramDiscovery(true, 'XCHAT', true, true);
+        AssertTelegramDiscovery(true, 'XCHAT', true, false, true);
     end;
 
     /// <summary>Checks Telegram discovery for NoUserSetupRead_Disabled under real lowered permissions.</summary>
@@ -54,7 +54,7 @@ codeunit 96403 "Orchestr Secret Tests"
     begin
         // Story #65 AC05 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
         // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
-        AssertTelegramDiscovery(true, 'XCHAT', false, false);
+        AssertTelegramDiscovery(true, 'XCHAT', false, false, false);
     end;
 
     /// <summary>Checks Telegram discovery for UnsetToken_Disabled under real lowered permissions.</summary>
@@ -64,7 +64,7 @@ codeunit 96403 "Orchestr Secret Tests"
     begin
         // Story #65 AC06 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
         // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
-        AssertTelegramDiscovery(false, 'XCHAT', true, false);
+        AssertTelegramDiscovery(false, 'XCHAT', true, false, false);
     end;
 
     /// <summary>Checks Telegram discovery for EmptyChat_Disabled under real lowered permissions.</summary>
@@ -74,10 +74,19 @@ codeunit 96403 "Orchestr Secret Tests"
     begin
         // Story #65 AC06 | Time: independent of Today/WorkDate | Risk: Foundation role permissions.
         // [GIVEN/WHEN/THEN] Set disposable fixtures, lower permissions and exercise the discovery interface.
-        AssertTelegramDiscovery(true, '', true, false);
+        AssertTelegramDiscovery(true, '', true, false, false);
     end;
 
-    local procedure AssertTelegramDiscovery(TokenSet: Boolean; ChatId: Text; GrantFoundationRead: Boolean; ExpectedEnabled: Boolean)
+    /// <summary>Checks the documented codeunit grant with only indirect Foundation read permission.</summary>
+    [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
+    procedure Scenario_AC01_IndirectRead_Enabled()
+    begin
+        // [SCENARIO] #65: indirect table read succeeds only through the documented codeunit grant.
+        AssertTelegramDiscovery(true, 'XCHAT', false, true, true);
+    end;
+
+    local procedure AssertTelegramDiscovery(TokenSet: Boolean; ChatId: Text; GrantFoundationRead: Boolean; GrantIndirectRead: Boolean; ExpectedEnabled: Boolean)
     var
         UserSetup: Record "User Setup ori";
         LowerPermissions: Codeunit "Library - Lower Permissions";
@@ -107,6 +116,8 @@ codeunit 96403 "Orchestr Secret Tests"
         LowerPermissions.AddPermissionSet('BIFROST Orchestr ori');
         if GrantFoundationRead then
             LowerPermissions.AddPermissionSet('BIFROST Full ori');
+        if GrantIndirectRead then
+            LowerPermissions.AddPermissionSet('BIFROST Read ori');
         CanRead := UserSetup.ReadPermission();
         Discovery := "Message Type ori"::"Orchestrator.Telegram.Message";
         Enabled := Discovery.IsEnabled();

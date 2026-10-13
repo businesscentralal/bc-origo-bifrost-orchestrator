@@ -7,6 +7,37 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-13) - PR #67 acceptance reconciliation (#64, #65, #70)
+
+- Pin Foundation to the successful main build `28.0.4.554` in both manifests. `Msg Executor ori` (10035603) exposes its internal binary-envelope builder for the #64 regression tests in `Orchestrator Unit Tests` (96411), covering the Office MIME type and the 100-character boundary without changing the envelope format.
+- Keep the documented `User Setup ori` read grant on `Telegram Msg ori` (10035588), following Gunnar's final #65 ruling. `Orchestr Secret Tests` (96403) covers indirect Foundation read through that grant, direct read, denied access, missing token and empty chat ID without sending messages.
+- Retain current-main pipeline changes and the strict Force-tier assertions while resolving test/documentation conflicts. Keep the precise XML summaries on `Report Msg Tests` (96416). Compiled XLF evidence and Architect-owned workflow wiring remain required for #70.
+
+### Changed (2026-10-12) - Guard the Bifrost pipeline across AL-Go and Alpaca updates
+
+- `.github/workflows/BifrostPipeline.yaml` runs `tools/Test-BifrostPipeline.ps1` and the isolated `tools/Test-SharedAlpacaContainer.ps1` checks to preserve sequential Default/Test builds, filtered container creation, physical container identity, Test production-app republishing, Default internals stripping, signing requests where applicable, deferred cleanup, merged settings before secrets, and Test-only upgrade skipping. Pull request builds remain unsigned.
+- `.AL-Go/settings.json` adds `.github/workflows/**` and `tools/Test-BifrostPipeline.ps1` to `fullBuildPatterns`; `tools/Test-SharedAlpacaContainer.ps1` rejects settings that omit either entry, so workflow and guard changes select a full build.
+- `AGENTS.md` requires agents to run both guards before opening pipeline PRs, preserve these Bifrost custom blocks during compatible AL-Go and Alpaca updates, and keep repository app IDs, action versions, dependencies and deployment variables.
+
+### Changed (2026-10-11) - CI compiles against BC 28.5
+
+- Current CI/CD and pull request builds compile against sandbox artifact `/sandbox/28.5.54151.55751/w1/latest` (BC 28.5.54151.55751, w1). `.AL-Go/settings.json` sets `artifact`. AL-Go reads that value as storage/type/version/country/select, so the string has one leading slash. A second slash puts `w1` in `select`, and container creation rejects it.
+- The Test Current workflow settings (`.github/Test Current.settings.json`) use the same artifact. That file overrides the project setting, so leaving it at `////latest` would build Test Current against whatever sandbox is newest. `.github/Test Current.settings.json` is also a `fullBuildPatterns` entry, so a pull request that only changes it still builds.
+- `.github/AL-Go-Settings.json` does not set `artifact`, so it is unchanged. Next Minor and Next Major keep `////nextminor` and `////nextmajor`.
+- `app.json` and `test/app.json` already set runtime `17.0` and application and platform `28.0.0.0`. The app version stays `28.0.0.0`. No AL objects change.
+
+### Fixed (2026-10-10) - UAT dependency installation
+
+- UAT feature-app deployment uses the Foundation app already deployed by its own pipeline in Dev scope, avoiding an unauthorized AppSource Foundation installation. `.github/AL-Go-Settings.json`: `DeployToBifrost.DependencyInstallMode = "ignore"`. AppSource delivery is unchanged; no AL objects or IDs change.
+
+### Fixed (2026-10-07) - Foundation Force argument compatibility
+
+- `Data Records Hint Tests` (96428) and `Report Msg Tests` (96416) pass `Force=false` explicitly to `Message Argument ori.IsTableWriteRestrictedForDataRecords` after core #904 added the required parameter. The four existing restriction assertions remain enabled. The Job Queue test keeps direct companion hints exact and checks the current Force-tier base error, full next-step guidance, PermissionDenied code and expected access.
+
+### Changed (2026-10-04) - CI/CD builds only main; every pull request gets a Pull Request Build
+
+- Build policy only, no app change. `CI/CD` runs on pushes to `main` only, and `Pull Request Build` runs for pull requests into any branch. `.github/AL-Go-Settings.json` sets `CICDPushBranches` to `main` and `CICDPullRequestBranches` to `**`, so Update AL-Go System Files keeps the triggers.
+
 ### Changed (2026-10-09) - PR #67 verification
 
 - Preserve the job queue log existence assertion in `SE Run Msg Tests` (96427) without loading an unused record. Align the source filenames of `Report Boundary Tests ori` (96454) and report `Test Output Report ori` (96454) with their existing object names so test CodeCop validation is warning-free.
@@ -14,8 +45,8 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Changed (2026-10-06) - Foundation 28.0.1 alignment (PR #67)
 
 - Raise the Foundation dependency floor in the app and test manifests to `28.0.1.0`.
-- Retain `Msg Executor ori` (10035603) content types as `Text[100]` for Foundation compatibility; this does not implement or close the separately owned #64.
-- `Telegram Msg ori` (10035588) uses the caller's Foundation permissions and returns disabled before reading User Setup when the caller lacks read access (#65). `Orchestr Secret Tests` (96403) covers permitted access, denied access, missing token and empty chat ID without sending Telegram messages.
+- Retain `Msg Executor ori` (10035603) content types as `Text[100]` for Foundation compatibility; #64 regression coverage is completed in the later acceptance-reconciliation entry.
+- `Telegram Msg ori` (10035588) checks effective User Setup read access before discovery (#65); the later acceptance-reconciliation entry restores Gunnar's documented codeunit-grant exception. `Orchestr Secret Tests` (96403) covers permitted access, denied access, missing token and empty chat ID without sending Telegram messages.
 - `Report Msg Handler ori` (10035592) validates both report paths with Foundation `ApplyTableView` and stops on its structured errors before executing a report. Error responses never include call stacks, including debug mode; `Report Run Msg ori` (10035597) documents that response. `Report Boundary Tests ori` (96454), report `Test Output Report ori` (96454) and `Report Run Tests` (96417) cover filter boundaries and error responses.
 - Replace repeated/filler Icelandic keywords in `Report Run Msg ori` (10035597) and `Status Get Msg ori` (10035559); restore the four corrupted error/tooltip translations.
 - Align the enumerated inherited Icelandic source comments with their existing translations and regenerate XLF; restore the checkmark in `Telegram Notif. ori` (10035587). Objects: `Codeunit Email Notification ori` (10035541), `Codeunit Entry Msg Handler ori` (10035566), `Codeunit Entry Restart Msg ori` (10035567), `Codeunit Entry RestartIf Msg ori` (10035568), `Codeunit Help Get Impl ori` (10035570), `Codeunit Playbook Enqueue Msg ori` (10035584), `Codeunit Playbook Run Msg ori` (10035562), `Codeunit Playbook Schedule Msg ori` (10035574), `Codeunit Report Get Msg ori` (10035594), `Codeunit Report List Msg ori` (10035593), `Codeunit Report Run Msg ori` (10035597), `Codeunit Report SaveAs Msg ori` (10035595), `Codeunit SE Msg Handler ori` (10035550), `Codeunit SE Register Msg ori` (10035579), `Codeunit SE Restart Msg ori` (10035556), `Codeunit SE Run Msg ori` (10035555), `Codeunit SE Schedule Msg ori` (10035581), `Codeunit Scheduler Mgt ori` (10035536), `Codeunit Scheduler Wizard Reg. ori` (10035589), `Codeunit Status Get Msg ori` (10035559), `Codeunit Status Restart Msg ori` (10035560), `Codeunit Status RestartIf Msg ori` (10035561), `Codeunit Telegram Msg ori` (10035588), `Codeunit Telegram Notif. ori` (10035587), `Codeunit Workspace Preview Msg ori` (10035596), `Enum Retry Policy ori` (10035536), `Page Entries API ori` (10035538), `Page Playbook Card ori` (10035548), `Page Playbook Instance Card ori` (10035549), `Page Playbook Instances ori` (10035550), `Page Playbook Last Run FB ori` (10035583), `Page Playbook Step Logs Sub. ori` (10035552), `Page Recurring Template ori` (10035543), `Page Sched. Entry Subform ori` (10035535), `Page Schedule Playbook ori` (10035584), `Page Scheduled Entry API ori` (10035537), `Page Scheduled Entry Card ori` (10035544), `Page Scheduler Setup Wizard ori` (10035589), `Page Scheduler Setup ori` (10035536), `Table JQ Parameter ori` (10035544), `Table Playbook Step Log ori` (10035543), `Table Playbook ori` (10035539), `Table Recurring Template ori` (10035537), `Table Report Request Preset ori` (10035590), `Table Scheduled Entry ori` (10035535), `TableExtension User Setup Ext ori` (10035584).

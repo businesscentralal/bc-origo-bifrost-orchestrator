@@ -102,7 +102,11 @@ codeunit 10035603 "Msg Executor ori"
         exit(false);
     end;
 
-    local procedure BuildBinaryEnvelope(Base64Value: Text; ContentType: Text[100]) ResultJson: Text
+    /// <summary>Wraps a binary response without truncating its MIME type.</summary>
+    /// <param name="Base64Value">Base64-encoded response content.</param>
+    /// <param name="ContentType">The full Foundation response MIME type.</param>
+    /// <returns>JSON containing contentType, encoded size and base64.</returns>
+    internal procedure BuildBinaryEnvelope(Base64Value: Text; ContentType: Text[100]) ResultJson: Text
     var
         ResultObject: JsonObject;
     begin

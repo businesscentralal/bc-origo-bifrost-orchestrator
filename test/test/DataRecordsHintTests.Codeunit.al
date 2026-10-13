@@ -80,6 +80,9 @@ codeunit 96428 "Data Records Hint Tests"
         GlobalLanguage(PreviousLanguage);
     end;
 
+    /// <summary>
+    /// Verifies Scheduled Task write denial and the Orchestrator.Status.Restart companion hint.
+    /// </summary>
     [Test]
     procedure ScheduledTask_WriteHint()
     var
@@ -107,6 +110,9 @@ codeunit 96428 "Data Records Hint Tests"
         AssertErrorAndHint(TempArgument.GetResponseJson(), ExpectedError, ScheduledTaskWriteHintTxt);
     end;
 
+    /// <summary>
+    /// Verifies report preset read and write denials and their dedicated report companion hints.
+    /// </summary>
     [Test]
     procedure ReportRequestPreset_ReadWriteHint()
     var
@@ -148,6 +154,9 @@ codeunit 96428 "Data Records Hint Tests"
         AssertErrorAndHint(TempArgumentWrite.GetResponseJson(), ExpectedWrite, ReportPresetHintTxt);
     end;
 
+    /// <summary>
+    /// Verifies unrelated Customer records have no Orchestrator companion hints.
+    /// </summary>
     [Test]
     procedure Customer_NoCompanionHints()
     var

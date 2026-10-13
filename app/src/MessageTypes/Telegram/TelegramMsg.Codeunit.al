@@ -7,6 +7,9 @@ using System.Environment.Configuration;
 codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
+    // Documented User Setup read exception: #65, Gunnar decision 5956399513.
+    Permissions = tabledata "User Setup ori" = R;
+
     /// <summary>Reports whether the caller can read their Telegram setup and has a configured destination.</summary>
     /// <returns>True when the bot token and caller chat ID are available.</returns>
     procedure IsEnabled(): Boolean

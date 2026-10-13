@@ -28,6 +28,38 @@ codeunit 96411 "Orchestrator Unit Tests"
         EntryNotRemovedErr: Label '%1 not removed.', Locked = true, Comment = '%1 - Table Name';
         InvalidFieldValueTok: Label 'Invalid value in field %1', Locked = true, Comment = '%1 - Field Name';
 
+    /// <summary>Preserves Office MIME types longer than the former fifty-character limit.</summary>
+    [Test]
+    procedure BinaryEnvelopePreservesOfficeContentType()
+    begin
+        AssertBinaryEnvelope('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    end;
+
+    /// <summary>Preserves a MIME type at the full Foundation content-type boundary.</summary>
+    [Test]
+    procedure BinaryEnvelopePreservesMaximumContentType()
+    begin
+        AssertBinaryEnvelope(PadStr('application/x-', 100, 'a'));
+    end;
+
+    local procedure AssertBinaryEnvelope(ContentType: Text[100])
+    var
+        MsgExecutor: Codeunit "Msg Executor ori";
+        Envelope: JsonObject;
+        Value: JsonToken;
+    begin
+        // [SCENARIO] #64: binary metadata crosses the former Text[50] boundary unchanged.
+        // [WHEN] The executor wraps a self-contained base64 fixture.
+        Assert.IsTrue(Envelope.ReadFrom(MsgExecutor.BuildBinaryEnvelope('WA==', ContentType)), 'Valid JSON envelope');
+        // [THEN] The MIME type and encoded content remain intact.
+        Assert.IsTrue(Envelope.Get('contentType', Value), 'contentType is present');
+        Assert.AreEqual(ContentType, Value.AsValue().AsText(), 'Full MIME type must survive');
+        Assert.IsTrue(Envelope.Get('size', Value), 'size is present');
+        Assert.AreEqual(4, Value.AsValue().AsInteger(), 'Existing encoded-size contract');
+        Assert.IsTrue(Envelope.Get('base64', Value), 'base64 is present');
+        Assert.AreEqual('WA==', Value.AsValue().AsText(), 'Encoded payload must survive');
+    end;
+
     [Test]
     procedure CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage()
     var
