@@ -1281,6 +1281,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lista skýrslur sem núverandi notandi sér, mögulega síaðar eftir því hvort þær séu vinnsluskýrslur. Lesaðgerð. Notaðu Orchestrator.Report.Get fyrir eina skýrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report List Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3557924230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>appId must be a valid GUID.</source>
+          <target>appId verður að vera gilt GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=appId verður að vera gilt GUID.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType InvalidLayoutAppIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 not found on report %2.</source>
+          <target>Útlit %1 fannst ekki fyrir skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType LayoutNotFoundErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3444540953" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.</source>
           <target>Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.</target>

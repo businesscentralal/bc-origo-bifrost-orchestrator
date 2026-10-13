@@ -1,5 +1,6 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
+using Microsoft.Foundation.Reporting;
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Environment.Configuration;
@@ -135,6 +136,124 @@ codeunit 96409 "Report Layout Read Tests ori"
     begin
         asserterror Execute("Message Type ori"::"Orchestrator.ReportLayout.Get", GetLayoutRequest('XNONEXISTENT', EmptyGuid));
         Assert.ExpectedError('XNONEXISTENT');
+    end;
+
+    /// <summary>The selected layout is visible during execution and the prior session and saved preset survive.</summary>
+    [Test]
+    procedure SaveAsOverrideRestoresSessionAndPreset()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Preset: Record "Report Request Preset ori";
+        Layout: Record "Report Layout List";
+        Selection: Codeunit "Design-time Report Selection";
+        Implementation: Codeunit "Report SaveAs Msg ori";
+        XmlContent: BigText;
+        Content: InStream;
+        XmlText: Text;
+        PriorAppId: Guid;
+    begin
+        FindSampleLayout(Layout);
+        Preset.Init();
+        Preset."Report ID" := Report::"Layout Sample Report ori";
+        Preset."User Security ID" := UserSecurityId();
+        Preset.Insert();
+        Preset.SetRequestPageXml('<owned-saved-settings/>');
+        Preset.Modify();
+        PriorAppId := CreateGuid();
+        Selection.ClearLayoutSelection();
+        Selection.SetSelectedLayout('OWN-PRIOR', PriorAppId);
+        Selection.SetSelectedCustomLayout('OWN-CUSTOM');
+        CreateSaveArgument(TempArgument, Layout, 'XML', '');
+        Implementation.ExecuteBifrostTask(TempArgument);
+        Assert.AreEqual('OWN-PRIOR', Selection.GetSelectedLayout(), 'Prior platform selection restored');
+        Assert.AreEqual(PriorAppId, Selection.GetSelectedAppID(), 'Prior app identity restored');
+        Assert.AreEqual('OWN-CUSTOM', Selection.GetSelectedCustomLayout(), 'Prior custom selection restored');
+        Selection.ClearLayoutSelection();
+        Preset.Get(Report::"Layout Sample Report ori", UserSecurityId());
+        Assert.AreEqual('<owned-saved-settings/>', Preset.GetRequestPageXml(), 'Saved preset not rewritten');
+        Preset.Delete();
+        TempArgument.CalcFields("Response Content");
+        TempArgument."Response Content".CreateInStream(Content);
+        XmlContent.Read(Content);
+        XmlContent.GetSubText(XmlText, 1);
+        Assert.IsTrue(XmlText.Contains('>' + Layout.Name + '</SelectedLayoutName>'), 'Report execution observed the requested layout');
+    end;
+
+    /// <summary>A real RDLC render produces PDF bytes while preserving a custom-only prior selection.</summary>
+    [Test]
+    procedure SaveAsOverrideRendersPdf()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Layout: Record "Report Layout List";
+        Selection: Codeunit "Design-time Report Selection";
+        Implementation: Codeunit "Report SaveAs Msg ori";
+        Content: InStream;
+        Header: Text;
+    begin
+        FindSampleLayout(Layout);
+        Selection.ClearLayoutSelection();
+        Selection.SetSelectedCustomLayout('OWN-CUSTOM');
+        CreateSaveArgument(TempArgument, Layout, 'PDF', '');
+        Implementation.ExecuteBifrostTask(TempArgument);
+        Assert.AreEqual('OWN-CUSTOM', Selection.GetSelectedCustomLayout(), 'Custom-only selection restored');
+        Selection.SetSelectedCustomLayout('');
+        Assert.AreEqual('', Selection.GetSelectedLayout(), 'No spurious platform selection created from custom fallback');
+        Selection.ClearLayoutSelection();
+        TempArgument.CalcFields("Response Content");
+        TempArgument."Response Content".CreateInStream(Content);
+        Content.ReadText(Header, 5);
+        Assert.AreEqual('%PDF-', Header, 'Platform rendered a PDF');
+    end;
+
+    /// <summary>Rendering failure returns the platform error and does not leak the temporary session layout.</summary>
+    [Test]
+    procedure SaveAsRenderFailureRestoresSession()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Layout: Record "Report Layout List";
+        Selection: Codeunit "Design-time Report Selection";
+        Implementation: Codeunit "Report SaveAs Msg ori";
+        PriorAppId: Guid;
+    begin
+        FindSampleLayout(Layout);
+        PriorAppId := CreateGuid();
+        Selection.ClearLayoutSelection();
+        Selection.SetSelectedLayout('OWN-PRIOR', PriorAppId);
+        CreateSaveArgument(TempArgument, Layout, 'PDF', '<invalid-xml');
+        asserterror Implementation.ExecuteBifrostTask(TempArgument);
+        Assert.AreNotEqual('', GetLastErrorText(), 'Original rendering error returned');
+        Assert.AreEqual('OWN-PRIOR', Selection.GetSelectedLayout(), 'Prior selection restored after failure');
+        Assert.AreEqual(PriorAppId, Selection.GetSelectedAppID(), 'Prior identity restored after failure');
+        Selection.ClearLayoutSelection();
+    end;
+
+    /// <summary>An unknown requested layout fails explicitly instead of silently rendering the default.</summary>
+    [Test]
+    procedure SaveAsRejectsUnknownLayout()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Layout: Record "Report Layout List";
+        Implementation: Codeunit "Report SaveAs Msg ori";
+    begin
+        FindSampleLayout(Layout);
+        Layout.Name := 'XNONEXISTENT';
+        CreateSaveArgument(TempArgument, Layout, 'PDF', '');
+        asserterror Implementation.ExecuteBifrostTask(TempArgument);
+        Assert.ExpectedError('XNONEXISTENT');
+    end;
+
+    local procedure CreateSaveArgument(var TempArgument: Record "Message Argument ori" temporary; Layout: Record "Report Layout List"; OutputFormat: Text; Xml: Text)
+    var
+        Request: JsonObject;
+    begin
+        Request.Add('reportId', Report::"Layout Sample Report ori");
+        Request.Add('format', OutputFormat);
+        Request.Add('layoutName', Layout.Name);
+        Request.Add('appId', Format(Layout."Application ID", 0, 4));
+        Request.Add('requestPageXml', Xml);
+        TempArgument.Init();
+        TempArgument.Insert();
+        TempArgument.SetRequestJson(Request);
     end;
 
     local procedure FindSampleLayout(var Layout: Record "Report Layout List")

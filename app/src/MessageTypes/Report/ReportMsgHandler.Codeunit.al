@@ -1,5 +1,6 @@
 namespace Origo.Bifrost.Orchestrator;
 
+using Microsoft.Foundation.Reporting;
 using Origo.Bifrost;
 using System.Reflection;
 using System.Utilities;
@@ -173,7 +174,10 @@ codeunit 10035592 "Report Msg Handler ori"
         end;
 
         TempBlob.CreateOutStream(OutStr);
-        Report.SaveAs(ReportId, XmlParams, OutputFormat, OutStr, RecRef);
+        if RequestJson.Contains('layoutName') then
+            SaveWithLayout(RequestJson, ReportId, XmlParams, OutputFormat, OutStr, RecRef)
+        else
+            Report.SaveAs(ReportId, XmlParams, OutputFormat, OutStr, RecRef);
         if RecRef.Number <> 0 then
             RecRef.Close();
 
@@ -259,6 +263,50 @@ codeunit 10035592 "Report Msg Handler ori"
         Argument.SetResponseJson(ResponseJson);
     end;
 
+    local procedure SaveWithLayout(Request: JsonObject; ReportId: Integer; XmlParams: Text; OutputFormat: ReportFormat; var Output: OutStream; var RecRef: RecordRef)
+    var
+        Layout: Record "Report Layout List";
+        Selection: Codeunit "Design-time Report Selection";
+        Value: JsonToken;
+        LayoutName: Text;
+        AppId: Guid;
+        PreviousName: Text[250];
+        PreviousAppId: Guid;
+        PreviousCustom: Code[20];
+        Rendered: Boolean;
+        RenderError: Text;
+    begin
+        Request.Get('layoutName', Value);
+        LayoutName := Value.AsValue().AsText();
+        if (LayoutName = '') or (StrLen(LayoutName) > MaxStrLen(Layout.Name)) then
+            Error(LayoutNotFoundErr, LayoutName, ReportId);
+        if Request.Get('appId', Value) then
+            if not Evaluate(AppId, Value.AsValue().AsText()) then
+                Error(InvalidLayoutAppIdErr);
+        Layout.SetRange("Report ID", ReportId);
+        Layout.SetRange(Name, LayoutName);
+        Layout.SetRange("Application ID", AppId);
+        Layout.SetLoadFields(Name);
+        if not Layout.FindFirst() then
+            Error(LayoutNotFoundErr, LayoutName, ReportId);
+
+        PreviousCustom := Selection.GetSelectedCustomLayout();
+        PreviousAppId := Selection.GetSelectedAppID();
+        // GetSelectedLayout falls back to the custom code; clear that fallback only while reading.
+        Selection.SetSelectedCustomLayout('');
+        PreviousName := Selection.GetSelectedLayout();
+        Selection.ClearLayoutSelection();
+        Selection.SetSelectedLayout(Layout.Name, AppId);
+        ClearLastError();
+        Rendered := Report.SaveAs(ReportId, XmlParams, OutputFormat, Output, RecRef);
+        RenderError := GetLastErrorText();
+        Selection.ClearLayoutSelection();
+        Selection.SetSelectedLayout(PreviousName, PreviousAppId);
+        Selection.SetSelectedCustomLayout(PreviousCustom);
+        if not Rendered then
+            Error(RenderError);
+    end;
+
     local procedure GetReportId(RequestJson: JsonObject) ReportId: Integer
     var
         ReportIdToken: JsonToken;
@@ -293,6 +341,8 @@ codeunit 10035592 "Report Msg Handler ori"
     end;
 
     var
+        LayoutNotFoundErr: Label 'Layout %1 not found on report %2.', Comment = 'is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.';
+        InvalidLayoutAppIdErr: Label 'appId must be a valid GUID.', Comment = 'is-IS=appId verður að vera gilt GUID.';
         ReportNotFoundErr: Label 'Report %1 not found.', Comment = 'is-IS=Skýrsla %1 finnst ekki.';
         ProcessingOnlyErr: Label 'Report %1 is processing-only and cannot be saved.', Comment = 'is-IS=Skýrsla %1 er eingöngu keyrsluskýrsla og ekki hægt að vista hana.';
         NotProcessingOnlyErr: Label 'Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', Comment = 'is-IS=Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.';

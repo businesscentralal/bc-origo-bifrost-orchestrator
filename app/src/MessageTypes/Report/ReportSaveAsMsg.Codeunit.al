@@ -68,6 +68,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must not be a processing-only report.'));
         Parts.AddChoiceParameter(Parameters, 'format', false, 'Output format. Case-insensitive.', Formats, 'PDF');
         Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Request page parameters as XML. When left out, the calling user''s saved preset is used, otherwise the report defaults.'));
+        Parameters.Add(ContractMgt.Parameter('layoutName', 'string', false, 'Temporary layout override from Orchestrator.ReportLayout.List. The prior session selection and stored defaults are preserved.'));
+        Parameters.Add(ContractMgt.Parameter('appId', 'string', false, 'Extension layout application GUID; omitted means a user-defined layout. Used with layoutName.'));
         Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item, e.g. WHERE(Sell-to Customer No.=CONST(10000)). Ignored when the report has no data item table.'));
         exit(true);
     end;
@@ -146,7 +148,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. There is no layout parameter: the report renders with its default layout. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
+        Notes := 'Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
         exit(true);
     end;
 

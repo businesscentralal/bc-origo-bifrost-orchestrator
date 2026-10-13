@@ -7,11 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+- #5: SaveAs (10035592/10035595) accepts an installed `layoutName`/`appId` for one call through the public session selection API; restores platform/custom selection after successful or failed rendering, without updating stored defaults or presets. Test 96409 exercises selection observation, PDF rendering, preset preservation and errors with own report 96455. Generic parameter maps and persistent SetDefault remain pending supported API disposition.
+
 ### Added (2026-10-13) - Read-only report layout discovery and export (#5, partial)
 
 - Add `Orchestrator.ReportLayout.List` and `.Get`, backed by `Report Layout Read Handler ori` (10035611) and message codeunits 10035612/10035613. List uses the BC virtual layout list, supports excluding extension layouts, and reports the current-company default. Get exports the selected extension or user-defined layout bytes without changing it or stored defaults.
 - `Report Layout Read Tests ori` (96409) exercises the dedicated RDLC `Layout Sample Report ori` (96455), a self-created user layout with byte-for-byte export, filtered listing, missing report/layout errors and fixture deletion. New discovery labels have Icelandic translations; permission and help registrations are included.
-- This is part of #5 only. Existing Set/raw request XML remain; temporary execution-layout override, arbitrary parameter maps and default-selection APIs are separate remaining acceptance criteria. No whole-issue completion is claimed.
+- This is part of #5 only. Existing Set/raw request XML remain; SaveAs now supports temporary layout selection. Arbitrary parameter maps and persistent default-selection APIs remain acceptance gaps. No whole-issue completion is claimed.
 
 ### Changed (2026-10-13) - PR #67 acceptance reconciliation (#64, #65, #70)
 

@@ -60,6 +60,9 @@
         <Field Name="RowNumber">
           <DataField>RowNumber</DataField>
         </Field>
+        <Field Name="SelectedLayoutName">
+          <DataField>SelectedLayoutName</DataField>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource</DataSourceName>

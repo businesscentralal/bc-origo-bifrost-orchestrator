@@ -1,5 +1,6 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
+using Microsoft.Foundation.Reporting;
 using System.Utilities;
 
 /// <summary>Own installed RDLC layout fixture for report layout discovery and export tests.</summary>
@@ -16,6 +17,7 @@ report 96455 "Layout Sample Report ori"
         {
             DataItemTableView = where(Number = const(1));
             column(RowNumber; Number) { }
+            column(SelectedLayoutName; Selection.GetSelectedLayout()) { }
         }
     }
 
@@ -29,4 +31,7 @@ report 96455 "Layout Sample Report ori"
             Summary = 'Owned layout export test fixture', Locked = true;
         }
     }
+
+    var
+        Selection: Codeunit "Design-time Report Selection";
 }
