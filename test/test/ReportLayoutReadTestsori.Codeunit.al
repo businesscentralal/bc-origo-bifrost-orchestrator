@@ -24,7 +24,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Value: JsonToken;
         Layout: JsonToken;
     begin
-        Request.Add('reportId', Report::"Test Output Report ori");
+        Request.Add('reportId', Report::"Layout Sample Report ori");
         Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.List", Request);
         Assert.IsTrue(Response.Get('layouts', Value), 'Layouts array');
         Assert.IsTrue(Value.AsArray().Count() > 0, 'Installed sample layout');
@@ -44,7 +44,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Layout: JsonToken;
         UserDefined: JsonToken;
     begin
-        Request.Add('reportId', Report::"Test Output Report ori");
+        Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('includeExtensionLayouts', false);
         Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.List", Request);
         Response.Get('layouts', Value);
@@ -101,7 +101,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Response.Get('layoutBase64', Value);
         Assert.AreEqual(Exported, Value.AsValue().AsText(), 'User layout bytes unchanged');
         Clear(Request);
-        Request.Add('reportId', Report::"Test Output Report ori");
+        Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('includeExtensionLayouts', false);
         Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.List", Request);
         Response.Get('layouts', Value);
@@ -111,9 +111,9 @@ codeunit 96409 "Report Layout Read Tests ori"
                 Found := true;
         end;
         Assert.IsTrue(Found, 'Own user layout listed');
-        TenantLayout.Get(Report::"Test Output Report ori", FixtureName, EmptyGuid);
+        TenantLayout.Get(Report::"Layout Sample Report ori", FixtureName, EmptyGuid);
         TenantLayout.Delete(true);
-        Assert.IsFalse(TenantLayout.Get(Report::"Test Output Report ori", FixtureName, EmptyGuid), 'Owned fixture deleted');
+        Assert.IsFalse(TenantLayout.Get(Report::"Layout Sample Report ori", FixtureName, EmptyGuid), 'Owned fixture deleted');
     end;
 
     /// <summary>Rejects an unknown report before looking for layouts.</summary>
@@ -139,7 +139,7 @@ codeunit 96409 "Report Layout Read Tests ori"
 
     local procedure FindSampleLayout(var Layout: Record "Report Layout List")
     begin
-        Layout.SetRange("Report ID", Report::"Test Output Report ori");
+        Layout.SetRange("Report ID", Report::"Layout Sample Report ori");
         Layout.SetRange("User Defined", false);
         Layout.SetLoadFields(Name, "Application ID");
         Assert.IsTrue(Layout.FindFirst(), 'Own installed sample report layout exists');
@@ -147,7 +147,7 @@ codeunit 96409 "Report Layout Read Tests ori"
 
     local procedure GetLayoutRequest(LayoutName: Text; AppId: Guid) Request: JsonObject
     begin
-        Request.Add('reportId', Report::"Test Output Report ori");
+        Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('name', LayoutName);
         Request.Add('appId', Format(AppId, 0, 4));
     end;

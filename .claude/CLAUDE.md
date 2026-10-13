@@ -221,5 +221,5 @@ Key rules always in effect:
 
 ## Worker-9 report capability reservations (2026-10-13)
 
-- #5: codeunits10035611/10035612/10035613, enum values10035612/10035613, test codeunit96409.
+- #5: codeunits10035611/10035612/10035613, enum values10035612/10035613, test codeunit96409 and fixture report96455.
 - Foreign #62 retains10035557/96405; worker9 #59 reserves10035554/96406 separately.
