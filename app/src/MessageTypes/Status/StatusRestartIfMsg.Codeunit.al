@@ -34,7 +34,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Restart the orchestrator only if not already running.', Comment = 'is-IS=EndurrÃ¦sa Ã¡Ã¦tlara aÃ°eins ef hann er ekki Ã¾egar Ã­ gangi.';
+        DescriptionLbl: Label 'Restart the orchestrator only if not already running.', Comment = 'is-IS=Endurræsa áætlara aðeins ef hann er ekki þegar í gangi.';
     begin
         exit(DescriptionLbl);
     end;

@@ -22,7 +22,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Register a Job Queue Entry as an orchestrator entry.', Comment = 'is-IS=SkrÃ¡ vinnsluraÃ°arfÃ¦rslu sem Ã¡Ã¦tlunarfÃ¦rslu.';
+        DescriptionLbl: Label 'Register a Job Queue Entry as an orchestrator entry.', Comment = 'is-IS=Skrá vinnsluraðarfærslu sem áætlunarfærslu.';
     begin
         exit(DescriptionLbl);
     end;

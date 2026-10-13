@@ -208,7 +208,7 @@ codeunit 96427 "SE Run Msg Tests"
         TempJobQueueEntry.SetRange("Object ID to Run", Codeunit::"Ok Sample");
         Assert.IsTrue(TempJobQueueEntry.FindFirst(), 'Run Now should still dispatch the entry');
         LogEntry.SetRange(ID, TempJobQueueEntry.ID);
-        Assert.IsTrue(LogEntry.FindFirst(), 'Run Now should still write a job queue log entry');
+        Assert.IsFalse(LogEntry.IsEmpty(), 'Run Now should still write a job queue log entry');
 
         CleanupEntry(Entry, TempJobQueueEntry.ID);
     end;

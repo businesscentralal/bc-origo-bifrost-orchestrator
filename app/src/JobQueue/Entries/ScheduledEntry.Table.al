@@ -15,6 +15,7 @@ using System.Utilities;
 /// </summary>
 table 10035535 "Scheduled Entry ori"
 {
+    Extensible = false;
     Caption = 'Job Queue Orchestrator Entry', Comment = 'is-IS=Vinnsluraðarfærsla';
     DataCaptionFields = "Object Type to Run", "Object Caption to Run";
     DataClassification = SystemMetadata;
@@ -114,7 +115,7 @@ table 10035535 "Scheduled Entry ori"
         {
             CalcFormula = lookup(AllObjWithCaption."Object Caption" where("Object Type" = field("Object Type to Run"),
                                                                            "Object ID" = field("Object ID to Run")));
-            Caption = 'Object Caption to Run', Comment = 'is-IS=Kafli hluts til keyrslu';
+            Caption = 'Object Caption to Run', Comment = 'is-IS=Heiti hluts til keyrslu';
             Editable = false;
             FieldClass = FlowField;
         }
@@ -238,7 +239,7 @@ table 10035535 "Scheduled Entry ori"
         }
         field(160; "Recurring Template Code"; Code[20])
         {
-            Caption = 'Recurring Template Code', Comment = 'is-IS=Kóði endur tek a sniðmáts';
+            Caption = 'Recurring Template Code', Comment = 'is-IS=Kóði endurtekningarsniðmáts';
             DataClassification = SystemMetadata;
             TableRelation = "Recurring Template ori".Code;
 
@@ -297,7 +298,7 @@ table 10035535 "Scheduled Entry ori"
         }
         field(190; "Run on Tuesdays"; Boolean)
         {
-            Caption = 'Run on Tuesdays', Comment = 'is-IS=Keyra á þrist dagum';
+            Caption = 'Run on Tuesdays', Comment = 'is-IS=Keyra á þriðjudögum';
             DataClassification = SystemMetadata;
 
             trigger OnValidate()
@@ -310,7 +311,7 @@ table 10035535 "Scheduled Entry ori"
         }
         field(200; "Run on Wednesdays"; Boolean)
         {
-            Caption = 'Run on Wednesdays', Comment = 'is-IS=Keyra á miðviku köllum';
+            Caption = 'Run on Wednesdays', Comment = 'is-IS=Keyra á miðvikudögum';
             DataClassification = SystemMetadata;
 
             trigger OnValidate()
@@ -323,7 +324,7 @@ table 10035535 "Scheduled Entry ori"
         }
         field(210; "Run on Thursdays"; Boolean)
         {
-            Caption = 'Run on Thursdays', Comment = 'is-IS=Keyra á fimmtud köllum';
+            Caption = 'Run on Thursdays', Comment = 'is-IS=Keyra á fimmtudögum';
             DataClassification = SystemMetadata;
 
             trigger OnValidate()
@@ -423,19 +424,19 @@ table 10035535 "Scheduled Entry ori"
         }
         field(280; "Client Credentials Code"; Code[50])
         {
-            Caption = 'Client Credentials Code', Comment = 'is-IS=Kóði kliensta auðkenningar';
+            Caption = 'Client Credentials Code', Comment = 'is-IS=Kóði biðlaraauðkenningar';
             DataClassification = SystemMetadata;
             TableRelation = "Client Credentials ori";
         }
         field(290; "Retry Policy"; Enum "Retry Policy ori")
         {
-            Caption = 'Retry Policy', Comment = 'is-IS=Endurprófanarstefna';
+            Caption = 'Retry Policy', Comment = 'is-IS=Endurprófunarreglur';
             DataClassification = SystemMetadata;
             InitValue = Always;
         }
         field(300; "Errors Since Last Success"; Integer)
         {
-            Caption = 'Errors Since Last Success', Comment = 'is-IS=Villur frá síðustu gangi';
+            Caption = 'Errors Since Last Success', Comment = 'is-IS=Villur frá síðustu velgengni';
             DataClassification = SystemMetadata;
             Editable = false;
             InitValue = 0;
@@ -456,7 +457,7 @@ table 10035535 "Scheduled Entry ori"
     var
         DeletedMsg: Label 'The linked Job Queue Entry has been deleted.  New Job Queue Entry will be automatically created by the Job Queue Orchestrator.', Comment = 'is-IS=Tengdri vinnsluraðafærslu hefur verið eytt. Ný vinnsluraðafærsla verður sjálfkrafa stofnuð af vinnsluraðaranum.';
         ObjNotFoundErr: Label 'There is no %1 with ID %2.', Comment = '%1 = Object Type, %2 = Object ID';
-        EndingTimeBeforeStartingTimeErr: Label 'Ending Time must be greater than Starting Time.', Comment = 'is-IS=Lokatími verður að vera stærri en upphafstími.';
+        EndingTimeBeforeStartingTimeErr: Label 'Ending Time must be greater than Starting Time.', Comment = 'is-IS=Lokatími verður að vera síðar en upphafstími.';
 
     trigger OnRename()
     var

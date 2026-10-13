@@ -6,6 +6,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 table 10035542 "Playbook Instance ori"
 {
+    Extensible = false;
     Caption = 'Bifrost Playbook Instance', Comment = 'is-IS=Keyrsla Bifröst keðju';
     DataClassification = SystemMetadata;
 

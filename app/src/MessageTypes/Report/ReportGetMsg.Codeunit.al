@@ -20,7 +20,7 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Returns report metadata, available layouts, and saved request page preset.', Comment = 'is-IS=Skilar lÃ½sigÃ¶gnum skÃ½rslu, tiltÃ¦kum Ãºtlitum og vistuÃ°um forsendum beiÃ°nisÃ­Ã°u.';
+        DescriptionLbl: Label 'Returns report metadata, available layouts, and saved request page preset.', Comment = 'is-IS=Skilar lýsigögnum skýrslu, tiltækum útlitum og vistuðum forsendum beiðnisíðu.';
     begin
         exit(DescriptionLbl);
     end;

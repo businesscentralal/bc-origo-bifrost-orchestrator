@@ -4,9 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Reflection;
 
-/// <summary>
-/// Tests report discovery, metadata, saved request-page XML, PDF output, and generic data restrictions.
-/// </summary>
+/// <summary>Tests report preset storage, report message handlers, and generic data-access restrictions.</summary>
 codeunit 96416 "Report Msg Tests"
 {
     Subtype = Test;
@@ -17,10 +15,8 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Preset Table Tests ---
 
+    /// <summary>Verifies that a saved report preset returns the XML stored for the current user.</summary>
     [Test]
-    /// <summary>
-    /// Verifies preset table stores and retrieves request page XML.
-    /// </summary>
     procedure PresetRoundTripsXml()
     var
         Preset: Record "Report Request Preset ori";
@@ -42,10 +38,8 @@ codeunit 96416 "Report Msg Tests"
         Preset.Delete();
     end;
 
+    /// <summary>Verifies that a preset without stored XML returns empty text and reports no XML.</summary>
     [Test]
-    /// <summary>
-    /// Verifies getRequestPageXml returns empty when no blob stored.
-    /// </summary>
     procedure PresetReturnsEmptyWhenNoXml()
     var
         Preset: Record "Report Request Preset ori";
@@ -63,10 +57,8 @@ codeunit 96416 "Report Msg Tests"
         Preset.Delete();
     end;
 
+    /// <summary>Verifies that a preset reports XML availability after request-page XML is stored.</summary>
     [Test]
-    /// <summary>
-    /// Verifies hasRequestPageXml returns true after XML is stored.
-    /// </summary>
     procedure PresetHasRequestPageXmlReturnsTrueWhenPopulated()
     var
         Preset: Record "Report Request Preset ori";
@@ -86,10 +78,8 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Report.List Tests ---
 
+    /// <summary>Checks that Report.List returns reports and a positive count.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.List returns reports array with count.
-    /// </summary>
     procedure ListReturnsReportsWithCountField()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -109,10 +99,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(CountToken.AsValue().AsInteger() > 0, 'Should find at least one report');
     end;
 
+    /// <summary>Checks that processingOnly=false excludes processing-only reports from the returned list.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.List with processingOnly=false excludes processing-only reports.
-    /// </summary>
     procedure ListFiltersByProcessingOnly()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -143,10 +131,8 @@ codeunit 96416 "Report Msg Tests"
         end;
     end;
 
+    /// <summary>Checks the expected metadata fields on the first report returned by Report.List.</summary>
     [Test]
-    /// <summary>
-    /// Verifies each report in the list has all expected fields.
-    /// </summary>
     procedure ListReportContainsExpectedFields()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -178,10 +164,8 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Report.Get Tests ---
 
+    /// <summary>Checks that Report.Get returns the requested report ID.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.Get returns metadata for a known report.
-    /// </summary>
     procedure GetReturnsReportMetadata()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -202,10 +186,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.AreEqual(TestReportId, IdToken.AsValue().AsInteger(), 'Report ID mismatch');
     end;
 
+    /// <summary>Checks that Report.Get includes at least one layout for the selected report.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.Get includes layouts array.
-    /// </summary>
     procedure GetReturnsLayoutsArray()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -226,10 +208,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(LayoutsToken.AsArray().Count() > 0, 'Should have at least one layout');
     end;
 
+    /// <summary>Checks that Report.Get returns the request-page XML saved for the current user.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.Get returns preset with XML when user has a saved preset.
-    /// </summary>
     procedure GetReturnsPresetWhenExists()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -260,10 +240,8 @@ codeunit 96416 "Report Msg Tests"
         DeletePreset(TestReportId);
     end;
 
+    /// <summary>Checks that Report.Get creates an empty current-user preset and reports no saved XML.</summary>
     [Test]
-    /// <summary>
-    /// Verifies Report.Get creates an empty user preset when none exists.
-    /// </summary>
     procedure GetCreatesEmptyPresetWhenNoneExists()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -294,10 +272,8 @@ codeunit 96416 "Report Msg Tests"
         DeletePreset(TestReportId);
     end;
 
+    /// <summary>Checks the Report.Get error for a report ID that does not exist.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.Get errors when report does not exist.
-    /// </summary>
     procedure GetErrorsForInvalidReportId()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -310,10 +286,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.ExpectedError('Report 999999999 not found');
     end;
 
+    /// <summary>Checks that Report.Get reports a missing reportId.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.Get errors when reportId is missing from request.
-    /// </summary>
     procedure GetErrorsWhenReportIdMissing()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -328,10 +302,8 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Report.SaveAs Tests ---
 
+    /// <summary>Checks that Report.SaveAs produces response content when PDF output is requested.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.SaveAs produces non-empty PDF output.
-    /// </summary>
     procedure SaveAsGeneratesPdfOutput()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -349,10 +321,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(TempArgument."Response Content".HasValue(), 'Response should contain PDF data');
     end;
 
+    /// <summary>Checks that Report.SaveAs produces response content when format is omitted.</summary>
     [Test]
-    /// <summary>
-    /// Verifies report.SaveAs defaults to PDF when format is not specified.
-    /// </summary>
     procedure SaveAsDefaultsToPdfWhenFormatOmitted()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -370,10 +340,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.IsTrue(TempArgument."Response Content".HasValue(), 'Should produce output with default format');
     end;
 
+    /// <summary>Checks that Report.SaveAs produces content with an empty saved preset and no requestPageXml input.</summary>
     [Test]
-    /// <summary>
-    /// Verifies saveAs falls back to preset XML when requestPageXml not in request.
-    /// </summary>
     procedure SaveAsUsesPresetWhenNoXmlProvided()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -396,10 +364,8 @@ codeunit 96416 "Report Msg Tests"
         DeletePreset(TestReportId);
     end;
 
+    /// <summary>Checks that Report.SaveAs rejects an unsupported output format.</summary>
     [Test]
-    /// <summary>
-    /// Verifies saveAs errors on unsupported format.
-    /// </summary>
     procedure SaveAsErrorsForInvalidFormat()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -415,10 +381,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.ExpectedError('Unsupported format');
     end;
 
+    /// <summary>Checks that Report.SaveAs reports a missing reportId.</summary>
     [Test]
-    /// <summary>
-    /// Verifies saveAs errors when reportId is missing.
-    /// </summary>
     procedure SaveAsErrorsForMissingReportId()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -431,10 +395,8 @@ codeunit 96416 "Report Msg Tests"
         Assert.ExpectedError('reportId');
     end;
 
+    /// <summary>Checks the Report.SaveAs error for a report ID that does not exist.</summary>
     [Test]
-    /// <summary>
-    /// Verifies saveAs errors when report does not exist.
-    /// </summary>
     procedure SaveAsErrorsForNonExistentReport()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -449,10 +411,8 @@ codeunit 96416 "Report Msg Tests"
 
     // --- Data Restriction Tests ---
 
+    /// <summary>Checks that report presets are restricted from generic Data.Records reads.</summary>
     [Test]
-    /// <summary>
-    /// Verifies bifrost Report Request Preset is restricted from generic Data.Records.Get.
-    /// </summary>
     procedure PresetTableIsBlockedFromDataRecordsRead()
     var
         TempArgument: Record "Message Argument ori" temporary;
@@ -463,10 +423,8 @@ codeunit 96416 "Report Msg Tests"
             'Preset table should be read-restricted');
     end;
 
+    /// <summary>Checks that report presets are restricted from generic non-forced Data.Records writes.</summary>
     [Test]
-    /// <summary>
-    /// Verifies bifrost Report Request Preset is restricted from generic Data.Records.Set.
-    /// </summary>
     procedure PresetTableIsBlockedFromDataRecordsWrite()
     var
         TempArgument: Record "Message Argument ori" temporary;

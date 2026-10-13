@@ -9,6 +9,7 @@ namespace Origo.Bifrost.Orchestrator;
 /// </summary>
 table 10035538 "Client Credentials ori"
 {
+    Extensible = false;
     Caption = 'Client Credentials', Comment = 'is-IS=Auðkenni biðlara';
     DataClassification = SystemMetadata;
 

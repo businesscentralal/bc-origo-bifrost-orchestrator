@@ -25,7 +25,7 @@ codeunit 10035536 "Scheduler Mgt ori"
         JobQueueNotConfiguredErr: Label 'Job Queue has not been configured', Comment = 'is-IS=Vinnsluröð hefur ekki verið stillt';
         JobQueueNotScheduledQst: Label 'Job Queue has not been scheduled, schedule now?', Comment = 'is-IS=Vinnsluröð hefur ekki verið tímasett, tímasetja núna?';
         JobQueueRunningColorTok: Label 'Favorable', Locked = true;
-        RunOnceQst: Label 'This will create a temporary non-recurrent copy of this job and will run it once in the foreground.\Do you want to continue?', Comment = 'is-IS=Þetta mun stofna tímabundinn einskiptisafrit af ýessu verki og keyra það einu sinni í forgrunni.\Viltu halda áfram?';
+        RunOnceQst: Label 'This will create a temporary non-recurrent copy of this job and will run it once in the foreground.\Do you want to continue?', Comment = 'is-IS=Þetta mun stofna tímabundinn einskiptisafrit af þessu verki og keyra það einu sinni í forgrunni.\Viltu halda áfram?';
 
     /// <summary>
     /// Cancels the management Job Queue Entry if it exists.

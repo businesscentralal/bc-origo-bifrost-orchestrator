@@ -18,7 +18,7 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Lists available reports with metadata, excluding obsolete reports.', Comment = 'is-IS=Listar tiltÃ¦kar skÃ½rslur meÃ° lÃ½sigÃ¶gnum, Ãºtilokar Ãºreltar skÃ½rslur.';
+        DescriptionLbl: Label 'Lists available reports with metadata, excluding obsolete reports.', Comment = 'is-IS=Listar tiltækar skýrslur með lýsigögnum, útilokar úreltar skýrslur.';
     begin
         exit(DescriptionLbl);
     end;

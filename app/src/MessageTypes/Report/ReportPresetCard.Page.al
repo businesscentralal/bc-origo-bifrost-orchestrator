@@ -4,6 +4,7 @@ using System.Reflection;
 
 page 10035591 "Report Preset Card ori"
 {
+    Extensible = false;
     Caption = 'Report Request Preset', Comment = 'is-IS=Forsendur skýrslu';
     ContextSensitiveHelpPage = 'report-preset-card';
     PageType = Card;

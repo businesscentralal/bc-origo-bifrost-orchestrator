@@ -14,7 +14,7 @@ enum 10035536 "Retry Policy ori"
     }
     value(1; "Three Times")
     {
-        Caption = 'Three Times', Comment = 'is-IS=Þrjú sinni';
+        Caption = 'Three Times', Comment = 'is-IS=Þrisvar sinnum';
     }
     value(2; Never)
     {

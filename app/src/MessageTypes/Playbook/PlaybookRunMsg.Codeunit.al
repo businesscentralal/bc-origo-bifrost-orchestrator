@@ -34,7 +34,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Execute a Bifrost Playbook immediately and return results.', Comment = 'is-IS=Keyra BifrÃ¶st keÃ°ju strax og skila niÃ°urstÃ¶Ã°um.';
+        DescriptionLbl: Label 'Execute a Bifrost Playbook immediately and return results.', Comment = 'is-IS=Keyra Bifröst keðju strax og skila niðurstöðum.';
     begin
         exit(DescriptionLbl);
     end;

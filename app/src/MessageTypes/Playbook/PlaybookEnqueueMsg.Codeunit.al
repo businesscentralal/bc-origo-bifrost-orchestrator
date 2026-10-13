@@ -18,7 +18,7 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Enqueue a Bifrost Playbook for one-time execution via Job Queue with custom request data.', Comment = 'is-IS=Setja BifrÃ¶st keÃ°ju Ã­ biÃ°rÃ¶Ã° til einskiptiskeyrslu meÃ° sÃ©rsniÃ°num gÃ¶gnum.';
+        DescriptionLbl: Label 'Enqueue a Bifrost Playbook for one-time execution via Job Queue with custom request data.', Comment = 'is-IS=Setja Bifröst keðju í biðröð til einskiptiskeyrslu í gegnum vinnsluröð með sérsniðnum beiðnigögnum.';
     begin
         exit(DescriptionLbl);
     end;

@@ -145,8 +145,8 @@ codeunit 10035550 "SE Msg Handler ori"
     var
         MissingIdErr: Label 'Request must include "id" (GUID) in the data payload or as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.';
         MissingJQIdErr: Label 'Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "jobQueueEntryId" (GUID) í gagnahleðslunni eða auðkenni vinnsluraðarfærslu sem viðfang.';
-        ExecutedMsg: Label 'Job queue entry executed.', Comment = 'is-IS=Vinnsluröðarfærsla keyrð.';
+        ExecutedMsg: Label 'Job queue entry executed.', Comment = 'is-IS=Vinnsluraðafærsla keyrð.';
         RestartedMsg: Label 'Orchestrator entry restarted.', Comment = 'is-IS=Áætlunarfærsla endurræst.';
         RegisteredMsg: Label 'Job Queue Entry registered with orchestrator.', Comment = 'is-IS=Vinnsluraðarfærsla skráð hjá vinnsluraðara.';
-        ScheduledMsg: Label 'Orchestrator entry scheduled.', Comment = 'is-IS=Áætlunarfærsla áætluð.';
+        ScheduledMsg: Label 'Orchestrator entry scheduled.', Comment = 'is-IS=Áætlunarfærsla tímasett.';
 }

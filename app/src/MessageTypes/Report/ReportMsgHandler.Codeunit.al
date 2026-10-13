@@ -144,10 +144,8 @@ codeunit 10035592 "Report Msg Handler ori"
         OutStr: OutStream;
         ReportId: Integer;
         XmlParams: Text;
-        TableView: Text;
         OutputFormat: ReportFormat;
         XmlToken: JsonToken;
-        TableViewToken: JsonToken;
     begin
         RequestJson := Argument.GetRequestJson();
         ReportId := GetReportId(RequestJson);
@@ -168,10 +166,9 @@ codeunit 10035592 "Report Msg Handler ori"
 
         if ReportMeta.FirstDataItemTableID <> 0 then begin
             RecRef.Open(ReportMeta.FirstDataItemTableID);
-            if RequestJson.Get('tableView', TableViewToken) then begin
-                TableView := TableViewToken.AsValue().AsText();
-                if TableView <> '' then
-                    RecRef.SetView(TableView);
+            if not Argument.ApplyTableView(RequestJson, RecRef) then begin
+                RecRef.Close();
+                exit;
             end;
         end;
 
@@ -186,7 +183,7 @@ codeunit 10035592 "Report Msg Handler ori"
     /// <summary>
     /// Runs a processing-only report as a batch job and reports how it went. The report is executed
     /// through <c>Report Run Exec ori</c> with <c>Codeunit.Run</c>, so a failure comes back as a
-    /// response with status Error, error text and callstack rather than as a thrown error. Only
+    /// response with status Error and error text rather than as a thrown error. Only
     /// processing-only reports are accepted; anything that produces output belongs in
     /// Orchestrator.Report.SaveAs.
     /// </summary>
@@ -226,11 +223,13 @@ codeunit 10035592 "Report Msg Handler ori"
 
         if ReportMeta.FirstDataItemTableID <> 0 then begin
             RecRef.Open(ReportMeta.FirstDataItemTableID);
-            if RequestJson.Get('tableView', TableViewToken) then begin
-                TableView := TableViewToken.AsValue().AsText();
-                if TableView <> '' then
-                    RecRef.SetView(TableView);
+            if not Argument.ApplyTableView(RequestJson, RecRef) then begin
+                RecRef.Close();
+                exit;
             end;
+            if RequestJson.Get('tableView', TableViewToken) then
+                if not TableViewToken.AsValue().IsNull() then
+                    TableView := TableViewToken.AsValue().AsText();
         end;
 
         StartTime := CurrentDateTime();
@@ -251,11 +250,6 @@ codeunit 10035592 "Report Msg Handler ori"
             ResponseJson.Add('status', 'Error');
             ResponseJson.Add('reportId', ReportMeta.ID);
             ResponseJson.Add('error', GetLastErrorText());
-            // The call stack names objects, procedures and line numbers of the base application and
-            // of every extension on the stack, so it is only returned when the administrator has
-            // switched on Request Debug Mode - the same gate the request log uses.
-            if IsRequestDebugMode() then
-                ResponseJson.Add('callstack', GetLastErrorCallStack());
             ClearLastError();
         end;
 
@@ -296,13 +290,6 @@ codeunit 10035592 "Report Msg Handler ori"
             else
                 Error(UnsupportedFormatErr, FormatText);
         end;
-    end;
-
-    local procedure IsRequestDebugMode(): Boolean
-    var
-        Setup: Record "Setup ori";
-    begin
-        exit(Setup.GetRequestDebugMode());
     end;
 
     var

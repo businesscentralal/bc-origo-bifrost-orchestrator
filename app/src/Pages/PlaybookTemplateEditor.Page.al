@@ -8,6 +8,7 @@ using Origo.Bifrost;
 
 page 10035556 "Playbook Template Editor ori"
 {
+    Extensible = false;
     Caption = 'Playbook Template Editor', Comment = 'is-IS=Ritill keðjusniðmáts';
     PageType = CardPart;
     SourceTable = "Playbook Step ori";

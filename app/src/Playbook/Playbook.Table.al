@@ -8,6 +8,7 @@ using System.Threading;
 
 table 10035539 "Playbook ori"
 {
+    Extensible = false;
     Caption = 'Bifrost Playbook', Comment = 'is-IS=Bifröst keðja';
     DataClassification = SystemMetadata;
     LookupPageId = "Playbooks ori";
@@ -26,7 +27,7 @@ table 10035539 "Playbook ori"
         }
         field(30; "Initial Request Template"; Blob)
         {
-            Caption = 'Initial Request Template', Comment = 'is-IS=Upphafsbeðni sniðmát';
+            Caption = 'Initial Request Template', Comment = 'is-IS=Upphafsbeiðni sniðmát';
         }
         field(70; "Last Run Instance ID"; Guid)
         {

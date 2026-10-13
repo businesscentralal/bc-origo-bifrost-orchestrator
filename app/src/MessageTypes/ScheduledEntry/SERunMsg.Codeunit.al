@@ -34,7 +34,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Execute a orchestrator entry immediately as a one-time run.', Comment = 'is-IS=Keyra Ã¡Ã¦tlunarfÃ¦rslu strax Ã­ eitt skipti.';
+        DescriptionLbl: Label 'Execute a orchestrator entry immediately as a one-time run.', Comment = 'is-IS=Keyra áætlunarfærslu strax í eitt skipti.';
     begin
         exit(DescriptionLbl);
     end;
