@@ -190,7 +190,7 @@ codeunit 96431 "Report Parameter Tests ori"
     var
         Document: XmlDocument;
     begin
-        XmlDocument.ReadFrom(Report.RunRequestPage(Report::"Layout Sample Report ori", SampleTemplate()), Document);
+        XmlDocument.ReadFrom(Report.RunRequestPage(Report::"Layout Sample Report ori"), Document);
         Assert.AreEqual('native capture', OptionText(Document, 'SampleText'), 'Native XML serialization name');
         Assert.AreEqual('true', OptionText(Document, 'SampleFlag'), 'Native boolean serialization');
     end;
