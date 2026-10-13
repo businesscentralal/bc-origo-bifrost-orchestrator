@@ -140,6 +140,7 @@ codeunit 10035592 "Report Msg Handler ori"
         Preset: Record "Report Request Preset ori";
         ReportMeta: Record "Report Metadata";
         TempBlob: Codeunit "Temp Blob";
+        Parameters: Codeunit "Report Parameters ori";
         RecRef: RecordRef;
         RequestJson: JsonObject;
         OutStr: OutStream;
@@ -157,11 +158,14 @@ codeunit 10035592 "Report Msg Handler ori"
         if ReportMeta.ProcessingOnly then
             Error(ProcessingOnlyErr, ReportId);
 
-        if RequestJson.Get('requestPageXml', XmlToken) then
-            XmlParams := XmlToken.AsValue().AsText()
+        if RequestJson.Contains('parameters') then
+            XmlParams := Parameters.Resolve(ReportId, RequestJson)
         else
-            if Preset.Get(ReportId, UserSecurityId()) then
-                XmlParams := Preset.GetRequestPageXml();
+            if RequestJson.Get('requestPageXml', XmlToken) then
+                XmlParams := XmlToken.AsValue().AsText()
+            else
+                if Preset.Get(ReportId, UserSecurityId()) then
+                    XmlParams := Preset.GetRequestPageXml();
 
         OutputFormat := ParseFormat(RequestJson);
 
@@ -197,6 +201,7 @@ codeunit 10035592 "Report Msg Handler ori"
         Preset: Record "Report Request Preset ori";
         ReportMeta: Record "Report Metadata";
         Runner: Codeunit "Report Run Exec ori";
+        Parameters: Codeunit "Report Parameters ori";
         RecRef: RecordRef;
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
@@ -217,13 +222,16 @@ codeunit 10035592 "Report Msg Handler ori"
         if not ReportMeta.ProcessingOnly then
             Error(NotProcessingOnlyErr, ReportId);
 
-        if RequestJson.Get('requestPageXml', XmlToken) then
-            XmlParams := XmlToken.AsValue().AsText()
+        if RequestJson.Contains('parameters') then
+            XmlParams := Parameters.Resolve(ReportId, RequestJson)
         else
-            if Preset.Get(ReportId, UserSecurityId()) then begin
-                XmlParams := Preset.GetRequestPageXml();
-                UsedPreset := XmlParams <> '';
-            end;
+            if RequestJson.Get('requestPageXml', XmlToken) then
+                XmlParams := XmlToken.AsValue().AsText()
+            else
+                if Preset.Get(ReportId, UserSecurityId()) then begin
+                    XmlParams := Preset.GetRequestPageXml();
+                    UsedPreset := XmlParams <> '';
+                end;
 
         if ReportMeta.FirstDataItemTableID <> 0 then begin
             RecRef.Open(ReportMeta.FirstDataItemTableID);

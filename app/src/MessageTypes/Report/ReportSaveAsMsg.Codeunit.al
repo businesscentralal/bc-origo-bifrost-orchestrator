@@ -67,7 +67,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Formats.Add('XML');
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must not be a processing-only report.'));
         Parts.AddChoiceParameter(Parameters, 'format', false, 'Output format. Case-insensitive.', Formats, 'PDF');
-        Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Request page parameters as XML. When left out, the calling user''s saved preset is used, otherwise the report defaults.'));
+        Parameters.Add(ContractMgt.Parameter('parameters', 'object', false, 'Explicit scalar option values over caller requestPageXml or a registered template. Never reads or changes saved settings. Unknown names fail. Report 1316 has a built-in template; see notes.'));
+        Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Caller XML takes precedence over registered templates. parameters overlays its named options. Without parameters, existing raw XML / saved-preset behavior is retained.'));
         Parameters.Add(ContractMgt.Parameter('layoutName', 'string', false, 'Temporary layout override from Orchestrator.ReportLayout.List. The prior session selection and stored defaults are preserved.'));
         Parameters.Add(ContractMgt.Parameter('appId', 'string', false, 'Extension layout application GUID; omitted means a user-defined layout. Used with layoutName.'));
         Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item, e.g. WHERE(Sell-to Customer No.=CONST(10000)). Ignored when the report has no data item table.'));
@@ -89,6 +90,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddReportErrors(Errors);
+        Parts.AddError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
+        Parts.AddError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
         Parts.AddError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
         Parts.AddError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
         Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
@@ -148,7 +151,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
+        Notes := 'The report 1316 template accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item). PrintEntriesNotDue is not a BC 28.5 control and is rejected. Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
         exit(true);
     end;
 

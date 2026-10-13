@@ -60,6 +60,15 @@
         <Field Name="RowNumber">
           <DataField>RowNumber</DataField>
         </Field>
+        <Field Name="ObservedText">
+          <DataField>ObservedText</DataField>
+        </Field>
+        <Field Name="ObservedFlag">
+          <DataField>ObservedFlag</DataField>
+        </Field>
+        <Field Name="ObservedDate">
+          <DataField>ObservedDate</DataField>
+        </Field>
         <Field Name="SelectedLayoutName">
           <DataField>SelectedLayoutName</DataField>
         </Field>

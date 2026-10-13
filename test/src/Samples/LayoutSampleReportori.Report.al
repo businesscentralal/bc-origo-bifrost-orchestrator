@@ -7,7 +7,7 @@ using System.Utilities;
 report 96455 "Layout Sample Report ori"
 {
     Caption = 'Layout sample report', Locked = true;
-    UseRequestPage = false;
+    UseRequestPage = true;
     UsageCategory = None;
     DefaultRenderingLayout = Fixture;
 
@@ -17,6 +17,9 @@ report 96455 "Layout Sample Report ori"
         {
             DataItemTableView = where(Number = filter(1..2));
             column(RowNumber; Number) { }
+            column(ObservedText; SampleText) { }
+            column(ObservedFlag; SampleFlag) { }
+            column(ObservedDate; Format(SampleDate, 0, 9)) { }
             column(SelectedLayoutName; Selection.GetSelectedLayout()) { }
 
             trigger OnAfterGetRecord()
@@ -26,6 +29,19 @@ report 96455 "Layout Sample Report ori"
                 if Number = 2 then
                     Error(DeliberateErr);
             end;
+        }
+    }
+
+    requestpage
+    {
+        layout
+        {
+            area(Content)
+            {
+                field(FixtureText; SampleText) { ApplicationArea = All; Caption = 'Fixture text', Locked = true; ToolTip = 'Specifies the owned fixture text.', Locked = true; }
+                field(FixtureFlag; SampleFlag) { ApplicationArea = All; Caption = 'Fixture flag', Locked = true; ToolTip = 'Specifies the owned fixture flag.', Locked = true; }
+                field(FixtureDate; SampleDate) { ApplicationArea = All; Caption = 'Fixture date', Locked = true; ToolTip = 'Specifies the owned fixture date.', Locked = true; }
+            }
         }
     }
 
@@ -42,4 +58,7 @@ report 96455 "Layout Sample Report ori"
 
     var
         Selection: Codeunit "Design-time Report Selection";
+        SampleText: Text;
+        SampleFlag: Boolean;
+        SampleDate: Date;
 }

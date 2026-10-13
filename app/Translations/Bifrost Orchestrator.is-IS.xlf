@@ -1323,6 +1323,48 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "reportId".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - Method GetReportId - NamedType MissingReportIdErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 2566772706" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request page parameter %1 must be one of: %2.</source>
+          <target>Færibreyta beiðnisíðu %1 verður að vera eitt af: %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færibreyta beiðnisíðu %1 verður að vera eitt af: %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType ChoiceErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 527110261" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request page option %1 is specified more than once on report %2.</source>
+          <target>Valkostur beiðnisíðu %1 er tilgreindur oftar en einu sinni í skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Valkostur beiðnisíðu %1 er tilgreindur oftar en einu sinni í skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType DuplicateParameterErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 723412179" size-unit="char" translate="yes" xml:space="preserve">
+          <source>requestPageXml must contain ReportParameters for report %1 with unique option names.</source>
+          <target>requestPageXml verður að innihalda ReportParameters fyrir skýrslu %1 með einkvæmum heitum valkosta.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=requestPageXml verður að innihalda ReportParameters fyrir skýrslu %1 með einkvæmum heitum valkosta.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType InvalidBaseErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 1688898688" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No request page template is registered for report %1. Provide requestPageXml.</source>
+          <target>Ekkert sniðmát beiðnisíðu er skráð fyrir skýrslu %1. Gefðu upp requestPageXml.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert sniðmát beiðnisíðu er skráð fyrir skýrslu %1. Gefðu upp requestPageXml.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType MissingBaseErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 3284910742" size-unit="char" translate="yes" xml:space="preserve">
+          <source>parameters must be an object.</source>
+          <target>parameters verður að vera hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=parameters verður að vera hlutur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType ParametersObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 541553205" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request page parameter %1 must be a non-null scalar value.</source>
+          <target>Færibreyta beiðnisíðu %1 verður að vera einfalt gildi sem er ekki null.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færibreyta beiðnisíðu %1 verður að vera einfalt gildi sem er ekki null.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType ScalarErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 3788215960" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unknown request page parameter %1 on report %2.</source>
+          <target>Óþekkt færibreyta beiðnisíðu %1 í skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Óþekkt færibreyta beiðnisíðu %1 í skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType UnknownParameterErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2046287294 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Runs a processing-only report (batch job) using saved preset or provided parameters.</source>
           <target>Keyrir vinnsluskýrslu (runuvinnslu) út frá vistuðum forsendum eða uppgefnum breytum.</target>

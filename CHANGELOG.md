@@ -7,13 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-- #5: SaveAs (10035592/10035595) accepts an installed `layoutName`/`appId` for one call through the public session selection API; restores platform/custom selection after successful or failed rendering, without updating stored defaults or presets. Test 96409 exercises selection observation, PDF rendering, preset preservation and errors with own report 96455. Generic parameter maps and persistent SetDefault remain pending supported API disposition.
+### Added (2026-10-13) - Bounded report parameters and layout selection (#5)
 
-### Added (2026-10-13) - Read-only report layout discovery and export (#5, partial)
-
-- Add `Orchestrator.ReportLayout.List` and `.Get`, backed by `Report Layout Read Handler ori` (10035611) and message codeunits 10035612/10035613. List uses the BC virtual layout list, supports excluding extension layouts, and reports the current-company default. Get exports the selected extension or user-defined layout bytes without changing it or stored defaults.
-- `Report Layout Read Tests ori` (96409) exercises the dedicated RDLC `Layout Sample Report ori` (96455), a self-created user layout with byte-for-byte export, filtered listing, missing report/layout errors and fixture deletion. New discovery labels have Icelandic translations; permission and help registrations are included.
-- This is part of #5 only. Existing Set/raw request XML remain; SaveAs now supports temporary layout selection. Arbitrary parameter maps and persistent default-selection APIs remain acceptance gaps. No whole-issue completion is claimed.
+- Add `Orchestrator.ReportLayout.List` and `.Get` through `Report Layout Read Handler ori` (10035611), message codeunits 10035612/10035613, the message enum/help and permissions. Discovery includes extension and user layouts; export preserves the selected layout bytes.
+- `Report Msg Handler ori` (10035592) and Run/SaveAs contracts (10035597/10035595) accept a scalar `parameters` overlay through `Report Parameters ori` (10035614). Caller XML takes precedence over event-registered templates; unknown names, ambiguous aliases, non-scalar values and wrong-report XML fail explicitly. Explicit overlays never read or update saved user settings. Calls without `parameters` retain existing raw XML / preset behavior.
+- Supply the BC 28.5 report 1316 template and stable aliases for dates, aging, date choice, balance selection and statement style. `PrintEntriesNotDue` has no platform control and is rejected rather than mapped to different behavior.
+- SaveAs accepts temporary `layoutName`/`appId` through the public session-selection API and restores the prior platform/custom selection after rendering success or failure. Persistent `SetDefault` and `setAsDefault` are out of scope; no selection-table writes.
+- Native tests 96409/96431 use owned report 96455, imported layout fixtures, observable report parameters and an event template. Cover byte round trips, XML escaping, unknown/malformed input, explicit-input precedence, preset preservation, actual rendering and selection restoration. New error labels have is-IS translations.
 
 ### Changed (2026-10-13) - PR #67 acceptance reconciliation (#64, #65, #70)
 

@@ -28,8 +28,28 @@ report 96450 "Test Process Report"
             begin
                 Marker.Init();
                 Marker.Source := 'Bifrost Test Process Report';
+                if SampleMarker <> '' then
+                    Marker.Source := CopyStr(SampleMarker, 1, MaxStrLen(Marker.Source));
                 Marker.Insert(true);
             end;
         }
     }
+    requestpage
+    {
+        layout
+        {
+            area(Content)
+            {
+                field(MarkerText; SampleMarker)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Marker text', Locked = true;
+                    ToolTip = 'Specifies the owned report execution marker.', Locked = true;
+                }
+            }
+        }
+    }
+
+    var
+        SampleMarker: Text;
 }

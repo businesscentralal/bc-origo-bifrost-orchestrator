@@ -90,6 +90,39 @@ codeunit 96417 "Report Run Tests"
         Assert.IsFalse(ResponseJson.Contains('callstack'), 'The call stack must not be returned while Request Debug Mode is off');
     end;
 
+    /// <summary>Run applies explicit XML options and reports that no saved preset was used.</summary>
+    [Test]
+    procedure RunUsesExplicitParameterOverlay()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Marker: Record "Test Run Marker";
+        Handler: Codeunit "Report Msg Handler ori";
+        Request: JsonObject;
+        Parameters: JsonObject;
+        Response: JsonObject;
+        Value: JsonToken;
+        FixtureValue: Text;
+    begin
+        FixtureValue := 'OVERLAY-' + Format(CreateGuid(), 0, 4);
+        Parameters.Add('MarkerText', FixtureValue);
+        Request.Add('reportId', Report::"Test Process Report");
+        Request.Add('parameters', Parameters);
+        Request.Add('requestPageXml', '<ReportParameters name="Test Process Report" id="96450"><Options><Field name="MarkerText">base</Field></Options><DataItems/></ReportParameters>');
+        TempArgument.Init();
+        TempArgument.Insert();
+        TempArgument.SetRequestJson(Request);
+        Handler.ExecuteRun(TempArgument);
+        Response := TempArgument.GetResponseJson();
+        Response.Get('status', Value);
+        Assert.AreEqual('Success', Value.AsValue().AsText(), 'Run succeeds');
+        Response.Get('usedPreset', Value);
+        Assert.IsFalse(Value.AsValue().AsBoolean(), 'Explicit overlay does not use saved settings');
+        Marker.SetRange(Source, FixtureValue);
+        Assert.AreEqual(1, Marker.Count(), 'Actual report observed explicit parameter');
+        Marker.DeleteAll();
+        Assert.AreEqual(0, Marker.Count(), 'Owned marker cleaned');
+    end;
+
     // Debug on/off error-response regressions are in Report Boundary Tests ori.
 
     [Test]

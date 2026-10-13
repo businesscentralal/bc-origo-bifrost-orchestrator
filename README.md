@@ -606,3 +606,55 @@ It is a customized version of the [AL-Go-AppSource](https://github.com/microsoft
 
 Please go to https://aka.ms/AL-Go and [COSMO Docs](https://docs.cosmoconsult.com/en-us/cloud-service/alpaca) to learn more.
 <!-- AUTO-UPDATE-END -->
+
+## Explicit report parameters and layouts
+
+`Orchestrator.Report.Run` (processing-only) and `Orchestrator.Report.SaveAs`
+(output reports) accept an optional `parameters` object. It overlays named options
+in a base request-page XML. A nonempty caller `requestPageXml` is the base; otherwise
+`Report Parameters ori.OnGetRequestPageTemplate` lets extensions register a
+headless template for their reports. A built-in template covers Standard Statement
+(report 1316). Templates must contain `ReportParameters` with the matching `id`,
+`Options/Field` elements with unique `name` attributes, and any required `DataItems`.
+No interactive request page or saved connection-user settings supply this base.
+
+Values must be non-null scalars. Names must exist in the selected base (or be one
+of the report 1316 aliases below); unknown names fail with
+`Unknown request page parameter {name} on report {reportId}.`
+Without a base or registered template, the error asks for `requestPageXml`.
+XML values are escaped and data-item views and unspecified options are preserved.
+Caller XML wins over templates, even when it omits a requested option.
+Calls without `parameters` retain the existing raw XML / saved-preset behavior.
+
+For report 1316 the aliases are `StartDate` and `EndDate` (ISO dates), `DateChoice`
+(`Due Date` or `Posting Date`), `PrintAging` (boolean), `AgingBandPeriodLength`
+(an invariant date formula such as `<30D>`), `PrintAllHavingBalance` (boolean),
+and `StatementStyle` (`Balance` or `Open Item`). Actual request control names
+also work when present in the base; supplying both an alias and its control name
+is rejected. Dates must be supplied for a real statement; the report validates them.
+`PrintEntriesNotDue` has no request control in BC 28.5 report 1316 and is rejected.
+It is not an alias for the unrelated `ShowOverdueEntries` option.
+
+```json
+{
+  "reportId": 1316,
+  "format": "PDF",
+  "tableView": "WHERE(No.=CONST(YOUR-CUSTOMER))",
+  "parameters": {
+    "StartDate": "2026-01-01",
+    "EndDate": "2026-12-31",
+    "DateChoice": "Due Date",
+    "PrintAging": true,
+    "AgingBandPeriodLength": "<30D>",
+    "PrintAllHavingBalance": true,
+    "StatementStyle": "Balance"
+  }
+}
+```
+
+Use `Orchestrator.ReportLayout.List` / `.Get` to discover/export layouts. SaveAs
+accepts `layoutName` and `appId` for a per-run selection; session selection and
+stored defaults are preserved, including on rendering failure. Existing
+`ReportLayout.Set` imports a user layout. Persistent `ReportLayout.SetDefault`
+and `setAsDefault` are non-goals for #5 because no supported public platform API
+is available; revisit only when Microsoft exposes one.
