@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-13) - Headless registration and WhoAmI contract (#10, #63)
+
+- `Scheduled Entry ori` (10035535) honors `HideDialog` for newly registered Job Queue entries. `Entry Registration Tests ori` (96407) checks fresh and repeated headless registration and preserves the interactive confirmation/card flow.
+- `WhoAmI Subscriber ori` (10035585) documents the installed `telegramChatId` response field, its caller-specific setup source, empty value and playbook reference. `WhoAmI Contract Tests ori` (96408) checks the real contract builder and retained Foundation chapters.
+
 ### Changed (2026-10-13) - PR #67 acceptance reconciliation (#64, #65, #70)
 
 - Pin Foundation to the successful main build `28.0.4.554` in both manifests. `Msg Executor ori` (10035603) exposes its internal binary-envelope builder for the #64 regression tests in `Orchestrator Unit Tests` (96411), covering the Office MIME type and the 100-character boundary without changing the envelope format.

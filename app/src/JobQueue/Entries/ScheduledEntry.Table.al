@@ -718,7 +718,7 @@ table 10035535 "Scheduled Entry ori"
             end;
         end else begin
             CopyJobQueueEntryToOrchestratorEntry(JobQueueEntry);
-            ShouldOpenCard := true;
+            ShouldOpenCard := not HideDialog;
             IsNewEntry := true;
         end;
 
