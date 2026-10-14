@@ -402,7 +402,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035596 | `Workspace Preview Msg ori` | `Orchestrator.Workspace.Preview` |
 | 10035597 | `Report Run Msg ori` | `Orchestrator.Report.Run` |
 | 10035598 | `Report Run Exec ori` | Runs a processing-only report in its own transaction scope so the caller can catch the error. |
-| 10035603 | `Msg Executor ori` | The only path from playbook code to Foundation's `Dispatcher ori`; wraps every dispatch in a `Codeunit.Run` scope. |
+| 10035603 | `Msg Executor ori` | The only path from playbook code to Foundation's `Dispatcher ori`; wraps every dispatch in a `Codeunit.Run` scope and checks explicit safe effect contracts before an Omit Commit dispatch. |
 | 10035604 | `App Takeover ori` | One-time data take-over from the published *Origo Cloud Events Orchestrator* app. |
 | 10035606 | `Secrets ori` | Single access point for every secret this app keeps in the Foundation secret store. |
 | 10035607 | `Orchestrator Registration ori` | Registers the app in Foundation's `App Registry ori` so Bifröst Setup can name it in the aggregated setup notifications. |
@@ -511,6 +511,8 @@ the complete reasoning, including:
 | `.AL-Go/`, `.github/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
 
 ---
+
+The internal message executor accepts Omit Commit only after checking for an explicit `read` or `write` effect contract. It refuses irreversible, missing and unknown effects before dispatch. Call `SetParameters` before `SetOmitCommit`; the signal is consumed by one run, including a refused run. The normal playbook runner still commits every step independently; this adds no transaction-chain field or UI.
 
 ## Development
 

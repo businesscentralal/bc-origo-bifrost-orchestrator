@@ -144,6 +144,95 @@ codeunit 96406 "Playbook Effect Tests ori"
         Cleanup(Playbook);
     end;
 
+    /// <summary>AC04 rejects actual email execution before any dispatcher queue write.</summary>
+    [Test]
+    procedure AC04_ExecutorEmailRefusedBeforeDispatch()
+    begin
+        // Story #59 AC04 | Time: independent | Risk: no email or external request is allowed.
+        AssertExecutorRefused("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'irreversible');
+    end;
+
+    /// <summary>AC04 rejects actual Telegram execution before any dispatcher queue write.</summary>
+    [Test]
+    procedure AC04_ExecutorTelegramRefusedBeforeDispatch()
+    begin
+        // Story #59 AC04 | Time: independent | Risk: no Telegram request is allowed.
+        AssertExecutorRefused("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'irreversible');
+    end;
+
+    /// <summary>AC04 rejects a missing contract at the executor boundary, not just the guard helper.</summary>
+    [Test]
+    procedure AC04_ExecutorMissingContractRefused()
+    begin
+        // Story #59 AC04 | Time: independent | Risk: test fixture must never dispatch.
+        AssertExecutorRefused("Message Type ori"::"Test.Effect.Missing", 'Test.Effect.Missing', 'no effect contract');
+    end;
+
+    /// <summary>AC04 rejects malformed effect metadata through the real executor.</summary>
+    [Test]
+    procedure AC04_ExecutorMalformedEffectRefused()
+    var
+        Fixture: Codeunit "Effect Contract Fixture ori";
+    begin
+        // Story #59 AC04 | Time: independent | Risk: test fixture must never dispatch.
+        Fixture.Configure('{"effect":null}', true);
+        AssertExecutorRefused("Message Type ori"::"Test.Effect.Contract", 'Test.Effect.Contract', 'no effect contract');
+        Fixture.Configure('', false);
+    end;
+
+    /// <summary>AC05 a newly configured run cannot inherit a previous Omit Commit request.</summary>
+    [Test]
+    procedure AC05_SetParametersResetsCommitSignal()
+    var
+        Executor: Codeunit "Msg Executor ori";
+    begin
+        // Story #59 AC05 | Time: independent | Risk: commit-error scope stops before any handler.
+        Executor.SetParameters("Message Type ori"::"Orchestrator.Email.Send", '', '{}');
+        Executor.SetOmitCommit(true, 'OLD', 10);
+        Executor.SetParameters("Message Type ori"::"Orchestrator.Email.Send", '', '{}');
+        asserterror RunWithoutCommit();
+        Assert.IsTrue(LowerCase(GetLastErrorText()).Contains('commit'), 'The default dispatch must attempt its normal commit.');
+        Assert.IsFalse(GetLastErrorText().Contains('cannot run'), 'The previous Omit Commit guard must not survive SetParameters.');
+    end;
+
+    /// <summary>AC05 a refused run consumes the SingleInstance signal even before new parameters arrive.</summary>
+    [Test]
+    procedure AC05_FailedRunConsumesCommitSignal()
+    var
+        Executor: Codeunit "Msg Executor ori";
+    begin
+        // Story #59 AC05 | Time: independent | Risk: commit-error scope stops before any handler.
+        AssertExecutorRefused("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'irreversible');
+        asserterror RunWithoutCommit();
+        Assert.IsTrue(LowerCase(GetLastErrorText()).Contains('commit'), 'A later default run must attempt its normal commit.');
+        Assert.IsFalse(GetLastErrorText().Contains('cannot run'), 'A refused run must consume the Omit Commit flag.');
+        Executor.SetParameters("Message Type ori"::"Test.Effect.Missing", '', '');
+    end;
+
+    [CommitBehavior(CommitBehavior::Error)]
+    local procedure RunWithoutCommit()
+    var
+        Executor: Codeunit "Msg Executor ori";
+    begin
+        Executor.Run();
+    end;
+
+    local procedure AssertExecutorRefused(MessageType: Enum "Message Type ori"; TypeName: Text; Reason: Text)
+    var
+        Executor: Codeunit "Msg Executor ori";
+        Subject: Text[250];
+        ExpectedError: Text;
+    begin
+        Subject := Format(CreateGuid(), 0, 4);
+        Executor.SetParameters(MessageType, Subject, '{}');
+        Executor.SetOmitCommit(true, 'XEXECUTOR', 70);
+        asserterror Executor.Run();
+        ExpectedError := GetLastErrorText();
+        Assert.IsTrue(ExpectedError.StartsWith('Playbook XEXECUTOR step 70 cannot run ' + TypeName + ' under Omit Commit:'), 'Runtime refusal identifies the exact caller and target.');
+        Assert.IsTrue(ExpectedError.Contains(Reason), 'Runtime refusal identifies the unsafe effect.');
+        Assert.AreEqual('', Executor.GetResponseText(), 'Refusal cannot produce a dispatched response.');
+    end;
+
     local procedure AssertMalformedEffect(EffectJson: Text; HasEffect: Boolean)
     var
         Fixture: Codeunit "Effect Contract Fixture ori";

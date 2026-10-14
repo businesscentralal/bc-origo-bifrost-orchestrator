@@ -2,7 +2,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 
-/// <summary>Validates effect contracts before a future Omit Commit dispatch is enabled.</summary>
+/// <summary>Validates effect contracts before Omit Commit dispatch.</summary>
 codeunit 10035554 "Playbook Effect Guard ori"
 {
     Access = Internal;

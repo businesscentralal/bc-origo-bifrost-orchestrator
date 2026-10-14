@@ -96,7 +96,7 @@ Repository: bc-origo-bifrost-orchestrator
 Default branch: main
 
 ## Dependencies
-- Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, **28.0.0.100**) - the only AL dependency (≥ core#20 / PR #45; take-over probe ≥ core#43). `.AL-Go` core probing uses `release_status: latestBuild`.
+- Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, **28.0.4.556**) - the only AL dependency (public binary-preserving OmitCommit dispatch from core#996 / PR #999). `.AL-Go` core probing uses `release_status: latestBuild`.
   Bifrost Orchestrator does **not** depend on Bifrost Bragi (chat, language models, MCP Tool Server).
 
 ## Legacy take-over (#21)
@@ -223,5 +223,5 @@ Key rules always in effect:
 
 - #10: test codeunit 96407 `Entry Registration Tests ori`.
 - #63: test codeunit 96408 `WhoAmI Contract Tests ori`; existing app codeunit 10035585.
-- #59: app codeunit 10035554, test codeunit/enumextension 96406 and test fixture codeunit 96430 implement effect validation; executor integration awaits Foundation API disposition. Check steps still dispatch and must be validated.
+- #59: app codeunit 10035554, test codeunit/enumextension 96406 and test fixture codeunit 96430 implement effect validation; executor 10035603 now guards and forwards the per-run signal through the public Foundation TempBlob overload from core#996. Check steps still dispatch and must be validated.
 - #62: 10035557 and 96405 remain reserved to Claude; no custody transfer.

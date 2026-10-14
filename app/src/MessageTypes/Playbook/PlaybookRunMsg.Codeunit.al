@@ -154,7 +154,8 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
         Notes := 'The whole playbook runs inside this call and the answer is written only at the end. A caller that times out first gets nothing while the server carries on, and the Playbook Instance ori stays at Running for ever, because the completion belongs to the abandoned session. An LLM step inside a forEach is the usual cause. Use Orchestrator.Playbook.Enqueue, or invoke this type asynchronously, for anything that is not reliably quick, and read Playbook Step Log ori to follow progress.' +
             ' A failing step does not fail the call: the answer is Success with playbookStatus Failed and stepsFailed above 0. Read Playbook Step Log ori filtered on instanceId for the step errors.' +
             ' itemsProcessed counts forEach iterations summed over every step, not distinct items. Do not present it to a user as a record count.' +
-            ' A playbook without steps completes at once with every counter 0.';
+            ' A playbook without steps completes at once with every counter 0.' +
+            ' The internal executor refuses Omit Commit for irreversible, missing or unknown effect contracts; real posting, external writes and committing types declare irreversible. Only explicit read and write are allowed. This runner still commits each step independently and does not expose a roll-back-together signal.';
         exit(true);
     end;
 

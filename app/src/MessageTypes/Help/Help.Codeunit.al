@@ -201,6 +201,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Each step calls one Bifrost message type');
         O.AppendLine('- Steps execute sequentially; each step''s writes commit independently');
         O.AppendLine('- **No rollback** of previous steps on failure');
+        O.AppendLine('- The internal executor refuses Omit Commit for irreversible, missing or unknown effect contracts. Real posting, external writes and committing types declare `irreversible`. Only explicit `read` and `write` are allowed; the playbook runner does not yet expose a roll-back-together signal.');
         O.AppendLine('- Steps branch on success/failure via `Next Step No. (Success)` / `Next Step No. (Failure)`');
         O.AppendLine('- Step 0 as next = end playbook (success or failure depending on path)');
         O.AppendLine('- Full request/response logged per step for audit and replay');
