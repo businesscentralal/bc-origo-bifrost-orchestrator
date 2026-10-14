@@ -18,7 +18,7 @@ codeunit 96406 "Playbook Effect Tests ori"
     [Test]
     procedure ReadAndWriteAllowed()
     begin
-        Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Workspace.Preview");
+        Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Report.List");
         Guard.CheckOmitCommitAllowed('XGUARD', 20, "Message Type ori"::"Orchestrator.Playbook.Enqueue");
     end;
 
@@ -110,7 +110,7 @@ codeunit 96406 "Playbook Effect Tests ori"
         Playbook: Record "Playbook ori";
     begin
         CreatePlaybook(Playbook);
-        AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Workspace.Preview", false, false);
+        AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Report.List", false, false);
         AddStep(Playbook.Code, 20, "Message Type ori"::"Orchestrator.Playbook.Enqueue", false, false);
         AddStep(Playbook.Code, 30, "Message Type ori"::"Orchestrator.Email.Send", true, false);
         Guard.ValidateOmitCommitChain(Playbook.Code);

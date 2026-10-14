@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed
+- #80: `Orchestrator.Workspace.Preview` (codeunit 10035596) now declares an irreversible effect: `_who` seeding performs a nested committed dispatch. Omit Commit guard tests reject Preview before dispatch and retain metadata-only reads as safe fixtures.
+
 ### Added (2026-10-14) - Guarded Omit Commit dispatch (#59)
 
 - `Playbook Effect Guard ori` (10035554) accepts only explicit `read` and `write` contracts and rejects irreversible, missing and malformed effects with playbook/step/type context. The chain validator ignores disabled steps and checks enabled Check steps too, because those steps still dispatch a message. Both playbook-admin and Orchestrator permission sets grant execute access.

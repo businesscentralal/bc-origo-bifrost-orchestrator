@@ -28,7 +28,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   10035609 = codeunit `Orch B1 Contract Parts ori` and 10035610 = codeunit `Orch B2 Contract Parts ori`,
   added 2026-09-29 for #56.)
 - Used test ids: 96400-96404, 96410-96426, 96428, 96450-96454.
-  **Free: 96405-96409, 96429-96449, 96455-96499.**
+  **Free: 96405, 96429-96449, 96455-96499.**
   (96403 = codeunit `Orchestr Secret Tests`, added 2026-09-06; 96404 = codeunit `Test Upgrade`;
   96423 = codeunit `Orchestr Registration Tests`, added 2026-09-07; 96424 = `Report Layout Msg Tests`;
   96425 = `App Takeover Tests`; 96426 = `App Takeover Probe Tests` (#21); 96428 = `Data Records Hint Tests` (#19);
@@ -121,6 +121,8 @@ Default branch: main
   `Scheduled Entry ori`, `Scheduler Setup ori`, `Scheduler Handler ori`, `Scheduler Mgt ori`,
   `Scheduler Events ori`, `Scheduler API Client ori`, `Scheduler Setup Wizard ori`, `Playbook ori`.
 - Icelandic captions use "Bifröst".
+
+- #80: test codeunit 96409 `Workspace Preview Tests ori` guards the nested committed seed boundary.
 
 ## Development Standards
 
