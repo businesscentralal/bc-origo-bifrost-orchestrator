@@ -32,7 +32,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Read the seeded Playbook workspace without running steps. Read-only. Use Orchestrator.Playbook.Run to execute a playbook.', Comment = 'is-IS=Lestu forsendu vinnusvæði keðju án þess að keyra skref. Lesaðgerð. Notaðu Orchestrator.Playbook.Run til að keyra keðju.';
+        SelectionLbl: Label 'Preview the seeded Playbook workspace without running steps. Seeding dispatches and commits user context, so it cannot join an Omit Commit chain.', Comment = 'is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling sækir og staðfestir notandasamhengi og getur því ekki verið hluti af keðju sem sleppir staðfestingu.';
     begin
         exit(SelectionLbl);
     end;
@@ -95,9 +95,8 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('read', 'Builds and returns a temporary seeded workspace.', true, '', Preconditions);
+        Effect := Parts.CommittingEffect('Builds a temporary workspace, but seeds _who through a nested Help.WhoAmI.Get dispatch that writes and commits its queue entry and may create the caller''s Bifrost user setup.', true);
         exit(true);
     end;
 
@@ -136,7 +135,8 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The workspace is temporary; this message does not create a Playbook Instance or log.' +
+        Notes := 'The workspace is temporary; this message does not create a Playbook Instance or Playbook Step Log.' +
+            ' Seeding _who dispatches Help.WhoAmI.Get in an isolated committed scope. Its queue writes and possible first-use user setup creation cannot roll back with an outer transaction. The Omit Commit guard therefore refuses this type before dispatch.' +
             ' Call it before building a playbook to find the paths the request templates can use, such as @_sys.lastMonthStart and @_sys.lastMonthEnd for monthly filters, @_who.companyInfo.registrationNo, @_who.salesperson.email for recipients and @_who.telegramChatId. When debugging, compare it with the workspace snapshot of a failed step in Playbook Step Log ori.';
         exit(true);
     end;

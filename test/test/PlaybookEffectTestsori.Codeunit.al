@@ -18,7 +18,7 @@ codeunit 96406 "Playbook Effect Tests ori"
     [Test]
     procedure ReadAndWriteAllowed()
     begin
-        Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Workspace.Preview");
+        Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Report.List");
         Guard.CheckOmitCommitAllowed('XGUARD', 20, "Message Type ori"::"Orchestrator.Playbook.Enqueue");
     end;
 
@@ -110,7 +110,7 @@ codeunit 96406 "Playbook Effect Tests ori"
         Playbook: Record "Playbook ori";
     begin
         CreatePlaybook(Playbook);
-        AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Workspace.Preview", false, false);
+        AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Report.List", false, false);
         AddStep(Playbook.Code, 20, "Message Type ori"::"Orchestrator.Playbook.Enqueue", false, false);
         AddStep(Playbook.Code, 30, "Message Type ori"::"Orchestrator.Email.Send", true, false);
         Guard.ValidateOmitCommitChain(Playbook.Code);
@@ -185,6 +185,9 @@ codeunit 96406 "Playbook Effect Tests ori"
     procedure AC04_ReadDispatchOmitsCommit()
     var
         Executor: Codeunit "Msg Executor ori";
+        ResponseJson: JsonObject;
+        ResponseToken: JsonToken;
+        ReportCount: Integer;
     begin
         // Story #59 AC04 | Time: independent | Risk: transport proof only, not licensed message acceptance.
         // The response may be a licensing or request error. The real dispatcher must still honor true.
@@ -192,7 +195,15 @@ codeunit 96406 "Playbook Effect Tests ori"
         Executor.SetOmitCommit(true, 'XREAD', 80);
         RunWithoutCommit();
         Assert.AreEqual('text/json', Executor.GetResponseContentType(), 'The actual dispatcher preserves the Report.List JSON content type.');
-        Assert.AreNotEqual('', Executor.GetResponseText(), 'The dispatch must produce a response without committing.');
+        Assert.IsTrue(ResponseJson.ReadFrom(Executor.GetResponseText()), 'The dispatch must produce valid JSON without committing.');
+        if ResponseJson.Get('status', ResponseToken) then
+            Assert.AreEqual('Error', ResponseToken.AsValue().AsText(), 'A dispatcher refusal must be an error envelope.')
+        else begin
+            Assert.IsTrue(ResponseJson.Get('reports', ResponseToken), 'Report.List success must contain reports.');
+            ReportCount := ResponseToken.AsArray().Count();
+            Assert.IsTrue(ResponseJson.Get('count', ResponseToken), 'Report.List success must contain count.');
+            Assert.AreEqual(ReportCount, ResponseToken.AsValue().AsInteger(), 'Report.List count must match its metadata array.');
+        end;
         // The configured codeunit test isolation rolls back the owned request; container cleanup is verified too.
     end;
 

@@ -1726,9 +1726,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Read the seeded Playbook workspace without running steps. Read-only. Use Orchestrator.Playbook.Run to execute a playbook.</source>
-          <target>Lestu forsendu vinnusvæði keðju án þess að keyra skref. Lesaðgerð. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lestu forsendu vinnusvæði keðju án þess að keyra skref. Lesaðgerð. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</note>
+          <source>Preview the seeded Playbook workspace without running steps. Seeding dispatches and commits user context, so it cannot join an Omit Commit chain.</source>
+          <target>Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling sækir og staðfestir notandasamhengi og getur því ekki verið hluti af keðju sem sleppir staðfestingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling sækir og staðfestir notandasamhengi og getur því ekki verið hluti af keðju sem sleppir staðfestingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Page 3387562382 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">

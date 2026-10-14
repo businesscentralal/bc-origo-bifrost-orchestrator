@@ -31,6 +31,7 @@ codeunit 96453 "Orch B2 Contract Tests"
     begin
         // [SCENARIO #60] Report.Run runs caller-named batch reports that commit, so it declares irreversible
         AssertEffect("Message Type ori"::"Orchestrator.Report.Run", 'Orchestrator.Report.Run', 'irreversible', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'irreversible', true);
     end;
 
     [Test]
@@ -41,7 +42,7 @@ codeunit 96453 "Orch B2 Contract Tests"
         AssertEffect("Message Type ori"::"Orchestrator.Report.List", 'Orchestrator.Report.List', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.Report.Get", 'Orchestrator.Report.Get', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.Report.SaveAs", 'Orchestrator.Report.SaveAs', 'read', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'read', false);
+
     end;
 
     local procedure AssertContract(MessageType: Enum "Message Type ori"; Name: Text)
