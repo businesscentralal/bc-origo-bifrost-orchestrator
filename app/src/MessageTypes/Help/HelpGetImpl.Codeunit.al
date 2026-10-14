@@ -91,7 +91,7 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddError(Errors, 'Unsupported specification version <version>. Expected version 1.0.', 'The request version is not 1.0.', 'Send version 1.0.');
+        Parts.AddContractError(Errors, 'Unsupported specification version <version>. Expected version 1.0.', 'The request version is not 1.0.', 'Send version 1.0.');
         exit(true);
     end;
 

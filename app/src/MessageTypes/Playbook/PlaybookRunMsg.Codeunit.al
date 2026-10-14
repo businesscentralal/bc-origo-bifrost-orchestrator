@@ -101,7 +101,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.AddPlaybookErrors(Errors);
-        Parts.AddError(Errors, 'Step <stepNo> not found in playbook <playbookCode>.', 'A Next Step No. of a step that ran points to a step that does not exist.', 'Fix the step chain of the playbook.');
+        Parts.AddContractError(Errors, 'Step <stepNo> not found in playbook <playbookCode>.', 'A Next Step No. of a step that ran points to a step that does not exist.', 'Fix the step chain of the playbook.');
         exit(true);
     end;
 

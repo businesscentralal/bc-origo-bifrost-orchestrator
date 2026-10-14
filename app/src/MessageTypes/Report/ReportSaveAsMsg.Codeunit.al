@@ -66,7 +66,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Formats.Add('Word');
         Formats.Add('XML');
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must not be a processing-only report.'));
-        Parts.AddChoiceParameter(Parameters, 'format', false, 'Output format. Case-insensitive.', Formats, 'PDF');
+        Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('format', 'string', false, 'Output format. Case-insensitive.'), Formats, 'PDF'));
         Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Request page parameters as XML. When left out, the calling user''s saved preset is used, otherwise the report defaults.'));
         Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item, e.g. WHERE(Sell-to Customer No.=CONST(10000)). Ignored when the report has no data item table.'));
         exit(true);
@@ -87,8 +87,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddReportErrors(Errors);
-        Parts.AddError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
-        Parts.AddError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
+        Parts.AddContractError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
+        Parts.AddContractError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
         Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
         exit(true);
     end;
