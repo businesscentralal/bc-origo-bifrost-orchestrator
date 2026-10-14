@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Security (2026-10-14) - Generic data API field restrictions (#62, core#344)
+
+- `Sched Field Restrict ori` (10035557) blocks generic writes, including forced writes, to Scheduled Entry (10035535) fields 110 Notification Recipient and 140 Job Queue User ID, and Scheduler Setup (10035536) field 40 Job Queue User ID. Reads, neighbouring fields, dedicated scheduling and page edits are unchanged. Field hints name the appropriate BC page and, for recipients, `Orchestrator.Playbook.Schedule`, the dedicated type that sets that value.
+- `Sched Field Restrict Tests ori` (96405) checks the public restriction and hint paths, including readable fields, writable neighbours and unchanged table companion hints. `Help ori` (10035576) documents all three restrictions. Existing entry registration and playbook scheduling tests remain enabled; app versions and permission sets are unchanged.
+
 ### Changed (2026-10-14) - Contract source guard remediation (#68, #71)
 
 - Declare choice parameter keys literally in `Playbook Schedule Msg ori` (10035574), `Report SaveAs Msg ori` (10035595) and `Report Layout Set Msg ori` (10035599), using entry-taking `WithChoices` helpers in `Orch B1 Contract Parts ori` (10035609) and `Orch B2 Contract Parts ori` (10035610). Preserve all parameter fields and positions.

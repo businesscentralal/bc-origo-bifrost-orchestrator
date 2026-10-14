@@ -1293,6 +1293,24 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Birttu skýrslu sem er ekki eingöngu vinnsluskýrsla sem PDF, Excel, Word eða XML. Lesaðgerð með tvíundarúttaki. Notaðu Orchestrator.Report.Run fyrir vinnsluskýrslur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3051959341 - NamedType 1146070434" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Change Job Queue User ID on the Scheduled Entry card.</source>
+          <target>Breyttu notandakenni verkraðar á spjaldi áætlaðrar færslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Breyttu notandakenni verkraðar á spjaldi áætlaðrar færslu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sched Field Restrict ori - NamedType EntryUserHintTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3051959341 - NamedType 1769568196" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Orchestrator.Playbook.Schedule when scheduling a playbook, or change Notification Recipient on the Scheduled Entry card.</source>
+          <target>Notaðu Orchestrator.Playbook.Schedule þegar spilabók er tímasett, eða breyttu viðtakanda tilkynningar á spjaldi áætlaðrar færslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Orchestrator.Playbook.Schedule þegar spilabók er tímasett, eða breyttu viðtakanda tilkynningar á spjaldi áætlaðrar færslu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sched Field Restrict ori - NamedType RecipientHintTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3051959341 - NamedType 2546138143" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Change Job Queue User ID on the Scheduler Setup page.</source>
+          <target>Breyttu notandakenni verkraðar á síðunni Uppsetning verkstýringar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Breyttu notandakenni verkraðar á síðunni Uppsetning verkstýringar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sched Field Restrict ori - NamedType SetupUserHintTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2555341656 - Method 433557723 - NamedType 4235727488" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1: %2 is invalid</source>
           <target>%1: %2 er ógilt</target>
