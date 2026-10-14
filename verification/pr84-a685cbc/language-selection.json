@@ -1,0 +1,8 @@
+{
+  "sha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "containerId": "f0d2914e6324",
+  "selection": "Icelandic (Iceland), selected through My Settings and Search Available Languages",
+  "selectionScript": "/workspace/evidence/orchestrator80-worker7/amend-20261014/ui-language-change.cjs",
+  "sessionLanguageVerifiedBy": "ui-preview-is-IS.json actualLanguage must be1039; URL language not sufficient",
+  "screenshot": "ui-language-selection.png"
+}

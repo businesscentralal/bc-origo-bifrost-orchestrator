@@ -1,0 +1,63 @@
+{
+  "containerId": "f0d2914e6324",
+  "checkedAt": "2026-10-14T12:50:35.002Z",
+  "sourceSha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "deployedAppVersion": "28.0.0.0",
+  "artifact": "source-matched compiler/app.app and compiler/test.app; owned publish logs retained",
+  "page": 130455,
+  "language": "en-US",
+  "actualLanguage": "1033",
+  "tests": {
+    "executed": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "testRows": [
+    [
+      "1",
+      "",
+      "",
+      "96409",
+      "Scenario_AC01_PreviewDeclaresCommit",
+      "",
+      "2",
+      "",
+      "",
+      "10/14/2026 12:50 PM",
+      "10/14/2026 12:50 PM"
+    ],
+    [
+      "1",
+      "",
+      "",
+      "96409",
+      "Scenario_AC01_ExecutorRefusesPreview",
+      "",
+      "2",
+      "",
+      "",
+      "10/14/2026 12:50 PM",
+      "10/14/2026 12:50 PM"
+    ],
+    [
+      "1",
+      "",
+      "",
+      "96409",
+      "Scenario_AC01_ChainRefusesPreview",
+      "",
+      "2",
+      "",
+      "",
+      "10/14/2026 12:50 PM",
+      "10/14/2026 12:50 PM"
+    ]
+  ],
+  "passed": true,
+  "checks": [
+    "authenticated owned Web Client",
+    "execute Preview contract/executor/chain guard tests from Command Line Test Tool"
+  ],
+  "observedText": "Dynamics 365 Business Central\n\n\n\n\nG\n\nCommand Line Test Tool\nSaved\n\n\nSuite Name\nTest Codeunit Range\nTest Procedure Range\nTest Runner Codeunit ID\nExtension ID\nRequired Test Isolation\nTest Type\nDisableTestMethod\nTest Result JSON\nCode Coverage Tracking Type\nCode Coverage Map\nCode Coverage Track All Sessions\nCode Coverage Exporter ID\nCode Coverage Results CSV\nData Output\nData Input\nCode Coverage Map CSV Text\nCode Coverage Information\nStability run\nCompany Name\nCRONUS International Ltd.\nTenant ID\ndefault\nLanguage ID\n1033\nManage\nRun Selected Tests\nRun Next Test\nClear Test Results\nGetCodeCoverage\nGetCodeCoverageMap\n\n\n\n\t\t\nLine Type\n\t\n\t\nCodeunit ID\n\t\nName\n\t\nRun\n\t\nResult\n\t\nError Message\n\t\nStack Trace\n\t\nFinish Time\n\t\nStart Time\n\t\n\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\n0\n\t\n\t\n96409\n\t\nWorkspace Preview Tests ori\n\t\n\t\n2\n\t\n\t\t\n10/14/2026 12:50 PM\n\t\n10/14/2026 12:50 PM\n\t\n\t\t\n1\n\t\t\n96409\n\t\nScenario_AC01_PreviewDeclaresCommit\n\t\n\t\n2\n\t\n\t\n\t\n10/14/2026 12:50 PM\n\t\n10/14/2026 12:50 PM\n\t\n\t\t\n1\n\t\t\n96409\n\t\nScenario_AC01_ExecutorRefusesPreview\n\t\n\t\n2\n\t\n\t\n\t\n10/14/2026 12:50 PM\n\t\n10/14/2026 12:50 PM\n\t\n\t\t\n1\n\t\t\n96409\n\t\nScenario_AC01_ChainRefusesPreview\n\t\n\t\n2\n\t\n\t\n\t\n10/14/2026 12:50 PM\n\t\n10/14/2026 12:50 PM\n\t\n\t\t\n\t\t\n\t\n\t\t\n\t\n\t\n\t\n\t\n\t\nUse the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.\n\nList with title \"Command Line Test Tool\" now has 5 items\n\nSaved"
+}

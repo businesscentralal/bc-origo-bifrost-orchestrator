@@ -1,0 +1,25 @@
+{
+  "sha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "comparedAgainst": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+  "changedFiles": [
+    "CHANGELOG.md"
+  ],
+  "checks": {
+    "scope": "Accepted review5517795593 documentation inventory only; no product/test/workflow/settings changes.",
+    "namingIds": "96409 Workspace Preview Tests ori;96453 Orch B2 Contract Tests;96406 Playbook Effect Tests ori matched actual definitions.",
+    "behavior": "Documentation matches existing irreversible contract, executor/chain refusals and Report.List semantic response assertions.",
+    "localization": "Explicitly documents existing is-IS selection-label/XLF change.",
+    "compatibilityPermissions": "No API, schema, dependency, permissions, namespace or object-range changes.",
+    "compile": "Product/test actual committed-tip compile0errors/0warnings.",
+    "tests": "Fresh native234/234/0/0,CI234/234/0/0;en-US1033 andis-IS1039 each3/3/0/0.",
+    "mcp": "Only touched type Workspace.Preview; public dispatch is licence gated, scoped #81 UAT deferral retained with zero passes.",
+    "custody": "Worker7 original checkout, worker9 #59 separate base; no merge/rebase/foreign write."
+  },
+  "gaps": [
+    "Verified cleanup and canonical handoff pending",
+    "Licence-only #81 UAT MCP explicitly deferred;0passes",
+    "Reviewer clearance and Architect #59/merge/UAT pending"
+  ],
+  "checkedAt": "2026-10-14T12:42:02.752505+00:00",
+  "layer1Disclosure": "Layer1 defaults to full scan when amendment has no changed AL files;9/23 checks pass,14 fail across unchanged117product files (including366 XML-doc findings,29 ReadIsolation,16 modernization,2GUIDformat). These are wider baseline advisory findings, not amended source regressions; no suppressions or source broadening. Initial Linux USERPROFILE lookup error fixed by assigning existing standards root for invocation only."
+}

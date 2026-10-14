@@ -1,0 +1,89 @@
+{
+  "issueUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/80",
+  "owner": "worker-7",
+  "branch": "codex/worker7-workspace-preview-80",
+  "candidateSha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "dependency": {
+    "issue": 59,
+    "retainedOwner": "worker-9",
+    "baseSha": "33f7da5945fe59e6fc7b088bc871a801501a62ec",
+    "branch": "codex/worker9-execution-contract-10-59-63",
+    "scope": "#80 own diff only; base source custody untouched",
+    "disposition": {
+      "sourceTs": "1791968326.994089",
+      "sourceUrl": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791968326994089",
+      "custodyBlockerReleased": true,
+      "stackPermitted": true,
+      "separateScopeRequired": true
+    }
+  },
+  "criteria": [
+    {
+      "criterion": "Verify cause before product changes",
+      "status": "verified",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/cause.json; original cause established before implementation"
+    },
+    {
+      "criterion": "Correct contract and guard refusal tests",
+      "status": "pending fresh amended-tip verification",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+    },
+    {
+      "criterion": "Product/test compile0/0",
+      "status": "verified exact committed amended tip: both0errors/0warnings",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014/compile.json"
+    },
+    {
+      "criterion": "Full suite0fail/0skip",
+      "status": "pending fresh amended-tip verification",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+    },
+    {
+      "criterion": "BC Web Client EN/IS",
+      "status": "pending fresh amended-tip verification",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+    },
+    {
+      "criterion": "MCP self-created data before PR",
+      "status": "deferred to UAT, Bifr\u00f6st Tester, Gunnar 14.10 10:34; unverified0passes; canonical81,one-off1791974058.346709",
+      "evidence": "/workspace/evidence/uat-deferral-1791974058/orchestrator84-current/mcp-deferral.json; current SHA has no MCP pass; scoped authenticated1791974058.346709"
+    },
+    {
+      "criterion": "Owned cleanup",
+      "status": "pending fresh amended-tip verification",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+    },
+    {
+      "criterion": "PR/Reviewer/Architect delivery",
+      "status": "PR84 remains pr:amend until fresh gates and handoff. Reviewer clearance/Architect #59 stack and merge/UAT remain pending.",
+      "evidence": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/84"
+    },
+    {
+      "criterion": "Review5517795593 CHANGELOG amendment",
+      "status": "implemented and5/5documentationchecksverified",
+      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014/documentation-checks.json"
+    }
+  ],
+  "uatDeferralSource": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791974058346709",
+  "prUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/84",
+  "updatedAt": "2026-10-14T11:59:09.185344+00:00",
+  "architectAuthorization": {
+    "sourceTs": "1791976960.369919",
+    "sourceUrl": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791976960369919",
+    "sender": "U0C11GUJCMP",
+    "text": "_Architect here._ <@U0C6K5YNWGH> orchestrator PR84 @ `4cb4338` (#80, gap #81), worker-7, delivery-blocker-75bd9bca:\n\n\u2022 _This thread reply is the authorization._ PR84/#81 is explicitly in Gunnar's 14.10 10:34 one-off (orchestrator#80 (#81)), as stated in my 1791974058 post. Root registry entries are not a precondition. I can't reach `/team-queue`, so record this reply as the authorization in worker-7's delivery contract, the same way as the PR79/PR15 disposition. Don't spend more effort on wrapper or registry repair.\n\u2022 Licence-gated MCP steps stay a documented gap: \"deferred to UAT, Bifr\u00f6st Tester, Gunnar 14.10 10:34\", linking #81. No EULA, licence or trial writes; no MCP pass claimed.\n\u2022 If compile 0/0, full suite, en-US + is-IS UI, non-gated MCP and cleanup are all done at exactly `4cb4338` and green CI is at that tip, post the evidence on PR84 and move it to `pr:needs-review`. Any new tip needs fresh gates.\n\u2022 worker-7 keeps custody. PR Reviewer gives the verdict; only Architect merges. *Sent using* <@U0C11LTR40H>",
+    "appliesTo": {
+      "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+      "pr": 84,
+      "sha": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+      "dependencyIssue": 81,
+      "messageTypes": [
+        "Orchestrator.Workspace.Preview"
+      ]
+    },
+    "registryPrerequisite": false,
+    "custody": "worker-7",
+    "recordedAt": "2026-10-14T11:57:51.962765+00:00"
+  },
+  "previousTipAcceptanceEvidenceRetained": true
+}

@@ -1,0 +1,11 @@
+{
+  "sha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "containerId": "f0d2914e6324",
+  "owner": "worker-7",
+  "deleteStatus": 204,
+  "readbackStatus": 404,
+  "verifiedDeleted": true,
+  "verifiedAt": "2026-10-14T12:52:50.678927+00:00",
+  "activeEnvironmentRecordRemoved": true,
+  "fixtures": "All native/UI fixtures isolated in owned ephemeral environment and removed with it. No MCP fixtures created; licence-only #81 deferred. No shared/customer/foreign resources touched."
+}

@@ -1,0 +1,27 @@
+{
+  "sha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "containerId": "f0d2914e6324",
+  "bcVersion": "28.5.54151.56267",
+  "origoApps": [
+    {
+      "Id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "Name": "Bifrost Orchestrator",
+      "Publisher": "Origo",
+      "Version": "28.0.0.0"
+    },
+    {
+      "Id": "7505e808-6e52-4b96-a328-82573391297a",
+      "Name": "Bifrost Foundation",
+      "Publisher": "Origo",
+      "Version": "28.0.4.556"
+    },
+    {
+      "Id": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "Name": "Bifrost Orchestrator - Tests",
+      "Publisher": "Origo",
+      "Version": "28.0.0.0"
+    }
+  ],
+  "foundationTestsInstalled": false,
+  "capturedAt": "2026-10-14T12:45:53.032681+00:00"
+}

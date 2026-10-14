@@ -1,0 +1,28 @@
+{
+  "sha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "runId": 38565255521,
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/38565255521",
+  "tests": {
+    "total": 234,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 234
+  },
+  "artifacts": {
+    "11895765172": {
+      "compileDiagnostics": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "fullLogRetained": true
+    },
+    "11895252290": {
+      "compileDiagnostics": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "fullLogRetained": true
+    }
+  }
+}

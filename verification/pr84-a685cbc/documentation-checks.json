@@ -1,0 +1,14 @@
+{
+  "sha": "a685cbc0492ac85da164a4bf48448135b8de2a00",
+  "executed": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "checks": {
+    "Workspace Preview Tests ori (96409) matched source and entry": true,
+    "Orch B2 Contract Tests (96453) matched source and entry": true,
+    "Playbook Effect Tests ori (96406) matched source and entry": true,
+    "Icelandic selection text documented": true,
+    "Only CHANGELOG changed": true
+  }
+}
