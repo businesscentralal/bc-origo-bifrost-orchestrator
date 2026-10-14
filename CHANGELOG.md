@@ -8,7 +8,8 @@ Business Central release versioning (`major.minor.build.revision`).
 ## [Unreleased]
 
 ### Fixed
-- #80: `Orchestrator.Workspace.Preview` (codeunit 10035596) now declares an irreversible effect: `_who` seeding performs a nested committed dispatch. Omit Commit guard tests reject Preview before dispatch and retain metadata-only reads as safe fixtures.
+- #80: `Orchestrator.Workspace.Preview` (codeunit 10035596) now declares an irreversible effect: `_who` seeding performs a nested committed dispatch. Omit Commit guard tests reject Preview before dispatch and retain metadata-only reads as safe fixtures. The Preview selection label and its is-IS XLF translation describe that committed seeding.
+- `Workspace Preview Tests ori` (96409), new, verifies the irreversible contract and executor/chain refusals before dispatch. `Orch B2 Contract Tests` (96453) now asserts Preview is irreversible. `Playbook Effect Tests ori` (96406) uses `Orchestrator.Report.List` as the safe fixture and checks its JSON content type and response.
 
 ### Added (2026-10-14) - Guarded Omit Commit dispatch (#59)
 
