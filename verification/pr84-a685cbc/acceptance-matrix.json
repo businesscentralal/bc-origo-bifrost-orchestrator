@@ -25,8 +25,8 @@
     },
     {
       "criterion": "Correct contract and guard refusal tests",
-      "status": "pending fresh amended-tip verification",
-      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+      "status": "verified amended-tip full native suite and bilingual UI",
+      "evidence": "full-suite-summary.json;ui-preview-en-US.json;ui-preview-is-IS.json"
     },
     {
       "criterion": "Product/test compile0/0",
@@ -35,13 +35,13 @@
     },
     {
       "criterion": "Full suite0fail/0skip",
-      "status": "pending fresh amended-tip verification",
-      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+      "status": "verified native234/234/0/0 and CI234/234/0/0 at amended tip",
+      "evidence": "full-suite-summary.json;ci-parsed-summary.json;ci-TestResults.xml"
     },
     {
       "criterion": "BC Web Client EN/IS",
-      "status": "pending fresh amended-tip verification",
-      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+      "status": "verified EN1033 and IS1039;each3executed/3passed/0failed/0skipped",
+      "evidence": "ui-preview-en-US.json;ui-preview-is-IS.json"
     },
     {
       "criterion": "MCP self-created data before PR",
@@ -50,8 +50,8 @@
     },
     {
       "criterion": "Owned cleanup",
-      "status": "pending fresh amended-tip verification",
-      "evidence": "/workspace/evidence/orchestrator80-worker7/amend-20261014"
+      "status": "verified DELETE204/GET404;owned pointer removed",
+      "evidence": "cleanup.json"
     },
     {
       "criterion": "PR/Reviewer/Architect delivery",
@@ -66,7 +66,7 @@
   ],
   "uatDeferralSource": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791974058346709",
   "prUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/84",
-  "updatedAt": "2026-10-14T11:59:09.185344+00:00",
+  "updatedAt": "2026-10-14T12:53:10.572602+00:00",
   "architectAuthorization": {
     "sourceTs": "1791976960.369919",
     "sourceUrl": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791976960369919",
