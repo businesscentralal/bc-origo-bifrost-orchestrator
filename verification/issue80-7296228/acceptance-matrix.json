@@ -45,8 +45,8 @@
     },
     {
       "criterion": "MCP self-created data before PR",
-      "status": "blocked: Gunnar #81 verification; no PR until cleared",
-      "evidence": "mcp-preview-en.json EULA_REQUIRED; canonical issue81 (issue82 duplicate), Architect1791968112.074229 no waiver; exact-candidate acceptance pending"
+      "status": "deferred to UAT, Bifr\u00f6st Tester, Gunnar 14.10 10:34; unverified0passes; canonical81,one-off1791974058.346709",
+      "evidence": "mcp-deferral.json; noEULA/licence/trialwrites. Native/full/bilingual UI remain passed at7296228. No other touched non-gated MCP entrypoint identified."
     },
     {
       "criterion": "Owned cleanup",
@@ -58,5 +58,6 @@
       "status": "pending; no PR opened",
       "evidence": "Published verification-only branch current SHA readback github-candidate-final.json"
     }
-  ]
+  ],
+  "uatDeferralSource": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791974058346709"
 }
