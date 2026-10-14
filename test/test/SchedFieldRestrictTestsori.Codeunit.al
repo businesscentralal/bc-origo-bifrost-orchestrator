@@ -113,9 +113,9 @@ codeunit 96405 "Sched Field Restrict Tests ori"
         TempArgument.Insert();
         // [WHEN] The public restriction/hint API raises the real subscribers.
         // [THEN] Only the three governed fields are closed for generic writes.
-        Assert.AreEqual('Change Job Queue User ID on the Scheduled Entry card.', TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Entry ori", 140), 'Entry run-as hint');
-        Assert.AreEqual('Change Job Queue User ID on the Scheduler Setup page.', TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduler Setup ori", 40), 'Setup run-as hint');
-        Assert.AreEqual('Use Orchestrator.Playbook.Schedule when scheduling a playbook, or change Notification Recipient on the Scheduled Entry card.', TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Entry ori", 110), 'Recipient hint names only the type that accepts it');
+        Assert.AreEqual('the Scheduled Entry card (Job Queue User ID)', TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Entry ori", 140), 'Entry run-as hint');
+        Assert.AreEqual('the Scheduler Setup page (Job Queue User ID)', TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduler Setup ori", 40), 'Setup run-as hint');
+        Assert.AreEqual('Orchestrator.Playbook.Schedule (notificationRecipient) or the Scheduled Entry card (Notification Recipient)', TempArgument.GetDedicatedMessageTypeHintForField(Database::"Scheduled Entry ori", 110), 'Recipient hint names only the type that accepts it');
         GlobalLanguage(PreviousLanguage);
     end;
 

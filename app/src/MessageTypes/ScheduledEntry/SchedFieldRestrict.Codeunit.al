@@ -11,9 +11,9 @@ codeunit 10035557 "Sched Field Restrict ori"
     Access = Internal;
 
     var
-        EntryUserHintTxt: Label 'Change Job Queue User ID on the Scheduled Entry card.', Comment = 'is-IS=Breyttu notandakenni verkraðar á spjaldi áætlaðrar færslu.';
-        SetupUserHintTxt: Label 'Change Job Queue User ID on the Scheduler Setup page.', Comment = 'is-IS=Breyttu notandakenni verkraðar á síðunni Uppsetning verkstýringar.';
-        RecipientHintTxt: Label 'Use Orchestrator.Playbook.Schedule when scheduling a playbook, or change Notification Recipient on the Scheduled Entry card.', Comment = 'is-IS=Notaðu Orchestrator.Playbook.Schedule þegar spilabók er tímasett, eða breyttu viðtakanda tilkynningar á spjaldi áætlaðrar færslu.';
+        EntryUserHintTxt: Label 'the Scheduled Entry card (Job Queue User ID)', Comment = 'is-IS=spjald áætlaðrar færslu (notandakenni verkraðar)';
+        SetupUserHintTxt: Label 'the Scheduler Setup page (Job Queue User ID)', Comment = 'is-IS=síðuna Uppsetning verkstýringar (notandakenni verkraðar)';
+        RecipientHintTxt: Label 'Orchestrator.Playbook.Schedule (notificationRecipient) or the Scheduled Entry card (Notification Recipient)', Comment = 'is-IS=Orchestrator.Playbook.Schedule (notificationRecipient) eða spjald áætlaðrar færslu (viðtakandi tilkynningar)';
 
     [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", OnAfterIsFieldWriteRestrictedForDataRecords, '', false, false)]
     local procedure RestrictScheduledFields(TableNo: Integer; FieldNo: Integer; Force: Boolean; var IsRestricted: Boolean)
