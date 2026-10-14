@@ -13,6 +13,11 @@ Business Central release versioning (`major.minor.build.revision`).
 - Rename the contract-only `AddError` helper to `AddContractError` in both Parts codeunits and its 26 call sites across 11 files. Contract error codes, text and ordering remain unchanged; runtime answers and translations are unchanged.
 - Name the paged step's outgoing payload `PageRequestJson` in `Playbook Runner ori` (10035547), keeping `skip`/`take` out of the caller contract. `Orch B1 Contract Tests` (96452), `Orch B2 Contract Tests` (96453) and `Playbook Run Msg Tests` (96421) cover the four choice entries, all 21 error chapters and real outgoing paging-key injection. Guard scripts and CI wiring are unchanged.
 
+### Fixed (2026-10-13) - Headless registration and WhoAmI contract (#10, #63)
+
+- `Scheduled Entry ori` (10035535) honors `HideDialog` for newly registered Job Queue entries. `Entry Registration Tests ori` (96407) checks fresh and repeated headless registration and preserves the interactive confirmation/card flow.
+- `WhoAmI Subscriber ori` (10035585) documents the installed `telegramChatId` response field, its caller-specific setup source, empty value and playbook reference. `WhoAmI Contract Tests ori` (96408) checks the real contract builder and retained Foundation chapters.
+
 ### Changed (2026-10-13) - PR #67 acceptance reconciliation (#64, #65, #70)
 
 - Pin Foundation to the successful main build `28.0.4.554` in both manifests. `Msg Executor ori` (10035603) exposes its internal binary-envelope builder for the #64 regression tests in `Orchestrator Unit Tests` (96411), covering the Office MIME type and the 100-character boundary without changing the envelope format.
