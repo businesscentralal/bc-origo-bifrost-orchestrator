@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="96401 Workspace Test" timestamp="2026-10-14T11:03:44" hostname="runnervmmprz5" time="2.587" tests="14" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96401 Workspace Test" name="SetValueAndGetValue" time="2.29" />
+    <testcase classname="96401 Workspace Test" name="SetTokenAtNestedPath" time="0.03" />
+    <testcase classname="96401 Workspace Test" name="SetTokenPreservesArray" time="0.033" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseWithRename" time="0.03" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseIteratedKeying" time="0.034" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseFirstElement" time="0.023" />
+    <testcase classname="96401 Workspace Test" name="CollectGathersIterations" time="0.046" />
+    <testcase classname="96401 Workspace Test" name="ToFilteredTextOnlyIncludesRequestedKeys" time="0.03" />
+    <testcase classname="96401 Workspace Test" name="ResetClearsAllData" time="0.04" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC001_September31DayMonth" time="0.006" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC002_LeapYearFebruary" time="0.007" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC003_JanuaryCrossYear" time="0.007" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC004_May31ToApril30" time="0.004" />
+    <testcase classname="96401 Workspace Test" name="LastMonthStartThisMonthStart_TC005_FormulasUnchanged" time="0.007" />
+  </testsuite>
+  <testsuite name="96402 Resolver Test" timestamp="2026-10-14T11:03:44" hostname="runnervmmprz5" time="0.259" tests="9" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesString" time="0.064" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesNumericAsNumber" time="0.024" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesObject" time="0.023" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesArray" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefResolvesInString" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="CollectDirective" time="0.023" />
+    <testcase classname="96402 Resolver Test" name="FilteredDumpEscapesAsString" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="UnresolvedRefStaysIntact" time="0.024" />
+    <testcase classname="96402 Resolver Test" name="MultipleRefsInSameTemplate" time="0.02" />
+  </testsuite>
+  <testsuite name="96403 Orchestr Secret Tests" timestamp="2026-10-14T11:04:00" hostname="runnervmmprz5" time="14.788" tests="17" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC04_FoundationFull_Enabled" time="2.853" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC05_NoUserSetupRead_Disabled" time="0.034" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC06_UnsetToken_Disabled" time="0.013" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC06_EmptyChat_Disabled" time="0.017" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC01_IndirectRead_Enabled" time="0.047" />
+    <testcase classname="96403 Orchestr Secret Tests" name="SecretCodesFollowTheDocumentedPattern" time="0.01" />
+    <testcase classname="96403 Orchestr Secret Tests" name="LongCredentialCodesFitCode50AndStayDistinct" time="0.823" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllRegistersTheTelegramBotToken" time="0.013" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllRegistersBothSecretsOfEveryCredential" time="0.023" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllIsIdempotent" time="0.027" />
+    <testcase classname="96403 Orchestr Secret Tests" name="TelegramBotTokenSetIsSetAndClearRoundTrip" time="0.027" />
+    <testcase classname="96403 Orchestr Secret Tests" name="CredentialClientIdAndSecretRoundTrip" time="0.033" />
+    <testcase classname="96403 Orchestr Secret Tests" name="DeletingACredentialClearsItsSecrets" time="0.03" />
+    <testcase classname="96403 Orchestr Secret Tests" name="DeletingACredentialLeavesNoMissingSecretsBehind" time="0.017" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RenamingACredentialMovesItsSecrets" time="0.104" />
+    <testcase classname="96403 Orchestr Secret Tests" name="AppSetupPageReportsTheTelegramSecretStatus" time="1.554" />
+    <testcase classname="96403 Orchestr Secret Tests" name="BifrostSetupExposesTheSingleOrchestratorAppsAction" time="9.163" />
+  </testsuite>
+  <testsuite name="96406 Playbook Effect Tests ori" timestamp="2026-10-14T11:04:14" hostname="runnervmmprz5" time="14.318" tests="22" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96406 Playbook Effect Tests ori" name="ReadAndWriteAllowed" time="0.02" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="ExternalWritesRefused" time="0.247" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="MissingContractRefused" time="0.01" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="MissingChapterRefused" time="0.01" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="MissingEffectRefused" time="0.007" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="UnknownEffectRefused" time="0.006" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="NullEffectRefused" time="0.006" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="ArrayEffectRefused" time="0.01" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="ObjectEffectRefused" time="0.007" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="BooleanEffectRefused" time="0.007" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="NumberEffectRefused" time="0.007" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="CaseVariantRefused" time="0.004" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="SafeChainIgnoresDisabled" time="0.094" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="UnsafeChainNamesStep" time="0.02" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="CheckStepCannotHideEffect" time="0.017" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC04_ExecutorEmailRefusedBeforeDispatch" time="0.013" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC04_ExecutorTelegramRefusedBeforeDispatch" time="0.007" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC04_ExecutorMissingContractRefused" time="0.006" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC04_ExecutorMalformedEffectRefused" time="0.007" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC04_ReadDispatchOmitsCommit" time="13.79" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC05_SetParametersResetsCommitSignal" time="0.013" />
+    <testcase classname="96406 Playbook Effect Tests ori" name="AC05_FailedRunConsumesCommitSignal" time="0.01" />
+  </testsuite>
+  <testsuite name="96407 Entry Registration Tests ori" timestamp="2026-10-14T11:04:16" hostname="runnervmmprz5" time="0.364" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96407 Entry Registration Tests ori" name="NewEntryHidesDialogs" time="0.157" />
+    <testcase classname="96407 Entry Registration Tests ori" name="ExistingEntryHidesDialogs" time="0.017" />
+    <testcase classname="96407 Entry Registration Tests ori" name="InteractiveEntryOpensCard" time="0.19" />
+  </testsuite>
+  <testsuite name="96408 WhoAmI Contract Tests ori" timestamp="2026-10-14T11:04:16" hostname="runnervmmprz5" time="0.08" tests="1" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96408 WhoAmI Contract Tests ori" name="TelegramFieldDescribesCallerSetup" time="0.08" />
+  </testsuite>
+  <testsuite name="96409 Workspace Preview Tests ori" timestamp="2026-10-14T11:04:17" hostname="runnervmmprz5" time="0.033" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96409 Workspace Preview Tests ori" name="Scenario_AC01_PreviewDeclaresCommit" time="0.01" />
+    <testcase classname="96409 Workspace Preview Tests ori" name="Scenario_AC01_ExecutorRefusesPreview" time="0.006" />
+    <testcase classname="96409 Workspace Preview Tests ori" name="Scenario_AC01_ChainRefusesPreview" time="0.017" />
+  </testsuite>
+  <testsuite name="96411 Orchestrator Unit Tests" timestamp="2026-10-14T11:04:22" hostname="runnervmmprz5" time="4.6" tests="39" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96411 Orchestrator Unit Tests" name="BinaryEnvelopePreservesOfficeContentType" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BinaryEnvelopePreservesMaximumContentType" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage" time="0.127" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage" time="0.08" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun" time="1.413" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified" time="0.47" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BlockedEntriesAreSkipped" time="0.233" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped" time="0.18" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EarliestStartDateTimeIsRecalculated" time="0.197" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank" time="0.016" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress" time="0.016" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EMailNotificationType_RestartNotificationType_VerifyEMailContent" time="0.19" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BlockJobQueueSchedulerEntryOpenFromJQEntryCard" time="0.344" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite" time="0.2" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateWeekdayValidation" time="0.277" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateTimeRangeValidation" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateCanBeInsertedWithValidData" time="0.006" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplatesActionNavigationFromSetupPage" time="0.1" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateCardPageCanBeOpened" time="0.117" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateNoOfMinutesBetweenRunsValidation" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateNextRunDateFormulaValidation" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy" time="0.024" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry" time="0.104" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ModifyStartingEndingTime_VerifyValidationAndSync" time="0.05" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ChangingTemplate_VerifyExistingValuesOverwritten" time="0.02" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="TimeZoneCode_VerifyStored" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime" time="0.004" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun" time="0.006" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly" time="0.006" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter" time="0.164" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed" time="0.04" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyNever_ErrorEntry_SuppressesImmediately" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicy_ErrorCounterResetsOnSuccess" time="0.016" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted" time="0.083" />
+  </testsuite>
+  <testsuite name="96414 Enqueue Playbook Tests" timestamp="2026-10-14T11:04:23" hostname="runnervmmprz5" time="0.414" tests="13" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96414 Enqueue Playbook Tests" name="JQParameterStoresAndRetrievesRequestData" time="0.024" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="JQParameterGetRequestDataReturnsEmptyWhenNoBlob" time="0.01" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookCreatesNonRecurringJQEntry" time="0.047" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookCreatesParameterRecord" time="0.02" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookNoParameterWhenRequestEmpty" time="0.02" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSetsJobQueueCategory" time="0.026" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookEnforcesMinimumDelay" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookDefaultOverloadUses60SecDelay" time="0.02" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookFailsWhenDisabled" time="0.024" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="DeleteJQEntryDeletesParameterRecord" time="0.03" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSchedulesRealTask" time="0.033" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookDispatchesAndCreatesInstance" time="0.113" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSetsRecordIdToProcess" time="0.024" />
+  </testsuite>
+  <testsuite name="96415 Schedule Playbook Tests" timestamp="2026-10-14T11:04:24" hostname="runnervmmprz5" time="0.375" tests="12" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryCreatesEntry" time="0.037" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryStoresIdOnPlaybook" time="0.013" />
+    <testcase classname="96415 Schedule Playbook Tests" name="ScheduledFlowFieldReflectsOrchestratorEntry" time="0.017" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryCopiesRecurringTemplate" time="0.013" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsNotification" time="0.016" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsRetryPolicy" time="0.013" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsEmitTelemetry" time="0.013" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsJobQueueCategory" time="0.017" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryBlocksDoubleSchedule" time="0.016" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsRecordIdAndSystemId" time="0.16" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryAllowsRescheduleAfterOrphan" time="0.027" />
+    <testcase classname="96415 Schedule Playbook Tests" name="ScheduleResponseEmitsSystemIdAndPkId" time="0.033" />
+  </testsuite>
+  <testsuite name="96416 Report Msg Tests" timestamp="2026-10-14T11:04:35" hostname="runnervmmprz5" time="10.885" tests="20" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96416 Report Msg Tests" name="PresetRoundTripsXml" time="0.03" />
+    <testcase classname="96416 Report Msg Tests" name="PresetReturnsEmptyWhenNoXml" time="0.013" />
+    <testcase classname="96416 Report Msg Tests" name="PresetHasRequestPageXmlReturnsTrueWhenPopulated" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="ListReturnsReportsWithCountField" time="0.023" />
+    <testcase classname="96416 Report Msg Tests" name="ListFiltersByProcessingOnly" time="0.02" />
+    <testcase classname="96416 Report Msg Tests" name="ListReportContainsExpectedFields" time="0.02" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsReportMetadata" time="0.09" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsLayoutsArray" time="0.017" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsPresetWhenExists" time="0.036" />
+    <testcase classname="96416 Report Msg Tests" name="GetCreatesEmptyPresetWhenNoneExists" time="0.014" />
+    <testcase classname="96416 Report Msg Tests" name="GetErrorsForInvalidReportId" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="GetErrorsWhenReportIdMissing" time="0.007" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsGeneratesPdfOutput" time="8.79" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsDefaultsToPdfWhenFormatOmitted" time="0.927" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsUsesPresetWhenNoXmlProvided" time="0.844" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForInvalidFormat" time="0.007" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForMissingReportId" time="0.007" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForNonExistentReport" time="0.007" />
+    <testcase classname="96416 Report Msg Tests" name="PresetTableIsBlockedFromDataRecordsRead" time="0.003" />
+    <testcase classname="96416 Report Msg Tests" name="PresetTableIsBlockedFromDataRecordsWrite" time="0.01" />
+  </testsuite>
+  <testsuite name="96417 Report Run Tests" timestamp="2026-10-14T11:04:36" hostname="runnervmmprz5" time="0.095" tests="6" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96417 Report Run Tests" name="RunExecutesProcessingOnlyReport" time="0.04" />
+    <testcase classname="96417 Report Run Tests" name="RunEchoesReportMetadata" time="0.01" />
+    <testcase classname="96417 Report Run Tests" name="RunReturnsErrorObjectWhenReportFails" time="0.023" />
+    <testcase classname="96417 Report Run Tests" name="RunRejectsReportThatProducesOutput" time="0.01" />
+    <testcase classname="96417 Report Run Tests" name="RunErrorsWhenReportIdMissing" time="0.006" />
+    <testcase classname="96417 Report Run Tests" name="RunErrorsForNonExistentReport" time="0.006" />
+  </testsuite>
+  <testsuite name="96418 Playbook Cond Tests" timestamp="2026-10-14T11:04:37" hostname="runnervmmprz5" time="0.521" tests="23" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96418 Playbook Cond Tests" name="EmptyConditionSetIsTrue" time="0.034" />
+    <testcase classname="96418 Playbook Cond Tests" name="AllConditionsInAGroupMustHold" time="0.034" />
+    <testcase classname="96418 Playbook Cond Tests" name="AnyGroupHoldingIsEnough" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="GroupsAreIndependentNotLeftToRight" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="ConditionTypesAreEvaluatedIndependently" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="HasConditionsSeesOnlyItsOwnType" time="0.013" />
+    <testcase classname="96418 Playbook Cond Tests" name="StepTypeDefaultsToAction" time="0.003" />
+    <testcase classname="96418 Playbook Cond Tests" name="BeginRunSeedsRunNamespace" time="0.036" />
+    <testcase classname="96418 Playbook Cond Tests" name="RollUpCountsAndFlagsFailure" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="ExcludedStepsLeaveRunStatusAlone" time="0.026" />
+    <testcase classname="96418 Playbook Cond Tests" name="EscalateFailsTheRunWithoutTouchingCounters" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="RepeatedStepAccumulatesInsteadOfOverwriting" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="StatusDegradesAndNeverImproves" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="IterationFailuresCarryItemAndError" time="0.033" />
+    <testcase classname="96418 Playbook Cond Tests" name="CheckFailuresAreCountedSeparatelyFromErrors" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="FailureListIsCappedButCountsStayExact" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="SkippedStepRecordsTheReason" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="SummaryPathsFeedTheReportNotTheWorkspaceData" time="0.026" />
+    <testcase classname="96418 Playbook Cond Tests" name="RunAndStepsFilterToTheReportPayload" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="StatusTextComesFromTheEnumName" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="MessageTypeTextComesFromTheEnumName" time="0.007" />
+    <testcase classname="96418 Playbook Cond Tests" name="ExcludedStepsAreStillReferenceableUnderTail" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="TailStaysOutOfTheReportPayload" time="0.023" />
+  </testsuite>
+  <testsuite name="96419 Status Msg Tests" timestamp="2026-10-14T11:04:37" hostname="runnervmmprz5" time="0.122" tests="7" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96419 Status Msg Tests" name="GetReturnsSuccessWithEntryCounts" time="0.023" />
+    <testcase classname="96419 Status Msg Tests" name="GetEntryCountsAreConsistent" time="0.006" />
+    <testcase classname="96419 Status Msg Tests" name="RestartReturnsSuccessWithMessage" time="0.02" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededRestartsWhenNoJQEntry" time="0.02" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededSkipsWhenAlreadyRunning" time="0.02" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededSkipsWhenInProcess" time="0.013" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededRestartsWhenInError" time="0.02" />
+  </testsuite>
+  <testsuite name="96420 Entry Msg Tests" timestamp="2026-10-14T11:04:38" hostname="runnervmmprz5" time="0.806" tests="8" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96420 Entry Msg Tests" name="RestartSetsEntryToReady" time="0.037" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartSetsOnHoldEntryToReady" time="0.02" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartErrorsForMissingId" time="0.65" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededRestartsErrorEntry" time="0.026" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededSkipsReadyEntry" time="0.013" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededRestartsOnHoldEntry" time="0.02" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartResponseIncludesEntryDetails" time="0.02" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartAcceptsIdInSubject" time="0.02" />
+  </testsuite>
+  <testsuite name="96421 Playbook Run Msg Tests" timestamp="2026-10-14T11:04:39" hostname="runnervmmprz5" time="0.024" tests="2" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96421 Playbook Run Msg Tests" name="RunErrorsWhenPlaybookCodeMissing" time="0.017" />
+    <testcase classname="96421 Playbook Run Msg Tests" name="RunErrorsForUnknownPlaybookCode" time="0.007" />
+  </testsuite>
+  <testsuite name="96422 Misc Msg Smoke Tests" timestamp="2026-10-14T11:04:39" hostname="runnervmmprz5" time="0.111" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96422 Misc Msg Smoke Tests" name="HelpGetReturnsNonEmptyMarkdown" time="0.047" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="WorkspacePreviewReturnsSysNamespace" time="0.044" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="WorkspacePreviewPassesThroughInitialRequest" time="0.02" />
+  </testsuite>
+  <testsuite name="96423 Orchestr Registration Tests" timestamp="2026-10-14T11:04:40" hostname="runnervmmprz5" time="0.017" tests="1" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96423 Orchestr Registration Tests" name="OrchestratorIsRegisteredInTheAppRegistry" time="0.017" />
+  </testsuite>
+  <testsuite name="96424 Report Layout Msg Tests" timestamp="2026-10-14T11:04:40" hostname="runnervmmprz5" time="0.067" tests="6" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenReportIdMissing" time="0.02" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenNameMissing" time="0.013" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsForUnknownReport" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsForInvalidLayoutFormat" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenLayoutBase64Missing" time="0.007" />
+    <testcase classname="96424 Report Layout Msg Tests" name="MessageTypeIsRegistered" time="0.007" />
+  </testsuite>
+  <testsuite name="96427 SE Run Msg Tests" timestamp="2026-10-14T11:04:41" hostname="runnervmmprz5" time="0.891" tests="5" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunDispatchesCodeunitEntryHeadlessly" time="0.066" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunReturnsErrorWhenJobFails" time="0.627" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunReturnsErrorWhenDispatchFails" time="0.064" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunUsesPlaybookRecordIdNotEntryRecordId" time="0.09" />
+    <testcase classname="96427 SE Run Msg Tests" name="RunJobQueueEntryOnceStillConfirmsAndMessages" time="0.044" />
+  </testsuite>
+  <testsuite name="96428 Data Records Hint Tests" timestamp="2026-10-14T11:04:42" hostname="runnervmmprz5" time="0.142" tests="4" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96428 Data Records Hint Tests" name="JobQueueEntry_WriteHint" time="0.073" />
+    <testcase classname="96428 Data Records Hint Tests" name="ScheduledTask_WriteHint" time="0.02" />
+    <testcase classname="96428 Data Records Hint Tests" name="ReportRequestPreset_ReadWriteHint" time="0.043" />
+    <testcase classname="96428 Data Records Hint Tests" name="Customer_NoCompanionHints" time="0.006" />
+  </testsuite>
+  <testsuite name="96452 Orch B1 Contract Tests" timestamp="2026-10-14T11:04:43" hostname="runnervmmprz5" time="0.223" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96452 Orch B1 Contract Tests" name="Batch1MessagesHaveContractChaptersAndDiscovery" time="0.203" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="CommittingTypesDeclareIrreversible" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="NonCommittingTypesKeepTheirEffect" time="0.01" />
+  </testsuite>
+  <testsuite name="96453 Orch B2 Contract Tests" timestamp="2026-10-14T11:04:43" hostname="runnervmmprz5" time="0.1" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96453 Orch B2 Contract Tests" name="Batch2MessagesHaveContractChaptersAndDiscovery" time="0.083" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="CommittingTypesDeclareIrreversible" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="NonCommittingTypesKeepTheirEffect" time="0.007" />
+  </testsuite>
+  <testsuite name="96454 Report Boundary Tests ori" timestamp="2026-10-14T11:04:45" hostname="runnervmmprz5" time="1.006" tests="10" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+    </properties>
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_UnknownField_ReturnsErrorWithoutExecution" time="0.05" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_MalformedView_ReturnsErrorWithoutExecution" time="0.004" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_NonString_ReturnsErrorWithoutExecution" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_UnknownField_ReturnsErrorWithoutExecution" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_MalformedView_ReturnsErrorWithoutExecution" time="0.007" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_NonString_ReturnsErrorWithoutExecution" time="0.004" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_ValidView_ExecutesOnlySelectedRow" time="0.077" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_ValidView_ExecutesSelectedRow" time="0.02" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_EmptySelection_DoesNotWidenDataSet" time="0.014" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_BothDebugStates_FailureHasNoCallstack" time="0.81" />
+  </testsuite>
+</testsuites>
