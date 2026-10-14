@@ -194,7 +194,7 @@ codeunit 96406 "Playbook Effect Tests ori"
         Executor.SetParameters("Message Type ori"::"Orchestrator.Report.List", Format(CreateGuid(), 0, 4), '{}');
         Executor.SetOmitCommit(true, 'XREAD', 80);
         RunWithoutCommit();
-        Assert.IsTrue(Executor.GetResponseContentType() in ['application/json', 'text/json'], 'The actual dispatcher returns a supported JSON content type.');
+        Assert.AreEqual('text/json', Executor.GetResponseContentType(), 'The actual dispatcher preserves the Report.List JSON content type.');
         Assert.IsTrue(ResponseJson.ReadFrom(Executor.GetResponseText()), 'The dispatch must produce valid JSON without committing.');
         if ResponseJson.Get('status', ResponseToken) then
             Assert.AreEqual('Error', ResponseToken.AsValue().AsText(), 'A dispatcher refusal must be an error envelope.')
