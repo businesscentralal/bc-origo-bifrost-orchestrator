@@ -191,7 +191,7 @@ codeunit 96406 "Playbook Effect Tests ori"
         Executor.SetParameters("Message Type ori"::"Orchestrator.Report.List", Format(CreateGuid(), 0, 4), '{}');
         Executor.SetOmitCommit(true, 'XREAD', 80);
         RunWithoutCommit();
-        Assert.AreEqual('application/json', Executor.GetResponseContentType(), 'The actual dispatcher returns its JSON response.');
+        Assert.AreEqual('text/json', Executor.GetResponseContentType(), 'The actual dispatcher preserves the Report.List JSON content type.');
         Assert.AreNotEqual('', Executor.GetResponseText(), 'The dispatch must produce a response without committing.');
         // The configured codeunit test isolation rolls back the owned request; container cleanup is verified too.
     end;
