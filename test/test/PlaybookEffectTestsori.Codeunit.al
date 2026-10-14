@@ -188,7 +188,7 @@ codeunit 96406 "Playbook Effect Tests ori"
     begin
         // Story #59 AC04 | Time: independent | Risk: transport proof only, not licensed message acceptance.
         // The response may be a licensing or request error. The real dispatcher must still honor true.
-        Executor.SetParameters("Message Type ori"::"Orchestrator.Workspace.Preview", Format(CreateGuid(), 0, 4), '{}');
+        Executor.SetParameters("Message Type ori"::"Orchestrator.Report.List", Format(CreateGuid(), 0, 4), '{}');
         Executor.SetOmitCommit(true, 'XREAD', 80);
         RunWithoutCommit();
         Assert.AreEqual('application/json', Executor.GetResponseContentType(), 'The actual dispatcher returns its JSON response.');
