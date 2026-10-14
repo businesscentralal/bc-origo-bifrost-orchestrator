@@ -186,6 +186,8 @@ codeunit 96406 "Playbook Effect Tests ori"
     var
         Executor: Codeunit "Msg Executor ori";
         ResponseJson: JsonObject;
+        ResponseToken: JsonToken;
+        ReportCount: Integer;
     begin
         // Story #59 AC04 | Time: independent | Risk: transport proof only, not licensed message acceptance.
         // The response may be a licensing or request error. The real dispatcher must still honor true.
@@ -194,7 +196,14 @@ codeunit 96406 "Playbook Effect Tests ori"
         RunWithoutCommit();
         Assert.IsTrue(Executor.GetResponseContentType() in ['application/json', 'text/json'], 'The actual dispatcher returns a supported JSON content type.');
         Assert.IsTrue(ResponseJson.ReadFrom(Executor.GetResponseText()), 'The dispatch must produce valid JSON without committing.');
-        Assert.IsTrue(ResponseJson.Contains('status'), 'The response must retain its status envelope.');
+        if ResponseJson.Get('status', ResponseToken) then
+            Assert.AreEqual('Error', ResponseToken.AsValue().AsText(), 'A dispatcher refusal must be an error envelope.')
+        else begin
+            Assert.IsTrue(ResponseJson.Get('reports', ResponseToken), 'Report.List success must contain reports.');
+            ReportCount := ResponseToken.AsArray().Count();
+            Assert.IsTrue(ResponseJson.Get('count', ResponseToken), 'Report.List success must contain count.');
+            Assert.AreEqual(ReportCount, ResponseToken.AsValue().AsInteger(), 'Report.List count must match its metadata array.');
+        end;
         // The configured codeunit test isolation rolls back the owned request; container cleanup is verified too.
     end;
 
