@@ -1,0 +1,8 @@
+{
+  "containerId": "f08d1a96d533",
+  "owner": "worker-7",
+  "deleteStatus": 204,
+  "readbackStatus": 404,
+  "verifiedDeleted": true,
+  "fixtures": "Native and UI data isolated in owned environment, deleted with container; only self-created initialRequest used for refused MCP attempt. No foreign/shared/customer resources."
+}

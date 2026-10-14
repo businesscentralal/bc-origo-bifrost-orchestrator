@@ -1,0 +1,21 @@
+{
+  "sha": "729622815dc42121caa4c5c822d364e732ba66ec",
+  "fullSuite": true,
+  "total": 234,
+  "passed": 234,
+  "failed": 0,
+  "skipped": 0,
+  "containerId": "f08d1a96d533",
+  "appVersion": "28.0.0.0",
+  "testAppVersion": "28.0.0.0",
+  "foundationVersion": "28.0.4.556",
+  "rawEvidenceSha256": "5d6ddbecb0ba8ddd367509536f9f9cf3af3e0a29bd031f9ea9c1cf62d98c7ab0",
+  "executionResult": {
+    "ok": true,
+    "exitCode": 0,
+    "durationMs": 29068,
+    "errors": 0
+  },
+  "retainedRawEvidence": "/workspace/evidence/orchestrator80-worker7/full-suite-7296228.json",
+  "notNewExecution": true
+}

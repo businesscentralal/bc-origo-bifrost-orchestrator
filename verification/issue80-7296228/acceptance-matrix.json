@@ -1,0 +1,62 @@
+{
+  "issueUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/80",
+  "owner": "worker-7",
+  "branch": "codex/worker7-workspace-preview-80",
+  "candidateSha": "729622815dc42121caa4c5c822d364e732ba66ec",
+  "dependency": {
+    "issue": 59,
+    "retainedOwner": "worker-9",
+    "baseSha": "35f660ec2956104782fc0abfabe7aca2a7b9f21b",
+    "branch": "codex/worker9-execution-contract-10-59-63",
+    "scope": "#80 own diff only; base source custody untouched",
+    "disposition": {
+      "sourceTs": "1791968326.994089",
+      "sourceUrl": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791968326994089",
+      "custodyBlockerReleased": true,
+      "stackPermitted": true,
+      "separateScopeRequired": true
+    }
+  },
+  "criteria": [
+    {
+      "criterion": "Verify cause before product changes",
+      "status": "verified",
+      "evidence": "cause.json; Foundation556 artifact source confirms nested defaultfalse dispatcher writes/commits; parent runtime231/230/1/0 failure retained by issue80"
+    },
+    {
+      "criterion": "Correct contract and guard refusal tests",
+      "status": "verified final-tip native and EN/IS UI guard tests",
+      "evidence": "WorkspacePreviewTestsori.Codeunit.al; full-suite.json"
+    },
+    {
+      "criterion": "Product/test compile0/0",
+      "status": "verified source-matched final candidate",
+      "evidence": "compile.json; source hashes confirmed; compiler/app.log and test.log"
+    },
+    {
+      "criterion": "Full suite0fail/0skip",
+      "status": "verified234executed/234passed/0failed/0skipped",
+      "evidence": "full-suite-7296228.json"
+    },
+    {
+      "criterion": "BC Web Client EN/IS",
+      "status": "verified actual EN1033 and IS1039 sessions;3guard tests executed/passed per session",
+      "evidence": "ui-preview-en-US.json and ui-preview-is-IS.json; screenshots/DOM retained"
+    },
+    {
+      "criterion": "MCP self-created data before PR",
+      "status": "blocked: Gunnar #81 verification; no PR until cleared",
+      "evidence": "mcp-preview-en.json EULA_REQUIRED; canonical issue81 (issue82 duplicate), Architect1791968112.074229 no waiver; exact-candidate acceptance pending"
+    },
+    {
+      "criterion": "Owned cleanup",
+      "status": "verified owned deletion DELETE204 / GET404",
+      "evidence": "cleanup-delete.json; cleanup-readback.json"
+    },
+    {
+      "criterion": "PR/Reviewer/Architect delivery",
+      "status": "pending; no PR opened",
+      "evidence": "Published verification-only branch current SHA readback github-candidate-final.json"
+    }
+  ]
+}

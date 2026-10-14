@@ -1,0 +1,18 @@
+{
+  "issue": 80,
+  "baselineSha": "6413d705ab26a21d70b8314858aaf50c2a576d24",
+  "dependencySha": "35f660ec2956104782fc0abfabe7aca2a7b9f21b",
+  "foundation": {
+    "version": "28.0.4.556",
+    "sha": "f8d53b4bd8ec8409048524bb5689515db898e04d",
+    "artifactId": 11879801497
+  },
+  "confirmedCause": [
+    "Preview.ExecuteBifrostTask calls Workspace.Reset -> SeedWhoAmI -> StepExecutor.Execute -> boolean MsgExecutor.Run",
+    "MsgExecutor dispatches WhoAmI using no-flag EnqueueAndProcess; artifact Dispatcher source forwards OmitCommit=false",
+    "Dispatcher inserts Message ori; Message Task ProcessIncomingMessage commits at lines139 and264 unless OmitCommit=true",
+    "Boolean Codeunit.Run cannot start inside the outer write transaction; Reset itself only edits JSON before SeedWhoAmI. Declared read effect incorrectly hides nested queue writes and commit boundary."
+  ],
+  "decision": "Correct Preview to irreversible and guard refusal; no generic read-dispatch redesign or #59 writer changes",
+  "priorNativeFailure": "Issue80 reports a86bbfb full suite231/230/1/0 stopped at StepExecutor boolean Run; no claim of new native reproduction yet"
+}

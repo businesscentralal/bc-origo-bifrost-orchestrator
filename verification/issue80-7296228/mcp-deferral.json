@@ -1,0 +1,25 @@
+{
+  "sha": "729622815dc42121caa4c5c822d364e732ba66ec",
+  "touchedMessageTypes": [
+    "Orchestrator.Workspace.Preview"
+  ],
+  "verified": false,
+  "passed": 0,
+  "failed": 0,
+  "skipped": 0,
+  "deferredToUat": true,
+  "summary": "deferred to UAT, Bifr\u00f6st Tester, Gunnar 14.10 10:34",
+  "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/81",
+  "sourceTs": "1791974058.346709",
+  "sourceUrl": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791974058346709",
+  "previousRefusal": {
+    "sha": "ac8a2777ed1c6f1d14b91ca6ef19b8ee343538da",
+    "status": "Error",
+    "code": "EULA_REQUIRED",
+    "error": "EULA approval is required before Bifrost calls can be processed.",
+    "notFinalTipExecution": true
+  },
+  "scenario": "Tester self-seeds initialRequest and chain in UAT; verify Preview success response, declared irreversible contract and guard refusal before committed dispatch; owned cleanup. No existing customer/shared fixture data.",
+  "nonGatedTouchedMcp": "No separate non-gated public entry point for the sole touched message type; common Foundation dispatch gate refused before handler. Native and bilingual UI guard checks pass independently.",
+  "writesToLicensingState": false
+}
