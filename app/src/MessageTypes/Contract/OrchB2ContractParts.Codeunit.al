@@ -50,28 +50,23 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     end;
 
     /// <summary>
-    /// Adds a string parameter that takes one of a fixed list of values.
+    /// Adds choices and an optional default to a declared string parameter.
     /// </summary>
-    /// <param name="Parameters">Receives the entry.</param>
-    /// <param name="Name">The key under data.</param>
-    /// <param name="Required">True when the call fails without it.</param>
-    /// <param name="Description">What the parameter does.</param>
+    /// <param name="Entry">The parameter declared with its literal key by the caller.</param>
     /// <param name="AllowedValues">The accepted values.</param>
     /// <param name="DefaultValue">The value used when the key is left out; empty when there is none.</param>
-    internal procedure AddChoiceParameter(var Parameters: JsonArray; Name: Text; Required: Boolean; Description: Text; AllowedValues: List of [Text]; DefaultValue: Text)
+    /// <returns>The parameter entry with choices and default.</returns>
+    internal procedure WithChoices(Entry: JsonObject; AllowedValues: List of [Text]; DefaultValue: Text): JsonObject
     var
-        ContractMgt: Codeunit "Msg Contract Mgt ori";
-        Entry: JsonObject;
         Allowed: JsonArray;
         Value: Text;
     begin
         foreach Value in AllowedValues do
             Allowed.Add(Value);
-        Entry := ContractMgt.Parameter(Name, 'string', Required, Description);
         if DefaultValue <> '' then
             Entry.Add('default', DefaultValue);
         Entry.Add('allowed', Allowed);
-        Parameters.Add(Entry);
+        exit(Entry);
     end;
 
     /// <summary>
@@ -81,7 +76,7 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     /// <param name="ErrorText">The error text, or its pattern.</param>
     /// <param name="When">When the error is returned.</param>
     /// <param name="Fix">What the caller does about it.</param>
-    internal procedure AddError(var Errors: JsonArray; ErrorText: Text; When: Text; Fix: Text)
+    internal procedure AddContractError(var Errors: JsonArray; ErrorText: Text; When: Text; Fix: Text)
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
@@ -97,7 +92,7 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     /// <param name="Fix">What the caller does about it.</param>
     internal procedure AddRuntimeError(var Errors: JsonArray; When: Text; Fix: Text)
     begin
-        AddError(Errors, 'Business Central''s own error text', When, Fix);
+        AddContractError(Errors, 'Business Central''s own error text', When, Fix);
     end;
 
     /// <summary>
@@ -106,8 +101,8 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddReportErrors(var Errors: JsonArray)
     begin
-        AddError(Errors, 'Request must include "reportId".', 'data.reportId is missing.', 'Send the report object ID in data.reportId.');
-        AddError(Errors, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
+        AddContractError(Errors, 'Request must include "reportId".', 'data.reportId is missing.', 'Send the report object ID in data.reportId.');
+        AddContractError(Errors, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
         AddRuntimeError(Errors, 'data.reportId is not a whole number.', 'Send reportId as an integer.');
     end;
 

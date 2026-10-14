@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-14) - Contract source guard remediation (#68, #71)
+
+- Declare choice parameter keys literally in `Playbook Schedule Msg ori` (10035574), `Report SaveAs Msg ori` (10035595) and `Report Layout Set Msg ori` (10035599), using entry-taking `WithChoices` helpers in `Orch B1 Contract Parts ori` (10035609) and `Orch B2 Contract Parts ori` (10035610). Preserve all parameter fields and positions.
+- Rename the contract-only `AddError` helper to `AddContractError` in both Parts codeunits and its 26 call sites across 11 files. Contract error codes, text and ordering remain unchanged; runtime answers and translations are unchanged.
+- Name the paged step's outgoing payload `PageRequestJson` in `Playbook Runner ori` (10035547), keeping `skip`/`take` out of the caller contract. `Orch B1 Contract Tests` (96452), `Orch B2 Contract Tests` (96453) and `Playbook Run Msg Tests` (96421) cover the four choice entries, all 21 error chapters and real outgoing paging-key injection. Guard scripts and CI wiring are unchanged.
+
 ### Fixed (2026-10-13) - Headless registration and WhoAmI contract (#10, #63)
 
 - `Scheduled Entry ori` (10035535) honors `HideDialog` for newly registered Job Queue entries. `Entry Registration Tests ori` (96407) checks fresh and repeated headless registration and preserves the interactive confirmation/card flow.

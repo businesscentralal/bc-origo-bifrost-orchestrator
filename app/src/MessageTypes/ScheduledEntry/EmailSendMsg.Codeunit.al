@@ -88,7 +88,7 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddError(Errors, '"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.', 'data.outboxSystemId is missing or not a GUID, and subject is not a GUID.', 'Send the outboxSystemId of the draft.');
+        Parts.AddContractError(Errors, '"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.', 'data.outboxSystemId is missing or not a GUID, and subject is not a GUID.', 'Send the outboxSystemId of the draft.');
         Parts.AddRuntimeError(Errors, 'No Email Outbox entry has that SystemId (Business Central''s record-not-found text).', 'Send the outboxSystemId from the Email.Draft.Set answer.');
         Parts.AddRuntimeError(Errors, 'The email account or its connector refuses to send.', 'Check the email account of the draft.');
         exit(true);

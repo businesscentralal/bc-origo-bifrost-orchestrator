@@ -184,7 +184,7 @@ codeunit 10035547 "Playbook Runner ori"
     local procedure ExecutePagedBlock(PagedStep: Record "Playbook Step ori"; InstanceId: Guid; InitialRequestText: Text; var ResponseStore: Dictionary of [Integer, JsonObject]; var StepSuccess: Boolean; var StepsExecuted: Integer; var StepsFailed: Integer; var ItemsProcessed: Integer; var LastResponseText: Text)
     var
         ChainStep: Record "Playbook Step ori";
-        RequestJson: JsonObject;
+        PageRequestJson: JsonObject;
         ResponseJson: JsonObject;
         BaseRequestText: Text;
         PagedRequestText: Text;
@@ -213,16 +213,16 @@ codeunit 10035547 "Playbook Runner ori"
             BaseRequestText := InitialRequestText;
 
         repeat
-            // Build paged request from step template, injecting skip/take
-            Clear(RequestJson);
+            // This is the outgoing step request, not the playbook caller's request.
+            Clear(PageRequestJson);
             if BaseRequestText <> '' then
-                RequestJson.ReadFrom(BaseRequestText);
-            JsonHelper.ResolveWorkspaceRefs(RequestJson);
-            if RequestJson.Contains('skip') then RequestJson.Remove('skip');
-            if RequestJson.Contains('take') then RequestJson.Remove('take');
-            RequestJson.Add('skip', CurrentSkip);
-            RequestJson.Add('take', PageSize);
-            RequestJson.WriteTo(PagedRequestText);
+                PageRequestJson.ReadFrom(BaseRequestText);
+            JsonHelper.ResolveWorkspaceRefs(PageRequestJson);
+            if PageRequestJson.Contains('skip') then PageRequestJson.Remove('skip');
+            if PageRequestJson.Contains('take') then PageRequestJson.Remove('take');
+            PageRequestJson.Add('skip', CurrentSkip);
+            PageRequestJson.Add('take', PageSize);
+            PageRequestJson.WriteTo(PagedRequestText);
 
             // Execute the paged data step directly (not through ExecuteStep to control logging)
             StartTime := CurrentDateTime();
