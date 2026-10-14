@@ -180,6 +180,22 @@ codeunit 96406 "Playbook Effect Tests ori"
         Fixture.Configure('', false);
     end;
 
+    /// <summary>AC04 forwards true through the public dispatcher without an explicit commit.</summary>
+    [Test]
+    procedure AC04_ReadDispatchOmitsCommit()
+    var
+        Executor: Codeunit "Msg Executor ori";
+    begin
+        // Story #59 AC04 | Time: independent | Risk: transport proof only, not licensed message acceptance.
+        // The response may be a licensing or request error. The real dispatcher must still honor true.
+        Executor.SetParameters("Message Type ori"::"Orchestrator.Workspace.Preview", Format(CreateGuid(), 0, 4), '{}');
+        Executor.SetOmitCommit(true, 'XREAD', 80);
+        RunWithoutCommit();
+        Assert.AreEqual('application/json', Executor.GetResponseContentType(), 'The actual dispatcher returns its JSON response.');
+        Assert.AreNotEqual('', Executor.GetResponseText(), 'The dispatch must produce a response without committing.');
+        // The configured codeunit test isolation rolls back the owned request; container cleanup is verified too.
+    end;
+
     /// <summary>AC05 a newly configured run cannot inherit a previous Omit Commit request.</summary>
     [Test]
     procedure AC05_SetParametersResetsCommitSignal()

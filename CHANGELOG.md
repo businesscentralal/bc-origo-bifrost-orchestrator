@@ -13,7 +13,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - `Playbook Effect Tests ori` (96406), enumextension `Effect Guard Types ori` (96406) and test-only `Effect Contract Fixture ori` (96430) cover actual read/write/external-write contracts, missing and malformed effects, and isolated chain validation with cleanup.
 - Product and test manifests now require Foundation 28.0.4.556, the main build containing core#996's public TempBlob/OmitCommit API.
 - `Msg Executor ori` (10035603) consumes an explicit per-run Omit Commit signal, checks the effect before dispatch, and forwards it to Foundation's public binary-preserving TempBlob overload. New parameters reset the signal to false; even a refused run consumes it. Existing runner behavior remains independently committed steps; no transaction-chain field or UI is introduced.
-- `Playbook Effect Tests ori` (96406) adds executor-boundary refusals for email, Telegram, absent and malformed contracts plus commit-signal reset regressions. `Help ori` and `Playbook Run Msg ori` describe the guard and the unchanged runner transaction boundary.
+- `Playbook Effect Tests ori` (96406) adds executor-boundary refusals for email, Telegram, absent and malformed contracts plus commit-signal reset regressions and a real read-dispatch transport check that prohibits commits without claiming licensed handler acceptance. `Help ori` and `Playbook Run Msg ori` describe the guard and the unchanged runner transaction boundary.
 
 
 ### Fixed (2026-10-13) - Headless registration and WhoAmI contract (#10, #63)
