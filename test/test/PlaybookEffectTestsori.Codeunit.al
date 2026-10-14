@@ -185,14 +185,16 @@ codeunit 96406 "Playbook Effect Tests ori"
     procedure AC04_ReadDispatchOmitsCommit()
     var
         Executor: Codeunit "Msg Executor ori";
+        ResponseJson: JsonObject;
     begin
         // Story #59 AC04 | Time: independent | Risk: transport proof only, not licensed message acceptance.
         // The response may be a licensing or request error. The real dispatcher must still honor true.
         Executor.SetParameters("Message Type ori"::"Orchestrator.Report.List", Format(CreateGuid(), 0, 4), '{}');
         Executor.SetOmitCommit(true, 'XREAD', 80);
         RunWithoutCommit();
-        Assert.AreEqual('application/json', Executor.GetResponseContentType(), 'The actual dispatcher returns its JSON response.');
-        Assert.AreNotEqual('', Executor.GetResponseText(), 'The dispatch must produce a response without committing.');
+        Assert.IsTrue(Executor.GetResponseContentType() in ['application/json', 'text/json'], 'The actual dispatcher returns a supported JSON content type.');
+        Assert.IsTrue(ResponseJson.ReadFrom(Executor.GetResponseText()), 'The dispatch must produce valid JSON without committing.');
+        Assert.IsTrue(ResponseJson.Contains('status'), 'The response must retain its status envelope.');
         // The configured codeunit test isolation rolls back the owned request; container cleanup is verified too.
     end;
 
