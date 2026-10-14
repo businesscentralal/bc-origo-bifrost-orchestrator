@@ -1,0 +1,11 @@
+{
+  "sha": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+  "containerId": "f0b473c304c6",
+  "owner": "worker-7",
+  "deleteStatus": 204,
+  "readbackStatus": 404,
+  "verifiedDeleted": true,
+  "verifiedAt": "2026-10-14T11:12:44.858211+00:00",
+  "activeEnvironmentRecordRemoved": true,
+  "fixtures": "All native/UI fixtures isolated in owned environment and removed with container. No newMCPfixtures created;licence-gated MCPdeferred. No shared/customer/foreign resource writes or deletion."
+}

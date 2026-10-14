@@ -1,0 +1,30 @@
+{
+  "sha": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+  "touchedMessageTypes": [
+    "Orchestrator.Workspace.Preview"
+  ],
+  "deferredToUat": true,
+  "verified": false,
+  "passed": 0,
+  "failed": 0,
+  "skipped": 0,
+  "summary": "deferred to UAT, Bifr\u00f6st Tester, Gunnar 14.10 10:34",
+  "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/81",
+  "architectDisposition": {
+    "sourceTs": "1791974058.346709",
+    "sourceUrl": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791974058346709"
+  },
+  "evidenceUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/81",
+    "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1791974058346709"
+  ],
+  "nonGatedTouchedMcp": "No separate non-gated public entry point for the sole touched type; common Foundation dispatch gate precedeshandler. Native/UIguardchecks pass independently and are not shipping MCP passes.",
+  "createsOwnData": "Deferred Tester scenarios must self-seed initialRequest/chain, verify actual handler response and contract/refusal, then verifycleanup aftergreenmain andsameSHAUATdeployment. No current-tip MCP request/pass claimed.",
+  "licensingStateWrites": false,
+  "foundationTestsInstalled": false,
+  "priorRefusal": {
+    "sha": "ac8a2777ed1c6f1d14b91ca6ef19b8ee343538da",
+    "code": "EULA_REQUIRED",
+    "notFinalTipEvidence": true
+  }
+}

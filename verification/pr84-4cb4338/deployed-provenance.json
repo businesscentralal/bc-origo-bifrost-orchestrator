@@ -1,0 +1,25 @@
+{
+  "sha": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+  "containerId": "f0b473c304c6",
+  "bcVersion": "28.5.54151.56267",
+  "country": "w1",
+  "foundationVersion": "28.0.4.556",
+  "productVersion": "28.0.0.0",
+  "testAppVersion": "28.0.0.0",
+  "checkedAt": "2026-10-14T10:57:53.083410+00:00",
+  "permissions": "Fresh own container admin connection; scope native/UI only; no shared/customer resources",
+  "foundationTestsInstalled": false,
+  "appHashes": {
+    "product": {
+      "compiled": "7b3ae5e0e7807db62f7a23991662e4c3e810a9f14f738c1c1931c3133875a16f",
+      "deployedReadback": "7b3ae5e0e7807db62f7a23991662e4c3e810a9f14f738c1c1931c3133875a16f",
+      "matches": true
+    },
+    "test": {
+      "compiled": "6d7b50244c97a3c2fc98f3f7fa2a30ef87ba76db3f9d120b217010c33d71c60a",
+      "deployedReadback": "6d7b50244c97a3c2fc98f3f7fa2a30ef87ba76db3f9d120b217010c33d71c60a",
+      "matches": true
+    }
+  },
+  "foundationHash": "0f26c476ac1fe69f0b19da5ce5714773c6b95d4d71ed74545a4bda6202113525"
+}

@@ -1,0 +1,10 @@
+{
+  "sha": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+  "containerId": "f0b473c304c6",
+  "method": "BC WebClient MySettings -> LanguageLookup -> SearchAvailableLanguages explicitsearchboxfill -> Icelandic(Iceland) -> OK",
+  "actualLanguageAfterSelection": 1039,
+  "screenshot": "ui-language-selection.png",
+  "html": "ui-language-changed.html",
+  "recordedAt": "2026-10-14T11:09:19.377663+00:00",
+  "uiChecksAfterSelection": "pending"
+}

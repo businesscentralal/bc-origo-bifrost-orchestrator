@@ -1,0 +1,23 @@
+{
+  "sha": "4cb43380aca4ed90298aa7646c1735facb284ca8",
+  "fullSuite": true,
+  "total": 234,
+  "passed": 234,
+  "failed": 0,
+  "skipped": 0,
+  "containerId": "f0b473c304c6",
+  "appVersion": "28.0.0.0",
+  "testAppVersion": "28.0.0.0",
+  "foundationVersion": "28.0.4.556",
+  "executionResult": {
+    "ok": true,
+    "exitCode": 0,
+    "durationMs": 42805,
+    "errors": 0
+  },
+  "rawEvidenceSha256": "edf37f213ba65cf24a33b699ce32d3ab955e1fde75df637249192408029c2f8b",
+  "rawEvidenceRetained": "/workspace/evidence/uat-deferral-1791974058/orchestrator84-current/native-attempt2.json",
+  "attempt1": "SSH255beforecounts;incomplete,nopassclaimed;readiness200thenactualretry2pass",
+  "attempt1RawSha256": "bc97d1620e43fc4e7117595e27d5af2209cc50a846e51e55e4a84d8c0bd70afc",
+  "stdoutNote": "Provider stdoutPreview may truncate detailed output;234/0/0 are actual provider resultcounts,not inferred from visible testnames."
+}
