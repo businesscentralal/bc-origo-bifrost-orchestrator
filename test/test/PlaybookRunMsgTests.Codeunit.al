@@ -131,7 +131,7 @@ codeunit 96421 "Playbook Run Msg Tests"
         PlaybookStep."Message Type" := "Message Type ori"::"Help.Implementation.Get";
         PlaybookStep.Paged := true;
         PlaybookStep."Page Size" := 2;
-        PlaybookStep.SetRequestTemplate('{"type":"Orchestrator.Playbook.Schedule","skip":99,"take":99,"marker":"outgoing"}');
+        PlaybookStep.SetRequestTemplate('{"messageTypes":["Orchestrator.Playbook.Schedule"],"chapters":["parameters"],"skip":99,"take":99,"marker":"outgoing"}');
         PlaybookStep.Insert(true);
         InitialText := '{"marker":"caller"}';
         InitialRequest.AddText(InitialText);
@@ -147,6 +147,9 @@ codeunit 96421 "Playbook Run Msg Tests"
         Assert.AreEqual(2, Value.AsValue().AsInteger(), 'Configured page size replaces stale take');
         Request.Get('marker', Value);
         Assert.AreEqual('outgoing', Value.AsValue().AsText(), 'Outgoing step template is preserved');
+        Assert.IsTrue(Request.ReadFrom(StepLog.GetResponseReceived()), 'Valid help response');
+        Request.Get('status', Value);
+        Assert.AreEqual('Success', Value.AsValue().AsText(), 'The paged step returns a successful help response');
         InitialRequest.GetSubText(InitialText, 1);
         Assert.AreEqual('{"marker":"caller"}', InitialText, 'Caller request remains unchanged');
         Instance.Get(InstanceId);
