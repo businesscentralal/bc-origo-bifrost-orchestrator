@@ -67,7 +67,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
         Formats.Add('RDL');
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID.'));
         Parameters.Add(ContractMgt.Parameter('name', 'string', true, 'Name of the user-defined layout, cut to 250 characters. A user-defined layout with this name on the report is replaced.'));
-        Parts.AddChoiceParameter(Parameters, 'layoutFormat', true, 'Layout format. Case-insensitive; RDL is stored as RDLC.', Formats, '');
+        Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('layoutFormat', 'string', true, 'Layout format. Case-insensitive; RDL is stored as RDLC.'), Formats, ''));
         Parameters.Add(ContractMgt.Parameter('layoutBase64', 'string', true, 'The layout file (.docx, .xlsx or .rdl) as non-empty base64.'));
         Parameters.Add(ContractMgt.Parameter('description', 'string', false, 'Layout description, cut to 250 characters; defaults to name.'));
         Parameters.Add(ContractMgt.Parameter('companyName', 'string', false, 'Company the layout belongs to, cut to 30 characters; empty for all companies.'));
@@ -93,10 +93,10 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.AddError(Errors, 'Request must include "<key>".', 'reportId, name, layoutFormat or layoutBase64 is missing.', 'Send all four keys.');
-        Parts.AddError(Errors, 'Layout format <layoutFormat> is not valid for report <reportId>.', 'layoutFormat is not Word, Excel, RDLC or RDL.', 'Send one of those formats.');
-        Parts.AddError(Errors, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
-        Parts.AddError(Errors, 'Request must include non-empty "layoutBase64".', 'layoutBase64 is empty.', 'Send the layout file as base64.');
+        Parts.AddContractError(Errors, 'Request must include "<key>".', 'reportId, name, layoutFormat or layoutBase64 is missing.', 'Send all four keys.');
+        Parts.AddContractError(Errors, 'Layout format <layoutFormat> is not valid for report <reportId>.', 'layoutFormat is not Word, Excel, RDLC or RDL.', 'Send one of those formats.');
+        Parts.AddContractError(Errors, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
+        Parts.AddContractError(Errors, 'Request must include non-empty "layoutBase64".', 'layoutBase64 is empty.', 'Send the layout file as base64.');
         Parts.AddRuntimeError(Errors, 'layoutBase64 is not valid base64, or the layout import fails.', 'Send the file content base64-encoded, in the format named by layoutFormat.');
         exit(true);
     end;

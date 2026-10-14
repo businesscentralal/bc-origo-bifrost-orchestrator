@@ -88,7 +88,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddReportErrors(Errors);
-        Parts.AddError(Errors, 'Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', 'The report is not processing-only.', 'Use Orchestrator.Report.SaveAs for reports that produce output.');
+        Parts.AddContractError(Errors, 'Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', 'The report is not processing-only.', 'Use Orchestrator.Report.SaveAs for reports that produce output.');
         Parts.AddRuntimeError(Errors, 'tableView is not a valid view for the report''s data item table.', 'Fix the view or leave it out.');
         exit(true);
     end;
