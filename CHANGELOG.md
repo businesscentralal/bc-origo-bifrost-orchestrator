@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-16) - Force-tier refusal regression tests (#88)
+
+- `Data Records Hint Tests` (96428) now expects Foundation's force-openable setup-table refusal for Job Queue Entry (472), while preserving exact permission guidance and the separately discoverable Orchestrator companion hints. Job Queue Entry, Scheduled Task, Report Request Preset and unrelated Customer scenarios run in both en-US (1033) and is-IS (1039). Product behavior and write restrictions are unchanged.
+
+
 ### Security (2026-10-14) - Generic data API field restrictions (#62, core#344)
 
 - `Sched Field Restrict ori` (10035557) blocks generic writes, including forced writes, to Scheduled Entry (10035535) fields 110 Notification Recipient and 140 Job Queue User ID, and Scheduler Setup (10035536) field 40 Job Queue User ID. Reads, neighbouring fields, dedicated scheduling and page edits are unchanged. Field hints name the appropriate BC page and, for recipients, `Orchestrator.Playbook.Schedule`, the dedicated type that sets that value.
