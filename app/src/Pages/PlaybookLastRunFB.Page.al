@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 page 10035583 "Playbook Last Run FB ori"
 {
+    ContextSensitiveHelpPage = 'playbook-last-run-fact-box';
     Extensible = false;
     Caption = 'Last Execution', Comment = 'is-IS=Síðasta keyrsla';
     PageType = CardPart;

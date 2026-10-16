@@ -7,6 +7,7 @@ using System.Threading;
 /// </summary>
 page 10035541 "Categories ori"
 {
+    ContextSensitiveHelpPage = 'categories-api';
     Extensible = false;
     APIGroup = 'jobQueueOrchestrator';
     APIPublisher = 'origo';

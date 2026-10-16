@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-16) - Context-sensitive help metadata (#69)
+
+- Add unique context-sensitive help slugs to pages 10035535, 10035537–10035541, 10035552–10035556, 10035583 and 10035602. Point the app help URL template at `https://docs.bifrost.origo.is/{0}/help/orchestrator/`. Page behavior, message contracts and translations are unchanged.
+- Bilingual help drafts and later publication remain separate acceptance steps in #69; the unchanged HelpLinks guard will be enabled through Architect-owned wiring after documentation publication at AppSource preparation.
+
 ### Changed (2026-10-14) - Contract source guard remediation (#68, #71)
 
 - Declare choice parameter keys literally in `Playbook Schedule Msg ori` (10035574), `Report SaveAs Msg ori` (10035595) and `Report Layout Set Msg ori` (10035599), using entry-taking `WithChoices` helpers in `Orch B1 Contract Parts ori` (10035609) and `Orch B2 Contract Parts ori` (10035610). Preserve all parameter fields and positions.
