@@ -1293,6 +1293,24 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Birttu skýrslu sem er ekki eingöngu vinnsluskýrsla sem PDF, Excel, Word eða XML. Lesaðgerð með tvíundarúttaki. Notaðu Orchestrator.Report.Run fyrir vinnsluskýrslur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3051959341 - NamedType 1146070434" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the Scheduled Entry card (Job Queue User ID)</source>
+          <target>spjald áætlaðrar færslu (notandakenni verkraðar)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=spjald áætlaðrar færslu (notandakenni verkraðar)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sched Field Restrict ori - NamedType EntryUserHintTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3051959341 - NamedType 1769568196" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Orchestrator.Playbook.Schedule (notificationRecipient) or the Scheduled Entry card (Notification Recipient)</source>
+          <target>Orchestrator.Playbook.Schedule (notificationRecipient) eða spjald áætlaðrar færslu (viðtakandi tilkynningar)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Orchestrator.Playbook.Schedule (notificationRecipient) eða spjald áætlaðrar færslu (viðtakandi tilkynningar)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sched Field Restrict ori - NamedType RecipientHintTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3051959341 - NamedType 2546138143" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the Scheduler Setup page (Job Queue User ID)</source>
+          <target>síðuna Uppsetning verkstýringar (notandakenni verkraðar)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=síðuna Uppsetning verkstýringar (notandakenni verkraðar)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sched Field Restrict ori - NamedType SetupUserHintTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2555341656 - Method 433557723 - NamedType 4235727488" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1: %2 is invalid</source>
           <target>%1: %2 er ógilt</target>
