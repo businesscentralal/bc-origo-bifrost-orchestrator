@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-10-16) - Report export filter regressions (#85)
+
+- Extend `Report Boundary Tests ori` (codeunit 96454) to reject invalid filter fields for PDF, the default PDF format, Excel and Word alongside XML. Assert JSON error content, `InvalidFilterField`, `tableView`, nonempty recovery guidance, help hints and no report execution, so a validation failure cannot pass as empty binary success.
+
 ### Changed (2026-10-14) - Contract source guard remediation (#68, #71)
 
 - Declare choice parameter keys literally in `Playbook Schedule Msg ori` (10035574), `Report SaveAs Msg ori` (10035595) and `Report Layout Set Msg ori` (10035599), using entry-taking `WithChoices` helpers in `Orch B1 Contract Parts ori` (10035609) and `Orch B2 Contract Parts ori` (10035610). Preserve all parameter fields and positions.
