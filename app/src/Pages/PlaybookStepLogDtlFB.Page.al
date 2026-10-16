@@ -5,6 +5,7 @@ namespace Origo.Bifrost.Orchestrator;
 
 page 10035555 "Playbook Step Log Dtl. FB ori"
 {
+    ContextSensitiveHelpPage = 'playbook-step-log-detail-fact-box';
     Extensible = false;
     Caption = 'Selected Step', Comment = 'is-IS=Valið skref';
     PageType = CardPart;
