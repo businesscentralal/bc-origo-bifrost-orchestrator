@@ -57,5 +57,6 @@
         "skipUpgrade": true
       }
     }
-  ]
+  ],
+  "repoVersion": "1.0.1"
 }
