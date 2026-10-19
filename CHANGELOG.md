@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-19) - Embedded @path references (#101)
+
+- `Playbook JSON Helper ori` (embedded references) no longer reads a sentence-ending period as part of the path, so `"... date @_sys.today."` resolves instead of staying literal.
+- An embedded value is now escaped as JSON string content. A value with a quote, backslash or line break (typical of a language-model reply), or an embedded object such as `@_run`, made the request invalid JSON and stopped the whole run with "The data does not represent a valid JSON token."
+- `Resolver Test` (96402): `EmbeddedRefBeforePeriodResolves`, `EmbeddedRefEscapesQuotesAndObjects`.
+
 ### Added (2026-10-19) - Bounded report parameters and layout selection (#5)
 
 - Add `Orchestrator.ReportLayout.List` and `.Get` through `Report Layout Read Handler ori` (10035611), message codeunits 10035612/10035613, the message enum/help and permissions. Discovery includes extension and user layouts; export preserves the selected layout bytes.

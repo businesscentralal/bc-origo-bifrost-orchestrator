@@ -112,6 +112,45 @@ codeunit 96402 "Resolver Test"
     end;
 
     [Test]
+    procedure EmbeddedRefBeforePeriodResolves()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        // [SCENARIO #101] A sentence-ending period after an embedded reference is punctuation, not part of the path
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_initial.id', '103002');
+        RequestJson.Add('prompt', 'Invoice @_initial.id. Then @_initial.id...');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Invoice 103002. Then 103002...', Token.AsValue().AsText(), 'Trailing dots stay as text');
+    end;
+
+    [Test]
+    procedure EmbeddedRefEscapesQuotesAndObjects()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+        Lf: Text[1];
+    begin
+        // [SCENARIO #101] An embedded value with quotes, a backslash or a line break, or an object, keeps the request valid JSON
+        Initialize();
+        Lf[1] := 10;
+        Workspace.Reset();
+        Workspace.SetValue('10.reply', 'He said "hi"' + Lf + 'C:\temp');
+        Workspace.SetValue('20.obj.code', 'A');
+        RequestJson.Add('prompt', 'Reply: @10.reply / object: @20.obj');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Reply: He said "hi"' + Lf + 'C:\temp / object: {"code":"A"}', Token.AsValue().AsText(), 'Embedded values are escaped inside the string');
+    end;
+
+    [Test]
     procedure CollectDirective()
     var
         Workspace: Codeunit "Playbook Workspace ori";
