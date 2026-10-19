@@ -33,6 +33,33 @@ codeunit 96453 "Orch B2 Contract Tests"
     begin
         // [SCENARIO #60] Report.Run runs caller-named batch reports that commit, so it declares irreversible
         AssertEffect("Message Type ori"::"Orchestrator.Report.Run", 'Orchestrator.Report.Run', 'irreversible', true);
+        // [SCENARIO #80] Preview seeds _who through a nested Help.WhoAmI.Get dispatch that commits
+        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'irreversible', true);
+    end;
+
+    /// <summary>Preview names the nested committed dispatch and keeps its read direction (#80).</summary>
+    [Test]
+    procedure PreviewDisclosesNestedCommit()
+    var
+        Contract: Interface "Msg Contract ori";
+        MessageTypeInterface: Interface "Msg Interface ori";
+        Effect: JsonObject;
+        Token: JsonToken;
+        Notes: Text;
+    begin
+        // [GIVEN] The Workspace.Preview contract
+        Contract := "Message Type ori"::"Orchestrator.Workspace.Preview";
+        // [WHEN] Its effect and notes are read
+        Assert.IsTrue(Contract.GetEffect(Effect), 'Preview declares an effect');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'Preview has notes');
+        // [THEN] The changes text names the nested dispatch and its commit
+        Assert.IsTrue(Effect.Get('changes', Token), 'changes is present');
+        Assert.IsTrue(Token.AsValue().AsText().Contains('Help.WhoAmI.Get'), 'changes names the nested dispatch');
+        Assert.IsTrue(Token.AsValue().AsText().Contains('commits'), 'changes discloses the commit');
+        Assert.IsTrue(Notes.Contains('outer transaction'), 'notes explain why it cannot roll back');
+        // [THEN] No business data changes, so the roster direction stays Outbound
+        MessageTypeInterface := "Message Type ori"::"Orchestrator.Workspace.Preview";
+        Assert.AreEqual("Msg Direction ori"::Outbound, MessageTypeInterface.GetMessageDirection(), 'Preview direction');
     end;
 
     [Test]
@@ -45,7 +72,6 @@ codeunit 96453 "Orch B2 Contract Tests"
         AssertEffect("Message Type ori"::"Orchestrator.Report.SaveAs", 'Orchestrator.Report.SaveAs', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.List", 'Orchestrator.ReportLayout.List', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.Get", 'Orchestrator.ReportLayout.Get', 'read', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'read', false);
     end;
 
     /// <summary>Preserves every field and position of the main choice entry.</summary>
