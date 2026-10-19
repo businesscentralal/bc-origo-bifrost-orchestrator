@@ -90,10 +90,10 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.AddError(Errors, 'Report <reportId> not found.', 'The report does not exist.', 'Use Orchestrator.Report.List.');
-        Parts.AddError(Errors, 'Request must include "<key>".', 'A required key is missing.', 'Supply the documented required fields.');
-        Parts.AddError(Errors, 'appId must be a valid GUID.', 'The supplied appId is not a GUID.', 'Use the appId returned by ReportLayout.List.');
-        Parts.AddError(Errors, 'Layout <name> not found on report <reportId>.', 'No layout matches the name and appId.', 'Use ReportLayout.List and send the returned name and appId.');
+        Parts.AddContractError(Errors, 'Report <reportId> not found.', 'The report does not exist.', 'Use Orchestrator.Report.List.');
+        Parts.AddContractError(Errors, 'Request must include "<key>".', 'A required key is missing.', 'Supply the documented required fields.');
+        Parts.AddContractError(Errors, 'appId must be a valid GUID.', 'The supplied appId is not a GUID.', 'Use the appId returned by ReportLayout.List.');
+        Parts.AddContractError(Errors, 'Layout <name> not found on report <reportId>.', 'No layout matches the name and appId.', 'Use ReportLayout.List and send the returned name and appId.');
 
         exit(true);
     end;

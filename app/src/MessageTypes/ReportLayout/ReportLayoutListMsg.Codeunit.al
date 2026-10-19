@@ -85,8 +85,8 @@ codeunit 10035612 "Report Layout List Msg ori" implements "Msg Interface ori", "
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.AddError(Errors, 'Report <reportId> not found.', 'The report does not exist.', 'Use Orchestrator.Report.List.');
-        Parts.AddError(Errors, 'Request must include "<key>".', 'A required key is missing.', 'Supply the documented required fields.');
+        Parts.AddContractError(Errors, 'Report <reportId> not found.', 'The report does not exist.', 'Use Orchestrator.Report.List.');
+        Parts.AddContractError(Errors, 'Request must include "<key>".', 'A required key is missing.', 'Supply the documented required fields.');
 
         exit(true);
     end;

@@ -66,7 +66,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Formats.Add('Word');
         Formats.Add('XML');
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must not be a processing-only report.'));
-        Parts.AddChoiceParameter(Parameters, 'format', false, 'Output format. Case-insensitive.', Formats, 'PDF');
+        Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('format', 'string', false, 'Output format. Case-insensitive.'), Formats, 'PDF'));
         Parameters.Add(ContractMgt.Parameter('parameters', 'object', false, 'Explicit scalar option values over caller requestPageXml or a registered template. Never reads or changes saved settings. Unknown names fail. Report 1316 has a built-in template; see notes.'));
         Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Caller XML takes precedence over registered templates. parameters overlays its named options. Without parameters, existing raw XML / saved-preset behavior is retained.'));
         Parameters.Add(ContractMgt.Parameter('layoutName', 'string', false, 'Temporary layout override from Orchestrator.ReportLayout.List. The prior session selection and stored defaults are preserved.'));
@@ -90,10 +90,10 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddReportErrors(Errors);
-        Parts.AddError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
-        Parts.AddError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
-        Parts.AddError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
-        Parts.AddError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
+        Parts.AddContractError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
+        Parts.AddContractError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
+        Parts.AddContractError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
+        Parts.AddContractError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
         Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
         exit(true);
     end;

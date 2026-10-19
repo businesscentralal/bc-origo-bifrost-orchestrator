@@ -86,11 +86,11 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         RetryPolicies.Add('Always');
         Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to schedule (Code[20]). Required unless subject carries the code.'));
         Parameters.Add(ContractMgt.Parameter('recurringTemplateCode', 'string', true, 'Code of the Recurring Template ori whose days, times and interval the entry takes. Must exist.'));
-        Parts.AddChoiceParameter(Parameters, 'notificationType', 'How the entry notifies. Case-insensitive; any other value means None.', NotificationTypes, 'None');
+        Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('notificationType', 'string', false, 'How the entry notifies. Case-insensitive; any other value means None.'), NotificationTypes, 'None'));
         Parameters.Add(ContractMgt.Parameter('notificationRecipient', 'string', false, 'Where the notification goes (up to 2048 characters). Stored as sent; not checked against notificationType.'));
         Parameters.Add(ContractMgt.Parameter('jobQueueCategoryCode', 'string', false, 'Job Queue Category Code (Code[10]) of the entry.'));
         Parameters.Add(ContractMgt.Parameter('emitTelemetry', 'boolean', false, 'Whether the entry emits telemetry. Default false.'));
-        Parts.AddChoiceParameter(Parameters, 'retryPolicy', 'Whether a failed run is restarted: Never, ThreeTimes (until three errors since the last success) or Always. Case-insensitive; any other value means Always.', RetryPolicies, 'Always');
+        Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('retryPolicy', 'string', false, 'Whether a failed run is restarted: Never, ThreeTimes (until three errors since the last success) or Always. Case-insensitive; any other value means Always.'), RetryPolicies, 'Always'));
         exit(true);
     end;
 
@@ -113,8 +113,8 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.AddPlaybookErrors(Errors);
-        Parts.AddError(Errors, 'Request must include "recurringTemplateCode".', 'data.recurringTemplateCode is missing or empty.', 'Send the code of a Recurring Template ori.');
-        Parts.AddError(Errors, 'Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.', 'The playbook already has an orchestrator entry.', 'Delete that Scheduled Entry ori first, or keep the schedule it has.');
+        Parts.AddContractError(Errors, 'Request must include "recurringTemplateCode".', 'data.recurringTemplateCode is missing or empty.', 'Send the code of a Recurring Template ori.');
+        Parts.AddContractError(Errors, 'Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.', 'The playbook already has an orchestrator entry.', 'Delete that Scheduled Entry ori first, or keep the schedule it has.');
         Parts.AddRuntimeError(Errors, 'No Recurring Template ori has that code (Business Central''s table relation error).', 'Check the code with Data.Records.Get on table Recurring Template ori.');
         exit(true);
     end;
@@ -172,10 +172,10 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     /// <summary>
     /// Returns the message direction for this message type.
     /// </summary>
-    /// <returns>Outbound direction.</returns>
+    /// <returns>Inbound direction.</returns>
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
-        exit("Msg Direction ori"::Outbound);
+        exit("Msg Direction ori"::Inbound);
     end;
 
     /// <summary>

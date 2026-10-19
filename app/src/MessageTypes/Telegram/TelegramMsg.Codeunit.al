@@ -90,12 +90,12 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddError(Errors, 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', 'Allow HttpClient Requests is off for Bifrost Orchestrator.', 'Enable it in Extension Settings (page 2500).');
-        Parts.AddError(Errors, 'Telegram Bot Token is not configured in Orchestrator Setup.', 'No bot token is stored.', 'Set the Telegram Bot Token in the Orchestrator setup.');
+        Parts.AddContractError(Errors, 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', 'Allow HttpClient Requests is off for Bifrost Orchestrator.', 'Enable it in Extension Settings (page 2500).');
+        Parts.AddContractError(Errors, 'Telegram Bot Token is not configured in Orchestrator Setup.', 'No bot token is stored.', 'Set the Telegram Bot Token in the Orchestrator setup.');
         Parts.AddRuntimeError(Errors, 'The calling user has no User Setup ori record (Business Central''s record-not-found text).', 'Create the user''s Bifrost User Setup with a Telegram Chat ID.');
-        Parts.AddError(Errors, 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', 'The calling user''s Telegram Chat ID is empty.', 'Set the Telegram Chat ID in Bifrost User Setup.');
-        Parts.AddError(Errors, '"message" is required in the request data.', 'data.message is missing.', 'Send the text in data.message.');
-        Parts.AddError(Errors, 'Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>', 'Telegram rejected the request.', 'Read the Telegram response and correct the message or the configuration.');
+        Parts.AddContractError(Errors, 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', 'The calling user''s Telegram Chat ID is empty.', 'Set the Telegram Chat ID in Bifrost User Setup.');
+        Parts.AddContractError(Errors, '"message" is required in the request data.', 'data.message is missing.', 'Send the text in data.message.');
+        Parts.AddContractError(Errors, 'Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>', 'Telegram rejected the request.', 'Read the Telegram response and correct the message or the configuration.');
         exit(true);
     end;
 

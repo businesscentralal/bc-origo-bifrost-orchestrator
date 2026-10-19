@@ -7,13 +7,40 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-### Added (2026-10-13) - Bounded report parameters and layout selection (#5)
+### Added (2026-10-19) - Bounded report parameters and layout selection (#5)
 
 - Add `Orchestrator.ReportLayout.List` and `.Get` through `Report Layout Read Handler ori` (10035611), message codeunits 10035612/10035613, the message enum/help and permissions. Discovery includes extension and user layouts; export preserves the selected layout bytes.
 - `Report Msg Handler ori` (10035592) and Run/SaveAs contracts (10035597/10035595) accept a scalar `parameters` overlay through `Report Parameters ori` (10035614). Caller XML takes precedence over event-registered templates; unknown names, ambiguous aliases, non-scalar values and wrong-report XML fail explicitly. Explicit overlays never read or update saved user settings. Calls without `parameters` retain existing raw XML / preset behavior.
 - Supply the BC 28.5 report 1316 template and stable aliases for dates, aging, date choice, balance selection and statement style. `PrintEntriesNotDue` has no platform control and is rejected rather than mapped to different behavior.
 - SaveAs accepts temporary `layoutName`/`appId` through the public session-selection API and restores the prior platform/custom selection after rendering success or failure. Persistent `SetDefault` and `setAsDefault` are out of scope; no selection-table writes.
 - Native tests 96409/96431 use owned report 96455, imported layout fixtures, observable report parameters and an event template. Cover byte round trips, XML escaping, unknown/malformed input, explicit-input precedence, preset preservation, actual rendering and selection restoration. New error labels have is-IS translations.
+
+### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
+
+- Message types whose contract effect is write or irreversible now return `GetMessageDirection` Inbound, matching Foundation's roster rule that Outbound is a read and Inbound is a write. MCP clients no longer treat these types as read-only. Pure reads stay Outbound. `Orchestrator.Report.Get` stays Both because it reads and inserts an empty preset. `Orchestrator.Report.SaveAs` stays Outbound because its effect is read.
+- Objects: `Codeunit Entry Restart Msg ori` (10035567), `Codeunit Entry RestartIf Msg ori` (10035568), `Codeunit Playbook Enqueue Msg ori` (10035584), `Codeunit Playbook Run Msg ori` (10035562), `Codeunit Playbook Schedule Msg ori` (10035574), `Codeunit Report Run Msg ori` (10035597), `Codeunit SE Register Msg ori` (10035579), `Codeunit SE Restart Msg ori` (10035556), `Codeunit SE Run Msg ori` (10035555), `Codeunit SE Schedule Msg ori` (10035581), `Codeunit Status Restart Msg ori` (10035560), `Codeunit Status RestartIf Msg ori` (10035561).
+- `Msg Direction Tests ori` (96455) checks the registered direction of every Orchestrator message type through `Msg Interface ori`.
+
+### Fixed (2026-10-16) - Force-tier refusal regression tests (#88)
+
+- `Data Records Hint Tests` (96428) now expects Foundation's force-openable setup-table refusal for Job Queue Entry (472), while preserving exact permission guidance and the separately discoverable Orchestrator companion hints. Job Queue Entry, Scheduled Task, Report Request Preset and unrelated Customer scenarios run in both en-US (1033) and is-IS (1039). Product behavior and write restrictions are unchanged.
+
+
+### Security (2026-10-14) - Generic data API field restrictions (#62, core#344)
+
+- `Sched Field Restrict ori` (10035557) blocks generic writes, including forced writes, to Scheduled Entry (10035535) fields 110 Notification Recipient and 140 Job Queue User ID, and Scheduler Setup (10035536) field 40 Job Queue User ID. Reads, neighbouring fields, dedicated scheduling and page edits are unchanged. Field hints name the appropriate BC page and, for recipients, `Orchestrator.Playbook.Schedule`, the dedicated type that sets that value.
+- `Sched Field Restrict Tests ori` (96405) checks the public restriction and hint paths, including readable fields, writable neighbours and unchanged table companion hints. `Help ori` (10035576) documents all three restrictions. Existing entry registration and playbook scheduling tests remain enabled; app versions and permission sets are unchanged.
+
+### Changed (2026-10-14) - Contract source guard remediation (#68, #71)
+
+- Declare choice parameter keys literally in `Playbook Schedule Msg ori` (10035574), `Report SaveAs Msg ori` (10035595) and `Report Layout Set Msg ori` (10035599), using entry-taking `WithChoices` helpers in `Orch B1 Contract Parts ori` (10035609) and `Orch B2 Contract Parts ori` (10035610). Preserve all parameter fields and positions.
+- Rename the contract-only `AddError` helper to `AddContractError` in both Parts codeunits and its 26 call sites across 11 files. Contract error codes, text and ordering remain unchanged; runtime answers and translations are unchanged.
+- Name the paged step's outgoing payload `PageRequestJson` in `Playbook Runner ori` (10035547), keeping `skip`/`take` out of the caller contract. `Orch B1 Contract Tests` (96452), `Orch B2 Contract Tests` (96453) and `Playbook Run Msg Tests` (96421) cover the four choice entries, all 21 error chapters and real outgoing paging-key injection. Guard scripts and CI wiring are unchanged.
+
+### Fixed (2026-10-13) - Headless registration and WhoAmI contract (#10, #63)
+
+- `Scheduled Entry ori` (10035535) honors `HideDialog` for newly registered Job Queue entries. `Entry Registration Tests ori` (96407) checks fresh and repeated headless registration and preserves the interactive confirmation/card flow.
+- `WhoAmI Subscriber ori` (10035585) documents the installed `telegramChatId` response field, its caller-specific setup source, empty value and playbook reference. `WhoAmI Contract Tests ori` (96408) checks the real contract builder and retained Foundation chapters.
 
 ### Changed (2026-10-13) - PR #67 acceptance reconciliation (#64, #65, #70)
 

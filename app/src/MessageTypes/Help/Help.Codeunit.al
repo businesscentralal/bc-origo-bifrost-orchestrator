@@ -688,12 +688,14 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| Starting Time | StartingTime | Time | |');
         O.AppendLine('| Ending Time | EndingTime | Time | |');
         O.AppendLine('| Notification Type | NotificationType | Option | None/Email |');
-        O.AppendLine('| Notification Recipient | NotificationRecipient | Text | Email address |');
+        O.AppendLine('| Notification Recipient | NotificationRecipient | Text | Field 110: not writable through Data.Records.Set. Set with Orchestrator.Playbook.Schedule or edit on the Scheduled Entry card. |');
+        O.AppendLine('| Job Queue User ID | JobQueueUserID | Code[50] | Field 140: not writable through Data.Records.Set. Edit on the Scheduled Entry card. |');
         O.AppendLine('| Retry Policy | RetryPolicy | Option | Always/Limited/None |');
         O.AppendLine('| Client Credentials Code | ClientCredentialsCode | Code[20] | For API-based scheduling |');
         O.AppendLine('');
         O.AppendLine('#### Scheduler Setup ori');
         O.AppendLine('Singleton setup table. Read with `Data.Records.Get`, tableName = "Scheduler Setup ori".');
+        O.AppendLine('Job Queue User ID (field 40) cannot be written through Data.Records.Set. Edit it on the Scheduler Setup page. Reads of these three fields are unchanged; other fields remain writable generically.');
         O.AppendLine('');
         O.AppendLine('### Playbook Tables');
         O.AppendLine('');

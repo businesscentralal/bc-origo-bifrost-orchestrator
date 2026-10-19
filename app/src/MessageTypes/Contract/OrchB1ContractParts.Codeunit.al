@@ -86,26 +86,22 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     end;
 
     /// <summary>
-    /// Adds a string parameter that takes one of a fixed list of values.
+    /// Adds choices and an optional default to a declared string parameter.
     /// </summary>
-    /// <param name="Parameters">Receives the entry.</param>
-    /// <param name="Name">The key under data.</param>
-    /// <param name="Description">What the parameter does.</param>
+    /// <param name="Entry">The parameter declared with its literal key by the caller.</param>
     /// <param name="AllowedValues">The accepted values.</param>
-    /// <param name="DefaultValue">The value used when the key is left out.</param>
-    internal procedure AddChoiceParameter(var Parameters: JsonArray; Name: Text; Description: Text; AllowedValues: List of [Text]; DefaultValue: Text)
+    /// <param name="DefaultValue">The value used when the key is left out; empty when there is none.</param>
+    /// <returns>The parameter entry with choices and default.</returns>
+    internal procedure WithChoices(Entry: JsonObject; AllowedValues: List of [Text]; DefaultValue: Text): JsonObject
     var
-        ContractMgt: Codeunit "Msg Contract Mgt ori";
-        Entry: JsonObject;
         Allowed: JsonArray;
         Value: Text;
     begin
         foreach Value in AllowedValues do
             Allowed.Add(Value);
-        Entry := ContractMgt.Parameter(Name, 'string', false, Description);
         Entry.Add('default', DefaultValue);
         Entry.Add('allowed', Allowed);
-        Parameters.Add(Entry);
+        exit(Entry);
     end;
 
     /// <summary>
@@ -115,7 +111,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="ErrorText">The error text, or its pattern.</param>
     /// <param name="When">When the error is returned.</param>
     /// <param name="Fix">What the caller does about it.</param>
-    internal procedure AddError(var Errors: JsonArray; ErrorText: Text; When: Text; Fix: Text)
+    internal procedure AddContractError(var Errors: JsonArray; ErrorText: Text; When: Text; Fix: Text)
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
@@ -131,7 +127,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Fix">What the caller does about it.</param>
     internal procedure AddRuntimeError(var Errors: JsonArray; When: Text; Fix: Text)
     begin
-        AddError(Errors, 'Business Central''s own error text', When, Fix);
+        AddContractError(Errors, 'Business Central''s own error text', When, Fix);
     end;
 
     /// <summary>
@@ -140,7 +136,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddPlaybookErrors(var Errors: JsonArray)
     begin
-        AddError(Errors, 'Request must include "playbookCode" in the data payload or as the subject.',
+        AddContractError(Errors, 'Request must include "playbookCode" in the data payload or as the subject.',
             'Neither data.playbookCode nor subject was sent.', 'Send the playbook code in data.playbookCode or as subject.');
         AddRuntimeError(Errors, 'No Playbook ori exists with that code (Business Central''s record-not-found text).',
             'Check the code with Data.Records.Get on table Playbook ori.');
@@ -152,7 +148,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddScheduledEntryErrors(var Errors: JsonArray)
     begin
-        AddError(Errors, 'Request must include "id" (GUID) in the data payload or as the subject.',
+        AddContractError(Errors, 'Request must include "id" (GUID) in the data payload or as the subject.',
             'data.id is missing or not a GUID, and subject is not a GUID.', 'Send the SystemId of the Scheduled Entry ori in data.id or as subject.');
         AddRuntimeError(Errors, 'No Scheduled Entry ori has that SystemId or ID (Business Central''s record-not-found text).',
             'Check the identifier with Data.Records.Get on table Scheduled Entry ori.');
@@ -164,7 +160,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddJobQueueEntryErrors(var Errors: JsonArray)
     begin
-        AddError(Errors, 'Request must include "id" (GUID) in the data payload or as the subject.',
+        AddContractError(Errors, 'Request must include "id" (GUID) in the data payload or as the subject.',
             'data.id is missing or not a GUID, and subject is not a GUID.', 'Send the SystemId of the Job Queue Entry in data.id or as subject.');
         AddRuntimeError(Errors, 'No Job Queue Entry has that SystemId (Business Central''s record-not-found text).',
             'Send the SystemId of the Job Queue Entry; its ID is not accepted.');
