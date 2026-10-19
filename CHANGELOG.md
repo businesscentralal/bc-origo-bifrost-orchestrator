@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-19) - Help published and guarded (#69)
+
+- The Orchestrator documentation and context-sensitive help are published on https://docs.bifrost.origo.is/ (businesscentralal/bifrost#107). `app.json` `help` now points at `https://docs.bifrost.origo.is/en-us/orchestrator/`.
+- The unchanged `tools/Test-HelpLinks.ps1` runs as the `HelpLinks` job in `SourceGuards.yaml` against the documentation site's main branch: every page must link to a help page that exists in en-US and is-IS.
+
 ### Fixed (2026-10-19) - Embedded @path references (#101)
 
 - `Playbook JSON Helper ori` (embedded references) no longer reads a sentence-ending period as part of the path, so `"... date @_sys.today."` resolves instead of staying literal.
