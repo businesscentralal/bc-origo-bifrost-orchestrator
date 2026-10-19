@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-19) - Embedded @path references (#101)
+
+- `Playbook JSON Helper ori` (embedded references) no longer reads a sentence-ending period as part of the path, so `"... date @_sys.today."` resolves instead of staying literal.
+- An embedded value is now escaped as JSON string content. A value with a quote, backslash or line break (typical of a language-model reply), or an embedded object such as `@_run`, made the request invalid JSON and stopped the whole run with "The data does not represent a valid JSON token."
+- `Resolver Test` (96402): `EmbeddedRefBeforePeriodResolves`, `EmbeddedRefEscapesQuotesAndObjects`.
+
 ### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
 
 - Message types whose contract effect is write or irreversible now return `GetMessageDirection` Inbound, matching Foundation's roster rule that Outbound is a read and Inbound is a write. MCP clients no longer treat these types as read-only. Pure reads stay Outbound. `Orchestrator.Report.Get` stays Both because it reads and inserts an empty preset. `Orchestrator.Report.SaveAs` stays Outbound because its effect is read.

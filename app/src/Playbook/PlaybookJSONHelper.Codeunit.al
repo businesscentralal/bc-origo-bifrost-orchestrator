@@ -104,6 +104,9 @@ codeunit 10035546 "Playbook JSON Helper ori"
                     break;
                 RefEnd += 1;
             end;
+            // A path never ends with a dot: trailing dots are sentence punctuation and stay in the text (#101)
+            while (RefEnd > SearchPos + 1) and (JsonText[RefEnd - 1] = '.') do
+                RefEnd -= 1;
 
             if RefEnd > SearchPos + 1 then begin
                 RefText := CopyStr(JsonText, SearchPos + 1, RefEnd - SearchPos - 1);
@@ -112,6 +115,8 @@ codeunit 10035546 "Playbook JSON Helper ori"
                         ResolvedValue := ResolvedToken.AsValue().AsText()
                     else
                         ResolvedToken.WriteTo(ResolvedValue);
+                    // An embedded reference sits inside a JSON string: escape quotes, backslashes and line breaks (#101)
+                    ResolvedValue := EscapeForJsonString(ResolvedValue);
                     JsonText := CopyStr(JsonText, 1, SearchPos - 1) + ResolvedValue + CopyStr(JsonText, RefEnd);
                     SearchPos := SearchPos + StrLen(ResolvedValue);
                 end else
@@ -122,6 +127,16 @@ codeunit 10035546 "Playbook JSON Helper ori"
             SearchPos := JsonText.IndexOf('@', SearchPos);
         end;
         exit(JsonText);
+    end;
+
+    local procedure EscapeForJsonString(Value: Text): Text
+    var
+        JsonValueHolder: JsonValue;
+        Quoted: Text;
+    begin
+        JsonValueHolder.SetValue(Value);
+        JsonValueHolder.WriteTo(Quoted);
+        exit(CopyStr(Quoted, 2, StrLen(Quoted) - 2));
     end;
 
     /// <summary>
