@@ -112,4 +112,14 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
       Caption = 'Orchestrator.ReportLayout.Set', Locked = true;
       Implementation = "Msg Interface ori" = "Report Layout Set Msg ori", "Msg Discovery ori" = "Report Layout Set Msg ori", "Msg Contract ori" = "Report Layout Set Msg ori";
    }
+    value(10035612; "Orchestrator.ReportLayout.List")
+    {
+        Caption = 'Orchestrator.ReportLayout.List', Locked = true;
+        Implementation = "Msg Interface ori" = "Report Layout List Msg ori", "Msg Discovery ori" = "Report Layout List Msg ori", "Msg Contract ori" = "Report Layout List Msg ori";
+    }
+    value(10035613; "Orchestrator.ReportLayout.Get")
+    {
+        Caption = 'Orchestrator.ReportLayout.Get', Locked = true;
+        Implementation = "Msg Interface ori" = "Report Layout Get Msg ori", "Msg Discovery ori" = "Report Layout Get Msg ori", "Msg Contract ori" = "Report Layout Get Msg ori";
+    }
 }

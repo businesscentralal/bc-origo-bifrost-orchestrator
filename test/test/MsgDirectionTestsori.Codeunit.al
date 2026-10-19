@@ -48,6 +48,8 @@ codeunit 96455 "Msg Direction Tests ori"
         AssertDirection("Message Type ori"::"Orchestrator.Workspace.Preview", "Msg Direction ori"::Outbound, 'Orchestrator.Workspace.Preview');
         AssertDirection("Message Type ori"::"Orchestrator.Report.SaveAs", "Msg Direction ori"::Outbound, 'Orchestrator.Report.SaveAs');
         AssertDirection("Message Type ori"::"Orchestrator.Report.Get", "Msg Direction ori"::Both, 'Orchestrator.Report.Get');
+        AssertDirection("Message Type ori"::"Orchestrator.ReportLayout.List", "Msg Direction ori"::Outbound, 'Orchestrator.ReportLayout.List');
+        AssertDirection("Message Type ori"::"Orchestrator.ReportLayout.Get", "Msg Direction ori"::Outbound, 'Orchestrator.ReportLayout.Get');
     end;
 
     local procedure AssertDirection(MessageType: Enum "Message Type ori"; Expected: Enum "Msg Direction ori"; Name: Text)
