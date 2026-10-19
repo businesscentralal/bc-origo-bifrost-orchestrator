@@ -219,6 +219,13 @@ Key rules always in effect:
 - `ContextSensitiveHelpPage` values are Docusaurus slugs without the `.html` extension - each one must
   match a page under `help/nornir/` in the site repo.
 
+## Report capability objects (#5, merged 2026-10-19)
+
+- App codeunits 10035611 `Report Layout Read Handler ori`, 10035612 `Report Layout List Msg ori`,
+  10035613 `Report Layout Get Msg ori`, 10035614 `Report Parameters ori`; enum values 10035612/10035613.
+- Tests: codeunit 96409 `Report Layout Read Tests ori`, codeunit 96431 `Report Parameter Tests ori`,
+  fixture report 96455 `Layout Sample Report ori` (shares its number with codeunit 96455, a different object type).
+
 ## Worker-9 issue batch reservations (2026-10-13)
 
 - #10: test codeunit 96407 `Entry Registration Tests ori`.

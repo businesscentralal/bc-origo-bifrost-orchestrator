@@ -1167,6 +1167,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Lesaðgerð. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Get Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 386601961 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exports the bytes of an extension or user-defined report layout.</source>
+          <target>Flytur út gögn skýrsluútlits úr viðbót eða notandaskilgreindu útliti.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytur út gögn skýrsluútlits úr viðbót eða notandaskilgreindu útliti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Get Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 386601961 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>export report layout, download layout, layout bytes, base64 layout</source>
+          <target>flytja út skýrsluútlit, sækja útlit, útlitsgögn, base64 útlit</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=flytja út skýrsluútlit, sækja útlit, útlitsgögn, base64 útlit</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Get Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 1047023575" size-unit="char" translate="yes" xml:space="preserve">
           <source>Layout format %1 is not valid for report %2.</source>
           <target>Útlitssnið %1 er ógilt fyrir skýrslu %2.</target>
@@ -1190,6 +1202,48 @@
           <target>Skýrsla %1 finnst ekki.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 finnst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType ReportNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2135295893 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lists extension and user-defined layouts for a report.</source>
+          <target>Sýnir útlit skýrslu úr viðbótum og notandaskilgreind útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir útlit skýrslu úr viðbótum og notandaskilgreind útlit.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout List Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2135295893 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>list report layouts, report formats, extension layouts, user layouts</source>
+          <target>sýna skýrsluútlit, skýrslusnið, útlit viðbóta, notandaútlit</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=sýna skýrsluútlit, skýrslusnið, útlit viðbóta, notandaútlit</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout List Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3544975446 - NamedType 1435033756" size-unit="char" translate="yes" xml:space="preserve">
+          <source>appId must be a valid GUID.</source>
+          <target>appId verður að vera gilt GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=appId verður að vera gilt GUID.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType InvalidAppIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3544975446 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 not found on report %2.</source>
+          <target>Útlit %1 fannst ekki fyrir skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType LayoutNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3544975446 - NamedType 681006130" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request must include "name".</source>
+          <target>Beiðni verður að innihalda "name".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "name".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType MissingNameErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3544975446 - NamedType 625280694" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request must include "reportId".</source>
+          <target>Beiðni verður að innihalda "reportId".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "reportId".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType MissingReportIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3544975446 - NamedType 572047844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report %1 not found.</source>
+          <target>Skýrsla %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType ReportNotFoundErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Creates or replaces a user-defined report layout via the BC layout import path.</source>
@@ -1227,6 +1281,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lista skýrslur sem núverandi notandi sér, mögulega síaðar eftir því hvort þær séu vinnsluskýrslur. Lesaðgerð. Notaðu Orchestrator.Report.Get fyrir eina skýrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report List Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3557924230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>appId must be a valid GUID.</source>
+          <target>appId verður að vera gilt GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=appId verður að vera gilt GUID.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType InvalidLayoutAppIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 not found on report %2.</source>
+          <target>Útlit %1 fannst ekki fyrir skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType LayoutNotFoundErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3444540953" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.</source>
           <target>Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.</target>
@@ -1256,6 +1322,48 @@
           <target>Beiðni verður að innihalda "reportId".</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "reportId".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - Method GetReportId - NamedType MissingReportIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 2566772706" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request page parameter %1 must be one of: %2.</source>
+          <target>Færibreyta beiðnisíðu %1 verður að vera eitt af: %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færibreyta beiðnisíðu %1 verður að vera eitt af: %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType ChoiceErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 527110261" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request page option %1 is specified more than once on report %2.</source>
+          <target>Valkostur beiðnisíðu %1 er tilgreindur oftar en einu sinni í skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Valkostur beiðnisíðu %1 er tilgreindur oftar en einu sinni í skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType DuplicateParameterErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 723412179" size-unit="char" translate="yes" xml:space="preserve">
+          <source>requestPageXml must contain ReportParameters for report %1 with unique option names.</source>
+          <target>requestPageXml verður að innihalda ReportParameters fyrir skýrslu %1 með einkvæmum heitum valkosta.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=requestPageXml verður að innihalda ReportParameters fyrir skýrslu %1 með einkvæmum heitum valkosta.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType InvalidBaseErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 1688898688" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No request page template is registered for report %1. Provide requestPageXml.</source>
+          <target>Ekkert sniðmát beiðnisíðu er skráð fyrir skýrslu %1. Gefðu upp requestPageXml.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert sniðmát beiðnisíðu er skráð fyrir skýrslu %1. Gefðu upp requestPageXml.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType MissingBaseErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 3284910742" size-unit="char" translate="yes" xml:space="preserve">
+          <source>parameters must be an object.</source>
+          <target>parameters verður að vera hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=parameters verður að vera hlutur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType ParametersObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 541553205" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request page parameter %1 must be a non-null scalar value.</source>
+          <target>Færibreyta beiðnisíðu %1 verður að vera einfalt gildi sem er ekki null.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færibreyta beiðnisíðu %1 verður að vera einfalt gildi sem er ekki null.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType ScalarErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3954080676 - NamedType 3788215960" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unknown request page parameter %1 on report %2.</source>
+          <target>Óþekkt færibreyta beiðnisíðu %1 í skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Óþekkt færibreyta beiðnisíðu %1 í skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Parameters ori - NamedType UnknownParameterErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2046287294 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Runs a processing-only report (batch job) using saved preset or provided parameters.</source>

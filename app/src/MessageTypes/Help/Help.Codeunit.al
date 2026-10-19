@@ -44,6 +44,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Send a Telegram message → `Orchestrator.Telegram.Message`');
         O.AppendLine('- List available reports → `Orchestrator.Report.List`');
         O.AppendLine('- Get report details + layouts → `Orchestrator.Report.Get`');
+        O.AppendLine('- Inspect or export report layouts → `Orchestrator.ReportLayout.List` / `Orchestrator.ReportLayout.Get`');
         O.AppendLine('- Generate PDF/Excel/Word report → `Orchestrator.Report.SaveAs`');
         O.AppendLine('- Run a batch job / processing-only report → `Orchestrator.Report.Run`');
         O.AppendLine('- See what workspace variables are available → `Orchestrator.Workspace.Preview`');
@@ -68,6 +69,8 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `Orchestrator.Telegram.Message` | Send a Telegram message to the current user |');
         O.AppendLine('| `Orchestrator.Report.List` | List available reports with metadata |');
         O.AppendLine('| `Orchestrator.Report.Get` | Get report details, layouts, and saved preset |');
+        O.AppendLine('| `Orchestrator.ReportLayout.List` | List extension and user-defined report layouts |');
+        O.AppendLine('| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |');
         O.AppendLine('| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |');
         O.AppendLine('| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |');
         O.AppendLine('| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |');

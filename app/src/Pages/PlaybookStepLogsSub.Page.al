@@ -7,6 +7,7 @@ using System.Utilities;
 
 page 10035552 "Playbook Step Logs Sub. ori"
 {
+    ContextSensitiveHelpPage = 'playbook-step-logs';
     Extensible = false;
     Caption = 'Playbook Step Log', Comment = 'is-IS=Atburðaskrá keðjuskrefa';
     PageType = ListPart;

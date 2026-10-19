@@ -13,6 +13,20 @@ Business Central release versioning (`major.minor.build.revision`).
 - An embedded value is now escaped as JSON string content. A value with a quote, backslash or line break (typical of a language-model reply), or an embedded object such as `@_run`, made the request invalid JSON and stopped the whole run with "The data does not represent a valid JSON token."
 - `Resolver Test` (96402): `EmbeddedRefBeforePeriodResolves`, `EmbeddedRefEscapesQuotesAndObjects`.
 
+### Added (2026-10-19) - Bounded report parameters and layout selection (#5)
+
+- Add `Orchestrator.ReportLayout.List` and `.Get` through `Report Layout Read Handler ori` (10035611), message codeunits 10035612/10035613, the message enum/help and permissions. Discovery includes extension and user layouts; export preserves the selected layout bytes.
+- `Report Msg Handler ori` (10035592) and Run/SaveAs contracts (10035597/10035595) accept a scalar `parameters` overlay through `Report Parameters ori` (10035614). Caller XML takes precedence over event-registered templates; unknown names, ambiguous aliases, non-scalar values and wrong-report XML fail explicitly. Explicit overlays never read or update saved user settings. Calls without `parameters` retain existing raw XML / preset behavior.
+- Supply the BC 28.5 report 1316 template and stable aliases for dates, aging, date choice, balance selection and statement style. `PrintEntriesNotDue` has no platform control and is rejected rather than mapped to different behavior.
+- SaveAs accepts temporary `layoutName`/`appId` through the public session-selection API and restores the prior platform/custom selection after rendering success or failure. Persistent `SetDefault` and `setAsDefault` are out of scope; no selection-table writes.
+- Native tests 96409/96431 use owned report 96455, imported layout fixtures, observable report parameters and an event template. Cover byte round trips, XML escaping, unknown/malformed input, explicit-input precedence, preset preservation, actual rendering and selection restoration. New error labels have is-IS translations.
+- `Orchestrator.ReportLayout.Set` replaces an existing user layout the way the Report Layouts page does (delete and insert under the same key) instead of modifying it, which the platform refused with "The type and content of an existing report layout cannot be modified." A second identical Set now answers `Replaced` (`Report Layout Handler ori`, 10035600; test `SetTwiceReplacesUserLayout` in 96409).
+
+### Changed (2026-10-19) - Context-sensitive help metadata (#69)
+
+- Add unique context-sensitive help slugs to pages 10035535, 10035537–10035541, 10035552–10035556, 10035583 and 10035602. Point the app help URL template at `https://docs.bifrost.origo.is/{0}/help/orchestrator/`. Page behavior, message contracts and translations are unchanged.
+- Bilingual help drafts and later publication remain separate acceptance steps in #69; the unchanged HelpLinks guard will be enabled through Architect-owned wiring after documentation publication at AppSource preparation.
+
 ### Fixed (2026-10-19) - Workspace.Preview declared a read effect although it commits (#80)
 
 - `Orchestrator.Workspace.Preview` (codeunit `Workspace Preview Msg ori`, 10035596) now declares effect `irreversible`. Seeding `_who` runs `Help.WhoAmI.Get` through `Playbook Step Executor ori` and `Msg Executor ori`, a boolean `Codeunit.Run` whose dispatch commits its queue entry, so Preview cannot run inside an open write transaction or roll back with one. The effect `changes` text, the notes and the selection description (en-US and is-IS) say so. The answer is unchanged and the roster direction stays Outbound, because no business data changes.

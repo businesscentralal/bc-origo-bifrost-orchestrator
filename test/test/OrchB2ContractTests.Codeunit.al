@@ -24,6 +24,8 @@ codeunit 96453 "Orch B2 Contract Tests"
         AssertContract("Message Type ori"::"Orchestrator.Report.Run", 'Orchestrator.Report.Run');
         AssertContract("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview');
         AssertContract("Message Type ori"::"Orchestrator.ReportLayout.Set", 'Orchestrator.ReportLayout.Set');
+        AssertContract("Message Type ori"::"Orchestrator.ReportLayout.List", 'Orchestrator.ReportLayout.List');
+        AssertContract("Message Type ori"::"Orchestrator.ReportLayout.Get", 'Orchestrator.ReportLayout.Get');
     end;
 
     [Test]
@@ -68,6 +70,8 @@ codeunit 96453 "Orch B2 Contract Tests"
         AssertEffect("Message Type ori"::"Orchestrator.Report.List", 'Orchestrator.Report.List', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.Report.Get", 'Orchestrator.Report.Get', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.Report.SaveAs", 'Orchestrator.Report.SaveAs', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.List", 'Orchestrator.ReportLayout.List', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.Get", 'Orchestrator.ReportLayout.Get', 'read', false);
     end;
 
     /// <summary>Preserves every field and position of the main choice entry.</summary>
@@ -77,8 +81,8 @@ codeunit 96453 "Orch B2 Contract Tests"
         // Story #68, AC05 | Time: independent of Today/WorkDate | Risk: #71 shared Parts helper.
         // [GIVEN] The choice entry captured from main 6413d705.
         // [WHEN] Its message contract is generated.
-        // [THEN] Every entry field, its position and the chapter size remain unchanged.
-        AssertChoiceParameter("Message Type ori"::"Orchestrator.Report.SaveAs", 1, 4,
+        // [THEN] Every entry field and its position remain unchanged; #5 adds parameters, layoutName and appId (7 entries).
+        AssertChoiceParameter("Message Type ori"::"Orchestrator.Report.SaveAs", 1, 7,
             '{"name":"format","type":"string","required":false,"description":"Output format. Case-insensitive.","default":"PDF","allowed":["PDF","Excel","Word","XML"]}');
     end;
 
@@ -159,7 +163,7 @@ codeunit 96453 "Orch B2 Contract Tests"
         // [WHEN] The current contract is generated.
         // [THEN] All entries, their order, codes and text are identical.
         AssertMainErrors("Message Type ori"::"Orchestrator.Report.Run",
-            '[{"code":"BusinessCentralError","error":"Request must include \"reportId\".","when":"data.reportId is missing.","fix":"Send the report object ID in data.reportId."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"data.reportId is not a whole number.","fix":"Send reportId as an integer."},{"code":"BusinessCentralError","error":"Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.","when":"The report is not processing-only.","fix":"Use Orchestrator.Report.SaveAs for reports that produce output."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"tableView is not a valid view for the report''s data item table.","fix":"Fix the view or leave it out."}]');
+            '[{"code":"BusinessCentralError","error":"Request must include \"reportId\".","when":"data.reportId is missing.","fix":"Send the report object ID in data.reportId."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"data.reportId is not a whole number.","fix":"Send reportId as an integer."},{"code":"BusinessCentralError","error":"Unknown request page parameter <name> on report <reportId>.","when":"The option name is not in the selected base XML.","fix":"Use a known control name or register a report template."},{"code":"BusinessCentralError","error":"No request page template is registered for report <reportId>. Provide requestPageXml.","when":"Explicit parameters need a caller XML base or registered template.","fix":"Send requestPageXml containing the report options."},{"code":"BusinessCentralError","error":"Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.","when":"The report is not processing-only.","fix":"Use Orchestrator.Report.SaveAs for reports that produce output."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"tableView is not a valid view for the report''s data item table.","fix":"Fix the view or leave it out."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Report.SaveAs.</summary>
@@ -171,7 +175,7 @@ codeunit 96453 "Orch B2 Contract Tests"
         // [WHEN] The current contract is generated.
         // [THEN] All entries, their order, codes and text are identical.
         AssertMainErrors("Message Type ori"::"Orchestrator.Report.SaveAs",
-            '[{"code":"BusinessCentralError","error":"Request must include \"reportId\".","when":"data.reportId is missing.","fix":"Send the report object ID in data.reportId."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"data.reportId is not a whole number.","fix":"Send reportId as an integer."},{"code":"BusinessCentralError","error":"Report <reportId> is processing-only and cannot be saved.","when":"The report is a batch job that produces no document.","fix":"Use Orchestrator.Report.Run for it."},{"code":"BusinessCentralError","error":"Unsupported format \"<FORMAT>\". Use PDF, Excel, Word, or XML.","when":"data.format is not one of the four formats.","fix":"Send PDF, Excel, Word or XML, or leave format out."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The report fails while rendering, or tableView is not a valid view.","fix":"Read the text; check the request page XML and the view."}]');
+            '[{"code":"BusinessCentralError","error":"Request must include \"reportId\".","when":"data.reportId is missing.","fix":"Send the report object ID in data.reportId."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"data.reportId is not a whole number.","fix":"Send reportId as an integer."},{"code":"BusinessCentralError","error":"Unknown request page parameter <name> on report <reportId>.","when":"The option name is not in the selected base XML.","fix":"Use a known control name or register a report template."},{"code":"BusinessCentralError","error":"No request page template is registered for report <reportId>. Provide requestPageXml.","when":"Explicit parameters need a caller XML base or registered template.","fix":"Send requestPageXml containing the report options."},{"code":"BusinessCentralError","error":"Report <reportId> is processing-only and cannot be saved.","when":"The report is a batch job that produces no document.","fix":"Use Orchestrator.Report.Run for it."},{"code":"BusinessCentralError","error":"Unsupported format \"<FORMAT>\". Use PDF, Excel, Word, or XML.","when":"data.format is not one of the four formats.","fix":"Send PDF, Excel, Word or XML, or leave format out."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The report fails while rendering, or tableView is not a valid view.","fix":"Read the text; check the request page XML and the view."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.ReportLayout.Set.</summary>

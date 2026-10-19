@@ -60,7 +60,8 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must be a processing-only report (processingOnly true in Orchestrator.Report.List).'));
-        Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Request page parameters as XML. When left out, the calling user''s saved preset is used, otherwise the report defaults.'));
+        Parameters.Add(ContractMgt.Parameter('parameters', 'object', false, 'Explicit scalar option values over caller requestPageXml or a registered template. Never reads or changes saved settings. Unknown names fail. Report 1316 has a built-in template; see notes.'));
+        Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Caller XML takes precedence over registered templates. parameters overlays its named options. Without parameters, existing raw XML / saved-preset behavior is retained.'));
         Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item. Ignored when the report has no data item table.'));
         exit(true);
     end;
@@ -74,7 +75,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts.AddResponseField(Fields, 'reportId', 'integer', 'Report ID.');
         Parts.AddResponseField(Fields, 'reportName', 'string', 'Report object name (Success only).');
         Parts.AddResponseField(Fields, 'caption', 'string', 'Report caption (Success only).');
-        Parts.AddResponseField(Fields, 'usedPreset', 'boolean', 'True when no requestPageXml was sent and the saved preset had XML (Success only).');
+        Parts.AddResponseField(Fields, 'usedPreset', 'boolean', 'True only on the legacy path with neither parameters nor requestPageXml and a saved preset (Success only).');
         Parts.AddResponseField(Fields, 'tableView', 'string', 'The view that was sent, or empty (Success only).');
         Parts.AddResponseField(Fields, 'startedAt', 'string', 'Start time, ISO 8601 (Success only).');
         Parts.AddResponseField(Fields, 'durationMs', 'integer', 'Execution duration in milliseconds (Success only).');
@@ -88,6 +89,8 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddReportErrors(Errors);
+        Parts.AddContractError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
+        Parts.AddContractError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
         Parts.AddContractError(Errors, 'Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', 'The report is not processing-only.', 'Use Orchestrator.Report.SaveAs for reports that produce output.');
         Parts.AddRuntimeError(Errors, 'tableView is not a valid view for the report''s data item table.', 'Fix the view or leave it out.');
         exit(true);
@@ -142,7 +145,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
             ' **Effects are partial on failure.** A failing report is caught and answered with status Error without a call stack. Most batch reports commit as they go, and that work stays, so status Error does not mean nothing happened.' +
             ' **Do not auto-retry.** Set the retry policy of an orchestrator entry to Never for any chain that contains this step.' +
             ' **Check what you are calling first.** Orchestrator.Report.List with processingOnly true lists Date Compress G/L Entries and Delete Invoiced Sales Orders next to the harmless ones. Confirm a reportId with Orchestrator.Report.Get.' +
-            ' **No request page is shown.** Parameters come only from requestPageXml or the saved preset; capture a preset through the URL from Orchestrator.Report.Get.' +
+            ' **No request page is shown.** Explicit parameters overlay caller XML or a registered template without saved settings. Without parameters, values come from requestPageXml or the saved preset; capture a preset through the URL from Orchestrator.Report.Get.' +
             ' **Long runs need the queue.** A batch job can outlive a synchronous request: run it from a playbook with Orchestrator.Playbook.Enqueue, or invoke this type asynchronously.';
         exit(true);
     end;
