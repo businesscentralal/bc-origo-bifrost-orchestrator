@@ -7,6 +7,7 @@ using System.Threading;
 /// </summary>
 page 10035537 "Scheduled Entry API ori"
 {
+    ContextSensitiveHelpPage = 'scheduled-entry-api';
     APIGroup = 'jobQueueOrchestrator';
     APIPublisher = 'origo';
     APIVersion = 'v1.0';
