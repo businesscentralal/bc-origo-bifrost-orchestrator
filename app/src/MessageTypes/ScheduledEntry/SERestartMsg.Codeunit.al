@@ -155,10 +155,10 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
     /// <summary>
     /// Returns the message direction for this message type.
     /// </summary>
-    /// <returns>Outbound direction.</returns>
+    /// <returns>Inbound direction.</returns>
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
-        exit("Msg Direction ori"::Outbound);
+        exit("Msg Direction ori"::Inbound);
     end;
 
     /// <summary>
