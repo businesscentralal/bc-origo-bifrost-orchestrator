@@ -117,6 +117,46 @@ codeunit 96409 "Report Layout Read Tests ori"
         Assert.IsFalse(TenantLayout.Get(Report::"Layout Sample Report ori", FixtureName, EmptyGuid), 'Owned fixture deleted');
     end;
 
+    /// <summary>A second Set with the same name replaces the user layout instead of failing (#5 acceptance 3).</summary>
+    [Test]
+    procedure SetTwiceReplacesUserLayout()
+    var
+        Layout: Record "Report Layout List";
+        TenantLayout: Record "Tenant Report Layout";
+        Request: JsonObject;
+        Response: JsonObject;
+        Value: JsonToken;
+        Exported: Text;
+        FixtureName: Text[250];
+        EmptyGuid: Guid;
+    begin
+        // [GIVEN] A user layout created from the sample report's extension layout
+        FindSampleLayout(Layout);
+        Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.Get", GetLayoutRequest(Layout.Name, Layout."Application ID"));
+        Response.Get('layoutBase64', Value);
+        Exported := Value.AsValue().AsText();
+        FixtureName := CopyStr('XREPLACE-' + Format(CreateGuid(), 0, 4), 1, MaxStrLen(FixtureName));
+        Request := GetLayoutRequest(FixtureName, EmptyGuid);
+        Request.Add('layoutFormat', 'RDLC');
+        Request.Add('layoutBase64', Exported);
+        Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.Set", Request);
+        Response.Get('action', Value);
+        Assert.AreEqual('Created', Value.AsValue().AsText(), 'First Set creates');
+        // [WHEN] The same request is sent again
+        Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.Set", Request);
+        // [THEN] It answers Replaced, keeps one row and the bytes are unchanged
+        Response.Get('action', Value);
+        Assert.AreEqual('Replaced', Value.AsValue().AsText(), 'Second Set replaces');
+        TenantLayout.SetRange("Report ID", Report::"Layout Sample Report ori");
+        TenantLayout.SetRange(Name, FixtureName);
+        Assert.AreEqual(1, TenantLayout.Count(), 'One user layout row');
+        Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.Get", GetLayoutRequest(FixtureName, EmptyGuid));
+        Response.Get('layoutBase64', Value);
+        Assert.AreEqual(Exported, Value.AsValue().AsText(), 'Replaced bytes unchanged');
+        TenantLayout.Get(Report::"Layout Sample Report ori", FixtureName, EmptyGuid);
+        TenantLayout.Delete(true);
+    end;
+
     /// <summary>Rejects an unknown report before looking for layouts.</summary>
     [Test]
     procedure ListRejectsUnknownReport()

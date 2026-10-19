@@ -76,28 +76,25 @@ codeunit 10035600 "Report Layout Handler ori"
         Base64Convert.FromBase64(LayoutBase64, OutStr);
         TempBlob.CreateInStream(InStr);
 
+        // The platform refuses to modify the content or type of an existing layout, so a replace
+        // deletes the user-defined row and inserts it again under the same key, as the
+        // Report Layouts page's Replace Layout action does (Report Layouts Impl. InsertNewLayout).
         Replacing := TenantReportLayout.Get(ReportId, LayoutName, EmptyGuid);
         if Replacing then begin
             ActionText := 'Replaced';
-            TenantReportLayout."Layout Format" := LayoutFormat;
-            TenantReportLayout.Description := Description;
-            TenantReportLayout."Company Name" := CompanyNameValue;
-            TenantReportLayout."MIME Type" := MimeTypeFor(LayoutFormat);
-            TenantReportLayout.Layout.ImportStream(InStr, FileNameFor(LayoutName, LayoutFormat));
-            TenantReportLayout.Modify(true);
-        end else begin
+            TenantReportLayout.Delete(true);
+        end else
             ActionText := 'Created';
-            TenantReportLayout.Init();
-            TenantReportLayout."Report ID" := ReportId;
-            TenantReportLayout.Name := LayoutName;
-            TenantReportLayout."App ID" := EmptyGuid;
-            TenantReportLayout."Layout Format" := LayoutFormat;
-            TenantReportLayout.Description := Description;
-            TenantReportLayout."Company Name" := CompanyNameValue;
-            TenantReportLayout."MIME Type" := MimeTypeFor(LayoutFormat);
-            TenantReportLayout.Layout.ImportStream(InStr, FileNameFor(LayoutName, LayoutFormat));
-            TenantReportLayout.Insert(true);
-        end;
+        TenantReportLayout.Init();
+        TenantReportLayout."Report ID" := ReportId;
+        TenantReportLayout.Name := LayoutName;
+        TenantReportLayout."App ID" := EmptyGuid;
+        TenantReportLayout."Layout Format" := LayoutFormat;
+        TenantReportLayout.Description := Description;
+        TenantReportLayout."Company Name" := CompanyNameValue;
+        TenantReportLayout."MIME Type" := MimeTypeFor(LayoutFormat);
+        TenantReportLayout.Layout.ImportStream(InStr, FileNameFor(LayoutName, LayoutFormat));
+        TenantReportLayout.Insert(true);
 
         ResponseJson.Add('status', 'Success');
         ResponseJson.Add('reportId', ReportId);
