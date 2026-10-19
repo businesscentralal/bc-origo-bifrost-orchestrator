@@ -7,17 +7,15 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-<<<<<<< HEAD
 ### Changed (2026-10-19) - Context-sensitive help metadata (#69)
 
 - Add unique context-sensitive help slugs to pages 10035535, 10035537–10035541, 10035552–10035556, 10035583 and 10035602. Point the app help URL template at `https://docs.bifrost.origo.is/{0}/help/orchestrator/`. Page behavior, message contracts and translations are unchanged.
 - Bilingual help drafts and later publication remain separate acceptance steps in #69; the unchanged HelpLinks guard will be enabled through Architect-owned wiring after documentation publication at AppSource preparation.
-=======
+
 ### Fixed (2026-10-19) - Workspace.Preview declared a read effect although it commits (#80)
 
 - `Orchestrator.Workspace.Preview` (codeunit `Workspace Preview Msg ori`, 10035596) now declares effect `irreversible`. Seeding `_who` runs `Help.WhoAmI.Get` through `Playbook Step Executor ori` and `Msg Executor ori`, a boolean `Codeunit.Run` whose dispatch commits its queue entry, so Preview cannot run inside an open write transaction or roll back with one. The effect `changes` text, the notes and the selection description (en-US and is-IS) say so. The answer is unchanged and the roster direction stays Outbound, because no business data changes.
 - `Orch B2 Contract Tests` (96453) asserts the irreversible effect, the disclosed nested dispatch and the Outbound direction.
->>>>>>> origin/main
 
 ### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
 
