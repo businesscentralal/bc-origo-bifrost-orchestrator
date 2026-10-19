@@ -105,6 +105,13 @@ codeunit 10035546 "Playbook JSON Helper ori"
                 RefEnd += 1;
             end;
 
+            // Dots separate path segments; trailing dots belong to the surrounding text.
+            while RefEnd > SearchPos + 1 do begin
+                if JsonText[RefEnd - 1] <> '.' then
+                    break;
+                RefEnd -= 1;
+            end;
+
             if RefEnd > SearchPos + 1 then begin
                 RefText := CopyStr(JsonText, SearchPos + 1, RefEnd - SearchPos - 1);
                 if Workspace.GetToken(RefText, ResolvedToken) then begin

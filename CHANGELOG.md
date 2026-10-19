@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-19) - Embedded playbook references before sentence periods (#101)
+
+- `Playbook JSON Helper ori` (10035546) excludes trailing periods from embedded workspace paths and preserves them as text. Nested paths still resolve, and missing references stay intact.
+- `Resolver Test` (96402) covers the company/date prompt, invoice ellipsis, consecutive references, unresolved paths, punctuation-only references and a reference at the start of a string.
+
 ### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
 
 - Message types whose contract effect is write or irreversible now return `GetMessageDirection` Inbound, matching Foundation's roster rule that Outbound is a read and Inbound is a write. MCP clients no longer treat these types as read-only. Pure reads stay Outbound. `Orchestrator.Report.Get` stays Both because it reads and inserts an empty preset. `Orchestrator.Report.SaveAs` stays Outbound because its effect is read.

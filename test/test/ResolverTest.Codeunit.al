@@ -112,6 +112,120 @@ codeunit 96402 "Resolver Test"
     end;
 
     [Test]
+    procedure EmbeddedRefsBeforeSentencePeriods()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_who.companyInfo.name', 'CRONUS Ltd.');
+        Workspace.SetValue('_sys.today', '2026-10-19');
+        Workspace.SetValue('_initial.invoiceNo', 'INV-101');
+        RequestJson.Add('prompt', 'Company @_who.companyInfo.name and date @_sys.today.');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Company CRONUS Ltd. and date 2026-10-19.', Token.AsValue().AsText(), 'Resolve paths while preserving sentence punctuation');
+    end;
+
+    [Test]
+    procedure EmbeddedRefBeforeEllipsis()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_who.companyInfo.name', 'CRONUS Ltd.');
+        Workspace.SetValue('_sys.today', '2026-10-19');
+        Workspace.SetValue('_initial.invoiceNo', 'INV-101');
+        RequestJson.Add('prompt', 'Invoice @_initial.invoiceNo...');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Invoice INV-101...', Token.AsValue().AsText(), 'Resolve paths while preserving sentence punctuation');
+    end;
+
+    [Test]
+    procedure EmbeddedRefsKeepInternalDots()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_who.companyInfo.name', 'CRONUS Ltd.');
+        Workspace.SetValue('_sys.today', '2026-10-19');
+        Workspace.SetValue('_initial.invoiceNo', 'INV-101');
+        RequestJson.Add('prompt', 'Invoice @_initial.invoiceNo. Company @_who.companyInfo.name.');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Invoice INV-101. Company CRONUS Ltd..', Token.AsValue().AsText(), 'Resolve paths while preserving sentence punctuation');
+    end;
+
+    [Test]
+    procedure UnresolvedRefBeforePeriodStaysIntact()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_who.companyInfo.name', 'CRONUS Ltd.');
+        Workspace.SetValue('_sys.today', '2026-10-19');
+        Workspace.SetValue('_initial.invoiceNo', 'INV-101');
+        RequestJson.Add('prompt', 'Missing @_missing.value. Date @_sys.today.');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Missing @_missing.value. Date 2026-10-19.', Token.AsValue().AsText(), 'Resolve paths while preserving sentence punctuation');
+    end;
+
+    [Test]
+    procedure OnlyDotsDoNotPreventLaterRef()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_who.companyInfo.name', 'CRONUS Ltd.');
+        Workspace.SetValue('_sys.today', '2026-10-19');
+        Workspace.SetValue('_initial.invoiceNo', 'INV-101');
+        RequestJson.Add('prompt', 'Punctuation @... Date @_sys.today.');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('Punctuation @... Date 2026-10-19.', Token.AsValue().AsText(), 'Resolve paths while preserving sentence punctuation');
+    end;
+
+    [Test]
+    procedure RefAtStartKeepsSentencePeriod()
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        JsonHelper: Codeunit "Playbook JSON Helper ori";
+        RequestJson: JsonObject;
+        Token: JsonToken;
+    begin
+        Initialize();
+        Workspace.Reset();
+        Workspace.SetValue('_who.companyInfo.name', 'CRONUS Ltd.');
+        Workspace.SetValue('_sys.today', '2026-10-19');
+        Workspace.SetValue('_initial.invoiceNo', 'INV-101');
+        RequestJson.Add('prompt', '@_sys.today.');
+        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        RequestJson.Get('prompt', Token);
+        Assert.AreEqual('2026-10-19.', Token.AsValue().AsText(), 'Resolve paths while preserving sentence punctuation');
+    end;
+
+    [Test]
     procedure CollectDirective()
     var
         Workspace: Codeunit "Playbook Workspace ori";
