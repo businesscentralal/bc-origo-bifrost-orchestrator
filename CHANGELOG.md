@@ -7,11 +7,18 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+<<<<<<< HEAD
 ### Fixed (2026-10-19) - Embedded @path references (#101)
 
 - `Playbook JSON Helper ori` (embedded references) no longer reads a sentence-ending period as part of the path, so `"... date @_sys.today."` resolves instead of staying literal.
 - An embedded value is now escaped as JSON string content. A value with a quote, backslash or line break (typical of a language-model reply), or an embedded object such as `@_run`, made the request invalid JSON and stopped the whole run with "The data does not represent a valid JSON token."
 - `Resolver Test` (96402): `EmbeddedRefBeforePeriodResolves`, `EmbeddedRefEscapesQuotesAndObjects`.
+=======
+### Fixed (2026-10-19) - Workspace.Preview declared a read effect although it commits (#80)
+
+- `Orchestrator.Workspace.Preview` (codeunit `Workspace Preview Msg ori`, 10035596) now declares effect `irreversible`. Seeding `_who` runs `Help.WhoAmI.Get` through `Playbook Step Executor ori` and `Msg Executor ori`, a boolean `Codeunit.Run` whose dispatch commits its queue entry, so Preview cannot run inside an open write transaction or roll back with one. The effect `changes` text, the notes and the selection description (en-US and is-IS) say so. The answer is unchanged and the roster direction stays Outbound, because no business data changes.
+- `Orch B2 Contract Tests` (96453) asserts the irreversible effect, the disclosed nested dispatch and the Outbound direction.
+>>>>>>> origin/main
 
 ### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
 
