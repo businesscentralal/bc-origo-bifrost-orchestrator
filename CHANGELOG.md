@@ -7,16 +7,27 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+<<<<<<< HEAD
 ### Changed (2026-10-19) - Context-sensitive help metadata (#69)
 
 - Add unique context-sensitive help slugs to pages 10035535, 10035537–10035541, 10035552–10035556, 10035583 and 10035602. Point the app help URL template at `https://docs.bifrost.origo.is/{0}/help/orchestrator/`. Page behavior, message contracts and translations are unchanged.
 - Bilingual help drafts and later publication remain separate acceptance steps in #69; the unchanged HelpLinks guard will be enabled through Architect-owned wiring after documentation publication at AppSource preparation.
+=======
+### Fixed (2026-10-19) - Workspace.Preview declared a read effect although it commits (#80)
+
+- `Orchestrator.Workspace.Preview` (codeunit `Workspace Preview Msg ori`, 10035596) now declares effect `irreversible`. Seeding `_who` runs `Help.WhoAmI.Get` through `Playbook Step Executor ori` and `Msg Executor ori`, a boolean `Codeunit.Run` whose dispatch commits its queue entry, so Preview cannot run inside an open write transaction or roll back with one. The effect `changes` text, the notes and the selection description (en-US and is-IS) say so. The answer is unchanged and the roster direction stays Outbound, because no business data changes.
+- `Orch B2 Contract Tests` (96453) asserts the irreversible effect, the disclosed nested dispatch and the Outbound direction.
+>>>>>>> origin/main
 
 ### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
 
 - Message types whose contract effect is write or irreversible now return `GetMessageDirection` Inbound, matching Foundation's roster rule that Outbound is a read and Inbound is a write. MCP clients no longer treat these types as read-only. Pure reads stay Outbound. `Orchestrator.Report.Get` stays Both because it reads and inserts an empty preset. `Orchestrator.Report.SaveAs` stays Outbound because its effect is read.
 - Objects: `Codeunit Entry Restart Msg ori` (10035567), `Codeunit Entry RestartIf Msg ori` (10035568), `Codeunit Playbook Enqueue Msg ori` (10035584), `Codeunit Playbook Run Msg ori` (10035562), `Codeunit Playbook Schedule Msg ori` (10035574), `Codeunit Report Run Msg ori` (10035597), `Codeunit SE Register Msg ori` (10035579), `Codeunit SE Restart Msg ori` (10035556), `Codeunit SE Run Msg ori` (10035555), `Codeunit SE Schedule Msg ori` (10035581), `Codeunit Status Restart Msg ori` (10035560), `Codeunit Status RestartIf Msg ori` (10035561).
 - `Msg Direction Tests ori` (96455) checks the registered direction of every Orchestrator message type through `Msg Interface ori`.
+
+### Added (2026-10-16) - Report export filter regressions (#85)
+
+- Extend `Report Boundary Tests ori` (codeunit 96454) to reject invalid filter fields for PDF, the default PDF format, Excel and Word alongside XML. Assert JSON error content, `InvalidFilterField`, `tableView`, nonempty recovery guidance, help hints and no report execution, so a validation failure cannot pass as empty binary success.
 
 ### Fixed (2026-10-16) - Force-tier refusal regression tests (#88)
 
