@@ -18,6 +18,10 @@ Business Central release versioning (`major.minor.build.revision`).
 - Objects: `Codeunit Entry Restart Msg ori` (10035567), `Codeunit Entry RestartIf Msg ori` (10035568), `Codeunit Playbook Enqueue Msg ori` (10035584), `Codeunit Playbook Run Msg ori` (10035562), `Codeunit Playbook Schedule Msg ori` (10035574), `Codeunit Report Run Msg ori` (10035597), `Codeunit SE Register Msg ori` (10035579), `Codeunit SE Restart Msg ori` (10035556), `Codeunit SE Run Msg ori` (10035555), `Codeunit SE Schedule Msg ori` (10035581), `Codeunit Status Restart Msg ori` (10035560), `Codeunit Status RestartIf Msg ori` (10035561).
 - `Msg Direction Tests ori` (96455) checks the registered direction of every Orchestrator message type through `Msg Interface ori`.
 
+### Added (2026-10-16) - Report export filter regressions (#85)
+
+- Extend `Report Boundary Tests ori` (codeunit 96454) to reject invalid filter fields for PDF, the default PDF format, Excel and Word alongside XML. Assert JSON error content, `InvalidFilterField`, `tableView`, nonempty recovery guidance, help hints and no report execution, so a validation failure cannot pass as empty binary success.
+
 ### Fixed (2026-10-16) - Force-tier refusal regression tests (#88)
 
 - `Data Records Hint Tests` (96428) now expects Foundation's force-openable setup-table refusal for Job Queue Entry (472), while preserving exact permission guidance and the separately discoverable Orchestrator companion hints. Job Queue Entry, Scheduled Task, Report Request Preset and unrelated Customer scenarios run in both en-US (1033) and is-IS (1039). Product behavior and write restrictions are unchanged.

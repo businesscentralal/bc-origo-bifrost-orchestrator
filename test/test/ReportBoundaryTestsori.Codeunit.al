@@ -53,6 +53,46 @@ codeunit 96454 "Report Boundary Tests ori"
         AssertRejectedView(true, 'WHERE(XUnknown=CONST(1))', 'InvalidFilterField', false);
     end;
 
+    /// <summary>Rejects an unknown filter field before rendering Pdf output and retains recovery guidance.</summary>
+    [Test]
+    procedure Scenario_AC01_PdfInvalidField_ReturnsError()
+    begin
+        // Issue #85, AC01 | Time: independent of Today/WorkDate | Risk: Foundation error serialization.
+        // [GIVEN] A report with a known data item and an invalid caller view.
+        // [WHEN/THEN] Format selection must not turn a validation error into empty binary success.
+        AssertRejectedView(true, 'WHERE(XUnknown=CONST(1))', 'InvalidFilterField', false, 'PDF');
+    end;
+
+    /// <summary>Rejects an unknown filter field before rendering DefaultPdf output and retains recovery guidance.</summary>
+    [Test]
+    procedure Scenario_AC01_DefaultPdfInvalidField_ReturnsError()
+    begin
+        // Issue #85, AC01 | Time: independent of Today/WorkDate | Risk: Foundation error serialization.
+        // [GIVEN] A report with a known data item and an invalid caller view.
+        // [WHEN/THEN] Format selection must not turn a validation error into empty binary success.
+        AssertRejectedView(true, 'WHERE(XUnknown=CONST(1))', 'InvalidFilterField', false, '');
+    end;
+
+    /// <summary>Rejects an unknown filter field before rendering Excel output and retains recovery guidance.</summary>
+    [Test]
+    procedure Scenario_AC01_ExcelInvalidField_ReturnsError()
+    begin
+        // Issue #85, AC01 | Time: independent of Today/WorkDate | Risk: Foundation error serialization.
+        // [GIVEN] A report with a known data item and an invalid caller view.
+        // [WHEN/THEN] Format selection must not turn a validation error into empty binary success.
+        AssertRejectedView(true, 'WHERE(XUnknown=CONST(1))', 'InvalidFilterField', false, 'Excel');
+    end;
+
+    /// <summary>Rejects an unknown filter field before rendering Word output and retains recovery guidance.</summary>
+    [Test]
+    procedure Scenario_AC01_WordInvalidField_ReturnsError()
+    begin
+        // Issue #85, AC01 | Time: independent of Today/WorkDate | Risk: Foundation error serialization.
+        // [GIVEN] A report with a known data item and an invalid caller view.
+        // [WHEN/THEN] Format selection must not turn a validation error into empty binary success.
+        AssertRejectedView(true, 'WHERE(XUnknown=CONST(1))', 'InvalidFilterField', false, 'Word');
+    end;
+
     /// <summary>Rejects MalformedView before SaveAs executes a report.</summary>
     [Test]
     procedure SaveAs_MalformedView_ReturnsErrorWithoutExecution()
@@ -205,6 +245,11 @@ codeunit 96454 "Report Boundary Tests ori"
     end;
 
     local procedure AssertRejectedView(SaveAs: Boolean; ViewText: Text; ExpectedCode: Text; ObjectView: Boolean)
+    begin
+        AssertRejectedView(SaveAs, ViewText, ExpectedCode, ObjectView, 'XML');
+    end;
+
+    local procedure AssertRejectedView(SaveAs: Boolean; ViewText: Text; ExpectedCode: Text; ObjectView: Boolean; OutputFormat: Text)
     var
         TempArgument: Record "Message Argument ori" temporary;
         Marker: Record "Test Run Marker";
@@ -214,7 +259,7 @@ codeunit 96454 "Report Boundary Tests ori"
         BeforeCount: Integer;
     begin
         BeforeCount := Marker.Count();
-        CreateArgument(TempArgument, SaveAs, ViewText, ObjectView);
+        CreateArgument(TempArgument, SaveAs, ViewText, ObjectView, OutputFormat);
         if SaveAs then
             MessageImpl := "Message Type ori"::"Orchestrator.Report.SaveAs"
         else
@@ -226,18 +271,31 @@ codeunit 96454 "Report Boundary Tests ori"
         Assert.AreEqual('Error', Token.AsValue().AsText(), 'Invalid views must return structured errors.');
         ResponseJson.Get('code', Token);
         Assert.AreEqual(ExpectedCode, Token.AsValue().AsText(), 'Expected a specific view-validation error.');
+        Assert.AreEqual(TempArgument.GetContentTypeJson(), TempArgument."Content Type", 'Validation errors must remain JSON, not empty binary output.');
+        Assert.IsTrue(ResponseJson.Get('parameter', Token), 'Identify the invalid request parameter.');
+        Assert.AreEqual('tableView', Token.AsValue().AsText(), 'The error must identify tableView.');
+        Assert.IsTrue(ResponseJson.Get('nextStep', Token), 'Provide a recovery step.');
+        Assert.AreNotEqual('', Token.AsValue().AsText(), 'Recovery guidance must not be empty.');
+        Assert.IsTrue(ResponseJson.Get('hint', Token), 'Provide message contract help.');
+        Assert.IsTrue(Token.AsValue().AsText().Contains('Help.Implementation.Get'), 'The hint must name the contract discovery message.');
         Assert.IsFalse(ResponseJson.Contains('callstack'), 'Validation responses must never expose call stacks.');
         Assert.AreEqual(BeforeCount, Marker.Count(), 'Validation must precede report execution.');
     end;
 
     local procedure CreateArgument(var TempArgument: Record "Message Argument ori" temporary; SaveAs: Boolean; ViewText: Text; ObjectView: Boolean)
+    begin
+        CreateArgument(TempArgument, SaveAs, ViewText, ObjectView, 'XML');
+    end;
+
+    local procedure CreateArgument(var TempArgument: Record "Message Argument ori" temporary; SaveAs: Boolean; ViewText: Text; ObjectView: Boolean; OutputFormat: Text)
     var
         RequestJson: JsonObject;
         EmptyObject: JsonObject;
     begin
         if SaveAs then begin
             RequestJson.Add('reportId', Report::"Test Output Report ori");
-            RequestJson.Add('format', 'XML');
+            if OutputFormat <> '' then
+                RequestJson.Add('format', OutputFormat);
         end else
             RequestJson.Add('reportId', Report::"Test Process Report");
         if ObjectView then
@@ -245,6 +303,10 @@ codeunit 96454 "Report Boundary Tests ori"
         else
             RequestJson.Add('tableView', ViewText);
         TempArgument.Init();
+        if SaveAs then
+            TempArgument.Type := "Message Type ori"::"Orchestrator.Report.SaveAs"
+        else
+            TempArgument.Type := "Message Type ori"::"Orchestrator.Report.Run";
         TempArgument.Insert();
         TempArgument.SetRequestJson(RequestJson);
     end;
