@@ -149,7 +149,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
-        exit("Msg Direction ori"::Outbound);
+        exit("Msg Direction ori"::Inbound);
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")

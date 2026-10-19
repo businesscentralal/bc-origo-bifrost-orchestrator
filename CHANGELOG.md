@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-17) - Executing message types registered as Outbound (#90)
+
+- Message types whose contract effect is write or irreversible now return `GetMessageDirection` Inbound, matching Foundation's roster rule that Outbound is a read and Inbound is a write. MCP clients no longer treat these types as read-only. Pure reads stay Outbound. `Orchestrator.Report.Get` stays Both because it reads and inserts an empty preset. `Orchestrator.Report.SaveAs` stays Outbound because its effect is read.
+- Objects: `Codeunit Entry Restart Msg ori` (10035567), `Codeunit Entry RestartIf Msg ori` (10035568), `Codeunit Playbook Enqueue Msg ori` (10035584), `Codeunit Playbook Run Msg ori` (10035562), `Codeunit Playbook Schedule Msg ori` (10035574), `Codeunit Report Run Msg ori` (10035597), `Codeunit SE Register Msg ori` (10035579), `Codeunit SE Restart Msg ori` (10035556), `Codeunit SE Run Msg ori` (10035555), `Codeunit SE Schedule Msg ori` (10035581), `Codeunit Status Restart Msg ori` (10035560), `Codeunit Status RestartIf Msg ori` (10035561).
+- `Msg Direction Tests ori` (96455) checks the registered direction of every Orchestrator message type through `Msg Interface ori`.
+
 ### Added (2026-10-16) - Report export filter regressions (#85)
 
 - Extend `Report Boundary Tests ori` (codeunit 96454) to reject invalid filter fields for PDF, the default PDF format, Excel and Word alongside XML. Assert JSON error content, `InvalidFilterField`, `tableView`, nonempty recovery guidance, help hints and no report execution, so a validation failure cannot pass as empty binary success.
