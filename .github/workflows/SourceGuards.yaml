@@ -9,9 +9,9 @@ name: Source Guards
 # https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/68
 # https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/71
 # Both require PR67 merge and story-v4 before remediation; retain the unmodified guards.
-# HelpLinks fails on main: help/orchestrator is missing in businesscentralal/bifrost; Tryggvi owns #69:
-# https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/69
 # Wire these guards when their acceptance criteria pass (Architect ruling, 6 Oct).
+# HelpLinks (#69) checks every page's ContextSensitiveHelpPage against businesscentralal/bifrost main, both locales.
+# A PR that adds or renames a page merges its help pages on the documentation site first.
 # IcelandicXlfInSync (#70) runs in PullRequestHandler against this run's compiled Default app.
 
 on:
@@ -27,6 +27,23 @@ permissions:
   contents: read
 
 jobs:
+  HelpLinks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Checkout documentation site
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: businesscentralal/bifrost
+          ref: main
+          path: docs-site
+
+      - name: Every page links to an existing help page in en-US and is-IS
+        shell: pwsh
+        run: ./tools/Test-HelpLinks.ps1 -DocsPath ./docs-site
+
   NoClientCallstack:
     runs-on: ubuntu-latest
     steps:
