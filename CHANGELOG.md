@@ -14,6 +14,29 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - `app.json` `privacyStatement` and `EULA` point at `https://docs.bifrost.origo.is/en-us/licensing/privacy/` and `.../licensing/eula/`, the same pages as Bifrost Foundation and Bifrost Language Models, instead of the old `businesscentralal.github.io/bifrost` addresses.
 
+### Fixed (2026-10-20) - Technical errors in a Check step are failures, not the answer "no" (#106)
+
+- A `Check` step whose message type raises an error, or answers `status` `Error` (also `Refused`, `Failed`, or any other non-`Success` status that carries an `error` text), is now `Failed`. It never reaches its Success conditions, increments `StepsFailed` and fails the run exactly as an `Action` does. Before, the Success condition was evaluated against the error answer, the step was logged `Cancelled` with an empty `ErrorText`, and the run completed with `StepsFailed = 0` (codeunit 10035547 `Playbook Runner ori`, single and forEach paths; new `IsErrorResponse` in codeunit 10035546 `Playbook JSON Helper ori`).
+- The step log `ErrorText` and `_steps.<no>.failures[].error` carry the type's `code` and `error` (`<code>: <error>`, still cut to 500 characters in `_steps`).
+- A genuine answer of no keeps its meaning (`Cancelled` for a forEach iteration, `Completed` for a single step, run not failed) and is now told apart in the log: `ErrorText` reads "Check answered no." (is-IS "Athugun svaraði nei.").
+- `_steps.<no>.items.errored` counts failed Check iterations separately (new `Errored` outcome in codeunit 10035583 `Playbook Workspace ori`); they are also counted in `failed`. `checkFailed` now means only "answered no".
+- `Help.Orchestrator.Get` (codeunit 10035576 `Help ori`; Step Type, Execution Semantics, `_steps` example) states the distinction and the `errored` count.
+- `Check Step Error Tests` (96430): classifier, `errored` counting, and single and forEach Check steps for error answer, raised error, answer no and answer yes, each in 1033 and 1039, plus an Action that still fails. Helper `Playbook Test Library ori` (96434).
+
+### Fixed (2026-10-20) - Playbook header last-run fields are updated by every run (#107)
+
+- Codeunit 10035547 `Playbook Runner ori` now writes `Last Run Instance ID`, `Last Run Status` and `Last Run At` on `Playbook ori` when a run starts (`Running`) and when it ends (`Completed` or `Failed`). Run Now, `Orchestrator.Playbook.Run`, `Orchestrator.Playbook.Enqueue` and scheduled runs all go through the runner, so all leave the same trace. A run abandoned mid-flight stays `Running` and never leaves the previous `Completed` behind.
+- Codeunit 10035548 `Playbook JQ Dispatcher ori` no longer stamps the header itself (it only did so for a run that came back, and only as Completed or Failed).
+- `Help.Orchestrator.Get` (codeunit 10035576 `Help ori`) lists `LastRunInstanceID`, `LastRunStatus` and `LastRunAt` in the Playbook ori table and in Execution Semantics, and says when they are written.
+- `Playbook Last Run Tests` (96432): Run, Enqueue followed by the Job Queue run, a scheduled run, a failed run, in 1033 and 1039 with the localized `LastRunStatus` caption; a second run, an empty playbook, and the header read mid-run through `Data.Records.Get` (Running).
+
+### Added (2026-10-20) - Orchestrator.Playbook.Verify and per-item forEach guidance (#108)
+
+- New read-only message type `Orchestrator.Playbook.Verify` (codeunits `Playbook Verify Msg ori` 10035615 and `Playbook Verify ori` 10035616, enum value 10035614 in enumextension 10035536 `MsgType.EnumExt ori`; permission set 10035535 `BIFROST Orchestr ori`). It returns localized (en-US and is-IS) warnings. Warning `UnsafeForEachWrite`: an enabled forEach step with a write-type message type (last name segment Set, Post, Delete, Create, Update, Send and similar) iterates the same array as an earlier enabled forEach `Check` step and has `Skip If Step Failed = 0`.
+- Not implemented, and why (stated in the type's notes): an operator that is not an AL name cannot be stored (`Operator` is an enum and `Data.Records.Set` refuses a caption that is not an AL name), and a `roleCode` that does not exist cannot be checked because the language model roles belong to Bifrost Bragi, which this app does not depend on.
+- `Help.Orchestrator.Get` (codeunit 10035576 `Help ori`) has a section "Per-item decisions in a forEach" (Next Step edges apply once per step, not per item; `Skip If Step Failed = <check step>` is the per-item gate; worked example with the exact field values), Rules for AI Agents 18 (every forEach write step after a forEach Check over the same array must set `Skip If Step Failed` to that Check) and 19 (verify before run), and an Execution Semantics line.
+- `Playbook Verify Tests` (96433): warning and its absence for the corrected pattern in 1033 and 1039, two write steps, safe shapes (read, single write, other array, disabled check), write-verb detection, missing and unknown playbook. Contract, effect and direction entries for the new type in test codeunits 96452 `Orch B1 Contract Tests` and 96455 `Msg Direction Tests ori`.
+
 ### Changed (2026-10-19) - Help published and guarded (#69)
 
 - The Orchestrator documentation and context-sensitive help are published on https://docs.bifrost.origo.is/ (businesscentralal/bifrost#107). `app.json` `help` now points at `https://docs.bifrost.origo.is/en-us/orchestrator/`.

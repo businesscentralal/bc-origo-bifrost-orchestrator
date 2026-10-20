@@ -322,6 +322,13 @@ codeunit 10035583 "Playbook Workspace ori"
                 SetJsonInt(ItemsObj, 'succeeded', GetJsonInt(ItemsObj, 'succeeded') + 1);
             'Failed':
                 SetJsonInt(ItemsObj, 'failed', GetJsonInt(ItemsObj, 'failed') + 1);
+            'Errored':
+                begin
+                    // A Check step whose message type raised or answered with an error: a technical
+                    // failure (counted in failed too), never the answer "no" (checkFailed).
+                    SetJsonInt(ItemsObj, 'failed', GetJsonInt(ItemsObj, 'failed') + 1);
+                    SetJsonInt(ItemsObj, 'errored', GetJsonInt(ItemsObj, 'errored') + 1);
+                end;
             'CheckFailed':
                 SetJsonInt(ItemsObj, 'checkFailed', GetJsonInt(ItemsObj, 'checkFailed') + 1);
             'Skipped':
@@ -329,7 +336,7 @@ codeunit 10035583 "Playbook Workspace ori"
         end;
         SetJsonObject(StepObj, 'items', ItemsObj);
 
-        if Outcome in ['Failed', 'CheckFailed'] then begin
+        if Outcome in ['Failed', 'Errored', 'CheckFailed'] then begin
             if StepObj.Get('failures', Token) then
                 FailuresArr := Token.AsArray();
             if FailuresArr.Count() < MaxFailures() then begin

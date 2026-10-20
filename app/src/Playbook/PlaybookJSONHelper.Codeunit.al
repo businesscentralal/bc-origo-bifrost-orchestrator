@@ -9,6 +9,68 @@ codeunit 10035546 "Playbook JSON Helper ori"
     Access = Internal;
 
     /// <summary>
+    /// Tells whether a message type answered with an error instead of raising one. Bifrost message
+    /// types return refusals and handled failures as a response whose <c>status</c> is not
+    /// <c>Success</c>: <c>status = "Error"</c> (or <c>Refused</c>, <c>Failed</c>), or any other
+    /// non-<c>Success</c> status that carries an <c>error</c> text. The error text keeps the
+    /// message type's <c>code</c> and <c>error</c> (or <c>message</c>) so it can be logged.
+    /// A response without a <c>status</c>, with <c>status = "Success"</c> or one that is not a JSON
+    /// object is never an error here.
+    /// </summary>
+    /// <param name="ResponseText">The response text of the message type.</param>
+    /// <param name="ErrorText">Receives "code: error" (or just the error) when the response is an error, otherwise empty.</param>
+    /// <returns>True when the response is a technical error answer.</returns>
+    procedure IsErrorResponse(ResponseText: Text; var ErrorText: Text): Boolean
+    var
+        ResponseJson: JsonObject;
+        StatusText: Text;
+        CodeText: Text;
+        MessageText: Text;
+    begin
+        ErrorText := '';
+        if ResponseText = '' then
+            exit(false);
+        if not ResponseJson.ReadFrom(ResponseText) then
+            exit(false);
+
+        StatusText := GetTextProperty(ResponseJson, 'status');
+        if StatusText = '' then
+            exit(false);
+        if StatusText.ToLower() = 'success' then
+            exit(false);
+
+        CodeText := GetTextProperty(ResponseJson, 'code');
+        MessageText := GetTextProperty(ResponseJson, 'error');
+        if MessageText = '' then
+            MessageText := GetTextProperty(ResponseJson, 'message');
+
+        if not (StatusText.ToLower() in ['error', 'refused', 'failed']) then
+            if MessageText = '' then
+                exit(false);
+
+        if MessageText = '' then
+            MessageText := StatusText;
+        if CodeText <> '' then
+            ErrorText := CodeText + ': ' + MessageText
+        else
+            ErrorText := MessageText;
+        exit(true);
+    end;
+
+    local procedure GetTextProperty(Source: JsonObject; PropertyName: Text): Text
+    var
+        Token: JsonToken;
+    begin
+        if not Source.Get(PropertyName, Token) then
+            exit('');
+        if not Token.IsValue() then
+            exit('');
+        if Token.AsValue().IsNull() then
+            exit('');
+        exit(Token.AsValue().AsText());
+    end;
+
+    /// <summary>
     /// Walks the serialized request JSON and replaces "@path" string values with
     /// workspace data. "@collect:N" gathers forEach iteration objects into an array.
     /// </summary>

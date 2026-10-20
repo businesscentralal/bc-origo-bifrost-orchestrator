@@ -1,7 +1,8 @@
 /// <summary>
 /// Job Queue entry point for playbook execution. When the Job Queue fires, this
 /// codeunit reads the playbook record from the Job Queue Entry's Record ID to Process,
-/// then delegates to the Bifrost Playbook Runner.
+/// then delegates to the Bifrost Playbook Runner, which stamps the last-run fields on the
+/// playbook header (instance, status, time) for every run type.
 ///
 /// Also subscribes to the Bifrost Orchestrator registration event to automatically
 /// create orchestrator entries for enabled playbooks.
@@ -38,17 +39,6 @@ codeunit 10035548 "Playbook JQ Dispatcher ori"
             InitialRequest.AddText(InitialRequestText);
 
         Runner.Run(Playbook.Code, InitialRequest, FinalResponse, InstanceId);
-
-        Playbook.Get(Playbook.Code);
-        Playbook."Last Run Instance ID" := InstanceId;
-        Playbook."Last Run At" := CurrentDateTime();
-
-        if GetInstanceStatus(InstanceId) = "Playbook Inst. Status ori"::Completed then
-            Playbook."Last Run Status" := "Playbook Inst. Status ori"::Completed
-        else
-            Playbook."Last Run Status" := "Playbook Inst. Status ori"::Failed;
-
-        Playbook.Modify();
     end;
 
     local procedure GetPlaybookCodeFromJobQueueEntry(JobQueueEntry: Record "Job Queue Entry"): Code[20]
@@ -60,16 +50,6 @@ codeunit 10035548 "Playbook JQ Dispatcher ori"
         RecRef.Get(JobQueueEntry."Record ID to Process");
         RecRef.SetTable(Playbook);
         exit(Playbook.Code);
-    end;
-
-    local procedure GetInstanceStatus(InstanceId: Guid): Enum "Playbook Inst. Status ori"
-    var
-        Instance: Record "Playbook Instance ori";
-    begin
-        Instance.SetLoadFields(Status);
-        if Instance.Get(InstanceId) then
-            exit(Instance.Status);
-        exit("Playbook Inst. Status ori"::Failed);
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Job Queue Entry", OnAfterDeleteEvent, '', false, false)]

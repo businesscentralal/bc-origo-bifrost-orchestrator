@@ -406,6 +406,8 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035604 | `App Takeover ori` | One-time data take-over from the published *Origo Cloud Events Orchestrator* app. |
 | 10035606 | `Secrets ori` | Single access point for every secret this app keeps in the Foundation secret store. |
 | 10035607 | `Orchestrator Registration ori` | Registers the app in Foundation's `App Registry ori` so Bifröst Setup can name it in the aggregated setup notifications. |
+| 10035615 | `Playbook Verify Msg ori` | `Orchestrator.Playbook.Verify` |
+| 10035616 | `Playbook Verify ori` | Reads a playbook and returns localized warnings, for example a per-item forEach write that no `Skip If Step Failed` gates. |
 
 ### Permission sets
 

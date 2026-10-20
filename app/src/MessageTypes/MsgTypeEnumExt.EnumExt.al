@@ -122,4 +122,9 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
         Caption = 'Orchestrator.ReportLayout.Get', Locked = true;
         Implementation = "Msg Interface ori" = "Report Layout Get Msg ori", "Msg Discovery ori" = "Report Layout Get Msg ori", "Msg Contract ori" = "Report Layout Get Msg ori";
     }
+    value(10035614; "Orchestrator.Playbook.Verify")
+    {
+        Caption = 'Orchestrator.Playbook.Verify', Locked = true;
+        Implementation = "Msg Interface ori" = "Playbook Verify Msg ori", "Msg Discovery ori" = "Playbook Verify Msg ori", "Msg Contract ori" = "Playbook Verify Msg ori";
+    }
 }
