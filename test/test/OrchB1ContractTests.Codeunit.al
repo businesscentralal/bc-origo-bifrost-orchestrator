@@ -72,7 +72,7 @@ codeunit 96452 "Orch B1 Contract Tests"
         // [GIVEN] The choice entry captured from main 6413d705.
         // [WHEN] Its message contract is generated.
         // [THEN] Every entry field, its position and the chapter size remain unchanged.
-        AssertChoiceParameter("Message Type ori"::"Orchestrator.Playbook.Schedule", 2, 7,
+        AssertChoiceParameter("Message Type ori"::"Orchestrator.Playbook.Schedule", 2, 8,
             '{"name":"notificationType","type":"string","required":false,"description":"How the entry notifies. Case-insensitive; any other value means None.","default":"None","allowed":["None","EMail","Telegram"]}');
     end;
 
@@ -84,7 +84,7 @@ codeunit 96452 "Orch B1 Contract Tests"
         // [GIVEN] The choice entry captured from main 6413d705.
         // [WHEN] Its message contract is generated.
         // [THEN] Every entry field, its position and the chapter size remain unchanged.
-        AssertChoiceParameter("Message Type ori"::"Orchestrator.Playbook.Schedule", 6, 7,
+        AssertChoiceParameter("Message Type ori"::"Orchestrator.Playbook.Schedule", 6, 8,
             '{"name":"retryPolicy","type":"string","required":false,"description":"Whether a failed run is restarted: Never, ThreeTimes (until three errors since the last success) or Always. Case-insensitive; any other value means Always.","default":"Always","allowed":["Never","ThreeTimes","Always"]}');
     end;
 
@@ -156,7 +156,7 @@ codeunit 96452 "Orch B1 Contract Tests"
             '[{"code":"BusinessCentralError","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Playbook ori exists with that code (Business Central''s record-not-found text).","fix":"Check the code with Data.Records.Get on table Playbook ori."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"delaySeconds is not a whole number, or Job Queue - Enqueue refuses the entry.","fix":"Send delaySeconds as an integer and check the Job Queue setup."}]');
     end;
 
-    /// <summary>Preserves the main errors chapter for Orchestrator.Playbook.Run.</summary>
+    /// <summary>Preserves the main errors chapter for Orchestrator.Playbook.Run and ends with the PreconditionFailed entry of #109 (verify before start).</summary>
     [Test]
     procedure Scenario_AC04_PlaybookRun_KeepsMainErrors()
     begin
@@ -165,10 +165,10 @@ codeunit 96452 "Orch B1 Contract Tests"
         // [WHEN] The current contract is generated.
         // [THEN] All entries, their order, codes and text are identical.
         AssertMainErrors("Message Type ori"::"Orchestrator.Playbook.Run",
-            '[{"code":"BusinessCentralError","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Playbook ori exists with that code (Business Central''s record-not-found text).","fix":"Check the code with Data.Records.Get on table Playbook ori."},{"code":"BusinessCentralError","error":"Step <stepNo> not found in playbook <playbookCode>.","when":"A Next Step No. of a step that ran points to a step that does not exist.","fix":"Fix the step chain of the playbook."}]');
+            '[{"code":"BusinessCentralError","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Playbook ori exists with that code (Business Central''s record-not-found text).","fix":"Check the code with Data.Records.Get on table Playbook ori."},{"code":"BusinessCentralError","error":"Step <stepNo> not found in playbook <playbookCode>.","when":"A Next Step No. of a step that ran points to a step that does not exist.","fix":"Fix the step chain of the playbook."},{"code":"PreconditionFailed","error":"Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>","when":"The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.","fix":"Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot."}]');
     end;
 
-    /// <summary>Preserves the main errors chapter for Orchestrator.Playbook.Schedule.</summary>
+    /// <summary>Preserves the main errors chapter for Orchestrator.Playbook.Schedule and ends with the PreconditionFailed entry of #109 (verify before start).</summary>
     [Test]
     procedure Scenario_AC04_PlaybookSchedule_KeepsMainErrors()
     begin
@@ -177,7 +177,7 @@ codeunit 96452 "Orch B1 Contract Tests"
         // [WHEN] The current contract is generated.
         // [THEN] All entries, their order, codes and text are identical.
         AssertMainErrors("Message Type ori"::"Orchestrator.Playbook.Schedule",
-            '[{"code":"BusinessCentralError","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Playbook ori exists with that code (Business Central''s record-not-found text).","fix":"Check the code with Data.Records.Get on table Playbook ori."},{"code":"BusinessCentralError","error":"Request must include \"recurringTemplateCode\".","when":"data.recurringTemplateCode is missing or empty.","fix":"Send the code of a Recurring Template ori."},{"code":"BusinessCentralError","error":"Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.","when":"The playbook already has an orchestrator entry.","fix":"Delete that Scheduled Entry ori first, or keep the schedule it has."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Recurring Template ori has that code (Business Central''s table relation error).","fix":"Check the code with Data.Records.Get on table Recurring Template ori."}]');
+            '[{"code":"BusinessCentralError","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Playbook ori exists with that code (Business Central''s record-not-found text).","fix":"Check the code with Data.Records.Get on table Playbook ori."},{"code":"BusinessCentralError","error":"Request must include \"recurringTemplateCode\".","when":"data.recurringTemplateCode is missing or empty.","fix":"Send the code of a Recurring Template ori."},{"code":"BusinessCentralError","error":"Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.","when":"The playbook already has an orchestrator entry.","fix":"Delete that Scheduled Entry ori first, or keep the schedule it has."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"No Recurring Template ori has that code (Business Central''s table relation error).","fix":"Check the code with Data.Records.Get on table Recurring Template ori."},{"code":"PreconditionFailed","error":"Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>","when":"The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.","fix":"Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Email.Send.</summary>

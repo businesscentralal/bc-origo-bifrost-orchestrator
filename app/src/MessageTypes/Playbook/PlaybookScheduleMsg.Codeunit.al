@@ -91,6 +91,7 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         Parameters.Add(ContractMgt.Parameter('jobQueueCategoryCode', 'string', false, 'Job Queue Category Code (Code[10]) of the entry.'));
         Parameters.Add(ContractMgt.Parameter('emitTelemetry', 'boolean', false, 'Whether the entry emits telemetry. Default false.'));
         Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('retryPolicy', 'string', false, 'Whether a failed run is restarted: Never, ThreeTimes (until three errors since the last success) or Always. Case-insensitive; any other value means Always.'), RetryPolicies, 'Always'));
+        Parameters.Add(ContractMgt.Parameter('ignoreWarnings', 'boolean', false, 'True accepts the warnings of the verification on purpose. Never waives an error. Default false: warnings refuse the schedule like errors.'));
         exit(true);
     end;
 
@@ -110,12 +111,14 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
 
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.AddPlaybookErrors(Errors);
         Parts.AddContractError(Errors, 'Request must include "recurringTemplateCode".', 'data.recurringTemplateCode is missing or empty.', 'Send the code of a Recurring Template ori.');
         Parts.AddContractError(Errors, 'Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.', 'The playbook already has an orchestrator entry.', 'Delete that Scheduled Entry ori first, or keep the schedule it has.');
         Parts.AddRuntimeError(Errors, 'No Recurring Template ori has that code (Business Central''s table relation error).', 'Check the code with Data.Records.Get on table Recurring Template ori.');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>', 'The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.', 'Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot.'));
         exit(true);
     end;
 
@@ -164,7 +167,8 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The call creates only the Scheduled Entry ori: not blocked, earliest start now, running the Playbook JQ Dispatcher for this playbook on the template''s schedule. The Job Queue Entry is created by the orchestrator management job on its next run, so the orchestrator must be running (Orchestrator.Status.Get, Orchestrator.Status.RestartIfNeeded).' +
+        Notes := 'The playbook is verified first (Orchestrator.Playbook.Verify), exactly as Orchestrator.Playbook.Run does. An enabled step with an error always refuses the call, and so does a warning unless ignoreWarnings is true; the answer is PreconditionFailed with the blocking findings in findings[]. No Scheduled Entry ori is created. A playbook that is already scheduled and then gets an error reports ScheduledWithErrors from Verify; its scheduled runs are not stopped by it.' +
+            ' The call creates only the Scheduled Entry ori: not blocked, earliest start now, running the Playbook JQ Dispatcher for this playbook on the template''s schedule. The Job Queue Entry is created by the orchestrator management job on its next run, so the orchestrator must be running (Orchestrator.Status.Get, Orchestrator.Status.RestartIfNeeded).' +
             ' A playbook has at most one orchestrator entry; a second call is refused until the first entry is deleted. notificationRecipient is not checked: a notificationType other than None with no recipient is accepted.';
         exit(true);
     end;

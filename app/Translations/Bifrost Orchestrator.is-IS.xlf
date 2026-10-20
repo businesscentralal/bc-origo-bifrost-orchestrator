@@ -1156,22 +1156,34 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Check a Bifrost Playbook for unsafe configuration without running it.</source>
-          <target>Athuga hvort Bifröst keðja sé óörugglega uppsett án þess að keyra hana.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Athuga hvort Bifröst keðja sé óörugglega uppsett án þess að keyra hana.</note>
+          <source>Check a Bifrost Playbook for errors and unsafe configuration without running it.</source>
+          <target>Athuga hvort Bifröst keðja sé með villur eða óörugga uppsetningu án þess að keyra hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athuga hvort Bifröst keðja sé með villur eða óörugga uppsetningu án þess að keyra hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
-          <source>verify playbook, validate playbook, check playbook, playbook warnings, lint playbook</source>
-          <target>sannreyna keðju, staðfesta keðju, athuga keðju, viðvaranir keðju, rýna keðju</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=sannreyna keðju, staðfesta keðju, athuga keðju, viðvaranir keðju, rýna keðju</note>
+          <source>verify playbook, validate playbook, check playbook, playbook errors, playbook warnings, lint playbook</source>
+          <target>sannreyna keðju, staðfesta keðju, athuga keðju, villur í keðju, viðvaranir keðju, rýna keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=sannreyna keðju, staðfesta keðju, athuga keðju, villur í keðju, viðvaranir keðju, rýna keðju</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Verify a Bifrost Playbook and return warnings, for example a per-item write that no Skip If Step Failed gates. Read-only. Run it before Orchestrator.Playbook.Run.</source>
-          <target>Sannreyndu Bifröst-keðju og fáðu viðvaranir, til dæmis skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sannreyndu Bifröst-keðju og fáðu viðvaranir, til dæmis skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað.</note>
+          <source>Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only. Run it before Orchestrator.Playbook.Run: Run and Schedule refuse a playbook that does not verify.</source>
+          <target>Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 2918804866" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a playbook whose enabled steps verify without errors, and without warnings unless ignoreWarnings is true</source>
+          <target>keðja þar sem virk skref sannreynast án villna, og án viðvarana nema ignoreWarnings sé true</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=keðja þar sem virk skref sannreynast án villna, og án viðvarana nema ignoreWarnings sé true</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType ExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 4065702589" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 [%2]: %3</source>
+          <target>Skref %1 [%2]: %3</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = finding code, %3 = the message, is-IS=Skref %1 [%2]: %3</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType FindingLineTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 367103690 - NamedType 2208007315" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "playbookCode" in the data payload or as the subject.</source>
@@ -1179,11 +1191,203 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType MissingPlaybookCodeErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 367103690 - NamedType 3014898190" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 367103690 - NamedType 1235961909" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings = true; an error cannot.</source>
+          <target>Kallaðu á Orchestrator.Playbook.Verify með sama playbookCode, lagaðu niðurstöðurnar og kallaðu svo aftur. Viðvörun má samþykkja viljandi með ignoreWarnings = true; villu má ekki samþykkja.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kallaðu á Orchestrator.Playbook.Verify með sama playbookCode, lagaðu niðurstöðurnar og kallaðu svo aftur. Viðvörun má samþykkja viljandi með ignoreWarnings = true; villu má ekki samþykkja.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType RefusedNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 1660392146" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 was not started: errors on enabled steps: %2, warnings: %3. %4</source>
+          <target>Keðjan %1 var ekki ræst: villur í virkum skrefum: %2, viðvaranir: %3. %4</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = number of errors, %3 = number of warnings, %4 = the findings, is-IS=Keðjan %1 var ekki ræst: villur í virkum skrefum: %2, viðvaranir: %3. %4</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType RefusedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 3674856675" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 is scheduled, but its enabled steps have errors (%2) that will fail the next scheduled run.</source>
+          <target>Keðjan %1 er tímasett, en virk skref hennar eru með villur (%2) sem láta næstu tímasettu keyrslu mistakast.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = number of errors, is-IS=Keðjan %1 er tímasett, en virk skref hennar eru með villur (%2) sem láta næstu tímasettu keyrslu mistakast.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType ScheduledWithErrorsMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 2909100847" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fix the errors above, or remove the schedule (delete the Scheduled Entry ori of the playbook) until they are fixed.</source>
+          <target>Lagaðu villurnar hér að ofan, eða fjarlægðu tímasetninguna (eyddu Scheduled Entry ori keðjunnar) þar til þær eru lagaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lagaðu villurnar hér að ofan, eða fjarlægðu tímasetninguna (eyddu Scheduled Entry ori keðjunnar) þar til þær eru lagaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType ScheduledWithErrorsNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 1887900340" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 has no Success condition, so it counts as successful whenever the message type does not raise an error, also when it answers status Error.</source>
+          <target>Skref %1 hefur ekkert árangursskilyrði, svo það telst árangursríkt svo lengi sem skilaboðategundin kastar ekki villu, líka þegar hún svarar status Error.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Skref %1 hefur ekkert árangursskilyrði, svo það telst árangursríkt svo lengi sem skilaboðategundin kastar ekki villu, líka þegar hún svarar status Error.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType ActionWithoutConditionMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 688177776" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add the Success condition status Equals Success to step %1.</source>
+          <target>Bættu árangursskilyrðinu status Equals Success við skref %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Bættu árangursskilyrðinu status Equals Success við skref %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType ActionWithoutConditionNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2697862252" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check step %1 has no Success condition, so it answers yes every time and decides nothing.</source>
+          <target>Athugunarskref %1 hefur ekkert árangursskilyrði, svo það svarar alltaf já og ákveður ekkert.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Athugunarskref %1 hefur ekkert árangursskilyrði, svo það svarar alltaf já og ákveður ekkert.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType CheckWithoutConditionMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 340749864" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a Success condition to step %1 (a Playbook Condition ori row with ConditionType Success), for example status Equals Success and the value the decision depends on.</source>
+          <target>Bættu árangursskilyrði við skref %1 (færsla í Playbook Condition ori með ConditionType Success), til dæmis status Equals Success og gildið sem ákvörðunin byggir á.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Bættu árangursskilyrði við skref %1 (færsla í Playbook Condition ori með ConditionType Success), til dæmis status Equals Success og gildið sem ákvörðunin byggir á.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType CheckWithoutConditionNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 3716560834" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 has Skip If Step Failed = %2, but step %2 does not exist, does not come before step %1 or does not iterate, so it records no result per item and every item of step %1 would be skipped.</source>
+          <target>Skref %1 er með Sleppa ef skref mistókst = %2, en skref %2 er ekki til, kemur ekki á undan skrefi %1 eða ítrar ekki, svo það skráir enga niðurstöðu fyrir hvert atriði og öllum atriðum skrefs %1 yrði sleppt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = gate step no, is-IS=Skref %1 er með Sleppa ef skref mistókst = %2, en skref %2 er ekki til, kemur ekki á undan skrefi %1 eða ítrar ekki, svo það skráir enga niðurstöðu fyrir hvert atriði og öllum atriðum skrefs %1 yrði sleppt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType InvalidSkipGateMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 1322096646" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Skip If Step Failed on step %1 to the number of the earlier forEach step that decides, or to 0.</source>
+          <target>Stilltu Sleppa ef skref mistókst í skrefi %1 á númer fyrra forEach-skrefs sem ákveður, eða á 0.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Stilltu Sleppa ef skref mistókst í skrefi %1 á númer fyrra forEach-skrefs sem ákveður, eða á 0.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType InvalidSkipGateNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 311545153" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 iterates over the result of step %2 (Iterate Source Step No.), which does not exist or does not come before step %1, so the step would do nothing.</source>
+          <target>Skref %1 ítrar yfir niðurstöðu skrefs %2 (Upprunaskref ítrunar), sem er ekki til eða kemur ekki á undan skrefi %1, svo skrefið myndi ekkert gera.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = source step no, is-IS=Skref %1 ítrar yfir niðurstöðu skrefs %2 (Upprunaskref ítrunar), sem er ekki til eða kemur ekki á undan skrefi %1, svo skrefið myndi ekkert gera.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType IterateSourceInvalidMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 3735130613" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Iterate Source Step No. on step %1 to the number of an earlier step that produces the array.</source>
+          <target>Stilltu Upprunaskref ítrunar í skrefi %1 á númer fyrra skrefs sem skilar fylkinu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Stilltu Upprunaskref ítrunar í skrefi %1 á númer fyrra skrefs sem skilar fylkinu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType IterateSourceInvalidNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 3130895348" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 calls message type %2, which does not exist in this deployment or is not enabled for this user in this company. Every run of the step would fail.</source>
+          <target>Skref %1 kallar á skilaboðategundina %2, sem er ekki til í þessari uppsetningu eða er ekki virk fyrir þennan notanda í þessu fyrirtæki. Hver keyrsla skrefsins myndi mistakast.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, is-IS=Skref %1 kallar á skilaboðategundina %2, sem er ekki til í þessari uppsetningu eða er ekki virk fyrir þennan notanda í þessu fyrirtæki. Hver keyrsla skrefsins myndi mistakast.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType MessageTypeUnavailableMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2394971568" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Call Help.MessageTypes.Get (or describe_message_type) to find the exact name of the message type, check that the app that provides it is installed and that you may use it, then correct the step.</source>
+          <target>Kallaðu á Help.MessageTypes.Get (eða describe_message_type) til að finna nákvæmt heiti skilaboðategundarinnar, athugaðu að forritið sem býr hana til sé uppsett og að þú megir nota hana og lagaðu svo skrefið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kallaðu á Help.MessageTypes.Get (eða describe_message_type) til að finna nákvæmt heiti skilaboðategundarinnar, athugaðu að forritið sem býr hana til sé uppsett og að þú megir nota hana og lagaðu svo skrefið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType MessageTypeUnavailableNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2065577865" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 has %2 = %3, but the playbook has no step %3. The run would stop there with an error.</source>
+          <target>Skref %1 er með %2 = %3, en keðjan hefur ekkert skref %3. Keyrslan myndi stöðvast þar með villu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = field caption, %3 = the missing step no, is-IS=Skref %1 er með %2 = %3, en keðjan hefur ekkert skref %3. Keyrslan myndi stöðvast þar með villu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType NextStepNotFoundMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2045439421" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set %1 on step %2 to a step that exists, or to 0 to end the playbook.</source>
+          <target>Stilltu %1 í skrefi %2 á skref sem er til, eða á 0 til að ljúka keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field caption, %2 = step no, is-IS=Stilltu %1 í skrefi %2 á skref sem er til, eða á 0 til að ljúka keðjunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType NextStepNotFoundNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2589613645" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 (%2) feeds a forEach but has no Success condition on noOfRecords. When it finds no records it still succeeds, the forEach does nothing and the run completes having done nothing.</source>
+          <target>Skref %1 (%2) fóðrar forEach en hefur ekkert árangursskilyrði á noOfRecords. Þegar það finnur engar færslur heppnast það samt, forEach gerir ekkert og keyrslunni lýkur án þess að nokkuð hafi verið gert.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, is-IS=Skref %1 (%2) fóðrar forEach en hefur ekkert árangursskilyrði á noOfRecords. Þegar það finnur engar færslur heppnast það samt, forEach gerir ekkert og keyrslunni lýkur án þess að nokkuð hafi verið gert.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType SourceUnguardedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 3404727033" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add the Success condition noOfRecords GreaterThan 0 to step %1, beside status Equals Success, in the same group.</source>
+          <target>Bættu árangursskilyrðinu noOfRecords GreaterThan 0 við skref %1, við hlið status Equals Success, í sama hópi.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Bættu árangursskilyrðinu noOfRecords GreaterThan 0 við skref %1, við hlið status Equals Success, í sama hópi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType SourceUnguardedNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 3014898190" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 (%2) writes for every item of an array that an earlier forEach Check step %3 decides on, but Skip If Step Failed is not set to %3. Next Step edges apply once per step, not per item, so this step runs for all items, also those the check answered no. Set Skip If Step Failed to %3 on step %1.</source>
           <target>Skref %1 (%2) skrifar fyrir öll atriði fylkis sem forEach-athugunarskref %3 á undan tekur ákvörðun um, en Sleppa ef skref mistókst er ekki stillt á %3. Næsta skref gildir einu sinni fyrir skrefið, ekki fyrir hvert atriði, svo þetta skref keyrir fyrir öll atriði, líka þau sem athugunin svaraði nei. Stilltu Sleppa ef skref mistókst á %3 í skrefi %1.</target>
           <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = check step no, is-IS=Skref %1 (%2) skrifar fyrir öll atriði fylkis sem forEach-athugunarskref %3 á undan tekur ákvörðun um, en Sleppa ef skref mistókst er ekki stillt á %3. Næsta skref gildir einu sinni fyrir skrefið, ekki fyrir hvert atriði, svo þetta skref keyrir fyrir öll atriði, líka þau sem athugunin svaraði nei. Stilltu Sleppa ef skref mistókst á %3 í skrefi %1.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType UnsafeForEachWriteMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType UnsafeForEachWriteMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2230637866" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Skip If Step Failed to %1 on step %2.</source>
+          <target>Stilltu Sleppa ef skref mistókst á %1 í skrefi %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = check step no, %2 = write step no, is-IS=Stilltu Sleppa ef skref mistókst á %1 í skrefi %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType UnsafeForEachWriteNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1991160535" size-unit="char" translate="yes" xml:space="preserve">
+          <source>nothing</source>
+          <target>ekkert</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=ekkert</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType NothingTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 995180490" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 calls %2 with roleCode %3, but this company has no language model with that code. Every call would answer RecordNotFound.</source>
+          <target>Skref %1 kallar á %2 með roleCode %3, en þetta fyrirtæki hefur ekkert mállíkan með þeim kóða. Hvert kall myndi svara RecordNotFound.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = role code, is-IS=Skref %1 kallar á %2 með roleCode %3, en þetta fyrirtæki hefur ekkert mállíkan með þeim kóða. Hvert kall myndi svara RecordNotFound.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType RoleNotFoundMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3589112302" size-unit="char" translate="yes" xml:space="preserve">
+          <source>List the codes with Data.Records.Get on table "Bifrost Language Model ori", then use one of them, or leave roleCode out to use the default language model.</source>
+          <target>Sæktu kóðana með Data.Records.Get á töfluna "Bifrost Language Model ori" og notaðu einn þeirra, eða slepptu roleCode til að nota sjálfgefið mállíkan.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sæktu kóðana með Data.Records.Get á töfluna "Bifrost Language Model ori" og notaðu einn þeirra, eða slepptu roleCode til að nota sjálfgefið mállíkan.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType RoleNotFoundNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1609364166" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 refers to step %2 (@%2...), which does not run before it, so its result does not exist yet when this step builds its request. The reference stays as literal text.</source>
+          <target>Skref %1 vísar í skref %2 (@%2...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Tilvísunin helst sem hreinn texti.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Tilvísunin helst sem hreinn texti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotEarlierMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1417200642" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refer only to steps with a lower number, or renumber the steps so that the step you read from comes first.</source>
+          <target>Vísaðu aðeins í skref með lægra númer, eða endurnúmeraðu skrefin þannig að skrefið sem þú lest úr komi fyrst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vísaðu aðeins í skref með lægra númer, eða endurnúmeraðu skrefin þannig að skrefið sem þú lest úr komi fyrst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotEarlierNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2332361164" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 refers to step %2 (@%2...), which does not exist in this playbook. The reference stays as literal text in the request.</source>
+          <target>Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Tilvísunin helst sem hreinn texti í beiðninni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Tilvísunin helst sem hreinn texti í beiðninni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotFoundMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2314390664" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the step number in the reference, or add the missing step.</source>
+          <target>Leiðréttu skrefsnúmerið í tilvísuninni, eða bættu við skrefinu sem vantar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu skrefsnúmerið í tilvísuninni, eða bættu við skrefinu sem vantar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotFoundNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3733960680" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The request template of step %1 is not a valid JSON object. The engine does not fail on it: it sends an empty request {} to the message type.</source>
+          <target>Beiðnisniðmát skrefs %1 er ekki gildur JSON-hlutur. Vélin stoppar ekki á því: hún sendir tóma beiðni {} til skilaboðategundarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Beiðnisniðmát skrefs %1 er ekki gildur JSON-hlutur. Vélin stoppar ekki á því: hún sendir tóma beiðni {} til skilaboðategundarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType TemplateNotJsonMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3501335340" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fix the template: it must be one JSON object, with every string in double quotes and no comma after the last item. Set it again as base64 of the corrected JSON.</source>
+          <target>Lagaðu sniðmátið: það verður að vera einn JSON-hlutur, með alla strengi innan tvöfaldra gæsalappa og án kommu á eftir síðasta atriði. Settu það aftur sem base64 af leiðrétta JSON-textanum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lagaðu sniðmátið: það verður að vera einn JSON-hlutur, með alla strengi innan tvöfaldra gæsalappa og án kommu á eftir síðasta atriði. Settu það aftur sem base64 af leiðrétta JSON-textanum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType TemplateNotJsonNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2764084366" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 reads @_current.fields.%2, but table %3 has no field with that name. The reference stays as literal text.</source>
+          <target>Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Tilvísunin helst sem hreinn texti.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Tilvísunin helst sem hreinn texti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownCurrentFieldMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3351205802" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A field name in an answer has no spaces and no punctuation except _ (for example No_ for No.). Call Help.Fields.Get on table %1 to list the fields.</source>
+          <target>Reitaheiti í svari hefur engin bil og engin greinarmerki nema _ (til dæmis No_ fyrir No.). Kallaðu á Help.Fields.Get á töfluna %1 til að sjá reitina.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table name, is-IS=Reitaheiti í svari hefur engin bil og engin greinarmerki nema _ (til dæmis No_ fyrir No.). Kallaðu á Help.Fields.Get á töfluna %1 til að sjá reitina.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownCurrentFieldNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1834680235" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 reads @%2.%3, but step %2 stores no field %3 in the workspace (its Result Log Paths store: %4). The reference stays as literal text.</source>
+          <target>Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Tilvísunin helst sem hreinn texti.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = storing step no, %3 = field name, %4 = the stored fields, is-IS=Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Tilvísunin helst sem hreinn texti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownStepFieldMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3137607799" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add the field to Result Log Paths on step %1 (for example result&gt;%2), or correct the name in the reference.</source>
+          <target>Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result&gt;%2), eða leiðréttu heitið í tilvísuninni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = storing step no, %2 = field name, is-IS=Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result&gt;%2), eða leiðréttu heitið í tilvísuninni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownStepFieldNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Returns report metadata, available layouts, and saved request page preset.</source>
@@ -3668,6 +3872,12 @@
           <target>Þú verður að velja endurtekningarsniðmát.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Þú verður að velja endurtekningarsniðmát.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Schedule Playbook ori - NamedType MissingTemplateErr</note>
+        </trans-unit>
+        <trans-unit id="Page 1606311328 - NamedType 4192109527" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The playbook verifies with warnings: %1\Schedule it anyway?</source>
+          <target>Keðjan sannreynist með viðvörunum: %1\Á samt að tímasetja hana?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the warnings, is-IS=Keðjan sannreynist með viðvörunum: %1\Á samt að tímasetja hana?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Schedule Playbook ori - NamedType WarningsConfirmQst</note>
         </trans-unit>
         <trans-unit id="Page 1606311328 - Control 2373037437 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Advanced</source>

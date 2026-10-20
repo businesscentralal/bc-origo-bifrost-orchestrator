@@ -100,6 +100,8 @@ table 10035539 "Playbook ori"
     /// Playbook JQ Dispatcher, and stores the new entry primary-key id back on the playbook. A
     /// playbook that already points at a living orchestrator entry is refused; the existing entry
     /// has to be removed first. A stale id left behind by a deleted entry is simply overwritten.
+    /// The playbook is verified first and refused when the verification finds an error, or a warning
+    /// (see the overload with IgnoreWarnings).
     /// </summary>
     /// <param name="RecurringTemplateCode">The recurring template that sets days, times and interval.</param>
     /// <param name="NotificationType">How to notify on failure and restart: none, e-mail or Telegram.</param>
@@ -117,10 +119,42 @@ table 10035539 "Playbook ori"
         EmitTelemetry: Boolean;
         RetryPolicy: Enum "Retry Policy ori";
         var OrchestratorEntryPkId: Guid): Guid
+    begin
+        exit(CreateOrchestratorEntry(RecurringTemplateCode, NotificationType, NotificationRecipient, JobQueueCategoryCode, EmitTelemetry, RetryPolicy, false, OrchestratorEntryPkId));
+    end;
+
+    /// <summary>
+    /// Puts this playbook on a recurring schedule by creating an orchestrator entry that runs the
+    /// Playbook JQ Dispatcher, and stores the new entry primary-key id back on the playbook. A
+    /// playbook that already points at a living orchestrator entry is refused; the existing entry
+    /// has to be removed first. A stale id left behind by a deleted entry is simply overwritten.
+    /// The playbook is verified first (Orchestrator.Playbook.Verify): an error on an enabled step refuses
+    /// the schedule, and so does a warning unless IgnoreWarnings is true.
+    /// </summary>
+    /// <param name="RecurringTemplateCode">The recurring template that sets days, times and interval.</param>
+    /// <param name="NotificationType">How to notify on failure and restart: none, e-mail or Telegram.</param>
+    /// <param name="NotificationRecipient">The address or chat id the notifications go to.</param>
+    /// <param name="JobQueueCategoryCode">The Job Queue category to run under, or empty for none.</param>
+    /// <param name="EmitTelemetry">Whether the entry writes telemetry on every run.</param>
+    /// <param name="RetryPolicy">How often a failed run may be restarted automatically.</param>
+    /// <param name="IgnoreWarnings">True when the caller accepts the warnings of the verification on purpose; an error always refuses.</param>
+    /// <param name="OrchestratorEntryPkId">Receives the created entry's primary-key ID (field ID).</param>
+    /// <returns>Guid. The SystemId of the orchestrator entry that was created (for Entry.* APIs).</returns>
+    procedure CreateOrchestratorEntry(
+        RecurringTemplateCode: Code[20];
+        NotificationType: Enum "Notif. Type ori";
+        NotificationRecipient: Text[2048];
+        JobQueueCategoryCode: Code[10];
+        EmitTelemetry: Boolean;
+        RetryPolicy: Enum "Retry Policy ori";
+        IgnoreWarnings: Boolean;
+        var OrchestratorEntryPkId: Guid): Guid
     var
         Entry: Record "Scheduled Entry ori";
+        Verify: Codeunit "Playbook Verify ori";
         AlreadyScheduledErr: Label 'Playbook %1 is already scheduled. Remove the existing orchestrator entry first.', Comment = '%1 = playbook code, is-IS=Keðja %1 er þegar tímasett. Fjarlægðu núverandi vinnsluraðarstjórafærslu fyrst.';
     begin
+        Verify.AssertSafeToStart(Code, IgnoreWarnings);
         if not IsNullGuid("Orchestrator Entry ID") then begin
             Entry.SetLoadFields(ID);
             if Entry.Get("Orchestrator Entry ID") then

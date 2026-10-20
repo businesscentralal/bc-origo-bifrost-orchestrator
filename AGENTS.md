@@ -88,7 +88,7 @@ Keys keep the `Orchestrator.*` prefix — they are the published API contract an
 
 ## Key Design Rules
 
-- **Never** call Foundation's `Dispatcher ori` directly from playbook code — always go through `Msg Executor ori` so the `Codeunit.Run` isolation stays intact.
+- **Never** call Foundation's `Dispatcher ori` directly from playbook code — always go through `Msg Executor ori` so the `Codeunit.Run` isolation stays intact. The one exception is `Playbook Verify Lookup ori` (10035619): it reads through the public, lightweight `Dispatcher ori.Execute` (OmitCommit, nothing persisted) inside a `TryFunction`, because a verification must leave no trace and must not commit.
 - **Never** rename an existing `Orchestrator.*` message type key or remove an enum value — they are the published API contract.
 - **Never** reintroduce chat, language model or MCP Tool Server references. Those objects live in Bifrost Bragi and Bifrost Orchestrator has no dependency on it.
 - **Always** return errors as a `status = Error` response with a helpful message through the Foundation argument — never let an unhandled exception reach the API.
@@ -116,6 +116,8 @@ To add a message type: add a value to `MsgType.EnumExt ori`, write the `<Area> <
 ---
 
 ## Agent Notes
+
+- #109 (2026-10-20): `Orchestrator.Playbook.Verify` returns findings (`severity`, `stepNo`, `code`, `message`, `nextStep`), not just warnings. `Orchestrator.Playbook.Run`, `Orchestrator.Playbook.Schedule` and `Playbook ori.CreateOrchestratorEntry` refuse with `PreconditionFailed` on an error finding of an enabled step, and on a warning unless `ignoreWarnings` is true; a Job Queue run is not gated. A new finding code needs a label pair (message and next step, with `is-IS=`), a row in the help table "What `Orchestrator.Playbook.Verify` checks", an entry in the notes of `Playbook Verify Msg ori`, and a positive and a negative test. The worked examples in `Help ori` are built in `Playbook Example Library ori` (96438); change both together, `Playbook Example Tests` compares the base64.
 
 - #21 (2026-09-15): legacy take-over is permission-tolerant (`TryProbeTakeOverPermissions` / `TryRunTakeOverAtInstall`); skip = telemetry only (A1); never read Foundation `Setup ori` for migration; Telegram Bot Token ID mapping dropped (A2).
 - #19 (2026-09-15): Data.Records companion hints for Job Queue Entry / Scheduled Task / Report Request Preset ori via `Report Data Restriction ori`; Foundation pin **28.0.0.100**; `.AL-Go` core probing `release_status: latestBuild` (suite-wide accepted; Sync COSMO Alpaca keyVaultName soft-fails after settings change are Haraldur infra, not AL blockers).

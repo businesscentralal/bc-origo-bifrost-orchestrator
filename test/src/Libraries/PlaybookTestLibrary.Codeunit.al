@@ -109,6 +109,113 @@ codeunit 96434 "Playbook Test Library ori"
     end;
 
     /// <summary>
+    /// Adds a condition of any type to a step.
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step the condition guards.</param>
+    /// <param name="ConditionType">Start, Success or Error.</param>
+    /// <param name="LineNo">The line number within the group (10000, 20000, ...).</param>
+    /// <param name="Path">The path the condition reads.</param>
+    /// <param name="Operator">The comparison operator.</param>
+    /// <param name="ConditionValue">The value to compare with.</param>
+    procedure AddCondition(PlaybookCode: Code[20]; StepNo: Integer; ConditionType: Enum "Playbook Cond. Type ori"; LineNo: Integer; Path: Text[250]; Operator: Enum "Playbook Cond. Operator ori"; ConditionValue: Text[250])
+    var
+        Condition: Record "Playbook Condition ori";
+    begin
+        Condition.Init();
+        Condition."Playbook Code" := PlaybookCode;
+        Condition."Step No." := StepNo;
+        Condition."Condition Type" := ConditionType;
+        Condition."Group No." := 1;
+        Condition."Line No." := LineNo;
+        Condition.Path := Path;
+        Condition.Operator := Operator;
+        Condition.Value := ConditionValue;
+        Condition.Insert(true);
+    end;
+
+    /// <summary>
+    /// Adds the Success condition <c>status Equals Success</c> that every step should have.
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step the condition guards.</param>
+    procedure AddStatusSuccessCondition(PlaybookCode: Code[20]; StepNo: Integer)
+    begin
+        AddCondition(PlaybookCode, StepNo, "Playbook Cond. Type ori"::Success, 10000, 'status', "Playbook Cond. Operator ori"::Equals, 'Success');
+    end;
+
+    /// <summary>
+    /// Adds the Success condition <c>noOfRecords GreaterThan 0</c> that guards a record reader.
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step the condition guards.</param>
+    procedure AddNoOfRecordsCondition(PlaybookCode: Code[20]; StepNo: Integer)
+    begin
+        AddCondition(PlaybookCode, StepNo, "Playbook Cond. Type ori"::Success, 20000, 'noOfRecords', "Playbook Cond. Operator ori"::GreaterThan, '0');
+    end;
+
+    /// <summary>
+    /// Sets the Next Step edges of a step.
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step to change.</param>
+    /// <param name="OnSuccess">Next Step No. (Success).</param>
+    /// <param name="OnFailure">Next Step No. (Failure).</param>
+    procedure SetNextSteps(PlaybookCode: Code[20]; StepNo: Integer; OnSuccess: Integer; OnFailure: Integer)
+    var
+        PlaybookStep: Record "Playbook Step ori";
+    begin
+        PlaybookStep.Get(PlaybookCode, StepNo);
+        PlaybookStep."Next Step No. (Success)" := OnSuccess;
+        PlaybookStep."Next Step No. (Failure)" := OnFailure;
+        PlaybookStep.Modify(true);
+    end;
+
+    /// <summary>
+    /// Sets the Result Log Paths of a step.
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step to change.</param>
+    /// <param name="ResultLogPaths">The paths, for example noOfRecords>customerCount.</param>
+    procedure SetResultLogPaths(PlaybookCode: Code[20]; StepNo: Integer; ResultLogPaths: Text[2048])
+    var
+        PlaybookStep: Record "Playbook Step ori";
+    begin
+        PlaybookStep.Get(PlaybookCode, StepNo);
+        PlaybookStep."Result Log Paths" := ResultLogPaths;
+        PlaybookStep.Modify(true);
+    end;
+
+    /// <summary>
+    /// Enables or disables a step.
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step to change.</param>
+    /// <param name="Disabled">True to disable the step.</param>
+    procedure SetStepDisabled(PlaybookCode: Code[20]; StepNo: Integer; Disabled: Boolean)
+    var
+        PlaybookStep: Record "Playbook Step ori";
+    begin
+        PlaybookStep.Get(PlaybookCode, StepNo);
+        PlaybookStep.Validate(Disabled, Disabled);
+        PlaybookStep.Modify(true);
+    end;
+
+    /// <summary>
+    /// Keeps a step out of the run status (the reporting tail).
+    /// </summary>
+    /// <param name="PlaybookCode">The playbook code.</param>
+    /// <param name="StepNo">The step to change.</param>
+    procedure SetExcludeFromRunStatus(PlaybookCode: Code[20]; StepNo: Integer)
+    var
+        PlaybookStep: Record "Playbook Step ori";
+    begin
+        PlaybookStep.Get(PlaybookCode, StepNo);
+        PlaybookStep."Exclude From Run Status" := true;
+        PlaybookStep.Modify(true);
+    end;
+
+    /// <summary>
     /// Runs the playbook through the real runner, as the Run message type and the Job Queue do.
     /// </summary>
     /// <param name="PlaybookCode">The playbook to run.</param>

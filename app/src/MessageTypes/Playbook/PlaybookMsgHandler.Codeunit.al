@@ -26,6 +26,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
         Instance: Record "Playbook Instance ori";
         Runner: Codeunit "Playbook Runner ori";
         Workspace: Codeunit "Playbook Workspace ori";
+        Verify: Codeunit "Playbook Verify ori";
         InitialRequest: BigText;
         FinalResponse: BigText;
         RequestJson: JsonObject;
@@ -35,6 +36,10 @@ codeunit 10035552 "Playbook Msg Handler ori"
     begin
         RequestJson := Argument.GetRequestJson();
         Playbook.Get(GetPlaybookCode(Argument, RequestJson));
+
+        // A playbook that does not verify is not started: errors always refuse, warnings unless ignoreWarnings is true.
+        if Verify.RefuseIfUnsafe(Argument, Playbook.Code, GetJsonBool(RequestJson, 'ignoreWarnings')) then
+            exit;
 
         if RequestJson.Get('initialRequest', InitialRequestToken) then
             InitialRequest.AddText(Format(InitialRequestToken));
@@ -63,6 +68,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
     procedure ExecuteSchedule(var Argument: Record "Message Argument ori")
     var
         Playbook: Record "Playbook ori";
+        Verify: Codeunit "Playbook Verify ori";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
         EntrySystemId: Guid;
@@ -73,9 +79,15 @@ codeunit 10035552 "Playbook Msg Handler ori"
         JobQueueCategoryCode: Code[10];
         EmitTelemetry: Boolean;
         RetryPolicy: Enum "Retry Policy ori";
+        IgnoreWarnings: Boolean;
     begin
         RequestJson := Argument.GetRequestJson();
         Playbook.Get(GetPlaybookCode(Argument, RequestJson));
+
+        // Enabling a schedule runs the same verification as Orchestrator.Playbook.Run.
+        IgnoreWarnings := GetJsonBool(RequestJson, 'ignoreWarnings');
+        if Verify.RefuseIfUnsafe(Argument, Playbook.Code, IgnoreWarnings) then
+            exit;
 
         RecurringTemplateCode := CopyStr(GetJsonText(RequestJson, 'recurringTemplateCode'), 1, 20);
         if RecurringTemplateCode = '' then
@@ -89,7 +101,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
 
         EntrySystemId := Playbook.CreateOrchestratorEntry(
             RecurringTemplateCode, NotificationType, NotificationRecipient,
-            JobQueueCategoryCode, EmitTelemetry, RetryPolicy, OrchestratorEntryPkId);
+            JobQueueCategoryCode, EmitTelemetry, RetryPolicy, IgnoreWarnings, OrchestratorEntryPkId);
 
         ResponseJson.Add('status', 'Success');
         ResponseJson.Add('playbookCode', Playbook.Code);
