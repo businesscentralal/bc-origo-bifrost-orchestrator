@@ -54,6 +54,24 @@ codeunit 96434 "Playbook Test Library ori"
         if Template <> '' then
             PlaybookStep.SetRequestTemplate(Template);
         PlaybookStep.Insert(true);
+        LinkPreviousStep(PlaybookCode, StepNo);
+    end;
+
+    /// <summary>
+    /// Points the Next Step edges (success and failure) of the step before this one at this step, so a
+    /// playbook of several steps runs in step order the way the runner follows edges.
+    /// </summary>
+    local procedure LinkPreviousStep(PlaybookCode: Code[20]; StepNo: Integer)
+    var
+        PreviousStep: Record "Playbook Step ori";
+    begin
+        PreviousStep.SetRange("Playbook Code", PlaybookCode);
+        PreviousStep.SetFilter("Step No.", '<%1', StepNo);
+        if not PreviousStep.FindLast() then
+            exit;
+        PreviousStep."Next Step No. (Success)" := StepNo;
+        PreviousStep."Next Step No. (Failure)" := StepNo;
+        PreviousStep.Modify(true);
     end;
 
     /// <summary>
