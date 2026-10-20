@@ -10,11 +10,16 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Changed (2026-10-20) - AppSource delivery
 
 - `.AL-Go/settings.json`: `deliverToAppSource` names the Partner Center offer (productId beb3672f-c5f7-44ed-83e7-6f1193560143, main app folder `app`, branch main, no continuous delivery), so the Publish To AppSource workflow can deliver updates.
+### Changed (2026-10-19) - AppSource metadata on docs.bifrost.origo.is
+
+- `app.json` `privacyStatement` and `EULA` point at `https://docs.bifrost.origo.is/en-us/licensing/privacy/` and `.../licensing/eula/`, the same pages as Bifrost Foundation and Bifrost Language Models, instead of the old `businesscentralal.github.io/bifrost` addresses.
 
 ### Changed (2026-10-19) - Help published and guarded (#69)
 
 - The Orchestrator documentation and context-sensitive help are published on https://docs.bifrost.origo.is/ (businesscentralal/bifrost#107). `app.json` `help` now points at `https://docs.bifrost.origo.is/en-us/orchestrator/`.
 - The unchanged `tools/Test-HelpLinks.ps1` runs as the `HelpLinks` job in `SourceGuards.yaml` against the documentation site's main branch: every page must link to a help page that exists in en-US and is-IS.
+
+## [28.0.0.0] - 2026-10-19
 
 ### Fixed (2026-10-19) - Embedded @path references (#101)
 
@@ -54,7 +59,6 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Fixed (2026-10-16) - Force-tier refusal regression tests (#88)
 
 - `Data Records Hint Tests` (96428) now expects Foundation's force-openable setup-table refusal for Job Queue Entry (472), while preserving exact permission guidance and the separately discoverable Orchestrator companion hints. Job Queue Entry, Scheduled Task, Report Request Preset and unrelated Customer scenarios run in both en-US (1033) and is-IS (1039). Product behavior and write restrictions are unchanged.
-
 
 ### Security (2026-10-14) - Generic data API field restrictions (#62, core#344)
 
@@ -279,8 +283,6 @@ Business Central release versioning (`major.minor.build.revision`).
   `RecordRef.Open(2000000053)` and cover grant, idempotent re-run, and empty-legacy exit.
   `TakeOverAccessControl` is no longer local so the tests can call it directly.
 
-## [28.0.0.0] - 2026-09-07
-
 ### Fixed (2026-09-11) - `_sys.lastMonthEnd` off-by-one (#11)
 
 - `Playbook Workspace ori.SeedSystemConstants` computed `lastMonthEnd` with `CalcDate('<CM-1M>', Today)`,
@@ -289,7 +291,6 @@ Business Central release versioning (`major.minor.build.revision`).
   `GetLastDayOfPreviousMonth` (start of this month minus one day). `lastMonthStart` / `thisMonthStart`
   formulas are unchanged. Unit tests TC001–TC005 cover September, leap February, January cross-year,
   and May 31 → April 30.
-
 
 ### Setup notifications and wizard (2026-09-07)
 
@@ -329,7 +330,6 @@ the single action *Start setup wizard*.
 - The test app no longer depends on Bifröst Foundation's internals: Bifrost Orchestrator - Tests has been removed
   from Foundation's `internalsVisibleTo`, and the test suite compiles and runs against a Foundation
   package that does not grant it. No test code had to change - the suite never touched a Foundation internal.
-
 
 ### App name: Bifrost Nornir -> Bifrost Orchestrator (2026-09-06, before first release)
 
