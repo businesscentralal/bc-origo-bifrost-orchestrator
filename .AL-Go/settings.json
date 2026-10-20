@@ -38,6 +38,14 @@
     "tools/Test-BifrostPipeline.ps1"
   ],
   "keyVaultCodesignCertificateName": "CodeSigning-2025",
+  "deliverToAppSource": {
+    "productId": "beb3672f-c5f7-44ed-83e7-6f1193560143",
+    "mainAppFolder": "app",
+    "branches": [
+      "main"
+    ],
+    "continuousDelivery": false
+  },
   "conditionalSettings": [
     {
       "buildModes": [

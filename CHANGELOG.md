@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-20) - AppSource delivery
+
+- `.AL-Go/settings.json`: `deliverToAppSource` names the Partner Center offer (productId beb3672f-c5f7-44ed-83e7-6f1193560143, main app folder `app`, branch main, no continuous delivery), so the Publish To AppSource workflow can deliver updates.
 ### Changed (2026-10-19) - AppSource metadata on docs.bifrost.origo.is
 
 - `app.json` `privacyStatement` and `EULA` point at `https://docs.bifrost.origo.is/en-us/licensing/privacy/` and `.../licensing/eula/`, the same pages as Bifrost Foundation and Bifrost Language Models, instead of the old `businesscentralal.github.io/bifrost` addresses.
