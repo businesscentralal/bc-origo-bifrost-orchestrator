@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Changed (2026-10-20) - AppSource delivery
+
+- `.AL-Go/settings.json`: `deliverToAppSource` names the Partner Center offer (productId beb3672f-c5f7-44ed-83e7-6f1193560143, main app folder `app`, branch main, no continuous delivery), so the Publish To AppSource workflow can deliver updates.
+
 ### Changed (2026-10-19) - Help published and guarded (#69)
 
 - The Orchestrator documentation and context-sensitive help are published on https://docs.bifrost.origo.is/ (businesscentralal/bifrost#107). `app.json` `help` now points at `https://docs.bifrost.origo.is/en-us/orchestrator/`.
