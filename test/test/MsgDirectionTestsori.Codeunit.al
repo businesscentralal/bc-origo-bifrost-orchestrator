@@ -46,6 +46,7 @@ codeunit 96455 "Msg Direction Tests ori"
         AssertDirection("Message Type ori"::"Help.Orchestrator.Get", "Msg Direction ori"::Outbound, 'Help.Orchestrator.Get');
         AssertDirection("Message Type ori"::"Orchestrator.Report.List", "Msg Direction ori"::Outbound, 'Orchestrator.Report.List');
         AssertDirection("Message Type ori"::"Orchestrator.Workspace.Preview", "Msg Direction ori"::Outbound, 'Orchestrator.Workspace.Preview');
+        AssertDirection("Message Type ori"::"Orchestrator.Playbook.Verify", "Msg Direction ori"::Outbound, 'Orchestrator.Playbook.Verify');
         AssertDirection("Message Type ori"::"Orchestrator.Report.SaveAs", "Msg Direction ori"::Outbound, 'Orchestrator.Report.SaveAs');
         AssertDirection("Message Type ori"::"Orchestrator.Report.Get", "Msg Direction ori"::Both, 'Orchestrator.Report.Get');
         AssertDirection("Message Type ori"::"Orchestrator.ReportLayout.List", "Msg Direction ori"::Outbound, 'Orchestrator.ReportLayout.List');

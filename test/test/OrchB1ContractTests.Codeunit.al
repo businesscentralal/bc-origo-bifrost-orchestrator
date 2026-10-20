@@ -28,6 +28,7 @@ codeunit 96452 "Orch B1 Contract Tests"
         AssertContract("Message Type ori"::"Orchestrator.Playbook.Run", 'Orchestrator.Playbook.Run');
         AssertContract("Message Type ori"::"Orchestrator.Playbook.Schedule", 'Orchestrator.Playbook.Schedule');
         AssertContract("Message Type ori"::"Orchestrator.Playbook.Enqueue", 'Orchestrator.Playbook.Enqueue');
+        AssertContract("Message Type ori"::"Orchestrator.Playbook.Verify", 'Orchestrator.Playbook.Verify');
         AssertContract("Message Type ori"::"Orchestrator.JobQueueEntry.Restart", 'Orchestrator.JobQueueEntry.Restart');
         AssertContract("Message Type ori"::"Orchestrator.JobQueueEntry.RestartIfNeeded", 'Orchestrator.JobQueueEntry.RestartIfNeeded');
         AssertContract("Message Type ori"::"Help.Orchestrator.Get", 'Help.Orchestrator.Get');
@@ -60,6 +61,7 @@ codeunit 96452 "Orch B1 Contract Tests"
         AssertEffect("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'irreversible', false);
         AssertEffect("Message Type ori"::"Orchestrator.Status.Get", 'Orchestrator.Status.Get', 'read', false);
         AssertEffect("Message Type ori"::"Help.Orchestrator.Get", 'Help.Orchestrator.Get', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.Playbook.Verify", 'Orchestrator.Playbook.Verify', 'read', false);
     end;
 
     /// <summary>Preserves every field and position of the main choice entry.</summary>

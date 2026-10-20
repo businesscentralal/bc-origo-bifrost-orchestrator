@@ -11,7 +11,7 @@ using System.Utilities;
 codeunit 10035547 "Playbook Runner ori"
 {
     Access = Internal;
-    Permissions = tabledata "Playbook ori" = R,
+    Permissions = tabledata "Playbook ori" = RM,
                   tabledata "Playbook Step ori" = R,
                   tabledata "Playbook Condition ori" = R,
                   tabledata "Playbook Instance ori" = RIMD,
@@ -24,6 +24,7 @@ codeunit 10035547 "Playbook Runner ori"
         PlaybookNotFoundErr: Label 'Playbook %1 not found.', Comment = '%1 = playbook code, is-IS=Keðja %1 fannst ekki.';
         StepNotFoundErr: Label 'Step %1 not found in playbook %2.', Comment = '%1 = step no, %2 = playbook code, is-IS=Skref %1 fannst ekki í keðju %2.';
         MaxIterationsErr: Label 'Step %1 exceeded max iterations (%2).', Comment = '%1 = step no, %2 = max, is-IS=Skref %1 fór yfir hámarksfjölda ítrana (%2).';
+        CheckAnsweredNoTok: Label 'Check answered no.', Comment = 'is-IS=Athugun svaraði nei.';
         SkippedByStartCondTok: Label 'Skipped: start conditions not met.', Comment = 'is-IS=Sleppt: upphafsskilyrði ekki uppfyllt.';
         PerItemResults: Dictionary of [Text, Boolean];
         PageItemOffset: Integer;
@@ -63,6 +64,7 @@ codeunit 10035547 "Playbook Runner ori"
         StoreInitialRequest(InitialRequestText);
         InstanceId := LogMgt.CreateInstance(PlaybookCode, InitialRequestText);
         RunStartTime := CurrentDateTime();
+        UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Running);
         Workspace.BeginRun(PlaybookCode, Playbook.Description, InstanceId);
 
         // Find first step
@@ -70,6 +72,7 @@ codeunit 10035547 "Playbook Runner ori"
         PlaybookStep.SetCurrentKey("Playbook Code", "Step No.");
         if not PlaybookStep.FindFirst() then begin
             LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Completed, 0, 0, 0, '');
+            UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Completed);
             exit;
         end;
 
@@ -105,10 +108,13 @@ codeunit 10035547 "Playbook Runner ori"
 
         Workspace.CompleteRun(CurrentDateTime() - RunStartTime);
         PlaybookFailed := Workspace.RunFailed();
-        if PlaybookFailed then
-            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, '')
-        else
+        if PlaybookFailed then begin
+            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, '');
+            UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Failed);
+        end else begin
             LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Completed, StepsExecuted, StepsFailed, ItemsProcessed, '');
+            UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Completed);
+        end;
 
         TextToBigText(LastResponseText, FinalResponse);
     end;
@@ -140,6 +146,7 @@ codeunit 10035547 "Playbook Runner ori"
         StoreInitialRequest(InitialRequestText);
         InstanceId := LogMgt.CreateInstance(PlaybookCode, InitialRequestText);
         RunStartTime := CurrentDateTime();
+        UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Running);
         Workspace.BeginRun(PlaybookCode, Playbook.Description, InstanceId);
 
         NextStepNo := StartStepNo;
@@ -173,12 +180,33 @@ codeunit 10035547 "Playbook Runner ori"
 
         Workspace.CompleteRun(CurrentDateTime() - RunStartTime);
         PlaybookFailed := Workspace.RunFailed();
-        if PlaybookFailed then
-            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, '')
-        else
+        if PlaybookFailed then begin
+            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, '');
+            UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Failed);
+        end else begin
             LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Completed, StepsExecuted, StepsFailed, ItemsProcessed, '');
+            UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Completed);
+        end;
 
         TextToBigText(LastResponseText, FinalResponse);
+    end;
+
+    /// <summary>
+    /// Stamps the playbook header with the run it just started or finished, so the header shows
+    /// the outcome of every run type (Run Now, Playbook.Run, Playbook.Enqueue and scheduled runs
+    /// all end up here). The status is Running while the run is in flight; a run that is
+    /// abandoned mid-flight therefore never leaves the header at Completed.
+    /// </summary>
+    local procedure UpdateLastRun(PlaybookCode: Code[20]; InstanceId: Guid; RunStatus: Enum "Playbook Inst. Status ori")
+    var
+        Playbook: Record "Playbook ori";
+    begin
+        if not Playbook.Get(PlaybookCode) then
+            exit;
+        Playbook."Last Run Instance ID" := InstanceId;
+        Playbook."Last Run Status" := RunStatus;
+        Playbook."Last Run At" := CurrentDateTime();
+        Playbook.Modify();
     end;
 
     local procedure ExecutePagedBlock(PagedStep: Record "Playbook Step ori"; InstanceId: Guid; InitialRequestText: Text; var ResponseStore: Dictionary of [Integer, JsonObject]; var StepSuccess: Boolean; var StepsExecuted: Integer; var StepsFailed: Integer; var ItemsProcessed: Integer; var LastResponseText: Text)
@@ -320,6 +348,7 @@ codeunit 10035547 "Playbook Runner ori"
         ConditionHolds: Boolean;
         CheckAnswered: Boolean;
         TechnicalFailure: Boolean;
+        LogErrorText: Text;
     begin
         // Build request from template or initial request
         RequestText := PlaybookStep.GetRequestTemplate();
@@ -334,6 +363,12 @@ codeunit 10035547 "Playbook Runner ori"
         StartTime := CurrentDateTime();
         ExecuteMessageType(PlaybookStep."Message Type", RequestText, ResponseText, StepSuccess, ErrorText);
         StepDuration := CurrentDateTime() - StartTime;
+
+        // A Check step answers a question, but an error answer from the message type is not an
+        // answer: it is a technical failure and is never evaluated against the Success conditions.
+        if StepSuccess and PlaybookStep.IsCheck() then
+            if JsonHelper.IsErrorResponse(ResponseText, ErrorText) then
+                StepSuccess := false;
 
         // Store response for downstream bindings
         if (ResponseText <> '') and ResponseJson.ReadFrom(ResponseText) then begin
@@ -356,15 +391,18 @@ codeunit 10035547 "Playbook Runner ori"
         TechnicalFailure := not StepSuccess and not (PlaybookStep.IsCheck() and CheckAnswered);
 
         StepsExecuted += 1;
-        if not TechnicalFailure then
-            StepStatus := "Playbook Inst. Status ori"::Completed
-        else begin
+        LogErrorText := ErrorText;
+        if not TechnicalFailure then begin
+            StepStatus := "Playbook Inst. Status ori"::Completed;
+            if PlaybookStep.IsCheck() and CheckAnswered and not ConditionHolds then
+                LogErrorText := CheckAnsweredNoTok;
+        end else begin
             StepStatus := "Playbook Inst. Status ori"::Failed;
             StepsFailed += 1;
         end;
 
         LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", CurrentPageNo, PlaybookStep."Message Type",
-            RequestText, ResponseText, StepDuration, StepStatus, ErrorText, '', Workspace.ToText());
+            RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, '', Workspace.ToText());
         Workspace.WriteFromResponse(PlaybookStep."Step No.", CurrentPageNo, false, ResponseText, PlaybookStep."Result Log Paths");
 
         RecordStepOutcome(PlaybookStep, Workspace.StatusToText(StepStatus), PlaybookStep.IsCheck() and CheckAnswered, ConditionHolds, StepDuration, ErrorText, ResponseText, 0, 0);
@@ -396,6 +434,7 @@ codeunit 10035547 "Playbook Runner ori"
         AggregateStatus: Text;
         ItemsHere: Integer;
         ItemsFailedHere: Integer;
+        LogErrorText: Text;
     begin
         StepSuccess := true;
         RequestTemplate := PlaybookStep.GetRequestTemplate();
@@ -456,6 +495,12 @@ codeunit 10035547 "Playbook Runner ori"
                 ExecuteMessageType(PlaybookStep."Message Type", RequestText, ResponseText, ItemSuccess, ErrorText);
                 StepDuration := CurrentDateTime() - StartTime;
 
+                // An error answer from the message type is a technical failure, not the answer
+                // "no": a Check step must not evaluate its Success conditions against it.
+                if ItemSuccess and PlaybookStep.IsCheck() then
+                    if JsonHelper.IsErrorResponse(ResponseText, ErrorText) then
+                        ItemSuccess := false;
+
                 StepsExecuted += 1;
                 ItemsProcessed += 1;
 
@@ -470,7 +515,10 @@ codeunit 10035547 "Playbook Runner ori"
                 if ItemSuccess then
                     ItemOutcome := 'Completed'
                 else
-                    ItemOutcome := 'Failed';
+                    if PlaybookStep.IsCheck() then
+                        ItemOutcome := 'Errored'
+                    else
+                        ItemOutcome := 'Failed';
 
                 // Evaluate condition on successful execution
                 if ItemSuccess and PlaybookStep.HasConditions("Playbook Cond. Type ori"::Success) then begin
@@ -484,16 +532,20 @@ codeunit 10035547 "Playbook Runner ori"
                         end;
                 end;
 
+                LogErrorText := ErrorText;
+                if ItemOutcome = 'CheckFailed' then
+                    LogErrorText := CheckAnsweredNoTok;
+
                 LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", PageItemOffset + i, PlaybookStep."Message Type",
-                    RequestText, ResponseText, StepDuration, StepStatus, ErrorText, ElementText, Workspace.ToText());
+                    RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, ElementText, Workspace.ToText());
                 SetIterationSuccess(PlaybookStep."Step No.", PageItemOffset + i, ItemSuccess);
                 Workspace.WriteFromResponse(PlaybookStep."Step No.", PageItemOffset + i, true, ResponseText, PlaybookStep."Result Log Paths");
                 Workspace.SetToken(Format(PlaybookStep."Step No.") + '.' + Format(PageItemOffset + i) + '._item', ElementToken);
                 Workspace.RecordIteration(PlaybookStep."Step No.", PageItemOffset + i, ItemOutcome, ElementToken,
-                    ErrorText, PlaybookStep."Exclude From Run Status");
+                    LogErrorText, PlaybookStep."Exclude From Run Status");
                 Workspace.RecordStepSummary(PlaybookStep."Step No.", ResponseText, PlaybookStep."Summary Paths",
                     PlaybookStep."Exclude From Run Status");
-                if ItemOutcome = 'Failed' then
+                if ItemOutcome in ['Failed', 'Errored'] then
                     ItemsFailedHere += 1;
                 ItemsHere += 1;
 

@@ -1107,6 +1107,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3386553435 - NamedType 1706382334" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check answered no.</source>
+          <target>Athugun svaraði nei.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athugun svaraði nei.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType CheckAnsweredNoTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 1018720751" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 exceeded max iterations (%2).</source>
           <target>Skref %1 fór yfir hámarksfjölda ítrana (%2).</target>
@@ -1148,6 +1154,36 @@
           <target>Áætlun Bifröst-keðju sem áætlunarfærslu með endurtekningarsniðmáti. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir einskiptiskeyrslu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Áætlun Bifröst-keðju sem áætlunarfærslu með endurtekningarsniðmáti. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir einskiptiskeyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 42595137 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check a Bifrost Playbook for unsafe configuration without running it.</source>
+          <target>Athuga hvort Bifröst keðja sé óörugglega uppsett án þess að keyra hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athuga hvort Bifröst keðja sé óörugglega uppsett án þess að keyra hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 42595137 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>verify playbook, validate playbook, check playbook, playbook warnings, lint playbook</source>
+          <target>sannreyna keðju, staðfesta keðju, athuga keðju, viðvaranir keðju, rýna keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=sannreyna keðju, staðfesta keðju, athuga keðju, viðvaranir keðju, rýna keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 42595137 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verify a Bifrost Playbook and return warnings, for example a per-item write that no Skip If Step Failed gates. Read-only. Run it before Orchestrator.Playbook.Run.</source>
+          <target>Sannreyndu Bifröst-keðju og fáðu viðvaranir, til dæmis skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sannreyndu Bifröst-keðju og fáðu viðvaranir, til dæmis skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 2208007315" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request must include "playbookCode" in the data payload or as the subject.</source>
+          <target>Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType MissingPlaybookCodeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 3014898190" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 (%2) writes for every item of an array that an earlier forEach Check step %3 decides on, but Skip If Step Failed is not set to %3. Next Step edges apply once per step, not per item, so this step runs for all items, also those the check answered no. Set Skip If Step Failed to %3 on step %1.</source>
+          <target>Skref %1 (%2) skrifar fyrir öll atriði fylkis sem forEach-athugunarskref %3 á undan tekur ákvörðun um, en Sleppa ef skref mistókst er ekki stillt á %3. Næsta skref gildir einu sinni fyrir skrefið, ekki fyrir hvert atriði, svo þetta skref keyrir fyrir öll atriði, líka þau sem athugunin svaraði nei. Stilltu Sleppa ef skref mistókst á %3 í skrefi %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = check step no, is-IS=Skref %1 (%2) skrifar fyrir öll atriði fylkis sem forEach-athugunarskref %3 á undan tekur ákvörðun um, en Sleppa ef skref mistókst er ekki stillt á %3. Næsta skref gildir einu sinni fyrir skrefið, ekki fyrir hvert atriði, svo þetta skref keyrir fyrir öll atriði, líka þau sem athugunin svaraði nei. Stilltu Sleppa ef skref mistókst á %3 í skrefi %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType UnsafeForEachWriteMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Returns report metadata, available layouts, and saved request page preset.</source>

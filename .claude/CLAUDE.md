@@ -232,3 +232,7 @@ Key rules always in effect:
 - #63: test codeunit 96408 `WhoAmI Contract Tests ori`; existing app codeunit 10035585.
 - #59: app codeunit 10035554 and test codeunit 96406 reserved for the effect guard; executor integration awaits Foundation API disposition.
 - #62: 10035557 and 96405 remain reserved to Claude; no custody transfer.
+
+## Orchestrator #106/#107/#108 reservations (2026-10-20)
+
+- Codeunits 10035615 `Playbook Verify Msg ori` and 10035616 `Playbook Verify ori`, enum value 10035614 `Orchestrator.Playbook.Verify`; tests 96430, 96432, 96433.
