@@ -88,7 +88,7 @@ Keys keep the `Orchestrator.*` prefix — they are the published API contract an
 
 ## Key Design Rules
 
-- **Never** call Foundation's `Dispatcher ori` directly from playbook code — always go through `Msg Executor ori` so the `Codeunit.Run` isolation stays intact. The one exception is `Playbook Verify Lookup ori` (10035619): it reads through the public, lightweight `Dispatcher ori.Execute` (OmitCommit, nothing persisted) inside a `TryFunction`, because a verification must leave no trace and must not commit.
+- **Never** call Foundation's `Dispatcher ori` directly from playbook code — always go through `Msg Executor ori` so the `Codeunit.Run` isolation stays intact.
 - **Never** rename an existing `Orchestrator.*` message type key or remove an enum value — they are the published API contract.
 - **Never** reintroduce chat, language model or MCP Tool Server references. Those objects live in Bifrost Bragi and Bifrost Orchestrator has no dependency on it.
 - **Always** return errors as a `status = Error` response with a helpful message through the Foundation argument — never let an unhandled exception reach the API.

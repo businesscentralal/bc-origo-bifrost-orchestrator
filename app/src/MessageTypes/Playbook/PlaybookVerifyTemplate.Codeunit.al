@@ -105,6 +105,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         AtPos: Integer;
         RefEnd: Integer;
         StepNo: Integer;
+        IsReference: Boolean;
     begin
         if not Value.Contains('@') then
             exit;
@@ -128,7 +129,11 @@ codeunit 10035618 "Playbook Verify Template ori"
         while AtPos > 0 do begin
             RefEnd := PathEnd(Value, AtPos);
             if RefEnd > AtPos + 1 then begin
-                if (AtPos = 1) or not IsLetterOrDigit(Value[AtPos - 1]) then
+                // AL does not short-circuit: Value[0] must never be evaluated.
+                IsReference := true;
+                if AtPos > 1 then
+                    IsReference := not IsLetterOrDigit(Value[AtPos - 1]);
+                if IsReference then
                     CheckPath(Step, Value, AtPos, CopyStr(Value, AtPos + 1, RefEnd - AtPos - 1), Seen, Findings);
                 AtPos := Value.IndexOf('@', RefEnd);
             end else
@@ -358,7 +363,9 @@ codeunit 10035618 "Playbook Verify Template ori"
         DigitsEnd: Integer;
         Index: Integer;
     begin
-        if (AtPos < 4) or (Value[AtPos - 1] <> '.') then
+        if AtPos < 4 then
+            exit(false);
+        if Value[AtPos - 1] <> '.' then
             exit(false);
         DigitsEnd := AtPos - 2;
         Index := DigitsEnd;

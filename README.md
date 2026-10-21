@@ -410,7 +410,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035616 | `Playbook Verify ori` | Reads a playbook and returns localized findings (errors and warnings), for example a per-item forEach write that no `Skip If Step Failed` gates. `Orchestrator.Playbook.Run` and the schedule refuse a playbook that does not verify. |
 | 10035617 | `Playbook Verify Step ori` | The step-level checks of Verify: message type, Success condition, Next Step edges, forEach source, per-item gate. |
 | 10035618 | `Playbook Verify Template ori` | The template-level checks of Verify: JSON, `@` references, language model `roleCode`, field references. |
-| 10035619 | `Playbook Verify Lookup ori` | The lookups behind Verify: whether a record exists (through Foundation's lightweight dispatch) and the field names of a table. |
+| 10035619 | `Playbook Verify Lookup ori` | The lookups behind Verify: whether a record exists (through Data.Records.Get) and the field names of a table. |
 
 ### Permission sets
 

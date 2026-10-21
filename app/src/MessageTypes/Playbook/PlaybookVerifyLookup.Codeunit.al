@@ -1,6 +1,6 @@
 /// <summary>
 /// The lookups Orchestrator.Playbook.Verify needs from outside this app, without depending on the apps that own
-/// the data: whether a record exists (read through the lightweight dispatch of Foundation, so a language model
+/// the data: whether a record exists (read through Data.Records.Get of Foundation, so a language model
 /// role can be checked without a dependency on Bifrost Bragi) and the field names of a table.
 /// A lookup that cannot be answered, for example because the caller may not read the table, answers "not
 /// determinable" and the check stays silent.
@@ -78,21 +78,17 @@ codeunit 10035619 "Playbook Verify Lookup ori"
         exit(true);
     end;
 
-    [TryFunction]
-    local procedure TryRead(RequestText: Text; var ResponseText: Text)
+    local procedure TryRead(RequestText: Text; var ResponseText: Text): Boolean
     var
-        Dispatcher: Codeunit "Dispatcher ori";
-        RequestContent: BigText;
-        ResponseContent: BigText;
-        ResponseContentType: Text[100];
+        MsgExecutor: Codeunit "Msg Executor ori";
     begin
-        RequestContent.AddText(RequestText);
-        // The lightweight dispatch (OmitCommit) neither persists a message nor commits: a verification must not
-        // leave a trace. The playbook runner keeps using Msg Executor ori for the steps themselves.
-        Dispatcher.Execute("Message Type ori"::"Data.Records.Get", "Message Version ori"::"1.0", '', SourceTok, 'application/json',
-            RequestContent, ResponseContent, ResponseContentType, true);
-        if ResponseContent.Length() > 0 then
-            ResponseContent.GetSubText(ResponseText, 1);
+        // Msg Executor ori is the one path to Foundation's dispatcher and isolates a failure in a Codeunit.Run scope:
+        // an answer that is not Success, or an error, only makes the question "not determinable".
+        MsgExecutor.SetParameters("Message Type ori"::"Data.Records.Get", '', RequestText);
+        if not MsgExecutor.Run() then
+            exit(false);
+        ResponseText := MsgExecutor.GetResponseText();
+        exit(true);
     end;
 
     /// <summary>
@@ -213,5 +209,4 @@ codeunit 10035619 "Playbook Verify Lookup ori"
         LanguageModelTableTok: Label 'Bifrost Language Model ori', Locked = true;
         CodeFieldTok: Label 'Code', Locked = true;
         TableViewTok: Label 'WHERE(%1=CONST(%2))', Locked = true;
-        SourceTok: Label 'Bifrost Orchestrator Playbook Verify', Locked = true;
 }

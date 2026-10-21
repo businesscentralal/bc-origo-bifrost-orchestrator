@@ -88,9 +88,15 @@ codeunit 10035616 "Playbook Verify ori"
         if not GetBlockingFindings(PlaybookCode, IgnoreWarnings, Blocking, Summary) then
             exit(false);
 
-        Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, Summary, 'playbookCode', PlaybookCode, ExpectedTxt, RefusedNextStepTxt);
-        // The findings that block are part of the answer, so the caller does not have to call Verify to read them.
-        ResponseJson := Argument.GetResponseJson();
+        // The answer has the shape of Argument.RespondWithError (status, code, error, parameter, received, expected,
+        // nextStep) and carries the blocking findings, so the caller does not have to call Verify to read them.
+        ResponseJson.Add('status', 'Error');
+        ResponseJson.Add('code', 'PreconditionFailed');
+        ResponseJson.Add('error', Summary);
+        ResponseJson.Add('parameter', 'playbookCode');
+        ResponseJson.Add('received', PlaybookCode);
+        ResponseJson.Add('expected', ExpectedTxt);
+        ResponseJson.Add('nextStep', RefusedNextStepTxt);
         ResponseJson.Add('findings', Blocking);
         Argument.SetResponseJson(ResponseJson);
         exit(true);
