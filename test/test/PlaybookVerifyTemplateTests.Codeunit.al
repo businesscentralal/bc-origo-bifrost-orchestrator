@@ -239,11 +239,24 @@ codeunit 96439 "Playbook Verify Template Tests"
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{"tableName":"Customer"}', 0, '', 0);
         Assert.IsTrue(Database.IsInWriteTransaction(), 'The test has written');
 
+        // [WHEN] The role is looked up with Exists set to true beforehand
+        Exists := true;
         Assert.IsFalse(Lookup.TryGetRoleExists('HAIKU', Exists), 'Not determinable inside a write transaction');
+        // [THEN] Exists is false, and the lookup did not commit
+        Assert.IsFalse(Exists, 'Exists is false when the question cannot be answered');
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The lookup did not commit');
+
+        // [WHEN] The role check runs for an LLM.* type name
         RunRoleCheckInPlace('LLM.Prompt.Complete', '{"roleCode":"HAIKU","prompt":"x"}', Findings);
+        // [THEN] It says nothing, the rest of Verify still works and the transaction is still open
         Assert.AreEqual(0, Findings.Count(), 'The role check says nothing');
         GetFindings(Findings);
         Assert.AreEqual(1, CountFindings(Findings, 'ActionWithoutSuccessCondition', 10), 'The rest of Verify still works');
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'Verify did not commit');
+
+        // A role code longer than a code needs no read, so it is still judged inside the transaction
+        RunRoleCheckInPlace('LLM.Prompt.Complete', '{"roleCode":"A-ROLE-CODE-THAT-IS-LONGER-THAN-TWENTY"}', Findings);
+        Assert.AreEqual(1, CountFindings(Findings, 'LanguageModelRoleNotFound', 10), 'Too long to exist, with no read');
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
