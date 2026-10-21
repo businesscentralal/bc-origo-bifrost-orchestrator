@@ -205,12 +205,13 @@ codeunit 96437 "Playbook Gate Tests"
         CreateTemplate();
         Playbook.Get(PlaybookCodeTok);
 
-        asserterror Playbook.CreateOrchestratorEntry(TemplateCodeTok, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, EntryPkId);
+        asserterror Playbook.CreateOrchestratorEntry(TemplateCodeTok, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, false, EntryPkId);
         Assert.ExpectedError('was not started');
         Assert.ExpectedError('ActionWithoutSuccessCondition');
 
-        Playbook.CreateOrchestratorEntry(TemplateCodeTok, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, true, EntryPkId);
-        Assert.IsFalse(IsNullGuid(EntryPkId), 'The warning was accepted on purpose');
+        // The old signature keeps accepting warnings, so existing callers are not refused for them
+        Playbook.CreateOrchestratorEntry(TemplateCodeTok, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, EntryPkId);
+        Assert.IsFalse(IsNullGuid(EntryPkId), 'The old signature accepts the warning');
         CleanupAll();
     end;
 

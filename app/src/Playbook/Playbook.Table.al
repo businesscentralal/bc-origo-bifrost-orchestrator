@@ -100,8 +100,9 @@ table 10035539 "Playbook ori"
     /// Playbook JQ Dispatcher, and stores the new entry primary-key id back on the playbook. A
     /// playbook that already points at a living orchestrator entry is refused; the existing entry
     /// has to be removed first. A stale id left behind by a deleted entry is simply overwritten.
-    /// The playbook is verified first and refused when the verification finds an error, or a warning
-    /// (see the overload with IgnoreWarnings).
+    /// The playbook is verified first and refused when the verification finds an error on an enabled step.
+    /// Warnings are accepted here, as before, so existing callers keep working; the overload with
+    /// IgnoreWarnings = false refuses on warnings too.
     /// </summary>
     /// <param name="RecurringTemplateCode">The recurring template that sets days, times and interval.</param>
     /// <param name="NotificationType">How to notify on failure and restart: none, e-mail or Telegram.</param>
@@ -120,7 +121,7 @@ table 10035539 "Playbook ori"
         RetryPolicy: Enum "Retry Policy ori";
         var OrchestratorEntryPkId: Guid): Guid
     begin
-        exit(CreateOrchestratorEntry(RecurringTemplateCode, NotificationType, NotificationRecipient, JobQueueCategoryCode, EmitTelemetry, RetryPolicy, false, OrchestratorEntryPkId));
+        exit(CreateOrchestratorEntry(RecurringTemplateCode, NotificationType, NotificationRecipient, JobQueueCategoryCode, EmitTelemetry, RetryPolicy, true, OrchestratorEntryPkId));
     end;
 
     /// <summary>
