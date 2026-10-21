@@ -87,7 +87,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Result.Add(ContractMgt.TargetEntry('data.id', 'guid', 'Read first. Tried as the SystemId of the Scheduled Entry ori, then as its primary key ID (which equals the ID of the Job Queue Entry it schedules).'));
+        Result.Add(ContractMgt.TargetEntry('data.id', 'guid', 'Read first. Tried as the SystemId of the orchestrator entry, then as its primary key ID (which equals the ID of the Job Queue Entry it schedules).'));
         Result.Add(ContractMgt.TargetEntry('subject', 'guid', 'Used only when data.id is missing or not a GUID. Resolved the same way.'));
     end;
 
@@ -99,7 +99,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Result.Add(ContractMgt.TargetEntry('data.playbookCode', 'code', 'Read first: the Code of the Playbook ori. Cut to 20 characters.'));
+        Result.Add(ContractMgt.TargetEntry('data.playbookCode', 'code', 'Read first: the Code of the playbook. Cut to 20 characters.'));
         Result.Add(ContractMgt.TargetEntry('subject', 'code', 'Used only when data.playbookCode is not sent. Cut to 20 characters.'));
     end;
 

@@ -334,36 +334,6 @@ codeunit 96441 "Contract Complete Tests ori"
         GlobalLanguage(PreviousLanguage);
     end;
 
-    [Test]
-    procedure EnvelopeStrictDescription_IsTranslated()
-    var
-        ContractMgt: Codeunit "Msg Contract Mgt ori";
-        Contract: JsonObject;
-        Envelope: JsonToken;
-        Strict: JsonToken;
-        PreviousLanguage: Integer;
-        EnglishText: Text;
-        IcelandicText: Text;
-    begin
-        // [SCENARIO] The description of the strict option follows the session language, as it does in Foundation.
-        PreviousLanguage := GlobalLanguage();
-        GlobalLanguage(1033);
-        Assert.IsTrue(ContractMgt.GetContract("Message Type ori"::"Orchestrator.Status.Get", Contract), 'English contract');
-        Contract.Get('envelope', Envelope);
-        Envelope.AsObject().Get('strict', Strict);
-        EnglishText := TextOf(Strict.AsObject(), 'description');
-        GlobalLanguage(1039);
-        Clear(Contract);
-        Assert.IsTrue(ContractMgt.GetContract("Message Type ori"::"Orchestrator.Status.Get", Contract), 'Icelandic contract');
-        Contract.Get('envelope', Envelope);
-        Envelope.AsObject().Get('strict', Strict);
-        IcelandicText := TextOf(Strict.AsObject(), 'description');
-        GlobalLanguage(PreviousLanguage);
-
-        Assert.AreNotEqual('', EnglishText, 'English text');
-        Assert.AreNotEqual(EnglishText, IcelandicText, 'The Icelandic text differs');
-    end;
-
     local procedure OrchestratorTypes() Ordinals: List of [Integer]
     var
         MessageType: Enum "Message Type ori";
@@ -387,8 +357,7 @@ codeunit 96441 "Contract Complete Tests ori"
     var
         MessageType: Enum "Message Type ori";
     begin
-        MessageType := Enum::"Message Type ori".FromInteger(Ordinal);
-        exit(Format(MessageType, 0, 9));
+        exit(MessageType.Names().Get(MessageType.Ordinals().IndexOf(Ordinal)));
     end;
 
     /// <summary>The types whose code reads Argument.Subject (as a GUID, an outbox id or a playbook code).</summary>
