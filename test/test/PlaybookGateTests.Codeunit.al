@@ -153,38 +153,65 @@ codeunit 96437 "Playbook Gate Tests"
     end;
 
     [Test]
-    procedure VerifyRunAndSchedule_InsideAWriteTransaction_DoNotError()
+    procedure VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify()
     var
         Playbook: Record "Playbook ori";
         TempArgument: Record "Message Argument ori" temporary;
         Handler: Codeunit "Playbook Msg Handler ori";
         VerifyHandler: Codeunit "Playbook Verify ori";
         ResponseJson: JsonObject;
+        Token: JsonToken;
     begin
-        // [SCENARIO] Nothing is committed, so the transaction has written: the verification must not raise a runtime
-        // error (a language model role lookup would answer "not determinable"); Verify, Schedule and Run all work
+        // [SCENARIO] Each entry point is called with a real uncommitted write behind it, so Business Central would refuse
+        // a Codeunit.Run with a used result. The verification must not raise a runtime error and must still judge the
+        // playbook. This covers the entry points and the gate; the role lookup itself is covered with an LLM.* type name
+        // in Playbook Verify Template Tests (the test app has no LLM.* message type to put in a step).
         BuildCleanPlaybook();
         CreateTemplate();
-        Assert.IsTrue(Database.IsInWriteTransaction(), 'The test has written');
+        Commit();
 
+        // [WHEN] Verify is called after an uncommitted write
+        MakeUncommittedWrite();
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Verify');
         CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
         VerifyHandler.ExecuteVerify(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
+        // [THEN] It answers, the findings are intact and the transaction is still open
         Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Verify answers');
+        ResponseJson.Get('findings', Token);
+        Assert.AreEqual(0, Token.AsArray().Count(), 'The clean playbook has no findings');
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'Verify did not commit');
 
+        // [WHEN] Schedule is called after an uncommitted write
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Schedule');
         CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2"}', PlaybookCodeTok, TemplateCodeTok));
         Handler.ExecuteSchedule(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
+        // [THEN] The gate passed and the playbook is scheduled
         Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Schedule answers');
         Playbook.Get(PlaybookCodeTok);
         Assert.IsFalse(IsNullGuid(Playbook."Orchestrator Entry ID"), 'Scheduled');
 
-        Commit();
+        // [WHEN] Run is called after an uncommitted write (the runner itself commits once the gate has passed)
+        MakeUncommittedWrite();
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Run');
         CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
         Handler.ExecuteRun(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
+        // [THEN] The gate passed inside the write transaction and the run answered
         Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Run answers');
+        Assert.IsTrue(ResponseJson.Contains('instanceId'), 'The run happened');
         CleanupAll();
+    end;
+
+    /// <summary>Changes the playbook header and does not commit, so the transaction has written.</summary>
+    local procedure MakeUncommittedWrite()
+    var
+        Playbook: Record "Playbook ori";
+    begin
+        Playbook.Get(PlaybookCodeTok);
+        Playbook.Description := CopyStr(Format(CurrentDateTime(), 0, 9), 1, MaxStrLen(Playbook.Description));
+        Playbook.Modify();
     end;
 
     [Test]
