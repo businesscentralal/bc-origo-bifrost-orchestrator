@@ -7,6 +7,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+## [28.0.1.0] - 2026-10-21
+
 ### Changed (2026-10-21) - Tests: Verify, Schedule and Run after an uncommitted write, and the role lookup inside a write transaction (#109 follow-up)
 
 - Test codeunit 96437 `Playbook Gate Tests`: the test `VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify` makes a real uncommitted write before each of `Orchestrator.Playbook.Verify`, `Orchestrator.Playbook.Schedule` and `Orchestrator.Playbook.Run`, asserts that the write transaction is open, that Verify did not commit, that the findings are intact and that the Schedule gate passed. For Run it proves the gate by a refusal (an error step is added): the runner itself needs a committed transaction, because it seeds the workspace through `Codeunit.Run` before its first commit, so Run is not started inside a write transaction. It replaces `VerifyRunAndSchedule_InsideAWriteTransaction_DoNotError`, which committed before Run.
