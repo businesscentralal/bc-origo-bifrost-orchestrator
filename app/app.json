@@ -2,7 +2,7 @@
   "id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
   "name": "Bifrost Orchestrator",
   "publisher": "Origo",
-  "version": "28.0.1.0",
+  "version": "28.0.2.0",
   "brief": "Bifrost Orchestrator - scheduling and playbooks",
   "description": "Bifrost Orchestrator: scheduled tasks, playbooks and orchestration of Bifrost message types on top of Bifrost Foundation. Provides Job Queue scheduling, monitoring, restart and error handling, and a declarative playbook runner with data flow, foreach iteration and conditional branching.",
   "url": "https://www.origo.is/",
