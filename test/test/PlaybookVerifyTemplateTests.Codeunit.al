@@ -227,6 +227,27 @@ codeunit 96439 "Playbook Verify Template Tests"
     end;
 
     [Test]
+    procedure RoleCode_InsideAWriteTransaction_IsNotDeterminable()
+    var
+        Lookup: Codeunit "Playbook Verify Lookup ori";
+        Findings: JsonArray;
+        Exists: Boolean;
+    begin
+        // [SCENARIO] No subscriber and a transaction that has written (no Commit): Codeunit.Run with a used result is
+        // refused by Business Central, so the lookup says "not determinable" and the check stays silent
+        Lib.CreatePlaybook(PlaybookCodeTok);
+        Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{"tableName":"Customer"}', 0, '', 0);
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The test has written');
+
+        Assert.IsFalse(Lookup.TryGetRoleExists('HAIKU', Exists), 'Not determinable inside a write transaction');
+        RunRoleCheckInPlace('LLM.Prompt.Complete', '{"roleCode":"HAIKU","prompt":"x"}', Findings);
+        Assert.AreEqual(0, Findings.Count(), 'The role check says nothing');
+        GetFindings(Findings);
+        Assert.AreEqual(1, CountFindings(Findings, 'ActionWithoutSuccessCondition', 10), 'The rest of Verify still works');
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    [Test]
     procedure CurrentField_Unknown_Warns()
     begin
         VerifyUnknownCurrentField(1033, CurrentFieldStartTxt);
@@ -538,6 +559,19 @@ codeunit 96439 "Playbook Verify Template Tests"
         TemplateJson.ReadFrom(Template);
         TemplateChecks.CheckRoleCode(PlaybookStep, TypeName, TemplateJson, Findings);
         Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    /// <summary>Runs the role check on step 10 of the playbook that already exists, without creating or committing anything.</summary>
+    local procedure RunRoleCheckInPlace(TypeName: Text; Template: Text; var Findings: JsonArray)
+    var
+        PlaybookStep: Record "Playbook Step ori";
+        TemplateChecks: Codeunit "Playbook Verify Template ori";
+        TemplateJson: JsonObject;
+    begin
+        Clear(Findings);
+        PlaybookStep.Get(PlaybookCodeTok, 10);
+        TemplateJson.ReadFrom(Template);
+        TemplateChecks.CheckRoleCode(PlaybookStep, TypeName, TemplateJson, Findings);
     end;
 
     /// <summary>Step 10 reads Customer (guarded); step 30 is a forEach Check over it with the given template.</summary>

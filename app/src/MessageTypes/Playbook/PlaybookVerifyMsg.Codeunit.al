@@ -56,7 +56,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>Selection description text.</returns>
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only. Run it before Orchestrator.Playbook.Run: Run and Schedule refuse a playbook that does not verify.', Comment = 'is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.';
+        SelectionLbl: Label 'Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only for playbook data; a language model role check leaves a Foundation message log row. Run it before Orchestrator.Playbook.Run: Run and Schedule refuse a playbook that does not verify.', Comment = 'is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.';
     begin
         exit(SelectionLbl);
     end;
@@ -153,7 +153,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('read', 'Reads the playbook, its steps and conditions, and looks up whether a language model role and the fields of a table exist; changes nothing and runs no step.', true, '', Preconditions);
+        Effect := Parts.Effect('read', 'Reads the playbook, its steps and conditions, and looks up whether a language model role and the fields of a table exist; changes no playbook data and runs no step. A language model role check reads through Data.Records.Get and leaves a Foundation message log row, and is skipped inside a transaction that has already written.', true, '', Preconditions);
         exit(true);
     end;
 

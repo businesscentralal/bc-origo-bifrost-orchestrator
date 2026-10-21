@@ -153,6 +153,41 @@ codeunit 96437 "Playbook Gate Tests"
     end;
 
     [Test]
+    procedure VerifyRunAndSchedule_InsideAWriteTransaction_DoNotError()
+    var
+        Playbook: Record "Playbook ori";
+        TempArgument: Record "Message Argument ori" temporary;
+        Handler: Codeunit "Playbook Msg Handler ori";
+        VerifyHandler: Codeunit "Playbook Verify ori";
+        ResponseJson: JsonObject;
+    begin
+        // [SCENARIO] Nothing is committed, so the transaction has written: the verification must not raise a runtime
+        // error (a language model role lookup would answer "not determinable"); Verify, Schedule and Run all work
+        BuildCleanPlaybook();
+        CreateTemplate();
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The test has written');
+
+        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        VerifyHandler.ExecuteVerify(TempArgument);
+        ResponseJson := TempArgument.GetResponseJson();
+        Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Verify answers');
+
+        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2"}', PlaybookCodeTok, TemplateCodeTok));
+        Handler.ExecuteSchedule(TempArgument);
+        ResponseJson := TempArgument.GetResponseJson();
+        Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Schedule answers');
+        Playbook.Get(PlaybookCodeTok);
+        Assert.IsFalse(IsNullGuid(Playbook."Orchestrator Entry ID"), 'Scheduled');
+
+        Commit();
+        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        Handler.ExecuteRun(TempArgument);
+        ResponseJson := TempArgument.GetResponseJson();
+        Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Run answers');
+        CleanupAll();
+    end;
+
+    [Test]
     procedure Schedule_RefusesAWarning_UnlessIgnoreWarnings()
     var
         Playbook: Record "Playbook ori";

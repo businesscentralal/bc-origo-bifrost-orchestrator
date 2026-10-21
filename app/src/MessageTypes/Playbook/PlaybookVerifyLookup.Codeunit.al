@@ -82,6 +82,10 @@ codeunit 10035619 "Playbook Verify Lookup ori"
     var
         MsgExecutor: Codeunit "Msg Executor ori";
     begin
+        // Business Central refuses Codeunit.Run with a used return value once the transaction has written. The
+        // question is then "not determinable" and the check stays silent, instead of a runtime error.
+        if Database.IsInWriteTransaction() then
+            exit(false);
         // Msg Executor ori is the one path to Foundation's dispatcher and isolates a failure in a Codeunit.Run scope:
         // an answer that is not Success, or an error, only makes the question "not determinable".
         MsgExecutor.SetParameters("Message Type ori"::"Data.Records.Get", '', RequestText);

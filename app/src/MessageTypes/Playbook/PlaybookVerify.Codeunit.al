@@ -90,6 +90,8 @@ codeunit 10035616 "Playbook Verify ori"
 
         // The answer has the shape of Argument.RespondWithError (status, code, error, parameter, received, expected,
         // nextStep) and carries the blocking findings, so the caller does not have to call Verify to read them.
+        // AddError records the error on the argument too (HasCollectedErrors), as RespondWithError does.
+        Argument.AddError("Bifrost Error Code ori"::PreconditionFailed, Summary, 'playbookCode', PlaybookCode, ExpectedTxt, RefusedNextStepTxt);
         ResponseJson.Add('status', 'Error');
         ResponseJson.Add('code', 'PreconditionFailed');
         ResponseJson.Add('error', Summary);
