@@ -34,7 +34,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Execute a orchestrator entry immediately as a one-time run.', Comment = 'is-IS=Keyra áætlunarfærslu strax í eitt skipti.';
+        DescriptionLbl: Label 'Execute an orchestrator entry immediately as a one-time run.', Comment = 'is-IS=Keyra áætlunarfærslu strax í eitt skipti.';
     begin
         exit(DescriptionLbl);
     end;
@@ -75,7 +75,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the Scheduled Entry ori. Required unless subject carries it.'));
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the orchestrator entry (Job Queue Orchestrator Entry). Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -85,7 +85,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success when the job completed, Error when it failed.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the Scheduled Entry ori.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the orchestrator entry.');
         Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Whether the entry is blocked.');
         Parts.AddResponseField(Fields, 'message', 'string', 'Job queue entry executed. on Success; the run''s error text on Error.');
         Response := Parts.Response(Fields, 'text/json');
@@ -122,8 +122,15 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Entry.Register', 'Bring an existing Job Queue Entry under orchestrator control; keep the id from the answer.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Entry.Run', 'Run that entry once now, with data.id from the Register answer; read status and message of the answer.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'Skip the Register step when the orchestrator entry already exists. A failed run answers status Error, not an error answer, so test status before a following step.');
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -137,7 +144,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Runs one orchestrator entry immediately in the caller session. The recurring schedule is retained.';
+        Overview := 'Runs one orchestrator entry once, right now, in the calling session, through a one-time copy of its Job Queue Entry. Use it to test an entry or to run it outside its schedule: the recurring schedule and the entry''s own Job Queue Entry are retained. Irreversible: the job''s work and the commit cannot be rolled back.';
         exit(true);
     end;
 

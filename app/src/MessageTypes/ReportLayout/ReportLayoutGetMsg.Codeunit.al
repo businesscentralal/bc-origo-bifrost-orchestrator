@@ -37,17 +37,18 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
 
     /// <summary>Provides the GetSelectionDescription part of the report layout get message.</summary>
     procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Export the bytes of one report layout, extension or user-defined, as base64. Read-only. Use Orchestrator.ReportLayout.List first to find the layout name and appId, or Orchestrator.ReportLayout.Set to import a layout.', Comment = 'is-IS=Fluttu út gögn eins skýrsluútlits, úr viðbót eða notandaskilgreind, sem base64. Lesaðgerð. Notaðu Orchestrator.ReportLayout.List fyrst til að finna heiti útlitsins og appId, eða Orchestrator.ReportLayout.Set til að flytja inn útlit.';
     begin
-        exit(GetDescription());
+        exit(SelectionLbl);
     end;
 
     /// <summary>Provides the GetEnvelope part of the report layout get message.</summary>
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used; reportId is supplied in data.', true);
+        Envelope := Parts.NoSubjectEnvelope(true, 'text/json');
         exit(true);
     end;
 
@@ -104,7 +105,7 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('read', 'Reads report layout metadata or bytes; does not change layouts or defaults.', false, '', Preconditions);
+        Effect := Parts.Effect('read', 'Exports the layout bytes; does not change layouts or defaults.', true, '', Preconditions);
         exit(true);
     end;
 
@@ -119,26 +120,37 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
+        Parts.Related(Related, 'Orchestrator.ReportLayout.List', 'Use this first to find the layout name and appId.');
+        Parts.Related(Related, 'Orchestrator.ReportLayout.Set', 'Use this to import or replace a user-defined layout.');
         Parts.Related(Related, 'Orchestrator.Report.Get', 'Use this to inspect report metadata and existing layouts.');
         exit(true);
     end;
 
     /// <summary>Provides the GetWorkflow part of the report layout get message.</summary>
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.ReportLayout.List', 'Find the layout name and appId of the layout to export.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.ReportLayout.Get', 'Export it as base64 with data.name and data.appId from the list.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'Send appId only for an extension layout; a user-defined layout has none.');
+        exit(true);
     end;
 
     /// <summary>Provides the GetExamples part of the report layout get message.</summary>
     procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        exit(false);
+        Parts.Example(Examples, 'Export a user-defined layout', '{"type":"Orchestrator.ReportLayout.Get","data":{"reportId":206,"name":"custom"}}', '{"status":"Success","reportId":206,"name":"custom","appId":"00000000-0000-0000-0000-000000000000","format":"Word","mimeType":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","layoutBase64":"<base64>"}');
+        exit(true);
     end;
 
-    /// <summary>Provides the GetOverview part of the report layout get message.</summary>
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Exports the bytes of an extension or user-defined report layout.';
+        Overview := 'Exports the bytes of one report layout, extension or user-defined, as base64 together with its format and MIME type. Find the name and appId with Orchestrator.ReportLayout.List. Nothing is changed.';
         exit(true);
     end;
 

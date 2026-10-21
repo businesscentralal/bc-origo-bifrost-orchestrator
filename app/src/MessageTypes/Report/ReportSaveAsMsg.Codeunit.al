@@ -40,10 +40,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Forms.Add('integer');
-        Envelope := Parts.Envelope(Forms, 'The report ID in data.reportId.', true);
+        Envelope := Parts.NoSubjectEnvelope(true, 'application/pdf');
         exit(true);
     end;
 
@@ -145,7 +143,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Renders a report into a binary PDF, Excel, Word or XML response using request data or the saved preset.';
+        Overview := 'Renders a report that produces a document into a binary PDF, Excel, Word or XML response, using the request page XML or option values you send, or the calling user''s saved preset. Does not change the report. Use Orchestrator.Report.Run for a processing-only report.';
         exit(true);
     end;
 

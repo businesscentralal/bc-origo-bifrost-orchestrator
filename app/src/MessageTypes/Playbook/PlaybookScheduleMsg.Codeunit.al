@@ -85,7 +85,7 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         RetryPolicies.Add('ThreeTimes');
         RetryPolicies.Add('Always');
         Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to schedule (Code[20]). Required unless subject carries the code.'));
-        Parameters.Add(ContractMgt.Parameter('recurringTemplateCode', 'string', true, 'Code of the Recurring Template ori whose days, times and interval the entry takes. Must exist.'));
+        Parameters.Add(ContractMgt.Parameter('recurringTemplateCode', 'string', true, 'Code of the Job Queue Recurring Template whose days, times and interval the entry takes. Must exist.'));
         Parameters.Add(Parts.WithChoices(ContractMgt.Parameter('notificationType', 'string', false, 'How the entry notifies. Case-insensitive; any other value means None.'), NotificationTypes, 'None'));
         Parameters.Add(ContractMgt.Parameter('notificationRecipient', 'string', false, 'Where the notification goes (up to 2048 characters). Stored as sent; not checked against notificationType.'));
         Parameters.Add(ContractMgt.Parameter('jobQueueCategoryCode', 'string', false, 'Job Queue Category Code (Code[10]) of the entry.'));
@@ -103,8 +103,8 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
         Parts.AddResponseField(Fields, 'playbookCode', 'string', 'Scheduled playbook code.');
         Parts.AddResponseField(Fields, 'scheduled', 'boolean', 'Always true.');
-        Parts.AddResponseField(Fields, 'orchestratorEntryId', 'string', 'SystemId of the new Scheduled Entry ori.');
-        Parts.AddResponseField(Fields, 'orchestratorEntryPkId', 'string', 'ID (primary key) of the new Scheduled Entry ori; its Job Queue Entry gets the same ID.');
+        Parts.AddResponseField(Fields, 'orchestratorEntryId', 'string', 'SystemId of the new orchestrator entry.');
+        Parts.AddResponseField(Fields, 'orchestratorEntryPkId', 'string', 'ID (primary key) of the new orchestrator entry; its Job Queue Entry gets the same ID.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -147,8 +147,15 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Check the playbook; Schedule verifies again and refuses one that does not verify.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Schedule', 'Put the playbook on a recurring template; keep orchestratorEntryId from the answer.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Check that the orchestrator, which creates the Job Queue Entry, is running.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -161,14 +168,14 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Creates a recurring orchestrator entry for a configured Bifröst Playbook.';
+        Overview := 'Creates a recurring orchestrator entry for a configured Bifröst Playbook from a recurring template. The playbook is verified first. The entry then runs the playbook on the template''s days, times and interval, with the chosen notification and retry policy. A playbook has at most one orchestrator entry.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The playbook is verified first (Orchestrator.Playbook.Verify), exactly as Orchestrator.Playbook.Run does. An enabled step with an error always refuses the call, and so does a warning unless ignoreWarnings is true; the answer is PreconditionFailed with the blocking findings in findings[]. No Scheduled Entry ori is created. A playbook that is already scheduled and then gets an error reports ScheduledWithErrors from Verify; its scheduled runs are not stopped by it.' +
-            ' The call creates only the Scheduled Entry ori: not blocked, earliest start now, running the Playbook JQ Dispatcher for this playbook on the template''s schedule. The Job Queue Entry is created by the orchestrator management job on its next run, so the orchestrator must be running (Orchestrator.Status.Get, Orchestrator.Status.RestartIfNeeded).' +
+        Notes := 'The playbook is verified first (Orchestrator.Playbook.Verify), exactly as Orchestrator.Playbook.Run does. An enabled step with an error always refuses the call, and so does a warning unless ignoreWarnings is true; the answer is PreconditionFailed with the blocking findings in findings[]. No orchestrator entry is created. A playbook that is already scheduled and then gets an error reports ScheduledWithErrors from Verify; its scheduled runs are not stopped by it.' +
+            ' The call creates only the orchestrator entry: not blocked, earliest start now, running this playbook on the template''s schedule. The Job Queue Entry is created by the orchestrator management job on its next run, so the orchestrator must be running (Orchestrator.Status.Get, Orchestrator.Status.RestartIfNeeded).' +
             ' A playbook has at most one orchestrator entry; a second call is refused until the first entry is deleted. notificationRecipient is not checked: a notificationType other than None with no recipient is accepted.';
         exit(true);
     end;

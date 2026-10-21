@@ -75,7 +75,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the Scheduled Entry ori. Required unless subject carries it.'));
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the orchestrator entry (Job Queue Orchestrator Entry). Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -85,7 +85,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the Scheduled Entry ori.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the orchestrator entry.');
         Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Whether the entry is blocked.');
         Parts.AddResponseField(Fields, 'message', 'string', 'Always Orchestrator entry restarted. (translated), also when the retry policy suppressed the restart.');
         Response := Parts.Response(Fields, 'text/json');
@@ -137,7 +137,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Restarts a failed or held orchestrator entry by applying its retry policy and notification rules.';
+        Overview := 'Restarts a failed or held orchestrator entry by applying its retry policy and notification rules: the policy decides whether it is requeued and the notification rules decide who is told. It requeues the entry on its schedule; it does not run the job in the foreground, which Orchestrator.Entry.Run does.';
         exit(true);
     end;
 

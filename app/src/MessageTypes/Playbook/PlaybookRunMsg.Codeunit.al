@@ -87,7 +87,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success, also when a step failed.');
-        Parts.AddResponseField(Fields, 'instanceId', 'string', 'ID of the Playbook Instance ori of this run; filter Playbook Step Log ori on it.');
+        Parts.AddResponseField(Fields, 'instanceId', 'string', 'ID of the playbook instance of this run (table Bifrost Playbook Instance); filter the Bifrost Playbook Step Log on it.');
         Parts.AddResponseField(Fields, 'playbookCode', 'string', 'Executed playbook code.');
         Parts.AddResponseField(Fields, 'playbookStatus', 'string', 'Final status of the instance as the enum name: Completed or Failed.');
         Parts.AddResponseField(Fields, 'stepsExecuted', 'integer', 'Number of executed steps.');
@@ -112,7 +112,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. Playbook Runner commits before every step, so the writes of the steps that ran stay when a later step fails.', false);
+        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. The playbook runner commits before every step, so the writes of the steps that ran stay when a later step fails.', false);
         exit(true);
     end;
 
@@ -131,9 +131,13 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
     var
-        Parts: Codeunit "Orch B1 Contract Parts ori";
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        Parts.Workflow(Workflow, 'Orchestrator.Playbook.Run', 'Execute the playbook steps in the configured order.');
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Check the playbook; a finding with severity error, or a warning without ignoreWarnings, stops the run.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Run', 'Execute the playbook steps in the configured order.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'Run verifies again and refuses a playbook that does not verify, so the Verify step is for reading the findings before the call. A failed step does not fail the call: check playbookStatus and stepsFailed in the answer.');
         exit(true);
     end;
 
@@ -148,15 +152,15 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Runs a configured Bifröst Playbook inline and returns its completed instance counters.';
+        Overview := 'Runs a configured Bifröst Playbook inline, step by step, in the calling session and returns the counters of its completed instance: status, steps executed and failed, and forEach iterations. The playbook is verified first and refused when it does not verify. Use Orchestrator.Playbook.Enqueue for a run that must not depend on the caller session. Irreversible: the runner commits before every step.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
         Notes := 'The playbook is verified first (Orchestrator.Playbook.Verify). An enabled step with an error always refuses the call, and so does a warning unless ignoreWarnings is true; the answer is PreconditionFailed with the blocking findings in findings[]. Nothing runs and no instance is written.' +
-            ' The whole playbook runs inside this call and the answer is written only at the end. A caller that times out first gets nothing while the server carries on, and the Playbook Instance ori stays at Running for ever, because the completion belongs to the abandoned session. An LLM step inside a forEach is the usual cause. Use Orchestrator.Playbook.Enqueue, or invoke this type asynchronously, for anything that is not reliably quick, and read Playbook Step Log ori to follow progress.' +
-            ' A failing step does not fail the call: the answer is Success with playbookStatus Failed and stepsFailed above 0. Read Playbook Step Log ori filtered on instanceId for the step errors.' +
+            ' The whole playbook runs inside this call and the answer is written only at the end. A caller that times out first gets nothing while the server carries on, and the playbook instance stays at Running for ever, because the completion belongs to the abandoned session. An LLM step inside a forEach is the usual cause. Use Orchestrator.Playbook.Enqueue, or invoke this type asynchronously, for anything that is not reliably quick, and read the Bifrost Playbook Step Log to follow progress.' +
+            ' A failing step does not fail the call: the answer is Success with playbookStatus Failed and stepsFailed above 0. Read the Bifrost Playbook Step Log filtered on instanceId for the step errors.' +
             ' itemsProcessed counts forEach iterations summed over every step, not distinct items. Do not present it to a user as a record count.' +
             ' A playbook without steps completes at once with every counter 0.';
         exit(true);

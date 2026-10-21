@@ -74,7 +74,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the Scheduled Entry ori; its ID equals the Job Queue Entry ID.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the orchestrator entry; its ID equals the Job Queue Entry ID.');
         Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Always false: a registered entry starts unblocked.');
         Parts.AddResponseField(Fields, 'message', 'string', 'Job Queue Entry registered with orchestrator. (translated).');
         Response := Parts.Response(Fields, 'text/json');
@@ -95,7 +95,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Creates the Scheduled Entry ori from the Job Queue Entry, replacing an existing one, and commits it.', false);
+        Effect := Parts.CommittingEffect('Creates the orchestrator entry from the Job Queue Entry, replacing an existing one, and commits it.', false);
         exit(true);
     end;
 
@@ -113,8 +113,15 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Entry.Register', 'Bring the Job Queue Entry under orchestrator control; keep the id from the answer.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Entry.Schedule', 'Rebuild its Job Queue schedule from the recurrence settings, with data.id from the Register answer.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Check the orchestrator health and the entry counts.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -127,13 +134,13 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Brings an existing Job Queue Entry under orchestrator scheduling, monitoring and notification control.';
+        Overview := 'Brings an existing Job Queue Entry under orchestrator scheduling, monitoring and notification control by creating the matching orchestrator entry from it. Use it once for each Job Queue Entry that should be supervised; registering it again replaces the orchestrator entry with a fresh copy. Irreversible: the call commits.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The identifier is the ID (primary key) of the Job Queue Entry, not its SystemId. Registering an entry that is already registered deletes the Scheduled Entry ori and copies it again from the Job Queue Entry, so changes made on the orchestrator entry are lost. The new entry copies the object to run, the record to process, the category, the description and the recurrence fields, takes the calling user''s time zone, and is not blocked.';
+        Notes := 'The identifier is the ID (primary key) of the Job Queue Entry, not its SystemId. Registering an entry that is already registered deletes the orchestrator entry and copies it again from the Job Queue Entry, so changes made on the orchestrator entry are lost. The new entry copies the object to run, the record to process, the category, the description and the recurrence fields, takes the calling user''s time zone, and is not blocked.';
         exit(true);
     end;
 

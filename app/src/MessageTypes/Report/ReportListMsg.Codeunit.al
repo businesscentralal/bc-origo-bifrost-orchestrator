@@ -40,9 +40,8 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        Envelope := Parts.NoSubjectEnvelope(false, 'text/json');
         exit(true);
     end;
 
@@ -109,8 +108,15 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.List', 'Find the reportId, optionally with processingOnly.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.Get', 'Confirm what the report is and read its layouts and saved preset.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.SaveAs', 'Render a report that produces a document; use Orchestrator.Report.Run for a processing-only report.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -123,7 +129,7 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Lists report metadata available to the current user, with an optional processing-only filter.';
+        Overview := 'Lists the reports available to the current user with their id, name, caption, whether they are processing-only, default layout, first data item table and request page, optionally only the processing-only ones. Use it to find a reportId for Orchestrator.Report.Get, Orchestrator.Report.SaveAs or Orchestrator.Report.Run.';
         exit(true);
     end;
 

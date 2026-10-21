@@ -56,9 +56,8 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', true);
+        Envelope := Parts.NoSubjectEnvelope(true, 'text/json');
         exit(true);
     end;
 
@@ -136,7 +135,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Sends a message to the current user''s Telegram chat using the configured Bifröst bot.';
+        Overview := 'Sends a text message to the calling user''s own Telegram chat through the configured Bifröst bot. The chat ID always comes from the caller''s Bifrost User Setup, so it cannot message another user. Irreversible: a sent message cannot be recalled.';
         exit(true);
     end;
 

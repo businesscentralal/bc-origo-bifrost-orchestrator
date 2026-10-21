@@ -139,13 +139,13 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Sends an existing Email Outbox draft and returns its message identifiers.';
+        Overview := 'Sends an existing Email Outbox draft, created with Email.Draft.Set, through its email account and returns the message id and the outbox SystemId. Irreversible: a sent email cannot be recalled.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The message can send a draft when the caller has its SystemId; ownership is not checked by the current implementation.';
+        Notes := 'A draft can be sent by anyone who has its SystemId: ownership of the draft is not checked.';
         exit(true);
     end;
 

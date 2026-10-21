@@ -42,10 +42,8 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Forms.Add('integer');
-        Envelope := Parts.Envelope(Forms, 'The report ID in data.reportId.', true);
+        Envelope := Parts.NoSubjectEnvelope(true, 'text/json');
         exit(true);
     end;
 
@@ -90,7 +88,7 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts.AddResponseField(Fields, 'requestPageUrl', 'string', 'Web client URL that opens the report in this company.');
         Parts.AddResponseField(Fields, 'layouts', 'array', 'Available report layouts.', LayoutFields);
         Parts.AddResponseField(Fields, 'preset', 'object', 'The calling user''s request preset for the report.', PresetFields);
-        Parts.AddResponseField(Fields, 'presetCapturePageUrl', 'string', 'Web client URL of the Report Preset Card ori where the request page XML is captured.');
+        Parts.AddResponseField(Fields, 'presetCapturePageUrl', 'string', 'Web client URL of the report preset card page where the request page XML is captured.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -149,7 +147,7 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Returns one report''s metadata, layouts and the current user''s saved request page preset.';
+        Overview := 'Returns one report''s metadata, its layouts and the current user''s saved request page preset, with the web client URL where the preset is captured. Use it to confirm what a report is before running or rendering it.';
         exit(true);
     end;
 

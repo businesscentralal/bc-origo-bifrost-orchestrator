@@ -188,8 +188,15 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <param name="Workflow">Receives the workflow chapter.</param>
     /// <returns>False; the type has no workflow chapter.</returns>
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Workspace.Preview', 'Optional: see the @_sys and @_who paths the request templates can use.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Read the findings of the playbook; fix errors, and fix warnings or accept them with ignoreWarnings.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Run', 'Run it once it verifies, or use Orchestrator.Playbook.Schedule to put it on a schedule.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     /// <summary>
@@ -214,7 +221,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>True; the chapter exists.</returns>
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Reads a Bifröst Playbook and returns errors and warnings for configurations the engine accepts silently, without running a step.';
+        Overview := 'Reads a Bifröst Playbook and returns errors and warnings for configurations the engine accepts silently, without running a step. Use it before Orchestrator.Playbook.Run, Orchestrator.Playbook.Schedule or Orchestrator.Playbook.Enqueue: every finding names the step, a stable code and what to do about it.';
         exit(true);
     end;
 
@@ -230,7 +237,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
             ' Errors: MessageTypeUnavailable (the step calls a message type that does not exist in this deployment or is not enabled for this user in this company; a type that exists but is not enabled is not reported on a step that has a Start condition, because the author has decided when it runs, as the reporting tail does with _who.telegramChatId Exists), TemplateNotJson (the request template is not a JSON object; the engine would send an empty request), CheckWithoutSuccessCondition (a Check step with no Success condition answers yes every time), NextStepNotFound (a Next Step edge points to a step that does not exist), IterateSourceInvalid (the forEach source step is missing or does not come first), InvalidSkipGate (Skip If Step Failed names a step that is missing, does not come first or does not iterate, so every item would be skipped), StepReferenceNotFound and StepReferenceNotEarlier (an @stepNo reference to a step that is missing or does not run before), LanguageModelRoleNotFound (the roleCode of a LLM.* step is not a language model of this company), ScheduledWithErrors (the playbook is scheduled and has errors on enabled steps).' +
             ' Warnings: UnsafeForEachWrite (an enabled forEach step with a write-type message type iterates the same array as an earlier enabled forEach Check step and has Skip If Step Failed = 0; Next Step No. edges apply once per forEach step, never per item, so only Skip If Step Failed = <check step> gates the write per item), ActionWithoutSuccessCondition (an Action with no Success condition counts as successful whenever the type does not raise, also when it answers status Error), ForEachSourceUnguarded (a record reader that feeds a forEach has no Success condition on noOfRecords, so an empty answer still succeeds and the forEach does nothing), UnknownFieldReference (@_current.fields.X names a field the source table does not have, or @N.field and @N.@_iter.field name a field step N does not store in its Result Log Paths).' +
             ' A write-type message type is one whose last name segment is Set, Post, Delete, Create, Update, Insert, Modify, Cancel, Correct, Send, MakeOrder, Release, Reopen, Approve, Reject, Register, Schedule or Enqueue. A record reader is a Data.* type ending in Get, Find, Search or List.' +
-            ' The roleCode of a LLM.* step is looked up with Data.Records.Get on table Bifrost Language Model ori, because the language models belong to Bifrost Bragi, which Bifrost Orchestrator does not depend on. When the table cannot be read (Bragi is not installed, or the caller may not read it) the check says nothing. Fields are looked up in the table metadata; a table that cannot be resolved is not judged. An operator that is not an AL name cannot be stored (Operator is an enum), so it is not a finding.' +
+            ' The roleCode of a LLM.* step is looked up with Data.Records.Get on the Bifrost Language Model table, because the language models belong to Bifrost Bragi, which Bifrost Orchestrator does not depend on. When the table cannot be read (Bragi is not installed, or the caller may not read it) the check says nothing. Fields are looked up in the table metadata; a table that cannot be resolved is not judged. An operator that is not an AL name cannot be stored (Operator is an enum), so it is not a finding.' +
             ' Orchestrator.Playbook.Run and Orchestrator.Playbook.Schedule (and the Schedule action of the playbook card) verify first. They refuse with PreconditionFailed, naming the findings in the answer, when an enabled step has an error, or a warning unless the request sets ignoreWarnings to true; ignoreWarnings never waives an error. A run started by the Job Queue is not verified again.';
         exit(true);
     end;
