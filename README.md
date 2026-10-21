@@ -407,7 +407,10 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | 10035606 | `Secrets ori` | Single access point for every secret this app keeps in the Foundation secret store. |
 | 10035607 | `Orchestrator Registration ori` | Registers the app in Foundation's `App Registry ori` so Bifröst Setup can name it in the aggregated setup notifications. |
 | 10035615 | `Playbook Verify Msg ori` | `Orchestrator.Playbook.Verify` |
-| 10035616 | `Playbook Verify ori` | Reads a playbook and returns localized warnings, for example a per-item forEach write that no `Skip If Step Failed` gates. |
+| 10035616 | `Playbook Verify ori` | Reads a playbook and returns localized findings (errors and warnings), for example a per-item forEach write that no `Skip If Step Failed` gates. `Orchestrator.Playbook.Run` and the schedule refuse a playbook that does not verify. |
+| 10035617 | `Playbook Verify Step ori` | The step-level checks of Verify: message type, Success condition, Next Step edges, forEach source, per-item gate. |
+| 10035618 | `Playbook Verify Template ori` | The template-level checks of Verify: JSON, `@` references, language model `roleCode`, field references. |
+| 10035619 | `Playbook Verify Lookup ori` | The lookups behind Verify: whether a record exists (through Data.Records.Get) and the field names of a table. |
 
 ### Permission sets
 

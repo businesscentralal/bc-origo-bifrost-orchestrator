@@ -163,7 +163,7 @@ codeunit 96432 "Playbook Last Run Tests"
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","ignoreWarnings":true}', PlaybookCodeTok));
         StartedAt := CurrentDateTime();
 
         Handler.ExecuteRun(TempArgument);

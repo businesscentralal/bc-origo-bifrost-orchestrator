@@ -5,9 +5,10 @@ using Origo.Bifrost.Orchestrator;
 using System.TestLibraries.Utilities;
 
 /// <summary>
-/// Issue #108: Orchestrator.Playbook.Verify warns when a forEach write step follows a forEach Check over
-/// the same array without Skip If Step Failed pointing at the Check, and stays silent for the corrected
-/// pattern. The warnings are localized in en-US (1033) and is-IS (1039).
+/// Issue #108: Orchestrator.Playbook.Verify warns (UnsafeForEachWrite) when a forEach write step follows a forEach
+/// Check over the same array without Skip If Step Failed pointing at the Check, and stays silent for the corrected
+/// pattern. The findings are localized in en-US (1033) and is-IS (1039). The fixtures are deliberately bare, so these
+/// tests look at the UnsafeForEachWrite finding only; the other checks have their own tests (#109).
 /// </summary>
 codeunit 96433 "Playbook Verify Tests"
 {
@@ -61,7 +62,8 @@ codeunit 96433 "Playbook Verify Tests"
         Lib.AddStep(PlaybookCodeTok, 50, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
         Lib.AddStep(PlaybookCodeTok, 60, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 50);
 
-        Verify.GetWarnings(PlaybookCodeTok, Warnings);
+        Verify.GetFindings(PlaybookCodeTok, Warnings);
+        Warnings := OnlyUnsafeWrites(Warnings);
 
         // Step 40 is ungated; step 60 has Skip If Step Failed = 50, so it is clean.
         Assert.AreEqual(1, Warnings.Count(), 'Only the ungated write warns');
@@ -90,16 +92,16 @@ codeunit 96433 "Playbook Verify Tests"
         // A write that follows no Check at all (the Check is later)
         Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 0);
 
-        Verify.GetWarnings(PlaybookCodeTok, Warnings);
-        Assert.AreEqual(0, Warnings.Count(), 'No warnings for the safe shapes');
+        Verify.GetFindings(PlaybookCodeTok, Warnings);
+        Assert.AreEqual(0, OnlyUnsafeWrites(Warnings).Count(), 'No warnings for the safe shapes');
 
         // A disabled Check does not gate anything, so a write behind only a disabled Check is not warned about either
         PlaybookStep.Get(PlaybookCodeTok, 30);
         PlaybookStep.Validate(Disabled, true);
         PlaybookStep.Modify(true);
         Lib.AddStep(PlaybookCodeTok, 70, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 0);
-        Verify.GetWarnings(PlaybookCodeTok, Warnings);
-        Assert.AreEqual(0, Warnings.Count(), 'A disabled Check raises no warning');
+        Verify.GetFindings(PlaybookCodeTok, Warnings);
+        Assert.AreEqual(0, OnlyUnsafeWrites(Warnings).Count(), 'A disabled Check raises no warning');
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
@@ -142,6 +144,7 @@ codeunit 96433 "Playbook Verify Tests"
         ResponseJson: JsonObject;
         Token: JsonToken;
         Warning: JsonToken;
+        Findings: JsonArray;
         PreviousLanguage: Integer;
         Message: Text;
     begin
@@ -160,12 +163,16 @@ codeunit 96433 "Playbook Verify Tests"
         ResponseJson := TempArgument.GetResponseJson();
         ResponseJson.Get('status', Token);
         Assert.AreEqual('Success', Token.AsValue().AsText(), 'status');
-        ResponseJson.Get('warningCount', Token);
-        Assert.AreEqual(1, Token.AsValue().AsInteger(), 'warningCount');
-        ResponseJson.Get('warnings', Token);
-        Token.AsArray().Get(0, Warning);
+        ResponseJson.Get('findings', Token);
+        Findings := OnlyUnsafeWrites(Token.AsArray());
+        Assert.AreEqual(1, Findings.Count(), 'One UnsafeForEachWrite finding');
+        Findings.Get(0, Warning);
         Warning.AsObject().Get('code', Token);
         Assert.AreEqual('UnsafeForEachWrite', Token.AsValue().AsText(), 'code');
+        Warning.AsObject().Get('severity', Token);
+        Assert.AreEqual('warning', Token.AsValue().AsText(), 'severity');
+        Warning.AsObject().Get('nextStep', Token);
+        Assert.IsTrue(Token.AsValue().AsText().Contains('30') and Token.AsValue().AsText().Contains('40'), 'nextStep names the gate and the step: ' + Token.AsValue().AsText());
         Warning.AsObject().Get('stepNo', Token);
         Assert.AreEqual(40, Token.AsValue().AsInteger(), 'stepNo');
         Warning.AsObject().Get('checkStepNo', Token);
@@ -198,12 +205,22 @@ codeunit 96433 "Playbook Verify Tests"
         Handler.ExecuteVerify(TempArgument);
 
         ResponseJson := TempArgument.GetResponseJson();
-        ResponseJson.Get('warningCount', Token);
-        Assert.AreEqual(0, Token.AsValue().AsInteger(), 'No warnings for the corrected pattern');
-        ResponseJson.Get('warnings', Token);
-        Assert.AreEqual(0, Token.AsArray().Count(), 'Empty warnings array');
+        ResponseJson.Get('findings', Token);
+        Assert.AreEqual(0, OnlyUnsafeWrites(Token.AsArray()).Count(), 'No UnsafeForEachWrite for the corrected pattern');
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
+    end;
+
+    /// <summary>Keeps the UnsafeForEachWrite findings of a list of findings.</summary>
+    local procedure OnlyUnsafeWrites(Findings: JsonArray) Kept: JsonArray
+    var
+        Token: JsonToken;
+        CodeToken: JsonToken;
+    begin
+        foreach Token in Findings do
+            if Token.AsObject().Get('code', CodeToken) then
+                if CodeToken.AsValue().AsText() = 'UnsafeForEachWrite' then
+                    Kept.Add(Token);
     end;
 
     local procedure WarningInt(Warnings: JsonArray; Index: Integer; PropertyName: Text): Integer

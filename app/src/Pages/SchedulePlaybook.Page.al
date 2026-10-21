@@ -90,6 +90,7 @@ page 10035584 "Schedule Playbook ori"
         RetryPolicy: Enum "Retry Policy ori";
         EmitTelemetry: Boolean;
         MissingTemplateErr: Label 'You must select a Recurring Template Code.', Comment = 'is-IS=Þú verður að velja endurtekningarsniðmát.';
+        WarningsConfirmQst: Label 'The playbook verifies with warnings: %1\Schedule it anyway?', Comment = '%1 = the warnings, is-IS=Keðjan sannreynist með viðvörunum: %1\Á samt að tímasetja hana?';
 
     /// <summary>
     /// Tells the dialog which playbook it is scheduling. Call it before <c>RunModal</c>. Also sets
@@ -104,7 +105,11 @@ page 10035584 "Schedule Playbook ori"
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
+        Verify: Codeunit "Playbook Verify ori";
+        Blocking: JsonArray;
         OrchestratorEntryPkId: Guid;
+        Summary: Text;
+        IgnoreWarnings: Boolean;
     begin
         if CloseAction <> Action::OK then
             exit(true);
@@ -113,9 +118,17 @@ page 10035584 "Schedule Playbook ori"
             Error(MissingTemplateErr);
 
         Playbook.Get(Playbook.Code);
+        // Errors refuse the schedule. Warnings are shown and the user decides, as ignoreWarnings does for the message type.
+        if Verify.GetBlockingFindings(Playbook.Code, true, Blocking, Summary) then
+            Error('%1', Summary);
+        if Verify.GetBlockingFindings(Playbook.Code, false, Blocking, Summary) then begin
+            if not Confirm(WarningsConfirmQst, false, Summary) then
+                exit(false);
+            IgnoreWarnings := true;
+        end;
         Playbook.CreateOrchestratorEntry(
             RecurringTemplateCode, NotificationType, NotificationRecipient,
-            JobQueueCategoryCode, EmitTelemetry, RetryPolicy, OrchestratorEntryPkId);
+            JobQueueCategoryCode, EmitTelemetry, RetryPolicy, IgnoreWarnings, OrchestratorEntryPkId);
 
         exit(true);
     end;

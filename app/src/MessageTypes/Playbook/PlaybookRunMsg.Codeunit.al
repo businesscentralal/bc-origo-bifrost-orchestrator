@@ -77,6 +77,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
     begin
         Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to execute (Code[20]). Required unless subject carries the code.'));
         Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored in the workspace at _initial for the steps to reference as @_initial.<key>. When it is left out, the playbook''s own initial request template is used.'));
+        Parameters.Add(ContractMgt.Parameter('ignoreWarnings', 'boolean', false, 'True accepts the warnings of the verification on purpose, for example an ungated per-item write you really want. Never waives an error. Default false: warnings refuse the run like errors.'));
         exit(true);
     end;
 
@@ -98,10 +99,12 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.AddPlaybookErrors(Errors);
         Parts.AddContractError(Errors, 'Step <stepNo> not found in playbook <playbookCode>.', 'A Next Step No. of a step that ran points to a step that does not exist.', 'Fix the step chain of the playbook.');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>', 'The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.', 'Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot.'));
         exit(true);
     end;
 
@@ -151,7 +154,8 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The whole playbook runs inside this call and the answer is written only at the end. A caller that times out first gets nothing while the server carries on, and the Playbook Instance ori stays at Running for ever, because the completion belongs to the abandoned session. An LLM step inside a forEach is the usual cause. Use Orchestrator.Playbook.Enqueue, or invoke this type asynchronously, for anything that is not reliably quick, and read Playbook Step Log ori to follow progress.' +
+        Notes := 'The playbook is verified first (Orchestrator.Playbook.Verify). An enabled step with an error always refuses the call, and so does a warning unless ignoreWarnings is true; the answer is PreconditionFailed with the blocking findings in findings[]. Nothing runs and no instance is written.' +
+            ' The whole playbook runs inside this call and the answer is written only at the end. A caller that times out first gets nothing while the server carries on, and the Playbook Instance ori stays at Running for ever, because the completion belongs to the abandoned session. An LLM step inside a forEach is the usual cause. Use Orchestrator.Playbook.Enqueue, or invoke this type asynchronously, for anything that is not reliably quick, and read Playbook Step Log ori to follow progress.' +
             ' A failing step does not fail the call: the answer is Success with playbookStatus Failed and stepsFailed above 0. Read Playbook Step Log ori filtered on instanceId for the step errors.' +
             ' itemsProcessed counts forEach iterations summed over every step, not distinct items. Do not present it to a user as a record count.' +
             ' A playbook without steps completes at once with every counter 0.';
