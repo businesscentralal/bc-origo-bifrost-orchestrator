@@ -203,6 +203,7 @@ codeunit 96437 "Playbook Gate Tests"
     begin
         BuildWarningPlaybook();
         CreateTemplate();
+        Commit();
         Playbook.Get(PlaybookCodeTok);
 
         asserterror Playbook.CreateOrchestratorEntry(TemplateCodeTok, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, false, EntryPkId);
