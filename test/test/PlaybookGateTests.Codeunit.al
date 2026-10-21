@@ -192,15 +192,19 @@ codeunit 96437 "Playbook Gate Tests"
         Playbook.Get(PlaybookCodeTok);
         Assert.IsFalse(IsNullGuid(Playbook."Orchestrator Entry ID"), 'Scheduled');
 
-        // [WHEN] Run is called after an uncommitted write (the runner itself commits once the gate has passed)
+        // [WHEN] Run is called after an uncommitted write, on the playbook with an error added. The runner itself needs a
+        // committed transaction (it seeds the workspace through Codeunit.Run before its first Commit), so the gate is
+        // proven by the refusal: it judged the playbook inside the write transaction and answered, without an error
+        Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         MakeUncommittedWrite();
         Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Run');
         CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
         Handler.ExecuteRun(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
-        // [THEN] The gate passed inside the write transaction and the run answered
-        Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'Run answers');
-        Assert.IsTrue(ResponseJson.Contains('instanceId'), 'The run happened');
+        // [THEN] Run refused with the finding, nothing ran and the transaction is still open
+        Assert.AreEqual('PreconditionFailed', TextOf(ResponseJson, 'code'), 'The gate refused inside the write transaction');
+        Assert.IsTrue(TextOf(ResponseJson, 'error').Contains('CheckWithoutSuccessCondition'), 'The refusal names the finding');
+        Assert.IsTrue(Database.IsInWriteTransaction(), 'The gate did not commit');
         CleanupAll();
     end;
 
