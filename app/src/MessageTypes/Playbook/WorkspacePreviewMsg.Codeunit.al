@@ -40,9 +40,8 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        Envelope := Parts.NoSubjectEnvelope(false, 'text/json');
         exit(true);
     end;
 
@@ -115,8 +114,15 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Workspace.Preview', 'Read the _sys and _who paths, optionally with a sample initialRequest.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Check the request templates that use those paths.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Run', 'Run the playbook once it verifies.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -129,15 +135,15 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Returns the seeded workspace context that a Playbook Runner would provide without executing any step.';
+        Overview := 'Returns the seeded workspace context that the playbook runner would provide without executing any step: the _sys dates and company, the _who user context and, when sent, the _initial request. Use it to find the paths a request template can reference before building a playbook.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The workspace is temporary; this message does not create a Playbook Instance or Playbook Step Log.' +
+        Notes := 'The workspace is temporary; this message does not create a playbook instance or step log.' +
             ' Seeding _who dispatches Help.WhoAmI.Get in its own committed scope. Its queue entry and a possible first-use user setup cannot roll back with an outer transaction, so the effect is irreversible and the type cannot run inside an open write transaction. It changes no business data, so its direction stays Outbound.' +
-            ' Call it before building a playbook to find the paths the request templates can use, such as @_sys.lastMonthStart and @_sys.lastMonthEnd for monthly filters, @_who.companyInfo.registrationNo, @_who.salesperson.email for recipients and @_who.telegramChatId. When debugging, compare it with the workspace snapshot of a failed step in Playbook Step Log ori.';
+            ' Call it before building a playbook to find the paths the request templates can use, such as @_sys.lastMonthStart and @_sys.lastMonthEnd for monthly filters, @_who.companyInfo.registrationNo, @_who.salesperson.email for recipients and @_who.telegramChatId. When debugging, compare it with the workspace snapshot of a failed step in the Bifrost Playbook Step Log.';
         exit(true);
     end;
 

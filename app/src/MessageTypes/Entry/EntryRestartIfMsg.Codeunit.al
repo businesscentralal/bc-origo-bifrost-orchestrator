@@ -139,7 +139,7 @@ codeunit 10035568 "Entry RestartIf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Restarts the selected Job Queue Entry only when its status is Error or a held state.';
+        Overview := 'Restarts the selected Job Queue Entry only when its status is Error, On Hold or On Hold with Inactivity Timeout; any other status is returned unchanged. It works on any Job Queue Entry and applies no retry policy.';
         exit(true);
     end;
 

@@ -60,7 +60,7 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to enqueue (Code[20]). Required unless subject carries the code.'));
-        Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored in JQ Parameter ori and handed to the playbook as its initial request (_initial) when the job runs.'));
+        Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored with the one-off Job Queue Entry and handed to the playbook as its initial request (_initial) when the job runs. When it is left out, the playbook''s own initial request template is used.'));
         Parameters.Add(ContractMgt.Parameter('jobQueueCategory', 'string', false, 'Job Queue Category Code (Code[10]) of the Job Queue Entry.'));
         Parameters.Add(ContractMgt.Parameter('delaySeconds', 'integer', false, 'Seconds before the run starts. Default 60; values below 60 are raised to 60.'));
         exit(true);
@@ -94,7 +94,7 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Creates a one-time Job Queue Entry and stores the initial request.', true, '', Preconditions);
+        Effect := Parts.Effect('write', 'Creates a one-time Job Queue Entry and stores the initial request. Every call queues one more run.', false, '', Preconditions);
         exit(true);
     end;
 
@@ -112,8 +112,15 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Check the playbook before it is queued; Enqueue does not verify it.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Enqueue', 'Queue the one-time background run; keep jobQueueEntryId from the answer.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'The answer comes before the run. Follow the run in the Bifrost Playbook Instance and Bifrost Playbook Step Log tables.');
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -126,13 +133,13 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Queues a Bifröst Playbook for one-time background execution through the Job Queue.';
+        Overview := 'Queues a Bifröst Playbook for one-time background execution through the Job Queue and returns the id of the one-off Job Queue Entry. The call answers before the playbook runs; use it for runs that are slow or must not depend on the caller session. Every call queues another run.';
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The effective delay is at least 60 seconds. The call answers before the playbook runs: the one-off, non-recurring Job Queue Entry is scheduled through Job Queue - Enqueue, so it has a System Task ID and runs at its earliest start in a background session, where it writes a Playbook Instance ori like Orchestrator.Playbook.Run. Follow it in Playbook Instance ori and Playbook Step Log ori.';
+        Notes := 'The effective delay is at least 60 seconds. The call answers before the playbook runs: the one-off, non-recurring Job Queue Entry is handed to the Job Queue and runs at its earliest start in a background session, where it writes a playbook instance like Orchestrator.Playbook.Run. Follow it in the Bifrost Playbook Instance and Bifrost Playbook Step Log tables. The playbook is not verified when it is enqueued, and a run started by the Job Queue is not verified either: call Orchestrator.Playbook.Verify first.';
         exit(true);
     end;
 

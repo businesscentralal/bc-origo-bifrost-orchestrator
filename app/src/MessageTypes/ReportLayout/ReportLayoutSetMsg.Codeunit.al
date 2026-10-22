@@ -40,10 +40,8 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Forms.Add('integer and name');
-        Envelope := Parts.Envelope(Forms, 'The reportId and layout name are supplied in data.', true);
+        Envelope := Parts.NoSubjectEnvelope(true, 'text/json');
         exit(true);
     end;
 
@@ -119,13 +117,22 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
+        Parts.Related(Related, 'Orchestrator.ReportLayout.List', 'Use this to see the existing layouts before importing one.');
+        Parts.Related(Related, 'Orchestrator.ReportLayout.Get', 'Use this to export a layout, for example to edit it and import it again.');
         Parts.Related(Related, 'Orchestrator.Report.Get', 'Use this to inspect report metadata and existing layouts.');
         exit(true);
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.ReportLayout.List', 'See which layouts the report has.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.ReportLayout.Set', 'Import the layout file as base64; a user-defined layout with the same name is replaced.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.SaveAs', 'Render the report with layoutName set to the imported name to check the result.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -138,7 +145,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Creates or replaces a user-defined tenant report layout through the supported layout media import path.';
+        Overview := 'Creates or replaces a user-defined tenant report layout from a base64 Word, Excel or RDLC file, through the same import path the Report Layouts page uses. It never changes a layout that an extension ships and does not set the default layout.';
         exit(true);
     end;
 

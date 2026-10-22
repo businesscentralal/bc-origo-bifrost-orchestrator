@@ -56,9 +56,8 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        Envelope := Parts.NoSubjectEnvelope(false, 'text/json');
         exit(true);
     end;
 
@@ -78,7 +77,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
         Fields: JsonArray;
         EntryFields: JsonArray;
     begin
-        Parts.AddResponseField(EntryFields, 'total', 'integer', 'All Scheduled Entry ori records.');
+        Parts.AddResponseField(EntryFields, 'total', 'integer', 'All orchestrator entries.');
         Parts.AddResponseField(EntryFields, 'blocked', 'integer', 'Blocked entries.');
         Parts.AddResponseField(EntryFields, 'active', 'integer', 'Entries that are not blocked.');
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
@@ -121,8 +120,15 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Read orchestratorStatus and the entry counts.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.RestartIfNeeded', 'When the management job has expired or failed, schedule it again without disturbing a running one.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Read the status again to confirm.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -135,7 +141,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Returns the current orchestrator health, setup values and scheduled entry counts.';
+        Overview := 'Returns the health of the orchestrator''s management Job Queue Entry as a sentence for a person, the scheduler setup values and the counts of orchestrator entries (total, blocked, active). Read-only. Use it to check that scheduling is alive before relying on it.';
         exit(true);
     end;
 

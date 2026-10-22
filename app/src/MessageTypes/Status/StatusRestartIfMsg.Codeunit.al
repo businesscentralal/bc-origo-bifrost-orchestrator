@@ -56,9 +56,8 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        Envelope := Parts.NoSubjectEnvelope(false, 'text/json');
         exit(true);
     end;
 
@@ -114,8 +113,14 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Read orchestratorStatus and the entry counts.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.RestartIfNeeded', 'Schedule the management Job Queue Entry again only when it is not Ready or In Process.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -128,7 +133,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Ensures that the orchestrator management Job Queue Entry is scheduled without interrupting a running entry.';
+        Overview := 'Ensures that the orchestrator management Job Queue Entry is scheduled without interrupting a running entry; restarted in the answer tells whether anything was changed. Calling it again while the entry is Ready or In Process changes nothing.';
         exit(true);
     end;
 

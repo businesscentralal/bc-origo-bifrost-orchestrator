@@ -12,27 +12,57 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     Access = Internal;
 
     /// <summary>
-    /// The envelope chapter: subject optional, version 1.0, JSON content.
+    /// The envelope chapter of a type that reads subject: subject optional, version 1.0, JSON content, and the
+    /// root option strict that Foundation honours for every type.
     /// </summary>
-    /// <param name="SubjectForms">The forms subject accepts; empty when subject is not used.</param>
+    /// <param name="SubjectForms">The forms subject accepts.</param>
     /// <param name="SubjectDescription">What subject identifies.</param>
     /// <param name="DataRequired">True when the call needs data.</param>
     /// <returns>The envelope chapter.</returns>
-    internal procedure Envelope(SubjectForms: List of [Text]; SubjectDescription: Text; DataRequired: Boolean) Result: JsonObject
+    internal procedure Envelope(SubjectForms: List of [Text]; SubjectDescription: Text; DataRequired: Boolean): JsonObject
+    begin
+        exit(BuildEnvelope('optional', SubjectForms, SubjectDescription, DataRequired, 'text/json'));
+    end;
+
+    /// <summary>
+    /// The envelope chapter of a type that does not read subject: subject notUsed, version 1.0, and the
+    /// root option strict that Foundation honours for every type.
+    /// </summary>
+    /// <param name="DataRequired">True when the call needs data.</param>
+    /// <param name="ContentType">The content type of the Success answer, e.g. text/json or application/pdf.</param>
+    /// <returns>The envelope chapter.</returns>
+    internal procedure NoSubjectEnvelope(DataRequired: Boolean; ContentType: Text): JsonObject
+    var
+        NoForms: List of [Text];
+    begin
+        exit(BuildEnvelope('notUsed', NoForms, '', DataRequired, ContentType));
+    end;
+
+    local procedure BuildEnvelope(SubjectUse: Text; SubjectForms: List of [Text]; SubjectDescription: Text; DataRequired: Boolean; ContentType: Text) Result: JsonObject
     var
         Subject: JsonObject;
+        StrictOption: JsonObject;
         Forms: JsonArray;
         Form: Text;
+        StrictDescriptionTxt: Label 'Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data.', Comment = 'is-IS=Valfrjálst Boolean-gildi á efsta stigi, sjálfgefið false. Þegar það er true er óþekktum gagnalyklum hafnað fyrir keyrslu með UnknownParameter. Ekki setja þennan valkost inni í data.';
     begin
-        foreach Form in SubjectForms do
-            Forms.Add(Form);
-        Subject.Add('use', 'optional');
-        Subject.Add('forms', Forms);
-        Subject.Add('description', SubjectDescription);
+        Subject.Add('use', SubjectUse);
+        if SubjectForms.Count() > 0 then begin
+            foreach Form in SubjectForms do
+                Forms.Add(Form);
+            Subject.Add('forms', Forms);
+        end;
+        if SubjectDescription <> '' then
+            Subject.Add('description', SubjectDescription);
+        StrictOption.Add('type', 'boolean');
+        StrictOption.Add('required', false);
+        StrictOption.Add('default', false);
+        StrictOption.Add('description', StrictDescriptionTxt);
+        Result.Add('strict', StrictOption);
         Result.Add('subject', Subject);
         Result.Add('dataRequired', DataRequired);
         Result.Add('version', '1.0');
-        Result.Add('contentType', 'text/json');
+        Result.Add('contentType', ContentType);
     end;
 
     /// <summary>
@@ -57,7 +87,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Result.Add(ContractMgt.TargetEntry('data.id', 'guid', 'Read first. Tried as the SystemId of the Scheduled Entry ori, then as its primary key ID (which equals the ID of the Job Queue Entry it schedules).'));
+        Result.Add(ContractMgt.TargetEntry('data.id', 'guid', 'Read first. Tried as the SystemId of the orchestrator entry, then as its primary key ID (which equals the ID of the Job Queue Entry it schedules).'));
         Result.Add(ContractMgt.TargetEntry('subject', 'guid', 'Used only when data.id is missing or not a GUID. Resolved the same way.'));
     end;
 
@@ -69,7 +99,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Result.Add(ContractMgt.TargetEntry('data.playbookCode', 'code', 'Read first: the Code of the Playbook ori. Cut to 20 characters.'));
+        Result.Add(ContractMgt.TargetEntry('data.playbookCode', 'code', 'Read first: the Code of the playbook. Cut to 20 characters.'));
         Result.Add(ContractMgt.TargetEntry('subject', 'code', 'Used only when data.playbookCode is not sent. Cut to 20 characters.'));
     end;
 

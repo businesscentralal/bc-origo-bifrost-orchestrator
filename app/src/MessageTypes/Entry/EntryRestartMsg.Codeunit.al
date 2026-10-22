@@ -139,7 +139,7 @@ codeunit 10035567 "Entry Restart Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Sets the selected Job Queue Entry to Ready regardless of its current state.';
+        Overview := 'Sets the selected Job Queue Entry to Ready regardless of its current state, with no retry policy and no notification. It works on any Job Queue Entry, registered with the orchestrator or not; for an orchestrator entry use Orchestrator.Entry.Restart.';
         exit(true);
     end;
 

@@ -56,9 +56,8 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        Envelope := Parts.NoSubjectEnvelope(false, 'text/json');
         exit(true);
     end;
 
@@ -132,7 +131,7 @@ codeunit 10035570 "Help Get Impl ori" implements "Msg Interface ori", "Msg Disco
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Returns the compatibility overview for Job Queue and Playbook Workflow message types.';
+        Overview := 'Returns the Bifröst Orchestrator overview as one markdown document: a decision tree, the message type table, how run reporting works, playbook concepts and how to build, verify and schedule a playbook, and rules for AI agents. It is the one orchestrator type whose answer is a document; the machine-readable chapters of any type come from Help.Implementation.Get.';
         exit(true);
     end;
 

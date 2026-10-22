@@ -40,10 +40,8 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Forms.Add('integer');
-        Envelope := Parts.Envelope(Forms, 'The report ID in data.reportId.', true);
+        Envelope := Parts.NoSubjectEnvelope(true, 'text/json');
         exit(true);
     end;
 
@@ -119,8 +117,16 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.List', 'Find processing-only reports with processingOnly true.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.Get', 'Confirm what the report does before running it.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Report.Run', 'Run it; check the result with a following read of the register or ledger it writes to.'));
+        Workflow.Add('steps', Steps);
+        Workflow.Add('text', 'Run changes data and commits as it goes, so confirm the reportId first and do not retry automatically.');
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -134,7 +140,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Runs a processing-only report through the report batch-job path and returns execution details.';
+        Overview := 'Runs a processing-only report (a batch job that produces no document) through the report batch-job path and returns when it started and how long it ran. Success only means that no error was raised; read the notes before using it. Irreversible: most batch reports commit as they go.';
         exit(true);
     end;
 
@@ -146,6 +152,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
             ' **Do not auto-retry.** Set the retry policy of an orchestrator entry to Never for any chain that contains this step.' +
             ' **Check what you are calling first.** Orchestrator.Report.List with processingOnly true lists Date Compress G/L Entries and Delete Invoiced Sales Orders next to the harmless ones. Confirm a reportId with Orchestrator.Report.Get.' +
             ' **No request page is shown.** Explicit parameters overlay caller XML or a registered template without saved settings. Without parameters, values come from requestPageXml or the saved preset; capture a preset through the URL from Orchestrator.Report.Get.' +
+            ' The built-in template of report 1316 accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item).' +
             ' **Long runs need the queue.** A batch job can outlive a synchronous request: run it from a playbook with Orchestrator.Playbook.Enqueue, or invoke this type asynchronously.';
         exit(true);
     end;

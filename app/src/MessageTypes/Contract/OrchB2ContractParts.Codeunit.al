@@ -12,27 +12,17 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     Access = Internal;
 
     /// <summary>
-    /// The envelope chapter: subject optional, version 1.0, JSON content.
+    /// The envelope chapter of a Report, Workspace or ReportLayout type: none of them reads subject.
+    /// Built by "Orch B1 Contract Parts ori" so the envelope is defined once.
     /// </summary>
-    /// <param name="SubjectForms">The forms subject accepts; empty when subject is not used.</param>
-    /// <param name="SubjectDescription">What subject identifies.</param>
     /// <param name="DataRequired">True when the call needs data.</param>
+    /// <param name="ContentType">The content type of the Success answer, e.g. text/json or application/pdf.</param>
     /// <returns>The envelope chapter.</returns>
-    internal procedure Envelope(SubjectForms: List of [Text]; SubjectDescription: Text; DataRequired: Boolean) Result: JsonObject
+    internal procedure NoSubjectEnvelope(DataRequired: Boolean; ContentType: Text): JsonObject
     var
-        Subject: JsonObject;
-        Forms: JsonArray;
-        Form: Text;
+        B1Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        foreach Form in SubjectForms do
-            Forms.Add(Form);
-        Subject.Add('use', 'optional');
-        Subject.Add('forms', Forms);
-        Subject.Add('description', SubjectDescription);
-        Result.Add('subject', Subject);
-        Result.Add('dataRequired', DataRequired);
-        Result.Add('version', '1.0');
-        Result.Add('contentType', 'text/json');
+        exit(B1Parts.NoSubjectEnvelope(DataRequired, ContentType));
     end;
 
     /// <summary>

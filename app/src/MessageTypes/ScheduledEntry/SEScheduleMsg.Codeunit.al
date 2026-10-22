@@ -22,7 +22,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Reschedule an orchestrator entry for immediate execution.', Comment = 'is-IS=Enduráætla áætlunarfærslu til tafarlausrar keyrslu.';
+        DescriptionLbl: Label 'Rebuild the Job Queue schedule of an orchestrator entry.', Comment = 'is-IS=Endurbyggja vinnsluraðaráætlun áætlunarfærslu.';
     begin
         exit(DescriptionLbl);
     end;
@@ -36,7 +36,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Reschedule an orchestrator entry for immediate execution. Irreversible. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Enduráætlun áætlunarfærslu fyrir tafarlausa keyrslu. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir forgrunn keyrslu sem skilur áætlunina eftir.';
+        SelectionLbl: Label 'Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Irreversible. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir.';
     begin
         exit(SelectionLbl);
     end;
@@ -63,7 +63,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the Scheduled Entry ori. Required unless subject carries it.'));
+        Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the orchestrator entry (Job Queue Orchestrator Entry). Required unless subject carries it.'));
         exit(true);
     end;
 
@@ -73,9 +73,9 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'id', 'string', 'Scheduled Entry SystemId.');
+        Parts.AddResponseField(Fields, 'id', 'string', 'SystemId of the orchestrator entry.');
         Parts.AddResponseField(Fields, 'blocked', 'boolean', 'Whether the entry is blocked.');
-        Parts.AddResponseField(Fields, 'message', 'string', 'Scheduling result.');
+        Parts.AddResponseField(Fields, 'message', 'string', 'Orchestrator entry scheduled. (translated).');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -112,21 +112,28 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Entry.Register', 'Bring a Job Queue Entry under orchestrator control, or skip this when the orchestrator entry already exists.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Entry.Schedule', 'Rebuild its Job Queue schedule from the recurrence settings, with data.id from the Register answer.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Check that the orchestrator itself is running.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Schedule an entry', '{"type":"Orchestrator.Entry.Schedule","data":{"id":"<systemId>"}}', '{"status":"Success","id":"<systemId>","message":"Orchestrator entry scheduled."}');
+        Parts.Example(Examples, 'Schedule an entry', '{"type":"Orchestrator.Entry.Schedule","data":{"id":"<systemId>"}}', '{"status":"Success","id":"<systemId>","blocked":false,"message":"Orchestrator entry scheduled."}');
         exit(true);
     end;
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Rebuilds the Job Queue Entry of an existing orchestrator entry from its current recurrence settings.';
+        Overview := 'Rebuilds the Job Queue Entry of an existing orchestrator entry from its current recurrence settings. Use it after the recurrence settings of the entry changed. A blocked entry is refused. Irreversible: the call commits.';
         exit(true);
     end;
 

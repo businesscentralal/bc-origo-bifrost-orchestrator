@@ -56,9 +56,8 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Forms: List of [Text];
     begin
-        Envelope := Parts.Envelope(Forms, 'No subject is used.', false);
+        Envelope := Parts.NoSubjectEnvelope(false, 'text/json');
         exit(true);
     end;
 
@@ -114,8 +113,15 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     end;
 
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Steps: JsonArray;
     begin
-        exit(false);
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Read orchestratorStatus: expired or failed means a restart is due.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Restart', 'Cancel and schedule the management Job Queue Entry again.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Status.Get', 'Confirm the status after the restart.'));
+        Workflow.Add('steps', Steps);
+        exit(true);
     end;
 
     procedure GetExamples(var Examples: JsonArray): Boolean
@@ -128,7 +134,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Cancels and schedules the orchestrator management Job Queue Entry.';
+        Overview := 'Cancels the orchestrator management Job Queue Entry and schedules a new one, whatever its state, and returns the resulting health. Use it when Orchestrator.Status.Get reports the management job as expired or failed; use Orchestrator.Status.RestartIfNeeded to leave a running orchestrator alone.';
         exit(true);
     end;
 
