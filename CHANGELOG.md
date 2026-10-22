@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-22) - Distinguish blocking Verify findings (#113)
+
+- Codeunits 10035616 `Playbook Verify ori` and 10035615 `Playbook Verify Msg ori`: add `blockingErrorCount` and `blockingWarningCount` to `Orchestrator.Playbook.Verify`. These exclude informational findings on disabled steps and match the existing Run/Schedule gates (warnings can be accepted with `ignoreWarnings`). Existing `valid`, `errorCount`, `warningCount`, per-step findings and `stepDisabled` remain unchanged for compatibility. Help, examples and bilingual type descriptions explain which counts to read.
+- Test app compile hygiene: use locked request-format labels, order local variables and align three filenames with their existing object names for zero-warning CodeCop; assertions and test selection are unchanged.
+- Test codeunit 96442 `Verify Summary Tests ori`: regressions in LCIDs 1033/1039 for disabled-only errors, mixed enabled/disabled findings, enabled blockers, clean summaries and the published help contract. Run/Schedule safety is unchanged.
+
 ### Changed (2026-10-21) - Message type contract and discovery brought to Foundation parity
 
 No public object, procedure, enum value or message type key changed; only the text and chapters that Help.Implementation.Get and the roster return.
