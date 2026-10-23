@@ -423,11 +423,13 @@ codeunit 96430 "Check Step Error Tests"
 
     local procedure FailingReportRequest(): Text
     begin
-        exit(StrSubstNo('{"reportId":%1}', Report::"Test Failing Report"));
+        exit(StrSubstNo(Format1Tok, Report::"Test Failing Report"));
     end;
 
     local procedure HelpRequest(): Text
     begin
         exit('{"messageTypes":["Orchestrator.Playbook.Schedule"],"chapters":["parameters"]}');
     end;
+    var
+        Format1Tok: Label '{"reportId":%1}', Locked = true;
 }

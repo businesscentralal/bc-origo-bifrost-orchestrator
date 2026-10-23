@@ -7,6 +7,14 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-23) - Primary-key references in playbooks (#118)
+
+- Help (10035576 `Help ori`) now uses `@_current.primaryKey.No_` in the credit-control example, including its encoded template, and explains where primary-key and other fields appear. The matching example fixture (96438) and existing field-path test (96439) follow the corrected response shape.
+- Verify (10035618 `Playbook Verify Template ori`, 10035619 `Playbook Verify Lookup ori`, contract 10035615 `Playbook Verify Msg ori`) warns with `UnknownFieldReference` when `@_current.fields.X` names a primary-key field and suggests its `primaryKey` path.
+- Runner (10035547 `Playbook Runner ori`) checks original template references with 10035546 `Playbook JSON Helper ori` before dispatch in single, forEach and paged steps. A missing reference fails the step with a localized diagnostic instead of sending literal token text; e-mail literals and data returned by an earlier step are not treated as missing template references.
+- Zero-warning test compilation: corrected existing format-string labels in test codeunits 96430, 96433, 96432, 96435, 96437, 96439 and library 96434; ordered declarations in 96433; aligned helper filenames for 96434, 96438 and 96440. Assertions and scenarios are unchanged.
+- Regression tests: 96442 `Playbook Ref 118 Tests ori` covers bilingual warnings, correct resolution, missing embedded/nested paths, e-mail/data literals, same-iteration syntax and real single/forEach runner failures. Existing compatibility signatures remain intact.
+
 ### Changed (2026-10-21) - Message type contract and discovery brought to Foundation parity
 
 No public object, procedure, enum value or message type key changed; only the text and chapters that Help.Implementation.Get and the roster return.

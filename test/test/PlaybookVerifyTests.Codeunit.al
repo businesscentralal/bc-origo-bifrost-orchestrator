@@ -52,8 +52,8 @@ codeunit 96433 "Playbook Verify Tests"
     [Test]
     procedure TwoUnsafeWrites_WarnOncePerStep()
     var
-        Warnings: JsonArray;
         Verify: Codeunit "Playbook Verify ori";
+        Warnings: JsonArray;
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
@@ -77,8 +77,8 @@ codeunit 96433 "Playbook Verify Tests"
     procedure SafeShapes_DoNotWarn()
     var
         PlaybookStep: Record "Playbook Step ori";
-        Warnings: JsonArray;
         Verify: Codeunit "Playbook Verify ori";
+        Warnings: JsonArray;
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
@@ -156,7 +156,7 @@ codeunit 96433 "Playbook Verify Tests"
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
         Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
         Lib.AddStep(PlaybookCodeTok, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 0);
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
         // [WHEN] The playbook is verified through the message type handler
         Handler.ExecuteVerify(TempArgument);
         // [THEN] One localized warning names the write step and the check
@@ -200,7 +200,7 @@ codeunit 96433 "Playbook Verify Tests"
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
         Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
         Lib.AddStep(PlaybookCodeTok, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 30);
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
 
         Handler.ExecuteVerify(TempArgument);
 
@@ -244,4 +244,6 @@ codeunit 96433 "Playbook Verify Tests"
         RequestJson.ReadFrom(RequestJsonText);
         TempArgument.SetRequestJson(RequestJson);
     end;
+    var
+        Format1Tok: Label '{"playbookCode":"%1"}', Locked = true;
 }

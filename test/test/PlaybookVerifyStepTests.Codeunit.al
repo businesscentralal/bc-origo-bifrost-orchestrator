@@ -549,7 +549,7 @@ codeunit 96435 "Playbook Verify Step Tests"
                 Assert.IsTrue(TextOf(Token.AsObject(), 'nextStep') <> '', FindingCode + ' has a nextStep');
                 exit;
             end;
-        Assert.Fail(StrSubstNo('No %1 finding on step %2', FindingCode, StepNo));
+        Assert.Fail(StrSubstNo(Format1Tok, FindingCode, StepNo));
     end;
 
     local procedure AssertMessageStartsWith(Findings: JsonArray; FindingCode: Text; ExpectedStart: Text)
@@ -597,4 +597,6 @@ codeunit 96435 "Playbook Verify Step Tests"
     begin
         Unlisted := Enum::"Message Type ori".FromInteger(Ordinal);
     end;
+    var
+        Format1Tok: Label 'No %1 finding on step %2', Locked = true;
 }

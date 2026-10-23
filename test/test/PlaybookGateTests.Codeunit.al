@@ -64,7 +64,7 @@ codeunit 96437 "Playbook Gate Tests"
         BuildErrorPlaybook();
         Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","ignoreWarnings":true}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
 
         Handler.ExecuteRun(TempArgument);
 
@@ -90,7 +90,7 @@ codeunit 96437 "Playbook Gate Tests"
         Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         Lib.SetStepDisabled(PlaybookCodeTok, 20, true);
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
 
         Handler.ExecuteRun(TempArgument);
 
@@ -109,7 +109,7 @@ codeunit 96437 "Playbook Gate Tests"
     begin
         BuildCleanPlaybook();
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
 
         Handler.ExecuteRun(TempArgument);
 
@@ -141,7 +141,7 @@ codeunit 96437 "Playbook Gate Tests"
     begin
         BuildCleanPlaybook();
         CreateTemplate();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2"}', PlaybookCodeTok, TemplateCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
 
         Handler.ExecuteSchedule(TempArgument);
 
@@ -173,7 +173,7 @@ codeunit 96437 "Playbook Gate Tests"
         // [WHEN] Verify is called after an uncommitted write
         MakeUncommittedWrite();
         Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Verify');
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
         VerifyHandler.ExecuteVerify(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         // [THEN] It answers, the findings are intact and the transaction is still open
@@ -184,7 +184,7 @@ codeunit 96437 "Playbook Gate Tests"
 
         // [WHEN] Schedule is called after an uncommitted write
         Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Schedule');
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2"}', PlaybookCodeTok, TemplateCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
         Handler.ExecuteSchedule(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         // [THEN] The gate passed and the playbook is scheduled
@@ -198,7 +198,7 @@ codeunit 96437 "Playbook Gate Tests"
         Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         MakeUncommittedWrite();
         Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Run');
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
         Handler.ExecuteRun(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         // [THEN] Run refused with the finding, nothing ran and the transaction is still open
@@ -229,12 +229,12 @@ codeunit 96437 "Playbook Gate Tests"
         // [SCENARIO] An Action without a Success condition is a warning: it refuses the schedule until ignoreWarnings says it is meant
         BuildWarningPlaybook();
         CreateTemplate();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2"}', PlaybookCodeTok, TemplateCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
         Handler.ExecuteSchedule(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         Assert.AreEqual('PreconditionFailed', TextOf(ResponseJson, 'code'), 'A warning refuses the schedule');
 
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2","ignoreWarnings":true}', PlaybookCodeTok, TemplateCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format4Tok, PlaybookCodeTok, TemplateCodeTok));
         Handler.ExecuteSchedule(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'ignoreWarnings accepts the warning');
@@ -331,7 +331,7 @@ codeunit 96437 "Playbook Gate Tests"
         // [SCENARIO] The answer of Orchestrator.Playbook.Verify: valid, errorCount, warningCount and findings
         BuildErrorPlaybook();
         Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
 
         Handler.ExecuteVerify(TempArgument);
 
@@ -357,7 +357,7 @@ codeunit 96437 "Playbook Gate Tests"
         Token: JsonToken;
     begin
         BuildCleanPlaybook();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
 
         Handler.ExecuteVerify(TempArgument);
 
@@ -384,7 +384,7 @@ codeunit 96437 "Playbook Gate Tests"
         GlobalLanguage(LanguageId);
         BuildErrorPlaybook();
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
 
         Handler.ExecuteRun(TempArgument);
 
@@ -419,13 +419,13 @@ codeunit 96437 "Playbook Gate Tests"
         GlobalLanguage(LanguageId);
         BuildWarningPlaybook();
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
         Handler.ExecuteRun(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         Assert.AreEqual('PreconditionFailed', TextOf(ResponseJson, 'code'), 'A warning refuses the run');
         Assert.IsTrue(TextOf(ResponseJson, 'error').StartsWith(ExpectedStart), 'Localized start expected: ' + ExpectedStart + ' got: ' + TextOf(ResponseJson, 'error'));
 
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","ignoreWarnings":true}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
         Handler.ExecuteRun(TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'ignoreWarnings accepts the warning');
@@ -448,7 +448,7 @@ codeunit 96437 "Playbook Gate Tests"
         GlobalLanguage(LanguageId);
         BuildErrorPlaybook();
         CreateTemplate();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","recurringTemplateCode":"%2"}', PlaybookCodeTok, TemplateCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
 
         Handler.ExecuteSchedule(TempArgument);
 
@@ -564,4 +564,9 @@ codeunit 96437 "Playbook Gate Tests"
         if Source.Get(PropertyName, Token) then
             exit(Token.AsValue().AsInteger());
     end;
+    var
+        Format1Tok: Label '{"playbookCode":"%1","ignoreWarnings":true}', Locked = true;
+        Format2Tok: Label '{"playbookCode":"%1"}', Locked = true;
+        Format3Tok: Label '{"playbookCode":"%1","recurringTemplateCode":"%2"}', Locked = true;
+        Format4Tok: Label '{"playbookCode":"%1","recurringTemplateCode":"%2","ignoreWarnings":true}', Locked = true;
 }

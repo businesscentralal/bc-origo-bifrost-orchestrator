@@ -1083,6 +1083,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Settu Bifröst-keðju í biðröð fyrir einskiptis bakgrunnsvinnslu. Skrifaðgerð. Notaðu Orchestrator.Playbook.Run fyrir tafarlausa keyrslu í forgrunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Enqueue Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2939314393 - NamedType 665073879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unresolved workspace reference %1. Inspect the source response and correct the path before running the step. No message was sent.</source>
+          <target>Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = workspace reference, is-IS=Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType UnresolvedReferenceErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4100168724 - NamedType 2208007315" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "playbookCode" in the data payload or as the subject.</source>
           <target>Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</target>
@@ -1322,6 +1328,18 @@
           <target>ekkert</target>
           <note from="Developer" annotates="general" priority="2">is-IS=ekkert</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType NothingTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 4056349108" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 reads @_current.fields.%2, but %2 is a primary-key field of table %3 and is returned under primaryKey, not fields.</source>
+          <target>Skref %1 les @_current.fields.%2, en %2 er aðallykilsreitur í töflunni %3 og er skilað undir primaryKey, ekki fields.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = JSON field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en %2 er aðallykilsreitur í töflunni %3 og er skilað undir primaryKey, ekki fields.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PrimaryKeyFieldMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2324457840" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use @_current.primaryKey.%1 and inspect the source answer before running the playbook.</source>
+          <target>Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en verkbókin er keyrð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = JSON field name, is-IS=Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en verkbókin er keyrð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PrimaryKeyFieldNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 995180490" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 calls %2 with roleCode %3, but this company has no language model with that code. Every call would answer RecordNotFound.</source>

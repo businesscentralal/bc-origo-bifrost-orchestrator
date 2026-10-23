@@ -127,7 +127,7 @@ codeunit 96432 "Playbook Last Run Tests"
         // [GIVEN] A playbook whose header still shows an earlier, completed run, and whose only step reads that header
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get",
-            StrSubstNo('{"tableName":"Playbook ori","tableView":"WHERE(Code=CONST(%1))"}', PlaybookCodeTok), 0, '', 0);
+            StrSubstNo(Format1Tok, PlaybookCodeTok), 0, '', 0);
         PreviousInstanceId := CreateGuid();
         Playbook.Get(PlaybookCodeTok);
         Playbook."Last Run Status" := Playbook."Last Run Status"::Completed;
@@ -163,7 +163,7 @@ codeunit 96432 "Playbook Last Run Tests"
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","ignoreWarnings":true}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
         StartedAt := CurrentDateTime();
 
         Handler.ExecuteRun(TempArgument);
@@ -194,7 +194,7 @@ codeunit 96432 "Playbook Last Run Tests"
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
         Commit();
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1","initialRequest":{"marker":"enqueued"}}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok));
 
         // [GIVEN] The playbook is enqueued (the enqueue itself is intercepted; no real job is scheduled)
         LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
@@ -264,7 +264,7 @@ codeunit 96432 "Playbook Last Run Tests"
         GlobalLanguage(LanguageId);
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Report.Run",
-            StrSubstNo('{"reportId":%1}', Report::"Test Failing Report"), 0, '', 0);
+            StrSubstNo(Format4Tok, Report::"Test Failing Report"), 0, '', 0);
         Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'status', 'Success');
         StartedAt := CurrentDateTime();
 
@@ -315,4 +315,9 @@ codeunit 96432 "Playbook Last Run Tests"
     begin
         exit('{"messageTypes":["Orchestrator.Playbook.Schedule"],"chapters":["parameters"]}');
     end;
+    var
+        Format1Tok: Label '{"tableName":"Playbook ori","tableView":"WHERE(Code=CONST(%1))"}', Locked = true;
+        Format2Tok: Label '{"playbookCode":"%1","ignoreWarnings":true}', Locked = true;
+        Format3Tok: Label '{"playbookCode":"%1","initialRequest":{"marker":"enqueued"}}', Locked = true;
+        Format4Tok: Label '{"reportId":%1}', Locked = true;
 }
