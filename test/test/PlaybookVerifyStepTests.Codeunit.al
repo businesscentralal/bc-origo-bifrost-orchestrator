@@ -17,6 +17,7 @@ codeunit 96435 "Playbook Verify Step Tests"
     var
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
+        RequestFormat1Tok: Label 'No %1 finding on step %2', Locked = true;
         PlaybookCodeTok: Label 'VERIFY-109', Locked = true;
         UnlistedOrdinalTok: Label '99999999', Locked = true;
         PlatformRefusedTxt: Label 'The platform refused to hold an ordinal that the enum does not list.', Locked = true;
@@ -549,7 +550,7 @@ codeunit 96435 "Playbook Verify Step Tests"
                 Assert.IsTrue(TextOf(Token.AsObject(), 'nextStep') <> '', FindingCode + ' has a nextStep');
                 exit;
             end;
-        Assert.Fail(StrSubstNo('No %1 finding on step %2', FindingCode, StepNo));
+        Assert.Fail(StrSubstNo(RequestFormat1Tok, FindingCode, StepNo));
     end;
 
     local procedure AssertMessageStartsWith(Findings: JsonArray; FindingCode: Text; ExpectedStart: Text)

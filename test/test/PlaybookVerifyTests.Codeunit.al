@@ -18,6 +18,7 @@ codeunit 96433 "Playbook Verify Tests"
     var
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
+        RequestFormat1Tok: Label '{"playbookCode":"%1"}', Locked = true;
         PlaybookCodeTok: Label 'VERIFY-108', Locked = true;
         UnsafeStartTxt: Label 'Step 40 (Data.Records.Set) writes for every item of an array that an earlier forEach Check step 30 decides on', Locked = true;
         UnsafeStartIsTxt: Label 'Skref 40 (Data.Records.Set) skrifar fyrir öll atriði fylkis sem forEach-athugunarskref 30 á undan tekur ákvörðun um', Locked = true;
@@ -52,8 +53,8 @@ codeunit 96433 "Playbook Verify Tests"
     [Test]
     procedure TwoUnsafeWrites_WarnOncePerStep()
     var
-        Warnings: JsonArray;
         Verify: Codeunit "Playbook Verify ori";
+        Warnings: JsonArray;
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
@@ -77,8 +78,8 @@ codeunit 96433 "Playbook Verify Tests"
     procedure SafeShapes_DoNotWarn()
     var
         PlaybookStep: Record "Playbook Step ori";
-        Warnings: JsonArray;
         Verify: Codeunit "Playbook Verify ori";
+        Warnings: JsonArray;
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
@@ -156,7 +157,7 @@ codeunit 96433 "Playbook Verify Tests"
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
         Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
         Lib.AddStep(PlaybookCodeTok, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 0);
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
         // [WHEN] The playbook is verified through the message type handler
         Handler.ExecuteVerify(TempArgument);
         // [THEN] One localized warning names the write step and the check
@@ -200,7 +201,7 @@ codeunit 96433 "Playbook Verify Tests"
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
         Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
         Lib.AddStep(PlaybookCodeTok, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 30);
-        CreateArgument(TempArgument, StrSubstNo('{"playbookCode":"%1"}', PlaybookCodeTok));
+        CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
 
         Handler.ExecuteVerify(TempArgument);
 

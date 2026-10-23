@@ -1162,9 +1162,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Check a Bifrost Playbook for errors and unsafe configuration without running it.</source>
-          <target>Athuga hvort Bifröst keðja sé með villur eða óörugga uppsetningu án þess að keyra hana.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Athuga hvort Bifröst keðja sé með villur eða óörugga uppsetningu án þess að keyra hana.</note>
+          <source>Check a Bifrost Playbook without running it; findings on disabled steps are informational.</source>
+          <target>Athuga Bifröst-keðju án keyrslu; niðurstöður um óvirk skref eru eingöngu til upplýsinga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athuga Bifröst-keðju án keyrslu; niðurstöður um óvirk skref eru eingöngu til upplýsinga.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
@@ -1174,9 +1174,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only for playbook data; a language model role check leaves a Foundation message log row. Run it before Orchestrator.Playbook.Run: Run and Schedule refuse a playbook that does not verify.</source>
-          <target>Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.</note>
+          <source>Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only for playbook data; a language model role check leaves a Foundation message log row. Run it before Orchestrator.Playbook.Run: Read blockingErrorCount and blockingWarningCount for Run and Schedule readiness; findings on disabled steps are informational.</source>
+          <target>Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Lestu blockingErrorCount og blockingWarningCount til að meta hvort Run og Schedule megi ræsa; niðurstöður um óvirk skref eru eingöngu til upplýsinga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Lestu blockingErrorCount og blockingWarningCount til að meta hvort Run og Schedule megi ræsa; niðurstöður um óvirk skref eru eingöngu til upplýsinga.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 367103690 - NamedType 2918804866" size-unit="char" translate="yes" xml:space="preserve">

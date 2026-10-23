@@ -34,7 +34,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>Description text.</returns>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Check a Bifrost Playbook for errors and unsafe configuration without running it.', Comment = 'is-IS=Athuga hvort Bifröst keðja sé með villur eða óörugga uppsetningu án þess að keyra hana.';
+        DescriptionLbl: Label 'Check a Bifrost Playbook without running it; findings on disabled steps are informational.', Comment = 'is-IS=Athuga Bifröst-keðju án keyrslu; niðurstöður um óvirk skref eru eingöngu til upplýsinga.';
     begin
         exit(DescriptionLbl);
     end;
@@ -56,7 +56,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>Selection description text.</returns>
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only for playbook data; a language model role check leaves a Foundation message log row. Run it before Orchestrator.Playbook.Run: Run and Schedule refuse a playbook that does not verify.', Comment = 'is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Run og Schedule hafna keðju sem sannreynist ekki.';
+        SelectionLbl: Label 'Verify a Bifrost Playbook and return its findings (errors and warnings), for example an unknown message type, a missing language model role or a per-item write that no Skip If Step Failed gates. Read-only for playbook data; a language model role check leaves a Foundation message log row. Run it before Orchestrator.Playbook.Run: Read blockingErrorCount and blockingWarningCount for Run and Schedule readiness; findings on disabled steps are informational.', Comment = 'is-IS=Sannreyndu Bifröst-keðju og fáðu niðurstöður hennar (villur og viðvaranir), til dæmis óþekkta skilaboðategund, mállíkanshlutverk sem vantar eða skrif fyrir hvert atriði sem ekkert Sleppa ef skref mistókst stýrir. Les eingöngu keðjugögn; athugun á mállíkanshlutverki skilur eftir færslu í skilaboðaskrá Foundation. Keyrðu þetta áður en Orchestrator.Playbook.Run er notað: Lestu blockingErrorCount og blockingWarningCount til að meta hvort Run og Schedule megi ræsa; niðurstöður um óvirk skref eru eingöngu til upplýsinga.';
     begin
         exit(SelectionLbl);
     end;
@@ -113,7 +113,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
         Fields: JsonArray;
         FindingFields: JsonArray;
     begin
-        Parts.AddResponseField(FindingFields, 'severity', 'string', 'error or warning. An error always stops Orchestrator.Playbook.Run and the enabling of a schedule; a warning does too unless the caller sets ignoreWarnings.');
+        Parts.AddResponseField(FindingFields, 'severity', 'string', 'error or warning. On enabled steps, an error always stops Orchestrator.Playbook.Run and the enabling of a schedule; a warning does too unless the caller sets ignoreWarnings. Findings on disabled steps are informational.');
         Parts.AddResponseField(FindingFields, 'stepNo', 'integer', 'The step the finding is about; 0 for a finding about the playbook as a whole.');
         Parts.AddResponseField(FindingFields, 'code', 'string', 'Stable code of the finding, for example UnsafeForEachWrite. The codes are listed in the notes.');
         Parts.AddResponseField(FindingFields, 'message', 'string', 'What is wrong, in the language of the calling session (en-US or is-IS).');
@@ -122,9 +122,11 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
         Parts.AddResponseField(FindingFields, 'stepDisabled', 'boolean', 'Only present, and true, when the step is disabled. A finding about a disabled step never blocks a run or a schedule.');
         Parts.AddResponseField(Fields, 'status', 'string', 'Success, also when findings were returned.');
         Parts.AddResponseField(Fields, 'playbookCode', 'string', 'The verified playbook code.');
-        Parts.AddResponseField(Fields, 'valid', 'boolean', 'True when there is no finding with severity error.');
-        Parts.AddResponseField(Fields, 'errorCount', 'integer', 'Number of findings with severity error.');
-        Parts.AddResponseField(Fields, 'warningCount', 'integer', 'Number of findings with severity warning.');
+        Parts.AddResponseField(Fields, 'valid', 'boolean', 'True when there is no finding with severity error, including disabled steps. For Run and Schedule readiness, read blockingErrorCount and blockingWarningCount instead.');
+        Parts.AddResponseField(Fields, 'errorCount', 'integer', 'Number of findings with severity error, including informational findings on disabled steps.');
+        Parts.AddResponseField(Fields, 'warningCount', 'integer', 'Number of findings with severity warning, including informational findings on disabled steps.');
+        Parts.AddResponseField(Fields, 'blockingErrorCount', 'integer', 'Number of errors excluding informational findings on disabled steps. Run and Schedule require zero, even with ignoreWarnings.');
+        Parts.AddResponseField(Fields, 'blockingWarningCount', 'integer', 'Number of warnings excluding informational findings on disabled steps. Run and Schedule require zero unless ignoreWarnings is true.');
         Parts.AddResponseField(Fields, 'findings', 'array', 'One entry per finding, in step order; empty when the playbook is clean.', FindingFields);
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
@@ -176,8 +178,8 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Related(Related, 'Orchestrator.Playbook.Run', 'Use this to execute the playbook once it verifies without errors and warnings. Run verifies again and refuses a playbook that does not verify.');
-        Parts.Related(Related, 'Orchestrator.Playbook.Schedule', 'Use this to put the playbook on a schedule once it verifies. It verifies again and refuses a playbook that does not verify.');
+        Parts.Related(Related, 'Orchestrator.Playbook.Run', 'Use this to execute the playbook once blockingErrorCount and blockingWarningCount are zero (or warnings are explicitly accepted). Run verifies again and refuses a playbook that does not verify.');
+        Parts.Related(Related, 'Orchestrator.Playbook.Schedule', 'Use this to put the playbook on a schedule once blockingErrorCount and blockingWarningCount are zero (or warnings are explicitly accepted). It verifies again and refuses a playbook that does not verify.');
         Parts.Related(Related, 'Orchestrator.Workspace.Preview', 'Use this to see the workspace paths a step template can reference.');
         exit(true);
     end;
@@ -193,7 +195,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
         Steps: JsonArray;
     begin
         Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Workspace.Preview', 'Optional: see the @_sys and @_who paths the request templates can use.'));
-        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Read the findings of the playbook; fix errors, and fix warnings or accept them with ignoreWarnings.'));
+        Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Verify', 'Read the findings of the playbook; read blockingErrorCount and blockingWarningCount, fix blocking errors, and fix blocking warnings or accept them with ignoreWarnings. Findings on disabled steps are informational.'));
         Steps.Add(ContractMgt.WorkflowStep('Orchestrator.Playbook.Run', 'Run it once it verifies, or use Orchestrator.Playbook.Schedule to put it on a schedule.'));
         Workflow.Add('steps', Steps);
         exit(true);
@@ -208,9 +210,10 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Verify a playbook with an ungated write', '{"type":"Orchestrator.Playbook.Verify","data":{"playbookCode":"CUST-CREDIT-CTRL"}}', '{"status":"Success","playbookCode":"CUST-CREDIT-CTRL","valid":true,"errorCount":0,"warningCount":1,"findings":[{"severity":"warning","stepNo":40,"code":"UnsafeForEachWrite","message":"Step 40 (Data.Records.Set) writes for every item ...","nextStep":"Set Skip If Step Failed to 30 on step 40.","checkStepNo":30}]}');
-        Parts.Example(Examples, 'Verify a playbook with errors', '{"type":"Orchestrator.Playbook.Verify","subject":"CUST-CREDIT-CTRL"}', '{"status":"Success","playbookCode":"CUST-CREDIT-CTRL","valid":false,"errorCount":2,"warningCount":0,"findings":[{"severity":"error","stepNo":30,"code":"LanguageModelRoleNotFound","message":"Step 30 calls LLM.Prompt.Complete with roleCode HAIKU, but this company has no language model with that code. ...","nextStep":"List the codes with Data.Records.Get on table ..."},{"severity":"error","stepNo":50,"code":"StepReferenceNotFound","message":"Step 50 refers to step 45 (@45...), which does not exist in this playbook. ...","nextStep":"Correct the step number in the reference, or add the missing step."}]}');
-        Parts.Example(Examples, 'A clean playbook', '{"type":"Orchestrator.Playbook.Verify","data":{"playbookCode":"OVERDUE-REPORT"}}', '{"status":"Success","playbookCode":"OVERDUE-REPORT","valid":true,"errorCount":0,"warningCount":0,"findings":[]}');
+        Parts.Example(Examples, 'Verify a playbook with an ungated write', '{"type":"Orchestrator.Playbook.Verify","data":{"playbookCode":"CUST-CREDIT-CTRL"}}', '{"status":"Success","playbookCode":"CUST-CREDIT-CTRL","valid":true,"errorCount":0,"warningCount":1,"blockingErrorCount":0,"blockingWarningCount":1,"findings":[{"severity":"warning","stepNo":40,"code":"UnsafeForEachWrite","message":"Step 40 (Data.Records.Set) writes for every item ...","nextStep":"Set Skip If Step Failed to 30 on step 40.","checkStepNo":30}]}');
+        Parts.Example(Examples, 'Verify a playbook with errors', '{"type":"Orchestrator.Playbook.Verify","subject":"CUST-CREDIT-CTRL"}', '{"status":"Success","playbookCode":"CUST-CREDIT-CTRL","valid":false,"errorCount":2,"warningCount":0,"blockingErrorCount":2,"blockingWarningCount":0,"findings":[{"severity":"error","stepNo":30,"code":"LanguageModelRoleNotFound","message":"Step 30 calls LLM.Prompt.Complete with roleCode HAIKU, but this company has no language model with that code. ...","nextStep":"List the codes with Data.Records.Get on table ..."},{"severity":"error","stepNo":50,"code":"StepReferenceNotFound","message":"Step 50 refers to step 45 (@45...), which does not exist in this playbook. ...","nextStep":"Correct the step number in the reference, or add the missing step."}]}');
+        Parts.Example(Examples, 'An informational error on a disabled step', '{"type":"Orchestrator.Playbook.Verify","data":{"playbookCode":"DRAFT"}}', '{"status":"Success","playbookCode":"DRAFT","valid":false,"errorCount":1,"warningCount":0,"blockingErrorCount":0,"blockingWarningCount":0,"findings":[{"severity":"error","stepNo":20,"code":"CheckWithoutSuccessCondition","message":"Check step 20 has no Success condition, so it answers yes every time and decides nothing.","nextStep":"Add a Success condition to step 20.","stepDisabled":true}]}');
+        Parts.Example(Examples, 'A clean playbook', '{"type":"Orchestrator.Playbook.Verify","data":{"playbookCode":"OVERDUE-REPORT"}}', '{"status":"Success","playbookCode":"OVERDUE-REPORT","valid":true,"errorCount":0,"warningCount":0,"blockingErrorCount":0,"blockingWarningCount":0,"findings":[]}');
         exit(true);
     end;
 
@@ -221,7 +224,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>True; the chapter exists.</returns>
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Reads a Bifröst Playbook and returns errors and warnings for configurations the engine accepts silently, without running a step. Use it before Orchestrator.Playbook.Run, Orchestrator.Playbook.Schedule or Orchestrator.Playbook.Enqueue: every finding names the step, a stable code and what to do about it.';
+        Overview := 'Reads a Bifröst Playbook and returns errors and warnings for configurations the engine accepts silently, without running a step. Use it before Orchestrator.Playbook.Run, Orchestrator.Playbook.Schedule or Orchestrator.Playbook.Enqueue: every finding names the step, a stable code and what to do about it. Findings on disabled steps are informational; read blockingErrorCount and blockingWarningCount for Run and Schedule readiness.';
         exit(true);
     end;
 
@@ -232,7 +235,7 @@ codeunit 10035615 "Playbook Verify Msg ori" implements "Msg Interface ori", "Msg
     /// <returns>True; the chapter exists.</returns>
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Every finding has severity, stepNo, code, message and nextStep; the text is in the language of the calling session (en-US and is-IS). valid is true when no finding has severity error. A playbook with no findings answers valid true and an empty findings array.' +
+        Notes := 'Every finding has severity, stepNo, code, message and nextStep; the text is in the language of the calling session (en-US and is-IS). valid is true when no finding has severity error; errorCount and warningCount include all findings for compatibility. For Run and Schedule readiness, read blockingErrorCount and blockingWarningCount: both exclude findings on disabled steps, but include findings about the playbook as a whole. Errors always block; warnings block unless ignoreWarnings is true. Findings on disabled steps are informational. A playbook with no findings answers valid true and an empty findings array.' +
             ' Every step is checked, enabled or not, so a playbook built with all steps disabled can be verified before anything is switched on. A finding about a disabled step carries stepDisabled true and never blocks a run or a schedule. UnsafeForEachWrite is judged on enabled steps only.' +
             ' Errors: MessageTypeUnavailable (the step calls a message type that does not exist in this deployment or is not enabled for this user in this company; a type that exists but is not enabled is not reported on a step that has a Start condition, because the author has decided when it runs, as the reporting tail does with _who.telegramChatId Exists), TemplateNotJson (the request template is not a JSON object; the engine would send an empty request), CheckWithoutSuccessCondition (a Check step with no Success condition answers yes every time), NextStepNotFound (a Next Step edge points to a step that does not exist), IterateSourceInvalid (the forEach source step is missing or does not come first), InvalidSkipGate (Skip If Step Failed names a step that is missing, does not come first or does not iterate, so every item would be skipped), StepReferenceNotFound and StepReferenceNotEarlier (an @stepNo reference to a step that is missing or does not run before), LanguageModelRoleNotFound (the roleCode of a LLM.* step is not a language model of this company), ScheduledWithErrors (the playbook is scheduled and has errors on enabled steps).' +
             ' Warnings: UnsafeForEachWrite (an enabled forEach step with a write-type message type iterates the same array as an earlier enabled forEach Check step and has Skip If Step Failed = 0; Next Step No. edges apply once per forEach step, never per item, so only Skip If Step Failed = <check step> gates the write per item), ActionWithoutSuccessCondition (an Action with no Success condition counts as successful whenever the type does not raise, also when it answers status Error), ForEachSourceUnguarded (a record reader that feeds a forEach has no Success condition on noOfRecords, so an empty answer still succeeds and the forEach does nothing), UnknownFieldReference (@_current.fields.X names a field the source table does not have, or @N.field and @N.@_iter.field name a field step N does not store in its Result Log Paths).' +
