@@ -1,0 +1,325 @@
+Dynamics 365 Business Central
+
+
+
+
+G
+
+
+Bifröst keðja
+
+
+
+
+Vistað
+
+
+X118-M-1039
+Heim
+Saga
+
+Keyra núna
+Tímasetja
+Vinnsluraðarstjórafærsla
+
+Almennt
+Kóði
+Lýsing
+Skref
+Ný lína
+Eyða línu
+
+
+		
+Skrefnúmer
+	
+	
+Síðasta keyrsla
+	
+Lýsing
+	
+Skilaboðagerð
+	
+Slóð fylkis til ítrunar
+	
+Upprunaskref ítrunar
+	
+Tegund skrefs
+	
+Slóðir samantektar
+	
+Undanskilja frá stöðu keyrslu
+	
+Næsta skref (árangur)
+	
+Næsta skref (misbrestur)
+	
+Stöðva við villu hlutar
+	
+Óvirkt
+	
+			
+													
+			
+	
+✓
+		
+Help.Tables.Get
+Help.Fields.Get
+Help.MessageTypes.Get
+Help.Implementation.Get
+Help.Permissions.Get
+Help.NextLineNo.Get
+Help.TableRelations.Get
+Help.WhoAmI.Get
+Help.PageUrl.Get
+Help.Bifrost.Get
+Data.RecordIds.Get
+Data.Records.Get
+Data.Records.Set
+Data.Totals.Get
+Data.Notes.Get
+Data.Notes.Set
+Data.Entries.Find
+Help.Namespaces.Get
+Bifrost.Subscription.GetStatus
+Bifrost.Subscription.GetUsage
+Bifrost.Vendor.GetBillingSummary
+Bifrost.Vendor.GetPartners
+Bifrost.Vendor.GetCustomers
+Bifrost.Partner.GetBillingSummary
+Bifrost.Partner.GetCustomers
+Customer.CreditLimit.Get
+Customer.SalesHistory.Get
+Customer.Statement.Pdf
+Item.Availability.Get
+Item.Inventory.Get
+Item.Price.Get
+Sales.Document.Release
+Sales.Document.Reopen
+Sales.Document.Statistics
+Sales.Document.Post
+Sales.Document.Create
+Sales.Quote.MakeOrder
+Sales.SalesInvoice.Pdf
+Sales.SalesShipment.Pdf
+Sales.SalesCreditMemo.Pdf
+Sales.ReturnReceipt.Pdf
+Purchase.Document.Release
+Purchase.Document.Reopen
+Purchase.Document.Statistics
+Purchase.Document.Post
+Purchase.Document.PreviewPost
+Purchase.Document.Create
+Sales.Document.PreviewPost
+CSV.Records.Get
+Deleted.Records.Get
+CSV.DeletedRecords.Get
+Finance.GeneralJournal.Check
+Finance.GeneralJournal.Post
+Finance.GeneralJournal.Create
+Finance.GeneralJournal.ReverseRegister
+Finance.GeneralJournal.ReverseTransaction
+Finance.GeneralJournal.PreviewPost
+Deleted.RecordIds.Get
+Sales.BlanketOrder.MakeOrder
+Purchase.Quote.MakeOrder
+Purchase.BlanketOrder.MakeOrder
+Field.Translation.Get
+Field.Translation.Set
+Field.Translations.Get
+Sales.SalesInvoice.Correct
+Sales.SalesInvoice.Cancel
+Sales.SalesInvoice.Send
+Sales.SalesCreditMemo.Send
+Purchase.PurchaseInvoice.Correct
+Purchase.PurchaseInvoice.Cancel
+ChangeLog.Field.Restore
+ChangeLog.Field.History
+ChangeLog.Field.Enabled
+ChangeLog.Records.Delta
+Incoming.Document.Create
+Incoming.Document.Attach
+Incoming.Document.Process
+Incoming.Document.Get
+Incoming.Document.SetDefault
+Memory.Company.Get
+Memory.Company.Set
+Memory.Company.List
+Memory.User.Get
+Memory.User.Set
+Memory.User.List
+Document.Approval.Get
+Document.Approval.Send
+Document.Approval.Me
+Document.Approval.Approve
+Document.Approval.Reject
+Document.Approval.Delegate
+Document.Approval.Cancel
+User.Notification.Get
+User.Notification.Thread
+User.Notification.Send
+User.Notification.Read
+User.Notification.Count
+Email.Draft.Set
+Finance.Currency.AdjustExchangeRates
+Inventory.ItemJournal.Create
+Inventory.ItemJournal.Check
+Inventory.ItemJournal.Post
+Finance.FAJournal.Create
+Finance.FAJournal.Check
+Finance.FAJournal.Post
+Projects.ProjectJournal.Create
+Projects.ProjectJournal.Check
+Projects.ProjectJournal.Post
+Resources.ResourceJournal.Create
+Resources.ResourceJournal.Check
+Resources.ResourceJournal.Post
+Webhook.Inbound.Receive
+Customer.Application.Post
+Customer.Application.Reverse
+Vendor.Application.Post
+Vendor.Application.Reverse
+Finance.BankReconciliation.Create
+Finance.BankReconciliation.Match
+Finance.BankReconciliation.Reset
+Finance.BankReconciliation.Post
+Inventory.ItemJournal.PreviewPost
+Finance.FAJournal.PreviewPost
+Projects.ProjectJournal.PreviewPost
+Finance.FinancialReport.Calculate
+Project.Ledger.CreateSalesInvoice
+Project.Ledger.CreateSalesCreditMemo
+Finance.Budget.Compare
+Finance.BudgetEntry.Get
+Finance.BudgetEntry.Set
+Finance.BudgetName.Get
+Finance.BudgetName.Set
+Finance.Budget.Copy
+Finance.Budget.Export
+Finance.Budget.Import
+Finance.GeneralJournal.Update
+Inventory.ItemJournal.Update
+Projects.ProjectJournal.Update
+Data.RequestLog.Get
+Session Source Approve
+Orchestrator.Entry.Run
+Orchestrator.Entry.Restart
+Orchestrator.Status.Get
+Orchestrator.Status.Restart
+Orchestrator.Status.RestartIfNeeded
+Orchestrator.Playbook.Run
+Orchestrator.JobQueueEntry.Restart
+Orchestrator.JobQueueEntry.RestartIfNeeded
+Help.Orchestrator.Get
+Orchestrator.Playbook.Schedule
+Orchestrator.Entry.Register
+Orchestrator.Entry.Schedule
+Orchestrator.Email.Send
+Orchestrator.Playbook.Enqueue
+Orchestrator.Telegram.Message
+Orchestrator.Report.List
+Orchestrator.Report.Get
+Orchestrator.Report.SaveAs
+Orchestrator.Report.Run
+Orchestrator.Workspace.Preview
+Orchestrator.ReportLayout.Set
+Orchestrator.ReportLayout.List
+Orchestrator.ReportLayout.Get
+Orchestrator.Playbook.Verify
+			
+Aðgerð
+Athugun
+		
+			
+	
+	
+		
+30
+		
+✓
+	
+	
+Data.Records.Get
+	
+result
+	
+10
+	
+Athugun
+	
+	
+	
+40
+	
+40
+	
+	
+	
+		
+40
+		
+✓
+	
+	
+Data.Records.Set
+	
+result
+	
+10
+	
+Aðgerð
+	
+	
+	
+0
+	
+0
+	
+	
+	
+		
+		
+	
+	
+	
+	
+	
+	
+		
+	
+			
+Skilyrði skrefa
+Ný lína
+Eyða línu
+
+
+Skilyrði skrefa
+Tímaáætlun
+Upphafsbeiðni
+Sniðmát beiðni
+Síðasta keyrsla
+StaðaLokið
+Byrjaði10/23/2026 12:31 PM
+Heildartími136 millisekúndur
+Skref keyrð3
+Skref mistókst0
+Hlutir unnir2
+
+
+Keðja X118-M-1039 lauk með stöðu: Lokið.
+
+Í lagi
+Notaðu hægri og vinstri örvalyklana til að stilla stærðina. Notaðu Escape-lykilinn til að afturkalla eða Enter-lykilinn til að staðfesta.
+
+X118-M-1039. Bifröst keðja
+
+Listi með titilinn „Keðjuskref“ hefur nú 4 atriði
+
+Skrefnúmer, raðað í pöntunina Hækkandi
+
+Tegund skilyrðis, raðað í pöntunina Hækkandi
+
+Hópnúmer, raðað í pöntunina Hækkandi
+
+Listi með titilinn „Skilyrði skrefa“ hefur nú 3 atriði

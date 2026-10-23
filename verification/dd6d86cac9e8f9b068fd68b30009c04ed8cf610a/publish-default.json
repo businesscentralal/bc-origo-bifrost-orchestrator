@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"fileName\": \"Orchestrator-candidate-Default.app\",\n  \"bytes\": 445456,\n  \"statusCode\": 200,\n  \"durationMs\": 13381,\n  \"developerBaseUrl\": \"https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0223a373d54dev\",\n  \"body\": null,\n  \"ok\": true\n}"
+    }
+  ]
+}

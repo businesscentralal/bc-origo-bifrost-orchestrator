@@ -1,0 +1,1462 @@
+{
+  "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "containerId": "f0223a373d54",
+  "appVersion": "28.0.2.0",
+  "foundationVersion": "28.0.9.618",
+  "startedAt": "2026-10-23T12:29:16.539Z",
+  "setup": [
+    {
+      "action": "Verify no pre-existing task headers",
+      "type": "Data.Records.Get",
+      "data": {
+        "tableName": "Playbook ori",
+        "tableView": "WHERE(Code=FILTER(X118-M-1033|X118-T-1033))",
+        "take": 10
+      },
+      "lcid": 1033,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 0,
+        "result": []
+      }
+    },
+    {
+      "action": "Create own playbook and source header",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook ori",
+        "data": [
+          {
+            "primaryKey": {
+              "Code": "X118-M-1033"
+            },
+            "fields": {
+              "Description": "X118 MCP acceptance 1033"
+            }
+          },
+          {
+            "primaryKey": {
+              "Code": "X118-T-1033"
+            },
+            "fields": {
+              "Description": "X118 untouched 1033"
+            }
+          }
+        ]
+      },
+      "lcid": 1033,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "330D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-M-1033"
+            },
+            "fields": {
+              "Description": "X118 MCP acceptance 1033"
+            }
+          },
+          {
+            "id": "350D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1033"
+            },
+            "fields": {
+              "Description": "X118 untouched 1033"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 2,
+        "modifiedCount": 0
+      }
+    },
+    {
+      "action": "Create three disabled steps before enabling",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Step ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 10
+            },
+            "fields": {
+              "StepType": "Action",
+              "MessageType": "Data.Records.Get",
+              "Disabled": true,
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxLDEwXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChYMTE4LVQtMTAzMykpIn0=",
+              "NextStepNo_Success": 30
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 30
+            },
+            "fields": {
+              "StepType": "Check",
+              "MessageType": "Data.Records.Get",
+              "Disabled": true,
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQuZmllbGRzLkNvZGUpKSJ9",
+              "IterateSourceStepNo_": 10,
+              "IterateArrayPath": "result",
+              "NextStepNo_Success": 40,
+              "NextStepNo_Failure": 40
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 40
+            },
+            "fields": {
+              "StepType": "Action",
+              "MessageType": "Data.Records.Set",
+              "Disabled": true,
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJkYXRhIjpbeyJpZCI6IkBfY3VycmVudC5pZCIsImZpZWxkcyI6eyJEZXNjcmlwdGlvbiI6IlgxMTggd3JpdHRlbiAxMDMzIn19XX0=",
+              "IterateSourceStepNo_": 10,
+              "IterateArrayPath": "result",
+              "SkipIfStepFailed": 30
+            }
+          }
+        ]
+      },
+      "lcid": 1033,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "380D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "10"
+            },
+            "fields": {
+              "StepType": "Action",
+              "MessageType": "Data.Records.Get",
+              "Disabled": "true",
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxLDEwXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChYMTE4LVQtMTAzMykpIn0=",
+              "NextStepNo_Success": "30"
+            }
+          },
+          {
+            "id": "3D0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "30"
+            },
+            "fields": {
+              "StepType": "Check",
+              "MessageType": "Data.Records.Get",
+              "Disabled": "true",
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQuZmllbGRzLkNvZGUpKSJ9",
+              "IterateSourceStepNo_": "10",
+              "IterateArrayPath": "result",
+              "NextStepNo_Success": "40",
+              "NextStepNo_Failure": "40"
+            }
+          },
+          {
+            "id": "460D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "40"
+            },
+            "fields": {
+              "StepType": "Action",
+              "MessageType": "Data.Records.Set",
+              "Disabled": "true",
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJkYXRhIjpbeyJpZCI6IkBfY3VycmVudC5pZCIsImZpZWxkcyI6eyJEZXNjcmlwdGlvbiI6IlgxMTggd3JpdHRlbiAxMDMzIn19XX0=",
+              "IterateSourceStepNo_": "10",
+              "IterateArrayPath": "result",
+              "SkipIfStepFailed": "30"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 3,
+        "modifiedCount": 0
+      }
+    },
+    {
+      "action": "Create own success conditions",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Condition ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 10,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 10000
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 30,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 10000
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 40,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 10000
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 10,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 20000
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "GreaterThan",
+              "Value": "0"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 30,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 20000
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "GreaterThan",
+              "Value": "0"
+            }
+          }
+        ]
+      },
+      "lcid": 1033,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "4E0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "10",
+              "ConditionType": "Success",
+              "GroupNo_": "1",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "id": "510D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "30",
+              "ConditionType": "Success",
+              "GroupNo_": "1",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "id": "540D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "40",
+              "ConditionType": "Success",
+              "GroupNo_": "1",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "id": "570D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "10",
+              "ConditionType": "Success",
+              "GroupNo_": "1",
+              "LineNo_": "20000"
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "Greater Than",
+              "Value": "0"
+            }
+          },
+          {
+            "id": "5B0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "30",
+              "ConditionType": "Success",
+              "GroupNo_": "1",
+              "LineNo_": "20000"
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "Greater Than",
+              "Value": "0"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 5,
+        "modifiedCount": 0
+      }
+    },
+    {
+      "action": "Enable own fully assembled steps",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Step ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 10
+            },
+            "fields": {
+              "Disabled": false
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 30
+            },
+            "fields": {
+              "Disabled": false
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 40
+            },
+            "fields": {
+              "Disabled": false
+            }
+          }
+        ]
+      },
+      "lcid": 1033,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "380D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "10"
+            },
+            "fields": {
+              "Disabled": "false"
+            }
+          },
+          {
+            "id": "3D0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "30"
+            },
+            "fields": {
+              "Disabled": "false"
+            }
+          },
+          {
+            "id": "460D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "40"
+            },
+            "fields": {
+              "Disabled": "false"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 0,
+        "modifiedCount": 3
+      }
+    },
+    {
+      "action": "Correct primary-key template on own step",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Step ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": 30
+            },
+            "fields": {
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQucHJpbWFyeUtleS5Db2RlKSkifQ=="
+            }
+          }
+        ]
+      },
+      "lcid": 1033,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "3D0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1033",
+              "StepNo_": "30"
+            },
+            "fields": {
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQucHJpbWFyeUtleS5Db2RlKSkifQ=="
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 0,
+        "modifiedCount": 1
+      }
+    },
+    {
+      "action": "Verify no pre-existing task headers",
+      "type": "Data.Records.Get",
+      "data": {
+        "tableName": "Playbook ori",
+        "tableView": "WHERE(Code=FILTER(X118-M-1039|X118-T-1039))",
+        "take": 10
+      },
+      "lcid": 1039,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 0,
+        "result": []
+      }
+    },
+    {
+      "action": "Create own playbook and source header",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook ori",
+        "data": [
+          {
+            "primaryKey": {
+              "Code": "X118-M-1039"
+            },
+            "fields": {
+              "Description": "X118 MCP acceptance 1039"
+            }
+          },
+          {
+            "primaryKey": {
+              "Code": "X118-T-1039"
+            },
+            "fields": {
+              "Description": "X118 untouched 1039"
+            }
+          }
+        ]
+      },
+      "lcid": 1039,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "820D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-M-1039"
+            },
+            "fields": {
+              "Description": "X118 MCP acceptance 1039"
+            }
+          },
+          {
+            "id": "840D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1039"
+            },
+            "fields": {
+              "Description": "X118 untouched 1039"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 2,
+        "modifiedCount": 0
+      }
+    },
+    {
+      "action": "Create three disabled steps before enabling",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Step ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 10
+            },
+            "fields": {
+              "StepType": "Action",
+              "MessageType": "Data.Records.Get",
+              "Disabled": true,
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxLDEwXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChYMTE4LVQtMTAzOSkpIn0=",
+              "NextStepNo_Success": 30
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 30
+            },
+            "fields": {
+              "StepType": "Check",
+              "MessageType": "Data.Records.Get",
+              "Disabled": true,
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQuZmllbGRzLkNvZGUpKSJ9",
+              "IterateSourceStepNo_": 10,
+              "IterateArrayPath": "result",
+              "NextStepNo_Success": 40,
+              "NextStepNo_Failure": 40
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 40
+            },
+            "fields": {
+              "StepType": "Action",
+              "MessageType": "Data.Records.Set",
+              "Disabled": true,
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJkYXRhIjpbeyJpZCI6IkBfY3VycmVudC5pZCIsImZpZWxkcyI6eyJEZXNjcmlwdGlvbiI6IlgxMTggd3JpdHRlbiAxMDM5In19XX0=",
+              "IterateSourceStepNo_": 10,
+              "IterateArrayPath": "result",
+              "SkipIfStepFailed": 30
+            }
+          }
+        ]
+      },
+      "lcid": 1039,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "870D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "10"
+            },
+            "fields": {
+              "StepType": "Aðgerð",
+              "MessageType": "Data.Records.Get",
+              "Disabled": "true",
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxLDEwXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChYMTE4LVQtMTAzOSkpIn0=",
+              "NextStepNo_Success": "30"
+            }
+          },
+          {
+            "id": "8C0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "30"
+            },
+            "fields": {
+              "StepType": "Athugun",
+              "MessageType": "Data.Records.Get",
+              "Disabled": "true",
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQuZmllbGRzLkNvZGUpKSJ9",
+              "IterateSourceStepNo_": "10",
+              "IterateArrayPath": "result",
+              "NextStepNo_Success": "40",
+              "NextStepNo_Failure": "40"
+            }
+          },
+          {
+            "id": "950D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "40"
+            },
+            "fields": {
+              "StepType": "Aðgerð",
+              "MessageType": "Data.Records.Set",
+              "Disabled": "true",
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJkYXRhIjpbeyJpZCI6IkBfY3VycmVudC5pZCIsImZpZWxkcyI6eyJEZXNjcmlwdGlvbiI6IlgxMTggd3JpdHRlbiAxMDM5In19XX0=",
+              "IterateSourceStepNo_": "10",
+              "IterateArrayPath": "result",
+              "SkipIfStepFailed": "30"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 3,
+        "modifiedCount": 0
+      }
+    },
+    {
+      "action": "Create own success conditions",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Condition ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 10,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 10000
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 30,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 10000
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 40,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 10000
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Equals",
+              "Value": "Success"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 10,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 20000
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "GreaterThan",
+              "Value": "0"
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 30,
+              "ConditionType": "Success",
+              "GroupNo_": 1,
+              "LineNo_": 20000
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "GreaterThan",
+              "Value": "0"
+            }
+          }
+        ]
+      },
+      "lcid": 1039,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "9D0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "10",
+              "ConditionType": "Árangur",
+              "GroupNo_": "1",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Jafnt",
+              "Value": "Success"
+            }
+          },
+          {
+            "id": "A00D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "30",
+              "ConditionType": "Árangur",
+              "GroupNo_": "1",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Jafnt",
+              "Value": "Success"
+            }
+          },
+          {
+            "id": "A30D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "40",
+              "ConditionType": "Árangur",
+              "GroupNo_": "1",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "Path": "status",
+              "Operator": "Jafnt",
+              "Value": "Success"
+            }
+          },
+          {
+            "id": "A60D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "10",
+              "ConditionType": "Árangur",
+              "GroupNo_": "1",
+              "LineNo_": "20000"
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "Stærra en",
+              "Value": "0"
+            }
+          },
+          {
+            "id": "AA0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "30",
+              "ConditionType": "Árangur",
+              "GroupNo_": "1",
+              "LineNo_": "20000"
+            },
+            "fields": {
+              "Path": "noOfRecords",
+              "Operator": "Stærra en",
+              "Value": "0"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 5,
+        "modifiedCount": 0
+      }
+    },
+    {
+      "action": "Enable own fully assembled steps",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Step ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 10
+            },
+            "fields": {
+              "Disabled": false
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 30
+            },
+            "fields": {
+              "Disabled": false
+            }
+          },
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 40
+            },
+            "fields": {
+              "Disabled": false
+            }
+          }
+        ]
+      },
+      "lcid": 1039,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "870D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "10"
+            },
+            "fields": {
+              "Disabled": "false"
+            }
+          },
+          {
+            "id": "8C0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "30"
+            },
+            "fields": {
+              "Disabled": "false"
+            }
+          },
+          {
+            "id": "950D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "40"
+            },
+            "fields": {
+              "Disabled": "false"
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 0,
+        "modifiedCount": 3
+      }
+    },
+    {
+      "action": "Correct primary-key template on own step",
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Playbook Step ori",
+        "data": [
+          {
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": 30
+            },
+            "fields": {
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQucHJpbWFyeUtleS5Db2RlKSkifQ=="
+            }
+          }
+        ]
+      },
+      "lcid": 1039,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Set",
+        "result": [
+          {
+            "id": "8C0D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "PlaybookCode": "X118-M-1039",
+              "StepNo_": "30"
+            },
+            "fields": {
+              "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJQbGF5Ym9vayBvcmkiLCJmaWVsZE51bWJlcnMiOlsxXSwidGFibGVWaWV3IjoiV0hFUkUoQ29kZT1DT05TVChAX2N1cnJlbnQucHJpbWFyeUtleS5Db2RlKSkifQ=="
+            }
+          }
+        ],
+        "status": "Success",
+        "insertedCount": 0,
+        "modifiedCount": 1
+      }
+    }
+  ],
+  "rows": [
+    {
+      "scenario": "Wrong primary-key path gives one corrective warning",
+      "type": "Orchestrator.Playbook.Verify",
+      "data": {
+        "playbookCode": "X118-M-1033"
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Verify",
+        "status": "Success",
+        "playbookCode": "X118-M-1033",
+        "valid": true,
+        "errorCount": 0,
+        "warningCount": 1,
+        "findings": [
+          {
+            "severity": "warning",
+            "stepNo": 30,
+            "code": "UnknownFieldReference",
+            "message": "Step 30 reads @_current.fields.Code, but Code is a primary-key field of table Playbook ori and is returned under primaryKey, not fields.",
+            "nextStep": "Use @_current.primaryKey.Code and inspect the source answer before running the playbook."
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Run refuses the warning without acknowledgement",
+      "type": "Orchestrator.Playbook.Run",
+      "data": {
+        "playbookCode": "X118-M-1033"
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": true,
+      "response": {
+        "status": "Error",
+        "code": "PreconditionFailed",
+        "error": "Playbook X118-M-1033 was not started: errors on enabled steps: 0, warnings: 1. Step 30 [UnknownFieldReference]: Step 30 reads @_current.fields.Code, but Code is a primary-key field of table Playbook ori and is returned under primaryKey, not fields.",
+        "parameter": "playbookCode",
+        "received": "X118-M-1033",
+        "expected": "a playbook whose enabled steps verify without errors, and without warnings unless ignoreWarnings is true",
+        "nextStep": "Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings = true; an error cannot.",
+        "findings": [
+          {
+            "severity": "warning",
+            "stepNo": 30,
+            "code": "UnknownFieldReference",
+            "message": "Step 30 reads @_current.fields.Code, but Code is a primary-key field of table Playbook ori and is returned under primaryKey, not fields.",
+            "nextStep": "Use @_current.primaryKey.Code and inspect the source answer before running the playbook."
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Schedule also refuses wrong-path warning without scheduling",
+      "type": "Orchestrator.Playbook.Schedule",
+      "data": {
+        "playbookCode": "X118-M-1033"
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": true,
+      "response": {
+        "status": "Error",
+        "code": "PreconditionFailed",
+        "error": "Playbook X118-M-1033 was not started: errors on enabled steps: 0, warnings: 1. Step 30 [UnknownFieldReference]: Step 30 reads @_current.fields.Code, but Code is a primary-key field of table Playbook ori and is returned under primaryKey, not fields.",
+        "parameter": "playbookCode",
+        "received": "X118-M-1033",
+        "expected": "a playbook whose enabled steps verify without errors, and without warnings unless ignoreWarnings is true",
+        "nextStep": "Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings = true; an error cannot.",
+        "findings": [
+          {
+            "severity": "warning",
+            "stepNo": 30,
+            "code": "UnknownFieldReference",
+            "message": "Step 30 reads @_current.fields.Code, but Code is a primary-key field of table Playbook ori and is returned under primaryKey, not fields.",
+            "nextStep": "Use @_current.primaryKey.Code and inspect the source answer before running the playbook."
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Even acknowledged warnings cannot dispatch an unresolved token",
+      "type": "Orchestrator.Playbook.Run",
+      "data": {
+        "playbookCode": "X118-M-1033",
+        "ignoreWarnings": true
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Run",
+        "status": "Success",
+        "instanceId": "C9C38C7C-7017-4AC5-99D4-FDFC642C4E77",
+        "playbookCode": "X118-M-1033",
+        "playbookStatus": "Failed",
+        "stepsExecuted": 2,
+        "stepsFailed": 1,
+        "itemsProcessed": 1
+      }
+    },
+    {
+      "scenario": "Gated write left only the self-created target unchanged",
+      "type": "Data.Records.Get",
+      "data": {
+        "tableName": "Playbook ori",
+        "tableView": "WHERE(Code=CONST(X118-T-1033))",
+        "fieldNumbers": [
+          1,
+          10
+        ]
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "350D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1033"
+            },
+            "fields": {
+              "Description": "X118 untouched 1033"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Corrected primary-key path verifies clean",
+      "type": "Orchestrator.Playbook.Verify",
+      "data": {
+        "playbookCode": "X118-M-1033"
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Verify",
+        "status": "Success",
+        "playbookCode": "X118-M-1033",
+        "valid": true,
+        "errorCount": 0,
+        "warningCount": 0,
+        "findings": []
+      }
+    },
+    {
+      "scenario": "Corrected primary-key decision reaches the gated write",
+      "type": "Orchestrator.Playbook.Run",
+      "data": {
+        "playbookCode": "X118-M-1033"
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Run",
+        "status": "Success",
+        "instanceId": "BE2BEBF7-7F1B-4F21-9EAA-3549E8AABBD2",
+        "playbookCode": "X118-M-1033",
+        "playbookStatus": "Completed",
+        "stepsExecuted": 3,
+        "stepsFailed": 0,
+        "itemsProcessed": 2
+      }
+    },
+    {
+      "scenario": "Only own target was updated by the real dispatched write",
+      "type": "Data.Records.Get",
+      "data": {
+        "tableName": "Playbook ori",
+        "tableView": "WHERE(Code=CONST(X118-T-1033))",
+        "fieldNumbers": [
+          1,
+          10
+        ]
+      },
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "350D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1033"
+            },
+            "fields": {
+              "Description": "X118 written 1033"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Live overview documents primaryKey and corrected decoded template",
+      "type": "Help.Orchestrator.Get",
+      "data": {},
+      "lcid": 1033,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Help.Orchestrator.Get",
+        "status": "Success",
+        "result": {
+          "messageType": "Help.Orchestrator.Get",
+          "format": "markdown",
+          "markdown": "# Job Queue Orchestrator & Playbook Workflow Engine\r\n\r\n21 Bifrost message types for managing job queues, building workflow playbooks, and generating reports.\r\nCall `Help.Implementation.Get` with `subject = \"<type>\"` for per-type technical guides.\r\n\r\n## Quick Decision Tree for AI Agents\r\n\r\n**I need to...**\r\n- Check orchestrator health → `Orchestrator.Status.Get`\r\n- Restart the orchestrator → `Orchestrator.Status.Restart` or `Orchestrator.Status.RestartIfNeeded`\r\n- Run an orchestrator entry now → `Orchestrator.Entry.Run`\r\n- Restart a failed entry → `Orchestrator.Entry.Restart` or `Orchestrator.JobQueueEntry.Restart`\r\n- Register a JQ entry → `Orchestrator.Entry.Register`\r\n- Schedule an entry → `Orchestrator.Entry.Schedule`\r\n- Build a workflow → read \"Building a playbook safely\" and \"Worked Playbook Examples\" below first, then create the playbook + steps via `Data.Records.Set` with every step disabled, and set request templates with `@` workspace references\r\n- Run a workflow → `Orchestrator.Playbook.Run`\r\n- Queue a workflow for later → `Orchestrator.Playbook.Enqueue`\r\n- Check a workflow for errors and unsafe configuration before it runs or is scheduled → `Orchestrator.Playbook.Verify` (Run and Schedule verify again and refuse what does not verify)\r\n- Send a Telegram message → `Orchestrator.Telegram.Message`\r\n- List available reports → `Orchestrator.Report.List`\r\n- Get report details + layouts → `Orchestrator.Report.Get`\r\n- Inspect or export report layouts → `Orchestrator.ReportLayout.List` / `Orchestrator.ReportLayout.Get`\r\n- Generate PDF/Excel/Word report → `Orchestrator.Report.SaveAs`\r\n- Run a batch job / processing-only report → `Orchestrator.Report.Run`\r\n- See what workspace variables are available → `Orchestrator.Workspace.Preview`\r\n\r\n## Building a playbook safely\r\n\r\nA playbook runs unattended and its steps commit one by one (see \"Execution Model\"): nothing is rolled back when a later step goes wrong. The only safety net is what you check before it runs. Follow these seven steps, in order, every time you build or change a playbook. `Orchestrator.Playbook.Run` and the schedule refuse a playbook that does not verify (step 4), but finding a mistake there costs more than not making it.\r\n\r\n1. **Design the steps on paper.** For every step write down whether it is a *read* (`Data.Records.Get`), a *decision* (a `Check` step) or a *write* (`Data.Records.Set`, `*.Post`, `Orchestrator.Email.Send`, `Orchestrator.Telegram.Message`), and whether it runs once or once per record (a forEach). For every write that runs per record, name the decision step that gates it: the write needs `Skip If Step Failed` pointing at that step (see \"Per-item decisions in a forEach\").\r\n2. **Check that everything you name exists.** Message types: `describe_message_type`, or `Help.Implementation.Get` with `subject = \"<type>\"`, and `Help.MessageTypes.Get` for the list; copy the exact name. Language model role codes (`roleCode` of `LLM.Prompt.Complete`): `Data.Records.Get` with `{\"tableName\":\"Bifrost Language Model ori\"}`; use a code that comes back, or leave `roleCode` out for the default model. `HAIKU` is only an example: a code that does not exist makes every call answer `RecordNotFound`. Tables and fields of a `tableView`: `Help.Tables.Get` and `Help.Fields.Get`. Primary-key fields are under `@_current.primaryKey.X` (for example `@_current.primaryKey.No_` for `No.`); other requested fields are under `@_current.fields.X` (for example `@_current.fields.Name`). Field names omit spaces and punctuation except `_`. Inspect the source answer before writing a reference.\r\n3. **Create the header and the steps with every step `Disabled = true`.** Put `\"Disabled\": true` in the `Data.Records.Set` call that creates each step. A disabled step is skipped, so nothing can run while you are still building. Create the conditions and the Result Log Paths now too.\r\n4. **Run `Orchestrator.Playbook.Verify` and fix every finding.** It reads the playbook without running it, also while the steps are disabled. A finding has a `severity` (`error` or `warning`), the `stepNo`, a `code`, what is wrong (`message`) and what to do about it (`nextStep`). An error is always a mistake. A warning is a mistake unless you can say why this case is deliberate. Repeat until `findings` is empty.\r\n5. **Run the read and decision steps only.** Enable the read steps and the `Check` steps and leave every write step disabled. Call `Orchestrator.Workspace.Preview` to see what `_sys`, `_who` and `_initial` hold, then `Orchestrator.Playbook.Run`, and read `Playbook Step Log ori` for the instance: request, response and `Check answered no.` for each record. Confirm that the decisions say yes and no for the records you expect. Verify again after every change.\r\n6. **Enable the write steps one at a time**, starting with a filter that hits a single test record (for example `No.=CONST(10000)` in the read step). Run, read the step log, confirm that exactly that record changed, and verify again before you enable the next write step. Widen the filter last.\r\n7. **Only then schedule the playbook** (`Orchestrator.Playbook.Schedule`, or the Schedule action on the Playbook Card). Scheduling verifies once more. It refuses a playbook with an error, and one with a warning unless the request says `\"ignoreWarnings\": true`; `ignoreWarnings` never waives an error.\r\n\r\n### What `Orchestrator.Playbook.Verify` checks\r\n\r\nEvery step is checked, enabled or not; a finding about a disabled step carries `\"stepDisabled\": true` and never blocks a run. `Orchestrator.Playbook.Run` and the schedule refuse on the findings of enabled steps.\r\n\r\n| Code | Severity | Means |\r\n|---|---|---|\r\n| `MessageTypeUnavailable` | error | The message type does not exist in this deployment, or is not enabled for this user in this company (a type that exists but is not enabled is not reported on a step with a Start condition, such as the Telegram notice in the examples) |\r\n| `LanguageModelRoleNotFound` | error | The `roleCode` of an `LLM.*` step is not a language model of this company |\r\n| `TemplateNotJson` | error | The request template is not a JSON object. The engine does not fail: it sends an empty request `{}` |\r\n| `StepReferenceNotFound`, `StepReferenceNotEarlier` | error | An `@<stepNo>` reference (`@10.x`, `@collect:25`, `@10,20`) to a step that does not exist, or that does not run before this step |\r\n| `CheckWithoutSuccessCondition` | error | A `Check` step has no Success condition, so it answers yes every time and decides nothing |\r\n| `NextStepNotFound` | error | A `Next Step No.` edge points at a step that does not exist |\r\n| `IterateSourceInvalid` | error | A forEach step iterates a step that does not exist or does not come before it |\r\n| `InvalidSkipGate` | error | `Skip If Step Failed` names a step that does not exist, does not come first or does not iterate: every item would be skipped |\r\n| `ScheduledWithErrors` | error | The playbook is scheduled and an enabled step has an error |\r\n| `UnsafeForEachWrite` | warning | An enabled forEach write step follows a forEach `Check` over the same array and does not have `Skip If Step Failed` set to it: it writes for every item |\r\n| `ActionWithoutSuccessCondition` | warning | An `Action` has no Success condition, so it counts as successful whenever the type does not raise, also when it answers `status: \"Error\"` |\r\n| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |\r\n| `UnknownFieldReference` | warning | `@_current.fields.X` names a field the source table does not have or returns under `primaryKey`, or `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths |\r\n\r\nWhen `Orchestrator.Playbook.Run` or `Orchestrator.Playbook.Schedule` refuses, the answer is `PreconditionFailed` on `playbookCode`, the text lists the blocking findings, and `findings` holds them:\r\n\r\n```json\r\n{ \"status\": \"Error\", \"code\": \"PreconditionFailed\",\r\n  \"error\": \"Playbook CUST-CREDIT-CTRL was not started: errors on enabled steps: 1, warnings: 0. Step 30 [LanguageModelRoleNotFound]: Step 30 calls LLM.Prompt.Complete with roleCode HAIKU, but this company has no language model with that code. ...\",\r\n  \"parameter\": \"playbookCode\", \"received\": \"CUST-CREDIT-CTRL\",\r\n  \"nextStep\": \"Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. ...\",\r\n  \"findings\": [ { \"severity\": \"error\", \"stepNo\": 30, \"code\": \"LanguageModelRoleNotFound\", \"message\": \"...\", \"nextStep\": \"...\" } ] }\r\n```\r\n\r\n## Worked Playbook Examples\r\n\r\nThree complete playbooks. Each is created with three `Data.Records.Set` calls: the header, the steps, the conditions. `RequestTemplate` is the base64 of the JSON printed under each step table. The calls show the finished, enabled state to stay short: when you build, add `\"Disabled\": true` to every step as in \"Building a playbook safely\" and enable the steps as described there. Examples 1 and 2 verify with no findings; example 3 is the mistake on purpose and verifies with exactly one warning.\r\n\r\n### Example 1 — Per-record decision, then per-record write\r\n\r\n`CREDIT-CTRL` blocks every customer that has an overdue balance for invoicing, and tells the credit controller how many it checked and blocked. This is the shape that went wrong when the write had no gate: **decide per record, write per record**.\r\n\r\n**Header**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"CREDIT-CTRL\" },\r\n    \"fields\": { \"Description\": \"Block customers with an overdue balance and tell the credit controller\" } }]\r\n} }\r\n```\r\n\r\n**Steps**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Step ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 10 },\r\n      \"fields\": { \"Description\": \"Read the customers\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Get\",\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzEsMl0sInRhYmxlVmlldyI6IldIRVJFKEJsb2NrZWQ9Q09OU1QoICkpIn0=\",\r\n        \"ResultLogPaths\": \"noOfRecords>customerCount\", \"NextStepNo_Success\": 30 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 30 },\r\n      \"fields\": { \"Description\": \"Does this customer have an overdue balance?\", \"StepType\": \"Check\", \"MessageType\": \"Data.Records.Get\",\r\n        \"IterateSourceStepNo_\": 10, \"IterateArrayPath\": \"result\",\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzFdLCJ0YWJsZVZpZXciOiJXSEVSRShOby49Q09OU1QoQF9jdXJyZW50LnByaW1hcnlLZXkuTm9fKSxCYWxhbmNlIER1ZSAoTENZKT1GSUxURVIoPjApKSJ9\",\r\n        \"NextStepNo_Success\": 40, \"NextStepNo_Failure\": 40 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 40 },\r\n      \"fields\": { \"Description\": \"Block the customer for invoicing\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Set\",\r\n        \"IterateSourceStepNo_\": 10, \"IterateArrayPath\": \"result\", \"SkipIfStepFailed\": 30,\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImRhdGEiOlt7ImlkIjoiQF9jdXJyZW50LmlkIiwiZmllbGRzIjp7IkJsb2NrZWQiOiJJbnZvaWNlIn19XX0=\",\r\n        \"NextStepNo_Success\": 90, \"NextStepNo_Failure\": 90 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 90 },\r\n      \"fields\": { \"Description\": \"Tell the credit controller\", \"StepType\": \"Action\", \"MessageType\": \"Orchestrator.Telegram.Message\",\r\n        \"ExcludeFromRunStatus\": true,\r\n        \"RequestTemplate\": \"eyJtZXNzYWdlIjoiQ3JlZGl0IGNvbnRyb2w6IEAxMC5jdXN0b21lckNvdW50IGN1c3RvbWVycyBjaGVja2VkLCBAX3N0ZXBzLjQwLml0ZW1zLnN1Y2NlZWRlZCBibG9ja2VkLiJ9\" } }\r\n  ] } }\r\n```\r\n\r\nThe templates, decoded:\r\n\r\n| Step | Template (JSON) |\r\n|---|---|\r\n| 10 | `{\"tableName\":\"Customer\",\"fieldNumbers\":[1,2],\"tableView\":\"WHERE(Blocked=CONST( ))\"}` |\r\n| 30 | `{\"tableName\":\"Customer\",\"fieldNumbers\":[1],\"tableView\":\"WHERE(No.=CONST(@_current.primaryKey.No_),Balance Due (LCY)=FILTER(>0))\"}` |\r\n| 40 | `{\"tableName\":\"Customer\",\"data\":[{\"id\":\"@_current.id\",\"fields\":{\"Blocked\":\"Invoice\"}}]}` |\r\n| 90 | `{\"message\":\"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked.\"}` |\r\n\r\n**Conditions** (one call, all five rows)\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Condition ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 10, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 10, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 20000 },\r\n      \"fields\": { \"Path\": \"noOfRecords\", \"Operator\": \"GreaterThan\", \"Value\": \"0\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 30, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 30, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 20000 },\r\n      \"fields\": { \"Path\": \"noOfRecords\", \"Operator\": \"GreaterThan\", \"Value\": \"0\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 40, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 90, \"ConditionType\": \"Start\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"_who.telegramChatId\", \"Operator\": \"Exists\", \"Value\": \"\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 90, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } }\r\n  ] } }\r\n```\r\n\r\n**Why every line is there**\r\n\r\n- **Step 10, `noOfRecords GreaterThan 0` beside `status Equals Success`.** A read that finds nothing still answers `Success`. Without the second condition step 30 and 40 would iterate zero customers, succeed, and the run would end `Completed` having done nothing. With it, an empty read fails step 10 and the run is `Failed` at the step that is really wrong. `Next Step No. (Failure)` is left at 0: the playbook ends there, no notice is sent. `Orchestrator.Playbook.Verify` warns (`ForEachSourceUnguarded`) when this condition is missing.\r\n- **Step 10, the filter `Blocked=CONST( )`.** Only customers that are not blocked yet are candidates, so the playbook never replaces a stronger block (for example `All`) with `Invoice`.\r\n- **Step 10, `ResultLogPaths: noOfRecords>customerCount`.** Stores the count at `10.customerCount` for the notice. The array itself needs no mapping: a forEach step reads the answer of its source step directly (`IterateSourceStepNo_` 10, `IterateArrayPath` `result`).\r\n- **Step 30 is a `Check`, not an `Action`.** A customer without an overdue balance is not an error. A `Check` that answers no is logged `Cancelled` (\"Check answered no.\"), does not increment `StepsFailed` and does not fail the run. The decision is a read that finds a row only when the rule holds (`Balance Due (LCY)` above 0 for exactly this customer, `@_current.primaryKey.No_`), so the Success condition `noOfRecords GreaterThan 0` is the answer yes.\r\n- **Step 30, both Next Step edges at 40.** A forEach step follows one edge once, after all its iterations. The edges can not make the decision per customer; they only have to lead on.\r\n- **Step 40, `SkipIfStepFailed: 30`.** This is the gate. For each customer the step is skipped (`Cancelled`, \"Skipped: prior step failed for this item.\") unless step 30's answer for the same customer was yes. Next Step edges do not do this: they apply once for the whole step. Without this one number step 40 would block every customer, which is example 3.\r\n- **Step 40, the write by `id`.** `@_current.id` is the SystemId of the customer that the current iteration is on, so the write can only touch that customer. `Blocked` is written by its AL name, `Invoice`.\r\n- **Step 40, the Success condition `status Equals Success`.** Without a Success condition an `Action` counts as successful whenever the type does not raise, also when it answers `status: \"Error\"` (`ActionWithoutSuccessCondition`).\r\n- **Step 90 is the tail, `ExcludeFromRunStatus`.** The notice reports on the run, so it stays out of the totals it reports. The Start condition `_who.telegramChatId Exists` skips it for a user without a chat id instead of failing the run. `@_steps.40.items.succeeded` is how many customers step 40 wrote, which is not `itemsProcessed`.\r\n\r\n### Example 2 — A read-only reporting playbook\r\n\r\n`OVERDUE-REPORT` counts the customers with an overdue balance and sends the number. It writes nothing, so it needs no decision step and no gate; it is safe to schedule once it verifies.\r\n\r\n**Header and steps**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"OVERDUE-REPORT\" },\r\n    \"fields\": { \"Description\": \"Count customers with an overdue balance and send the number\" } }]\r\n} }\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Step ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"OVERDUE-REPORT\", \"StepNo_\": 10 },\r\n      \"fields\": { \"Description\": \"Count the customers\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Get\",\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzEsMl0sInRhYmxlVmlldyI6IldIRVJFKEJhbGFuY2UgRHVlIChMQ1kpPUZJTFRFUig+MCkpIn0=\",\r\n        \"ResultLogPaths\": \"noOfRecords>overdueCount\", \"NextStepNo_Success\": 20, \"NextStepNo_Failure\": 20 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"OVERDUE-REPORT\", \"StepNo_\": 20 },\r\n      \"fields\": { \"Description\": \"Send the number\", \"StepType\": \"Action\", \"MessageType\": \"Orchestrator.Telegram.Message\",\r\n        \"RequestTemplate\": \"eyJtZXNzYWdlIjoiQ3VzdG9tZXJzIHdpdGggYW4gb3ZlcmR1ZSBiYWxhbmNlOiBAMTAub3ZlcmR1ZUNvdW50In0=\" } }\r\n  ] } }\r\n```\r\n\r\nTemplates: step 10 `{\"tableName\":\"Customer\",\"fieldNumbers\":[1,2],\"tableView\":\"WHERE(Balance Due (LCY)=FILTER(>0))\"}`; step 20 `{\"message\":\"Customers with an overdue balance: @10.overdueCount\"}`.\r\n\r\n**Conditions**: step 10 `Success` `status Equals Success`; step 20 `Start` `_who.telegramChatId Exists` and `Success` `status Equals Success`, written as the rows in example 1 (`LineNo_` 10000, `GroupNo_` 1).\r\n\r\nWhy it is safe: there is no write step, so nothing needs a gate. An empty read is a legitimate answer here (\"0 customers\"), so step 10 has no `noOfRecords` condition and nothing iterates its result. The count is stored with `ResultLogPaths` and read with `@10.overdueCount`; `Orchestrator.Playbook.Verify` checks that step 10 really stores `overdueCount`.\r\n\r\n### Example 3 — The anti-pattern: an ungated forEach write\r\n\r\n**Do not build this.** It is example 1 with one number changed on step 40: `SkipIfStepFailed` is 0 (or left out).\r\n\r\n```json\r\n{ \"primaryKey\": { \"PlaybookCode\": \"CUST-BLOCK-ALL\", \"StepNo_\": 40 },\r\n  \"fields\": { \"Description\": \"Block the customer for invoicing\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Set\",\r\n    \"IterateSourceStepNo_\": 10, \"IterateArrayPath\": \"result\", \"SkipIfStepFailed\": 0,\r\n    \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImRhdGEiOlt7ImlkIjoiQF9jdXJyZW50LmlkIiwiZmllbGRzIjp7IkJsb2NrZWQiOiJJbnZvaWNlIn19XX0=\" } }\r\n```\r\n\r\nWhat it does: step 30 runs for every customer and answers yes or no for each. Then step 40 runs for every customer, because nothing tells it to look at step 30's answer: `Next Step No. (Success)` and `Next Step No. (Failure)` are followed once for the whole of step 30, not once per customer. **Every customer in the read is blocked for invoicing**, the ones with an overdue balance and the ones without, and each write is committed. The run ends `Completed`, and the step log of step 30 even shows \"Check answered no.\" for the customers that were blocked anyway. `Orchestrator.Playbook.Verify` answers one warning, `UnsafeForEachWrite` on step 40 with `checkStepNo` 30, and `Orchestrator.Playbook.Run` refuses the playbook until you set `SkipIfStepFailed` to 30 (or pass `ignoreWarnings`, which you should not).\r\n\r\n### A decision that needs judgement\r\n\r\nWhen the rule cannot be written as a filter, make step 30 an LLM `Check`: message type `LLM.Prompt.Complete`, template `{\"roleCode\":\"<a code that exists in Bifrost Language Model ori>\",\"system\":\"Answer ONLY BLOCK or NO.\",\"prompt\":\"Customer: @_current.fields.Name ...\"}` and Success conditions `status Equals Success` and `text Equals BLOCK`. Everything else stays: step 40 keeps `SkipIfStepFailed: 30`. Check the `roleCode` first (step 2 of \"Building a playbook safely\"): `Orchestrator.Playbook.Verify` reports `LanguageModelRoleNotFound` for a code that does not exist, and an error answer from the model (an unknown role, a provider that is down) fails the Check instead of being read as \"no\".\r\n\r\n## Message Types (21)\r\n\r\n| Type | Description |\r\n|---|---|\r\n| `Orchestrator.Entry.Run` | Execute entry immediately (one-time) |\r\n| `Orchestrator.Entry.Restart` | Restart a failed/held entry |\r\n| `Orchestrator.Entry.Register` | Register a Job Queue Entry as an orchestrator entry |\r\n| `Orchestrator.Entry.Schedule` | Delete + immediately reschedule entry |\r\n| `Orchestrator.Email.Send` | Send an email (same params as Email.Draft.Set) |\r\n| `Orchestrator.Status.Get` | Get orchestrator health + entry counts |\r\n| `Orchestrator.Status.Restart` | Restart orchestrator unconditionally |\r\n| `Orchestrator.Status.RestartIfNeeded` | Restart only if not running |\r\n| `Orchestrator.JobQueueEntry.Restart` | Restart any Job Queue Entry |\r\n| `Orchestrator.JobQueueEntry.RestartIfNeeded` | Restart only if in Error/On Hold |\r\n| `Orchestrator.Playbook.Run` | Execute playbook, return results |\r\n| `Orchestrator.Playbook.Schedule` | Schedule playbook as an Orchestrator Entry with recurring template |\r\n| `Orchestrator.Playbook.Enqueue` | Queue playbook for one-time execution with custom data |\r\n| `Orchestrator.Playbook.Verify` | Read a playbook and return errors and warnings (unknown message type or role, bad template, ungated per-item write ...) before it runs |\r\n| `Orchestrator.Telegram.Message` | Send a Telegram message to the current user |\r\n| `Orchestrator.Report.List` | List available reports with metadata |\r\n| `Orchestrator.Report.Get` | Get report details, layouts, and saved preset |\r\n| `Orchestrator.ReportLayout.List` | List extension and user-defined report layouts |\r\n| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |\r\n| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |\r\n| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |\r\n| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |\r\n| `Help.Orchestrator.Get` | This help document |\r\n\r\n## Run Reporting — `_run` and `_steps`\r\n\r\nThe runner maintains two reserved top-level workspace keys. Reference them together\r\nas `@_run,_steps` to hand a language model the whole execution narrative with none of\r\nthe bulk data the steps collected.\r\n\r\n`_run` — playbook status:\r\n```json\r\n{ \"playbookCode\": \"MONTHEND\", \"instanceId\": \"...\", \"durationMs\": 41230,\r\n  \"stepsExecuted\": 7, \"stepsSucceeded\": 5, \"stepsFailed\": 2, \"stepsSkipped\": 1,\r\n  \"itemsProcessed\": 143, \"itemsFailed\": 2, \"failed\": true,\r\n  \"firstFailedStepNo\": 30, \"failedStepNos\": [30, 50] }\r\n```\r\n\r\n`_steps.<stepNo>` — one entry per step, accumulating across pages and iterations:\r\n```json\r\n{ \"stepNo\": 30, \"description\": \"Post sales invoices\", \"messageType\": \"Sales.Document.Post\",\r\n  \"status\": \"Failed\", \"durationMs\": 1180, \"iterated\": true, \"pages\": 1,\r\n  \"items\": { \"total\": 5, \"succeeded\": 3, \"failed\": 2, \"skipped\": 0, \"checkFailed\": 0, \"errored\": 0 },\r\n  \"failures\": [ { \"iteration\": 2, \"outcome\": \"Failed\",\r\n                  \"item\": { \"no\": \"103002\", \"name\": \"CRONUS Ltd.\" },\r\n                  \"error\": \"Posting Date is not within your range.\" } ],\r\n  \"result\": { \"postedInvoices\": 3, \"totalAmount\": 45280 } }\r\n```\r\n\r\n`_run.itemsProcessed` is the total number of *iterations* across every forEach step,\r\nnot the number of distinct items the playbook handled. Three customers taken through\r\nfour forEach steps count as twelve. When a report needs \"how many customers\", read\r\n`_steps.<no>.items.total` for the specific step, and say which step it came from —\r\na language model handed `itemsProcessed` will confidently call it a customer count.\r\n\r\n`checkFailed` counts the iterations of a `Check` step that answered no. `errored` counts the iterations of a\r\n`Check` step whose message type raised an error or answered `status: \"Error\"` (or `Refused`, `Failed`). Those are\r\ntechnical failures, counted in `failed` as well, and never in `checkFailed`. `errored` appears only when it is above 0.\r\n\r\n`failures` is capped at 20 entries per step (`failuresTruncated` flags the cut), errors\r\nare truncated to 500 characters, and `item` is a projection of at most 5 scalar fields.\r\nThe counts stay exact regardless. The full request, response and error text remain in\r\nthe step log — filter it by `@_run.instanceId` when the report needs more.\r\n\r\n`result` is populated from the step's `Summary Paths`, which is deliberately separate\r\nfrom `Result Log Paths`: the latter feeds later steps and often carries large arrays,\r\nthe former feeds the report and must stay small.\r\n\r\n### The reporting tail\r\n\r\nA notification tail is four steps: compose and send for success, compose and send for\r\nfailure. Every step carries `Exclude From Run Status`. This is the shape running in\r\nproduction, verified on both branches:\r\n\r\n```\r\nStep 900  Start: _run.failed Equals false        [Exclude From Run Status]\r\n          AND _who.telegramChatId Exists\r\n          LLM.Prompt.Complete  prompt \"@_run,_steps\"\r\n          Result Log Paths: text>noticeText       → next 910 on BOTH edges\r\nStep 910  Start: 900.noticeText Exists           [Exclude From Run Status]\r\n          Orchestrator.Telegram.Message  {\"message\":\"@900.noticeText\"}\r\n                                                  → next 920 on BOTH edges\r\nStep 920  Start: _run.failed Equals true         [Exclude From Run Status]\r\n          ... same shape, → 930\r\nStep 930  Start: 920.noticeText Exists           [Exclude From Run Status]\r\n```\r\n\r\nFour rules, each of which cost a debugging round to learn:\r\n\r\n1. **Point both edges at the next tail step.** A tail step that is skipped, or that\r\n   fails because a provider was down, must not end the chain — the other branch still\r\n   has to get its chance. Leaving `Next Step No. (Failure)` at 0 silently drops the\r\n   failure notification exactly when it is most wanted.\r\n2. **Guard the send step on the composed text existing**, not on the run outcome. If\r\n   the compose step was skipped there is nothing to send, and the model occasionally\r\n   returns an empty completion even when it succeeds.\r\n3. **Guard on the delivery address too.** `_who.telegramChatId Exists` AND\r\n   `NotEquals \"\"` — a user with no chat ID should skip the notice, not fail the run.\r\n4. **The whole tail is excluded from run status**, so it never narrates itself or\r\n   inflates the totals the notice is about.\r\n\r\n### `_tail` — where excluded steps are recorded\r\n\r\nAn excluded step is not dropped from the workspace; it is recorded under `_tail.<no>`\r\nwith the same shape as a `_steps` entry. It stays out of `_run` totals and out of the\r\n`@_run,_steps` dump the report is built from, while remaining referenceable — so one\r\ntail step can condition on another's outcome via `_tail.910.status`.\r\n\r\nDo not confuse the two namespaces a step writes to:\r\n\r\n| Written by | Path | Purpose |\r\n|---|---|---|\r\n| `Result Log Paths` | `<stepNo>.<field>` | Data for later steps. Unaffected by exclusion |\r\n| `Summary Paths` | `_steps.<no>.result` or `_tail.<no>.result` | Figures for the report |\r\n| the runner | `_steps.<no>` or `_tail.<no>` | Status, duration, errors, item counts |\r\n\r\nThis is why the send step above references `@900.noticeText` and not\r\n`@_tail.900.result.noticeText`: `Result Log Paths` writes to the step-number\r\nnamespace whether or not the step is excluded.\r\n\r\n## Common Playbook Step Types (from Core Library)\r\n\r\nPlaybook steps can call **any** registered message type. These are the most commonly used:\r\n\r\n| Type | Purpose | Help |\r\n|---|---|---|\r\n| `Data.Records.Get` | Read records from any BC table | `Help.Implementation.Get` subject `Data.Records.Get` |\r\n| `Data.Records.Set` | Write/update records in any BC table | `Help.Implementation.Get` subject `Data.Records.Set` |\r\n| `LLM.Prompt.Complete` | One-shot AI completion for reasoning, formatting, decisions | `Help.Implementation.Get` subject `LLM.Prompt.Complete` |\r\n| `Email.Draft.Set` | Create email draft with attachments | `Help.Implementation.Get` subject `Email.Draft.Set` |\r\n| `Customer.Statement.Pdf` | Generate customer statement PDF | `Help.Implementation.Get` subject `Customer.Statement.Pdf` |\r\n| `Iceland.Kennitala.Validate` | Validate Icelandic kennitala | `Help.Implementation.Get` subject `Iceland.Kennitala.Validate` |\r\n| `Iceland.AddressInfo.Get` | Lookup address from national registry | `Help.Implementation.Get` subject `Iceland.AddressInfo.Get` |\r\n| `DocumentExchange.Advania.*` | E-document exchange (GetUnread, GetDocument, UpdateStatus) | `Help.Implementation.Get` subject `DocumentExchange.Advania.GetUnread` |\r\n\r\n**When no standard message type fits** → use `LLM.Prompt.Complete` as the glue step.\r\nAlways call `Help.Implementation.Get` with the message type name before using it in a playbook.\r\n\r\n## Playbook Workflow Engine — Concepts\r\n\r\nA **Playbook** is a named sequence of message type calls with data flow through a shared **Workspace**.\r\n\r\n### Execution Model\r\n\r\n- Each step calls one Bifrost message type\r\n- Steps execute sequentially; each step's writes commit independently\r\n- **No rollback** of previous steps on failure\r\n- Steps branch on success/failure via `Next Step No. (Success)` / `Next Step No. (Failure)`\r\n- Step 0 as next = end playbook (success or failure depending on path)\r\n- Full request/response logged per step for audit and replay\r\n\r\n### Data Flow — Workspace + @Templates\r\n\r\nAll data flows through a **single JSON workspace document**. Two phases:\r\n\r\n**Phase 1 — Gather:** Steps execute and write results to workspace via `Result Log Paths`.\r\nData is keyed by step number (and iteration number for forEach):\r\n- Single step: `<StepNo>.<fieldName>` (e.g. `10.company`)\r\n- forEach step: `<StepNo>.<IterationNo>.<fieldName>` (e.g. `20.0.valid`, `20.1.valid`)\r\n- Initial request: stored at `_initial` (e.g. `_initial.invoiceNo`)\r\n- Current forEach element: stored at `_current` during each iteration\r\n- System constants: stored at `_sys` (dates, company, user)\r\n- WhoAmI context: stored at `_who` (user profile, salesperson, company info)\r\n\r\n**Phase 2 — Build:** Request templates use `@path` references resolved from workspace:\r\nA missing workspace reference fails the step before its message is sent. Inspect the source response and correct the path; primary-key fields of Data.Records.Get are under `primaryKey`, not `fields`.\r\n\r\n| Syntax | Resolves to | Example |\r\n|---|---|---|\r\n| `\"@path\"` | Single value/object/array (type-preserving) | `\"@10.company.fields.Name\"` → `\"CRONUS Ltd.\"` |\r\n| `\"@_current.field\"` | Current forEach element field | `\"@_current.primaryKey.No_\"` → `\"10000\"` |\r\n| `\"@_initial.key\"` | Initial request parameter | `\"@_initial.invoiceNo\"` → `\"103002\"` |\r\n| `\"@_iter\"` | Current forEach iteration index | `\"@30.@_iter.street\"` → resolves to `\"@30.0.street\"` then to the value |\r\n| `\"@_sys.field\"` | System constant | `\"@_sys.today\"` → `\"2026-08-30\"`, `\"@_sys.lastMonthStart\"` → `\"2026-07-01\"` |\r\n| `\"@_who.path\"` | WhoAmI user/company context | `\"@_who.salesperson.email\"` → `\"user@company.is\"` |\r\n| `\"@collect:N\"` | All iterations of step N as array | `\"@collect:25\"` → `[{...}, {...}]` |\r\n| `\"@k1,k2,k3\"` | Filtered workspace dump (escaped string) | `\"@10,20,30\"` → `\"{\\\"10\\\":...}\"` |\r\n| `@path` (embedded) | Text interpolation within a string | `\"WHERE(No.=CONST(@_initial.id))\"` |\r\n\r\nNumeric strings are auto-detected and injected as JSON numbers.\r\n\r\n### Result Log Paths\r\n\r\nThe `Result Log Paths` field controls what data each step writes to workspace.\r\nComma-separated, supports `source>target` renaming:\r\n\r\n| Syntax | Source in response | Stored at (single step 10) |\r\n|---|---|---|\r\n| `result` | `result` | `10.result` |\r\n| `result>customers` | `result` | `10.customers` |\r\n| `result[0]>invoice` | First element of `result` | `10.invoice` (no array wrapper) |\r\n| `result.valid>valid` | `result.valid` | `10.valid` |\r\n\r\n### ForEach Iteration\r\n\r\nA step with `Iterate Array Path` set becomes a foreach loop:\r\n- Extracts an array from a prior step's response (via ResponseStore)\r\n- Executes the message type once per array element\r\n- `@_current` in the request template resolves to the current element\r\n- `Stop On Item Error` controls whether to abort on first failure\r\n- Each iteration writes to workspace at `<StepNo>.<IterationNo>.<field>`\r\n- The iterator element is also stored at `<StepNo>.<IterationNo>._item`\r\n- Use `@collect:N` to gather all iterations into an array\r\n\r\n### Per-item decisions in a forEach\r\n\r\n`Next Step No. (Success)` and `Next Step No. (Failure)` are followed **once per step, not once per item**. A forEach\r\nstep runs all of its iterations first and then follows exactly one edge, so a forEach `Check` cannot decide, item by\r\nitem, which items a later forEach step writes to. Left alone, the later step writes to every item.\r\n\r\nThe per-item gate is `Skip If Step Failed = <check step no>` on every downstream forEach step that must be\r\nconditional. The step is skipped (`Cancelled`, `Skipped: prior step failed for this item.`) for each iteration in\r\nwhich the named step's same iteration did not succeed, an answer of no included.\r\n\r\nWorked example: block the customers a language model answers `BLOCK` for, unblock the ones it answers `NO` for.\r\nAll forEach steps iterate step 10's `result`:\r\n\r\n| Step | Message type | Step Type | Iterate Source Step No. | Iterate Array Path | Skip If Step Failed | Success condition |\r\n|---|---|---|---|---|---|---|\r\n| 10 | `Data.Records.Get` (customers) | Action | 0 | | 0 | `status Equals Success` |\r\n| 30 | `LLM.Prompt.Complete` (BLOCK or NO) | Check | 10 | `result` | 0 | `text Equals BLOCK` |\r\n| 40 | `Data.Records.Set` (`Blocked` = `Invoice`) | Action | 10 | `result` | **30** | `status Equals Success` |\r\n| 50 | `LLM.Prompt.Complete` (BLOCK or NO) | Check | 10 | `result` | 0 | `text Equals NO` |\r\n| 60 | `Data.Records.Set` (`Blocked` = empty) | Action | 10 | `result` | **50** | `status Equals Success` |\r\n\r\nStep 40 runs only for the customers step 30 answered `BLOCK` for, and step 60 only for the customers step 50\r\nanswered `NO` for. With `Skip If Step Failed = 0` on step 40, step 40 writes `Blocked = Invoice` to every customer.\r\n`Orchestrator.Playbook.Verify` warns about exactly that configuration.\r\n\r\n### Conditions\r\n\r\nSteps can evaluate the response to determine success/failure:\r\nConditions live in `Playbook Condition ori`, keyed by playbook, step, type, group and line.\r\n\r\n| Type | Evaluated | Against | Effect |\r\n|---|---|---|---|\r\n| `Start` | before the step | workspace | False = step is Cancelled, chain follows the success path |\r\n| `Success` | after the step | response | Picks the success or failure branch |\r\n| `Error` | after the step | workspace | True = mark the run failed, branch unchanged |\r\n\r\n**All conditions in a group must hold. Any group holding is enough.**\r\nAND within a `Group No.`, OR across groups — every boolean expression can be\r\nwritten that way, so there is no nesting, precedence or parentheses to learn.\r\nAn empty condition set is true.\r\n\r\n```\r\nType   Group  Path                       Operator   Value\r\nStart  1      _run.failed                Equals     true\r\nStart  2      _steps.30.items.succeeded  Equals     0\r\nStart  2      _steps.30.status           NotEquals  Cancelled\r\n```\r\n\r\nOperators: Equals, NotEquals, Contains, GreaterThan, LessThan, GreaterOrEqual, LessOrEqual, Exists.\r\n\r\n### `status Equals Success` is not enough\r\n\r\nA message type reports `Success` when it did what was asked, and finding nothing is\r\ndoing what was asked. `Data.Records.Get` over a filter that matches no rows returns\r\n`{\"status\":\"Success\",\"noOfRecords\":0,\"result\":[]}`. A step guarded only on `status`\r\naccepts that, the forEach below it iterates zero times and also succeeds, and the run\r\nends Completed having done nothing — with the real cause several steps upstream.\r\n\r\nAdd the second condition in the same group, so both must hold:\r\n\r\n```\r\nType     Group  Line   Path          Operator      Value\r\nSuccess  1      10000  status        Equals        Success\r\nSuccess  1      20000  noOfRecords   GreaterThan   0\r\n```\r\n\r\nThen decide what an empty result *means*. If the playbook has nothing to do when the\r\nquery is empty, that is a `Check` step — it routes down the failure edge to a tidy\r\nending without marking the run failed. If an empty result means something upstream is\r\nbroken, leave it an `Action` so the run fails and names this step.\r\n\r\n### Step Type — checks are not errors\r\n\r\n- `Action` (default): a false Success condition means the step failed, and the run fails.\r\n- `Check`: a false Success condition is simply the answer. It still routes down the\r\n  failure path and still drives `Skip If Step Failed`, but it does **not** fail the run.\r\n\r\nA `Check` can end two different ways, and the log tells them apart:\r\n\r\n| Outcome | Step log status | Step log `ErrorText` | `_steps.<no>.items` | Fails the run? |\r\n|---|---|---|---|---|\r\n| Answered no (response `status: \"Success\"`, Success condition false) | `Cancelled` (forEach) or `Completed` (single step) | `Check answered no.` | `checkFailed` | No |\r\n| Failed (the message type raised an error or answered `status: \"Error\"`) | `Failed` | the type's `code` and `error` | `failed` and `errored` | Yes, as an `Action` would |\r\n\r\nA failed `Check` never reaches its Success conditions: an error answer is not an answer. It increments\r\n`StepsFailed`, fails the run, and keeps the error text (cut to 500 characters in `_steps.<no>.failures[].error`).\r\n\r\nUse `Check` for validations and predicates — \"is this kennitala valid\", \"did the\r\naddress match\", \"are there any documents to import\". A step asking a question and\r\ngetting \"no\" has not failed.\r\n- If no condition set, step succeeds whenever the message type doesn't throw an error\r\n\r\n## Building Workflows via Data.Records.Set/Get\r\n\r\n### Tables\r\n\r\n| Table | Purpose | Primary Key |\r\n|---|---|---|\r\n| `Playbook ori` | Playbook header (name, schedule, template) | Code[20] |\r\n| `Playbook Step ori` | Step definition (message type, template, branching) | (PlaybookCode, StepNo_) |\r\n| `Playbook Condition ori` | Start/Success/Error conditions, one row per condition | (PlaybookCode, StepNo_, ConditionType, GroupNo_, LineNo_) |\r\n| `Recurring Template ori` | Reusable schedule template (days, time, interval) | Code[20] |\r\n| `Playbook Instance ori` | Execution log (per run) | ID (Guid) |\r\n| `Playbook Step Log ori` | Per-step execution detail | (Instance ID, Step No., Iteration No.) |\r\n\r\n### Example: E-Document Send Playbook (BII1 invoice via Advania)\r\n\r\n**Step 1: Create the playbook**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"EDOC-SEND\" },\r\n    \"fields\": { \"Description\": \"Send invoice via Advania\" } }]\r\n} }\r\n```\r\n\r\n**Step 2: Add steps with request templates**\r\nRequest templates are BLOB fields — pass base64-encoded JSON:\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Step ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 10 },\r\n      \"fields\": { \"Description\": \"Get company info\",\r\n        \"MessageType\": \"Data.Records.Get\",\r\n        \"RequestTemplate\": \"<base64 of {\\\"tableName\\\":\\\"Company Information\\\",...}>\",\r\n        \"ResultLogPaths\": \"result[0]>company\",\r\n        \"NextStepNo_Success\": 20 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 20 },\r\n      \"fields\": { \"Description\": \"Render BII1 XML\",\r\n        \"MessageType\": \"DocumentExchange.UBL.RenderBilling\",\r\n        \"RequestTemplate\": \"<base64 of template with @10.company.fields.Name etc>\",\r\n        \"ResultLogPaths\": \"xml,success\" } }\r\n  ] } }\r\n```\r\n\r\n**Step 3: Run with parameters**\r\n```json\r\n{ \"type\": \"Orchestrator.Playbook.Run\", \"data\": {\r\n  \"playbookCode\": \"EDOC-SEND\",\r\n  \"initialRequest\": { \"invoiceNo\": \"103002\" } } }\r\n```\r\nThe `initialRequest` is stored in workspace at `_initial`, accessible as `@_initial.invoiceNo`.\r\n\r\n### Writing conditions\r\n\r\nConditions are ordinary records. One row per condition, `Line No.` spaced like step\r\nnumbers so rows can be inserted between:\r\n\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Condition ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 10,\r\n        \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 10,\r\n        \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 20000 },\r\n      \"fields\": { \"Path\": \"noOfRecords\", \"Operator\": \"GreaterThan\", \"Value\": \"0\" } }\r\n  ] } }\r\n```\r\n\r\n**Write enum fields by their AL name, not their caption.** `Operator` accepts\r\n`NotEquals`, `GreaterOrEqual`, `LessOrEqual`; it rejects `Not Equals`. `ConditionType`\r\naccepts `Start`, `Success`, `Error`. `Step Type` accepts `Action`, `Check`.\r\n\r\n**A `Data.Records.Get` on these tables gives back captions, not names.** An is-IS\r\nsession reads `Operator: \"Ekki jafnt\"`, `ConditionType: \"Upphaf\"`. Requesting\r\n`lcid: 1033` does not fix it: the English caption for `NotEquals` is `Not Equals`,\r\nwith a space, and `Set` rejects that too. Some names and captions coincide —\r\n`Equals`, `Exists`, `Start` — which makes the failure look intermittent.\r\n\r\nSo a read-modify-write cycle over conditions cannot feed its own output back in.\r\nMap captions to AL names yourself, or keep the intended values beside the code that\r\nwrites them rather than recovering them from a Get.\r\n\r\n## Scheduling Playbooks for Recurring Execution\r\n\r\nPlaybooks can run on a recurring schedule via the Job Queue. Two approaches:\r\n\r\n### Option A: Use a Recurring Template (recommended)\r\n\r\nTemplates define reusable schedules (days, time window, interval).\r\n\r\n**1. Create or find a template:**\r\n```json\r\n{ \"type\": \"Data.Records.Get\", \"data\": { \"tableName\": \"Recurring Template ori\" } }\r\n```\r\n\r\n**2. Create a template if needed:**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Recurring Template ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"WORKDAYS\" },\r\n    \"fields\": { \"Description\": \"Weekdays 08-18 every 30 min\",\r\n      \"RunonMondays\": true, \"RunonTuesdays\": true, \"RunonWednesdays\": true,\r\n      \"RunonThursdays\": true, \"RunonFridays\": true,\r\n      \"RunonSaturdays\": false, \"RunonSundays\": false,\r\n      \"StartingTime\": \"08:00:00\", \"EndingTime\": \"18:00:00\",\r\n      \"No_ofMinutesbetweenRuns\": 30 } }]\r\n} }\r\n```\r\n\r\n**3. Assign template to playbook (auto-copies schedule fields):**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"MY-PLAYBOOK\" },\r\n    \"fields\": { \"RecurringTemplateCode\": \"WORKDAYS\" } }]\r\n} }\r\n```\r\nWhen a template is set, the playbook's schedule fields (days, times, interval) are\r\nautomatically populated from the template and locked from manual editing.\r\n\r\n### Option B: Set schedule directly on the playbook\r\n\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"MY-PLAYBOOK\" },\r\n    \"fields\": { \"RunonMondays\": true, \"RunonTuesdays\": true,\r\n      \"RunonWednesdays\": true, \"RunonThursdays\": true, \"RunonFridays\": true,\r\n      \"StartingTime\": \"06:00:00\", \"EndingTime\": \"22:00:00\",\r\n      \"No_ofMinutesbetweenRuns\": 60 } }]\r\n} }\r\n```\r\n\r\n### Activating the schedule\r\n\r\nAfter setting the schedule, use the **Schedule** action on the Playbook Card page\r\nto create the Job Queue Entry. This creates a recurring JQ Entry pointing to the\r\nBifrost Playbook JQ Dispatcher codeunit with the playbook's RecordId.\r\n\r\n**Key playbook fields for scheduling:**\r\n\r\n| Field | Type | Purpose |\r\n|---|---|---|\r\n| `RecurringTemplateCode` | Code[20] | Links to JQ Recurring Template (optional) |\r\n| `No_ofMinutesbetweenRuns` | Integer | Run interval in minutes |\r\n| `RunonMondays`..`RunonSundays` | Boolean | Which days to run |\r\n| `StartingTime` | Time | Earliest time of day |\r\n| `EndingTime` | Time | Latest time of day |\r\n| `Scheduled` | Boolean (FlowField) | Whether a JQ Entry exists (read-only) |\r\n| `JobQueueEntryID` | Guid | The created JQ Entry ID (read-only) |\r\n\r\n## Using LLM.Prompt.Complete in Playbooks\r\n\r\n`LLM.Prompt.Complete` is the general-purpose AI step for tasks not covered by dedicated message types.\r\nAlways set `roleCode` in the request template to control cost and speed (e.g. `HAIKU` for simple tasks), and only to a code that exists in this company: read the codes with `Data.Records.Get` on table `Bifrost Language Model ori`. A code that does not exist makes every call answer `RecordNotFound`, and `Orchestrator.Playbook.Verify` reports it as `LanguageModelRoleNotFound`.\r\n\r\n### Pattern 1: Yes/No Gate (per-item decision)\r\n\r\nUse LLM as a forEach decision step. The success condition determines the branch:\r\n\r\n```json\r\n// Step 35 template — forEach, condition: text Contains \"No\"\r\n{ \"roleCode\": \"HAIKU\",\r\n  \"system\": \"Compare two addresses. Answer ONLY Yes or No.\",\r\n  \"prompt\": \"BC: @_current.fields.Address, @_current.fields.PostCode\\\\nRegistry: @30.@_iter.street, @30.@_iter.postCode\" }\r\n```\r\n\r\n- Condition `text Contains \"No\"` → mismatch = Completed → downstream step runs\r\n- Condition false (\"Yes\") → Cancelled → downstream `Skip If Step Failed` skips it\r\n- Use `@_iter` to reference same-iteration data from prior forEach steps\r\n\r\n### Pattern 2: Text Formatting (summary/report generation)\r\n\r\nCollect workspace data from multiple steps and format for output:\r\n\r\n```json\r\n// Step 48 template — single step, workspace dump\r\n{ \"roleCode\": \"HAIKU\",\r\n  \"system\": \"Create a report for Telegram. Use only <b>, <i> tags. No <p>, <table>.\",\r\n  \"prompt\": \"@10,20,30\" }\r\n```\r\n\r\n- `@10,20,30` dumps filtered workspace data from steps 10, 20, 30 as a single string\r\n- Always specify output constraints (Telegram tags, max chars, JSON-only, etc.)\r\n- Store result via `ResultLogPaths: text>report` for downstream steps\r\n\r\n### Pattern 3: Run Notification\r\n\r\nTurn the run report into a human message. Do not describe the format — **show it**,\r\nthen show one filled-in example. A prompt that only lists rules produces output of\r\nroughly the right shape and reliably the wrong length; the same prompt with a worked\r\nexample produces the shape exactly:\r\n\r\nThe `system` string, written out (each line below is a real newline in the JSON):\r\n\r\n```text\r\nJSON about an automated process that SUCCEEDED. Icelandic, for Telegram.\r\nFormat, exactly three lines:\r\nOK <b>PLAYBOOK CODE</b>\r\n<one sentence about what was achieved, with figures>\r\n<i>x steps - y s</i>\r\nExample:\r\nOK <b>CUST-KT-SYNC</b>\r\n5 customers checked, 4 valid kennitalas, 2 addresses updated.\r\n<i>7 steps - 12 s</i>\r\nRules: use ONLY <b> and <i>, no other HTML and no Markdown asterisks. Real\r\nline breaks, not <br>. durationMs is in MILLISECONDS - convert to seconds.\r\nTake figures from _steps.*.result. No greeting, no signature.\r\nReturn ONLY the message.\r\n```\r\n\r\nand the step template that carries it:\r\n\r\n```json\r\n// Step 900 - Start: _run.failed Equals false, Exclude From Run Status\r\n{ \"roleCode\": \"HAIKU\", \"system\": \"<the text above>\", \"prompt\": \"@_run,_steps\" }\r\n```\r\n\r\nThen `Result Log Paths: text>noticeText`, and send it from the next step with\r\n`{\"message\":\"@900.noticeText\"}`. Failure notices are the same with `_run.failed`\r\ninverted and `_run.firstFailedStepNo` named in the prompt.\r\n\r\nFour things the model gets wrong unless told:\r\n\r\n- **`durationMs` is milliseconds.** Unprompted it reports 41230 seconds.\r\n- **`itemsProcessed` is iterations, not items.** Point the prompt at a named step.\r\n- **Length.** State the limit *and* show it. SMS in Icelandic is UCS-2: 70 characters\r\n  in one segment, 67 each once it splits — not the 160 of GSM-7 English.\r\n- **Markup.** Telegram takes `<b> <i> <code> <a>`; anything else is a 400 from the\r\n  API, so forbid other tags and Markdown asterisks explicitly.\r\n\r\nPick the role for the job. A small local model is fine for a Yes/No gate but writes\r\nunidiomatic Icelandic and leaks its instructions into prose; `HAIKU` composes these\r\nnotices in about 1.5 seconds. Latency compounds — a per-item LLM gate in a forEach\r\nover a slow local model turned a 12-second run into 397 seconds.\r\n\r\n### Key Rules for LLM Steps\r\n\r\n1. **Always set `roleCode`, to a code that exists** — `HAIKU` for simple tasks (fast, cheap), larger models only when needed. Check the code with `Data.Records.Get` on `Bifrost Language Model ori` before you use it\r\n2. **Always set success condition** — `status = Success` catches provider errors\r\n3. **Constrain output format, and show the shape** — \"Answer ONLY Yes/No\", \"Return ONLY JSON\". For anything with a length limit, give the limit and a worked example of it; a rule alone is not enough\r\n4. **Telegram-safe HTML** — only `<b>`, `<i>`, `<code>`, `<a>` tags. No `<p>`, `<table>`, `<div>`\r\n5. **Response field is `text`** — use `ResultLogPaths: text>fieldName` to store LLM output in workspace\r\n\r\n## Rules for AI Agents\r\n\r\n1. **Build with every step disabled.** Create the playbook and its steps with `Disabled = true`, enable the read and decision steps first, and enable the write steps one at a time on a single test record. See \"Building a playbook safely\".\r\n2. **Verify before every run, and before every schedule.** Call `Orchestrator.Playbook.Verify` after every change and fix every finding. `Orchestrator.Playbook.Run` and `Orchestrator.Playbook.Schedule` verify again and refuse with `PreconditionFailed` when an enabled step has an error, or a warning unless `ignoreWarnings` is true. Never pass `ignoreWarnings` to get past a warning you do not understand.\r\n3. **Never write in a forEach without a per-record gate.** Every forEach write step that follows a forEach `Check` over the same array must set `Skip If Step Failed` to that `Check`. The Next Step edges apply once per step, not per item; without the gate the write runs for every item. See \"Per-item decisions in a forEach\" and the worked example \"Per-record decision, then per-record write\".\r\n4. **Check that every message type and every role code you name exists.** `describe_message_type` or `Help.Implementation.Get` for a message type; `Data.Records.Get` on `Bifrost Language Model ori` for the `roleCode` of an `LLM.*` step. A code you remember or guess (`HAIKU`) may not exist in this company.\r\n5. **Use Data.Records.Get/Set for all CRUD** — reading/writing playbooks, steps, templates, credentials\r\n6. **Use action message types for operations** — Run, Restart, Schedule, etc.\r\n7. **Always check logs after Run** — read Playbook Instance ori and Playbook Step Log ori to verify\r\n8. **Step numbering convention** — use 10, 20, 30... (allows inserting steps between)\r\n9. **Request templates use `@path` syntax** — all data flows through the workspace, no separate bindings\r\n10. **Request templates are BLOB fields** — set via Data.Records.Set by passing base64-encoded JSON as the field value\r\n11. **Commits are permanent** — posting, document exchange, and other write operations cannot be undone by the engine\r\n12. **Use `result[0]>name` in Result Log Paths** for single-record steps to avoid array wrapper in workspace\r\n13. **Always add a Success condition** — one `Playbook Condition ori` row per step with `ConditionType=Success`, `Path=status`, `Operator=Equals`, `Value=Success` catches application-level errors. Set `StepType=Check` when a false answer is a legitimate result rather than a failure\r\n14. **Use `@_iter` for cross-step forEach data** — in forEach templates, `@30.@_iter.fieldName` references another forEach step's data at the same iteration index\r\n15. **Use `Disabled=true` to skip steps** — disabled steps follow the success path without executing. Use this instead of deleting steps.\r\n16. **LLM steps should set `roleCode`** — add `\"roleCode\":\"HAIKU\"` (or other role) in the request template to control which model is used. The code must exist in this company: verify it with `Data.Records.Get` on `Bifrost Language Model ori`\r\n17. **Data.Records.Get uses `tableView` not `filter`** — the parameter name for BC filters is `tableView`, e.g. `\"tableView\":\"WHERE(Registration Number=FILTER(<>''))\"`. Use English field names in tableView.\r\n18. **Guard on the result, not just the status** — add `noOfRecords GreaterThan 0` beside `status Equals Success` on every query step whose emptiness would make the rest of the run pointless. See \"`status Equals Success` is not enough\".\r\n19. **Write enum fields by AL name** — `NotEquals`, not the `Not Equals` caption a Get returns. Reads are localized; writes are not.\r\n20. **Queue long playbooks instead of running them inline** — `Orchestrator.Playbook.Enqueue`, or an async invocation. A synchronous `Playbook.Run` that outlives the caller's HTTP timeout leaves its instance stuck in `Running` for ever: the client gives up, the server keeps going, and nothing ever writes the completion. Any playbook with an LLM step in a forEach is a candidate.\r\n21. **Verify from the step log, not the response** — a `Playbook.Run` response that never arrived says nothing about whether the run succeeded. Read `Playbook Step Log ori` filtered by instance; it is written step by step as the run progresses.\r\n\r\n## Execution Semantics\r\n\r\n- **Playbook status = Failed** only when `StepsFailed > 0`. A playbook ending via a condition branch (NextStepNo_Failure = 0 with 0 step errors) is Completed.\r\n- **forEach condition false = Cancelled** (not Failed). Does not increment StepsFailed. `Skip If Step Failed` still skips these iterations in downstream steps.\r\n- **Single-step condition false = branch** — follows NextStepNo_Failure path. If that path is 0, playbook ends as Completed (not Failed).\r\n- **Paged steps use the step's Request Template** — not the playbook's initial request. The engine injects `skip`/`take` into the template.\r\n- **Paged step failure** — if a paged step fails, the engine follows the paged step's failure path (not the chain end step's).\r\n- **Workspace snapshot** — on step failure, the workspace JSON is saved to the step log for debugging. Download via the Step Log subpage.\r\n- **Start condition false = Cancelled, success path** — the step logs `Skipped: start conditions not met`, `stepsSkipped` increments, and the run is not failed. This is the mechanism the reporting tail is built on.\r\n- **Check steps do not fail the run for answering no** — a `Check` whose Success condition is false is Cancelled (forEach) and routes down the failure edge, but `StepsFailed` is untouched; its log says `Check answered no.` A technical failure fails the Check step and the run like an `Action`: the message type raising an error, or answering `status: \"Error\"` (also `Refused`, `Failed`). The step log carries the type's `code` and `error`, and `_steps.<no>.items.errored` counts it apart from `checkFailed`.\r\n- **Next Step edges apply once per step, never per item** — a forEach step runs all its iterations and then follows one edge. A per-item gate is `Skip If Step Failed = <check step no>` on the downstream forEach step. See \"Per-item decisions in a forEach\".\r\n- **Last-run fields on the header** — every run (`Orchestrator.Playbook.Run`, `Orchestrator.Playbook.Enqueue`, a scheduled run, Run Now) writes `LastRunInstanceID`, `LastRunStatus` and `LastRunAt` on `Playbook ori`: `Running` when the run starts, then `Completed` or `Failed` when it ends. A run abandoned mid-flight therefore stays `Running` and never reads `Completed`.\r\n- **Excluded steps are recorded under `_tail`** — out of the totals, still referenceable. They appear in the step log like any other step.\r\n\r\n## Built-in Workspace Variables\r\n\r\nThese are seeded automatically at playbook start. No steps needed to populate them.\r\n\r\n### `_sys` — System Constants\r\n\r\n| Path | Example | Description |\r\n|---|---|---|\r\n| `_sys.today` | `2026-08-30` | Calendar date (Today) |\r\n| `_sys.workDate` | `2026-08-30` | BC posting date (WorkDate) |\r\n| `_sys.now` | `2026-08-30T15:30:00Z` | Current timestamp |\r\n| `_sys.year` | `2026` | Current year |\r\n| `_sys.lastMonthStart` | `2026-07-01` | First day of previous month |\r\n| `_sys.lastMonthEnd` | `2026-07-31` | Last day of previous month |\r\n| `_sys.thisMonthStart` | `2026-08-01` | First day of current month |\r\n| `_sys.thisQuarterStart` | `2026-07-01` | First day of current quarter |\r\n| `_sys.thisYearStart` | `2026-01-01` | First day of current year |\r\n| `_sys.companyName` | `CRONUS IS` | Current BC company |\r\n| `_sys.userId` | `ADMIN` | Current user ID |\r\n\r\n### `_who` — User & Company Context (from Help.WhoAmI.Get)\r\n\r\n| Path | Example | Description |\r\n|---|---|---|\r\n| `_who.user.userName` | `JOHN` | Login name |\r\n| `_who.user.userSecurityId` | GUID | User security ID |\r\n| `_who.salesperson.name` | `John Smith` | Salesperson full name |\r\n| `_who.salesperson.email` | `user@company.is` | Salesperson email |\r\n| `_who.salesperson.code` | `JS` | Salesperson code |\r\n| `_who.salesperson.phoneNo` | `5551234` | Phone number |\r\n| `_who.companyInfo.name` | `CRONUS Ltd.` | Legal company name |\r\n| `_who.companyInfo.registrationNo` | `5501011490` | Company kennitala |\r\n| `_who.companyInfo.vatRegistrationNo` | `00000` | VAT number |\r\n| `_who.companyInfo.address` | `5 The Ring` | Company address |\r\n| `_who.telegramChatId` | `123456789` | User's Telegram chat ID |\r\n| `_who.personalization.languageId` | `1033` | Session language LCID |\r\n\r\n## Data Reference — Tables & Fields for Data.Records.Get/Set\r\n\r\n### Restricted tables (dedicated message types)\r\n\r\nFoundation / this app block `Data.Records.Get` / `Data.Records.Set` on the tables below.\r\nThe error text ends with `Use {hint}.` and the response `nextStep` field carries the same dedicated types:\r\n\r\n| Table | Direction | Use instead |\r\n|---|---|---|\r\n| `Job Queue Entry` | write | `Orchestrator.Entry.Register` / `Orchestrator.Entry.Schedule` / `Orchestrator.JobQueueEntry.Restart` |\r\n| `Scheduled Task` | write | `Orchestrator.Status.Restart` (no generic write) |\r\n| `Report Request Preset ori` | read / write | `Orchestrator.Report.Get` / `Orchestrator.Report.Run` / `Orchestrator.Report.SaveAs` |\r\n\r\nIMPORTANT: Playbook steps use **message type parameter names** (e.g. `tableName`, `fieldNumbers`),\r\nNOT the MCP tool shorthand names (e.g. `table`, `fields`). The playbook engine dispatches\r\nthrough `invoke_message_type`, which passes data directly to the message type handler.\r\nAlways call `Help.Implementation.Get` with the message type name to see its exact parameters.\r\n\r\n### Orchestrator Tables\r\n\r\n#### Scheduled Entry ori\r\nStores configuration for each monitored Job Queue Entry.\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| ID | ID | GUID | PK — matches the Job Queue Entry ID |\r\n| Object Type to Run | ObjectTypetoRun | Option | Codeunit/Report |\r\n| Object ID to Run | ObjectIDtoRun | Integer | BC object ID |\r\n| Description | Description | Text[250] | |\r\n| Blocked | Blocked | Boolean | Prevents scheduling when true |\r\n| No. of Minutes between Runs | No_ofMinutesbetweenRuns | Integer | |\r\n| Run on Mondays..Sundays | RunonMondays..RunonSundays | Boolean | |\r\n| Starting Time | StartingTime | Time | |\r\n| Ending Time | EndingTime | Time | |\r\n| Notification Type | NotificationType | Option | None/Email |\r\n| Notification Recipient | NotificationRecipient | Text | Field 110: not writable through Data.Records.Set. Set with Orchestrator.Playbook.Schedule or edit on the Scheduled Entry card. |\r\n| Job Queue User ID | JobQueueUserID | Code[50] | Field 140: not writable through Data.Records.Set. Edit on the Scheduled Entry card. |\r\n| Retry Policy | RetryPolicy | Option | Always/Limited/None |\r\n| Client Credentials Code | ClientCredentialsCode | Code[20] | For API-based scheduling |\r\n\r\n#### Scheduler Setup ori\r\nSingleton setup table. Read with `Data.Records.Get`, tableName = \"Scheduler Setup ori\".\r\nJob Queue User ID (field 40) cannot be written through Data.Records.Set. Edit it on the Scheduler Setup page. Reads of these three fields are unchanged; other fields remain writable generically.\r\n\r\n### Playbook Tables\r\n\r\n#### Playbook ori (PK: Code)\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| Code | Code | Code[20] | PK |\r\n| Description | Description | Text[250] | |\r\n| Recurring Template Code | RecurringTemplateCode | Code[20] | Links to schedule template |\r\n| No. of Minutes between Runs | No_ofMinutesbetweenRuns | Integer | |\r\n| Run on Mondays..Sundays | RunonMondays..RunonSundays | Boolean | |\r\n| Starting/Ending Time | StartingTime/EndingTime | Time | |\r\n| Notification Type | NotificationType | Option | None/Email |\r\n| Scheduled | Scheduled | Boolean | FlowField — read-only |\r\n| Last Run Instance ID | LastRunInstanceID | Guid | ID of the `Playbook Instance ori` of the latest run. Written by the runner when a run starts and again when it ends, for every run type; read-only |\r\n| Last Run Status | LastRunStatus | Enum | Status of that instance: `Running` while in flight, then `Completed` or `Failed`. An abandoned run stays `Running`; read-only |\r\n| Last Run At | LastRunAt | DateTime | When the header was last stamped: the start of the run, then its end; read-only |\r\n\r\n#### Playbook Step ori (PK: PlaybookCode + StepNo_)\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| Playbook Code | PlaybookCode | Code[20] | PK |\r\n| Step No. | StepNo_ | Integer | PK — use 10, 20, 30... |\r\n| Description | Description | Text[250] | |\r\n| Message Type | MessageType | Option | The Bifrost message type to call |\r\n| Next Step No. (Success) | NextStepNo_Success | Integer | 0 = end playbook |\r\n| Next Step No. (Failure) | NextStepNo_Failure | Integer | 0 = fail playbook |\r\n| Request Template | RequestTemplate | BLOB | JSON template with `@path` workspace refs (set as base64) |\r\n| Result Log Paths | ResultLogPaths | Text[2048] | Paths to extract from response to workspace. `source>target` renames, `source[0]>target` extracts first element |\r\n| Iterate Array Path | IterateArrayPath | Text[250] | Dot-path to array for foreach |\r\n| Iterate Source Step No. | IterateSourceStepNo_ | Integer | Which step's response has the array |\r\n| Step Type | StepType | Option | Action (default) or Check — is a false Success condition a failure? |\r\n| Summary Paths | SummaryPaths | Text[2048] | Response paths copied into the run report. Keep small |\r\n| Exclude From Run Status | ExcludeFromRunStatus | Boolean | Keep this step out of _run and _steps |\r\n| Stop On Item Error | StopOnItemError | Boolean | For foreach: abort on first failure |\r\n| Skip If Step Failed | SkipIfStepFailed | Integer | The per-item gate: skip this iteration if the named step's same iteration did not succeed, an answer of no included. Next Step edges are per step, not per item |\r\n| Paged | Paged | Boolean | Enable auto-paging (skip/take) |\r\n| Page Size | PageSize | Integer | Records per page (default 500) |\r\n| Page Through Step No. | PageThroughStepNo_ | Integer | Last step in paged chain |\r\n| Disabled | Disabled | Boolean | Skip this step without executing |\r\n\r\n#### Playbook Condition ori (PK: PlaybookCode + StepNo_ + ConditionType + GroupNo_ + LineNo_)\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| Playbook Code | PlaybookCode | Code[20] | PK |\r\n| Step No. | StepNo_ | Integer | PK — the step this condition guards |\r\n| Condition Type | ConditionType | Enum | PK — Start, Success or Error |\r\n| Group No. | GroupNo_ | Integer | PK — conditions in one group are ANDed; groups are ORed |\r\n| Line No. | LineNo_ | Integer | PK — use 10000, 20000, ... |\r\n| Path | Path | Text[250] | Dot-path. Start/Error read the workspace, Success reads the step response |\r\n| Operator | Operator | Enum | Equals, NotEquals, Contains, GreaterThan, LessThan, GreaterOrEqual, LessOrEqual, Exists |\r\n| Value | Value | Text[250] | Compared as text; numeric operators parse both sides |\r\n| Description | Description | Text[100] | Why this condition exists. Optional, and worth writing |\r\n\r\nDeleting a step cascades to its conditions. An empty condition set is true, so a step\r\nwith no Success conditions succeeds whenever the message type does not raise an error.\r\n\r\n### Execution Log Tables (read-only)\r\n\r\n#### Playbook Instance ori (PK: ID)\r\nOne record per playbook run. Fields: PlaybookCode, Status, StartedAt, CompletedAt,\r\nTotalDuration, StepsExecuted, StepsFailed, ItemsProcessed, InitiatedBy, ErrorText, Context.\r\n\r\n`Status` stays `Running` until the run writes its own completion, so an instance\r\nabandoned mid-flight — a session killed, a caller that timed out — stays `Running`\r\nfor ever. Judge such a run by the timestamps on its step log, not by this field.\r\n\r\n#### Playbook Step Log ori (PK: InstanceID + StepNo_ + IterationNo_)\r\nOne record per step execution. Fields: MessageType, Status, Duration, ErrorText,\r\nRequestSent (base64 BLOB), ResponseReceived (base64 BLOB), IteratorElement, WorkspaceSnapshot (base64 BLOB, only on failed steps).\r\n\r\n"
+        }
+      }
+    },
+    {
+      "scenario": "Wrong primary-key path gives one corrective warning",
+      "type": "Orchestrator.Playbook.Verify",
+      "data": {
+        "playbookCode": "X118-M-1039"
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Verify",
+        "status": "Success",
+        "playbookCode": "X118-M-1039",
+        "valid": true,
+        "errorCount": 0,
+        "warningCount": 1,
+        "findings": [
+          {
+            "severity": "warning",
+            "stepNo": 30,
+            "code": "UnknownFieldReference",
+            "message": "Skref 30 les @_current.fields.Code, en Code er aðallykilsreitur í töflunni Playbook ori og er skilað undir primaryKey, ekki fields.",
+            "nextStep": "Notaðu @_current.primaryKey.Code og skoðaðu upprunasvarið áður en verkbókin er keyrð."
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Run refuses the warning without acknowledgement",
+      "type": "Orchestrator.Playbook.Run",
+      "data": {
+        "playbookCode": "X118-M-1039"
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": true,
+      "response": {
+        "status": "Error",
+        "code": "PreconditionFailed",
+        "error": "Keðjan X118-M-1039 var ekki ræst: villur í virkum skrefum: 0, viðvaranir: 1. Skref 30 [UnknownFieldReference]: Skref 30 les @_current.fields.Code, en Code er aðallykilsreitur í töflunni Playbook ori og er skilað undir primaryKey, ekki fields.",
+        "parameter": "playbookCode",
+        "received": "X118-M-1039",
+        "expected": "keðja þar sem virk skref sannreynast án villna, og án viðvarana nema ignoreWarnings sé true",
+        "nextStep": "Kallaðu á Orchestrator.Playbook.Verify með sama playbookCode, lagaðu niðurstöðurnar og kallaðu svo aftur. Viðvörun má samþykkja viljandi með ignoreWarnings = true; villu má ekki samþykkja.",
+        "findings": [
+          {
+            "severity": "warning",
+            "stepNo": 30,
+            "code": "UnknownFieldReference",
+            "message": "Skref 30 les @_current.fields.Code, en Code er aðallykilsreitur í töflunni Playbook ori og er skilað undir primaryKey, ekki fields.",
+            "nextStep": "Notaðu @_current.primaryKey.Code og skoðaðu upprunasvarið áður en verkbókin er keyrð."
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Schedule also refuses wrong-path warning without scheduling",
+      "type": "Orchestrator.Playbook.Schedule",
+      "data": {
+        "playbookCode": "X118-M-1039"
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": true,
+      "response": {
+        "status": "Error",
+        "code": "PreconditionFailed",
+        "error": "Keðjan X118-M-1039 var ekki ræst: villur í virkum skrefum: 0, viðvaranir: 1. Skref 30 [UnknownFieldReference]: Skref 30 les @_current.fields.Code, en Code er aðallykilsreitur í töflunni Playbook ori og er skilað undir primaryKey, ekki fields.",
+        "parameter": "playbookCode",
+        "received": "X118-M-1039",
+        "expected": "keðja þar sem virk skref sannreynast án villna, og án viðvarana nema ignoreWarnings sé true",
+        "nextStep": "Kallaðu á Orchestrator.Playbook.Verify með sama playbookCode, lagaðu niðurstöðurnar og kallaðu svo aftur. Viðvörun má samþykkja viljandi með ignoreWarnings = true; villu má ekki samþykkja.",
+        "findings": [
+          {
+            "severity": "warning",
+            "stepNo": 30,
+            "code": "UnknownFieldReference",
+            "message": "Skref 30 les @_current.fields.Code, en Code er aðallykilsreitur í töflunni Playbook ori og er skilað undir primaryKey, ekki fields.",
+            "nextStep": "Notaðu @_current.primaryKey.Code og skoðaðu upprunasvarið áður en verkbókin er keyrð."
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Even acknowledged warnings cannot dispatch an unresolved token",
+      "type": "Orchestrator.Playbook.Run",
+      "data": {
+        "playbookCode": "X118-M-1039",
+        "ignoreWarnings": true
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Run",
+        "status": "Success",
+        "instanceId": "4507CD2E-27B2-41BD-9985-30EEB910EC5D",
+        "playbookCode": "X118-M-1039",
+        "playbookStatus": "Failed",
+        "stepsExecuted": 2,
+        "stepsFailed": 1,
+        "itemsProcessed": 1
+      }
+    },
+    {
+      "scenario": "Gated write left only the self-created target unchanged",
+      "type": "Data.Records.Get",
+      "data": {
+        "tableName": "Playbook ori",
+        "tableView": "WHERE(Code=CONST(X118-T-1039))",
+        "fieldNumbers": [
+          1,
+          10
+        ]
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "840D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1039"
+            },
+            "fields": {
+              "Description": "X118 untouched 1039"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Corrected primary-key path verifies clean",
+      "type": "Orchestrator.Playbook.Verify",
+      "data": {
+        "playbookCode": "X118-M-1039"
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Verify",
+        "status": "Success",
+        "playbookCode": "X118-M-1039",
+        "valid": true,
+        "errorCount": 0,
+        "warningCount": 0,
+        "findings": []
+      }
+    },
+    {
+      "scenario": "Corrected primary-key decision reaches the gated write",
+      "type": "Orchestrator.Playbook.Run",
+      "data": {
+        "playbookCode": "X118-M-1039"
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Orchestrator.Playbook.Run",
+        "status": "Success",
+        "instanceId": "0E7AFFBB-5DA0-4A79-8092-E83914468B9C",
+        "playbookCode": "X118-M-1039",
+        "playbookStatus": "Completed",
+        "stepsExecuted": 3,
+        "stepsFailed": 0,
+        "itemsProcessed": 2
+      }
+    },
+    {
+      "scenario": "Only own target was updated by the real dispatched write",
+      "type": "Data.Records.Get",
+      "data": {
+        "tableName": "Playbook ori",
+        "tableView": "WHERE(Code=CONST(X118-T-1039))",
+        "fieldNumbers": [
+          1,
+          10
+        ]
+      },
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "840D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1039"
+            },
+            "fields": {
+              "Description": "X118 written 1039"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Live overview documents primaryKey and corrected decoded template",
+      "type": "Help.Orchestrator.Get",
+      "data": {},
+      "lcid": 1039,
+      "passed": true,
+      "toolError": false,
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Help.Orchestrator.Get",
+        "status": "Success",
+        "result": {
+          "messageType": "Help.Orchestrator.Get",
+          "format": "markdown",
+          "markdown": "# Job Queue Orchestrator & Playbook Workflow Engine\r\n\r\n21 Bifrost message types for managing job queues, building workflow playbooks, and generating reports.\r\nCall `Help.Implementation.Get` with `subject = \"<type>\"` for per-type technical guides.\r\n\r\n## Quick Decision Tree for AI Agents\r\n\r\n**I need to...**\r\n- Check orchestrator health → `Orchestrator.Status.Get`\r\n- Restart the orchestrator → `Orchestrator.Status.Restart` or `Orchestrator.Status.RestartIfNeeded`\r\n- Run an orchestrator entry now → `Orchestrator.Entry.Run`\r\n- Restart a failed entry → `Orchestrator.Entry.Restart` or `Orchestrator.JobQueueEntry.Restart`\r\n- Register a JQ entry → `Orchestrator.Entry.Register`\r\n- Schedule an entry → `Orchestrator.Entry.Schedule`\r\n- Build a workflow → read \"Building a playbook safely\" and \"Worked Playbook Examples\" below first, then create the playbook + steps via `Data.Records.Set` with every step disabled, and set request templates with `@` workspace references\r\n- Run a workflow → `Orchestrator.Playbook.Run`\r\n- Queue a workflow for later → `Orchestrator.Playbook.Enqueue`\r\n- Check a workflow for errors and unsafe configuration before it runs or is scheduled → `Orchestrator.Playbook.Verify` (Run and Schedule verify again and refuse what does not verify)\r\n- Send a Telegram message → `Orchestrator.Telegram.Message`\r\n- List available reports → `Orchestrator.Report.List`\r\n- Get report details + layouts → `Orchestrator.Report.Get`\r\n- Inspect or export report layouts → `Orchestrator.ReportLayout.List` / `Orchestrator.ReportLayout.Get`\r\n- Generate PDF/Excel/Word report → `Orchestrator.Report.SaveAs`\r\n- Run a batch job / processing-only report → `Orchestrator.Report.Run`\r\n- See what workspace variables are available → `Orchestrator.Workspace.Preview`\r\n\r\n## Building a playbook safely\r\n\r\nA playbook runs unattended and its steps commit one by one (see \"Execution Model\"): nothing is rolled back when a later step goes wrong. The only safety net is what you check before it runs. Follow these seven steps, in order, every time you build or change a playbook. `Orchestrator.Playbook.Run` and the schedule refuse a playbook that does not verify (step 4), but finding a mistake there costs more than not making it.\r\n\r\n1. **Design the steps on paper.** For every step write down whether it is a *read* (`Data.Records.Get`), a *decision* (a `Check` step) or a *write* (`Data.Records.Set`, `*.Post`, `Orchestrator.Email.Send`, `Orchestrator.Telegram.Message`), and whether it runs once or once per record (a forEach). For every write that runs per record, name the decision step that gates it: the write needs `Skip If Step Failed` pointing at that step (see \"Per-item decisions in a forEach\").\r\n2. **Check that everything you name exists.** Message types: `describe_message_type`, or `Help.Implementation.Get` with `subject = \"<type>\"`, and `Help.MessageTypes.Get` for the list; copy the exact name. Language model role codes (`roleCode` of `LLM.Prompt.Complete`): `Data.Records.Get` with `{\"tableName\":\"Bifrost Language Model ori\"}`; use a code that comes back, or leave `roleCode` out for the default model. `HAIKU` is only an example: a code that does not exist makes every call answer `RecordNotFound`. Tables and fields of a `tableView`: `Help.Tables.Get` and `Help.Fields.Get`. Primary-key fields are under `@_current.primaryKey.X` (for example `@_current.primaryKey.No_` for `No.`); other requested fields are under `@_current.fields.X` (for example `@_current.fields.Name`). Field names omit spaces and punctuation except `_`. Inspect the source answer before writing a reference.\r\n3. **Create the header and the steps with every step `Disabled = true`.** Put `\"Disabled\": true` in the `Data.Records.Set` call that creates each step. A disabled step is skipped, so nothing can run while you are still building. Create the conditions and the Result Log Paths now too.\r\n4. **Run `Orchestrator.Playbook.Verify` and fix every finding.** It reads the playbook without running it, also while the steps are disabled. A finding has a `severity` (`error` or `warning`), the `stepNo`, a `code`, what is wrong (`message`) and what to do about it (`nextStep`). An error is always a mistake. A warning is a mistake unless you can say why this case is deliberate. Repeat until `findings` is empty.\r\n5. **Run the read and decision steps only.** Enable the read steps and the `Check` steps and leave every write step disabled. Call `Orchestrator.Workspace.Preview` to see what `_sys`, `_who` and `_initial` hold, then `Orchestrator.Playbook.Run`, and read `Playbook Step Log ori` for the instance: request, response and `Check answered no.` for each record. Confirm that the decisions say yes and no for the records you expect. Verify again after every change.\r\n6. **Enable the write steps one at a time**, starting with a filter that hits a single test record (for example `No.=CONST(10000)` in the read step). Run, read the step log, confirm that exactly that record changed, and verify again before you enable the next write step. Widen the filter last.\r\n7. **Only then schedule the playbook** (`Orchestrator.Playbook.Schedule`, or the Schedule action on the Playbook Card). Scheduling verifies once more. It refuses a playbook with an error, and one with a warning unless the request says `\"ignoreWarnings\": true`; `ignoreWarnings` never waives an error.\r\n\r\n### What `Orchestrator.Playbook.Verify` checks\r\n\r\nEvery step is checked, enabled or not; a finding about a disabled step carries `\"stepDisabled\": true` and never blocks a run. `Orchestrator.Playbook.Run` and the schedule refuse on the findings of enabled steps.\r\n\r\n| Code | Severity | Means |\r\n|---|---|---|\r\n| `MessageTypeUnavailable` | error | The message type does not exist in this deployment, or is not enabled for this user in this company (a type that exists but is not enabled is not reported on a step with a Start condition, such as the Telegram notice in the examples) |\r\n| `LanguageModelRoleNotFound` | error | The `roleCode` of an `LLM.*` step is not a language model of this company |\r\n| `TemplateNotJson` | error | The request template is not a JSON object. The engine does not fail: it sends an empty request `{}` |\r\n| `StepReferenceNotFound`, `StepReferenceNotEarlier` | error | An `@<stepNo>` reference (`@10.x`, `@collect:25`, `@10,20`) to a step that does not exist, or that does not run before this step |\r\n| `CheckWithoutSuccessCondition` | error | A `Check` step has no Success condition, so it answers yes every time and decides nothing |\r\n| `NextStepNotFound` | error | A `Next Step No.` edge points at a step that does not exist |\r\n| `IterateSourceInvalid` | error | A forEach step iterates a step that does not exist or does not come before it |\r\n| `InvalidSkipGate` | error | `Skip If Step Failed` names a step that does not exist, does not come first or does not iterate: every item would be skipped |\r\n| `ScheduledWithErrors` | error | The playbook is scheduled and an enabled step has an error |\r\n| `UnsafeForEachWrite` | warning | An enabled forEach write step follows a forEach `Check` over the same array and does not have `Skip If Step Failed` set to it: it writes for every item |\r\n| `ActionWithoutSuccessCondition` | warning | An `Action` has no Success condition, so it counts as successful whenever the type does not raise, also when it answers `status: \"Error\"` |\r\n| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |\r\n| `UnknownFieldReference` | warning | `@_current.fields.X` names a field the source table does not have or returns under `primaryKey`, or `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths |\r\n\r\nWhen `Orchestrator.Playbook.Run` or `Orchestrator.Playbook.Schedule` refuses, the answer is `PreconditionFailed` on `playbookCode`, the text lists the blocking findings, and `findings` holds them:\r\n\r\n```json\r\n{ \"status\": \"Error\", \"code\": \"PreconditionFailed\",\r\n  \"error\": \"Playbook CUST-CREDIT-CTRL was not started: errors on enabled steps: 1, warnings: 0. Step 30 [LanguageModelRoleNotFound]: Step 30 calls LLM.Prompt.Complete with roleCode HAIKU, but this company has no language model with that code. ...\",\r\n  \"parameter\": \"playbookCode\", \"received\": \"CUST-CREDIT-CTRL\",\r\n  \"nextStep\": \"Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. ...\",\r\n  \"findings\": [ { \"severity\": \"error\", \"stepNo\": 30, \"code\": \"LanguageModelRoleNotFound\", \"message\": \"...\", \"nextStep\": \"...\" } ] }\r\n```\r\n\r\n## Worked Playbook Examples\r\n\r\nThree complete playbooks. Each is created with three `Data.Records.Set` calls: the header, the steps, the conditions. `RequestTemplate` is the base64 of the JSON printed under each step table. The calls show the finished, enabled state to stay short: when you build, add `\"Disabled\": true` to every step as in \"Building a playbook safely\" and enable the steps as described there. Examples 1 and 2 verify with no findings; example 3 is the mistake on purpose and verifies with exactly one warning.\r\n\r\n### Example 1 — Per-record decision, then per-record write\r\n\r\n`CREDIT-CTRL` blocks every customer that has an overdue balance for invoicing, and tells the credit controller how many it checked and blocked. This is the shape that went wrong when the write had no gate: **decide per record, write per record**.\r\n\r\n**Header**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"CREDIT-CTRL\" },\r\n    \"fields\": { \"Description\": \"Block customers with an overdue balance and tell the credit controller\" } }]\r\n} }\r\n```\r\n\r\n**Steps**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Step ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 10 },\r\n      \"fields\": { \"Description\": \"Read the customers\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Get\",\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzEsMl0sInRhYmxlVmlldyI6IldIRVJFKEJsb2NrZWQ9Q09OU1QoICkpIn0=\",\r\n        \"ResultLogPaths\": \"noOfRecords>customerCount\", \"NextStepNo_Success\": 30 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 30 },\r\n      \"fields\": { \"Description\": \"Does this customer have an overdue balance?\", \"StepType\": \"Check\", \"MessageType\": \"Data.Records.Get\",\r\n        \"IterateSourceStepNo_\": 10, \"IterateArrayPath\": \"result\",\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzFdLCJ0YWJsZVZpZXciOiJXSEVSRShOby49Q09OU1QoQF9jdXJyZW50LnByaW1hcnlLZXkuTm9fKSxCYWxhbmNlIER1ZSAoTENZKT1GSUxURVIoPjApKSJ9\",\r\n        \"NextStepNo_Success\": 40, \"NextStepNo_Failure\": 40 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 40 },\r\n      \"fields\": { \"Description\": \"Block the customer for invoicing\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Set\",\r\n        \"IterateSourceStepNo_\": 10, \"IterateArrayPath\": \"result\", \"SkipIfStepFailed\": 30,\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImRhdGEiOlt7ImlkIjoiQF9jdXJyZW50LmlkIiwiZmllbGRzIjp7IkJsb2NrZWQiOiJJbnZvaWNlIn19XX0=\",\r\n        \"NextStepNo_Success\": 90, \"NextStepNo_Failure\": 90 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 90 },\r\n      \"fields\": { \"Description\": \"Tell the credit controller\", \"StepType\": \"Action\", \"MessageType\": \"Orchestrator.Telegram.Message\",\r\n        \"ExcludeFromRunStatus\": true,\r\n        \"RequestTemplate\": \"eyJtZXNzYWdlIjoiQ3JlZGl0IGNvbnRyb2w6IEAxMC5jdXN0b21lckNvdW50IGN1c3RvbWVycyBjaGVja2VkLCBAX3N0ZXBzLjQwLml0ZW1zLnN1Y2NlZWRlZCBibG9ja2VkLiJ9\" } }\r\n  ] } }\r\n```\r\n\r\nThe templates, decoded:\r\n\r\n| Step | Template (JSON) |\r\n|---|---|\r\n| 10 | `{\"tableName\":\"Customer\",\"fieldNumbers\":[1,2],\"tableView\":\"WHERE(Blocked=CONST( ))\"}` |\r\n| 30 | `{\"tableName\":\"Customer\",\"fieldNumbers\":[1],\"tableView\":\"WHERE(No.=CONST(@_current.primaryKey.No_),Balance Due (LCY)=FILTER(>0))\"}` |\r\n| 40 | `{\"tableName\":\"Customer\",\"data\":[{\"id\":\"@_current.id\",\"fields\":{\"Blocked\":\"Invoice\"}}]}` |\r\n| 90 | `{\"message\":\"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked.\"}` |\r\n\r\n**Conditions** (one call, all five rows)\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Condition ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 10, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 10, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 20000 },\r\n      \"fields\": { \"Path\": \"noOfRecords\", \"Operator\": \"GreaterThan\", \"Value\": \"0\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 30, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 30, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 20000 },\r\n      \"fields\": { \"Path\": \"noOfRecords\", \"Operator\": \"GreaterThan\", \"Value\": \"0\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 40, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 90, \"ConditionType\": \"Start\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"_who.telegramChatId\", \"Operator\": \"Exists\", \"Value\": \"\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"CREDIT-CTRL\", \"StepNo_\": 90, \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } }\r\n  ] } }\r\n```\r\n\r\n**Why every line is there**\r\n\r\n- **Step 10, `noOfRecords GreaterThan 0` beside `status Equals Success`.** A read that finds nothing still answers `Success`. Without the second condition step 30 and 40 would iterate zero customers, succeed, and the run would end `Completed` having done nothing. With it, an empty read fails step 10 and the run is `Failed` at the step that is really wrong. `Next Step No. (Failure)` is left at 0: the playbook ends there, no notice is sent. `Orchestrator.Playbook.Verify` warns (`ForEachSourceUnguarded`) when this condition is missing.\r\n- **Step 10, the filter `Blocked=CONST( )`.** Only customers that are not blocked yet are candidates, so the playbook never replaces a stronger block (for example `All`) with `Invoice`.\r\n- **Step 10, `ResultLogPaths: noOfRecords>customerCount`.** Stores the count at `10.customerCount` for the notice. The array itself needs no mapping: a forEach step reads the answer of its source step directly (`IterateSourceStepNo_` 10, `IterateArrayPath` `result`).\r\n- **Step 30 is a `Check`, not an `Action`.** A customer without an overdue balance is not an error. A `Check` that answers no is logged `Cancelled` (\"Check answered no.\"), does not increment `StepsFailed` and does not fail the run. The decision is a read that finds a row only when the rule holds (`Balance Due (LCY)` above 0 for exactly this customer, `@_current.primaryKey.No_`), so the Success condition `noOfRecords GreaterThan 0` is the answer yes.\r\n- **Step 30, both Next Step edges at 40.** A forEach step follows one edge once, after all its iterations. The edges can not make the decision per customer; they only have to lead on.\r\n- **Step 40, `SkipIfStepFailed: 30`.** This is the gate. For each customer the step is skipped (`Cancelled`, \"Skipped: prior step failed for this item.\") unless step 30's answer for the same customer was yes. Next Step edges do not do this: they apply once for the whole step. Without this one number step 40 would block every customer, which is example 3.\r\n- **Step 40, the write by `id`.** `@_current.id` is the SystemId of the customer that the current iteration is on, so the write can only touch that customer. `Blocked` is written by its AL name, `Invoice`.\r\n- **Step 40, the Success condition `status Equals Success`.** Without a Success condition an `Action` counts as successful whenever the type does not raise, also when it answers `status: \"Error\"` (`ActionWithoutSuccessCondition`).\r\n- **Step 90 is the tail, `ExcludeFromRunStatus`.** The notice reports on the run, so it stays out of the totals it reports. The Start condition `_who.telegramChatId Exists` skips it for a user without a chat id instead of failing the run. `@_steps.40.items.succeeded` is how many customers step 40 wrote, which is not `itemsProcessed`.\r\n\r\n### Example 2 — A read-only reporting playbook\r\n\r\n`OVERDUE-REPORT` counts the customers with an overdue balance and sends the number. It writes nothing, so it needs no decision step and no gate; it is safe to schedule once it verifies.\r\n\r\n**Header and steps**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"OVERDUE-REPORT\" },\r\n    \"fields\": { \"Description\": \"Count customers with an overdue balance and send the number\" } }]\r\n} }\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Step ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"OVERDUE-REPORT\", \"StepNo_\": 10 },\r\n      \"fields\": { \"Description\": \"Count the customers\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Get\",\r\n        \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzEsMl0sInRhYmxlVmlldyI6IldIRVJFKEJhbGFuY2UgRHVlIChMQ1kpPUZJTFRFUig+MCkpIn0=\",\r\n        \"ResultLogPaths\": \"noOfRecords>overdueCount\", \"NextStepNo_Success\": 20, \"NextStepNo_Failure\": 20 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"OVERDUE-REPORT\", \"StepNo_\": 20 },\r\n      \"fields\": { \"Description\": \"Send the number\", \"StepType\": \"Action\", \"MessageType\": \"Orchestrator.Telegram.Message\",\r\n        \"RequestTemplate\": \"eyJtZXNzYWdlIjoiQ3VzdG9tZXJzIHdpdGggYW4gb3ZlcmR1ZSBiYWxhbmNlOiBAMTAub3ZlcmR1ZUNvdW50In0=\" } }\r\n  ] } }\r\n```\r\n\r\nTemplates: step 10 `{\"tableName\":\"Customer\",\"fieldNumbers\":[1,2],\"tableView\":\"WHERE(Balance Due (LCY)=FILTER(>0))\"}`; step 20 `{\"message\":\"Customers with an overdue balance: @10.overdueCount\"}`.\r\n\r\n**Conditions**: step 10 `Success` `status Equals Success`; step 20 `Start` `_who.telegramChatId Exists` and `Success` `status Equals Success`, written as the rows in example 1 (`LineNo_` 10000, `GroupNo_` 1).\r\n\r\nWhy it is safe: there is no write step, so nothing needs a gate. An empty read is a legitimate answer here (\"0 customers\"), so step 10 has no `noOfRecords` condition and nothing iterates its result. The count is stored with `ResultLogPaths` and read with `@10.overdueCount`; `Orchestrator.Playbook.Verify` checks that step 10 really stores `overdueCount`.\r\n\r\n### Example 3 — The anti-pattern: an ungated forEach write\r\n\r\n**Do not build this.** It is example 1 with one number changed on step 40: `SkipIfStepFailed` is 0 (or left out).\r\n\r\n```json\r\n{ \"primaryKey\": { \"PlaybookCode\": \"CUST-BLOCK-ALL\", \"StepNo_\": 40 },\r\n  \"fields\": { \"Description\": \"Block the customer for invoicing\", \"StepType\": \"Action\", \"MessageType\": \"Data.Records.Set\",\r\n    \"IterateSourceStepNo_\": 10, \"IterateArrayPath\": \"result\", \"SkipIfStepFailed\": 0,\r\n    \"RequestTemplate\": \"eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImRhdGEiOlt7ImlkIjoiQF9jdXJyZW50LmlkIiwiZmllbGRzIjp7IkJsb2NrZWQiOiJJbnZvaWNlIn19XX0=\" } }\r\n```\r\n\r\nWhat it does: step 30 runs for every customer and answers yes or no for each. Then step 40 runs for every customer, because nothing tells it to look at step 30's answer: `Next Step No. (Success)` and `Next Step No. (Failure)` are followed once for the whole of step 30, not once per customer. **Every customer in the read is blocked for invoicing**, the ones with an overdue balance and the ones without, and each write is committed. The run ends `Completed`, and the step log of step 30 even shows \"Check answered no.\" for the customers that were blocked anyway. `Orchestrator.Playbook.Verify` answers one warning, `UnsafeForEachWrite` on step 40 with `checkStepNo` 30, and `Orchestrator.Playbook.Run` refuses the playbook until you set `SkipIfStepFailed` to 30 (or pass `ignoreWarnings`, which you should not).\r\n\r\n### A decision that needs judgement\r\n\r\nWhen the rule cannot be written as a filter, make step 30 an LLM `Check`: message type `LLM.Prompt.Complete`, template `{\"roleCode\":\"<a code that exists in Bifrost Language Model ori>\",\"system\":\"Answer ONLY BLOCK or NO.\",\"prompt\":\"Customer: @_current.fields.Name ...\"}` and Success conditions `status Equals Success` and `text Equals BLOCK`. Everything else stays: step 40 keeps `SkipIfStepFailed: 30`. Check the `roleCode` first (step 2 of \"Building a playbook safely\"): `Orchestrator.Playbook.Verify` reports `LanguageModelRoleNotFound` for a code that does not exist, and an error answer from the model (an unknown role, a provider that is down) fails the Check instead of being read as \"no\".\r\n\r\n## Message Types (21)\r\n\r\n| Type | Description |\r\n|---|---|\r\n| `Orchestrator.Entry.Run` | Execute entry immediately (one-time) |\r\n| `Orchestrator.Entry.Restart` | Restart a failed/held entry |\r\n| `Orchestrator.Entry.Register` | Register a Job Queue Entry as an orchestrator entry |\r\n| `Orchestrator.Entry.Schedule` | Delete + immediately reschedule entry |\r\n| `Orchestrator.Email.Send` | Send an email (same params as Email.Draft.Set) |\r\n| `Orchestrator.Status.Get` | Get orchestrator health + entry counts |\r\n| `Orchestrator.Status.Restart` | Restart orchestrator unconditionally |\r\n| `Orchestrator.Status.RestartIfNeeded` | Restart only if not running |\r\n| `Orchestrator.JobQueueEntry.Restart` | Restart any Job Queue Entry |\r\n| `Orchestrator.JobQueueEntry.RestartIfNeeded` | Restart only if in Error/On Hold |\r\n| `Orchestrator.Playbook.Run` | Execute playbook, return results |\r\n| `Orchestrator.Playbook.Schedule` | Schedule playbook as an Orchestrator Entry with recurring template |\r\n| `Orchestrator.Playbook.Enqueue` | Queue playbook for one-time execution with custom data |\r\n| `Orchestrator.Playbook.Verify` | Read a playbook and return errors and warnings (unknown message type or role, bad template, ungated per-item write ...) before it runs |\r\n| `Orchestrator.Telegram.Message` | Send a Telegram message to the current user |\r\n| `Orchestrator.Report.List` | List available reports with metadata |\r\n| `Orchestrator.Report.Get` | Get report details, layouts, and saved preset |\r\n| `Orchestrator.ReportLayout.List` | List extension and user-defined report layouts |\r\n| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |\r\n| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |\r\n| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |\r\n| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |\r\n| `Help.Orchestrator.Get` | This help document |\r\n\r\n## Run Reporting — `_run` and `_steps`\r\n\r\nThe runner maintains two reserved top-level workspace keys. Reference them together\r\nas `@_run,_steps` to hand a language model the whole execution narrative with none of\r\nthe bulk data the steps collected.\r\n\r\n`_run` — playbook status:\r\n```json\r\n{ \"playbookCode\": \"MONTHEND\", \"instanceId\": \"...\", \"durationMs\": 41230,\r\n  \"stepsExecuted\": 7, \"stepsSucceeded\": 5, \"stepsFailed\": 2, \"stepsSkipped\": 1,\r\n  \"itemsProcessed\": 143, \"itemsFailed\": 2, \"failed\": true,\r\n  \"firstFailedStepNo\": 30, \"failedStepNos\": [30, 50] }\r\n```\r\n\r\n`_steps.<stepNo>` — one entry per step, accumulating across pages and iterations:\r\n```json\r\n{ \"stepNo\": 30, \"description\": \"Post sales invoices\", \"messageType\": \"Sales.Document.Post\",\r\n  \"status\": \"Failed\", \"durationMs\": 1180, \"iterated\": true, \"pages\": 1,\r\n  \"items\": { \"total\": 5, \"succeeded\": 3, \"failed\": 2, \"skipped\": 0, \"checkFailed\": 0, \"errored\": 0 },\r\n  \"failures\": [ { \"iteration\": 2, \"outcome\": \"Failed\",\r\n                  \"item\": { \"no\": \"103002\", \"name\": \"CRONUS Ltd.\" },\r\n                  \"error\": \"Posting Date is not within your range.\" } ],\r\n  \"result\": { \"postedInvoices\": 3, \"totalAmount\": 45280 } }\r\n```\r\n\r\n`_run.itemsProcessed` is the total number of *iterations* across every forEach step,\r\nnot the number of distinct items the playbook handled. Three customers taken through\r\nfour forEach steps count as twelve. When a report needs \"how many customers\", read\r\n`_steps.<no>.items.total` for the specific step, and say which step it came from —\r\na language model handed `itemsProcessed` will confidently call it a customer count.\r\n\r\n`checkFailed` counts the iterations of a `Check` step that answered no. `errored` counts the iterations of a\r\n`Check` step whose message type raised an error or answered `status: \"Error\"` (or `Refused`, `Failed`). Those are\r\ntechnical failures, counted in `failed` as well, and never in `checkFailed`. `errored` appears only when it is above 0.\r\n\r\n`failures` is capped at 20 entries per step (`failuresTruncated` flags the cut), errors\r\nare truncated to 500 characters, and `item` is a projection of at most 5 scalar fields.\r\nThe counts stay exact regardless. The full request, response and error text remain in\r\nthe step log — filter it by `@_run.instanceId` when the report needs more.\r\n\r\n`result` is populated from the step's `Summary Paths`, which is deliberately separate\r\nfrom `Result Log Paths`: the latter feeds later steps and often carries large arrays,\r\nthe former feeds the report and must stay small.\r\n\r\n### The reporting tail\r\n\r\nA notification tail is four steps: compose and send for success, compose and send for\r\nfailure. Every step carries `Exclude From Run Status`. This is the shape running in\r\nproduction, verified on both branches:\r\n\r\n```\r\nStep 900  Start: _run.failed Equals false        [Exclude From Run Status]\r\n          AND _who.telegramChatId Exists\r\n          LLM.Prompt.Complete  prompt \"@_run,_steps\"\r\n          Result Log Paths: text>noticeText       → next 910 on BOTH edges\r\nStep 910  Start: 900.noticeText Exists           [Exclude From Run Status]\r\n          Orchestrator.Telegram.Message  {\"message\":\"@900.noticeText\"}\r\n                                                  → next 920 on BOTH edges\r\nStep 920  Start: _run.failed Equals true         [Exclude From Run Status]\r\n          ... same shape, → 930\r\nStep 930  Start: 920.noticeText Exists           [Exclude From Run Status]\r\n```\r\n\r\nFour rules, each of which cost a debugging round to learn:\r\n\r\n1. **Point both edges at the next tail step.** A tail step that is skipped, or that\r\n   fails because a provider was down, must not end the chain — the other branch still\r\n   has to get its chance. Leaving `Next Step No. (Failure)` at 0 silently drops the\r\n   failure notification exactly when it is most wanted.\r\n2. **Guard the send step on the composed text existing**, not on the run outcome. If\r\n   the compose step was skipped there is nothing to send, and the model occasionally\r\n   returns an empty completion even when it succeeds.\r\n3. **Guard on the delivery address too.** `_who.telegramChatId Exists` AND\r\n   `NotEquals \"\"` — a user with no chat ID should skip the notice, not fail the run.\r\n4. **The whole tail is excluded from run status**, so it never narrates itself or\r\n   inflates the totals the notice is about.\r\n\r\n### `_tail` — where excluded steps are recorded\r\n\r\nAn excluded step is not dropped from the workspace; it is recorded under `_tail.<no>`\r\nwith the same shape as a `_steps` entry. It stays out of `_run` totals and out of the\r\n`@_run,_steps` dump the report is built from, while remaining referenceable — so one\r\ntail step can condition on another's outcome via `_tail.910.status`.\r\n\r\nDo not confuse the two namespaces a step writes to:\r\n\r\n| Written by | Path | Purpose |\r\n|---|---|---|\r\n| `Result Log Paths` | `<stepNo>.<field>` | Data for later steps. Unaffected by exclusion |\r\n| `Summary Paths` | `_steps.<no>.result` or `_tail.<no>.result` | Figures for the report |\r\n| the runner | `_steps.<no>` or `_tail.<no>` | Status, duration, errors, item counts |\r\n\r\nThis is why the send step above references `@900.noticeText` and not\r\n`@_tail.900.result.noticeText`: `Result Log Paths` writes to the step-number\r\nnamespace whether or not the step is excluded.\r\n\r\n## Common Playbook Step Types (from Core Library)\r\n\r\nPlaybook steps can call **any** registered message type. These are the most commonly used:\r\n\r\n| Type | Purpose | Help |\r\n|---|---|---|\r\n| `Data.Records.Get` | Read records from any BC table | `Help.Implementation.Get` subject `Data.Records.Get` |\r\n| `Data.Records.Set` | Write/update records in any BC table | `Help.Implementation.Get` subject `Data.Records.Set` |\r\n| `LLM.Prompt.Complete` | One-shot AI completion for reasoning, formatting, decisions | `Help.Implementation.Get` subject `LLM.Prompt.Complete` |\r\n| `Email.Draft.Set` | Create email draft with attachments | `Help.Implementation.Get` subject `Email.Draft.Set` |\r\n| `Customer.Statement.Pdf` | Generate customer statement PDF | `Help.Implementation.Get` subject `Customer.Statement.Pdf` |\r\n| `Iceland.Kennitala.Validate` | Validate Icelandic kennitala | `Help.Implementation.Get` subject `Iceland.Kennitala.Validate` |\r\n| `Iceland.AddressInfo.Get` | Lookup address from national registry | `Help.Implementation.Get` subject `Iceland.AddressInfo.Get` |\r\n| `DocumentExchange.Advania.*` | E-document exchange (GetUnread, GetDocument, UpdateStatus) | `Help.Implementation.Get` subject `DocumentExchange.Advania.GetUnread` |\r\n\r\n**When no standard message type fits** → use `LLM.Prompt.Complete` as the glue step.\r\nAlways call `Help.Implementation.Get` with the message type name before using it in a playbook.\r\n\r\n## Playbook Workflow Engine — Concepts\r\n\r\nA **Playbook** is a named sequence of message type calls with data flow through a shared **Workspace**.\r\n\r\n### Execution Model\r\n\r\n- Each step calls one Bifrost message type\r\n- Steps execute sequentially; each step's writes commit independently\r\n- **No rollback** of previous steps on failure\r\n- Steps branch on success/failure via `Next Step No. (Success)` / `Next Step No. (Failure)`\r\n- Step 0 as next = end playbook (success or failure depending on path)\r\n- Full request/response logged per step for audit and replay\r\n\r\n### Data Flow — Workspace + @Templates\r\n\r\nAll data flows through a **single JSON workspace document**. Two phases:\r\n\r\n**Phase 1 — Gather:** Steps execute and write results to workspace via `Result Log Paths`.\r\nData is keyed by step number (and iteration number for forEach):\r\n- Single step: `<StepNo>.<fieldName>` (e.g. `10.company`)\r\n- forEach step: `<StepNo>.<IterationNo>.<fieldName>` (e.g. `20.0.valid`, `20.1.valid`)\r\n- Initial request: stored at `_initial` (e.g. `_initial.invoiceNo`)\r\n- Current forEach element: stored at `_current` during each iteration\r\n- System constants: stored at `_sys` (dates, company, user)\r\n- WhoAmI context: stored at `_who` (user profile, salesperson, company info)\r\n\r\n**Phase 2 — Build:** Request templates use `@path` references resolved from workspace:\r\nA missing workspace reference fails the step before its message is sent. Inspect the source response and correct the path; primary-key fields of Data.Records.Get are under `primaryKey`, not `fields`.\r\n\r\n| Syntax | Resolves to | Example |\r\n|---|---|---|\r\n| `\"@path\"` | Single value/object/array (type-preserving) | `\"@10.company.fields.Name\"` → `\"CRONUS Ltd.\"` |\r\n| `\"@_current.field\"` | Current forEach element field | `\"@_current.primaryKey.No_\"` → `\"10000\"` |\r\n| `\"@_initial.key\"` | Initial request parameter | `\"@_initial.invoiceNo\"` → `\"103002\"` |\r\n| `\"@_iter\"` | Current forEach iteration index | `\"@30.@_iter.street\"` → resolves to `\"@30.0.street\"` then to the value |\r\n| `\"@_sys.field\"` | System constant | `\"@_sys.today\"` → `\"2026-08-30\"`, `\"@_sys.lastMonthStart\"` → `\"2026-07-01\"` |\r\n| `\"@_who.path\"` | WhoAmI user/company context | `\"@_who.salesperson.email\"` → `\"user@company.is\"` |\r\n| `\"@collect:N\"` | All iterations of step N as array | `\"@collect:25\"` → `[{...}, {...}]` |\r\n| `\"@k1,k2,k3\"` | Filtered workspace dump (escaped string) | `\"@10,20,30\"` → `\"{\\\"10\\\":...}\"` |\r\n| `@path` (embedded) | Text interpolation within a string | `\"WHERE(No.=CONST(@_initial.id))\"` |\r\n\r\nNumeric strings are auto-detected and injected as JSON numbers.\r\n\r\n### Result Log Paths\r\n\r\nThe `Result Log Paths` field controls what data each step writes to workspace.\r\nComma-separated, supports `source>target` renaming:\r\n\r\n| Syntax | Source in response | Stored at (single step 10) |\r\n|---|---|---|\r\n| `result` | `result` | `10.result` |\r\n| `result>customers` | `result` | `10.customers` |\r\n| `result[0]>invoice` | First element of `result` | `10.invoice` (no array wrapper) |\r\n| `result.valid>valid` | `result.valid` | `10.valid` |\r\n\r\n### ForEach Iteration\r\n\r\nA step with `Iterate Array Path` set becomes a foreach loop:\r\n- Extracts an array from a prior step's response (via ResponseStore)\r\n- Executes the message type once per array element\r\n- `@_current` in the request template resolves to the current element\r\n- `Stop On Item Error` controls whether to abort on first failure\r\n- Each iteration writes to workspace at `<StepNo>.<IterationNo>.<field>`\r\n- The iterator element is also stored at `<StepNo>.<IterationNo>._item`\r\n- Use `@collect:N` to gather all iterations into an array\r\n\r\n### Per-item decisions in a forEach\r\n\r\n`Next Step No. (Success)` and `Next Step No. (Failure)` are followed **once per step, not once per item**. A forEach\r\nstep runs all of its iterations first and then follows exactly one edge, so a forEach `Check` cannot decide, item by\r\nitem, which items a later forEach step writes to. Left alone, the later step writes to every item.\r\n\r\nThe per-item gate is `Skip If Step Failed = <check step no>` on every downstream forEach step that must be\r\nconditional. The step is skipped (`Cancelled`, `Skipped: prior step failed for this item.`) for each iteration in\r\nwhich the named step's same iteration did not succeed, an answer of no included.\r\n\r\nWorked example: block the customers a language model answers `BLOCK` for, unblock the ones it answers `NO` for.\r\nAll forEach steps iterate step 10's `result`:\r\n\r\n| Step | Message type | Step Type | Iterate Source Step No. | Iterate Array Path | Skip If Step Failed | Success condition |\r\n|---|---|---|---|---|---|---|\r\n| 10 | `Data.Records.Get` (customers) | Action | 0 | | 0 | `status Equals Success` |\r\n| 30 | `LLM.Prompt.Complete` (BLOCK or NO) | Check | 10 | `result` | 0 | `text Equals BLOCK` |\r\n| 40 | `Data.Records.Set` (`Blocked` = `Invoice`) | Action | 10 | `result` | **30** | `status Equals Success` |\r\n| 50 | `LLM.Prompt.Complete` (BLOCK or NO) | Check | 10 | `result` | 0 | `text Equals NO` |\r\n| 60 | `Data.Records.Set` (`Blocked` = empty) | Action | 10 | `result` | **50** | `status Equals Success` |\r\n\r\nStep 40 runs only for the customers step 30 answered `BLOCK` for, and step 60 only for the customers step 50\r\nanswered `NO` for. With `Skip If Step Failed = 0` on step 40, step 40 writes `Blocked = Invoice` to every customer.\r\n`Orchestrator.Playbook.Verify` warns about exactly that configuration.\r\n\r\n### Conditions\r\n\r\nSteps can evaluate the response to determine success/failure:\r\nConditions live in `Playbook Condition ori`, keyed by playbook, step, type, group and line.\r\n\r\n| Type | Evaluated | Against | Effect |\r\n|---|---|---|---|\r\n| `Start` | before the step | workspace | False = step is Cancelled, chain follows the success path |\r\n| `Success` | after the step | response | Picks the success or failure branch |\r\n| `Error` | after the step | workspace | True = mark the run failed, branch unchanged |\r\n\r\n**All conditions in a group must hold. Any group holding is enough.**\r\nAND within a `Group No.`, OR across groups — every boolean expression can be\r\nwritten that way, so there is no nesting, precedence or parentheses to learn.\r\nAn empty condition set is true.\r\n\r\n```\r\nType   Group  Path                       Operator   Value\r\nStart  1      _run.failed                Equals     true\r\nStart  2      _steps.30.items.succeeded  Equals     0\r\nStart  2      _steps.30.status           NotEquals  Cancelled\r\n```\r\n\r\nOperators: Equals, NotEquals, Contains, GreaterThan, LessThan, GreaterOrEqual, LessOrEqual, Exists.\r\n\r\n### `status Equals Success` is not enough\r\n\r\nA message type reports `Success` when it did what was asked, and finding nothing is\r\ndoing what was asked. `Data.Records.Get` over a filter that matches no rows returns\r\n`{\"status\":\"Success\",\"noOfRecords\":0,\"result\":[]}`. A step guarded only on `status`\r\naccepts that, the forEach below it iterates zero times and also succeeds, and the run\r\nends Completed having done nothing — with the real cause several steps upstream.\r\n\r\nAdd the second condition in the same group, so both must hold:\r\n\r\n```\r\nType     Group  Line   Path          Operator      Value\r\nSuccess  1      10000  status        Equals        Success\r\nSuccess  1      20000  noOfRecords   GreaterThan   0\r\n```\r\n\r\nThen decide what an empty result *means*. If the playbook has nothing to do when the\r\nquery is empty, that is a `Check` step — it routes down the failure edge to a tidy\r\nending without marking the run failed. If an empty result means something upstream is\r\nbroken, leave it an `Action` so the run fails and names this step.\r\n\r\n### Step Type — checks are not errors\r\n\r\n- `Action` (default): a false Success condition means the step failed, and the run fails.\r\n- `Check`: a false Success condition is simply the answer. It still routes down the\r\n  failure path and still drives `Skip If Step Failed`, but it does **not** fail the run.\r\n\r\nA `Check` can end two different ways, and the log tells them apart:\r\n\r\n| Outcome | Step log status | Step log `ErrorText` | `_steps.<no>.items` | Fails the run? |\r\n|---|---|---|---|---|\r\n| Answered no (response `status: \"Success\"`, Success condition false) | `Cancelled` (forEach) or `Completed` (single step) | `Check answered no.` | `checkFailed` | No |\r\n| Failed (the message type raised an error or answered `status: \"Error\"`) | `Failed` | the type's `code` and `error` | `failed` and `errored` | Yes, as an `Action` would |\r\n\r\nA failed `Check` never reaches its Success conditions: an error answer is not an answer. It increments\r\n`StepsFailed`, fails the run, and keeps the error text (cut to 500 characters in `_steps.<no>.failures[].error`).\r\n\r\nUse `Check` for validations and predicates — \"is this kennitala valid\", \"did the\r\naddress match\", \"are there any documents to import\". A step asking a question and\r\ngetting \"no\" has not failed.\r\n- If no condition set, step succeeds whenever the message type doesn't throw an error\r\n\r\n## Building Workflows via Data.Records.Set/Get\r\n\r\n### Tables\r\n\r\n| Table | Purpose | Primary Key |\r\n|---|---|---|\r\n| `Playbook ori` | Playbook header (name, schedule, template) | Code[20] |\r\n| `Playbook Step ori` | Step definition (message type, template, branching) | (PlaybookCode, StepNo_) |\r\n| `Playbook Condition ori` | Start/Success/Error conditions, one row per condition | (PlaybookCode, StepNo_, ConditionType, GroupNo_, LineNo_) |\r\n| `Recurring Template ori` | Reusable schedule template (days, time, interval) | Code[20] |\r\n| `Playbook Instance ori` | Execution log (per run) | ID (Guid) |\r\n| `Playbook Step Log ori` | Per-step execution detail | (Instance ID, Step No., Iteration No.) |\r\n\r\n### Example: E-Document Send Playbook (BII1 invoice via Advania)\r\n\r\n**Step 1: Create the playbook**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"EDOC-SEND\" },\r\n    \"fields\": { \"Description\": \"Send invoice via Advania\" } }]\r\n} }\r\n```\r\n\r\n**Step 2: Add steps with request templates**\r\nRequest templates are BLOB fields — pass base64-encoded JSON:\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Step ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 10 },\r\n      \"fields\": { \"Description\": \"Get company info\",\r\n        \"MessageType\": \"Data.Records.Get\",\r\n        \"RequestTemplate\": \"<base64 of {\\\"tableName\\\":\\\"Company Information\\\",...}>\",\r\n        \"ResultLogPaths\": \"result[0]>company\",\r\n        \"NextStepNo_Success\": 20 } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 20 },\r\n      \"fields\": { \"Description\": \"Render BII1 XML\",\r\n        \"MessageType\": \"DocumentExchange.UBL.RenderBilling\",\r\n        \"RequestTemplate\": \"<base64 of template with @10.company.fields.Name etc>\",\r\n        \"ResultLogPaths\": \"xml,success\" } }\r\n  ] } }\r\n```\r\n\r\n**Step 3: Run with parameters**\r\n```json\r\n{ \"type\": \"Orchestrator.Playbook.Run\", \"data\": {\r\n  \"playbookCode\": \"EDOC-SEND\",\r\n  \"initialRequest\": { \"invoiceNo\": \"103002\" } } }\r\n```\r\nThe `initialRequest` is stored in workspace at `_initial`, accessible as `@_initial.invoiceNo`.\r\n\r\n### Writing conditions\r\n\r\nConditions are ordinary records. One row per condition, `Line No.` spaced like step\r\nnumbers so rows can be inserted between:\r\n\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook Condition ori\",\r\n  \"data\": [\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 10,\r\n        \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 10000 },\r\n      \"fields\": { \"Path\": \"status\", \"Operator\": \"Equals\", \"Value\": \"Success\" } },\r\n    { \"primaryKey\": { \"PlaybookCode\": \"EDOC-SEND\", \"StepNo_\": 10,\r\n        \"ConditionType\": \"Success\", \"GroupNo_\": 1, \"LineNo_\": 20000 },\r\n      \"fields\": { \"Path\": \"noOfRecords\", \"Operator\": \"GreaterThan\", \"Value\": \"0\" } }\r\n  ] } }\r\n```\r\n\r\n**Write enum fields by their AL name, not their caption.** `Operator` accepts\r\n`NotEquals`, `GreaterOrEqual`, `LessOrEqual`; it rejects `Not Equals`. `ConditionType`\r\naccepts `Start`, `Success`, `Error`. `Step Type` accepts `Action`, `Check`.\r\n\r\n**A `Data.Records.Get` on these tables gives back captions, not names.** An is-IS\r\nsession reads `Operator: \"Ekki jafnt\"`, `ConditionType: \"Upphaf\"`. Requesting\r\n`lcid: 1033` does not fix it: the English caption for `NotEquals` is `Not Equals`,\r\nwith a space, and `Set` rejects that too. Some names and captions coincide —\r\n`Equals`, `Exists`, `Start` — which makes the failure look intermittent.\r\n\r\nSo a read-modify-write cycle over conditions cannot feed its own output back in.\r\nMap captions to AL names yourself, or keep the intended values beside the code that\r\nwrites them rather than recovering them from a Get.\r\n\r\n## Scheduling Playbooks for Recurring Execution\r\n\r\nPlaybooks can run on a recurring schedule via the Job Queue. Two approaches:\r\n\r\n### Option A: Use a Recurring Template (recommended)\r\n\r\nTemplates define reusable schedules (days, time window, interval).\r\n\r\n**1. Create or find a template:**\r\n```json\r\n{ \"type\": \"Data.Records.Get\", \"data\": { \"tableName\": \"Recurring Template ori\" } }\r\n```\r\n\r\n**2. Create a template if needed:**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Recurring Template ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"WORKDAYS\" },\r\n    \"fields\": { \"Description\": \"Weekdays 08-18 every 30 min\",\r\n      \"RunonMondays\": true, \"RunonTuesdays\": true, \"RunonWednesdays\": true,\r\n      \"RunonThursdays\": true, \"RunonFridays\": true,\r\n      \"RunonSaturdays\": false, \"RunonSundays\": false,\r\n      \"StartingTime\": \"08:00:00\", \"EndingTime\": \"18:00:00\",\r\n      \"No_ofMinutesbetweenRuns\": 30 } }]\r\n} }\r\n```\r\n\r\n**3. Assign template to playbook (auto-copies schedule fields):**\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"MY-PLAYBOOK\" },\r\n    \"fields\": { \"RecurringTemplateCode\": \"WORKDAYS\" } }]\r\n} }\r\n```\r\nWhen a template is set, the playbook's schedule fields (days, times, interval) are\r\nautomatically populated from the template and locked from manual editing.\r\n\r\n### Option B: Set schedule directly on the playbook\r\n\r\n```json\r\n{ \"type\": \"Data.Records.Set\", \"data\": {\r\n  \"tableName\": \"Playbook ori\",\r\n  \"data\": [{ \"primaryKey\": { \"Code\": \"MY-PLAYBOOK\" },\r\n    \"fields\": { \"RunonMondays\": true, \"RunonTuesdays\": true,\r\n      \"RunonWednesdays\": true, \"RunonThursdays\": true, \"RunonFridays\": true,\r\n      \"StartingTime\": \"06:00:00\", \"EndingTime\": \"22:00:00\",\r\n      \"No_ofMinutesbetweenRuns\": 60 } }]\r\n} }\r\n```\r\n\r\n### Activating the schedule\r\n\r\nAfter setting the schedule, use the **Schedule** action on the Playbook Card page\r\nto create the Job Queue Entry. This creates a recurring JQ Entry pointing to the\r\nBifrost Playbook JQ Dispatcher codeunit with the playbook's RecordId.\r\n\r\n**Key playbook fields for scheduling:**\r\n\r\n| Field | Type | Purpose |\r\n|---|---|---|\r\n| `RecurringTemplateCode` | Code[20] | Links to JQ Recurring Template (optional) |\r\n| `No_ofMinutesbetweenRuns` | Integer | Run interval in minutes |\r\n| `RunonMondays`..`RunonSundays` | Boolean | Which days to run |\r\n| `StartingTime` | Time | Earliest time of day |\r\n| `EndingTime` | Time | Latest time of day |\r\n| `Scheduled` | Boolean (FlowField) | Whether a JQ Entry exists (read-only) |\r\n| `JobQueueEntryID` | Guid | The created JQ Entry ID (read-only) |\r\n\r\n## Using LLM.Prompt.Complete in Playbooks\r\n\r\n`LLM.Prompt.Complete` is the general-purpose AI step for tasks not covered by dedicated message types.\r\nAlways set `roleCode` in the request template to control cost and speed (e.g. `HAIKU` for simple tasks), and only to a code that exists in this company: read the codes with `Data.Records.Get` on table `Bifrost Language Model ori`. A code that does not exist makes every call answer `RecordNotFound`, and `Orchestrator.Playbook.Verify` reports it as `LanguageModelRoleNotFound`.\r\n\r\n### Pattern 1: Yes/No Gate (per-item decision)\r\n\r\nUse LLM as a forEach decision step. The success condition determines the branch:\r\n\r\n```json\r\n// Step 35 template — forEach, condition: text Contains \"No\"\r\n{ \"roleCode\": \"HAIKU\",\r\n  \"system\": \"Compare two addresses. Answer ONLY Yes or No.\",\r\n  \"prompt\": \"BC: @_current.fields.Address, @_current.fields.PostCode\\\\nRegistry: @30.@_iter.street, @30.@_iter.postCode\" }\r\n```\r\n\r\n- Condition `text Contains \"No\"` → mismatch = Completed → downstream step runs\r\n- Condition false (\"Yes\") → Cancelled → downstream `Skip If Step Failed` skips it\r\n- Use `@_iter` to reference same-iteration data from prior forEach steps\r\n\r\n### Pattern 2: Text Formatting (summary/report generation)\r\n\r\nCollect workspace data from multiple steps and format for output:\r\n\r\n```json\r\n// Step 48 template — single step, workspace dump\r\n{ \"roleCode\": \"HAIKU\",\r\n  \"system\": \"Create a report for Telegram. Use only <b>, <i> tags. No <p>, <table>.\",\r\n  \"prompt\": \"@10,20,30\" }\r\n```\r\n\r\n- `@10,20,30` dumps filtered workspace data from steps 10, 20, 30 as a single string\r\n- Always specify output constraints (Telegram tags, max chars, JSON-only, etc.)\r\n- Store result via `ResultLogPaths: text>report` for downstream steps\r\n\r\n### Pattern 3: Run Notification\r\n\r\nTurn the run report into a human message. Do not describe the format — **show it**,\r\nthen show one filled-in example. A prompt that only lists rules produces output of\r\nroughly the right shape and reliably the wrong length; the same prompt with a worked\r\nexample produces the shape exactly:\r\n\r\nThe `system` string, written out (each line below is a real newline in the JSON):\r\n\r\n```text\r\nJSON about an automated process that SUCCEEDED. Icelandic, for Telegram.\r\nFormat, exactly three lines:\r\nOK <b>PLAYBOOK CODE</b>\r\n<one sentence about what was achieved, with figures>\r\n<i>x steps - y s</i>\r\nExample:\r\nOK <b>CUST-KT-SYNC</b>\r\n5 customers checked, 4 valid kennitalas, 2 addresses updated.\r\n<i>7 steps - 12 s</i>\r\nRules: use ONLY <b> and <i>, no other HTML and no Markdown asterisks. Real\r\nline breaks, not <br>. durationMs is in MILLISECONDS - convert to seconds.\r\nTake figures from _steps.*.result. No greeting, no signature.\r\nReturn ONLY the message.\r\n```\r\n\r\nand the step template that carries it:\r\n\r\n```json\r\n// Step 900 - Start: _run.failed Equals false, Exclude From Run Status\r\n{ \"roleCode\": \"HAIKU\", \"system\": \"<the text above>\", \"prompt\": \"@_run,_steps\" }\r\n```\r\n\r\nThen `Result Log Paths: text>noticeText`, and send it from the next step with\r\n`{\"message\":\"@900.noticeText\"}`. Failure notices are the same with `_run.failed`\r\ninverted and `_run.firstFailedStepNo` named in the prompt.\r\n\r\nFour things the model gets wrong unless told:\r\n\r\n- **`durationMs` is milliseconds.** Unprompted it reports 41230 seconds.\r\n- **`itemsProcessed` is iterations, not items.** Point the prompt at a named step.\r\n- **Length.** State the limit *and* show it. SMS in Icelandic is UCS-2: 70 characters\r\n  in one segment, 67 each once it splits — not the 160 of GSM-7 English.\r\n- **Markup.** Telegram takes `<b> <i> <code> <a>`; anything else is a 400 from the\r\n  API, so forbid other tags and Markdown asterisks explicitly.\r\n\r\nPick the role for the job. A small local model is fine for a Yes/No gate but writes\r\nunidiomatic Icelandic and leaks its instructions into prose; `HAIKU` composes these\r\nnotices in about 1.5 seconds. Latency compounds — a per-item LLM gate in a forEach\r\nover a slow local model turned a 12-second run into 397 seconds.\r\n\r\n### Key Rules for LLM Steps\r\n\r\n1. **Always set `roleCode`, to a code that exists** — `HAIKU` for simple tasks (fast, cheap), larger models only when needed. Check the code with `Data.Records.Get` on `Bifrost Language Model ori` before you use it\r\n2. **Always set success condition** — `status = Success` catches provider errors\r\n3. **Constrain output format, and show the shape** — \"Answer ONLY Yes/No\", \"Return ONLY JSON\". For anything with a length limit, give the limit and a worked example of it; a rule alone is not enough\r\n4. **Telegram-safe HTML** — only `<b>`, `<i>`, `<code>`, `<a>` tags. No `<p>`, `<table>`, `<div>`\r\n5. **Response field is `text`** — use `ResultLogPaths: text>fieldName` to store LLM output in workspace\r\n\r\n## Rules for AI Agents\r\n\r\n1. **Build with every step disabled.** Create the playbook and its steps with `Disabled = true`, enable the read and decision steps first, and enable the write steps one at a time on a single test record. See \"Building a playbook safely\".\r\n2. **Verify before every run, and before every schedule.** Call `Orchestrator.Playbook.Verify` after every change and fix every finding. `Orchestrator.Playbook.Run` and `Orchestrator.Playbook.Schedule` verify again and refuse with `PreconditionFailed` when an enabled step has an error, or a warning unless `ignoreWarnings` is true. Never pass `ignoreWarnings` to get past a warning you do not understand.\r\n3. **Never write in a forEach without a per-record gate.** Every forEach write step that follows a forEach `Check` over the same array must set `Skip If Step Failed` to that `Check`. The Next Step edges apply once per step, not per item; without the gate the write runs for every item. See \"Per-item decisions in a forEach\" and the worked example \"Per-record decision, then per-record write\".\r\n4. **Check that every message type and every role code you name exists.** `describe_message_type` or `Help.Implementation.Get` for a message type; `Data.Records.Get` on `Bifrost Language Model ori` for the `roleCode` of an `LLM.*` step. A code you remember or guess (`HAIKU`) may not exist in this company.\r\n5. **Use Data.Records.Get/Set for all CRUD** — reading/writing playbooks, steps, templates, credentials\r\n6. **Use action message types for operations** — Run, Restart, Schedule, etc.\r\n7. **Always check logs after Run** — read Playbook Instance ori and Playbook Step Log ori to verify\r\n8. **Step numbering convention** — use 10, 20, 30... (allows inserting steps between)\r\n9. **Request templates use `@path` syntax** — all data flows through the workspace, no separate bindings\r\n10. **Request templates are BLOB fields** — set via Data.Records.Set by passing base64-encoded JSON as the field value\r\n11. **Commits are permanent** — posting, document exchange, and other write operations cannot be undone by the engine\r\n12. **Use `result[0]>name` in Result Log Paths** for single-record steps to avoid array wrapper in workspace\r\n13. **Always add a Success condition** — one `Playbook Condition ori` row per step with `ConditionType=Success`, `Path=status`, `Operator=Equals`, `Value=Success` catches application-level errors. Set `StepType=Check` when a false answer is a legitimate result rather than a failure\r\n14. **Use `@_iter` for cross-step forEach data** — in forEach templates, `@30.@_iter.fieldName` references another forEach step's data at the same iteration index\r\n15. **Use `Disabled=true` to skip steps** — disabled steps follow the success path without executing. Use this instead of deleting steps.\r\n16. **LLM steps should set `roleCode`** — add `\"roleCode\":\"HAIKU\"` (or other role) in the request template to control which model is used. The code must exist in this company: verify it with `Data.Records.Get` on `Bifrost Language Model ori`\r\n17. **Data.Records.Get uses `tableView` not `filter`** — the parameter name for BC filters is `tableView`, e.g. `\"tableView\":\"WHERE(Registration Number=FILTER(<>''))\"`. Use English field names in tableView.\r\n18. **Guard on the result, not just the status** — add `noOfRecords GreaterThan 0` beside `status Equals Success` on every query step whose emptiness would make the rest of the run pointless. See \"`status Equals Success` is not enough\".\r\n19. **Write enum fields by AL name** — `NotEquals`, not the `Not Equals` caption a Get returns. Reads are localized; writes are not.\r\n20. **Queue long playbooks instead of running them inline** — `Orchestrator.Playbook.Enqueue`, or an async invocation. A synchronous `Playbook.Run` that outlives the caller's HTTP timeout leaves its instance stuck in `Running` for ever: the client gives up, the server keeps going, and nothing ever writes the completion. Any playbook with an LLM step in a forEach is a candidate.\r\n21. **Verify from the step log, not the response** — a `Playbook.Run` response that never arrived says nothing about whether the run succeeded. Read `Playbook Step Log ori` filtered by instance; it is written step by step as the run progresses.\r\n\r\n## Execution Semantics\r\n\r\n- **Playbook status = Failed** only when `StepsFailed > 0`. A playbook ending via a condition branch (NextStepNo_Failure = 0 with 0 step errors) is Completed.\r\n- **forEach condition false = Cancelled** (not Failed). Does not increment StepsFailed. `Skip If Step Failed` still skips these iterations in downstream steps.\r\n- **Single-step condition false = branch** — follows NextStepNo_Failure path. If that path is 0, playbook ends as Completed (not Failed).\r\n- **Paged steps use the step's Request Template** — not the playbook's initial request. The engine injects `skip`/`take` into the template.\r\n- **Paged step failure** — if a paged step fails, the engine follows the paged step's failure path (not the chain end step's).\r\n- **Workspace snapshot** — on step failure, the workspace JSON is saved to the step log for debugging. Download via the Step Log subpage.\r\n- **Start condition false = Cancelled, success path** — the step logs `Skipped: start conditions not met`, `stepsSkipped` increments, and the run is not failed. This is the mechanism the reporting tail is built on.\r\n- **Check steps do not fail the run for answering no** — a `Check` whose Success condition is false is Cancelled (forEach) and routes down the failure edge, but `StepsFailed` is untouched; its log says `Check answered no.` A technical failure fails the Check step and the run like an `Action`: the message type raising an error, or answering `status: \"Error\"` (also `Refused`, `Failed`). The step log carries the type's `code` and `error`, and `_steps.<no>.items.errored` counts it apart from `checkFailed`.\r\n- **Next Step edges apply once per step, never per item** — a forEach step runs all its iterations and then follows one edge. A per-item gate is `Skip If Step Failed = <check step no>` on the downstream forEach step. See \"Per-item decisions in a forEach\".\r\n- **Last-run fields on the header** — every run (`Orchestrator.Playbook.Run`, `Orchestrator.Playbook.Enqueue`, a scheduled run, Run Now) writes `LastRunInstanceID`, `LastRunStatus` and `LastRunAt` on `Playbook ori`: `Running` when the run starts, then `Completed` or `Failed` when it ends. A run abandoned mid-flight therefore stays `Running` and never reads `Completed`.\r\n- **Excluded steps are recorded under `_tail`** — out of the totals, still referenceable. They appear in the step log like any other step.\r\n\r\n## Built-in Workspace Variables\r\n\r\nThese are seeded automatically at playbook start. No steps needed to populate them.\r\n\r\n### `_sys` — System Constants\r\n\r\n| Path | Example | Description |\r\n|---|---|---|\r\n| `_sys.today` | `2026-08-30` | Calendar date (Today) |\r\n| `_sys.workDate` | `2026-08-30` | BC posting date (WorkDate) |\r\n| `_sys.now` | `2026-08-30T15:30:00Z` | Current timestamp |\r\n| `_sys.year` | `2026` | Current year |\r\n| `_sys.lastMonthStart` | `2026-07-01` | First day of previous month |\r\n| `_sys.lastMonthEnd` | `2026-07-31` | Last day of previous month |\r\n| `_sys.thisMonthStart` | `2026-08-01` | First day of current month |\r\n| `_sys.thisQuarterStart` | `2026-07-01` | First day of current quarter |\r\n| `_sys.thisYearStart` | `2026-01-01` | First day of current year |\r\n| `_sys.companyName` | `CRONUS IS` | Current BC company |\r\n| `_sys.userId` | `ADMIN` | Current user ID |\r\n\r\n### `_who` — User & Company Context (from Help.WhoAmI.Get)\r\n\r\n| Path | Example | Description |\r\n|---|---|---|\r\n| `_who.user.userName` | `JOHN` | Login name |\r\n| `_who.user.userSecurityId` | GUID | User security ID |\r\n| `_who.salesperson.name` | `John Smith` | Salesperson full name |\r\n| `_who.salesperson.email` | `user@company.is` | Salesperson email |\r\n| `_who.salesperson.code` | `JS` | Salesperson code |\r\n| `_who.salesperson.phoneNo` | `5551234` | Phone number |\r\n| `_who.companyInfo.name` | `CRONUS Ltd.` | Legal company name |\r\n| `_who.companyInfo.registrationNo` | `5501011490` | Company kennitala |\r\n| `_who.companyInfo.vatRegistrationNo` | `00000` | VAT number |\r\n| `_who.companyInfo.address` | `5 The Ring` | Company address |\r\n| `_who.telegramChatId` | `123456789` | User's Telegram chat ID |\r\n| `_who.personalization.languageId` | `1033` | Session language LCID |\r\n\r\n## Data Reference — Tables & Fields for Data.Records.Get/Set\r\n\r\n### Restricted tables (dedicated message types)\r\n\r\nFoundation / this app block `Data.Records.Get` / `Data.Records.Set` on the tables below.\r\nThe error text ends with `Use {hint}.` and the response `nextStep` field carries the same dedicated types:\r\n\r\n| Table | Direction | Use instead |\r\n|---|---|---|\r\n| `Job Queue Entry` | write | `Orchestrator.Entry.Register` / `Orchestrator.Entry.Schedule` / `Orchestrator.JobQueueEntry.Restart` |\r\n| `Scheduled Task` | write | `Orchestrator.Status.Restart` (no generic write) |\r\n| `Report Request Preset ori` | read / write | `Orchestrator.Report.Get` / `Orchestrator.Report.Run` / `Orchestrator.Report.SaveAs` |\r\n\r\nIMPORTANT: Playbook steps use **message type parameter names** (e.g. `tableName`, `fieldNumbers`),\r\nNOT the MCP tool shorthand names (e.g. `table`, `fields`). The playbook engine dispatches\r\nthrough `invoke_message_type`, which passes data directly to the message type handler.\r\nAlways call `Help.Implementation.Get` with the message type name to see its exact parameters.\r\n\r\n### Orchestrator Tables\r\n\r\n#### Scheduled Entry ori\r\nStores configuration for each monitored Job Queue Entry.\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| ID | ID | GUID | PK — matches the Job Queue Entry ID |\r\n| Object Type to Run | ObjectTypetoRun | Option | Codeunit/Report |\r\n| Object ID to Run | ObjectIDtoRun | Integer | BC object ID |\r\n| Description | Description | Text[250] | |\r\n| Blocked | Blocked | Boolean | Prevents scheduling when true |\r\n| No. of Minutes between Runs | No_ofMinutesbetweenRuns | Integer | |\r\n| Run on Mondays..Sundays | RunonMondays..RunonSundays | Boolean | |\r\n| Starting Time | StartingTime | Time | |\r\n| Ending Time | EndingTime | Time | |\r\n| Notification Type | NotificationType | Option | None/Email |\r\n| Notification Recipient | NotificationRecipient | Text | Field 110: not writable through Data.Records.Set. Set with Orchestrator.Playbook.Schedule or edit on the Scheduled Entry card. |\r\n| Job Queue User ID | JobQueueUserID | Code[50] | Field 140: not writable through Data.Records.Set. Edit on the Scheduled Entry card. |\r\n| Retry Policy | RetryPolicy | Option | Always/Limited/None |\r\n| Client Credentials Code | ClientCredentialsCode | Code[20] | For API-based scheduling |\r\n\r\n#### Scheduler Setup ori\r\nSingleton setup table. Read with `Data.Records.Get`, tableName = \"Scheduler Setup ori\".\r\nJob Queue User ID (field 40) cannot be written through Data.Records.Set. Edit it on the Scheduler Setup page. Reads of these three fields are unchanged; other fields remain writable generically.\r\n\r\n### Playbook Tables\r\n\r\n#### Playbook ori (PK: Code)\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| Code | Code | Code[20] | PK |\r\n| Description | Description | Text[250] | |\r\n| Recurring Template Code | RecurringTemplateCode | Code[20] | Links to schedule template |\r\n| No. of Minutes between Runs | No_ofMinutesbetweenRuns | Integer | |\r\n| Run on Mondays..Sundays | RunonMondays..RunonSundays | Boolean | |\r\n| Starting/Ending Time | StartingTime/EndingTime | Time | |\r\n| Notification Type | NotificationType | Option | None/Email |\r\n| Scheduled | Scheduled | Boolean | FlowField — read-only |\r\n| Last Run Instance ID | LastRunInstanceID | Guid | ID of the `Playbook Instance ori` of the latest run. Written by the runner when a run starts and again when it ends, for every run type; read-only |\r\n| Last Run Status | LastRunStatus | Enum | Status of that instance: `Running` while in flight, then `Completed` or `Failed`. An abandoned run stays `Running`; read-only |\r\n| Last Run At | LastRunAt | DateTime | When the header was last stamped: the start of the run, then its end; read-only |\r\n\r\n#### Playbook Step ori (PK: PlaybookCode + StepNo_)\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| Playbook Code | PlaybookCode | Code[20] | PK |\r\n| Step No. | StepNo_ | Integer | PK — use 10, 20, 30... |\r\n| Description | Description | Text[250] | |\r\n| Message Type | MessageType | Option | The Bifrost message type to call |\r\n| Next Step No. (Success) | NextStepNo_Success | Integer | 0 = end playbook |\r\n| Next Step No. (Failure) | NextStepNo_Failure | Integer | 0 = fail playbook |\r\n| Request Template | RequestTemplate | BLOB | JSON template with `@path` workspace refs (set as base64) |\r\n| Result Log Paths | ResultLogPaths | Text[2048] | Paths to extract from response to workspace. `source>target` renames, `source[0]>target` extracts first element |\r\n| Iterate Array Path | IterateArrayPath | Text[250] | Dot-path to array for foreach |\r\n| Iterate Source Step No. | IterateSourceStepNo_ | Integer | Which step's response has the array |\r\n| Step Type | StepType | Option | Action (default) or Check — is a false Success condition a failure? |\r\n| Summary Paths | SummaryPaths | Text[2048] | Response paths copied into the run report. Keep small |\r\n| Exclude From Run Status | ExcludeFromRunStatus | Boolean | Keep this step out of _run and _steps |\r\n| Stop On Item Error | StopOnItemError | Boolean | For foreach: abort on first failure |\r\n| Skip If Step Failed | SkipIfStepFailed | Integer | The per-item gate: skip this iteration if the named step's same iteration did not succeed, an answer of no included. Next Step edges are per step, not per item |\r\n| Paged | Paged | Boolean | Enable auto-paging (skip/take) |\r\n| Page Size | PageSize | Integer | Records per page (default 500) |\r\n| Page Through Step No. | PageThroughStepNo_ | Integer | Last step in paged chain |\r\n| Disabled | Disabled | Boolean | Skip this step without executing |\r\n\r\n#### Playbook Condition ori (PK: PlaybookCode + StepNo_ + ConditionType + GroupNo_ + LineNo_)\r\n\r\n| Field | JSON Key | Type | Notes |\r\n|---|---|---|---|\r\n| Playbook Code | PlaybookCode | Code[20] | PK |\r\n| Step No. | StepNo_ | Integer | PK — the step this condition guards |\r\n| Condition Type | ConditionType | Enum | PK — Start, Success or Error |\r\n| Group No. | GroupNo_ | Integer | PK — conditions in one group are ANDed; groups are ORed |\r\n| Line No. | LineNo_ | Integer | PK — use 10000, 20000, ... |\r\n| Path | Path | Text[250] | Dot-path. Start/Error read the workspace, Success reads the step response |\r\n| Operator | Operator | Enum | Equals, NotEquals, Contains, GreaterThan, LessThan, GreaterOrEqual, LessOrEqual, Exists |\r\n| Value | Value | Text[250] | Compared as text; numeric operators parse both sides |\r\n| Description | Description | Text[100] | Why this condition exists. Optional, and worth writing |\r\n\r\nDeleting a step cascades to its conditions. An empty condition set is true, so a step\r\nwith no Success conditions succeeds whenever the message type does not raise an error.\r\n\r\n### Execution Log Tables (read-only)\r\n\r\n#### Playbook Instance ori (PK: ID)\r\nOne record per playbook run. Fields: PlaybookCode, Status, StartedAt, CompletedAt,\r\nTotalDuration, StepsExecuted, StepsFailed, ItemsProcessed, InitiatedBy, ErrorText, Context.\r\n\r\n`Status` stays `Running` until the run writes its own completion, so an instance\r\nabandoned mid-flight — a session killed, a caller that timed out — stays `Running`\r\nfor ever. Judge such a run by the timestamps on its step log, not by this field.\r\n\r\n#### Playbook Step Log ori (PK: InstanceID + StepNo_ + IterationNo_)\r\nOne record per step execution. Fields: MessageType, Status, Duration, ErrorText,\r\nRequestSent (base64 BLOB), ResponseReceived (base64 BLOB), IteratorElement, WorkspaceSnapshot (base64 BLOB, only on failed steps).\r\n\r\n"
+        }
+      }
+    }
+  ],
+  "executed": 18,
+  "passed": 18,
+  "failed": 0,
+  "skipped": 0,
+  "fixtures": [
+    {
+      "lcid": 1033,
+      "code": "X118-M-1033",
+      "target": "X118-T-1033",
+      "initial": "X118 untouched 1033",
+      "changed": "X118 written 1033",
+      "templates": {
+        "bad": {
+          "tableName": "Playbook ori",
+          "fieldNumbers": [
+            1
+          ],
+          "tableView": "WHERE(Code=CONST(@_current.fields.Code))"
+        },
+        "good": {
+          "tableName": "Playbook ori",
+          "fieldNumbers": [
+            1
+          ],
+          "tableView": "WHERE(Code=CONST(@_current.primaryKey.Code))"
+        }
+      },
+      "failedInstanceId": "C9C38C7C-7017-4AC5-99D4-FDFC642C4E77",
+      "goodInstanceId": "BE2BEBF7-7F1B-4F21-9EAA-3549E8AABBD2"
+    },
+    {
+      "lcid": 1039,
+      "code": "X118-M-1039",
+      "target": "X118-T-1039",
+      "initial": "X118 untouched 1039",
+      "changed": "X118 written 1039",
+      "templates": {
+        "bad": {
+          "tableName": "Playbook ori",
+          "fieldNumbers": [
+            1
+          ],
+          "tableView": "WHERE(Code=CONST(@_current.fields.Code))"
+        },
+        "good": {
+          "tableName": "Playbook ori",
+          "fieldNumbers": [
+            1
+          ],
+          "tableView": "WHERE(Code=CONST(@_current.primaryKey.Code))"
+        }
+      },
+      "failedInstanceId": "4507CD2E-27B2-41BD-9985-30EEB910EC5D",
+      "goodInstanceId": "0E7AFFBB-5DA0-4A79-8092-E83914468B9C"
+    }
+  ],
+  "cleanup": {
+    "verified": true,
+    "method": "Owned container deleted and GET404 read back",
+    "containerId": "f0223a373d54",
+    "evidence": "owned-cleanup.json"
+  },
+  "scope": "Self-created playbooks and isolated target headers only; no licence/EULA/trial/backend/HTTP configuration writes.",
+  "verified": true,
+  "finishedAt": "2026-10-23T12:29:38.745Z"
+}

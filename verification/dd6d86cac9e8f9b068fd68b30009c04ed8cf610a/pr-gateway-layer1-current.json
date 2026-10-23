@@ -1,0 +1,385 @@
+{
+  "version": "28.0.2.0",
+  "summary": {
+    "ready": false,
+    "passed": 14,
+    "failed": 9,
+    "total": 23
+  },
+  "files_scanned": 6,
+  "mode": "diff (vs origin/main)",
+  "publisher": "Origo",
+  "total_al_files": 126,
+  "project": "Bifrost Orchestrator",
+  "checks": {
+    "hardcoded_values": {
+      "findings": [
+        {
+          "text": "O.AppendLine('| `\"@_who.path\"` | WhoAmI user/company context | `\"@_who.salesperson.email\"` → `\"user@company.is\"` |');",
+          "line": 426,
+          "file": "Help.Codeunit.al",
+          "severity": "medium",
+          "issue": "Hardcoded email"
+        },
+        {
+          "text": "O.AppendLine('| `_who.salesperson.email` | `user@company.is` | Salesperson email |');",
+          "line": 875,
+          "file": "Help.Codeunit.al",
+          "severity": "medium",
+          "issue": "Hardcoded email"
+        }
+      ],
+      "pass": false
+    },
+    "with_statements": {
+      "findings": [],
+      "pass": true
+    },
+    "set_load_fields": {
+      "advisory": "Loops without SetLoadFields - consider it only for wide tables; not a gate failure",
+      "pass": true,
+      "findings": [
+        {
+          "text": "if not Condition.FindSet() then",
+          "line": 322,
+          "file": "PlaybookJSONHelper.Codeunit.al",
+          "severity": "low"
+        }
+      ]
+    },
+    "caption_translation": {
+      "pass": true,
+      "skipped": null,
+      "findings": []
+    },
+    "changelog": {
+      "findings": [
+        "No entry for version 28.0.2.0"
+      ],
+      "pass": false
+    },
+    "xml_doc_comments": {
+      "findings": [
+        {
+          "procedure": "OnBeforeCheckLanguageModelRole",
+          "line": 240,
+          "file": "PlaybookVerifyLookup.Codeunit.al"
+        }
+      ],
+      "pass": false
+    },
+    "commit_in_loop": {
+      "findings": [],
+      "pass": true
+    },
+    "app_json": {
+      "findings": [],
+      "pass": true
+    },
+    "format_evaluate_enum": {
+      "findings": [],
+      "pass": true
+    },
+    "namespace": {
+      "findings": [
+        {
+          "file": "Help.Codeunit.al"
+        },
+        {
+          "file": "PlaybookVerifyLookup.Codeunit.al"
+        },
+        {
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "file": "PlaybookRunner.Codeunit.al"
+        }
+      ],
+      "pass": false
+    },
+    "read_isolation": {
+      "findings": [
+        {
+          "text": "if not PlaybookStep.FindFirst() then begin",
+          "line": 73,
+          "file": "PlaybookRunner.Codeunit.al",
+          "variable": "PlaybookStep"
+        },
+        {
+          "text": "if not PlaybookStep.FindFirst() then begin",
+          "line": 73,
+          "file": "PlaybookRunner.Codeunit.al",
+          "variable": "PlaybookStep"
+        }
+      ],
+      "pass": false
+    },
+    "confirm_in_page": {
+      "findings": [],
+      "pass": true
+    },
+    "today_vs_workdate": {
+      "findings": [],
+      "pass": true
+    },
+    "data_classification": {
+      "findings": [],
+      "pass": true
+    },
+    "format_guid": {
+      "findings": [],
+      "pass": true
+    },
+    "global_variables": {
+      "findings": [
+        {
+          "names": "JsonHelper, LogMgt, Workspace, PerItemResults, PageItemOffset, CurrentPageNo",
+          "file": "PlaybookRunner.Codeunit.al",
+          "count": 7,
+          "issue": "Object has 7 global variables (recommended max: 3-5 non-Label vars)"
+        }
+      ],
+      "pass": false
+    },
+    "modernization": {
+      "findings": [
+        {
+          "area": "Job Queue & Scheduling",
+          "modern": "Enhanced Job Queue with recurrence, Task Scheduler, external notifications on failure",
+          "transition": "MOD-JOBQUEUE-001",
+          "file": "PlaybookVerifyTemplate.Codeunit.al",
+          "severity": "warn",
+          "matched": "NAS"
+        },
+        {
+          "area": "Job Queue & Scheduling",
+          "modern": "Enhanced Job Queue with recurrence, Task Scheduler, external notifications on failure",
+          "transition": "MOD-JOBQUEUE-001",
+          "file": "PlaybookJSONHelper.Codeunit.al",
+          "severity": "warn",
+          "matched": "NAS"
+        }
+      ],
+      "pass": false
+    },
+    "try_prefix_convention": {
+      "findings": [
+        {
+          "procedure": "TryGetRoleExists",
+          "line": 27,
+          "file": "PlaybookVerifyLookup.Codeunit.al",
+          "issue": "Procedure 'TryGetRoleExists' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryLookupRecord",
+          "line": 50,
+          "file": "PlaybookVerifyLookup.Codeunit.al",
+          "issue": "Procedure 'TryLookupRecord' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryRead",
+          "line": 81,
+          "file": "PlaybookVerifyLookup.Codeunit.al",
+          "issue": "Procedure 'TryRead' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryGetFieldNames",
+          "line": 107,
+          "file": "PlaybookVerifyLookup.Codeunit.al",
+          "issue": "Procedure 'TryGetFieldNames' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryGetPrimaryKeyNames",
+          "line": 121,
+          "file": "PlaybookVerifyLookup.Codeunit.al",
+          "issue": "Procedure 'TryGetPrimaryKeyNames' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryGetIterOwner",
+          "line": 374,
+          "file": "PlaybookVerifyTemplate.Codeunit.al",
+          "issue": "Procedure 'TryGetIterOwner' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryGetStepNo",
+          "line": 392,
+          "file": "PlaybookVerifyTemplate.Codeunit.al",
+          "issue": "Procedure 'TryGetStepNo' uses Try prefix but has no [TryFunction] attribute"
+        },
+        {
+          "procedure": "TryResolveWorkspaceRefs",
+          "line": 101,
+          "file": "PlaybookJSONHelper.Codeunit.al",
+          "issue": "Procedure 'TryResolveWorkspaceRefs' uses Try prefix but has no [TryFunction] attribute"
+        }
+      ],
+      "pass": false
+    },
+    "one_statement_per_line": {
+      "findings": [
+        {
+          "text": "internal procedure TryLookupRecord(TableName: Text; FieldName: Text; FieldValue: Text; var Found: Boolean): Boolean",
+          "line": 50,
+          "file": "PlaybookVerifyLookup.Codeunit.al"
+        },
+        {
+          "text": "internal procedure TryGetFieldNames(TableName: Text; var FieldNames: Dictionary of [Text, Boolean]; var ResolvedTableName: Text): Boolean",
+          "line": 107,
+          "file": "PlaybookVerifyLookup.Codeunit.al"
+        },
+        {
+          "text": "local procedure TryFindTable(TableName: Text; var TableId: Integer; var ResolvedTableName: Text)",
+          "line": 150,
+          "file": "PlaybookVerifyLookup.Codeunit.al"
+        },
+        {
+          "text": "internal procedure OnBeforeCheckLanguageModelRole(RoleCode: Text; var Handled: Boolean; var Exists: Boolean)",
+          "line": 240,
+          "file": "PlaybookVerifyLookup.Codeunit.al"
+        },
+        {
+          "text": "internal procedure CheckRoleCode(Step: Record \"Playbook Step ori\"; TypeName: Text; TemplateJson: JsonObject; var Findings: JsonArray)",
+          "line": 50,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure ScanToken(Step: Record \"Playbook Step ori\"; Token: JsonToken; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 76,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure ScanString(Step: Record \"Playbook Step ori\"; Value: Text; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 101,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure CheckPath(Step: Record \"Playbook Step ori\"; Value: Text; AtPos: Integer; Path: Text; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 144,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure CheckStepReference(Step: Record \"Playbook Step ori\"; ReferencedStepNo: Integer; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 167,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure CheckStepField(Step: Record \"Playbook Step ori\"; ReferencedStepNo: Integer; Segments: List of [Text]; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 193,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure CheckIterField(Step: Record \"Playbook Step ori\"; OwnerStepNo: Integer; Segments: List of [Text]; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 214,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure GetStoringStep(Step: Record \"Playbook Step ori\"; StepNo: Integer; var StoringStep: Record \"Playbook Step ori\"): Boolean",
+          "line": 231,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure CheckStoredField(Step: Record \"Playbook Step ori\"; StoringStep: Record \"Playbook Step ori\"; RawFieldName: Text; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 241,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure CheckCurrentField(Step: Record \"Playbook Step ori\"; Segments: List of [Text]; var Seen: List of [Text]; var Findings: JsonArray)",
+          "line": 307,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "local procedure TryGetIterOwner(Value: Text; AtPos: Integer; var OwnerStepNo: Integer): Boolean",
+          "line": 374,
+          "file": "PlaybookVerifyTemplate.Codeunit.al"
+        },
+        {
+          "text": "procedure EvaluateConditionSet(SourceJson: JsonObject; PlaybookCode: Code[20]; StepNo: Integer; CondType: Enum \"Playbook Cond. Type ori\"): Boolean",
+          "line": 314,
+          "file": "PlaybookJSONHelper.Codeunit.al"
+        },
+        {
+          "text": "procedure EvaluateCondition(SourceJson: JsonObject; ConditionPath: Text; Operator: Enum \"Playbook Cond. Operator ori\"; ConditionValue: Text): Boolean",
+          "line": 350,
+          "file": "PlaybookJSONHelper.Codeunit.al"
+        },
+        {
+          "text": "procedure ExtractArray(ResponseJson: JsonObject; ArrayPath: Text; var ResultArray: JsonArray): Boolean",
+          "line": 405,
+          "file": "PlaybookJSONHelper.Codeunit.al"
+        },
+        {
+          "text": "procedure ResolveJsonPath(Source: JsonObject; Path: Text; var Result: JsonToken): Boolean",
+          "line": 429,
+          "file": "PlaybookJSONHelper.Codeunit.al"
+        },
+        {
+          "text": "procedure Run(PlaybookCode: Code[20]; var InitialRequest: BigText; var FinalResponse: BigText; var InstanceId: Guid)",
+          "line": 41,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "procedure Run(PlaybookCode: Code[20]; var InitialRequest: BigText; var FinalResponse: BigText; var InstanceId: Guid; StartStepNo: Integer)",
+          "line": 123,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure UpdateLastRun(PlaybookCode: Code[20]; InstanceId: Guid; RunStatus: Enum \"Playbook Inst. Status ori\")",
+          "line": 200,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure ExecutePagedBlock(PagedStep: Record \"Playbook Step ori\"; InstanceId: Guid; InitialRequestText: Text; var ResponseStore: Dictionary of [Integer, JsonObject]; var StepSuccess: Boolean; var StepsExecuted: Integer; var StepsFailed: Integer; var ItemsProcessed: Integer; var LastResponseText: Text)",
+          "line": 212,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure ExecuteStep(PlaybookStep: Record \"Playbook Step ori\"; InstanceId: Guid; InitialRequestText: Text; var ResponseStore: Dictionary of [Integer, JsonObject]; var StepSuccess: Boolean; var StepsExecuted: Integer; var StepsFailed: Integer; var ItemsProcessed: Integer; var LastResponseText: Text)",
+          "line": 332,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure ExecuteSingleStep(PlaybookStep: Record \"Playbook Step ori\"; InstanceId: Guid; InitialRequestText: Text; var ResponseStore: Dictionary of [Integer, JsonObject]; var StepSuccess: Boolean; var StepsExecuted: Integer; var StepsFailed: Integer; var LastResponseText: Text)",
+          "line": 340,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure ExecuteForEachStep(PlaybookStep: Record \"Playbook Step ori\"; InstanceId: Guid; var ResponseStore: Dictionary of [Integer, JsonObject]; var StepSuccess: Boolean; var StepsExecuted: Integer; var StepsFailed: Integer; var ItemsProcessed: Integer; var LastResponseText: Text)",
+          "line": 417,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure ExecuteMessageType(MessageType: Enum \"Message Type ori\"; RequestText: Text; var ResponseText: Text; var StepSuccess: Boolean; var ErrorText: Text)",
+          "line": 577,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure RecordStepOutcome(PlaybookStep: Record \"Playbook Step ori\"; StatusText: Text; IsCheckAnswered: Boolean; CheckResult: Boolean; StepDuration: Duration; ErrorText: Text; ResponseText: Text; ItemsHere: Integer; ItemsFailedHere: Integer)",
+          "line": 612,
+          "file": "PlaybookRunner.Codeunit.al"
+        },
+        {
+          "text": "local procedure SetIterationSuccess(StepNo: Integer; IterationNo: Integer; Success: Boolean)",
+          "line": 636,
+          "file": "PlaybookRunner.Codeunit.al"
+        }
+      ],
+      "pass": false
+    },
+    "page_code_minimal": {
+      "findings": [],
+      "pass": true
+    },
+    "reserved_var_names": {
+      "findings": [],
+      "pass": true
+    },
+    "event_subscriber_placement": {
+      "findings": [],
+      "pass": true
+    },
+    "object_naming": {
+      "findings": [],
+      "pass": true
+    }
+  }
+}

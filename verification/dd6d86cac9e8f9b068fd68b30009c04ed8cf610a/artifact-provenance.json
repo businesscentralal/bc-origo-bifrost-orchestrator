@@ -1,0 +1,61 @@
+{
+  "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "branch": "codex/worker4-orchestrator118-reference-validation",
+  "artifacts": {
+    "product": {
+      "path": "/workspace/evidence/orchestrator118-worker4/build/Orchestrator.app",
+      "sha256": "c1ba16c284022a44fb7418401b49977725f2ea9230b26a1e7173d71b57730e56"
+    },
+    "test": {
+      "path": "/workspace/evidence/orchestrator118-worker4/build/OrchestratorTests.app",
+      "sha256": "69bb76ad39a0c3a6766e499790ddbcdb7da739d997ce070e37550cdb13dc66ae"
+    },
+    "defaultNoIVT": {
+      "path": "/workspace/evidence/orchestrator118-worker4/build/Orchestrator-candidate-Default.app",
+      "sha256": "68a4224650047e4370e632f76568cb213d904e86f7106e9bbceb3411b56f4797",
+      "sourceSha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+      "localBuildSigned": false,
+      "note": "Local no-IVT Default build/deployment; normal signed CI remains a PR gate."
+    }
+  },
+  "compile": {
+    "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+    "worktreeDirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "app": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0
+    },
+    "test": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 1
+    }
+  },
+  "dependency": {
+    "artifactId": 12409744454,
+    "artifactName": "bc-origo-bifrost-core-main-Apps-1.0.9.618",
+    "sourceSha": "daef56f6318b07f384ded3431e32f97dfe571527",
+    "runUrl": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core/actions/runs/39741415512",
+    "runConclusion": "success",
+    "archiveSha256": "940e2e2056abf51ebb73c3fc428171481097ba96e44162e9f5418479fc718dc6",
+    "expectedDigest": "sha256:940e2e2056abf51ebb73c3fc428171481097ba96e44162e9f5418479fc718dc6",
+    "version": "28.0.9.618",
+    "artifactPath": "/workspace/evidence/orchestrator118-worker4/foundation618/Origo_Bifrost Foundation_28.0.9.618.app",
+    "localSymbols": "/workspace/evidence/orchestrator118-worker4/symbols/Foundation-main618.app",
+    "deploymentEvidence": "/workspace/evidence/orchestrator118-worker4/publish-foundation.json"
+  },
+  "deploymentEvidence": [
+    "publish-default.json",
+    "publish-test-product.json",
+    "publish-test-app.json",
+    "apps-after-candidate-deploy.json"
+  ]
+}

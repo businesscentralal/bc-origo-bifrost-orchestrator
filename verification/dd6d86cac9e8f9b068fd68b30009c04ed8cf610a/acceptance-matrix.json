@@ -1,0 +1,143 @@
+{
+  "issueUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/118"
+  ],
+  "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+  "owner": "worker-4",
+  "displayName": "Alv\u00edss",
+  "sourceSha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "sourceBranch": "codex/worker4-orchestrator118-reference-validation",
+  "sourceCommitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "appVersion": "28.0.2.0",
+  "foundationVersion": "28.0.9.618",
+  "containerId": "f0223a373d54",
+  "acceptance": [
+    {
+      "id": "118-help",
+      "status": "implemented-and-developer-verified",
+      "criteria": "Use primaryKey.No_ for customer primary-key references in help, decoded/base64 example, explanation, token table and safe-build guidance.",
+      "evidence": [
+        "mcp-acceptance.json",
+        "full-suite.junit.xml"
+      ]
+    },
+    {
+      "id": "118-verify",
+      "status": "implemented-and-developer-verified",
+      "criteria": "UnknownFieldReference warns when a forEach fields.X path names a primary-key field; bilingual corrective nextStep.",
+      "evidence": [
+        "mcp-acceptance.json",
+        "full-suite.junit.xml"
+      ]
+    },
+    {
+      "id": "118-runtime",
+      "status": "implemented-and-developer-verified",
+      "criteria": "An unresolved request token fails the step before dispatch, including ignoreWarnings; corrected primary-key reference reaches a gated write on a self-created target.",
+      "evidence": [
+        "mcp-acceptance.json",
+        "ui-acceptance.json",
+        "full-suite.junit.xml"
+      ]
+    }
+  ],
+  "compile": {
+    "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+    "worktreeDirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "app": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0
+    },
+    "test": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 1
+    }
+  },
+  "native": {
+    "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+    "containerId": "f0223a373d54",
+    "suite": "ORCHESTRAT",
+    "fullSuite": true,
+    "total": 437,
+    "passed": 437,
+    "failed": 0,
+    "skipped": 0,
+    "sourceDeclaredTestMethods": 437,
+    "new118Tests": 9,
+    "runnerExitPending": false,
+    "runnerExitCode": 0,
+    "finishedAt": "2026-10-23T12:04:43.284Z"
+  },
+  "mcp": {
+    "executed": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "lcids": [
+      1033,
+      1039
+    ],
+    "types": [
+      "Orchestrator.Playbook.Verify",
+      "Orchestrator.Playbook.Run",
+      "Orchestrator.Playbook.Schedule",
+      "Help.Orchestrator.Get"
+    ],
+    "createsOwnData": true,
+    "dataSetup": "Own playbook/source headers, steps and conditions; built disabled then enabled. Normal Some Fields audit setup through standard BC UI; Blocked write guard retained, no force/bypass/consent/licence/backend-state writes.",
+    "scopeDisclosure": "Actual runtime mutation uses a self-created Playbook header primaryKey.Code to avoid customer fixtures; Customer No_ warning/path and exact documented examples also covered in native tests and live overview.",
+    "cleanup": {
+      "verified": true,
+      "method": "Owned container deleted and GET404 read back",
+      "containerId": "f0223a373d54",
+      "evidence": "owned-cleanup.json"
+    }
+  },
+  "ui": {
+    "executed": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "languages": [
+      "en-US",
+      "is-IS"
+    ],
+    "scenarios": "Actual Run Now clicks: wrong primary-key path fails with localized completion dialog and no target write; corrected path completes and changes own target.",
+    "originalLanguageRestored": true
+  },
+  "cleanup": {
+    "containerId": "f0223a373d54",
+    "sourceSha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+    "startedAt": "2026-10-23T12:32:37.512Z",
+    "owner": "worker-4",
+    "beforeStatus": 200,
+    "verified": true,
+    "meaning": "Owned container deletion removes all self-created headers, steps, conditions, instances, messages, audit setup and temporary test files. No foreign resource targeted.",
+    "displayName": "worker4-orch118-20261023",
+    "deleteStatus": 204,
+    "getStatus": 404,
+    "finishedAt": "2026-10-23T12:32:37.803Z"
+  },
+  "remainingDelivery": [
+    "PR current-tip CI",
+    "Independent Claude verification on bc28-w1 at current full SHA",
+    "Grok sole clearance at same SHA and eligible non-author approval",
+    "Architect merge commit and same-SHA deployment",
+    "Tester UAT and actual issue closure evidence"
+  ],
+  "deliveryComplete": false,
+  "failureHistory": {
+    "nativeHarness": "Attempts1/2 ran no AL tests; corrected env-secret resolution and incompatible named-suite+extension selection, then full437 passed without exclusions.",
+    "mcpSetup": "Initial Data.Records.Set fixture creation refused by normal write guard and rolled back. Normal audited field coverage configured through BC UI; no force/guard bypass. Public coverage helper refuses Blob type; recorded as unsupported setup probe, not a pass.",
+    "uiSetup": "Retained failed browser-driver attempts; driver now detects editable mode and scopes controls. All four product UI cases then passed."
+  }
+}

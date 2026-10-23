@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-23T12:28:51.502Z",
+  "rows": [
+    {
+      "company": "CRONUS International Ltd.",
+      "messageType": "ChangeLog.Field.Enabled",
+      "status": "Success",
+      "changeLogEnabled": true,
+      "changelogWriteGuardEnabled": true,
+      "tableNo": 10035539,
+      "tableName": "Playbook ori",
+      "fieldNo": 1,
+      "fieldName": "Code",
+      "fieldCovered": true,
+      "fieldWriteGuardBypassed": false
+    },
+    {
+      "company": "CRONUS International Ltd.",
+      "messageType": "ChangeLog.Field.Enabled",
+      "status": "Success",
+      "changeLogEnabled": true,
+      "changelogWriteGuardEnabled": true,
+      "tableNo": 10035539,
+      "tableName": "Playbook ori",
+      "fieldNo": 10,
+      "fieldName": "Description",
+      "fieldCovered": true,
+      "fieldWriteGuardBypassed": false
+    },
+    {
+      "status": "Error",
+      "code": "InvalidParameter",
+      "error": "Field type is not supported for change log tracking.",
+      "parameter": "fieldNo",
+      "received": "30",
+      "expected": "a field of a supported type",
+      "nextStep": "Pick a field of a supported type; Help.Fields.Get lists the fields of a table with their types.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"ChangeLog.Field.Enabled\". Always read the help before calling a message type."
+    },
+    {
+      "company": "CRONUS International Ltd.",
+      "messageType": "ChangeLog.Field.Enabled",
+      "status": "Success",
+      "changeLogEnabled": true,
+      "changelogWriteGuardEnabled": true,
+      "tableNo": 10035599,
+      "tableName": "Playbook Condition ori",
+      "fieldNo": 12,
+      "fieldName": "Value",
+      "fieldCovered": true,
+      "fieldWriteGuardBypassed": false
+    }
+  ],
+  "note": "Three supported field probes confirm active logging, normal coverage and no bypass. Public ChangeLog.Field.Enabled refuses Blob field 30 as unsupported; its actual configuration is retained in the normal UI setup journal, not counted as a passed probe."
+}

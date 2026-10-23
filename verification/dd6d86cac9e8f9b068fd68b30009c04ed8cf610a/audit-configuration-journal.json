@@ -1,0 +1,184 @@
+{
+  "containerId": "f0223a373d54",
+  "startedAt": "2026-10-23T12:12:35.754Z",
+  "originalChangeLogActivated": true,
+  "guardMode": "Blocked; unchanged",
+  "scope": "Only fixture table modification logging; no Open/Via force mode, force request or guard exception.",
+  "tables": [
+    {
+      "id": 10035539,
+      "selectedFields": [
+        {
+          "name": "Code",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Description",
+          "before": "false",
+          "after": "true"
+        }
+      ],
+      "at": "2026-10-23T12:22:13.555Z"
+    },
+    {
+      "id": 10035539,
+      "selectedFields": [
+        {
+          "name": "Code",
+          "before": "true",
+          "after": "true"
+        },
+        {
+          "name": "Description",
+          "before": "true",
+          "after": "true"
+        }
+      ],
+      "at": "2026-10-23T12:23:16.279Z"
+    },
+    {
+      "id": 10035539,
+      "selectedFields": [
+        {
+          "name": "Code",
+          "before": "true",
+          "after": "true"
+        },
+        {
+          "name": "Description",
+          "before": "true",
+          "after": "true"
+        }
+      ],
+      "at": "2026-10-23T12:24:23.949Z"
+    },
+    {
+      "id": 10035539,
+      "selectedFields": [
+        {
+          "name": "Code",
+          "before": "true",
+          "after": "true"
+        },
+        {
+          "name": "Description",
+          "before": "true",
+          "after": "true"
+        }
+      ],
+      "at": "2026-10-23T12:25:30.573Z"
+    },
+    {
+      "id": 10035540,
+      "selectedFields": [
+        {
+          "name": "Playbook Code",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Step No.",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Step Type",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Message Type",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Request Template",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Iterate Array Path",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Iterate Source Step No.",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Next Step No. (Success)",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Next Step No. (Failure)",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Skip If Step Failed",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Disabled",
+          "before": "false",
+          "after": "true"
+        }
+      ],
+      "at": "2026-10-23T12:26:31.691Z"
+    },
+    {
+      "id": 10035599,
+      "selectedFields": [
+        {
+          "name": "Playbook Code",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Step No.",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Condition Type",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Group No.",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Line No.",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Path",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Operator",
+          "before": "false",
+          "after": "true"
+        },
+        {
+          "name": "Value",
+          "before": "false",
+          "after": "true"
+        }
+      ],
+      "at": "2026-10-23T12:27:20.816Z"
+    }
+  ],
+  "error": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[controlname=LogModification]:visible') to be visible\u001b[22m\n",
+  "updatedAt": "2026-10-23T12:25:43.614Z",
+  "loggingReactivated": true,
+  "finishedAt": "2026-10-23T12:27:44.930Z"
+}

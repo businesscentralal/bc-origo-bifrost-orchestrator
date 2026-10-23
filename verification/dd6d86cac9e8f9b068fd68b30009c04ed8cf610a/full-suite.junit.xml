@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="96401 Workspace Test" timestamp="2026-10-23T12:00:40" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="5.574" tests="0" failures="0" errors="0" skipped="0" total="14">
+    <testcase classname="96401 Workspace Test" name="SetValueAndGetValue" time="4.647" />
+    <testcase classname="96401 Workspace Test" name="SetTokenAtNestedPath" time="0.207" />
+    <testcase classname="96401 Workspace Test" name="SetTokenPreservesArray" time="0.17" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseWithRename" time="0.04" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseIteratedKeying" time="0.257" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseFirstElement" time="0.036" />
+    <testcase classname="96401 Workspace Test" name="CollectGathersIterations" time="0.06" />
+    <testcase classname="96401 Workspace Test" name="ToFilteredTextOnlyIncludesRequestedKeys" time="0.034" />
+    <testcase classname="96401 Workspace Test" name="ResetClearsAllData" time="0.074" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC001_September31DayMonth" time="0.016" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC002_LeapYearFebruary" time="0.01" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC003_JanuaryCrossYear" time="0.006" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC004_May31ToApril30" time="0.007" />
+    <testcase classname="96401 Workspace Test" name="LastMonthStartThisMonthStart_TC005_FormulasUnchanged" time="0.01" />
+  </testsuite>
+  <testsuite name="96402 Resolver Test" timestamp="2026-10-23T12:00:44" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.493" tests="0" failures="0" errors="0" skipped="0" total="11">
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesString" time="0.127" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesNumericAsNumber" time="0.03" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesObject" time="0.05" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesArray" time="0.09" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefResolvesInString" time="0.033" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefBeforePeriodResolves" time="0.023" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefEscapesQuotesAndObjects" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="CollectDirective" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="FilteredDumpEscapesAsString" time="0.037" />
+    <testcase classname="96402 Resolver Test" name="UnresolvedRefStaysIntact" time="0.023" />
+    <testcase classname="96402 Resolver Test" name="MultipleRefsInSameTemplate" time="0.026" />
+  </testsuite>
+  <testsuite name="96403 Orchestr Secret Tests" timestamp="2026-10-23T12:01:02" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="13.473" tests="0" failures="0" errors="0" skipped="0" total="17">
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC04_FoundationFull_Enabled" time="3.73" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC05_NoUserSetupRead_Disabled" time="0.243" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC06_UnsetToken_Disabled" time="0.014" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC06_EmptyChat_Disabled" time="0.024" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC01_IndirectRead_Enabled" time="0.067" />
+    <testcase classname="96403 Orchestr Secret Tests" name="SecretCodesFollowTheDocumentedPattern" time="0.01" />
+    <testcase classname="96403 Orchestr Secret Tests" name="LongCredentialCodesFitCode50AndStayDistinct" time="0.904" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllRegistersTheTelegramBotToken" time="0.02" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllRegistersBothSecretsOfEveryCredential" time="0.033" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllIsIdempotent" time="0.037" />
+    <testcase classname="96403 Orchestr Secret Tests" name="TelegramBotTokenSetIsSetAndClearRoundTrip" time="0.036" />
+    <testcase classname="96403 Orchestr Secret Tests" name="CredentialClientIdAndSecretRoundTrip" time="0.05" />
+    <testcase classname="96403 Orchestr Secret Tests" name="DeletingACredentialClearsItsSecrets" time="0.033" />
+    <testcase classname="96403 Orchestr Secret Tests" name="DeletingACredentialLeavesNoMissingSecretsBehind" time="0.014" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RenamingACredentialMovesItsSecrets" time="0.124" />
+    <testcase classname="96403 Orchestr Secret Tests" name="AppSetupPageReportsTheTelegramSecretStatus" time="1.937" />
+    <testcase classname="96403 Orchestr Secret Tests" name="BifrostSetupExposesTheSingleOrchestratorAppsAction" time="6.197" />
+  </testsuite>
+  <testsuite name="96405 Sched Field Restrict Tests ori" timestamp="2026-10-23T12:01:06" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.283" tests="0" failures="0" errors="0" skipped="0" total="7">
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC01_IdentityAndRecipientWritesAreRestricted" time="0.183" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC02_IdentityAndRecipientReadsStayOpen" time="0.017" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC03_NeighbourFieldsStayWritable" time="0.024" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC04_TablesStayReadableAndWritable" time="0.01" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC05_HintsNameSupportedPagesAndSchedule" time="0.01" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC05_NeighboursHaveNoNewHints" time="0.013" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC05_ExistingCompanionHintsArePreserved" time="0.026" />
+  </testsuite>
+  <testsuite name="96407 Entry Registration Tests ori" timestamp="2026-10-23T12:01:09" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.577" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="96407 Entry Registration Tests ori" name="NewEntryHidesDialogs" time="0.337" />
+    <testcase classname="96407 Entry Registration Tests ori" name="ExistingEntryHidesDialogs" time="0.017" />
+    <testcase classname="96407 Entry Registration Tests ori" name="InteractiveEntryOpensCard" time="0.223" />
+  </testsuite>
+  <testsuite name="96408 WhoAmI Contract Tests ori" timestamp="2026-10-23T12:01:11" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.097" tests="0" failures="0" errors="0" skipped="0" total="1">
+    <testcase classname="96408 WhoAmI Contract Tests ori" name="TelegramFieldDescribesCallerSetup" time="0.097" />
+  </testsuite>
+  <testsuite name="96409 Report Layout Read Tests ori" timestamp="2026-10-23T12:01:21" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="7.436" tests="0" failures="0" errors="0" skipped="0" total="11">
+    <testcase classname="96409 Report Layout Read Tests ori" name="ListIncludesExtensionLayout" time="0.113" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="ListExcludesExtensionLayouts" time="0.01" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="GetExportsExtensionBytes" time="0.393" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="OwnUserLayoutRoundTripsBytes" time="0.163" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SetTwiceReplacesUserLayout" time="0.047" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="ListRejectsUnknownReport" time="0.033" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="GetRejectsUnknownLayout" time="0.017" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsOverrideRestoresSessionAndPreset" time="0.467" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsOverrideRendersPdf" time="6.07" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsRenderFailureRestoresSession" time="0.073" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsRejectsUnknownLayout" time="0.05" />
+  </testsuite>
+  <testsuite name="96411 Orchestrator Unit Tests" timestamp="2026-10-23T12:01:32" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="7.25" tests="0" failures="0" errors="0" skipped="0" total="39">
+    <testcase classname="96411 Orchestrator Unit Tests" name="BinaryEnvelopePreservesOfficeContentType" time="0.017" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BinaryEnvelopePreservesMaximumContentType" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage" time="0.177" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage" time="0.104" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun" time="2.917" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified" time="1.304" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BlockedEntriesAreSkipped" time="0.36" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped" time="0.194" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EarliestStartDateTimeIsRecalculated" time="0.24" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank" time="0.02" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress" time="0.023" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EMailNotificationType_RestartNotificationType_VerifyEMailContent" time="0.196" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BlockJobQueueSchedulerEntryOpenFromJQEntryCard" time="0.297" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite" time="0.174" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateWeekdayValidation" time="0.266" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateTimeRangeValidation" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateCanBeInsertedWithValidData" time="0.006" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplatesActionNavigationFromSetupPage" time="0.097" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateCardPageCanBeOpened" time="0.12" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateNoOfMinutesBetweenRunsValidation" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateNextRunDateFormulaValidation" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy" time="0.027" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry" time="0.137" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ModifyStartingEndingTime_VerifyValidationAndSync" time="0.1" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy" time="0.017" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ChangingTemplate_VerifyExistingValuesOverwritten" time="0.02" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="TimeZoneCode_VerifyStored" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError" time="0.017" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay" time="0.016" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime" time="0.017" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter" time="0.127" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed" time="0.047" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyNever_ErrorEntry_SuppressesImmediately" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicy_ErrorCounterResetsOnSuccess" time="0.014" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted" time="0.087" />
+  </testsuite>
+  <testsuite name="96414 Enqueue Playbook Tests" timestamp="2026-10-23T12:01:36" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.615" tests="0" failures="0" errors="0" skipped="0" total="13">
+    <testcase classname="96414 Enqueue Playbook Tests" name="JQParameterStoresAndRetrievesRequestData" time="0.027" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="JQParameterGetRequestDataReturnsEmptyWhenNoBlob" time="0.013" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookCreatesNonRecurringJQEntry" time="0.06" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookCreatesParameterRecord" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookNoParameterWhenRequestEmpty" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSetsJobQueueCategory" time="0.03" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookEnforcesMinimumDelay" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookDefaultOverloadUses60SecDelay" time="0.086" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookFailsWhenDisabled" time="0.03" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="DeleteJQEntryDeletesParameterRecord" time="0.03" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSchedulesRealTask" time="0.036" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookDispatchesAndCreatesInstance" time="0.177" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSetsRecordIdToProcess" time="0.057" />
+  </testsuite>
+  <testsuite name="96415 Schedule Playbook Tests" timestamp="2026-10-23T12:01:40" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.723" tests="0" failures="0" errors="0" skipped="0" total="12">
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryCreatesEntry" time="0.137" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryStoresIdOnPlaybook" time="0.053" />
+    <testcase classname="96415 Schedule Playbook Tests" name="ScheduledFlowFieldReflectsOrchestratorEntry" time="0.024" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryCopiesRecurringTemplate" time="0.023" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsNotification" time="0.043" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsRetryPolicy" time="0.023" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsEmitTelemetry" time="0.017" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsJobQueueCategory" time="0.016" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryBlocksDoubleSchedule" time="0.06" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsRecordIdAndSystemId" time="0.237" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryAllowsRescheduleAfterOrphan" time="0.04" />
+    <testcase classname="96415 Schedule Playbook Tests" name="ScheduleResponseEmitsSystemIdAndPkId" time="0.05" />
+  </testsuite>
+  <testsuite name="96416 Report Msg Tests" timestamp="2026-10-23T12:02:04" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="20.315" tests="0" failures="0" errors="0" skipped="0" total="20">
+    <testcase classname="96416 Report Msg Tests" name="PresetRoundTripsXml" time="0.013" />
+    <testcase classname="96416 Report Msg Tests" name="PresetReturnsEmptyWhenNoXml" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="PresetHasRequestPageXmlReturnsTrueWhenPopulated" time="0.016" />
+    <testcase classname="96416 Report Msg Tests" name="ListReturnsReportsWithCountField" time="14.617" />
+    <testcase classname="96416 Report Msg Tests" name="ListFiltersByProcessingOnly" time="0.024" />
+    <testcase classname="96416 Report Msg Tests" name="ListReportContainsExpectedFields" time="0.027" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsReportMetadata" time="0.023" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsLayoutsArray" time="0.016" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsPresetWhenExists" time="0.02" />
+    <testcase classname="96416 Report Msg Tests" name="GetCreatesEmptyPresetWhenNoneExists" time="0.033" />
+    <testcase classname="96416 Report Msg Tests" name="GetErrorsForInvalidReportId" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="GetErrorsWhenReportIdMissing" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsGeneratesPdfOutput" time="3.387" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsDefaultsToPdfWhenFormatOmitted" time="1.003" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsUsesPresetWhenNoXmlProvided" time="1.057" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForInvalidFormat" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForMissingReportId" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForNonExistentReport" time="0.013" />
+    <testcase classname="96416 Report Msg Tests" name="PresetTableIsBlockedFromDataRecordsRead" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="PresetTableIsBlockedFromDataRecordsWrite" time="0.006" />
+  </testsuite>
+  <testsuite name="96417 Report Run Tests" timestamp="2026-10-23T12:02:08" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.236" tests="0" failures="0" errors="0" skipped="0" total="7">
+    <testcase classname="96417 Report Run Tests" name="RunExecutesProcessingOnlyReport" time="0.067" />
+    <testcase classname="96417 Report Run Tests" name="RunEchoesReportMetadata" time="0.016" />
+    <testcase classname="96417 Report Run Tests" name="RunReturnsErrorObjectWhenReportFails" time="0.05" />
+    <testcase classname="96417 Report Run Tests" name="RunUsesExplicitParameterOverlay" time="0.073" />
+    <testcase classname="96417 Report Run Tests" name="RunRejectsReportThatProducesOutput" time="0.01" />
+    <testcase classname="96417 Report Run Tests" name="RunErrorsWhenReportIdMissing" time="0.01" />
+    <testcase classname="96417 Report Run Tests" name="RunErrorsForNonExistentReport" time="0.01" />
+  </testsuite>
+  <testsuite name="96418 Playbook Cond Tests" timestamp="2026-10-23T12:02:12" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.518" tests="0" failures="0" errors="0" skipped="0" total="23">
+    <testcase classname="96418 Playbook Cond Tests" name="EmptyConditionSetIsTrue" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="AllConditionsInAGroupMustHold" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="AnyGroupHoldingIsEnough" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="GroupsAreIndependentNotLeftToRight" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="ConditionTypesAreEvaluatedIndependently" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="HasConditionsSeesOnlyItsOwnType" time="0.017" />
+    <testcase classname="96418 Playbook Cond Tests" name="StepTypeDefaultsToAction" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="BeginRunSeedsRunNamespace" time="0.034" />
+    <testcase classname="96418 Playbook Cond Tests" name="RollUpCountsAndFlagsFailure" time="0.033" />
+    <testcase classname="96418 Playbook Cond Tests" name="ExcludedStepsLeaveRunStatusAlone" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="EscalateFailsTheRunWithoutTouchingCounters" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="RepeatedStepAccumulatesInsteadOfOverwriting" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="StatusDegradesAndNeverImproves" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="IterationFailuresCarryItemAndError" time="0.037" />
+    <testcase classname="96418 Playbook Cond Tests" name="CheckFailuresAreCountedSeparatelyFromErrors" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="FailureListIsCappedButCountsStayExact" time="0.024" />
+    <testcase classname="96418 Playbook Cond Tests" name="SkippedStepRecordsTheReason" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="SummaryPathsFeedTheReportNotTheWorkspaceData" time="0.026" />
+    <testcase classname="96418 Playbook Cond Tests" name="RunAndStepsFilterToTheReportPayload" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="StatusTextComesFromTheEnumName" time="0.006" />
+    <testcase classname="96418 Playbook Cond Tests" name="MessageTypeTextComesFromTheEnumName" time="0.007" />
+    <testcase classname="96418 Playbook Cond Tests" name="ExcludedStepsAreStillReferenceableUnderTail" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="TailStaysOutOfTheReportPayload" time="0.02" />
+  </testsuite>
+  <testsuite name="96419 Status Msg Tests" timestamp="2026-10-23T12:02:16" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.163" tests="0" failures="0" errors="0" skipped="0" total="7">
+    <testcase classname="96419 Status Msg Tests" name="GetReturnsSuccessWithEntryCounts" time="0.04" />
+    <testcase classname="96419 Status Msg Tests" name="GetEntryCountsAreConsistent" time="0.01" />
+    <testcase classname="96419 Status Msg Tests" name="RestartReturnsSuccessWithMessage" time="0.02" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededRestartsWhenNoJQEntry" time="0.017" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededSkipsWhenAlreadyRunning" time="0.026" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededSkipsWhenInProcess" time="0.016" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededRestartsWhenInError" time="0.034" />
+  </testsuite>
+  <testsuite name="96420 Entry Msg Tests" timestamp="2026-10-23T12:02:22" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="1.567" tests="0" failures="0" errors="0" skipped="0" total="8">
+    <testcase classname="96420 Entry Msg Tests" name="RestartSetsEntryToReady" time="0.17" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartSetsOnHoldEntryToReady" time="0.114" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartErrorsForMissingId" time="1.133" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededRestartsErrorEntry" time="0.03" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededSkipsReadyEntry" time="0.034" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededRestartsOnHoldEntry" time="0.03" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartResponseIncludesEntryDetails" time="0.03" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartAcceptsIdInSubject" time="0.026" />
+  </testsuite>
+  <testsuite name="96421 Playbook Run Msg Tests" timestamp="2026-10-23T12:02:35" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.269" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="96421 Playbook Run Msg Tests" name="RunErrorsWhenPlaybookCodeMissing" time="0.036" />
+    <testcase classname="96421 Playbook Run Msg Tests" name="RunErrorsForUnknownPlaybookCode" time="0.02" />
+    <testcase classname="96421 Playbook Run Msg Tests" name="Scenario_AC07_PagedStep_ReceivesItsOwnSkipAndTake" time="0.213" />
+  </testsuite>
+  <testsuite name="96422 Misc Msg Smoke Tests" timestamp="2026-10-23T12:02:40" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.161" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="96422 Misc Msg Smoke Tests" name="HelpGetReturnsNonEmptyMarkdown" time="0.097" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="WorkspacePreviewReturnsSysNamespace" time="0.04" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="WorkspacePreviewPassesThroughInitialRequest" time="0.024" />
+  </testsuite>
+  <testsuite name="96423 Orchestr Registration Tests" timestamp="2026-10-23T12:02:44" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.013" tests="0" failures="0" errors="0" skipped="0" total="1">
+    <testcase classname="96423 Orchestr Registration Tests" name="OrchestratorIsRegisteredInTheAppRegistry" time="0.013" />
+  </testsuite>
+  <testsuite name="96424 Report Layout Msg Tests" timestamp="2026-10-23T12:02:48" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.071" tests="0" failures="0" errors="0" skipped="0" total="6">
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenReportIdMissing" time="0.024" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenNameMissing" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsForUnknownReport" time="0.007" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsForInvalidLayoutFormat" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenLayoutBase64Missing" time="0.013" />
+    <testcase classname="96424 Report Layout Msg Tests" name="MessageTypeIsRegistered" time="0.007" />
+  </testsuite>
+  <testsuite name="96427 SE Run Msg Tests" timestamp="2026-10-23T12:02:53" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.882" tests="0" failures="0" errors="0" skipped="0" total="5">
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunDispatchesCodeunitEntryHeadlessly" time="0.046" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunReturnsErrorWhenJobFails" time="0.56" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunReturnsErrorWhenDispatchFails" time="0.07" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunUsesPlaybookRecordIdNotEntryRecordId" time="0.12" />
+    <testcase classname="96427 SE Run Msg Tests" name="RunJobQueueEntryOnceStillConfirmsAndMessages" time="0.086" />
+  </testsuite>
+  <testsuite name="96428 Data Records Hint Tests" timestamp="2026-10-23T12:02:57" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.096" tests="0" failures="0" errors="0" skipped="0" total="8">
+    <testcase classname="96428 Data Records Hint Tests" name="JobQueueEntry_WriteHint" time="0.034" />
+    <testcase classname="96428 Data Records Hint Tests" name="JobQueueEntry_WriteHint_Icelandic" time="0.007" />
+    <testcase classname="96428 Data Records Hint Tests" name="ScheduledTask_WriteHint" time="0.013" />
+    <testcase classname="96428 Data Records Hint Tests" name="ScheduledTask_WriteHint_Icelandic" time="0.006" />
+    <testcase classname="96428 Data Records Hint Tests" name="ReportRequestPreset_ReadWriteHint" time="0.013" />
+    <testcase classname="96428 Data Records Hint Tests" name="ReportRequestPreset_ReadWriteHint_Icelandic" time="0.01" />
+    <testcase classname="96428 Data Records Hint Tests" name="Customer_NoCompanionHints" time="0.007" />
+    <testcase classname="96428 Data Records Hint Tests" name="Customer_NoCompanionHints_Icelandic" time="0.006" />
+  </testsuite>
+  <testsuite name="96430 Check Step Error Tests" timestamp="2026-10-23T12:03:03" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="1.58" tests="0" failures="0" errors="0" skipped="0" total="21">
+    <testcase classname="96430 Check Step Error Tests" name="ErrorResponseKeepsCodeAndError" time="0.01" />
+    <testcase classname="96430 Check Step Error Tests" name="ErrorResponseWithoutCodeUsesErrorOrMessage" time="0.01" />
+    <testcase classname="96430 Check Step Error Tests" name="NonErrorResponsesAreNotErrors" time="0.02" />
+    <testcase classname="96430 Check Step Error Tests" name="ErroredIterationsAreCountedApartFromNo" time="0.067" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_ErrorAnswer_FailsStepAndRun" time="0.166" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_ErrorAnswer_FailsStepAndRun_Icelandic" time="0.094" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_RaisedError_FailsStepAndRun" time="0.084" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_RaisedError_FailsStepAndRun_Icelandic" time="0.066" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredNo_DoesNotFailTheRun" time="0.05" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredNo_DoesNotFailTheRun_Icelandic" time="0.044" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredYes_Completes" time="0.154" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredYes_Completes_Icelandic" time="0.06" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_ErrorAnswers_AreFailuresNotNo" time="0.154" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_ErrorAnswers_AreFailuresNotNo_Icelandic" time="0.077" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_RaisedErrors_AreFailuresNotNo" time="0.1" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_RaisedErrors_AreFailuresNotNo_Icelandic" time="0.083" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun" time="0.084" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun_Icelandic" time="0.057" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredYes_Succeeds" time="0.07" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredYes_Succeeds_Icelandic" time="0.07" />
+    <testcase classname="96430 Check Step Error Tests" name="ActionStep_ErrorAnswerWithSuccessCondition_StillFails" time="0.06" />
+  </testsuite>
+  <testsuite name="96431 Report Parameter Tests ori" timestamp="2026-10-23T12:03:11" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="3.017" tests="0" failures="0" errors="0" skipped="0" total="18">
+    <testcase classname="96431 Report Parameter Tests ori" name="OverlayPreservesOtherValues" time="0.023" />
+    <testcase classname="96431 Report Parameter Tests ori" name="UnknownNameFails" time="0.017" />
+    <testcase classname="96431 Report Parameter Tests ori" name="MissingBaseFails" time="0.017" />
+    <testcase classname="96431 Report Parameter Tests ori" name="WrongReportXmlFails" time="0.016" />
+    <testcase classname="96431 Report Parameter Tests ori" name="MalformedXmlFails" time="0.016" />
+    <testcase classname="96431 Report Parameter Tests ori" name="DuplicateOptionFails" time="0.016" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NonObjectParametersFail" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NullValueFails" time="0.013" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NestedValueFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementTemplateMapsOptions" time="0.013" />
+    <testcase classname="96431 Report Parameter Tests ori" name="DuplicateAliasesFail" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NativeCaptureMatchesTemplateSchema" time="0.367" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementUnknownOptionFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementBadChoiceFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="CallerXmlPrecedesTemplate" time="0.013" />
+    <testcase classname="96431 Report Parameter Tests ori" name="RegisteredTemplateRendersValues" time="0.033" />
+    <testcase classname="96431 Report Parameter Tests ori" name="ExplicitParametersDoNotUsePreset" time="0.023" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementRendersOwnAgingData" time="2.4" />
+  </testsuite>
+  <testsuite name="96432 Playbook Last Run Tests" timestamp="2026-10-23T12:03:18" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.729" tests="0" failures="0" errors="0" skipped="0" total="11">
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookRun_StampsHeader" time="0.126" />
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookRun_StampsHeader_Icelandic" time="0.036" />
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookEnqueue_ThenJobQueueRun_StampsHeader" time="0.063" />
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookEnqueue_ThenJobQueueRun_StampsHeader_Icelandic" time="0.057" />
+    <testcase classname="96432 Playbook Last Run Tests" name="ScheduledRun_StampsHeader" time="0.05" />
+    <testcase classname="96432 Playbook Last Run Tests" name="ScheduledRun_StampsHeader_Icelandic" time="0.05" />
+    <testcase classname="96432 Playbook Last Run Tests" name="FailedRun_StampsHeaderFailed" time="0.08" />
+    <testcase classname="96432 Playbook Last Run Tests" name="FailedRun_StampsHeaderFailed_Icelandic" time="0.08" />
+    <testcase classname="96432 Playbook Last Run Tests" name="SecondRun_ReplacesTheFirst" time="0.06" />
+    <testcase classname="96432 Playbook Last Run Tests" name="EmptyPlaybook_StampsHeaderCompleted" time="0.037" />
+    <testcase classname="96432 Playbook Last Run Tests" name="HeaderIsRunningWhileTheRunIsInFlight" time="0.09" />
+  </testsuite>
+  <testsuite name="96433 Playbook Verify Tests" timestamp="2026-10-23T12:03:24" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.329" tests="0" failures="0" errors="0" skipped="0" total="8">
+    <testcase classname="96433 Playbook Verify Tests" name="UnsafePattern_Warns" time="0.103" />
+    <testcase classname="96433 Playbook Verify Tests" name="UnsafePattern_Warns_Icelandic" time="0.027" />
+    <testcase classname="96433 Playbook Verify Tests" name="CorrectedPattern_DoesNotWarn" time="0.03" />
+    <testcase classname="96433 Playbook Verify Tests" name="CorrectedPattern_DoesNotWarn_Icelandic" time="0.037" />
+    <testcase classname="96433 Playbook Verify Tests" name="TwoUnsafeWrites_WarnOncePerStep" time="0.043" />
+    <testcase classname="96433 Playbook Verify Tests" name="SafeShapes_DoNotWarn" time="0.063" />
+    <testcase classname="96433 Playbook Verify Tests" name="WriteMessageTypesAreRecognisedByTheirVerb" time="0.01" />
+    <testcase classname="96433 Playbook Verify Tests" name="VerifyErrorsForMissingOrUnknownPlaybook" time="0.016" />
+  </testsuite>
+  <testsuite name="96435 Playbook Verify Step Tests" timestamp="2026-10-23T12:03:30" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.936" tests="0" failures="0" errors="0" skipped="0" total="31">
+    <testcase classname="96435 Playbook Verify Step Tests" name="CleanPlaybook_HasNoFindings" time="0.04" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="EmptyPlaybook_HasNoFindings" time="0.06" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedMessageType_IsAnError" time="0.047" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedMessageType_IsAnError_Icelandic" time="0.03" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ListedEnabledMessageType_NoFinding" time="0.003" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedMessageType_NameAndEnabled" time="0.01" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="KnownTypeThatIsNotEnabled_WithStartCondition_IsNotReported" time="0.037" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedType_WithStartCondition_IsStillAnError" time="0.027" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CheckWithoutSuccessCondition_IsAnError" time="0.023" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CheckWithoutSuccessCondition_IsAnError_Icelandic" time="0.023" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CheckWithSuccessCondition_NoFinding" time="0.027" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ActionWithoutSuccessCondition_IsAWarning" time="0.027" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ActionWithSuccessCondition_NoFinding" time="0.024" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="NextStepNotFound_IsAnError" time="0.023" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="NextStepExistingOrZero_NoFinding" time="0.024" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="IterateSource_Missing_IsAnError" time="0.024" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="IterateSource_NotEarlier_IsAnError" time="0.04" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="IterateSource_Earlier_NoFinding" time="0.027" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_Missing_IsAnError" time="0.03" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_NotEarlier_IsAnError" time="0.047" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_OnSingleStep_IsAnError" time="0.034" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_OnForEachCheck_NoFinding" time="0.044" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_WithoutNoOfRecords_Warns" time="0.027" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_WithoutNoOfRecords_Warns_Icelandic" time="0.023" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_WithNoOfRecords_NoWarning" time="0.026" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_NotARecordReader_NoWarning" time="0.02" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_TwoConsumers_WarnsOnce" time="0.026" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnsafeWrite_OnDisabledStep_IsNotReported" time="0.057" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="FindingOnDisabledStep_CarriesStepDisabled" time="0.036" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="FindingOnEnabledStep_HasNoStepDisabled" time="0.02" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="Findings_AreInStepOrder_WithAllFields" time="0.03" />
+  </testsuite>
+  <testsuite name="96436 Playbook Example Tests" timestamp="2026-10-23T12:03:36" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.378" tests="0" failures="0" errors="0" skipped="0" total="10">
+    <testcase classname="96436 Playbook Example Tests" name="Example1_PerRecordDecisionThenWrite_VerifiesClean" time="0.097" />
+    <testcase classname="96436 Playbook Example Tests" name="Example1_PerRecordDecisionThenWrite_VerifiesClean_Icelandic" time="0.04" />
+    <testcase classname="96436 Playbook Example Tests" name="Example2_ReadOnlyReport_VerifiesClean" time="0.027" />
+    <testcase classname="96436 Playbook Example Tests" name="Example2_ReadOnlyReport_VerifiesClean_Icelandic" time="0.037" />
+    <testcase classname="96436 Playbook Example Tests" name="Example3_AntiPattern_WarnsExactlyOnce" time="0.053" />
+    <testcase classname="96436 Playbook Example Tests" name="Example3_AntiPattern_WarnsExactlyOnce_Icelandic" time="0.037" />
+    <testcase classname="96436 Playbook Example Tests" name="Example1_WithEveryStepDisabled_StillVerifiesWithoutErrors" time="0.044" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_CarriesTheWorkflowTheExamplesAndTheRules" time="0.013" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_CarriesTheBase64OfEveryExampleTemplate" time="0.02" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_ListsEveryFindingCodeOfVerify" time="0.01" />
+  </testsuite>
+  <testsuite name="96437 Playbook Gate Tests" timestamp="2026-10-23T12:03:43" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.711" tests="0" failures="0" errors="0" skipped="0" total="18">
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAnError" time="0.047" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAnError_Icelandic" time="0.02" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAWarning_UnlessIgnoreWarnings" time="0.09" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAWarning_UnlessIgnoreWarnings_Icelandic" time="0.05" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_IgnoreWarnings_NeverWaivesAnError" time="0.026" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_ErrorOnDisabledStep_DoesNotBlock" time="0.06" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_CleanPlaybook_Runs" time="0.067" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_RefusesAnError_AndCreatesNoEntry" time="0.034" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_RefusesAnError_AndCreatesNoEntry_Icelandic" time="0.024" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_CleanPlaybook_IsScheduled" time="0.027" />
+    <testcase classname="96437 Playbook Gate Tests" name="VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify" time="0.073" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_RefusesAWarning_UnlessIgnoreWarnings" time="0.033" />
+    <testcase classname="96437 Playbook Gate Tests" name="CreateOrchestratorEntry_RefusesAnError" time="0.02" />
+    <testcase classname="96437 Playbook Gate Tests" name="CreateOrchestratorEntry_WarningNeedsIgnoreWarnings" time="0.037" />
+    <testcase classname="96437 Playbook Gate Tests" name="ScheduledPlaybookWithErrors_IsReported" time="0.04" />
+    <testcase classname="96437 Playbook Gate Tests" name="UnscheduledPlaybookWithErrors_HasNoScheduleFinding" time="0.016" />
+    <testcase classname="96437 Playbook Gate Tests" name="VerifyMessageType_ReportsValidAndCounts" time="0.027" />
+    <testcase classname="96437 Playbook Gate Tests" name="VerifyMessageType_CleanPlaybook_IsValid" time="0.02" />
+  </testsuite>
+  <testsuite name="96439 Playbook Verify Template Tests" timestamp="2026-10-23T12:03:52" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="2.709" tests="0" failures="0" errors="0" skipped="0" total="34">
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateNotJson_Truncated_IsAnError" time="0.056" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateNotJson_Truncated_IsAnError_Icelandic" time="0.054" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateNotJson_Array_IsAnError" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateValidOrEmpty_NoFinding" time="0.043" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_Missing_IsAnError" time="0.037" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_Missing_IsAnError_Icelandic" time="0.03" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_CollectAndListForms_AreChecked" time="0.037" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_NotEarlier_IsAnError" time="0.033" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_NotEarlier_IsAnError_Icelandic" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_ToItself_IsAnError" time="0.034" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_ToEarlierStep_NoFinding" time="0.064" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_ShapesThatAreNotReferences_NoFinding" time="0.066" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_RepeatedReference_IsReportedOnce" time="0.03" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_Unknown_IsAnError" time="0.027" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_Unknown_IsAnError_Icelandic" time="0.02" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_Known_NoFinding" time="0.03" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_EmptyReferenceOrAbsent_IsNotLookedUp" time="0.043" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_OnOtherMessageType_IsNotLookedUp" time="0.024" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_LongerThanACode_IsAnError" time="0.023" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_InsideAWriteTransaction_IsNotDeterminable" time="0.08" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_Unknown_Warns" time="0.07" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_Unknown_Warns_Icelandic" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_Known_NoWarning" time="0.05" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_SourceTableUndeterminable_NoWarning" time="0.093" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepField_Unknown_Warns" time="0.03" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepField_Known_NoWarning" time="0.03" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_Unknown_Warns" time="0.07" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_Unknown_Warns_Icelandic" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_Known_NoWarning" time="0.043" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_ExplicitIteration_Unknown_Warns" time="0.043" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepField_OfPagedOrDisabledStep_IsNotJudged" time="0.037" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="Lookup_RecordExists_FoundNotFoundAndUndeterminable" time="1.296" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="Lookup_FieldNames_AreTheJsonNames" time="0.043" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="Lookup_ToJsonName_FollowsTheDataTypes" time="0.013" />
+  </testsuite>
+  <testsuite name="96441 Contract Complete Tests ori" timestamp="2026-10-23T12:03:59" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.479" tests="0" failures="0" errors="0" skipped="0" total="10">
+    <testcase classname="96441 Contract Complete Tests ori" name="TheGuardSeesEveryOrchestratorType" time="0.006" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_DeclaresTheRequiredChapters" time="0.273" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_EnvelopeStatesSubjectStrictAndContentType" time="0.023" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_ParametersAndResponseFieldsAreDescribed" time="0.023" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_EachErrorHasACodeOrATextAndTheStepToTake" time="0.02" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_EffectMatchesTheDirection" time="0.024" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_ExamplesAreRealRequestsAndAnswers" time="0.024" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_RelatedAndWorkflowNameRealTypes" time="0.023" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_HelpTextHasEnoughSubstanceAndNoAlObjectNames" time="0.023" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_DiscoveryTextsExistAndAreTranslated" time="0.04" />
+  </testsuite>
+  <testsuite name="96442 Playbook Ref 118 Tests ori" timestamp="2026-10-23T12:04:06" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.481" tests="0" failures="0" errors="0" skipped="0" total="9">
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="PrimaryKeyUnderFieldsWarnsEnglish" time="0.096" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="PrimaryKeyUnderFieldsWarnsIcelandic" time="0.053" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="CorrectPathsResolve" time="0.054" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="UnresolvedRequestsAreRejected" time="0.033" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="LiteralMailAndResolvedDataRemainValid" time="0.034" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="SameIterationAndFilteredDumpResolve" time="0.034" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="SingleCheckMissingReferenceFails" time="0.05" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="ForEachCheckMissingReferenceFails" time="0.067" />
+    <testcase classname="96442 Playbook Ref 118 Tests ori" name="ForEachActionMissingReferenceFailsIcelandic" time="0.06" />
+  </testsuite>
+  <testsuite name="96452 Orch B1 Contract Tests" timestamp="2026-10-23T12:04:13" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.222" tests="0" failures="0" errors="0" skipped="0" total="20">
+    <testcase classname="96452 Orch B1 Contract Tests" name="Batch1MessagesHaveContractChaptersAndDiscovery" time="0.02" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="CommittingTypesDeclareIrreversible" time="0.02" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="NonCommittingTypesKeepTheirEffect" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC05_NotificationType_KeepsMainContract" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC05_RetryPolicy_KeepsMainContract" time="0.016" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_JobQueueEntryRestartIfNeeded_KeepsMainErrors" time="0.013" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_JobQueueEntryRestart_KeepsMainErrors" time="0.013" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_OrchestratorGet_KeepsMainErrors" time="0.007" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_PlaybookEnqueue_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_PlaybookRun_KeepsMainErrors" time="0.013" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_PlaybookSchedule_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EmailSend_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntryRegister_KeepsMainErrors" time="0.014" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntryRestart_KeepsMainErrors" time="0.006" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntryRun_KeepsMainErrors" time="0.017" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntrySchedule_KeepsMainErrors" time="0.006" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_StatusGet_KeepsMainErrors" time="0.007" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_StatusRestartIfNeeded_KeepsMainErrors" time="0.007" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_StatusRestart_KeepsMainErrors" time="0.006" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_TelegramMessage_KeepsMainErrors" time="0.007" />
+  </testsuite>
+  <testsuite name="96453 Orch B2 Contract Tests" timestamp="2026-10-23T12:04:20" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.129" tests="0" failures="0" errors="0" skipped="0" total="12">
+    <testcase classname="96453 Orch B2 Contract Tests" name="Batch2MessagesHaveContractChaptersAndDiscovery" time="0.017" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="CommittingTypesDeclareIrreversible" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="PreviewDisclosesNestedCommit" time="0.014" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="NonCommittingTypesKeepTheirEffect" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC05_Format_KeepsMainContract" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC05_LayoutFormat_KeepsMainContract" time="0.014" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_WorkspacePreview_KeepsMainErrors" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportGet_KeepsMainErrors" time="0.007" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportList_KeepsMainErrors" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportRun_KeepsMainErrors" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportSaveAs_KeepsMainErrors" time="0.007" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportLayoutSet_KeepsMainErrors" time="0.01" />
+  </testsuite>
+  <testsuite name="96454 Report Boundary Tests ori" timestamp="2026-10-23T12:04:28" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.968" tests="0" failures="0" errors="0" skipped="0" total="14">
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_UnknownField_ReturnsErrorWithoutExecution" time="0.03" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_MalformedView_ReturnsErrorWithoutExecution" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_NonString_ReturnsErrorWithoutExecution" time="0.013" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_UnknownField_ReturnsErrorWithoutExecution" time="0.013" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_PdfInvalidField_ReturnsError" time="0.006" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_DefaultPdfInvalidField_ReturnsError" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_ExcelInvalidField_ReturnsError" time="0.016" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_WordInvalidField_ReturnsError" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_MalformedView_ReturnsErrorWithoutExecution" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_NonString_ReturnsErrorWithoutExecution" time="0.01" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_ValidView_ExecutesOnlySelectedRow" time="0.03" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_ValidView_ExecutesSelectedRow" time="0.02" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_EmptySelection_DoesNotWidenDataSet" time="0.02" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_BothDebugStates_FailureHasNoCallstack" time="0.77" />
+  </testsuite>
+  <testsuite name="96455 Msg Direction Tests ori" timestamp="2026-10-23T12:04:39" hostname="f0223a373d54-business-central-86789ddcc5-mh7rr" time="0.02" tests="0" failures="0" errors="0" skipped="0" total="2">
+    <testcase classname="96455 Msg Direction Tests ori" name="ExecutingTypesAreInbound" time="0.01" />
+    <testcase classname="96455 Msg Direction Tests ori" name="ReadTypesStayOutboundOrBoth" time="0.01" />
+  </testsuite>
+</testsuites>

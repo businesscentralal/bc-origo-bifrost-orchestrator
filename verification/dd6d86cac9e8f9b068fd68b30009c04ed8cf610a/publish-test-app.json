@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"fileName\": \"OrchestratorTests.app\",\n  \"bytes\": 156202,\n  \"statusCode\": 200,\n  \"durationMs\": 37017,\n  \"developerBaseUrl\": \"https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0223a373d54dev\",\n  \"body\": null,\n  \"ok\": true\n}"
+    }
+  ]
+}

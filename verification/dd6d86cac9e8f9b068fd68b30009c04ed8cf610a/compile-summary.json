@@ -1,0 +1,21 @@
+{
+  "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "worktreeDirty": false,
+  "analyzers": [
+    "CodeCop",
+    "UICop",
+    "AppSourceCop"
+  ],
+  "app": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  "test": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "infos": 1
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "containerId": "f0223a373d54",
+  "startedAt": "2026-10-23T12:30:32.715Z",
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "language": "en-US",
+      "lcid": 1033,
+      "code": "X118-M-1033",
+      "scenario": "Missing primary-key token fails from Run Now",
+      "expectedStatus": "Failed",
+      "passed": true,
+      "intentAt": "2026-10-23T12:30:39.423Z",
+      "runClickedAt": "2026-10-23T12:30:44.817Z",
+      "screenshot": "ui-scenario-1.png",
+      "visibleEvidence": "ui-scenario-1.txt",
+      "targetReadback": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "350D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1033"
+            },
+            "fields": {
+              "Description": "X118 untouched 1033"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "language": "en-US",
+      "lcid": 1033,
+      "code": "X118-M-1033",
+      "scenario": "Corrected primary-key token reaches gated write from Run Now",
+      "expectedStatus": "Completed",
+      "passed": true,
+      "intentAt": "2026-10-23T12:30:46.019Z",
+      "runClickedAt": "2026-10-23T12:30:51.933Z",
+      "screenshot": "ui-scenario-2.png",
+      "visibleEvidence": "ui-scenario-2.txt",
+      "targetReadback": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "350D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1033"
+            },
+            "fields": {
+              "Description": "X118 written 1033"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "language": "is-IS",
+      "lcid": 1039,
+      "code": "X118-M-1039",
+      "scenario": "Missing primary-key token fails from Run Now",
+      "expectedStatus": "Failed",
+      "passed": true,
+      "intentAt": "2026-10-23T12:31:03.103Z",
+      "runClickedAt": "2026-10-23T12:31:09.053Z",
+      "screenshot": "ui-scenario-3.png",
+      "visibleEvidence": "ui-scenario-3.txt",
+      "targetReadback": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "840D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1039"
+            },
+            "fields": {
+              "Description": "X118 untouched 1039"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "language": "is-IS",
+      "lcid": 1039,
+      "code": "X118-M-1039",
+      "scenario": "Corrected primary-key token reaches gated write from Run Now",
+      "expectedStatus": "Completed",
+      "passed": true,
+      "intentAt": "2026-10-23T12:31:10.156Z",
+      "runClickedAt": "2026-10-23T12:31:15.041Z",
+      "screenshot": "ui-scenario-4.png",
+      "visibleEvidence": "ui-scenario-4.txt",
+      "targetReadback": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Data.Records.Get",
+        "status": "Success",
+        "noOfRecords": 1,
+        "result": [
+          {
+            "id": "840D735C-DDCE-F111-B7A4-DBE1A7D453F8",
+            "primaryKey": {
+              "Code": "X118-T-1039"
+            },
+            "fields": {
+              "Description": "X118 written 1039"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "preferenceChanges": [
+    {
+      "target": "en-US",
+      "alreadySelected": true
+    },
+    {
+      "target": "is-IS",
+      "savedThrough": "BC My Settings",
+      "at": "2026-10-23T12:31:03.087Z"
+    },
+    {
+      "target": "en-US",
+      "savedThrough": "BC My Settings",
+      "at": "2026-10-23T12:31:26.715Z"
+    }
+  ],
+  "verified": true,
+  "originalLanguageRestored": true,
+  "finishedAt": "2026-10-23T12:31:26.721Z",
+  "cleanup": {
+    "verified": true,
+    "method": "Owned container deleted and GET404 read back",
+    "containerId": "f0223a373d54",
+    "evidence": "owned-cleanup.json"
+  }
+}

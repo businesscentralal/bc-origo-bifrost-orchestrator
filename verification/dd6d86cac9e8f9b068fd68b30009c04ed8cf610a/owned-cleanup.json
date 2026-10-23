@@ -1,0 +1,13 @@
+{
+  "containerId": "f0223a373d54",
+  "sourceSha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+  "startedAt": "2026-10-23T12:32:37.512Z",
+  "owner": "worker-4",
+  "beforeStatus": 200,
+  "verified": true,
+  "meaning": "Owned container deletion removes all self-created headers, steps, conditions, instances, messages, audit setup and temporary test files. No foreign resource targeted.",
+  "displayName": "worker4-orch118-20261023",
+  "deleteStatus": 204,
+  "getStatus": 404,
+  "finishedAt": "2026-10-23T12:32:37.803Z"
+}
