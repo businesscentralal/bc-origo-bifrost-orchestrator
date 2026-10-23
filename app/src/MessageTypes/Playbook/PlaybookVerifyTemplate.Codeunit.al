@@ -310,6 +310,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         Verify: Codeunit "Playbook Verify ori";
         Lookup: Codeunit "Playbook Verify Lookup ori";
         FieldNames: Dictionary of [Text, Boolean];
+        PrimaryKeyNames: List of [Text];
         SourceTemplate: JsonObject;
         Token: JsonToken;
         TableName: Text;
@@ -343,8 +344,20 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         if not Lookup.TryGetFieldNames(TableName, FieldNames, ResolvedTableName) then
             exit;
-        if FieldNames.ContainsKey(FieldName.ToLower()) then
+        if FieldNames.ContainsKey(FieldName.ToLower()) then begin
+            if not Lookup.TryGetPrimaryKeyNames(TableName, PrimaryKeyNames) then
+                exit;
+            if not PrimaryKeyNames.Contains(FieldName.ToLower()) then
+                exit;
+            SeenKey := StrSubstNo(SeenCurrentTok, FieldName.ToLower());
+            if Seen.Contains(SeenKey) then
+                exit;
+            Seen.Add(SeenKey);
+            Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownFieldReference',
+                StrSubstNo(PrimaryKeyFieldMsg, Step."Step No.", FieldName, ResolvedTableName),
+                StrSubstNo(PrimaryKeyFieldNextStepTxt, FieldName), Step.Disabled);
             exit;
+        end;
 
         SeenKey := StrSubstNo(SeenCurrentTok, FieldName.ToLower());
         if Seen.Contains(SeenKey) then
@@ -440,5 +453,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         UnknownStepFieldNextStepTxt: Label 'Add the field to Result Log Paths on step %1 (for example result>%2), or correct the name in the reference.', Comment = '%1 = storing step no, %2 = field name, is-IS=Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result>%2), eða leiðréttu heitið í tilvísuninni.';
         UnknownCurrentFieldMsg: Label 'Step %1 reads @_current.fields.%2, but table %3 has no field with that name. The reference stays as literal text.', Comment = '%1 = step no, %2 = field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Tilvísunin helst sem hreinn texti.';
         UnknownCurrentFieldNextStepTxt: Label 'A field name in an answer has no spaces and no punctuation except _ (for example No_ for No.). Call Help.Fields.Get on table %1 to list the fields.', Comment = '%1 = table name, is-IS=Reitaheiti í svari hefur engin bil og engin greinarmerki nema _ (til dæmis No_ fyrir No.). Kallaðu á Help.Fields.Get á töfluna %1 til að sjá reitina.';
+        PrimaryKeyFieldMsg: Label 'Step %1 reads @_current.fields.%2, but %2 is a primary-key field of table %3 and is returned under primaryKey, not fields.', Comment = '%1 = step no, %2 = JSON field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en %2 er aðallykilsreitur í töflunni %3 og er skilað undir primaryKey, ekki fields.';
+        PrimaryKeyFieldNextStepTxt: Label 'Use @_current.primaryKey.%1 and inspect the source answer before running the playbook.', Comment = '%1 = JSON field name, is-IS=Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en verkbókin er keyrð.';
         NothingTxt: Label 'nothing', Comment = 'is-IS=ekkert';
 }

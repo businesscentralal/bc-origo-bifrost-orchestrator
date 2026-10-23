@@ -75,7 +75,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure CreditDecideTemplate(): Text
     begin
-        exit('{"tableName":"Customer","fieldNumbers":[1],"tableView":"WHERE(No.=CONST(@_current.fields.No_),Balance Due (LCY)=FILTER(>0))"}');
+        exit('{"tableName":"Customer","fieldNumbers":[1],"tableView":"WHERE(No.=CONST(@_current.primaryKey.No_),Balance Due (LCY)=FILTER(>0))"}');
     end;
 
     /// <summary>The request template of step 40 of example 1.</summary>
