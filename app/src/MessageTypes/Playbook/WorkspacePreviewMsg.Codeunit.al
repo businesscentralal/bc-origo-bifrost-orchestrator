@@ -149,7 +149,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
-        exit("Msg Direction ori"::Outbound);
+        exit("Msg Direction ori"::Both);
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")

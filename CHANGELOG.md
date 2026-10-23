@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-23) - Orchestrator direction and effect declarations (#117)
+
+- Workspace.Preview is offered in both directions; Report.Get declares the preset it may insert as a write (core#1147 C). Codeunits 10035596 `Workspace Preview Msg ori` and 10035594 `Report Get Msg ori`; runtime behavior and the effect changes text are unchanged.
+- Test codeunits 96453 `Orch B2 Contract Tests`, 96441 `Contract Complete Tests ori` and 96455 `Msg Direction Tests ori` assert Both for Workspace.Preview and write for Report.Get, following Gunnar's H2 approvals of the existing assertions.
+
+- Reuse the compile-only test hygiene from PR #116: locked format labels and variable ordering in codeunits 96430, 96432, 96433, 96434, 96435, 96437 and 96439; align filenames for 96434 `Playbook Test Library ori`, 96438 `Playbook Example Library ori` and 96440 `Role Lookup Subscriber ori`. Assertions and fixture values are unchanged.
+
 ### Changed (2026-10-21) - Message type contract and discovery brought to Foundation parity
 
 No public object, procedure, enum value or message type key changed; only the text and chapters that Help.Implementation.Get and the roster return.

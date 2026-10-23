@@ -37,7 +37,7 @@ codeunit 96453 "Orch B2 Contract Tests"
         AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'irreversible', true);
     end;
 
-    /// <summary>Preview names the nested committed dispatch and keeps its read direction (#80).</summary>
+    /// <summary>Preview names the nested committed dispatch and is offered in both directions (#80, #117).</summary>
     [Test]
     procedure PreviewDisclosesNestedCommit()
     var
@@ -57,18 +57,18 @@ codeunit 96453 "Orch B2 Contract Tests"
         Assert.IsTrue(Token.AsValue().AsText().Contains('Help.WhoAmI.Get'), 'changes names the nested dispatch');
         Assert.IsTrue(Token.AsValue().AsText().Contains('commits'), 'changes discloses the commit');
         Assert.IsTrue(Notes.Contains('outer transaction'), 'notes explain why it cannot roll back');
-        // [THEN] No business data changes, so the roster direction stays Outbound
+        // [THEN] The committing effect is offered in both directions (#117, Gunnar H2).
         MessageTypeInterface := "Message Type ori"::"Orchestrator.Workspace.Preview";
-        Assert.AreEqual("Msg Direction ori"::Outbound, MessageTypeInterface.GetMessageDirection(), 'Preview direction');
+        Assert.AreEqual("Msg Direction ori"::Both, MessageTypeInterface.GetMessageDirection(), 'Preview direction');
     end;
 
     [Test]
     procedure NonCommittingTypesKeepTheirEffect()
     begin
-        // [SCENARIO #60] ReportLayout.Set stays write; the reads stay read
+        // [SCENARIO #60, #117] ReportLayout.Set and preset-seeding Report.Get write; the other reads stay read
         AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.Set", 'Orchestrator.ReportLayout.Set', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.Report.List", 'Orchestrator.Report.List', 'read', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Report.Get", 'Orchestrator.Report.Get', 'read', false);
+        AssertEffect("Message Type ori"::"Orchestrator.Report.Get", 'Orchestrator.Report.Get', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.Report.SaveAs", 'Orchestrator.Report.SaveAs', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.List", 'Orchestrator.ReportLayout.List', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.ReportLayout.Get", 'Orchestrator.ReportLayout.Get', 'read', false);
