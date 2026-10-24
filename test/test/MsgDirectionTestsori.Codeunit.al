@@ -41,11 +41,11 @@ codeunit 96455 "Msg Direction Tests ori"
     [Test]
     procedure ReadTypesStayOutboundOrBoth()
     begin
-        // [SCENARIO #90] Reads stay Outbound. Report.Get remains Both. SaveAs remains a read.
+        // [SCENARIO #117] Reads stay Outbound. Preview and Report.Get declare Both; SaveAs remains a read.
         AssertDirection("Message Type ori"::"Orchestrator.Status.Get", "Msg Direction ori"::Outbound, 'Orchestrator.Status.Get');
         AssertDirection("Message Type ori"::"Help.Orchestrator.Get", "Msg Direction ori"::Outbound, 'Help.Orchestrator.Get');
         AssertDirection("Message Type ori"::"Orchestrator.Report.List", "Msg Direction ori"::Outbound, 'Orchestrator.Report.List');
-        AssertDirection("Message Type ori"::"Orchestrator.Workspace.Preview", "Msg Direction ori"::Outbound, 'Orchestrator.Workspace.Preview');
+        AssertDirection("Message Type ori"::"Orchestrator.Workspace.Preview", "Msg Direction ori"::Both, 'Orchestrator.Workspace.Preview');
         AssertDirection("Message Type ori"::"Orchestrator.Playbook.Verify", "Msg Direction ori"::Outbound, 'Orchestrator.Playbook.Verify');
         AssertDirection("Message Type ori"::"Orchestrator.Report.SaveAs", "Msg Direction ori"::Outbound, 'Orchestrator.Report.SaveAs');
         AssertDirection("Message Type ori"::"Orchestrator.Report.Get", "Msg Direction ori"::Both, 'Orchestrator.Report.Get');

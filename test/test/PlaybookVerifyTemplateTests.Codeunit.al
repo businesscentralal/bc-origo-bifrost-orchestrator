@@ -17,6 +17,7 @@ codeunit 96439 "Playbook Verify Template Tests"
     var
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
+        RequestFormat1Tok: Label 'No %1 finding on step %2', Locked = true;
         PlaybookCodeTok: Label 'VERIFY-109', Locked = true;
         ErrorTok: Label 'error', Locked = true;
         WarningTok: Label 'warning', Locked = true;
@@ -659,7 +660,7 @@ codeunit 96439 "Playbook Verify Template Tests"
                 Assert.IsTrue(TextOf(Token.AsObject(), 'nextStep') <> '', FindingCode + ' has a nextStep');
                 exit;
             end;
-        Assert.Fail(StrSubstNo('No %1 finding on step %2', FindingCode, StepNo));
+        Assert.Fail(StrSubstNo(RequestFormat1Tok, FindingCode, StepNo));
     end;
 
     local procedure AssertMessageStartsWith(Findings: JsonArray; FindingCode: Text; ExpectedStart: Text)

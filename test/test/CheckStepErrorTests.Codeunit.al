@@ -17,6 +17,7 @@ codeunit 96430 "Check Step Error Tests"
     var
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
+        RequestFormat1Tok: Label '{"reportId":%1}', Locked = true;
         PlaybookCodeTok: Label 'CHK-106', Locked = true;
         FailingReportErrTxt: Label 'Deliberate failure from the test report.', Locked = true;
         ReportNotFoundTxt: Label 'not found', Locked = true;
@@ -423,7 +424,7 @@ codeunit 96430 "Check Step Error Tests"
 
     local procedure FailingReportRequest(): Text
     begin
-        exit(StrSubstNo('{"reportId":%1}', Report::"Test Failing Report"));
+        exit(StrSubstNo(RequestFormat1Tok, Report::"Test Failing Report"));
     end;
 
     local procedure HelpRequest(): Text

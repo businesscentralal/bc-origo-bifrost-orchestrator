@@ -106,7 +106,7 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('read', 'Reads report metadata, layouts and the calling user''s preset. When the user has no preset for the report, inserts an empty one for that user in this company.', true, '', Preconditions);
+        Effect := Parts.Effect('write', 'Reads report metadata, layouts and the calling user''s preset. When the user has no preset for the report, inserts an empty one for that user in this company.', true, '', Preconditions);
         exit(true);
     end;
 
