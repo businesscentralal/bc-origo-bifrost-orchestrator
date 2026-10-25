@@ -42,14 +42,17 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   left `Help ori` (10035576), which stays for the `Help.Orchestrator.Get` overview; no object was deleted.
 
 ## Setup Page and Secrets (Bifröst platform rules)
-- The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) contains **one action
-  only** - `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in
-  `addlast(Category_Apps)`. No layout changes, no other action group, no notification and **no
-  `ContextSensitiveHelpPage` override** - that property belongs to Foundation's own page.
+- The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) adds the Apps action
+  `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in `addlast(Category_Apps)`,
+  and direct Navigate actions (`addlast(Navigation)`) opening `Playbooks ori` and
+  `Playbook Instances ori`. No layout changes, no notification and **no `ContextSensitiveHelpPage`
+  override** - that property belongs to Foundation's own page. Client credentials, secrets and the
+  setup wizard stay on `Scheduler Setup ori`.
 - `Scheduler Setup ori` (page 10035536, caption *Bifrost Orchestrator Setup*, help slug `nornir-setup`) is
   the application setup page. It hosts the navigation to Playbooks, Client Credentials, the Playbook
   Execution Log and `App Secrets ori` (filtered with `SetAppFilter(GetAppId())`). It shows **no**
-  notification.
+  notification. The playbook list and the execution log are also opened from the Navigate area of
+  Bifröst Setup.
 - **Setup notifications live on Bifröst Setup only** (Foundation's `Setup ori`). This app raises no
   setup banner of its own - no HTTP banner, no missing-credentials banner, no "run the setup wizard"
   banner, on any page. Foundation aggregates them, one banner per topic naming the applications
