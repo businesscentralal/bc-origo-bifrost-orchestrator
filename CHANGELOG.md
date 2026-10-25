@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-22) - Distinguish blocking Verify findings (#113)
+
+- Codeunits 10035616 `Playbook Verify ori` and 10035615 `Playbook Verify Msg ori`: add `blockingErrorCount` and `blockingWarningCount` to `Orchestrator.Playbook.Verify`. These exclude informational findings on disabled steps and match the existing Run/Schedule gates (warnings can be accepted with `ignoreWarnings`). Existing `valid`, `errorCount`, `warningCount`, per-step findings and `stepDisabled` remain unchanged for compatibility. Help, examples and bilingual type descriptions explain which counts to read.
+- Test app compile hygiene: codeunits 96430 `Check Step Error Tests`, 96432 `Playbook Last Run Tests`, 96433 `Playbook Verify Tests`, 96434 `Playbook Test Library ori`, 96435 `Playbook Verify Step Tests`, 96437 `Playbook Gate Tests` and 96439 `Playbook Verify Template Tests` use locked request-format labels and ordered local variables for zero-warning CodeCop. Align filenames with existing object names for 96434 `Playbook Test Library ori`, 96438 `Playbook Example Library ori` and 96440 `Role Lookup Subscriber ori`; 96438 and 96440 are filename-only renames. Assertions and test selection are unchanged.
+- Test codeunit 96442 `Verify Summary Tests ori`: regressions in LCIDs 1033/1039 for disabled-only errors, mixed enabled/disabled findings, enabled blockers, clean summaries and the published help contract. Run/Schedule safety is unchanged.
+
 ### Fixed (2026-10-25) - Report.Get selection description (#123)
 
 - Codeunit `Report Get Msg ori` (10035594): the English and Icelandic selection descriptions now state that the call may create an empty preset for the calling user when none exists. Effect, direction and runtime behavior are unchanged.
