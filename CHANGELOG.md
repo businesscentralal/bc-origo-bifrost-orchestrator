@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-25) - Report.Get selection description (#123)
+
+- Codeunit `Report Get Msg ori` (10035594): the English and Icelandic selection descriptions now state that the call may create an empty preset for the calling user when none exists. Effect, direction and runtime behavior are unchanged.
+
 ### Added (2026-10-25) - Playbooks on Bifrost Setup Navigate, and Tell Me for the playbook list
 
 - Page extension `Setup JQ ori` (10035537) on Foundation's `Setup ori` keeps the *Bifrost Orchestrator Setup* action in Apps and adds two Navigate actions: *Bifrost Playbooks* (`Playbooks ori`) and *Playbook Execution Log* (`Playbook Instances ori`). The same two actions remain on `Scheduler Setup ori`.

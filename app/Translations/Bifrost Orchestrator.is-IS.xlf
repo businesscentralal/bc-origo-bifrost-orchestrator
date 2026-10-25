@@ -1408,9 +1408,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Get Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Read one report's metadata, layouts and current user request preset. Read-only. Use Orchestrator.Report.SaveAs or Orchestrator.Report.Run to execute it.</source>
-          <target>Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Lesaðgerð. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Lesaðgerð. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</note>
+          <source>Read one report's metadata, layouts and current user request preset. May create an empty preset for the calling user if none exists. Use Orchestrator.Report.SaveAs or Orchestrator.Report.Run to execute it.</source>
+          <target>Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Getur búið til tóma forstillingu fyrir notandann sem kallar ef engin er til. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Getur búið til tóma forstillingu fyrir notandann sem kallar ef engin er til. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Get Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 386601961 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
