@@ -34,7 +34,7 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Read one report''s metadata, layouts and current user request preset. Read-only. Use Orchestrator.Report.SaveAs or Orchestrator.Report.Run to execute it.', Comment = 'is-IS=Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Lesaðgerð. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.';
+        SelectionLbl: Label 'Read one report''s metadata, layouts and current user request preset. May create an empty preset for the calling user if none exists. Use Orchestrator.Report.SaveAs or Orchestrator.Report.Run to execute it.', Comment = 'is-IS=Lestu lýsigögn, útlit og beiðniforstillingu núverandi notanda fyrir eina skýrslu. Getur búið til tóma forstillingu fyrir notandann sem kallar ef engin er til. Notaðu Orchestrator.Report.SaveAs eða Orchestrator.Report.Run til að keyra hana.';
     begin
         exit(SelectionLbl);
     end;
