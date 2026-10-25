@@ -140,16 +140,18 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        DirectionNoteLbl: Label 'It changes no business data, but its nested committed dispatch means its direction is Both.', Comment = 'is-IS=Það breytir engum viðskiptagögnum, en innri keyrslan staðfestir færslur og því er stefnan báðar leiðir (Both).';
     begin
         Notes := 'The workspace is temporary; this message does not create a playbook instance or step log.' +
-            ' Seeding _who dispatches Help.WhoAmI.Get in its own committed scope. Its queue entry and a possible first-use user setup cannot roll back with an outer transaction, so the effect is irreversible and the type cannot run inside an open write transaction. It changes no business data, so its direction stays Outbound.' +
+            ' Seeding _who dispatches Help.WhoAmI.Get in its own committed scope. Its queue entry and a possible first-use user setup cannot roll back with an outer transaction, so the effect is irreversible and the type cannot run inside an open write transaction. ' + DirectionNoteLbl +
             ' Call it before building a playbook to find the paths the request templates can use, such as @_sys.lastMonthStart and @_sys.lastMonthEnd for monthly filters, @_who.companyInfo.registrationNo, @_who.salesperson.email for recipients and @_who.telegramChatId. When debugging, compare it with the workspace snapshot of a failed step in the Bifrost Playbook Step Log.';
         exit(true);
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
-        exit("Msg Direction ori"::Outbound);
+        exit("Msg Direction ori"::Both);
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
