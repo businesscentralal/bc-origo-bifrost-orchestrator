@@ -11,6 +11,7 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - Page extension `Setup JQ ori` (10035537) on Foundation's `Setup ori` keeps the *Bifrost Orchestrator Setup* action in Apps and adds two Navigate actions: *Bifrost Playbooks* (`Playbooks ori`) and *Playbook Execution Log* (`Playbook Instances ori`). The same two actions remain on `Scheduler Setup ori`.
 - Page `Playbooks ori` (10035551) sets `UsageCategory = Lists` so Tell Me can open the list. Caption stays *Bifrost Playbooks* and `ApplicationArea` stays `All`.
+- Icelandic captions for the two new Bifrost Setup actions are in `app/Translations/Bifrost Orchestrator.is-IS.xlf`, generated with `tools/Update-IcelandicXlf.ps1`.
 
 ### Fixed (2026-10-23) - Orchestrator direction and effect declarations (#117)
 
