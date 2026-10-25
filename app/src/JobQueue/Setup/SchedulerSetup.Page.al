@@ -6,10 +6,11 @@ using System.Threading;
 using System.Utilities;
 
 /// <summary>
-/// Setup page of the Bifrost Orchestrator application. It is the single entry point the application adds
-/// to the Bifröst Setup page and carries everything the administrator needs: the job queue
-/// orchestrator configuration, the Telegram bot token, and navigation to playbooks, client
-/// credentials, the playbook execution log and the Bifröst secret list filtered to this application.
+/// Setup page of the Bifrost Orchestrator application. The Apps action on the Bifröst Setup page opens
+/// it, and it carries everything the administrator needs: the job queue orchestrator configuration,
+/// the Telegram bot token, and navigation to playbooks, client credentials, the playbook execution
+/// log and the Bifröst secret list filtered to this application. The playbook list and the execution
+/// log are also opened from the Navigate area of the Bifröst Setup page.
 /// </summary>
 page 10035536 "Scheduler Setup ori"
 {

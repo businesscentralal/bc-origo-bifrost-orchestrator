@@ -12,7 +12,7 @@ page 10035551 "Playbooks ori"
     ContextSensitiveHelpPage = 'playbooks';
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = None;
+    UsageCategory = Lists;
     SourceTable = "Playbook ori";
     CardPageId = "Playbook Card ori";
     Editable = false;

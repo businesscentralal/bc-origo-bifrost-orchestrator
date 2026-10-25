@@ -177,7 +177,7 @@ Supporting paths:
 | Step | Where | What |
 | --- | --- | --- |
 | 1 | Extension Management (page 2500) | Enable **Allow HttpClient Requests** for Bifrost Orchestrator. Needed by Telegram and by the OAuth restart client. **Bifröst Setup** shows an aggregated notification with a *Start setup wizard* action while it is off. |
-| 2 | **Bifröst Setup** → *Apps* → **Bifrost Orchestrator** | Open `Scheduler Setup ori` (page 10035536), the single place this module is configured. |
+| 2 | **Bifröst Setup** → *Apps* → **Bifrost Orchestrator** | Open `Scheduler Setup ori` (page 10035536), where this module is configured. *Navigate* on the same page opens `Playbooks ori` and the playbook execution log; those actions also stay on the setup page. |
 | 3 | **Set up Bifrost Orchestrator** (assisted setup) | `Scheduler Setup Wizard ori` walks through HTTP client requests, the management job queue and the scheduling defaults. Also reachable from the *Start setup wizard* action on Bifröst Setup. |
 | 4 | *Restart Job Queue* action | Creates and enqueues the management Job Queue Entry — recurring, every 5 minutes, all seven days, running codeunit `Scheduler Handler ori`. The status field on the setup page reports whether it is running. |
 | 5 | *Client Credentials* action | One `Client Credentials ori` row per Entra app registration used to restart entries through the API. |
@@ -288,7 +288,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | ID | Name | Purpose |
 | --- | --- | --- |
 | 10035535 | `Sched. Entry Subform ori` | List part page displaying scheduled entries as a subform. |
-| 10035536 | `Scheduler Setup ori` | The module's own setup page — the only place it is configured. |
+| 10035536 | `Scheduler Setup ori` | The module's own setup page — where it is configured. |
 | 10035537 | `Scheduled Entry API ori` | API page exposing scheduled entries for external integrations. |
 | 10035538 | `Entries API ori` | API page exposing Job Queue Entries with an action to add entries to the orchestrator. |
 | 10035539 | `Scheduler Status ori` | API page exposing the orchestrator status and restart actions. |
@@ -320,7 +320,7 @@ Finance wants the nightly *Aged Accounts Receivable* report generated every work
 | --- | --- | --- | --- |
 | 10035535 | `JobQueueEntryCard.PageExt ori` | Job Queue Entry Card | Adds the orchestrator scheduling actions to the Job Queue Entry Card. |
 | 10035536 | `JobQueueEntries.PageExt ori` | Job Queue Entries | Adds the orchestrator scheduling actions to the Job Queue Entries list. |
-| 10035537 | `Setup JQ ori` | `Setup ori` (Foundation) | Adds exactly one *Apps* action pointing at `Scheduler Setup ori`. |
+| 10035537 | `Setup JQ ori` | `Setup ori` (Foundation) | Adds the *Apps* action pointing at `Scheduler Setup ori`, and Navigate actions opening `Playbooks ori` and `Playbook Instances ori`. |
 | 10035584 | `User Setup Ext ori` | `User Setup Editor ori` (Foundation) | Shows the Telegram Chat ID field on the Bifröst User Setup editor. |
 
 ### Enums
