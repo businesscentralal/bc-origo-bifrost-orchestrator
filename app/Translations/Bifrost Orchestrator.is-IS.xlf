@@ -4845,6 +4845,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort Bifröst stjórnandinn fylgist með þessari vinnsluraðarfærslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobQueueEntryCard.PageExt ori - Control Scheduler Enabled ori - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>View the execution log for playbook runs.</source>
+          <target>Skoða keyrsluskrá keðjukeyrslna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða keyrsluskrá keðjukeyrslna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action PlaybookInstances - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 3732935745 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Playbook Execution Log</source>
+          <target>Keyrsluskrá keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action PlaybookInstances - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>View and configure Bifrost message playbooks.</source>
+          <target>Skoða og stilla keðjur Bifröst skilaboða.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða og stilla keðjur Bifröst skilaboða.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Bifrost Playbooks</source>
+          <target>Bifröst keðjur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Configure Bifrost Orchestrator: job queue scheduling, playbooks, client credentials and secrets.</source>
           <target>Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</target>
