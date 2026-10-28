@@ -2,7 +2,7 @@
   "id": "194ecd04-5688-4af6-94bc-732c714251fc",
   "name": "Bifrost Orchestrator - Tests",
   "publisher": "Origo",
-  "version": "28.0.3.0",
+  "version": "28.0.4.0",
   "brief": "Bifrost Orchestrator - Tests",
   "description": "Bifrost Orchestrator - Tests",
   "applicationInsightsConnectionString": "InstrumentationKey=70788cb7-2d17-4a3d-8d14-1f0522b8fcca;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=9b402607-d048-47b2-9854-14c825ab88f1",
@@ -22,7 +22,7 @@
       "id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
       "name": "Bifrost Orchestrator",
       "publisher": "Origo",
-      "version": "28.0.3.0"
+      "version": "28.0.4.0"
     },
     {
       "id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
