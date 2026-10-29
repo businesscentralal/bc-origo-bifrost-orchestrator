@@ -52,12 +52,16 @@ codeunit 10035544 "Schedule Calc ori"
         if (LastExecutionDateTime = 0DT) and ("Scheduled Entry ori"."No. of Minutes between Runs" > 0) then
             exit(CalcFirstRunTime("Scheduled Entry ori", StartingDateTime, NowDateTime));
 
-        // A delayed daily dispatch must not shift tomorrow's configured starting time.
+        // Keep the first configured daily start after the actual execution, including
+        // an execution delayed past midnight into the next calendar day.
         if (LastExecutionDateTime <> 0DT) and
            ("Scheduled Entry ori"."No. of Minutes between Runs" = 1440) and
-           ("Scheduled Entry ori"."Starting Time" <> 0T) then
-            exit(CalcRunTimeForRecurringSchedule("Scheduled Entry ori",
-                CreateDateTime(DT2Date(LastExecutionDateTime) + 1, "Scheduled Entry ori"."Starting Time")));
+           ("Scheduled Entry ori"."Starting Time" <> 0T) then begin
+            NewRunDateTime := CreateDateTime(DT2Date(LastExecutionDateTime), "Scheduled Entry ori"."Starting Time");
+            if NewRunDateTime <= LastExecutionDateTime then
+                NewRunDateTime := CreateDateTime(DT2Date(LastExecutionDateTime) + 1, "Scheduled Entry ori"."Starting Time");
+            exit(CalcRunTimeForRecurringSchedule("Scheduled Entry ori", NewRunDateTime));
+        end;
 
         NewRunDateTime := StartingDateTime;
 

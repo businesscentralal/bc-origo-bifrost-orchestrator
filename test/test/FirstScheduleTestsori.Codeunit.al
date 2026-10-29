@@ -91,6 +91,42 @@ codeunit 96443 "First Schedule Tests ori"
             'Delayed execution must not move the daily anchor');
     end;
 
+    /// <summary>A daily execution delayed past midnight retains the upcoming evening slot.</summary>
+    [Test]
+    procedure Scenario_AC01_MidnightDelayKeepsSameDayAnchor()
+    var
+        Entry: Record "Scheduled Entry ori";
+        Calc: Codeunit "Schedule Calc ori";
+        ActualRun: DateTime;
+    begin
+        // #130 AC01/03 | Time: fixed clock | Risk: None
+        // Given Monday's 23:30 dispatch succeeds just after midnight on Tuesday.
+        InitializeEntry(Entry, 1440, 233000T, 0T);
+        ActualRun := CreateDateTime(20260106D, 000500T);
+        // When calculating recurrence, then Tuesday evening must not be skipped.
+        Assert.AreEqual(CreateDateTime(20260106D, 233000T),
+            Calc.CalcNextRunTimeForRecurringSchedule(Entry, ActualRun, ActualRun, ActualRun),
+            'A midnight-delayed success must retain the next configured start on the same date');
+    end;
+
+    /// <summary>A never-run schedule created inside its window retains its first due slot.</summary>
+    [Test]
+    procedure Scenario_AC01_CreatedInsideWindowRunsFirstSlot()
+    var
+        Entry: Record "Scheduled Entry ori";
+        Calc: Codeunit "Schedule Calc ori";
+        CreatedAt: DateTime;
+    begin
+        // #130 AC01 | Time: fixed clock | Risk: None
+        // Given a daily entry created after its configured start, inside the window.
+        InitializeEntry(Entry, 1440, 103000T, 110000T);
+        CreatedAt := CreateDateTime(20260105D, 104500T);
+        // When first dispatched, then its due creation slot remains eligible.
+        Assert.AreEqual(CreatedAt,
+            Calc.CalcNextRunTimeForRecurringSchedule(Entry, 0DT, CreatedAt, CreatedAt + 1000),
+            'Creating an entry inside its window must not postpone its first dispatch');
+    end;
+
     /// <summary>Changing and clearing a recurring starting time updates its reference.</summary>
     [Test]
     procedure Scenario_AC05_StartChangeAndClearSyncReference()
