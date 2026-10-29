@@ -7,8 +7,25 @@ using System.EMail;
 using System.Environment;
 using System.Threading;
 
-codeunit 10035541 "Email Notification ori" implements "Notification ori"
+codeunit 10035541 "Email Notification ori" implements "Notification ori", "Skipped Notification ori"
 {
+    /// <summary>Sends a warning for a due job that was skipped without running.</summary>
+    procedure SendSkippedNotification(Entry: Record "Scheduled Entry ori"; PlannedAt: DateTime; NewRunAt: DateTime)
+    var
+        EmailMessage: Codeunit "Email Message";
+        Email: Codeunit Email;
+        Recipient: Text;
+        SubjectTxt: Label 'Job skipped, not run: %1', Comment = '%1 = entry description, is-IS=Verki sleppt, ekki keyrt: %1';
+        BodyTxt: Label 'Job %1 was skipped, not run. Planned time: %2. New time: %3.', Comment = '%1 = entry description, %2 = planned time, %3 = new time, is-IS=Verki %1 var sleppt, ekki keyrt. Áætlaður tími: %2. Nýr tími: %3.';
+    begin
+        foreach Recipient in Entry."Notification Recipient".Split(';') do
+            if Recipient.Trim() <> '' then begin
+                Clear(EmailMessage);
+                EmailMessage.Create(Recipient.Trim(), StrSubstNo(SubjectTxt, Entry.Description), StrSubstNo(BodyTxt, Entry.Description, PlannedAt, NewRunAt), false);
+                Email.Enqueue(EmailMessage, "Email Scenario"::"Scheduler ori");
+            end;
+    end;
+
     /// <summary>
     /// Returns that a notification recipient is mandatory for email notifications.
     /// </summary>

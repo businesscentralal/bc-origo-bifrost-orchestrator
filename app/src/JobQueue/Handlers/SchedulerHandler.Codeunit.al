@@ -168,7 +168,8 @@ codeunit 10035535 "Scheduler Handler ori"
         JobQueueEntry."Run on Fridays" := "Scheduled Entry ori"."Run on Fridays";
         JobQueueEntry."Run on Saturdays" := "Scheduled Entry ori"."Run on Saturdays";
         JobQueueEntry."Run on Sundays" := "Scheduled Entry ori"."Run on Sundays";
-        JobQueueEntry."Starting Time" := "Scheduled Entry ori"."Starting Time";
+        JobQueueEntry."Recurring Job" := true;
+        JobQueueEntry.Validate("Starting Time", "Scheduled Entry ori"."Starting Time");
         JobQueueEntry."Ending Time" := "Scheduled Entry ori"."Ending Time";
         JobQueueEntry."Next Run Date Formula" := "Scheduled Entry ori"."Next Run Date Formula";
         JobQueueEntry."Recurring Job" := true;

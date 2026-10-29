@@ -70,6 +70,7 @@ codeunit 10035616 "Playbook Verify ori"
             until Step.Next() = 0;
 
         CheckScheduleWithErrors(PlaybookCode, Findings);
+        CheckScheduleHealth(PlaybookCode, Findings);
     end;
 
     /// <summary>
@@ -142,7 +143,7 @@ codeunit 10035616 "Playbook Verify ori"
         GetFindings(PlaybookCode, Findings);
         foreach Token in Findings do begin
             Finding := Token.AsObject();
-            if not Finding.Contains('stepDisabled') then begin
+            if not Finding.Contains('stepDisabled') and (GetText(Finding, 'code') <> 'ScheduleNotRunning') then begin
                 Severity := GetText(Finding, 'severity');
                 if (Severity = ErrorTok) or ((Severity = WarningTok) and not IgnoreWarnings) then begin
                     Blocking.Add(Finding);
@@ -182,7 +183,7 @@ codeunit 10035616 "Playbook Verify ori"
     begin
         foreach Token in Findings do begin
             Finding := Token.AsObject();
-            if not Finding.Contains('stepDisabled') then
+            if not Finding.Contains('stepDisabled') and (GetText(Finding, 'code') <> 'ScheduleNotRunning') then
                 if GetText(Finding, 'severity') = Severity then
                     Count += 1;
         end;
@@ -331,6 +332,28 @@ codeunit 10035616 "Playbook Verify ori"
         Segments := MessageTypeName.Split('.');
         Verbs.AddRange('Get', 'Find', 'Search', 'List');
         exit(Verbs.Contains(Segments.Get(Segments.Count())));
+    end;
+
+    local procedure CheckScheduleHealth(PlaybookCode: Code[20]; var Findings: JsonArray)
+    var
+        Playbook: Record "Playbook ori";
+        Entry: Record "Scheduled Entry ori";
+        Health: Codeunit "Schedule Health ori";
+        Attention: JsonArray;
+        Token: JsonToken;
+        Flag: JsonObject;
+        ScheduleNotRunningTxt: Label 'Schedule for playbook %1 needs attention: %2. This warning does not block Run.', Comment = '%1 = playbook code, %2 = health flag, is-IS=Tímasetning keðjunnar %1 þarfnast athugunar: %2. Þessi viðvörun hindrar ekki keyrslu.';
+    begin
+        if not Playbook.Get(PlaybookCode) then
+            exit;
+        if not Entry.Get(Playbook."Orchestrator Entry ID") then
+            exit;
+        Health.AddAttention(Entry, Attention, CurrentDateTime);
+        foreach Token in Attention do begin
+            Flag := Token.AsObject();
+            AddFinding(Findings, WarningTok, 0, 'ScheduleNotRunning',
+                StrSubstNo(ScheduleNotRunningTxt, PlaybookCode, GetText(Flag, 'code')), GetText(Flag, 'nextStep'), false);
+        end;
     end;
 
     local procedure CheckScheduleWithErrors(PlaybookCode: Code[20]; var Findings: JsonArray)

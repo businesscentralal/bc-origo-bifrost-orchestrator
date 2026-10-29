@@ -386,9 +386,10 @@ table 10035535 "Scheduled Entry ori"
                 ValidateTimeRange();
 
                 // Sync to Job Queue Entry
-                JobQueueEntry.SetRange(ID, ID);
-                if not JobQueueEntry.IsEmpty() then
-                    JobQueueEntry.ModifyAll("Starting Time", "Starting Time", true);
+                if JobQueueEntry.Get(ID) then begin
+                    JobQueueEntry.Validate("Starting Time", "Starting Time");
+                    JobQueueEntry.Modify(true);
+                end;
             end;
         }
         field(260; "Ending Time"; Time)
@@ -440,6 +441,21 @@ table 10035535 "Scheduled Entry ori"
             DataClassification = SystemMetadata;
             Editable = false;
             InitValue = 0;
+        }
+        field(310; "Skips Since Last Run"; Integer)
+        {
+            Caption = 'Skips Since Last Run', Comment = 'is-IS=Sleppt síðan síðast var keyrt';
+            Editable = false;
+        }
+        field(320; "Last Skipped At"; DateTime)
+        {
+            Caption = 'Last Skipped At', Comment = 'is-IS=Síðast sleppt';
+            Editable = false;
+        }
+        field(330; "Last Skipped Slot"; DateTime)
+        {
+            Caption = 'Last Skipped Slot', Comment = 'is-IS=Síðasta keyrslubil sem var sleppt';
+            Editable = false;
         }
     }
 

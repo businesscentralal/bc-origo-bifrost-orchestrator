@@ -24,6 +24,8 @@ codeunit 10035551 "Status Msg Handler ori"
         Setup: Record "Scheduler Setup ori";
         Entry: Record "Scheduled Entry ori";
         Mgt: Codeunit "Scheduler Mgt ori";
+        Health: Codeunit "Schedule Health ori";
+        Attention: JsonArray;
         ResponseJson: JsonObject;
         EntriesJson: JsonObject;
         StatusText: Text;
@@ -45,6 +47,12 @@ codeunit 10035551 "Status Msg Handler ori"
         EntriesJson.Add('active', Entry.Count());
         ResponseJson.Add('entries', EntriesJson);
 
+        Entry.SetLoadFields(ID, Description, Blocked, "Skips Since Last Run", "No. of Minutes between Runs", "Next Run Date Formula", SystemCreatedAt);
+        if Entry.FindSet() then
+            repeat
+                Health.AddAttention(Entry, Attention, CurrentDateTime);
+            until Entry.Next() = 0;
+        ResponseJson.Add('attention', Attention);
         Argument.SetResponseJson(ResponseJson);
     end;
 

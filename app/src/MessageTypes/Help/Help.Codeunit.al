@@ -33,6 +33,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         O.AppendLine('**I need to...**');
         O.AppendLine('- Check orchestrator health → `Orchestrator.Status.Get`');
+        O.AppendLine(ScheduleHealthHelpTxt);
         O.AppendLine('- Restart the orchestrator → `Orchestrator.Status.Restart` or `Orchestrator.Status.RestartIfNeeded`');
         O.AppendLine('- Run an orchestrator entry now → `Orchestrator.Entry.Run`');
         O.AppendLine('- Restart a failed entry → `Orchestrator.Entry.Restart` or `Orchestrator.JobQueueEntry.Restart`');
@@ -230,6 +231,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `IterateSourceInvalid` | error | A forEach step iterates a step that does not exist or does not come before it |');
         O.AppendLine('| `InvalidSkipGate` | error | `Skip If Step Failed` names a step that does not exist, does not come first or does not iterate: every item would be skipped |');
         O.AppendLine('| `ScheduledWithErrors` | error | The playbook is scheduled and an enabled step has an error |');
+        O.AppendLine(ScheduleFindingHelpTxt);
         O.AppendLine('| `UnsafeForEachWrite` | warning | An enabled forEach write step follows a forEach `Check` over the same array and does not have `Skip If Step Failed` set to it: it writes for every item |');
         O.AppendLine('| `ActionWithoutSuccessCondition` | warning | An `Action` has no Success condition, so it counts as successful whenever the type does not raise, also when it answers `status: "Error"` |');
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
@@ -1004,4 +1006,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('RequestSent (base64 BLOB), ResponseReceived (base64 BLOB), IteratorElement, WorkspaceSnapshot (base64 BLOB, only on failed steps).');
         O.AppendLine('');
     end;
+    var
+        ScheduleHealthHelpTxt: Label 'Status.Get returns attention[] with entryId, description, code and nextStep for non-blocked entries. Codes: ReferenceStartingTimeBlank, OverdueNoRun (one interval plus 15 minutes without a successful log), SilentlySkipped and NoJobQueueEntry. Healthy entries produce no flags. Checks are read-only. A skipped due slot moved to a later day or three consecutive skipped slots trigger the configured notification; normal waiting does not. Successful execution clears the skip diagnostics.', Comment = 'is-IS=Status.Get skilar attention[] með entryId, description, code og nextStep fyrir ólokaðar færslur. Kóðar: ReferenceStartingTimeBlank, OverdueNoRun (eitt keyrslubil og 15 mínútur án heppnaðrar keyrslu), SilentlySkipped og NoJobQueueEntry. Heilbrigðar færslur fá engar viðvaranir. Athuganir eru aðeins til lestrar. Keyrsla sem er færð á síðari dag eða þrjár slepptar keyrslur í röð virkja stillta tilkynningu; venjuleg bið gerir það ekki. Heppnuð keyrsla hreinsar greiningu á slepptum keyrslum.';
+        ScheduleFindingHelpTxt: Label '| `ScheduleNotRunning` | warning (never blocks Run or Schedule) | Scheduled entry needs attention; follow nextStep and inspect Status.Get attention |', Comment = 'is-IS=| `ScheduleNotRunning` | viðvörun (hindrar aldrei Run eða Schedule) | Tímasett færsla þarfnast athugunar; fylgdu nextStep og skoðaðu attention í Status.Get |';
 }

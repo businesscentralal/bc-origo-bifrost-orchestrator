@@ -6,9 +6,28 @@ using System.Environment;
 using System.Environment.Configuration;
 using System.Threading;
 
-codeunit 10035587 "Telegram Notif. ori" implements "Notification ori"
+codeunit 10035587 "Telegram Notif. ori" implements "Notification ori", "Skipped Notification ori"
 {
     Access = Internal;
+    /// <summary>Sends a warning for a due job that was skipped without running.</summary>
+    procedure SendSkippedNotification(Entry: Record "Scheduled Entry ori"; PlannedAt: DateTime; NewRunAt: DateTime)
+    var
+        Secrets: Codeunit "Secrets ori";
+        TelegramSend: Codeunit "Telegram Send ori";
+        ChatId: Text;
+        MessageText: Text;
+        SkippedTxt: Label 'Job %1 was skipped, not run. Planned time: %2. New time: %3.', Comment = '%1 = entry description, %2 = planned time, %3 = new time, is-IS=Verki %1 var sleppt, ekki keyrt. Áætlaður tími: %2. Nýr tími: %3.';
+    begin
+        if not Secrets.IsTelegramBotTokenSet() then
+            exit;
+        // Telegram uses HTML parse mode: escape the customer-authored description.
+        MessageText := StrSubstNo(SkippedTxt, Entry.Description.Replace('&', '&amp;').Replace('<', '&lt;').Replace('>', '&gt;'), PlannedAt, NewRunAt);
+        foreach ChatId in Entry."Notification Recipient".Split(';') do
+            if ChatId.Trim() <> '' then
+                if not TelegramSend.SendMessage(Secrets.GetTelegramBotToken(), ChatId.Trim(), MessageText) then
+                    LogSendError(Entry, ChatId);
+    end;
+
 
     procedure IsNotificationReceipientMandatory() IsMandatory: Boolean
     begin

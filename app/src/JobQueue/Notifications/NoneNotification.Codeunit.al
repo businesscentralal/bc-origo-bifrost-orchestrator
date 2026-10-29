@@ -5,8 +5,13 @@ namespace Origo.Bifrost.Orchestrator;
 
 using System.Threading;
 
-codeunit 10035540 "None Notification ori" implements "Notification ori"
+codeunit 10035540 "None Notification ori" implements "Notification ori", "Skipped Notification ori"
 {
+    /// <summary>Sends a warning for a due job that was skipped without running.</summary>
+    procedure SendSkippedNotification(Entry: Record "Scheduled Entry ori"; PlannedAt: DateTime; NewRunAt: DateTime)
+    begin
+    end;
+
     /// <summary>
     /// Returns that a notification recipient is not mandatory when notifications are disabled.
     /// </summary>

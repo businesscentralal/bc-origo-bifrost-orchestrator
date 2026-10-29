@@ -57,6 +57,7 @@ codeunit 10035539 "Scheduler Events ori"
     local procedure OnAfterRun(var JobQueueEntry: Record "Job Queue Entry");
     var
         "Scheduled Entry ori": Record "Scheduled Entry ori";
+        Health: Codeunit "Schedule Health ori";
         CustomDimensions: Dictionary of [Text, Text];
         NotificationInterface: Interface "Notification ori";
         JobQueueEntryExecutedTok: Label 'Job Queue Entry Executed', Locked = true;
@@ -64,6 +65,7 @@ codeunit 10035539 "Scheduler Events ori"
         if not "Scheduled Entry ori".Get(JobQueueEntry.ID) then
             exit;
 
+        Health.ResetAfterSuccess(JobQueueEntry.ID);
         NotificationInterface := "Scheduled Entry ori"."Notification Type";
         NotificationInterface.SendExecutionCompletedNotification("Scheduled Entry ori", JobQueueEntry);
         if not "Scheduled Entry ori"."Emit Telemetry" then

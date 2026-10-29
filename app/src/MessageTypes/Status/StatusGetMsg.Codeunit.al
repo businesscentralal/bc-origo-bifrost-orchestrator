@@ -76,6 +76,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Fields: JsonArray;
         EntryFields: JsonArray;
+        AttentionFields: JsonArray;
     begin
         Parts.AddResponseField(EntryFields, 'total', 'integer', 'All orchestrator entries.');
         Parts.AddResponseField(EntryFields, 'blocked', 'integer', 'Blocked entries.');
@@ -85,6 +86,11 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts.AddResponseField(Fields, 'jobQueueCategoryCode', 'string', 'Job Queue Category Code of the scheduler setup, e.g. JOBSSCHDLR.');
         Parts.AddResponseField(Fields, 'logJobQueueActivity', 'boolean', 'Whether Job Queue activity is logged.');
         Parts.AddResponseField(Fields, 'entries', 'object', 'Counts of orchestrator entries.', EntryFields);
+        Parts.AddResponseField(AttentionFields, 'entryId', 'string', 'Scheduled Entry primary-key GUID.');
+        Parts.AddResponseField(AttentionFields, 'description', 'string', 'Scheduled Entry description.');
+        Parts.AddResponseField(AttentionFields, 'code', 'string', 'ReferenceStartingTimeBlank, OverdueNoRun, SilentlySkipped or NoJobQueueEntry.');
+        Parts.AddResponseField(AttentionFields, 'nextStep', 'string', 'Actionable guidance in the session language.');
+        Parts.AddResponseField(Fields, 'attention', 'array', AttentionDescriptionTxt, AttentionFields);
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
     end;
@@ -135,7 +141,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Read status', '{"type":"Orchestrator.Status.Get"}', '{"status":"Success","orchestratorStatus":"Job Queue is running","jobQueueCategoryCode":"JOBSSCHDLR","logJobQueueActivity":true,"entries":{"total":10,"blocked":1,"active":9}}');
+        Parts.Example(Examples, 'Read status', '{"type":"Orchestrator.Status.Get"}', '{"status":"Success","orchestratorStatus":"Job Queue is running","jobQueueCategoryCode":"JOBSSCHDLR","logJobQueueActivity":true,"entries":{"total":10,"blocked":1,"active":9},"attention":[]}');
         exit(true);
     end;
 
@@ -147,7 +153,7 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'orchestratorStatus is meant for a person, not for a comparison: it is translated. Expired means the management Job Queue Entry has expired, or it is ready to start but its earliest start lies more than a minute in the past; any other state of an existing entry is reported as failed. Orchestrator.Status.Restart fixes both; Orchestrator.Status.RestartIfNeeded leaves a Ready or In Process entry alone even when it has expired. The active count is the entries that are not blocked.';
+        Notes := 'orchestratorStatus is meant for a person, not for a comparison: it is translated. Expired means the management Job Queue Entry has expired, or it is ready to start but its earliest start lies more than a minute in the past; any other state of an existing entry is reported as failed. Orchestrator.Status.Restart fixes both; Orchestrator.Status.RestartIfNeeded leaves a Ready or In Process entry alone even when it has expired. The active count is the entries that are not blocked.' + ' ' + AttentionNotesTxt;
         exit(true);
     end;
 
@@ -171,4 +177,6 @@ codeunit 10035559 "Status Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     var
         Handler: Codeunit "Status Msg Handler ori";
+        AttentionDescriptionTxt: Label 'Read-only schedule warnings for non-blocked entries; empty for a healthy setup.', Comment = 'is-IS=Viðvaranir um tímasetningar ólokaðra færslna, aðeins til lestrar; tómt þegar uppsetning er heilbrigð.';
+        AttentionNotesTxt: Label 'attention lists entryId, description, code and nextStep. ReferenceStartingTimeBlank means Starting Time is set but its reference is blank. OverdueNoRun means no successful log exists after one configured interval plus a 15-minute grace period from entry creation. SilentlySkipped means at least one due slot was skipped. NoJobQueueEntry means the active entry has no job. These checks never repair records. A due slot moved to a later day, or a third consecutive skipped slot, sends a warning using the configured notification type. Repeated handling of the same slot does not send again; normal waiting before the window opens does not notify. Successful execution resets the skip diagnostics.', Comment = 'is-IS=attention sýnir entryId, description, code og nextStep. ReferenceStartingTimeBlank merkir að upphafstími sé tilgreindur en viðmiðun hans vanti. OverdueNoRun merkir að engin heppnuð keyrsla hafi verið skráð eftir eitt stillt keyrslubil og 15 mínútna svigrúm frá stofnun færslu. SilentlySkipped merkir að að minnsta kosti einni áætlaðri keyrslu hafi verið sleppt. NoJobQueueEntry merkir að virka færslan hafi enga vinnsluraðafærslu. Þessar athuganir laga aldrei færslur. Keyrsla sem er færð á síðari dag, eða þriðja keyrsla í röð sem er sleppt, sendir viðvörun með stilltri tilkynningartegund. Sama keyrslubil sendir ekki aftur; venjuleg bið eftir tímaglugga sendir enga tilkynningu. Heppnuð keyrsla núllstillir greiningu á slepptum keyrslum.';
 }

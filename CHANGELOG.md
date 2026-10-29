@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed / Added (2026-10-29) - First daily dispatch and schedule health (#130, #131)
+
+- Codeunits 10035544 `Schedule Calc ori`, 10035535 `Scheduler Handler ori`, 10035536 `Scheduler Mgt ori` and table 10035535 `Scheduled Entry ori`: a never-run minutes-based schedule keeps the due slot while inside its allowed window. Administrative Last Ready State is no longer treated as a successful run. Creation, rebuild and Starting Time edits validate the BC field to maintain Reference Starting Time, including clearing it.
+- Add codeunits 10035620 `Schedule Health ori` and 10035621 `Skipped Notification Send ori`, the additive `Skipped Notification ori` interface, and Scheduled Entry fields 310/320/330. Due skips are counted once per slot, always emit O4NJQS-0010 telemetry, and notify on a later-day deferral or three consecutive skips. Ordinary waiting does not notify; successful execution (10035539 `Scheduler Events ori`) resets skip diagnostics. Notification failures are isolated and emit O4NJQS-0011. Existing notification interface implementations remain compatible.
+- Codeunit 10035551 `Status Msg Handler ori` adds read-only `attention` flags to Status.Get. Codeunit 10035616 `Playbook Verify ori` adds `ScheduleNotRunning`, excluded from execution gates and blockingWarningCount. Contracts/help (10035559, 10035615, 10035576), permissions and English/Icelandic text document the flags and the fifteen-minute grace period.
+- Regression codeunits 96443 `First Schedule Tests ori` and 96444 `Schedule Health Tests ori` cover first dispatch, window boundaries, reference-time synchronization, skip deduplication, healthy/overdue entries and informational Verify findings. Existing codeunit 96411 starting-time sync test now checks the reference time.
+
 ### Fixed (2026-10-22) - Distinguish blocking Verify findings (#113)
 
 - Codeunits 10035616 `Playbook Verify ori` and 10035615 `Playbook Verify Msg ori`: add `blockingErrorCount` and `blockingWarningCount` to `Orchestrator.Playbook.Verify`. These exclude informational findings on disabled steps and match the existing Run/Schedule gates (warnings can be accepted with `ignoreWarnings`). Existing `valid`, `errorCount`, `warningCount`, per-step findings and `stepDisabled` remain unchanged for compatibility. Help, examples and bilingual type descriptions explain which counts to read.
