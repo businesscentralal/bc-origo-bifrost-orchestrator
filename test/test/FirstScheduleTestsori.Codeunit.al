@@ -75,6 +75,22 @@ codeunit 96443 "First Schedule Tests ori"
             Calc.CalcNextRunTimeForRecurringSchedule(Entry, Slot, Slot, Slot + 1000), 'A successful slot must not run twice');
     end;
 
+    /// <summary>A late successful daily run does not shift the next day's starting time.</summary>
+    [Test]
+    procedure Scenario_AC01_LateDailyRunKeepsNextDayAnchor()
+    var
+        Entry: Record "Scheduled Entry ori";
+        Calc: Codeunit "Schedule Calc ori";
+        ActualRun: DateTime;
+    begin
+        // #130 AC01/03 | Time: fixed clock | Risk: None
+        InitializeEntry(Entry, 1440, 103000T, 110000T);
+        ActualRun := CreateDateTime(20260105D, 103201T);
+        Assert.AreEqual(CreateDateTime(20260106D, 103000T),
+            Calc.CalcNextRunTimeForRecurringSchedule(Entry, ActualRun, ActualRun, ActualRun),
+            'Delayed execution must not move the daily anchor');
+    end;
+
     /// <summary>Changing and clearing a recurring starting time updates its reference.</summary>
     [Test]
     procedure Scenario_AC05_StartChangeAndClearSyncReference()
@@ -148,7 +164,7 @@ codeunit 96443 "First Schedule Tests ori"
         LogEntry.SetRange(Status, LogEntry.Status::Success);
         Assert.IsFalse(LogEntry.IsEmpty(), 'First dispatch must write a successful Job Queue log');
         Job.Get(EntryId);
-        Assert.AreEqual(Today() + 1, DT2Date(Job."Earliest Start Date/Time"), 'Next daily dispatch must be tomorrow');
+        Assert.AreEqual(CreateDateTime(Today() + 1, StartTime), Job."Earliest Start Date/Time", 'Next daily dispatch must keep the configured starting time tomorrow');
         // Reset the library's insertion collector before recreating the same job ID.
         UnbindSubscription(LibraryQueue);
         Clear(LibraryQueue);
