@@ -27,6 +27,12 @@ codeunit 10035535 "Scheduler Handler ori"
     /// </summary>
     /// <param name="Scheduled Entry ori">The orchestrator entry to process.</param>
     internal procedure ScheduleTask("Scheduled Entry ori": Record "Scheduled Entry ori")
+    begin
+        ScheduleTask("Scheduled Entry ori", false);
+    end;
+
+    /// <summary>Schedules an entry, optionally creating a future job for an explicit rebuild request.</summary>
+    internal procedure ScheduleTask("Scheduled Entry ori": Record "Scheduled Entry ori"; CreateFutureEntry: Boolean)
     var
         JobQueueEntry: Record "Job Queue Entry";
         ApiClient: Codeunit "Scheduler API Client ori";
@@ -76,7 +82,7 @@ codeunit 10035535 "Scheduler Handler ori"
                 end;
             end
         end else
-            if "Scheduled Entry ori"."Earliest Start Date/Time" <= CurrentDateTime then
+            if CreateFutureEntry or ("Scheduled Entry ori"."Earliest Start Date/Time" <= CurrentDateTime) then
                 ScheduleNextJobQueueEntry("Scheduled Entry ori");
     end;
 

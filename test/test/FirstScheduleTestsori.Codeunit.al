@@ -155,9 +155,12 @@ codeunit 96443 "First Schedule Tests ori"
         BindSubscription(LibraryQueue);
         // Rebuild using the same production scheduling path.
         Job.Delete();
-        Handler.ScheduleTask(Entry);
+        Entry."Earliest Start Date/Time" := CreateDateTime(Today() + 1, StartTime);
+        Entry.Modify();
+        Handler.ScheduleTask(Entry, true);
         Job.Get(EntryId);
         Assert.AreEqual(CreateDateTime(20000101D, StartTime), Job."Reference Starting Time", 'Rebuilt job reference');
+        Assert.AreEqual(Today() + 1, DT2Date(Job."Earliest Start Date/Time"), 'Explicit rebuild must retain the future run time');
         UnbindSubscription(LibraryQueue);
         Job.Delete();
         LogEntry.DeleteAll();
