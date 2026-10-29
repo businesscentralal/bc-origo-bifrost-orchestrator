@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
+using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Covers the registration of Bifrost Orchestrator in the Bifröst Foundation application registry.
@@ -23,6 +24,69 @@ codeunit 96423 "Orchestr Registration Tests"
         if IsInitialized then
             exit;
         IsInitialized := true;
+    end;
+
+    /// <summary>Opens Foundation setup with Orchestrator installed and only the licence-admin role in English.</summary>
+    [Test]
+    procedure Scenario_AC03_LicenceAdmin_OpensSetupInEnglish()
+    begin
+        // Story #127 AC03 | Time: independent of Today/WorkDate | Risk: cross-app registration execute permission.
+        AssertLicenceAdminOpensSetup(1033);
+    end;
+
+    /// <summary>Proves the same restricted setup path in Icelandic without granting Orchestrator administration.</summary>
+    [Test]
+    procedure Scenario_AC03_LicenceAdmin_OpensSetupInIcelandic()
+    begin
+        // Story #127 AC03 | Time: independent of Today/WorkDate | Risk: cross-app registration execute permission.
+        AssertLicenceAdminOpensSetup(1039);
+    end;
+
+    local procedure AssertLicenceAdminOpensSetup(LanguageId: Integer)
+    var
+        BifrostSetup: Record "Setup ori";
+        TempRegisteredApp: Record "Registered App ori" temporary;
+        AppRegistry: Codeunit "App Registry ori";
+        LowerPermissions: Codeunit "Library - Lower Permissions";
+        SetupPage: TestPage "Setup ori";
+        PreviousLanguage: Integer;
+        RegisteredSetupPageId: Integer;
+        IsEditable: Boolean;
+        CanWriteSetup: Boolean;
+        IsRegistered: Boolean;
+        PermissionsLowered: Boolean;
+        OrchestratorAppId: Guid;
+    begin
+        // [GIVEN] Our installed app and Foundation setup; no consent, trial, quota or licence state changes.
+        Initialize();
+        BifrostSetup.InsertIfNotExists();
+        OrchestratorAppId := Secrets.GetAppId();
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+
+        LowerPermissions.StartLoggingNAVPermissions();
+        LowerPermissions.SetExactPermissionSet('BIFROST LicAdm ori');
+        // Platform baseline only: no Orchestrator codeunit grant, SUPER, or BIFROST Full.
+        LowerPermissions.AddPermissionSet('Orch Test Plat ori');
+        PermissionsLowered := LowerPermissions.HasChangedPermissions();
+        CanWriteSetup := BifrostSetup.WritePermission();
+
+        // [WHEN] The real page-open path raises OnRegisterApps under the restricted role.
+        SetupPage.OpenView();
+        IsEditable := SetupPage.Editable();
+        SetupPage.Close();
+        AppRegistry.GetApps(TempRegisteredApp);
+        IsRegistered := TempRegisteredApp.Get(OrchestratorAppId);
+        RegisteredSetupPageId := TempRegisteredApp."Setup Page Id";
+
+        // [THEN] Assertions run outside the restricted role; the product calls above do not.
+        LowerPermissions.StopLoggingNAVPermissions();
+        GlobalLanguage(PreviousLanguage);
+        Assert.IsTrue(PermissionsLowered, 'The permission mock must be active for this regression.');
+        Assert.IsFalse(CanWriteSetup, 'The licence administrator must not gain direct setup write permission.');
+        Assert.IsFalse(IsEditable, 'Bifrost setup must remain read-only for a licence administrator.');
+        Assert.IsTrue(IsRegistered, 'Orchestrator must register under the restricted licence-admin role.');
+        Assert.AreEqual(Page::"Scheduler Setup ori", RegisteredSetupPageId, 'The restricted registry must retain the Orchestrator setup page.');
     end;
 
     [Test]
