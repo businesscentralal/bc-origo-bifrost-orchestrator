@@ -149,6 +149,10 @@ codeunit 96443 "First Schedule Tests ori"
         Assert.IsFalse(LogEntry.IsEmpty(), 'First dispatch must write a successful Job Queue log');
         Job.Get(EntryId);
         Assert.AreEqual(Today() + 1, DT2Date(Job."Earliest Start Date/Time"), 'Next daily dispatch must be tomorrow');
+        // Reset the library's insertion collector before recreating the same job ID.
+        UnbindSubscription(LibraryQueue);
+        Clear(LibraryQueue);
+        BindSubscription(LibraryQueue);
         // Rebuild using the same production scheduling path.
         Job.Delete();
         Handler.ScheduleTask(Entry);
@@ -161,6 +165,42 @@ codeunit 96443 "First Schedule Tests ori"
         Instance.DeleteAll();
         Entry.Delete();
         Playbook.Delete();
+        RecurringTemplate.Delete();
+    end;
+
+    /// <summary>Applying a template updates the existing job and its starting-time reference.</summary>
+    [Test]
+    procedure Scenario_AC05_TemplateKeepsJobAndSyncsReference()
+    var
+        Entry: Record "Scheduled Entry ori";
+        Job: Record "Job Queue Entry";
+        RecurringTemplate: Record "Recurring Template ori";
+        JobSystemId: Guid;
+    begin
+        // #130 AC05 | Time: fixed times | Risk: no task scheduled
+        RecurringTemplate.Code := CopyStr(DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, 20);
+        RecurringTemplate."Run on Mondays" := true;
+        RecurringTemplate."Starting Time" := 103000T;
+        RecurringTemplate."Ending Time" := 110000T;
+        RecurringTemplate."No. of Minutes between Runs" := 1440;
+        RecurringTemplate.Insert();
+        Entry.ID := CreateGuid();
+        Entry.Insert();
+        Job.ID := Entry.ID;
+        Job."Recurring Job" := true;
+        Job.Insert();
+        JobSystemId := Job.SystemId;
+        Entry.Validate("Recurring Template Code", RecurringTemplate.Code);
+        Entry.Modify();
+        Job.Get(Entry.ID);
+        Assert.AreEqual(JobSystemId, Job.SystemId, 'Template application must retain the linked job');
+        Assert.AreEqual(103000T, Job."Starting Time", 'Template starting time must synchronize');
+        Assert.AreEqual(CreateDateTime(20000101D, 103000T), Job."Reference Starting Time", 'Template reference must synchronize');
+        Assert.AreEqual(110000T, Job."Ending Time", 'Template ending time must synchronize');
+        Assert.AreEqual(1440, Job."No. of Minutes between Runs", 'Template interval must synchronize');
+        Assert.IsTrue(Job."Run on Mondays", 'Template weekdays must synchronize');
+        Job.Delete();
+        Entry.Delete();
         RecurringTemplate.Delete();
     end;
 
