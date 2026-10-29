@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-28) - Registration for restricted licence administrators (#127)
+
+- Codeunit 10035607 `Orchestrator Registration ori` declares `InherentPermissions = X` and `InherentEntitlements = X`, allowing Foundation's setup page to invoke the app-registration subscriber without granting the user Orchestrator administration, including the entitlement boundary approved on 2026-10-29.
+- Test codeunit 96423 `Orchestr Registration Tests` opens Foundation setup under the exact `BIFROST LicAdm ori` role in English and Icelandic, checks that the page stays read-only and Orchestrator remains registered with its setup page. Test permission set 96423 `Orch Test Plat ori` supplies only the Microsoft platform baseline; it grants no Bifrost or Orchestrator objects. Verification requires Foundation 28.0.10 or later.
+
 ### Fixed (2026-10-22) - Distinguish blocking Verify findings (#113)
 
 - Codeunits 10035616 `Playbook Verify ori` and 10035615 `Playbook Verify Msg ori`: add `blockingErrorCount` and `blockingWarningCount` to `Orchestrator.Playbook.Verify`. These exclude informational findings on disabled steps and match the existing Run/Schedule gates (warnings can be accepted with `ignoreWarnings`). Existing `valid`, `errorCount`, `warningCount`, per-step findings and `stepDisabled` remain unchanged for compatibility. Help, examples and bilingual type descriptions explain which counts to read.
