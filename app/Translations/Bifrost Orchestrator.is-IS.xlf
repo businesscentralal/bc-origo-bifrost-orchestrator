@@ -699,18 +699,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Notendaauðkenni</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Scheduled Entry ori - Field Job Queue User ID - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 4028614243 - Field 3911847065 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Last Skipped At</source>
-          <target>Síðast sleppt</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Síðast sleppt</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Scheduled Entry ori - Field Last Skipped At - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 4028614243 - Field 1022009050 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Last Skipped Slot</source>
-          <target>Síðasta keyrslubil sem var sleppt</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Síðasta keyrslubil sem var sleppt</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Scheduled Entry ori - Field Last Skipped Slot - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 4028614243 - Field 919265552 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Next Run Date Formula</source>
           <target>Formúla næsta keyrsludags</target>
@@ -837,12 +825,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tímasett</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Scheduled Entry ori - Field Scheduled - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 4028614243 - Field 1676480245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Skips Since Last Run</source>
-          <target>Sleppt síðan síðast var keyrt</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sleppt síðan síðast var keyrt</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Scheduled Entry ori - Field Skips Since Last Run - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 4028614243 - Field 980877959 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Starting Time</source>
           <target>Upphafstími</target>
@@ -963,18 +945,6 @@
           <note from="Developer" annotates="general" priority="2">%1 = Job Description, is-IS=Verk '%1' hefur verið endurræst</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method PrepareAndSendRestartNotification - NamedType JobRestartedSubjectMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2492258583 - Method 1314393659 - NamedType 2679221408" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Job skipped, not run: %1</source>
-          <target>Verki sleppt, ekki keyrt: %1</target>
-          <note from="Developer" annotates="general" priority="2">%1 = entry description, is-IS=Verki sleppt, ekki keyrt: %1</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method SendSkippedNotification - NamedType SubjectTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2492258583 - Method 1314393659 - NamedType 4008849492" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Job %1 was skipped, not run. Planned time: %2. New time: %3.</source>
-          <target>Verki %1 var sleppt, ekki keyrt. Áætlaður tími: %2. Nýr tími: %3.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = entry description, %2 = planned time, %3 = new time, is-IS=Verki %1 var sleppt, ekki keyrt. Áætlaður tími: %2. Nýr tími: %3.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method SendSkippedNotification - NamedType BodyTxt</note>
-        </trans-unit>
         <trans-unit id="Codeunit 2492258583 - Method 2463710073 - NamedType 1810977272" size-unit="char" translate="yes" xml:space="preserve">
           <source>Test Email for job '%1'</source>
           <target>Prófunarpóstur fyrir verk '%1'</target>
@@ -1082,18 +1052,6 @@
           <target>Lestu yfirlit yfir skilaboðategundir Bifröst stjórnanda og uppsetningarleiðbeiningar. Lesaðgerð. Notaðu Help.Implementation.Get fyrir samning einnar tegundar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Lestu yfirlit yfir skilaboðategundir Bifröst stjórnanda og uppsetningarleiðbeiningar. Lesaðgerð. Notaðu Help.Implementation.Get fyrir samning einnar tegundar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help Get Impl ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 293043543 - NamedType 2542879139" size-unit="char" translate="yes" xml:space="preserve">
-          <source>| `ScheduleNotRunning` | warning (never blocks Run or Schedule) | Scheduled entry needs attention; follow nextStep and inspect Status.Get attention |</source>
-          <target>| `ScheduleNotRunning` | viðvörun (hindrar aldrei Run eða Schedule) | Tímasett færsla þarfnast athugunar; fylgdu nextStep og skoðaðu attention í Status.Get |</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=| `ScheduleNotRunning` | viðvörun (hindrar aldrei Run eða Schedule) | Tímasett færsla þarfnast athugunar; fylgdu nextStep og skoðaðu attention í Status.Get |</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - NamedType ScheduleFindingHelpTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 293043543 - NamedType 2145994044" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Status.Get returns attention[] with entryId, description, code and nextStep for non-blocked entries. Codes: ReferenceStartingTimeBlank, OverdueNoRun (one interval plus 15 minutes without a successful log), SilentlySkipped and NoJobQueueEntry. Healthy entries produce no flags. Checks are read-only. A skipped due slot moved to a later day or three consecutive skipped slots trigger the configured notification; normal waiting does not. Successful execution clears the skip diagnostics.</source>
-          <target>Status.Get skilar attention[] með entryId, description, code og nextStep fyrir ólokaðar færslur. Kóðar: ReferenceStartingTimeBlank, OverdueNoRun (eitt keyrslubil og 15 mínútur án heppnaðrar keyrslu), SilentlySkipped og NoJobQueueEntry. Heilbrigðar færslur fá engar viðvaranir. Athuganir eru aðeins til lestrar. Keyrsla sem er færð á síðari dag eða þrjár slepptar keyrslur í röð virkja stillta tilkynningu; venjuleg bið gerir það ekki. Heppnuð keyrsla hreinsar greiningu á slepptum keyrslum.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Status.Get skilar attention[] með entryId, description, code og nextStep fyrir ólokaðar færslur. Kóðar: ReferenceStartingTimeBlank, OverdueNoRun (eitt keyrslubil og 15 mínútur án heppnaðrar keyrslu), SilentlySkipped og NoJobQueueEntry. Heilbrigðar færslur fá engar viðvaranir. Athuganir eru aðeins til lestrar. Keyrsla sem er færð á síðari dag eða þrjár slepptar keyrslur í röð virkja stillta tilkynningu; venjuleg bið gerir það ekki. Heppnuð keyrsla hreinsar greiningu á slepptum keyrslum.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - NamedType ScheduleHealthHelpTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1910912853 - Method 4183778207 - NamedType 1852605995" size-unit="char" translate="yes" xml:space="preserve">
           <source>%3 is not supported for %1 %2</source>
@@ -1203,12 +1161,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Áætlun Bifröst-keðju sem áætlunarfærslu með endurtekningarsniðmáti. Skrifaðgerð. Notaðu Orchestrator.Playbook.Enqueue fyrir einskiptiskeyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 42595137 - NamedType 582322286" size-unit="char" translate="yes" xml:space="preserve">
-          <source>ScheduleNotRunning is a warning about a non-blocked scheduled entry with ReferenceStartingTimeBlank, OverdueNoRun, SilentlySkipped or NoJobQueueEntry. It includes an actionable nextStep. It never blocks Run or Schedule, even when ignoreWarnings is false, and is excluded from blockingWarningCount.</source>
-          <target>ScheduleNotRunning er viðvörun um ólokaða tímasetta færslu með ReferenceStartingTimeBlank, OverdueNoRun, SilentlySkipped eða NoJobQueueEntry. Hún inniheldur leiðbeiningar í nextStep. Hún hindrar aldrei Run eða Schedule, jafnvel þótt ignoreWarnings sé false, og er ekki talin í blockingWarningCount.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=ScheduleNotRunning er viðvörun um ólokaða tímasetta færslu með ReferenceStartingTimeBlank, OverdueNoRun, SilentlySkipped eða NoJobQueueEntry. Hún inniheldur leiðbeiningar í nextStep. Hún hindrar aldrei Run eða Schedule, jafnvel þótt ignoreWarnings sé false, og er ekki talin í blockingWarningCount.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Msg ori - NamedType ScheduleHealthNotesTxt</note>
-        </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Check a Bifrost Playbook without running it; findings on disabled steps are informational.</source>
           <target>Athuga Bifröst-keðju án keyrslu; niðurstöður um óvirk skref eru eingöngu til upplýsinga.</target>
@@ -1268,12 +1220,6 @@
           <target>Lagaðu villurnar hér að ofan, eða fjarlægðu tímasetninguna (eyddu Scheduled Entry ori keðjunnar) þar til þær eru lagaðar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Lagaðu villurnar hér að ofan, eða fjarlægðu tímasetninguna (eyddu Scheduled Entry ori keðjunnar) þar til þær eru lagaðar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType ScheduledWithErrorsNextStepTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 367103690 - Method 1212802993 - NamedType 4170619505" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Schedule for playbook %1 needs attention: %2. This warning does not block Run.</source>
-          <target>Tímasetning keðjunnar %1 þarfnast athugunar: %2. Þessi viðvörun hindrar ekki keyrslu.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = health flag, is-IS=Tímasetning keðjunnar %1 þarfnast athugunar: %2. Þessi viðvörun hindrar ekki keyrslu.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - Method CheckScheduleHealth - NamedType ScheduleNotRunningTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3345492096 - NamedType 1887900340" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 has no Success condition, so it counts as successful whenever the message type does not raise an error, also when it answers status Error.</source>
@@ -1761,30 +1707,6 @@
           <note from="Developer" annotates="general" priority="2">%1 = Last Run DateTime, %2 = New Run DateTime, %3 = Skip Boolean, is-IS=Síðasta keyrsla: %1, Næsta keyrsla: %2, Sleppa: %3</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Schedule Calc ori - Method JobQueueDispatcher_OnBeforeRun - NamedType ActivityDescriptionTok</note>
         </trans-unit>
-        <trans-unit id="Codeunit 677001727 - NamedType 1730328794" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Check that the orchestrator is running, then schedule the entry with Orchestrator.Entry.Schedule.</source>
-          <target>Athugaðu að vinnsluraðarinn sé í gangi og tímasettu síðan færsluna með Orchestrator.Entry.Schedule.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Athugaðu að vinnsluraðarinn sé í gangi og tímasettu síðan færsluna með Orchestrator.Entry.Schedule.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Schedule Health ori - NamedType MissingJobNextStepTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 677001727 - NamedType 3040569225" size-unit="char" translate="yes" xml:space="preserve">
-          <source>No successful run was recorded after one interval plus 15 minutes. Check the Job Queue Entry and its schedule.</source>
-          <target>Engin heppnuð keyrsla var skráð eftir eitt keyrslubil og 15 mínútur. Athugaðu vinnsluraðafærsluna og tímasetningu hennar.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Engin heppnuð keyrsla var skráð eftir eitt keyrslubil og 15 mínútur. Athugaðu vinnsluraðafærsluna og tímasetningu hennar.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Schedule Health ori - NamedType OverdueNextStepTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 677001727 - NamedType 1755656850" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Validate Starting Time on the Scheduled Entry or rebuild its Job Queue Entry with Orchestrator.Entry.Schedule. Status does not repair it.</source>
-          <target>Staðfestu upphafstíma tímasettu færslunnar eða endurskapaðu vinnsluraðafærslu hennar með Orchestrator.Entry.Schedule. Stöðuskoðun lagar hana ekki.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Staðfestu upphafstíma tímasettu færslunnar eða endurskapaðu vinnsluraðafærslu hennar með Orchestrator.Entry.Schedule. Stöðuskoðun lagar hana ekki.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Schedule Health ori - NamedType ReferenceNextStepTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 677001727 - NamedType 422672663" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Inspect the schedule window and skipped-run telemetry before rescheduling the entry.</source>
-          <target>Skoðaðu tímaglugga og fjarmælingar yfir keyrslur sem var sleppt áður en færslan er tímasett aftur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoðaðu tímaglugga og fjarmælingar yfir keyrslur sem var sleppt áður en færslan er tímasett aftur.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Schedule Health ori - NamedType SkippedNextStepTxt</note>
-        </trans-unit>
         <trans-unit id="Codeunit 2690727118 - NamedType 909536863" size-unit="char" translate="yes" xml:space="preserve">
           <source>No response received from API call for orchestrator entry %1.</source>
           <target>Ekkert svar barst frá API-kalli fyrir vinnsluraðarafærslu %1.</target>
@@ -2025,18 +1947,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Telegram-vélmennislykill sem notaður er til að senda tilkynningar Bifröst stjórnandans.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Secrets ori - NamedType TelegramBotTokenDescriptionLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3425003177 - NamedType 3782993700" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Read-only schedule warnings for non-blocked entries; empty for a healthy setup.</source>
-          <target>Viðvaranir um tímasetningar ólokaðra færslna, aðeins til lestrar; tómt þegar uppsetning er heilbrigð.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Viðvaranir um tímasetningar ólokaðra færslna, aðeins til lestrar; tómt þegar uppsetning er heilbrigð.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - NamedType AttentionDescriptionTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3425003177 - NamedType 2178720319" size-unit="char" translate="yes" xml:space="preserve">
-          <source>attention lists entryId, description, code and nextStep. ReferenceStartingTimeBlank means Starting Time is set but its reference is blank. OverdueNoRun means no successful log exists after one configured interval plus a 15-minute grace period from entry creation. SilentlySkipped means at least one due slot was skipped. NoJobQueueEntry means the active entry has no job. These checks never repair records. A due slot moved to a later day, or a third consecutive skipped slot, sends a warning using the configured notification type. Repeated handling of the same slot does not send again; normal waiting before the window opens does not notify. Successful execution resets the skip diagnostics.</source>
-          <target>attention sýnir entryId, description, code og nextStep. ReferenceStartingTimeBlank merkir að upphafstími sé tilgreindur en viðmiðun hans vanti. OverdueNoRun merkir að engin heppnuð keyrsla hafi verið skráð eftir eitt stillt keyrslubil og 15 mínútna svigrúm frá stofnun færslu. SilentlySkipped merkir að að minnsta kosti einni áætlaðri keyrslu hafi verið sleppt. NoJobQueueEntry merkir að virka færslan hafi enga vinnsluraðafærslu. Þessar athuganir laga aldrei færslur. Keyrsla sem er færð á síðari dag, eða þriðja keyrsla í röð sem er sleppt, sendir viðvörun með stilltri tilkynningartegund. Sama keyrslubil sendir ekki aftur; venjuleg bið eftir tímaglugga sendir enga tilkynningu. Heppnuð keyrsla núllstillir greiningu á slepptum keyrslum.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=attention sýnir entryId, description, code og nextStep. ReferenceStartingTimeBlank merkir að upphafstími sé tilgreindur en viðmiðun hans vanti. OverdueNoRun merkir að engin heppnuð keyrsla hafi verið skráð eftir eitt stillt keyrslubil og 15 mínútna svigrúm frá stofnun færslu. SilentlySkipped merkir að að minnsta kosti einni áætlaðri keyrslu hafi verið sleppt. NoJobQueueEntry merkir að virka færslan hafi enga vinnsluraðafærslu. Þessar athuganir laga aldrei færslur. Keyrsla sem er færð á síðari dag, eða þriðja keyrsla í röð sem er sleppt, sendir viðvörun með stilltri tilkynningartegund. Sama keyrslubil sendir ekki aftur; venjuleg bið eftir tímaglugga sendir enga tilkynningu. Heppnuð keyrsla núllstillir greiningu á slepptum keyrslum.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Get Msg ori - NamedType AttentionNotesTxt</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3425003177 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Get orchestrator health status and entry counts.</source>
           <target>Sækja heilsustöðu áætlara og fjölda færslna.</target>
@@ -2186,12 +2096,6 @@
           <target>✅ Prófunartilkynning fyrir: %1</target>
           <note from="Developer" annotates="general" priority="2">%1 = Job Description, is-IS=✅ Prófunartilkynning fyrir: %1</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Notif. ori - NamedType TestMessageLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2083975675 - Method 1314393659 - NamedType 3765535036" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Job %1 was skipped, not run. Planned time: %2. New time: %3.</source>
-          <target>Verki %1 var sleppt, ekki keyrt. Áætlaður tími: %2. Nýr tími: %3.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = entry description, %2 = planned time, %3 = new time, is-IS=Verki %1 var sleppt, ekki keyrt. Áætlaður tími: %2. Nýr tími: %3.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Notif. ori - Method SendSkippedNotification - NamedType SkippedTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Returns the seeded workspace (_sys dates, _who user context) without running any steps.</source>

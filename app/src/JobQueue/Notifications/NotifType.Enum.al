@@ -3,24 +3,23 @@
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
-enum 10035535 "Notif. Type ori" implements "Notification ori", "Skipped Notification ori"
+enum 10035535 "Notif. Type ori" implements "Notification ori"
 {
     Extensible = true;
-    DefaultImplementation = "Skipped Notification ori" = "None Notification ori";
 
     value(0; None)
     {
         Caption = 'None', Comment = 'is-IS=Engin';
-        Implementation = "Notification ori" = "None Notification ori", "Skipped Notification ori" = "None Notification ori";
+        Implementation = "Notification ori" = "None Notification ori";
     }
     value(1; EMail)
     {
         Caption = 'EMail', Comment = 'is-IS=Tölvupóstur';
-        Implementation = "Notification ori" = "Email Notification ori", "Skipped Notification ori" = "Email Notification ori";
+        Implementation = "Notification ori" = "Email Notification ori";
     }
     value(2; Telegram)
     {
         Caption = 'Telegram', Locked = true;
-        Implementation = "Notification ori" = "Telegram Notif. ori", "Skipped Notification ori" = "Telegram Notif. ori";
+        Implementation = "Notification ori" = "Telegram Notif. ori";
     }
 }

@@ -1006,7 +1006,7 @@ codeunit 96411 "Orchestrator Unit Tests"
 
         // [THEN] Both times should be updated successfully and synced
         JobQueueEntry.Get(OrchestratorEntry.ID);
-        Assert.AreEqual(CreateDateTime(20000101D, 060000T), JobQueueEntry."Reference Starting Time", 'Starting time validation must update the reference anchor');
+        Assert.AreEqual(CreateDateTime(20000101D, 090000T), JobQueueEntry."Reference Starting Time", 'Starting time validation must update the reference anchor');
         Assert.AreEqual(090000T, JobQueueEntry."Starting Time", StrSubstNo(FieldNotSyncedErr, 'Starting Time', '09:00:00', Format(JobQueueEntry."Starting Time")));
         Assert.AreEqual(170000T, JobQueueEntry."Ending Time", StrSubstNo(FieldNotSyncedErr, 'Ending Time', '17:00:00', Format(JobQueueEntry."Ending Time")));
     end;

@@ -442,21 +442,6 @@ table 10035535 "Scheduled Entry ori"
             Editable = false;
             InitValue = 0;
         }
-        field(310; "Skips Since Last Run"; Integer)
-        {
-            Caption = 'Skips Since Last Run', Comment = 'is-IS=Sleppt síðan síðast var keyrt';
-            Editable = false;
-        }
-        field(320; "Last Skipped At"; DateTime)
-        {
-            Caption = 'Last Skipped At', Comment = 'is-IS=Síðast sleppt';
-            Editable = false;
-        }
-        field(330; "Last Skipped Slot"; DateTime)
-        {
-            Caption = 'Last Skipped Slot', Comment = 'is-IS=Síðasta keyrslubil sem var sleppt';
-            Editable = false;
-        }
     }
 
     keys

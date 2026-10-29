@@ -138,6 +138,7 @@ codeunit 96443 "First Schedule Tests ori"
         // Legacy jobs may have either a blank or administrative Last Ready State, neither is execution.
         Job."Earliest Start Date/Time" := CurrentDateTime - 1000;
         Job."Last Ready State" := CurrentDateTime - 1000;
+        Job.Status := Job.Status::Ready;
         Job.Modify();
         Commit();
         LibraryQueue.RunJobQueueDispatcher(Job);

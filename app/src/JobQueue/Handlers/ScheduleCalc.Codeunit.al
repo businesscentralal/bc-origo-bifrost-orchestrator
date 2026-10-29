@@ -285,10 +285,8 @@ codeunit 10035544 "Schedule Calc ori"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Job Queue Dispatcher", 'OnBeforeRun', '', false, false)]
     local procedure JobQueueDispatcher_OnBeforeRun(var JobQueueEntry: Record "Job Queue Entry"; var Skip: Boolean)
     var
-        Health: Codeunit "Schedule Health ori";
         NextRunContextTok: Label 'Check for Next Run', MaxLength = 30, Comment = 'is-IS=Athuga næstu keyrslu';
         ActivityDescriptionTok: Label 'Last Run: %1, Next Run: %2, Skip: %3', Comment = '%1 = Last Run DateTime, %2 = New Run DateTime, %3 = Skip Boolean, is-IS=Síðasta keyrsla: %1, Næsta keyrsla: %2, Sleppa: %3';
-        PlannedAt: DateTime;
         LastRunDateTime: DateTime;
         NewRunDateTime: DateTime;
     begin
@@ -313,10 +311,8 @@ codeunit 10035544 "Schedule Calc ori"
         if not Skip then
             exit;
 
-        PlannedAt := JobQueueEntry."Earliest Start Date/Time";
         JobQueueEntry.SetStatus(JobQueueEntry.Status::"On Hold");
         JobQueueEntry."Earliest Start Date/Time" := NewRunDateTime;
         CODEUNIT.Run(CODEUNIT::"Job Queue - Enqueue", JobQueueEntry);
-        Health.RecordSkip(JobQueueEntry, PlannedAt, NewRunDateTime, CurrentDateTime);
     end;
 }

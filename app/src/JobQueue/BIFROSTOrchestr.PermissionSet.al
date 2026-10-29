@@ -98,8 +98,6 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "SE Run Msg ori" = X,
         codeunit "SE Schedule Msg ori" = X,
         codeunit "Schedule Calc ori" = X,
-        codeunit "Schedule Health ori" = X,
-        codeunit "Skipped Notification Send ori" = X,
         codeunit "Scheduler API Client ori" = X,
         codeunit "Scheduler Events ori" = X,
         codeunit "Scheduler Handler ori" = X,
