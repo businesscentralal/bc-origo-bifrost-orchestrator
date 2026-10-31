@@ -9,6 +9,8 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;
+    TestType = IntegrationTest;
+    RequiredTestIsolation = Disabled;
 
     var
         Assert: Codeunit "Library Assert";
@@ -132,6 +134,7 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
         InstanceId: Guid;
         OriginalDebugMode: Boolean;
         BeforeEntryNo: BigInteger;
+        WaitAttempt: Integer;
         Response: JsonObject;
         Token: JsonToken;
         Value: Text;
@@ -202,6 +205,13 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
         RequestLog.SetFilter("Entry No.", '>%1', BeforeEntryNo);
         RequestLog.SetRange(Operation, 'Test.Orchestrator.Ask');
         RequestLog.SetRange(SystemCreatedBy, UserSecurityId());
+        // Foundation writes debug logs in background sessions; wait for the actual rows.
+        for WaitAttempt := 1 to 100 do begin
+            SelectLatestVersion();
+            if RequestLog.Count() = ExpectedLogs then
+                break;
+            Sleep(100);
+        end;
         Assert.AreEqual(ExpectedLogs, RequestLog.Count(), 'Debug log written for every fixture call');
         VerifyDebugLogs(RequestLog);
         RequestLog.DeleteAll(true);

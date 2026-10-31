@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
+using Origo.Bifrost.Orchestrator;
 
 /// <summary>A deterministic, dependency-free Ask-shaped response dispatched through the real message loop.</summary>
 codeunit 96445 "Ask Fixture Msg ori" implements "Msg Interface ori"
@@ -32,7 +33,11 @@ codeunit 96445 "Ask Fixture Msg ori" implements "Msg Interface ori"
     /// <summary>Returns a trace plus fields whose preservation is asserted by the persistence tests.</summary>
     /// <param name="Argument">Test request and response.</param>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    var
+        Scrub: Codeunit "Playbook Response Scrub ori";
     begin
+        // Register only this test fixture in the dispatch session, including owned UI/MCP checks.
+        Scrub.AddTestType('Test.Orchestrator.Ask');
         Argument.SetResponseText('{"status":"Success","trace":{"secret":"XASK-PRIVATE-TRACE"},"answer":"audit complete","data":{"verdict":"pass","findings":[],"trace":"nested-kept"},"schemaValid":true,"toolCalls":2,"noOfRecords":2,"result":[{"value":"owned-fixture"}]}');
     end;
 }
