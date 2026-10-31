@@ -239,9 +239,12 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
         Entries: JsonArray;
         Body: JsonObject;
         RequestText: Text;
+        RequestLogViewTok: Label 'WHERE(Entry No.=FILTER(%1),Operation=CONST(Test.Orchestrator.Ask))', Locked = true;
     begin
         Request.Add('take', 100);
-        Request.Add('tableView', RequestLog.GetView(true));
+        // Use public field names, not GetView's localised system-field captions.
+        // Data.RequestLog.Get always applies its own mandatory creating-user filter.
+        Request.Add('tableView', StrSubstNo(RequestLogViewTok, RequestLog.GetFilter("Entry No.")));
         Request.WriteTo(RequestText);
         // Let the public dispatcher evaluate the actual company and licence context.
         Executor.SetParameters("Message Type ori"::"Data.RequestLog.Get", '', RequestText);
