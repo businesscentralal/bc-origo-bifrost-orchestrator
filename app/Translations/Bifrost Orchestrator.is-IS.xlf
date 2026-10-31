@@ -1233,6 +1233,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Bættu árangursskilyrðinu status Equals Success við skref %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType ActionWithoutConditionNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 2087268904" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask step %1 iterates records from step %2 without take. Every customer or record can cause model calls and counted messages; paging does not bound that cost.</source>
+          <target>Ask-skref %1 ítrar yfir færslur úr skrefi %2 án take. Hver viðskiptamaður eða færsla getur valdið líkanaköllum og taldum skilaboðum; síðuskipting takmarkar ekki þann kostnað.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Ask step no, %2 = source step no, is-IS=Ask-skref %1 ítrar yfir færslur úr skrefi %2 án take. Hver viðskiptamaður eða færsla getur valdið líkanaköllum og taldum skilaboðum; síðuskipting takmarkar ekki þann kostnað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType AskForEachUnboundedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 4247652460" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set take in the request template of source step %1 to bound the number of records audited.</source>
+          <target>Settu take í beiðnisniðmát upprunaskrefs %1 til að takmarka fjölda færslna sem eru yfirfarnar.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = source step no, is-IS=Settu take í beiðnisniðmát upprunaskrefs %1 til að takmarka fjölda færslna sem eru yfirfarnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType AskForEachUnboundedNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3345492096 - NamedType 2697862252" size-unit="char" translate="yes" xml:space="preserve">
           <source>Check step %1 has no Success condition, so it answers yes every time and decides nothing.</source>
           <target>Athugunarskref %1 hefur ekkert árangursskilyrði, svo það svarar alltaf já og ákveður ekkert.</target>
@@ -1316,6 +1328,30 @@
           <target>Stilltu Sleppa ef skref mistókst á %1 í skrefi %2.</target>
           <note from="Developer" annotates="general" priority="2">%1 = check step no, %2 = write step no, is-IS=Stilltu Sleppa ef skref mistókst á %1 í skrefi %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType UnsafeForEachWriteNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 986805997" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask step %1 has a Success or Error condition on data but no responseSchema. A structured verdict requires a response schema.</source>
+          <target>Ask-skref %1 hefur árangurs- eða villuskilyrði á data en ekkert responseSchema. Skipulögð niðurstaða krefst svarskema.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 hefur árangurs- eða villuskilyrði á data en ekkert responseSchema. Skipulögð niðurstaða krefst svarskema.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskDataConditionMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2796561561" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add responseSchema to the Ask request and test schemaValid as well as the verdict field.</source>
+          <target>Bættu responseSchema við Ask-beiðnina og prófaðu schemaValid ásamt niðurstöðureitnum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu responseSchema við Ask-beiðnina og prófaðu schemaValid ásamt niðurstöðureitnum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskDataConditionNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 203386158" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.</source>
+          <target>Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskTraceDiscardedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3422069962" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove includeTrace from the Ask request. Use answer, data and the counts in the playbook instead.</source>
+          <target>Fjarlægðu includeTrace úr Ask-beiðninni. Notaðu answer, data og talningarnar í keðjunni í staðinn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu includeTrace úr Ask-beiðninni. Notaðu answer, data og talningarnar í keðjunni í staðinn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskTraceDiscardedNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1991160535" size-unit="char" translate="yes" xml:space="preserve">
           <source>nothing</source>

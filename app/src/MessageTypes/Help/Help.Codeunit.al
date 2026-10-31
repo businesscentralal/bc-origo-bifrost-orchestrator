@@ -232,6 +232,9 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `ScheduledWithErrors` | error | The playbook is scheduled and an enabled step has an error |');
         O.AppendLine('| `UnsafeForEachWrite` | warning | An enabled forEach write step follows a forEach `Check` over the same array and does not have `Skip If Step Failed` set to it: it writes for every item |');
         O.AppendLine('| `ActionWithoutSuccessCondition` | warning | An `Action` has no Success condition, so it counts as successful whenever the type does not raise, also when it answers `status: "Error"` |');
+        O.AppendLine('| `AskForEachUnbounded` | warning | An Ask forEach reads records from a source with no `take`; paging does not bound cost |');
+        O.AppendLine('| `AskDataConditionWithoutSchema` | warning | An Ask Success or Error condition reads `data` without `responseSchema` |');
+        O.AppendLine('| `AskTraceDiscarded` | warning | Ask requests `includeTrace: true`, but Orchestrator discards the trace before using or storing the response |');
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
         O.AppendLine('| `UnknownFieldReference` | warning | `@_current.fields.X` names a field the source table does not have, or `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths |');
         O.AppendLine('');
@@ -796,11 +799,15 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         O.AppendLine('### Key Rules for LLM Steps');
         O.AppendLine('');
-        O.AppendLine('1. **Always set `roleCode`, to a code that exists** — `HAIKU` for simple tasks (fast, cheap), larger models only when needed. Check the code with `Data.Records.Get` on `Bifrost Language Model ori` before you use it');
+        O.AppendLine('1. **Choose an existing `roleCode` for Complete steps** — `HAIKU` for simple tasks (fast, cheap), larger models only when needed. Check the code with `Data.Records.Get` on `Bifrost Language Model ori` before you use it');
         O.AppendLine('2. **Always set success condition** — `status = Success` catches provider errors');
         O.AppendLine('3. **Constrain output format, and show the shape** — "Answer ONLY Yes/No", "Return ONLY JSON". For anything with a length limit, give the limit and a worked example of it; a rule alone is not enough');
         O.AppendLine('4. **Telegram-safe HTML** — only `<b>`, `<i>`, `<code>`, `<a>` tags. No `<p>`, `<table>`, `<div>`');
-        O.AppendLine('5. **Response field is `text`** — use `ResultLogPaths: text>fieldName` to store LLM output in workspace');
+        O.AppendLine('5. **Response fields depend on the type** — `LLM.Prompt.Complete` returns `text`; `LLM.Prompt.Ask` returns `answer` and, with `responseSchema`, structured `data`. Use the corresponding Result Log Paths.');
+        O.AppendLine('6. **Ask verdicts need a schema** — set `responseSchema` and test `schemaValid` as well as `data.verdict`. Verify warns with `AskDataConditionWithoutSchema` for Success or Error conditions on `data` without a schema.');
+        O.AppendLine('7. **Bound an Ask forEach** — put `take` on its source record reader. Paging bounds memory per page, not the number of Ask runs. Every tool call Ask makes is a counted message; Verify warns with `AskForEachUnbounded` when the source has no `take`. Safe default limits do not trigger a warning.');
+        O.AppendLine('8. **Ask traces cannot be used in a playbook** — Orchestrator removes `trace` before its logs, workspace and summaries use the response, and Verify warns with `AskTraceDiscarded` for `includeTrace: true`. Orchestrator stores no trace. Bifrost''s message log keeps the request and response of every message until retention deletes it.');
+        O.AppendLine('9. **Ask is read-only** — it cannot call other language model or playbook types. `roleCode` is optional (the caller''s or default model); when supplied, it must exist in this company.');
         O.AppendLine('');
     end;
 
@@ -827,7 +834,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('17. **Data.Records.Get uses `tableView` not `filter`** — the parameter name for BC filters is `tableView`, e.g. `"tableView":"WHERE(Registration Number=FILTER(<>''''))"`. Use English field names in tableView.');
         O.AppendLine('18. **Guard on the result, not just the status** — add `noOfRecords GreaterThan 0` beside `status Equals Success` on every query step whose emptiness would make the rest of the run pointless. See "`status Equals Success` is not enough".');
         O.AppendLine('19. **Write enum fields by AL name** — `NotEquals`, not the `Not Equals` caption a Get returns. Reads are localized; writes are not.');
-        O.AppendLine('20. **Queue long playbooks instead of running them inline** — `Orchestrator.Playbook.Enqueue`, or an async invocation. A synchronous `Playbook.Run` that outlives the caller''s HTTP timeout leaves its instance stuck in `Running` for ever: the client gives up, the server keeps going, and nothing ever writes the completion. Any playbook with an LLM step in a forEach is a candidate.');
+        O.AppendLine('20. **Timeouts belong to external callers** — each step runs in-process through the dispatcher and has no request timeout of its own. An external caller of `Orchestrator.Playbook.Run` receives the answer only when the playbook finishes: use `Orchestrator.Playbook.Enqueue` for long runs. Enqueue, a schedule and Run Now in the BC client have no client timeout. A Job Queue Entry''s Job Timeout is the only outer bound for a background run.');
         O.AppendLine('21. **Verify from the step log, not the response** — a `Playbook.Run` response that never arrived says nothing about whether the run succeeded. Read `Playbook Step Log ori` filtered by instance; it is written step by step as the run progresses.');
         O.AppendLine('');
         O.AppendLine('## Execution Semantics');

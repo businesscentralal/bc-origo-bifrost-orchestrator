@@ -9,7 +9,8 @@ namespace Origo.Bifrost.Orchestrator;
 codeunit 10035618 "Playbook Verify Template ori"
 {
     Access = Internal;
-    Permissions = tabledata "Playbook Step ori" = R;
+    Permissions = tabledata "Playbook Step ori" = R,
+                  tabledata "Playbook Condition ori" = R;
 
     /// <summary>
     /// Runs every template-level check on one step.
@@ -24,8 +25,10 @@ codeunit 10035618 "Playbook Verify Template ori"
         TemplateText: Text;
     begin
         TemplateText := Step.GetRequestTemplate();
-        if TemplateText.Trim() = '' then
+        if TemplateText.Trim() = '' then begin
+            CheckAskTemplate(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
             exit;
+        end;
 
         // The runner reads the template into a JsonObject and ignores the result: a template that is not a JSON
         // object is sent as an empty request {} without a word.
@@ -36,6 +39,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         end;
 
         CheckRoleCode(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
+        CheckAskTemplate(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
         ScanToken(Step, TemplateJson.AsToken(), Seen, Findings);
     end;
 
@@ -71,6 +75,49 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'LanguageModelRoleNotFound',
             StrSubstNo(RoleNotFoundMsg, Step."Step No.", TypeName, RoleCode), RoleNotFoundNextStepTxt, Step.Disabled);
+    end;
+
+    /// <summary>Checks Ask response conditions and trace requests without a Language Models dependency.</summary>
+    /// <param name="Step">The step whose conditions are checked.</param>
+    /// <param name="TypeName">The invariant message type name.</param>
+    /// <param name="TemplateJson">The parsed request template; empty when no template is set.</param>
+    /// <param name="Findings">Receives one warning per risky setting.</param>
+    internal procedure CheckAskTemplate(Step: Record "Playbook Step ori"; TypeName: Text; TemplateJson: JsonObject; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
+        Token: JsonToken;
+    begin
+        if TypeName <> 'LLM.Prompt.Ask' then
+            exit;
+        if not TemplateJson.Contains('responseSchema') then
+            if HasDataCondition(Step) then
+                Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'AskDataConditionWithoutSchema',
+                    StrSubstNo(AskDataConditionMsg, Step."Step No."), AskDataConditionNextStepTxt, Step.Disabled);
+        if not TemplateJson.Get('includeTrace', Token) then
+            exit;
+        if not Token.IsValue() then
+            exit;
+        if Token.AsValue().IsNull() then
+            exit;
+        if Token.AsValue().AsText() = 'true' then
+            Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'AskTraceDiscarded',
+                StrSubstNo(AskTraceDiscardedMsg, Step."Step No."), AskTraceDiscardedNextStepTxt, Step.Disabled);
+    end;
+
+    local procedure HasDataCondition(Step: Record "Playbook Step ori"): Boolean
+    var
+        Condition: Record "Playbook Condition ori";
+    begin
+        Condition.SetLoadFields("Playbook Code", "Step No.", "Condition Type", Path);
+        Condition.SetRange("Playbook Code", Step."Playbook Code");
+        Condition.SetRange("Step No.", Step."Step No.");
+        Condition.SetFilter("Condition Type", '%1|%2', Condition."Condition Type"::Success, Condition."Condition Type"::Error);
+        if Condition.FindSet() then
+            repeat
+                if (Condition.Path = 'data') or Condition.Path.StartsWith('data.') then
+                    exit(true);
+            until Condition.Next() = 0;
+        exit(false);
     end;
 
     local procedure ScanToken(Step: Record "Playbook Step ori"; Token: JsonToken; var Seen: List of [Text]; var Findings: JsonArray)
@@ -425,6 +472,10 @@ codeunit 10035618 "Playbook Verify Template ori"
     end;
 
     var
+        AskDataConditionMsg: Label 'Ask step %1 has a Success or Error condition on data but no responseSchema. A structured verdict requires a response schema.', Comment = '%1 = step no, is-IS=Ask-skref %1 hefur árangurs- eða villuskilyrði á data en ekkert responseSchema. Skipulögð niðurstaða krefst svarskema.';
+        AskDataConditionNextStepTxt: Label 'Add responseSchema to the Ask request and test schemaValid as well as the verdict field.', Comment = 'is-IS=Bættu responseSchema við Ask-beiðnina og prófaðu schemaValid ásamt niðurstöðureitnum.';
+        AskTraceDiscardedMsg: Label 'Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.', Comment = '%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.';
+        AskTraceDiscardedNextStepTxt: Label 'Remove includeTrace from the Ask request. Use answer, data and the counts in the playbook instead.', Comment = 'is-IS=Fjarlægðu includeTrace úr Ask-beiðninni. Notaðu answer, data og talningarnar í keðjunni í staðinn.';
         SeenStepTok: Label 'step|%1', Locked = true;
         SeenFieldTok: Label 'field|%1|%2', Locked = true;
         SeenCurrentTok: Label 'current|%1', Locked = true;

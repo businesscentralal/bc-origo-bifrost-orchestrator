@@ -41,6 +41,7 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         tabledata "Report Request Preset ori" = RIMD,
         codeunit "Playbook Runner ori" = X,
         codeunit "Playbook Step Executor ori" = X,
+        codeunit "Playbook Response Scrub ori" = X,
         codeunit "Msg Executor ori" = X,
         codeunit "Playbook JQ Dispatcher ori" = X,
         codeunit "Playbook Log Mgt ori" = X;

@@ -35,6 +35,105 @@ codeunit 96439 "Playbook Verify Template Tests"
         CurrentFieldStartIsTxt: Label 'Skref 30 les @_current.fields.Nmae, en taflan Customer hefur engan reit með því nafni.', Locked = true;
 
     [Test]
+    procedure AskSchema_ConditionAndPresenceBoundaries()
+    begin
+        // [SCENARIO] Success and Error data conditions require a schema; Start and unrelated paths do not.
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Success, 'data', '{}', 'LLM.Prompt.Ask', 1);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Error, 'data.verdict', '{}', 'LLM.Prompt.Ask', 1);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Start, 'data.verdict', '{}', 'LLM.Prompt.Ask', 0);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Success, 'database', '{}', 'LLM.Prompt.Ask', 0);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Success, 'data.verdict', '{"responseSchema":{}}', 'LLM.Prompt.Ask', 0);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Success, 'data.verdict', '{"responseSchema":"schema"}', 'LLM.Prompt.Ask', 0);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Success, 'data.verdict', '{"responseSchema":"@_initial.schema"}', 'LLM.Prompt.Ask', 0);
+        CheckAskSchemaCase("Playbook Cond. Type ori"::Success, 'data.verdict', '{}', 'LLM.Prompt.Complete', 0);
+    end;
+
+    [Test]
+    procedure AskTrace_LiteralTrueOnly()
+    begin
+        CheckAskTraceCase('{"includeTrace":true}', 'LLM.Prompt.Ask', 1);
+        CheckAskTraceCase('{"includeTrace":"true"}', 'LLM.Prompt.Ask', 1);
+        CheckAskTraceCase('{"includeTrace":false}', 'LLM.Prompt.Ask', 0);
+        CheckAskTraceCase('{"includeTrace":"false"}', 'LLM.Prompt.Ask', 0);
+        CheckAskTraceCase('{}', 'LLM.Prompt.Ask', 0);
+        CheckAskTraceCase('{"includeTrace":"@_initial.trace"}', 'LLM.Prompt.Ask', 0);
+        CheckAskTraceCase('{"includeTrace":null}', 'LLM.Prompt.Ask', 0);
+        CheckAskTraceCase('{"includeTrace":{}}', 'LLM.Prompt.Ask', 0);
+        CheckAskTraceCase('{"includeTrace":true}', 'LLM.Prompt.Complete', 0);
+    end;
+
+    [Test]
+    procedure AskTemplate_TranslatedMessagesAndNextSteps()
+    begin
+        VerifyAskTemplateLanguage(1033, 'Ask step 10 has a Success or Error condition', 'Add responseSchema', 'Ask step 10 requests a trace', 'Remove includeTrace');
+        VerifyAskTemplateLanguage(1039, 'Ask-skref 10 hefur árangurs- eða villuskilyrði', 'Bættu responseSchema', 'Ask-skref 10 biður um rakningu', 'Fjarlægðu includeTrace');
+    end;
+
+    local procedure CheckAskSchemaCase(ConditionType: Enum "Playbook Cond. Type ori"; ConditionPath: Text[250]; Template: Text; TypeName: Text; Expected: Integer)
+    var
+        Findings: JsonArray;
+    begin
+        BuildBase();
+        Lib.AddCondition(PlaybookCodeTok, 10, ConditionType, 20000, ConditionPath, "Playbook Cond. Operator ori"::Equals, 'pass');
+        RunAskTemplateCheck(TypeName, Template, Findings);
+        Assert.AreEqual(Expected, Findings.Count(), 'Schema boundary: ' + ConditionPath + ' ' + Template);
+        if Expected > 0 then
+            AssertWarning(Findings, 'AskDataConditionWithoutSchema', 10);
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    local procedure CheckAskTraceCase(Template: Text; TypeName: Text; Expected: Integer)
+    var
+        Findings: JsonArray;
+    begin
+        BuildBase();
+        RunAskTemplateCheck(TypeName, Template, Findings);
+        Assert.AreEqual(Expected, Findings.Count(), 'Trace boundary: ' + Template);
+        if Expected > 0 then
+            AssertWarning(Findings, 'AskTraceDiscarded', 10);
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    local procedure VerifyAskTemplateLanguage(LanguageId: Integer; SchemaMessage: Text; SchemaNext: Text; TraceMessage: Text; TraceNext: Text)
+    var
+        Findings: JsonArray;
+        Token: JsonToken;
+        Finding: JsonObject;
+        PreviousLanguage: Integer;
+    begin
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        BuildBase();
+        Lib.AddCondition(PlaybookCodeTok, 10, "Playbook Cond. Type ori"::Success, 20000, 'data.verdict', "Playbook Cond. Operator ori"::Equals, 'pass');
+        Lib.SetStepDisabled(PlaybookCodeTok, 10, true);
+        RunAskTemplateCheck('LLM.Prompt.Ask', '{"includeTrace":true}', Findings);
+        Assert.AreEqual(2, Findings.Count(), 'Both Ask warnings');
+        AssertMessageStartsWith(Findings, 'AskDataConditionWithoutSchema', SchemaMessage);
+        AssertMessageStartsWith(Findings, 'AskTraceDiscarded', TraceMessage);
+        foreach Token in Findings do begin
+            Finding := Token.AsObject();
+            Assert.AreEqual('true', TextOf(Finding, 'stepDisabled'), 'Disabled warnings never block');
+            if TextOf(Finding, 'code') = 'AskTraceDiscarded' then
+                Assert.IsTrue(TextOf(Finding, 'nextStep').StartsWith(TraceNext), 'Localized trace next step')
+            else
+                Assert.IsTrue(TextOf(Finding, 'nextStep').StartsWith(SchemaNext), 'Localized schema next step');
+        end;
+        Lib.Cleanup(PlaybookCodeTok);
+        GlobalLanguage(PreviousLanguage);
+    end;
+
+    local procedure RunAskTemplateCheck(TypeName: Text; Template: Text; var Findings: JsonArray)
+    var
+        Step: Record "Playbook Step ori";
+        Checks: Codeunit "Playbook Verify Template ori";
+        TemplateJson: JsonObject;
+    begin
+        Step.Get(PlaybookCodeTok, 10);
+        TemplateJson.ReadFrom(Template);
+        Checks.CheckAskTemplate(Step, TypeName, TemplateJson, Findings);
+    end;
+
+    [Test]
     procedure TemplateNotJson_Truncated_IsAnError()
     begin
         VerifyNotJson(1033, '{"tableName":', NotJsonStartTxt);

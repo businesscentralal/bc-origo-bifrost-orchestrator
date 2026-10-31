@@ -16,6 +16,8 @@ codeunit 10035617 "Playbook Verify Step ori"
     /// <param name="Step">The step to check; loaded with the fields the checks read.</param>
     /// <param name="Findings">Receives the findings of the step.</param>
     internal procedure CheckStep(Step: Record "Playbook Step ori"; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
     begin
         CheckMessageType(Step, Findings);
         CheckSuccessCondition(Step, Findings);
@@ -24,6 +26,7 @@ codeunit 10035617 "Playbook Verify Step ori"
         CheckSkipGate(Step, Findings);
         CheckSourceGuard(Step, Findings);
         CheckUnsafeWrite(Step, Findings);
+        CheckAskForEach(Step, Verify.GetTypeName(Step."Message Type"), Findings);
     end;
 
     local procedure CheckMessageType(Step: Record "Playbook Step ori"; var Findings: JsonArray)
@@ -181,6 +184,38 @@ codeunit 10035617 "Playbook Verify Step ori"
         Findings.Add(Finding);
     end;
 
+    /// <summary>Warns when an Ask forEach reads an unbounded number of records. Paging does not bound cost.</summary>
+    /// <param name="Step">The consuming step, including its disabled state.</param>
+    /// <param name="TypeName">The invariant message type name; also permits dependency-free tests.</param>
+    /// <param name="Findings">Receives the warning.</param>
+    internal procedure CheckAskForEach(Step: Record "Playbook Step ori"; TypeName: Text; var Findings: JsonArray)
+    var
+        SourceStep: Record "Playbook Step ori";
+        Verify: Codeunit "Playbook Verify ori";
+        TemplateJson: JsonObject;
+        TemplateText: Text;
+    begin
+        if TypeName <> 'LLM.Prompt.Ask' then
+            exit;
+        if not Step.IsForEach() then
+            exit;
+        if not SourceStep.Get(Step."Playbook Code", Step."Iterate Source Step No.") then
+            exit;
+        if not Verify.IsRecordReaderMessageType(Verify.GetTypeName(SourceStep."Message Type")) then
+            exit;
+        TemplateText := SourceStep.GetRequestTemplate();
+        if TemplateText.Trim() <> '' then begin
+            // Malformed JSON has its own error; do not guess whether it contains a bound.
+            if not TemplateJson.ReadFrom(TemplateText) then
+                exit;
+            if TemplateJson.Contains('take') then
+                exit;
+        end;
+        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'AskForEachUnbounded',
+            StrSubstNo(AskForEachUnboundedMsg, Step."Step No.", SourceStep."Step No."),
+            StrSubstNo(AskForEachUnboundedNextStepTxt, SourceStep."Step No."), Step.Disabled);
+    end;
+
     local procedure StepExists(PlaybookCode: Code[20]; StepNo: Integer): Boolean
     var
         Step: Record "Playbook Step ori";
@@ -190,6 +225,8 @@ codeunit 10035617 "Playbook Verify Step ori"
     end;
 
     var
+        AskForEachUnboundedMsg: Label 'Ask step %1 iterates records from step %2 without take. Every customer or record can cause model calls and counted messages; paging does not bound that cost.', Comment = '%1 = Ask step no, %2 = source step no, is-IS=Ask-skref %1 ítrar yfir færslur úr skrefi %2 án take. Hver viðskiptamaður eða færsla getur valdið líkanaköllum og taldum skilaboðum; síðuskipting takmarkar ekki þann kostnað.';
+        AskForEachUnboundedNextStepTxt: Label 'Set take in the request template of source step %1 to bound the number of records audited.', Comment = '%1 = source step no, is-IS=Settu take í beiðnisniðmát upprunaskrefs %1 til að takmarka fjölda færslna sem eru yfirfarnar.';
         MessageTypeUnavailableMsg: Label 'Step %1 calls message type %2, which does not exist in this deployment or is not enabled for this user in this company. Every run of the step would fail.', Comment = '%1 = step no, %2 = message type, is-IS=Skref %1 kallar á skilaboðategundina %2, sem er ekki til í þessari uppsetningu eða er ekki virk fyrir þennan notanda í þessu fyrirtæki. Hver keyrsla skrefsins myndi mistakast.';
         MessageTypeUnavailableNextStepTxt: Label 'Call Help.MessageTypes.Get (or describe_message_type) to find the exact name of the message type, check that the app that provides it is installed and that you may use it, then correct the step.', Comment = 'is-IS=Kallaðu á Help.MessageTypes.Get (eða describe_message_type) til að finna nákvæmt heiti skilaboðategundarinnar, athugaðu að forritið sem býr hana til sé uppsett og að þú megir nota hana og lagaðu svo skrefið.';
         CheckWithoutConditionMsg: Label 'Check step %1 has no Success condition, so it answers yes every time and decides nothing.', Comment = '%1 = step no, is-IS=Athugunarskref %1 hefur ekkert árangursskilyrði, svo það svarar alltaf já og ákveður ekkert.';

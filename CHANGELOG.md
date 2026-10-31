@@ -7,6 +7,14 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added
+- #134: warn about unbounded `LLM.Prompt.Ask` record iteration, data conditions without a response schema, and discarded traces without a Language Models dependency (codeunits 10035617/10035618, 10035615; bilingual finding messages and Icelandic XLF).
+
+### Fixed
+- #134: remove Ask response traces before Orchestrator logging and response consumers (new internal codeunit 10035620, step executor 10035572; execute permission in sets 10035535/10035538). Preserve other response properties and unchanged response bytes where no scrub is needed.
+- #134: clarify external Run timeout versus in-process steps, Run Now and background execution; document Ask schema, counted calls and Foundation message retention in run notes and help (codeunits 10035562/10035576). Regression coverage extends verify tests 96435/96439 and adds scrub tests 96444 with a test-only response type/handler (enum extension 96444, codeunit 96445).
+
+
 ### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)
 
 - Codeunits 10035544 `Schedule Calc ori`, 10035535 `Scheduler Handler ori`, 10035536 `Scheduler Mgt ori` and table 10035535 `Scheduled Entry ori`: a never-run minutes-based schedule keeps the due slot while inside its allowed window. Administrative Last Ready State is no longer treated as a successful run. A delayed daily success retains the next configured daily start, including the same evening when an execution crosses midnight. Creation, rebuild and Starting Time edits validate the BC field to maintain Reference Starting Time, including clearing it. Applying a recurring template synchronizes the existing job and its reference without deleting it. Explicit rebuilds through codeunit 10035550 `SE Msg Handler ori` or API page 10035537 create the replacement even when its next run is in the future.
