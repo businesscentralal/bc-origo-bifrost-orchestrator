@@ -2110,9 +2110,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 3650283039 - NamedType 1568996169" size-unit="char" translate="yes" xml:space="preserve">
-          <source>It changes no business data, but its nested committed dispatch means its direction is Both.</source>
-          <target>Það breytir engum viðskiptagögnum, en innri keyrslan staðfestir færslur og því er stefnan báðar leiðir (Both).</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Það breytir engum viðskiptagögnum, en innri keyrslan staðfestir færslur og því er stefnan báðar leiðir (Both).</note>
+          <source>It changes no business data.</source>
+          <target>Það breytir engum viðskiptagögnum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Það breytir engum viðskiptagögnum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetNotes - NamedType DirectionNoteLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">

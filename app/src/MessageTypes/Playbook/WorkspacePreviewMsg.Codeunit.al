@@ -141,7 +141,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetNotes(var Notes: Text): Boolean
     var
-        DirectionNoteLbl: Label 'It changes no business data, but its nested committed dispatch means its direction is Both.', Comment = 'is-IS=Það breytir engum viðskiptagögnum, en innri keyrslan staðfestir færslur og því er stefnan báðar leiðir (Both).';
+        DirectionNoteLbl: Label 'It changes no business data.', Comment = 'is-IS=Það breytir engum viðskiptagögnum.';
     begin
         Notes := 'The workspace is temporary; this message does not create a playbook instance or step log.' +
             ' Seeding _who dispatches Help.WhoAmI.Get in its own committed scope. Its queue entry and a possible first-use user setup cannot roll back with an outer transaction, so the effect is irreversible and the type cannot run inside an open write transaction. ' + DirectionNoteLbl +

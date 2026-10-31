@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-31) - Workspace preview notes (#117)
+
+- Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
+- Test codeunit 96453 `Orch B2 Contract Tests` checks that preview notes do not duplicate the direction field while preserving the existing Both direction assertion.
+
 ### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)
 
 - Codeunits 10035544 `Schedule Calc ori`, 10035535 `Scheduler Handler ori`, 10035536 `Scheduler Mgt ori` and table 10035535 `Scheduled Entry ori`: a never-run minutes-based schedule keeps the due slot while inside its allowed window. Administrative Last Ready State is no longer treated as a successful run. A delayed daily success retains the next configured daily start, including the same evening when an execution crosses midnight. Creation, rebuild and Starting Time edits validate the BC field to maintain Reference Starting Time, including clearing it. Applying a recurring template synchronizes the existing job and its reference without deleting it. Explicit rebuilds through codeunit 10035550 `SE Msg Handler ori` or API page 10035537 create the replacement even when its next run is in the future.
