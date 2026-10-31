@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-31) - Current Foundation test contracts (#117)
+
+- Test codeunit 96430 `Check Step Error Tests` supplies `expectedCount: 1` in the failing-report and missing-report fixtures so the existing domain-error assertions run beyond Foundation's confirmation guard.
+- Test codeunits 96452 `Orch B1 Contract Tests` and 96453 `Orch B2 Contract Tests` append Foundation's `Retryable` entry to the six approved error snapshots. Every existing error entry, text, order and full-array equality assertion is preserved, following Gunnar's 31 October H2 decision. Product code and help are unchanged.
+
 ### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)
 
 - Codeunits 10035544 `Schedule Calc ori`, 10035535 `Scheduler Handler ori`, 10035536 `Scheduler Mgt ori` and table 10035535 `Scheduled Entry ori`: a never-run minutes-based schedule keeps the due slot while inside its allowed window. Administrative Last Ready State is no longer treated as a successful run. A delayed daily success retains the next configured daily start, including the same evening when an execution crosses midnight. Creation, rebuild and Starting Time edits validate the BC field to maintain Reference Starting Time, including clearing it. Applying a recurring template synchronizes the existing job and its reference without deleting it. Explicit rebuilds through codeunit 10035550 `SE Msg Handler ori` or API page 10035537 create the replacement even when its next run is in the future.

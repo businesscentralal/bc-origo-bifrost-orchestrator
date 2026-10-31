@@ -17,7 +17,7 @@ codeunit 96430 "Check Step Error Tests"
     var
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
-        RequestFormat1Tok: Label '{"reportId":%1}', Locked = true;
+        RequestFormat1Tok: Label '{"reportId":%1,"expectedCount":1}', Locked = true;
         PlaybookCodeTok: Label 'CHK-106', Locked = true;
         FailingReportErrTxt: Label 'Deliberate failure from the test report.', Locked = true;
         ReportNotFoundTxt: Label 'not found', Locked = true;
@@ -266,7 +266,7 @@ codeunit 96430 "Check Step Error Tests"
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
         Lib.CreatePlaybook(PlaybookCodeTok);
-        Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Check, "Message Type ori"::"Orchestrator.Report.Run", '{"reportId":999999999}', 0, '', 0);
+        Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Check, "Message Type ori"::"Orchestrator.Report.Run", '{"reportId":999999999,"expectedCount":1}', 0, '', 0);
         Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'status', 'Success');
         Lib.RunPlaybook(PlaybookCodeTok, InstanceId);
         Instance.Get(InstanceId);
@@ -356,7 +356,7 @@ codeunit 96430 "Check Step Error Tests"
         GlobalLanguage(LanguageId);
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
-        Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Orchestrator.Report.Run", '{"reportId":999999999}', 10, 'layouts', 0);
+        Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Orchestrator.Report.Run", '{"reportId":999999999,"expectedCount":1}', 10, 'layouts', 0);
         Lib.AddSuccessCondition(PlaybookCodeTok, 30, 'status', 'Success');
         Lib.RunPlaybook(PlaybookCodeTok, InstanceId);
         Instance.Get(InstanceId);

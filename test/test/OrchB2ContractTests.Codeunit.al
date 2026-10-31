@@ -135,11 +135,11 @@ codeunit 96453 "Orch B2 Contract Tests"
     procedure Scenario_AC04_ReportGet_KeepsMainErrors()
     begin
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
-        // [GIVEN] The errors chapter captured from main 6413d705.
+        // [GIVEN] The captured main errors plus Foundation Retryable, authorized by Gunnar on 2026-10-31 (#117).
         // [WHEN] The current contract is generated.
         // [THEN] All entries, their order, codes and text are identical.
         AssertMainErrors("Message Type ori"::"Orchestrator.Report.Get",
-            '[{"code":"BusinessCentralError","error":"Request must include \"reportId\".","when":"data.reportId is missing.","fix":"Send the report object ID in data.reportId."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"data.reportId is not a whole number.","fix":"Send reportId as an integer."}]');
+            '[{"code":"BusinessCentralError","error":"Request must include \"reportId\".","when":"data.reportId is missing.","fix":"Send the report object ID in data.reportId."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"data.reportId is not a whole number.","fix":"Send reportId as an integer."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Report.List.</summary>
@@ -183,11 +183,11 @@ codeunit 96453 "Orch B2 Contract Tests"
     procedure Scenario_AC04_ReportLayoutSet_KeepsMainErrors()
     begin
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
-        // [GIVEN] The errors chapter captured from main 6413d705.
+        // [GIVEN] The captured main errors plus Foundation Retryable, authorized by Gunnar on 2026-10-31 (#117).
         // [WHEN] The current contract is generated.
         // [THEN] All entries, their order, codes and text are identical.
         AssertMainErrors("Message Type ori"::"Orchestrator.ReportLayout.Set",
-            '[{"code":"BusinessCentralError","error":"Request must include \"<key>\".","when":"reportId, name, layoutFormat or layoutBase64 is missing.","fix":"Send all four keys."},{"code":"BusinessCentralError","error":"Layout format <layoutFormat> is not valid for report <reportId>.","when":"layoutFormat is not Word, Excel, RDLC or RDL.","fix":"Send one of those formats."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Request must include non-empty \"layoutBase64\".","when":"layoutBase64 is empty.","fix":"Send the layout file as base64."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"layoutBase64 is not valid base64, or the layout import fails.","fix":"Send the file content base64-encoded, in the format named by layoutFormat."}]');
+            '[{"code":"BusinessCentralError","error":"Request must include \"<key>\".","when":"reportId, name, layoutFormat or layoutBase64 is missing.","fix":"Send all four keys."},{"code":"BusinessCentralError","error":"Layout format <layoutFormat> is not valid for report <reportId>.","when":"layoutFormat is not Word, Excel, RDLC or RDL.","fix":"Send one of those formats."},{"code":"BusinessCentralError","error":"Report <reportId> not found.","when":"No report with that ID exists in Report Metadata.","fix":"Find the ID with Orchestrator.Report.List."},{"code":"BusinessCentralError","error":"Request must include non-empty \"layoutBase64\".","when":"layoutBase64 is empty.","fix":"Send the layout file as base64."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"layoutBase64 is not valid base64, or the layout import fails.","fix":"Send the file content base64-encoded, in the format named by layoutFormat."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     local procedure AssertMainErrors(MessageType: Enum "Message Type ori"; ExpectedJson: Text)
