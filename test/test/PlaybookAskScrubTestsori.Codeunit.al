@@ -142,6 +142,11 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
     begin
         Scrub.ClearTestTypes();
         Scrub.AddTestType('Test.Orchestrator.Ask');
+        // Remove only this fixture's retained rows from a previous interrupted owned run.
+        RequestLog.SetRange(Operation, 'Test.Orchestrator.Ask');
+        RequestLog.SetRange(SystemCreatedBy, UserSecurityId());
+        RequestLog.DeleteAll(true);
+        RequestLog.Reset();
         OriginalDebugMode := Setup.GetRequestDebugMode();
         SetupPage.OpenEdit();
         SetupPage."Request Debug Mode".SetValue(true);
@@ -236,13 +241,13 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
         RequestText: Text;
     begin
         Request.Add('take', 100);
-        Request.Add('tableView', RequestLog.GetView(false));
+        Request.Add('tableView', RequestLog.GetView(true));
         Request.WriteTo(RequestText);
         // Let the public dispatcher evaluate the actual company and licence context.
         Executor.SetParameters("Message Type ori"::"Data.RequestLog.Get", '', RequestText);
         Assert.IsTrue(Executor.Run(), 'Read owned logs through the real dispatcher: ' + GetLastErrorText());
         Assert.IsTrue(Response.ReadFrom(Executor.GetResponseText()), 'Log response is JSON');
-        Assert.IsTrue(Response.Get('entries', Token), 'Read owned logs through the public message interface');
+        Assert.IsTrue(Response.Get('entries', Token), 'Read owned logs through the public message interface: ' + Executor.GetResponseText());
         Entries := Token.AsArray();
         Assert.AreEqual(RequestLog.Count(), Entries.Count(), 'Every owned log was read');
         foreach Token in Entries do begin
