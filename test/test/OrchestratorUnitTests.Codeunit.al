@@ -968,6 +968,7 @@ codeunit 96411 "Orchestrator Unit Tests"
         JobQueueEntry.ID := OrchestratorEntry.ID;
         JobQueueEntry."Object Type to Run" := OrchestratorEntry."Object Type to Run";
         JobQueueEntry."Object ID to Run" := OrchestratorEntry."Object ID to Run";
+        JobQueueEntry."Recurring Job" := true;
         JobQueueEntry."Starting Time" := 080000T;
         JobQueueEntry."Ending Time" := 170000T;
         JobQueueEntry.Insert();
@@ -986,6 +987,7 @@ codeunit 96411 "Orchestrator Unit Tests"
 
         // [THEN] Verify Starting Time is synced to Job Queue Entry
         JobQueueEntry.Get(OrchestratorEntry.ID);
+        Assert.AreEqual(CreateDateTime(20000101D, 060000T), JobQueueEntry."Reference Starting Time", 'Starting time validation must update the reference anchor');
         Assert.AreEqual(060000T, JobQueueEntry."Starting Time", StrSubstNo(FieldNotSyncedErr, 'Starting Time', '06:00:00', Format(JobQueueEntry."Starting Time")));
 
         // [WHEN] Update Ending Time to 18:00:00
@@ -994,6 +996,7 @@ codeunit 96411 "Orchestrator Unit Tests"
 
         // [THEN] Verify Ending Time is synced to Job Queue Entry
         JobQueueEntry.Get(OrchestratorEntry.ID);
+        Assert.AreEqual(CreateDateTime(20000101D, 060000T), JobQueueEntry."Reference Starting Time", 'Starting time validation must update the reference anchor');
         Assert.AreEqual(180000T, JobQueueEntry."Ending Time", StrSubstNo(FieldNotSyncedErr, 'Ending Time', '18:00:00', Format(JobQueueEntry."Ending Time")));
 
         // [WHEN] Validate valid time range (Starting < Ending)
@@ -1003,6 +1006,7 @@ codeunit 96411 "Orchestrator Unit Tests"
 
         // [THEN] Both times should be updated successfully and synced
         JobQueueEntry.Get(OrchestratorEntry.ID);
+        Assert.AreEqual(CreateDateTime(20000101D, 090000T), JobQueueEntry."Reference Starting Time", 'Starting time validation must update the reference anchor');
         Assert.AreEqual(090000T, JobQueueEntry."Starting Time", StrSubstNo(FieldNotSyncedErr, 'Starting Time', '09:00:00', Format(JobQueueEntry."Starting Time")));
         Assert.AreEqual(170000T, JobQueueEntry."Ending Time", StrSubstNo(FieldNotSyncedErr, 'Ending Time', '17:00:00', Format(JobQueueEntry."Ending Time")));
     end;
