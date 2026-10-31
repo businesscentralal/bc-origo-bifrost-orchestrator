@@ -227,22 +227,21 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
 
     local procedure VerifyDebugLogs(var RequestLog: Record "Request Log ori")
     var
-        TempArgument: Record "Message Argument ori" temporary;
-        MessageImpl: Interface "Msg Interface ori";
+        Executor: Codeunit "Msg Executor ori";
         Request: JsonObject;
         Response: JsonObject;
         Token: JsonToken;
         Entries: JsonArray;
         Body: JsonObject;
+        RequestText: Text;
     begin
         Request.Add('take', 100);
         Request.Add('tableView', RequestLog.GetView(false));
-        TempArgument.Init();
-        TempArgument.Insert();
-        TempArgument.SetRequestJson(Request);
-        MessageImpl := "Message Type ori"::"Data.RequestLog.Get";
-        MessageImpl.ExecuteBifrostTask(TempArgument);
-        Response := TempArgument.GetResponseJson();
+        Request.WriteTo(RequestText);
+        // Let the public dispatcher evaluate the actual company and licence context.
+        Executor.SetParameters("Message Type ori"::"Data.RequestLog.Get", '', RequestText);
+        Assert.IsTrue(Executor.Run(), 'Read owned logs through the real dispatcher: ' + GetLastErrorText());
+        Assert.IsTrue(Response.ReadFrom(Executor.GetResponseText()), 'Log response is JSON');
         Assert.IsTrue(Response.Get('entries', Token), 'Read owned logs through the public message interface');
         Entries := Token.AsArray();
         Assert.AreEqual(RequestLog.Count(), Entries.Count(), 'Every owned log was read');
