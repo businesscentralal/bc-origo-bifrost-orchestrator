@@ -26,7 +26,7 @@ codeunit 10035618 "Playbook Verify Template ori"
     begin
         TemplateText := Step.GetRequestTemplate();
         if TemplateText.Trim() = '' then begin
-            CheckAskTemplate(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
+            CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
             exit;
         end;
 
@@ -39,7 +39,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         end;
 
         CheckRoleCode(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
-        CheckAskTemplate(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
+        CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
         ScanToken(Step, TemplateJson.AsToken(), Seen, Findings);
     end;
 

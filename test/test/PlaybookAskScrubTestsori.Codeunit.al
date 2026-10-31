@@ -20,6 +20,109 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
         TraceMarkerTok: Label 'XASK-PRIVATE-TRACE', Locked = true;
 
     [Test]
+    procedure AskForEach_RunGateInBothLanguages()
+    begin
+        VerifyAskRunGate('AskForEachUnbounded', 1033);
+        VerifyAskRunGate('AskForEachUnbounded', 1039);
+    end;
+
+    [Test]
+    procedure AskDataCondition_RunGateInBothLanguages()
+    begin
+        VerifyAskRunGate('AskDataConditionWithoutSchema', 1033);
+        VerifyAskRunGate('AskDataConditionWithoutSchema', 1039);
+    end;
+
+    [Test]
+    procedure AskTrace_RunGateInBothLanguages()
+    begin
+        VerifyAskRunGate('AskTraceDiscarded', 1033);
+        VerifyAskRunGate('AskTraceDiscarded', 1039);
+    end;
+
+    local procedure VerifyAskRunGate(FindingCode: Text; LanguageId: Integer)
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Instance: Record "Playbook Instance ori";
+        Verify: Codeunit "Playbook Verify ori";
+        RunMessage: Codeunit "Playbook Run Msg ori";
+        Response: JsonObject;
+        Request: JsonObject;
+        Token: JsonToken;
+        Findings: JsonArray;
+        Finding: JsonObject;
+        PreviousLanguage: Integer;
+        SourceStepNo: Integer;
+        ArrayPath: Text[250];
+        Template: Text;
+    begin
+        // [SCENARIO] The real Run message handler refuses each Ask finding and executes only after explicit acceptance.
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        Verify.SetTestAskType('');
+        Scrub.ClearTestTypes();
+        Lib.CreatePlaybook('XASK-GATE');
+        Template := '{}';
+        if FindingCode = 'AskForEachUnbounded' then begin
+            Lib.AddStep('XASK-GATE', 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get",
+                '{"tableName":"Playbook ori","tableView":"WHERE(Code=CONST(XASK-GATE))"}', 0, '', 0);
+            Lib.AddStatusSuccessCondition('XASK-GATE', 10);
+            Lib.AddCondition('XASK-GATE', 10, "Playbook Cond. Type ori"::Success, 20000, 'noOfRecords', "Playbook Cond. Operator ori"::GreaterThan, '0');
+            SourceStepNo := 10;
+            ArrayPath := 'result';
+        end;
+        if FindingCode = 'AskTraceDiscarded' then
+            Template := '{"includeTrace":true}';
+        Lib.AddStep('XASK-GATE', 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Ask", Template, SourceStepNo, ArrayPath, 0);
+        Lib.AddStatusSuccessCondition('XASK-GATE', 30);
+        if FindingCode = 'AskDataConditionWithoutSchema' then
+            Lib.AddCondition('XASK-GATE', 30, "Playbook Cond. Type ori"::Success, 20000, 'data.verdict', "Playbook Cond. Operator ori"::Equals, 'pass');
+        Verify.SetTestAskType('Test.Orchestrator.Ask');
+        Commit();
+        Request.Add('playbookCode', 'XASK-GATE');
+        TempArgument.Init();
+        TempArgument.Insert();
+        TempArgument.SetRequestJson(Request);
+        RunMessage.ExecuteBifrostTask(TempArgument);
+        Response := TempArgument.GetResponseJson();
+        Assert.AreEqual('PreconditionFailed', ResponseText(Response, 'code'), 'New finding must refuse Run');
+        Response.Get('findings', Token);
+        Findings := Token.AsArray();
+        Assert.AreEqual(1, Findings.Count(), 'Only the intended warning blocks');
+        Findings.Get(0, Token);
+        Finding := Token.AsObject();
+        Assert.AreEqual(FindingCode, ResponseText(Finding, 'code'), 'Run names the exact new finding');
+        Assert.IsTrue(ResponseText(Finding, 'message') <> '', 'Finding message is present');
+        Assert.IsTrue(ResponseText(Finding, 'nextStep') <> '', 'Finding next step is present');
+        Instance.SetRange("Playbook Code", 'XASK-GATE');
+        Assert.IsTrue(Instance.IsEmpty(), 'Refusal does not start an instance');
+        TempArgument.DeleteAll();
+        Clear(TempArgument);
+        TempArgument.Init();
+        TempArgument.Insert();
+        Request.Add('ignoreWarnings', true);
+        TempArgument.SetRequestJson(Request);
+        RunMessage.ExecuteBifrostTask(TempArgument);
+        Response := TempArgument.GetResponseJson();
+        Assert.AreEqual('Success', ResponseText(Response, 'status'), 'Explicit acceptance permits the run');
+        Assert.AreEqual('Completed', ResponseText(Response, 'playbookStatus'), 'Fixture actually completes');
+        Assert.IsFalse(Instance.IsEmpty(), 'Accepted Run creates an actual instance');
+        Verify.SetTestAskType('');
+        Scrub.ClearTestTypes();
+        Lib.Cleanup('XASK-GATE');
+        GlobalLanguage(PreviousLanguage);
+        Commit();
+    end;
+
+    local procedure ResponseText(Response: JsonObject; Name: Text): Text
+    var
+        Token: JsonToken;
+    begin
+        Assert.IsTrue(Response.Get(Name, Token), 'Expected response property: ' + Name);
+        exit(Token.AsValue().AsText());
+    end;
+
+    [Test]
     procedure Scrub_PreservesAllOtherProperties()
     var
         Response: Text;

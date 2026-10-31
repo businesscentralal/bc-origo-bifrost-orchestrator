@@ -63,6 +63,7 @@ codeunit 96445 "Ask Fixture Msg ori" implements "Msg Interface ori", "Msg Contra
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
+        Parameters.Add(ContractMgt.Parameter('includeTrace', 'boolean', false, 'Fixture trace warning input.'));
         Parameters.Add(ContractMgt.Parameter('skip', 'integer', false, 'Fixture page offset.'));
         Parameters.Add(ContractMgt.Parameter('take', 'integer', false, 'Fixture page size.'));
         exit(true);

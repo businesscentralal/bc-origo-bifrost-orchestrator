@@ -26,7 +26,7 @@ codeunit 10035617 "Playbook Verify Step ori"
         CheckSkipGate(Step, Findings);
         CheckSourceGuard(Step, Findings);
         CheckUnsafeWrite(Step, Findings);
-        CheckAskForEach(Step, Verify.GetTypeName(Step."Message Type"), Findings);
+        CheckAskForEach(Step, Verify.GetAskCheckTypeName(Step."Message Type"), Findings);
     end;
 
     local procedure CheckMessageType(Step: Record "Playbook Step ori"; var Findings: JsonArray)

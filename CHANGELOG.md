@@ -8,11 +8,11 @@ Business Central release versioning (`major.minor.build.revision`).
 ## [Unreleased]
 
 ### Added
-- #134: warn about unbounded `LLM.Prompt.Ask` record iteration, data conditions without a response schema, and discarded traces without a Language Models dependency (codeunits 10035617/10035618, 10035615; bilingual finding messages and Icelandic XLF).
+- #134: warn about unbounded `LLM.Prompt.Ask` record iteration, data conditions without a response schema, and discarded traces without a Language Models dependency (codeunits 10035616/10035617/10035618, 10035615; bilingual finding messages and Icelandic XLF).
 
 ### Fixed
 - #134: remove Ask response traces before Orchestrator logging and response consumers (new internal codeunit 10035620, step executor 10035572; execute permission in sets 10035535/10035538). Preserve other response properties and unchanged response bytes where no scrub is needed.
-- #134: clarify external Run timeout versus in-process steps, Run Now and background execution; document Ask schema, counted calls and Foundation message retention in run notes and help (codeunits 10035562/10035576). Regression coverage extends verify tests 96435/96439 and adds scrub tests 96444 with a test-only response type/handler (enum extension 96444, codeunit 96445).
+- #134: clarify external Run timeout versus in-process steps, Run Now and background execution; document Ask schema, counted calls and Foundation message retention in run notes and help (codeunits 10035562/10035576). Regression coverage extends verify tests 96435/96439 and adds scrub and per-warning Run gate tests 96444 with a test-only response type/handler (enum extension 96444, codeunit 96445).
 
 
 ### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)

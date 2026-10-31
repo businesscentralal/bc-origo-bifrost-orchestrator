@@ -12,6 +12,7 @@ using Origo.Bifrost;
 codeunit 10035616 "Playbook Verify ori"
 {
     Access = Internal;
+    SingleInstance = true;
     Permissions = tabledata "Playbook ori" = R,
                   tabledata "Playbook Step ori" = R,
                   tabledata "Playbook Condition ori" = R,
@@ -259,6 +260,26 @@ codeunit 10035616 "Playbook Verify ori"
         exit(MessageType.Names().Get(Index));
     end;
 
+    /// <summary>Registers a session-only test name for the Ask-specific checks; dispatch and all other checks retain the actual enum.</summary>
+    /// <param name="TypeName">Test fixture name, or empty to clear the seam.</param>
+    internal procedure SetTestAskType(TypeName: Text)
+    begin
+        TestAskTypeName := TypeName;
+    end;
+
+    /// <summary>Resolves only the Ask-check name seam without changing availability, role, source or unsafe-write checks.</summary>
+    /// <param name="MessageType">The actual registered enum.</param>
+    /// <returns>The invariant name, or Ask for the explicitly registered session fixture.</returns>
+    internal procedure GetAskCheckTypeName(MessageType: Enum "Message Type ori"): Text
+    var
+        TypeName: Text;
+    begin
+        TypeName := GetTypeName(MessageType);
+        if (TestAskTypeName <> '') and (TypeName = TestAskTypeName) then
+            exit('LLM.Prompt.Ask');
+        exit(TypeName);
+    end;
+
     /// <summary>
     /// Tells whether a message type exists in this deployment and is enabled for the calling user in this
     /// company. An unknown ordinal and a type whose own check raises are not enabled.
@@ -380,6 +401,7 @@ codeunit 10035616 "Playbook Verify ori"
     end;
 
     var
+        TestAskTypeName: Text;
         ErrorTok: Label 'error', Locked = true;
         WarningTok: Label 'warning', Locked = true;
         UnknownNameTok: Label 'Unknown(%1)', Locked = true;
