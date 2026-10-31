@@ -8,6 +8,7 @@ enumextension 96444 "Ask Fixture Type ori" extends "Message Type ori"
     value(96444; "Test.Orchestrator.Ask")
     {
         Caption = 'Test.Orchestrator.Ask', Locked = true;
-        Implementation = "Msg Interface ori" = "Ask Fixture Msg ori";
+        Implementation = "Msg Interface ori" = "Ask Fixture Msg ori",
+                         "Msg Contract ori" = "Ask Fixture Msg ori";
     }
 }

@@ -187,12 +187,17 @@ codeunit 96444 "Playbook Ask Scrub Tests ori"
         repeat
             Response.ReadFrom(StepLog.GetResponseReceived());
             Assert.IsFalse(Response.Contains('trace'), 'Trace absent from response log');
+            Assert.IsTrue(Response.Contains('answer'), 'Fixture must execute through the real contract gate: ' + StepLog.GetResponseReceived());
             Response.Get('answer', Token);
             Assert.AreEqual('audit complete', Token.AsValue().AsText(), 'Answer retained');
             Response.Get('toolCalls', Token);
             Assert.AreEqual(2, Token.AsValue().AsInteger(), 'Counts retained');
             Response.Get('data', Token);
             Assert.IsTrue(Token.AsObject().Contains('trace'), 'Nested business field untouched');
+            if FailCondition then begin
+                Assert.AreEqual(StepLog.Status::Failed, StepLog.Status, 'Condition must fail the action');
+                Assert.IsTrue(StepLog.GetWorkspaceSnapshot() <> '', 'Failed step must persist a real snapshot');
+            end;
             Assert.IsFalse(StepLog.GetWorkspaceSnapshot().Contains(TraceMarkerTok), 'No trace in failed-step snapshot');
             StepLog.CalcFields("Iterator Element");
             StepLog."Iterator Element".CreateInStream(LogStream, TextEncoding::UTF8);
