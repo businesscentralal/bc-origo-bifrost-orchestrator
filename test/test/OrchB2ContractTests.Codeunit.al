@@ -57,9 +57,30 @@ codeunit 96453 "Orch B2 Contract Tests"
         Assert.IsTrue(Token.AsValue().AsText().Contains('Help.WhoAmI.Get'), 'changes names the nested dispatch');
         Assert.IsTrue(Token.AsValue().AsText().Contains('commits'), 'changes discloses the commit');
         Assert.IsTrue(Notes.Contains('outer transaction'), 'notes explain why it cannot roll back');
+        // [THEN] Direction is stated only by the direction field (Gunnar, 2026-10-31).
+        AssertPreviewNotesHaveNoDirection(1033);
+        AssertPreviewNotesHaveNoDirection(1039);
         // [THEN] The committing effect is offered in both directions (#117, Gunnar H2).
         MessageTypeInterface := "Message Type ori"::"Orchestrator.Workspace.Preview";
         Assert.AreEqual("Msg Direction ori"::Both, MessageTypeInterface.GetMessageDirection(), 'Preview direction');
+    end;
+
+    /// <summary>Preview notes leave direction to its metadata in both supported languages.</summary>
+    local procedure AssertPreviewNotesHaveNoDirection(LanguageId: Integer)
+    var
+        Contract: Interface "Msg Contract ori";
+        Notes: Text;
+        PreviousLanguage: Integer;
+        HasNotes: Boolean;
+    begin
+        Contract := "Message Type ori"::"Orchestrator.Workspace.Preview";
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        HasNotes := Contract.GetNotes(Notes);
+        GlobalLanguage(PreviousLanguage);
+        Assert.IsTrue(HasNotes, 'Preview has notes');
+        Assert.IsFalse(Notes.ToLower().Contains('direction'), 'notes do not duplicate the direction field');
+        Assert.IsFalse(Notes.ToLower().Contains('stefnan'), 'Icelandic notes do not duplicate the direction field');
     end;
 
     [Test]
