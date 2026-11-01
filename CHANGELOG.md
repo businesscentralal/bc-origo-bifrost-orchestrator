@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-10-31) - Workspace preview notes (#117)
+
+- Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
+- Test codeunit 96453 `Orch B2 Contract Tests` checks that preview notes do not duplicate the direction field while preserving the existing Both direction assertion.
+
 ### Fixed (2026-10-31) - Current Foundation test contracts (#117)
 
 - Test codeunit 96430 `Check Step Error Tests` supplies `expectedCount: 1` in the failing-report and missing-report fixtures so the existing domain-error assertions run beyond Foundation's confirmation guard.
