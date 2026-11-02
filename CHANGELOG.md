@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - First-dispatch test isolation (#143)
+
+- Test codeunit 96443 `First Schedule Tests ori` makes its first-dispatch fixture explicitly due, blocks background Orchestrator pickup, and intercepts task creation before setup. It asserts that the job stays on hold without a platform task around manual dispatch and rebuild, while preserving all existing playbook-instance, successful-log, daily-anchor and rebuild assertions. Production scheduling code is unchanged.
+
 ### Fixed (2026-11-02) - Assisted Setup metadata registration (#139)
 
 - Codeunit 10035589 `Scheduler Wizard Reg. ori` has inherent Execute permissions and entitlements for its metadata-only Guided Experience subscriber. Object identity and both false skip flags remain unchanged; scheduler wizard and business permissions are not broadened.
