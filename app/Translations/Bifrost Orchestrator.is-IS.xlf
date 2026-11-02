@@ -1083,6 +1083,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Settu Bifröst-keðju í biðröð fyrir einskiptis bakgrunnsvinnslu. Skrifaðgerð. Notaðu Orchestrator.Playbook.Run fyrir tafarlausa keyrslu í forgrunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Enqueue Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2939314393 - NamedType 665073879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unresolved workspace reference %1. Inspect the source response and correct the path before running the step. No message was sent.</source>
+          <target>Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = workspace reference, is-IS=Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType UnresolvedReferenceErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4100168724 - NamedType 2208007315" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "playbookCode" in the data payload or as the subject.</source>
           <target>Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</target>
@@ -1359,6 +1365,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=ekkert</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType NothingTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 4056349108" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 reads @_current.fields.%2, but %2 is a primary-key field of table %3 and is returned under primaryKey, not fields.</source>
+          <target>Skref %1 les @_current.fields.%2, en %2 er aðallykilsreitur í töflunni %3 og er skilað undir primaryKey, ekki fields.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = JSON field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en %2 er aðallykilsreitur í töflunni %3 og er skilað undir primaryKey, ekki fields.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PrimaryKeyFieldMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2324457840" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use @_current.primaryKey.%1 and inspect the source answer before running the playbook.</source>
+          <target>Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en keðjan er keyrð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = JSON field name, is-IS=Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en keðjan er keyrð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PrimaryKeyFieldNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 995180490" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 calls %2 with roleCode %3, but this company has no language model with that code. Every call would answer RecordNotFound.</source>
           <target>Skref %1 kallar á %2 með roleCode %3, en þetta fyrirtæki hefur ekkert mállíkan með þeim kóða. Hvert kall myndi svara RecordNotFound.</target>
@@ -1372,9 +1390,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType RoleNotFoundNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1609364166" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Step %1 refers to step %2 (@%2...), which does not run before it, so its result does not exist yet when this step builds its request. The reference stays as literal text.</source>
-          <target>Skref %1 vísar í skref %2 (@%2...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Tilvísunin helst sem hreinn texti.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Tilvísunin helst sem hreinn texti.</note>
+          <source>Step %1 refers to step %2 (@%2...), which does not run before it, so its result does not exist yet when this step builds its request. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
+          <target>Skref %1 vísar í skref %2 (@%2...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotEarlierMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1417200642" size-unit="char" translate="yes" xml:space="preserve">
@@ -1384,9 +1402,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotEarlierNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 2332361164" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Step %1 refers to step %2 (@%2...), which does not exist in this playbook. The reference stays as literal text in the request.</source>
-          <target>Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Tilvísunin helst sem hreinn texti í beiðninni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Tilvísunin helst sem hreinn texti í beiðninni.</note>
+          <source>Step %1 refers to step %2 (@%2...), which does not exist in this playbook. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
+          <target>Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotFoundMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 2314390664" size-unit="char" translate="yes" xml:space="preserve">
@@ -1408,9 +1426,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType TemplateNotJsonNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 2764084366" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Step %1 reads @_current.fields.%2, but table %3 has no field with that name. The reference stays as literal text.</source>
-          <target>Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Tilvísunin helst sem hreinn texti.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Tilvísunin helst sem hreinn texti.</note>
+          <source>Step %1 reads @_current.fields.%2, but table %3 has no field with that name. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
+          <target>Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownCurrentFieldMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 3351205802" size-unit="char" translate="yes" xml:space="preserve">
@@ -1420,9 +1438,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownCurrentFieldNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1834680235" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Step %1 reads @%2.%3, but step %2 stores no field %3 in the workspace (its Result Log Paths store: %4). The reference stays as literal text.</source>
-          <target>Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Tilvísunin helst sem hreinn texti.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = storing step no, %3 = field name, %4 = the stored fields, is-IS=Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Tilvísunin helst sem hreinn texti.</note>
+          <source>Step %1 reads @%2.%3, but step %2 stores no field %3 in the workspace (its Result Log Paths store: %4). The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
+          <target>Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = storing step no, %3 = field name, %4 = the stored fields, is-IS=Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownStepFieldMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 3137607799" size-unit="char" translate="yes" xml:space="preserve">
@@ -2146,9 +2164,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 3650283039 - NamedType 1568996169" size-unit="char" translate="yes" xml:space="preserve">
-          <source>It changes no business data, but its nested committed dispatch means its direction is Both.</source>
-          <target>Það breytir engum viðskiptagögnum, en innri keyrslan staðfestir færslur og því er stefnan báðar leiðir (Both).</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Það breytir engum viðskiptagögnum, en innri keyrslan staðfestir færslur og því er stefnan báðar leiðir (Both).</note>
+          <source>It changes no business data.</source>
+          <target>Það breytir engum viðskiptagögnum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Það breytir engum viðskiptagögnum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetNotes - NamedType DirectionNoteLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">

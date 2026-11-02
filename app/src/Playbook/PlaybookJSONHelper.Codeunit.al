@@ -94,6 +94,112 @@ codeunit 10035546 "Playbook JSON Helper ori"
         RequestJson.ReadFrom(RequestText);
     end;
 
+    /// <summary>Checks references in the original request before resolution, so missing data never reaches dispatch as literal tokens.</summary>
+    /// <param name="RequestJson">The step request; resolved only when all references exist.</param>
+    /// <param name="ErrorText">Receives the first unresolved reference and corrective guidance.</param>
+    /// <returns>True when the request can be dispatched.</returns>
+    procedure TryResolveWorkspaceRefs(var RequestJson: JsonObject; var ErrorText: Text): Boolean
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        ValidationJson: JsonObject;
+        RequestText: Text;
+        IterValue: Text;
+    begin
+        Clear(ErrorText);
+        RequestJson.WriteTo(RequestText);
+        if Workspace.GetValue('_iter', IterValue) then
+            RequestText := RequestText.Replace('@_iter', IterValue);
+        ValidationJson.ReadFrom(RequestText);
+        if not CheckReferenceToken(ValidationJson.AsToken(), ErrorText) then
+            exit(false);
+        ResolveWorkspaceRefs(RequestJson);
+        exit(true);
+    end;
+
+    local procedure CheckReferenceToken(Token: JsonToken; var ErrorText: Text): Boolean
+    var
+        Child: JsonToken;
+        PropertyName: Text;
+    begin
+        case true of
+            Token.IsValue():
+                if not Token.AsValue().IsNull() then
+                    exit(CheckReferenceString(Token.AsValue().AsText(), ErrorText));
+            Token.IsObject():
+                foreach PropertyName in Token.AsObject().Keys() do begin
+                    Token.AsObject().Get(PropertyName, Child);
+                    if not CheckReferenceToken(Child, ErrorText) then
+                        exit(false);
+                end;
+            Token.IsArray():
+                foreach Child in Token.AsArray() do
+                    if not CheckReferenceToken(Child, ErrorText) then
+                        exit(false);
+        end;
+        exit(true);
+    end;
+
+    local procedure CheckReferenceString(Value: Text; var ErrorText: Text): Boolean
+    var
+        Workspace: Codeunit "Playbook Workspace ori";
+        ResolvedToken: JsonToken;
+        CollectedArray: JsonArray;
+        Reference: Text;
+        AtPos: Integer;
+        RefEnd: Integer;
+        IsReference: Boolean;
+    begin
+        if Value.StartsWith('@') and not Value.Contains(' ') and not Value.Contains('(') then begin
+            Reference := CopyStr(Value, 2);
+            if Reference.StartsWith('collect:') then begin
+                if Workspace.Collect(CopyStr(Reference, 9), CollectedArray) then
+                    exit(true);
+                ErrorText := StrSubstNo(UnresolvedReferenceErr, Value);
+                exit(false);
+            end;
+            // A filtered workspace dump resolves to a JSON string, including when its selection is empty.
+            if Reference.Contains(',') then
+                exit(true);
+        end;
+        AtPos := Value.IndexOf('@');
+        while AtPos > 0 do begin
+            RefEnd := AtPos + 1;
+            while RefEnd <= StrLen(Value) do begin
+                if not IsReferencePathChar(Value[RefEnd]) then
+                    break;
+                RefEnd += 1;
+            end;
+            while RefEnd > AtPos + 1 do begin
+                if Value[RefEnd - 1] <> '.' then
+                    break;
+                RefEnd -= 1;
+            end;
+            IsReference := RefEnd > AtPos + 1;
+            if AtPos > 1 then
+                if IsReferenceLetterOrDigit(Value[AtPos - 1]) then
+                    IsReference := false;
+            if IsReference then begin
+                Reference := CopyStr(Value, AtPos + 1, RefEnd - AtPos - 1);
+                if not Workspace.GetToken(Reference, ResolvedToken) then begin
+                    ErrorText := StrSubstNo(UnresolvedReferenceErr, '@' + Reference);
+                    exit(false);
+                end;
+            end;
+            AtPos := Value.IndexOf('@', RefEnd);
+        end;
+        exit(true);
+    end;
+
+    local procedure IsReferencePathChar(Ch: Char): Boolean
+    begin
+        exit(IsReferenceLetterOrDigit(Ch) or (Ch in ['.', '_', '[', ']']));
+    end;
+
+    local procedure IsReferenceLetterOrDigit(Ch: Char): Boolean
+    begin
+        exit(((Ch >= 'a') and (Ch <= 'z')) or ((Ch >= 'A') and (Ch <= 'Z')) or ((Ch >= '0') and (Ch <= '9')));
+    end;
+
     local procedure ResolveStandaloneRefs(JsonText: Text; var Workspace: Codeunit "Playbook Workspace ori"): Text
     var
         ResolvedToken: JsonToken;
@@ -399,4 +505,6 @@ codeunit 10035546 "Playbook JSON Helper ori"
         Token.WriteTo(Result);
         exit(Result);
     end;
+    var
+        UnresolvedReferenceErr: Label 'Unresolved workspace reference %1. Inspect the source response and correct the path before running the step. No message was sent.', Comment = '%1 = workspace reference, is-IS=Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.';
 }

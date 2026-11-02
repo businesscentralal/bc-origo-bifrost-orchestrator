@@ -245,7 +245,8 @@ codeunit 10035547 "Playbook Runner ori"
             Clear(PageRequestJson);
             if BaseRequestText <> '' then
                 PageRequestJson.ReadFrom(BaseRequestText);
-            JsonHelper.ResolveWorkspaceRefs(PageRequestJson);
+            Clear(PageResponseText);
+            PageSuccess := JsonHelper.TryResolveWorkspaceRefs(PageRequestJson, PageErrorText);
             if PageRequestJson.Contains('skip') then PageRequestJson.Remove('skip');
             if PageRequestJson.Contains('take') then PageRequestJson.Remove('take');
             PageRequestJson.Add('skip', CurrentSkip);
@@ -254,7 +255,8 @@ codeunit 10035547 "Playbook Runner ori"
 
             // Execute the paged data step directly (not through ExecuteStep to control logging)
             StartTime := CurrentDateTime();
-            ExecuteMessageType(PagedStep."Message Type", PagedRequestText, PageResponseText, PageSuccess, PageErrorText);
+            if PageSuccess then
+                ExecuteMessageType(PagedStep."Message Type", PagedRequestText, PageResponseText, PageSuccess, PageErrorText);
             StepsExecuted += 1;
             if not PageSuccess then
                 StepsFailed += 1;
@@ -357,11 +359,12 @@ codeunit 10035547 "Playbook Runner ori"
         if RequestText <> '' then
             RequestJson.ReadFrom(RequestText);
 
-        JsonHelper.ResolveWorkspaceRefs(RequestJson);
+        StepSuccess := JsonHelper.TryResolveWorkspaceRefs(RequestJson, ErrorText);
         RequestJson.WriteTo(RequestText);
 
         StartTime := CurrentDateTime();
-        ExecuteMessageType(PlaybookStep."Message Type", RequestText, ResponseText, StepSuccess, ErrorText);
+        if StepSuccess then
+            ExecuteMessageType(PlaybookStep."Message Type", RequestText, ResponseText, StepSuccess, ErrorText);
         StepDuration := CurrentDateTime() - StartTime;
 
         // A Check step answers a question, but an error answer from the message type is not an
@@ -488,11 +491,13 @@ codeunit 10035547 "Playbook Runner ori"
                 Clear(RequestJson);
                 if RequestTemplate <> '' then
                     RequestJson.ReadFrom(RequestTemplate);
-                JsonHelper.ResolveWorkspaceRefs(RequestJson);
+                Clear(ResponseText);
+                ItemSuccess := JsonHelper.TryResolveWorkspaceRefs(RequestJson, ErrorText);
                 RequestJson.WriteTo(RequestText);
 
                 StartTime := CurrentDateTime();
-                ExecuteMessageType(PlaybookStep."Message Type", RequestText, ResponseText, ItemSuccess, ErrorText);
+                if ItemSuccess then
+                    ExecuteMessageType(PlaybookStep."Message Type", RequestText, ResponseText, ItemSuccess, ErrorText);
                 StepDuration := CurrentDateTime() - StartTime;
 
                 // An error answer from the message type is a technical failure, not the answer

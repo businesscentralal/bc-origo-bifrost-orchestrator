@@ -14,6 +14,40 @@ Business Central release versioning (`major.minor.build.revision`).
 - #134: remove Ask response traces before Orchestrator logging and response consumers (new internal codeunit 10035620, step executor 10035572; execute permission in sets 10035535/10035538). Preserve other response properties and unchanged response bytes where no scrub is needed.
 - #134: clarify external Run timeout versus in-process steps, Run Now and background execution; document Ask schema, counted calls and Foundation message retention in run notes and help (codeunits 10035562/10035576). Regression coverage extends verify tests 96435/96439 and adds scrub and per-warning Run gate tests 96444 with a test-only response type/handler (enum extension 96444, codeunit 96445).
 
+### Fixed (2026-11-02) - Assisted Setup metadata registration (#139)
+
+- Codeunit 10035589 `Scheduler Wizard Reg. ori` has inherent Execute permissions and entitlements for its metadata-only Guided Experience subscriber. Object identity and both false skip flags remain unchanged; scheduler wizard and business permissions are not broadened.
+- Test codeunit 96446 `Scheduler Wizard Reg Tests ori` opens the real Assisted Setup publisher path under the test permission set 96446 `Orch Guided Test ori` (`D365 Basic - Read` plus `Guided Experience - View`, with no Orchestrator business role; test permission set 96447 `Orch Meta Excl ori` subtracts callback and business grants from the platform wildcard) in English and Icelandic, checks repeated-registration uniqueness and no business/setup changes, and proves wizard and scheduler access remain refused.
+
+### Fixed (2026-11-02) - Unresolved-reference Verify guidance (#140)
+
+- Codeunit 10035618 `Playbook Verify Template ori`: the four missing/forward-step and unknown-field findings now explain that the step fails before dispatch and that its Failed run-log entry names the unresolved reference, in English and Icelandic.
+- Test codeunit 96439 compares the complete findings in LCIDs 1033 and 1039. Existing email-literal and runner behavior remains unchanged.
+
+### Fixed (2026-11-02) - Test object identity after main integration (#118, PR #119)
+
+- Renumber test codeunit `Playbook Ref 118 Tests ori` from 96442 to the next free ID, 96444; retain main's 96442 `Verify Summary Tests ori` and 96443 `First Schedule Tests ori` with all existing scenarios and assertions.
+
+### Fixed (2026-11-02) - Icelandic playbook terminology (#118, PR #119)
+- Use the established Icelandic term "keðjan" in the primary-key next-step guidance (codeunit 10035618), its label comment and is-IS translation.
+
+### Fixed (2026-10-23) - Primary-key references in playbooks (#118)
+
+- Help (10035576 `Help ori`) now uses `@_current.primaryKey.No_` in the credit-control example, including its encoded template, and explains where primary-key and other fields appear. The matching example fixture (96438) and existing field-path test (96439) follow the corrected response shape.
+- Verify (10035618 `Playbook Verify Template ori`, 10035619 `Playbook Verify Lookup ori`, contract 10035615 `Playbook Verify Msg ori`) warns with `UnknownFieldReference` when `@_current.fields.X` names a primary-key field and suggests its `primaryKey` path.
+- Runner (10035547 `Playbook Runner ori`) checks original template references with 10035546 `Playbook JSON Helper ori` before dispatch in single, forEach and paged steps. A missing reference fails the step with a localized diagnostic instead of sending literal token text; e-mail literals and data returned by an earlier step are not treated as missing template references.
+- Zero-warning test compilation: corrected existing format-string labels in test codeunits 96430, 96433, 96432, 96435, 96437, 96439 and library 96434; ordered declarations in 96433; aligned helper filenames for 96434, 96438 and 96440. Assertions and scenarios are unchanged.
+- Regression tests: 96444 `Playbook Ref 118 Tests ori` covers bilingual warnings, correct resolution, missing embedded/nested paths, e-mail/data literals, same-iteration syntax and real single/forEach runner failures. Existing compatibility signatures remain intact.
+
+### Fixed (2026-10-31) - Workspace preview notes (#117)
+
+- Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
+- Test codeunit 96453 `Orch B2 Contract Tests` checks that preview notes do not duplicate the direction field while preserving the existing Both direction assertion.
+
+### Fixed (2026-10-31) - Current Foundation test contracts (#117)
+
+- Test codeunit 96430 `Check Step Error Tests` supplies `expectedCount: 1` in the failing-report and missing-report fixtures so the existing domain-error assertions run beyond Foundation's confirmation guard.
+- Test codeunits 96452 `Orch B1 Contract Tests` and 96453 `Orch B2 Contract Tests` append Foundation's `Retryable` entry to the six approved error snapshots. Every existing error entry, text, order and full-array equality assertion is preserved, following Gunnar's 31 October H2 decision. Product code and help are unchanged.
 
 ### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)
 
