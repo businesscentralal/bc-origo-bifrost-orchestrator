@@ -208,7 +208,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('A playbook runs unattended and its steps commit one by one (see "Execution Model"): nothing is rolled back when a later step goes wrong. The only safety net is what you check before it runs. Follow these seven steps, in order, every time you build or change a playbook. `Orchestrator.Playbook.Run` and the schedule refuse a playbook that does not verify (step 4), but finding a mistake there costs more than not making it.');
         O.AppendLine('');
         O.AppendLine('1. **Design the steps on paper.** For every step write down whether it is a *read* (`Data.Records.Get`), a *decision* (a `Check` step) or a *write* (`Data.Records.Set`, `*.Post`, `Orchestrator.Email.Send`, `Orchestrator.Telegram.Message`), and whether it runs once or once per record (a forEach). For every write that runs per record, name the decision step that gates it: the write needs `Skip If Step Failed` pointing at that step (see "Per-item decisions in a forEach").');
-        O.AppendLine('2. **Check that everything you name exists.** Message types: `describe_message_type`, or `Help.Implementation.Get` with `subject = "<type>"`, and `Help.MessageTypes.Get` for the list; copy the exact name. Language model role codes (`roleCode` of `LLM.Prompt.Complete`): `Data.Records.Get` with `{"tableName":"Bifrost Language Model ori"}`; use a code that comes back, or leave `roleCode` out for the default model. `HAIKU` is only an example: a code that does not exist makes every call answer `RecordNotFound`. Tables and fields of a `tableView`: `Help.Tables.Get` and `Help.Fields.Get`. A field in `@_current.fields.X` is written without spaces and without punctuation except `_`: `No.` is `No_`.');
+        O.AppendLine('2. **Check that everything you name exists.** Message types: `describe_message_type`, or `Help.Implementation.Get` with `subject = "<type>"`, and `Help.MessageTypes.Get` for the list; copy the exact name. Language model role codes (`roleCode` of `LLM.Prompt.Complete`): `Data.Records.Get` with `{"tableName":"Bifrost Language Model ori"}`; use a code that comes back, or leave `roleCode` out for the default model. `HAIKU` is only an example: a code that does not exist makes every call answer `RecordNotFound`. Tables and fields of a `tableView`: `Help.Tables.Get` and `Help.Fields.Get`. Primary-key fields are under `@_current.primaryKey.X` (for example `@_current.primaryKey.No_` for `No.`); other requested fields are under `@_current.fields.X` (for example `@_current.fields.Name`). Field names omit spaces and punctuation except `_`. Inspect the source answer before writing a reference.');
         O.AppendLine('3. **Create the header and the steps with every step `Disabled = true`.** Put `"Disabled": true` in the `Data.Records.Set` call that creates each step. A disabled step is skipped, so nothing can run while you are still building. Create the conditions and the Result Log Paths now too.');
         O.AppendLine('4. **Run `Orchestrator.Playbook.Verify` and fix every finding.** It reads the playbook without running it, also while the steps are disabled. A finding has a `severity` (`error` or `warning`), the `stepNo`, a `code`, what is wrong (`message`) and what to do about it (`nextStep`). An error is always a mistake. A warning is a mistake unless you can say why this case is deliberate. Repeat until `findings` is empty.');
         O.AppendLine('5. **Run the read and decision steps only.** Enable the read steps and the `Check` steps and leave every write step disabled. Call `Orchestrator.Workspace.Preview` to see what `_sys`, `_who` and `_initial` hold, then `Orchestrator.Playbook.Run`, and read `Playbook Step Log ori` for the instance: request, response and `Check answered no.` for each record. Confirm that the decisions say yes and no for the records you expect. Verify again after every change.');
@@ -233,7 +233,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `UnsafeForEachWrite` | warning | An enabled forEach write step follows a forEach `Check` over the same array and does not have `Skip If Step Failed` set to it: it writes for every item |');
         O.AppendLine('| `ActionWithoutSuccessCondition` | warning | An `Action` has no Success condition, so it counts as successful whenever the type does not raise, also when it answers `status: "Error"` |');
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
-        O.AppendLine('| `UnknownFieldReference` | warning | `@_current.fields.X` names a field the source table does not have, or `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths |');
+        O.AppendLine('| `UnknownFieldReference` | warning | `@_current.fields.X` names a field the source table does not have or returns under `primaryKey`, or `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths |');
         O.AppendLine('');
         O.AppendLine('When `Orchestrator.Playbook.Run` or `Orchestrator.Playbook.Schedule` refuses, the answer is `PreconditionFailed` on `playbookCode`, the text lists the blocking findings, and `findings` holds them:');
         O.AppendLine('');
@@ -278,7 +278,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('    { "primaryKey": { "PlaybookCode": "CREDIT-CTRL", "StepNo_": 30 },');
         O.AppendLine('      "fields": { "Description": "Does this customer have an overdue balance?", "StepType": "Check", "MessageType": "Data.Records.Get",');
         O.AppendLine('        "IterateSourceStepNo_": 10, "IterateArrayPath": "result",');
-        O.AppendLine('        "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzFdLCJ0YWJsZVZpZXciOiJXSEVSRShOby49Q09OU1QoQF9jdXJyZW50LmZpZWxkcy5Ob18pLEJhbGFuY2UgRHVlIChMQ1kpPUZJTFRFUig+MCkpIn0=",');
+        O.AppendLine('        "RequestTemplate": "eyJ0YWJsZU5hbWUiOiJDdXN0b21lciIsImZpZWxkTnVtYmVycyI6WzFdLCJ0YWJsZVZpZXciOiJXSEVSRShOby49Q09OU1QoQF9jdXJyZW50LnByaW1hcnlLZXkuTm9fKSxCYWxhbmNlIER1ZSAoTENZKT1GSUxURVIoPjApKSJ9",');
         O.AppendLine('        "NextStepNo_Success": 40, "NextStepNo_Failure": 40 } },');
         O.AppendLine('    { "primaryKey": { "PlaybookCode": "CREDIT-CTRL", "StepNo_": 40 },');
         O.AppendLine('      "fields": { "Description": "Block the customer for invoicing", "StepType": "Action", "MessageType": "Data.Records.Set",');
@@ -297,7 +297,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| Step | Template (JSON) |');
         O.AppendLine('|---|---|');
         O.AppendLine('| 10 | `{"tableName":"Customer","fieldNumbers":[1,2],"tableView":"WHERE(Blocked=CONST( ))"}` |');
-        O.AppendLine('| 30 | `{"tableName":"Customer","fieldNumbers":[1],"tableView":"WHERE(No.=CONST(@_current.fields.No_),Balance Due (LCY)=FILTER(>0))"}` |');
+        O.AppendLine('| 30 | `{"tableName":"Customer","fieldNumbers":[1],"tableView":"WHERE(No.=CONST(@_current.primaryKey.No_),Balance Due (LCY)=FILTER(>0))"}` |');
         O.AppendLine('| 40 | `{"tableName":"Customer","data":[{"id":"@_current.id","fields":{"Blocked":"Invoice"}}]}` |');
         O.AppendLine('| 90 | `{"message":"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked."}` |');
         O.AppendLine('');
@@ -328,7 +328,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- **Step 10, `noOfRecords GreaterThan 0` beside `status Equals Success`.** A read that finds nothing still answers `Success`. Without the second condition step 30 and 40 would iterate zero customers, succeed, and the run would end `Completed` having done nothing. With it, an empty read fails step 10 and the run is `Failed` at the step that is really wrong. `Next Step No. (Failure)` is left at 0: the playbook ends there, no notice is sent. `Orchestrator.Playbook.Verify` warns (`ForEachSourceUnguarded`) when this condition is missing.');
         O.AppendLine('- **Step 10, the filter `Blocked=CONST( )`.** Only customers that are not blocked yet are candidates, so the playbook never replaces a stronger block (for example `All`) with `Invoice`.');
         O.AppendLine('- **Step 10, `ResultLogPaths: noOfRecords>customerCount`.** Stores the count at `10.customerCount` for the notice. The array itself needs no mapping: a forEach step reads the answer of its source step directly (`IterateSourceStepNo_` 10, `IterateArrayPath` `result`).');
-        O.AppendLine('- **Step 30 is a `Check`, not an `Action`.** A customer without an overdue balance is not an error. A `Check` that answers no is logged `Cancelled` ("Check answered no."), does not increment `StepsFailed` and does not fail the run. The decision is a read that finds a row only when the rule holds (`Balance Due (LCY)` above 0 for exactly this customer, `@_current.fields.No_`), so the Success condition `noOfRecords GreaterThan 0` is the answer yes.');
+        O.AppendLine('- **Step 30 is a `Check`, not an `Action`.** A customer without an overdue balance is not an error. A `Check` that answers no is logged `Cancelled` ("Check answered no."), does not increment `StepsFailed` and does not fail the run. The decision is a read that finds a row only when the rule holds (`Balance Due (LCY)` above 0 for exactly this customer, `@_current.primaryKey.No_`), so the Success condition `noOfRecords GreaterThan 0` is the answer yes.');
         O.AppendLine('- **Step 30, both Next Step edges at 40.** A forEach step follows one edge once, after all its iterations. The edges can not make the decision per customer; they only have to lead on.');
         O.AppendLine('- **Step 40, `SkipIfStepFailed: 30`.** This is the gate. For each customer the step is skipped (`Cancelled`, "Skipped: prior step failed for this item.") unless step 30''s answer for the same customer was yes. Next Step edges do not do this: they apply once for the whole step. Without this one number step 40 would block every customer, which is example 3.');
         O.AppendLine('- **Step 40, the write by `id`.** `@_current.id` is the SystemId of the customer that the current iteration is on, so the write can only touch that customer. `Blocked` is written by its AL name, `Invoice`.');
@@ -414,11 +414,12 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- WhoAmI context: stored at `_who` (user profile, salesperson, company info)');
         O.AppendLine('');
         O.AppendLine('**Phase 2 — Build:** Request templates use `@path` references resolved from workspace:');
+        O.AppendLine('A missing workspace reference fails the step before its message is sent. Inspect the source response and correct the path; primary-key fields of Data.Records.Get are under `primaryKey`, not `fields`.');
         O.AppendLine('');
         O.AppendLine('| Syntax | Resolves to | Example |');
         O.AppendLine('|---|---|---|');
         O.AppendLine('| `"@path"` | Single value/object/array (type-preserving) | `"@10.company.fields.Name"` → `"CRONUS Ltd."` |');
-        O.AppendLine('| `"@_current.field"` | Current forEach element field | `"@_current.fields.No_"` → `"10000"` |');
+        O.AppendLine('| `"@_current.field"` | Current forEach element field | `"@_current.primaryKey.No_"` → `"10000"` |');
         O.AppendLine('| `"@_initial.key"` | Initial request parameter | `"@_initial.invoiceNo"` → `"103002"` |');
         O.AppendLine('| `"@_iter"` | Current forEach iteration index | `"@30.@_iter.street"` → resolves to `"@30.0.street"` then to the value |');
         O.AppendLine('| `"@_sys.field"` | System constant | `"@_sys.today"` → `"2026-08-30"`, `"@_sys.lastMonthStart"` → `"2026-07-01"` |');
