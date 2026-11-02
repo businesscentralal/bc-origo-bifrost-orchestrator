@@ -11,6 +11,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - #134: warn about unbounded `LLM.Prompt.Ask` record iteration, data conditions without a response schema, and discarded traces without a Language Models dependency (codeunits 10035616/10035617/10035618, 10035615; bilingual finding messages and Icelandic XLF).
 
 ### Fixed
+- #134 / PR #147: run test codeunit 96456 with its declared disabled isolation and retain codeunit isolation for the rest of the full suite. The AL-Go hook combines JUnit results and rejects missing, duplicate or skipped tests without changing assertions.
 - #134 / PR #147: move test codeunit `Playbook Ask Scrub Tests ori` from 96444 to 96456 after merging main, preserving main's `Playbook Ref 118 Tests ori` at 96444 and every test scenario and assertion.
 - #134 / PR #147: keep Ask schema and trace warning assertions in test codeunit 96439 after main removes the warning helper; call the existing severity-aware assertion with `WarningTok` unchanged.
 - #134: remove Ask response traces before Orchestrator logging and response consumers (new internal codeunit 10035620, step executor 10035572; execute permission in sets 10035535/10035538). Preserve other response properties and unchanged response bytes where no scrub is needed.
