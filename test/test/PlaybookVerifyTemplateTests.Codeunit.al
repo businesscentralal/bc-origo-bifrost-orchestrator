@@ -497,7 +497,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         Findings := Token.AsArray();
         Assert.AreEqual(1, Findings.Count(), 'Case-insensitive references remain valid');
         AssertFinding(Findings, 'UnknownFieldReference', 20, ErrorTok);
-        Findings.Get(1, Token);
+        Findings.Get(0, Token);
         Assert.IsTrue(TextOf(Token.AsObject(), 'message').Contains('creditLimitLCY, MixedCase, result_TotalAmount'), 'Original mapped and unmapped casing, without duplicate targets');
         Assert.AreEqual(1, IntOf(ResponseJson, 'errorCount'), 'Stored-field error is counted as an error');
         Assert.AreEqual(0, IntOf(ResponseJson, 'warningCount'), 'Stored-field error is not counted as a warning');
