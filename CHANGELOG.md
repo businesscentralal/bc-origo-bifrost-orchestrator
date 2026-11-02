@@ -10,7 +10,7 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Fixed (2026-11-02) - Assisted Setup metadata registration (#139)
 
 - Codeunit 10035589 `Scheduler Wizard Reg. ori` has inherent Execute permissions and entitlements for its metadata-only Guided Experience subscriber. Object identity and both false skip flags remain unchanged; scheduler wizard and business permissions are not broadened.
-- Test codeunit 96446 `Scheduler Wizard Reg Tests ori` opens the real Assisted Setup publisher path under the test permission set 96446 `Orch Guided Test ori` (`D365 Basic - Read` plus `Guided Experience - View`, with no Orchestrator business role) in English and Icelandic, checks repeated-registration uniqueness and no business/setup changes, and proves wizard and scheduler access remain refused.
+- Test codeunit 96446 `Scheduler Wizard Reg Tests ori` opens the real Assisted Setup publisher path under the test permission set 96446 `Orch Guided Test ori` (`D365 Basic - Read` plus `Guided Experience - View`, with no Orchestrator business role; test permission set 96447 `Orch Meta Excl ori` subtracts callback and business grants from the platform wildcard) in English and Icelandic, checks repeated-registration uniqueness and no business/setup changes, and proves wizard and scheduler access remain refused.
 
 ### Fixed (2026-10-31) - Workspace preview notes (#117)
 

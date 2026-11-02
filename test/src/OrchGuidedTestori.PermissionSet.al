@@ -12,4 +12,5 @@ permissionset 96446 "Orch Guided Test ori"
     Assignable = true;
     Caption = 'Assisted setup test identity', Locked = true;
     IncludedPermissionSets = "D365 Basic - Read", "Guided Experience - View";
+    ExcludedPermissionSets = "Orch Meta Excl ori";
 }
