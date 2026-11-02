@@ -46,6 +46,10 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         PreviousLanguage: Integer;
         FirstCount: Integer;
         SecondCount: Integer;
+        FirstVisibleCount: Integer;
+        SecondVisibleCount: Integer;
+        FirstTitle: Text;
+        SecondTitle: Text;
         TableId: Integer;
         IsRegistered: Boolean;
         IsCompleted: Boolean;
@@ -75,8 +79,10 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
             BifrostSetup.WritePermission() or NavAppSetting.WritePermission();
 
         // [WHEN] Opening the standard page raises Guided Experience.OnRegisterAssistedSetup twice.
-        FirstCount := CountWizardEntries(ExpectedTitle);
-        SecondCount := CountWizardEntries(ExpectedTitle);
+        FirstVisibleCount := CountWizardEntries(ExpectedTitle);
+        FirstCount := ReadRegisteredWizard(FirstTitle);
+        SecondVisibleCount := CountWizardEntries(ExpectedTitle);
+        SecondCount := ReadRegisteredWizard(SecondTitle);
         IsRegistered := GuidedExperience.Exists(Enum::"Guided Experience Type"::"Assisted Setup", ObjectType::Page, Page::"Scheduler Setup Wizard ori");
         IsCompleted := GuidedExperience.IsAssistedSetupComplete(ObjectType::Page, Page::"Scheduler Setup Wizard ori");
         asserterror Wizard.OpenView();
@@ -91,7 +97,11 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         GlobalLanguage(PreviousLanguage);
         Assert.IsTrue(PermissionsLowered, 'The permission mock must be active.');
         Assert.IsFalse(HasBusinessAccess, 'Metadata registration must not grant scheduler, credential, consent or HTTP-setting access.');
-        Assert.AreEqual(1, FirstCount, 'The translated scheduler wizard must appear once.');
+        Assert.AreEqual(0, FirstVisibleCount, 'Assisted Setup must hide a wizard the user cannot execute.');
+        Assert.AreEqual(0, SecondVisibleCount, 'Repeated registration must not grant wizard visibility.');
+        Assert.AreEqual(1, FirstCount, 'The scheduler wizard metadata must be registered once.');
+        Assert.AreEqual(ExpectedTitle, FirstTitle, 'Registration must persist the translated wizard title.');
+        Assert.AreEqual(ExpectedTitle, SecondTitle, 'Repeated registration must preserve the translated title.');
         Assert.AreEqual(1, SecondCount, 'Repeated publisher registration must not duplicate wizard entries.');
         Assert.IsTrue(IsRegistered, 'The real registration event must persist wizard metadata.');
         Assert.IsFalse(IsCompleted, 'Metadata enumeration must not complete the wizard.');
@@ -113,6 +123,24 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
                     EntryCount += 1;
             until not AssistedSetup.Next();
         AssistedSetup.Close();
+        exit(EntryCount);
+    end;
+
+    local procedure ReadRegisteredWizard(var RegisteredTitle: Text): Integer
+    var
+        Registry: RecordRef;
+        EntryCount: Integer;
+    begin
+        // Microsoft table 1990 is internal. Inspect metadata through RecordRef without bypassing permissions.
+        // Fields 4/13 identify the target and experience type; field 6 holds the registered title.
+        // Assisted Setup filters out pages without Execute, so visible rows cannot prove registration here.
+        Registry.Open(1990);
+        Registry.Field(4).SetRange(Page::"Scheduler Setup Wizard ori");
+        Registry.Field(13).SetRange(Enum::"Guided Experience Type"::"Assisted Setup");
+        EntryCount := Registry.Count();
+        if Registry.FindFirst() then
+            RegisteredTitle := Format(Registry.Field(6).Value);
+        Registry.Close();
         exit(EntryCount);
     end;
 
