@@ -233,7 +233,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `UnsafeForEachWrite` | warning | An enabled forEach write step follows a forEach `Check` over the same array and does not have `Skip If Step Failed` set to it: it writes for every item |');
         O.AppendLine('| `ActionWithoutSuccessCondition` | warning | An `Action` has no Success condition, so it counts as successful whenever the type does not raise, also when it answers `status: "Error"` |');
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
-        O.AppendLine('| `UnknownFieldReference` | warning | `@_current.fields.X` names a field the source table does not have or returns under `primaryKey`, or `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths |');
+        O.AppendLine('| `UnknownFieldReference` | error for stored fields; warning for `@_current.fields` | `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths: this is an Error and blocks Run/Schedule even with `ignoreWarnings=true`. Stored names retain their original casing; matching stays case-insensitive. `@_current.fields.X` findings remain warnings when the source table does not have the field or returns it under `primaryKey`. |');
         O.AppendLine('');
         O.AppendLine('When `Orchestrator.Playbook.Run` or `Orchestrator.Playbook.Schedule` refuses, the answer is `PreconditionFailed` on `playbookCode`, the text lists the blocking findings, and `findings` holds them:');
         O.AppendLine('');

@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - Stored-field Verify errors and original casing (#144)
+
+- Codeunit 10035618 `Playbook Verify Template ori` reports missing stored fields in `@N.field`, `@N.@_iter.field` and explicit iteration references as `UnknownFieldReference` Errors. Enabled findings now block Run and Schedule even with `ignoreWarnings=true`; playbooks that previously only warned may be refused until their references are corrected. Other findings, including `@_current.fields` warnings, are unchanged.
+- Stored-field diagnostics retain the original Result Log Paths target casing (including unmapped paths), while matching and duplicate detection stay case-insensitive. Verify contract help (10035615) and overview (10035576) explain the severity distinction and compatibility impact.
+- Test codeunit 96439 verifies Error severity, bilingual error/warning and blocking counts, original mixed-case field names, case-insensitive matches and duplicate targets, alongside the existing iteration checks.
+
 ### Fixed (2026-11-02) - Assisted Setup metadata registration (#139)
 
 - Codeunit 10035589 `Scheduler Wizard Reg. ori` has inherent Execute permissions and entitlements for its metadata-only Guided Experience subscriber. Object identity and both false skip flags remain unchanged; scheduler wizard and business permissions are not broadened.
