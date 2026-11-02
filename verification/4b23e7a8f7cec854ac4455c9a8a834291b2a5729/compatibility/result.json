@@ -1,0 +1,14 @@
+{
+  "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "startedAt": "2026-11-02T02:03:58.460Z",
+  "finishedAt": "2026-11-02T02:04:11.557Z",
+  "baselineSha": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997",
+  "baselineVersion": "28.0.4.98",
+  "verificationManifestVersion": "28.0.4.99",
+  "sourceManifestVersion": "28.0.4.0",
+  "sourceTreeMutated": false,
+  "reason": "Private shipping AppSourceCop comparison against genuine current-main green artifact; manifest build component projected above baseline for compatibility analysis only",
+  "exitCode": 0,
+  "errors": 0,
+  "warnings": 0
+}

@@ -1,0 +1,6 @@
+Write-Error: test: duplicate codeunit 96442 (VerifySummaryTestsori.Codeunit.al and PlaybookRef118Testsori.Codeunit.al)
+Exception: /workspace/evidence/orchestrator119-renumber-worker3/guard-view/tools/Test-ObjectIdsUnique.ps1:106
+Line |
+ 106 |      throw "Object ID uniqueness check failed with $($Failures.Count)  …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Object ID uniqueness check failed with 1 duplicate(s).

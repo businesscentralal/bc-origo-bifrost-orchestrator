@@ -1,0 +1,44 @@
+{
+  "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "artifacts": [
+    {
+      "path": "candidate/app.app",
+      "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "name": "Bifrost Orchestrator",
+      "version": "28.0.4.0",
+      "source": {
+        "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+        "Commit": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729"
+      },
+      "packageId": null,
+      "sha256": "1173cad27095d7e1840adc2b9bb5ed4a4a07f128b056c5d45b67e7c93a4fd662",
+      "signedLocalArtifactClaim": false
+    },
+    {
+      "path": "candidate/test.app",
+      "appId": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "name": "Bifrost Orchestrator - Tests",
+      "version": "28.0.4.0",
+      "source": {
+        "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+        "Commit": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729"
+      },
+      "packageId": null,
+      "sha256": "32ac96e9459403f575dde2bfa683a8f39d49daca5755c2f72fed4d4a0d03d510",
+      "signedLocalArtifactClaim": false
+    },
+    {
+      "path": "shipping/shipping.app",
+      "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "name": "Bifrost Orchestrator",
+      "version": "28.0.4.0",
+      "source": {
+        "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+        "Commit": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729"
+      },
+      "packageId": null,
+      "sha256": "e9f388fd57c7823a82c7b15fd46e6bf8a9a415f12c8d4ed68b6c33b947cfd50e",
+      "signedLocalArtifactClaim": false
+    }
+  ]
+}

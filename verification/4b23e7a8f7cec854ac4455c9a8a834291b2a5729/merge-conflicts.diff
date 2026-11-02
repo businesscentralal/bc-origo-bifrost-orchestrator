@@ -1,0 +1,393 @@
+diff --cc CHANGELOG.md
+index d6f8d4b,df1e988..0000000
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@@ -7,16 -7,52 +7,65 @@@ Business Central release versioning (`m
+  
+  ## [Unreleased]
+  
+++<<<<<<< HEAD
+ +### Fixed (2026-11-02) - Icelandic playbook terminology (#118, PR #119)
+ +- Use the established Icelandic term "keðjan" in the primary-key next-step guidance (codeunit 10035618), its label comment and is-IS translation.
+ +
+ +### Fixed (2026-10-23) - Primary-key references in playbooks (#118)
+ +
+ +- Help (10035576 `Help ori`) now uses `@_current.primaryKey.No_` in the credit-control example, including its encoded template, and explains where primary-key and other fields appear. The matching example fixture (96438) and existing field-path test (96439) follow the corrected response shape.
+ +- Verify (10035618 `Playbook Verify Template ori`, 10035619 `Playbook Verify Lookup ori`, contract 10035615 `Playbook Verify Msg ori`) warns with `UnknownFieldReference` when `@_current.fields.X` names a primary-key field and suggests its `primaryKey` path.
+ +- Runner (10035547 `Playbook Runner ori`) checks original template references with 10035546 `Playbook JSON Helper ori` before dispatch in single, forEach and paged steps. A missing reference fails the step with a localized diagnostic instead of sending literal token text; e-mail literals and data returned by an earlier step are not treated as missing template references.
+ +- Zero-warning test compilation: corrected existing format-string labels in test codeunits 96430, 96433, 96432, 96435, 96437, 96439 and library 96434; ordered declarations in 96433; aligned helper filenames for 96434, 96438 and 96440. Assertions and scenarios are unchanged.
+ +- Regression tests: 96442 `Playbook Ref 118 Tests ori` covers bilingual warnings, correct resolution, missing embedded/nested paths, e-mail/data literals, same-iteration syntax and real single/forEach runner failures. Existing compatibility signatures remain intact.
+++=======
++ ### Fixed (2026-10-31) - Workspace preview notes (#117)
++ 
++ - Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
++ - Test codeunit 96453 `Orch B2 Contract Tests` checks that preview notes do not duplicate the direction field while preserving the existing Both direction assertion.
++ 
++ ### Fixed (2026-10-31) - Current Foundation test contracts (#117)
++ 
++ - Test codeunit 96430 `Check Step Error Tests` supplies `expectedCount: 1` in the failing-report and missing-report fixtures so the existing domain-error assertions run beyond Foundation's confirmation guard.
++ - Test codeunits 96452 `Orch B1 Contract Tests` and 96453 `Orch B2 Contract Tests` append Foundation's `Retryable` entry to the six approved error snapshots. Every existing error entry, text, order and full-array equality assertion is preserved, following Gunnar's 31 October H2 decision. Product code and help are unchanged.
++ 
++ ### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)
++ 
++ - Codeunits 10035544 `Schedule Calc ori`, 10035535 `Scheduler Handler ori`, 10035536 `Scheduler Mgt ori` and table 10035535 `Scheduled Entry ori`: a never-run minutes-based schedule keeps the due slot while inside its allowed window. Administrative Last Ready State is no longer treated as a successful run. A delayed daily success retains the next configured daily start, including the same evening when an execution crosses midnight. Creation, rebuild and Starting Time edits validate the BC field to maintain Reference Starting Time, including clearing it. Applying a recurring template synchronizes the existing job and its reference without deleting it. Explicit rebuilds through codeunit 10035550 `SE Msg Handler ori` or API page 10035537 create the replacement even when its next run is in the future.
++ - Test codeunit 96443 `First Schedule Tests ori` covers due, future and elapsed windows, successful-run recurrence across midnight, creation inside the allowed window, reference-time synchronization and the full scheduler/dispatcher path. Existing codeunit 96411 starting-time synchronization test also checks the reference anchor.
++ 
++ - Successful execution history determines whether an entry has run; purged successful logs make it follow the never-run path. Existing blank reference times are corrected by a Starting Time edit, template application or explicit rebuild; this change does not perform an automatic upgrade backfill. Scheduling retains the existing session-time-zone behavior.
++ 
++ ### Fixed (2026-10-28) - Registration for restricted licence administrators (#127)
++ 
++ - Codeunit 10035607 `Orchestrator Registration ori` declares `InherentPermissions = X` and `InherentEntitlements = X`, allowing Foundation's setup page to invoke the app-registration subscriber without granting the user Orchestrator administration, including the entitlement boundary approved on 2026-10-29.
++ - Test codeunit 96423 `Orchestr Registration Tests` opens Foundation setup under the exact `BIFROST LicAdm ori` role in English and Icelandic, checks that the page stays read-only and Orchestrator remains registered with its setup page. Test permission set 96423 `Orch Test Plat ori` supplies only the Microsoft platform baseline; it grants no Bifrost or Orchestrator objects. Verification requires Foundation 28.0.10 or later.
++ 
++ ### Fixed (2026-10-22) - Distinguish blocking Verify findings (#113)
++ 
++ - Codeunits 10035616 `Playbook Verify ori` and 10035615 `Playbook Verify Msg ori`: add `blockingErrorCount` and `blockingWarningCount` to `Orchestrator.Playbook.Verify`. These exclude informational findings on disabled steps and match the existing Run/Schedule gates (warnings can be accepted with `ignoreWarnings`). Existing `valid`, `errorCount`, `warningCount`, per-step findings and `stepDisabled` remain unchanged for compatibility. Help, examples and bilingual type descriptions explain which counts to read.
++ - Test app compile hygiene: codeunits 96430 `Check Step Error Tests`, 96432 `Playbook Last Run Tests`, 96433 `Playbook Verify Tests`, 96434 `Playbook Test Library ori`, 96435 `Playbook Verify Step Tests`, 96437 `Playbook Gate Tests` and 96439 `Playbook Verify Template Tests` use locked request-format labels and ordered local variables for zero-warning CodeCop. Align filenames with existing object names for 96434 `Playbook Test Library ori`, 96438 `Playbook Example Library ori` and 96440 `Role Lookup Subscriber ori`; 96438 and 96440 are filename-only renames. Assertions and test selection are unchanged.
++ - Test codeunit 96442 `Verify Summary Tests ori`: regressions in LCIDs 1033/1039 for disabled-only errors, mixed enabled/disabled findings, enabled blockers, clean summaries and the published help contract. Run/Schedule safety is unchanged.
++ 
++ ### Fixed (2026-10-25) - Report.Get selection description (#123)
++ 
++ - Codeunit `Report Get Msg ori` (10035594): the English and Icelandic selection descriptions now state that the call may create an empty preset for the calling user when none exists. Effect, direction and runtime behavior are unchanged.
++ 
++ ### Added (2026-10-25) - Playbooks on Bifrost Setup Navigate, and Tell Me for the playbook list
++ 
++ - Page extension `Setup JQ ori` (10035537) on Foundation's `Setup ori` keeps the *Bifrost Orchestrator Setup* action in Apps and adds two Navigate actions: *Bifrost Playbooks* (`Playbooks ori`) and *Playbook Execution Log* (`Playbook Instances ori`). The same two actions remain on `Scheduler Setup ori`.
++ - Page `Playbooks ori` (10035551) sets `UsageCategory = Lists` so Tell Me can open the list. Caption stays *Bifrost Playbooks* and `ApplicationArea` stays `All`.
++ - Icelandic captions for the two new Bifrost Setup actions are in `app/Translations/Bifrost Orchestrator.is-IS.xlf`, generated with `tools/Update-IcelandicXlf.ps1`.
++ - `Orchestr Secret Tests` (96403): `BifrostSetupExposesOrchestratorSetupAndPlaybooks` opens Bifrost Playbooks and the playbook execution log from Bifrost Setup, and still opens Bifrost Orchestrator Setup from Apps.
++ 
++ ### Fixed (2026-10-23) - Orchestrator direction and effect declarations (#117)
++ 
++ - Workspace.Preview is offered in both directions; Report.Get declares the preset it may insert as a write (core#1147 C). Codeunits 10035596 `Workspace Preview Msg ori` and 10035594 `Report Get Msg ori`; runtime behavior and the effect changes text are unchanged.
++ - Workspace.Preview's direction note now says Both in English and Icelandic, matching its metadata (Gunnar's 2026-10-24 exception to contract item 3); the remaining help text is unchanged.
++ - Test codeunits 96453 `Orch B2 Contract Tests`, 96441 `Contract Complete Tests ori` and 96455 `Msg Direction Tests ori` assert Both for Workspace.Preview and write for Report.Get, following Gunnar's H2 approvals of the existing assertions.
++ 
++ - Reuse the compile-only test hygiene from PR #116: locked format labels and variable ordering in codeunits 96430, 96432, 96433, 96434, 96435, 96437 and 96439; align filenames for 96434 `Playbook Test Library ori`, 96438 `Playbook Example Library ori` and 96440 `Role Lookup Subscriber ori`. Assertions and fixture values are unchanged.
+++>>>>>>> origin/main
+  
+  ### Changed (2026-10-21) - Message type contract and discovery brought to Foundation parity
+  
+diff --cc test/src/Libraries/PlaybookTestLibraryori.Codeunit.al
+index bd6ecb3,b1461c9..0000000
+--- a/test/src/Libraries/PlaybookTestLibraryori.Codeunit.al
++++ b/test/src/Libraries/PlaybookTestLibraryori.Codeunit.al
+@@@ -82,7 -85,7 +85,11 @@@ codeunit 96434 "Playbook Test Library o
+      procedure AddLayoutSourceStep(PlaybookCode: Code[20]; StepNo: Integer)
+      begin
+          AddStep(PlaybookCode, StepNo, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.ReportLayout.List",
+++<<<<<<< HEAD
+ +            StrSubstNo(Format1Tok, Report::"Layout Sample Report ori"), 0, '', 0);
+++=======
++             StrSubstNo(RequestFormat1Tok, Report::"Layout Sample Report ori"), 0, '', 0);
+++>>>>>>> origin/main
+      end;
+  
+      /// <summary>
+diff --cc test/test/CheckStepErrorTests.Codeunit.al
+index d3bbf44,25a623e..0000000
+--- a/test/test/CheckStepErrorTests.Codeunit.al
++++ b/test/test/CheckStepErrorTests.Codeunit.al
+@@@ -423,7 -424,7 +424,11 @@@ codeunit 96430 "Check Step Error Tests
+  
+      local procedure FailingReportRequest(): Text
+      begin
+++<<<<<<< HEAD
+ +        exit(StrSubstNo(Format1Tok, Report::"Test Failing Report"));
+++=======
++         exit(StrSubstNo(RequestFormat1Tok, Report::"Test Failing Report"));
+++>>>>>>> origin/main
+      end;
+  
+      local procedure HelpRequest(): Text
+diff --cc test/test/PlaybookGateTests.Codeunit.al
+index 60e1707,e7aed76..0000000
+--- a/test/test/PlaybookGateTests.Codeunit.al
++++ b/test/test/PlaybookGateTests.Codeunit.al
+@@@ -64,7 -68,7 +68,11 @@@ codeunit 96437 "Playbook Gate Tests
+          BuildErrorPlaybook();
+          Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteRun(TempArgument);
+  
+@@@ -90,7 -94,7 +98,11 @@@
+          Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
+          Lib.SetStepDisabled(PlaybookCodeTok, 20, true);
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteRun(TempArgument);
+  
+@@@ -109,7 -113,7 +121,11 @@@
+      begin
+          BuildCleanPlaybook();
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteRun(TempArgument);
+  
+@@@ -141,7 -145,7 +157,11 @@@
+      begin
+          BuildCleanPlaybook();
+          CreateTemplate();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat3Tok, PlaybookCodeTok, TemplateCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteSchedule(TempArgument);
+  
+@@@ -173,7 -177,7 +193,11 @@@
+          // [WHEN] Verify is called after an uncommitted write
+          MakeUncommittedWrite();
+          Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Verify');
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+          VerifyHandler.ExecuteVerify(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          // [THEN] It answers, the findings are intact and the transaction is still open
+@@@ -184,7 -188,7 +208,11 @@@
+  
+          // [WHEN] Schedule is called after an uncommitted write
+          Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Schedule');
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat3Tok, PlaybookCodeTok, TemplateCodeTok));
+++>>>>>>> origin/main
+          Handler.ExecuteSchedule(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          // [THEN] The gate passed and the playbook is scheduled
+@@@ -198,7 -202,7 +226,11 @@@
+          Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
+          MakeUncommittedWrite();
+          Assert.IsTrue(Database.IsInWriteTransaction(), 'The transaction has written before Run');
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+          Handler.ExecuteRun(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          // [THEN] Run refused with the finding, nothing ran and the transaction is still open
+@@@ -229,12 -233,12 +261,20 @@@
+          // [SCENARIO] An Action without a Success condition is a warning: it refuses the schedule until ignoreWarnings says it is meant
+          BuildWarningPlaybook();
+          CreateTemplate();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat3Tok, PlaybookCodeTok, TemplateCodeTok));
+++>>>>>>> origin/main
+          Handler.ExecuteSchedule(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          Assert.AreEqual('PreconditionFailed', TextOf(ResponseJson, 'code'), 'A warning refuses the schedule');
+  
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format4Tok, PlaybookCodeTok, TemplateCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat4Tok, PlaybookCodeTok, TemplateCodeTok));
+++>>>>>>> origin/main
+          Handler.ExecuteSchedule(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'ignoreWarnings accepts the warning');
+@@@ -331,7 -335,7 +371,11 @@@
+          // [SCENARIO] The answer of Orchestrator.Playbook.Verify: valid, errorCount, warningCount and findings
+          BuildErrorPlaybook();
+          Lib.AddStep(PlaybookCodeTok, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteVerify(TempArgument);
+  
+@@@ -357,7 -361,7 +401,11 @@@
+          Token: JsonToken;
+      begin
+          BuildCleanPlaybook();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteVerify(TempArgument);
+  
+@@@ -384,7 -388,7 +432,11 @@@
+          GlobalLanguage(LanguageId);
+          BuildErrorPlaybook();
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteRun(TempArgument);
+  
+@@@ -419,13 -423,13 +471,21 @@@
+          GlobalLanguage(LanguageId);
+          BuildWarningPlaybook();
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat2Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+          Handler.ExecuteRun(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          Assert.AreEqual('PreconditionFailed', TextOf(ResponseJson, 'code'), 'A warning refuses the run');
+          Assert.IsTrue(TextOf(ResponseJson, 'error').StartsWith(ExpectedStart), 'Localized start expected: ' + ExpectedStart + ' got: ' + TextOf(ResponseJson, 'error'));
+  
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+          Handler.ExecuteRun(TempArgument);
+          ResponseJson := TempArgument.GetResponseJson();
+          Assert.AreEqual('Success', TextOf(ResponseJson, 'status'), 'ignoreWarnings accepts the warning');
+@@@ -448,7 -452,7 +508,11 @@@
+          GlobalLanguage(LanguageId);
+          BuildErrorPlaybook();
+          CreateTemplate();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok, TemplateCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat3Tok, PlaybookCodeTok, TemplateCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteSchedule(TempArgument);
+  
+diff --cc test/test/PlaybookLastRunTests.Codeunit.al
+index 716d4f3,725a439..0000000
+--- a/test/test/PlaybookLastRunTests.Codeunit.al
++++ b/test/test/PlaybookLastRunTests.Codeunit.al
+@@@ -127,7 -131,7 +131,11 @@@ codeunit 96432 "Playbook Last Run Tests
+          // [GIVEN] A playbook whose header still shows an earlier, completed run, and whose only step reads that header
+          Lib.CreatePlaybook(PlaybookCodeTok);
+          Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get",
+++<<<<<<< HEAD
+ +            StrSubstNo(Format1Tok, PlaybookCodeTok), 0, '', 0);
+++=======
++             StrSubstNo(RequestFormat2Tok, PlaybookCodeTok), 0, '', 0);
+++>>>>>>> origin/main
+          PreviousInstanceId := CreateGuid();
+          Playbook.Get(PlaybookCodeTok);
+          Playbook."Last Run Status" := Playbook."Last Run Status"::Completed;
+@@@ -163,7 -167,7 +171,11 @@@
+          Lib.CreatePlaybook(PlaybookCodeTok);
+          Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format2Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+          StartedAt := CurrentDateTime();
+  
+          Handler.ExecuteRun(TempArgument);
+@@@ -194,7 -198,7 +206,11 @@@
+          Lib.CreatePlaybook(PlaybookCodeTok);
+          Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Help.Implementation.Get", HelpRequest(), 0, '', 0);
+          Commit();
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format3Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat3Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          // [GIVEN] The playbook is enqueued (the enqueue itself is intercepted; no real job is scheduled)
+          LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
+@@@ -264,7 -268,7 +280,11 @@@
+          GlobalLanguage(LanguageId);
+          Lib.CreatePlaybook(PlaybookCodeTok);
+          Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Report.Run",
+++<<<<<<< HEAD
+ +            StrSubstNo(Format4Tok, Report::"Test Failing Report"), 0, '', 0);
+++=======
++             StrSubstNo(RequestFormat4Tok, Report::"Test Failing Report"), 0, '', 0);
+++>>>>>>> origin/main
+          Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'status', 'Success');
+          StartedAt := CurrentDateTime();
+  
+diff --cc test/test/PlaybookVerifyStepTests.Codeunit.al
+index 1ec66b6,b937b1c..0000000
+--- a/test/test/PlaybookVerifyStepTests.Codeunit.al
++++ b/test/test/PlaybookVerifyStepTests.Codeunit.al
+@@@ -549,7 -550,7 +550,11 @@@ codeunit 96435 "Playbook Verify Step Te
+                  Assert.IsTrue(TextOf(Token.AsObject(), 'nextStep') <> '', FindingCode + ' has a nextStep');
+                  exit;
+              end;
+++<<<<<<< HEAD
+ +        Assert.Fail(StrSubstNo(Format1Tok, FindingCode, StepNo));
+++=======
++         Assert.Fail(StrSubstNo(RequestFormat1Tok, FindingCode, StepNo));
+++>>>>>>> origin/main
+      end;
+  
+      local procedure AssertMessageStartsWith(Findings: JsonArray; FindingCode: Text; ExpectedStart: Text)
+diff --cc test/test/PlaybookVerifyTemplateTests.Codeunit.al
+index 7e33de4,d3bd0ad..0000000
+--- a/test/test/PlaybookVerifyTemplateTests.Codeunit.al
++++ b/test/test/PlaybookVerifyTemplateTests.Codeunit.al
+@@@ -659,7 -660,7 +660,11 @@@ codeunit 96439 "Playbook Verify Templat
+                  Assert.IsTrue(TextOf(Token.AsObject(), 'nextStep') <> '', FindingCode + ' has a nextStep');
+                  exit;
+              end;
+++<<<<<<< HEAD
+ +        Assert.Fail(StrSubstNo(Format1Tok, FindingCode, StepNo));
+++=======
++         Assert.Fail(StrSubstNo(RequestFormat1Tok, FindingCode, StepNo));
+++>>>>>>> origin/main
+      end;
+  
+      local procedure AssertMessageStartsWith(Findings: JsonArray; FindingCode: Text; ExpectedStart: Text)
+diff --cc test/test/PlaybookVerifyTests.Codeunit.al
+index da9639b,2f27838..0000000
+--- a/test/test/PlaybookVerifyTests.Codeunit.al
++++ b/test/test/PlaybookVerifyTests.Codeunit.al
+@@@ -156,7 -157,7 +157,11 @@@ codeunit 96433 "Playbook Verify Tests
+          Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
+          Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
+          Lib.AddStep(PlaybookCodeTok, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 0);
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+          // [WHEN] The playbook is verified through the message type handler
+          Handler.ExecuteVerify(TempArgument);
+          // [THEN] One localized warning names the write step and the check
+@@@ -200,7 -201,7 +205,11 @@@
+          Lib.AddLayoutSourceStep(PlaybookCodeTok, 10);
+          Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Help.Implementation.Get", '{}', 10, 'layouts', 0);
+          Lib.AddStep(PlaybookCodeTok, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Set", '{}', 10, 'layouts', 30);
+++<<<<<<< HEAD
+ +        CreateArgument(TempArgument, StrSubstNo(Format1Tok, PlaybookCodeTok));
+++=======
++         CreateArgument(TempArgument, StrSubstNo(RequestFormat1Tok, PlaybookCodeTok));
+++>>>>>>> origin/main
+  
+          Handler.ExecuteVerify(TempArgument);
+  

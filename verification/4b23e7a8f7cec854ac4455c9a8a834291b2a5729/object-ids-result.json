@@ -1,0 +1,17 @@
+{
+  "scriptSource": "/workspace/sb76-worker3/tools/Test-ObjectIdsUnique.ps1",
+  "scriptSha256": "69c09718d1aba5af160c7420bde2861f8cf4fddcb986e10240be0498c6951e2c",
+  "sourceReadOnly": true,
+  "reason": "Guard scans app/src and test/src. Private input view includes all actual test/src and test/test AL files without changing guard/source/pipeline.",
+  "sourceRepoCommit": "c3ca3159f69944aad0cd8fc6b1db532d7543f757",
+  "beforeExitCode": 1,
+  "afterExitCode": 0,
+  "originalDuplicate": 96442,
+  "assignedId": 96444,
+  "mainReservedId": 96443,
+  "range": [
+    96400,
+    96499
+  ],
+  "at": "2026-11-02T02:02:45.668Z"
+}

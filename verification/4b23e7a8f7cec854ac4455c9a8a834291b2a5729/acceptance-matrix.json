@@ -1,0 +1,210 @@
+{
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/118",
+  "pr": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119",
+  "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "owner": "worker-3",
+  "acceptance": [
+    {
+      "criterion": "Help examples and token guidance use primaryKey for primary-key fields",
+      "implementation": "retained from accepted dd6d86c",
+      "verification": "new-tip full suite/UI/MCP pending"
+    },
+    {
+      "criterion": "Verify reports UnknownFieldReference with actionable bilingual nextStep",
+      "implementation": "retained; F1 corrects Icelandic playbook terminology in AL Comment, XLF target and Developer note",
+      "verification": "static parity/XML/placeholders and exact-tip compile passed; live 1033/1039 pending"
+    },
+    {
+      "criterion": "Runner fails unresolved tokens before dispatch in single, forEach and paged paths",
+      "implementation": "retained; no behavior or assertion change in F1",
+      "verification": "new-tip full suite/UI/self-seeded MCP pending; prior evidence is historical"
+    },
+    {
+      "criterion": "H2 on primaryKey test expectations and free-text @ refusal",
+      "implementation": "explicit Gunnar decision6367547139 accepted in review5631394182",
+      "verification": "decision remains applicable; no product/test expectation change in F1"
+    },
+    {
+      "criterion": "F1 terminology amendment",
+      "implementation": "all three approved occurrences corrected, CHANGELOG10035618 added",
+      "verification": "Static parity/XML/placeholders and exact-tip compile passed; fresh live1033/1039 and finding-author resolution pending."
+    },
+    {
+      "criterion": "Current-main integration and breaking-change baseline",
+      "implementation": "Current main3044ce31 merged; own test96442→96444, main96442/96443 retained, CHANGELOG updated",
+      "verification": "Test-ObjectIdsUnique caught original duplicate and passes fixed tree; all9own tests byte-preserved exceptID,58main test files compared with only two previously-approved primaryKey fixture deltas; product/test/shipping compile0/0; AppSourceCop genuine current-main28.0.4.98 baseline0/0 with private projected28.0.4.99 manifest, repository version unchanged28.0.4.0."
+    },
+    {
+      "criterion": "Developer, independent and delivery gates",
+      "implementation": "new candidate published and canonical GitHub readback retained",
+      "verification": "PairedCI41375782515in progress; SourceGuards green. Current-tip full suite/UI/MCP/Claude/Grok/approval/merge/deploy/UAT remain pending."
+    }
+  ],
+  "excludedSuggestions": [
+    "Try-prefix renames",
+    "New paged/@mention tests"
+  ],
+  "notIssueCompletion": true,
+  "runtimeAtCurrentTip": {
+    "native": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "fullSuiteVerified": false,
+      "reason": "Fresh paired CI in progress; developer owned runtime unavailable after documented prior failed paired install."
+    },
+    "ui": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "plannedLanguages": [
+        "en-US",
+        "is-IS"
+      ],
+      "acScenariosExecuted": 0,
+      "startupAttempts": 0,
+      "reason": "No UI run at new tip; earlier f9ac293 startup failure is historical evidence only."
+    },
+    "mcp": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "createsOwnData": false,
+      "fixturesCreated": [],
+      "touchedMessageTypes": [
+        "Orchestrator.Playbook.Verify",
+        "Orchestrator.Playbook.Run",
+        "Orchestrator.Playbook.Schedule",
+        "Help.Orchestrator.Get"
+      ],
+      "plannedLcids": [
+        1033,
+        1039
+      ],
+      "reason": "Inherited PR message-type acceptance requires fresh self-seeded verification. This phase changes only test identity/main integration, no new message type."
+    },
+    "cleanup": {
+      "resourcesCreatedThisPhase": [],
+      "fixturesCreatedThisPhase": [],
+      "ownedFixtureWritesThisPhase": 0,
+      "priorOwnedCleanup": {
+        "id": "f0a82b8bd245",
+        "displayName": "worker3-orch119-20261102-w1",
+        "owner": "worker-3",
+        "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+        "startedAt": "2026-11-02T01:25:35.703Z",
+        "foreignResourcesChanged": false,
+        "deleteStatus": 204,
+        "readbackStatus": 404,
+        "readbackAt": "2026-11-02T01:25:36.002Z",
+        "deleted": true,
+        "plannedFixtureScope": "Self-created W3119 playbooks, steps, conditions, instances, messages, audit setup and test data on isolated owned container only; container deletion removes all.",
+        "fixturesActuallyCreated": [],
+        "nativeTestsExecuted": 0,
+        "fixtures": "No W3119 playbooks/steps/conditions/MCP fixtures or UI audit configuration were created. Only normal app install/deployment state existed; owned container deletion removed it.",
+        "fixtureScopeClarifiedAt": "2026-11-02T01:27:14.823460+00:00"
+      },
+      "noDeletionReplayed": true
+    },
+    "blockers": [
+      {
+        "owner": "Architect / Indriði (COSMO development runtime)",
+        "code": "needs-runtime-recovery",
+        "reason": "Owned BC28.5 W1 paired deployment failed through normal retries and one NST restart. Test-product publication returned fetch failed then UND_ERR_SOCKET; exact package was briefly installed but is now isInstalled=false. Test app HTTP422 says another service is modifying extension state on tenant default. No test extension installed. Actual Web Client startup failed. No licence/guard/backend bypass or further identical retry. Owned failed environment deleted204/readback404 after evidence retention. Need a working supported paired Default/Test + Web Client route before native/UI/MCP acceptance can run.",
+        "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+      }
+    ]
+  },
+  "compile": {
+    "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "dirty": "",
+    "checks": {
+      "app": {
+        "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+        "dirty": "",
+        "startedAt": "2026-11-02T02:02:50.261Z",
+        "finishedAt": "2026-11-02T02:03:04.635Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "1173cad27095d7e1840adc2b9bb5ed4a4a07f128b056c5d45b67e7c93a4fd662"
+      },
+      "test": {
+        "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+        "dirty": "",
+        "startedAt": "2026-11-02T02:03:04.667Z",
+        "finishedAt": "2026-11-02T02:03:15.119Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "32ac96e9459403f575dde2bfa683a8f39d49daca5755c2f72fed4d4a0d03d510"
+      }
+    }
+  },
+  "publication": {
+    "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+    "branch": "codex/worker4-orchestrator118-reference-validation",
+    "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/worker4-orchestrator118-reference-validation",
+    "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "remoteVerifiedAt": "2026-11-02T02:04:40.785Z"
+  },
+  "objectIdGuard": {
+    "scriptSource": "/workspace/sb76-worker3/tools/Test-ObjectIdsUnique.ps1",
+    "scriptSha256": "69c09718d1aba5af160c7420bde2861f8cf4fddcb986e10240be0498c6951e2c",
+    "sourceReadOnly": true,
+    "reason": "Guard scans app/src and test/src. Private input view includes all actual test/src and test/test AL files without changing guard/source/pipeline.",
+    "sourceRepoCommit": "c3ca3159f69944aad0cd8fc6b1db532d7543f757",
+    "beforeExitCode": 1,
+    "afterExitCode": 0,
+    "originalDuplicate": 96442,
+    "assignedId": 96444,
+    "mainReservedId": 96443,
+    "range": [
+      96400,
+      96499
+    ],
+    "at": "2026-11-02T02:02:45.668Z"
+  },
+  "sourcePreservation": {
+    "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "mainSha": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997",
+    "mainFilesCompared": 58,
+    "mainTestDeletions": 0,
+    "mainTestDeltas": [
+      {
+        "file": "test/src/Libraries/PlaybookExampleLibraryori.Codeunit.al",
+        "expected": true
+      },
+      {
+        "file": "test/test/PlaybookVerifyTemplateTests.Codeunit.al",
+        "expected": true
+      }
+    ],
+    "ownTestsPreservedByteForByteExceptId": true,
+    "ownTestCount": 9,
+    "at": "2026-11-02T02:04:17.212Z"
+  },
+  "ci": {
+    "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "runId": 41375782515,
+    "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41375782515",
+    "status": "in_progress",
+    "conclusion": null,
+    "sourceGuards": {
+      "runId": 41375782380,
+      "conclusion": "success"
+    },
+    "mergeable": true,
+    "mergeableState": "blocked"
+  }
+}

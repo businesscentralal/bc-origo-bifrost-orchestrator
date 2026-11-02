@@ -1,0 +1,19 @@
+{
+  "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "mainSha": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997",
+  "mainFilesCompared": 58,
+  "mainTestDeletions": 0,
+  "mainTestDeltas": [
+    {
+      "file": "test/src/Libraries/PlaybookExampleLibraryori.Codeunit.al",
+      "expected": true
+    },
+    {
+      "file": "test/test/PlaybookVerifyTemplateTests.Codeunit.al",
+      "expected": true
+    }
+  ],
+  "ownTestsPreservedByteForByteExceptId": true,
+  "ownTestCount": 9,
+  "at": "2026-11-02T02:04:17.212Z"
+}

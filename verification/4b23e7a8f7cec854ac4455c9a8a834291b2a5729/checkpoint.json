@@ -1,0 +1,364 @@
+{
+  "id": "1793584523.038489-target-businesscentralal_bc-origo-bifrost-orchestrator-119",
+  "sourceTask": "1793584523.038489-target-businesscentralal_bc-origo-bifrost-orchestrator-119",
+  "owner": "worker-3",
+  "ownerName": "Sindri",
+  "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+  "primaryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119",
+  "issueUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/118"
+  ],
+  "prUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+  ],
+  "startedAt": "2026-11-02T02:00:05.181Z",
+  "status": "awaiting-ci",
+  "candidateSha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "progressKey": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729-published-readback-mergeable-guards-green-paired41375782515-pending",
+  "checkpointPath": "/workspace/evidence/orchestrator119-renumber-worker3/checkpoint.json",
+  "readyWork": [],
+  "remainingWork": [
+    "Obtain and diagnose current-tip paired CI41375782515; retain full configured suite counts and fix any failures with normal fresh retry.",
+    "Complete owned current-tip full configured suite, BC Web Client en-US/is-IS and self-seeded MCP Verify/Run/Schedule/Help after named supported runtime recovery;0current-tip scenarios executed.",
+    "Obtain fresh independent Claude verification on bc29-w1 and explicit F1 amendment resolution, then current-tip Grok clearance and eligible approval.",
+    "Architect merge/same-SHA deployment, postmerge UAT and actual issue closure/cleanup evidence."
+  ],
+  "blockers": [
+    {
+      "owner": "Architect / Indriði (COSMO development runtime)",
+      "code": "needs-runtime-recovery",
+      "reason": "Owned BC28.5 W1 paired deployment failed through normal retries and one NST restart. Test-product publication returned fetch failed then UND_ERR_SOCKET; exact package was briefly installed but is now isInstalled=false. Test app HTTP422 says another service is modifying extension state on tenant default. No test extension installed. Actual Web Client startup failed. No licence/guard/backend bypass or further identical retry. Owned failed environment deleted204/readback404 after evidence retention. Need a working supported paired Default/Test + Web Client route before native/UI/MCP acceptance can run.",
+      "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+    }
+  ],
+  "nextOwner": "worker-3 (Sindri), Architect/Indriði for runtime recovery",
+  "nextAction": "On actual current-tip CI completion, inspect logs/results and repair any failure; Architect/Indriði supplies supported paired deployment/Web Client route. Sindri redeploys current artifacts and completes full suite/UI/self-seeded MCP and cleanup, then exact-tip independent verification/review handoff.",
+  "resumeTrigger": "Terminal or new failure evidence from paired run41375782515; authenticated runtime recovery capability/disposition; actual new-tip Claude finding/receipt. No unchanged model polling.",
+  "previousCheckpoint": "/workspace/evidence/orchestrator119-amend-worker3/checkpoint.json",
+  "acceptanceEvidence": {
+    "priorRuntimeFailure": {
+      "originalFailure": "Local subprocess300s timeout, no returned shipping publication receipt",
+      "actualReadback": "appinfo-after-timeout.json HTTP200 lists installedFoundation28.0.9.618 and Orchestrator28.0.2.0; company read succeeded",
+      "repeatedShippingWrite": false,
+      "next": "Distinct Test product and test-app stages;900s bound",
+      "evidence": "recover-deploy-intent.json",
+      "testProductTransport": "fetch failed; no success receipt",
+      "testProductReceipt": "publish-orchestrator-test-product.json",
+      "tenantAfterError": "tenant-after-test-product-error.json still shipping package installed",
+      "sshDiagnosis": "ssh-deploy-diagnosis.txt: tenant metadata command hung, localSSH read timed out120s",
+      "restartIntent": "restart-intent.json",
+      "httpHarness": "Private request timeout extended900s; underlying transport cause remains unproved",
+      "nativeStarted": false,
+      "restart": {
+        "id": "f0a82b8bd245",
+        "at": "2026-11-02T01:00:23.164Z",
+        "status": 200,
+        "body": "Import PPI Overrides from c:\\run\\helper\\PPIOverrides\\PPIOverrides.psm1\nWelcome to the Business Central Container PowerShell prompt\n\n\r\n\r\nServerInstance : MicrosoftDynamicsNavServer$BC\r\nDisplayName    : Dynamics 365 Business Central Server [BC]\r\nState          : Running\r\nServiceAccount : NT AUTHORITY\\SYSTEM\r\nVersion        : 28.0.54946.57238\r\nDefault        : True\r\n\r\n\r\n\r\n"
+      },
+      "afterRestart": "tenant-after-restart.json: Foundation installed; old shipping product package isInstalled=false during interrupted Test transition",
+      "currentRetry": "post-restart-deploy-intent.json; only exact Test product/test-app missing stages,900s private transport bound",
+      "verifiedTestProduct": false
+    },
+    "priorOwnedCleanup": {
+      "id": "f0a82b8bd245",
+      "displayName": "worker3-orch119-20261102-w1",
+      "owner": "worker-3",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "startedAt": "2026-11-02T01:25:35.703Z",
+      "foreignResourcesChanged": false,
+      "deleteStatus": 204,
+      "readbackStatus": 404,
+      "readbackAt": "2026-11-02T01:25:36.002Z",
+      "deleted": true,
+      "plannedFixtureScope": "Self-created W3119 playbooks, steps, conditions, instances, messages, audit setup and test data on isolated owned container only; container deletion removes all.",
+      "fixturesActuallyCreated": [],
+      "nativeTestsExecuted": 0,
+      "fixtures": "No W3119 playbooks/steps/conditions/MCP fixtures or UI audit configuration were created. Only normal app install/deployment state existed; owned container deletion removed it.",
+      "fixtureScopeClarifiedAt": "2026-11-02T01:27:14.823460+00:00"
+    },
+    "appliedLessonIds": [
+      "orchestrator119-review5631394182-f1-terminology",
+      "core-pr853-worker8-20261004-conflict-preservation",
+      "orchestrator119-worker3-amend5631394182-f1-20261102",
+      "core1156-review5629271668-english-xlf"
+    ],
+    "standards": {
+      "commit": "ac05e88ab51ed4c9bbfb843508fc2484afe5ec8f",
+      "syncedAt": "2026-10-03T17:42:19.3581046Z",
+      "freshlySynchronized": false,
+      "releasedMainCompatibility": "Pending authorized main integration; zero-warning AppSourceCop here is not current-main compatibility proof.",
+      "snapshotCapturedAt": "2026-10-03T16:02:22.475Z",
+      "provenanceFiles": [
+        "/workspace/standards/snapshot.json",
+        "/workspace/standards/bc-dev-standards/local-sync.json"
+      ]
+    },
+    "objectIdGuard": {
+      "scriptSource": "/workspace/sb76-worker3/tools/Test-ObjectIdsUnique.ps1",
+      "scriptSha256": "69c09718d1aba5af160c7420bde2861f8cf4fddcb986e10240be0498c6951e2c",
+      "sourceReadOnly": true,
+      "reason": "Guard scans app/src and test/src. Private input view includes all actual test/src and test/test AL files without changing guard/source/pipeline.",
+      "sourceRepoCommit": "c3ca3159f69944aad0cd8fc6b1db532d7543f757",
+      "beforeExitCode": 1,
+      "afterExitCode": 0,
+      "originalDuplicate": 96442,
+      "assignedId": 96444,
+      "mainReservedId": 96443,
+      "range": [
+        96400,
+        96499
+      ],
+      "at": "2026-11-02T02:02:45.668Z"
+    },
+    "compile": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "dirty": "",
+      "checks": {
+        "app": {
+          "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+          "dirty": "",
+          "startedAt": "2026-11-02T02:02:50.261Z",
+          "finishedAt": "2026-11-02T02:03:04.635Z",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 0,
+          "artifactSha256": "1173cad27095d7e1840adc2b9bb5ed4a4a07f128b056c5d45b67e7c93a4fd662"
+        },
+        "test": {
+          "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+          "dirty": "",
+          "startedAt": "2026-11-02T02:03:04.667Z",
+          "finishedAt": "2026-11-02T02:03:15.119Z",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 0,
+          "artifactSha256": "32ac96e9459403f575dde2bfa683a8f39d49daca5755c2f72fed4d4a0d03d510"
+        }
+      }
+    },
+    "shipping": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "mode": "shipping no-IVT",
+      "startedAt": "2026-11-02T02:03:31.475Z",
+      "finishedAt": "2026-11-02T02:03:43.515Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "compatibility": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "startedAt": "2026-11-02T02:03:58.460Z",
+      "finishedAt": "2026-11-02T02:04:11.557Z",
+      "baselineSha": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997",
+      "baselineVersion": "28.0.4.98",
+      "verificationManifestVersion": "28.0.4.99",
+      "sourceManifestVersion": "28.0.4.0",
+      "sourceTreeMutated": false,
+      "reason": "Private shipping AppSourceCop comparison against genuine current-main green artifact; manifest build component projected above baseline for compatibility analysis only",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "artifactProvenance": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "artifacts": [
+        {
+          "path": "candidate/app.app",
+          "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+          "name": "Bifrost Orchestrator",
+          "version": "28.0.4.0",
+          "source": {
+            "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+            "Commit": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729"
+          },
+          "packageId": null,
+          "sha256": "1173cad27095d7e1840adc2b9bb5ed4a4a07f128b056c5d45b67e7c93a4fd662",
+          "signedLocalArtifactClaim": false
+        },
+        {
+          "path": "candidate/test.app",
+          "appId": "194ecd04-5688-4af6-94bc-732c714251fc",
+          "name": "Bifrost Orchestrator - Tests",
+          "version": "28.0.4.0",
+          "source": {
+            "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+            "Commit": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729"
+          },
+          "packageId": null,
+          "sha256": "32ac96e9459403f575dde2bfa683a8f39d49daca5755c2f72fed4d4a0d03d510",
+          "signedLocalArtifactClaim": false
+        },
+        {
+          "path": "shipping/shipping.app",
+          "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+          "name": "Bifrost Orchestrator",
+          "version": "28.0.4.0",
+          "source": {
+            "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+            "Commit": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729"
+          },
+          "packageId": null,
+          "sha256": "e9f388fd57c7823a82c7b15fd46e6bf8a9a415f12c8d4ed68b6c33b947cfd50e",
+          "signedLocalArtifactClaim": false
+        }
+      ]
+    },
+    "sourcePreservation": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "mainSha": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997",
+      "mainFilesCompared": 58,
+      "mainTestDeletions": 0,
+      "mainTestDeltas": [
+        {
+          "file": "test/src/Libraries/PlaybookExampleLibraryori.Codeunit.al",
+          "expected": true
+        },
+        {
+          "file": "test/test/PlaybookVerifyTemplateTests.Codeunit.al",
+          "expected": true
+        }
+      ],
+      "ownTestsPreservedByteForByteExceptId": true,
+      "ownTestCount": 9,
+      "at": "2026-11-02T02:04:17.212Z"
+    },
+    "publication": {
+      "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+      "branch": "codex/worker4-orchestrator118-reference-validation",
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/worker4-orchestrator118-reference-validation",
+      "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "remoteVerifiedAt": "2026-11-02T02:04:40.785Z"
+    },
+    "tests": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "fullSuiteVerified": false,
+      "reason": "Fresh paired CI in progress; developer owned runtime unavailable after documented prior failed paired install."
+    },
+    "ui": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "plannedLanguages": [
+        "en-US",
+        "is-IS"
+      ],
+      "acScenariosExecuted": 0,
+      "startupAttempts": 0,
+      "reason": "No UI run at new tip; earlier f9ac293 startup failure is historical evidence only."
+    },
+    "mcp": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "createsOwnData": false,
+      "fixturesCreated": [],
+      "touchedMessageTypes": [
+        "Orchestrator.Playbook.Verify",
+        "Orchestrator.Playbook.Run",
+        "Orchestrator.Playbook.Schedule",
+        "Help.Orchestrator.Get"
+      ],
+      "plannedLcids": [
+        1033,
+        1039
+      ],
+      "reason": "Inherited PR message-type acceptance requires fresh self-seeded verification. This phase changes only test identity/main integration, no new message type."
+    },
+    "cleanup": {
+      "resourcesCreatedThisPhase": [],
+      "fixturesCreatedThisPhase": [],
+      "ownedFixtureWritesThisPhase": 0,
+      "priorOwnedCleanup": {
+        "id": "f0a82b8bd245",
+        "displayName": "worker3-orch119-20261102-w1",
+        "owner": "worker-3",
+        "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+        "startedAt": "2026-11-02T01:25:35.703Z",
+        "foreignResourcesChanged": false,
+        "deleteStatus": 204,
+        "readbackStatus": 404,
+        "readbackAt": "2026-11-02T01:25:36.002Z",
+        "deleted": true,
+        "plannedFixtureScope": "Self-created W3119 playbooks, steps, conditions, instances, messages, audit setup and test data on isolated owned container only; container deletion removes all.",
+        "fixturesActuallyCreated": [],
+        "nativeTestsExecuted": 0,
+        "fixtures": "No W3119 playbooks/steps/conditions/MCP fixtures or UI audit configuration were created. Only normal app install/deployment state existed; owned container deletion removed it.",
+        "fixtureScopeClarifiedAt": "2026-11-02T01:27:14.823460+00:00"
+      },
+      "noDeletionReplayed": true
+    },
+    "ci": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "runId": 41375782515,
+      "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41375782515",
+      "status": "in_progress",
+      "conclusion": null,
+      "sourceGuards": {
+        "runId": 41375782380,
+        "conclusion": "success"
+      },
+      "mergeable": true,
+      "mergeableState": "blocked"
+    },
+    "staticVerification": {
+      "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+      "xmlParses": true,
+      "uniqueLabel": true,
+      "commentNoteTargetConsistent": true,
+      "placeholdersPreserved": true,
+      "oldTermAbsent": true,
+      "matchedOccurrences": 3
+    },
+    "runtimeEnvironmentPolicy": {
+      "at": "2026-10-29T11:02:52Z",
+      "scope": "Foundation/core and businesscentralal feature apps",
+      "currentEnvironment": "bc29-w1",
+      "historicalEnvironment": "bc28-w1",
+      "authority": "Gunnar decision d-20261029-bc28w1-attachments-test-route relayed by authenticated Claude",
+      "source": "https://bifrst-group.slack.com/archives/C0C0XM70YF8/p1793271772960929",
+      "preserved": [
+        "Exact-head trusted-author checks",
+        "Open amendment hold",
+        "Independent receipt limitations",
+        "Historical unchanged-head bc28 receipts before migration",
+        "Iceland bc28-is and documentation routes"
+      ]
+    },
+    "secretary": {
+      "startedAt": "2026-11-02T02:00:05.181Z",
+      "startLedger": "/team-queue/time-registration/1793584523.038489-target-businesscentralal_bc-origo-bifrost-orchestrator-119-START.json",
+      "stopOwnedByRegistrar": true,
+      "acknowledged": false,
+      "unpaidRecordsRetained": true
+    }
+  },
+  "executionFinishedIsDelivery": false,
+  "updatedAt": "2026-11-02T02:05:41.562Z",
+  "source": {
+    "checkout": "/workspace/orchestrator119-repair-worker3",
+    "branch": "codex/worker4-orchestrator118-reference-validation",
+    "localSha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "remoteSha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+    "mainSha": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997",
+    "originalPrivateCheckpointPreserved": true,
+    "dirty": ""
+  },
+  "resolvedBlockers": [
+    {
+      "owner": "Architect",
+      "reason": "96442reconciliation explicitly authorized by1793584523.038489; mechanical next-free96444 fix complete and published."
+    }
+  ]
+}
