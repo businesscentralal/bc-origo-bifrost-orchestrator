@@ -67,7 +67,7 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
         LowerPermissions.StartLoggingNAVPermissions();
-        LowerPermissions.SetExactPermissionSet('Orch Test Plat ori');
+        LowerPermissions.SetExactPermissionSet('Orch Guided Test ori');
         PermissionsLowered := LowerPermissions.HasChangedPermissions();
         HasBusinessAccess := SchedulerSetup.ReadPermission() or SchedulerSetup.WritePermission() or
             ScheduledEntry.ReadPermission() or ScheduledEntry.WritePermission() or
