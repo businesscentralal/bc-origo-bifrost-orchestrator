@@ -12,6 +12,11 @@ Business Central release versioning (`major.minor.build.revision`).
 - Codeunit 10035589 `Scheduler Wizard Reg. ori` has inherent Execute permissions and entitlements for its metadata-only Guided Experience subscriber. Object identity and both false skip flags remain unchanged; scheduler wizard and business permissions are not broadened.
 - Test codeunit 96446 `Scheduler Wizard Reg Tests ori` opens the real Assisted Setup publisher path under the test permission set 96446 `Orch Guided Test ori` (`D365 Basic - Read` plus `Guided Experience - View`, with no Orchestrator business role; test permission set 96447 `Orch Meta Excl ori` subtracts callback and business grants from the platform wildcard) in English and Icelandic, checks repeated-registration uniqueness and no business/setup changes, and proves wizard and scheduler access remain refused.
 
+### Fixed (2026-11-02) - Unresolved-reference Verify guidance (#140)
+
+- Codeunit 10035618 `Playbook Verify Template ori`: the four missing/forward-step and unknown-field findings now explain that the step fails before dispatch and that its Failed run-log entry names the unresolved reference, in English and Icelandic.
+- Test codeunit 96439 compares the complete findings in LCIDs 1033 and 1039. Existing email-literal and runner behavior remains unchanged.
+
 ### Fixed (2026-11-02) - Test object identity after main integration (#118, PR #119)
 
 - Renumber test codeunit `Playbook Ref 118 Tests ori` from 96442 to the next free ID, 96444; retain main's 96442 `Verify Summary Tests ori` and 96443 `First Schedule Tests ori` with all existing scenarios and assertions.
