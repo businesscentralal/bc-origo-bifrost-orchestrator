@@ -78,7 +78,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         RunAskTemplateCheck(TypeName, Template, Findings);
         Assert.AreEqual(Expected, Findings.Count(), 'Schema boundary: ' + ConditionPath + ' ' + Template);
         if Expected > 0 then
-            AssertWarning(Findings, 'AskDataConditionWithoutSchema', 10);
+            AssertFinding(Findings, 'AskDataConditionWithoutSchema', 10, WarningTok);
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
@@ -90,7 +90,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         RunAskTemplateCheck(TypeName, Template, Findings);
         Assert.AreEqual(Expected, Findings.Count(), 'Trace boundary: ' + Template);
         if Expected > 0 then
-            AssertWarning(Findings, 'AskTraceDiscarded', 10);
+            AssertFinding(Findings, 'AskTraceDiscarded', 10, WarningTok);
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
