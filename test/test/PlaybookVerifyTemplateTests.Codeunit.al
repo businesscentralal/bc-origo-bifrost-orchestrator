@@ -278,7 +278,7 @@ codeunit 96439 "Playbook Verify Template Tests"
     var
         Findings: JsonArray;
     begin
-        BuildForEachOverCustomers('{"tableView":"WHERE(No.=CONST(@_current.fields.No_),Name=FILTER(@_current.fields.Name),Sell-to=FILTER(@_current.fields.Contact))"}');
+        BuildForEachOverCustomers('{"tableView":"WHERE(No.=CONST(@_current.primaryKey.No_),Name=FILTER(@_current.fields.Name),Sell-to=FILTER(@_current.fields.Contact))"}');
         GetFindings(Findings);
         Assert.AreEqual(0, CountFindings(Findings, 'UnknownFieldReference', -1), 'No_, Name and Contact are fields of Customer');
         Lib.Cleanup(PlaybookCodeTok);

@@ -114,6 +114,38 @@ codeunit 10035619 "Playbook Verify Lookup ori"
         exit(TryReadFieldNames(TableId, FieldNames));
     end;
 
+    /// <summary>Reads primary-key JSON names without reading or changing business records.</summary>
+    /// <param name="TableName">The source table name.</param>
+    /// <param name="PrimaryKeyNames">Receives lower-case primary-key field names.</param>
+    /// <returns>True when the primary key could be determined.</returns>
+    internal procedure TryGetPrimaryKeyNames(TableName: Text; var PrimaryKeyNames: List of [Text]): Boolean
+    var
+        TableId: Integer;
+        ResolvedName: Text;
+    begin
+        Clear(PrimaryKeyNames);
+        if not TryFindTable(TableName, TableId, ResolvedName) then
+            exit(false);
+        exit(TryReadPrimaryKeyNames(TableId, PrimaryKeyNames));
+    end;
+
+    [TryFunction]
+    local procedure TryReadPrimaryKeyNames(TableId: Integer; var PrimaryKeyNames: List of [Text])
+    var
+        SourceTable: RecordRef;
+        KeyField: FieldRef;
+        PrimaryKey: KeyRef;
+        Index: Integer;
+    begin
+        SourceTable.Open(TableId);
+        PrimaryKey := SourceTable.KeyIndex(1);
+        for Index := 1 to PrimaryKey.FieldCount() do begin
+            KeyField := PrimaryKey.FieldIndex(Index);
+            PrimaryKeyNames.Add(ToJsonName(KeyField.Name));
+        end;
+        SourceTable.Close();
+    end;
+
     [TryFunction]
     local procedure TryFindTable(TableName: Text; var TableId: Integer; var ResolvedTableName: Text)
     var

@@ -7,6 +7,21 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - Test object identity after main integration (#118, PR #119)
+
+- Renumber test codeunit `Playbook Ref 118 Tests ori` from 96442 to the next free ID, 96444; retain main's 96442 `Verify Summary Tests ori` and 96443 `First Schedule Tests ori` with all existing scenarios and assertions.
+
+### Fixed (2026-11-02) - Icelandic playbook terminology (#118, PR #119)
+- Use the established Icelandic term "keðjan" in the primary-key next-step guidance (codeunit 10035618), its label comment and is-IS translation.
+
+### Fixed (2026-10-23) - Primary-key references in playbooks (#118)
+
+- Help (10035576 `Help ori`) now uses `@_current.primaryKey.No_` in the credit-control example, including its encoded template, and explains where primary-key and other fields appear. The matching example fixture (96438) and existing field-path test (96439) follow the corrected response shape.
+- Verify (10035618 `Playbook Verify Template ori`, 10035619 `Playbook Verify Lookup ori`, contract 10035615 `Playbook Verify Msg ori`) warns with `UnknownFieldReference` when `@_current.fields.X` names a primary-key field and suggests its `primaryKey` path.
+- Runner (10035547 `Playbook Runner ori`) checks original template references with 10035546 `Playbook JSON Helper ori` before dispatch in single, forEach and paged steps. A missing reference fails the step with a localized diagnostic instead of sending literal token text; e-mail literals and data returned by an earlier step are not treated as missing template references.
+- Zero-warning test compilation: corrected existing format-string labels in test codeunits 96430, 96433, 96432, 96435, 96437, 96439 and library 96434; ordered declarations in 96433; aligned helper filenames for 96434, 96438 and 96440. Assertions and scenarios are unchanged.
+- Regression tests: 96444 `Playbook Ref 118 Tests ori` covers bilingual warnings, correct resolution, missing embedded/nested paths, e-mail/data literals, same-iteration syntax and real single/forEach runner failures. Existing compatibility signatures remain intact.
+
 ### Fixed (2026-10-31) - Workspace preview notes (#117)
 
 - Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
