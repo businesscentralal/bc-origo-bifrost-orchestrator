@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - Assisted Setup metadata registration (#139)
+
+- Codeunit 10035589 `Scheduler Wizard Reg. ori` has inherent Execute permissions and entitlements for its metadata-only Guided Experience subscriber. Object identity and both false skip flags remain unchanged; scheduler wizard and business permissions are not broadened.
+- Test codeunit 96446 `Scheduler Wizard Reg Tests ori` opens the real Assisted Setup publisher path under the platform-only `Orch Test Plat ori` role in English and Icelandic, checks repeated-registration uniqueness and no business/setup changes, and proves wizard and scheduler access remain refused.
+
 ### Fixed (2026-10-31) - Workspace preview notes (#117)
 
 - Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
