@@ -23,16 +23,16 @@ codeunit 96439 "Playbook Verify Template Tests"
         WarningTok: Label 'warning', Locked = true;
         NotJsonStartTxt: Label 'The request template of step 20 is not a valid JSON object.', Locked = true;
         NotJsonStartIsTxt: Label 'Beiðnisniðmát skrefs 20 er ekki gildur JSON-hlutur.', Locked = true;
-        NotFoundStartTxt: Label 'Step 20 refers to step 45 (@45...), which does not exist in this playbook.', Locked = true;
-        NotFoundStartIsTxt: Label 'Skref 20 vísar í skref 45 (@45...), sem er ekki til í þessari keðju.', Locked = true;
-        NotEarlierStartTxt: Label 'Step 20 refers to step 30 (@30...), which does not run before it', Locked = true;
-        NotEarlierStartIsTxt: Label 'Skref 20 vísar í skref 30 (@30...), sem keyrir ekki á undan því', Locked = true;
+        NotFoundStartTxt: Label 'Step 20 refers to step 45 (@45...), which does not exist in this playbook. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.', Locked = true;
+        NotFoundStartIsTxt: Label 'Skref 20 vísar í skref 45 (@45...), sem er ekki til í þessari keðju. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.', Locked = true;
+        NotEarlierStartTxt: Label 'Step 20 refers to step 30 (@30...), which does not run before it, so its result does not exist yet when this step builds its request. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.', Locked = true;
+        NotEarlierStartIsTxt: Label 'Skref 20 vísar í skref 30 (@30...), sem keyrir ekki á undan því, svo niðurstaða þess er ekki til þegar þetta skref býr til beiðni sína. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.', Locked = true;
         RoleStartTxt: Label 'Step 10 calls LLM.Prompt.Complete with roleCode HAIKU, but this company has no language model with that code.', Locked = true;
         RoleStartIsTxt: Label 'Skref 10 kallar á LLM.Prompt.Complete með roleCode HAIKU, en þetta fyrirtæki hefur ekkert mállíkan með þeim kóða.', Locked = true;
-        StepFieldStartTxt: Label 'Step 40 reads @30.valdi, but step 30 stores no field valdi in the workspace (its Result Log Paths store: valid).', Locked = true;
-        StepFieldStartIsTxt: Label 'Skref 40 les @30.valdi, en skref 30 geymir ekkert valdi í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: valid).', Locked = true;
-        CurrentFieldStartTxt: Label 'Step 30 reads @_current.fields.Nmae, but table Customer has no field with that name.', Locked = true;
-        CurrentFieldStartIsTxt: Label 'Skref 30 les @_current.fields.Nmae, en taflan Customer hefur engan reit með því nafni.', Locked = true;
+        StepFieldStartTxt: Label 'Step 40 reads @30.valdi, but step 30 stores no field valdi in the workspace (its Result Log Paths store: valid). The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.', Locked = true;
+        StepFieldStartIsTxt: Label 'Skref 40 les @30.valdi, en skref 30 geymir ekkert valdi í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: valid). Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.', Locked = true;
+        CurrentFieldStartTxt: Label 'Step 30 reads @_current.fields.Nmae, but table Customer has no field with that name. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.', Locked = true;
+        CurrentFieldStartIsTxt: Label 'Skref 30 les @_current.fields.Nmae, en taflan Customer hefur engan reit með því nafni. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.', Locked = true;
 
     [Test]
     procedure TemplateNotJson_Truncated_IsAnError()
@@ -475,7 +475,7 @@ codeunit 96439 "Playbook Verify Template Tests"
 
         Assert.AreEqual(1, Findings.Count(), 'One finding');
         AssertFinding(Findings, 'StepReferenceNotFound', 20, ErrorTok);
-        AssertMessageStartsWith(Findings, 'StepReferenceNotFound', ExpectedStart);
+        AssertReferenceMessage(Findings, 'StepReferenceNotFound', ExpectedStart);
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
     end;
@@ -495,7 +495,7 @@ codeunit 96439 "Playbook Verify Template Tests"
 
         Assert.AreEqual(1, Findings.Count(), 'One finding');
         AssertFinding(Findings, 'StepReferenceNotEarlier', 20, ErrorTok);
-        AssertMessageStartsWith(Findings, 'StepReferenceNotEarlier', ExpectedStart);
+        AssertReferenceMessage(Findings, 'StepReferenceNotEarlier', ExpectedStart);
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
     end;
@@ -535,7 +535,7 @@ codeunit 96439 "Playbook Verify Template Tests"
 
         Assert.AreEqual(1, Findings.Count(), 'One finding');
         AssertFinding(Findings, 'UnknownFieldReference', 30, WarningTok);
-        AssertMessageStartsWith(Findings, 'UnknownFieldReference', ExpectedStart);
+        AssertReferenceMessage(Findings, 'UnknownFieldReference', ExpectedStart);
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
     end;
@@ -555,7 +555,7 @@ codeunit 96439 "Playbook Verify Template Tests"
 
         Assert.AreEqual(1, Findings.Count(), 'One finding');
         AssertFinding(Findings, 'UnknownFieldReference', 40, WarningTok);
-        AssertMessageStartsWith(Findings, 'UnknownFieldReference', ExpectedStart);
+        AssertReferenceMessage(Findings, 'UnknownFieldReference', ExpectedStart);
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
     end;
@@ -661,6 +661,20 @@ codeunit 96439 "Playbook Verify Template Tests"
                 exit;
             end;
         Assert.Fail(StrSubstNo(RequestFormat1Tok, FindingCode, StepNo));
+    end;
+
+    // Issue #140 AC01/AC02: compare the complete localized finding, including failure and run-log guidance.
+    // Verify is a read-only message API; direct invocation covers its public response, not a UI action.
+    local procedure AssertReferenceMessage(Findings: JsonArray; FindingCode: Text; ExpectedMessage: Text)
+    var
+        Token: JsonToken;
+    begin
+        foreach Token in Findings do
+            if TextOf(Token.AsObject(), 'code') = FindingCode then begin
+                Assert.AreEqual(ExpectedMessage, TextOf(Token.AsObject(), 'message'), 'Complete localized reference finding');
+                exit;
+            end;
+        Assert.Fail('No finding ' + FindingCode);
     end;
 
     local procedure AssertMessageStartsWith(Findings: JsonArray; FindingCode: Text; ExpectedStart: Text)
