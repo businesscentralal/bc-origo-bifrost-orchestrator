@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - Icelandic playbook terminology (#118, PR #119)
+- Use the established Icelandic term "keðjan" in the primary-key next-step guidance (codeunit 10035618), its label comment and is-IS translation.
+
 ### Fixed (2026-10-23) - Primary-key references in playbooks (#118)
 
 - Help (10035576 `Help ori`) now uses `@_current.primaryKey.No_` in the credit-control example, including its encoded template, and explains where primary-key and other fields appear. The matching example fixture (96438) and existing field-path test (96439) follow the corrected response shape.

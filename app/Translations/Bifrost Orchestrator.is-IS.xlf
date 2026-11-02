@@ -1337,8 +1337,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 2324457840" size-unit="char" translate="yes" xml:space="preserve">
           <source>Use @_current.primaryKey.%1 and inspect the source answer before running the playbook.</source>
-          <target>Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en verkbókin er keyrð.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = JSON field name, is-IS=Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en verkbókin er keyrð.</note>
+          <target>Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en keðjan er keyrð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = JSON field name, is-IS=Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en keðjan er keyrð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PrimaryKeyFieldNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 995180490" size-unit="char" translate="yes" xml:space="preserve">
