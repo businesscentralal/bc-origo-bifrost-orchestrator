@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - First-dispatch test isolation (#143)
+
+- Test codeunit 96443 `First Schedule Tests ori` makes its first-dispatch fixture explicitly due, blocks background Orchestrator pickup, and intercepts task creation before setup. It asserts that the job stays on hold without a platform task around manual dispatch and rebuild, while preserving all existing playbook-instance, successful-log, daily-anchor and rebuild assertions. Production scheduling code is unchanged.
+
 ### Fixed (2026-11-02) - Stored-field Verify errors and original casing (#144)
 
 - Codeunit 10035618 `Playbook Verify Template ori` reports missing stored fields in `@N.field`, `@N.@_iter.field` and explicit iteration references as `UnknownFieldReference` Errors. Enabled findings now block Run and Schedule even with `ignoreWarnings=true`; playbooks that previously only warned may be refused until their references are corrected. Other findings, including `@_current.fields` warnings, are unchanged.
