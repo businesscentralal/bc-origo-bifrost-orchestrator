@@ -3,9 +3,12 @@ namespace Origo.Bifrost.Orchestrator;
 using System.Environment.Configuration;
 using System.Media;
 
+/// <summary>Registers assisted-setup metadata without granting access to the scheduler wizard or business operations.</summary>
 codeunit 10035589 "Scheduler Wizard Reg. ori"
 {
     Access = Internal;
+    InherentPermissions = X;
+    InherentEntitlements = X;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Guided Experience", OnRegisterAssistedSetup, '', false, false)]
     local procedure RegisterOrchSetupWizard()
