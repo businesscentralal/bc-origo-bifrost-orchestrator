@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-02T01:14:07.866Z",
+  "containerId": "f0a82b8bd245",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "fetch failed (UND_ERR_SOCKET)"
+      }
+    ],
+    "isError": true
+  }
+}

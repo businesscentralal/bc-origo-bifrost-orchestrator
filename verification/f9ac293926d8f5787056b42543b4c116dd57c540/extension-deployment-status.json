@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-02T01:19:01.279Z",
+  "containerId": "f0a82b8bd245",
+  "result": {
+    "@odata.context": "https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/BC/api/microsoft/automation/v2.0/$metadata#companies(14154dfa-98d4-f111-925b-7c1e523f9136)/extensionDeploymentStatus",
+    "value": []
+  }
+}

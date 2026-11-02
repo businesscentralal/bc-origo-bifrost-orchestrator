@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-02T01:15:28.428Z",
+  "containerId": "f0a82b8bd245",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"fileName\": \"test.app\",\n  \"bytes\": 156201,\n  \"statusCode\": 422,\n  \"durationMs\": 10814,\n  \"developerBaseUrl\": \"https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0a82b8bd245dev\",\n  \"body\": {\n    \"Message\": \"Publishing failed due to 'Cannot install extension Bifrost Orchestrator - Tests because another service is currently modifying the state of extensions on tenant default.'. The original extensions have been restored.\\r\\n\\r\\n\",\n    \"ErrorType\": \"InvalidOperation\"\n  },\n  \"ok\": false,\n  \"error\": {\n    \"Message\": \"Publishing failed due to 'Cannot install extension Bifrost Orchestrator - Tests because another service is currently modifying the state of extensions on tenant default.'. The original extensions have been restored.\\r\\n\\r\\n\",\n    \"ErrorType\": \"InvalidOperation\"\n  }\n}"
+      }
+    ]
+  }
+}

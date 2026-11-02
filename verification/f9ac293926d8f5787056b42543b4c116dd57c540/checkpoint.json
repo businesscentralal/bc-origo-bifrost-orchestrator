@@ -11,27 +11,31 @@
   "prUrls": [
     "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
   ],
-  "status": "ready",
+  "status": "blocked",
   "candidateSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
-  "progressKey": "f9ac293-F1-compiled-zero-zero-published-readback-owned-f0a82b8bd245",
+  "progressKey": "f9ac293-F1-published-compiled-runtime-extension-mutex-UI-startup-failed-cleanup204-404",
   "checkpointPath": "/workspace/evidence/orchestrator119-amend-worker3/checkpoint.json",
   "startedAt": "2026-11-02T00:32:38.413Z",
-  "updatedAt": "2026-11-02T00:35:08.688Z",
-  "phaseFinishedAt": "2026-11-02T00:36:58.468023+00:00",
+  "updatedAt": "2026-11-02T01:27:14.823460+00:00",
+  "phaseFinishedAt": "2026-11-02T01:27:14.823460+00:00",
   "retainedDeveloper": "worker-3",
-  "nextOwner": "worker-3",
-  "nextAction": "Deploy F1 candidate to worker-owned BC28.5 W1 after actual health readiness and verify acceptance.",
-  "resumeTrigger": "Current execution continues unblocked F1; authenticated Architect disposition for test96442 reconciliation",
-  "readyWork": [
-    "Deploy published f9ac293 on owned container f0a82b8bd245; execute full native suite, bilingual UI and self-seeded MCP; verify cleanup."
-  ],
+  "nextOwner": "Architect / Indri\u00f0i",
+  "nextAction": "Resolve the COSMO paired deployment/extension-state failure and disposition the retained test96442 integration boundary. Sindri retains source and resumes owned full-suite/UI/self-seeded MCP verification after a working supported runtime route is established.",
+  "resumeTrigger": "Authenticated Architect/Indri\u00f0i runtime recovery disposition or actual changed supported runtime capability; Architect scope disposition for test96442 integration. No unchanged model polling.",
+  "readyWork": [],
   "remainingWork": [
-    "F1 implemented and published after exact-clean-tip app/test compilation; owned runtime checks pending.",
-    "Architect disposition for duplicate test96442 and semantic main merge, followed by authorized integration and current-candidate revalidation.",
-    "Exact-tip app/test compile, published readback, full native suite, bilingual UI/self-seeded MCP and cleanup.",
-    "Fresh exact-tip Claude verification, Grok clearance, eligible approval, Architect merge/deployment and Tester UAT/closure."
+    "Full configured native suite at current candidate:0executed/0passed, not verified; successful exact product+test deployment is required.",
+    "BC Web Client en-US/is-IS acceptance and self-seeded MCP for Verify, Run, Schedule and Help:0ACscenarios executed/0passed; one UI startup failure, no data fixtures created.",
+    "Resolve main conflicts/test96442 identity collision under the original explicit semantic-repair stop/disposition, preserve all accepted tests/assertions, compile and publish any changed candidate then repeat exact-tip verification.",
+    "Fresh exact-head Claude bc29-w1 independent verification, Grok clearance, eligible non-author approval, Architect merge/deployment and PR Reviewer UAT/closure remain unfinished."
   ],
   "blockers": [
+    {
+      "owner": "Architect / Indri\u00f0i (COSMO development runtime)",
+      "code": "needs-runtime-recovery",
+      "reason": "Owned BC28.5 W1 paired deployment failed through normal retries and one NST restart. Test-product publication returned fetch failed then UND_ERR_SOCKET; exact package was briefly installed but is now isInstalled=false. Test app HTTP422 says another service is modifying extension state on tenant default. No test extension installed. Actual Web Client startup failed. No licence/guard/backend bypass or further identical retry. Owned failed environment deleted204/readback404 after evidence retention. Need a working supported paired Default/Test + Web Client route before native/UI/MCP acceptance can run.",
+      "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+    },
     {
       "owner": "Architect",
       "code": "needs-dependency",
@@ -72,9 +76,12 @@
       "checkout": "/workspace/orchestrator119-repair-worker3",
       "branch": "codex/worker4-orchestrator118-reference-validation",
       "base": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
-      "dirty": " M CHANGELOG.md\n M \"app/Translations/Bifrost Orchestrator.is-IS.xlf\"\n M app/src/MessageTypes/Playbook/PlaybookVerifyTemplate.Codeunit.al\n",
+      "dirty": "",
       "priorWorker4PrivateCheckpointPreserved": true,
-      "noForeignActiveTaskObserved": true
+      "noForeignActiveTaskObserved": true,
+      "localSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "remoteSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "acceptedBase": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a"
     },
     "F1": {
       "localOccurrencesChanged": 3,
@@ -113,35 +120,88 @@
       "passed": 0,
       "failed": 0,
       "skipped": 0,
-      "fullSuiteVerified": false
+      "fullSuiteVerified": false,
+      "nativeIntentCreated": false,
+      "reason": "Test app never installed; configured suite was never started."
     },
     "ui": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "containerId": "f0a82b8bd245",
+      "plannedLanguages": [
+        "en-US",
+        "is-IS"
+      ],
+      "verified": false,
+      "acScenariosExecuted": 0,
       "executed": 0,
       "passed": 0,
-      "verified": false
+      "failed": 0,
+      "skipped": 0,
+      "startupAttempts": 1,
+      "startupFailures": 1,
+      "setupFailure": "Actual Web Client displayed We had trouble completing the request. Let us try again.; inner app frame was empty. Inspector exit0 is not a UI pass.",
+      "screenshot": "ui-inspect.png",
+      "noFixtureWrites": true,
+      "cleanup": "DELETE204/GET404 verified"
     },
     "mcp": {
       "executed": 0,
       "passed": 0,
-      "verified": false
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "createsOwnData": false,
+      "fixturesCreated": [],
+      "touchedMessageTypes": [
+        "Orchestrator.Playbook.Verify",
+        "Orchestrator.Playbook.Run",
+        "Orchestrator.Playbook.Schedule",
+        "Help.Orchestrator.Get"
+      ],
+      "reason": "Self-seeded acceptance not started; unstable app state and failed UI setup. No existing/customer/shared fixture used.",
+      "plannedSelfSeededHarness": true
     },
     "cleanup": {
-      "resourcesCreated": [],
-      "fixturesCreated": []
+      "id": "f0a82b8bd245",
+      "displayName": "worker3-orch119-20261102-w1",
+      "owner": "worker-3",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "startedAt": "2026-11-02T01:25:35.703Z",
+      "foreignResourcesChanged": false,
+      "deleteStatus": 204,
+      "readbackStatus": 404,
+      "readbackAt": "2026-11-02T01:25:36.002Z",
+      "deleted": true,
+      "plannedFixtureScope": "Self-created W3119 playbooks, steps, conditions, instances, messages, audit setup and test data on isolated owned container only; container deletion removes all.",
+      "fixturesActuallyCreated": [],
+      "nativeTestsExecuted": 0,
+      "fixtures": "No W3119 playbooks/steps/conditions/MCP fixtures or UI audit configuration were created. Only normal app install/deployment state existed; owned container deletion removed it.",
+      "fixtureScopeClarifiedAt": "2026-11-02T01:27:14.823460+00:00"
     },
     "appliedLessonIds": [
       "orchestrator119-review5631394182-f1-terminology",
-      "core-pr853-worker8-20261004-conflict-preservation"
+      "core-pr853-worker8-20261004-conflict-preservation",
+      "orchestrator119-worker3-amend5631394182-f1-20261102",
+      "core1156-review5629271668-english-xlf"
     ],
     "standards": {
       "commit": "ac05e88ab51ed4c9bbfb843508fc2484afe5ec8f",
       "syncedAt": "2026-10-03T17:42:19.3581046Z",
-      "freshlySynchronized": false
+      "freshlySynchronized": false,
+      "releasedMainCompatibility": "Pending authorized main integration; zero-warning AppSourceCop here is not current-main compatibility proof.",
+      "snapshotCapturedAt": "2026-10-03T16:02:22.475Z",
+      "provenanceFiles": [
+        "/workspace/standards/snapshot.json",
+        "/workspace/standards/bc-dev-standards/local-sync.json"
+      ]
     },
     "secretary": {
       "startedAt": "2026-11-02T00:32:38.413Z",
       "stopOwnedByRegistrar": true,
-      "acknowledged": false
+      "acknowledged": false,
+      "startLedgerPresent": true,
+      "startLedger": "/team-queue/time-registration/amend-119-206d77a4b35dae166e7c-START.json",
+      "unpaidRecordsRetained": true
     },
     "publication": {
       "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
@@ -166,7 +226,167 @@
       "owner": "worker-3",
       "createdAt": "2026-11-02T00:35:46.307Z",
       "sourceSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
-      "status": 202
+      "status": 202,
+      "state": "deleted",
+      "readyAt": "2026-11-02T00:40:31.019Z",
+      "deployment": "Foundation28.0.9.618 and shipping Orchestrator28.0.2.0 installed; Test product/test app recovery publishing sequentially",
+      "deleteStatus": 204,
+      "readbackStatus": 404,
+      "fixturesCreated": []
+    },
+    "foundationProvenance": {
+      "artifactId": 12409744454,
+      "artifactName": "bc-origo-bifrost-core-main-Apps-1.0.9.618",
+      "sha": "daef56f6318b07f384ded3431e32f97dfe571527",
+      "runUrl": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core/actions/runs/39741415512",
+      "runConclusion": "success",
+      "sha256": "940e2e2056abf51ebb73c3fc428171481097ba96e44162e9f5418479fc718dc6",
+      "downloadedAt": "2026-11-02T00:39:08.407Z"
+    },
+    "evidencePublication": {
+      "branch": "verification/worker3-orchestrator119",
+      "commit": "02fe4de8611d58e892fb5d0b65f366981e10722d",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "files": [
+        "publication.json",
+        "static-verification.json",
+        "foundation-provenance.json",
+        "environment-created.json",
+        "candidate/result.json",
+        "candidate/app.log",
+        "candidate/test.log",
+        "shipping/result.json",
+        "shipping/compile.log",
+        "checkpoint.json",
+        "deploy-intent.json"
+      ],
+      "at": "2026-11-02T00:40:59.150Z",
+      "baseUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/blob/02fe4de8611d58e892fb5d0b65f366981e10722d/verification/f9ac293926d8f5787056b42543b4c116dd57c540/"
+    },
+    "currentStateReceipt": {
+      "id": 6365106078,
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119#issuecomment-6365106078",
+      "action": "updated",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "at": "2026-11-02T00:41:34.162Z"
+    },
+    "checksObserved": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "checkRuns": [],
+      "mergeableState": "dirty",
+      "noGreenCiClaim": true
+    },
+    "deploymentRecovery": {
+      "originalFailure": "Local subprocess300s timeout, no returned shipping publication receipt",
+      "actualReadback": "appinfo-after-timeout.json HTTP200 lists installedFoundation28.0.9.618 and Orchestrator28.0.2.0; company read succeeded",
+      "repeatedShippingWrite": false,
+      "next": "Distinct Test product and test-app stages;900s bound",
+      "evidence": "recover-deploy-intent.json",
+      "testProductTransport": "fetch failed; no success receipt",
+      "testProductReceipt": "publish-orchestrator-test-product.json",
+      "tenantAfterError": "tenant-after-test-product-error.json still shipping package installed",
+      "sshDiagnosis": "ssh-deploy-diagnosis.txt: tenant metadata command hung, localSSH read timed out120s",
+      "restartIntent": "restart-intent.json",
+      "httpHarness": "Private request timeout extended900s; underlying transport cause remains unproved",
+      "nativeStarted": false,
+      "restart": {
+        "id": "f0a82b8bd245",
+        "at": "2026-11-02T01:00:23.164Z",
+        "status": 200,
+        "body": "Import PPI Overrides from c:\\run\\helper\\PPIOverrides\\PPIOverrides.psm1\nWelcome to the Business Central Container PowerShell prompt\n\n\r\n\r\nServerInstance : MicrosoftDynamicsNavServer$BC\r\nDisplayName    : Dynamics 365 Business Central Server [BC]\r\nState          : Running\r\nServiceAccount : NT AUTHORITY\\SYSTEM\r\nVersion        : 28.0.54946.57238\r\nDefault        : True\r\n\r\n\r\n\r\n"
+      },
+      "afterRestart": "tenant-after-restart.json: Foundation installed; old shipping product package isInstalled=false during interrupted Test transition",
+      "currentRetry": "post-restart-deploy-intent.json; only exact Test product/test-app missing stages,900s private transport bound",
+      "verifiedTestProduct": false
+    },
+    "artifactProvenance": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "artifacts": [
+        {
+          "path": "shipping/shipping.app",
+          "packageId": "eecdc5b0-fd27-4ed7-8c0d-363163ab5120",
+          "sha256": "69dabc128c918a84eb41cc2b145560d10db0f9f1235c960ac5a9201bfc6a534d",
+          "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+          "name": "Bifrost Orchestrator",
+          "version": "28.0.2.0",
+          "source": {
+            "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+            "Commit": "f9ac293926d8f5787056b42543b4c116dd57c540"
+          },
+          "internalsVisibleTo": [],
+          "signedLocalArtifactClaim": false
+        },
+        {
+          "path": "candidate/app.app",
+          "packageId": "b928c3f3-f494-4434-9640-25a369929d1e",
+          "sha256": "ebec0549e8e97241954638b22516194befa0f8014b77ee02f7cdd0b67194d1de",
+          "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+          "name": "Bifrost Orchestrator",
+          "version": "28.0.2.0",
+          "source": {
+            "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+            "Commit": "f9ac293926d8f5787056b42543b4c116dd57c540"
+          },
+          "internalsVisibleTo": [
+            {
+              "Id": "194ecd04-5688-4af6-94bc-732c714251fc",
+              "Name": "Bifrost Orchestrator - Tests",
+              "Publisher": "Origo"
+            }
+          ],
+          "signedLocalArtifactClaim": false
+        },
+        {
+          "path": "candidate/test.app",
+          "packageId": "03d38e2f-3e3e-4ba0-a058-978126ccf82c",
+          "sha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b",
+          "appId": "194ecd04-5688-4af6-94bc-732c714251fc",
+          "name": "Bifrost Orchestrator - Tests",
+          "version": "28.0.2.0",
+          "source": {
+            "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+            "Commit": "f9ac293926d8f5787056b42543b4c116dd57c540"
+          },
+          "internalsVisibleTo": [],
+          "signedLocalArtifactClaim": false
+        },
+        {
+          "path": "foundation.app",
+          "packageId": "b267ebee-1f85-48c2-9989-47158f7a422b",
+          "sha256": "ad548ee1c19b276539ec22a2e57c4b1cad198d10199c0d28fb8a4938744c74b1",
+          "appId": "7505e808-6e52-4b96-a328-82573391297a",
+          "name": "Bifrost Foundation",
+          "version": "28.0.9.618",
+          "source": {
+            "RepositoryUrl": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
+            "Commit": "daef56f6318b07f384ded3431e32f97dfe571527"
+          },
+          "internalsVisibleTo": [],
+          "signedLocalArtifactClaim": false
+        }
+      ],
+      "shippingInstalledReadback": {
+        "at": "2026-11-02T00:52:28.456Z",
+        "packageId": "eecdc5b0-fd27-4ed7-8c0d-363163ab5120",
+        "isInstalled": true,
+        "receipt": "tenant-extensions-readback.json"
+      }
+    },
+    "runtimeFailure": {
+      "testProductResponse": "publish-post-restart-test-product.json: UND_ERR_SOCKET",
+      "testAppResponse": "publish-test-app-final.json: HTTP422 another service currently modifying state of extensions",
+      "currentPackages": "tenant-before-cleanup.json: product b928c3f3-f494-4434-9640-25a369929d1e isInstalled=false, test app absent",
+      "ui": "ui-inspect.png generic request-completion error",
+      "originalErrorRetained": true,
+      "newProductCodeDefectClaimed": false
+    },
+    "publicationExit": {
+      "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+      "branch": "codex/worker4-orchestrator118-reference-validation",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/worker4-orchestrator118-reference-validation",
+      "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/f9ac293926d8f5787056b42543b4c116dd57c540",
+      "remoteVerifiedAt": "2026-11-02T01:27:16.724Z"
     }
   },
   "executionFinishedIsDelivery": false

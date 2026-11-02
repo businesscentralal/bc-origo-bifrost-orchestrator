@@ -1,0 +1,126 @@
+{
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/118",
+  "pr": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119",
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "owner": "worker-3",
+  "acceptance": [
+    {
+      "criterion": "Help examples and token guidance use primaryKey for primary-key fields",
+      "implementation": "retained from accepted dd6d86c",
+      "verification": "new-tip full suite/UI/MCP pending"
+    },
+    {
+      "criterion": "Verify reports UnknownFieldReference with actionable bilingual nextStep",
+      "implementation": "retained; F1 corrects Icelandic playbook terminology in AL Comment, XLF target and Developer note",
+      "verification": "static parity/XML/placeholders and exact-tip compile passed; live 1033/1039 pending"
+    },
+    {
+      "criterion": "Runner fails unresolved tokens before dispatch in single, forEach and paged paths",
+      "implementation": "retained; no behavior or assertion change in F1",
+      "verification": "new-tip full suite/UI/self-seeded MCP pending; prior evidence is historical"
+    },
+    {
+      "criterion": "H2 on primaryKey test expectations and free-text @ refusal",
+      "implementation": "explicit Gunnar decision6367547139 accepted in review5631394182",
+      "verification": "decision remains applicable; no product/test expectation change in F1"
+    },
+    {
+      "criterion": "F1 terminology amendment",
+      "implementation": "all three approved occurrences corrected, CHANGELOG10035618 added",
+      "verification": "static check and clean product/test compile 0errors0warnings at f9ac293; live response wording pending"
+    },
+    {
+      "criterion": "Current-main integration and breaking-change baseline",
+      "implementation": "separate retained conflict-repair scope; two distinct codeunits96442 need reconciliation",
+      "verification": "not integrated or verified; prior explicit stop/escalation retained with Architect"
+    },
+    {
+      "criterion": "Developer, independent and delivery gates",
+      "implementation": "new candidate published and canonical GitHub readback retained",
+      "verification": "full suite/UI/MCP/cleanup, signed CI, current-head Claude/Grok, eligible approval, Architect merge/deploy and PR Reviewer UAT pending"
+    }
+  ],
+  "excludedSuggestions": [
+    "Try-prefix renames",
+    "New paged/@mention tests"
+  ],
+  "notIssueCompletion": true,
+  "runtimeAtCurrentTip": {
+    "native": {
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "fullSuiteVerified": false,
+      "nativeIntentCreated": false,
+      "reason": "Test app never installed; configured suite was never started."
+    },
+    "ui": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "containerId": "f0a82b8bd245",
+      "plannedLanguages": [
+        "en-US",
+        "is-IS"
+      ],
+      "verified": false,
+      "acScenariosExecuted": 0,
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "startupAttempts": 1,
+      "startupFailures": 1,
+      "setupFailure": "Actual Web Client displayed We had trouble completing the request. Let us try again.; inner app frame was empty. Inspector exit0 is not a UI pass.",
+      "screenshot": "ui-inspect.png",
+      "noFixtureWrites": true,
+      "cleanup": "DELETE204/GET404 verified"
+    },
+    "mcp": {
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "verified": false,
+      "createsOwnData": true,
+      "fixturesCreated": [],
+      "touchedMessageTypes": [
+        "Orchestrator.Playbook.Verify",
+        "Orchestrator.Playbook.Run",
+        "Orchestrator.Playbook.Schedule",
+        "Help.Orchestrator.Get"
+      ],
+      "reason": "Self-seeded acceptance not started; unstable app state and failed UI setup. No existing/customer/shared fixture used."
+    },
+    "cleanup": {
+      "id": "f0a82b8bd245",
+      "displayName": "worker3-orch119-20261102-w1",
+      "owner": "worker-3",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "startedAt": "2026-11-02T01:25:35.703Z",
+      "foreignResourcesChanged": false,
+      "deleteStatus": 204,
+      "readbackStatus": 404,
+      "readbackAt": "2026-11-02T01:25:36.002Z",
+      "deleted": true,
+      "plannedFixtureScope": "Self-created W3119 playbooks, steps, conditions, instances, messages, audit setup and test data on isolated owned container only; container deletion removes all.",
+      "fixturesActuallyCreated": [],
+      "nativeTestsExecuted": 0,
+      "fixtures": "No W3119 playbooks/steps/conditions/MCP fixtures or UI audit configuration were created. Only normal app install/deployment state existed; owned container deletion removed it.",
+      "fixtureScopeClarifiedAt": "2026-11-02T01:27:14.823460+00:00"
+    },
+    "blockers": [
+      {
+        "owner": "Architect / Indri\u00f0i (COSMO development runtime)",
+        "code": "needs-runtime-recovery",
+        "reason": "Owned BC28.5 W1 paired deployment failed through normal retries and one NST restart. Test-product publication returned fetch failed then UND_ERR_SOCKET; exact package was briefly installed but is now isInstalled=false. Test app HTTP422 says another service is modifying extension state on tenant default. No test extension installed. Actual Web Client startup failed. No licence/guard/backend bypass or further identical retry. Owned failed environment deleted204/readback404 after evidence retention. Need a working supported paired Default/Test + Web Client route before native/UI/MCP acceptance can run.",
+        "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+      },
+      {
+        "owner": "Architect",
+        "code": "needs-dependency",
+        "reason": "Explicit repair assignment requires stopping for semantic source/test changes. Combined tree contains two distinct codeunits numbered96442 (Playbook Ref118 Tests and Verify Summary Tests). A conflict-marker-only resolution cannot yield a compilable combined suite. Decide/authorize minimal object-identity reconciliation before editing; no test deletion, exclusion or weakened assertion.",
+        "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+      }
+    ]
+  }
+}

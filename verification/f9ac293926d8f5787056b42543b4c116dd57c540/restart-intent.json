@@ -1,0 +1,8 @@
+{
+  "id": "f0a82b8bd245",
+  "owner": "worker-3",
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "at": "2026-11-02T01:00:06.706Z",
+  "reason": "Own Test-product publication transport failed; tenant metadata read hung and timed out after120s. No native suite has started. Restart only this owned NST to recover stalled own publication; read actual package state before any normal retry.",
+  "priorInstalledPackage": "eecdc5b0-fd27-4ed7-8c0d-363163ab5120"
+}

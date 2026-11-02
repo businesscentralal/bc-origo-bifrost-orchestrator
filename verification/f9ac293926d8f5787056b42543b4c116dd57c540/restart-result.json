@@ -1,0 +1,6 @@
+{
+  "id": "f0a82b8bd245",
+  "at": "2026-11-02T01:00:23.164Z",
+  "status": 200,
+  "body": "Import PPI Overrides from c:\\run\\helper\\PPIOverrides\\PPIOverrides.psm1\nWelcome to the Business Central Container PowerShell prompt\n\n\r\n\r\nServerInstance : MicrosoftDynamicsNavServer$BC\r\nDisplayName    : Dynamics 365 Business Central Server [BC]\r\nState          : Running\r\nServiceAccount : NT AUTHORITY\\SYSTEM\r\nVersion        : 28.0.54946.57238\r\nDefault        : True\r\n\r\n\r\n\r\n"
+}

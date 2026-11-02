@@ -1,0 +1,26 @@
+{
+  "id": "f0a82b8bd245",
+  "owner": "worker-3",
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "startedAt": "2026-11-02T01:15:17.108Z",
+  "mode": "Continue only never-started Test-app stage; no product retry; Test product exact package installed despite transport failure",
+  "productPackageId": "b928c3f3-f494-4434-9640-25a369929d1e",
+  "testPackageId": "03d38e2f-3e3e-4ba0-a058-978126ccf82c",
+  "testArtifactSha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b",
+  "publishProcess": {
+    "exitCode": 0,
+    "finishedAt": "2026-11-02T01:15:28.452Z"
+  },
+  "publishReceipt": {
+    "at": "2026-11-02T01:15:28.428Z",
+    "containerId": "f0a82b8bd245",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"fileName\": \"test.app\",\n  \"bytes\": 156201,\n  \"statusCode\": 422,\n  \"durationMs\": 10814,\n  \"developerBaseUrl\": \"https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0a82b8bd245dev\",\n  \"body\": {\n    \"Message\": \"Publishing failed due to 'Cannot install extension Bifrost Orchestrator - Tests because another service is currently modifying the state of extensions on tenant default.'. The original extensions have been restored.\\r\\n\\r\\n\",\n    \"ErrorType\": \"InvalidOperation\"\n  },\n  \"ok\": false,\n  \"error\": {\n    \"Message\": \"Publishing failed due to 'Cannot install extension Bifrost Orchestrator - Tests because another service is currently modifying the state of extensions on tenant default.'. The original extensions have been restored.\\r\\n\\r\\n\",\n    \"ErrorType\": \"InvalidOperation\"\n  }\n}"
+        }
+      ]
+    }
+  }
+}

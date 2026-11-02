@@ -1,0 +1,32 @@
+{
+  "at": "2026-11-02T01:25:03.754Z",
+  "containerId": "f0a82b8bd245",
+  "extensions": [
+    {
+      "@odata.etag": "W/\"JzE5Ozc2ODkwMjE1NzMwOTg4NjYxMjExOzAwOyc=\"",
+      "packageId": "b267ebee-1f85-48c2-9989-47158f7a422b",
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "displayName": "Bifrost Foundation",
+      "publisher": "Origo",
+      "versionMajor": 28,
+      "versionMinor": 0,
+      "versionBuild": 9,
+      "versionRevision": 618,
+      "isInstalled": true,
+      "publishedAs": " Dev"
+    },
+    {
+      "@odata.etag": "W/\"JzE5OzU1MDIwOTc3MDI4NTcwOTU3OTMxOzAwOyc=\"",
+      "packageId": "b928c3f3-f494-4434-9640-25a369929d1e",
+      "id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "displayName": "Bifrost Orchestrator",
+      "publisher": "Origo",
+      "versionMajor": 28,
+      "versionMinor": 0,
+      "versionBuild": 2,
+      "versionRevision": 0,
+      "isInstalled": false,
+      "publishedAs": " Dev"
+    }
+  ]
+}

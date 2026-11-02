@@ -1,0 +1,13 @@
+{
+  "id": "f0a82b8bd245",
+  "displayName": "worker3-orch119-20261102-w1",
+  "owner": "worker-3",
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "startedAt": "2026-11-02T01:25:35.703Z",
+  "foreignResourcesChanged": false,
+  "plannedFixtureScope": "Self-created W3119 playbooks, steps, conditions, instances, messages, audit setup and test data on isolated owned container only; container deletion removes all.",
+  "fixturesActuallyCreated": [],
+  "nativeTestsExecuted": 0,
+  "fixtures": "No W3119 playbooks/steps/conditions/MCP fixtures or UI audit configuration were created. Only normal app install/deployment state existed; owned container deletion removed it.",
+  "fixtureScopeClarifiedAt": "2026-11-02T01:27:14.823460+00:00"
+}

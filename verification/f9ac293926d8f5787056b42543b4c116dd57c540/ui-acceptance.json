@@ -1,0 +1,20 @@
+{
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "containerId": "f0a82b8bd245",
+  "plannedLanguages": [
+    "en-US",
+    "is-IS"
+  ],
+  "verified": false,
+  "acScenariosExecuted": 0,
+  "executed": 0,
+  "passed": 0,
+  "failed": 0,
+  "skipped": 0,
+  "startupAttempts": 1,
+  "startupFailures": 1,
+  "setupFailure": "Actual Web Client displayed We had trouble completing the request. Let us try again.; inner app frame was empty. Inspector exit0 is not a UI pass.",
+  "screenshot": "ui-inspect.png",
+  "noFixtureWrites": true,
+  "cleanup": "DELETE204/GET404 verified"
+}

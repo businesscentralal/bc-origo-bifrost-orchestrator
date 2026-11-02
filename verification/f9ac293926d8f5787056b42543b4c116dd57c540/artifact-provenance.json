@@ -1,0 +1,73 @@
+{
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "artifacts": [
+    {
+      "path": "shipping/shipping.app",
+      "packageId": "eecdc5b0-fd27-4ed7-8c0d-363163ab5120",
+      "sha256": "69dabc128c918a84eb41cc2b145560d10db0f9f1235c960ac5a9201bfc6a534d",
+      "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "name": "Bifrost Orchestrator",
+      "version": "28.0.2.0",
+      "source": {
+        "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+        "Commit": "f9ac293926d8f5787056b42543b4c116dd57c540"
+      },
+      "internalsVisibleTo": [],
+      "signedLocalArtifactClaim": false
+    },
+    {
+      "path": "candidate/app.app",
+      "packageId": "b928c3f3-f494-4434-9640-25a369929d1e",
+      "sha256": "ebec0549e8e97241954638b22516194befa0f8014b77ee02f7cdd0b67194d1de",
+      "appId": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "name": "Bifrost Orchestrator",
+      "version": "28.0.2.0",
+      "source": {
+        "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+        "Commit": "f9ac293926d8f5787056b42543b4c116dd57c540"
+      },
+      "internalsVisibleTo": [
+        {
+          "Id": "194ecd04-5688-4af6-94bc-732c714251fc",
+          "Name": "Bifrost Orchestrator - Tests",
+          "Publisher": "Origo"
+        }
+      ],
+      "signedLocalArtifactClaim": false
+    },
+    {
+      "path": "candidate/test.app",
+      "packageId": "03d38e2f-3e3e-4ba0-a058-978126ccf82c",
+      "sha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b",
+      "appId": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "name": "Bifrost Orchestrator - Tests",
+      "version": "28.0.2.0",
+      "source": {
+        "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+        "Commit": "f9ac293926d8f5787056b42543b4c116dd57c540"
+      },
+      "internalsVisibleTo": [],
+      "signedLocalArtifactClaim": false
+    },
+    {
+      "path": "foundation.app",
+      "packageId": "b267ebee-1f85-48c2-9989-47158f7a422b",
+      "sha256": "ad548ee1c19b276539ec22a2e57c4b1cad198d10199c0d28fb8a4938744c74b1",
+      "appId": "7505e808-6e52-4b96-a328-82573391297a",
+      "name": "Bifrost Foundation",
+      "version": "28.0.9.618",
+      "source": {
+        "RepositoryUrl": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
+        "Commit": "daef56f6318b07f384ded3431e32f97dfe571527"
+      },
+      "internalsVisibleTo": [],
+      "signedLocalArtifactClaim": false
+    }
+  ],
+  "shippingInstalledReadback": {
+    "at": "2026-11-02T00:52:28.456Z",
+    "packageId": "eecdc5b0-fd27-4ed7-8c0d-363163ab5120",
+    "isInstalled": true,
+    "receipt": "tenant-extensions-readback.json"
+  }
+}
