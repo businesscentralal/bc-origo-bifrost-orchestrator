@@ -288,7 +288,7 @@ codeunit 10035618 "Playbook Verify Template ori"
     local procedure CheckStoredField(Step: Record "Playbook Step ori"; StoringStep: Record "Playbook Step ori"; RawFieldName: Text; var Seen: List of [Text]; var Findings: JsonArray)
     var
         Verify: Codeunit "Playbook Verify ori";
-        Stored: List of [Text];
+        Stored: Dictionary of [Text, Text];
         FieldName: Text;
         SeenKey: Text;
         StoredText: Text;
@@ -298,7 +298,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         if FieldName = '' then
             exit;
         GetStoredFieldNames(StoringStep, Stored);
-        if Stored.Contains(FieldName.ToLower()) then
+        if Stored.ContainsKey(FieldName.ToLower()) then
             exit;
 
         SeenKey := StrSubstNo(SeenFieldTok, Format(StoringStep."Step No.", 0, 9), FieldName.ToLower());
@@ -306,24 +306,25 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         Seen.Add(SeenKey);
 
-        foreach Name in Stored do
-            if (Name <> '_item') then begin
+        foreach Name in Stored.Values() do
+            if (Name.ToLower() <> '_item') then begin
                 if StoredText <> '' then
                     StoredText += ', ';
                 StoredText += Name;
             end;
         if StoredText = '' then
             StoredText := NothingTxt;
-        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownFieldReference',
+        Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'UnknownFieldReference',
             StrSubstNo(UnknownStepFieldMsg, Step."Step No.", StoringStep."Step No.", FieldName, StoredText),
             StrSubstNo(UnknownStepFieldNextStepTxt, StoringStep."Step No.", FieldName), Step.Disabled);
     end;
 
     /// <summary>
-    /// The first segment of every target of the Result Log Paths of a step, lower case, plus _item for a forEach step.
+    /// The first segment of every target of the Result Log Paths of a step, plus _item for a forEach step.
+    /// Keys are lower case for matching; values retain the original spelling for diagnostics.
     /// A mapping source>target stores at target; a mapping without an arrow stores at the path with dots as underscores.
     /// </summary>
-    local procedure GetStoredFieldNames(StoringStep: Record "Playbook Step ori"; var Stored: List of [Text])
+    local procedure GetStoredFieldNames(StoringStep: Record "Playbook Step ori"; var Stored: Dictionary of [Text, Text])
     var
         Mapping: Text;
         Target: Text;
@@ -339,12 +340,12 @@ codeunit 10035618 "Playbook Verify Template ori"
                 else
                     Target := Mapping.Replace('.', '_');
                 Target := StripIndex(Target);
-                if (Target <> '') and not Stored.Contains(Target.ToLower()) then
-                    Stored.Add(Target.ToLower());
+                if (Target <> '') and not Stored.ContainsKey(Target.ToLower()) then
+                    Stored.Add(Target.ToLower(), Target);
             end;
         end;
-        if StoringStep.IsForEach() then
-            Stored.Add('_item');
+        if StoringStep.IsForEach() and not Stored.ContainsKey('_item') then
+            Stored.Add('_item', '_item');
     end;
 
     /// <summary>
