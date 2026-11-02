@@ -81,7 +81,7 @@
       "failed": 0,
       "skipped": 0,
       "verified": false,
-      "createsOwnData": true,
+      "createsOwnData": false,
       "fixturesCreated": [],
       "touchedMessageTypes": [
         "Orchestrator.Playbook.Verify",
@@ -89,7 +89,8 @@
         "Orchestrator.Playbook.Schedule",
         "Help.Orchestrator.Get"
       ],
-      "reason": "Self-seeded acceptance not started; unstable app state and failed UI setup. No existing/customer/shared fixture used."
+      "reason": "Self-seeded acceptance not started; unstable app state and failed UI setup. No existing/customer/shared fixture used.",
+      "plannedSelfSeededHarness": true
     },
     "cleanup": {
       "id": "f0a82b8bd245",
@@ -110,7 +111,7 @@
     },
     "blockers": [
       {
-        "owner": "Architect / Indri\u00f0i (COSMO development runtime)",
+        "owner": "Architect / Indriði (COSMO development runtime)",
         "code": "needs-runtime-recovery",
         "reason": "Owned BC28.5 W1 paired deployment failed through normal retries and one NST restart. Test-product publication returned fetch failed then UND_ERR_SOCKET; exact package was briefly installed but is now isInstalled=false. Test app HTTP422 says another service is modifying extension state on tenant default. No test extension installed. Actual Web Client startup failed. No licence/guard/backend bypass or further identical retry. Owned failed environment deleted204/readback404 after evidence retention. Need a working supported paired Default/Test + Web Client route before native/UI/MCP acceptance can run.",
         "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
@@ -122,5 +123,39 @@
         "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
       }
     ]
+  },
+  "compile": {
+    "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+    "dirty": "",
+    "checks": {
+      "app": {
+        "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+        "dirty": "",
+        "startedAt": "2026-11-02T00:35:40.056Z",
+        "finishedAt": "2026-11-02T00:35:52.046Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "ebec0549e8e97241954638b22516194befa0f8014b77ee02f7cdd0b67194d1de"
+      },
+      "test": {
+        "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+        "dirty": "",
+        "startedAt": "2026-11-02T00:35:52.100Z",
+        "finishedAt": "2026-11-02T00:36:01.214Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b"
+      }
+    }
+  },
+  "publication": {
+    "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+    "branch": "codex/worker4-orchestrator118-reference-validation",
+    "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+    "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/worker4-orchestrator118-reference-validation",
+    "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/f9ac293926d8f5787056b42543b4c116dd57c540",
+    "remoteVerifiedAt": "2026-11-02T01:27:16.724Z"
   }
 }

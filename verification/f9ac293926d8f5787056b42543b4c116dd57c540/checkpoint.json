@@ -16,12 +16,12 @@
   "progressKey": "f9ac293-F1-published-compiled-runtime-extension-mutex-UI-startup-failed-cleanup204-404",
   "checkpointPath": "/workspace/evidence/orchestrator119-amend-worker3/checkpoint.json",
   "startedAt": "2026-11-02T00:32:38.413Z",
-  "updatedAt": "2026-11-02T01:27:14.823460+00:00",
-  "phaseFinishedAt": "2026-11-02T01:27:14.823460+00:00",
+  "updatedAt": "2026-11-02T01:30:50.329Z",
+  "phaseFinishedAt": "2026-11-02T01:30:50.329Z",
   "retainedDeveloper": "worker-3",
-  "nextOwner": "Architect / Indri\u00f0i",
+  "nextOwner": "Architect / Indriði",
   "nextAction": "Resolve the COSMO paired deployment/extension-state failure and disposition the retained test96442 integration boundary. Sindri retains source and resumes owned full-suite/UI/self-seeded MCP verification after a working supported runtime route is established.",
-  "resumeTrigger": "Authenticated Architect/Indri\u00f0i runtime recovery disposition or actual changed supported runtime capability; Architect scope disposition for test96442 integration. No unchanged model polling.",
+  "resumeTrigger": "Authenticated Architect/Indriði runtime recovery disposition or actual changed supported runtime capability; Architect scope disposition for test96442 integration. No unchanged model polling.",
   "readyWork": [],
   "remainingWork": [
     "Full configured native suite at current candidate:0executed/0passed, not verified; successful exact product+test deployment is required.",
@@ -31,7 +31,7 @@
   ],
   "blockers": [
     {
-      "owner": "Architect / Indri\u00f0i (COSMO development runtime)",
+      "owner": "Architect / Indriði (COSMO development runtime)",
       "code": "needs-runtime-recovery",
       "reason": "Owned BC28.5 W1 paired deployment failed through normal retries and one NST restart. Test-product publication returned fetch failed then UND_ERR_SOCKET; exact package was briefly installed but is now isInstalled=false. Test app HTTP422 says another service is modifying extension state on tenant default. No test extension installed. Actual Web Client startup failed. No licence/guard/backend bypass or further identical retry. Owned failed environment deleted204/readback404 after evidence retention. Need a working supported paired Default/Test + Web Client route before native/UI/MCP acceptance can run.",
       "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
@@ -81,7 +81,8 @@
       "noForeignActiveTaskObserved": true,
       "localSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
       "remoteSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
-      "acceptedBase": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a"
+      "acceptedBase": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+      "observedMainReadback": "3044ce31f4e322db1ffa85e7e24ec8a53bd18997\trefs/heads/main"
     },
     "F1": {
       "localOccurrencesChanged": 3,
@@ -201,7 +202,8 @@
       "acknowledged": false,
       "startLedgerPresent": true,
       "startLedger": "/team-queue/time-registration/amend-119-206d77a4b35dae166e7c-START.json",
-      "unpaidRecordsRetained": true
+      "unpaidRecordsRetained": true,
+      "actualProcessFinishedAtPending": true
     },
     "publication": {
       "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
@@ -245,10 +247,13 @@
     },
     "evidencePublication": {
       "branch": "verification/worker3-orchestrator119",
-      "commit": "02fe4de8611d58e892fb5d0b65f366981e10722d",
+      "commit": "7e32e6461792acd34cf94c4e667b2facf012a2c8",
       "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
       "files": [
         "publication.json",
+        "publication-exit.json",
+        "acceptance-matrix.json",
+        "artifact-provenance.json",
         "static-verification.json",
         "foundation-provenance.json",
         "environment-created.json",
@@ -258,10 +263,25 @@
         "shipping/result.json",
         "shipping/compile.log",
         "checkpoint.json",
-        "deploy-intent.json"
+        "deploy-intent.json",
+        "ui-acceptance.json",
+        "cleanup-result.json",
+        "cleanup-intent.json",
+        "tenant-before-cleanup.json",
+        "tenant-extensions-readback.json",
+        "tenant-after-retry-error.json",
+        "restart-intent.json",
+        "restart-result.json",
+        "publish-post-restart-test-product.json",
+        "publish-test-app-final.json",
+        "test-app-attempt.json",
+        "post-restart-deploy-intent.json",
+        "test-app-error.json",
+        "extension-deployment-status.json",
+        "ui-inspect.png"
       ],
-      "at": "2026-11-02T00:40:59.150Z",
-      "baseUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/blob/02fe4de8611d58e892fb5d0b65f366981e10722d/verification/f9ac293926d8f5787056b42543b4c116dd57c540/"
+      "at": "2026-11-02T01:28:13.259Z",
+      "baseUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/blob/7e32e6461792acd34cf94c4e667b2facf012a2c8/verification/f9ac293926d8f5787056b42543b4c116dd57c540/"
     },
     "currentStateReceipt": {
       "id": 6365106078,
@@ -387,6 +407,18 @@
       "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/worker4-orchestrator118-reference-validation",
       "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/f9ac293926d8f5787056b42543b4c116dd57c540",
       "remoteVerifiedAt": "2026-11-02T01:27:16.724Z"
+    },
+    "currentPr": {
+      "state": "open",
+      "head": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "labels": [
+        "pr:amend",
+        "wip:codex-sindri"
+      ],
+      "mergeable": false,
+      "currentCheckRuns": 0,
+      "currentHeadClaudeReceipt": false,
+      "currentHeadGrokClearance": false
     }
   },
   "executionFinishedIsDelivery": false
