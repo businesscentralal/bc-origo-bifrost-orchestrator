@@ -302,7 +302,7 @@ codeunit 96439 "Playbook Verify Template Tests"
     end;
 
     [Test]
-    procedure StepField_Unknown_Warns()
+    procedure StepField_Unknown_IsAnError()
     var
         Findings: JsonArray;
     begin
@@ -312,12 +312,38 @@ codeunit 96439 "Playbook Verify Template Tests"
         AddStepWithTemplate(20, '{"a":"@10.nope"}');
         GetFindings(Findings);
         Assert.AreEqual(1, CountFindings(Findings, 'UnknownFieldReference', 20), 'Step 10 stores v, not nope');
-        AssertWarning(Findings, 'UnknownFieldReference', 20);
+        AssertFinding(Findings, 'UnknownFieldReference', 20, ErrorTok);
 
         Lib.SetResultLogPaths(PlaybookCodeTok, 10, '');
         GetFindings(Findings);
         Assert.AreEqual(1, CountFindings(Findings, 'UnknownFieldReference', 20), 'Step 10 stores nothing');
         Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    [Test]
+    procedure StoredField_ErrorAndOriginalCasing()
+    begin
+        VerifyStoredFieldFinding(1033);
+    end;
+
+    [Test]
+    procedure StoredField_ErrorAndOriginalCasing_Icelandic()
+    begin
+        VerifyStoredFieldFinding(1039);
+    end;
+
+    [Test]
+    procedure StoredField_HelpExplainsError()
+    var
+        HelpMgt: Codeunit "Help ori";
+        Contract: Codeunit "Playbook Verify Msg ori";
+        Notes: Text;
+    begin
+        // [SCENARIO] Both discovery surfaces distinguish stored-field errors from unchanged current-field warnings.
+        Contract.GetNotes(Notes);
+        Assert.IsTrue(Notes.Contains('Errors: UnknownFieldReference for @N.field and @N.@_iter.field'), 'Contract lists stored-field errors');
+        Assert.IsTrue(Notes.Contains('unknown stored-field reference that previously only warned'), 'Contract explains the stronger gate');
+        Assert.IsTrue(HelpMgt.GetOverview().Contains('error for stored fields; warning for `@_current.fields`'), 'Overview severity agrees with the contract');
     end;
 
     [Test]
@@ -334,13 +360,13 @@ codeunit 96439 "Playbook Verify Template Tests"
     end;
 
     [Test]
-    procedure IterField_Unknown_Warns()
+    procedure IterField_Unknown_IsAnError()
     begin
         VerifyUnknownIterField(1033, StepFieldStartTxt);
     end;
 
     [Test]
-    procedure IterField_Unknown_Warns_Icelandic()
+    procedure IterField_Unknown_IsAnError_Icelandic()
     begin
         VerifyUnknownIterField(1039, StepFieldStartIsTxt);
     end;
@@ -358,7 +384,7 @@ codeunit 96439 "Playbook Verify Template Tests"
     end;
 
     [Test]
-    procedure IterField_ExplicitIteration_Unknown_Warns()
+    procedure IterField_ExplicitIteration_Unknown_IsAnError()
     var
         Findings: JsonArray;
     begin
@@ -366,6 +392,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         AddForEachStep(40, '{"x":"@30.0.valdi"}');
         GetFindings(Findings);
         Assert.AreEqual(1, CountFindings(Findings, 'UnknownFieldReference', 40), 'An explicit iteration is judged the same way');
+        AssertFinding(Findings, 'UnknownFieldReference', 40, ErrorTok);
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
@@ -439,6 +466,47 @@ codeunit 96439 "Playbook Verify Template Tests"
         Assert.AreEqual('balanceduelcy', Lookup.ToJsonName('Balance Due (LCY)'), 'Balance Due (LCY)');
         Assert.AreEqual('linediscount_', Lookup.ToJsonName('Line Discount %'), 'A percent sign becomes _');
         Assert.AreEqual('a_b_c_d', Lookup.ToJsonName('A/B\C"D'), 'Slash, backslash and quote become _');
+    end;
+
+    local procedure VerifyStoredFieldFinding(LanguageId: Integer)
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Verify: Codeunit "Playbook Verify ori";
+        Findings: JsonArray;
+        RequestJson: JsonObject;
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+        PreviousLanguage: Integer;
+    begin
+        // [SCENARIO] A missing stored field is a blocking error; the diagnostic preserves mapped and unmapped casing.
+        // [GIVEN] Case variants match and duplicate targets retain their first original spelling.
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        BuildBase();
+        Lib.SetResultLogPaths(PlaybookCodeTok, 10, 'creditLimitLCY, result>MixedCase, other>mixedcase, result.TotalAmount');
+        AddStepWithTemplate(20, '{"a":"@10.CREDITLIMITLCY","b":"@10.mixedcase","c":"@10.RESULT_TOTALAMOUNT","d":"@10.typo"}');
+        TempArgument.Init();
+        TempArgument.Insert();
+        RequestJson.Add('playbookCode', PlaybookCodeTok);
+        TempArgument.SetRequestJson(RequestJson);
+        // [WHEN] The public Verify handler summarizes the findings.
+        Verify.ExecuteVerify(TempArgument);
+        ResponseJson := TempArgument.GetResponseJson();
+        // [THEN] Exactly the unknown field is an error, with copyable original field names, in both languages.
+        ResponseJson.Get('findings', Token);
+        Findings := Token.AsArray();
+        Assert.AreEqual(1, Findings.Count(), 'Case-insensitive references remain valid');
+        AssertFinding(Findings, 'UnknownFieldReference', 20, ErrorTok);
+        Findings.Get(0, Token);
+        Assert.IsTrue(TextOf(Token.AsObject(), 'message').Contains('creditLimitLCY, MixedCase, result_TotalAmount'), 'Original mapped and unmapped casing, without duplicate targets');
+        Assert.AreEqual(1, IntOf(ResponseJson, 'errorCount'), 'Stored-field error is counted as an error');
+        Assert.AreEqual(0, IntOf(ResponseJson, 'warningCount'), 'Stored-field error is not counted as a warning');
+        Assert.AreEqual(1, IntOf(ResponseJson, 'blockingErrorCount'), 'Enabled stored-field error blocks Run and Schedule');
+        Assert.AreEqual(0, IntOf(ResponseJson, 'blockingWarningCount'), 'No blocking warnings');
+        ResponseJson.Get('valid', Token);
+        Assert.IsFalse(Token.AsValue().AsBoolean(), 'The playbook is invalid');
+        Lib.Cleanup(PlaybookCodeTok);
+        GlobalLanguage(PreviousLanguage);
     end;
 
     local procedure VerifyNotJson(LanguageId: Integer; Template: Text; ExpectedStart: Text)
@@ -554,7 +622,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         GetFindings(Findings);
 
         Assert.AreEqual(1, Findings.Count(), 'One finding');
-        AssertFinding(Findings, 'UnknownFieldReference', 40, WarningTok);
+        AssertFinding(Findings, 'UnknownFieldReference', 40, ErrorTok);
         AssertReferenceMessage(Findings, 'UnknownFieldReference', ExpectedStart);
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
@@ -642,11 +710,6 @@ codeunit 96439 "Playbook Verify Template Tests"
             if (TextOf(Token.AsObject(), 'code') = FindingCode) and ((StepNo = -1) or (IntOf(Token.AsObject(), 'stepNo') = StepNo)) then
                 Count += 1;
         exit(Count);
-    end;
-
-    local procedure AssertWarning(Findings: JsonArray; FindingCode: Text; StepNo: Integer)
-    begin
-        AssertFinding(Findings, FindingCode, StepNo, WarningTok);
     end;
 
     local procedure AssertFinding(Findings: JsonArray; FindingCode: Text; StepNo: Integer; Severity: Text)
