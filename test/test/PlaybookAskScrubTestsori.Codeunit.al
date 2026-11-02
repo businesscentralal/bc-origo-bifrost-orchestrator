@@ -5,7 +5,7 @@ using Origo.Bifrost.Orchestrator;
 using System.TestLibraries.Utilities;
 
 /// <summary>Issue #134: trace scrubbing at dispatch, all runner paths, debug logging, and run/help guidance.</summary>
-codeunit 96444 "Playbook Ask Scrub Tests ori"
+codeunit 96456 "Playbook Ask Scrub Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;
