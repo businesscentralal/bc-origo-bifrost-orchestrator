@@ -1,0 +1,173 @@
+{
+  "id": "amend-119-206d77a4b35dae166e7c",
+  "sourceTask": "amend-119-206d77a4b35dae166e7c",
+  "owner": "worker-3",
+  "ownerName": "Sindri",
+  "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+  "primaryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119",
+  "issueUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/118"
+  ],
+  "prUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+  ],
+  "status": "ready",
+  "candidateSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "progressKey": "f9ac293-F1-compiled-zero-zero-published-readback-owned-f0a82b8bd245",
+  "checkpointPath": "/workspace/evidence/orchestrator119-amend-worker3/checkpoint.json",
+  "startedAt": "2026-11-02T00:32:38.413Z",
+  "updatedAt": "2026-11-02T00:35:08.688Z",
+  "phaseFinishedAt": "2026-11-02T00:36:58.468023+00:00",
+  "retainedDeveloper": "worker-3",
+  "nextOwner": "worker-3",
+  "nextAction": "Deploy F1 candidate to worker-owned BC28.5 W1 after actual health readiness and verify acceptance.",
+  "resumeTrigger": "Current execution continues unblocked F1; authenticated Architect disposition for test96442 reconciliation",
+  "readyWork": [
+    "Deploy published f9ac293 on owned container f0a82b8bd245; execute full native suite, bilingual UI and self-seeded MCP; verify cleanup."
+  ],
+  "remainingWork": [
+    "F1 implemented and published after exact-clean-tip app/test compilation; owned runtime checks pending.",
+    "Architect disposition for duplicate test96442 and semantic main merge, followed by authorized integration and current-candidate revalidation.",
+    "Exact-tip app/test compile, published readback, full native suite, bilingual UI/self-seeded MCP and cleanup.",
+    "Fresh exact-tip Claude verification, Grok clearance, eligible approval, Architect merge/deployment and Tester UAT/closure."
+  ],
+  "blockers": [
+    {
+      "owner": "Architect",
+      "code": "needs-dependency",
+      "reason": "Explicit repair assignment requires stopping for semantic source/test changes. Combined tree contains two distinct codeunits numbered96442 (Playbook Ref118 Tests and Verify Summary Tests). A conflict-marker-only resolution cannot yield a compilable combined suite. Decide/authorize minimal object-identity reconciliation before editing; no test deletion, exclusion or weakened assertion.",
+      "dependencyUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/119"
+    }
+  ],
+  "accountableOwner": "root-coordinator",
+  "escalationOwner": "Architect",
+  "acceptanceEvidence": {
+    "priorCheckpoint": "/workspace/evidence/orchestrator119-repair-worker3/checkpoint.json",
+    "liveReview": [
+      {
+        "id": 5628569650,
+        "state": "COMMENTED",
+        "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a"
+      },
+      {
+        "id": 5631394182,
+        "state": "CHANGES_REQUESTED",
+        "sha": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a"
+      }
+    ],
+    "eligibility": {
+      "checkedAt": "2026-11-02T00:35:08.688Z",
+      "prLabels": [
+        "pr:amend",
+        "wip:codex-sindri"
+      ],
+      "issueLabels": [
+        "bug",
+        "intake:handed-off",
+        "wip:codex-sindri"
+      ],
+      "parked": false
+    },
+    "source": {
+      "checkout": "/workspace/orchestrator119-repair-worker3",
+      "branch": "codex/worker4-orchestrator118-reference-validation",
+      "base": "dd6d86cac9e8f9b068fd68b30009c04ed8cf610a",
+      "dirty": " M CHANGELOG.md\n M \"app/Translations/Bifrost Orchestrator.is-IS.xlf\"\n M app/src/MessageTypes/Playbook/PlaybookVerifyTemplate.Codeunit.al\n",
+      "priorWorker4PrivateCheckpointPreserved": true,
+      "noForeignActiveTaskObserved": true
+    },
+    "F1": {
+      "localOccurrencesChanged": 3,
+      "verifiedRuntime": false,
+      "published": true,
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540"
+    },
+    "compile": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "dirty": "",
+      "checks": {
+        "app": {
+          "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+          "dirty": "",
+          "startedAt": "2026-11-02T00:35:40.056Z",
+          "finishedAt": "2026-11-02T00:35:52.046Z",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 0,
+          "artifactSha256": "ebec0549e8e97241954638b22516194befa0f8014b77ee02f7cdd0b67194d1de"
+        },
+        "test": {
+          "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+          "dirty": "",
+          "startedAt": "2026-11-02T00:35:52.100Z",
+          "finishedAt": "2026-11-02T00:36:01.214Z",
+          "exitCode": 0,
+          "errors": 0,
+          "warnings": 0,
+          "artifactSha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b"
+        }
+      }
+    },
+    "tests": {
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "fullSuiteVerified": false
+    },
+    "ui": {
+      "executed": 0,
+      "passed": 0,
+      "verified": false
+    },
+    "mcp": {
+      "executed": 0,
+      "passed": 0,
+      "verified": false
+    },
+    "cleanup": {
+      "resourcesCreated": [],
+      "fixturesCreated": []
+    },
+    "appliedLessonIds": [
+      "orchestrator119-review5631394182-f1-terminology",
+      "core-pr853-worker8-20261004-conflict-preservation"
+    ],
+    "standards": {
+      "commit": "ac05e88ab51ed4c9bbfb843508fc2484afe5ec8f",
+      "syncedAt": "2026-10-03T17:42:19.3581046Z",
+      "freshlySynchronized": false
+    },
+    "secretary": {
+      "startedAt": "2026-11-02T00:32:38.413Z",
+      "stopOwnedByRegistrar": true,
+      "acknowledged": false
+    },
+    "publication": {
+      "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+      "branch": "codex/worker4-orchestrator118-reference-validation",
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/worker4-orchestrator118-reference-validation",
+      "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/f9ac293926d8f5787056b42543b4c116dd57c540",
+      "remoteVerifiedAt": "2026-11-02T00:36:24.313Z"
+    },
+    "staticVerification": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "xmlParses": true,
+      "uniqueLabel": true,
+      "commentNoteTargetConsistent": true,
+      "placeholdersPreserved": true,
+      "oldTermAbsent": true,
+      "matchedOccurrences": 3
+    },
+    "environment": {
+      "id": "f0a82b8bd245",
+      "displayName": "worker3-orch119-20261102-w1",
+      "owner": "worker-3",
+      "createdAt": "2026-11-02T00:35:46.307Z",
+      "sourceSha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "status": 202
+    }
+  },
+  "executionFinishedIsDelivery": false
+}

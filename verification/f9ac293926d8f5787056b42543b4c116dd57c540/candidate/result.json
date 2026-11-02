@@ -1,0 +1,26 @@
+{
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "dirty": "",
+  "checks": {
+    "app": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "dirty": "",
+      "startedAt": "2026-11-02T00:35:40.056Z",
+      "finishedAt": "2026-11-02T00:35:52.046Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "artifactSha256": "ebec0549e8e97241954638b22516194befa0f8014b77ee02f7cdd0b67194d1de"
+    },
+    "test": {
+      "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+      "dirty": "",
+      "startedAt": "2026-11-02T00:35:52.100Z",
+      "finishedAt": "2026-11-02T00:36:01.214Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "artifactSha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b"
+    }
+  }
+}

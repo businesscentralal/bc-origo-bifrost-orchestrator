@@ -1,0 +1,29 @@
+{
+  "id": "f0a82b8bd245",
+  "owner": "worker-3",
+  "sha": "f9ac293926d8f5787056b42543b4c116dd57c540",
+  "startedAt": "2026-11-02T00:40:43.121Z",
+  "mode": "shipping no-IVT Default then Test same physical container, no Foundation test installer, Synchronize",
+  "stages": [
+    {
+      "name": "foundation",
+      "appPath": "/workspace/evidence/orchestrator119-amend-worker3/foundation.app",
+      "sha256": "ad548ee1c19b276539ec22a2e57c4b1cad198d10199c0d28fb8a4938744c74b1"
+    },
+    {
+      "name": "orchestrator-default",
+      "appPath": "/workspace/evidence/orchestrator119-amend-worker3/shipping/shipping.app",
+      "sha256": "69dabc128c918a84eb41cc2b145560d10db0f9f1235c960ac5a9201bfc6a534d"
+    },
+    {
+      "name": "orchestrator-test-product",
+      "appPath": "/workspace/evidence/orchestrator119-amend-worker3/candidate/app.app",
+      "sha256": "ebec0549e8e97241954638b22516194befa0f8014b77ee02f7cdd0b67194d1de"
+    },
+    {
+      "name": "orchestrator-test-app",
+      "appPath": "/workspace/evidence/orchestrator119-amend-worker3/candidate/test.app",
+      "sha256": "6083e4cc2018629d4c28a8a5b6b7452efb4f4061df13d665ab41fee4c52eb49b"
+    }
+  ]
+}
