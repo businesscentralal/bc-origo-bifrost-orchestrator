@@ -167,9 +167,8 @@ codeunit 96441 "Contract Complete Tests ori"
         EffectName: Text;
         Ordinal: Integer;
     begin
-        // [SCENARIO] A type that writes is Inbound and a type that reads is Outbound, except the two documented ones:
-        // Orchestrator.Report.Get reads and inserts an empty preset (Both) and Orchestrator.Workspace.Preview commits a nested
-        // dispatch but changes no business data (Outbound, #80).
+        // [SCENARIO] Reads are Outbound and writes are Inbound or Both. Report.Get may insert a preset,
+        // and Workspace.Preview commits a nested dispatch; both declare Both (#117, Gunnar H2).
         foreach Ordinal in OrchestratorTypes() do begin
             TypeName := NameOf(Ordinal);
             Assert.IsTrue(ContractMgt.GetContract(TypeOf(Ordinal), Contract), TypeName + ' has a contract');
@@ -186,7 +185,7 @@ codeunit 96441 "Contract Complete Tests ori"
                 TypeName = 'Orchestrator.Report.Get':
                     Assert.IsTrue(Direction = Direction::Both, TypeName + ' is Both');
                 TypeName = 'Orchestrator.Workspace.Preview':
-                    Assert.IsTrue(Direction = Direction::Outbound, TypeName + ' is Outbound');
+                    Assert.IsTrue(Direction = Direction::Both, TypeName + ' is Both');
                 EffectName = 'read':
                     Assert.IsTrue(Direction = Direction::Outbound, TypeName + ' reads, so it is Outbound');
                 else

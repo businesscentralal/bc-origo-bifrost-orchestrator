@@ -248,7 +248,7 @@ codeunit 10035536 "Scheduler Mgt ori"
         JobQueueEntry."Earliest Start Date/Time" := CurrentDateTime();
         JobQueueEntry."Object Type to Run" := JobQueueEntry."Object Type to Run"::Codeunit;
         JobQueueEntry."Object ID to Run" := Codeunit::"Scheduler Handler ori";
-        JobQueueEntry."Starting Time" := 080000T;
+        JobQueueEntry.Validate("Starting Time", 080000T);
         JobQueueEntry."Maximum No. of Attempts to Run" := 3;
         JobQueueEntry."Job Queue Category Code" := JobQueueCategoryCode;
         JobQueueEntry.Description := JobQueueEntryDescTxt;

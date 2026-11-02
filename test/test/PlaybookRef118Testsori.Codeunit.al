@@ -5,7 +5,7 @@ using Origo.Bifrost.Orchestrator;
 using System.TestLibraries.Utilities;
 
 /// <summary>Issue #118: use primary-key paths, warn before execution and fail unresolved requests before dispatch.</summary>
-codeunit 96442 "Playbook Ref 118 Tests ori"
+codeunit 96444 "Playbook Ref 118 Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;

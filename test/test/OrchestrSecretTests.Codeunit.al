@@ -9,7 +9,7 @@ using System.TestLibraries.Utilities;
 /// Covers the move of the Bifrost Orchestrator secrets into the Bifröst Foundation secret store:
 /// the composed secret codes, the registration done by install and upgrade, the set / is-set /
 /// clear round trip of the Telegram bot token and of a client credentials pair, the cleanup when a
-/// credential record is deleted or renamed, and the reduced Bifröst Setup page extension.
+/// credential record is deleted or renamed, and the Bifröst Setup page extension.
 /// </summary>
 codeunit 96403 "Orchestr Secret Tests"
 {
@@ -425,14 +425,14 @@ codeunit 96403 "Orchestr Secret Tests"
     end;
 
     [Test]
-    [HandlerFunctions('SendNotificationHandler,SchedulerSetupPageHandler')]
-    procedure BifrostSetupExposesTheSingleOrchestratorAppsAction()
+    [HandlerFunctions('SendNotificationHandler,SchedulerSetupPageHandler,PlaybooksPageHandler,PlaybookInstancesPageHandler')]
+    procedure BifrostSetupExposesOrchestratorSetupAndPlaybooks()
     var
         BifrostSetup: TestPage "Setup ori";
     begin
-        // [SCENARIO] The Bifröst Setup page carries exactly one Bifrost Orchestrator action, in group Apps.
-        // The three navigation actions moved onto the application setup page; referencing any of
-        // them here would no longer compile. The setup notifications live on Bifröst Setup, raised
+        // [SCENARIO] The Bifröst Setup page opens Bifrost Orchestrator Setup from Apps, and opens
+        // the playbook list and the playbook execution log from Navigate. Client credentials stay
+        // on the application setup page. The setup notifications live on Bifröst Setup, raised
         // by Foundation for every application in the registry.
 
         // [GIVEN] the Bifröst Setup page, and outbound HTTP disabled for this application so that
@@ -444,8 +444,12 @@ codeunit 96403 "Orchestr Secret Tests"
         // [WHEN] the page is opened
         BifrostSetup.OpenView();
 
-        // [THEN] the single Apps action is available and opens the application setup page
+        // [THEN] Navigate opens the playbook pages, and Apps still opens the application setup page
+        Assert.IsTrue(BifrostSetup.Playbooks.Enabled(), 'Bifrost Playbooks must be available on Bifrost Setup');
+        Assert.IsTrue(BifrostSetup.PlaybookInstances.Enabled(), 'The playbook execution log must be available on Bifrost Setup');
         Assert.IsTrue(BifrostSetup.OrchestratorSetup.Enabled(), 'The Bifrost Orchestrator Setup action must be available on Bifrost Setup');
+        BifrostSetup.Playbooks.Invoke();
+        BifrostSetup.PlaybookInstances.Invoke();
         BifrostSetup.OrchestratorSetup.Invoke();
         BifrostSetup.Close();
     end;
@@ -462,6 +466,18 @@ codeunit 96403 "Orchestr Secret Tests"
     procedure SchedulerSetupPageHandler(var SchedulerSetup: TestPage "Scheduler Setup ori")
     begin
         SchedulerSetup.Close();
+    end;
+
+    [PageHandler]
+    procedure PlaybooksPageHandler(var Playbooks: TestPage "Playbooks ori")
+    begin
+        Playbooks.Close();
+    end;
+
+    [PageHandler]
+    procedure PlaybookInstancesPageHandler(var PlaybookInstances: TestPage "Playbook Instances ori")
+    begin
+        PlaybookInstances.Close();
     end;
 
     // ---------- helpers ----------

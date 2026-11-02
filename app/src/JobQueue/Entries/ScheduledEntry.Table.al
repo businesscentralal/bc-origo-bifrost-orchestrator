@@ -246,6 +246,7 @@ table 10035535 "Scheduled Entry ori"
             trigger OnValidate()
             var
                 RecurringTemplate: Record "Recurring Template ori";
+                JobQueueEntry: Record "Job Queue Entry";
             begin
                 if "Recurring Template Code" = '' then
                     exit;
@@ -265,9 +266,13 @@ table 10035535 "Scheduled Entry ori"
                     "No. of Minutes between Runs" := RecurringTemplate."No. of Minutes between Runs";
                     "Next Run Date Formula" := RecurringTemplate."Next Run Date Formula";
 
-                    // Trigger sync to Job Queue Entry
-                    if Rec.DeleteJobQueueEntry() then
-                        Message(DeletedMsg);
+                    ValidateTimeRange();
+                    ModifyRecurringFields();
+                    if JobQueueEntry.Get(ID) then begin
+                        JobQueueEntry."Ending Time" := "Ending Time";
+                        JobQueueEntry.Validate("Starting Time", "Starting Time");
+                        JobQueueEntry.Modify(true);
+                    end;
                 end;
             end;
         }
@@ -386,9 +391,10 @@ table 10035535 "Scheduled Entry ori"
                 ValidateTimeRange();
 
                 // Sync to Job Queue Entry
-                JobQueueEntry.SetRange(ID, ID);
-                if not JobQueueEntry.IsEmpty() then
-                    JobQueueEntry.ModifyAll("Starting Time", "Starting Time", true);
+                if JobQueueEntry.Get(ID) then begin
+                    JobQueueEntry.Validate("Starting Time", "Starting Time");
+                    JobQueueEntry.Modify(true);
+                end;
             end;
         }
         field(260; "Ending Time"; Time)

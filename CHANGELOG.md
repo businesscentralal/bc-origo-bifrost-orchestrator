@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-02) - Test object identity after main integration (#118, PR #119)
+
+- Renumber test codeunit `Playbook Ref 118 Tests ori` from 96442 to the next free ID, 96444; retain main's 96442 `Verify Summary Tests ori` and 96443 `First Schedule Tests ori` with all existing scenarios and assertions.
+
 ### Fixed (2026-11-02) - Icelandic playbook terminology (#118, PR #119)
 - Use the established Icelandic term "keðjan" in the primary-key next-step guidance (codeunit 10035618), its label comment and is-IS translation.
 
@@ -16,7 +20,54 @@ Business Central release versioning (`major.minor.build.revision`).
 - Verify (10035618 `Playbook Verify Template ori`, 10035619 `Playbook Verify Lookup ori`, contract 10035615 `Playbook Verify Msg ori`) warns with `UnknownFieldReference` when `@_current.fields.X` names a primary-key field and suggests its `primaryKey` path.
 - Runner (10035547 `Playbook Runner ori`) checks original template references with 10035546 `Playbook JSON Helper ori` before dispatch in single, forEach and paged steps. A missing reference fails the step with a localized diagnostic instead of sending literal token text; e-mail literals and data returned by an earlier step are not treated as missing template references.
 - Zero-warning test compilation: corrected existing format-string labels in test codeunits 96430, 96433, 96432, 96435, 96437, 96439 and library 96434; ordered declarations in 96433; aligned helper filenames for 96434, 96438 and 96440. Assertions and scenarios are unchanged.
-- Regression tests: 96442 `Playbook Ref 118 Tests ori` covers bilingual warnings, correct resolution, missing embedded/nested paths, e-mail/data literals, same-iteration syntax and real single/forEach runner failures. Existing compatibility signatures remain intact.
+- Regression tests: 96444 `Playbook Ref 118 Tests ori` covers bilingual warnings, correct resolution, missing embedded/nested paths, e-mail/data literals, same-iteration syntax and real single/forEach runner failures. Existing compatibility signatures remain intact.
+
+### Fixed (2026-10-31) - Workspace preview notes (#117)
+
+- Codeunit 10035596 `Workspace Preview Msg ori`: remove the direction claim from the GetNotes sentence in English and Icelandic, following Gunnar's 31 October decision. Direction remains available from the message type's direction field; runtime and other help are unchanged.
+- Test codeunit 96453 `Orch B2 Contract Tests` checks that preview notes do not duplicate the direction field while preserving the existing Both direction assertion.
+
+### Fixed (2026-10-31) - Current Foundation test contracts (#117)
+
+- Test codeunit 96430 `Check Step Error Tests` supplies `expectedCount: 1` in the failing-report and missing-report fixtures so the existing domain-error assertions run beyond Foundation's confirmation guard.
+- Test codeunits 96452 `Orch B1 Contract Tests` and 96453 `Orch B2 Contract Tests` append Foundation's `Retryable` entry to the six approved error snapshots. Every existing error entry, text, order and full-array equality assertion is preserved, following Gunnar's 31 October H2 decision. Product code and help are unchanged.
+
+### Fixed (2026-10-29) - First recurring dispatch and reference starting time (#130)
+
+- Codeunits 10035544 `Schedule Calc ori`, 10035535 `Scheduler Handler ori`, 10035536 `Scheduler Mgt ori` and table 10035535 `Scheduled Entry ori`: a never-run minutes-based schedule keeps the due slot while inside its allowed window. Administrative Last Ready State is no longer treated as a successful run. A delayed daily success retains the next configured daily start, including the same evening when an execution crosses midnight. Creation, rebuild and Starting Time edits validate the BC field to maintain Reference Starting Time, including clearing it. Applying a recurring template synchronizes the existing job and its reference without deleting it. Explicit rebuilds through codeunit 10035550 `SE Msg Handler ori` or API page 10035537 create the replacement even when its next run is in the future.
+- Test codeunit 96443 `First Schedule Tests ori` covers due, future and elapsed windows, successful-run recurrence across midnight, creation inside the allowed window, reference-time synchronization and the full scheduler/dispatcher path. Existing codeunit 96411 starting-time synchronization test also checks the reference anchor.
+
+- Successful execution history determines whether an entry has run; purged successful logs make it follow the never-run path. Existing blank reference times are corrected by a Starting Time edit, template application or explicit rebuild; this change does not perform an automatic upgrade backfill. Scheduling retains the existing session-time-zone behavior.
+
+### Fixed (2026-10-28) - Registration for restricted licence administrators (#127)
+
+- Codeunit 10035607 `Orchestrator Registration ori` declares `InherentPermissions = X` and `InherentEntitlements = X`, allowing Foundation's setup page to invoke the app-registration subscriber without granting the user Orchestrator administration, including the entitlement boundary approved on 2026-10-29.
+- Test codeunit 96423 `Orchestr Registration Tests` opens Foundation setup under the exact `BIFROST LicAdm ori` role in English and Icelandic, checks that the page stays read-only and Orchestrator remains registered with its setup page. Test permission set 96423 `Orch Test Plat ori` supplies only the Microsoft platform baseline; it grants no Bifrost or Orchestrator objects. Verification requires Foundation 28.0.10 or later.
+
+### Fixed (2026-10-22) - Distinguish blocking Verify findings (#113)
+
+- Codeunits 10035616 `Playbook Verify ori` and 10035615 `Playbook Verify Msg ori`: add `blockingErrorCount` and `blockingWarningCount` to `Orchestrator.Playbook.Verify`. These exclude informational findings on disabled steps and match the existing Run/Schedule gates (warnings can be accepted with `ignoreWarnings`). Existing `valid`, `errorCount`, `warningCount`, per-step findings and `stepDisabled` remain unchanged for compatibility. Help, examples and bilingual type descriptions explain which counts to read.
+- Test app compile hygiene: codeunits 96430 `Check Step Error Tests`, 96432 `Playbook Last Run Tests`, 96433 `Playbook Verify Tests`, 96434 `Playbook Test Library ori`, 96435 `Playbook Verify Step Tests`, 96437 `Playbook Gate Tests` and 96439 `Playbook Verify Template Tests` use locked request-format labels and ordered local variables for zero-warning CodeCop. Align filenames with existing object names for 96434 `Playbook Test Library ori`, 96438 `Playbook Example Library ori` and 96440 `Role Lookup Subscriber ori`; 96438 and 96440 are filename-only renames. Assertions and test selection are unchanged.
+- Test codeunit 96442 `Verify Summary Tests ori`: regressions in LCIDs 1033/1039 for disabled-only errors, mixed enabled/disabled findings, enabled blockers, clean summaries and the published help contract. Run/Schedule safety is unchanged.
+
+### Fixed (2026-10-25) - Report.Get selection description (#123)
+
+- Codeunit `Report Get Msg ori` (10035594): the English and Icelandic selection descriptions now state that the call may create an empty preset for the calling user when none exists. Effect, direction and runtime behavior are unchanged.
+
+### Added (2026-10-25) - Playbooks on Bifrost Setup Navigate, and Tell Me for the playbook list
+
+- Page extension `Setup JQ ori` (10035537) on Foundation's `Setup ori` keeps the *Bifrost Orchestrator Setup* action in Apps and adds two Navigate actions: *Bifrost Playbooks* (`Playbooks ori`) and *Playbook Execution Log* (`Playbook Instances ori`). The same two actions remain on `Scheduler Setup ori`.
+- Page `Playbooks ori` (10035551) sets `UsageCategory = Lists` so Tell Me can open the list. Caption stays *Bifrost Playbooks* and `ApplicationArea` stays `All`.
+- Icelandic captions for the two new Bifrost Setup actions are in `app/Translations/Bifrost Orchestrator.is-IS.xlf`, generated with `tools/Update-IcelandicXlf.ps1`.
+- `Orchestr Secret Tests` (96403): `BifrostSetupExposesOrchestratorSetupAndPlaybooks` opens Bifrost Playbooks and the playbook execution log from Bifrost Setup, and still opens Bifrost Orchestrator Setup from Apps.
+
+### Fixed (2026-10-23) - Orchestrator direction and effect declarations (#117)
+
+- Workspace.Preview is offered in both directions; Report.Get declares the preset it may insert as a write (core#1147 C). Codeunits 10035596 `Workspace Preview Msg ori` and 10035594 `Report Get Msg ori`; runtime behavior and the effect changes text are unchanged.
+- Workspace.Preview's direction note now says Both in English and Icelandic, matching its metadata (Gunnar's 2026-10-24 exception to contract item 3); the remaining help text is unchanged.
+- Test codeunits 96453 `Orch B2 Contract Tests`, 96441 `Contract Complete Tests ori` and 96455 `Msg Direction Tests ori` assert Both for Workspace.Preview and write for Report.Get, following Gunnar's H2 approvals of the existing assertions.
+
+- Reuse the compile-only test hygiene from PR #116: locked format labels and variable ordering in codeunits 96430, 96432, 96433, 96434, 96435, 96437 and 96439; align filenames for 96434 `Playbook Test Library ori`, 96438 `Playbook Example Library ori` and 96440 `Role Lookup Subscriber ori`. Assertions and fixture values are unchanged.
 
 ### Changed (2026-10-21) - Message type contract and discovery brought to Foundation parity
 

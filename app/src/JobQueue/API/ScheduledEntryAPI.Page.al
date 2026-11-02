@@ -118,7 +118,7 @@ page 10035537 "Scheduled Entry API ori"
     begin
         Rec.TestField(Blocked, false);
         Exists := Rec.DeleteJobQueueEntry();
-        JobQueueHandler.ScheduleTask(Rec);
+        JobQueueHandler.ScheduleTask(Rec, true);
 
         ActionContext.SetObjectType(ObjectType::Page);
         ActionContext.SetObjectId(Page::"Scheduled Entry API ori");

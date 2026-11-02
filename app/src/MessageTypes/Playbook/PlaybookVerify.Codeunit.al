@@ -39,6 +39,8 @@ codeunit 10035616 "Playbook Verify ori"
         ResponseJson.Add('valid', CountFindings(Findings, ErrorTok) = 0);
         ResponseJson.Add('errorCount', CountFindings(Findings, ErrorTok));
         ResponseJson.Add('warningCount', CountFindings(Findings, WarningTok));
+        ResponseJson.Add('blockingErrorCount', CountBlockingFindings(Findings, ErrorTok));
+        ResponseJson.Add('blockingWarningCount', CountBlockingFindings(Findings, WarningTok));
         ResponseJson.Add('findings', Findings);
         Argument.SetResponseJson(ResponseJson);
     end;
@@ -169,6 +171,21 @@ codeunit 10035616 "Playbook Verify ori"
         foreach Token in Findings do
             if GetText(Token.AsObject(), 'severity') = Severity then
                 Count += 1;
+        exit(Count);
+    end;
+
+    local procedure CountBlockingFindings(Findings: JsonArray; Severity: Text): Integer
+    var
+        Token: JsonToken;
+        Finding: JsonObject;
+        Count: Integer;
+    begin
+        foreach Token in Findings do begin
+            Finding := Token.AsObject();
+            if not Finding.Contains('stepDisabled') then
+                if GetText(Finding, 'severity') = Severity then
+                    Count += 1;
+        end;
         exit(Count);
     end;
 

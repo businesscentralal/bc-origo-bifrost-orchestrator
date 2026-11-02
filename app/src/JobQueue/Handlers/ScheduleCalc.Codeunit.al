@@ -19,26 +19,48 @@ codeunit 10035544 "Schedule Calc ori"
     /// <param name="StartingDateTime">The base DateTime to calculate from.</param>
     /// <returns>The next DateTime when the job should run.</returns>
     internal procedure CalcNextRunTimeForRecurringSchedule(var "Scheduled Entry ori": Record "Scheduled Entry ori"; LastExecutionDateTime: DateTime; StartingDateTime: DateTime): DateTime
+    begin
+        exit(CalcNextRunTimeForRecurringSchedule("Scheduled Entry ori", LastExecutionDateTime, StartingDateTime, CurrentDateTime));
+    end;
+
+    /// <summary>Calculates the next slot using one captured clock value for the whole calculation.</summary>
+    internal procedure CalcNextRunTimeForRecurringSchedule(var "Scheduled Entry ori": Record "Scheduled Entry ori"; LastExecutionDateTime: DateTime; StartingDateTime: DateTime; NowDateTime: DateTime): DateTime
     var
         NewRunDate: Date;
         NewRunDateTime: DateTime;
         InvalidNexRunDateFormulaErr: Label '%1: %2 is invalid', Comment = '%1 = Field Caption, %2 = Field Value, is-IS=%1: %2 er ógilt';
     begin
         if StartingDateTime = 0DT then
-            StartingDateTime := CurrentDateTime;
+            StartingDateTime := NowDateTime;
         NewRunDate := DT2Date(StartingDateTime);
 
         if "Scheduled Entry ori".IsNextRunDateFormulaSet() then begin
             if CalcDate("Scheduled Entry ori"."Next Run Date Formula", NewRunDate) <= NewRunDate then
                 Error(InvalidNexRunDateFormulaErr, "Scheduled Entry ori".FieldCaption("Next Run Date Formula"), "Scheduled Entry ori"."Next Run Date Formula");
-            while CreateDateTime(NewRunDate, "Scheduled Entry ori"."Starting Time") < CurrentDateTime do begin
+            while CreateDateTime(NewRunDate, "Scheduled Entry ori"."Starting Time") < NowDateTime do begin
                 StartingDateTime := CreateDateTime(NewRunDate, "Scheduled Entry ori"."Starting Time");
                 NewRunDate := CalcDate("Scheduled Entry ori"."Next Run Date Formula", NewRunDate);
             end;
-            if IsInsideAllowedTimeRange("Scheduled Entry ori", CurrentDateTime) and (StartingDateTime > LastExecutionDateTime) then
+            if IsInsideAllowedTimeRange("Scheduled Entry ori", NowDateTime) and (StartingDateTime > LastExecutionDateTime) then
                 exit(StartingDateTime)
             else
                 exit(CreateDateTime(NewRunDate, "Scheduled Entry ori"."Starting Time"));
+        end;
+
+        // A first dispatch has no successful execution to advance from. Keep the latest
+        // due slot while inside today's allowed window, rather than advancing forever.
+        if (LastExecutionDateTime = 0DT) and ("Scheduled Entry ori"."No. of Minutes between Runs" > 0) then
+            exit(CalcFirstRunTime("Scheduled Entry ori", StartingDateTime, NowDateTime));
+
+        // Keep the first configured daily start after the actual execution, including
+        // an execution delayed past midnight into the next calendar day.
+        if (LastExecutionDateTime <> 0DT) and
+           ("Scheduled Entry ori"."No. of Minutes between Runs" = 1440) and
+           ("Scheduled Entry ori"."Starting Time" <> 0T) then begin
+            NewRunDateTime := CreateDateTime(DT2Date(LastExecutionDateTime), "Scheduled Entry ori"."Starting Time");
+            if NewRunDateTime <= LastExecutionDateTime then
+                NewRunDateTime := CreateDateTime(DT2Date(LastExecutionDateTime) + 1, "Scheduled Entry ori"."Starting Time");
+            exit(CalcRunTimeForRecurringSchedule("Scheduled Entry ori", NewRunDateTime));
         end;
 
         NewRunDateTime := StartingDateTime;
@@ -48,7 +70,7 @@ codeunit 10035544 "Schedule Calc ori"
                 StartingDateTime := CalcRunTimeForRecurringSchedule("Scheduled Entry ori", LastExecutionDateTime);
                 NewRunDateTime := AddMinutesToDateTime(StartingDateTime, "Scheduled Entry ori"."No. of Minutes between Runs")
             end else
-                while CalcRunTimeForRecurringSchedule("Scheduled Entry ori", NewRunDateTime) < CurrentDateTime do begin
+                while CalcRunTimeForRecurringSchedule("Scheduled Entry ori", NewRunDateTime) < NowDateTime do begin
                     StartingDateTime := CalcRunTimeForRecurringSchedule("Scheduled Entry ori", NewRunDateTime);
                     NewRunDateTime := AddMinutesToDateTime(NewRunDateTime, "Scheduled Entry ori"."No. of Minutes between Runs")
                 end;
@@ -57,6 +79,25 @@ codeunit 10035544 "Schedule Calc ori"
             exit(StartingDateTime)
         else
             exit(CalcRunTimeForRecurringSchedule("Scheduled Entry ori", NewRunDateTime));
+    end;
+
+    local procedure CalcFirstRunTime(var ScheduledEntry: Record "Scheduled Entry ori"; StartingDateTime: DateTime; NowDateTime: DateTime): DateTime
+    var
+        DueSlot: DateTime;
+        NextSlot: DateTime;
+    begin
+        NextSlot := CalcRunTimeForRecurringSchedule(ScheduledEntry, StartingDateTime);
+        while NextSlot < NowDateTime do begin
+            DueSlot := NextSlot;
+            NextSlot := CalcRunTimeForRecurringSchedule(ScheduledEntry,
+                AddMinutesToDateTime(NextSlot, ScheduledEntry."No. of Minutes between Runs"));
+        end;
+        if NextSlot = NowDateTime then
+            exit(NextSlot);
+        if (DueSlot <> 0DT) and
+           (CalcRunTimeForRecurringSchedule(ScheduledEntry, NowDateTime) = NowDateTime) then
+            exit(DueSlot);
+        exit(NextSlot);
     end;
 
     local procedure CalcRunTimeForRecurringSchedule(var "Scheduled Entry ori": Record "Scheduled Entry ori"; StartingDateTime: DateTime) NewRunDateTime: DateTime
@@ -182,7 +223,7 @@ codeunit 10035544 "Schedule Calc ori"
     /// Computes the next run DateTime for a job queue entry based on its orchestrator configuration.
     /// </summary>
     /// <param name="JobQueueEntry">The job queue entry record.</param>
-    /// <param name="LastRunDateTime">The DateTime of the last successful run. If 0DT, uses SystemModifiedAt.</param>
+    /// <param name="LastRunDateTime">The DateTime of the last successful run, or 0DT when no run succeeded.</param>
     /// <param name="StartingDateTime">The base DateTime to calculate from. If 0DT, uses SystemModifiedAt.</param>
     /// <param name="NewRunDateTime">Output: The calculated next run DateTime.</param>
     /// <returns>True if calculation succeeded, false otherwise.</returns>
@@ -219,10 +260,8 @@ codeunit 10035544 "Schedule Calc ori"
         JobQueueLogEntry.SetRange(ID, JobQueueEntry.ID);
         JobQueueLogEntry.SetRange(Status, JobQueueLogEntry.Status::Success);
         if JobQueueLogEntry.FindLast() then
-            LastRunDateTime := JobQueueLogEntry."Start Date/Time"
-        else
-            // No successful log entry found, use the last ready state
-            LastRunDateTime := JobQueueEntry."Last Ready State";
+            LastRunDateTime := JobQueueLogEntry."Start Date/Time";
+        // Last Ready State records queue administration, not a successful execution.
     end;
 
     /// <summary>

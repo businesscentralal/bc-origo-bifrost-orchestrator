@@ -97,7 +97,7 @@ codeunit 10035550 "SE Msg Handler ori"
             ApiClient.CallUpdateJobQueueEntry(Entry)
         else begin
             Entry.DeleteJobQueueEntry();
-            Handler.ScheduleTask(Entry);
+            Handler.ScheduleTask(Entry, true);
         end;
         RespondWithEntry(Argument, Entry, ScheduledMsg);
     end;

@@ -13,6 +13,9 @@ codeunit 96434 "Playbook Test Library ori"
 {
     Access = Internal;
 
+    var
+        RequestFormat1Tok: Label '{"reportId":%1}', Locked = true;
+
     /// <summary>
     /// Creates (or resets) a playbook header with no steps.
     /// </summary>
@@ -82,7 +85,7 @@ codeunit 96434 "Playbook Test Library ori"
     procedure AddLayoutSourceStep(PlaybookCode: Code[20]; StepNo: Integer)
     begin
         AddStep(PlaybookCode, StepNo, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.ReportLayout.List",
-            StrSubstNo(Format1Tok, Report::"Layout Sample Report ori"), 0, '', 0);
+            StrSubstNo(RequestFormat1Tok, Report::"Layout Sample Report ori"), 0, '', 0);
     end;
 
     /// <summary>
@@ -256,6 +259,4 @@ codeunit 96434 "Playbook Test Library ori"
             Playbook.Delete(true);
         Commit();
     end;
-    var
-        Format1Tok: Label '{"reportId":%1}', Locked = true;
 }
