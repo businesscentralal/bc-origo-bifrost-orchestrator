@@ -1,0 +1,32 @@
+{
+  "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41375782515",
+  "runAttempt": 1,
+  "at": "2026-11-02T02:45:42.698Z",
+  "files": [
+    {
+      "name": "tests.zip",
+      "route": "/actions/artifacts/13112525873/zip",
+      "bytes": 8802,
+      "sha256": "713fc36d562cd34c4cf7134bf44548cf11b7f7b768338cbca6abf11a60cf6ed1"
+    },
+    {
+      "name": "default.log",
+      "route": "/actions/jobs/125055847512/logs",
+      "bytes": 492843,
+      "sha256": "ababa849ff8e732cd37cd5447afc4c4acc70e1d6c844841b74ae3278cca570a5"
+    },
+    {
+      "name": "test.log",
+      "route": "/actions/jobs/125063909363/logs",
+      "bytes": 829958,
+      "sha256": "da352d7de8f3cd1b969efb0268df4ea7737ca4d820cfb0505e5a99409389d4b8"
+    },
+    {
+      "name": "cleanup.log",
+      "route": "/actions/jobs/125066006324/logs",
+      "bytes": 5447,
+      "sha256": "f50be437b3f2063515651aab932599a9c72671797695551a9f75dfa52e7116eb"
+    }
+  ]
+}

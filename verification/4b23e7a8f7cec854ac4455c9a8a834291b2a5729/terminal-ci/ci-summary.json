@@ -1,0 +1,43 @@
+{
+  "sha": "4b23e7a8f7cec854ac4455c9a8a834291b2a5729",
+  "runId": 41375782515,
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41375782515",
+  "status": "completed",
+  "conclusion": "success",
+  "runAttempt": 1,
+  "checkoutSha": "667bb4651210412a16888a9adfc3c302ef8796a0",
+  "treeSha": "1e59a4d31647af92160cfbe71bd4e6867b64bc15",
+  "sourceTreeEqualsCandidate": true,
+  "tests": {
+    "total": 460,
+    "executed": 460,
+    "passed": 460,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": 37,
+    "own96444Tests": 9
+  },
+  "testArtifactId": 13112525873,
+  "testsEvidenceUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41375782515/artifacts/13112525873"
+  ],
+  "cleanup": {
+    "containerId": "f02e22181ee9",
+    "deleted": 1,
+    "total": 1,
+    "source": "CI cleanup job log",
+    "independent404Readback": false,
+    "evidenceUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41375782515/job/125066006324"
+  },
+  "sourceGuards": {
+    "runId": 41375782380,
+    "conclusion": "success"
+  },
+  "skippedJobs": [
+    "Code Analysis Processing",
+    "PregateCheck",
+    "per-mode cleanup (central cleanup succeeded)"
+  ],
+  "skippedNativeTests": 0
+}
