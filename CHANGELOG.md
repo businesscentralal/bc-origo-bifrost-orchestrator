@@ -15,6 +15,11 @@ Business Central release versioning (`major.minor.build.revision`).
 - #134 / PR #147: keep Ask schema and trace warning assertions in test codeunit 96439 after main removes the warning helper; call the existing severity-aware assertion with `WarningTok` unchanged.
 - #134: remove Ask response traces before Orchestrator logging and response consumers (new internal codeunit 10035620, step executor 10035572; execute permission in sets 10035535/10035538). Preserve other response properties and unchanged response bytes where no scrub is needed.
 - #134: clarify external Run timeout versus in-process steps, Run Now and background execution; document Ask schema, counted calls and Foundation message retention in run notes and help (codeunits 10035562/10035576). Regression coverage extends verify tests 96435/96439 and adds scrub and per-warning Run gate tests 96444 with a test-only response type/handler (enum extension 96444, codeunit 96445).
+
+### Fixed (2026-11-02) - First-dispatch test isolation (#143)
+
+- Test codeunit 96443 `First Schedule Tests ori` makes its first-dispatch fixture explicitly due, blocks background Orchestrator pickup, and intercepts task creation before setup. It asserts that the job stays on hold without a platform task around manual dispatch and rebuild, while preserving all existing playbook-instance, successful-log, daily-anchor and rebuild assertions. Production scheduling code is unchanged.
+
 ### Fixed (2026-11-02) - Stored-field Verify errors and original casing (#144)
 
 - Codeunit 10035618 `Playbook Verify Template ori` reports missing stored fields in `@N.field`, `@N.@_iter.field` and explicit iteration references as `UnknownFieldReference` Errors. Enabled findings now block Run and Schedule even with `ignoreWarnings=true`; playbooks that previously only warned may be refused until their references are corrected. Other findings, including `@_current.fields` warnings, are unchanged.

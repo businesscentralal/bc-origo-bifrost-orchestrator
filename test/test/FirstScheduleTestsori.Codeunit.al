@@ -165,7 +165,8 @@ codeunit 96443 "First Schedule Tests ori"
         EntryId: Guid;
         StartTime: Time;
     begin
-        // #130 AC01/04/06 | Time: current clock, start of today's minute | Risk: tasks intercepted
+        // #143 AC01/02; #130 AC01/04/06 | Time: explicitly due slot | Risk: background scheduling intercepted
+        BindSubscription(LibraryQueue);
         Playbook.Code := CopyStr(DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, 20);
         Playbook.Description := 'Owned first-dispatch regression';
         Playbook.Insert();
@@ -183,9 +184,14 @@ codeunit 96443 "First Schedule Tests ori"
         RecurringTemplate.Insert();
         Playbook.CreateOrchestratorEntry(RecurringTemplate.Code, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, EntryId);
         Entry.Get(EntryId);
-        BindSubscription(LibraryQueue);
+        // Do not race a just-persisted current timestamp or the background Orchestrator scan.
+        // The test calls ScheduleTask and the dispatcher itself; no platform task may run it.
+        Entry.Blocked := true;
+        Entry."Earliest Start Date/Time" := CurrentDateTime - 1000;
+        Entry.Modify();
         Handler.ScheduleTask(Entry);
         Job.Get(EntryId);
+        AssertJobNotScheduled(Job);
         Assert.AreEqual(CreateDateTime(20000101D, StartTime), Job."Reference Starting Time", 'Created job reference');
         // Legacy jobs may have either a blank or administrative Last Ready State, neither is execution.
         Job."Earliest Start Date/Time" := CurrentDateTime - 1000;
@@ -200,6 +206,7 @@ codeunit 96443 "First Schedule Tests ori"
         LogEntry.SetRange(Status, LogEntry.Status::Success);
         Assert.IsFalse(LogEntry.IsEmpty(), 'First dispatch must write a successful Job Queue log');
         Job.Get(EntryId);
+        AssertJobNotScheduled(Job);
         Assert.AreEqual(CreateDateTime(Today() + 1, StartTime), Job."Earliest Start Date/Time", 'Next daily dispatch must keep the configured starting time tomorrow');
         // Reset the library's insertion collector before recreating the same job ID.
         UnbindSubscription(LibraryQueue);
@@ -211,6 +218,7 @@ codeunit 96443 "First Schedule Tests ori"
         Entry.Modify();
         Handler.ScheduleTask(Entry, true);
         Job.Get(EntryId);
+        AssertJobNotScheduled(Job);
         Assert.AreEqual(CreateDateTime(20000101D, StartTime), Job."Reference Starting Time", 'Rebuilt job reference');
         Assert.AreEqual(Today() + 1, DT2Date(Job."Earliest Start Date/Time"), 'Explicit rebuild must retain the future run time');
         UnbindSubscription(LibraryQueue);
@@ -221,6 +229,14 @@ codeunit 96443 "First Schedule Tests ori"
         Entry.Delete();
         Playbook.Delete();
         RecurringTemplate.Delete();
+    end;
+
+    local procedure AssertJobNotScheduled(var Job: Record "Job Queue Entry")
+    begin
+        Assert.AreEqual(Job.Status::"On Hold", Job.Status, 'Only the test may start this job');
+        Assert.IsTrue(IsNullGuid(Job."System Task ID"), 'The fixture must not create a platform task');
+        Job.CalcFields(Scheduled);
+        Assert.IsFalse(Job.Scheduled, 'The fixture must remain outside the background task scheduler');
     end;
 
     /// <summary>Applying a template updates the existing job and its starting-time reference.</summary>
