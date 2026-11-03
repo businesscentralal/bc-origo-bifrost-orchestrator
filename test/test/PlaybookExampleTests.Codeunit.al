@@ -142,6 +142,11 @@ codeunit 96436 "Playbook Example Tests"
         AssertContains(HelpText, Examples.ReportReadTemplate());
         AssertContains(HelpText, Examples.PostingAuditReadTemplate());
         AssertContains(HelpText, Examples.PostingAuditAskTemplate());
+        AssertContains(Examples.PostingAuditAskTemplate(), 'posting sales invoices');
+        AssertContains(Examples.PostingAuditAskTemplate(), 'Check the posting groups, the VAT business posting group, the payment terms');
+        AssertContains(Examples.PostingAuditAskTemplate(), 'the posting groups have their accounts filled');
+        AssertContains(Examples.PostingAuditAskTemplate(), 'list each problem with the field name');
+        AssertContains(Examples.PostingAuditAskTemplate(), '"record":{"tableName":"Customer","systemId":"@_current.id"}');
         AssertContains(HelpText, Examples.PostingAuditNoticeTemplate());
     end;
 
@@ -358,6 +363,7 @@ codeunit 96436 "Playbook Example Tests"
         if StepLog.FindSet() then
             repeat
                 Request := StepLog.GetRequestSent();
+                AssertPostingAuditRecordContext(Request);
                 Customers += 1;
                 if Request.Contains('Z135A') then begin
                     SawPass := true;
@@ -383,6 +389,27 @@ codeunit 96436 "Playbook Example Tests"
                 end;
             until StepLog.Next() = 0;
         Assert.AreEqual(4, Customers, 'Step 30 ran once per owned customer');
+    end;
+
+    local procedure AssertPostingAuditRecordContext(RequestText: Text)
+    var
+        Customer: Record Customer;
+        Request: JsonObject;
+        RecordContext: JsonObject;
+        Token: JsonToken;
+        CustomerId: Guid;
+    begin
+        Assert.IsTrue(Request.ReadFrom(RequestText), 'The resolved Ask request is JSON');
+        Assert.IsTrue(Request.Get('record', Token), 'The Ask request includes record context');
+        Assert.IsTrue(Token.IsObject(), 'Record context must be an object, not a GUID string');
+        RecordContext := Token.AsObject();
+        Assert.IsTrue(RecordContext.Get('tableName', Token), 'Record context identifies the table');
+        Assert.AreEqual('Customer', Token.AsValue().AsText(), 'Record context is a Customer');
+        Assert.IsTrue(RecordContext.Get('systemId', Token), 'Record context identifies the customer SystemId');
+        Assert.IsTrue(Evaluate(CustomerId, Token.AsValue().AsText()), 'The current customer id resolves to a GUID');
+        Assert.IsTrue(Customer.GetBySystemId(CustomerId), 'Record context resolves to an existing owned customer');
+        AssertContains(RequestText, Customer."No.");
+        AssertContains(RequestText, Customer.Name);
     end;
 
     local procedure FindingsPath(IterationNo: Integer): Text

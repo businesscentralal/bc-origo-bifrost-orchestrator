@@ -99,7 +99,7 @@ codeunit 96460 "Posting Audit Ask Msg ori" implements "Msg Interface ori", "Msg 
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('question', 'string', true, 'The audit question, with the customer already filled in.'));
-        Parameters.Add(ContractMgt.Parameter('record', 'string', true, 'The customer record id.'));
+        Parameters.Add(ContractMgt.Parameter('record', 'object', true, 'The customer record context with tableName and systemId.'));
         Parameters.Add(ContractMgt.Parameter('limits', 'object', false, 'Explicit tool-call limit.'));
         Parameters.Add(ContractMgt.Parameter('responseSchema', 'object', true, 'Verdict and findings schema.'));
         exit(true);

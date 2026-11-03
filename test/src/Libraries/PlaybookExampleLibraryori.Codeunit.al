@@ -161,7 +161,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure PostingAuditAskTemplate(): Text
     begin
-        exit('{"question":"Audit the posting setup of customer @_current.primaryKey.No_ (@_current.fields.Name). Decide verdict pass, fail or unknown. When the setup is wrong, name the field in findings. Read only; do not change the customer.","record":"@_current.id","limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
+        exit('{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","record":{"tableName":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
     end;
 
     /// <summary>The request template of step 90 of example 4.</summary>
