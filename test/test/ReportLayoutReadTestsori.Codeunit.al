@@ -14,6 +14,7 @@ codeunit 96409 "Report Layout Read Tests ori"
     TestPermissions = Disabled;
 
     var
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Assert: Codeunit "Library Assert";
 
     /// <summary>List returns the sample report's installed layout, with export identity and default metadata.</summary>
@@ -95,6 +96,8 @@ codeunit 96409 "Report Layout Read Tests ori"
         Exported := Value.AsValue().AsText();
         FixtureName := CopyStr('XLAYOUT-' + Format(CreateGuid(), 0, 4), 1, MaxStrLen(FixtureName));
         Request := GetLayoutRequest(FixtureName, EmptyGuid);
+        // Set declares no appId: the dispatcher refuses undeclared keys, and a user layout has no owning app.
+        Request.Remove('appId');
         Request.Add('layoutFormat', 'RDLC');
         Request.Add('layoutBase64', Exported);
         Execute("Message Type ori"::"Orchestrator.ReportLayout.Set", Request);
@@ -137,6 +140,8 @@ codeunit 96409 "Report Layout Read Tests ori"
         Exported := Value.AsValue().AsText();
         FixtureName := CopyStr('XREPLACE-' + Format(CreateGuid(), 0, 4), 1, MaxStrLen(FixtureName));
         Request := GetLayoutRequest(FixtureName, EmptyGuid);
+        // Set declares no appId: the dispatcher refuses undeclared keys, and a user layout has no owning app.
+        Request.Remove('appId');
         Request.Add('layoutFormat', 'RDLC');
         Request.Add('layoutBase64', Exported);
         Response := Execute("Message Type ori"::"Orchestrator.ReportLayout.Set", Request);
@@ -186,7 +191,6 @@ codeunit 96409 "Report Layout Read Tests ori"
         Preset: Record "Report Request Preset ori";
         Layout: Record "Report Layout List";
         Selection: Codeunit "Design-time Report Selection";
-        Implementation: Codeunit "Report SaveAs Msg ori";
         Content: InStream;
         XmlText: Text;
         XmlContent: XmlDocument;
@@ -205,7 +209,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Selection.SetSelectedLayout('OWN-PRIOR', PriorAppId);
         Selection.SetSelectedCustomLayout('OWN-CUSTOM');
         CreateSaveArgument(TempArgument, Layout, 'XML', 1);
-        Implementation.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         Assert.AreEqual('OWN-PRIOR', Selection.GetSelectedLayout(), 'Prior platform selection restored');
         Assert.AreEqual(PriorAppId, Selection.GetSelectedAppID(), 'Prior app identity restored');
         Assert.AreEqual('OWN-CUSTOM', Selection.GetSelectedCustomLayout(), 'Prior custom selection restored');
@@ -228,7 +232,6 @@ codeunit 96409 "Report Layout Read Tests ori"
         TempArgument: Record "Message Argument ori" temporary;
         Layout: Record "Report Layout List";
         Selection: Codeunit "Design-time Report Selection";
-        Implementation: Codeunit "Report SaveAs Msg ori";
         Content: InStream;
         Header: Text;
     begin
@@ -236,7 +239,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Selection.ClearLayoutSelection();
         Selection.SetSelectedCustomLayout('OWN-CUSTOM');
         CreateSaveArgument(TempArgument, Layout, 'PDF', 1);
-        Implementation.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         Assert.AreEqual('OWN-CUSTOM', Selection.GetSelectedCustomLayout(), 'Custom-only selection restored');
         Selection.SetSelectedCustomLayout('');
         Assert.AreEqual('', Selection.GetSelectedLayout(), 'No spurious platform selection created from custom fallback');
@@ -254,7 +257,6 @@ codeunit 96409 "Report Layout Read Tests ori"
         TempArgument: Record "Message Argument ori" temporary;
         Layout: Record "Report Layout List";
         Selection: Codeunit "Design-time Report Selection";
-        Implementation: Codeunit "Report SaveAs Msg ori";
         PriorAppId: Guid;
     begin
         FindSampleLayout(Layout);
@@ -262,7 +264,7 @@ codeunit 96409 "Report Layout Read Tests ori"
         Selection.ClearLayoutSelection();
         Selection.SetSelectedLayout('OWN-PRIOR', PriorAppId);
         CreateSaveArgument(TempArgument, Layout, 'PDF', 2);
-        asserterror Implementation.ExecuteBifrostTask(TempArgument);
+        asserterror DispatchHelper.ExecuteExpectingError("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         Assert.ExpectedError('Deliberate layout sample rendering failure.');
         Assert.AreEqual('OWN-PRIOR', Selection.GetSelectedLayout(), 'Prior selection restored after failure');
         Assert.AreEqual(PriorAppId, Selection.GetSelectedAppID(), 'Prior identity restored after failure');
@@ -275,12 +277,11 @@ codeunit 96409 "Report Layout Read Tests ori"
     var
         TempArgument: Record "Message Argument ori" temporary;
         Layout: Record "Report Layout List";
-        Implementation: Codeunit "Report SaveAs Msg ori";
     begin
         FindSampleLayout(Layout);
         Layout.Name := 'XNONEXISTENT';
         CreateSaveArgument(TempArgument, Layout, 'PDF', 1);
-        asserterror Implementation.ExecuteBifrostTask(TempArgument);
+        asserterror DispatchHelper.ExecuteExpectingError("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         Assert.ExpectedError('XNONEXISTENT');
     end;
 
@@ -318,13 +319,11 @@ codeunit 96409 "Report Layout Read Tests ori"
     local procedure Execute(MessageType: Enum "Message Type ori"; Request: JsonObject): JsonObject
     var
         TempArgument: Record "Message Argument ori" temporary;
-        Implementation: Interface "Msg Interface ori";
     begin
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);
-        Implementation := MessageType;
-        Implementation.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute(MessageType, TempArgument);
         exit(TempArgument.GetResponseJson());
     end;
 }

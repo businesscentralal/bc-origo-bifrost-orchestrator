@@ -195,6 +195,8 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteSchedule(Argument);
     end;
 

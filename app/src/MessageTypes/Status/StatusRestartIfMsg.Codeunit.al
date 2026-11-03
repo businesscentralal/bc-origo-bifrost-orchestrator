@@ -158,6 +158,8 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     /// <param name="Argument">Message argument carrying the request and receiving the response.</param>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteRestartIfNeeded(Argument);
     end;
 

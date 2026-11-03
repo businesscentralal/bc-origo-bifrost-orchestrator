@@ -13,6 +13,7 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
     RequiredTestIsolation = Disabled;
 
     var
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
         Scrub: Codeunit "Playbook Response Scrub ori";
@@ -45,7 +46,6 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
         TempArgument: Record "Message Argument ori" temporary;
         Instance: Record "Playbook Instance ori";
         Verify: Codeunit "Playbook Verify ori";
-        RunMessage: Codeunit "Playbook Run Msg ori";
         Response: JsonObject;
         Request: JsonObject;
         Token: JsonToken;
@@ -83,7 +83,7 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);
-        RunMessage.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Playbook.Run", TempArgument);
         Response := TempArgument.GetResponseJson();
         Assert.AreEqual('PreconditionFailed', ResponseText(Response, 'code'), 'New finding must refuse Run');
         Response.Get('findings', Token);
@@ -102,7 +102,7 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
         TempArgument.Insert();
         Request.Add('ignoreWarnings', true);
         TempArgument.SetRequestJson(Request);
-        RunMessage.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Playbook.Run", TempArgument);
         Response := TempArgument.GetResponseJson();
         Assert.AreEqual('Success', ResponseText(Response, 'status'), 'Explicit acceptance permits the run');
         Assert.AreEqual('Completed', ResponseText(Response, 'playbookStatus'), 'Fixture actually completes');

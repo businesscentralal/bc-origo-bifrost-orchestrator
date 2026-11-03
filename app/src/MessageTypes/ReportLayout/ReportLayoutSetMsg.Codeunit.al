@@ -163,6 +163,8 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteSet(Argument);
     end;
 
