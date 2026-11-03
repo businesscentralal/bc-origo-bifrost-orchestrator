@@ -11,6 +11,7 @@ codeunit 96454 "Report Boundary Tests ori"
 
     var
         Assert: Codeunit Assert;
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         DebugWarningSeen: Boolean;
 
     /// <summary>Rejects UnknownField before Run executes a report.</summary>
@@ -119,7 +120,6 @@ codeunit 96454 "Report Boundary Tests ori"
     var
         TempArgument: Record "Message Argument ori" temporary;
         Marker: Record "Test Run Marker";
-        MessageImpl: Codeunit "Report SaveAs Msg ori";
         BeforeCount: Integer;
     begin
         // PR #67 B4 | Time: independent of Today/WorkDate | Risk: Report.SaveAs filters.
@@ -128,7 +128,7 @@ codeunit 96454 "Report Boundary Tests ori"
         CreateArgument(TempArgument, true, 'WHERE(Number=CONST(1))', false);
         Commit();
         // [WHEN] The public message implementation renders the report.
-        MessageImpl.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         // [THEN] Exactly one row ran and output was returned.
         Assert.AreEqual(BeforeCount + 1, Marker.Count(), 'The view must not widen the report data set.');
         TempArgument.CalcFields("Response Content");
@@ -141,7 +141,6 @@ codeunit 96454 "Report Boundary Tests ori"
     var
         TempArgument: Record "Message Argument ori" temporary;
         Marker: Record "Test Run Marker";
-        MessageImpl: Codeunit "Report Run Msg ori";
         ResponseJson: JsonObject;
         Token: JsonToken;
         BeforeCount: Integer;
@@ -150,7 +149,7 @@ codeunit 96454 "Report Boundary Tests ori"
         BeforeCount := Marker.Count();
         CreateArgument(TempArgument, false, 'WHERE(Number=CONST(1))', false);
         Commit();
-        MessageImpl.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.Run", TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         ResponseJson.Get('status', Token);
         Assert.AreEqual('Success', Token.AsValue().AsText(), 'Expected successful report execution.');
@@ -165,14 +164,13 @@ codeunit 96454 "Report Boundary Tests ori"
     var
         TempArgument: Record "Message Argument ori" temporary;
         Marker: Record "Test Run Marker";
-        MessageImpl: Codeunit "Report Run Msg ori";
         BeforeCount: Integer;
     begin
         // PR #67 B4 | Time: independent of Today/WorkDate | Risk: empty view selection.
         BeforeCount := Marker.Count();
         CreateArgument(TempArgument, false, 'WHERE(Number=FILTER(1&2))', false);
         Commit();
-        MessageImpl.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.Run", TempArgument);
         Assert.AreEqual(BeforeCount, Marker.Count(), 'An empty selection must not become an unfiltered report.');
     end;
 
@@ -214,7 +212,6 @@ codeunit 96454 "Report Boundary Tests ori"
     var
         Setup: Record "Setup ori";
         TempArgument: Record "Message Argument ori" temporary;
-        MessageImpl: Codeunit "Report Run Msg ori";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
         Token: JsonToken;
@@ -231,7 +228,7 @@ codeunit 96454 "Report Boundary Tests ori"
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(RequestJson);
-        MessageImpl.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.Run", TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         SetupPage.OpenEdit();
         SetupPage."Request Debug Mode".SetValue(OriginalDebugMode);
@@ -253,7 +250,7 @@ codeunit 96454 "Report Boundary Tests ori"
     var
         TempArgument: Record "Message Argument ori" temporary;
         Marker: Record "Test Run Marker";
-        MessageImpl: Interface "Msg Interface ori";
+        MessageType: Enum "Message Type ori";
         ResponseJson: JsonObject;
         Token: JsonToken;
         BeforeCount: Integer;
@@ -261,11 +258,11 @@ codeunit 96454 "Report Boundary Tests ori"
         BeforeCount := Marker.Count();
         CreateArgument(TempArgument, SaveAs, ViewText, ObjectView, OutputFormat);
         if SaveAs then
-            MessageImpl := "Message Type ori"::"Orchestrator.Report.SaveAs"
+            MessageType := "Message Type ori"::"Orchestrator.Report.SaveAs"
         else
-            MessageImpl := "Message Type ori"::"Orchestrator.Report.Run";
+            MessageType := "Message Type ori"::"Orchestrator.Report.Run";
         Commit();
-        MessageImpl.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute(MessageType, TempArgument);
         ResponseJson := TempArgument.GetResponseJson();
         ResponseJson.Get('status', Token);
         Assert.AreEqual('Error', Token.AsValue().AsText(), 'Invalid views must return structured errors.');

@@ -161,6 +161,8 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
         InitialJson: JsonObject;
         ResponseJson: JsonObject;
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Workspace.Reset();
 
         if Argument.GetRequestJson().Get('initialRequest', InitialToken) then

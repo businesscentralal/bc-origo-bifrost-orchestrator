@@ -170,6 +170,8 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     /// <summary>Provides the ExecuteBifrostTask part of the report layout get message.</summary>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteGet(Argument);
     end;
 

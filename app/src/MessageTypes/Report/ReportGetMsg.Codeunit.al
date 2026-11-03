@@ -164,6 +164,8 @@ codeunit 10035594 "Report Get Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteGet(Argument);
     end;
 

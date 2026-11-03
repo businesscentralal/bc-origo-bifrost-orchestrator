@@ -162,6 +162,8 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         MessageText: Text;
         JsonToken: JsonToken;
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         VerifyHttpClientEnabled();
         if not Secrets.IsTelegramBotTokenSet() then
             Error(BotTokenNotConfiguredErr);

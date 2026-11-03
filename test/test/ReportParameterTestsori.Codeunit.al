@@ -16,6 +16,7 @@ codeunit 96431 "Report Parameter Tests ori"
     EventSubscriberInstance = Manual;
 
     var
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Assert: Codeunit "Library Assert";
         Resolver: Codeunit "Report Parameters ori";
 
@@ -299,7 +300,6 @@ codeunit 96431 "Report Parameter Tests ori"
         Detail: Record "Detailed Cust. Ledg. Entry";
         Layout: Record "Report Layout List";
         TempArgument: Record "Message Argument ori" temporary;
-        Handler: Codeunit "Report SaveAs Msg ori";
         Request: JsonObject;
         Parameters: JsonObject;
         Content: InStream;
@@ -357,7 +357,7 @@ codeunit 96431 "Report Parameter Tests ori"
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);
-        Handler.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         TempArgument.CalcFields("Response Content");
         TempArgument."Response Content".CreateInStream(Content);
         XmlDocument.ReadFrom(Content, Document);
@@ -368,6 +368,8 @@ codeunit 96431 "Report Parameter Tests ori"
             if Evaluate(Amount, Node.AsXmlElement().InnerText(), 9) then
                 Total += Amount;
         Assert.AreEqual(75, Total, 'Own ledger amount reaches aging buckets');
+        // The dispatched report committed and may have touched the customer, so reread it before the cleanup.
+        Customer.Get(Customer."No.");
         Detail.Delete();
         Entry.Delete();
         Customer.Delete();
@@ -407,7 +409,6 @@ codeunit 96431 "Report Parameter Tests ori"
     local procedure SaveAsXml(Request: JsonObject) Result: XmlDocument
     var
         TempArgument: Record "Message Argument ori" temporary;
-        Handler: Codeunit "Report SaveAs Msg ori";
         Content: InStream;
     begin
         Request.Add('reportId', Report::"Layout Sample Report ori");
@@ -416,7 +417,7 @@ codeunit 96431 "Report Parameter Tests ori"
         TempArgument.Init();
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);
-        Handler.ExecuteBifrostTask(TempArgument);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         TempArgument.CalcFields("Response Content");
         TempArgument."Response Content".CreateInStream(Content);
         XmlDocument.ReadFrom(Content, Result);
