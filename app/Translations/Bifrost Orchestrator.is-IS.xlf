@@ -1570,9 +1570,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Create or replace a user-defined tenant report layout from base64. Write operation. Use Orchestrator.Report.Get to inspect existing layouts.</source>
-          <target>Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</note>
+          <source>Create or replace a user-defined tenant report layout from base64 or from a staging row. Write operation. Use Orchestrator.Report.Get to inspect existing layouts.</source>
+          <target>Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1335621907 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -5144,6 +5144,30 @@
           <target>Bifröst keðjuskoðun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjuskoðun</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybVw ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 3730852756" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send either "layoutBase64" or "stagingId", not both.</source>
+          <target>Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType BothLayoutSourcesErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 1841382996" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"stagingId" %1 is not a valid GUID.</source>
+          <target>"stagingId" %1 er ekki gilt GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="stagingId" %1 er ekki gilt GUID.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType InvalidStagingIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 3965801693" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request must include "layoutBase64" or "stagingId".</source>
+          <target>Beiðni verður að innihalda "layoutBase64" eða "stagingId".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "layoutBase64" eða "stagingId".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NoLayoutSourceErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 1462950238" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Staging row %1 was not found or has already been taken.</source>
+          <target>Milligeymslufærsla %1 fannst ekki eða hefur þegar verið tekin.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Milligeymslufærsla %1 fannst ekki eða hefur þegar verið tekin.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType StagingIdNotFoundErr</note>
         </trans-unit>
       </group>
     </body>

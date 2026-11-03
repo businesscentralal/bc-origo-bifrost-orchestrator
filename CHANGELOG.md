@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)
+
+- `Orchestrator.ReportLayout.Set` (codeunit 10035599, handler 10035600) accepts `stagingId` (GUID, with or without braces) as an alternative to `layoutBase64`; exactly one of the two is required. The bytes are taken through Foundation's public `Blob Staging ori` façade (`Take`), which reads and deletes the row in the same transaction as the import, so a failed import leaves the row in place. Unknown or already-taken ids, both keys, neither key and a non-GUID id are refused with new bilingual errors; `layoutBase64` calls are unchanged. No Attachments dependency.
+- Contract: `layoutBase64` is now optional (conditional with `stagingId`), new parameter `stagingId` (appended, so existing parameter positions are unchanged), four new errors, a staging example, workflow note and overview text; is-IS translations added.
+- Foundation dependency raised to 28.0.11.659 in the app and test app (only `dependencies[].version`).
+- Tests: new codeunit 96458 `Report Layout Stage Tests ori`; codeunit 96453 fixtures updated for the added errors and the seventh parameter (existing entries and their order unchanged).
+
 ### Fixed (2026-11-03) - Version and licence assertions in every message type (#148)
 
 - All 23 non-Help Orchestrator message type implementations now call `Argument.AssertVersion1()` and then `Argument.AssertIsLicensed()` at the start of `ExecuteBifrostTask`, before any handler or business work, in this order everywhere (core#1173 follow-up). Affected codeunits: SE Run Msg (10035555), SE Restart Msg (10035556), Status Get Msg (10035559), Status Restart Msg (10035560), Status RestartIf Msg (10035561), Playbook Run Msg (10035562), Entry Restart Msg (10035567), Entry RestartIf Msg (10035568), Playbook Schedule Msg (10035574), SE Register Msg (10035579), SE Schedule Msg (10035581), Email Send Msg (10035582), Playbook Enqueue Msg (10035584), Telegram Msg (10035588), Report List Msg (10035593), Report Get Msg (10035594), Report SaveAs Msg (10035595), Workspace Preview Msg (10035596), Report Run Msg (10035597), Report Layout Set Msg (10035599), Report Layout List Msg (10035612), Report Layout Get Msg (10035613), Playbook Verify Msg (10035615). `Help.Orchestrator.Get` stays version-only. Calls that reach an implementation without going through Foundation's dispatcher are now refused with the licence error.

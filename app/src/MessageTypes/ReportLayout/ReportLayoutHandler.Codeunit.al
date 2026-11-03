@@ -32,6 +32,7 @@ codeunit 10035600 "Report Layout Handler ori"
         ReportMeta: Record "Report Metadata";
         TempBlob: Codeunit "Temp Blob";
         Base64Convert: Codeunit "Base64 Convert";
+        BlobStaging: Codeunit "Blob Staging ori";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
         ReportId: Integer;
@@ -40,6 +41,10 @@ codeunit 10035600 "Report Layout Handler ori"
         CompanyNameValue: Text[30];
         LayoutFormatText: Text;
         LayoutBase64: Text;
+        StagingIdText: Text;
+        StagingId: Guid;
+        HasBase64: Boolean;
+        HasStagingId: Boolean;
         ActionText: Text;
         LayoutFormat: Option RDLC,Word,Excel,Custom;
         OutStr: OutStream;
@@ -52,7 +57,18 @@ codeunit 10035600 "Report Layout Handler ori"
         ReportId := GetRequiredInteger(RequestJson, 'reportId');
         LayoutName := CopyStr(GetRequiredText(RequestJson, 'name'), 1, MaxStrLen(LayoutName));
         LayoutFormatText := GetRequiredText(RequestJson, 'layoutFormat');
-        LayoutBase64 := GetRequiredText(RequestJson, 'layoutBase64');
+        HasBase64 := RequestJson.Contains('layoutBase64');
+        HasStagingId := RequestJson.Contains('stagingId');
+        if HasBase64 and HasStagingId then
+            Error(BothLayoutSourcesErr);
+        if not (HasBase64 or HasStagingId) then
+            Error(NoLayoutSourceErr);
+        if HasStagingId then begin
+            StagingIdText := GetRequiredText(RequestJson, 'stagingId');
+            if not Evaluate(StagingId, StagingIdText) or IsNullGuid(StagingId) then
+                Error(InvalidStagingIdErr, StagingIdText);
+        end else
+            LayoutBase64 := GetRequiredText(RequestJson, 'layoutBase64');
         LayoutFormat := ParseLayoutFormat(LayoutFormatText, ReportId);
 
         if RequestJson.Get('description', Token) then
@@ -69,11 +85,17 @@ codeunit 10035600 "Report Layout Handler ori"
         if not ReportMeta.Get(ReportId) then
             Error(ReportNotFoundErr, ReportId);
 
-        if LayoutBase64 = '' then
-            Error(MissingLayoutBase64Err);
-
-        TempBlob.CreateOutStream(OutStr);
-        Base64Convert.FromBase64(LayoutBase64, OutStr);
+        if HasStagingId then begin
+            // Take reads and deletes the row in this transaction. A later import error rolls the delete back,
+            // so the row survives a failed import and the call can be retried with the same id.
+            if not BlobStaging.Take(StagingId, TempBlob) then
+                Error(StagingIdNotFoundErr, StagingIdText);
+        end else begin
+            if LayoutBase64 = '' then
+                Error(MissingLayoutBase64Err);
+            TempBlob.CreateOutStream(OutStr);
+            Base64Convert.FromBase64(LayoutBase64, OutStr);
+        end;
         TempBlob.CreateInStream(InStr);
 
         // The platform refuses to modify the content or type of an existing layout, so a replace
@@ -187,5 +209,9 @@ codeunit 10035600 "Report Layout Handler ori"
         ReportNotFoundErr: Label 'Report %1 not found.', Comment = 'is-IS=Skýrsla %1 finnst ekki.';
         InvalidLayoutFormatErr: Label 'Layout format %1 is not valid for report %2.', Comment = 'is-IS=Útlitssnið %1 er ógilt fyrir skýrslu %2.';
         MissingFieldErr: Label 'Request must include "%1".', Comment = 'is-IS=Beiðni verður að innihalda "%1".';
+        BothLayoutSourcesErr: Label 'Send either "layoutBase64" or "stagingId", not both.', Comment = 'is-IS=Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.';
+        NoLayoutSourceErr: Label 'Request must include "layoutBase64" or "stagingId".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" eða "stagingId".';
+        InvalidStagingIdErr: Label '"stagingId" %1 is not a valid GUID.', Comment = 'is-IS="stagingId" %1 er ekki gilt GUID.';
+        StagingIdNotFoundErr: Label 'Staging row %1 was not found or has already been taken.', Comment = 'is-IS=Milligeymslufærsla %1 fannst ekki eða hefur þegar verið tekin.';
         MissingLayoutBase64Err: Label 'Request must include non-empty "layoutBase64".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" sem er ekki autt.';
 }
