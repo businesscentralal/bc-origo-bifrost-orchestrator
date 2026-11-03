@@ -31,6 +31,88 @@ codeunit 96435 "Playbook Verify Step Tests"
         SourceUnguardedStartIsTxt: Label 'Skref 10 (Data.Records.Get) fóðrar forEach en hefur ekkert árangursskilyrði á noOfRecords', Locked = true;
 
     [Test]
+    procedure AskForEach_BoundsAndTypeAreChecked()
+    var
+        SourceStep: Record "Playbook Step ori";
+        Step: Record "Playbook Step ori";
+        Checks: Codeunit "Playbook Verify Step ori";
+        Findings: JsonArray;
+    begin
+        // [SCENARIO] Only Ask forEach over a record reader without take needs a cost warning.
+        Lib.CreatePlaybook('XASK-BOUND');
+        Lib.AddStep('XASK-BOUND', 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{}', 0, '', 0);
+        Lib.AddStep('XASK-BOUND', 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{}', 10, 'result', 0);
+        Step.Get('XASK-BOUND', 30);
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Ask', Findings);
+        Assert.AreEqual(1, Findings.Count(), 'Unbounded Ask warns');
+        Clear(Findings);
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Complete', Findings);
+        Assert.AreEqual(0, Findings.Count(), 'Other LLM types unchanged');
+        SourceStep.Get('XASK-BOUND', 10);
+        SourceStep.Paged := true;
+        SourceStep.Modify();
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Ask', Findings);
+        Assert.AreEqual(1, Findings.Count(), 'Paging does not cap cost');
+        SourceStep.SetRequestTemplate('{"take":3}');
+        SourceStep.Modify();
+        Clear(Findings);
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Ask', Findings);
+        Assert.AreEqual(0, Findings.Count(), 'Explicit take bounds cost');
+        SourceStep.SetRequestTemplate('{}');
+        SourceStep."Message Type" := "Message Type ori"::"Help.Implementation.Get";
+        SourceStep.Modify();
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Ask', Findings);
+        Assert.AreEqual(0, Findings.Count(), 'Non-record reader unchanged');
+        SourceStep."Message Type" := "Message Type ori"::"Data.Records.Get";
+        SourceStep.Modify();
+        Step."Iterate Array Path" := '';
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Ask', Findings);
+        Assert.AreEqual(0, Findings.Count(), 'Non-iterating Ask unchanged');
+        Lib.Cleanup('XASK-BOUND');
+    end;
+
+    [Test]
+    procedure AskForEach_DisabledAndTranslated()
+    begin
+        VerifyAskForEachLanguage(1033, 'Ask step 30 iterates records from step 10 without take.', 'Set take');
+        VerifyAskForEachLanguage(1039, 'Ask-skref 30 ítrar yfir færslur úr skrefi 10 án take.', 'Settu take');
+    end;
+
+    local procedure VerifyAskForEachLanguage(LanguageId: Integer; MessageStart: Text; NextStart: Text)
+    var
+        Step: Record "Playbook Step ori";
+        Checks: Codeunit "Playbook Verify Step ori";
+        Findings: JsonArray;
+        Token: JsonToken;
+        Finding: JsonObject;
+        PreviousLanguage: Integer;
+    begin
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        Lib.CreatePlaybook('XASK-BOUND');
+        Lib.AddStep('XASK-BOUND', 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{}', 0, '', 0);
+        Lib.AddStep('XASK-BOUND', 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{}', 10, 'result', 0);
+        Step.Get('XASK-BOUND', 30);
+        Step.Disabled := true;
+        Checks.CheckAskForEach(Step, 'LLM.Prompt.Ask', Findings);
+        Assert.AreEqual(1, Findings.Count(), 'Disabled steps remain inspectable');
+        Findings.Get(0, Token);
+        Finding := Token.AsObject();
+        Finding.Get('stepDisabled', Token);
+        Assert.IsTrue(Token.AsValue().AsBoolean(), 'Disabled findings never block');
+        Finding.Get('code', Token);
+        Assert.AreEqual('AskForEachUnbounded', Token.AsValue().AsText(), 'Stable warning code');
+        Finding.Get('severity', Token);
+        Assert.AreEqual('warning', Token.AsValue().AsText(), 'Warning severity');
+        Finding.Get('message', Token);
+        Assert.IsTrue(Token.AsValue().AsText().StartsWith(MessageStart), 'Localized message');
+        Finding.Get('nextStep', Token);
+        Assert.IsTrue(Token.AsValue().AsText().StartsWith(NextStart), 'Localized next step');
+        Lib.Cleanup('XASK-BOUND');
+        GlobalLanguage(PreviousLanguage);
+    end;
+
+    [Test]
     procedure CleanPlaybook_HasNoFindings()
     var
         Findings: JsonArray;

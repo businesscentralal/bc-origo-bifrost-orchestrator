@@ -25,6 +25,7 @@ codeunit 10035572 "Playbook Step Executor ori"
     var
         MsgExecutor: Codeunit "Msg Executor ori";
         Workspace: Codeunit "Playbook Workspace ori";
+        ResponseScrub: Codeunit "Playbook Response Scrub ori";
         IsError: Boolean;
         StartTime: DateTime;
     begin
@@ -38,7 +39,9 @@ codeunit 10035572 "Playbook Step Executor ori"
             ResponseText := MsgExecutor.GetResponseText();
 
         if IsError then
-            ErrorText := ResponseText;
+            ErrorText := ResponseText
+        else
+            ResponseScrub.Scrub(Workspace.MessageTypeToText(MessageType), ResponseText);
 
         // MessageTypeToText, not Format: the request log stores the invariant dotted message-type
         // name ("Orchestrator.Report.Run"), while Format would store the localised caption.
