@@ -50,16 +50,21 @@ codeunit 10035621 "Playbook Verify Artifact ori"
         ToolsToken: JsonToken;
         AllowToken: JsonToken;
     begin
-        // A reference (@...) is resolved at run time and is not judged here.
+        // A reference (@...) is resolved at run time and is not judged here. AL does not short-circuit: never
+        // dereference a token before its kind is known.
         if TemplateJson.Get('tools', ToolsToken) then begin
-            if ToolsToken.IsValue() and ToolsToken.AsValue().AsText().StartsWith('@') then
-                exit;
-            if ToolsToken.IsObject() and ToolsToken.AsObject().Get('allow', AllowToken) then begin
-                if AllowToken.IsArray() and (AllowToken.AsArray().Count() > 0) then
+            if ToolsToken.IsValue() then
+                if ToolsToken.AsValue().AsText().StartsWith('@') then
                     exit;
-                if AllowToken.IsValue() and AllowToken.AsValue().AsText().StartsWith('@') then
-                    exit;
-            end;
+            if ToolsToken.IsObject() then
+                if ToolsToken.AsObject().Get('allow', AllowToken) then begin
+                    if AllowToken.IsArray() then
+                        if AllowToken.AsArray().Count() > 0 then
+                            exit;
+                    if AllowToken.IsValue() then
+                        if AllowToken.AsValue().AsText().StartsWith('@') then
+                            exit;
+                end;
         end;
         Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'AskWithoutToolsAllow',
             StrSubstNo(AskWithoutToolsAllowMsg, Step."Step No."), AskWithoutToolsAllowNextStepTxt, Step.Disabled);
@@ -77,9 +82,13 @@ codeunit 10035621 "Playbook Verify Artifact ori"
                 if IsUnsanitizedBody(Step, Token) then
                     ReportUnsanitized(Step, PropertyName, Findings);
 
-        if TemplateJson.Get('attachments', Token) and Token.IsArray() then
-            foreach Attachment in Token.AsArray() do
-                if Attachment.IsObject() and Attachment.AsObject().Get('contentText', ContentToken) then
+        if not TemplateJson.Get('attachments', Token) then
+            exit;
+        if not Token.IsArray() then
+            exit;
+        foreach Attachment in Token.AsArray() do
+            if Attachment.IsObject() then
+                if Attachment.AsObject().Get('contentText', ContentToken) then
                     if IsUnsanitizedText(Step, ContentToken) then
                         ReportUnsanitized(Step, 'attachments[].contentText', Findings);
     end;
@@ -105,8 +114,9 @@ codeunit 10035621 "Playbook Verify Artifact ori"
         Value := Token.AsValue().AsText();
         AtPos := Value.IndexOf('@');
         while AtPos > 0 do begin
-            if (AtPos < StrLen(Value)) and (Value[AtPos + 1] in ['0' .. '9']) then
-                exit(not IsSanitizedReference(Step, Value));
+            if AtPos < StrLen(Value) then
+                if Value[AtPos + 1] in ['0' .. '9'] then
+                    exit(not IsSanitizedReference(Step, Value));
             AtPos := Value.IndexOf('@', AtPos + 1);
         end;
         exit(false);

@@ -94,7 +94,9 @@ codeunit 96462 "Artifact Mock Msg ori" implements "Msg Interface ori", "Msg Cont
     begin
         if not Request.Get('attachments', Token) then
             exit('');
-        if not Token.IsArray() or (Token.AsArray().Count() = 0) then
+        if not Token.IsArray() then
+            exit('');
+        if Token.AsArray().Count() = 0 then
             exit('');
         Token.AsArray().Get(0, Attachment);
         if not Attachment.AsObject().Get('contentText', Token) then

@@ -62,7 +62,8 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
         Verify.SetTestAskType('');
         Scrub.ClearTestTypes();
         Lib.CreatePlaybook('XASK-GATE');
-        Template := '{}';
+        // Each scenario isolates one finding, so the fixture carries the tools.allow that #153 requires.
+        Template := '{"tools":{"allow":["get_records"]}}';
         if FindingCode = 'AskForEachUnbounded' then begin
             Lib.AddStep('XASK-GATE', 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get",
                 '{"tableName":"Playbook ori","tableView":"WHERE(Code=CONST(XASK-GATE))"}', 0, '', 0);
@@ -72,7 +73,7 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
             ArrayPath := 'result';
         end;
         if FindingCode = 'AskTraceDiscarded' then
-            Template := '{"includeTrace":true}';
+            Template := '{"includeTrace":true,"tools":{"allow":["get_records"]}}';
         Lib.AddStep('XASK-GATE', 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Ask", Template, SourceStepNo, ArrayPath, 0);
         Lib.AddStatusSuccessCondition('XASK-GATE', 30);
         if FindingCode = 'AskDataConditionWithoutSchema' then
