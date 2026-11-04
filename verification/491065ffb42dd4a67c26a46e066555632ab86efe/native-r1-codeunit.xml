@@ -1,0 +1,950 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="96401 Workspace Test" timestamp="2026-11-04T17:00:43" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="3.15" tests="14" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;395.453&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.7&quot; }" />
+      <property name="platform.info" value="{ &quot;Version&quot;: &quot;29.0.57304.0+4b3cb7477cb15fe5963d7f815b286c8aeb8c0f2c&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;German language (Austria)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Quality Management Contoso Coffee Demo Dataset&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;AI Development Toolkit - Design&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Troubleshoot FA Ledger Entries&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Field Service Integration&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Master_Data_Management&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Error Messages with Recommendations&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Data Search&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Payables Agent&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - Continia&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Sustainability&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_SyncBaseApp_&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Sales and Inventory Forecast&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Norwegian language (Norway)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Microsoft Pay Payments&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Bifrost Foundation&quot;, &quot;Publisher&quot;: &quot;Origo&quot;, &quot;Version&quot;: &quot;28.0.11.669&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Subscription Billing Demo Data&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Permissions Mock&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Bank Account Reconciliation With AI&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Email - SMTP Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Performance Toolkit&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Spanish language (Spain)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;External File Storage - Azure File Service Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;API Reports - Finance&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;French language (Switzerland)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Bifrost Orchestrator&quot;, &quot;Publisher&quot;: &quot;Origo&quot;, &quot;Version&quot;: &quot;28.0.4.0&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;SAF-T&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Sales Lines Suggestions&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;German language (Switzerland)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Agent Test Internal Library&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Business Central Intelligent Cloud&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;AI Development Toolkit&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;External File Storage - SFTP Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;English language (New Zealand)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Base Application&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;AI Test Toolkit&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_APIV1_&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - FORNAV&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Review General Ledger Entries&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - Avalara&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Agent Samples Tests&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;System Application&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;English language (United States)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Performance Toolkit Samples&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Library Assert&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Essential Business Headlines&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Agent Test Library&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Icelandic language (Iceland)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;English language (Canada)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Payment Practices&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Expense Agent (Preview)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Agent Design Experience&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Italian language (Italy)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Audit File Export&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Library Variable Storage&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Finnish language (Finland)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Spanish language (Mexico)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Onboarding Signals&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Calculate Sustainability Emission with Copilot&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Danish language (Denmark)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Czech language (Czechia)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Dynamics BC Excel Reports&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Intrastat Core&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Application&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;VAT Group Management&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Sustainability Contoso Coffee Demo Dataset&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Universal Print Integration&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Create Product Information With Copilot&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Email - Current User Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Email - Outlook REST API&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Business_Events_&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Service Management&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Business Foundation&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Quality Management&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Any&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;ESG Statistical Accounts Demo Tool&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Late Payment Prediction&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - Logiq&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Intelligent Cloud Base&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - SignUp&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Core&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - B2Brouter&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;External File Storage - SharePoint Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Russian language (Russia)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Agent Samples&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Bank Deposits&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Company Hub&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Statistical Accounts&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Application Test Library&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Sales Order Agent&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Connectivity Apps&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Contoso Coffee Demo Dataset&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Business Foundation Test Libraries&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;French language (France)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Recommended Apps&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Performance Toolkit Tests&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;English language (Australia)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;API - Cross Environment Intercompany&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Excise Taxes&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;External File Storage - Azure Blob Service Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Microsoft Dynamics 365 - SmartList&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Bifrost Orchestrator - Tests&quot;, &quot;Publisher&quot;: &quot;Origo&quot;, &quot;Version&quot;: &quot;28.0.4.0&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_PlanConfiguration_&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;System Application Test Library&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;English language (United Kingdom)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;EU 3-Party Trade Purchase&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Payment Links to PayPal&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Dutch language (Netherlands)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Send remittance advice by email&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;AI Development Toolkit - Evaluation&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;PEPPOL&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Service Declaration&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Simplified Bank Statement Import&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Business Central Cloud Migration - Previous Release&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Power BI Report embeddings for Dynamics 365 Business Central&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Core Demo Data&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_ClientAddIns_&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Data Archive&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;German language (Germany)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Business Central 14 Historical Data&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Business Central Cloud Migration API&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Dynamics 365 Business Central v14 Reimplementation&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - Microsoft 365&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Withholding Tax&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Italian language (Switzerland)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Send To Email Printer&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Swedish language (Sweden)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Enforced Digital Vouchers&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Tests-TestLibraries&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Email - Microsoft 365 Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;External Storage - Document Attachments&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Shopify Connector&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;French language (Belgium)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_Email Logging Using Graph API&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Email - SMTP API&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Expense Withholding Tax&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Intrastat Core Demo Data&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;_Exclude_APIV2_&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Subscription Billing&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Manufacturing&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;E-Document Connector - Pagero&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Dutch language (Belgium)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Subcontracting&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;Test Runner&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="app.info" value="{ &quot;Name&quot;: &quot;French language (Canada)&quot;, &quot;Publisher&quot;: &quot;Microsoft&quot;, &quot;Version&quot;: &quot;29.0.54011.57417&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;398.984&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+    </properties>
+    <testcase classname="96401 Workspace Test" name="SetValueAndGetValue" time="2.727" />
+    <testcase classname="96401 Workspace Test" name="SetTokenAtNestedPath" time="0.036" />
+    <testcase classname="96401 Workspace Test" name="SetTokenPreservesArray" time="0.034" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseWithRename" time="0.043" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseIteratedKeying" time="0.03" />
+    <testcase classname="96401 Workspace Test" name="WriteFromResponseFirstElement" time="0.044" />
+    <testcase classname="96401 Workspace Test" name="CollectGathersIterations" time="0.057" />
+    <testcase classname="96401 Workspace Test" name="ToFilteredTextOnlyIncludesRequestedKeys" time="0.05" />
+    <testcase classname="96401 Workspace Test" name="ResetClearsAllData" time="0.063" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC001_September31DayMonth" time="0.017" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC002_LeapYearFebruary" time="0.026" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC003_JanuaryCrossYear" time="0.006" />
+    <testcase classname="96401 Workspace Test" name="LastMonthEnd_TC004_May31ToApril30" time="0.007" />
+    <testcase classname="96401 Workspace Test" name="LastMonthStartThisMonthStart_TC005_FormulasUnchanged" time="0.01" />
+  </testsuite>
+  <testsuite name="96402 Resolver Test" timestamp="2026-11-04T17:00:45" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.493" tests="11" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;399.047&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;399.516&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+    </properties>
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesString" time="0.093" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesNumericAsNumber" time="0.066" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesObject" time="0.04" />
+    <testcase classname="96402 Resolver Test" name="StandaloneRefResolvesArray" time="0.05" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefResolvesInString" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefBeforePeriodResolves" time="0.026" />
+    <testcase classname="96402 Resolver Test" name="EmbeddedRefEscapesQuotesAndObjects" time="0.027" />
+    <testcase classname="96402 Resolver Test" name="CollectDirective" time="0.037" />
+    <testcase classname="96402 Resolver Test" name="FilteredDumpEscapesAsString" time="0.057" />
+    <testcase classname="96402 Resolver Test" name="UnresolvedRefStaysIntact" time="0.04" />
+    <testcase classname="96402 Resolver Test" name="MultipleRefsInSameTemplate" time="0.03" />
+  </testsuite>
+  <testsuite name="96403 Orchestr Secret Tests" timestamp="2026-11-04T17:00:58" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="12.148" tests="17" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;399.578&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;410.188&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.5&quot; }" />
+    </properties>
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC04_FoundationFull_Enabled" time="3.617" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC05_NoUserSetupRead_Disabled" time="0.05" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC06_UnsetToken_Disabled" time="0.016" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC06_EmptyChat_Disabled" time="0.02" />
+    <testcase classname="96403 Orchestr Secret Tests" name="Scenario_AC01_IndirectRead_Enabled" time="0.05" />
+    <testcase classname="96403 Orchestr Secret Tests" name="SecretCodesFollowTheDocumentedPattern" time="0.016" />
+    <testcase classname="96403 Orchestr Secret Tests" name="LongCredentialCodesFitCode50AndStayDistinct" time="1.17" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllRegistersTheTelegramBotToken" time="0.074" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllRegistersBothSecretsOfEveryCredential" time="0.097" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RegisterAllIsIdempotent" time="0.28" />
+    <testcase classname="96403 Orchestr Secret Tests" name="TelegramBotTokenSetIsSetAndClearRoundTrip" time="0.077" />
+    <testcase classname="96403 Orchestr Secret Tests" name="CredentialClientIdAndSecretRoundTrip" time="0.126" />
+    <testcase classname="96403 Orchestr Secret Tests" name="DeletingACredentialClearsItsSecrets" time="0.16" />
+    <testcase classname="96403 Orchestr Secret Tests" name="DeletingACredentialLeavesNoMissingSecretsBehind" time="0.026" />
+    <testcase classname="96403 Orchestr Secret Tests" name="RenamingACredentialMovesItsSecrets" time="0.263" />
+    <testcase classname="96403 Orchestr Secret Tests" name="AppSetupPageReportsTheTelegramSecretStatus" time="2.26" />
+    <testcase classname="96403 Orchestr Secret Tests" name="BifrostSetupExposesOrchestratorSetupAndPlaybooks" time="3.846" />
+  </testsuite>
+  <testsuite name="96405 Sched Field Restrict Tests ori" timestamp="2026-11-04T17:00:59" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.321" tests="7" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;410.234&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.5&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;410.766&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.7&quot; }" />
+    </properties>
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC01_IdentityAndRecipientWritesAreRestricted" time="0.224" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC02_IdentityAndRecipientReadsStayOpen" time="0.01" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC03_NeighbourFieldsStayWritable" time="0.034" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC04_TablesStayReadableAndWritable" time="0.016" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC05_HintsNameSupportedPagesAndSchedule" time="0.013" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC05_NeighboursHaveNoNewHints" time="0.01" />
+    <testcase classname="96405 Sched Field Restrict Tests ori" name="Scenario_AC05_ExistingCompanionHintsArePreserved" time="0.014" />
+  </testsuite>
+  <testsuite name="96407 Entry Registration Tests ori" timestamp="2026-11-04T17:01:00" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.671" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;410.812&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.7&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;411.531&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+    </properties>
+    <testcase classname="96407 Entry Registration Tests ori" name="NewEntryHidesDialogs" time="0.46" />
+    <testcase classname="96407 Entry Registration Tests ori" name="ExistingEntryHidesDialogs" time="0.017" />
+    <testcase classname="96407 Entry Registration Tests ori" name="InteractiveEntryOpensCard" time="0.194" />
+  </testsuite>
+  <testsuite name="96408 WhoAmI Contract Tests ori" timestamp="2026-11-04T17:01:00" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.12" tests="1" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;411.578&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;411.828&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+    </properties>
+    <testcase classname="96408 WhoAmI Contract Tests ori" name="TelegramFieldDescribesCallerSetup" time="0.12" />
+  </testsuite>
+  <testsuite name="96409 Report Layout Read Tests ori" timestamp="2026-11-04T17:01:09" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="8.263" tests="11" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;411.891&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.6&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;419.109&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.4&quot; }" />
+    </properties>
+    <testcase classname="96409 Report Layout Read Tests ori" name="ListIncludesExtensionLayout" time="0.29" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="ListExcludesExtensionLayouts" time="0.016" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="GetExportsExtensionBytes" time="0.42" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="OwnUserLayoutRoundTripsBytes" time="0.247" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SetTwiceReplacesUserLayout" time="0.086" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="ListRejectsUnknownReport" time="0.027" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="GetRejectsUnknownLayout" time="0.03" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsOverrideRestoresSessionAndPreset" time="0.914" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsOverrideRendersPdf" time="6.177" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsRenderFailureRestoresSession" time="0.036" />
+    <testcase classname="96409 Report Layout Read Tests ori" name="SaveAsRejectsUnknownLayout" time="0.02" />
+  </testsuite>
+  <testsuite name="96411 Orchestrator Unit Tests" timestamp="2026-11-04T17:01:19" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="8.471" tests="39" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;419.156&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.4&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;425.516&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.1&quot; }" />
+    </properties>
+    <testcase classname="96411 Orchestrator Unit Tests" name="BinaryEnvelopePreservesOfficeContentType" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BinaryEnvelopePreservesMaximumContentType" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage" time="0.187" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage" time="0.103" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun" time="4.396" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified" time="0.563" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BlockedEntriesAreSkipped" time="0.27" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped" time="0.25" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EarliestStartDateTimeIsRecalculated" time="0.3" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank" time="0.023" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress" time="0.036" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="EMailNotificationType_RestartNotificationType_VerifyEMailContent" time="0.247" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="BlockJobQueueSchedulerEntryOpenFromJQEntryCard" time="0.426" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite" time="0.297" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateWeekdayValidation" time="0.377" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateTimeRangeValidation" time="0.024" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateCanBeInsertedWithValidData" time="0.016" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplatesActionNavigationFromSetupPage" time="0.146" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateCardPageCanBeOpened" time="0.15" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateNoOfMinutesBetweenRunsValidation" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RecurringTemplateNextRunDateFormulaValidation" time="0.016" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy" time="0.04" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry" time="0.12" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ModifyStartingEndingTime_VerifyValidationAndSync" time="0.05" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy" time="0.014" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="ChangingTemplate_VerifyExistingValuesOverwritten" time="0.02" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="TimeZoneCode_VerifyStored" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError" time="0.013" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime" time="0.007" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly" time="0.01" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter" time="0.09" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed" time="0.047" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicyNever_ErrorEntry_SuppressesImmediately" time="0.02" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RetryPolicy_ErrorCounterResetsOnSuccess" time="0.017" />
+    <testcase classname="96411 Orchestrator Unit Tests" name="RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted" time="0.11" />
+  </testsuite>
+  <testsuite name="96414 Enqueue Playbook Tests" timestamp="2026-11-04T17:01:20" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.5" tests="13" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;425.562&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;426.078&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.1&quot; }" />
+    </properties>
+    <testcase classname="96414 Enqueue Playbook Tests" name="JQParameterStoresAndRetrievesRequestData" time="0.053" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="JQParameterGetRequestDataReturnsEmptyWhenNoBlob" time="0.013" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookCreatesNonRecurringJQEntry" time="0.097" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookCreatesParameterRecord" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookNoParameterWhenRequestEmpty" time="0.027" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSetsJobQueueCategory" time="0.027" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookEnforcesMinimumDelay" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookDefaultOverloadUses60SecDelay" time="0.02" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookFailsWhenDisabled" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="DeleteJQEntryDeletesParameterRecord" time="0.023" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSchedulesRealTask" time="0.02" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookDispatchesAndCreatesInstance" time="0.124" />
+    <testcase classname="96414 Enqueue Playbook Tests" name="EnqueuePlaybookSetsRecordIdToProcess" time="0.027" />
+  </testsuite>
+  <testsuite name="96415 Schedule Playbook Tests" timestamp="2026-11-04T17:01:21" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.563" tests="12" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;426.094&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;426.969&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.1&quot; }" />
+    </properties>
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryCreatesEntry" time="0.08" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryStoresIdOnPlaybook" time="0.02" />
+    <testcase classname="96415 Schedule Playbook Tests" name="ScheduledFlowFieldReflectsOrchestratorEntry" time="0.03" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryCopiesRecurringTemplate" time="0.023" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsNotification" time="0.023" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsRetryPolicy" time="0.016" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsEmitTelemetry" time="0.017" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsJobQueueCategory" time="0.034" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryBlocksDoubleSchedule" time="0.043" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntrySetsRecordIdAndSystemId" time="0.203" />
+    <testcase classname="96415 Schedule Playbook Tests" name="CreateOrchestratorEntryAllowsRescheduleAfterOrphan" time="0.027" />
+    <testcase classname="96415 Schedule Playbook Tests" name="ScheduleResponseEmitsSystemIdAndPkId" time="0.047" />
+  </testsuite>
+  <testsuite name="96416 Report Msg Tests" timestamp="2026-11-04T17:01:45" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="23.15" tests="20" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;427.031&quot;, &quot;Free Memory (Gb)&quot;: &quot;27.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;437.859&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+    </properties>
+    <testcase classname="96416 Report Msg Tests" name="PresetRoundTripsXml" time="0.02" />
+    <testcase classname="96416 Report Msg Tests" name="PresetReturnsEmptyWhenNoXml" time="0.017" />
+    <testcase classname="96416 Report Msg Tests" name="PresetHasRequestPageXmlReturnsTrueWhenPopulated" time="0.013" />
+    <testcase classname="96416 Report Msg Tests" name="ListReturnsReportsWithCountField" time="17.74" />
+    <testcase classname="96416 Report Msg Tests" name="ListFiltersByProcessingOnly" time="0.024" />
+    <testcase classname="96416 Report Msg Tests" name="ListReportContainsExpectedFields" time="0.03" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsReportMetadata" time="0.033" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsLayoutsArray" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="GetReturnsPresetWhenExists" time="0.017" />
+    <testcase classname="96416 Report Msg Tests" name="GetCreatesEmptyPresetWhenNoneExists" time="0.02" />
+    <testcase classname="96416 Report Msg Tests" name="GetErrorsForInvalidReportId" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="GetErrorsWhenReportIdMissing" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsGeneratesPdfOutput" time="3.28" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsDefaultsToPdfWhenFormatOmitted" time="0.963" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsUsesPresetWhenNoXmlProvided" time="0.916" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForInvalidFormat" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForMissingReportId" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="SaveAsErrorsForNonExistentReport" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="PresetTableIsBlockedFromDataRecordsRead" time="0.01" />
+    <testcase classname="96416 Report Msg Tests" name="PresetTableIsBlockedFromDataRecordsWrite" time="0.007" />
+  </testsuite>
+  <testsuite name="96417 Report Run Tests" timestamp="2026-11-04T17:01:46" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.206" tests="7" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;437.859&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;438.312&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+    </properties>
+    <testcase classname="96417 Report Run Tests" name="RunExecutesProcessingOnlyReport" time="0.06" />
+    <testcase classname="96417 Report Run Tests" name="RunEchoesReportMetadata" time="0.023" />
+    <testcase classname="96417 Report Run Tests" name="RunReturnsErrorObjectWhenReportFails" time="0.026" />
+    <testcase classname="96417 Report Run Tests" name="RunUsesExplicitParameterOverlay" time="0.063" />
+    <testcase classname="96417 Report Run Tests" name="RunRejectsReportThatProducesOutput" time="0.007" />
+    <testcase classname="96417 Report Run Tests" name="RunErrorsWhenReportIdMissing" time="0.01" />
+    <testcase classname="96417 Report Run Tests" name="RunErrorsForNonExistentReport" time="0.017" />
+  </testsuite>
+  <testsuite name="96418 Playbook Cond Tests" timestamp="2026-11-04T17:01:47" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.625" tests="23" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;438.312&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;439.125&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+    </properties>
+    <testcase classname="96418 Playbook Cond Tests" name="EmptyConditionSetIsTrue" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="AllConditionsInAGroupMustHold" time="0.036" />
+    <testcase classname="96418 Playbook Cond Tests" name="AnyGroupHoldingIsEnough" time="0.013" />
+    <testcase classname="96418 Playbook Cond Tests" name="GroupsAreIndependentNotLeftToRight" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="ConditionTypesAreEvaluatedIndependently" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="HasConditionsSeesOnlyItsOwnType" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="StepTypeDefaultsToAction" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="BeginRunSeedsRunNamespace" time="0.04" />
+    <testcase classname="96418 Playbook Cond Tests" name="RollUpCountsAndFlagsFailure" time="0.06" />
+    <testcase classname="96418 Playbook Cond Tests" name="ExcludedStepsLeaveRunStatusAlone" time="0.037" />
+    <testcase classname="96418 Playbook Cond Tests" name="EscalateFailsTheRunWithoutTouchingCounters" time="0.043" />
+    <testcase classname="96418 Playbook Cond Tests" name="RepeatedStepAccumulatesInsteadOfOverwriting" time="0.033" />
+    <testcase classname="96418 Playbook Cond Tests" name="StatusDegradesAndNeverImproves" time="0.027" />
+    <testcase classname="96418 Playbook Cond Tests" name="IterationFailuresCarryItemAndError" time="0.04" />
+    <testcase classname="96418 Playbook Cond Tests" name="CheckFailuresAreCountedSeparatelyFromErrors" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="FailureListIsCappedButCountsStayExact" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="SkippedStepRecordsTheReason" time="0.034" />
+    <testcase classname="96418 Playbook Cond Tests" name="SummaryPathsFeedTheReportNotTheWorkspaceData" time="0.03" />
+    <testcase classname="96418 Playbook Cond Tests" name="RunAndStepsFilterToTheReportPayload" time="0.02" />
+    <testcase classname="96418 Playbook Cond Tests" name="StatusTextComesFromTheEnumName" time="0.01" />
+    <testcase classname="96418 Playbook Cond Tests" name="MessageTypeTextComesFromTheEnumName" time="0.006" />
+    <testcase classname="96418 Playbook Cond Tests" name="ExcludedStepsAreStillReferenceableUnderTail" time="0.023" />
+    <testcase classname="96418 Playbook Cond Tests" name="TailStaysOutOfTheReportPayload" time="0.023" />
+  </testsuite>
+  <testsuite name="96419 Status Msg Tests" timestamp="2026-11-04T17:01:48" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.174" tests="7" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;439.188&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;439.672&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+    </properties>
+    <testcase classname="96419 Status Msg Tests" name="GetReturnsSuccessWithEntryCounts" time="0.03" />
+    <testcase classname="96419 Status Msg Tests" name="GetEntryCountsAreConsistent" time="0.023" />
+    <testcase classname="96419 Status Msg Tests" name="RestartReturnsSuccessWithMessage" time="0.026" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededRestartsWhenNoJQEntry" time="0.02" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededSkipsWhenAlreadyRunning" time="0.023" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededSkipsWhenInProcess" time="0.016" />
+    <testcase classname="96419 Status Msg Tests" name="RestartIfNeededRestartsWhenInError" time="0.036" />
+  </testsuite>
+  <testsuite name="96420 Entry Msg Tests" timestamp="2026-11-04T17:01:49" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.066" tests="8" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;439.734&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;440.906&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+    </properties>
+    <testcase classname="96420 Entry Msg Tests" name="RestartSetsEntryToReady" time="0.06" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartSetsOnHoldEntryToReady" time="0.02" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartErrorsForMissingId" time="0.81" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededRestartsErrorEntry" time="0.03" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededSkipsReadyEntry" time="0.023" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartIfNeededRestartsOnHoldEntry" time="0.06" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartResponseIncludesEntryDetails" time="0.03" />
+    <testcase classname="96420 Entry Msg Tests" name="RestartAcceptsIdInSubject" time="0.033" />
+  </testsuite>
+  <testsuite name="96421 Playbook Run Msg Tests" timestamp="2026-11-04T17:01:50" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.401" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;440.969&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;441.578&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+    </properties>
+    <testcase classname="96421 Playbook Run Msg Tests" name="RunErrorsWhenPlaybookCodeMissing" time="0.033" />
+    <testcase classname="96421 Playbook Run Msg Tests" name="RunErrorsForUnknownPlaybookCode" time="0.014" />
+    <testcase classname="96421 Playbook Run Msg Tests" name="Scenario_AC07_PagedStep_ReceivesItsOwnSkipAndTake" time="0.354" />
+  </testsuite>
+  <testsuite name="96422 Misc Msg Smoke Tests" timestamp="2026-11-04T17:01:52" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.554" tests="4" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;441.703&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;442.438&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+    </properties>
+    <testcase classname="96422 Misc Msg Smoke Tests" name="HelpGetReturnsNonEmptyMarkdown" time="0.053" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="WorkspacePreviewReturnsSysNamespace" time="0.297" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="WorkspacePreviewPassesThroughInitialRequest" time="0.06" />
+    <testcase classname="96422 Misc Msg Smoke Tests" name="EveryOrchestratorMessageTypeRefusesAnUnlicensedDirectCall" time="0.144" />
+  </testsuite>
+  <testsuite name="96423 Orchestr Registration Tests" timestamp="2026-11-04T17:01:53" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.113" tests="3" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;442.438&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.8&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;443.297&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+    </properties>
+    <testcase classname="96423 Orchestr Registration Tests" name="Scenario_AC03_LicenceAdmin_OpensSetupInEnglish" time="0.64" />
+    <testcase classname="96423 Orchestr Registration Tests" name="Scenario_AC03_LicenceAdmin_OpensSetupInIcelandic" time="0.463" />
+    <testcase classname="96423 Orchestr Registration Tests" name="OrchestratorIsRegisteredInTheAppRegistry" time="0.01" />
+  </testsuite>
+  <testsuite name="96424 Report Layout Msg Tests" timestamp="2026-11-04T17:01:54" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.057" tests="6" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;443.359&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;443.812&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+    </properties>
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenReportIdMissing" time="0.014" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenNameMissing" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsForUnknownReport" time="0.006" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsForInvalidLayoutFormat" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="SetErrorsWhenLayoutBase64Missing" time="0.01" />
+    <testcase classname="96424 Report Layout Msg Tests" name="MessageTypeIsRegistered" time="0.007" />
+  </testsuite>
+  <testsuite name="96427 SE Run Msg Tests" timestamp="2026-11-04T17:01:55" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.986" tests="5" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;443.891&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;444.906&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+    </properties>
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunDispatchesCodeunitEntryHeadlessly" time="0.06" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunReturnsErrorWhenJobFails" time="0.713" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunReturnsErrorWhenDispatchFails" time="0.063" />
+    <testcase classname="96427 SE Run Msg Tests" name="ExecuteRunUsesPlaybookRecordIdNotEntryRecordId" time="0.1" />
+    <testcase classname="96427 SE Run Msg Tests" name="RunJobQueueEntryOnceStillConfirmsAndMessages" time="0.05" />
+  </testsuite>
+  <testsuite name="96428 Data Records Hint Tests" timestamp="2026-11-04T17:01:56" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.127" tests="8" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;444.969&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;445.516&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+    </properties>
+    <testcase classname="96428 Data Records Hint Tests" name="JobQueueEntry_WriteHint" time="0.047" />
+    <testcase classname="96428 Data Records Hint Tests" name="JobQueueEntry_WriteHint_Icelandic" time="0.01" />
+    <testcase classname="96428 Data Records Hint Tests" name="ScheduledTask_WriteHint" time="0.013" />
+    <testcase classname="96428 Data Records Hint Tests" name="ScheduledTask_WriteHint_Icelandic" time="0.007" />
+    <testcase classname="96428 Data Records Hint Tests" name="ReportRequestPreset_ReadWriteHint" time="0.014" />
+    <testcase classname="96428 Data Records Hint Tests" name="ReportRequestPreset_ReadWriteHint_Icelandic" time="0.013" />
+    <testcase classname="96428 Data Records Hint Tests" name="Customer_NoCompanionHints" time="0.013" />
+    <testcase classname="96428 Data Records Hint Tests" name="Customer_NoCompanionHints_Icelandic" time="0.01" />
+  </testsuite>
+  <testsuite name="96430 Check Step Error Tests" timestamp="2026-11-04T17:01:59" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="2.055" tests="21" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;445.594&quot;, &quot;Free Memory (Gb)&quot;: &quot;26.7&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;447.156&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.3&quot; }" />
+    </properties>
+    <testcase classname="96430 Check Step Error Tests" name="ErrorResponseKeepsCodeAndError" time="0.017" />
+    <testcase classname="96430 Check Step Error Tests" name="ErrorResponseWithoutCodeUsesErrorOrMessage" time="0.01" />
+    <testcase classname="96430 Check Step Error Tests" name="NonErrorResponsesAreNotErrors" time="0.03" />
+    <testcase classname="96430 Check Step Error Tests" name="ErroredIterationsAreCountedApartFromNo" time="0.043" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_ErrorAnswer_FailsStepAndRun" time="0.196" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_ErrorAnswer_FailsStepAndRun_Icelandic" time="0.117" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_RaisedError_FailsStepAndRun" time="0.08" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_RaisedError_FailsStepAndRun_Icelandic" time="0.076" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredNo_DoesNotFailTheRun" time="0.06" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredNo_DoesNotFailTheRun_Icelandic" time="0.076" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredYes_Completes" time="0.053" />
+    <testcase classname="96430 Check Step Error Tests" name="SingleCheck_AnsweredYes_Completes_Icelandic" time="0.05" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_ErrorAnswers_AreFailuresNotNo" time="0.177" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_ErrorAnswers_AreFailuresNotNo_Icelandic" time="0.174" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_RaisedErrors_AreFailuresNotNo" time="0.183" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_RaisedErrors_AreFailuresNotNo_Icelandic" time="0.113" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun" time="0.11" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun_Icelandic" time="0.156" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredYes_Succeeds" time="0.124" />
+    <testcase classname="96430 Check Step Error Tests" name="ForEachCheck_AnsweredYes_Succeeds_Icelandic" time="0.083" />
+    <testcase classname="96430 Check Step Error Tests" name="ActionStep_ErrorAnswerWithSuccessCondition_StillFails" time="0.127" />
+  </testsuite>
+  <testsuite name="96431 Report Parameter Tests ori" timestamp="2026-11-04T17:02:03" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="3.601" tests="18" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;447.219&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.3&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;450.266&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.4&quot; }" />
+    </properties>
+    <testcase classname="96431 Report Parameter Tests ori" name="OverlayPreservesOtherValues" time="0.024" />
+    <testcase classname="96431 Report Parameter Tests ori" name="UnknownNameFails" time="0.017" />
+    <testcase classname="96431 Report Parameter Tests ori" name="MissingBaseFails" time="0.013" />
+    <testcase classname="96431 Report Parameter Tests ori" name="WrongReportXmlFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="MalformedXmlFails" time="0.013" />
+    <testcase classname="96431 Report Parameter Tests ori" name="DuplicateOptionFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NonObjectParametersFail" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NullValueFails" time="0.017" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NestedValueFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementTemplateMapsOptions" time="0.017" />
+    <testcase classname="96431 Report Parameter Tests ori" name="DuplicateAliasesFail" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="NativeCaptureMatchesTemplateSchema" time="0.324" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementUnknownOptionFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementBadChoiceFails" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="CallerXmlPrecedesTemplate" time="0.01" />
+    <testcase classname="96431 Report Parameter Tests ori" name="RegisteredTemplateRendersValues" time="0.06" />
+    <testcase classname="96431 Report Parameter Tests ori" name="ExplicitParametersDoNotUsePreset" time="0.033" />
+    <testcase classname="96431 Report Parameter Tests ori" name="StatementRendersOwnAgingData" time="3.003" />
+  </testsuite>
+  <testsuite name="96432 Playbook Last Run Tests" timestamp="2026-11-04T17:02:05" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.142" tests="11" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;450.359&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.4&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;451.688&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+    </properties>
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookRun_StampsHeader" time="0.257" />
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookRun_StampsHeader_Icelandic" time="0.07" />
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookEnqueue_ThenJobQueueRun_StampsHeader" time="0.106" />
+    <testcase classname="96432 Playbook Last Run Tests" name="PlaybookEnqueue_ThenJobQueueRun_StampsHeader_Icelandic" time="0.08" />
+    <testcase classname="96432 Playbook Last Run Tests" name="ScheduledRun_StampsHeader" time="0.09" />
+    <testcase classname="96432 Playbook Last Run Tests" name="ScheduledRun_StampsHeader_Icelandic" time="0.056" />
+    <testcase classname="96432 Playbook Last Run Tests" name="FailedRun_StampsHeaderFailed" time="0.073" />
+    <testcase classname="96432 Playbook Last Run Tests" name="FailedRun_StampsHeaderFailed_Icelandic" time="0.053" />
+    <testcase classname="96432 Playbook Last Run Tests" name="SecondRun_ReplacesTheFirst" time="0.136" />
+    <testcase classname="96432 Playbook Last Run Tests" name="EmptyPlaybook_StampsHeaderCompleted" time="0.037" />
+    <testcase classname="96432 Playbook Last Run Tests" name="HeaderIsRunningWhileTheRunIsInFlight" time="0.184" />
+  </testsuite>
+  <testsuite name="96433 Playbook Verify Tests" timestamp="2026-11-04T17:02:06" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.459" tests="8" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;451.750&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;452.297&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.4&quot; }" />
+    </properties>
+    <testcase classname="96433 Playbook Verify Tests" name="UnsafePattern_Warns" time="0.127" />
+    <testcase classname="96433 Playbook Verify Tests" name="UnsafePattern_Warns_Icelandic" time="0.047" />
+    <testcase classname="96433 Playbook Verify Tests" name="CorrectedPattern_DoesNotWarn" time="0.074" />
+    <testcase classname="96433 Playbook Verify Tests" name="CorrectedPattern_DoesNotWarn_Icelandic" time="0.03" />
+    <testcase classname="96433 Playbook Verify Tests" name="TwoUnsafeWrites_WarnOncePerStep" time="0.064" />
+    <testcase classname="96433 Playbook Verify Tests" name="SafeShapes_DoNotWarn" time="0.08" />
+    <testcase classname="96433 Playbook Verify Tests" name="WriteMessageTypesAreRecognisedByTheirVerb" time="0.017" />
+    <testcase classname="96433 Playbook Verify Tests" name="VerifyErrorsForMissingOrUnknownPlaybook" time="0.02" />
+  </testsuite>
+  <testsuite name="96435 Playbook Verify Step Tests" timestamp="2026-11-04T17:02:08" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.09" tests="33" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;452.297&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.4&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;453.453&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.4&quot; }" />
+    </properties>
+    <testcase classname="96435 Playbook Verify Step Tests" name="AskForEach_BoundsAndTypeAreChecked" time="0.047" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="AskForEach_DisabledAndTranslated" time="0.036" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CleanPlaybook_HasNoFindings" time="0.03" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="EmptyPlaybook_HasNoFindings" time="0.016" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedMessageType_IsAnError" time="0.05" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedMessageType_IsAnError_Icelandic" time="0.026" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ListedEnabledMessageType_NoFinding" time="0.01" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedMessageType_NameAndEnabled" time="0.006" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="KnownTypeThatIsNotEnabled_WithStartCondition_IsNotReported" time="0.047" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnlistedType_WithStartCondition_IsStillAnError" time="0.026" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CheckWithoutSuccessCondition_IsAnError" time="0.04" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CheckWithoutSuccessCondition_IsAnError_Icelandic" time="0.027" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="CheckWithSuccessCondition_NoFinding" time="0.024" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ActionWithoutSuccessCondition_IsAWarning" time="0.023" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ActionWithSuccessCondition_NoFinding" time="0.026" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="NextStepNotFound_IsAnError" time="0.033" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="NextStepExistingOrZero_NoFinding" time="0.03" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="IterateSource_Missing_IsAnError" time="0.024" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="IterateSource_NotEarlier_IsAnError" time="0.044" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="IterateSource_Earlier_NoFinding" time="0.03" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_Missing_IsAnError" time="0.05" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_NotEarlier_IsAnError" time="0.053" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_OnSingleStep_IsAnError" time="0.037" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="SkipGate_OnForEachCheck_NoFinding" time="0.043" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_WithoutNoOfRecords_Warns" time="0.033" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_WithoutNoOfRecords_Warns_Icelandic" time="0.03" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_WithNoOfRecords_NoWarning" time="0.033" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_NotARecordReader_NoWarning" time="0.033" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="ForEachSource_TwoConsumers_WarnsOnce" time="0.033" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="UnsafeWrite_OnDisabledStep_IsNotReported" time="0.047" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="FindingOnDisabledStep_CarriesStepDisabled" time="0.047" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="FindingOnEnabledStep_HasNoStepDisabled" time="0.023" />
+    <testcase classname="96435 Playbook Verify Step Tests" name="Findings_AreInStepOrder_WithAllFields" time="0.033" />
+  </testsuite>
+  <testsuite name="96436 Playbook Example Tests" timestamp="2026-11-04T17:02:10" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.303" tests="15" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;453.500&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.4&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;454.875&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+    </properties>
+    <testcase classname="96436 Playbook Example Tests" name="Example1_PerRecordDecisionThenWrite_VerifiesClean" time="0.17" />
+    <testcase classname="96436 Playbook Example Tests" name="Example1_PerRecordDecisionThenWrite_VerifiesClean_Icelandic" time="0.044" />
+    <testcase classname="96436 Playbook Example Tests" name="Example2_ReadOnlyReport_VerifiesClean" time="0.074" />
+    <testcase classname="96436 Playbook Example Tests" name="Example2_ReadOnlyReport_VerifiesClean_Icelandic" time="0.03" />
+    <testcase classname="96436 Playbook Example Tests" name="Example3_AntiPattern_WarnsExactlyOnce" time="0.05" />
+    <testcase classname="96436 Playbook Example Tests" name="Example3_AntiPattern_WarnsExactlyOnce_Icelandic" time="0.05" />
+    <testcase classname="96436 Playbook Example Tests" name="Example1_WithEveryStepDisabled_StillVerifiesWithoutErrors" time="0.083" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_CarriesTheWorkflowTheExamplesAndTheRules" time="0.01" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_CarriesTheBase64OfEveryExampleTemplate" time="0.03" />
+    <testcase classname="96436 Playbook Example Tests" name="Example4_PostingAudit_VerifiesForTheInstalledAskType" time="0.104" />
+    <testcase classname="96436 Playbook Example Tests" name="Example4_PostingAudit_VerifiesForTheInstalledAskType_Icelandic" time="0.064" />
+    <testcase classname="96436 Playbook Example Tests" name="Example4_AskTemplateRaisesNoneOfTheAskWarnings" time="0.08" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_CarriesThePostingAuditExample" time="0.01" />
+    <testcase classname="96436 Playbook Example Tests" name="Example4_RunRecordsPassFailUnknownAndErrorThenAllPassNotice" time="0.494" />
+    <testcase classname="96436 Playbook Example Tests" name="Help_ListsEveryFindingCodeOfVerify" time="0.01" />
+  </testsuite>
+  <testsuite name="96437 Playbook Gate Tests" timestamp="2026-11-04T17:02:12" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.272" tests="18" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;454.922&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;455.766&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+    </properties>
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAnError" time="0.043" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAnError_Icelandic" time="0.053" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAWarning_UnlessIgnoreWarnings" time="0.153" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_RefusesAWarning_UnlessIgnoreWarnings_Icelandic" time="0.1" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_IgnoreWarnings_NeverWaivesAnError" time="0.086" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_ErrorOnDisabledStep_DoesNotBlock" time="0.234" />
+    <testcase classname="96437 Playbook Gate Tests" name="Run_CleanPlaybook_Runs" time="0.113" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_RefusesAnError_AndCreatesNoEntry" time="0.046" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_RefusesAnError_AndCreatesNoEntry_Icelandic" time="0.037" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_CleanPlaybook_IsScheduled" time="0.036" />
+    <testcase classname="96437 Playbook Gate Tests" name="VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify" time="0.05" />
+    <testcase classname="96437 Playbook Gate Tests" name="Schedule_RefusesAWarning_UnlessIgnoreWarnings" time="0.03" />
+    <testcase classname="96437 Playbook Gate Tests" name="CreateOrchestratorEntry_RefusesAnError" time="0.03" />
+    <testcase classname="96437 Playbook Gate Tests" name="CreateOrchestratorEntry_WarningNeedsIgnoreWarnings" time="0.084" />
+    <testcase classname="96437 Playbook Gate Tests" name="ScheduledPlaybookWithErrors_IsReported" time="0.05" />
+    <testcase classname="96437 Playbook Gate Tests" name="UnscheduledPlaybookWithErrors_HasNoScheduleFinding" time="0.027" />
+    <testcase classname="96437 Playbook Gate Tests" name="VerifyMessageType_ReportsValidAndCounts" time="0.057" />
+    <testcase classname="96437 Playbook Gate Tests" name="VerifyMessageType_CleanPlaybook_IsValid" time="0.043" />
+  </testsuite>
+  <testsuite name="96439 Playbook Verify Template Tests" timestamp="2026-11-04T17:02:16" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="2.883" tests="40" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;455.828&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;458.766&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+    </properties>
+    <testcase classname="96439 Playbook Verify Template Tests" name="AskSchema_ConditionAndPresenceBoundaries" time="0.174" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="AskTrace_LiteralTrueOnly" time="0.14" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="AskTemplate_TranslatedMessagesAndNextSteps" time="0.064" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateNotJson_Truncated_IsAnError" time="0.047" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateNotJson_Truncated_IsAnError_Icelandic" time="0.02" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateNotJson_Array_IsAnError" time="0.026" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="TemplateValidOrEmpty_NoFinding" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_Missing_IsAnError" time="0.036" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_Missing_IsAnError_Icelandic" time="0.027" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_CollectAndListForms_AreChecked" time="0.034" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_NotEarlier_IsAnError" time="0.043" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_NotEarlier_IsAnError_Icelandic" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_ToItself_IsAnError" time="0.023" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_ToEarlierStep_NoFinding" time="0.05" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_ShapesThatAreNotReferences_NoFinding" time="0.027" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepReference_RepeatedReference_IsReportedOnce" time="0.036" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_Unknown_IsAnError" time="0.03" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_Unknown_IsAnError_Icelandic" time="0.02" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_Known_NoFinding" time="0.033" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_EmptyReferenceOrAbsent_IsNotLookedUp" time="0.033" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_OnOtherMessageType_IsNotLookedUp" time="0.02" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_LongerThanACode_IsAnError" time="0.027" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="RoleCode_InsideAWriteTransaction_IsNotDeterminable" time="0.036" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_Unknown_Warns" time="0.053" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_Unknown_Warns_Icelandic" time="0.033" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_Known_NoWarning" time="0.047" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="CurrentField_SourceTableUndeterminable_NoWarning" time="0.113" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepField_Unknown_IsAnError" time="0.033" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StoredField_ErrorAndOriginalCasing" time="0.036" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StoredField_ErrorAndOriginalCasing_Icelandic" time="0.027" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StoredField_HelpExplainsError" time="0.006" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepField_Known_NoWarning" time="0.04" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_Unknown_IsAnError" time="0.053" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_Unknown_IsAnError_Icelandic" time="0.033" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_Known_NoWarning" time="0.036" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="IterField_ExplicitIteration_Unknown_IsAnError" time="0.037" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="StepField_OfPagedOrDisabledStep_IsNotJudged" time="0.037" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="Lookup_RecordExists_FoundNotFoundAndUndeterminable" time="1.203" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="Lookup_FieldNames_AreTheJsonNames" time="0.06" />
+    <testcase classname="96439 Playbook Verify Template Tests" name="Lookup_ToJsonName_FollowsTheDataTypes" time="0.01" />
+  </testsuite>
+  <testsuite name="96441 Contract Complete Tests ori" timestamp="2026-11-04T17:02:18" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.009" tests="10" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;458.812&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.2&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;459.781&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96441 Contract Complete Tests ori" name="TheGuardSeesEveryOrchestratorType" time="0.01" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_DeclaresTheRequiredChapters" time="0.573" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_EnvelopeStatesSubjectStrictAndContentType" time="0.076" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_ParametersAndResponseFieldsAreDescribed" time="0.054" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_EachErrorHasACodeOrATextAndTheStepToTake" time="0.074" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_EffectMatchesTheDirection" time="0.037" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_ExamplesAreRealRequestsAndAnswers" time="0.033" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_RelatedAndWorkflowNameRealTypes" time="0.046" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_HelpTextHasEnoughSubstanceAndNoAlObjectNames" time="0.043" />
+    <testcase classname="96441 Contract Complete Tests ori" name="EveryType_DiscoveryTextsExistAndAreTranslated" time="0.063" />
+  </testsuite>
+  <testsuite name="96442 Verify Summary Tests ori" timestamp="2026-11-04T17:02:18" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.273" tests="8" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;459.828&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;460.219&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_DisabledErrors_DoNotBlock" time="0.054" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_DisabledErrors_DoNotBlock_IsIS" time="0.03" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks" time="0.033" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks_IsIS" time="0.033" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_EnabledError_StillBlocks" time="0.043" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_EnabledError_StillBlocks_IsIS" time="0.037" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC01_CleanPlaybook_HasZeroCounts" time="0.03" />
+    <testcase classname="96442 Verify Summary Tests ori" name="Scenario_AC02_Help_ExplainsBlockingCounts" time="0.013" />
+  </testsuite>
+  <testsuite name="96443 First Schedule Tests ori" timestamp="2026-11-04T17:02:20" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.447" tests="13" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;460.250&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;460.828&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC01_NeverRunDailyKeepsDueSlot" time="0.014" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC02_NoEndingTimeKeepsDueSlot" time="0.013" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC02_HourlyKeepsLatestDueSlot" time="0.01" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC02_FutureWindowWaits" time="0.04" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC07_ElapsedDailyWindowWaits" time="0.01" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC07_ElapsedHourlyWindowWaits" time="0.006" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC03_SuccessAdvancesDaily" time="0.01" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC01_LateDailyRunKeepsNextDayAnchor" time="0.017" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC01_MidnightDelayKeepsSameDayAnchor" time="0.007" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC01_CreatedInsideWindowRunsFirstSlot" time="0.01" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC05_StartChangeAndClearSyncReference" time="0.033" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC01_AC04_AC06_FirstDispatchRunsPlaybook" time="0.21" />
+    <testcase classname="96443 First Schedule Tests ori" name="Scenario_AC05_TemplateKeepsJobAndSyncsReference" time="0.067" />
+  </testsuite>
+  <testsuite name="96444 Playbook Ref 118 Tests ori" timestamp="2026-11-04T17:02:21" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.555" tests="9" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;460.875&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;461.516&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="PrimaryKeyUnderFieldsWarnsEnglish" time="0.09" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="PrimaryKeyUnderFieldsWarnsIcelandic" time="0.047" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="CorrectPathsResolve" time="0.06" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="UnresolvedRequestsAreRejected" time="0.044" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="LiteralMailAndResolvedDataRemainValid" time="0.04" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="SameIterationAndFilteredDumpResolve" time="0.044" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="SingleCheckMissingReferenceFails" time="0.067" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="ForEachCheckMissingReferenceFails" time="0.093" />
+    <testcase classname="96444 Playbook Ref 118 Tests ori" name="ForEachActionMissingReferenceFailsIcelandic" time="0.07" />
+  </testsuite>
+  <testsuite name="96446 Scheduler Wizard Reg Tests ori" timestamp="2026-11-04T17:02:23" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.74" tests="2" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;461.562&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;463.453&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96446 Scheduler Wizard Reg Tests ori" name="Scenario_AC02_English_RegistersMetadataOnly" time="1.09" />
+    <testcase classname="96446 Scheduler Wizard Reg Tests ori" name="Scenario_AC03_Icelandic_RegistersMetadataOnly" time="0.65" />
+  </testsuite>
+  <testsuite name="96452 Orch B1 Contract Tests" timestamp="2026-11-04T17:02:24" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.268" tests="20" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;463.516&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;464.094&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96452 Orch B1 Contract Tests" name="Batch1MessagesHaveContractChaptersAndDiscovery" time="0.017" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="CommittingTypesDeclareIrreversible" time="0.013" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="NonCommittingTypesKeepTheirEffect" time="0.013" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC05_NotificationType_KeepsMainContract" time="0.027" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC05_RetryPolicy_KeepsMainContract" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_JobQueueEntryRestartIfNeeded_KeepsMainErrors" time="0.027" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_JobQueueEntryRestart_KeepsMainErrors" time="0.013" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_OrchestratorGet_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_PlaybookEnqueue_KeepsMainErrors" time="0.007" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_PlaybookRun_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_PlaybookSchedule_KeepsMainErrors" time="0.007" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EmailSend_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntryRegister_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntryRestart_KeepsMainErrors" time="0.006" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntryRun_KeepsMainErrors" time="0.007" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_EntrySchedule_KeepsMainErrors" time="0.017" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_StatusGet_KeepsMainErrors" time="0.02" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_StatusRestartIfNeeded_KeepsMainErrors" time="0.024" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_StatusRestart_KeepsMainErrors" time="0.01" />
+    <testcase classname="96452 Orch B1 Contract Tests" name="Scenario_AC04_TelegramMessage_KeepsMainErrors" time="0.01" />
+  </testsuite>
+  <testsuite name="96453 Orch B2 Contract Tests" timestamp="2026-11-04T17:02:24" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.154" tests="12" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;464.156&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;464.516&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96453 Orch B2 Contract Tests" name="Batch2MessagesHaveContractChaptersAndDiscovery" time="0.027" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="CommittingTypesDeclareIrreversible" time="0.014" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="PreviewDisclosesNestedCommit" time="0.017" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="NonCommittingTypesKeepTheirEffect" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC05_Format_KeepsMainContract" time="0.013" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC05_LayoutFormat_KeepsMainContract" time="0.013" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_WorkspacePreview_KeepsMainErrors" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportGet_KeepsMainErrors" time="0.007" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportList_KeepsMainErrors" time="0.006" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportRun_KeepsMainErrors" time="0.017" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportSaveAs_KeepsMainErrors" time="0.01" />
+    <testcase classname="96453 Orch B2 Contract Tests" name="Scenario_AC04_ReportLayoutSet_KeepsMainErrors" time="0.01" />
+  </testsuite>
+  <testsuite name="96454 Report Boundary Tests ori" timestamp="2026-11-04T17:02:26" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="1.281" tests="14" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;464.578&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;466.172&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_UnknownField_ReturnsErrorWithoutExecution" time="0.09" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_MalformedView_ReturnsErrorWithoutExecution" time="0.027" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_NonString_ReturnsErrorWithoutExecution" time="0.037" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_UnknownField_ReturnsErrorWithoutExecution" time="0.016" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_PdfInvalidField_ReturnsError" time="0.02" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_DefaultPdfInvalidField_ReturnsError" time="0.02" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_ExcelInvalidField_ReturnsError" time="0.024" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Scenario_AC01_WordInvalidField_ReturnsError" time="0.017" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_MalformedView_ReturnsErrorWithoutExecution" time="0.02" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_NonString_ReturnsErrorWithoutExecution" time="0.014" />
+    <testcase classname="96454 Report Boundary Tests ori" name="SaveAs_ValidView_ExecutesOnlySelectedRow" time="0.043" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_ValidView_ExecutesSelectedRow" time="0.05" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_EmptySelection_DoesNotWidenDataSet" time="0.037" />
+    <testcase classname="96454 Report Boundary Tests ori" name="Run_BothDebugStates_FailureHasNoCallstack" time="0.866" />
+  </testsuite>
+  <testsuite name="96455 Msg Direction Tests ori" timestamp="2026-11-04T17:02:27" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="0.023" tests="2" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;466.234&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;466.469&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+    </properties>
+    <testcase classname="96455 Msg Direction Tests ori" name="ExecutingTypesAreInbound" time="0.013" />
+    <testcase classname="96455 Msg Direction Tests ori" name="ReadTypesStayOutboundOrBoth" time="0.01" />
+  </testsuite>
+  <testsuite name="96467 Artifact Refresh Tests ori" timestamp="2026-11-04T17:02:32" hostname="f071522012bc-business-central-cdb4885c4-chjbg" time="4.316" tests="13" errors="0" failures="0" skipped="0">
+    <properties>
+      <property name="extensionid" value="194ecd04-5688-4af6-94bc-732c714251fc" />
+      <property name="appName" value="Bifrost Orchestrator - Tests" />
+      <property name="processinfo.start" value="{ &quot;CPU&quot;: &quot;466.531&quot;, &quot;Free Memory (Gb)&quot;: &quot;33.1&quot; }" />
+      <property name="processinfo.end" value="{ &quot;CPU&quot;: &quot;472.234&quot;, &quot;Free Memory (Gb)&quot;: &quot;32.9&quot; }" />
+    </properties>
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Example_VerifiesClean_1033" time="0.113" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Example_VerifiesClean_1039" time="0.046" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Rule_EmailAttachmentNotBoundToSanitize_Warns" time="0.063" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Rule_EmailAttachmentLiteral_And_BodyReferencingAsk_Warn" time="0.054" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Rule_SanitizeAfterTheEmail_Warns" time="0.043" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Rule_AskWithoutToolsAllow_Warns" time="0.07" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Rule_IncludeTrace_Warns" time="0.05" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Rule_LiteralExternalRecipient_Warns" time="0.064" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Run_OneMegabyteArtifact_StoresNoTraceAndNoDuplicatedBody" time="2.72" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Run_SizeCapExceeded_StopsBeforeTheEmail" time="0.23" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Run_HtmlWithScript_StopsBeforeTheEmail" time="0.137" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Run_Twice_InARow_LeavesNoData" time="0.703" />
+    <testcase classname="96467 Artifact Refresh Tests ori" name="Help_CarriesTheArtifactRefreshExample" time="0.023" />
+  </testsuite>
+</testsuites>

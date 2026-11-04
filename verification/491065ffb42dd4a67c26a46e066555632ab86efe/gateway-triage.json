@@ -1,0 +1,20 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "scope": "Repair commit changes XLF ordering and CHANGELOG only; existing PR implementation retained",
+  "layer1": {"filesScanned":6,"checksPassed":18,"checksFlagged":5,"raw":"pr-gateway-layer1-retry.log","notClaimedAllGreen":true},
+  "triage": [
+    {"check":"namespace","classification":"false positive","reason":"The three flagged files declare namespace Origo.Bifrost.Orchestrator after XML documentation comments; compiler resolves the expected namespace."},
+    {"check":"one_statement_per_line","classification":"false positive","reason":"All ten flagged lines are procedure declarations with semicolon-separated parameters, not multiple executable statements."},
+    {"check":"hardcoded_values","classification":"documentation examples","reason":"Both flagged email addresses are pre-existing Help examples explaining @_who.salesperson.email; ARTIFACT-REFRESH itself uses references. No credential/provider key/literal production recipient was added."},
+    {"check":"changelog","classification":"format mismatch","reason":"Repository uses Unreleased for the next build and has issue153 plus the XLF repair entry with codeunit10035621. The script looks for a literal28.0.4.0 header."},
+    {"check":"read_isolation","classification":"advisory finding retained","reason":"Four existing records in Verify/VerifyStep do not explicitly set ReadIsolation; this repair changes no AL reads or transactions. Disclose the actual gateway finding for independent verification; no automatic repository-wide rewrite or gate suppression."}
+  ],
+  "layer2": {
+    "identityAndRanges":"No app/test identity or object IDs changed by repair; original implementation uses10035621 and96461..96467 inside declared ranges.",
+    "compatibility":"Shipping no-IVT CodeCop/UICop/AppSourceCop against released28.0.3.93:0errors0warnings after adding the actual dependency packages to the private baseline cache. Initial incomplete-cache diagnostics retained, no source suppression added.",
+    "translations":"863 semantic translation units unchanged by repair; canonical generator and exact-tip CI XLF sync passed.",
+    "tests":"499 distinct methods covered in each of two native passes; exact-tip CI499passed; no omitted/duplicate/failed/skipped methods.",
+    "limitations":"Live enqueued ARTIFACT-REFRESH chain is not verified; upstream story dependencies and Gunnar decision hold remain. Final UI/MCP evidence recorded separately. This is not a PR readiness verdict or clearance."
+  },
+  "appliedLessonIds":["orchestrator67-worker9-xlf-scope-154bb50-inherited-comment-source-parity","worker7-cosmo-1791888247-empty-suite-filter"]
+}

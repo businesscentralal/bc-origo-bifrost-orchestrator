@@ -1,0 +1,43 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "containerId": "f071522012bc",
+  "owner": "worker-3",
+  "tool": "Playwright MCP (local stdio @playwright/mcp)",
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "name": "Playbooks list opens on exact deployment",
+      "evidence": "ui-1033-list.png"
+    },
+    {
+      "lcid": 1033,
+      "name": "Own card and saved JSON template open through native editor",
+      "evidence": "ui-1033-editor.png"
+    },
+    {
+      "lcid": 1039,
+      "name": "Actual Icelandic Playbooks list captions",
+      "evidence": "ui-1039-list.png"
+    },
+    {
+      "lcid": 1039,
+      "name": "Actual Icelandic own card/step/template captions",
+      "evidence": "ui-1039-card.png"
+    }
+  ],
+  "limitations": "No real provider or enqueued artifact-chain UI run; depends on upstream delivery. Earlier automation locator, modal-title and language-selection retries are retained privately and are not counted as final passing scenarios.",
+  "languageRestore": {
+    "language": 1033,
+    "verified": true,
+    "evidence": "ui-settings-mcp.json",
+    "at": "2026-11-04T17:18:35.205Z"
+  },
+  "fixtureCleanup": {
+    "verified": true,
+    "evidence": "cleanup.json"
+  }
+}

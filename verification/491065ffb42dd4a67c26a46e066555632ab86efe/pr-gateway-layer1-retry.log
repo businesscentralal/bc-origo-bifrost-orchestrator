@@ -1,0 +1,213 @@
+{
+  "mode": "diff (vs origin/main)",
+  "summary": {
+    "ready": false,
+    "total": 23,
+    "failed": 5,
+    "passed": 18
+  },
+  "files_scanned": 6,
+  "version": "28.0.4.0",
+  "publisher": "Origo",
+  "project": "Bifrost Orchestrator",
+  "total_al_files": 128,
+  "checks": {
+    "reserved_var_names": {
+      "pass": true,
+      "findings": []
+    },
+    "modernization": {
+      "pass": true,
+      "findings": []
+    },
+    "data_classification": {
+      "pass": true,
+      "findings": []
+    },
+    "read_isolation": {
+      "pass": false,
+      "findings": [
+        {
+          "variable": "Step",
+          "line": 67,
+          "text": "if Step.FindSet() then",
+          "file": "PlaybookVerify.Codeunit.al"
+        },
+        {
+          "variable": "EarlierConsumer",
+          "line": 141,
+          "text": "if not EarlierConsumer.IsEmpty() then",
+          "file": "PlaybookVerifyStep.Codeunit.al"
+        },
+        {
+          "variable": "Condition",
+          "line": 146,
+          "text": "if not Condition.IsEmpty() then",
+          "file": "PlaybookVerifyStep.Codeunit.al"
+        },
+        {
+          "variable": "GateCheck",
+          "line": 179,
+          "text": "if not GateCheck.FindLast() then",
+          "file": "PlaybookVerifyStep.Codeunit.al"
+        }
+      ]
+    },
+    "format_evaluate_enum": {
+      "pass": true,
+      "findings": []
+    },
+    "changelog": {
+      "pass": false,
+      "findings": [
+        "No entry for version 28.0.4.0"
+      ]
+    },
+    "one_statement_per_line": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 85,
+          "text": "procedure RefuseIfUnsafe(var Argument: Record \"Message Argument ori\"; PlaybookCode: Code[20]; IgnoreWarnings: Boolean): Boolean",
+          "file": "PlaybookVerify.Codeunit.al"
+        },
+        {
+          "line": 133,
+          "text": "procedure GetBlockingFindings(PlaybookCode: Code[20]; IgnoreWarnings: Boolean; var Blocking: JsonArray; var Summary: Text): Boolean",
+          "file": "PlaybookVerify.Codeunit.al"
+        },
+        {
+          "line": 203,
+          "text": "internal procedure BuildFinding(Severity: Text; StepNo: Integer; FindingCode: Text; MessageText: Text; NextStepText: Text; StepDisabled: Boolean) Finding: JsonObject",
+          "file": "PlaybookVerify.Codeunit.al"
+        },
+        {
+          "line": 224,
+          "text": "internal procedure AddFinding(var Findings: JsonArray; Severity: Text; StepNo: Integer; FindingCode: Text; MessageText: Text; NextStepText: Text; StepDisabled: Boolean)",
+          "file": "PlaybookVerify.Codeunit.al"
+        },
+        {
+          "line": 47,
+          "text": "local procedure CheckAskToolsAllow(Step: Record \"Playbook Step ori\"; TemplateJson: JsonObject; var Findings: JsonArray)",
+          "file": "PlaybookVerifyArtifact.Codeunit.al"
+        },
+        {
+          "line": 73,
+          "text": "local procedure CheckEmailContent(Step: Record \"Playbook Step ori\"; TemplateJson: JsonObject; var Findings: JsonArray)",
+          "file": "PlaybookVerifyArtifact.Codeunit.al"
+        },
+        {
+          "line": 96,
+          "text": "local procedure ReportUnsanitized(Step: Record \"Playbook Step ori\"; PropertyName: Text; var Findings: JsonArray)",
+          "file": "PlaybookVerifyArtifact.Codeunit.al"
+        },
+        {
+          "line": 166,
+          "text": "local procedure CheckEmailRecipients(Step: Record \"Playbook Step ori\"; TemplateJson: JsonObject; var Findings: JsonArray)",
+          "file": "PlaybookVerifyArtifact.Codeunit.al"
+        },
+        {
+          "line": 189,
+          "text": "local procedure AddRecipientFinding(Step: Record \"Playbook Step ori\"; PropertyName: Text; var Findings: JsonArray)",
+          "file": "PlaybookVerifyArtifact.Codeunit.al"
+        },
+        {
+          "line": 193,
+          "text": "internal procedure CheckAskForEach(Step: Record \"Playbook Step ori\"; TypeName: Text; var Findings: JsonArray)",
+          "file": "PlaybookVerifyStep.Codeunit.al"
+        }
+      ]
+    },
+    "xml_doc_comments": {
+      "pass": true,
+      "findings": []
+    },
+    "caption_translation": {
+      "findings": [],
+      "pass": true,
+      "skipped": null
+    },
+    "set_load_fields": {
+      "findings": [],
+      "pass": true,
+      "advisory": "Loops without SetLoadFields - consider it only for wide tables; not a gate failure"
+    },
+    "hardcoded_values": {
+      "pass": false,
+      "findings": [
+        {
+          "severity": "medium",
+          "line": 574,
+          "text": "O.AppendLine('| `\"@_who.path\"` | WhoAmI user/company context | `\"@_who.salesperson.email\"` → `\"user@company.is\"` |');",
+          "issue": "Hardcoded email",
+          "file": "Help.Codeunit.al"
+        },
+        {
+          "severity": "medium",
+          "line": 1027,
+          "text": "O.AppendLine('| `_who.salesperson.email` | `user@company.is` | Salesperson email |');",
+          "issue": "Hardcoded email",
+          "file": "Help.Codeunit.al"
+        }
+      ]
+    },
+    "commit_in_loop": {
+      "pass": true,
+      "findings": []
+    },
+    "event_subscriber_placement": {
+      "pass": true,
+      "findings": []
+    },
+    "app_json": {
+      "pass": true,
+      "findings": []
+    },
+    "namespace": {
+      "pass": false,
+      "findings": [
+        {
+          "file": "Help.Codeunit.al"
+        },
+        {
+          "file": "PlaybookVerify.Codeunit.al"
+        },
+        {
+          "file": "PlaybookVerifyArtifact.Codeunit.al"
+        }
+      ]
+    },
+    "page_code_minimal": {
+      "pass": true,
+      "findings": []
+    },
+    "confirm_in_page": {
+      "pass": true,
+      "findings": []
+    },
+    "object_naming": {
+      "pass": true,
+      "findings": []
+    },
+    "today_vs_workdate": {
+      "pass": true,
+      "findings": []
+    },
+    "format_guid": {
+      "pass": true,
+      "findings": []
+    },
+    "with_statements": {
+      "pass": true,
+      "findings": []
+    },
+    "try_prefix_convention": {
+      "pass": true,
+      "findings": []
+    },
+    "global_variables": {
+      "pass": true,
+      "findings": []
+    }
+  }
+}

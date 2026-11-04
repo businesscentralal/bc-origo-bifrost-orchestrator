@@ -1,0 +1,121 @@
+[
+  {
+    "kind": "test-product",
+    "sha256": "373d915d392ac7bdab387567c0964abdf421a9d2faae7cc89bb7f733d28c4d9f",
+    "app": {
+      "Id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "Name": "Bifrost Orchestrator",
+      "Publisher": "Origo",
+      "Brief": "Bifrost Orchestrator - scheduling and playbooks",
+      "Description": "Bifrost Orchestrator: scheduled tasks, playbooks and orchestration of Bifrost message types on top of Bifrost Foundation. Provides Job Queue scheduling, monitoring, restart and error handling, and a declarative playbook runner with data flow, foreach iteration and conditional branching.",
+      "Version": "28.0.4.0",
+      "CompatibilityId": "0.0.0.0",
+      "PrivacyStatement": "https://docs.bifrost.origo.is/en-us/licensing/privacy/",
+      "EULA": "https://docs.bifrost.origo.is/en-us/licensing/eula/",
+      "Help": "https://docs.bifrost.origo.is/en-us/orchestrator/",
+      "HelpBaseUrl": "",
+      "ContextSensitiveHelpUrl": "https://docs.bifrost.origo.is/{0}/help/orchestrator/",
+      "Url": "https://www.origo.is/",
+      "Logo": "/logo/Logo250x250.png",
+      "Platform": "28.0.0.0",
+      "Application": "28.0.0.0",
+      "Runtime": "17.0",
+      "Target": "Cloud",
+      "ShowMyCode": "False",
+      "ApplicationInsightsConnectionString": "InstrumentationKey=af411133-5e22-486f-b23a-081b79ed4168;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=c4476f32-5dfb-490a-8ad0-fb8ffad1c050"
+    },
+    "source": {
+      "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+      "Commit": "491065ffb42dd4a67c26a46e066555632ab86efe"
+    }
+  },
+  {
+    "kind": "test-app",
+    "sha256": "0e9bed3922ccfe372cbcb3d44c13598732d88b5fae4e68d808026d028be43299",
+    "app": {
+      "Id": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "Name": "Bifrost Orchestrator - Tests",
+      "Publisher": "Origo",
+      "Brief": "Bifrost Orchestrator - Tests",
+      "Description": "Bifrost Orchestrator - Tests",
+      "Version": "28.0.4.0",
+      "CompatibilityId": "0.0.0.0",
+      "PrivacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
+      "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
+      "Help": "https://www.origo.is/",
+      "HelpBaseUrl": "",
+      "Url": "https://www.origo.is/",
+      "Logo": "/logo/Logo250x250.png",
+      "Platform": "28.0.0.0",
+      "Application": "28.0.0.0",
+      "Runtime": "17.0",
+      "Target": "Cloud",
+      "ShowMyCode": "False",
+      "ApplicationInsightsConnectionString": "InstrumentationKey=70788cb7-2d17-4a3d-8d14-1f0522b8fcca;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=9b402607-d048-47b2-9854-14c825ab88f1"
+    },
+    "source": {
+      "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+      "Commit": "491065ffb42dd4a67c26a46e066555632ab86efe"
+    }
+  },
+  {
+    "kind": "shipping",
+    "sha256": "0d37d856d7e2f16c0d1868444cd6bc40bf490db8b7e4c6d506ef6d32fe2dd078",
+    "app": {
+      "Id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "Name": "Bifrost Orchestrator",
+      "Publisher": "Origo",
+      "Brief": "Bifrost Orchestrator - scheduling and playbooks",
+      "Description": "Bifrost Orchestrator: scheduled tasks, playbooks and orchestration of Bifrost message types on top of Bifrost Foundation. Provides Job Queue scheduling, monitoring, restart and error handling, and a declarative playbook runner with data flow, foreach iteration and conditional branching.",
+      "Version": "28.0.4.0",
+      "CompatibilityId": "0.0.0.0",
+      "PrivacyStatement": "https://docs.bifrost.origo.is/en-us/licensing/privacy/",
+      "EULA": "https://docs.bifrost.origo.is/en-us/licensing/eula/",
+      "Help": "https://docs.bifrost.origo.is/en-us/orchestrator/",
+      "HelpBaseUrl": "",
+      "ContextSensitiveHelpUrl": "https://docs.bifrost.origo.is/{0}/help/orchestrator/",
+      "Url": "https://www.origo.is/",
+      "Logo": "/logo/Logo250x250.png",
+      "Platform": "28.0.0.0",
+      "Application": "28.0.0.0",
+      "Runtime": "17.0",
+      "Target": "Cloud",
+      "ShowMyCode": "False",
+      "ApplicationInsightsConnectionString": "InstrumentationKey=af411133-5e22-486f-b23a-081b79ed4168;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=c4476f32-5dfb-490a-8ad0-fb8ffad1c050"
+    },
+    "source": {
+      "RepositoryUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+      "Commit": "491065ffb42dd4a67c26a46e066555632ab86efe"
+    }
+  },
+  {
+    "kind": "foundation",
+    "sha256": "050cb3b6f2c77ee74ab155831664a96b790781e27890c3632e32c29837452c08",
+    "app": {
+      "Id": "7505e808-6e52-4b96-a328-82573391297a",
+      "Name": "Bifrost Foundation",
+      "Publisher": "Origo",
+      "Brief": "Bifrost bridge foundation for Business Central",
+      "Description": "Bifrost Foundation exposes Business Central through versioned message types over a CloudEvents-based API, enabling seamless integration and headless operation.",
+      "Version": "28.0.11.669",
+      "CompatibilityId": "0.0.0.0",
+      "PrivacyStatement": "https://docs.bifrost.origo.is/en-us/licensing/privacy/",
+      "EULA": "https://docs.bifrost.origo.is/en-us/licensing/eula/",
+      "Help": "https://docs.bifrost.origo.is/en-us/foundation/",
+      "HelpBaseUrl": "",
+      "ContextSensitiveHelpUrl": "https://docs.bifrost.origo.is/{0}/help/foundation/",
+      "Url": "https://docs.bifrost.origo.is",
+      "Logo": "/logo/Logo250x250.png",
+      "Platform": "28.0.0.0",
+      "Application": "28.0.0.0",
+      "Runtime": "17.0",
+      "Target": "Cloud",
+      "ShowMyCode": "False",
+      "ApplicationInsightsConnectionString": "InstrumentationKey=af411133-5e22-486f-b23a-081b79ed4168;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=c4476f32-5dfb-490a-8ad0-fb8ffad1c050"
+    },
+    "source": {
+      "RepositoryUrl": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
+      "Commit": "a99232fbbe8bba3d18d39a24b8cfa2a06ea3376e"
+    }
+  }
+]

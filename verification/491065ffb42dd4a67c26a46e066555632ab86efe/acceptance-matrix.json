@@ -1,0 +1,69 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/153",
+  "pr": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/154",
+  "scope": "O1 only; upstream repositories are dependencies, not implementation scope",
+  "rows": [
+    {
+      "id": "AC01",
+      "status": "IMPLEMENTED_NOT_LIVE_VERIFIED",
+      "implemented": "Existing ARTIFACT-REFRESH example retained, read tools allowlist, sanitize binding and referenced recipient.",
+      "verified": "Native mock chain passes in both complete499-method runs; Help surfaced through MCP1033/1039.",
+      "pending": "Actual enqueued bc29-w1 run after core1257, attachments208, language-models113/101 are delivered.0live-chain passes."
+    },
+    {
+      "id": "AC02",
+      "status": "VERIFIED_NATIVE_AND_SCOPED_MCP",
+      "verified": "All13new96467methods and10Ask96456methods pass in both full runs. Own live Verify fixture produces EmailContentNotSanitized and EmailLiteralRecipient in1033/1039; contract/help exposes all warning codes.",
+      "limitation": "No live LLM provider installed/executed; native stand-ins establish Ask rule behavior, not provider behavior."
+    },
+    {
+      "id": "AC03",
+      "status": "VERIFIED_NATIVE",
+      "verified": "1MB artifact/trace/result-path assertions in96467 pass twice. No claim that a real Ask provider produced that artifact."
+    },
+    {
+      "id": "AC04",
+      "status": "VERIFIED_NATIVE",
+      "verified": "AddTestType stand-ins complete; email mock records call only. Live MCP fixture was only verified, never run. No external email sent."
+    },
+    {
+      "id": "AC05",
+      "status": "VERIFIED_NATIVE",
+      "verified": "Native size/html refusal cases stop before mock email in both full runs."
+    },
+    {
+      "id": "AC06",
+      "status": "VERIFIED_NATIVE_MCP_UI",
+      "verified": "English-only Help and native1033/1039conformance; live MCP1039warning text; actual Web Client1033/1039captions;863translation units preserved; exact-tipCI XLF guard green."
+    }
+  ],
+  "gates": {
+    "compile": "Product/test plus shipping no-IVT compatibility0errors0warnings",
+    "native": "499distinct methods in each of2runs,998passed0failed0skipped",
+    "ci": "41871258885green;499passed0failed0skipped",
+    "mcp": "8finalasserted scenarios passed; no live-chain pass",
+    "ui": "4finalscenarios passed in actual1033/1039; initial automation retries retained privately",
+    "reviewHandoff": "NOT_PERFORMED: liveAC01andexplicitGunnar decision/upstream hold; Claude/Grok/approval are subsequent gates, not current blockers"
+  },
+  "decision": {
+    "card": "d-20261104-core-1255-1256-questions",
+    "source": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/154#issuecomment-6633988066",
+    "owner": "Gunnar;Claude Code publishes disposition",
+    "state": "Hold confirmed by PR comment; actual decisions page not accessible; no answer inferred"
+  },
+  "resources": {
+    "current": {
+      "id": "f071522012bc",
+      "name": "worker3-orchestrator153-20261104-w1",
+      "owner": "worker-3",
+      "next": "Clean fixtures, stop and retain through Tester UAT/issue closure"
+    },
+    "previous": {
+      "id": "f0e562052d9c",
+      "owner": "worker-30 prior evidence",
+      "changed": false,
+      "reason": "Original owner environment preserved; no foreign resource use/deletion"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "containerId": "f071522012bc",
+  "owner": "worker-3",
+  "verified": true,
+  "fixture": "W3153-491065",
+  "proof": [
+    {
+      "table": "Playbook ori",
+      "remaining": 0,
+      "evidence": "cleanup-header-after.json"
+    },
+    {
+      "table": "Playbook Step ori",
+      "remaining": 0,
+      "evidence": "cleanup-step-after.json"
+    },
+    {
+      "table": "Playbook Condition ori",
+      "remaining": 0,
+      "evidence": "cleanup-conditions-after.json"
+    }
+  ],
+  "mechanism": "Supported BC Web Client Delete Line and Delete actions, each confirmed only for owned fixture; subsequent MCP read-back",
+  "languageRestored": 1033,
+  "guardOrLicensingChanges": false,
+  "realEmailInvoked": false,
+  "containerDeletion": "Not authorized until Tester post-deploy UAT and issue closure; stop and retain",
+  "verifiedAt": "2026-11-04T17:21:04.318Z"
+}

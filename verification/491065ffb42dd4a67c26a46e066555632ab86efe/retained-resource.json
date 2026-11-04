@@ -1,0 +1,12 @@
+{
+  "id": "f071522012bc",
+  "displayName": "worker3-orchestrator153-20261104-w1",
+  "owner": "worker-3",
+  "status": 200,
+  "state": "Stopped",
+  "imageTag": "sandbox-29.0.54011.57417-w1",
+  "at": "2026-11-04T17:21:31.316Z",
+  "retained": true,
+  "deleted": false,
+  "reason": "Retain through Tester post-deployment UAT and issue closure per1792155806.391819; restart this same resource on dependency change"
+}

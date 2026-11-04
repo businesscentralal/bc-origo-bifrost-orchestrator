@@ -1,0 +1,824 @@
+{
+  "total": 499,
+  "codeunits": [
+    {
+      "id": 96467,
+      "name": "Artifact Refresh Tests ori",
+      "file": "test/ArtifactRefreshTestsori.Codeunit.al",
+      "methods": [
+        "Example_VerifiesClean_1033",
+        "Example_VerifiesClean_1039",
+        "Rule_EmailAttachmentNotBoundToSanitize_Warns",
+        "Rule_EmailAttachmentLiteral_And_BodyReferencingAsk_Warn",
+        "Rule_SanitizeAfterTheEmail_Warns",
+        "Rule_AskWithoutToolsAllow_Warns",
+        "Rule_IncludeTrace_Warns",
+        "Rule_LiteralExternalRecipient_Warns",
+        "Run_OneMegabyteArtifact_StoresNoTraceAndNoDuplicatedBody",
+        "Run_SizeCapExceeded_StopsBeforeTheEmail",
+        "Run_HtmlWithScript_StopsBeforeTheEmail",
+        "Run_Twice_InARow_LeavesNoData",
+        "Help_CarriesTheArtifactRefreshExample"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96430,
+      "name": "Check Step Error Tests",
+      "file": "test/CheckStepErrorTests.Codeunit.al",
+      "methods": [
+        "ErrorResponseKeepsCodeAndError",
+        "ErrorResponseWithoutCodeUsesErrorOrMessage",
+        "NonErrorResponsesAreNotErrors",
+        "ErroredIterationsAreCountedApartFromNo",
+        "SingleCheck_ErrorAnswer_FailsStepAndRun",
+        "SingleCheck_ErrorAnswer_FailsStepAndRun_Icelandic",
+        "SingleCheck_RaisedError_FailsStepAndRun",
+        "SingleCheck_RaisedError_FailsStepAndRun_Icelandic",
+        "SingleCheck_AnsweredNo_DoesNotFailTheRun",
+        "SingleCheck_AnsweredNo_DoesNotFailTheRun_Icelandic",
+        "SingleCheck_AnsweredYes_Completes",
+        "SingleCheck_AnsweredYes_Completes_Icelandic",
+        "ForEachCheck_ErrorAnswers_AreFailuresNotNo",
+        "ForEachCheck_ErrorAnswers_AreFailuresNotNo_Icelandic",
+        "ForEachCheck_RaisedErrors_AreFailuresNotNo",
+        "ForEachCheck_RaisedErrors_AreFailuresNotNo_Icelandic",
+        "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun",
+        "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun_Icelandic",
+        "ForEachCheck_AnsweredYes_Succeeds",
+        "ForEachCheck_AnsweredYes_Succeeds_Icelandic",
+        "ActionStep_ErrorAnswerWithSuccessCondition_StillFails"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96441,
+      "name": "Contract Complete Tests ori",
+      "file": "test/ContractCompleteTestsori.Codeunit.al",
+      "methods": [
+        "TheGuardSeesEveryOrchestratorType",
+        "EveryType_DeclaresTheRequiredChapters",
+        "EveryType_EnvelopeStatesSubjectStrictAndContentType",
+        "EveryType_ParametersAndResponseFieldsAreDescribed",
+        "EveryType_EachErrorHasACodeOrATextAndTheStepToTake",
+        "EveryType_EffectMatchesTheDirection",
+        "EveryType_ExamplesAreRealRequestsAndAnswers",
+        "EveryType_RelatedAndWorkflowNameRealTypes",
+        "EveryType_HelpTextHasEnoughSubstanceAndNoAlObjectNames",
+        "EveryType_DiscoveryTextsExistAndAreTranslated"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96428,
+      "name": "Data Records Hint Tests",
+      "file": "test/DataRecordsHintTests.Codeunit.al",
+      "methods": [
+        "JobQueueEntry_WriteHint",
+        "JobQueueEntry_WriteHint_Icelandic",
+        "ScheduledTask_WriteHint",
+        "ScheduledTask_WriteHint_Icelandic",
+        "ReportRequestPreset_ReadWriteHint",
+        "ReportRequestPreset_ReadWriteHint_Icelandic",
+        "Customer_NoCompanionHints",
+        "Customer_NoCompanionHints_Icelandic"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96414,
+      "name": "Enqueue Playbook Tests",
+      "file": "test/EnqueuePlaybookTests.Codeunit.al",
+      "methods": [
+        "JQParameterStoresAndRetrievesRequestData",
+        "JQParameterGetRequestDataReturnsEmptyWhenNoBlob",
+        "EnqueuePlaybookCreatesNonRecurringJQEntry",
+        "EnqueuePlaybookCreatesParameterRecord",
+        "EnqueuePlaybookNoParameterWhenRequestEmpty",
+        "EnqueuePlaybookSetsJobQueueCategory",
+        "EnqueuePlaybookEnforcesMinimumDelay",
+        "EnqueuePlaybookDefaultOverloadUses60SecDelay",
+        "EnqueuePlaybookFailsWhenDisabled",
+        "DeleteJQEntryDeletesParameterRecord",
+        "EnqueuePlaybookSchedulesRealTask",
+        "EnqueuePlaybookDispatchesAndCreatesInstance",
+        "EnqueuePlaybookSetsRecordIdToProcess"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96420,
+      "name": "Entry Msg Tests",
+      "file": "test/EntryMsgTests.Codeunit.al",
+      "methods": [
+        "RestartSetsEntryToReady",
+        "RestartSetsOnHoldEntryToReady",
+        "RestartErrorsForMissingId",
+        "RestartIfNeededRestartsErrorEntry",
+        "RestartIfNeededSkipsReadyEntry",
+        "RestartIfNeededRestartsOnHoldEntry",
+        "RestartResponseIncludesEntryDetails",
+        "RestartAcceptsIdInSubject"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96407,
+      "name": "Entry Registration Tests ori",
+      "file": "test/EntryRegistrationTestsori.Codeunit.al",
+      "methods": [
+        "NewEntryHidesDialogs",
+        "ExistingEntryHidesDialogs",
+        "InteractiveEntryOpensCard"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96443,
+      "name": "First Schedule Tests ori",
+      "file": "test/FirstScheduleTestsori.Codeunit.al",
+      "methods": [
+        "Scenario_AC01_NeverRunDailyKeepsDueSlot",
+        "Scenario_AC02_NoEndingTimeKeepsDueSlot",
+        "Scenario_AC02_HourlyKeepsLatestDueSlot",
+        "Scenario_AC02_FutureWindowWaits",
+        "Scenario_AC07_ElapsedDailyWindowWaits",
+        "Scenario_AC07_ElapsedHourlyWindowWaits",
+        "Scenario_AC03_SuccessAdvancesDaily",
+        "Scenario_AC01_LateDailyRunKeepsNextDayAnchor",
+        "Scenario_AC01_MidnightDelayKeepsSameDayAnchor",
+        "Scenario_AC01_CreatedInsideWindowRunsFirstSlot",
+        "Scenario_AC05_StartChangeAndClearSyncReference",
+        "Scenario_AC01_AC04_AC06_FirstDispatchRunsPlaybook",
+        "Scenario_AC05_TemplateKeepsJobAndSyncsReference"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96422,
+      "name": "Misc Msg Smoke Tests",
+      "file": "test/MiscMsgSmokeTests.Codeunit.al",
+      "methods": [
+        "HelpGetReturnsNonEmptyMarkdown",
+        "WorkspacePreviewReturnsSysNamespace",
+        "WorkspacePreviewPassesThroughInitialRequest",
+        "EveryOrchestratorMessageTypeRefusesAnUnlicensedDirectCall"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96455,
+      "name": "Msg Direction Tests ori",
+      "file": "test/MsgDirectionTestsori.Codeunit.al",
+      "methods": [
+        "ExecutingTypesAreInbound",
+        "ReadTypesStayOutboundOrBoth"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96452,
+      "name": "Orch B1 Contract Tests",
+      "file": "test/OrchB1ContractTests.Codeunit.al",
+      "methods": [
+        "Batch1MessagesHaveContractChaptersAndDiscovery",
+        "CommittingTypesDeclareIrreversible",
+        "NonCommittingTypesKeepTheirEffect",
+        "Scenario_AC05_NotificationType_KeepsMainContract",
+        "Scenario_AC05_RetryPolicy_KeepsMainContract",
+        "Scenario_AC04_JobQueueEntryRestartIfNeeded_KeepsMainErrors",
+        "Scenario_AC04_JobQueueEntryRestart_KeepsMainErrors",
+        "Scenario_AC04_OrchestratorGet_KeepsMainErrors",
+        "Scenario_AC04_PlaybookEnqueue_KeepsMainErrors",
+        "Scenario_AC04_PlaybookRun_KeepsMainErrors",
+        "Scenario_AC04_PlaybookSchedule_KeepsMainErrors",
+        "Scenario_AC04_EmailSend_KeepsMainErrors",
+        "Scenario_AC04_EntryRegister_KeepsMainErrors",
+        "Scenario_AC04_EntryRestart_KeepsMainErrors",
+        "Scenario_AC04_EntryRun_KeepsMainErrors",
+        "Scenario_AC04_EntrySchedule_KeepsMainErrors",
+        "Scenario_AC04_StatusGet_KeepsMainErrors",
+        "Scenario_AC04_StatusRestartIfNeeded_KeepsMainErrors",
+        "Scenario_AC04_StatusRestart_KeepsMainErrors",
+        "Scenario_AC04_TelegramMessage_KeepsMainErrors"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96453,
+      "name": "Orch B2 Contract Tests",
+      "file": "test/OrchB2ContractTests.Codeunit.al",
+      "methods": [
+        "Batch2MessagesHaveContractChaptersAndDiscovery",
+        "CommittingTypesDeclareIrreversible",
+        "PreviewDisclosesNestedCommit",
+        "NonCommittingTypesKeepTheirEffect",
+        "Scenario_AC05_Format_KeepsMainContract",
+        "Scenario_AC05_LayoutFormat_KeepsMainContract",
+        "Scenario_AC04_WorkspacePreview_KeepsMainErrors",
+        "Scenario_AC04_ReportGet_KeepsMainErrors",
+        "Scenario_AC04_ReportList_KeepsMainErrors",
+        "Scenario_AC04_ReportRun_KeepsMainErrors",
+        "Scenario_AC04_ReportSaveAs_KeepsMainErrors",
+        "Scenario_AC04_ReportLayoutSet_KeepsMainErrors"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96411,
+      "name": "Orchestrator Unit Tests",
+      "file": "test/OrchestratorUnitTests.Codeunit.al",
+      "methods": [
+        "BinaryEnvelopePreservesOfficeContentType",
+        "BinaryEnvelopePreservesMaximumContentType",
+        "CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage",
+        "JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage",
+        "JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun",
+        "CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified",
+        "BlockedEntriesAreSkipped",
+        "EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped",
+        "EarliestStartDateTimeIsRecalculated",
+        "NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank",
+        "EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress",
+        "EMailNotificationType_RestartNotificationType_VerifyEMailContent",
+        "BlockJobQueueSchedulerEntryOpenFromJQEntryCard",
+        "JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite",
+        "RecurringTemplateWeekdayValidation",
+        "RecurringTemplateTimeRangeValidation",
+        "RecurringTemplateCanBeInsertedWithValidData",
+        "RecurringTemplatesActionNavigationFromSetupPage",
+        "RecurringTemplateCardPageCanBeOpened",
+        "RecurringTemplateNoOfMinutesBetweenRunsValidation",
+        "RecurringTemplateNextRunDateFormulaValidation",
+        "SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy",
+        "ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry",
+        "ModifyStartingEndingTime_VerifyValidationAndSync",
+        "CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy",
+        "ChangingTemplate_VerifyExistingValuesOverwritten",
+        "TimeZoneCode_VerifyStored",
+        "CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate",
+        "CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError",
+        "CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay",
+        "CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime",
+        "CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday",
+        "CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun",
+        "CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly",
+        "RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter",
+        "RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed",
+        "RetryPolicyNever_ErrorEntry_SuppressesImmediately",
+        "RetryPolicy_ErrorCounterResetsOnSuccess",
+        "RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96423,
+      "name": "Orchestr Registration Tests",
+      "file": "test/OrchestrRegistrationTests.Codeunit.al",
+      "methods": [
+        "Scenario_AC03_LicenceAdmin_OpensSetupInEnglish",
+        "Scenario_AC03_LicenceAdmin_OpensSetupInIcelandic",
+        "OrchestratorIsRegisteredInTheAppRegistry"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96403,
+      "name": "Orchestr Secret Tests",
+      "file": "test/OrchestrSecretTests.Codeunit.al",
+      "methods": [
+        "Scenario_AC04_FoundationFull_Enabled",
+        "Scenario_AC05_NoUserSetupRead_Disabled",
+        "Scenario_AC06_UnsetToken_Disabled",
+        "Scenario_AC06_EmptyChat_Disabled",
+        "Scenario_AC01_IndirectRead_Enabled",
+        "SecretCodesFollowTheDocumentedPattern",
+        "LongCredentialCodesFitCode50AndStayDistinct",
+        "RegisterAllRegistersTheTelegramBotToken",
+        "RegisterAllRegistersBothSecretsOfEveryCredential",
+        "RegisterAllIsIdempotent",
+        "TelegramBotTokenSetIsSetAndClearRoundTrip",
+        "CredentialClientIdAndSecretRoundTrip",
+        "DeletingACredentialClearsItsSecrets",
+        "DeletingACredentialLeavesNoMissingSecretsBehind",
+        "RenamingACredentialMovesItsSecrets",
+        "AppSetupPageReportsTheTelegramSecretStatus",
+        "BifrostSetupExposesOrchestratorSetupAndPlaybooks"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "file": "test/PlaybookAskScrubTestsori.Codeunit.al",
+      "methods": [
+        "AskForEach_RunGateInBothLanguages",
+        "AskDataCondition_RunGateInBothLanguages",
+        "AskTrace_RunGateInBothLanguages",
+        "Scrub_PreservesAllOtherProperties",
+        "Scrub_UnchangedPayloadsRetainBytes",
+        "SingleStep_NoTraceInAnyOrchestratorStore",
+        "FailedStep_WorkspaceSnapshotHasNoTrace",
+        "ForEach_NoTraceInLogsWorkspaceOrSummary",
+        "Paged_NoTraceAcrossPageAndIterationLogs",
+        "RunAndHelp_DescribeTimeoutAndRetentionBoundaries"
+      ],
+      "requiredDisabled": true
+    },
+    {
+      "id": 96418,
+      "name": "Playbook Cond Tests",
+      "file": "test/PlaybookCondTests.Codeunit.al",
+      "methods": [
+        "EmptyConditionSetIsTrue",
+        "AllConditionsInAGroupMustHold",
+        "AnyGroupHoldingIsEnough",
+        "GroupsAreIndependentNotLeftToRight",
+        "ConditionTypesAreEvaluatedIndependently",
+        "HasConditionsSeesOnlyItsOwnType",
+        "StepTypeDefaultsToAction",
+        "BeginRunSeedsRunNamespace",
+        "RollUpCountsAndFlagsFailure",
+        "ExcludedStepsLeaveRunStatusAlone",
+        "EscalateFailsTheRunWithoutTouchingCounters",
+        "RepeatedStepAccumulatesInsteadOfOverwriting",
+        "StatusDegradesAndNeverImproves",
+        "IterationFailuresCarryItemAndError",
+        "CheckFailuresAreCountedSeparatelyFromErrors",
+        "FailureListIsCappedButCountsStayExact",
+        "SkippedStepRecordsTheReason",
+        "SummaryPathsFeedTheReportNotTheWorkspaceData",
+        "RunAndStepsFilterToTheReportPayload",
+        "StatusTextComesFromTheEnumName",
+        "MessageTypeTextComesFromTheEnumName",
+        "ExcludedStepsAreStillReferenceableUnderTail",
+        "TailStaysOutOfTheReportPayload"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96436,
+      "name": "Playbook Example Tests",
+      "file": "test/PlaybookExampleTests.Codeunit.al",
+      "methods": [
+        "Example1_PerRecordDecisionThenWrite_VerifiesClean",
+        "Example1_PerRecordDecisionThenWrite_VerifiesClean_Icelandic",
+        "Example2_ReadOnlyReport_VerifiesClean",
+        "Example2_ReadOnlyReport_VerifiesClean_Icelandic",
+        "Example3_AntiPattern_WarnsExactlyOnce",
+        "Example3_AntiPattern_WarnsExactlyOnce_Icelandic",
+        "Example1_WithEveryStepDisabled_StillVerifiesWithoutErrors",
+        "Help_CarriesTheWorkflowTheExamplesAndTheRules",
+        "Help_CarriesTheBase64OfEveryExampleTemplate",
+        "Example4_PostingAudit_VerifiesForTheInstalledAskType",
+        "Example4_PostingAudit_VerifiesForTheInstalledAskType_Icelandic",
+        "Example4_AskTemplateRaisesNoneOfTheAskWarnings",
+        "Help_CarriesThePostingAuditExample",
+        "Example4_RunRecordsPassFailUnknownAndErrorThenAllPassNotice",
+        "Help_ListsEveryFindingCodeOfVerify"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96437,
+      "name": "Playbook Gate Tests",
+      "file": "test/PlaybookGateTests.Codeunit.al",
+      "methods": [
+        "Run_RefusesAnError",
+        "Run_RefusesAnError_Icelandic",
+        "Run_RefusesAWarning_UnlessIgnoreWarnings",
+        "Run_RefusesAWarning_UnlessIgnoreWarnings_Icelandic",
+        "Run_IgnoreWarnings_NeverWaivesAnError",
+        "Run_ErrorOnDisabledStep_DoesNotBlock",
+        "Run_CleanPlaybook_Runs",
+        "Schedule_RefusesAnError_AndCreatesNoEntry",
+        "Schedule_RefusesAnError_AndCreatesNoEntry_Icelandic",
+        "Schedule_CleanPlaybook_IsScheduled",
+        "VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify",
+        "Schedule_RefusesAWarning_UnlessIgnoreWarnings",
+        "CreateOrchestratorEntry_RefusesAnError",
+        "CreateOrchestratorEntry_WarningNeedsIgnoreWarnings",
+        "ScheduledPlaybookWithErrors_IsReported",
+        "UnscheduledPlaybookWithErrors_HasNoScheduleFinding",
+        "VerifyMessageType_ReportsValidAndCounts",
+        "VerifyMessageType_CleanPlaybook_IsValid"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96432,
+      "name": "Playbook Last Run Tests",
+      "file": "test/PlaybookLastRunTests.Codeunit.al",
+      "methods": [
+        "PlaybookRun_StampsHeader",
+        "PlaybookRun_StampsHeader_Icelandic",
+        "PlaybookEnqueue_ThenJobQueueRun_StampsHeader",
+        "PlaybookEnqueue_ThenJobQueueRun_StampsHeader_Icelandic",
+        "ScheduledRun_StampsHeader",
+        "ScheduledRun_StampsHeader_Icelandic",
+        "FailedRun_StampsHeaderFailed",
+        "FailedRun_StampsHeaderFailed_Icelandic",
+        "SecondRun_ReplacesTheFirst",
+        "EmptyPlaybook_StampsHeaderCompleted",
+        "HeaderIsRunningWhileTheRunIsInFlight"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "file": "test/PlaybookRef118Testsori.Codeunit.al",
+      "methods": [
+        "PrimaryKeyUnderFieldsWarnsEnglish",
+        "PrimaryKeyUnderFieldsWarnsIcelandic",
+        "CorrectPathsResolve",
+        "UnresolvedRequestsAreRejected",
+        "LiteralMailAndResolvedDataRemainValid",
+        "SameIterationAndFilteredDumpResolve",
+        "SingleCheckMissingReferenceFails",
+        "ForEachCheckMissingReferenceFails",
+        "ForEachActionMissingReferenceFailsIcelandic"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96421,
+      "name": "Playbook Run Msg Tests",
+      "file": "test/PlaybookRunMsgTests.Codeunit.al",
+      "methods": [
+        "RunErrorsWhenPlaybookCodeMissing",
+        "RunErrorsForUnknownPlaybookCode",
+        "Scenario_AC07_PagedStep_ReceivesItsOwnSkipAndTake"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96435,
+      "name": "Playbook Verify Step Tests",
+      "file": "test/PlaybookVerifyStepTests.Codeunit.al",
+      "methods": [
+        "AskForEach_BoundsAndTypeAreChecked",
+        "AskForEach_DisabledAndTranslated",
+        "CleanPlaybook_HasNoFindings",
+        "EmptyPlaybook_HasNoFindings",
+        "UnlistedMessageType_IsAnError",
+        "UnlistedMessageType_IsAnError_Icelandic",
+        "ListedEnabledMessageType_NoFinding",
+        "UnlistedMessageType_NameAndEnabled",
+        "KnownTypeThatIsNotEnabled_WithStartCondition_IsNotReported",
+        "UnlistedType_WithStartCondition_IsStillAnError",
+        "CheckWithoutSuccessCondition_IsAnError",
+        "CheckWithoutSuccessCondition_IsAnError_Icelandic",
+        "CheckWithSuccessCondition_NoFinding",
+        "ActionWithoutSuccessCondition_IsAWarning",
+        "ActionWithSuccessCondition_NoFinding",
+        "NextStepNotFound_IsAnError",
+        "NextStepExistingOrZero_NoFinding",
+        "IterateSource_Missing_IsAnError",
+        "IterateSource_NotEarlier_IsAnError",
+        "IterateSource_Earlier_NoFinding",
+        "SkipGate_Missing_IsAnError",
+        "SkipGate_NotEarlier_IsAnError",
+        "SkipGate_OnSingleStep_IsAnError",
+        "SkipGate_OnForEachCheck_NoFinding",
+        "ForEachSource_WithoutNoOfRecords_Warns",
+        "ForEachSource_WithoutNoOfRecords_Warns_Icelandic",
+        "ForEachSource_WithNoOfRecords_NoWarning",
+        "ForEachSource_NotARecordReader_NoWarning",
+        "ForEachSource_TwoConsumers_WarnsOnce",
+        "UnsafeWrite_OnDisabledStep_IsNotReported",
+        "FindingOnDisabledStep_CarriesStepDisabled",
+        "FindingOnEnabledStep_HasNoStepDisabled",
+        "Findings_AreInStepOrder_WithAllFields"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96439,
+      "name": "Playbook Verify Template Tests",
+      "file": "test/PlaybookVerifyTemplateTests.Codeunit.al",
+      "methods": [
+        "AskSchema_ConditionAndPresenceBoundaries",
+        "AskTrace_LiteralTrueOnly",
+        "AskTemplate_TranslatedMessagesAndNextSteps",
+        "TemplateNotJson_Truncated_IsAnError",
+        "TemplateNotJson_Truncated_IsAnError_Icelandic",
+        "TemplateNotJson_Array_IsAnError",
+        "TemplateValidOrEmpty_NoFinding",
+        "StepReference_Missing_IsAnError",
+        "StepReference_Missing_IsAnError_Icelandic",
+        "StepReference_CollectAndListForms_AreChecked",
+        "StepReference_NotEarlier_IsAnError",
+        "StepReference_NotEarlier_IsAnError_Icelandic",
+        "StepReference_ToItself_IsAnError",
+        "StepReference_ToEarlierStep_NoFinding",
+        "StepReference_ShapesThatAreNotReferences_NoFinding",
+        "StepReference_RepeatedReference_IsReportedOnce",
+        "RoleCode_Unknown_IsAnError",
+        "RoleCode_Unknown_IsAnError_Icelandic",
+        "RoleCode_Known_NoFinding",
+        "RoleCode_EmptyReferenceOrAbsent_IsNotLookedUp",
+        "RoleCode_OnOtherMessageType_IsNotLookedUp",
+        "RoleCode_LongerThanACode_IsAnError",
+        "RoleCode_InsideAWriteTransaction_IsNotDeterminable",
+        "CurrentField_Unknown_Warns",
+        "CurrentField_Unknown_Warns_Icelandic",
+        "CurrentField_Known_NoWarning",
+        "CurrentField_SourceTableUndeterminable_NoWarning",
+        "StepField_Unknown_IsAnError",
+        "StoredField_ErrorAndOriginalCasing",
+        "StoredField_ErrorAndOriginalCasing_Icelandic",
+        "StoredField_HelpExplainsError",
+        "StepField_Known_NoWarning",
+        "IterField_Unknown_IsAnError",
+        "IterField_Unknown_IsAnError_Icelandic",
+        "IterField_Known_NoWarning",
+        "IterField_ExplicitIteration_Unknown_IsAnError",
+        "StepField_OfPagedOrDisabledStep_IsNotJudged",
+        "Lookup_RecordExists_FoundNotFoundAndUndeterminable",
+        "Lookup_FieldNames_AreTheJsonNames",
+        "Lookup_ToJsonName_FollowsTheDataTypes"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96433,
+      "name": "Playbook Verify Tests",
+      "file": "test/PlaybookVerifyTests.Codeunit.al",
+      "methods": [
+        "UnsafePattern_Warns",
+        "UnsafePattern_Warns_Icelandic",
+        "CorrectedPattern_DoesNotWarn",
+        "CorrectedPattern_DoesNotWarn_Icelandic",
+        "TwoUnsafeWrites_WarnOncePerStep",
+        "SafeShapes_DoNotWarn",
+        "WriteMessageTypesAreRecognisedByTheirVerb",
+        "VerifyErrorsForMissingOrUnknownPlaybook"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96454,
+      "name": "Report Boundary Tests ori",
+      "file": "test/ReportBoundaryTestsori.Codeunit.al",
+      "methods": [
+        "Run_UnknownField_ReturnsErrorWithoutExecution",
+        "Run_MalformedView_ReturnsErrorWithoutExecution",
+        "Run_NonString_ReturnsErrorWithoutExecution",
+        "SaveAs_UnknownField_ReturnsErrorWithoutExecution",
+        "Scenario_AC01_PdfInvalidField_ReturnsError",
+        "Scenario_AC01_DefaultPdfInvalidField_ReturnsError",
+        "Scenario_AC01_ExcelInvalidField_ReturnsError",
+        "Scenario_AC01_WordInvalidField_ReturnsError",
+        "SaveAs_MalformedView_ReturnsErrorWithoutExecution",
+        "SaveAs_NonString_ReturnsErrorWithoutExecution",
+        "SaveAs_ValidView_ExecutesOnlySelectedRow",
+        "Run_ValidView_ExecutesSelectedRow",
+        "Run_EmptySelection_DoesNotWidenDataSet",
+        "Run_BothDebugStates_FailureHasNoCallstack"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96424,
+      "name": "Report Layout Msg Tests",
+      "file": "test/ReportLayoutMsgTests.Codeunit.al",
+      "methods": [
+        "SetErrorsWhenReportIdMissing",
+        "SetErrorsWhenNameMissing",
+        "SetErrorsForUnknownReport",
+        "SetErrorsForInvalidLayoutFormat",
+        "SetErrorsWhenLayoutBase64Missing",
+        "MessageTypeIsRegistered"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96409,
+      "name": "Report Layout Read Tests ori",
+      "file": "test/ReportLayoutReadTestsori.Codeunit.al",
+      "methods": [
+        "ListIncludesExtensionLayout",
+        "ListExcludesExtensionLayouts",
+        "GetExportsExtensionBytes",
+        "OwnUserLayoutRoundTripsBytes",
+        "SetTwiceReplacesUserLayout",
+        "ListRejectsUnknownReport",
+        "GetRejectsUnknownLayout",
+        "SaveAsOverrideRestoresSessionAndPreset",
+        "SaveAsOverrideRendersPdf",
+        "SaveAsRenderFailureRestoresSession",
+        "SaveAsRejectsUnknownLayout"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96416,
+      "name": "Report Msg Tests",
+      "file": "test/ReportMsgTests.Codeunit.al",
+      "methods": [
+        "PresetRoundTripsXml",
+        "PresetReturnsEmptyWhenNoXml",
+        "PresetHasRequestPageXmlReturnsTrueWhenPopulated",
+        "ListReturnsReportsWithCountField",
+        "ListFiltersByProcessingOnly",
+        "ListReportContainsExpectedFields",
+        "GetReturnsReportMetadata",
+        "GetReturnsLayoutsArray",
+        "GetReturnsPresetWhenExists",
+        "GetCreatesEmptyPresetWhenNoneExists",
+        "GetErrorsForInvalidReportId",
+        "GetErrorsWhenReportIdMissing",
+        "SaveAsGeneratesPdfOutput",
+        "SaveAsDefaultsToPdfWhenFormatOmitted",
+        "SaveAsUsesPresetWhenNoXmlProvided",
+        "SaveAsErrorsForInvalidFormat",
+        "SaveAsErrorsForMissingReportId",
+        "SaveAsErrorsForNonExistentReport",
+        "PresetTableIsBlockedFromDataRecordsRead",
+        "PresetTableIsBlockedFromDataRecordsWrite"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96431,
+      "name": "Report Parameter Tests ori",
+      "file": "test/ReportParameterTestsori.Codeunit.al",
+      "methods": [
+        "OverlayPreservesOtherValues",
+        "UnknownNameFails",
+        "MissingBaseFails",
+        "WrongReportXmlFails",
+        "MalformedXmlFails",
+        "DuplicateOptionFails",
+        "NonObjectParametersFail",
+        "NullValueFails",
+        "NestedValueFails",
+        "StatementTemplateMapsOptions",
+        "DuplicateAliasesFail",
+        "NativeCaptureMatchesTemplateSchema",
+        "StatementUnknownOptionFails",
+        "StatementBadChoiceFails",
+        "CallerXmlPrecedesTemplate",
+        "RegisteredTemplateRendersValues",
+        "ExplicitParametersDoNotUsePreset",
+        "StatementRendersOwnAgingData"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96417,
+      "name": "Report Run Tests",
+      "file": "test/ReportRunTests.Codeunit.al",
+      "methods": [
+        "RunExecutesProcessingOnlyReport",
+        "RunEchoesReportMetadata",
+        "RunReturnsErrorObjectWhenReportFails",
+        "RunUsesExplicitParameterOverlay",
+        "RunRejectsReportThatProducesOutput",
+        "RunErrorsWhenReportIdMissing",
+        "RunErrorsForNonExistentReport"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96402,
+      "name": "Resolver Test",
+      "file": "test/ResolverTest.Codeunit.al",
+      "methods": [
+        "StandaloneRefResolvesString",
+        "StandaloneRefResolvesNumericAsNumber",
+        "StandaloneRefResolvesObject",
+        "StandaloneRefResolvesArray",
+        "EmbeddedRefResolvesInString",
+        "EmbeddedRefBeforePeriodResolves",
+        "EmbeddedRefEscapesQuotesAndObjects",
+        "CollectDirective",
+        "FilteredDumpEscapesAsString",
+        "UnresolvedRefStaysIntact",
+        "MultipleRefsInSameTemplate"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "file": "test/SchedFieldRestrictTestsori.Codeunit.al",
+      "methods": [
+        "Scenario_AC01_IdentityAndRecipientWritesAreRestricted",
+        "Scenario_AC02_IdentityAndRecipientReadsStayOpen",
+        "Scenario_AC03_NeighbourFieldsStayWritable",
+        "Scenario_AC04_TablesStayReadableAndWritable",
+        "Scenario_AC05_HintsNameSupportedPagesAndSchedule",
+        "Scenario_AC05_NeighboursHaveNoNewHints",
+        "Scenario_AC05_ExistingCompanionHintsArePreserved"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96415,
+      "name": "Schedule Playbook Tests",
+      "file": "test/SchedulePlaybookTests.Codeunit.al",
+      "methods": [
+        "CreateOrchestratorEntryCreatesEntry",
+        "CreateOrchestratorEntryStoresIdOnPlaybook",
+        "ScheduledFlowFieldReflectsOrchestratorEntry",
+        "CreateOrchestratorEntryCopiesRecurringTemplate",
+        "CreateOrchestratorEntrySetsNotification",
+        "CreateOrchestratorEntrySetsRetryPolicy",
+        "CreateOrchestratorEntrySetsEmitTelemetry",
+        "CreateOrchestratorEntrySetsJobQueueCategory",
+        "CreateOrchestratorEntryBlocksDoubleSchedule",
+        "CreateOrchestratorEntrySetsRecordIdAndSystemId",
+        "CreateOrchestratorEntryAllowsRescheduleAfterOrphan",
+        "ScheduleResponseEmitsSystemIdAndPkId"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96446,
+      "name": "Scheduler Wizard Reg Tests ori",
+      "file": "test/SchedulerWizardRegTestsori.Codeunit.al",
+      "methods": [
+        "Scenario_AC02_English_RegistersMetadataOnly",
+        "Scenario_AC03_Icelandic_RegistersMetadataOnly"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96427,
+      "name": "SE Run Msg Tests",
+      "file": "test/SERunMsgTests.Codeunit.al",
+      "methods": [
+        "ExecuteRunDispatchesCodeunitEntryHeadlessly",
+        "ExecuteRunReturnsErrorWhenJobFails",
+        "ExecuteRunReturnsErrorWhenDispatchFails",
+        "ExecuteRunUsesPlaybookRecordIdNotEntryRecordId",
+        "RunJobQueueEntryOnceStillConfirmsAndMessages"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96419,
+      "name": "Status Msg Tests",
+      "file": "test/StatusMsgTests.Codeunit.al",
+      "methods": [
+        "GetReturnsSuccessWithEntryCounts",
+        "GetEntryCountsAreConsistent",
+        "RestartReturnsSuccessWithMessage",
+        "RestartIfNeededRestartsWhenNoJQEntry",
+        "RestartIfNeededSkipsWhenAlreadyRunning",
+        "RestartIfNeededSkipsWhenInProcess",
+        "RestartIfNeededRestartsWhenInError"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96442,
+      "name": "Verify Summary Tests ori",
+      "file": "test/VerifySummaryTestsori.Codeunit.al",
+      "methods": [
+        "Scenario_AC01_DisabledErrors_DoNotBlock",
+        "Scenario_AC01_DisabledErrors_DoNotBlock_IsIS",
+        "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks",
+        "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks_IsIS",
+        "Scenario_AC01_EnabledError_StillBlocks",
+        "Scenario_AC01_EnabledError_StillBlocks_IsIS",
+        "Scenario_AC01_CleanPlaybook_HasZeroCounts",
+        "Scenario_AC02_Help_ExplainsBlockingCounts"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96408,
+      "name": "WhoAmI Contract Tests ori",
+      "file": "test/WhoAmIContractTestsori.Codeunit.al",
+      "methods": [
+        "TelegramFieldDescribesCallerSetup"
+      ],
+      "requiredDisabled": false
+    },
+    {
+      "id": 96401,
+      "name": "Workspace Test",
+      "file": "test/WorkspaceTest.Codeunit.al",
+      "methods": [
+        "SetValueAndGetValue",
+        "SetTokenAtNestedPath",
+        "SetTokenPreservesArray",
+        "WriteFromResponseWithRename",
+        "WriteFromResponseIteratedKeying",
+        "WriteFromResponseFirstElement",
+        "CollectGathersIterations",
+        "ToFilteredTextOnlyIncludesRequestedKeys",
+        "ResetClearsAllData",
+        "LastMonthEnd_TC001_September31DayMonth",
+        "LastMonthEnd_TC002_LeapYearFebruary",
+        "LastMonthEnd_TC003_JanuaryCrossYear",
+        "LastMonthEnd_TC004_May31ToApril30",
+        "LastMonthStartThisMonthStart_TC005_FormulasUnchanged"
+      ],
+      "requiredDisabled": false
+    }
+  ]
+}

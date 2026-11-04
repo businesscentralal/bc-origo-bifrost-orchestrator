@@ -1,0 +1,46 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "containerId": "f071522012bc",
+  "fullSuite": true,
+  "distinctPerRun": 499,
+  "runs": 2,
+  "executed": 998,
+  "passed": 998,
+  "failed": 0,
+  "skipped": 0,
+  "partitions": [
+    {
+      "run": 1,
+      "isolation": "codeunit",
+      "executed": 489,
+      "passed": 489,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "run": 1,
+      "isolation": "disabled",
+      "executed": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "run": 2,
+      "isolation": "codeunit",
+      "executed": 489,
+      "passed": 489,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "run": 2,
+      "isolation": "disabled",
+      "executed": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "allSourceMethodsCoveredEachRun": true
+}

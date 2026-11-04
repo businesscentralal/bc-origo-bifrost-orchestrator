@@ -1,0 +1,11 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "mode": "shipping no-IVT",
+  "baseline": "28.0.3.93",
+  "baselineRelease": "28.0.3",
+  "startedAt": "2026-11-04T16:50:09.908Z",
+  "finishedAt": "2026-11-04T16:50:32.381Z",
+  "exitCode": 0,
+  "errors": 0,
+  "warnings": 0
+}

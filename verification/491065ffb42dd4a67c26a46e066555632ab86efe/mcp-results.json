@@ -1,0 +1,70 @@
+{
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "containerId": "f071522012bc",
+  "executed": 8,
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "createsOwnData": true,
+  "fixture": "W3153-491065",
+  "cases": [
+    {
+      "type": "Help.Orchestrator.Get",
+      "lcid": 1033,
+      "scenario": "Artifact example and all three warning codes",
+      "passed": true
+    },
+    {
+      "type": "Orchestrator.Playbook.Verify",
+      "lcid": 1033,
+      "scenario": "Owned unsanitized literal attachment and recipient produce expected localized warnings; never run",
+      "passed": true
+    },
+    {
+      "type": "Help.Implementation.Get",
+      "lcid": 1033,
+      "scenario": "Verify contract advertises all new warning codes",
+      "passed": true
+    },
+    {
+      "type": "Help.Orchestrator.Get",
+      "lcid": 1039,
+      "scenario": "Artifact example and all three warning codes",
+      "passed": true
+    },
+    {
+      "type": "Orchestrator.Playbook.Verify",
+      "lcid": 1039,
+      "scenario": "Owned unsanitized literal attachment and recipient produce expected localized warnings; never run",
+      "passed": true
+    },
+    {
+      "type": "Help.Implementation.Get",
+      "lcid": 1039,
+      "scenario": "Verify contract advertises all new warning codes",
+      "passed": true
+    },
+    {
+      "type": "Orchestrator.Playbook.Verify",
+      "lcid": 1033,
+      "scenario": "Own absent playbook identity is refused without creating a playbook",
+      "expectedError": "BusinessCentralError",
+      "passed": true
+    },
+    {
+      "type": "Orchestrator.Playbook.Verify",
+      "lcid": 1039,
+      "scenario": "Own absent playbook identity is refused without creating a playbook",
+      "expectedError": "BusinessCentralError",
+      "passed": true
+    }
+  ],
+  "touchedMessageTypes": [
+    "Orchestrator.Playbook.Verify",
+    "Help.Orchestrator.Get"
+  ],
+  "supplementalMessageTypes": [
+    "Help.Implementation.Get"
+  ],
+  "scope": "Eight direct MCP scenarios: bilingual Help, Verify own email warnings, missing playbook refusal, Verify contract. Live artifact chain and live Ask/provider behavior remain UNVERIFIED due upstream dependencies."
+}

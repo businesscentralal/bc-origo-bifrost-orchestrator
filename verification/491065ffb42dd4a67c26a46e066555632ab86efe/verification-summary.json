@@ -1,0 +1,248 @@
+{
+  "worker": "worker-3",
+  "displayName": "Sindri",
+  "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/153",
+  "pr": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/154",
+  "implementation": "Retained artifact example/verify implementation; repair canonical XLF order and CHANGELOG without semantic translation changes",
+  "compile": {
+    "product": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "test": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "shippingNoIVT": {
+      "errors": 0,
+      "warnings": 0,
+      "baseline": "released28.0.3.93"
+    },
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop (product/shipping)"
+    ],
+    "foundation": "28.0.11.669"
+  },
+  "native": {
+    "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+    "containerId": "f071522012bc",
+    "fullSuite": true,
+    "distinctPerRun": 499,
+    "runs": 2,
+    "executed": 998,
+    "passed": 998,
+    "failed": 0,
+    "skipped": 0,
+    "partitions": [
+      {
+        "run": 1,
+        "isolation": "codeunit",
+        "executed": 489,
+        "passed": 489,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "run": 1,
+        "isolation": "disabled",
+        "executed": 10,
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "run": 2,
+        "isolation": "codeunit",
+        "executed": 489,
+        "passed": 489,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "run": 2,
+        "isolation": "disabled",
+        "executed": 10,
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "allSourceMethodsCoveredEachRun": true
+  },
+  "mcp": {
+    "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+    "containerId": "f071522012bc",
+    "executed": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "createsOwnData": true,
+    "fixture": "W3153-491065",
+    "cases": [
+      {
+        "type": "Help.Orchestrator.Get",
+        "lcid": 1033,
+        "scenario": "Artifact example and all three warning codes",
+        "passed": true
+      },
+      {
+        "type": "Orchestrator.Playbook.Verify",
+        "lcid": 1033,
+        "scenario": "Owned unsanitized literal attachment and recipient produce expected localized warnings; never run",
+        "passed": true
+      },
+      {
+        "type": "Help.Implementation.Get",
+        "lcid": 1033,
+        "scenario": "Verify contract advertises all new warning codes",
+        "passed": true
+      },
+      {
+        "type": "Help.Orchestrator.Get",
+        "lcid": 1039,
+        "scenario": "Artifact example and all three warning codes",
+        "passed": true
+      },
+      {
+        "type": "Orchestrator.Playbook.Verify",
+        "lcid": 1039,
+        "scenario": "Owned unsanitized literal attachment and recipient produce expected localized warnings; never run",
+        "passed": true
+      },
+      {
+        "type": "Help.Implementation.Get",
+        "lcid": 1039,
+        "scenario": "Verify contract advertises all new warning codes",
+        "passed": true
+      },
+      {
+        "type": "Orchestrator.Playbook.Verify",
+        "lcid": 1033,
+        "scenario": "Own absent playbook identity is refused without creating a playbook",
+        "expectedError": "BusinessCentralError",
+        "passed": true
+      },
+      {
+        "type": "Orchestrator.Playbook.Verify",
+        "lcid": 1039,
+        "scenario": "Own absent playbook identity is refused without creating a playbook",
+        "expectedError": "BusinessCentralError",
+        "passed": true
+      }
+    ],
+    "touchedMessageTypes": [
+      "Orchestrator.Playbook.Verify",
+      "Help.Orchestrator.Get"
+    ],
+    "supplementalMessageTypes": [
+      "Help.Implementation.Get"
+    ],
+    "scope": "Eight direct MCP scenarios: bilingual Help, Verify own email warnings, missing playbook refusal, Verify contract. Live artifact chain and live Ask/provider behavior remain UNVERIFIED due upstream dependencies."
+  },
+  "ui": {
+    "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+    "containerId": "f071522012bc",
+    "owner": "worker-3",
+    "tool": "Playwright MCP (local stdio @playwright/mcp)",
+    "executed": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "scenarios": [
+      {
+        "lcid": 1033,
+        "name": "Playbooks list opens on exact deployment",
+        "evidence": "ui-1033-list.png"
+      },
+      {
+        "lcid": 1033,
+        "name": "Own card and saved JSON template open through native editor",
+        "evidence": "ui-1033-editor.png"
+      },
+      {
+        "lcid": 1039,
+        "name": "Actual Icelandic Playbooks list captions",
+        "evidence": "ui-1039-list.png"
+      },
+      {
+        "lcid": 1039,
+        "name": "Actual Icelandic own card/step/template captions",
+        "evidence": "ui-1039-card.png"
+      }
+    ],
+    "limitations": "No real provider or enqueued artifact-chain UI run; depends on upstream delivery. Earlier automation locator, modal-title and language-selection retries are retained privately and are not counted as final passing scenarios.",
+    "languageRestore": {
+      "language": 1033,
+      "verified": true,
+      "evidence": "ui-settings-mcp.json",
+      "at": "2026-11-04T17:18:35.205Z"
+    },
+    "fixtureCleanup": {
+      "verified": true,
+      "evidence": "cleanup.json"
+    }
+  },
+  "ci": {
+    "url": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/41871258885",
+    "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+    "conclusion": "success",
+    "tests": {
+      "executed": 499,
+      "passed": 499,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "cleanup": {
+    "sha": "491065ffb42dd4a67c26a46e066555632ab86efe",
+    "containerId": "f071522012bc",
+    "owner": "worker-3",
+    "verified": true,
+    "fixture": "W3153-491065",
+    "proof": [
+      {
+        "table": "Playbook ori",
+        "remaining": 0,
+        "evidence": "cleanup-header-after.json"
+      },
+      {
+        "table": "Playbook Step ori",
+        "remaining": 0,
+        "evidence": "cleanup-step-after.json"
+      },
+      {
+        "table": "Playbook Condition ori",
+        "remaining": 0,
+        "evidence": "cleanup-conditions-after.json"
+      }
+    ],
+    "mechanism": "Supported BC Web Client Delete Line and Delete actions, each confirmed only for owned fixture; subsequent MCP read-back",
+    "languageRestored": 1033,
+    "guardOrLicensingChanges": false,
+    "realEmailInvoked": false,
+    "containerDeletion": "Not authorized until Tester post-deploy UAT and issue closure; stop and retain",
+    "verifiedAt": "2026-11-04T17:21:04.318Z"
+  },
+  "resource": {
+    "id": "f071522012bc",
+    "displayName": "worker3-orchestrator153-20261104-w1",
+    "owner": "worker-3",
+    "status": 200,
+    "state": "Stopped",
+    "imageTag": "sandbox-29.0.54011.57417-w1",
+    "at": "2026-11-04T17:21:31.316Z",
+    "retained": true,
+    "deleted": false,
+    "reason": "Retain through Tester post-deployment UAT and issue closure per1792155806.391819; restart this same resource on dependency change"
+  },
+  "remaining": "AC01 real enqueued chain awaits core1257,attachments208,language-models113/101; Gunnar decision card remains an explicit hold until actual disposition. No live/provider-chain pass, review handoff, clearance, merge, deployment or UAT claim.",
+  "standards": {
+    "commit": "52ba4754cfd614e4a7c50af87b30149b18b313e3",
+    "snapshotCapturedAt": "2026-11-02T10:35:08.581Z",
+    "freshSyncClaim": false
+  },
+  "learning": "Generator-order mismatch: manual append placed six units outside canonical order; regenerate from compiled g.xlf, compare all863semantic units, run guard and normal pairedCI. Initial harness/cache/UI retries preserved privately; final counts are assertion-backed."
+}
