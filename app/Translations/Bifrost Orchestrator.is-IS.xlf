@@ -5146,6 +5146,42 @@
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybVw ori - Property Caption</note>
         </trans-unit>
       </group>
-    </body>
+            <trans-unit id="Codeunit 2293111500 - NamedType 3881611930" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask step %1 has no tools.allow. Without an explicit list the model may be offered every tool the caller may use, also tools that write.</source>
+          <target>Ask-skref %1 hefur ekkert tools.allow. Án skýrs lista gæti líkaninu staðið til boða hvert það verkfæri sem kallandinn má nota, líka verkfæri sem skrifa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Ask step no, is-IS=Ask-skref %1 hefur ekkert tools.allow. Án skýrs lista gæti líkaninu staðið til boða hvert það verkfæri sem kallandinn má nota, líka verkfæri sem skrifa.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType AskWithoutToolsAllowMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2293111500 - NamedType 374091550" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add tools.allow to the request template of step %1 with the read tools the question needs, for example {"tools":{"allow":["get_records"]}}.</source>
+          <target>Bættu tools.allow við beiðnisniðmát skrefs %1 með þeim lesverkfærum sem spurningin þarf, til dæmis {"tools":{"allow":["get_records"]}}.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Ask step no, is-IS=Bættu tools.allow við beiðnisniðmát skrefs %1 með þeim lesverkfærum sem spurningin þarf, til dæmis {"tools":{"allow":["get_records"]}}.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType AskWithoutToolsAllowNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2293111500 - NamedType 936532494" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Email step %1 sets %2 to something other than the answer of a Content.Html.Sanitize step that runs before it. Model output or stored HTML can carry script, so it must not reach a recipient unsanitized.</source>
+          <target>Tölvupóstskref %1 stillir %2 á annað en svar Content.Html.Sanitize-skrefs sem keyrir á undan því. Úttak líkans eða vistað HTML getur borið skriftu, svo það má ekki berast viðtakanda ósótthreinsað.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = email step no, %2 = request property, is-IS=Tölvupóstskref %1 stillir %2 á annað en svar Content.Html.Sanitize-skrefs sem keyrir á undan því. Úttak líkans eða vistað HTML getur borið skriftu, svo það má ekki berast viðtakanda ósótthreinsað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType EmailContentNotSanitizedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2293111500 - NamedType 1510833450" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a Content.Html.Sanitize step after the step that produces the HTML and bind this property to its answer, for example "@3.html".</source>
+          <target>Bættu við Content.Html.Sanitize-skrefi á eftir skrefinu sem býr til HTML og bindðu þennan eiginleika við svar þess, til dæmis "@3.html".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu við Content.Html.Sanitize-skrefi á eftir skrefinu sem býr til HTML og bindðu þennan eiginleika við svar þess, til dæmis "@3.html".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType EmailContentNotSanitizedNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2293111500 - NamedType 3872685719" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Email step %1 has a literal address in %2. A playbook that sends a model-produced artifact must not carry an external recipient in its template.</source>
+          <target>Tölvupóstskref %1 hefur fast netfang í %2. Keðja sem sendir afurð frá líkani má ekki bera ytri viðtakanda í sniðmáti sínu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = email step no, %2 = request property, is-IS=Tölvupóstskref %1 hefur fast netfang í %2. Keðja sem sendir afurð frá líkani má ekki bera ytri viðtakanda í sniðmáti sínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType EmailLiteralRecipientMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2293111500 - NamedType 2391061643" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Take the recipient from a setup field or a reference, for example "@_who.salesperson.email", never from a literal address.</source>
+          <target>Taktu viðtakandann úr uppsetningarreit eða tilvísun, til dæmis "@_who.salesperson.email", aldrei úr föstu netfangi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Taktu viðtakandann úr uppsetningarreit eða tilvísun, til dæmis "@_who.salesperson.email", aldrei úr föstu netfangi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType EmailLiteralRecipientNextStepTxt</note>
+        </trans-unit>
+</body>
   </file>
 </xliff>
