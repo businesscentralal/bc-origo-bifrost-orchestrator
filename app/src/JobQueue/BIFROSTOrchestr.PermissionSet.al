@@ -82,6 +82,7 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "Playbook Verify Msg ori" = X,
         codeunit "Playbook Verify Step ori" = X,
         codeunit "Playbook Verify Template ori" = X,
+        codeunit "Playbook Verify Artifact ori" = X,
         codeunit "Playbook Verify ori" = X,
         codeunit "Playbook Step Executor ori" = X,
         codeunit "Playbook Response Scrub ori" = X,

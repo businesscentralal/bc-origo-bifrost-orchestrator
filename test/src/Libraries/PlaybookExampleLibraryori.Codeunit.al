@@ -141,6 +141,62 @@ codeunit 96438 "Playbook Example Library ori"
         Lib.AddStatusSuccessCondition(PlaybookCode, 90);
     end;
 
+    /// <summary>
+    /// Builds example 5 (ARTIFACT-REFRESH) with the deterministic stand-ins of the four production types, so a test
+    /// runs the chain without Attachments, Language Models or a mail server: read the stored HTML as text (10), ask the
+    /// model to refresh it as html (20), sanitize the answer (30) and draft the email with the sanitized html as the
+    /// attachment (40). Steps 20, 30 and 40 stop the chain on failure: Next Step (Failure) is 0.
+    /// </summary>
+    /// <param name="PlaybookCode">The code of the playbook to create.</param>
+    procedure BuildArtifactRefresh(PlaybookCode: Code[20])
+    begin
+        Lib.CreatePlaybook(PlaybookCode);
+        Lib.AddStep(PlaybookCode, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Artifact.Storage", ArtifactReadTemplate(), 0, '', 0);
+        Lib.AddStep(PlaybookCode, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Artifact.Ask", ArtifactAskTemplate(), 0, '', 0);
+        Lib.AddStep(PlaybookCode, 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Artifact.Sanitize", ArtifactSanitizeTemplate(), 0, '', 0);
+        Lib.AddStep(PlaybookCode, 40, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Artifact.Email", ArtifactEmailTemplate(), 0, '', 0);
+
+        Lib.SetResultLogPaths(PlaybookCode, 10, 'content>artifactText,recipient>recipient');
+        Lib.SetResultLogPaths(PlaybookCode, 20, 'html>artifactHtml,stopReason>stopReason');
+        Lib.SetResultLogPaths(PlaybookCode, 30, 'html>cleanHtml');
+        Lib.SetNextSteps(PlaybookCode, 10, 20, 0);
+        Lib.SetNextSteps(PlaybookCode, 20, 30, 0);
+        Lib.SetNextSteps(PlaybookCode, 30, 40, 0);
+        Lib.SetNextSteps(PlaybookCode, 40, 0, 0);
+        Lib.AddStatusSuccessCondition(PlaybookCode, 10);
+        Lib.AddStatusSuccessCondition(PlaybookCode, 20);
+        Lib.AddStatusSuccessCondition(PlaybookCode, 30);
+        Lib.AddStatusSuccessCondition(PlaybookCode, 40);
+    end;
+
+    /// <summary>The request template of step 10 of example 5.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure ArtifactReadTemplate(): Text
+    begin
+        exit('{"storageCode":"ARTIFACTS","path":"claude/status.html","asText":true}');
+    end;
+
+    /// <summary>The request template of step 20 of example 5.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure ArtifactAskTemplate(): Text
+    begin
+        exit('{"question":"Update the figures in this HTML with the current Business Central data. Return the complete HTML document and nothing else. HTML: @10.artifactText","outputFormat":"html","limits":{"maxToolCalls":6},"tools":{"allow":["get_records"]}}');
+    end;
+
+    /// <summary>The request template of step 30 of example 5.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure ArtifactSanitizeTemplate(): Text
+    begin
+        exit('{"html":"@20.artifactHtml"}');
+    end;
+
+    /// <summary>The request template of step 40 of example 5.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure ArtifactEmailTemplate(): Text
+    begin
+        exit('{"to":["@_who.salesperson.email"],"subject":"Refreshed artifact","htmlBody":"The refreshed artifact is attached.","attachments":[{"fileName":"artifact.html","contentType":"text/html","contentText":"@30.cleanHtml"}]}');
+    end;
+
     /// <summary>True when this deployment lists LLM.Prompt.Ask. The example never names that value at compile time.</summary>
     /// <returns>True when the enum lists the invariant name.</returns>
     procedure AskTypeIsRegistered(): Boolean
@@ -161,7 +217,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure PostingAuditAskTemplate(): Text
     begin
-        exit('{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","record":{"tableName":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
+        exit('{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","record":{"tableName":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"tools":{"allow":["get_records"]},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
     end;
 
     /// <summary>The request template of step 90 of example 4.</summary>

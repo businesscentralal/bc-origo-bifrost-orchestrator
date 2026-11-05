@@ -267,6 +267,34 @@ codeunit 10035616 "Playbook Verify ori"
         TestAskTypeName := TypeName;
     end;
 
+    /// <summary>Registers a session-only alias so a dependency-free test message type is judged as the named production type by the artifact checks.</summary>
+    /// <param name="TestName">The invariant name of the test fixture.</param>
+    /// <param name="ProductionName">The production type name it stands in for, or empty to clear every alias.</param>
+    internal procedure SetTestAlias(TestName: Text; ProductionName: Text)
+    begin
+        if ProductionName = '' then begin
+            Clear(TestAliases);
+            exit;
+        end;
+        if TestAliases.ContainsKey(TestName) then
+            TestAliases.Set(TestName, ProductionName)
+        else
+            TestAliases.Add(TestName, ProductionName);
+    end;
+
+    /// <summary>Names a message type for the artifact checks, resolving a registered test alias.</summary>
+    /// <param name="MessageType">The message type of a step.</param>
+    /// <returns>The invariant name, or the production name the registered test alias stands in for.</returns>
+    internal procedure GetAliasedTypeName(MessageType: Enum "Message Type ori"): Text
+    var
+        TypeName: Text;
+    begin
+        TypeName := GetAskCheckTypeName(MessageType);
+        if TestAliases.ContainsKey(TypeName) then
+            exit(TestAliases.Get(TypeName));
+        exit(TypeName);
+    end;
+
     /// <summary>Resolves only the Ask-check name seam without changing availability, role, source or unsafe-write checks.</summary>
     /// <param name="MessageType">The actual registered enum.</param>
     /// <returns>The invariant name, or Ask for the explicitly registered session fixture.</returns>
@@ -402,6 +430,7 @@ codeunit 10035616 "Playbook Verify ori"
 
     var
         TestAskTypeName: Text;
+        TestAliases: Dictionary of [Text, Text];
         ErrorTok: Label 'error', Locked = true;
         WarningTok: Label 'warning', Locked = true;
         UnknownNameTok: Label 'Unknown(%1)', Locked = true;

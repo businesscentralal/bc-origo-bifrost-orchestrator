@@ -18,6 +18,7 @@ codeunit 10035617 "Playbook Verify Step ori"
     internal procedure CheckStep(Step: Record "Playbook Step ori"; var Findings: JsonArray)
     var
         Verify: Codeunit "Playbook Verify ori";
+        VerifyArtifact: Codeunit "Playbook Verify Artifact ori";
     begin
         CheckMessageType(Step, Findings);
         CheckSuccessCondition(Step, Findings);
@@ -27,6 +28,7 @@ codeunit 10035617 "Playbook Verify Step ori"
         CheckSourceGuard(Step, Findings);
         CheckUnsafeWrite(Step, Findings);
         CheckAskForEach(Step, Verify.GetAskCheckTypeName(Step."Message Type"), Findings);
+        VerifyArtifact.CheckStep(Step, Findings);
     end;
 
     local procedure CheckMessageType(Step: Record "Playbook Step ori"; var Findings: JsonArray)
