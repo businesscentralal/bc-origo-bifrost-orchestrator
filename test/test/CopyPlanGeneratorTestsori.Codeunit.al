@@ -81,6 +81,8 @@ codeunit 96465 "Copy Plan Generator Tests ori"
             Assert.AreEqual(Parent.Amount, Child.Amount, 'Mapped decimal');
             Child.SetRange(Code, Plan.Code);
             Assert.AreEqual(1, Child.Count(), 'Regenerated key updates the same destination row');
+            // Separate public Run invocations have separate transactions. Commit the first run before its repeat.
+            Commit();
         end;
         ChangeLogTable.Delete(true);
         ChangeLogSetup."Change Log Activated" := WasActivated;
