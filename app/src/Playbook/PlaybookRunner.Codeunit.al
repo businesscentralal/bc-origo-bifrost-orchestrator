@@ -257,6 +257,15 @@ codeunit 10035547 "Playbook Runner ori"
             StartTime := CurrentDateTime();
             if PageSuccess then
                 ExecuteMessageType(PagedStep."Message Type", PagedRequestText, PageResponseText, PageSuccess, PageErrorText);
+            // Foundation may return a structured refusal without raising an AL error.
+            // A paged source must fail visibly instead of treating that response as an empty page.
+            if PageSuccess then
+                if JsonHelper.IsErrorResponse(PageResponseText, PageErrorText) then
+                    PageSuccess := false;
+            if PageSuccess and not PagedStep.IsCheck() and PagedStep.HasConditions("Playbook Cond. Type ori"::Success) then
+                if ResponseJson.ReadFrom(PageResponseText) then
+                    PageSuccess := JsonHelper.EvaluateConditionSet(ResponseJson, PagedStep."Playbook Code",
+                        PagedStep."Step No.", "Playbook Cond. Type ori"::Success);
             StepsExecuted += 1;
             if not PageSuccess then
                 StepsFailed += 1;
@@ -305,7 +314,12 @@ codeunit 10035547 "Playbook Runner ori"
                     if ChainSuccess then
                         ChainStepNo := ChainStep."Next Step No. (Success)"
                     else
-                        ChainStepNo := ChainStep."Next Step No. (Failure)";
+                        if ChainStep."Next Step No. (Failure)" > 0 then
+                            ChainStepNo := ChainStep."Next Step No. (Failure)"
+                        else begin
+                            StepSuccess := false;
+                            exit;
+                        end;
                 end;
             end;
 

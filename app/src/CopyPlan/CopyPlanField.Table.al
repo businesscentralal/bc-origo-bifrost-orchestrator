@@ -51,5 +51,11 @@ table 10035578 "Copy Plan Field ori"
             ToolTip = 'Specifies that this mapping is excluded from the generated playbook.', Comment = 'is-IS=Tilgreinir að þessari vörpun sé sleppt úr mynduðu keðjunni.';
         }
     }
-    keys { key(PK; "Plan Code", "Line No.") { Clustered = true; } }
+    keys
+    {
+        key(PK; "Plan Code", "Line No.")
+        {
+            Clustered = true;
+        }
+    }
 }

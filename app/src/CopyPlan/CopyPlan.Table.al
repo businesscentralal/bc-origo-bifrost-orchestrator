@@ -79,6 +79,7 @@ table 10035577 "Copy Plan ori"
         Child: Record "Copy Plan ori";
     begin
         Child.SetRange("Parent Plan Code", Code);
+        Child.ReadIsolation := IsolationLevel::ReadCommitted;
         if not Child.IsEmpty() then
             Error(ErrorInfo.Create(ChildrenExistErr));
         CopyField.SetRange("Plan Code", Code);

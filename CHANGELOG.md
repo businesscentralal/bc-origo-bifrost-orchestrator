@@ -7,6 +7,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+- Copy Plan verification repair: paged reads record structured Foundation refusals as failures; an unhandled child-step failure stops the paged block (codeunit 10035547). Tests cover restricted sources, uncovered destination writes, and normal scratch-table change-log coverage.
+
 ### Added (2026-11-06) - Copy Plan generation (#155, Phase 3)
 
 - Copy Plan and field mapping tables (10035577–10035578), list/card/field pages (10035580, 10035604, 10035608) and internal generator (10035622) create paged `Data.Records.Get` and foreach `Data.Records.Set` steps through the existing runner. Parent plans precede children, with siblings ordered by sequence.
