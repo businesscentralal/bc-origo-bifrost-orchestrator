@@ -546,9 +546,16 @@ codeunit 10035547 "Playbook Runner ori"
                     if (ResponseText <> '') and ResponseJson.ReadFrom(ResponseText) then
                         if not JsonHelper.EvaluateConditionSet(ResponseJson, PlaybookStep."Playbook Code",
                             PlaybookStep."Step No.", "Playbook Cond. Type ori"::Success) then begin
-                            StepStatus := "Playbook Inst. Status ori"::Cancelled;
                             ItemSuccess := false;
-                            ItemOutcome := 'CheckFailed';
+                            if PlaybookStep.IsCheck() then begin
+                                StepStatus := "Playbook Inst. Status ori"::Cancelled;
+                                ItemOutcome := 'CheckFailed';
+                            end else begin
+                                StepStatus := "Playbook Inst. Status ori"::Failed;
+                                ItemOutcome := 'Failed';
+                                StepsFailed += 1;
+                                AnyFailed := true;
+                            end;
                         end;
                 end;
 
@@ -570,6 +577,15 @@ codeunit 10035547 "Playbook Runner ori"
                 ItemsHere += 1;
 
                 if not ItemSuccess and PlaybookStep."Stop On Item Error" then begin
+                    // Persist the aggregate before returning; otherwise a failed action can leave the run Completed.
+                    if AnyFailed then
+                        AggregateStatus := 'Failed'
+                    else
+                        AggregateStatus := 'Completed';
+                    RecordStepOutcome(PlaybookStep, AggregateStatus, false, false, StepDuration, LogErrorText,
+                        ResponseText, ItemsHere, ItemsFailedHere);
+                    ApplyErrorConditions(PlaybookStep);
+                    LastResponseText := ResponseText;
                     StepSuccess := false;
                     exit;
                 end;

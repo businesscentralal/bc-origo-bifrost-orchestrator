@@ -7,7 +7,7 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-- Copy Plan verification repair: source views are normalized to public field names; paged reads retain and record structured Foundation refusals as failures; an unhandled child-step failure stops the paged block (codeunit 10035547). Tests cover restricted sources, uncovered destination writes, and normal scratch-table change-log coverage.
+- Copy Plan verification repair: source views are normalized to public field names; paged reads retain and record structured Foundation refusals as failures; an unhandled child-step failure stops the paged block, and failed foreach Action conditions fail the run while Check answers retain their routing semantics (codeunit 10035547). Tests cover restricted sources, uncovered destination writes, and normal scratch-table change-log coverage.
 
 ### Added (2026-11-06) - Copy Plan generation (#155, Phase 3)
 
