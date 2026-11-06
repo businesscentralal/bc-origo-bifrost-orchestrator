@@ -20,6 +20,13 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
     Assignable = true;
 
     Permissions =
+        page "Copy Plans ori" = X,
+        page "Copy Plan Card ori" = X,
+        page "Copy Plan Fields ori" = X,
+        tabledata "Copy Plan ori" = RIMD,
+        tabledata "Copy Plan Field ori" = RIMD,
+        codeunit "Copy Plan Generator ori" = X,
+
         page "Playbook Card ori" = X,
         page "Playbook Cond. Subpage ori" = X,
         page "Playbook Instance Card ori" = X,

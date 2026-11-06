@@ -663,3 +663,22 @@ stored defaults are preserved, including on rendering failure. Existing
 `ReportLayout.Set` imports a user layout. Persistent `ReportLayout.SetDefault`
 and `setAsDefault` are non-goals for #5 because no supported public platform API
 is available; revisit only when Microsoft exposes one.
+
+## Copy plans
+
+Open **Copy Plans**, create a plan, choose source and destination tables, and add field mappings.
+Map every destination primary-key field: these keys identify rows to insert or update. Source
+SystemIds are not copied. Mark a mapping **Skip** to exclude it. A source table view limits the
+selected rows; page size is 1–500 (default 50).
+
+Choose **Generate Playbook**, then **Open Playbook** to inspect, verify, run or schedule it using
+the existing playbook actions. Generation uses the plan code for its first playbook and refuses
+an unrelated playbook with that code. Later generation replaces only the steps of the playbook
+recorded in **Generated Playbook Code**. Edit the plan rather than its generated steps if those
+edits must survive regeneration.
+
+To copy related tables in order, assign child plans to a parent and set their sequence numbers.
+Generate from the root: each parent runs before its children, and siblings follow sequence order.
+Each plan keeps its own source view and mappings; parent/child ordering does not infer foreign keys.
+Foundation permissions, table restrictions and write-once rules still apply at execution, with
+refusals visible in the execution log. Copy plans add no base-table permissions.

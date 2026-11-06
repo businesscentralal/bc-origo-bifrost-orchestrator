@@ -7,6 +7,14 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-11-06) - Copy Plan generation (#155, Phase 3)
+
+- Copy Plan and field mapping tables (10035577–10035578), list/card/field pages (10035580, 10035604, 10035608) and internal generator (10035622) create paged `Data.Records.Get` and foreach `Data.Records.Set` steps through the existing runner. Parent plans precede children, with siblings ordered by sequence.
+- Generation validates field metadata, destination keys, duplicate mappings and source views before replacing only the recorded generated playbook. It does not copy source SystemIds, grant base-table permissions, bypass Foundation guards or add message types.
+- Playbook admin/management roles can maintain plans; the view role receives read access. New captions and tooltips include Icelandic translations.
+- Test fixtures 96449/96464 and test codeunits 96465–96466 cover generation, repeated copies, ordering, replacement isolation, validation, restricted-source failures and the card action.
+
+
 ### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)
 
 - `Orchestrator.ReportLayout.Set` (codeunit 10035599, handler 10035600) accepts `stagingId` (GUID, with or without braces) as an alternative to `layoutBase64`; exactly one of the two is required. The bytes are taken through Foundation's public `Blob Staging ori` façade (`Take`), which reads and deletes the row in the same transaction as the import, so a failed import leaves the row in place. Unknown or already-taken ids, both keys, neither key and a non-GUID id are refused with new bilingual errors; `layoutBase64` calls are unchanged. No Attachments dependency.
