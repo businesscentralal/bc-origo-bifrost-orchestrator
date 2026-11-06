@@ -167,7 +167,10 @@ codeunit 10035622 "Copy Plan Generator ori"
                     Fields.Add(TargetName, SourcePath);
             until Mapping.Next() = 0;
         Request.Add('tableName', Source.Name);
-        Request.Add('tableView', Plan."Source View");
+        // SetView accepts field numbers, while the public Data.Records contract requires names.
+        if Plan."Source View" <> '' then
+            Source.SetView(Plan."Source View");
+        Request.Add('tableView', Source.GetView(true));
         Request.Add('fieldNumbers', FieldNumbers);
         Request.WriteTo(RequestText);
         Step.Init();

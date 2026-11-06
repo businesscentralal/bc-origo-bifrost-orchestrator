@@ -266,6 +266,7 @@ codeunit 10035547 "Playbook Runner ori"
                 if ResponseJson.ReadFrom(PageResponseText) then
                     PageSuccess := JsonHelper.EvaluateConditionSet(ResponseJson, PagedStep."Playbook Code",
                         PagedStep."Step No.", "Playbook Cond. Type ori"::Success);
+            LastResponseText := PageResponseText;
             StepsExecuted += 1;
             if not PageSuccess then
                 StepsFailed += 1;
