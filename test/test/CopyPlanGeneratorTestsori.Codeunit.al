@@ -265,26 +265,28 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         InstanceId: Guid;
     begin
         // Assumption: this owned scratch table has no configured coverage; the production guard remains enabled.
-        Assert.IsFalse(Coverage.Get(Database::"Test Copy Child ori"), 'No fixture coverage may leak from the successful-copy test');
+        Assert.IsFalse(Coverage.Get(Database::"Test Copy Parent ori"), 'This negative fixture destination has never been given coverage');
         CreatePlan(Plan);
-        Parent.Code := Plan.Code;
-        Parent.Description := 'Must not be copied';
-        Parent.Insert(true);
-        Parent.SetRange(Code, Plan.Code);
-        Plan."Source View" := CopyStr(Parent.GetView(false), 1, MaxStrLen(Plan."Source View"));
+        Plan."Source Table No." := Database::"Test Copy Child ori";
+        Plan."Destination Table No." := Database::"Test Copy Parent ori";
+        Child.Code := Plan.Code;
+        Child.Description := 'Must not be copied';
+        Child.Insert(true);
+        Child.SetRange(Code, Plan.Code);
+        Plan."Source View" := CopyStr(Child.GetView(false), 1, MaxStrLen(Plan."Source View"));
         Plan.Modify(true);
         Generator.Generate(Plan.Code);
         Commit();
         Runner.Run(Plan.Code, InitialRequest, Response, InstanceId);
         Instance.Get(InstanceId);
         Assert.AreEqual(Instance.Status::Failed, Instance.Status, 'The uncovered write fails the run');
-        Assert.IsFalse(Child.Get(Plan.Code), 'Refused destination remains absent');
+        Assert.IsFalse(Parent.Get(Plan.Code), 'Refused destination remains absent');
         StepLog.SetRange("Instance ID", InstanceId);
         StepLog.SetRange("Step No.", 20);
         StepLog.SetRange(Status, StepLog.Status::Failed);
         Assert.IsTrue(StepLog.FindFirst(), 'The refusal is recorded in the step log');
         Assert.IsTrue(StepLog.GetResponseReceived().Contains('BlockedByWriteGuard'), 'The actual Foundation refusal is retained');
-        Parent.DeleteAll(true);
+        Child.DeleteAll(true);
         Cleanup(Plan.Code);
         Commit();
     end;
