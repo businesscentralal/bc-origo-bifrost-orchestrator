@@ -19,7 +19,7 @@ codeunit 96469 "Transform Verify Tests ori"
     procedure Scenario_AC43_MissingTargetIsAFinding()
     begin
         // Story #155, AC4.3 | Time: independent of Today/WorkDate | Risk: None
-        AssertMappingFinding('', 'known', false, 'TransformTargetInvalid');
+        AssertMappingFinding('', 'known', false, 'TransformTargetInvalid', '{"known":1}');
     end;
 
     /// <summary>UnknownSourceIsAFinding.</summary>
@@ -27,7 +27,16 @@ codeunit 96469 "Transform Verify Tests ori"
     procedure Scenario_AC43_UnknownSourceIsAFinding()
     begin
         // Story #155, AC4.3 | Time: independent of Today/WorkDate | Risk: None
-        AssertMappingFinding('result', 'missing', false, 'TransformSourceUnknown');
+        AssertMappingFinding('result', 'missing', false, 'TransformSourceUnknown', '{"known":1}');
+    end;
+
+    /// <summary>Malformed or absent input produces findings instead of aborting Verify.</summary>
+    [Test]
+    procedure Scenario_AC43_InvalidInputIsAFinding()
+    begin
+        // Story #155, AC4.3 | Time: independent of Today/WorkDate | Risk: None
+        AssertMappingFinding('result', 'known', false, 'TransformSourceUnknown', '');
+        AssertMappingFinding('result', 'known', false, 'TransformSourceUnknown', '{invalid');
     end;
 
     /// <summary>MessageTypeOnTransformIsAFinding.</summary>
@@ -35,7 +44,7 @@ codeunit 96469 "Transform Verify Tests ori"
     procedure Scenario_AC43_MessageTypeOnTransformIsAFinding()
     begin
         // Story #155, AC4.3 | Time: independent of Today/WorkDate | Risk: None
-        AssertMappingFinding('result', 'known', true, 'TransformMessageType');
+        AssertMappingFinding('result', 'known', true, 'TransformMessageType', '{"known":1}');
     end;
 
     /// <summary>CopyOperationGeneratesVerifiedTransform.</summary>
@@ -128,7 +137,7 @@ codeunit 96469 "Transform Verify Tests ori"
         Lib.Cleanup(PlaybookCode);
     end;
 
-    local procedure AssertMappingFinding(Target: Text[250]; Source: Text[250]; HasMessage: Boolean; Expected: Text)
+    local procedure AssertMappingFinding(Target: Text[250]; Source: Text[250]; HasMessage: Boolean; Expected: Text; InputTemplate: Text)
     var
         Step: Record "Playbook Step ori";
         Mapping: Record "Playbook Transform ori";
@@ -144,7 +153,7 @@ codeunit 96469 "Transform Verify Tests ori"
         Step."Step Kind" := Step."Step Kind"::Transform;
         if HasMessage then
             Step."Message Type" := "Message Type ori"::"Data.Records.Get";
-        Step.SetRequestTemplate('{"known":1}');
+        Step.SetRequestTemplate(InputTemplate);
         Step.Insert(true);
         Mapping."Playbook Code" := Step."Playbook Code";
         Mapping."Step No." := 10;

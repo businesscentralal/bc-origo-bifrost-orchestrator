@@ -61,7 +61,10 @@ codeunit 10035628 "Playbook Transform Verify ori"
             if Step.IsForEach() then
                 Path := '@_current.' + Path
             else begin
-                Input.ReadFrom(Step.GetRequestTemplate());
+                if not Input.ReadFrom(Step.GetRequestTemplate()) then begin
+                    AddError(Step, Findings, 'TransformSourceUnknown', StrSubstNo(SourcePathErr, Path));
+                    exit;
+                end;
                 if not JsonHelper.ResolveJsonPath(Input, Path, Token) then
                     AddError(Step, Findings, 'TransformSourceUnknown', StrSubstNo(SourcePathErr, Path));
                 exit;
