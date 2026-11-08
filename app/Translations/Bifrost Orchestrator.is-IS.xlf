@@ -131,8 +131,8 @@
         </trans-unit>
         <trans-unit id="Table 4153413238 - NamedType 880944479" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove or reparent the child plans before deleting this plan.</source>
-          <target>Fjarlægðu eða tengdu undirskipaðar áætlanir við annan foreldri áður en þessari áætlun er eytt.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annan foreldri áður en þessari áætlun er eytt.</note>
+          <target>Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - NamedType ChildrenExistErr</note>
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -173,8 +173,8 @@
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 4140201449 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the only playbook replaced when this plan is generated again.</source>
-          <target>Tilgreinir einu keðjuna sem er skipt út þegar áætlunin er mynduð aftur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir einu keðjuna sem er skipt út þegar áætlunin er mynduð aftur.</note>
+          <target>Tilgreinir eina keðjuna sem er skipt út þegar áætlunin er mynduð aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir eina keðjuna sem er skipt út þegar áætlunin er mynduð aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Generated Playbook Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 4140201449 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">

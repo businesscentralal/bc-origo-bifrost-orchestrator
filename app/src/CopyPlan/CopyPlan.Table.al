@@ -63,7 +63,7 @@ table 10035577 "Copy Plan ori"
         field(9; "Generated Playbook Code"; Code[20])
         {
             Caption = 'Generated Playbook Code', Comment = 'is-IS=Kóði myndaðrar keðju';
-            ToolTip = 'Specifies the only playbook replaced when this plan is generated again.', Comment = 'is-IS=Tilgreinir einu keðjuna sem er skipt út þegar áætlunin er mynduð aftur.';
+            ToolTip = 'Specifies the only playbook replaced when this plan is generated again.', Comment = 'is-IS=Tilgreinir eina keðjuna sem er skipt út þegar áætlunin er mynduð aftur.';
             TableRelation = "Playbook ori".Code;
             Editable = false;
         }
@@ -86,5 +86,5 @@ table 10035577 "Copy Plan ori"
         CopyField.DeleteAll(true);
     end;
     var
-        ChildrenExistErr: Label 'Remove or reparent the child plans before deleting this plan.', Comment = 'is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annan foreldri áður en þessari áætlun er eytt.';
+        ChildrenExistErr: Label 'Remove or reparent the child plans before deleting this plan.', Comment = 'is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.';
 }
