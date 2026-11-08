@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-11-08) - Local Transform steps (#155, Phase 4)
+
+- Step kind and operation enums (10035623–10035624), mapping table/page (10035625–10035626) and executor/verifier (10035627–10035628) add Copy, Constant, Negate and Replace Text without a new message type or a business-table grant.
+- Runner 10035547 handles local single/forEach transformations and exposes a transformed result array to later steps. Step definitions/logs (10035540/10035543), log management (10035549), Verify (10035616–10035617) and authoring/log pages identify Transform; existing definitions retain Message ordinal zero.
+- Copy Plan fields/generator (10035578/10035608/10035622) insert Get/Transform/Set chains only when an operation is configured. Tests 96468–96470 and extended 96465 cover operations, invalid mappings, generated verification, repeated copying, logging and the legacy default.
+
 - Copy Plan verification repair: source views are normalized to public field names; paged reads retain and record structured Foundation refusals as failures; an unhandled child-step failure stops the paged block, and failed foreach Action conditions fail the run while Check answers retain their routing semantics (codeunit 10035547). Tests cover restricted sources, uncovered destination writes, and normal scratch-table change-log coverage.
 
 ### Added (2026-11-06) - Copy Plan generation (#155, Phase 3)

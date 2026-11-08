@@ -59,8 +59,15 @@ codeunit 10035549 "Playbook Log Mgt ori"
     procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text)
     var
         StepLog: Record "Playbook Step Log ori";
+        Instance: Record "Playbook Instance ori";
+        Step: Record "Playbook Step ori";
     begin
         StepLog.Init();
+        Instance.SetLoadFields("Playbook Code");
+        Step.SetLoadFields("Step Kind");
+        if Instance.Get(InstanceId) then
+            if Step.Get(Instance."Playbook Code", StepNo) then
+                StepLog."Step Kind" := Step."Step Kind";
         StepLog."Instance ID" := InstanceId;
         StepLog."Step No." := StepNo;
         StepLog."Iteration No." := IterationNo;

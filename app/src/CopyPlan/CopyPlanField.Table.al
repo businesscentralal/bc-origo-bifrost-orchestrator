@@ -50,6 +50,21 @@ table 10035578 "Copy Plan Field ori"
             Caption = 'Skip', Comment = 'is-IS=Sleppa';
             ToolTip = 'Specifies that this mapping is excluded from the generated playbook.', Comment = 'is-IS=Tilgreinir að þessari vörpun sé sleppt úr mynduðu keðjunni.';
         }
+        field(6; Operation; Enum "Transform Operation ori")
+        {
+            Caption = 'Operation', Comment = 'is-IS=Aðgerð';
+            ToolTip = 'Specifies the field transformation applied before writing the destination.', Comment = 'is-IS=Tilgreinir umbreytingu reitsins áður en skrifað er í marktöfluna.';
+        }
+        field(7; "Argument 1"; Text[250])
+        {
+            Caption = 'Argument 1', Comment = 'is-IS=Viðfang 1';
+            ToolTip = 'Specifies the constant value or text to replace.', Comment = 'is-IS=Tilgreinir fastagildið eða textann sem á að skipta út.';
+        }
+        field(8; "Argument 2"; Text[250])
+        {
+            Caption = 'Argument 2', Comment = 'is-IS=Viðfang 2';
+            ToolTip = 'Specifies the replacement text.', Comment = 'is-IS=Tilgreinir nýja textann.';
+        }
     }
     keys
     {

@@ -48,6 +48,13 @@ page 10035548 "Playbook Card ori"
                 SubPageLink = "Playbook Code" = field("Playbook Code"), "Step No." = field("Step No.");
                 Caption = 'Step Conditions', Comment = 'is-IS=Skilyrði skrefa';
             }
+            part(Transforms; "Playbook Transforms ori")
+            {
+                ApplicationArea = All;
+                Provider = Steps;
+                SubPageLink = "Playbook Code" = field("Playbook Code"), "Step No." = field("Step No.");
+                Caption = 'Transform Fields', Comment = 'is-IS=Umbreyting reita';
+            }
             group(Schedule)
             {
                 Caption = 'Schedule', Comment = 'is-IS=Tímaáætlun';

@@ -41,10 +41,8 @@ codeunit 10035622 "Copy Plan Generator ori"
         Step.SetRange("Playbook Code", PlaybookCode);
         Step.DeleteAll(true);
         StepNo := 10;
-        foreach CurrentCode in OrderedPlans do begin
+        foreach CurrentCode in OrderedPlans do
             AddPlanSteps(CurrentCode, PlaybookCode, StepNo);
-            StepNo += 20;
-        end;
         // The final Set terminates the graph; all earlier pairs lead to the next parent/child pair.
         Step.Get(PlaybookCode, StepNo - 10);
         Step."Next Step No. (Success)" := 0;
@@ -105,7 +103,7 @@ codeunit 10035622 "Copy Plan Generator ori"
         Source.Close();
         Mapping.SetRange("Plan Code", PlanCode);
         Mapping.SetRange(Skip, false);
-        Mapping.SetLoadFields("Plan Code", Skip, "Source Field No.", "Destination Field No.");
+        Mapping.SetLoadFields("Plan Code", "Line No.", Skip, "Source Field No.", "Destination Field No.", Operation, "Argument 1", "Argument 2");
         Mapping.ReadIsolation := IsolationLevel::ReadCommitted;
         if not Mapping.FindSet() then
             Error(ErrorInfo.Create(StrSubstNo(NoFieldsErr, PlanCode)));
@@ -124,7 +122,7 @@ codeunit 10035622 "Copy Plan Generator ori"
         Destination.Close();
     end;
 
-    local procedure AddPlanSteps(PlanCode: Code[20]; PlaybookCode: Code[20]; StepNo: Integer)
+    local procedure AddPlanSteps(PlanCode: Code[20]; PlaybookCode: Code[20]; var StepNo: Integer)
     var
         Plan: Record "Copy Plan ori";
         Mapping: Record "Copy Plan Field ori";
@@ -141,13 +139,19 @@ codeunit 10035622 "Copy Plan Generator ori"
         RequestText: Text;
         SourcePath: Text;
         TargetName: Text;
+        SetStepNo: Integer;
+        HasTransform: Boolean;
     begin
         Plan.Get(PlanCode);
+        HasTransform := HasOperations(PlanCode);
+        SetStepNo := StepNo + 10;
+        if HasTransform then
+            SetStepNo += 10;
         Source.Open(Plan."Source Table No.");
         Destination.Open(Plan."Destination Table No.");
         Mapping.SetRange("Plan Code", PlanCode);
         Mapping.SetRange(Skip, false);
-        Mapping.SetLoadFields("Plan Code", Skip, "Source Field No.", "Destination Field No.");
+        Mapping.SetLoadFields("Plan Code", "Line No.", Skip, "Source Field No.", "Destination Field No.", Operation, "Argument 1", "Argument 2");
         Mapping.ReadIsolation := IsolationLevel::ReadCommitted;
         if Mapping.FindSet() then
             repeat
@@ -161,6 +165,8 @@ codeunit 10035622 "Copy Plan Generator ori"
                     SourcePath := '@_current.fields.';
                 SourcePath += JsonFieldName(Source.Field(Mapping."Source Field No.").Name);
                 TargetName := JsonFieldName(Destination.Field(Mapping."Destination Field No.").Name);
+                if HasTransform then
+                    AddTransformMapping(PlaybookCode, StepNo + 10, Mapping, CopyStr(SourcePath, 11), TargetName, IsKeyField(Destination, Mapping."Destination Field No."));
                 if IsKeyField(Destination, Mapping."Destination Field No.") then
                     PrimaryKey.Add(TargetName, SourcePath)
                 else
@@ -180,14 +186,19 @@ codeunit 10035622 "Copy Plan Generator ori"
         Step."Message Type" := "Message Type ori"::"Data.Records.Get";
         Step.Paged := true;
         Step."Page Size" := Plan."Page Size";
-        Step."Page Through Step No." := StepNo + 10;
+        Step."Page Through Step No." := SetStepNo;
         Step."Next Step No. (Success)" := StepNo + 10;
         Step.SetRequestTemplate(RequestText);
         Step.Insert(true);
         AddSuccessCondition(PlaybookCode, StepNo, 'noOfRecords', "Playbook Cond. Operator ori"::GreaterOrEqual, '0');
         Clear(Request);
-        Row.Add('primaryKey', PrimaryKey);
-        Row.Add('fields', Fields);
+        if HasTransform then begin
+            Row.Add('primaryKey', '@_current.primaryKey');
+            Row.Add('fields', '@_current.fields');
+        end else begin
+            Row.Add('primaryKey', PrimaryKey);
+            Row.Add('fields', Fields);
+        end;
         Rows.Add(Row);
         Request.Add('tableName', Destination.Name);
         Request.Add('data', Rows);
@@ -195,18 +206,68 @@ codeunit 10035622 "Copy Plan Generator ori"
         Clear(Step);
         Step.Init();
         Step."Playbook Code" := PlaybookCode;
-        Step."Step No." := StepNo + 10;
+        Step."Step No." := SetStepNo;
         Step.Description := Plan.Description;
         Step."Message Type" := "Message Type ori"::"Data.Records.Set";
         Step."Iterate Source Step No." := StepNo;
+        if HasTransform then
+            Step."Iterate Source Step No." += 10;
         Step."Iterate Array Path" := 'result';
         Step."Stop On Item Error" := true;
-        Step."Next Step No. (Success)" := StepNo + 20;
+        Step."Next Step No. (Success)" := SetStepNo + 10;
         Step.SetRequestTemplate(RequestText);
         Step.Insert(true);
-        AddSuccessCondition(PlaybookCode, StepNo + 10, 'status', "Playbook Cond. Operator ori"::Equals, 'Success');
+        AddSuccessCondition(PlaybookCode, SetStepNo, 'status', "Playbook Cond. Operator ori"::Equals, 'Success');
+        if HasTransform then
+            AddTransformStep(PlaybookCode, StepNo, SetStepNo);
+        StepNo := SetStepNo + 10;
         Source.Close();
         Destination.Close();
+    end;
+
+    local procedure HasOperations(PlanCode: Code[20]): Boolean
+    var
+        Mapping: Record "Copy Plan Field ori";
+    begin
+        Mapping.SetRange("Plan Code", PlanCode);
+        Mapping.SetRange(Skip, false);
+        Mapping.SetFilter(Operation, '<>%1', Mapping.Operation::Copy);
+        exit(not Mapping.IsEmpty());
+    end;
+
+    local procedure AddTransformStep(PlaybookCode: Code[20]; SourceStepNo: Integer; SetStepNo: Integer)
+    var
+        Step: Record "Playbook Step ori";
+    begin
+        Step.Init();
+        Step."Playbook Code" := PlaybookCode;
+        Step."Step No." := SourceStepNo + 10;
+        Step."Step Kind" := Step."Step Kind"::Transform;
+        Step.Description := TransformDescriptionLbl;
+        Step."Iterate Source Step No." := SourceStepNo;
+        Step."Iterate Array Path" := 'result';
+        Step."Stop On Item Error" := true;
+        Step."Next Step No. (Success)" := SetStepNo;
+        Step.Insert(true);
+    end;
+
+    local procedure AddTransformMapping(PlaybookCode: Code[20]; StepNo: Integer; Mapping: Record "Copy Plan Field ori"; SourcePath: Text; TargetName: Text; IsPrimaryKey: Boolean)
+    var
+        Transform: Record "Playbook Transform ori";
+    begin
+        Transform.Init();
+        Transform."Playbook Code" := PlaybookCode;
+        Transform."Step No." := StepNo;
+        Transform."Line No." := Mapping."Line No.";
+        if IsPrimaryKey then
+            Transform."Target Path" := CopyStr('primaryKey.' + TargetName, 1, MaxStrLen(Transform."Target Path"))
+        else
+            Transform."Target Path" := CopyStr('fields.' + TargetName, 1, MaxStrLen(Transform."Target Path"));
+        Transform."Source Path" := CopyStr(SourcePath, 1, MaxStrLen(Transform."Source Path"));
+        Transform.Operation := Mapping.Operation;
+        Transform."Argument 1" := Mapping."Argument 1";
+        Transform."Argument 2" := Mapping."Argument 2";
+        Transform.Insert(true);
     end;
 
     local procedure IsKeyField(TableRef: RecordRef; FieldNo: Integer): Boolean
@@ -245,6 +306,7 @@ codeunit 10035622 "Copy Plan Generator ori"
     end;
 
     var
+        TransformDescriptionLbl: Label 'Transform copy fields', Comment = 'is-IS=Umbreyta afritunarreitum';
         PlaybookExistsErr: Label 'Playbook %1 already exists. Choose a different plan code; generation never takes over an unrelated playbook.', Comment = '%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.';
         CycleErr: Label 'Copy plan %1 occurs twice in the parent hierarchy.', Comment = '%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.';
         NoFieldsErr: Label 'Copy plan %1 needs at least one active field mapping.', Comment = '%1 = plan code, is-IS=Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.';

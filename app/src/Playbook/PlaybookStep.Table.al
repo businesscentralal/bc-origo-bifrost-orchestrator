@@ -94,6 +94,12 @@ table 10035540 "Playbook Step ori"
         {
             Caption = 'Exclude From Run Status', Comment = 'is-IS=Undanskilja frá stöðu keyrslu';
         }
+        field(120; "Step Kind"; Enum "Playbook Step Kind ori")
+        {
+            Caption = 'Step Kind', Comment = 'is-IS=Tegund skrefs';
+            AllowInCustomizations = Never;
+            ToolTip = 'Specifies whether the step dispatches a message or transforms JSON locally.', Comment = 'is-IS=Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum.';
+        }
     }
 
     keys
@@ -107,7 +113,11 @@ table 10035540 "Playbook Step ori"
     trigger OnDelete()
     var
         Condition: Record "Playbook Condition ori";
+        Transform: Record "Playbook Transform ori";
     begin
+        Transform.SetRange("Playbook Code", "Playbook Code");
+        Transform.SetRange("Step No.", "Step No.");
+        Transform.DeleteAll(true);
         Condition.SetRange("Playbook Code", "Playbook Code");
         Condition.SetRange("Step No.", "Step No.");
         Condition.DeleteAll(true);

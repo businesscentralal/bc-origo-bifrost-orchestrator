@@ -682,3 +682,39 @@ Generate from the root: each parent runs before its children, and siblings follo
 Each plan keeps its own source view and mappings; parent/child ordering does not infer foreign keys.
 Foundation permissions, table restrictions and write-once rules still apply at execution, with
 refusals visible in the execution log. Copy plans add no base-table permissions.
+
+
+### Transform copy fields
+
+Choose an operation on a Copy Plan field: **Copy** preserves its JSON value, **Constant** uses
+Argument 1 as literal text, **Negate** swaps an amount's sign, and **Replace Text** replaces
+Argument 1 with Argument 2 (case-sensitive). Negate uses a dot as the decimal separator in text,
+regardless of the session language, and leaves nonnumeric text unchanged.
+
+When a mapping uses an operation other than Copy, generation inserts a local Transform step
+between the paged Get and Set. All mappings in the plan produce the destination `primaryKey`
+and `fields` envelope. The Set step consumes the transformed array. Each page finishes its
+Transform and Set before the next page is read. Foundation remains responsible for all destination
+validation, permissions and write restrictions.
+
+### Author a Transform step
+
+Set **Step Kind** to **Transform**, leave **Message Type** empty, and enter rows in **Transform
+Fields**. Target Path is a dot-separated property path in a new output object; targets must not
+overlap. Source Path reads the input object (for example `fields.Amount`) or an existing `@workspace`
+reference. Constant needs no source. Single steps use the resolved request template as input;
+forEach steps use the current row from **Iterate Source Step No.** and **Iterate Array Path**.
+
+Transform steps perform no message dispatch and no business-record writes. A successful forEach
+Transform produces a `result` array for later forEach steps and stores it at `<stepNo>.result` in
+the workspace. Step logs identify the kind and retain each output row. Missing source paths,
+invalid targets, overlapping mappings and unsupported operations fail visibly. **Stop On Item
+Error** stops at the first failed item. Existing message steps retain kind Message (ordinal zero).
+
+**Verify** checks Transform definitions before Run or Schedule. `Orchestrator.Workspace.Preview`
+continues to preview the seeded workspace only: it does not execute either kind of step. Inspect
+Transform execution in the run response and the step log. No message type or public request
+parameter has been added.
+
+JSON file export/import and the Table Data editor are separate phases of issue #155; they require
+a released Foundation version containing public `Serializer ori` and are not included in this phase.

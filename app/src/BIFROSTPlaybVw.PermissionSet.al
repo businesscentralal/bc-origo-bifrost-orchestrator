@@ -35,6 +35,8 @@ permissionset 10035539 "BIFROST PlaybVw ori"
     Assignable = true;
 
     Permissions =
+        tabledata "Playbook Transform ori" = R,
+        page "Playbook Transforms ori" = X,
         page "Copy Plans ori" = X,
         page "Copy Plan Card ori" = X,
         page "Copy Plan Fields ori" = X,

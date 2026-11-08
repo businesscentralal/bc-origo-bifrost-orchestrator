@@ -30,6 +30,11 @@ page 10035552 "Playbook Step Logs Sub. ori"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the foreach iteration number (0 for single-call steps).', Comment = 'is-IS=Tilgreinir ítrunarnúmer (0 fyrir einfalt kall).';
                 }
+                field("Step Kind"; Rec."Step Kind")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Shows whether this log records a message or a local transform.', Comment = 'is-IS=Sýnir hvort færslan skráir skilaboð eða staðbundna umbreytingu.';
+                }
                 field("Message Type"; Rec."Message Type")
                 {
                     ApplicationArea = All;

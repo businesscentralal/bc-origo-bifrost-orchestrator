@@ -13,6 +13,10 @@ permissionset 10035535 "BIFROST Orchestr ori"
     Caption = 'Bifrost Orchestrator', MaxLength = 30, Comment = 'is-IS=Bifröst stjórnandi';
 
     Permissions =
+        tabledata "Playbook Transform ori" = RIMD,
+        page "Playbook Transforms ori" = X,
+        codeunit "Playbook Transform Exec ori" = X,
+        codeunit "Playbook Transform Verify ori" = X,
         page "Copy Plans ori" = X,
         page "Copy Plan Card ori" = X,
         page "Copy Plan Fields ori" = X,

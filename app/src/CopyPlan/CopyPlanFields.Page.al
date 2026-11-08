@@ -34,6 +34,9 @@ page 10035608 "Copy Plan Fields ori"
                         exit(LookupField(false));
                     end;
                 }
+                field(Operation; Rec.Operation) { ApplicationArea = All; }
+                field("Argument 1"; Rec."Argument 1") { ApplicationArea = All; }
+                field("Argument 2"; Rec."Argument 2") { ApplicationArea = All; }
                 field("Skip"; Rec."Skip")
                 {
                     ApplicationArea = All;

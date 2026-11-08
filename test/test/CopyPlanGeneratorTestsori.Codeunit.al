@@ -40,10 +40,26 @@ codeunit 96465 "Copy Plan Generator Tests ori"
     /// <summary>AC33 CopyTwicePreservesKeysAndValues.</summary>
     [Test]
     procedure AC33_CopyTwicePreservesKeysAndValues()
+    begin
+        // Story #155, AC3.3 | Time: independent of Today/WorkDate | Risk: Foundation change-log guards
+        RunCopyTwice(false);
+    end;
+
+    /// <summary>Runs a generated paged Get/Transform/Set playbook twice, preserving keys and transformed values.</summary>
+    [Test]
+    procedure Scenario_AC45_TransformedCopyRunsTwice()
+    begin
+        // Story #155, AC4.5 | Time: independent of Today/WorkDate | Risk: Foundation change-log guards
+        RunCopyTwice(true);
+    end;
+
+    local procedure RunCopyTwice(TransformAmount: Boolean)
     var
         Plan: Record "Copy Plan ori";
         Parent: Record "Test Copy Parent ori";
         Child: Record "Test Copy Child ori";
+        Mapping: Record "Copy Plan Field ori";
+        Instance: Record "Playbook Instance ori";
         ChangeLogSetup: Record "Change Log Setup";
         ChangeLogTable: Record "Change Log Setup (Table)";
         Runner: Codeunit "Playbook Runner ori";
@@ -55,6 +71,11 @@ codeunit 96465 "Copy Plan Generator Tests ori"
     begin
         // Assumption: the generated playbook uses the production dispatcher, with no test licensing or guard bypass.
         CreatePlan(Plan);
+        if TransformAmount then begin
+            Mapping.Get(Plan.Code, 30000);
+            Mapping.Operation := Mapping.Operation::Negate;
+            Mapping.Modify(true);
+        end;
         // The happy path has real change-log coverage for this owned scratch table.
         ChangeLogSetup.Get();
         WasActivated := ChangeLogSetup."Change Log Activated";
@@ -78,7 +99,12 @@ codeunit 96465 "Copy Plan Generator Tests ori"
             Runner.Run(Plan.Code, InitialRequest, Response, InstanceId);
             Assert.IsTrue(Child.Get(Plan.Code), Format(Response));
             Assert.AreEqual(Parent.Description, Child.Description, 'Mapped description');
-            Assert.AreEqual(Parent.Amount, Child.Amount, 'Mapped decimal');
+            if TransformAmount then
+                Assert.AreEqual(-Parent.Amount, Child.Amount, 'Transformed decimal')
+            else
+                Assert.AreEqual(Parent.Amount, Child.Amount, 'Mapped decimal');
+            Instance.Get(InstanceId);
+            Assert.AreEqual(Instance.Status::Completed, Instance.Status, 'The full copy run succeeds');
             Child.SetRange(Code, Plan.Code);
             Assert.AreEqual(1, Child.Count(), 'Regenerated key updates the same destination row');
             // Separate public Run invocations have separate transactions. Commit the first run before its repeat.
