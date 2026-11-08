@@ -65,6 +65,25 @@ codeunit 10035622 "Copy Plan Generator ori"
             Error(ErrorInfo.Create(SystemFieldErr));
     end;
 
+    local procedure ApplySourceView(Plan: Record "Copy Plan ori"; var Source: RecordRef)
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Request: JsonObject;
+        Response: JsonObject;
+        ErrorToken: JsonToken;
+    begin
+        if Plan."Source View" = '' then
+            exit;
+        TempArgument.Insert();
+        Request.Add('tableView', Plan."Source View");
+        if not TempArgument.ApplyTableView(Request, Source) then begin
+            Response := TempArgument.GetResponseJson();
+            if Response.Get('error', ErrorToken) then
+                Error(ErrorInfo.Create(ErrorToken.AsValue().AsText()));
+            Error(ErrorInfo.Create(SourceViewErr));
+        end;
+    end;
+
     local procedure CollectPlans(PlanCode: Code[20]; var OrderedPlans: List of [Code[20]])
     var
         Child: Record "Copy Plan ori";
@@ -98,8 +117,7 @@ codeunit 10035622 "Copy Plan Generator ori"
         if (Plan."Page Size" < 1) or (Plan."Page Size" > 500) then
             Error(ErrorInfo.Create(PageSizeErr));
         Source.Open(Plan."Source Table No.");
-        if Plan."Source View" <> '' then
-            Source.SetView(Plan."Source View");
+        ApplySourceView(Plan, Source);
         Source.Close();
         Mapping.SetRange("Plan Code", PlanCode);
         Mapping.SetRange(Skip, false);
@@ -173,9 +191,8 @@ codeunit 10035622 "Copy Plan Generator ori"
                     Fields.Add(TargetName, SourcePath);
             until Mapping.Next() = 0;
         Request.Add('tableName', Source.Name);
-        // SetView accepts field numbers, while the public Data.Records contract requires names.
-        if Plan."Source View" <> '' then
-            Source.SetView(Plan."Source View");
+        // Use the same validated field-name view that the public Data.Records contract accepts.
+        ApplySourceView(Plan, Source);
         Request.Add('tableView', Source.GetView(true));
         Request.Add('fieldNumbers', FieldNumbers);
         Request.WriteTo(RequestText);
@@ -306,6 +323,7 @@ codeunit 10035622 "Copy Plan Generator ori"
     end;
 
     var
+        SourceViewErr: Label 'The source table view is invalid. Use existing field names and permitted filters.', Comment = 'is-IS=Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.';
         TransformDescriptionLbl: Label 'Transform copy fields', Comment = 'is-IS=Umbreyta afritunarreitum';
         PlaybookExistsErr: Label 'Playbook %1 already exists. Choose a different plan code; generation never takes over an unrelated playbook.', Comment = '%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.';
         CycleErr: Label 'Copy plan %1 occurs twice in the parent hierarchy.', Comment = '%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.';

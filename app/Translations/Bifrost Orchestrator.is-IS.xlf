@@ -1275,6 +1275,12 @@
           <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PlaybookExistsErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 2217099951" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The source table view is invalid. Use existing field names and permitted filters.</source>
+          <target>Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SourceViewErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2797933787 - NamedType 3176109846" size-unit="char" translate="yes" xml:space="preserve">
           <source>System fields cannot be mapped by a copy plan.</source>
           <target>Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</target>

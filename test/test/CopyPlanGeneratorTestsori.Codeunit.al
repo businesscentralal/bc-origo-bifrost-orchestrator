@@ -145,7 +145,7 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         end;
         Parent.SetFilter(Code, '%1', Prefix + '*');
         Plan."Page Size" := 2;
-        Plan."Source View" := CopyStr(Parent.GetView(false), 1, MaxStrLen(Plan."Source View"));
+        Plan."Source View" := CopyStr(Parent.GetView(true), 1, MaxStrLen(Plan."Source View"));
         Plan.Modify(true);
         Generator.Generate(Plan.Code);
         Commit();
@@ -361,7 +361,7 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         Child.Description := 'Must not be copied';
         Child.Insert(true);
         Child.SetRange(Code, Plan.Code);
-        Plan."Source View" := CopyStr(Child.GetView(false), 1, MaxStrLen(Plan."Source View"));
+        Plan."Source View" := CopyStr(Child.GetView(true), 1, MaxStrLen(Plan."Source View"));
         Plan.Modify(true);
         Generator.Generate(Plan.Code);
         Commit();
@@ -408,7 +408,7 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         Child.Amount := 9;
         Child.Insert(true);
         Parent.SetRange(Code, Plan.Code);
-        Plan."Source View" := CopyStr(Parent.GetView(false), 1, MaxStrLen(Plan."Source View"));
+        Plan."Source View" := CopyStr(Parent.GetView(true), 1, MaxStrLen(Plan."Source View"));
         Plan.Modify(true);
         ChangeLogSetup.Get();
         WasActivated := ChangeLogSetup."Change Log Activated";
@@ -440,6 +440,27 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         ChangeLogSetup.Modify(true);
         Cleanup(Plan.Code);
         Commit();
+    end;
+
+    /// <summary>A misspelled source-view field must fail before regeneration can replace the owned definition.</summary>
+    [Test]
+    procedure Scenario_AC31_InvalidSourceViewFailsClosed()
+    var
+        Plan: Record "Copy Plan ori";
+        Step: Record "Playbook Step ori";
+    begin
+        // Story #155, AC3.1 | Time: independent of Today/WorkDate | Risk: Refused view must not widen the copy
+        CreatePlan(Plan);
+        Generator.Generate(Plan.Code);
+        Plan.Get(Plan.Code);
+        Plan."Source View" := 'WHERE(DoesNotExist=CONST(value))';
+        Plan.Modify(true);
+        Commit();
+        asserterror Generator.Generate(Plan.Code);
+        Assert.ExpectedError('DoesNotExist');
+        Step.SetRange("Playbook Code", Plan.Code);
+        Assert.AreEqual(2, Step.Count(), 'Previous generated steps survive a refused view');
+        Cleanup(Plan.Code);
     end;
 
     local procedure CreatePlan(var Plan: Record "Copy Plan ori")

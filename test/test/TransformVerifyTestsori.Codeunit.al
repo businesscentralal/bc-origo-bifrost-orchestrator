@@ -98,6 +98,7 @@ codeunit 96469 "Transform Verify Tests ori"
         Transform.SetRange("Playbook Code", Plan.Code);
         Assert.AreEqual(3, Transform.Count(), 'Regeneration replaces mappings without duplicates');
         Lib.Cleanup(Plan.Code);
+        Plan.Get(Plan.Code);
         Plan.Delete(true);
     end;
 
@@ -127,6 +128,7 @@ codeunit 96469 "Transform Verify Tests ori"
         Card.Transforms."Target Path".SetValue('result');
         Card.Transforms.Operation.SetValue("Transform Operation ori"::Constant);
         Card.Transforms."Argument 1".SetValue('literal value');
+        Card.Transforms.Next();
         Card.Close();
         Step.Get(PlaybookCode, 10);
         Assert.AreEqual(Step."Step Kind"::Transform, Step."Step Kind", 'Kind saved from user surface');
