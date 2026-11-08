@@ -379,6 +379,69 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         Commit();
     end;
 
+    /// <summary>Foundation write-once refusals survive the generated Set step and preserve the destination value.</summary>
+    [Test]
+    procedure Scenario_AC35_WriteOnceFieldFailsVisibly()
+    var
+        Plan: Record "Copy Plan ori";
+        Parent: Record "Test Copy Parent ori";
+        Child: Record "Test Copy Child ori";
+        Instance: Record "Playbook Instance ori";
+        StepLog: Record "Playbook Step Log ori";
+        ChangeLogSetup: Record "Change Log Setup";
+        Coverage: Record "Change Log Setup (Table)";
+        Runner: Codeunit "Playbook Runner ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        InitialRequest: BigText;
+        Response: BigText;
+        InstanceId: Guid;
+        WasActivated: Boolean;
+    begin
+        // Story #155, AC3.5 | Time: independent of Today/WorkDate | Risk: Subscriber adds a restriction only to the owned scratch field
+        CreatePlan(Plan);
+        Parent.Code := Plan.Code;
+        Parent.Description := 'New copied value';
+        Parent.Amount := 123.45;
+        Parent.Insert(true);
+        Child.Code := Plan.Code;
+        Child.Description := 'Original value';
+        Child.Amount := 9;
+        Child.Insert(true);
+        Parent.SetRange(Code, Plan.Code);
+        Plan."Source View" := CopyStr(Parent.GetView(false), 1, MaxStrLen(Plan."Source View"));
+        Plan.Modify(true);
+        ChangeLogSetup.Get();
+        WasActivated := ChangeLogSetup."Change Log Activated";
+        ChangeLogSetup."Change Log Activated" := true;
+        ChangeLogSetup.Modify(true);
+        Coverage."Table No." := Database::"Test Copy Child ori";
+        Coverage."Log Modification" := Coverage."Log Modification"::"All Fields";
+        Coverage.Insert(true);
+        Generator.Generate(Plan.Code);
+        Commit();
+        LibraryOrchestrator.SetCopyAmountWriteOnce(true);
+        BindSubscription(LibraryOrchestrator);
+        Runner.Run(Plan.Code, InitialRequest, Response, InstanceId);
+        UnbindSubscription(LibraryOrchestrator);
+        Instance.Get(InstanceId);
+        Assert.AreEqual(Instance.Status::Failed, Instance.Status, 'Write-once refusal fails the run');
+        Child.Get(Plan.Code);
+        Assert.AreEqual(9, Child.Amount, 'Destination amount remains unchanged');
+        Assert.AreEqual('Original value', Child.Description, 'The refused row is not partially modified');
+        StepLog.SetRange("Instance ID", InstanceId);
+        StepLog.SetRange("Step No.", 20);
+        StepLog.SetRange(Status, StepLog.Status::Failed);
+        Assert.IsTrue(StepLog.FindFirst(), 'The actual refusal is logged');
+        Assert.IsTrue(StepLog.GetResponseReceived().Contains('PermissionDenied'), 'Foundation error code retained');
+        Child.Delete(true);
+        Parent.Delete(true);
+        Coverage.Delete(true);
+        ChangeLogSetup."Change Log Activated" := WasActivated;
+        ChangeLogSetup.Modify(true);
+        Cleanup(Plan.Code);
+        Commit();
+    end;
+
     local procedure CreatePlan(var Plan: Record "Copy Plan ori")
     var
         Mapping: Record "Copy Plan Field ori";

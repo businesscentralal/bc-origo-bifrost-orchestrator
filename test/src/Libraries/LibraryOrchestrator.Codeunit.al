@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
 using Microsoft.Foundation.BatchProcessing;
+using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Threading;
 
@@ -16,12 +17,27 @@ codeunit 96413 "Library Orchestrator"
     begin
     end;
 
+    /// <summary>Declares only the owned copy fixture amount write-once while this manual subscriber is bound.</summary>
+    /// <param name="Enabled">Whether to enable the restrictive fixture rule.</param>
+    procedure SetCopyAmountWriteOnce(Enabled: Boolean)
+    begin
+        CopyAmountWriteOnce := Enabled;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnAfterIsFieldWriteOnceForDataRecords', '', false, false)]
+    local procedure RestrictCopyAmount(TableNo: Integer; FieldNo: Integer; Force: Boolean; var IsWriteOnce: Boolean)
+    begin
+        if CopyAmountWriteOnce and (TableNo = Database::"Test Copy Child ori") and (FieldNo = 3) then
+            IsWriteOnce := true;
+    end;
+
     var
         TempJobQueueEntry: Record "Job Queue Entry" temporary;
         DoNotHandleCodeunitJobQueueEnqueueEvent: Boolean;
         DoNotHandleTableJobQueueEntryEvent: Boolean;
         DoNotHandleSendNotificationEvent: Boolean;
         TrackingJobQueueEntryID: Guid;
+        CopyAmountWriteOnce: Boolean;
         MultipleTrackJobQueueEntryErr: Label 'Can''t track multiple job queue entries';
         DoNotSkipProcessBatchInBackground: Boolean;
 
