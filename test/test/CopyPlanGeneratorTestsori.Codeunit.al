@@ -4,6 +4,7 @@ using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.TestLibraries.Utilities;
 using System.Diagnostics;
+using System.Threading;
 
 /// <summary>Copy-plan acceptance: real generated steps, metadata failures, replacement isolation and repeatable execution.</summary>
 codeunit 96465 "Copy Plan Generator Tests ori"
@@ -51,6 +52,53 @@ codeunit 96465 "Copy Plan Generator Tests ori"
     begin
         // Story #155, AC4.5 | Time: independent of Today/WorkDate | Risk: Foundation change-log guards
         RunCopyTwice(true);
+    end;
+
+    /// <summary>A generated Transform copy remains compatible with the existing enqueue and scheduling entry points.</summary>
+    [Test]
+    procedure Scenario_AC33_GeneratedCopyEnqueuesAndSchedules()
+    var
+        Plan: Record "Copy Plan ori";
+        Mapping: Record "Copy Plan Field ori";
+        Playbook: Record "Playbook ori";
+        Job: Record "Job Queue Entry";
+        Parameter: Record "JQ Parameter ori";
+        Entry: Record "Scheduled Entry ori";
+        RecurringTemplate: Record "Recurring Template ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        JobId: Guid;
+        EntryId: Guid;
+        EntrySystemId: Guid;
+    begin
+        // Story #155, AC3.3 | Time: independent of Today/WorkDate | Risk: Existing test subscriber prevents asynchronous pickup only
+        CreatePlan(Plan);
+        Mapping.Get(Plan.Code, 30000);
+        Mapping.Operation := Mapping.Operation::Negate;
+        Mapping.Modify(true);
+        Generator.Generate(Plan.Code);
+        Playbook.Get(Plan.Code);
+        LibraryOrchestrator.SetDoNotHandleCodeunitJobQueueEnqueueEvent(true);
+        BindSubscription(LibraryOrchestrator);
+        JobId := Playbook.EnqueuePlaybook('{"owned":"copy-plan"}');
+        UnbindSubscription(LibraryOrchestrator);
+        Job.Get(JobId);
+        Assert.AreEqual(Codeunit::"Playbook JQ Dispatcher ori", Job."Object ID to Run", 'Existing dispatcher executes generated copy');
+        Parameter.Get(JobId);
+        Assert.AreEqual('{"owned":"copy-plan"}', Parameter.GetRequestData(), 'Enqueued initial request retained');
+        Job.Delete(true);
+        if Parameter.Get(JobId) then
+            Parameter.Delete(true);
+        RecurringTemplate.Code := Plan.Code;
+        RecurringTemplate."Run on Mondays" := true;
+        RecurringTemplate."No. of Minutes between Runs" := 60;
+        RecurringTemplate.Insert(true);
+        EntrySystemId := Playbook.CreateOrchestratorEntry(RecurringTemplate.Code, "Notif. Type ori"::None, '', '', false, "Retry Policy ori"::Always, EntryId);
+        Entry.Get(EntryId);
+        Assert.AreEqual(EntrySystemId, Entry.SystemId, 'Schedule returns the actual entry');
+        Assert.AreEqual(Codeunit::"Playbook JQ Dispatcher ori", Entry."Object ID to Run", 'Schedule uses existing dispatcher');
+        Entry.Delete(true);
+        RecurringTemplate.Delete(true);
+        Cleanup(Plan.Code);
     end;
 
     local procedure RunCopyTwice(TransformAmount: Boolean)

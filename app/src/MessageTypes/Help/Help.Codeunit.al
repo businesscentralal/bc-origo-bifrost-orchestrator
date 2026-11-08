@@ -196,9 +196,28 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildPlaybookWorkflowGuide(O);
         BuildDataRecordsGuide(O);
+        BuildCopyPlanGuide(O);
         BuildSchedulingGuide(O);
         BuildLLMPatternsGuide(O);
         BuildAgentRules(O);
+    end;
+
+    local procedure BuildCopyPlanGuide(var O: TextBuilder)
+    begin
+        O.AppendLine('## Copy Plans and local Transform steps');
+        O.AppendLine('');
+        O.AppendLine('Open **Copy Plans**, create a plan, choose source and destination tables, and use field lookups to add mappings. Map every destination primary-key field explicitly. Source SystemId is never copied. Set a source table view to limit the rows and Page Size (1–500) to bound each read.');
+        O.AppendLine('Use **Generate Playbook** to create the plan code as a playbook. Regeneration replaces only the playbook recorded in Generated Playbook Code, including its generated steps and mappings. Open that playbook, Verify it, then Run, Enqueue or Schedule through the existing entry points. Parent plans run before their children; siblings use Sequence No.');
+        O.AppendLine('A Copy mapping keeps the JSON value. Constant uses Argument 1 as literal text; it does not expand @ references. Negate reverses a decimal sign using invariant decimal text and leaves non-numeric text unchanged. Replace Text replaces every case-sensitive literal Argument 1 with Argument 2; the search text must not be empty.');
+        O.AppendLine('A plan with an operation generates Get → Transform → Set. All three run for one page before the next page is fetched. The Transform builds a fresh destination row with primaryKey and fields. Data.Records.Set still applies Foundation permissions, field restrictions, validation and change-log write guards.');
+        O.AppendLine('');
+        O.AppendLine('### Authoring a Transform');
+        O.AppendLine('On a playbook step choose Step Kind = Transform and leave Message Type empty. In Transform Mappings, add Target Path, Source Path, Operation and arguments. Target paths are dotted object properties, not array selectors or workspace writes. Duplicate or overlapping targets are errors.');
+        O.AppendLine('For a single step the request template is the input object. For a forEach step the current source row is the input. Source paths are relative to that input (for example fields.Amount), or explicitly reference the workspace (for example @_initial.amount). Constant needs no source path.');
+        O.AppendLine('A Transform dispatches no message and writes no business record. Its output is available to subsequent steps. A forEach Transform publishes its output rows under result and <stepNo>.result. Choose the Transform as the Iterate Source Step and result as the Iterate Array Path of a later forEach step.');
+        O.AppendLine('Verify reports missing or overlapping targets, unknown source paths, unsupported operations, empty text searches, and an assigned Message Type. Transform itself cannot fetch pages; use a preceding paged reader. Step logs show Step Kind = Transform and the mapped response or failure.');
+        O.AppendLine('Orchestrator.Workspace.Preview remains a seeded-workspace preview: it returns _sys, _who and optional _initial without executing saved Message or Transform steps. Run the playbook to inspect transformed output. No new message type or request parameter is required.');
+        O.AppendLine('');
     end;
 
     local procedure BuildSafeAuthoringGuide(var O: TextBuilder)

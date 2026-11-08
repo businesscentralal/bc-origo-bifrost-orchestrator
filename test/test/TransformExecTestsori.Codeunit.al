@@ -1,5 +1,6 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
+using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.TestLibraries.Utilities;
 
@@ -160,6 +161,39 @@ codeunit 96468 "Transform Exec Tests ori"
         StepLog.SetRange("Step Kind", StepLog."Step Kind"::Transform);
         Assert.AreEqual(3, StepLog.Count(), 'Every log identifies Transform');
         Lib.Cleanup(FirstStep."Playbook Code");
+        Commit();
+    end;
+
+    /// <summary>Preview retains its seeded-only contract even when local Transform definitions exist.</summary>
+    [Test]
+    procedure Scenario_AC44_PreviewDoesNotRunTransformDefinitions()
+    var
+        Step: Record "Playbook Step ori";
+        Instance: Record "Playbook Instance ori";
+        TempArgument: Record "Message Argument ori" temporary;
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
+        Request: JsonObject;
+        Response: JsonObject;
+        Initial: JsonObject;
+        Token: JsonToken;
+    begin
+        // Story #155, AC4.4 | Time: independent of Today/WorkDate | Risk: Preview seeds WhoAmI through its established dispatch
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'amount', 'amount', "Transform Operation ori"::Negate);
+        Initial.Add('amount', 12.5);
+        Request.Add('initialRequest', Initial);
+        TempArgument.Insert();
+        TempArgument.SetRequestJson(Request);
+        Commit();
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Workspace.Preview", TempArgument);
+        Response := TempArgument.GetResponseJson();
+        Assert.IsTrue(Response.Get('_initial', Token), 'Preview preserves initial input');
+        Token.AsObject().Get('amount', Token);
+        Assert.AreEqual(12.5, Token.AsValue().AsDecimal(), 'Preview must not transform the seed');
+        Assert.IsFalse(Response.Contains('10'), 'Preview must not claim a step result');
+        Instance.SetRange("Playbook Code", Step."Playbook Code");
+        Assert.IsTrue(Instance.IsEmpty(), 'Preview must not start a saved playbook');
+        Lib.Cleanup(Step."Playbook Code");
         Commit();
     end;
 
