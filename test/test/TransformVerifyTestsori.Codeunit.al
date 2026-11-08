@@ -123,7 +123,11 @@ codeunit 96469 "Transform Verify Tests ori"
         Card.Steps."Step Kind".SetValue("Playbook Step Kind ori"::Transform);
         Card.Steps.Description.SetValue('Local transform');
         Card.Steps.Next();
-        Card.Steps.First();
+        Card.Close();
+        Step.Get(PlaybookCode, 10);
+        Card.OpenEdit();
+        Card.GoToRecord(Playbook);
+        Card.Steps.GoToRecord(Step);
         Card.Transforms.New();
         Card.Transforms."Target Path".SetValue('result');
         Card.Transforms.Operation.SetValue("Transform Operation ori"::Constant);
