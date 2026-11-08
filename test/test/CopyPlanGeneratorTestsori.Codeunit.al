@@ -67,6 +67,8 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         Response: BigText;
         InstanceId: Guid;
         Attempt: Integer;
+        RowNo: Integer;
+        Prefix: Code[18];
         WasActivated: Boolean;
     begin
         // Assumption: the generated playbook uses the production dispatcher, with no test licensing or guard bypass.
@@ -85,11 +87,16 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         ChangeLogTable."Table No." := Database::"Test Copy Child ori";
         ChangeLogTable."Log Modification" := ChangeLogTable."Log Modification"::"All Fields";
         ChangeLogTable.Insert(true);
-        Parent.Code := Plan.Code;
-        Parent.Description := 'Copy test';
-        Parent.Amount := -123.45;
-        Parent.Insert(true);
-        Parent.SetRange(Code, Plan.Code);
+        Prefix := CopyStr(Plan.Code, 1, 17) + '-';
+        for RowNo := 1 to 3 do begin
+            Parent.Init();
+            Parent.Code := Prefix + Format(RowNo, 0, 9);
+            Parent.Description := 'Copy test';
+            Parent.Amount := -123.45 * RowNo;
+            Parent.Insert(true);
+        end;
+        Parent.SetFilter(Code, '%1', Prefix + '*');
+        Plan."Page Size" := 2;
         Plan."Source View" := CopyStr(Parent.GetView(false), 1, MaxStrLen(Plan."Source View"));
         Plan.Modify(true);
         Generator.Generate(Plan.Code);
@@ -97,16 +104,23 @@ codeunit 96465 "Copy Plan Generator Tests ori"
         for Attempt := 1 to 2 do begin
             Clear(Response);
             Runner.Run(Plan.Code, InitialRequest, Response, InstanceId);
-            Assert.IsTrue(Child.Get(Plan.Code), Format(Response));
-            Assert.AreEqual(Parent.Description, Child.Description, 'Mapped description');
-            if TransformAmount then
-                Assert.AreEqual(-Parent.Amount, Child.Amount, 'Transformed decimal')
-            else
-                Assert.AreEqual(Parent.Amount, Child.Amount, 'Mapped decimal');
+            Parent.FindSet();
+            repeat
+                Assert.IsTrue(Child.Get(Parent.Code), Format(Response));
+                Assert.AreEqual(Parent.Description, Child.Description, 'Mapped description');
+                if TransformAmount then
+                    Assert.AreEqual(-Parent.Amount, Child.Amount, 'Transformed decimal')
+                else
+                    Assert.AreEqual(Parent.Amount, Child.Amount, 'Mapped decimal');
+            until Parent.Next() = 0;
             Instance.Get(InstanceId);
             Assert.AreEqual(Instance.Status::Completed, Instance.Status, 'The full copy run succeeds');
-            Child.SetRange(Code, Plan.Code);
-            Assert.AreEqual(1, Child.Count(), 'Regenerated key updates the same destination row');
+            if TransformAmount then
+                Assert.AreEqual(8, Instance."Steps Executed", 'Two pages each finish Transform and Set')
+            else
+                Assert.AreEqual(5, Instance."Steps Executed", 'Two Get pages and three Set calls');
+            Child.SetFilter(Code, '%1', Prefix + '*');
+            Assert.AreEqual(3, Child.Count(), 'Repeated pages update the same three keys');
             // Separate public Run invocations have separate transactions. Commit the first run before its repeat.
             Commit();
         end;

@@ -5,7 +5,13 @@ enum 10035623 "Playbook Step Kind ori"
 {
     Extensible = true;
     /// <summary>Calls an existing Foundation message type.</summary>
-    value(0; Message) { Caption = 'Message', Comment = 'is-IS=Skilaboð'; }
+    value(0; Message)
+    {
+        Caption = 'Message', Comment = 'is-IS=Skilaboð';
+    }
     /// <summary>Maps JSON fields locally without dispatching a message.</summary>
-    value(1; Transform) { Caption = 'Transform', Comment = 'is-IS=Umbreyting'; }
+    value(1; Transform)
+    {
+        Caption = 'Transform', Comment = 'is-IS=Umbreyting';
+    }
 }
