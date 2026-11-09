@@ -43,6 +43,9 @@ permissionset 10035539 "BIFROST PlaybVw ori"
         tabledata "Copy Plan ori" = R,
         tabledata "Copy Plan Field ori" = R,
 
+        page "Table Data ori" = X,
+        page "Table Data Fields ori" = X,
+
         page "Playbook Card ori" = X,
         page "Playbook Cond. Subpage ori" = X,
         page "Playbook Instance Card ori" = X,

@@ -7,7 +7,8 @@
 /// "Playbook Runner ori" (foreground Run Now and the Job Queue path), "Playbook Step Executor ori"
 /// and "Msg Executor ori" (per-step dispatch into Bifrost Foundation), "Playbook JQ Dispatcher ori"
 /// (the Job Queue entry point) and "Playbook Log Mgt ori" (writes instance/step log records during
-/// a run). Assign it to users who configure, schedule and execute playbooks.
+/// a run), plus "Table JSON Export ori" and "Table JSON Import ori" (table data files, #155). Assign it to users
+/// who configure, schedule and execute playbooks.
 ///
 /// See "BIFROST PlaybVw ori" for the read-only counterpart and why it withholds every one of these
 /// codeunits plus the "Schedule Playbook ori" page.
@@ -43,6 +44,8 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         page "Playbook Step Template FB ori" = X,
         page "Playbook Template Editor ori" = X,
         page "Schedule Playbook ori" = X,
+        page "Table Data ori" = X,
+        page "Table Data Fields ori" = X,
         tabledata "JQ Parameter ori" = RIMD,
         tabledata "Playbook ori" = RIMD,
         tabledata "Playbook Condition ori" = RIMD,
@@ -55,5 +58,8 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         codeunit "Playbook Response Scrub ori" = X,
         codeunit "Msg Executor ori" = X,
         codeunit "Playbook JQ Dispatcher ori" = X,
-        codeunit "Playbook Log Mgt ori" = X;
+        codeunit "Playbook Log Mgt ori" = X,
+        codeunit "Table JSON Export ori" = X,
+        codeunit "Table JSON Import ori" = X,
+        codeunit "Table Data Mgt ori" = X;
 }

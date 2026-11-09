@@ -1293,6 +1293,138 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Umbreyta afritunarreitum</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType TransformDescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Table 392052156 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Field</source>
+          <target>Reitur töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitur töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3070320983 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the field.</source>
+          <target>Tilgreinir heiti reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir heiti reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3070320983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Name</source>
+          <target>Heiti reits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Heiti reits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3531868071 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the field.</source>
+          <target>Tilgreinir númer reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir númer reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field No.</source>
+          <target>Reitarnr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitarnr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 2710354593 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the key of the field in the serializer JSON.</source>
+          <target>Tilgreinir lykil reitsins í JSON raðarans.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lykil reitsins í JSON raðarans.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Json Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 2710354593 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Json Key</source>
+          <target>JSON-lykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=JSON-lykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Json Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1901039407 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the field is part of the primary key. Primary key fields cannot be edited here.</source>
+          <target>Tilgreinir hvort reiturinn er hluti af aðallyklinum. Ekki er hægt að breyta reitum aðallykils hér.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort reiturinn er hluti af aðallyklinum. Ekki er hægt að breyta reitum aðallykils hér.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Part of Primary Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1901039407 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Part of Primary Key</source>
+          <target>Hluti af aðallykli</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hluti af aðallykli</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Part of Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1878130204 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the data type of the field.</source>
+          <target>Tilgreinir gagnategund reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gagnategund reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1878130204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target>Tegund</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tegund</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1131619133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the field as the serializer writes it. Change it to save a new value.</source>
+          <target>Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Value - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1131619133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Value</source>
+          <target>Gildi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Gildi</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Row</source>
+          <target>Lína töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lína töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 1663593181 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the primary key values of the record.</source>
+          <target>Tilgreinir gildi aðallykils færslunnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi aðallykils færslunnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Primary Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <target>Aðallykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 3793541599 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the SystemId of the record in the source table.</source>
+          <target>Tilgreinir SystemId færslunnar í upprunatöflunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir SystemId færslunnar í upprunatöflunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Record SystemId - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 3793541599 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record SystemId</source>
+          <target>SystemId færslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=SystemId færslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Record SystemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2782707039 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the position of the row on the current page.</source>
+          <target>Tilgreinir staðsetningu línunnar á núverandi síðu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir staðsetningu línunnar á núverandi síðu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Row No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2782707039 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row No.</source>
+          <target>Línunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Row No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2166945456 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the first fields of the record as Name=Value pairs.</source>
+          <target>Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2166945456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Summary</source>
+          <target>Samantekt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Samantekt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2492258583 - Method 1532249759 - NamedType 1807669104" size-unit="char" translate="yes" xml:space="preserve">
           <source>Environment information:</source>
           <target>Upplýsingar um umhverfi:</target>
@@ -2606,6 +2738,108 @@
           <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 3954339052" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field %1 was not changed. The field is restricted or can be written only once.</source>
+          <target>Reitnum %1 var ekki breytt. Reiturinn er takmarkaður eða aðeins má skrifa í hann einu sinni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Reitnum %1 var ekki breytt. Reiturinn er takmarkaður eða aðeins má skrifa í hann einu sinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType FieldNotChangedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 2511888513" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field %1 cannot be edited.</source>
+          <target>Ekki er hægt að breyta reit %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field number, is-IS=Ekki er hægt að breyta reit %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType FieldNotShownErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 286251253" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The page size must be between 1 and %1.</source>
+          <target>Síðustærðin verður að vera á bilinu 1 til %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = maximum page size, is-IS=Síðustærðin verður að vera á bilinu 1 til %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType PageSizeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 2684290006" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field %1 is part of the primary key and cannot be edited here.</source>
+          <target>Reiturinn %1 er hluti af aðallyklinum og ekki er hægt að breyta honum hér.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Reiturinn %1 er hluti af aðallyklinum og ekki er hægt að breyta honum hér.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType PrimaryKeyEditErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 2100988429" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The record no longer exists in table %1.</source>
+          <target>Færslan er ekki lengur til í töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Færslan er ekki lengur til í töflu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType RecordNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not exist.</source>
+          <target>Tafla %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 3563140640" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 (%2) cannot be read by the table data export.</source>
+          <target>Útflutningur töflugagna getur ekki lesið töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Útflutningur töflugagna getur ekki lesið töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableReadRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 3901123449" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The table view is not valid for table %1.</source>
+          <target>Töflusýnin á ekki við töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin á ekki við töflu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableViewInvalidErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1468028954" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not a Bifrost table data file (format %1, version %2 expected).</source>
+          <target>Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType FormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1030601889" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A new row cannot be inserted into table %1 (%2).</source>
+          <target>Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1065153784" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The row has neither an id nor a primaryKey.</source>
+          <target>Línan hefur hvorki id né primaryKey.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línan hefur hvorki id né primaryKey.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowKeyMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 943745913" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The row is not a JSON object.</source>
+          <target>Línan er ekki JSON-hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línan er ekki JSON-hlutur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowNotObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 2095975556" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file has no rows array.</source>
+          <target>Skráin hefur engan línulista (rows).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin hefur engan línulista (rows).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowsMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1899388161" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row %1 failed: %2</source>
+          <target>Lína %1 mistókst: %2</target>
+          <note from="Developer" annotates="general" priority="2">%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowStopErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 2257494842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file does not name a table (tableNo).</source>
+          <target>Skráin tilgreinir ekki töflu (tableNo).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin tilgreinir ekki töflu (tableNo).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableNoMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not exist.</source>
+          <target>Tafla %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 45187949" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 (%2) cannot be written by the table data import.</source>
+          <target>Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableWriteRestrictedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token is not configured in Orchestrator Setup.</source>
@@ -5474,6 +5708,174 @@
           <target>Kerfisauðkenni</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Kerfisauðkenni</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Status ori - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3000445245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Fields</source>
+          <target>Reitir töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitir töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data Fields ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data</source>
+          <target>Töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 772952000" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export table data</source>
+          <target>Flytja út töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja út töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType DownloadTitleTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 1567760788" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Dry run of %1 rows: %2 to insert, %3 to modify, %4 failed. Import the rows that passed?</source>
+          <target>Prufukeyrsla %1 lína: %2 til að bæta við, %3 til að breyta, %4 mistókust. Flytja inn línurnar sem stóðust?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = rows, %2 = inserted, %3 = modified, %4 = failed, is-IS=Prufukeyrsla %1 lína: %2 til að bæta við, %3 til að breyta, %4 mistókust. Flytja inn línurnar sem stóðust?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType DryRunQst</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 3907048935" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 rows inserted, %2 rows modified, %3 rows failed.</source>
+          <target>%1 línum bætt við, %2 línum breytt, %3 línur mistókust.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = inserted, %2 = modified, %3 = failed, is-IS=%1 línum bætt við, %2 línum breytt, %3 línur mistókust.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType ImportedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 629381524" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not valid JSON.</source>
+          <target>Skráin er ekki gilt JSON.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gilt JSON.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType NotJsonErr</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 3237890445" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import table data</source>
+          <target>Flytja inn töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja inn töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType UploadTitleTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 870794884 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table</source>
+          <target>Tafla</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tafla</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control Selection - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2846550316 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the page of rows that is shown.</source>
+          <target>Tilgreinir síðu línanna sem er sýnd.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir síðu línanna sem er sýnd.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageNoField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2846550316 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page</source>
+          <target>Síða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageNoField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2780801696 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many rows are shown at a time, 1 to 500.</source>
+          <target>Tilgreinir hve margar línur eru sýndar í einu, 1 til 500.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hve margar línur eru sýndar í einu, 1 til 500.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageSizeField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2780801696 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page Size</source>
+          <target>Síðustærð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síðustærð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageSizeField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 1434847637 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the selected table.</source>
+          <target>Tilgreinir heiti valdrar töflu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir heiti valdrar töflu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNameField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 1434847637 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Name</source>
+          <target>Heiti töflu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Heiti töflu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNameField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3745738151 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the table to view.</source>
+          <target>Tilgreinir númer töflunnar sem á að skoða.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir númer töflunnar sem á að skoða.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNoField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3745738151 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table No.</source>
+          <target>Töflunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNoField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3694213003 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies an optional table view, for example WHERE(Source=FILTER(A*)). It is validated before it is applied.</source>
+          <target>Tilgreinir valfrjálsa töflusýn, til dæmis WHERE(Source=FILTER(A*)). Hún er staðfest áður en henni er beitt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir valfrjálsa töflusýn, til dæmis WHERE(Source=FILTER(A*)). Hún er staðfest áður en henni er beitt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableViewField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3694213003 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table View</source>
+          <target>Töflusýn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflusýn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableViewField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1605488312 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Downloads the rows in the table view as a table data file.</source>
+          <target>Sækir línurnar í töflusýninni sem töflugagnaskrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækir línurnar í töflusýninni sem töflugagnaskrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ExportJson - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1605488312 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export JSON</source>
+          <target>Flytja út JSON</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja út JSON</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ExportJson - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1721565511 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Uploads a table data file, checks it with a dry run and imports it after you confirm.</source>
+          <target>Hleður upp töflugagnaskrá, prófar hana með prufukeyrslu og flytur hana inn eftir staðfestingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hleður upp töflugagnaskrá, prófar hana með prufukeyrslu og flytur hana inn eftir staðfestingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ImportJson - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1721565511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import JSON</source>
+          <target>Flytja inn JSON</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja inn JSON</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ImportJson - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 3318475992 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the next page of rows.</source>
+          <target>Sýnir næstu síðu línanna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir næstu síðu línanna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action NextPage - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 3318475992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Next Page</source>
+          <target>Næsta síða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Næsta síða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action NextPage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2466519627 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the fields of the selected row and lets you edit them.</source>
+          <target>Sýnir reiti valinnar línu og gerir þér kleift að breyta þeim.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir reiti valinnar línu og gerir þér kleift að breyta þeim.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action OpenRecord - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2466519627 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Record</source>
+          <target>Opna færslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna færslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action OpenRecord - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2157727942 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the previous page of rows.</source>
+          <target>Sýnir fyrri síðu línanna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir fyrri síðu línanna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action PreviousPage - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2157727942 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Previous Page</source>
+          <target>Fyrri síða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fyrri síða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action PreviousPage - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 100990608 - Action 923844739 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 942706168">
           <source>Add the selected job queue entry to Bifrost Orchestrator so that it monitors the entry and restarts it when it fails.</source>
