@@ -2091,6 +2091,78 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not exist.</source>
+          <target>Tafla %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 3563140640" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 (%2) cannot be read by the table data export.</source>
+          <target>Útflutningur töflugagna getur ekki lesið töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Útflutningur töflugagna getur ekki lesið töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableReadRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 3901123449" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The table view is not valid for table %1.</source>
+          <target>Töflusýnin á ekki við töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin á ekki við töflu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableViewInvalidErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1468028954" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not a Bifrost table data file (format %1, version %2 expected).</source>
+          <target>Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType FormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1030601889" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A new row cannot be inserted into table %1 (%2).</source>
+          <target>Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1065153784" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The row has neither an id nor a primaryKey.</source>
+          <target>Línan hefur hvorki id né primaryKey.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línan hefur hvorki id né primaryKey.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowKeyMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 943745913" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The row is not a JSON object.</source>
+          <target>Línan er ekki JSON-hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línan er ekki JSON-hlutur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowNotObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 2095975556" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file has no rows array.</source>
+          <target>Skráin hefur engan línulista (rows).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin hefur engan línulista (rows).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowsMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1899388161" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row %1 failed: %2</source>
+          <target>Lína %1 mistókst: %2</target>
+          <note from="Developer" annotates="general" priority="2">%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowStopErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 2257494842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file does not name a table (tableNo).</source>
+          <target>Skráin tilgreinir ekki töflu (tableNo).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin tilgreinir ekki töflu (tableNo).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableNoMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not exist.</source>
+          <target>Tafla %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 45187949" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 (%2) cannot be written by the table data import.</source>
+          <target>Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableWriteRestrictedErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token is not configured in Orchestrator Setup.</source>
           <target>Telegram-vélmennislykill er ekki stilltur í uppsetningu vinnsluraðara.</target>

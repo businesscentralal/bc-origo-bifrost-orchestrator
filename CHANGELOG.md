@@ -7,6 +7,14 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added (2026-11-09) - Table data JSON export and import (#155, Phase 1)
+
+- New codeunit 10035558 `Table JSON Export ori` writes the rows of one table as a Bifrost table data file: `{ "format": "bifrost-table-data", "version": 1, "tableNo", "tableName", "rows": [...] }`. Each row is exactly the output of Foundation's public `Serializer ori.SerializeToJson` (primaryKey, id, fields). An optional table view is validated through `ApplyTableView` before it is applied; an empty field list writes every eligible field. A table that Foundation restricts for reading is refused with its restricted-table text and nothing is read.
+- New codeunit 10035563 `Table JSON Import ori` applies such a file through `Serializer ori.DeserializeFromJson` and persists with `Insert(true)` or `Modify(true)`. A row is matched by its id (SystemId), then by its primary key; otherwise it is inserted. The Foundation write guard (Force = false) is checked first and the insert guard before each new row. A row the serializer cannot read fails on its own and the other rows continue; `StopOnError` stops with that row's error and writes nothing; `DryRun` checks every row and writes nothing. The result reports inserted, modified, failed and per-row errors.
+- Both codeunits are internal and granted in `BIFROST PlaybAdm ori`. No new message type and no new request key.
+- Foundation dependency raised to 28.0.12.679 (the first release with core PR #1275, `Serializer ori` public) in the app and test app (only `dependencies[].version`).
+- Tests: new codeunits 96406 `Table JSON Export Tests ori` and 96425 `Table JSON Import Tests ori`.
+
 ### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)
 
 - `Orchestrator.ReportLayout.Set` (codeunit 10035599, handler 10035600) accepts `stagingId` (GUID, with or without braces) as an alternative to `layoutBase64`; exactly one of the two is required. The bytes are taken through Foundation's public `Blob Staging ori` façade (`Take`), which reads and deletes the row in the same transaction as the import, so a failed import leaves the row in place. Unknown or already-taken ids, both keys, neither key and a non-GUID id are refused with new bilingual errors; `layoutBase64` calls are unchanged. No Attachments dependency.
