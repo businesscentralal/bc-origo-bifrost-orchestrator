@@ -1,0 +1,17 @@
+{
+  "candidateSha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "labelsChanged": false,
+  "explanation": "Only invariant Markdown/JSON descriptions changed. No translated labels changed; checked-in Icelandic XLF unchanged. Source candidate is clean after compiler-generated g.xlf output.",
+  "files": [
+    {
+      "name": "Bifrost Orchestrator.g.xlf",
+      "sha256": "8097f7afe93964965185d61ac04955701e7d13c3bf984a84c85f498ab48ce4f1",
+      "units": 861
+    },
+    {
+      "name": "Bifrost Orchestrator.is-IS.xlf",
+      "sha256": "cd649aff3a8fff6a64439d04fa901cd551106598ca348adb28ade379ee189aa9",
+      "units": 861
+    }
+  ]
+}

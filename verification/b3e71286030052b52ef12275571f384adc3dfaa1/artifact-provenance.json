@@ -1,0 +1,80 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "repository": "businesscentralal/bc-origo-bifrost-orchestrator",
+  "branch": "codex/sindri-orchestrator159-whoami",
+  "sourceClean": true,
+  "owner": "worker-3",
+  "environmentId": "f0f3e993abcb",
+  "FoundationSha": "fe4cc372e7f94910931a3186bb147717fc6efc96",
+  "FoundationCI": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core/actions/runs/42568504090",
+  "appFiles": [
+    {
+      "file": "final/app.app",
+      "bytes": 459539,
+      "sha256": "6f78b4370aefde86feb63c94e7c7164b462289b4cfaba4717ea6801613d6dc9b"
+    },
+    {
+      "file": "final/test.app",
+      "bytes": 196652,
+      "sha256": "cf7add84712dabd6981c74ef5dea857705a8333b83e298b9b9c72cb51327e0fd"
+    },
+    {
+      "file": "shipping/shipping.app",
+      "bytes": 459448,
+      "sha256": "b1741029c93c4e27eddae30771450929c88e7d06e0ef7b146d7c704efbd7e713"
+    },
+    {
+      "file": "core680/Origo_Bifrost Foundation_28.0.12.680.app",
+      "bytes": 2818030,
+      "sha256": "9b834e72cef9905f54c4487d3b2037ffd82f752b16ede1cb9b76da9a4420d401"
+    },
+    {
+      "file": "core680-testproduct/Origo_Bifrost Foundation_28.0.12.680.app",
+      "bytes": 2806003,
+      "sha256": "4600377c5e9437a79f37652f3603b6d4f34bbe4ddea46121171da0196a505c3c"
+    },
+    {
+      "file": "core680-tests/Origo_Bifrost Foundation - Tests_28.0.12.680.app",
+      "bytes": 1975428,
+      "sha256": "a902e89b4f1dba3b62a3807a891f1fe5a805c92c2cd736170a1cfe8a736ea1eb"
+    }
+  ],
+  "compile": {
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "dirty": "",
+    "checks": {
+      "app": {
+        "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+        "dirty": "",
+        "startedAt": "2026-11-09T06:30:26.366Z",
+        "finishedAt": "2026-11-09T06:30:37.598Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "6f78b4370aefde86feb63c94e7c7164b462289b4cfaba4717ea6801613d6dc9b"
+      },
+      "test": {
+        "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+        "dirty": "",
+        "startedAt": "2026-11-09T06:30:37.641Z",
+        "finishedAt": "2026-11-09T06:30:49.402Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "cf7add84712dabd6981c74ef5dea857705a8333b83e298b9b9c72cb51327e0fd"
+      }
+    }
+  },
+  "shipping": {
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "mode": "shipping no-IVT",
+    "baseline": "28.0.3.93",
+    "baselineRelease": "28.0.3",
+    "startedAt": "2026-11-09T06:31:11.108Z",
+    "finishedAt": "2026-11-09T06:31:28.549Z",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "at": "2026-11-09T06:38:38.561Z"
+}

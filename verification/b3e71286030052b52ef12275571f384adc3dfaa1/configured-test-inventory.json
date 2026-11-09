@@ -1,0 +1,2971 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "total": 493,
+  "tests": [
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ErrorResponseKeepsCodeAndError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ErrorResponseWithoutCodeUsesErrorOrMessage",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "NonErrorResponsesAreNotErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ErroredIterationsAreCountedApartFromNo",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_ErrorAnswer_FailsStepAndRun",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_ErrorAnswer_FailsStepAndRun_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_RaisedError_FailsStepAndRun",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_RaisedError_FailsStepAndRun_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_AnsweredNo_DoesNotFailTheRun",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_AnsweredNo_DoesNotFailTheRun_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_AnsweredYes_Completes",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "SingleCheck_AnsweredYes_Completes_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_ErrorAnswers_AreFailuresNotNo",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_ErrorAnswers_AreFailuresNotNo_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_RaisedErrors_AreFailuresNotNo",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_RaisedErrors_AreFailuresNotNo_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_AnsweredYes_Succeeds",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ForEachCheck_AnsweredYes_Succeeds_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96430,
+      "name": "Check Step Error Tests",
+      "method": "ActionStep_ErrorAnswerWithSuccessCondition_StillFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "TheGuardSeesEveryOrchestratorType",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_DeclaresTheRequiredChapters",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_EnvelopeStatesSubjectStrictAndContentType",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_ParametersAndResponseFieldsAreDescribed",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_EachErrorHasACodeOrATextAndTheStepToTake",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_EffectMatchesTheDirection",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_ExamplesAreRealRequestsAndAnswers",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_RelatedAndWorkflowNameRealTypes",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_HelpTextHasEnoughSubstanceAndNoAlObjectNames",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96441,
+      "name": "Contract Complete Tests ori",
+      "method": "EveryType_DiscoveryTextsExistAndAreTranslated",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "JobQueueEntry_WriteHint",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "JobQueueEntry_WriteHint_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "ScheduledTask_WriteHint",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "ScheduledTask_WriteHint_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "ReportRequestPreset_ReadWriteHint",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "ReportRequestPreset_ReadWriteHint_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "Customer_NoCompanionHints",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96428,
+      "name": "Data Records Hint Tests",
+      "method": "Customer_NoCompanionHints_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "JQParameterStoresAndRetrievesRequestData",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "JQParameterGetRequestDataReturnsEmptyWhenNoBlob",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookCreatesNonRecurringJQEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookCreatesParameterRecord",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookNoParameterWhenRequestEmpty",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookSetsJobQueueCategory",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookEnforcesMinimumDelay",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookDefaultOverloadUses60SecDelay",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookFailsWhenDisabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "DeleteJQEntryDeletesParameterRecord",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookSchedulesRealTask",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookDispatchesAndCreatesInstance",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96414,
+      "name": "Enqueue Playbook Tests",
+      "method": "EnqueuePlaybookSetsRecordIdToProcess",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartSetsEntryToReady",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartSetsOnHoldEntryToReady",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartErrorsForMissingId",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartIfNeededRestartsErrorEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartIfNeededSkipsReadyEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartIfNeededRestartsOnHoldEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartResponseIncludesEntryDetails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96420,
+      "name": "Entry Msg Tests",
+      "method": "RestartAcceptsIdInSubject",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96407,
+      "name": "Entry Registration Tests ori",
+      "method": "NewEntryHidesDialogs",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96407,
+      "name": "Entry Registration Tests ori",
+      "method": "ExistingEntryHidesDialogs",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96407,
+      "name": "Entry Registration Tests ori",
+      "method": "InteractiveEntryOpensCard",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC01_NeverRunDailyKeepsDueSlot",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC02_NoEndingTimeKeepsDueSlot",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC02_HourlyKeepsLatestDueSlot",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC02_FutureWindowWaits",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC07_ElapsedDailyWindowWaits",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC07_ElapsedHourlyWindowWaits",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC03_SuccessAdvancesDaily",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC01_LateDailyRunKeepsNextDayAnchor",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC01_MidnightDelayKeepsSameDayAnchor",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC01_CreatedInsideWindowRunsFirstSlot",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC05_StartChangeAndClearSyncReference",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC01_AC04_AC06_FirstDispatchRunsPlaybook",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96443,
+      "name": "First Schedule Tests ori",
+      "method": "Scenario_AC05_TemplateKeepsJobAndSyncsReference",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96422,
+      "name": "Misc Msg Smoke Tests",
+      "method": "HelpGetReturnsNonEmptyMarkdown",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96422,
+      "name": "Misc Msg Smoke Tests",
+      "method": "WorkspacePreviewReturnsSysNamespace",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96422,
+      "name": "Misc Msg Smoke Tests",
+      "method": "WorkspacePreviewPassesThroughInitialRequest",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96422,
+      "name": "Misc Msg Smoke Tests",
+      "method": "EveryOrchestratorMessageTypeRefusesAnUnlicensedDirectCall",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96455,
+      "name": "Msg Direction Tests ori",
+      "method": "ExecutingTypesAreInbound",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96455,
+      "name": "Msg Direction Tests ori",
+      "method": "ReadTypesStayOutboundOrBoth",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Batch1MessagesHaveContractChaptersAndDiscovery",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "CommittingTypesDeclareIrreversible",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "NonCommittingTypesKeepTheirEffect",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC05_NotificationType_KeepsMainContract",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC05_RetryPolicy_KeepsMainContract",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_JobQueueEntryRestartIfNeeded_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_JobQueueEntryRestart_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_OrchestratorGet_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_PlaybookEnqueue_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_PlaybookRun_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_PlaybookSchedule_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_EmailSend_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_EntryRegister_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_EntryRestart_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_EntryRun_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_EntrySchedule_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_StatusGet_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_StatusRestartIfNeeded_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_StatusRestart_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96452,
+      "name": "Orch B1 Contract Tests",
+      "method": "Scenario_AC04_TelegramMessage_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Batch2MessagesHaveContractChaptersAndDiscovery",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "CommittingTypesDeclareIrreversible",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "PreviewDisclosesNestedCommit",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "NonCommittingTypesKeepTheirEffect",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC05_Format_KeepsMainContract",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC05_LayoutFormat_KeepsMainContract",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC04_WorkspacePreview_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC04_ReportGet_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC04_ReportList_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC04_ReportRun_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC04_ReportSaveAs_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96453,
+      "name": "Orch B2 Contract Tests",
+      "method": "Scenario_AC04_ReportLayoutSet_KeepsMainErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "BinaryEnvelopePreservesOfficeContentType",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "BinaryEnvelopePreservesMaximumContentType",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "BlockedEntriesAreSkipped",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "EarliestStartDateTimeIsRecalculated",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "EMailNotificationType_RestartNotificationType_VerifyEMailContent",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "BlockJobQueueSchedulerEntryOpenFromJQEntryCard",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplateWeekdayValidation",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplateTimeRangeValidation",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplateCanBeInsertedWithValidData",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplatesActionNavigationFromSetupPage",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplateCardPageCanBeOpened",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplateNoOfMinutesBetweenRunsValidation",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RecurringTemplateNextRunDateFormulaValidation",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "ModifyStartingEndingTime_VerifyValidationAndSync",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "ChangingTemplate_VerifyExistingValuesOverwritten",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "TimeZoneCode_VerifyStored",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RetryPolicyNever_ErrorEntry_SuppressesImmediately",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RetryPolicy_ErrorCounterResetsOnSuccess",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96411,
+      "name": "Orchestrator Unit Tests",
+      "method": "RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96423,
+      "name": "Orchestr Registration Tests",
+      "method": "Scenario_AC03_LicenceAdmin_OpensSetupInEnglish",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96423,
+      "name": "Orchestr Registration Tests",
+      "method": "Scenario_AC03_LicenceAdmin_OpensSetupInIcelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96423,
+      "name": "Orchestr Registration Tests",
+      "method": "OrchestratorIsRegisteredInTheAppRegistry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "Scenario_AC04_FoundationFull_Enabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "Scenario_AC05_NoUserSetupRead_Disabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "Scenario_AC06_UnsetToken_Disabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "Scenario_AC06_EmptyChat_Disabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "Scenario_AC01_IndirectRead_Enabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "SecretCodesFollowTheDocumentedPattern",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "LongCredentialCodesFitCode50AndStayDistinct",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "RegisterAllRegistersTheTelegramBotToken",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "RegisterAllRegistersBothSecretsOfEveryCredential",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "RegisterAllIsIdempotent",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "TelegramBotTokenSetIsSetAndClearRoundTrip",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "CredentialClientIdAndSecretRoundTrip",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "DeletingACredentialClearsItsSecrets",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "DeletingACredentialLeavesNoMissingSecretsBehind",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "RenamingACredentialMovesItsSecrets",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "AppSetupPageReportsTheTelegramSecretStatus",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96403,
+      "name": "Orchestr Secret Tests",
+      "method": "BifrostSetupExposesOrchestratorSetupAndPlaybooks",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "AskForEach_RunGateInBothLanguages",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "AskDataCondition_RunGateInBothLanguages",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "AskTrace_RunGateInBothLanguages",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "Scrub_PreservesAllOtherProperties",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "Scrub_UnchangedPayloadsRetainBytes",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "SingleStep_NoTraceInAnyOrchestratorStore",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "FailedStep_WorkspaceSnapshotHasNoTrace",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "ForEach_NoTraceInLogsWorkspaceOrSummary",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "Paged_NoTraceAcrossPageAndIterationLogs",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96456,
+      "name": "Playbook Ask Scrub Tests ori",
+      "method": "RunAndHelp_DescribeTimeoutAndRetentionBoundaries",
+      "isolation": "Disabled"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "EmptyConditionSetIsTrue",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "AllConditionsInAGroupMustHold",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "AnyGroupHoldingIsEnough",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "GroupsAreIndependentNotLeftToRight",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "ConditionTypesAreEvaluatedIndependently",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "HasConditionsSeesOnlyItsOwnType",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "StepTypeDefaultsToAction",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "BeginRunSeedsRunNamespace",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "RollUpCountsAndFlagsFailure",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "ExcludedStepsLeaveRunStatusAlone",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "EscalateFailsTheRunWithoutTouchingCounters",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "RepeatedStepAccumulatesInsteadOfOverwriting",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "StatusDegradesAndNeverImproves",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "IterationFailuresCarryItemAndError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "CheckFailuresAreCountedSeparatelyFromErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "FailureListIsCappedButCountsStayExact",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "SkippedStepRecordsTheReason",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "SummaryPathsFeedTheReportNotTheWorkspaceData",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "RunAndStepsFilterToTheReportPayload",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "StatusTextComesFromTheEnumName",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "MessageTypeTextComesFromTheEnumName",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "ExcludedStepsAreStillReferenceableUnderTail",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96418,
+      "name": "Playbook Cond Tests",
+      "method": "TailStaysOutOfTheReportPayload",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example1_PerRecordDecisionThenWrite_VerifiesClean",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example1_PerRecordDecisionThenWrite_VerifiesClean_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example2_ReadOnlyReport_VerifiesClean",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example2_ReadOnlyReport_VerifiesClean_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example3_AntiPattern_WarnsExactlyOnce",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example3_AntiPattern_WarnsExactlyOnce_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example1_WithEveryStepDisabled_StillVerifiesWithoutErrors",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Help_CarriesTheWorkflowTheExamplesAndTheRules",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Help_CarriesTheBase64OfEveryExampleTemplate",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example4_PostingAudit_VerifiesForTheInstalledAskType",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example4_PostingAudit_VerifiesForTheInstalledAskType_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example4_AskTemplateRaisesNoneOfTheAskWarnings",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Help_CarriesThePostingAuditExample",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Example4_RunRecordsPassFailUnknownAndErrorThenAllPassNotice",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96436,
+      "name": "Playbook Example Tests",
+      "method": "Help_ListsEveryFindingCodeOfVerify",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_RefusesAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_RefusesAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_RefusesAWarning_UnlessIgnoreWarnings",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_RefusesAWarning_UnlessIgnoreWarnings_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_IgnoreWarnings_NeverWaivesAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_ErrorOnDisabledStep_DoesNotBlock",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Run_CleanPlaybook_Runs",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Schedule_RefusesAnError_AndCreatesNoEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Schedule_RefusesAnError_AndCreatesNoEntry_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Schedule_CleanPlaybook_IsScheduled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "Schedule_RefusesAWarning_UnlessIgnoreWarnings",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "CreateOrchestratorEntry_RefusesAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "CreateOrchestratorEntry_WarningNeedsIgnoreWarnings",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "ScheduledPlaybookWithErrors_IsReported",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "UnscheduledPlaybookWithErrors_HasNoScheduleFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "VerifyMessageType_ReportsValidAndCounts",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96437,
+      "name": "Playbook Gate Tests",
+      "method": "VerifyMessageType_CleanPlaybook_IsValid",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "PlaybookRun_StampsHeader",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "PlaybookRun_StampsHeader_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "PlaybookEnqueue_ThenJobQueueRun_StampsHeader",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "PlaybookEnqueue_ThenJobQueueRun_StampsHeader_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "ScheduledRun_StampsHeader",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "ScheduledRun_StampsHeader_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "FailedRun_StampsHeaderFailed",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "FailedRun_StampsHeaderFailed_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "SecondRun_ReplacesTheFirst",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "EmptyPlaybook_StampsHeaderCompleted",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96432,
+      "name": "Playbook Last Run Tests",
+      "method": "HeaderIsRunningWhileTheRunIsInFlight",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "PrimaryKeyUnderFieldsWarnsEnglish",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "PrimaryKeyUnderFieldsWarnsIcelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "CorrectPathsResolve",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "UnresolvedRequestsAreRejected",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "LiteralMailAndResolvedDataRemainValid",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "SameIterationAndFilteredDumpResolve",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "SingleCheckMissingReferenceFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "ForEachCheckMissingReferenceFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96444,
+      "name": "Playbook Ref 118 Tests ori",
+      "method": "ForEachActionMissingReferenceFailsIcelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96421,
+      "name": "Playbook Run Msg Tests",
+      "method": "RunErrorsWhenPlaybookCodeMissing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96421,
+      "name": "Playbook Run Msg Tests",
+      "method": "RunErrorsForUnknownPlaybookCode",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96421,
+      "name": "Playbook Run Msg Tests",
+      "method": "Scenario_AC07_PagedStep_ReceivesItsOwnSkipAndTake",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "AskForEach_BoundsAndTypeAreChecked",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "AskForEach_DisabledAndTranslated",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "CleanPlaybook_HasNoFindings",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "EmptyPlaybook_HasNoFindings",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "UnlistedMessageType_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "UnlistedMessageType_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ListedEnabledMessageType_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "UnlistedMessageType_NameAndEnabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "KnownTypeThatIsNotEnabled_WithStartCondition_IsNotReported",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "UnlistedType_WithStartCondition_IsStillAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "CheckWithoutSuccessCondition_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "CheckWithoutSuccessCondition_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "CheckWithSuccessCondition_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ActionWithoutSuccessCondition_IsAWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ActionWithSuccessCondition_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "NextStepNotFound_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "NextStepExistingOrZero_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "IterateSource_Missing_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "IterateSource_NotEarlier_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "IterateSource_Earlier_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "SkipGate_Missing_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "SkipGate_NotEarlier_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "SkipGate_OnSingleStep_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "SkipGate_OnForEachCheck_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ForEachSource_WithoutNoOfRecords_Warns",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ForEachSource_WithoutNoOfRecords_Warns_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ForEachSource_WithNoOfRecords_NoWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ForEachSource_NotARecordReader_NoWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "ForEachSource_TwoConsumers_WarnsOnce",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "UnsafeWrite_OnDisabledStep_IsNotReported",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "FindingOnDisabledStep_CarriesStepDisabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "FindingOnEnabledStep_HasNoStepDisabled",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96435,
+      "name": "Playbook Verify Step Tests",
+      "method": "Findings_AreInStepOrder_WithAllFields",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "AskSchema_ConditionAndPresenceBoundaries",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "AskTrace_LiteralTrueOnly",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "AskTemplate_TranslatedMessagesAndNextSteps",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "TemplateNotJson_Truncated_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "TemplateNotJson_Truncated_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "TemplateNotJson_Array_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "TemplateValidOrEmpty_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_Missing_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_Missing_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_CollectAndListForms_AreChecked",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_NotEarlier_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_NotEarlier_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_ToItself_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_ToEarlierStep_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_ShapesThatAreNotReferences_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepReference_RepeatedReference_IsReportedOnce",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_Unknown_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_Unknown_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_Known_NoFinding",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_EmptyReferenceOrAbsent_IsNotLookedUp",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_OnOtherMessageType_IsNotLookedUp",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_LongerThanACode_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "RoleCode_InsideAWriteTransaction_IsNotDeterminable",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "CurrentField_Unknown_Warns",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "CurrentField_Unknown_Warns_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "CurrentField_Known_NoWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "CurrentField_SourceTableUndeterminable_NoWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepField_Unknown_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StoredField_ErrorAndOriginalCasing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StoredField_ErrorAndOriginalCasing_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StoredField_HelpExplainsError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepField_Known_NoWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "IterField_Unknown_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "IterField_Unknown_IsAnError_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "IterField_Known_NoWarning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "IterField_ExplicitIteration_Unknown_IsAnError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "StepField_OfPagedOrDisabledStep_IsNotJudged",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "Lookup_RecordExists_FoundNotFoundAndUndeterminable",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "Lookup_FieldNames_AreTheJsonNames",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96439,
+      "name": "Playbook Verify Template Tests",
+      "method": "Lookup_ToJsonName_FollowsTheDataTypes",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "UnsafePattern_Warns",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "UnsafePattern_Warns_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "CorrectedPattern_DoesNotWarn",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "CorrectedPattern_DoesNotWarn_Icelandic",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "TwoUnsafeWrites_WarnOncePerStep",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "SafeShapes_DoNotWarn",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "WriteMessageTypesAreRecognisedByTheirVerb",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96433,
+      "name": "Playbook Verify Tests",
+      "method": "VerifyErrorsForMissingOrUnknownPlaybook",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Run_UnknownField_ReturnsErrorWithoutExecution",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Run_MalformedView_ReturnsErrorWithoutExecution",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Run_NonString_ReturnsErrorWithoutExecution",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "SaveAs_UnknownField_ReturnsErrorWithoutExecution",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Scenario_AC01_PdfInvalidField_ReturnsError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Scenario_AC01_DefaultPdfInvalidField_ReturnsError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Scenario_AC01_ExcelInvalidField_ReturnsError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Scenario_AC01_WordInvalidField_ReturnsError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "SaveAs_MalformedView_ReturnsErrorWithoutExecution",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "SaveAs_NonString_ReturnsErrorWithoutExecution",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "SaveAs_ValidView_ExecutesOnlySelectedRow",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Run_ValidView_ExecutesSelectedRow",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Run_EmptySelection_DoesNotWidenDataSet",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96454,
+      "name": "Report Boundary Tests ori",
+      "method": "Run_BothDebugStates_FailureHasNoCallstack",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96424,
+      "name": "Report Layout Msg Tests",
+      "method": "SetErrorsWhenReportIdMissing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96424,
+      "name": "Report Layout Msg Tests",
+      "method": "SetErrorsWhenNameMissing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96424,
+      "name": "Report Layout Msg Tests",
+      "method": "SetErrorsForUnknownReport",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96424,
+      "name": "Report Layout Msg Tests",
+      "method": "SetErrorsForInvalidLayoutFormat",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96424,
+      "name": "Report Layout Msg Tests",
+      "method": "SetErrorsWhenLayoutBase64Missing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96424,
+      "name": "Report Layout Msg Tests",
+      "method": "MessageTypeIsRegistered",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "ListIncludesExtensionLayout",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "ListExcludesExtensionLayouts",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "GetExportsExtensionBytes",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "OwnUserLayoutRoundTripsBytes",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "SetTwiceReplacesUserLayout",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "ListRejectsUnknownReport",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "GetRejectsUnknownLayout",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "SaveAsOverrideRestoresSessionAndPreset",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "SaveAsOverrideRendersPdf",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "SaveAsRenderFailureRestoresSession",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96409,
+      "name": "Report Layout Read Tests ori",
+      "method": "SaveAsRejectsUnknownLayout",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96458,
+      "name": "Report Layout Stage Tests ori",
+      "method": "StagingIdImportsLikeBase64AndConsumesRow",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96458,
+      "name": "Report Layout Stage Tests ori",
+      "method": "StagingIdWithoutBracesReplacesExistingLayout",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96458,
+      "name": "Report Layout Stage Tests ori",
+      "method": "UnknownOrTakenStagingIdIsRefused",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96458,
+      "name": "Report Layout Stage Tests ori",
+      "method": "KeyCombinationsAndInvalidGuidAreRefusedWithoutTaking",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96458,
+      "name": "Report Layout Stage Tests ori",
+      "method": "FailedImportKeepsStagingRow",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96458,
+      "name": "Report Layout Stage Tests ori",
+      "method": "OrchestratorHasNoAttachmentsDependency",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "PresetRoundTripsXml",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "PresetReturnsEmptyWhenNoXml",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "PresetHasRequestPageXmlReturnsTrueWhenPopulated",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "ListReturnsReportsWithCountField",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "ListFiltersByProcessingOnly",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "ListReportContainsExpectedFields",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "GetReturnsReportMetadata",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "GetReturnsLayoutsArray",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "GetReturnsPresetWhenExists",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "GetCreatesEmptyPresetWhenNoneExists",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "GetErrorsForInvalidReportId",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "GetErrorsWhenReportIdMissing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "SaveAsGeneratesPdfOutput",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "SaveAsDefaultsToPdfWhenFormatOmitted",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "SaveAsUsesPresetWhenNoXmlProvided",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "SaveAsErrorsForInvalidFormat",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "SaveAsErrorsForMissingReportId",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "SaveAsErrorsForNonExistentReport",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "PresetTableIsBlockedFromDataRecordsRead",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96416,
+      "name": "Report Msg Tests",
+      "method": "PresetTableIsBlockedFromDataRecordsWrite",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "OverlayPreservesOtherValues",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "UnknownNameFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "MissingBaseFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "WrongReportXmlFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "MalformedXmlFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "DuplicateOptionFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "NonObjectParametersFail",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "NullValueFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "NestedValueFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "StatementTemplateMapsOptions",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "DuplicateAliasesFail",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "NativeCaptureMatchesTemplateSchema",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "StatementUnknownOptionFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "StatementBadChoiceFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "CallerXmlPrecedesTemplate",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "RegisteredTemplateRendersValues",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "ExplicitParametersDoNotUsePreset",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96431,
+      "name": "Report Parameter Tests ori",
+      "method": "StatementRendersOwnAgingData",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunExecutesProcessingOnlyReport",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunEchoesReportMetadata",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunReturnsErrorObjectWhenReportFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunUsesExplicitParameterOverlay",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunRejectsReportThatProducesOutput",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunErrorsWhenReportIdMissing",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96417,
+      "name": "Report Run Tests",
+      "method": "RunErrorsForNonExistentReport",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "StandaloneRefResolvesString",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "StandaloneRefResolvesNumericAsNumber",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "StandaloneRefResolvesObject",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "StandaloneRefResolvesArray",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "EmbeddedRefResolvesInString",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "EmbeddedRefBeforePeriodResolves",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "EmbeddedRefEscapesQuotesAndObjects",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "CollectDirective",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "FilteredDumpEscapesAsString",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "UnresolvedRefStaysIntact",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96402,
+      "name": "Resolver Test",
+      "method": "MultipleRefsInSameTemplate",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC01_IdentityAndRecipientWritesAreRestricted",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC02_IdentityAndRecipientReadsStayOpen",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC03_NeighbourFieldsStayWritable",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC04_TablesStayReadableAndWritable",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC05_HintsNameSupportedPagesAndSchedule",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC05_NeighboursHaveNoNewHints",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96405,
+      "name": "Sched Field Restrict Tests ori",
+      "method": "Scenario_AC05_ExistingCompanionHintsArePreserved",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntryCreatesEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntryStoresIdOnPlaybook",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "ScheduledFlowFieldReflectsOrchestratorEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntryCopiesRecurringTemplate",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntrySetsNotification",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntrySetsRetryPolicy",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntrySetsEmitTelemetry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntrySetsJobQueueCategory",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntryBlocksDoubleSchedule",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntrySetsRecordIdAndSystemId",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "CreateOrchestratorEntryAllowsRescheduleAfterOrphan",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96415,
+      "name": "Schedule Playbook Tests",
+      "method": "ScheduleResponseEmitsSystemIdAndPkId",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96446,
+      "name": "Scheduler Wizard Reg Tests ori",
+      "method": "Scenario_AC02_English_RegistersMetadataOnly",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96446,
+      "name": "Scheduler Wizard Reg Tests ori",
+      "method": "Scenario_AC03_Icelandic_RegistersMetadataOnly",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96427,
+      "name": "SE Run Msg Tests",
+      "method": "ExecuteRunDispatchesCodeunitEntryHeadlessly",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96427,
+      "name": "SE Run Msg Tests",
+      "method": "ExecuteRunReturnsErrorWhenJobFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96427,
+      "name": "SE Run Msg Tests",
+      "method": "ExecuteRunReturnsErrorWhenDispatchFails",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96427,
+      "name": "SE Run Msg Tests",
+      "method": "ExecuteRunUsesPlaybookRecordIdNotEntryRecordId",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96427,
+      "name": "SE Run Msg Tests",
+      "method": "RunJobQueueEntryOnceStillConfirmsAndMessages",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "GetReturnsSuccessWithEntryCounts",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "GetEntryCountsAreConsistent",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "RestartReturnsSuccessWithMessage",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "RestartIfNeededRestartsWhenNoJQEntry",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "RestartIfNeededSkipsWhenAlreadyRunning",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "RestartIfNeededSkipsWhenInProcess",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96419,
+      "name": "Status Msg Tests",
+      "method": "RestartIfNeededRestartsWhenInError",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_DisabledErrors_DoNotBlock",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_DisabledErrors_DoNotBlock_IsIS",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks_IsIS",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_EnabledError_StillBlocks",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_EnabledError_StillBlocks_IsIS",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC01_CleanPlaybook_HasZeroCounts",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96442,
+      "name": "Verify Summary Tests ori",
+      "method": "Scenario_AC02_Help_ExplainsBlockingCounts",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96408,
+      "name": "WhoAmI Contract Tests ori",
+      "method": "TelegramFieldDescribesCallerSetup",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96408,
+      "name": "WhoAmI Contract Tests ori",
+      "method": "Scenario_AC03_WhoAmIContract_HasNoAppName",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "SetValueAndGetValue",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "SetTokenAtNestedPath",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "SetTokenPreservesArray",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "WriteFromResponseWithRename",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "WriteFromResponseIteratedKeying",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "WriteFromResponseFirstElement",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "CollectGathersIterations",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "ToFilteredTextOnlyIncludesRequestedKeys",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "ResetClearsAllData",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "LastMonthEnd_TC001_September31DayMonth",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "LastMonthEnd_TC002_LeapYearFebruary",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "LastMonthEnd_TC003_JanuaryCrossYear",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "LastMonthEnd_TC004_May31ToApril30",
+      "isolation": "Codeunit"
+    },
+    {
+      "codeunit": 96401,
+      "name": "Workspace Test",
+      "method": "LastMonthStartThisMonthStart_TC005_FormulasUnchanged",
+      "isolation": "Codeunit"
+    }
+  ],
+  "ciReconciliation": {
+    "executed": 493,
+    "unique": 493,
+    "missing": [],
+    "unexpected": []
+  },
+  "parserCorrection": "Initial inventory omitted3quoted AL procedure names. Corrected parser preserves all source methods; runtime partitions never excluded them."
+}

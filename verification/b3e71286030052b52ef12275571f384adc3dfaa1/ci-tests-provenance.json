@@ -1,0 +1,22 @@
+{
+  "id": 13653859860,
+  "node_id": "MDg6QXJ0aWZhY3QxMzY1Mzg1OTg2MA==",
+  "name": "bc-origo-bifrost-orchestrator-codex_sindri-orchestrator159-whoami-TestTestResults-PR160-20261109",
+  "size_in_bytes": 9572,
+  "url": "https://api.github.com/repos/businesscentralal/bc-origo-bifrost-orchestrator/actions/artifacts/13653859860",
+  "archive_download_url": "https://api.github.com/repos/businesscentralal/bc-origo-bifrost-orchestrator/actions/artifacts/13653859860/zip",
+  "expired": false,
+  "digest": "sha256:cf3611acf564dcc4b8f0816607b0949be33922a0a51111b81e221bea43fc8a4b",
+  "created_at": "2026-11-09T06:46:41Z",
+  "updated_at": "2026-11-09T06:46:41Z",
+  "expires_at": "2027-02-07T06:31:16Z",
+  "workflow_run": {
+    "id": 42573531132,
+    "repository_id": 1358106412,
+    "head_repository_id": 1358106412,
+    "head_branch": "codex/sindri-orchestrator159-whoami",
+    "head_sha": "b3e71286030052b52ef12275571f384adc3dfaa1"
+  },
+  "downloadedAt": "2026-11-09T06:49:52.698Z",
+  "sha256": "cf3611acf564dcc4b8f0816607b0949be33922a0a51111b81e221bea43fc8a4b"
+}

@@ -1,0 +1,17 @@
+{
+  "containerId": "f0f3e993abcb",
+  "displayName": "worker3-orchestrator159-20261109-w1",
+  "owner": "worker-3",
+  "state": "Starting",
+  "httpStatus": 200,
+  "at": "2026-11-09T06:58:50.177072+00:00",
+  "fixturesCreated": false,
+  "appsDeployed": false,
+  "retention": "Retain same resource until Tester postdeploymentUAT and issue closure; provisioning blocked, no repeat creates or foreign changes",
+  "startRetry": {
+    "afterVerifiedState": "Stopped06:55:13.093Z",
+    "request": "start-owned-after-stopped.json",
+    "httpStatus": 204
+  },
+  "resourceStatePass": false
+}

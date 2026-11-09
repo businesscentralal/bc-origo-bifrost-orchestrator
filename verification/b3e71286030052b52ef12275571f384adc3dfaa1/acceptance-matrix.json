@@ -1,0 +1,138 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/159",
+  "pr": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/160",
+  "owner": "Sindri(worker-3)",
+  "criteria": [
+    {
+      "id": "AC01",
+      "requirement": "No Orchestrator branding in shared WhoAmI; move own wording into own chapters",
+      "implementation": "10035585 response-field description now caller/setup/empty semantics only;10035576 own workspace reference explains installed field and @_who access",
+      "status": "IMPLEMENTED; real-contract Orchestrator regression passed in exact-tip pairedCI; owned MCP/UI pending"
+    },
+    {
+      "id": "AC02",
+      "requirement": "Foundation98670 passes with Orchestrator installed",
+      "implementation": "Downloaded Foundation680 product/Test product/Test app from fe4cc372e7f94910931a3186bb147717fc6efc96;98670 source extracted and guard confirmed; own deploy/test pending",
+      "status": "NOT_RUN",
+      "passed": 0
+    },
+    {
+      "id": "AC03",
+      "requirement": "Orchestrator regression pins shared help neutrality",
+      "implementation": "96408 full real-contract serialization rejects case-insensitive orchestrator; retains exact once/type/source/empty assertions",
+      "status": "VERIFIED in pairedCI: both96408tests passed; own native suite still pending"
+    }
+  ],
+  "compile": {
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "dirty": "",
+    "checks": {
+      "app": {
+        "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+        "dirty": "",
+        "startedAt": "2026-11-09T06:30:26.366Z",
+        "finishedAt": "2026-11-09T06:30:37.598Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "6f78b4370aefde86feb63c94e7c7164b462289b4cfaba4717ea6801613d6dc9b"
+      },
+      "test": {
+        "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+        "dirty": "",
+        "startedAt": "2026-11-09T06:30:37.641Z",
+        "finishedAt": "2026-11-09T06:30:49.402Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "cf7add84712dabd6981c74ef5dea857705a8333b83e298b9b9c72cb51327e0fd"
+      }
+    }
+  },
+  "shipping": {
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "mode": "shipping no-IVT",
+    "baseline": "28.0.3.93",
+    "baselineRelease": "28.0.3",
+    "startedAt": "2026-11-09T06:31:11.108Z",
+    "finishedAt": "2026-11-09T06:31:28.549Z",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "publication": {
+    "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+    "branch": "codex/sindri-orchestrator159-whoami",
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/sindri-orchestrator159-whoami",
+    "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/commit/b3e71286030052b52ef12275571f384adc3dfaa1",
+    "remoteVerifiedAt": "2026-11-09T06:31:12.517Z"
+  },
+  "fullSuite": {
+    "ci": {
+      "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+      "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/42573531132",
+      "results": [
+        {
+          "file": "ci-tests/TestResults.xml",
+          "executed": 493,
+          "passed": 493,
+          "failed": 0,
+          "skipped": 0
+        }
+      ],
+      "WhoAmI": [
+        {
+          "classname": "96408 WhoAmI Contract Tests ori",
+          "name": "TelegramFieldDescribesCallerSetup",
+          "time": "0.107"
+        },
+        {
+          "classname": "96408 WhoAmI Contract Tests ori",
+          "name": "Scenario_AC03_WhoAmIContract_HasNoAppName",
+          "time": "0.007"
+        }
+      ]
+    },
+    "ownedContainer": {
+      "status": "NOT_RUN",
+      "sourceMethods": 493,
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "ui": {
+    "status": "NOT_RUN",
+    "lcids": [
+      1033,
+      1039
+    ],
+    "passed": 0
+  },
+  "mcp": {
+    "status": "NOT_RUN",
+    "types": [
+      "Help.WhoAmI.Get",
+      "Help.Implementation.Get",
+      "Help.Orchestrator.Get"
+    ],
+    "passed": 0
+  },
+  "environment": {
+    "id": "f0f3e993abcb",
+    "name": "worker3-orchestrator159-20261109-w1",
+    "owner": "worker-3",
+    "state": "Starting",
+    "expectedArtifact": "29.0W1",
+    "sourceOnCreation": "main855a673ff980dd30143922428b805a2a94e55c17",
+    "deploymentProvenance": "NOT_DEPLOYED; do not confuse creation source with final app source"
+  },
+  "cleanup": {
+    "fixturesCreated": false,
+    "resource": "Retain through TesterUAT/issue closure; stop when idle; never delete foreign resources"
+  },
+  "at": "2026-11-09T06:53:15.117174+00:00"
+}

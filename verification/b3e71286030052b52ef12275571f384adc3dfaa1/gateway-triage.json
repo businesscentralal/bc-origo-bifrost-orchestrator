@@ -1,0 +1,17 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "Layer1": "20/23; all findings triaged",
+  "triage": {
+    "namespace": "False positive: Help codeunit declares namespace after existing XML summary. No namespace change.",
+    "hardcoded_values": "Two existing user@company.is examples document WhoAmI references; no real recipient or secret.",
+    "changelog": "Current Unreleased28.0.4.0 entry includes159 and object IDs; checker requires a bracketed released heading. Not a missing entry."
+  },
+  "Layer2": {
+    "publicCompatibility": "No public symbol/field/parameter/enum changes; only help literal, test, CHANGELOG",
+    "security": "No permission, license, consent, outbound call, quota or backend behavior changes",
+    "test": "Real contract event invokes installed subscriber, full-contract branding rejection plus existing field-type/source/empty-value assertions",
+    "docs": "App-specific scope and playbook guidance moved to own help; shared field meaning retained",
+    "translation": "Existing help builder returns invariant Markdown; no localized label or XLF change. Check compiler XLF semantic comparison before handoff.",
+    "limitations": "Runtime acceptance pending"
+  }
+}

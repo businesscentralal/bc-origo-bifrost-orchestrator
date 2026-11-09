@@ -1,0 +1,14 @@
+{
+  "owner": "worker-3",
+  "containerId": "f0f3e993abcb",
+  "createdAt": "2026-11-09T06:26:43.605Z",
+  "initialWait": "90 status reads ended with15min readiness expired at approximately06:43; Pending until last read06:43:07.566Z. First complete history was overwritten when same readiness script was restarted after a state change; preserved early API snapshot, final probe and checkpoint timestamps remain. No test/deployment evidence overwritten.",
+  "apiSnapshot": "health-current-private.json statusPending",
+  "endpointProbe": "connection-probe.json HTTP503",
+  "appInfoProbe": "appinfo-probe.json HTTP400 pod not running",
+  "sshProbe": "runtime-initial.log SSH timeout",
+  "stopRequest": "stop-owned.json HTTP204",
+  "newStateReadback": "owned-after-stop-private.json Starting06:43:37.853162Z",
+  "nextAction": "Wait for changed Starting state; reuse same resource, no duplicate creates",
+  "recordedAt": "2026-11-09T06:45:06.798827+00:00"
+}

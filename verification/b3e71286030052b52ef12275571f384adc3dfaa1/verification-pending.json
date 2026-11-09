@@ -1,0 +1,38 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "owner": "worker-3",
+  "containerId": "f0f3e993abcb",
+  "noSourceReset": true,
+  "noFixtureOrFinancialWrites": true,
+  "deployedArtifacts": [],
+  "ownedNative": {
+    "status": "NOT_RUN",
+    "executed": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "MCP": {
+    "status": "NOT_RUN",
+    "executed": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "UI": {
+    "status": "NOT_RUN",
+    "executed": 0,
+    "passed": 0,
+    "languages": [
+      1033,
+      1039
+    ]
+  },
+  "dataCleanup": {
+    "created": 0,
+    "remaining": 0,
+    "verifiedBy": "No publish or fixture scripts executed; only environment lifecycle and read-only health/SSH/endpoint probes."
+  },
+  "resourceCleanup": "Stop204completed and confirmedStopped06:55:13.093Z, then same resource Start204 for verification retry; currentStarting. No apps or fixtures published/created; retain same resource through TesterUAT/issue closure.",
+  "originalEnvironmentRestoration": "Pending final checkpoint; prior-active-private.json and prior-settings-private.json retained mode0600."
+}

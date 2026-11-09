@@ -1,0 +1,25 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/42573531132",
+  "results": [
+    {
+      "file": "ci-tests/TestResults.xml",
+      "executed": 493,
+      "passed": 493,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "WhoAmI": [
+    {
+      "classname": "96408 WhoAmI Contract Tests ori",
+      "name": "TelegramFieldDescribesCallerSetup",
+      "time": "0.107"
+    },
+    {
+      "classname": "96408 WhoAmI Contract Tests ori",
+      "name": "Scenario_AC03_WhoAmIContract_HasNoAppName",
+      "time": "0.007"
+    }
+  ]
+}
