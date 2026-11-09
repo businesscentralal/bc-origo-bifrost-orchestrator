@@ -43,8 +43,7 @@ permissionset 10035539 "BIFROST PlaybVw ori"
         tabledata "Copy Plan ori" = R,
         tabledata "Copy Plan Field ori" = R,
 
-        page "Table Data ori" = X,
-        page "Table Data Fields ori" = X,
+        // Table Data pages edit/import arbitrary allowed tables; administration only (#155 AC2.7).
 
         page "Playbook Card ori" = X,
         page "Playbook Cond. Subpage ori" = X,

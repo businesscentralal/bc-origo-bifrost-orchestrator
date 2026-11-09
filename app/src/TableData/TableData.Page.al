@@ -241,15 +241,13 @@ page 10035569 "Table Data ori"
 
     local procedure ExportFile()
     var
-        TableJSONExport: Codeunit "Table JSON Export ori";
         TempBlob: Codeunit "Temp Blob";
         InStr: InStream;
         OutStr: OutStream;
-        FieldNos: List of [Integer];
         FileName: Text;
     begin
         TempBlob.CreateOutStream(OutStr, TextEncoding::UTF8);
-        TableJSONExport.ExportTable(TableNo, TableView, FieldNos).WriteTo(OutStr);
+        ExportTableData().WriteTo(OutStr);
         TempBlob.CreateInStream(InStr, TextEncoding::UTF8);
         FileName := FileNameTxt;
         DownloadFromStream(InStr, DownloadTitleTxt, '', '', FileName);
@@ -257,22 +255,42 @@ page 10035569 "Table Data ori"
 
     local procedure ImportFile()
     var
-        TableJSONImport: Codeunit "Table JSON Import ori";
         InStr: InStream;
         Envelope: JsonObject;
-        Result: JsonObject;
         FileName: Text;
     begin
         if not UploadIntoStream(UploadTitleTxt, '', '', FileName, InStr) then
             exit;
         if not Envelope.ReadFrom(InStr) then
             Error(ErrorInfo.Create(NotJsonErr));
+        if ImportTableData(Envelope) then
+            LoadRows();
+    end;
+
+    /// <summary>Exports the selected table view through the Phase 1 serializer-backed engine.</summary>
+    /// <returns>The Bifrost table data file envelope.</returns>
+    internal procedure ExportTableData(): JsonObject
+    var
+        TableJSONExport: Codeunit "Table JSON Export ori";
+        FieldNos: List of [Integer];
+    begin
+        exit(TableJSONExport.ExportTable(TableNo, TableView, FieldNos));
+    end;
+
+    /// <summary>Checks the uploaded file without writes, then imports only after explicit confirmation.</summary>
+    /// <param name="Envelope">Uploaded Bifrost table data file.</param>
+    /// <returns>True when the user confirmed the import.</returns>
+    internal procedure ImportTableData(Envelope: JsonObject): Boolean
+    var
+        TableJSONImport: Codeunit "Table JSON Import ori";
+        Result: JsonObject;
+    begin
         Result := TableJSONImport.ImportTable(Envelope, true, false);
         if not Confirm(DryRunQst, false, GetCount(Result, 'rows'), GetCount(Result, 'inserted'), GetCount(Result, 'modified'), GetCount(Result, 'failed')) then
-            exit;
+            exit(false);
         Result := TableJSONImport.ImportTable(Envelope, false, false);
         Message(ImportedMsg, GetCount(Result, 'inserted'), GetCount(Result, 'modified'), GetCount(Result, 'failed'));
-        LoadRows();
+        exit(true);
     end;
 
     local procedure GetCount(Result: JsonObject; KeyName: Text): Integer

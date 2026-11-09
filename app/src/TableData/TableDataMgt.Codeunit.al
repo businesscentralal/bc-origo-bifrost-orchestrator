@@ -110,6 +110,8 @@ codeunit 10035575 "Table Data Mgt ori"
             Error(ErrorInfo.Create(StrSubstNo(FieldNotShownErr, FieldNo)));
         if TempField."Part of Primary Key" then
             Error(ErrorInfo.Create(StrSubstNo(PrimaryKeyEditErr, TempField."Field Name")));
+        if not CanEditField(TableNo, RecordSystemId, FieldNo) then
+            Error(ErrorInfo.Create(StrSubstNo(FieldNotChangedErr, TempField."Field Name")));
         if NewValue = TempField.Value then
             exit;
         RecRef.Open(TableNo);
@@ -121,6 +123,38 @@ codeunit 10035575 "Table Data Mgt ori"
             Error(ErrorInfo.Create(StrSubstNo(FieldNotChangedErr, TempField."Field Name")));
         RecRef.Modify(true);
         RecRef.Close();
+    end;
+
+    /// <summary>Whether a readable, non-key field can be edited on the selected stored row.</summary>
+    /// <param name="TableNo">Table number.</param>
+    /// <param name="RecordSystemId">Stored row SystemId.</param>
+    /// <param name="FieldNo">Field number.</param>
+    /// <returns>False for a write-restricted table or an already filled write-once field.</returns>
+    internal procedure CanEditField(TableNo: Integer; RecordSystemId: Guid; FieldNo: Integer): Boolean
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        StoredRecord: RecordRef;
+        BlankRecord: RecordRef;
+        CanEdit: Boolean;
+    begin
+        if TempArgument.IsTableWriteRestrictedForDataRecords(TableNo, false) then
+            exit(false);
+        if not TempArgument.IsFieldWriteOnceForDataRecords(TableNo, FieldNo, false) then
+            exit(true);
+        StoredRecord.Open(TableNo);
+        if not StoredRecord.GetBySystemId(RecordSystemId) then begin
+            StoredRecord.Close();
+            exit(false);
+        end;
+        if StoredRecord.Field(FieldNo).Type in [FieldType::BLOB, FieldType::Media, FieldType::MediaSet] then begin
+            StoredRecord.Close();
+            exit(false);
+        end;
+        BlankRecord.Open(TableNo);
+        CanEdit := Format(StoredRecord.Field(FieldNo).Value(), 0, 9) = Format(BlankRecord.Field(FieldNo).Value(), 0, 9);
+        BlankRecord.Close();
+        StoredRecord.Close();
+        exit(CanEdit);
     end;
 
     /// <summary>The largest page size the viewer accepts.</summary>

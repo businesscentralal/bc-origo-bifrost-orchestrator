@@ -13,6 +13,9 @@ codeunit 96448 "Table Data Page Tests ori"
     var
         Assert: Codeunit "Library Assert";
         NewSourceValue: Text;
+        ConfirmImport: Boolean;
+        ImportMarkerId: Guid;
+        ReadOnlyFieldName: Text;
 
     /// <summary>AC2.1: open the page on a table, page forward and back.</summary>
     [Test]
@@ -98,6 +101,153 @@ codeunit 96448 "Table Data Page Tests ori"
         Assert.IsTrue(TableDataFields.FindFirstField("Field Name", 'Source'), 'Source is listed');
         TableDataFields.Value.SetValue(NewSourceValue);
         TableDataFields.OK().Invoke();
+    end;
+
+    /// <summary>AC2.4: the fields page renders a write-restricted table read-only.</summary>
+    [Test]
+    [HandlerFunctions('ReadOnlyFieldHandler')]
+    procedure AC24_RestrictedTablePageIsReadOnly()
+    var
+        Marker: Record "Test Run Marker";
+        Restrictions: Codeunit "Library Orchestrator";
+        FieldsPage: Page "Table Data Fields ori";
+    begin
+        DeleteMarkers();
+        InsertMarker('TJP-READONLY');
+        Marker.SetRange(Source, 'TJP-READONLY');
+        Marker.FindFirst();
+        Restrictions.SetTableDataRestrictions(false, true);
+        BindSubscription(Restrictions);
+        ReadOnlyFieldName := 'Source';
+        FieldsPage.SetRecord(Database::"Test Run Marker", Marker.SystemId);
+        FieldsPage.RunModal();
+        UnbindSubscription(Restrictions);
+        DeleteMarkers();
+    end;
+
+    /// <summary>AC2.4: the fields page renders a filled write-once field read-only.</summary>
+    [Test]
+    [HandlerFunctions('ReadOnlyFieldHandler')]
+    procedure AC24_WriteOncePageIsReadOnly()
+    var
+        Child: Record "Test Copy Child ori";
+        Restrictions: Codeunit "Library Orchestrator";
+        FieldsPage: Page "Table Data Fields ori";
+    begin
+        Child.Code := 'TJP-ONCE';
+        Child.Amount := 12;
+        Child.Insert(true);
+        Restrictions.SetCopyAmountWriteOnce(true);
+        BindSubscription(Restrictions);
+        ReadOnlyFieldName := 'Amount';
+        FieldsPage.SetRecord(Database::"Test Copy Child ori", Child.SystemId);
+        FieldsPage.RunModal();
+        UnbindSubscription(Restrictions);
+        Child.Delete(true);
+    end;
+
+    [ModalPageHandler]
+    procedure ReadOnlyFieldHandler(var FieldsPage: TestPage "Table Data Fields ori")
+    begin
+        Assert.IsTrue(FieldsPage.FindFirstField("Field Name", ReadOnlyFieldName), 'Readable field is shown');
+        Assert.IsFalse(FieldsPage.Value.Editable(), 'Restricted field is read-only');
+        FieldsPage.OK().Invoke();
+    end;
+
+    /// <summary>AC2.5: page export and import share the Phase 1 envelope; dry run leaves data unchanged until confirmation.</summary>
+    [Test]
+    [HandlerFunctions('ImportConfirmHandler,ImportMessageHandler')]
+    procedure AC25_PageImportConfirmsAfterDryRun()
+    begin
+        VerifyPageImport(true);
+    end;
+
+    /// <summary>AC2.5: declining the page import confirmation leaves the exported row unchanged.</summary>
+    [Test]
+    [HandlerFunctions('ImportConfirmHandler')]
+    procedure AC25_PageImportCancellationDoesNotWrite()
+    begin
+        VerifyPageImport(false);
+    end;
+
+    [ConfirmHandler]
+    procedure ImportConfirmHandler(Question: Text[1024]; var Reply: Boolean)
+    var
+        Marker: Record "Test Run Marker";
+    begin
+        Assert.IsTrue(Question.Contains('Dry run of 1 rows: 0 to insert, 1 to modify, 0 failed'), 'Dry-run counts are shown before import');
+        Marker.GetBySystemId(ImportMarkerId);
+        Assert.AreEqual('TJP-FILE', Marker.Source, 'No write before confirmation');
+        Reply := ConfirmImport;
+    end;
+
+    [MessageHandler]
+    procedure ImportMessageHandler(Message: Text[1024])
+    begin
+        Assert.IsTrue(Message.Contains('0 rows inserted, 1 rows modified, 0 rows failed'), 'Import result is shown');
+    end;
+
+    local procedure VerifyPageImport(Confirmed: Boolean)
+    var
+        Marker: Record "Test Run Marker";
+        ChangeLogSetup: Record "Change Log Setup";
+        Coverage: Record "Change Log Setup (Table)";
+        TableData: Page "Table Data ori";
+        Envelope: JsonObject;
+        Row: JsonObject;
+        Fields: JsonObject;
+        Rows: JsonArray;
+        Token: JsonToken;
+        WasActivated: Boolean;
+        CoverageAdded: Boolean;
+    begin
+        DeleteMarkers();
+        InsertMarker('TJP-FILE');
+        Marker.SetRange(Source, 'TJP-FILE');
+        Marker.FindFirst();
+        ImportMarkerId := Marker.SystemId;
+        if not ChangeLogSetup.Get() then begin
+            ChangeLogSetup.Init();
+            ChangeLogSetup.Insert(true);
+        end;
+        WasActivated := ChangeLogSetup."Change Log Activated";
+        ChangeLogSetup."Change Log Activated" := true;
+        ChangeLogSetup.Modify(true);
+        CoverageAdded := not Coverage.Get(Database::"Test Run Marker");
+        if CoverageAdded then begin
+            Coverage."Table No." := Database::"Test Run Marker";
+            Coverage."Log Modification" := Coverage."Log Modification"::"All Fields";
+            Coverage.Insert(true);
+        end;
+        TableData.SetTable(Database::"Test Run Marker", Marker.GetView(true));
+        Envelope := TableData.ExportTableData();
+        Envelope.Get('format', Token);
+        Assert.AreEqual('bifrost-table-data', Token.AsValue().AsText(), 'Phase 1 export format');
+        Envelope.Get('rows', Token);
+        Rows := Token.AsArray();
+        Assert.AreEqual(1, Rows.Count(), 'One exported row');
+        Rows.Get(0, Token);
+        Row := Token.AsObject();
+        Row.Get('fields', Token);
+        Fields := Token.AsObject();
+        Fields.Replace('Source', 'TJP-IMPORTED');
+        Row.Replace('fields', Fields);
+        Rows.Set(0, Row);
+        Envelope.Replace('rows', Rows);
+        ConfirmImport := Confirmed;
+        Assert.AreEqual(Confirmed, TableData.ImportTableData(Envelope), 'Confirmation controls import');
+        Marker.GetBySystemId(ImportMarkerId);
+        if Confirmed then
+            Assert.AreEqual('TJP-IMPORTED', Marker.Source, 'Confirmed import persisted')
+        else
+            Assert.AreEqual('TJP-FILE', Marker.Source, 'Cancelled import did not persist');
+        DeleteMarkers();
+        if CoverageAdded then
+            if Coverage.Get(Database::"Test Run Marker") then
+                Coverage.Delete(true);
+        ChangeLogSetup.Get();
+        ChangeLogSetup."Change Log Activated" := WasActivated;
+        ChangeLogSetup.Modify(true);
     end;
 
     local procedure InsertMarker(Source: Text[50])

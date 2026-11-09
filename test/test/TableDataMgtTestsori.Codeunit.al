@@ -134,6 +134,95 @@ codeunit 96426 "Table Data Mgt Tests ori"
         Assert.AreEqual('EntryNo_', TableDataMgt.GetJsonKey('Entry No.'), 'Entry No.');
     end;
 
+    /// <summary>AC2.2: a read-restricted field is absent from both row summaries and record fields.</summary>
+    [Test]
+    procedure AC22_ReadRestrictedFieldIsHidden()
+    var
+        Marker: Record "Test Run Marker";
+        TempRow: Record "Table Data Row ori" temporary;
+        TempField: Record "Table Data Field ori" temporary;
+        Restrictions: Codeunit "Library Orchestrator";
+    begin
+        DeleteMarkers();
+        InsertMarker('TJD-HIDDEN');
+        Marker.SetRange(Source, 'TJD-HIDDEN');
+        Marker.FindFirst();
+        Restrictions.SetTableDataRestrictions(true, false);
+        BindSubscription(Restrictions);
+        TableDataMgt.LoadPage(Database::"Test Run Marker", '', 1, 500, TempRow);
+        TempRow.SetRange("Record SystemId", Marker.SystemId);
+        Assert.IsTrue(TempRow.FindFirst(), 'Owned row remains visible');
+        Assert.IsFalse(TempRow.Summary.Contains('TJD-HIDDEN'), 'Restricted value is absent from the summary');
+        TableDataMgt.LoadRecord(Database::"Test Run Marker", Marker.SystemId, TempField);
+        Assert.IsFalse(TempField.Get(Marker.FieldNo(Source)), 'Restricted field is absent');
+        UnbindSubscription(Restrictions);
+        DeleteMarkers();
+    end;
+
+    /// <summary>AC2.4: a write-restricted table is readable, marked read-only, and refuses a save.</summary>
+    [Test]
+    procedure AC24_WriteRestrictedTableRefusesSave()
+    var
+        Marker: Record "Test Run Marker";
+        TempField: Record "Table Data Field ori" temporary;
+        Restrictions: Codeunit "Library Orchestrator";
+    begin
+        DeleteMarkers();
+        InsertMarker('TJD-READONLY');
+        Marker.SetRange(Source, 'TJD-READONLY');
+        Marker.FindFirst();
+        Restrictions.SetTableDataRestrictions(false, true);
+        BindSubscription(Restrictions);
+        TableDataMgt.LoadRecord(Database::"Test Run Marker", Marker.SystemId, TempField);
+        Assert.IsTrue(TempField.Get(Marker.FieldNo(Source)), 'Readable field');
+        Assert.IsFalse(TableDataMgt.CanEditField(Database::"Test Run Marker", Marker.SystemId, Marker.FieldNo(Source)), 'Read-only');
+        Commit();
+        asserterror TableDataMgt.SaveField(Database::"Test Run Marker", Marker.SystemId, Marker.FieldNo(Source), 'TJD-CHANGED');
+        Assert.ExpectedError('cannot be written by the table data import');
+        Marker.Get(Marker."Entry No.");
+        Assert.AreEqual('TJD-READONLY', Marker.Source, 'Save did not write');
+        UnbindSubscription(Restrictions);
+        DeleteMarkers();
+        Commit();
+    end;
+
+    /// <summary>AC2.4: a filled write-once field is read-only and cannot be saved; a blank field remains open.</summary>
+    [Test]
+    procedure AC24_WriteOnceFieldRefusesSave()
+    var
+        Child: Record "Test Copy Child ori";
+        ChildCoverage: Record "Change Log Setup (Table)";
+        Restrictions: Codeunit "Library Orchestrator";
+        AddedChildCoverage: Boolean;
+    begin
+        Setup();
+        AddedChildCoverage := not ChildCoverage.Get(Database::"Test Copy Child ori");
+        if AddedChildCoverage then begin
+            ChildCoverage."Table No." := Database::"Test Copy Child ori";
+            ChildCoverage."Log Modification" := ChildCoverage."Log Modification"::"All Fields";
+            ChildCoverage.Insert(true);
+        end;
+        Child.Code := 'TJD-ONCE';
+        Child.Amount := 12;
+        Child.Insert(true);
+        Restrictions.SetCopyAmountWriteOnce(true);
+        BindSubscription(Restrictions);
+        Assert.IsFalse(TableDataMgt.CanEditField(Database::"Test Copy Child ori", Child.SystemId, Child.FieldNo(Amount)), 'Filled write-once field is read-only');
+        Commit();
+        asserterror TableDataMgt.SaveField(Database::"Test Copy Child ori", Child.SystemId, Child.FieldNo(Amount), '13');
+        Assert.ExpectedError('can be written only once');
+        Child.Get(Child.Code);
+        Assert.AreEqual(12, Child.Amount, 'Stored value is unchanged');
+        Child.Amount := 0;
+        Child.Modify(true);
+        Assert.IsTrue(TableDataMgt.CanEditField(Database::"Test Copy Child ori", Child.SystemId, Child.FieldNo(Amount)), 'Blank write-once field remains open');
+        UnbindSubscription(Restrictions);
+        Child.Delete(true);
+        if AddedChildCoverage then
+            ChildCoverage.Delete(true);
+        TearDown();
+    end;
+
     local procedure Setup()
     var
         ChangeLogSetup: Record "Change Log Setup";

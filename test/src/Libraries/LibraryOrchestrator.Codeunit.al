@@ -31,6 +31,29 @@ codeunit 96413 "Library Orchestrator"
             IsWriteOnce := true;
     end;
 
+    /// <summary>Restricts only owned Test Run Marker fields/tables while this subscriber is bound.</summary>
+    /// <param name="ReadField">Hide Source from generic readers.</param>
+    /// <param name="WriteTable">Refuse generic writes to the marker table.</param>
+    procedure SetTableDataRestrictions(ReadField: Boolean; WriteTable: Boolean)
+    begin
+        TableDataReadField := ReadField;
+        TableDataWriteTable := WriteTable;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnAfterIsFieldReadRestrictedForDataRecords', '', false, false)]
+    local procedure RestrictTableDataReadField(TableNo: Integer; FieldNo: Integer; var IsRestricted: Boolean)
+    begin
+        if TableDataReadField and (TableNo = Database::"Test Run Marker") and (FieldNo = 2) then
+            IsRestricted := true;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnAfterIsTableWriteRestrictedForDataRecords', '', false, false)]
+    local procedure RestrictTableDataWriteTable(TableNo: Integer; Force: Boolean; var IsRestricted: Boolean)
+    begin
+        if TableDataWriteTable and (TableNo = Database::"Test Run Marker") then
+            IsRestricted := true;
+    end;
+
     var
         TempJobQueueEntry: Record "Job Queue Entry" temporary;
         DoNotHandleCodeunitJobQueueEnqueueEvent: Boolean;
@@ -38,6 +61,8 @@ codeunit 96413 "Library Orchestrator"
         DoNotHandleSendNotificationEvent: Boolean;
         TrackingJobQueueEntryID: Guid;
         CopyAmountWriteOnce: Boolean;
+        TableDataReadField: Boolean;
+        TableDataWriteTable: Boolean;
         MultipleTrackJobQueueEntryErr: Label 'Can''t track multiple job queue entries';
         DoNotSkipProcessBatchInBackground: Boolean;
 

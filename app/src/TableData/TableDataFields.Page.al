@@ -1,7 +1,5 @@
 namespace Origo.Bifrost.Orchestrator;
 
-using Origo.Bifrost;
-
 /// <summary>
 /// Shows the readable fields of one record from the "Table Data ori" page and saves a changed value through
 /// "Table Data Mgt ori" (Foundation's "Serializer ori" and Modify(true)) (#155, Phase 2). Primary key fields, and all
@@ -66,11 +64,13 @@ page 10035573 "Table Data Fields ori"
     }
 
     trigger OnOpenPage()
-    var
-        TempArgument: Record "Message Argument ori" temporary;
     begin
         TableDataMgt.LoadRecord(TableNo, RecordSystemId, Rec);
-        CanEdit := not TempArgument.IsTableWriteRestrictedForDataRecords(TableNo, false);
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        CanEdit := TableDataMgt.CanEditField(TableNo, RecordSystemId, Rec."Field No.");
     end;
 
     var
