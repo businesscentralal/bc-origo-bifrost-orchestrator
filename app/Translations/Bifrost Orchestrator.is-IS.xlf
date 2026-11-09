@@ -1239,60 +1239,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Scheduler Setup ori - Field PrimaryKey - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 1913014239" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Copy plan %1 occurs twice in the parent hierarchy.</source>
-          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType CycleErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 2712193876" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Destination field %1 is mapped more than once.</source>
-          <target>Markreitnum %1 er varpað oftar en einu sinni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = field number, is-IS=Markreitnum %1 er varpað oftar en einu sinni.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType DuplicateFieldErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 1575191754" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Map destination primary-key field %1 before generating the playbook.</source>
-          <target>Varpaðu aðallykilsreitnum %1 í marktöflunni áður en keðjan er mynduð.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Varpaðu aðallykilsreitnum %1 í marktöflunni áður en keðjan er mynduð.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType MissingKeyErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 3660386871" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Copy plan %1 needs at least one active field mapping.</source>
-          <target>Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType NoFieldsErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 286251253" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Page size must be between 1 and 500.</source>
-          <target>Síðustærð verður að vera á milli 1 og 500.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Síðustærð verður að vera á milli 1 og 500.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PageSizeErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 3047469292" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Playbook %1 already exists. Choose a different plan code; generation never takes over an unrelated playbook.</source>
-          <target>Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PlaybookExistsErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 2217099951" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The source table view is invalid. Use existing field names and permitted filters.</source>
-          <target>Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SourceViewErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 3176109846" size-unit="char" translate="yes" xml:space="preserve">
-          <source>System fields cannot be mapped by a copy plan.</source>
-          <target>Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SystemFieldErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2797933787 - NamedType 3165231940" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Transform copy fields</source>
-          <target>Umbreyta afritunarreitum</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyta afritunarreitum</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType TransformDescriptionLbl</note>
-        </trans-unit>
         <trans-unit id="Table 392052156 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table Data Field</source>
           <target>Reitur töflugagna</target>
@@ -1424,6 +1370,60 @@
           <target>Samantekt</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Samantekt</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 1913014239" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy plan %1 occurs twice in the parent hierarchy.</source>
+          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType CycleErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 2712193876" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination field %1 is mapped more than once.</source>
+          <target>Markreitnum %1 er varpað oftar en einu sinni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field number, is-IS=Markreitnum %1 er varpað oftar en einu sinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType DuplicateFieldErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 1575191754" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Map destination primary-key field %1 before generating the playbook.</source>
+          <target>Varpaðu aðallykilsreitnum %1 í marktöflunni áður en keðjan er mynduð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Varpaðu aðallykilsreitnum %1 í marktöflunni áður en keðjan er mynduð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType MissingKeyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3660386871" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy plan %1 needs at least one active field mapping.</source>
+          <target>Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType NoFieldsErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 286251253" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page size must be between 1 and 500.</source>
+          <target>Síðustærð verður að vera á milli 1 og 500.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síðustærð verður að vera á milli 1 og 500.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PageSizeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3047469292" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 already exists. Choose a different plan code; generation never takes over an unrelated playbook.</source>
+          <target>Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PlaybookExistsErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 2217099951" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The source table view is invalid. Use existing field names and permitted filters.</source>
+          <target>Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SourceViewErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3176109846" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System fields cannot be mapped by a copy plan.</source>
+          <target>Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SystemFieldErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3165231940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform copy fields</source>
+          <target>Umbreyta afritunarreitum</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyta afritunarreitum</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType TransformDescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2492258583 - Method 1532249759 - NamedType 1807669104" size-unit="char" translate="yes" xml:space="preserve">
           <source>Environment information:</source>
