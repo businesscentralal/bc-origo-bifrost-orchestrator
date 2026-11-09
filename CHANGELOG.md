@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed (2026-11-09) - Table Data final-page navigation (#155)
+
+- Codeunit 10035575 `Table Data Mgt ori` now probes for a further row exactly once after filling a page. When only one row remains, Next Page on page 10035569 `Table Data ori` stays available; an exact final page still has no next page. Regression tests cover both boundaries and changing the page size through the page.
+
 ### Added (2026-11-09) - Table data viewer/editor and JSON export/import (#155, Phases 1 and 2)
 
 - New codeunit 10035558 `Table JSON Export ori` writes the rows of one table as a Bifrost table data file: `{ "format": "bifrost-table-data", "version": 1, "tableNo", "tableName", "rows": [...] }`. Each row is exactly the output of Foundation's public `Serializer ori.SerializeToJson` (primaryKey, id, fields). An optional table view is validated through `ApplyTableView` before it is applied; an empty field list writes every eligible field. A table that Foundation restricts for reading is refused with its restricted-table text and nothing is read.
