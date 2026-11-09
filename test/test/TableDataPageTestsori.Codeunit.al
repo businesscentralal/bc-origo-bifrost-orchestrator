@@ -20,9 +20,9 @@ codeunit 96448 "Table Data Page Tests ori"
         Index: Integer;
         FirstKey: Text;
     begin
-        // [GIVEN] 51 owned rows, spanning the default page boundary.
+        // [GIVEN] 120 owned rows, spanning three pages.
         Scope := CopyStr(Format(CreateGuid(), 0, 4), 1, MaxStrLen(Scope));
-        for Index := 1 to 51 do begin
+        for Index := 1 to 120 do begin
             Marker.Init();
             Marker."Entry No." := 0;
             Marker.Source := Scope;
@@ -37,7 +37,12 @@ codeunit 96448 "Table Data Page Tests ori"
         FirstKey := Browser."Primary Key".Value();
         Browser.NextPage.Invoke();
         Browser.CurrentPage.AssertEquals(2);
-        Assert.IsFalse(Browser.NextPage.Enabled(), 'No third page');
+        Assert.IsTrue(Browser.NextPage.Enabled(), 'Third page available');
+        Browser.NextPage.Invoke();
+        Browser.CurrentPage.AssertEquals(3);
+        Assert.IsFalse(Browser.NextPage.Enabled(), 'No fourth page');
+        Browser.PreviousPage.Invoke();
+        Browser.CurrentPage.AssertEquals(2);
         Browser.PreviousPage.Invoke();
         Browser.First();
         // [THEN] The first page is stable and filtered.

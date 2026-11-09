@@ -17,6 +17,7 @@ codeunit 96425 "Table JSON Import Tests ori"
         Assert: Codeunit Assert;
         RestrictRead: Boolean;
         RestrictWriteOnce: Boolean;
+        RestrictTableWrite: Boolean;
         HadCoverage: Boolean;
         WasActivated: Boolean;
 
@@ -234,6 +235,17 @@ codeunit 96425 "Table JSON Import Tests ori"
         UnbindSubscription(Guard);
         Marker.Get(Marker."Entry No.");
         Assert.AreEqual('Before import', Marker.Source, 'Write-once value unchanged');
+        Guard.SetRestrictions(false, false);
+        Guard.SetTableWriteRestriction(true);
+        BindSubscription(Guard);
+        Mgt.LoadRecord(Database::"Test Run Marker", Row, TempFields);
+        TempFields.Get(2);
+        Assert.IsFalse(TempFields."Can Edit", 'Write-restricted table is read-only');
+        asserterror Mgt.SaveField(Database::"Test Run Marker", Row, 2, 'Forbidden table write');
+        Assert.ExpectedError('read-only');
+        UnbindSubscription(Guard);
+        Marker.Get(Marker."Entry No.");
+        Assert.AreEqual('Before import', Marker.Source, 'Write-restricted table unchanged');
         Cleanup(Marker);
     end;
 
@@ -242,6 +254,19 @@ codeunit 96425 "Table JSON Import Tests ori"
     begin
         RestrictRead := ReadRestricted;
         RestrictWriteOnce := WriteOnce;
+    end;
+
+    /// <summary>Closes only the owned marker table for the table-write guard scenario.</summary>
+    procedure SetTableWriteRestriction(Restricted: Boolean)
+    begin
+        RestrictTableWrite := Restricted;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnAfterIsTableWriteRestrictedForDataRecords', '', false, false)]
+    local procedure RestrictMarkerTableWrite(TableNo: Integer; Force: Boolean; var IsRestricted: Boolean)
+    begin
+        if RestrictTableWrite and (TableNo = Database::"Test Run Marker") then
+            IsRestricted := true;
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", 'OnAfterIsFieldReadRestrictedForDataRecords', '', false, false)]
