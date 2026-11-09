@@ -55,9 +55,8 @@ codeunit 10035575 "Table Data Mgt ori"
         repeat
             RowCount += 1;
             AddRow(TempRow, RowCount, TableJSONExport.SerializeRow(RecRef, FieldNos));
-        until (RowCount = PageSize) or (RecRef.Next() = 0);
-        if RowCount = PageSize then
             HasMore := RecRef.Next() <> 0;
+        until (RowCount = PageSize) or not HasMore;
         RecRef.Close();
         if TempRow.FindFirst() then;
     end;

@@ -41,6 +41,21 @@ codeunit 96426 "Table Data Mgt Tests ori"
         DeleteMarkers();
     end;
 
+    /// <summary>AC2.1: exactly one remaining row still enables the next page; lookahead advances only once.</summary>
+    [Test]
+    procedure AC21_OneRemainingRowHasNextPage()
+    var
+        TempRow: Record "Table Data Row ori" temporary;
+    begin
+        DeleteMarkers();
+        InsertMarkers(3);
+        Assert.IsTrue(TableDataMgt.LoadPage(Database::"Test Run Marker", OwnedView(), 1, 2, TempRow), 'The third row enables Next Page');
+        Assert.AreEqual(2, TempRow.Count(), 'First page has two rows');
+        Assert.IsFalse(TableDataMgt.LoadPage(Database::"Test Run Marker", OwnedView(), 2, 2, TempRow), 'The second page is last');
+        Assert.AreEqual(1, TempRow.Count(), 'Final row remains visible');
+        DeleteMarkers();
+    end;
+
     /// <summary>AC2.1: the table view filters the rows and each row shows its key and a summary.</summary>
     [Test]
     procedure AC21_ViewFiltersAndRowShowsSummary()

@@ -8,6 +8,7 @@ Business Central release versioning (`major.minor.build.revision`).
 ## [Unreleased]
 
 ### Fixed
+- Table Data paging (10035575): advance lookahead once per row so Next Page remains enabled when exactly one row remains after a full page. Added three-row/two-row-page management and page regressions (96426/96448).
 - #155 / PR157: Table Data pages (10035569/10035573) are administration-only; removed their PlaybVw grants rather than exposing edit/import actions to viewers. PlaybAdm grants remain, and ordinary table permissions/Foundation guards still apply. This is the reviewed least-privilege option, not a new read-only Table Data role.
 - Table Data Fields now marks filled write-once fields read-only and management (10035575) refuses saving them. Added hidden-field, restricted-table/write-once and page import/export dry-run regression tests (96426/96448); test-only restrictive subscribers remain manually bound to owned fixtures.
 
