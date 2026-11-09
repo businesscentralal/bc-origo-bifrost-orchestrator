@@ -1,0 +1,35 @@
+{
+  "at": "2026-11-09T08:45:12.431Z",
+  "containerId": "f0f3e993abcb",
+  "owner": "worker-3",
+  "candidateSha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "apps": [
+    {
+      "Id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "Name": "Bifrost Orchestrator",
+      "Publisher": "Origo",
+      "Version": "28.0.4.0"
+    },
+    {
+      "Id": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "Name": "Bifrost Orchestrator - Tests",
+      "Publisher": "Origo",
+      "Version": "28.0.4.0"
+    },
+    {
+      "Id": "7505e808-6e52-4b96-a328-82573391297a",
+      "Name": "Bifrost Foundation",
+      "Publisher": "Origo",
+      "Version": "28.0.12.680"
+    },
+    {
+      "Id": "9db1a0c9-c503-4793-a9e4-bcda3d3f3c94",
+      "Name": "Bifrost Foundation - Tests",
+      "Publisher": "Origo",
+      "Version": "28.0.12.680"
+    }
+  ],
+  "versionsMatchPriorDeployment": true,
+  "retainedArtifactsHashMatch": true,
+  "publicationReplay": false
+}

@@ -1,0 +1,41 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "containerId": "f0f3e993abcb",
+  "fixture": {
+    "TelegramChatId": "159071109",
+    "restored": "empty",
+    "remaining": 0,
+    "verified": true,
+    "evidence": [
+      "mcp-whoami-cleanup-1033.json",
+      "mcp-whoami-cleanup-1039.json",
+      "ui-cleanup-fixture.png"
+    ]
+  },
+  "profile": {
+    "originalLanguage": 1033,
+    "testLanguage": 1039,
+    "restoreSelected": 1033,
+    "restoreVerified": true,
+    "nextAction": "No furtherprofilemutation; verifiedEnglish1033andemptyTelegramfield.",
+    "verifiedAt": "2026-11-09T08:50:19.434773+00:00",
+    "evidence": [
+      "/workspace/evidence/orchestrator159-profile-worker3-20261109/ui-settings-english-final-mcp.json",
+      "/workspace/evidence/orchestrator159-profile-worker3-20261109/ui-editor-readback-mcp.json",
+      "/workspace/evidence/orchestrator159-profile-worker3-20261109/ui-english-cleanup-final.png"
+    ]
+  },
+  "resource": {
+    "containerId": "f0f3e993abcb",
+    "displayName": "worker3-orchestrator159-20261109-w1",
+    "owner": "worker-3",
+    "state": "Stopped",
+    "httpStatus": 200,
+    "at": "2026-11-09T08:49:56.590Z",
+    "stoppedVerified": true,
+    "deleted": false,
+    "retention": "Retain same owned resource until Tester postdeployUAT and issue closure. No new create or blind redeploy. Installed source candidateb3e712 and Foundation680 retained.",
+    "remainingCleanup": "None forprofileorTelegramfixture; resource retainedpendingpostdeployUATandissueclosure."
+  },
+  "otherWrites": "No customer/shared fixtures, credentials, consent/trial/licence/counter/backend or outbound provider writes. Native suite uses standard isolation and declared disabled partition."
+}
