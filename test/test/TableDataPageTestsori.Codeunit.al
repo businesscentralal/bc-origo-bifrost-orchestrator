@@ -29,7 +29,7 @@ codeunit 96448 "Table Data Page Tests ori"
         Marker.SetFilter(Source, 'TJP-*');
         // [WHEN] The page is opened on the table with a view on the owned rows
         TableData.OpenEdit();
-        TableData.TableViewField.SetValue(Marker.GetView(false));
+        TableData.TableViewField.SetValue(Marker.GetView(true));
         TableData.TableNoField.SetValue(Database::"Test Run Marker");
         // [THEN] Page 1 is shown, Next moves to page 2 and Previous back to page 1
         Assert.AreEqual('1', TableData.PageNoField.Value(), 'Page 1');
@@ -73,7 +73,7 @@ codeunit 96448 "Table Data Page Tests ori"
         end;
         Marker.SetRange(Source, 'TJP-EDIT');
         TableData.OpenEdit();
-        TableData.TableViewField.SetValue(Marker.GetView(false));
+        TableData.TableViewField.SetValue(Marker.GetView(true));
         TableData.TableNoField.SetValue(Database::"Test Run Marker");
         TableData.First();
         // [WHEN] The record is opened and Source is edited in the fields page

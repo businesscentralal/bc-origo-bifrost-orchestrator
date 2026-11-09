@@ -30,7 +30,7 @@ codeunit 96406 "Table JSON Export Tests ori"
         InsertMarker('TJY-C');
         Marker.SetFilter(Source, 'TJX-*');
         // [WHEN] The table is exported with a view that filters on the prefix and an empty field list
-        Envelope := TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(false), FieldNos);
+        Envelope := TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(true), FieldNos);
         // [THEN] The envelope names the format and table, and holds only the two filtered rows
         Assert.AreEqual('bifrost-table-data', GetText(Envelope, 'format'), 'format');
         Assert.AreEqual(1, GetInteger(Envelope, 'version'), 'version');
@@ -58,7 +58,7 @@ codeunit 96406 "Table JSON Export Tests ori"
         Marker.SetRange(Source, 'TJX-ONE');
         Marker.FindFirst();
         // [WHEN] It is exported
-        Envelope := TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(false), FieldNos);
+        Envelope := TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(true), FieldNos);
         // [THEN] The row is the serializer envelope for the record
         GetRows(Envelope).Get(0, RowToken);
         RowToken.WriteTo(Actual);
@@ -83,7 +83,7 @@ codeunit 96406 "Table JSON Export Tests ori"
         Marker.SetRange(Source, 'TJX-FLD');
         FieldNos.Add(Marker.FieldNo(Source));
         // [WHEN] It is exported with that field list
-        Envelope := TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(false), FieldNos);
+        Envelope := TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(true), FieldNos);
         // [THEN] The fields object holds Source only and the primary key is separate
         GetRows(Envelope).Get(0, RowToken);
         RowToken.AsObject().Get('fields', FieldsToken);

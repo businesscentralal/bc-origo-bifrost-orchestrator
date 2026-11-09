@@ -54,7 +54,7 @@ codeunit 96426 "Table Data Mgt Tests ori"
         InsertMarker('TJD-B');
         Marker.SetRange(Source, 'TJD-B');
         // [WHEN] A page is loaded with a view on TJD-B
-        TableDataMgt.LoadPage(Database::"Test Run Marker", Marker.GetView(false), 1, 50, TempRow);
+        TableDataMgt.LoadPage(Database::"Test Run Marker", Marker.GetView(true), 1, 50, TempRow);
         // [THEN] Only that row is shown with its SystemId, key and summary
         Assert.AreEqual(1, TempRow.Count(), 'The view filters');
         TempRow.FindFirst();
@@ -110,6 +110,8 @@ codeunit 96426 "Table Data Mgt Tests ori"
         InsertMarker('TJD-KEEP');
         Marker.SetRange(Source, 'TJD-KEEP');
         Marker.FindFirst();
+        // Error() inside SaveField rolls the test transaction back to the last commit.
+        Commit();
         // [WHEN] A text longer than the field is saved
         asserterror TableDataMgt.SaveField(Database::"Test Run Marker", Marker.SystemId, Marker.FieldNo(Source), PadStr('TJD-', 60, 'X'));
         // [THEN] It is refused and the record is unchanged
@@ -166,6 +168,8 @@ codeunit 96426 "Table Data Mgt Tests ori"
         ChangeLogSetup.Get();
         ChangeLogSetup."Change Log Activated" := WasActivated;
         ChangeLogSetup.Modify(true);
+        // The invalid-value test commits its marker so the refusal does not erase it. Commit the cleanup too.
+        Commit();
     end;
 
     local procedure OwnedView(): Text
@@ -173,7 +177,7 @@ codeunit 96426 "Table Data Mgt Tests ori"
         Marker: Record "Test Run Marker";
     begin
         Marker.SetFilter(Source, 'TJD-*');
-        exit(Marker.GetView(false));
+        exit(Marker.GetView(true));
     end;
 
     local procedure InsertMarkers(Count: Integer)

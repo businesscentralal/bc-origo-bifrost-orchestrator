@@ -116,6 +116,8 @@ codeunit 96425 "Table JSON Import Tests ori"
         Envelope := ExportOwned();
         SetRowSource(Envelope, 0, 'TJI-A2');
         SetRowSource(Envelope, 1, PadStr('TJI-', 60, 'X'));
+        // Error() on stop-on-error rolls the test transaction back to the last commit.
+        Commit();
         // [WHEN] The file is imported with Stop On Error
         asserterror TableJSONImport.ImportTable(Envelope, false, true);
         // [THEN] The import names the failed row and nothing is written
@@ -217,6 +219,8 @@ codeunit 96425 "Table JSON Import Tests ori"
         ChangeLogSetup.Get();
         ChangeLogSetup."Change Log Activated" := WasActivated;
         ChangeLogSetup.Modify(true);
+        // The stop-on-error test commits its markers so the refusal does not erase them. Commit the cleanup too.
+        Commit();
     end;
 
     local procedure ExportOwned(): JsonObject
@@ -225,7 +229,7 @@ codeunit 96425 "Table JSON Import Tests ori"
         FieldNos: List of [Integer];
     begin
         Marker.SetFilter(Source, 'TJI-*');
-        exit(TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(false), FieldNos));
+        exit(TableJSONExport.ExportTable(Database::"Test Run Marker", Marker.GetView(true), FieldNos));
     end;
 
     local procedure SetRowSource(var Envelope: JsonObject; RowIndex: Integer; NewSource: Text)
