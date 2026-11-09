@@ -41,6 +41,40 @@ codeunit 96426 "Table Data Mgt Tests ori"
         DeleteMarkers();
     end;
 
+    /// <summary>AC2.1: one row after a full page still makes the next page available.</summary>
+    [Test]
+    procedure AC21_OneRemainingRowKeepsNextPageAvailable()
+    var
+        TempRow: Record "Table Data Row ori" temporary;
+        View: Text;
+    begin
+        // Story #155, AC2.1 | Time: independent of Today and WorkDate | Risk: None
+        // [GIVEN] Three owned rows and a page size of two
+        DeleteMarkers();
+        InsertMarkers(3);
+        View := OwnedView();
+        // [WHEN/THEN] The first page advertises its single remaining row
+        Assert.IsTrue(TableDataMgt.LoadPage(Database::"Test Run Marker", View, 1, 2, TempRow), 'One remaining row needs a next page');
+        Assert.AreEqual(2, TempRow.Count(), 'First page rows');
+        Assert.IsFalse(TableDataMgt.LoadPage(Database::"Test Run Marker", View, 2, 2, TempRow), 'The second page is the last');
+        Assert.AreEqual(1, TempRow.Count(), 'The final row is reachable');
+        DeleteMarkers();
+    end;
+
+    /// <summary>AC2.1: a full final page does not advertise an empty next page.</summary>
+    [Test]
+    procedure AC21_ExactPageHasNoNextPage()
+    var
+        TempRow: Record "Table Data Row ori" temporary;
+    begin
+        // Story #155, AC2.1 | Time: independent of Today and WorkDate | Risk: None
+        DeleteMarkers();
+        InsertMarkers(2);
+        Assert.IsFalse(TableDataMgt.LoadPage(Database::"Test Run Marker", OwnedView(), 1, 2, TempRow), 'An exact page is the last');
+        Assert.AreEqual(2, TempRow.Count(), 'Both rows are retained');
+        DeleteMarkers();
+    end;
+
     /// <summary>AC2.1: the table view filters the rows and each row shows its key and a summary.</summary>
     [Test]
     procedure AC21_ViewFiltersAndRowShowsSummary()

@@ -43,6 +43,34 @@ codeunit 96448 "Table Data Page Tests ori"
         DeleteMarkers();
     end;
 
+    /// <summary>AC2.1: changing page size preserves navigation to a single final row.</summary>
+    [Test]
+    procedure AC21_PageSizeChangeKeepsSingleFinalRowReachable()
+    var
+        Marker: Record "Test Run Marker";
+        TableData: TestPage "Table Data ori";
+        Index: Integer;
+    begin
+        // Story #155, AC2.1 | Time: independent of Today and WorkDate | Risk: None
+        DeleteMarkers();
+        for Index := 1 to 3 do
+            InsertMarker(CopyStr('TJP-' + Format(Index), 1, 50));
+        Marker.SetFilter(Source, 'TJP-*');
+        TableData.OpenEdit();
+        TableData.TableViewField.SetValue(Marker.GetView(true));
+        TableData.TableNoField.SetValue(Database::"Test Run Marker");
+        TableData.PageSizeField.SetValue(2);
+        Assert.IsTrue(TableData.NextPage.Enabled(), 'One remaining row enables Next');
+        TableData.NextPage.Invoke();
+        Assert.AreEqual('2', TableData.PageNoField.Value(), 'The final page is reached');
+        Assert.IsTrue(TableData.First(), 'The final page has its remaining row');
+        Assert.IsFalse(TableData.NextPage.Enabled(), 'No third page');
+        TableData.PreviousPage.Invoke();
+        Assert.AreEqual('1', TableData.PageNoField.Value(), 'Previous returns to page one');
+        TableData.Close();
+        DeleteMarkers();
+    end;
+
     /// <summary>AC2.3: Open Record shows the fields and an edit of Source is saved.</summary>
     [Test]
     [HandlerFunctions('EditSourceHandler')]
