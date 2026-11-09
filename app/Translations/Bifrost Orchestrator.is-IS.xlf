@@ -2763,6 +2763,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlun</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3082714482 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target>Almennt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Almennt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Control General - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3082714482 - Action 2668085354 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Creates the copy playbook or replaces its previously generated steps.</source>
           <target>Býr til afritunarkeðju eða skiptir út áður mynduðum skrefum hennar.</target>

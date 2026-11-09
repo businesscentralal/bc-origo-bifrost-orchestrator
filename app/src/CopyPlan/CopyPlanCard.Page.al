@@ -16,6 +16,8 @@ page 10035604 "Copy Plan Card ori"
         {
             group(General)
             {
+                Caption = 'General', Comment = 'is-IS=Almennt';
+
                 field("Code"; Rec."Code")
                 {
                     ApplicationArea = All;
