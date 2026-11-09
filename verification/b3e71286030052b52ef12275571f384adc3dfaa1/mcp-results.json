@@ -1,0 +1,96 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "containerId": "f0f3e993abcb",
+  "owner": "worker-3",
+  "touchedMessageTypes": [
+    "Help.WhoAmI.Get",
+    "Help.Implementation.Get",
+    "Help.Orchestrator.Get"
+  ],
+  "finalScenarios": 10,
+  "finalPassed": 10,
+  "finalFailed": 0,
+  "finalSkipped": 0,
+  "createsOwnData": true,
+  "fixture": "Own caller setup created on new owned container; native UI seeded only Telegram159071109; MCP read value1033/1039; native UI restoredempty and MCP confirmed bothLCIDs. No customer/shared fixtures or forbidden generic-data bypass.",
+  "scenarios": [
+    {
+      "type": "Help.Implementation.Get",
+      "lcid": 1033,
+      "scenario": "Full WhoAmI help contract: no app name, Telegram field type/source/empty semantics retained",
+      "passed": true
+    },
+    {
+      "type": "Help.Orchestrator.Get",
+      "lcid": 1033,
+      "scenario": "App-specific installation and playbook guidance in own help",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1033,
+      "scenario": "empty own caller Telegram field",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "type": "Help.Implementation.Get",
+      "lcid": 1039,
+      "scenario": "Full WhoAmI help contract: no app name, Telegram field type/source/empty semantics retained",
+      "passed": true
+    },
+    {
+      "type": "Help.Orchestrator.Get",
+      "lcid": 1039,
+      "scenario": "App-specific installation and playbook guidance in own help",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1039,
+      "scenario": "empty own caller Telegram field",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1033,
+      "scenario": "seeded own caller Telegram field",
+      "expected": "159071109",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1039,
+      "scenario": "seeded own caller Telegram field",
+      "expected": "159071109",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1033,
+      "scenario": "cleanup own caller Telegram field",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1039,
+      "scenario": "cleanup own caller Telegram field",
+      "expected": "",
+      "passed": true
+    }
+  ],
+  "at": "2026-11-09T07:28:54.706764+00:00",
+  "acceptanceAssertionAttempts": {
+    "executed": 11,
+    "passed": 10,
+    "failed": 1,
+    "skipped": 0,
+    "failure": "First cleanup read correctly found159071109; the unfocused UI span was not a persisted cleanup. Fixed by focusing native field, verifying exact owned value, clearing, and reading bothLCIDs again."
+  },
+  "diagnosticCalls": {
+    "internalTableReadRefusals": 1,
+    "reason": "Generic UserSetup read was correctlyrefused. No force/bypass used; cleanup performed via native UI."
+  }
+}

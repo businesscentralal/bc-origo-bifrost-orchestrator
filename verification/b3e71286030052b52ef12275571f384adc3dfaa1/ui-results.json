@@ -1,0 +1,19 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "containerId": "f0f3e993abcb",
+  "acceptanceScenarios": 2,
+  "passed": 2,
+  "failed": 0,
+  "lcids": [
+    1033,
+    1039
+  ],
+  "scenarios": [
+    "1033 native caller User Setup Editor Telegram fixture saved and MCP returnedexactvalue",
+    "1039 actual translated User Setup Editor and Telegram caption displayed persisted fixture"
+  ],
+  "cleanup": "Native focus/read159071109, clear and save; bothLCID MCP responsesnowempty",
+  "languageRestored": false,
+  "languageRestoreStatus": "UNVERIFIED: selectedEnglish1033 through native lookup, final English field lookup timed out; resource stopped. Next inspect actual MySettings before replaying a change.",
+  "harnessNotes": "Language-is detached old frame after profile reload; actual1039UI readbackpassed. Unfocused BC textbox is a span; earlier cleanupinputValue failed and cleanup was not assumed; focused field cleanup and liveMCP readbackverified. Native lookup required grid-scoped selection; exact English selection submitted. Final actual English editor lookup failed, so restoration is not markedpassed."
+}

@@ -1,0 +1,921 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "owner": "worker-3",
+  "containerId": "f0f3e993abcb",
+  "at": "2026-11-09T07:08:53.093Z",
+  "compile": {
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "dirty": "",
+    "checks": {
+      "app": {
+        "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+        "dirty": "",
+        "startedAt": "2026-11-09T06:30:26.366Z",
+        "finishedAt": "2026-11-09T06:30:37.598Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "6f78b4370aefde86feb63c94e7c7164b462289b4cfaba4717ea6801613d6dc9b"
+      },
+      "test": {
+        "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+        "dirty": "",
+        "startedAt": "2026-11-09T06:30:37.641Z",
+        "finishedAt": "2026-11-09T06:30:49.402Z",
+        "exitCode": 0,
+        "errors": 0,
+        "warnings": 0,
+        "artifactSha256": "cf7add84712dabd6981c74ef5dea857705a8333b83e298b9b9c72cb51327e0fd"
+      }
+    }
+  },
+  "shipping": {
+    "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+    "mode": "shipping no-IVT",
+    "baseline": "28.0.3.93",
+    "baselineRelease": "28.0.3",
+    "startedAt": "2026-11-09T06:31:11.108Z",
+    "finishedAt": "2026-11-09T06:31:28.549Z",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "apps": [
+    {
+      "Id": "b4305a63-f987-425b-8520-ca9ccf7b22b6",
+      "Name": "E-Document Connector - B2Brouter",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "d852d5d2-a39d-4179-baeb-f99a19e32510",
+      "Name": "Application Test Library",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "d852a468-263e-49e5-bfda-f09e33342b89",
+      "Name": "E-Document Connector - Pagero",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "57623bfa-0559-4bc2-ae1c-0979c29fc8d1",
+      "Name": "Business Central Cloud Migration API",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "10cb69d9-bc8a-4d27-970a-9e110e9db2a5",
+      "Name": "_Exclude_APIV2_",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "8c972578-fe72-4aa5-ae51-cc5575fef2ea",
+      "Name": "Send To Email Printer",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "7a129d06-5fd6-4fb6-b82b-0bf539c779d0",
+      "Name": "_Exclude_Bank Deposits",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "8a3db2bc-9378-4d0f-b89a-a7dea0555449",
+      "Name": "Subscription Billing Demo Data",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ce295b13-0f47-4175-96f9-280f1e6734f2",
+      "Name": "Intrastat Core Demo Data",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "8afe7b40-8c87-4beb-ada0-451d1761bf95",
+      "Name": "_Exclude_APIV1_",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "2654d7e7-9afd-4947-9e02-6bb8f3e0cd04",
+      "Name": "Universal Print Integration",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f4a198ad-cd8c-44bb-aff1-814e0e28ab79",
+      "Name": "E-Document Connector - Logiq",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f2d0130c-4b0e-437a-bcfd-0dc9f84ac961",
+      "Name": "AI Development Toolkit",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "Name": "Library Assert",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "3721d519-67eb-43ee-b55b-8a85c87c292d",
+      "Name": "English language (New Zealand)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "2fd9cbd8-c94a-46d6-8274-ea6ccb244f12",
+      "Name": "Service Management",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "672777d5-ab26-4369-b334-6f04256efffd",
+      "Name": "_Exclude_Onboarding Signals",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "2156302a-872f-4568-be0b-60968696f0d5",
+      "Name": "AI Test Toolkit",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "51ba3799-d76c-4cf0-afd3-e2c2f6c0576b",
+      "Name": "Italian language (Italy)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c75a45c6-4e83-46e1-b17b-48c6506c19f3",
+      "Name": "French language (France)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e2ae191d-8829-44c3-a373-3749a2742d4d",
+      "Name": "Service Declaration",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "d09fa965-9a2a-424d-b704-69f3b54ed0ce",
+      "Name": "Payment Links to PayPal",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e1966889-b5fb-4fda-a84c-ea71b590e1a9",
+      "Name": "PEPPOL",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "70912191-3c4c-49fc-a1de-bc6ea1ac9da6",
+      "Name": "Intrastat Core",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a7bd3b4e-5469-4185-88b5-06745dd4c153",
+      "Name": "Excise Taxes",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5095f467-0a01-4b99-99d1-9ff1237d286f",
+      "Name": "Library Variable Storage",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "8fc50dfb-d338-4fd9-9499-5e44cc8cbf50",
+      "Name": "Email - SMTP API",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "aefe4506-6a2f-4ce4-8ba3-2c87dbc26f53",
+      "Name": "Spanish language (Spain)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a01864f8-9c3f-42f6-8328-8d7be1ce3e20",
+      "Name": "_Exclude_Master_Data_Management",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f8555f70-8cfe-46a2-b961-444c8af4cf4f",
+      "Name": "Finnish language (Finland)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "14aa1237-2f69-4c25-9a68-fa7d54e08613",
+      "Name": "Payables Agent",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f35c56a6-7c5f-4dbe-89c4-fef5145d00f4",
+      "Name": "E-Document Connector - Avalara",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "87990153-0e35-4e5d-ba61-2e93077d1699",
+      "Name": "Review General Ledger Entries",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "3556cc45-5df4-46aa-8162-058cb6fea4f0",
+      "Name": "Performance Toolkit Tests",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
+      "Name": "Tests-TestLibraries",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a0673989-48a4-48a0-9517-499c9f4037d3",
+      "Name": "Sustainability Contoso Coffee Demo Dataset",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "6f2c034f-5ebe-4eae-b34c-90a0d4e87687",
+      "Name": "_Exclude_Business_Events_",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f78952ee-aed3-43bb-896e-6598f98a3a35",
+      "Name": "AI Development Toolkit - Design",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "cb8f8fd2-7704-470a-bc12-40ff71ee6a30",
+      "Name": "French language (Belgium)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "972624b9-849a-40cd-98b1-fd0924b0defe",
+      "Name": "Calculate Sustainability Emission with Copilot",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ec255f57-31d0-4ca2-b751-f2fa7c745abb",
+      "Name": "Shopify Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c1335042-3002-4257-bf8a-75c898ccb1b8",
+      "Name": "Application",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "Name": "Bifrost Orchestrator",
+      "Publisher": "Origo",
+      "Version": "28.0.4.0"
+    },
+    {
+      "Id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
+      "Name": "Any",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "b56171bd-9a8e-47ad-a527-99f476d5af83",
+      "Name": "E-Document Connector - SignUp",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c50a4bf0-db51-4ad2-88d5-fe2287da0eb8",
+      "Name": "VAT Group Management",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e86e9234-8b95-459d-a9ba-4d901208ca38",
+      "Name": "_Exclude_Microsoft Dynamics 365 - SmartList",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "334ef79e-547e-4631-8ba1-7a7f18e14de6",
+      "Name": "Business Central Intelligent Cloud",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f1ede36c-2f5f-47f1-ba20-258b509c0238",
+      "Name": "Agent Samples Tests",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "0c098979-eadd-452c-90b1-6fd183e95651",
+      "Name": "English language (United Kingdom)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "1f32a50d-0057-4b95-b5df-cc04d7e89470",
+      "Name": "Subcontracting",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ce917438-506c-4724-9b01-13c1b860e851",
+      "Name": "Microsoft Pay Payments",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ea130081-c669-460f-a5f4-5dde14f03131",
+      "Name": "Statistical Accounts",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e2ae191d-8829-44c3-a373-3749a2742d4e",
+      "Name": "Enforced Digital Vouchers",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "2363a2b7-1018-4976-a32a-c77338dc9f16",
+      "Name": "Dynamics 365 Business Central v14 Reimplementation",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "bdbd8422-02d6-4b5f-9a35-948c5700a436",
+      "Name": "Danish language (Denmark)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e4e86220-cac0-4ec3-b853-7c2fa610399d",
+      "Name": "Power BI Report embeddings for Dynamics 365 Business Central",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f3552374-a1f2-4356-848e-196002525837",
+      "Name": "Business Foundation",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "64977288-facd-4b48-aaaa-bb0e288edfb3",
+      "Name": "Payment Practices",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "34bfcef7-f8ed-449f-94be-74024cadba3b",
+      "Name": "External File Storage - SharePoint Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5f92e0d5-a60e-435f-ae85-71ec28dd3e41",
+      "Name": "_Exclude_PlanConfiguration_",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "Name": "Test Runner",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "7961e9dc-a8e5-49b1-839b-3a78803a4cb8",
+      "Name": "Troubleshoot FA Ledger Entries",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "114e4e19-182b-42e2-b5a9-91d8b8ee8ce1",
+      "Name": "_Exclude_Email Logging Using Graph API",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "64c9d5e2-7744-4866-bc0e-5ebc2898e651",
+      "Name": "Error Messages with Recommendations",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "698cfedb-66b9-44a8-b5ae-1ec18bd32fa7",
+      "Name": "Agent Samples",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "fbb56a54-4f3b-4d2f-9330-ed8921ec4ec7",
+      "Name": "_Exclude_SyncBaseApp_",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a190e87b-2f59-4e14-a727-421877802768",
+      "Name": "API - Cross Environment Intercompany",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e0df20ef-75a2-4fae-8e3a-88140ab29507",
+      "Name": "External File Storage - SFTP Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "16c26bda-5f9c-4a77-a17e-4835f06062c0",
+      "Name": "_Exclude_Connectivity Apps",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "cc11c22e-5ca3-423f-8804-88cac6d91983",
+      "Name": "Dynamics BC Excel Reports",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ac14293f-1eb7-4a7b-9936-b280da31970b",
+      "Name": "Data Search",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c512d720-63b9-4b26-b062-a0c09b4ed322",
+      "Name": "Company Hub",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "6813edab-d08b-4d30-a119-11f984e06669",
+      "Name": "Czech language (Czechia)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e97bbbc7-16b6-470b-9428-376baa778970",
+      "Name": "Send remittance advice by email",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "66d1f41b-f670-4788-a2b3-0f82b4e5c05b",
+      "Name": "Agent Test Internal Library",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "cc85911b-390d-42d5-b4bb-1ec519019a30",
+      "Name": "Norwegian language (Norway)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a5d61952-f432-4ee6-8686-e8aa5d3dedc0",
+      "Name": "Italian language (Switzerland)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "aceb66c8-472e-437c-81d3-27e6c07d0f14",
+      "Name": "Email - Microsoft 365 Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "4ce93371-6bd6-4027-a78f-021064ad250e",
+      "Name": "SAF-T",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "4e7ce29d-c973-4e89-8230-5e13b26ce9fb",
+      "Name": "German language (Switzerland)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "75f1590f-55c5-4501-ae63-bada5504e852",
+      "Name": "Performance Toolkit Samples",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "Name": "Bifrost Orchestrator - Tests",
+      "Publisher": "Origo",
+      "Version": "28.0.4.0"
+    },
+    {
+      "Id": "1ba1031e-eae9-4f20-b9d2-d19b6d1e3f29",
+      "Name": "Field Service Integration",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c526b3e9-b8ca-4683-81ba-fcd5f6b1472a",
+      "Name": "Sales and Inventory Forecast",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "0a9a9ce1-6f98-4cf0-82e2-0b3e7cabb32a",
+      "Name": "EU 3-Party Trade Purchase",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "1732e878-cee4-4787-9456-05f25f4118da",
+      "Name": "English language (Australia)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "9856ae4f-d1a7-46ef-89bb-6ef056398228",
+      "Name": "System Application Test Library",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e2d4cb5e-9120-4a92-824d-2e1e5dc1a699",
+      "Name": "German language (Germany)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "f4e3d2c1-b0a9-4867-8765-432109876543",
+      "Name": "Business Central 14 Historical Data",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a53a4bb0-aa53-8ff8-77d6-fe3388db0eb8",
+      "Name": "Recommended Apps",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "9e737fc0-589a-436f-8b2f-0f27da2d2afd",
+      "Name": "Spanish language (Mexico)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5363109d-5605-4580-9cb7-5b577d00bbb2",
+      "Name": "French language (Canada)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "2ed02040-0300-4d64-b8c5-a48d09dddfc6",
+      "Name": "Icelandic language (Iceland)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e6328152-bb29-4664-9dae-3bc7eaae1fd8",
+      "Name": "Email - Outlook REST API",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c31ee575-3fc7-4388-98ee-d75aa2fc5f87",
+      "Name": "Withholding Tax",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "93a71c5e-237e-47e8-835b-1a7f9e844f1b",
+      "Name": "Create Product Information With Copilot",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ec6b3b0e-f983-408b-8476-bafb4368ecbc",
+      "Name": "E-Document Connector - Microsoft 365",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "40860557-a18d-42ad-aecb-22b7dd80dc80",
+      "Name": "Permissions Mock",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5afe217e-507a-40b4-9aa5-f4325b6e8230",
+      "Name": "Agent Test Library",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "7505e808-6e52-4b96-a328-82573391297a",
+      "Name": "Bifrost Foundation",
+      "Publisher": "Origo",
+      "Version": "28.0.12.680"
+    },
+    {
+      "Id": "40bf2bab-2a57-4c34-9002-c11d23fcbff6",
+      "Name": "Quality Management Contoso Coffee Demo Dataset",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "08d69832-9231-429e-be2c-8bab2c96905b",
+      "Name": "Email - Current User Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "4cb44e6c-9a37-4d4e-b45f-1b3054ddc59a",
+      "Name": "Expense Withholding Tax",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "517f890c-b49f-47de-8120-d0327974b89d",
+      "Name": "AI Development Toolkit - Evaluation",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "c9ce86fe-cb70-4b79-be03-d21856b1a4ca",
+      "Name": "External File Storage - Azure Blob Service Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "7819d79d-feea-4f09-bbed-5bbaca4bf323",
+      "Name": "Data Archive",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "d196d21b-75c3-45da-831b-345055b9d25f",
+      "Name": "ESG Statistical Accounts Demo Tool",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
+      "Name": "System Application",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "e1d97edc-c239-46b4-8d84-6368bdf67c8b",
+      "Name": "E-Document Core",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "79447b11-8301-4d02-a546-2261eb811296",
+      "Name": "External File Storage - Azure File Service Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "8b3609cf-3947-44c3-9f20-ce6edc6da33f",
+      "Name": "_Exclude_ClientAddIns_",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "4d6c453d-e61d-4872-b35d-6c731c0fd93e",
+      "Name": "Manufacturing",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "bc7b3891-f61b-4883-bbb3-384cdef88bec",
+      "Name": "Quality Management",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "80e80fa9-7100-4885-852c-ac6b053298dd",
+      "Name": "Russian language (Russia)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "58623bfa-0559-4bc2-ae1c-0979c29fd9e0",
+      "Name": "Intelligent Cloud Base",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "fbc91b81-1986-420f-9dd4-c41b381364ab",
+      "Name": "Dutch language (Belgium)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5f2e93a0-6083-4718-b05a-7ac89be5644d",
+      "Name": "External Storage - Document Attachments",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a41b0c3e-bf1c-4c97-ad1b-b430a3933ada",
+      "Name": "Audit File Export",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "a2cc2ef8-949f-43d4-45b8-10bd6f8bc62c",
+      "Name": "API Reports - Finance",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "bee8cf2f-494a-42f4-aabd-650e87934d39",
+      "Name": "Business Foundation Test Libraries",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "3a66faf9-4111-4ec3-be7e-7ca33e9421a0",
+      "Name": "German language (Austria)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+      "Name": "Base Application",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "63c9fbe6-d4f3-458c-8c25-644c90a0874a",
+      "Name": "Bank Account Reconciliation With AI",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "dd3f226b-40bf-4b3c-9988-9b1e0f74edd8",
+      "Name": "Sales Lines Suggestions",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "66efe10c-8033-403b-a86d-77c0887178ba",
+      "Name": "Expense Agent (Preview)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "5a0b41e9-7a42-4123-d521-2265186cfb31",
+      "Name": "Contoso Coffee Demo Dataset",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "b3780cd9-f8f8-4a83-a4d5-0c2ad87b28af",
+      "Name": "Sustainability",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "0addc017-80c4-40ad-bac6-5852f4fc4c55",
+      "Name": "E-Document Connector - FORNAV",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "2a89f298-7ffd-44a5-a7ce-e08dac98abce",
+      "Name": "Essential Business Headlines",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "75f1590f-55c5-4501-ae63-bada5534e852",
+      "Name": "Performance Toolkit",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "44a6a6d5-4478-4f1e-a94e-421407fc122c",
+      "Name": "English language (United States)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "ae1f0b7f-1ae3-4ca1-aeba-adc431cc12f9",
+      "Name": "Swedish language (Sweden)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "23b1772f-b8b8-4e87-9339-9ff7cbb2364b",
+      "Name": "Sales Order Agent",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "79b1a79a-2f66-4736-bc1b-8abb3537eb51",
+      "Name": "Simplified Bank Statement Import",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "68e13fa3-217a-4be0-9141-99e5bf0ca818",
+      "Name": "Email - SMTP Connector",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "9db1a0c9-c503-4793-a9e4-bcda3d3f3c94",
+      "Name": "Bifrost Foundation - Tests",
+      "Publisher": "Origo",
+      "Version": "28.0.12.680"
+    },
+    {
+      "Id": "6992416f-3f39-4d3c-8242-3fff61350bea",
+      "Name": "Business Central Cloud Migration - Previous Release",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "865bb488-eec0-4d05-b196-258fd1ff8363",
+      "Name": "French language (Switzerland)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "499ec319-ef73-463a-8d31-d66a58e2325a",
+      "Name": "Dutch language (Netherlands)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "3099ffc7-4cf7-4df6-9b96-7e4bc2bb587c",
+      "Name": "Subscription Billing",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "31ef535a-1182-4354-98e8-e0e66a587055",
+      "Name": "E-Document Connector - Continia",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "00155c68-8cdd-4d60-a451-2034ad094223",
+      "Name": "Agent Design Experience",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "3d5b2137-efeb-4014-8489-41d37f8fd4c3",
+      "Name": "Late Payment Prediction",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "fe2381dc-81ce-4d36-9107-6aae586a6720",
+      "Name": "English language (Canada)",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    },
+    {
+      "Id": "de0dddf3-9917-430d-8d20-6e7679a08500",
+      "Name": "E-Document Core Demo Data",
+      "Publisher": "Microsoft",
+      "Version": "29.0.54011.57736"
+    }
+  ]
+}

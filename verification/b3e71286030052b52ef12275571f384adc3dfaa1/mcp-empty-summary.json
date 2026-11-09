@@ -1,0 +1,53 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "containerId": "f0f3e993abcb",
+  "owner": "worker-3",
+  "mode": "empty",
+  "executed": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "createsOwnData": true,
+  "fixture": "Self-created caller setup/Telegram159071109 on new own container; UI seed and restore; no external/customer fixtures",
+  "cases": [
+    {
+      "type": "Help.Implementation.Get",
+      "lcid": 1033,
+      "scenario": "Full WhoAmI help contract: no app name, Telegram field type/source/empty semantics retained",
+      "passed": true
+    },
+    {
+      "type": "Help.Orchestrator.Get",
+      "lcid": 1033,
+      "scenario": "App-specific installation and playbook guidance in own help",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1033,
+      "scenario": "empty own caller Telegram field",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "type": "Help.Implementation.Get",
+      "lcid": 1039,
+      "scenario": "Full WhoAmI help contract: no app name, Telegram field type/source/empty semantics retained",
+      "passed": true
+    },
+    {
+      "type": "Help.Orchestrator.Get",
+      "lcid": 1039,
+      "scenario": "App-specific installation and playbook guidance in own help",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1039,
+      "scenario": "empty own caller Telegram field",
+      "expected": "",
+      "passed": true
+    }
+  ],
+  "at": "2026-11-09T07:18:11.848Z"
+}

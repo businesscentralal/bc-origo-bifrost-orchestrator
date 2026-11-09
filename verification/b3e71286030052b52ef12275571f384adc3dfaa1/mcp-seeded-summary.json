@@ -1,0 +1,29 @@
+{
+  "sha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "containerId": "f0f3e993abcb",
+  "owner": "worker-3",
+  "mode": "seeded",
+  "executed": 2,
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "createsOwnData": true,
+  "fixture": "Self-created caller setup/Telegram159071109 on new own container; UI seed and restore; no external/customer fixtures",
+  "cases": [
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1033,
+      "scenario": "seeded own caller Telegram field",
+      "expected": "159071109",
+      "passed": true
+    },
+    {
+      "type": "Help.WhoAmI.Get",
+      "lcid": 1039,
+      "scenario": "seeded own caller Telegram field",
+      "expected": "159071109",
+      "passed": true
+    }
+  ],
+  "at": "2026-11-09T07:20:33.313Z"
+}

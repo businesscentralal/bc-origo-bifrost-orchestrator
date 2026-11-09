@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="96456 Playbook Ask Scrub Tests ori" timestamp="2026-11-09T07:15:38" hostname="f0f3e993abcb-business-central-7f94f86bd7-jjzxl" time="4.853" tests="0" failures="0" errors="0" skipped="0" total="10">
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="AskForEach_RunGateInBothLanguages" time="0.5" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="AskDataCondition_RunGateInBothLanguages" time="0.343" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="AskTrace_RunGateInBothLanguages" time="0.287" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="Scrub_PreservesAllOtherProperties" time="0.013" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="Scrub_UnchangedPayloadsRetainBytes" time="0.01" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="SingleStep_NoTraceInAnyOrchestratorStore" time="1.92" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="FailedStep_WorkspaceSnapshotHasNoTrace" time="0.504" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="ForEach_NoTraceInLogsWorkspaceOrSummary" time="0.746" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="Paged_NoTraceAcrossPageAndIterationLogs" time="0.52" />
+    <testcase classname="96456 Playbook Ask Scrub Tests ori" name="RunAndHelp_DescribeTimeoutAndRetentionBoundaries" time="0.01" />
+  </testsuite>
+</testsuites>

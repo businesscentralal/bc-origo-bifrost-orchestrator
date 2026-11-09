@@ -1,0 +1,19 @@
+{
+  "candidateSha": "b3e71286030052b52ef12275571f384adc3dfaa1",
+  "FoundationSha": "fe4cc372e7f94910931a3186bb147717fc6efc96",
+  "containerId": "f0f3e993abcb",
+  "version": "28.0.12.680",
+  "executed": 40,
+  "passed": 39,
+  "failed": 1,
+  "skipped": 0,
+  "failures": [
+    {
+      "name": "PublicHelp_NamesNoIssueNumberNoInternalObjectNoProcedure",
+      "message": "Assert.IsFalse failed. Help.Orchestrator.Get names &quot;Orchestrator&quot;",
+      "classname": "98670 Help Misc Readers Tests"
+    }
+  ],
+  "status": "FAILED; AC02 unmet",
+  "diagnosis": "Guard scans every Help.* contract and prohibits Orchestrator. After shared WhoAmI fix it rejects app-specific public Help.Orchestrator.Get. Its type name, envelope, response description and examples legitimately contain Orchestrator. Removing/renaming this released contract breaks compatibility and conflicts with AC01 own-help requirement. No source change or exclusion applied; Foundation-owned guard scope repair/disposition required."
+}

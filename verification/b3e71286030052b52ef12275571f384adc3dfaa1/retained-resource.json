@@ -2,16 +2,11 @@
   "containerId": "f0f3e993abcb",
   "displayName": "worker3-orchestrator159-20261109-w1",
   "owner": "worker-3",
-  "state": "Starting",
+  "state": "Stopped",
   "httpStatus": 200,
-  "at": "2026-11-09T06:58:50.177072+00:00",
-  "fixturesCreated": false,
-  "appsDeployed": false,
-  "retention": "Retain same resource until Tester postdeploymentUAT and issue closure; provisioning blocked, no repeat creates or foreign changes",
-  "startRetry": {
-    "afterVerifiedState": "Stopped06:55:13.093Z",
-    "request": "start-owned-after-stopped.json",
-    "httpStatus": 204
-  },
-  "resourceStatePass": false
+  "at": "2026-11-09T07:42:11.293795+00:00",
+  "stoppedVerified": true,
+  "deleted": false,
+  "retention": "Retain same owned resource until Tester postdeployUAT and issue closure. No new create or blind redeploy. Installed source candidateb3e712 and Foundation680 retained.",
+  "remainingCleanup": "English1033 selection submitted but final English UI lookup failed; actual profile restoration not verified. Inspect MySettings actual language before any further write on restart."
 }

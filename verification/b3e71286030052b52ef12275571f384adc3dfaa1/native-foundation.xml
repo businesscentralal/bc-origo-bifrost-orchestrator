@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="98670 Help Misc Readers Tests" timestamp="2026-11-09T07:16:40" hostname="f0f3e993abcb-business-central-7f94f86bd7-jjzxl" time="6.343" tests="0" failures="1" errors="0" skipped="0" total="40">
+    <testcase classname="98670 Help Misc Readers Tests" name="Scenario_AC03_HelpPaging_IcelandicRefusal" time="0.11" />
+    <testcase classname="98670 Help Misc Readers Tests" name="Scenario_AC05_HelpContracts_DescribePagingAndStrings" time="0.34" />
+    <testcase classname="98670 Help Misc Readers Tests" name="HelpFieldsGet_SkipTake_PagesFields" time="0.183" />
+    <testcase classname="98670 Help Misc Readers Tests" name="Scenario_AC02_FieldPaging_EmptyAndBeyondEnd" time="0.027" />
+    <testcase classname="98670 Help Misc Readers Tests" name="Scenario_AC03_HelpPaging_InvalidValuesRefused" time="0.114" />
+    <testcase classname="98670 Help Misc Readers Tests" name="FilterOnReadRestrictedField_AnswersPermissionDeniedOnTableView" time="0.097" />
+    <testcase classname="98670 Help Misc Readers Tests" name="FieldHistory_ReadRestrictedField_AnswersPermissionDenied" time="0.083" />
+    <testcase classname="98670 Help Misc Readers Tests" name="HelpFieldsGet_ReadRestrictedTable_PermissionDeniedBeforeLookup" time="0.02" />
+    <testcase classname="98670 Help Misc Readers Tests" name="FieldHistory_RestrictedTable_SaysRestrictedNotPermissionDeniedText" time="0.023" />
+    <testcase classname="98670 Help Misc Readers Tests" name="RestrictedTableHints_NameARealTypeOrNothing" time="0.02" />
+    <testcase classname="98670 Help Misc Readers Tests" name="RestrictedBusinessCentralTable_HasFallbackAndNoBifrostWording" time="0.026" />
+    <testcase classname="98670 Help Misc Readers Tests" name="ErrorsChapters_ListPermissionDeniedForTheHardeningRefusals" time="0.067" />
+    <testcase classname="98670 Help Misc Readers Tests" name="UnknownTableNumber_IsRecordNotFoundInEverySevenTypes" time="1.694" />
+    <testcase classname="98670 Help Misc Readers Tests" name="UnknownTableName_IsRecordNotFoundWithTheKeyUsed" time="0.714" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NoTableNamed_IsMissingParameterWithoutADoubleSpace" time="0.053" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TablesGet_NoTableNamed_StillListsTables" time="0.07" />
+    <testcase classname="98670 Help Misc Readers Tests" name="ErrorsChapters_ListTheTableRefusal" time="0.06" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableRelations_UnconditionalRelation_HasEmptyConditionType" time="0.143" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableRelations_ConditionalBranches_NameTheConditionType" time="0.107" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableRelations_ConditionTypeInIcelandic_IsAName" time="0.13" />
+    <testcase classname="98670 Help Misc Readers Tests" name="Fields_ClassAndTypeInIcelandic_AreNames" time="0.027" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableRelations_WrongTypedFieldNo_IsInvalidParameterFormat" time="0.044" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableRelations_FieldNoAsDigitsText_IsRead" time="0.153" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableRelations_WrongFieldNoAndUnknownTable_AreAnsweredTogether" time="0.354" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NextLineNo_WrongTypedIncrement_IsInvalidParameterFormat" time="0.046" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NextLineNo_IncrementAsNumberOrDigitsText_IsReadAsFive" time="0.107" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NextLineNo_ZeroAndNegativeIncrement_AreInvalidParameter" time="0.03" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NamespaceFilter_ArrayOrObject_IsInvalidParameterFormat" time="0.05" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NamespaceFilter_Number_IsReadAsText" time="0.034" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NamespaceFilterAndUnknownTable_AreAnsweredTogether" time="0.44" />
+    <testcase classname="98670 Help Misc Readers Tests" name="ErrorsChapters_ListTheFormatErrorOfTheseKeys" time="0.027" />
+    <testcase classname="98670 Help Misc Readers Tests" name="PublicHelp_NamesNoIssueNumberNoInternalObjectNoProcedure" time="0.444" result="Fail">
+      <failure message="Assert.IsFalse failed. Help.Orchestrator.Get names &quot;Orchestrator&quot;">"Library Assert"(CodeUnit 130002).IsFalse line 3 - Library Assert by Microsoft version 29.0.54011.57736
+"Help Misc Readers Tests"(CodeUnit 98670).PublicHelp_NamesNoIssueNumberNoInternalObjectNoProcedure line 36 - Bifrost Foundation - Tests by Origo version 28.0.12.680
+"Test Runner - Mgt"(CodeUnit 130454).RunTests line 26 - Test Runner by Microsoft version 29.0.54011.57736
+"Test Runner - Isol. Codeunit"(CodeUnit 130450).OnRun(Trigger) line 4 - Test Runner by Microsoft version 29.0.54011.57736
+"Test Suite Mgt."(CodeUnit 130456).RunTests line 2 - Test Runner by Microsoft version 29.0.54011.57736
+"Test Suite Mgt."(CodeUnit 130456).RunSelectedTests line 35 - Test Runner by Microsoft version 29.0.54011.57736
+"Command Line Test Tool"(Page 130455)."RunSelectedTests - OnAction"(Trigger) line 7 - Test Runner by Microsoft version 29.0.54011.57736</failure>
+    </testcase>
+    <testcase classname="98670 Help Misc Readers Tests" name="NotificationTypes_FilterTableNoIsNotTheNumberOfAnInternalTable" time="0.057" />
+    <testcase classname="98670 Help Misc Readers Tests" name="NotificationGet_UnknownTableViewField_NamesNoTableNumber" time="0.026" />
+    <testcase classname="98670 Help Misc Readers Tests" name="ApprovalTypes_FilterTableNoIsNotTheNumberOfTheApprovalLog" time="0.2" />
+    <testcase classname="98670 Help Misc Readers Tests" name="ApprovalGet_UnknownTableViewField_NamesNoTableNumber" time="0.05" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TableViewOnReadableTable_StillNamesTheTableNumber" time="0.024" />
+    <testcase classname="98670 Help Misc Readers Tests" name="PageUrl_RequestErrors_HaveACodeAndAParameter" time="0.046" />
+    <testcase classname="98670 Help Misc Readers Tests" name="MessageTypesGet_ForRecordErrors_HaveACodeAndAParameter" time="0.09" />
+    <testcase classname="98670 Help Misc Readers Tests" name="TheseTypes_EveryListedErrorHasACode" time="0.013" />
+  </testsuite>
+</testsuites>
