@@ -13,6 +13,13 @@ permissionset 10035535 "BIFROST Orchestr ori"
     Caption = 'Bifrost Orchestrator', MaxLength = 30, Comment = 'is-IS=Bifröst stjórnandi';
 
     Permissions =
+        table "Table Data Row ori" = X,
+        table "Table Data Field ori" = X,
+        page "Table Data ori" = X,
+        page "Table Data Fields ori" = X,
+        codeunit "Table Data Mgt ori" = X,
+        codeunit "Table JSON Export ori" = X,
+        codeunit "Table JSON Import ori" = X,
         codeunit "Report Parameters ori" = X,
         codeunit "Report Layout Read Handler ori" = X,
         codeunit "Report Layout List Msg ori" = X,

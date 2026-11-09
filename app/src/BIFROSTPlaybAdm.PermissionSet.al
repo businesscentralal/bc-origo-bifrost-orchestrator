@@ -20,6 +20,13 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
     Assignable = true;
 
     Permissions =
+        table "Table Data Row ori" = X,
+        table "Table Data Field ori" = X,
+        page "Table Data ori" = X,
+        page "Table Data Fields ori" = X,
+        codeunit "Table Data Mgt ori" = X,
+        codeunit "Table JSON Export ori" = X,
+        codeunit "Table JSON Import ori" = X,
         page "Playbook Card ori" = X,
         page "Playbook Cond. Subpage ori" = X,
         page "Playbook Instance Card ori" = X,

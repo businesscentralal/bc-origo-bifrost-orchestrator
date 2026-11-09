@@ -20,6 +20,11 @@ table 96450 "Test Run Marker"
         {
             Caption = 'Source';
         }
+        field(3; Amount; Decimal)
+        {
+            Caption = 'Amount';
+        }
+
     }
 
     keys

@@ -16,6 +16,11 @@ codeunit 10035603 "Msg Executor ori"
     SingleInstance = true;
 
     trigger OnRun()
+    begin
+        ExecuteMessage();
+    end;
+
+    local procedure ExecuteMessage()
     var
         Dispatcher: Codeunit "Dispatcher ori";
         ResponseTempBlob: Codeunit "Temp Blob";
@@ -45,6 +50,22 @@ codeunit 10035603 "Msg Executor ori"
             ResponseText := BuildBinaryEnvelope(Base64Convert.ToBase64(ResponseInStr), ResponseContentType);
             IsBinaryResponse := true;
         end;
+    end;
+
+    /// <summary>Reads current field metadata through the fixed read-only Help.Fields.Get route.
+    /// This method never dispatches caller-selected messages and does not grant viewers execute permission on this codeunit.</summary>
+    /// <param name="TableNo">The table whose visible metadata is requested.</param>
+    /// <returns>The Foundation metadata response, including the caller's restriction flags.</returns>
+    procedure ReadFieldMetadata(TableNo: Integer): Text
+    var
+        Request: JsonObject;
+        MetadataRequest: Text;
+    begin
+        Request.Add('tableNo', TableNo);
+        Request.WriteTo(MetadataRequest);
+        SetParameters("Message Type ori"::"Help.Fields.Get", '', MetadataRequest);
+        ExecuteMessage();
+        exit(GetResponseText());
     end;
 
     /// <summary>

@@ -12,6 +12,13 @@ permissionset 10035537 "BIFROST OrchMgt ori"
     Caption = 'Bifrost Orchestrator Mgt.', MaxLength = 30, Comment = 'is-IS=Stjórnun Bifröst stjórnanda';
 
     Permissions =
+        table "Table Data Row ori" = X,
+        table "Table Data Field ori" = X,
+        page "Table Data ori" = X,
+        page "Table Data Fields ori" = X,
+        codeunit "Table Data Mgt ori" = X,
+        codeunit "Table JSON Export ori" = X,
+        codeunit "Table JSON Import ori" = X,
         tabledata "Scheduled Entry ori" = RIMD,
         tabledata "Scheduler Setup ori" = R,
         tabledata "Recurring Template ori" = R,

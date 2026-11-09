@@ -22,6 +22,17 @@ codeunit 10035576 "Help ori"
         exit(O.ToText());
     end;
 
+    local procedure BuildTableDataGuide(var O: TextBuilder)
+    begin
+        O.AppendLine('## Table Data and JSON files');
+        O.AppendLine('Search for **Table Data** in Business Central. Select a table by number or name, then enter an optional table view. The page shows 50 rows by default (maximum 500); Next Page and Previous Page retain the filter. The summary shows the first eight readable fields.');
+        O.AppendLine('Open Record shows the current field values. Primary keys, restricted fields and populated write-once fields cannot be changed. A permitted edit uses Foundation validation and Modify(true); a failed validation leaves the stored row unchanged. Your Business Central table permissions and the normal Foundation change-log write guard still apply. No Force option is provided.');
+        O.AppendLine('Export JSON downloads TableData.json. The file contains format "bifrost-table-data", version 1, tableNo, tableName and rows. Each row is the unmodified Foundation Serializer envelope: id, primaryKey and fields. Primary keys are separate from fields. Field names and option values use the Foundation invariant JSON convention.');
+        O.AppendLine('Import JSON validates every row in a rollback-only dry run before asking for confirmation. Each confirmed row is upserted by its complete primary key using Insert(true) or Modify(true); an existing row keeps its SystemId. Successful rows commit independently. Invalid rows are reported and later rows continue. The AL importer also supports StopOnError. Dry-run counts describe potential changes; they are not saved changes. No new message type is added.');
+        O.AppendLine('BIFROST PlaybVw ori provides browsing/export. Editing and importing require administrative execution permissions and the underlying table permissions. The browser obtains current field restrictions through Help.Fields.Get; it never grants base-table write access.');
+        O.AppendLine('');
+    end;
+
     local procedure BuildOverview(var O: TextBuilder)
     begin
         O.AppendLine('# Job Queue Orchestrator & Playbook Workflow Engine');
@@ -50,6 +61,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Run a batch job / processing-only report → `Orchestrator.Report.Run`');
         O.AppendLine('- See what workspace variables are available → `Orchestrator.Workspace.Preview`');
         O.AppendLine('');
+        BuildTableDataGuide(O);
         BuildSafeAuthoringGuide(O);
         BuildWorkedExamples(O);
         O.AppendLine('## Message Types (21)');

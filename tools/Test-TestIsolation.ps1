@@ -36,7 +36,7 @@ function Run-TestsInBcContainer {
 try {
     $parameters = @{ extensionId = '194ecd04-5688-4af6-94bc-732c714251fc'; JUnitResultFileName = (Join-Path $temp 'results.xml') }
     if (!(Invoke-Command $hook -ArgumentList $parameters)) { throw 'Successful complete suite rejected.' }
-    if ($script:calls.Count -ne 2 -or $script:calls[1].range -ne '96456' -or $script:calls[1].runner -ne 130451 -or $script:calls[0].runner -ne 130450 -or '96456' -in ($script:calls[0].range -split '\|')) {
+    if ($script:calls.Count -ne 2 -or $script:calls[1].range -ne '96425|96456' -or $script:calls[1].runner -ne 130451 -or $script:calls[0].runner -ne 130450 -or '96456' -in ($script:calls[0].range -split '\|')) {
         throw 'Isolation partition is incorrect.'
     }
     foreach ($mode in @('failure', 'skipped')) {

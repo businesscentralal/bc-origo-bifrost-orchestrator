@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added - Table Data and JSON file tools (#155, phases 1–2)
+
+- Table Data browser and field editor (temporary tables 10035564/10035565, pages 10035569/10035573, codeunit 10035575) with filtered 50-row paging, a 500-row maximum, current Foundation field restrictions and guarded edits of an existing SystemId.
+- Versioned JSON export/import (codeunits 10035558/10035563) uses the public Foundation serializer. Imports validate in rollback-only row transactions before confirmation, then upsert with normal triggers and per-row errors. No new message type or base-table write grant.
+- Foundation dependency is 28.0.12.679 in both apps, the released build containing the public serializer. Feature version remains unchanged. English Help.Orchestrator.Get guidance and Icelandic captions cover the new tools.
+- Tests 96406, 96425, 96426 and 96448 cover the file envelope, field selection, restrictions, repeated import, dry-run rollback, failed-row continuation and paging. The owned Test Run Marker fixture (96450) adds Amount for an unreadable-decimal regression.
+
 ### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)
 
 - `Orchestrator.ReportLayout.Set` (codeunit 10035599, handler 10035600) accepts `stagingId` (GUID, with or without braces) as an alternative to `layoutBase64`; exactly one of the two is required. The bytes are taken through Foundation's public `Blob Staging ori` façade (`Take`), which reads and deletes the row in the same transaction as the import, so a failed import leaves the row in place. Unknown or already-taken ids, both keys, neither key and a non-GUID id are refused with new bilingual errors; `layoutBase64` calls are unchanged. No Attachments dependency.
