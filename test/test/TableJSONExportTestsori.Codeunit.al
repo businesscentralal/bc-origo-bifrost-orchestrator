@@ -41,6 +41,8 @@ codeunit 96406 "Table JSON Export Tests ori"
         Assert.AreEqual(1, Value.AsArray().Count(), 'Only selected row');
         Value.AsArray().Get(0, Value);
         Value.WriteTo(ActualText);
+        // Reload the persisted row: SQL rounds system timestamps beyond the insert buffer precision.
+        Marker.Get(Marker."Entry No.");
         Expected := Serializer.SerializeToJson(Marker, Fields);
         Expected.WriteTo(ExpectedText);
         Assert.AreEqual(ExpectedText, ActualText, 'No local serializer changes');
