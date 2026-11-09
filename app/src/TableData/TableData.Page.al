@@ -286,10 +286,10 @@ page 10035569 "Table Data ori"
         Result: JsonObject;
     begin
         Result := TableJSONImport.ImportTable(Envelope, true, false);
-        if not Confirm(DryRunQst, false, GetCount(Result, 'rows'), GetCount(Result, 'inserted'), GetCount(Result, 'modified'), GetCount(Result, 'failed')) then
+        if not Confirm(StrSubstNo(DryRunQst, GetCount(Result, 'rows'), GetCount(Result, 'inserted'), GetCount(Result, 'modified'), GetCount(Result, 'failed')), false) then
             exit(false);
         Result := TableJSONImport.ImportTable(Envelope, false, false);
-        Message(ImportedMsg, GetCount(Result, 'inserted'), GetCount(Result, 'modified'), GetCount(Result, 'failed'));
+        Message(StrSubstNo(ImportedMsg, GetCount(Result, 'inserted'), GetCount(Result, 'modified'), GetCount(Result, 'failed')));
         exit(true);
     end;
 

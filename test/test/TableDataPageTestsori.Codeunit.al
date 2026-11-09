@@ -131,9 +131,26 @@ codeunit 96448 "Table Data Page Tests ori"
     procedure AC24_WriteOncePageIsReadOnly()
     var
         Child: Record "Test Copy Child ori";
+        ChangeLogSetup: Record "Change Log Setup";
+        Coverage: Record "Change Log Setup (Table)";
         Restrictions: Codeunit "Library Orchestrator";
         FieldsPage: Page "Table Data Fields ori";
+        WasActivated: Boolean;
+        CoverageAdded: Boolean;
     begin
+        if not ChangeLogSetup.Get() then begin
+            ChangeLogSetup.Init();
+            ChangeLogSetup.Insert(true);
+        end;
+        WasActivated := ChangeLogSetup."Change Log Activated";
+        ChangeLogSetup."Change Log Activated" := true;
+        ChangeLogSetup.Modify(true);
+        CoverageAdded := not Coverage.Get(Database::"Test Copy Child ori");
+        if CoverageAdded then begin
+            Coverage."Table No." := Database::"Test Copy Child ori";
+            Coverage."Log Modification" := Coverage."Log Modification"::"All Fields";
+            Coverage.Insert(true);
+        end;
         Child.Code := 'TJP-ONCE';
         Child.Amount := 12;
         Child.Insert(true);
@@ -144,11 +161,20 @@ codeunit 96448 "Table Data Page Tests ori"
         FieldsPage.RunModal();
         UnbindSubscription(Restrictions);
         Child.Delete(true);
+        if CoverageAdded then
+            Coverage.Delete(true);
+        ChangeLogSetup.Get();
+        ChangeLogSetup."Change Log Activated" := WasActivated;
+        ChangeLogSetup.Modify(true);
     end;
 
     [ModalPageHandler]
     procedure ReadOnlyFieldHandler(var FieldsPage: TestPage "Table Data Fields ori")
     begin
+        if ReadOnlyFieldName = 'Amount' then begin
+            Assert.IsTrue(FieldsPage.FindFirstField("Field Name", 'Description'), 'Ordinary field is shown');
+            Assert.IsTrue(FieldsPage.Value.Editable(), 'The table is writable; only the filled write-once field is closed');
+        end;
         Assert.IsTrue(FieldsPage.FindFirstField("Field Name", ReadOnlyFieldName), 'Readable field is shown');
         Assert.IsFalse(FieldsPage.Value.Editable(), 'Restricted field is read-only');
         FieldsPage.OK().Invoke();
@@ -175,7 +201,7 @@ codeunit 96448 "Table Data Page Tests ori"
     var
         Marker: Record "Test Run Marker";
     begin
-        Assert.IsTrue(Question.Contains('Dry run of 1 rows: 0 to insert, 1 to modify, 0 failed'), 'Dry-run counts are shown before import');
+        Assert.IsTrue(Question.Contains('Dry run of 1 rows: 0 to insert, 1 to modify, 0 failed'), 'Dry-run counts are shown before import: ' + Question);
         Marker.GetBySystemId(ImportMarkerId);
         Assert.AreEqual('TJP-FILE', Marker.Source, 'No write before confirmation');
         Reply := ConfirmImport;
