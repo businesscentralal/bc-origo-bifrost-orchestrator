@@ -33,6 +33,8 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         page "Playbook Step Template FB ori" = X,
         page "Playbook Template Editor ori" = X,
         page "Schedule Playbook ori" = X,
+        page "Table Data ori" = X,
+        page "Table Data Fields ori" = X,
         tabledata "JQ Parameter ori" = RIMD,
         tabledata "Playbook ori" = RIMD,
         tabledata "Playbook Condition ori" = RIMD,
@@ -47,5 +49,6 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         codeunit "Playbook JQ Dispatcher ori" = X,
         codeunit "Playbook Log Mgt ori" = X,
         codeunit "Table JSON Export ori" = X,
-        codeunit "Table JSON Import ori" = X;
+        codeunit "Table JSON Import ori" = X,
+        codeunit "Table Data Mgt ori" = X;
 }

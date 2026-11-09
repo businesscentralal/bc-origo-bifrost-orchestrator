@@ -7,13 +7,16 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
-### Added (2026-11-09) - Table data JSON export and import (#155, Phase 1)
+### Added (2026-11-09) - Table data viewer/editor and JSON export/import (#155, Phases 1 and 2)
 
 - New codeunit 10035558 `Table JSON Export ori` writes the rows of one table as a Bifrost table data file: `{ "format": "bifrost-table-data", "version": 1, "tableNo", "tableName", "rows": [...] }`. Each row is exactly the output of Foundation's public `Serializer ori.SerializeToJson` (primaryKey, id, fields). An optional table view is validated through `ApplyTableView` before it is applied; an empty field list writes every eligible field. A table that Foundation restricts for reading is refused with its restricted-table text and nothing is read.
 - New codeunit 10035563 `Table JSON Import ori` applies such a file through `Serializer ori.DeserializeFromJson` and persists with `Insert(true)` or `Modify(true)`. A row is matched by its id (SystemId), then by its primary key; otherwise it is inserted. The Foundation write guard (Force = false) is checked first and the insert guard before each new row. A row the serializer cannot read fails on its own and the other rows continue; `StopOnError` stops with that row's error and writes nothing; `DryRun` checks every row and writes nothing. The result reports inserted, modified, failed and per-row errors.
+- New page 10035569 `Table Data ori` (worksheet over temporary table 10035564 `Table Data Row ori`): pick a table by number, filter it with a validated table view and page through its rows (page size 50 by default, 1 to 500) with Previous Page and Next Page. Each row shows its primary key and its first eight fields as Name=Value, read through `Serializer ori`, so restricted fields are not shown and a read-restricted table is refused. Export JSON downloads `TableData.json`; Import JSON uploads a file, runs a dry run, asks for confirmation and imports the rows that passed. No generated column pages.
+- New page 10035573 `Table Data Fields ori` (temporary table 10035565 `Table Data Field ori`) shows the readable fields of one record (Open Record). A changed value is saved by codeunit 10035575 `Table Data Mgt ori`: the record is read fresh, the one-key fields object goes through `Serializer ori.DeserializeFromJson` (validation triggers run, the serializer's aggregated error is shown) and `Modify(true)`. Primary key fields, and every field of a table Foundation restricts for writing, are read-only; a value that a field or write-once restriction leaves unchanged is refused.
+- Pages and `Table Data Mgt ori` are granted in `BIFROST PlaybAdm ori`. Both pages use the existing `playbooks` help page until the Table Data help chapter exists (Phase 5).
 - Both codeunits are internal and granted in `BIFROST PlaybAdm ori`. No new message type and no new request key.
 - Foundation dependency raised to 28.0.12.679 (the first release with core PR #1275, `Serializer ori` public) in the app and test app (only `dependencies[].version`).
-- Tests: new codeunits 96406 `Table JSON Export Tests ori` and 96425 `Table JSON Import Tests ori`.
+- Tests: new codeunits 96406 `Table JSON Export Tests ori`, 96425 `Table JSON Import Tests ori`, 96426 `Table Data Mgt Tests ori` and 96448 `Table Data Page Tests ori`.
 
 ### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)
 
