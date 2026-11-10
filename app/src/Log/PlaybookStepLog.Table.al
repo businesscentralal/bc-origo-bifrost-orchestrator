@@ -31,6 +31,11 @@ table 10035543 "Playbook Step Log ori"
         {
             Caption = 'Message Type', Comment = 'is-IS=Skilaboðagerð';
         }
+        field(11; "Step Kind"; Enum "Playbook Step Kind ori")
+        {
+            Caption = 'Step Kind', Comment = 'is-IS=Tegund skrefs';
+            AllowInCustomizations = Never;
+        }
         field(20; Status; Enum "Playbook Inst. Status ori")
         {
             Caption = 'Status', Comment = 'is-IS=Staða';
