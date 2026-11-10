@@ -196,9 +196,74 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildPlaybookWorkflowGuide(O);
         BuildDataRecordsGuide(O);
+        BuildTableDataGuide(O);
+        BuildCopyPlanGuide(O);
         BuildSchedulingGuide(O);
         BuildLLMPatternsGuide(O);
         BuildAgentRules(O);
+    end;
+
+    local procedure BuildTableDataGuide(var O: TextBuilder)
+    begin
+        O.AppendLine('## View and edit Table Data');
+        O.AppendLine('');
+        O.AppendLine('1. Use Tell Me to open **Table Data**. Choose **Table No.** with the table lookup; **Table Name** shows the selected table.');
+        O.AppendLine('2. Set **Table View** to a Business Central table view to filter the records. An empty view includes all readable rows. Invalid views are refused.');
+        O.AppendLine('3. Set **Page Size** (default 50, maximum 500). Use **Next Page** and **Previous Page** to move through the filtered rows. Each row shows its primary key and a summary of its first eight eligible fields.');
+        O.AppendLine('4. Select a row and choose **Open Record**. Change **Value** for an editable field. The record is read again before saving, and field validation and the table modify trigger run. An invalid value is refused.');
+        O.AppendLine('');
+        O.AppendLine('Table Data and its field editor require the Playbook Administration permission set. The Playbook View role does not grant access to these pages. The underlying table permissions still apply; these pages do not grant general write access.');
+        O.AppendLine('Foundation restrictions apply before data is read or written. Read-restricted fields are omitted. Write-restricted tables and filled write-once fields cannot be edited. A restricted table, such as User, is refused.');
+        O.AppendLine('');
+        O.AppendLine('### Export and import a JSON file');
+        O.AppendLine('');
+        O.AppendLine('1. Select the table and filter on **Table Data**, then choose **Export JSON**. Save **TableData.json**. Export includes the entire filtered table view, not just the visible page, and all eligible fields.');
+        O.AppendLine('2. Keep an unchanged copy. Edit values in the exported rows using the existing JSON field keys and value types. Keep each row identity and primary key when updating existing records.');
+        O.AppendLine('3. Choose **Import JSON** and select the file. The destination is the file''s **tableNo**, not the table currently displayed on the page. Check it before importing.');
+        O.AppendLine('4. Review the dry-run counts: rows to insert, rows to modify and rows that failed validation. No rows are written during this check. Cancel to leave the table unchanged, or confirm to import the rows that passed.');
+        O.AppendLine('5. Review the inserted, modified and failed counts. Failed validation rows are not imported. Table insert/modify triggers run when the accepted rows are persisted; a trigger error stops that import and rolls back its transaction.');
+        O.AppendLine('');
+        O.AppendLine('A dry run validates the rows but does not execute the later insert/modify triggers. It cannot guarantee that confirmation will succeed. Import does not delete rows that are absent from the file.');
+        O.AppendLine('');
+        O.AppendLine('### Read the bifrost-table-data file format');
+        O.AppendLine('');
+        O.AppendLine('```json');
+        O.AppendLine('{ "format": "bifrost-table-data", "version": 1, "tableNo": 18, "tableName": "Customer", "rows": [] }');
+        O.AppendLine('```');
+        O.AppendLine('This empty example contains no records to import. Export a table to obtain its actual row keys and values.');
+        O.AppendLine('');
+        O.AppendLine('| Property | Meaning |');
+        O.AppendLine('|---|---|');
+        O.AppendLine('| format | Must be bifrost-table-data. |');
+        O.AppendLine('| version | Must be the number 1. |');
+        O.AppendLine('| tableNo | Destination table number on import; source table number on export. |');
+        O.AppendLine('| tableName | Exported table name for reference; tableNo selects the destination. |');
+        O.AppendLine('| rows | Array of Foundation serializer records, each with id, primaryKey and fields. |');
+        O.AppendLine('| rows[].id | SystemId of the exported record. Import first tries to find this record in the destination table. |');
+        O.AppendLine('| rows[].primaryKey | Object with the exported primary-key fields. Used when id does not match an existing record. |');
+        O.AppendLine('| rows[].fields | Object with the field values to validate and apply. Preserve the exported JSON keys. |');
+        O.AppendLine('');
+        O.AppendLine('If neither id nor a usable primaryKey identifies a row, that row fails validation. With an unmatched primary key, import attempts an insert only when Foundation permits it. Source SystemId is not forced onto a newly inserted record.');
+        O.AppendLine('The export/import engine uses Foundation serialization and its table and field guards. It adds no message type. Use the Table Data actions for files, or Copy Plans for a repeatable table-to-table workflow.');
+        O.AppendLine('');
+    end;
+
+    local procedure BuildCopyPlanGuide(var O: TextBuilder)
+    begin
+        O.AppendLine('## Copy Plans and local Transform steps');
+        O.AppendLine('');
+        O.AppendLine('Open **Copy Plans**, create a plan, choose source and destination tables, and use field lookups to add mappings. Map every destination primary-key field explicitly. Source SystemId is never copied. Set a source table view to limit the rows and Page Size (1–500) to bound each read.');
+        O.AppendLine('Use **Generate Playbook** to create the plan code as a playbook. Regeneration replaces only the playbook recorded in Generated Playbook Code, including its generated steps and mappings. Open that playbook, Verify it, then Run, Enqueue or Schedule through the existing entry points. Parent plans run before their children; siblings use Sequence No.');
+        O.AppendLine('A Copy mapping keeps the JSON value. Constant uses Argument 1 as literal text; it does not expand @ references. Negate reverses a decimal sign using invariant decimal text and leaves non-numeric text unchanged. Replace Text replaces every case-sensitive literal Argument 1 with Argument 2; the search text must not be empty.');
+        O.AppendLine('A plan with an operation generates Get → Transform → Set. All three run for one page before the next page is fetched. The Transform builds a fresh destination row with primaryKey and fields. Data.Records.Set still applies Foundation permissions, field restrictions, validation and change-log write guards.');
+        O.AppendLine('');
+        O.AppendLine('### Authoring a Transform');
+        O.AppendLine('On a playbook step choose Step Kind = Transform and leave Message Type empty. In Transform Mappings, add Target Path, Source Path, Operation and arguments. Target paths are dotted object properties, not array selectors or workspace writes. Duplicate or overlapping targets are errors.');
+        O.AppendLine('For a single step the request template is the input object. For a forEach step the current source row is the input. Source paths are relative to that input (for example fields.Amount), or explicitly reference the workspace (for example @_initial.amount). Constant needs no source path.');
+        O.AppendLine('A Transform dispatches no message and writes no business record. Its output is available to subsequent steps. A forEach Transform publishes its output rows under result and <stepNo>.result. Choose the Transform as the Iterate Source Step and result as the Iterate Array Path of a later forEach step.');
+        O.AppendLine('Verify reports missing or overlapping targets, unknown source paths, unsupported operations, empty text searches, and an assigned Message Type. Transform itself cannot fetch pages; use a preceding paged reader. Step logs show Step Kind = Transform and the mapped response or failure.');
+        O.AppendLine('Orchestrator.Workspace.Preview remains a seeded-workspace preview: it returns _sys, _who and optional _initial without executing saved Message or Transform steps. Run the playbook to inspect transformed output. No new message type or request parameter is required.');
+        O.AppendLine('');
     end;
 
     local procedure BuildSafeAuthoringGuide(var O: TextBuilder)

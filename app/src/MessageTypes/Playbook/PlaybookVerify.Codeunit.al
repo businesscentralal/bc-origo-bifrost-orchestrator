@@ -61,7 +61,7 @@ codeunit 10035616 "Playbook Verify ori"
         TemplateChecks: Codeunit "Playbook Verify Template ori";
     begin
         Clear(Findings);
-        Step.SetLoadFields("Step No.", Description, "Step Type", "Message Type", "Iterate Array Path", "Iterate Source Step No.",
+        Step.SetLoadFields("Step No.", Description, "Step Type", "Step Kind", "Message Type", "Iterate Array Path", "Iterate Source Step No.",
             "Next Step No. (Success)", "Next Step No. (Failure)", "Skip If Step Failed", "Result Log Paths", Disabled, Paged);
         Step.SetRange("Playbook Code", PlaybookCode);
         if Step.FindSet() then

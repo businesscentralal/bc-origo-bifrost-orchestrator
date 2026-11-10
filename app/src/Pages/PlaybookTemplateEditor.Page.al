@@ -23,6 +23,11 @@ page 10035556 "Playbook Template Editor ori"
     {
         area(Content)
         {
+            field("Step Kind"; Rec."Step Kind")
+            {
+                ApplicationArea = All;
+                Editable = false;
+            }
             group(RequestTemplate)
             {
                 Caption = 'Request Template', Comment = 'is-IS=Sniðmát beiðni';
@@ -53,6 +58,7 @@ page 10035556 "Playbook Template Editor ori"
 
     var
         DataAsText: Text;
+        TransformInputLbl: Label 'Transform Input', Comment = 'is-IS=Inntak umbreytingar';
 
     trigger OnAfterGetCurrRecord()
     begin
@@ -63,6 +69,8 @@ page 10035556 "Playbook Template Editor ori"
 
     local procedure GetCaption(): Text
     begin
+        if Rec."Step Kind" = Rec."Step Kind"::Transform then
+            exit(TransformInputLbl);
         exit(Rec.FieldCaption("Request Template"));
     end;
 }

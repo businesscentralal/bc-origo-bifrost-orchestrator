@@ -11,6 +11,47 @@ Business Central release versioning (`major.minor.build.revision`).
 - Keep shared WhoAmI contract text app-neutral in codeunit 10035585 `WhoAmI Subscriber ori`; retain the caller-specific Telegram field and empty-value behavior. Move installation and playbook wording into Orchestrator help (10035576 `Help ori`).
 - Test codeunit 96408 `WhoAmI Contract Tests ori` rejects the app name throughout the real shared contract and retains Telegram field/source assertions.
 
+### Fixed
+- Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
+
+### Added
+- #155 Phase 5: Table Data viewing, guarded field editing, JSON export/import and `bifrost-table-data` format guidance in the existing runtime help overview (codeunit 10035576). Documents full-filter exports, file-selected destination tables, dry-run confirmation, row identity, and validation/trigger failure behavior. Public website chapters remain tracked in `businesscentralal/bifrost#152`.
+
+### Fixed
+- Table Data paging (10035575): advance lookahead once per row so Next Page remains enabled when exactly one row remains after a full page. Added three-row/two-row-page management and page regressions (96426/96448).
+- #155 / PR157: Table Data pages (10035569/10035573) are administration-only; removed their PlaybVw grants rather than exposing edit/import actions to viewers. PlaybAdm grants remain, and ordinary table permissions/Foundation guards still apply. This is the reviewed least-privilege option, not a new read-only Table Data role.
+- Table Data Fields now marks filled write-once fields read-only and management (10035575) refuses saving them. Added hidden-field, restricted-table/write-once and page import/export dry-run regression tests (96426/96448); test-only restrictive subscribers remain manually bound to owned fixtures.
+
+
+### Added (2026-11-09) - Table data viewer/editor and JSON export/import (#155, Phases 1 and 2)
+
+- New codeunit 10035558 `Table JSON Export ori` writes the rows of one table as a Bifrost table data file: `{ "format": "bifrost-table-data", "version": 1, "tableNo", "tableName", "rows": [...] }`. Each row is exactly the output of Foundation's public `Serializer ori.SerializeToJson` (primaryKey, id, fields). An optional table view is validated through `ApplyTableView` before it is applied; an empty field list writes every eligible field. A table that Foundation restricts for reading is refused with its restricted-table text and nothing is read.
+- New codeunit 10035563 `Table JSON Import ori` applies such a file through `Serializer ori.DeserializeFromJson` and persists with `Insert(true)` or `Modify(true)`. A row is matched by its id (SystemId), then by its primary key; otherwise it is inserted. The Foundation write guard (Force = false) is checked first and the insert guard before each new row. A row the serializer cannot read fails on its own and the other rows continue; `StopOnError` stops with that row's error and writes nothing; `DryRun` checks every row and writes nothing. The result reports inserted, modified, failed and per-row errors.
+- New page 10035569 `Table Data ori` (worksheet over temporary table 10035564 `Table Data Row ori`): pick a table by number, filter it with a validated table view and page through its rows (page size 50 by default, 1 to 500) with Previous Page and Next Page. Each row shows its primary key and its first eight fields as Name=Value, read through `Serializer ori`, so restricted fields are not shown and a read-restricted table is refused. Export JSON downloads `TableData.json`; Import JSON uploads a file, runs a dry run, asks for confirmation and imports the rows that passed. No generated column pages.
+- New page 10035573 `Table Data Fields ori` (temporary table 10035565 `Table Data Field ori`) shows the readable fields of one record (Open Record). A changed value is saved by codeunit 10035575 `Table Data Mgt ori`: the record is read fresh, the one-key fields object goes through `Serializer ori.DeserializeFromJson` (validation triggers run, the serializer's aggregated error is shown) and `Modify(true)`. Primary key fields, and every field of a table Foundation restricts for writing, are read-only; a value that a field or write-once restriction leaves unchanged is refused.
+- Pages and `Table Data Mgt ori` are granted only in `BIFROST PlaybAdm ori` (administration); Table Data editing/import pages are not granted in `BIFROST PlaybVw ori`. Both pages use the existing `playbooks` help page until the Table Data help chapter exists (Phase 5).
+- Both codeunits are internal and granted in `BIFROST PlaybAdm ori`. No new message type and no new request key.
+- Foundation dependency raised to 28.0.12.679 (the first release with core PR #1275, `Serializer ori` public) in the app and test app (only `dependencies[].version`).
+- Tests: new codeunits 96406 `Table JSON Export Tests ori`, 96425 `Table JSON Import Tests ori`, 96426 `Table Data Mgt Tests ori` and 96448 `Table Data Page Tests ori`.
+
+### Added (2026-11-08) - Local Transform steps (#155, Phase 4)
+
+- Step kind and operation enums (10035623–10035624), mapping table/page (10035625–10035626) and executor/verifier (10035627–10035628) add Copy, Constant, Negate and Replace Text without a new message type or a business-table grant.
+- Runner 10035547 handles local single/forEach transformations and exposes a transformed result array to later steps. Step definitions/logs (10035540/10035543), log management (10035549), Verify (10035616–10035617) and authoring/log pages identify Transform; existing definitions retain Message ordinal zero.
+- Copy Plan fields/generator (10035578/10035608/10035622) insert Get/Transform/Set chains only when an operation is configured. Tests 96468–96470 and extended 96465 cover operations, invalid mappings, generated verification, repeated copying, logging and the legacy default.
+
+- Help overview (10035576) documents Copy Plan generation, field operations, Transform authoring and the unchanged seeded-only Workspace Preview contract.
+
+- Copy Plan verification repair: source views are validated through the public Foundation ApplyTableView API before any generated definition is replaced; unknown or unreadable filter fields fail closed; paged reads retain and record structured Foundation refusals as failures; an unhandled child-step failure stops the paged block, and failed foreach Action conditions fail the run while Check answers retain their routing semantics (codeunit 10035547). Tests cover restricted sources, uncovered destination writes, and normal scratch-table change-log coverage.
+
+### Added (2026-11-06) - Copy Plan generation (#155, Phase 3)
+
+- Copy Plan and field mapping tables (10035577–10035578), list/card/field pages (10035580, 10035604, 10035608) and internal generator (10035622) create paged `Data.Records.Get` and foreach `Data.Records.Set` steps through the existing runner. Parent plans precede children, with siblings ordered by sequence.
+- Generation validates field metadata, destination keys, duplicate mappings and source views before replacing only the recorded generated playbook. It does not copy source SystemIds, grant base-table permissions, bypass Foundation guards or add message types.
+- Playbook admin/management roles can maintain plans; the view role receives read access. New captions and tooltips include Icelandic translations.
+- Test fixtures 96449/96464 and test codeunits 96465–96466 cover generation, repeated copies, ordering, replacement isolation, validation, restricted-source failures and the card action.
+
+
 ### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)
 
 - `Orchestrator.ReportLayout.Set` (codeunit 10035599, handler 10035600) accepts `stagingId` (GUID, with or without braces) as an alternative to `layoutBase64`; exactly one of the two is required. The bytes are taken through Foundation's public `Blob Staging ori` façade (`Take`), which reads and deletes the row in the same transaction as the import, so a failed import leaves the row in place. Unknown or already-taken ids, both keys, neither key and a non-GUID id are refused with new bilingual errors; `layoutBase64` calls are unchanged. No Attachments dependency.
