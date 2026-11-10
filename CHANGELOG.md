@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added
+- #155 Phase 5: Table Data viewing, guarded field editing, JSON export/import and `bifrost-table-data` format guidance in the existing runtime help overview (codeunit 10035576). Documents full-filter exports, file-selected destination tables, dry-run confirmation, row identity, and validation/trigger failure behavior. Public website chapters remain tracked in `businesscentralal/bifrost#152`.
+
 ### Fixed
 - Table Data paging (10035575): advance lookahead once per row so Next Page remains enabled when exactly one row remains after a full page. Added three-row/two-row-page management and page regressions (96426/96448).
 - #155 / PR157: Table Data pages (10035569/10035573) are administration-only; removed their PlaybVw grants rather than exposing edit/import actions to viewers. PlaybAdm grants remain, and ordinary table permissions/Foundation guards still apply. This is the reviewed least-privilege option, not a new read-only Table Data role.

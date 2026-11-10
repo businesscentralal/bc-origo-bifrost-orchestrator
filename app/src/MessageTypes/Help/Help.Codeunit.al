@@ -196,10 +196,56 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildPlaybookWorkflowGuide(O);
         BuildDataRecordsGuide(O);
+        BuildTableDataGuide(O);
         BuildCopyPlanGuide(O);
         BuildSchedulingGuide(O);
         BuildLLMPatternsGuide(O);
         BuildAgentRules(O);
+    end;
+
+    local procedure BuildTableDataGuide(var O: TextBuilder)
+    begin
+        O.AppendLine('## View and edit Table Data');
+        O.AppendLine('');
+        O.AppendLine('1. Use Tell Me to open **Table Data**. Choose **Table No.** with the table lookup; **Table Name** shows the selected table.');
+        O.AppendLine('2. Set **Table View** to a Business Central table view to filter the records. An empty view includes all readable rows. Invalid views are refused.');
+        O.AppendLine('3. Set **Page Size** (default 50, maximum 500). Use **Next Page** and **Previous Page** to move through the filtered rows. Each row shows its primary key and a summary of its first eight eligible fields.');
+        O.AppendLine('4. Select a row and choose **Open Record**. Change **Value** for an editable field. The record is read again before saving, and field validation and the table modify trigger run. An invalid value is refused.');
+        O.AppendLine('');
+        O.AppendLine('Table Data and its field editor require the Playbook Administration permission set. The Playbook View role does not grant access to these pages. The underlying table permissions still apply; these pages do not grant general write access.');
+        O.AppendLine('Foundation restrictions apply before data is read or written. Read-restricted fields are omitted. Write-restricted tables and filled write-once fields cannot be edited. A restricted table, such as User, is refused.');
+        O.AppendLine('');
+        O.AppendLine('### Export and import a JSON file');
+        O.AppendLine('');
+        O.AppendLine('1. Select the table and filter on **Table Data**, then choose **Export JSON**. Save **TableData.json**. Export includes the entire filtered table view, not just the visible page, and all eligible fields.');
+        O.AppendLine('2. Keep an unchanged copy. Edit values in the exported rows using the existing JSON field keys and value types. Keep each row identity and primary key when updating existing records.');
+        O.AppendLine('3. Choose **Import JSON** and select the file. The destination is the file''s **tableNo**, not the table currently displayed on the page. Check it before importing.');
+        O.AppendLine('4. Review the dry-run counts: rows to insert, rows to modify and rows that failed validation. No rows are written during this check. Cancel to leave the table unchanged, or confirm to import the rows that passed.');
+        O.AppendLine('5. Review the inserted, modified and failed counts. Failed validation rows are not imported. Table insert/modify triggers run when the accepted rows are persisted; a trigger error stops that import and rolls back its transaction.');
+        O.AppendLine('');
+        O.AppendLine('A dry run validates the rows but does not execute the later insert/modify triggers. It cannot guarantee that confirmation will succeed. Import does not delete rows that are absent from the file.');
+        O.AppendLine('');
+        O.AppendLine('### Read the bifrost-table-data file format');
+        O.AppendLine('');
+        O.AppendLine('```json');
+        O.AppendLine('{ "format": "bifrost-table-data", "version": 1, "tableNo": 18, "tableName": "Customer", "rows": [] }');
+        O.AppendLine('```');
+        O.AppendLine('This empty example contains no records to import. Export a table to obtain its actual row keys and values.');
+        O.AppendLine('');
+        O.AppendLine('| Property | Meaning |');
+        O.AppendLine('|---|---|');
+        O.AppendLine('| format | Must be bifrost-table-data. |');
+        O.AppendLine('| version | Must be the number 1. |');
+        O.AppendLine('| tableNo | Destination table number on import; source table number on export. |');
+        O.AppendLine('| tableName | Exported table name for reference; tableNo selects the destination. |');
+        O.AppendLine('| rows | Array of Foundation serializer records, each with id, primaryKey and fields. |');
+        O.AppendLine('| rows[].id | SystemId of the exported record. Import first tries to find this record in the destination table. |');
+        O.AppendLine('| rows[].primaryKey | Object with the exported primary-key fields. Used when id does not match an existing record. |');
+        O.AppendLine('| rows[].fields | Object with the field values to validate and apply. Preserve the exported JSON keys. |');
+        O.AppendLine('');
+        O.AppendLine('If neither id nor a usable primaryKey identifies a row, that row fails validation. With an unmatched primary key, import attempts an insert only when Foundation permits it. Source SystemId is not forced onto a newly inserted record.');
+        O.AppendLine('The export/import engine uses Foundation serialization and its table and field guards. It adds no message type. Use the Table Data actions for files, or Copy Plans for a repeatable table-to-table workflow.');
+        O.AppendLine('');
     end;
 
     local procedure BuildCopyPlanGuide(var O: TextBuilder)
