@@ -150,6 +150,8 @@ codeunit 10035584 "Playbook Enqueue Msg ori" implements "Msg Interface ori", "Ms
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteEnqueue(Argument);
     end;
 

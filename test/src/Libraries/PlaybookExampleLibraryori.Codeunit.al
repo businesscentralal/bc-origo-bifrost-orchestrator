@@ -105,4 +105,105 @@ codeunit 96438 "Playbook Example Library ori"
     begin
         exit('{"message":"Customers with an overdue balance: @10.overdueCount"}');
     end;
+
+    /// <summary>
+    /// Builds example 4 (POSTING-AUDIT): read a bounded set of customers, ask once per customer, then send the
+    /// counts. The Ask step stores the invariant type name looked up at runtime. This app has no Language Models
+    /// dependency, so a deployment without LLM.Prompt.Ask keeps an unlisted ordinal and Verify reports that.
+    /// </summary>
+    /// <param name="PlaybookCode">The code of the playbook to create.</param>
+    procedure BuildPostingAudit(PlaybookCode: Code[20])
+    var
+        Playbook: Record "Playbook ori";
+    begin
+        Lib.CreatePlaybook(PlaybookCode);
+        Playbook.Get(PlaybookCode);
+        Playbook.Description := 'Audit customer posting setup and report the verdicts';
+        Playbook.Modify(true);
+
+        Lib.AddStep(PlaybookCode, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", PostingAuditReadTemplate(), 0, '', 0);
+        Lib.AddStep(PlaybookCode, 30, "Playbook Step Type ori"::Check, ResolveAskMessageType(), PostingAuditAskTemplate(), 10, 'result', 0);
+        Lib.AddStep(PlaybookCode, 90, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Telegram.Message", PostingAuditNoticeTemplate(), 0, '', 0);
+
+        Lib.SetResultLogPaths(PlaybookCode, 10, 'noOfRecords>customerCount');
+        Lib.SetResultLogPaths(PlaybookCode, 30, 'data.verdict>verdict,data.findings>findings,stopReason>stopReason');
+        Lib.SetNextSteps(PlaybookCode, 10, 30, 0);
+        Lib.SetNextSteps(PlaybookCode, 30, 90, 90);
+        Lib.SetNextSteps(PlaybookCode, 90, 0, 0);
+        Lib.SetExcludeFromRunStatus(PlaybookCode, 90);
+
+        Lib.AddStatusSuccessCondition(PlaybookCode, 10);
+        Lib.AddNoOfRecordsCondition(PlaybookCode, 10);
+        Lib.AddStatusSuccessCondition(PlaybookCode, 30);
+        Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 20000, 'data.verdict', "Playbook Cond. Operator ori"::Equals, 'pass');
+        Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 30000, 'schemaValid', "Playbook Cond. Operator ori"::Equals, 'true');
+        Lib.AddCondition(PlaybookCode, 90, "Playbook Cond. Type ori"::Start, 10000, '_who.telegramChatId', "Playbook Cond. Operator ori"::Exists, '');
+        Lib.AddStatusSuccessCondition(PlaybookCode, 90);
+    end;
+
+    /// <summary>True when this deployment lists LLM.Prompt.Ask. The example never names that value at compile time.</summary>
+    /// <returns>True when the enum lists the invariant name.</returns>
+    procedure AskTypeIsRegistered(): Boolean
+    var
+        MessageType: Enum "Message Type ori";
+    begin
+        exit(MessageType.Names().Contains(AskTypeNameTok));
+    end;
+
+    /// <summary>The request template of step 10 of example 4.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure PostingAuditReadTemplate(): Text
+    begin
+        exit('{"tableName":"Customer","fieldNumbers":[1,2],"tableView":"WHERE(Blocked=CONST( ))","take":25}');
+    end;
+
+    /// <summary>The request template of step 30 of example 4.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure PostingAuditAskTemplate(): Text
+    begin
+        exit('{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","record":{"tableName":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
+    end;
+
+    /// <summary>The request template of step 90 of example 4.</summary>
+    /// <returns>The JSON text.</returns>
+    procedure PostingAuditNoticeTemplate(): Text
+    begin
+        exit('{"message":"Posting audit finished: @_steps.30.items"}');
+    end;
+
+    /// <summary>
+    /// Resolves LLM.Prompt.Ask from the enum names at runtime. When Language Models is not installed the step
+    /// keeps an unlisted ordinal so Verify reports MessageTypeUnavailable instead of a compile-time dependency.
+    /// </summary>
+    /// <returns>The registered Ask type, or an unlisted ordinal.</returns>
+    local procedure ResolveAskMessageType() MessageType: Enum "Message Type ori"
+    var
+        Names: List of [Text];
+        Ordinals: List of [Integer];
+        Index: Integer;
+    begin
+        Names := MessageType.Names();
+        Ordinals := MessageType.Ordinals();
+        for Index := 1 to Names.Count() do
+            if Names.Get(Index) = AskTypeNameTok then
+                exit(Enum::"Message Type ori".FromInteger(Ordinals.Get(Index)));
+        if not TryUnlistedAskType(MessageType) then
+            Error(UnlistedRefusedErr);
+    end;
+
+    [TryFunction]
+    local procedure TryUnlistedAskType(var MessageType: Enum "Message Type ori")
+    var
+        Ordinal: Integer;
+    begin
+        Evaluate(Ordinal, UnlistedOrdinalTok);
+        if MessageType.Ordinals().Contains(Ordinal) then
+            Error('');
+        MessageType := Enum::"Message Type ori".FromInteger(Ordinal);
+    end;
+
+    var
+        AskTypeNameTok: Label 'LLM.Prompt.Ask', Locked = true;
+        UnlistedOrdinalTok: Label '99999999', Locked = true;
+        UnlistedRefusedErr: Label 'The platform refused to hold an ordinal that the enum does not list.', Locked = true;
 }

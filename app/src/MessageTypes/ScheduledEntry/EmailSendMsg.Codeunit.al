@@ -163,6 +163,8 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
         ResponseJson: JsonObject;
         OutboxSystemId: Guid;
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         RequestJson := Argument.GetRequestJson();
 
         if not Argument.TryGetGuidFromJson(RequestJson, 'outboxSystemId', OutboxSystemId) then

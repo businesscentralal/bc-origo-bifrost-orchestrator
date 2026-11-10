@@ -146,6 +146,8 @@ codeunit 10035593 "Report List Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     begin
+        Argument.AssertVersion1();
+        Argument.AssertIsLicensed();
         Handler.ExecuteList(Argument);
     end;
 
