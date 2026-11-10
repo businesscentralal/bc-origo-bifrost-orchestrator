@@ -12,6 +12,17 @@ permissionset 10035537 "BIFROST OrchMgt ori"
     Caption = 'Bifrost Orchestrator Mgt.', MaxLength = 30, Comment = 'is-IS=Stjórnun Bifröst stjórnanda';
 
     Permissions =
+        tabledata "Playbook Transform ori" = RIMD,
+        page "Playbook Transforms ori" = X,
+        codeunit "Playbook Transform Exec ori" = X,
+        codeunit "Playbook Transform Verify ori" = X,
+        page "Copy Plans ori" = X,
+        page "Copy Plan Card ori" = X,
+        page "Copy Plan Fields ori" = X,
+        tabledata "Copy Plan ori" = RIMD,
+        tabledata "Copy Plan Field ori" = RIMD,
+        codeunit "Copy Plan Generator ori" = X,
+
         tabledata "Scheduled Entry ori" = RIMD,
         tabledata "Scheduler Setup ori" = R,
         tabledata "Recurring Template ori" = R,
