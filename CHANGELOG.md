@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed
+- Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
+
 ### Added
 - #155 Phase 5: Table Data viewing, guarded field editing, JSON export/import and `bifrost-table-data` format guidance in the existing runtime help overview (codeunit 10035576). Documents full-filter exports, file-selected destination tables, dry-run confirmation, row identity, and validation/trigger failure behavior. Public website chapters remain tracked in `businesscentralal/bifrost#152`.
 

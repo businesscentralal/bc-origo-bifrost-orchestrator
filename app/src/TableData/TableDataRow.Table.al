@@ -9,6 +9,7 @@ table 10035564 "Table Data Row ori"
     Caption = 'Table Data Row', Comment = 'is-IS=Lína töflugagna';
     DataClassification = SystemMetadata;
     TableType = Temporary;
+    AllowInCustomizations = Never;
     Extensible = false;
 
     fields

@@ -8,6 +8,7 @@ table 10035565 "Table Data Field ori"
     Caption = 'Table Data Field', Comment = 'is-IS=Reitur töflugagna';
     DataClassification = SystemMetadata;
     TableType = Temporary;
+    AllowInCustomizations = Never;
     Extensible = false;
 
     fields
