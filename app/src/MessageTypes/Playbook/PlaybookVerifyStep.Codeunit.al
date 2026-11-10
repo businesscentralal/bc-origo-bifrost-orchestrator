@@ -20,6 +20,18 @@ codeunit 10035617 "Playbook Verify Step ori"
         Verify: Codeunit "Playbook Verify ori";
         VerifyArtifact: Codeunit "Playbook Verify Artifact ori";
     begin
+        if Step."Step Kind" = Step."Step Kind"::Transform then begin
+            CheckTransform(Step, Findings);
+            CheckNextSteps(Step, Findings);
+            CheckIterateSource(Step, Findings);
+            CheckSkipGate(Step, Findings);
+            exit;
+        end;
+        if Step."Step Kind" <> Step."Step Kind"::Message then begin
+            Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'StepKindUnsupported',
+                UnsupportedKindErr, UnsupportedKindErr, Step.Disabled);
+            exit;
+        end;
         CheckMessageType(Step, Findings);
         CheckSuccessCondition(Step, Findings);
         CheckNextSteps(Step, Findings);
@@ -29,6 +41,13 @@ codeunit 10035617 "Playbook Verify Step ori"
         CheckUnsafeWrite(Step, Findings);
         CheckAskForEach(Step, Verify.GetAskCheckTypeName(Step."Message Type"), Findings);
         VerifyArtifact.CheckStep(Step, Findings);
+    end;
+
+    local procedure CheckTransform(Step: Record "Playbook Step ori"; var Findings: JsonArray)
+    var
+        TransformVerify: Codeunit "Playbook Transform Verify ori";
+    begin
+        TransformVerify.CheckStep(Step, Findings);
     end;
 
     local procedure CheckMessageType(Step: Record "Playbook Step ori"; var Findings: JsonArray)
@@ -227,6 +246,7 @@ codeunit 10035617 "Playbook Verify Step ori"
     end;
 
     var
+        UnsupportedKindErr: Label 'Choose a supported playbook step kind.', Comment = 'is-IS=Veldu studda tegund keðjuskrefs.';
         AskForEachUnboundedMsg: Label 'Ask step %1 iterates records from step %2 without take. Every customer or record can cause model calls and counted messages; paging does not bound that cost.', Comment = '%1 = Ask step no, %2 = source step no, is-IS=Ask-skref %1 ítrar yfir færslur úr skrefi %2 án take. Hver viðskiptamaður eða færsla getur valdið líkanaköllum og taldum skilaboðum; síðuskipting takmarkar ekki þann kostnað.';
         AskForEachUnboundedNextStepTxt: Label 'Set take in the request template of source step %1 to bound the number of records audited.', Comment = '%1 = source step no, is-IS=Settu take í beiðnisniðmát upprunaskrefs %1 til að takmarka fjölda færslna sem eru yfirfarnar.';
         MessageTypeUnavailableMsg: Label 'Step %1 calls message type %2, which does not exist in this deployment or is not enabled for this user in this company. Every run of the step would fail.', Comment = '%1 = step no, %2 = message type, is-IS=Skref %1 kallar á skilaboðategundina %2, sem er ekki til í þessari uppsetningu eða er ekki virk fyrir þennan notanda í þessu fyrirtæki. Hver keyrsla skrefsins myndi mistakast.';

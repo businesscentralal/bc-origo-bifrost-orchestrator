@@ -21,6 +21,228 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Client Credentials ori - Field Description - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3499757020 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Plan Field</source>
+          <target>Reitur afritunaráætlunar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitur afritunaráætlunar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3716523614 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the constant value or text to replace.</source>
+          <target>Tilgreinir fastagildið eða textann sem á að skipta út.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fastagildið eða textann sem á að skipta út.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Argument 1 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3716523614 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Argument 1</source>
+          <target>Viðfang 1</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðfang 1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Argument 1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 1803433763 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the replacement text.</source>
+          <target>Tilgreinir nýja textann.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir nýja textann.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Argument 2 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 1803433763 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Argument 2</source>
+          <target>Viðfang 2</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðfang 2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Argument 2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 4104164979 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the destination field; key fields identify the row to insert or update.</source>
+          <target>Tilgreinir markreitinn; lykilreitir auðkenna færsluna sem á að bæta við eða uppfæra.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir markreitinn; lykilreitir auðkenna færsluna sem á að bæta við eða uppfæra.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Destination Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 4104164979 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Field No.</source>
+          <target>Númer markreits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer markreits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Destination Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3320823955 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the order of the field mapping.</source>
+          <target>Tilgreinir röð reitavörpunarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð reitavörpunarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Line No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <target>Línunúmer</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línunúmer</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3108107879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the field transformation applied before writing the destination.</source>
+          <target>Tilgreinir umbreytingu reitsins áður en skrifað er í marktöfluna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir umbreytingu reitsins áður en skrifað er í marktöfluna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Operation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3108107879 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Operation</source>
+          <target>Aðgerð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðgerð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Operation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3496118378 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the copy plan that owns this mapping.</source>
+          <target>Tilgreinir afritunaráætlunina sem á þessa vörpun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir afritunaráætlunina sem á þessa vörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Plan Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3496118378 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Plan Code</source>
+          <target>Áætlunarkóði</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Áætlunarkóði</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Plan Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 343736747 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that this mapping is excluded from the generated playbook.</source>
+          <target>Tilgreinir að þessari vörpun sé sleppt úr mynduðu keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir að þessari vörpun sé sleppt úr mynduðu keðjunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Skip - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 343736747 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Skip</source>
+          <target>Sleppa</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sleppa</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Skip - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3160832348 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the field to read from the source table.</source>
+          <target>Tilgreinir reitinn sem lesinn er úr upprunatöflunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir reitinn sem lesinn er úr upprunatöflunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Source Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3499757020 - Field 3160832348 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Field No.</source>
+          <target>Númer upprunareits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer upprunareits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan Field ori - Field Source Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Plan</source>
+          <target>Afritunaráætlun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - NamedType 880944479" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove or reparent the child plans before deleting this plan.</source>
+          <target>Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - NamedType ChildrenExistErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the unique code of the copy plan.</source>
+          <target>Tilgreinir einkvæman kóða afritunaráætlunarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir einkvæman kóða afritunaráætlunarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 3004954119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Code</source>
+          <target>Kóði</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kóði</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the purpose of this copy plan.</source>
+          <target>Tilgreinir tilgang afritunaráætlunarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir tilgang afritunaráætlunarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target>Lýsing</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 217619255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the table to write through Data.Records.Set with Foundation guards.</source>
+          <target>Tilgreinir töfluna sem skrifað er í með Data.Records.Set og vörnum Foundation.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir töfluna sem skrifað er í með Data.Records.Set og vörnum Foundation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Destination Table No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 217619255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Table No.</source>
+          <target>Númer marktöflu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer marktöflu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Destination Table No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 4140201449 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the only playbook replaced when this plan is generated again.</source>
+          <target>Tilgreinir eina keðjuna sem er skipt út þegar áætlunin er mynduð aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir eina keðjuna sem er skipt út þegar áætlunin er mynduð aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Generated Playbook Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 4140201449 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generated Playbook Code</source>
+          <target>Kóði myndaðrar keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kóði myndaðrar keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Generated Playbook Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 4187347522 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many source rows the runner reads per page.</source>
+          <target>Tilgreinir hversu margar upprunafærslur eru lesnar á hverri síðu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hversu margar upprunafærslur eru lesnar á hverri síðu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Page Size - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 4187347522 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page Size</source>
+          <target>Síðustærð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síðustærð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Page Size - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 1983564942 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the plan that must run before this child plan.</source>
+          <target>Tilgreinir áætlunina sem verður að keyra á undan þessari undirskipuðu áætlun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir áætlunina sem verður að keyra á undan þessari undirskipuðu áætlun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Parent Plan Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 1983564942 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parent Plan Code</source>
+          <target>Kóði yfirskipaðrar áætlunar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kóði yfirskipaðrar áætlunar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Parent Plan Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 3014885516 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the order of child plans under the same parent.</source>
+          <target>Tilgreinir röð undirskipaðra áætlana undir sama foreldri.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð undirskipaðra áætlana undir sama foreldri.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Sequence No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 3014885516 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sequence No.</source>
+          <target>Raðnúmer</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Raðnúmer</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Sequence No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 76420432 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the table to read through Data.Records.Get.</source>
+          <target>Tilgreinir töfluna sem lesin er með Data.Records.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir töfluna sem lesin er með Data.Records.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Source Table No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 76420432 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table No.</source>
+          <target>Númer upprunatöflu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer upprunatöflu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Source Table No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 1512687140 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the table view and filters used to select source records.</source>
+          <target>Tilgreinir töflusýn og afmarkanir fyrir upprunafærslur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir töflusýn og afmarkanir fyrir upprunafærslur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Source View - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4153413238 - Field 1512687140 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source View</source>
+          <target>Upprunasýn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Upprunasýn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Source View - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3364439874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost JQ Parameter</source>
           <target>Færibreyta vinnsluraðar Bifrastar</target>
@@ -297,6 +519,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Staða</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Field Status - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2002508345 - Field 3980180862 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step Kind</source>
+          <target>Tegund skrefs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tegund skrefs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Field Step Kind - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2002508345 - Field 250551527 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step No.</source>
           <target>Skrefnúmer</target>
@@ -405,6 +633,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Sleppa ef skref mistókst</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Skip If Step Failed - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2378468741 - Field 3980180862 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the step dispatches a message or transforms JSON locally.</source>
+          <target>Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Step Kind - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2378468741 - Field 3980180862 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step Kind</source>
+          <target>Tegund skrefs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tegund skrefs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Step Kind - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2378468741 - Field 250551527 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step No.</source>
           <target>Skrefnúmer</target>
@@ -428,6 +668,108 @@
           <target>Slóðir samantektar</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Slóðir samantektar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Summary Paths - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook Transform</source>
+          <target>Umbreyting keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 3716523614 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the constant value or text to replace.</source>
+          <target>Tilgreinir fastagildið eða textann sem á að skipta út.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fastagildið eða textann sem á að skipta út.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Argument 1 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 3716523614 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Argument 1</source>
+          <target>Viðfang 1</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðfang 1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Argument 1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 1803433763 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the replacement text.</source>
+          <target>Tilgreinir nýja textann.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir nýja textann.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Argument 2 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 1803433763 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Argument 2</source>
+          <target>Viðfang 2</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðfang 2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Argument 2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 3320823955 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the order of this mapping.</source>
+          <target>Tilgreinir röð þessarar vörpunar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð þessarar vörpunar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Line No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <target>Línunúmer</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línunúmer</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 3108107879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the operation applied to the source value.</source>
+          <target>Tilgreinir aðgerðina sem beitt er á upprunagildið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir aðgerðina sem beitt er á upprunagildið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Operation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 3108107879 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Operation</source>
+          <target>Aðgerð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðgerð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Operation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 1803165964 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the playbook that owns this mapping.</source>
+          <target>Tilgreinir keðjuna sem á þessa vörpun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir keðjuna sem á þessa vörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Playbook Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 1803165964 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook Code</source>
+          <target>Keðjukóði</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keðjukóði</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Playbook Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 1597973756 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the path in the input row, or an @workspace reference.</source>
+          <target>Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Source Path - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 1597973756 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Path</source>
+          <target>Upprunaslóð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Upprunaslóð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Source Path - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 250551527 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Transform step.</source>
+          <target>Tilgreinir umbreytingarskrefið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir umbreytingarskrefið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Step No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 250551527 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step No.</source>
+          <target>Skrefnúmer</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrefnúmer</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Step No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 4011441648 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the dot-separated path in the output row.</source>
+          <target>Tilgreinir slóðina í úttaksfærslunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í úttaksfærslunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Target Path - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 580399095 - Field 4011441648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Target Path</source>
+          <target>Markslóð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Markslóð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Target Path - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 905065511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Recurring Template</source>
@@ -897,6 +1239,192 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Scheduler Setup ori - Field PrimaryKey - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 392052156 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Field</source>
+          <target>Reitur töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitur töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3070320983 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the field.</source>
+          <target>Tilgreinir heiti reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir heiti reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3070320983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Name</source>
+          <target>Heiti reits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Heiti reits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3531868071 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the field.</source>
+          <target>Tilgreinir númer reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir númer reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field No.</source>
+          <target>Reitarnr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitarnr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 2710354593 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the key of the field in the serializer JSON.</source>
+          <target>Tilgreinir lykil reitsins í JSON raðarans.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lykil reitsins í JSON raðarans.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Json Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 2710354593 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Json Key</source>
+          <target>JSON-lykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=JSON-lykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Json Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1901039407 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the field is part of the primary key. Primary key fields cannot be edited here.</source>
+          <target>Tilgreinir hvort reiturinn er hluti af aðallyklinum. Ekki er hægt að breyta reitum aðallykils hér.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort reiturinn er hluti af aðallyklinum. Ekki er hægt að breyta reitum aðallykils hér.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Part of Primary Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1901039407 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Part of Primary Key</source>
+          <target>Hluti af aðallykli</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hluti af aðallykli</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Part of Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1878130204 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the data type of the field.</source>
+          <target>Tilgreinir gagnategund reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gagnategund reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1878130204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target>Tegund</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tegund</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1131619133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the field as the serializer writes it. Change it to save a new value.</source>
+          <target>Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Value - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 392052156 - Field 1131619133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Value</source>
+          <target>Gildi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Gildi</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Row</source>
+          <target>Lína töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lína töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 1663593181 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the primary key values of the record.</source>
+          <target>Tilgreinir gildi aðallykils færslunnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi aðallykils færslunnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Primary Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <target>Aðallykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 3793541599 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the SystemId of the record in the source table.</source>
+          <target>Tilgreinir SystemId færslunnar í upprunatöflunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir SystemId færslunnar í upprunatöflunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Record SystemId - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 3793541599 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record SystemId</source>
+          <target>SystemId færslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=SystemId færslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Record SystemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2782707039 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the position of the row on the current page.</source>
+          <target>Tilgreinir staðsetningu línunnar á núverandi síðu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir staðsetningu línunnar á núverandi síðu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Row No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2782707039 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row No.</source>
+          <target>Línunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Row No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2166945456 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the first fields of the record as Name=Value pairs.</source>
+          <target>Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2871538196 - Field 2166945456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Summary</source>
+          <target>Samantekt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Samantekt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 1913014239" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy plan %1 occurs twice in the parent hierarchy.</source>
+          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType CycleErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 2712193876" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination field %1 is mapped more than once.</source>
+          <target>Markreitnum %1 er varpað oftar en einu sinni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field number, is-IS=Markreitnum %1 er varpað oftar en einu sinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType DuplicateFieldErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 1575191754" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Map destination primary-key field %1 before generating the playbook.</source>
+          <target>Varpaðu aðallykilsreitnum %1 í marktöflunni áður en keðjan er mynduð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Varpaðu aðallykilsreitnum %1 í marktöflunni áður en keðjan er mynduð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType MissingKeyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3660386871" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy plan %1 needs at least one active field mapping.</source>
+          <target>Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType NoFieldsErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 286251253" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page size must be between 1 and 500.</source>
+          <target>Síðustærð verður að vera á milli 1 og 500.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síðustærð verður að vera á milli 1 og 500.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PageSizeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3047469292" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 already exists. Choose a different plan code; generation never takes over an unrelated playbook.</source>
+          <target>Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType PlaybookExistsErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 2217099951" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The source table view is invalid. Use existing field names and permitted filters.</source>
+          <target>Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SourceViewErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3176109846" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System fields cannot be mapped by a copy plan.</source>
+          <target>Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki er hægt að varpa kerfisreitum með afritunaráætlun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType SystemFieldErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2797933787 - NamedType 3165231940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform copy fields</source>
+          <target>Umbreyta afritunarreitum</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyta afritunarreitum</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType TransformDescriptionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2492258583 - Method 1532249759 - NamedType 1807669104" size-unit="char" translate="yes" xml:space="preserve">
           <source>Environment information:</source>
           <target>Upplýsingar um umhverfi:</target>
@@ -1149,6 +1677,12 @@
           <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = playbook code, is-IS=Skref %1 fannst ekki í keðju %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType StepNotFoundErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3386553435 - NamedType 341935324" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This playbook step kind is not supported.</source>
+          <target>Þessi tegund keðjuskrefs er ekki studd.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þessi tegund keðjuskrefs er ekki studd.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType UnsupportedKindErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 410476279 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Schedule a Bifrost Playbook as an Orchestrator Entry with a recurring template.</source>
           <target>Áætla Bifröst keðju sem vinnsluraðarstjórafærslu með endurtekningarsniðmáti.</target>
@@ -1202,6 +1736,114 @@
           <target>Taktu viðtakandann úr uppsetningarreit eða tilvísun, til dæmis "@_who.salesperson.email", aldrei úr föstu netfangi.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Taktu viðtakandann úr uppsetningarreit eða tilvísun, til dæmis "@_who.salesperson.email", aldrei úr föstu netfangi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Artifact ori - NamedType EmailLiteralRecipientNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 2505766101" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform target path %1 overlaps another mapping.</source>
+          <target>Markslóð umbreytingar %1 skarast við aðra vörpun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = target path, is-IS=Markslóð umbreytingar %1 skarast við aðra vörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType DuplicateTargetErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 3741080962" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Replace Text requires a nonempty Argument 1.</source>
+          <target>Viðfang 1 má ekki vera autt við textaskipti.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðfang 1 má ekki vera autt við textaskipti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType EmptySearchErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 2851206674" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A Transform step must not have a message type.</source>
+          <target>Umbreytingarskref má ekki hafa skilaboðagerð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref má ekki hafa skilaboðagerð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType MessageTypeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 533737573" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add at least one field mapping to the Transform step.</source>
+          <target>Bættu að minnsta kosti einni reitavörpun við umbreytingarskrefið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu að minnsta kosti einni reitavörpun við umbreytingarskrefið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType NoMappingsErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 1441009422" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform steps cannot fetch pages. Use a preceding paged reader.</source>
+          <target>Umbreytingarskref geta ekki sótt síður. Notaðu fyrra síðuskipt lestrarskref.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref geta ekki sótt síður. Notaðu fyrra síðuskipt lestrarskref.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType PagedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 541553205" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This transform operation requires a scalar value.</source>
+          <target>Þessi umbreytingaraðgerð krefst staks gildis.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þessi umbreytingaraðgerð krefst staks gildis.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ScalarErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 3041983687" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform source path %1 was not found.</source>
+          <target>Upprunaslóð umbreytingar %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = source path, is-IS=Upprunaslóð umbreytingar %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType SourcePathErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 1680186691" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform target path %1 is invalid.</source>
+          <target>Markslóð umbreytingar %1 er ógild.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = target path, is-IS=Markslóð umbreytingar %1 er ógild.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType TargetPathErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 2230270348" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The transform operation is not supported.</source>
+          <target>Umbreytingaraðgerðin er ekki studd.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingaraðgerðin er ekki studd.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType UnknownOperationErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 2851206674" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove the message type from the Transform step.</source>
+          <target>Fjarlægðu skilaboðagerðina úr umbreytingarskrefinu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu skilaboðagerðina úr umbreytingarskrefinu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType MessageTypeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 761809759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Transform field mappings and verify the playbook again.</source>
+          <target>Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType NextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 533737573" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A Transform step needs at least one field mapping.</source>
+          <target>Umbreytingarskref þarf að minnsta kosti eina reitavörpun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref þarf að minnsta kosti eina reitavörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType NoMappingsErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 4280277748" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The transform operation is not supported.</source>
+          <target>Umbreytingaraðgerðin er ekki studd.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingaraðgerðin er ekki studd.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType OperationErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 1441009422" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A Transform step cannot fetch pages. Iterate over a preceding reader step instead.</source>
+          <target>Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType PagedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 486583733" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Replace Text requires a nonempty search string in Argument 1.</source>
+          <target>Textaskipti krefjast leitartexta í viðfangi 1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Textaskipti krefjast leitartexta í viðfangi 1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType SearchErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 4281848628" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A non-Constant transform needs a source path.</source>
+          <target>Umbreyting sem er ekki fasti þarf upprunaslóð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting sem er ekki fasti þarf upprunaslóð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType SourceErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 3041983687" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform source path %1 is unknown in this input.</source>
+          <target>Upprunaslóð umbreytingar %1 er óþekkt í þessu inntaki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = source path, is-IS=Upprunaslóð umbreytingar %1 er óþekkt í þessu inntaki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType SourcePathErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 3123911384" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform target %1 is empty, invalid or overlaps another target.</source>
+          <target>Markslóð umbreytingar %1 er auð, ógild eða skarast við aðra markslóð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = target path, is-IS=Markslóð umbreytingar %1 er auð, ógild eða skarast við aðra markslóð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType TargetErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 42595137 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Check a Bifrost Playbook without running it; findings on disabled steps are informational.</source>
@@ -1370,6 +2012,12 @@
           <target>Stilltu Sleppa ef skref mistókst á %1 í skrefi %2.</target>
           <note from="Developer" annotates="general" priority="2">%1 = check step no, %2 = write step no, is-IS=Stilltu Sleppa ef skref mistókst á %1 í skrefi %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType UnsafeForEachWriteNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3345492096 - NamedType 341935324" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Choose a supported playbook step kind.</source>
+          <target>Veldu studda tegund keðjuskrefs.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Veldu studda tegund keðjuskrefs.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Step ori - NamedType UnsupportedKindErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 986805997" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask step %1 has a Success or Error condition on data but no responseSchema. A structured verdict requires a response schema.</source>
@@ -2127,6 +2775,108 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 3954339052" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field %1 was not changed. The field is restricted or can be written only once.</source>
+          <target>Reitnum %1 var ekki breytt. Reiturinn er takmarkaður eða aðeins má skrifa í hann einu sinni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Reitnum %1 var ekki breytt. Reiturinn er takmarkaður eða aðeins má skrifa í hann einu sinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType FieldNotChangedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 2511888513" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field %1 cannot be edited.</source>
+          <target>Ekki er hægt að breyta reit %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field number, is-IS=Ekki er hægt að breyta reit %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType FieldNotShownErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 286251253" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The page size must be between 1 and %1.</source>
+          <target>Síðustærðin verður að vera á bilinu 1 til %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = maximum page size, is-IS=Síðustærðin verður að vera á bilinu 1 til %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType PageSizeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 2684290006" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field %1 is part of the primary key and cannot be edited here.</source>
+          <target>Reiturinn %1 er hluti af aðallyklinum og ekki er hægt að breyta honum hér.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Reiturinn %1 er hluti af aðallyklinum og ekki er hægt að breyta honum hér.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType PrimaryKeyEditErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1169993136 - NamedType 2100988429" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The record no longer exists in table %1.</source>
+          <target>Færslan er ekki lengur til í töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Færslan er ekki lengur til í töflu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType RecordNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not exist.</source>
+          <target>Tafla %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 3563140640" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 (%2) cannot be read by the table data export.</source>
+          <target>Útflutningur töflugagna getur ekki lesið töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Útflutningur töflugagna getur ekki lesið töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableReadRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 3901123449" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The table view is not valid for table %1.</source>
+          <target>Töflusýnin á ekki við töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin á ekki við töflu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableViewInvalidErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1468028954" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not a Bifrost table data file (format %1, version %2 expected).</source>
+          <target>Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType FormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1030601889" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A new row cannot be inserted into table %1 (%2).</source>
+          <target>Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1065153784" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The row has neither an id nor a primaryKey.</source>
+          <target>Línan hefur hvorki id né primaryKey.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línan hefur hvorki id né primaryKey.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowKeyMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 943745913" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The row is not a JSON object.</source>
+          <target>Línan er ekki JSON-hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Línan er ekki JSON-hlutur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowNotObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 2095975556" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file has no rows array.</source>
+          <target>Skráin hefur engan línulista (rows).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin hefur engan línulista (rows).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowsMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1899388161" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row %1 failed: %2</source>
+          <target>Lína %1 mistókst: %2</target>
+          <note from="Developer" annotates="general" priority="2">%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowStopErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 2257494842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file does not name a table (tableNo).</source>
+          <target>Skráin tilgreinir ekki töflu (tableNo).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin tilgreinir ekki töflu (tableNo).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableNoMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not exist.</source>
+          <target>Tafla %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 45187949" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 (%2) cannot be written by the table data import.</source>
+          <target>Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableWriteRestrictedErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token is not configured in Orchestrator Setup.</source>
           <target>Telegram-vélmennislykill er ekki stilltur í uppsetningu vinnsluraðara.</target>
@@ -2276,6 +3026,54 @@
           <target>Lýsing</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Categories ori - Control description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3082714482 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Plan</source>
+          <target>Afritunaráætlun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3082714482 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target>Almennt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Almennt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3082714482 - Action 2668085354 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates the copy playbook or replaces its previously generated steps.</source>
+          <target>Býr til afritunarkeðju eða skiptir út áður mynduðum skrefum hennar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Býr til afritunarkeðju eða skiptir út áður mynduðum skrefum hennar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Action GeneratePlaybook - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3082714482 - Action 2668085354 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generate Playbook</source>
+          <target>Mynda keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Mynda keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Action GeneratePlaybook - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3082714482 - Action 3622966387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens the generated playbook to verify, run or schedule it.</source>
+          <target>Opnar mynduðu keðjuna til að staðfesta, keyra eða tímasetja hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opnar mynduðu keðjuna til að staðfesta, keyra eða tímasetja hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Action OpenPlaybook - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3082714482 - Action 3622966387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Playbook</source>
+          <target>Opna keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Card ori - Action OpenPlaybook - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3419099293 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fields</source>
+          <target>Reitir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plan Fields ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2298567555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Plans</source>
+          <target>Afritunaráætlanir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plans ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3564186828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client Credentials Card</source>
@@ -2877,6 +3675,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Skref</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Card ori - Control Steps - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 853968823 - Control 1949447633 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform Fields</source>
+          <target>Umbreyting reita</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting reita</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Card ori - Control Transforms - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 853968823 - Control 1113252865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Last Execution</source>
           <target>Síðasta keyrsla</target>
@@ -3279,6 +4083,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir stöðu keyrslu skrefsins.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Status - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 611875482 - Control 3980180862 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows whether this log records a message or a local transform.</source>
+          <target>Sýnir hvort færslan skráir skilaboð eða staðbundna umbreytingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir hvort færslan skráir skilaboð eða staðbundna umbreytingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Step Kind - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 611875482 - Control 250551527 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the step number.</source>
           <target>Tilgreinir skrefnúmer.</target>
@@ -3471,11 +4281,23 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Ritill keðjusniðmáts</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Template Editor ori - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 560157820 - NamedType 3250683452" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform Input</source>
+          <target>Inntak umbreytingar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Inntak umbreytingar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Template Editor ori - NamedType TransformInputLbl</note>
+        </trans-unit>
         <trans-unit id="Page 560157820 - Control 2555440835 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request Template</source>
           <target>Sniðmát beiðni</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sniðmát beiðni</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Template Editor ori - Control RequestTemplate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2155707330 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform Fields</source>
+          <target>Umbreyting reita</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting reita</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Transforms ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Playbooks</source>
@@ -4923,6 +5745,174 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Kerfisauðkenni</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Scheduler Status ori - Control systemId - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3000445245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Fields</source>
+          <target>Reitir töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitir töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data Fields ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data</source>
+          <target>Töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 772952000" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export table data</source>
+          <target>Flytja út töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja út töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType DownloadTitleTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 1567760788" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Dry run of %1 rows: %2 to insert, %3 to modify, %4 failed. Import the rows that passed?</source>
+          <target>Prufukeyrsla %1 lína: %2 til að bæta við, %3 til að breyta, %4 mistókust. Flytja inn línurnar sem stóðust?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = rows, %2 = inserted, %3 = modified, %4 = failed, is-IS=Prufukeyrsla %1 lína: %2 til að bæta við, %3 til að breyta, %4 mistókust. Flytja inn línurnar sem stóðust?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType DryRunQst</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 3907048935" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 rows inserted, %2 rows modified, %3 rows failed.</source>
+          <target>%1 línum bætt við, %2 línum breytt, %3 línur mistókust.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = inserted, %2 = modified, %3 = failed, is-IS=%1 línum bætt við, %2 línum breytt, %3 línur mistókust.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType ImportedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 629381524" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not valid JSON.</source>
+          <target>Skráin er ekki gilt JSON.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gilt JSON.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType NotJsonErr</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - NamedType 3237890445" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import table data</source>
+          <target>Flytja inn töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja inn töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType UploadTitleTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 870794884 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table</source>
+          <target>Tafla</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tafla</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control Selection - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2846550316 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the page of rows that is shown.</source>
+          <target>Tilgreinir síðu línanna sem er sýnd.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir síðu línanna sem er sýnd.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageNoField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2846550316 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page</source>
+          <target>Síða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageNoField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2780801696 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many rows are shown at a time, 1 to 500.</source>
+          <target>Tilgreinir hve margar línur eru sýndar í einu, 1 til 500.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hve margar línur eru sýndar í einu, 1 til 500.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageSizeField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 2780801696 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page Size</source>
+          <target>Síðustærð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síðustærð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control PageSizeField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 1434847637 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the selected table.</source>
+          <target>Tilgreinir heiti valdrar töflu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir heiti valdrar töflu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNameField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 1434847637 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Name</source>
+          <target>Heiti töflu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Heiti töflu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNameField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3745738151 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the table to view.</source>
+          <target>Tilgreinir númer töflunnar sem á að skoða.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir númer töflunnar sem á að skoða.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNoField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3745738151 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table No.</source>
+          <target>Töflunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableNoField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3694213003 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies an optional table view, for example WHERE(Source=FILTER(A*)). It is validated before it is applied.</source>
+          <target>Tilgreinir valfrjálsa töflusýn, til dæmis WHERE(Source=FILTER(A*)). Hún er staðfest áður en henni er beitt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir valfrjálsa töflusýn, til dæmis WHERE(Source=FILTER(A*)). Hún er staðfest áður en henni er beitt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableViewField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Control 3694213003 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table View</source>
+          <target>Töflusýn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflusýn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Control TableViewField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1605488312 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Downloads the rows in the table view as a table data file.</source>
+          <target>Sækir línurnar í töflusýninni sem töflugagnaskrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækir línurnar í töflusýninni sem töflugagnaskrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ExportJson - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1605488312 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export JSON</source>
+          <target>Flytja út JSON</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja út JSON</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ExportJson - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1721565511 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Uploads a table data file, checks it with a dry run and imports it after you confirm.</source>
+          <target>Hleður upp töflugagnaskrá, prófar hana með prufukeyrslu og flytur hana inn eftir staðfestingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hleður upp töflugagnaskrá, prófar hana með prufukeyrslu og flytur hana inn eftir staðfestingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ImportJson - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 1721565511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import JSON</source>
+          <target>Flytja inn JSON</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja inn JSON</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action ImportJson - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 3318475992 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the next page of rows.</source>
+          <target>Sýnir næstu síðu línanna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir næstu síðu línanna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action NextPage - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 3318475992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Next Page</source>
+          <target>Næsta síða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Næsta síða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action NextPage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2466519627 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the fields of the selected row and lets you edit them.</source>
+          <target>Sýnir reiti valinnar línu og gerir þér kleift að breyta þeim.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir reiti valinnar línu og gerir þér kleift að breyta þeim.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action OpenRecord - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2466519627 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Record</source>
+          <target>Opna færslu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna færslu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action OpenRecord - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2157727942 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the previous page of rows.</source>
+          <target>Sýnir fyrri síðu línanna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir fyrri síðu línanna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action PreviousPage - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 337517078 - Action 2157727942 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Previous Page</source>
+          <target>Fyrri síða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fyrri síða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - Action PreviousPage - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 100990608 - Action 923844739 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 942706168">
           <source>Add the selected job queue entry to Bifrost Orchestrator so that it monitors the entry and restarts it when it fails.</source>
           <target>Bæta valinni vinnsluraðarfærslu við Bifröst stjórnandann svo hann fylgist með færslunni og endurræsi hana ef hún bregst.</target>
@@ -5133,6 +6123,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Í keyrslu</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Playbook Inst. Status ori - EnumValue Running - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Enum 307031685 - EnumValue 3080618677 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Message</source>
+          <target>Skilaboð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skilaboð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Playbook Step Kind ori - EnumValue Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 307031685 - EnumValue 3612416368 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transform</source>
+          <target>Umbreyting</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Playbook Step Kind ori - EnumValue Transform - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Enum 1827459229 - EnumValue 2279323338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Action</source>
           <target>Aðgerð</target>
@@ -5162,6 +6164,30 @@
           <target>Þrisvar sinnum</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Þrisvar sinnum</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Retry Policy ori - EnumValue Three Times - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2268432847 - EnumValue 809579490 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Constant</source>
+          <target>Fasti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fasti</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Constant - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2268432847 - EnumValue 4254856415 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy</source>
+          <target>Afrita</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Copy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2268432847 - EnumValue 1736095600 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Negate</source>
+          <target>Skipta um formerki</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skipta um formerki</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Negate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2268432847 - EnumValue 2769871211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Replace Text</source>
+          <target>Skipta út texta</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skipta út texta</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Replace Text - Property Caption</note>
         </trans-unit>
         <trans-unit id="EnumExtension 1969099318 - EnumValue 3097961541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 2593693414">
           <source>Bifrost Orchestrator</source>

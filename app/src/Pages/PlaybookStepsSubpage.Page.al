@@ -48,6 +48,10 @@ page 10035553 "Playbook Steps Subpage ori"
                         SetDescriptionStyle();
                     end;
                 }
+                field("Step Kind"; Rec."Step Kind")
+                {
+                    ApplicationArea = All;
+                }
                 field("Message Type"; Rec."Message Type")
                 {
                     ApplicationArea = All;
