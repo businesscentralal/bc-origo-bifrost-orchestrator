@@ -91,6 +91,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'binary', 'binary', 'The PDF file of the purchase order itself, not JSON. A client such as MCP hands it on as base64.');
+        Parts.AddResponseField(Fields, 'datacontenttype', 'string', 'application/pdf with a quoted name parameter containing PurchaseOrder-<SystemId>.pdf. The SystemId is lowercase without braces; this stable filename contains no unsafe document-number characters. Playbooks expose the same MIME value as contentType.');
         Response := Parts.Response(Fields, 'application/pdf');
         exit(true);
     end;
@@ -153,7 +154,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Print a purchase order', '{"type":"Purchase.Order.Pdf","data":{"orderNo":"106001"}}', '{"contentType":"application/pdf","size":45120,"base64":"<base64>"}');
+        Parts.Example(Examples, 'Print a purchase order', '{"type":"Purchase.Order.Pdf","data":{"orderNo":"106001"}}', '{"contentType":"application/pdf; name=\"PurchaseOrder-00000000-0000-0000-0000-000000000001.pdf\"","size":45120,"base64":"<base64>"}');
         Parts.Example(Examples, 'Unknown order', '{"type":"Purchase.Order.Pdf","data":{"orderNo":"NOSUCHORDER"}}', '{"status":"Error","code":"RecordNotFound","parameter":"orderNo","received":"NOSUCHORDER"}');
         exit(true);
     end;
@@ -169,7 +170,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
     begin
         Notes := 'subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. ' +
             'Only purchase documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. ' +
-            'Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. ' +
+            'The success MIME type carries name="PurchaseOrder-<SystemId>.pdf"; callers may use that filename when saving the unchanged binary PDF. Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. ' +
             'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.';
         exit(true);
     end;
@@ -207,6 +208,8 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
         PurchaseHeader.SetRecFilter();
         ReportSelections.GetPdfReportForVend(TempBlob, Enum::"Report Selection Usage"::"P.Order", PurchaseHeader, PurchaseHeader."Buy-from Vendor No.");
         Argument.SetResponsePdf(TempBlob);
+        // Keep the PDF bytes and expose its filename through the response MIME metadata.
+        Argument."Content Type" := CopyStr('application/pdf; name="PurchaseOrder-' + Format(PurchaseHeader.SystemId, 0, 4).ToLower() + '.pdf"', 1, MaxStrLen(Argument."Content Type"));
     end;
 
     local procedure FindOrder(var Argument: Record "Message Argument ori"; var PurchaseHeader: Record "Purchase Header"): Boolean

@@ -7,6 +7,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+- #91 / codeunit 10035625: preserve binary purchase-order PDFs and return a stable, safe `PurchaseOrder-<SystemId>.pdf` filename in the response MIME `name` parameter; test codeunit 96480 asserts filename propagation through the public dispatcher.
+
 ### Added
 - #91 New message type `Purchase.Order.Pdf` (enum value 10035625, codeunit 10035625 `Purch Order Pdf Msg ori`): prints one open purchase order with the report that Report Selections usage P.Order names for its Buy-from Vendor (default 1322 `Standard Purchase - Order`) and answers the PDF. The order is found by No. or SystemId from subject, `orderNo`, `orderId`, `documentNo` or `documentId`; only Document Type Order is found. Refusals answer `PermissionDenied` (read permission on Purchase Header, as `Sales.SalesInvoice.Pdf`), `MissingParameter`, `RecordNotFound`, `ConflictingIdentifiers` or `PreconditionFailed` (no P.Order report) with a `nextStep`, in en-US and is-IS. Effect write (No. Printed), direction Inbound. Help overview (codeunit 10035576) lists the type; the contract envelope helper (codeunit 10035609) gains a subject envelope with a content type. Granted in `BIFROST Orchestr ori`. Tests: new codeunit 96480 `Purch Order Pdf Tests ori`; the contract guard (96441) also checks this type.
 

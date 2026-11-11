@@ -35,6 +35,7 @@ codeunit 96480 "Purch Order Pdf Tests ori"
         RunType(TempArgument, '{"orderNo":"' + PurchaseHeader."No." + '"}');
 
         AssertIsPdf(TempArgument);
+        Assert.AreEqual('application/pdf; name="PurchaseOrder-' + Format(PurchaseHeader.SystemId, 0, 4).ToLower() + '.pdf"', TempArgument."Content Type", 'The caller receives the stable filename in the MIME metadata');
         PurchaseHeader.Get(PurchaseHeader."Document Type", PurchaseHeader."No.");
         Assert.AreEqual(PrintedBefore + 1, PurchaseHeader."No. Printed", 'The standard purchase order report counts the print');
     end;
@@ -60,7 +61,7 @@ codeunit 96480 "Purch Order Pdf Tests ori"
         Dispatcher.EnqueueAndProcess("Message Type ori"::"Purchase.Order.Pdf", "Message Version ori"::"1.0", CopyStr(Format(PurchaseHeader.SystemId, 0, 4), 1, 250), '', 'text/json',
             RequestContent, EmptyTaskId, 1033, MessageId, ResponseTempBlob, ResponseContentType, ResponseTime);
 
-        Assert.AreEqual('application/pdf', ResponseContentType, 'Success answers a PDF');
+        Assert.AreEqual('application/pdf; name="PurchaseOrder-' + Format(PurchaseHeader.SystemId, 0, 4).ToLower() + '.pdf"', ResponseContentType, 'The public dispatcher preserves the PDF filename');
         Assert.IsTrue(ResponseTempBlob.HasValue(), 'The PDF has content');
         ResponseTempBlob.CreateInStream(InStr);
         InStr.ReadText(Header, 4);
@@ -193,7 +194,7 @@ codeunit 96480 "Purch Order Pdf Tests ori"
         InStr: InStream;
         Header: Text;
     begin
-        if TempArgument."Content Type" <> 'application/pdf' then
+        if not TempArgument."Content Type".StartsWith('application/pdf; name="PurchaseOrder-') then
             Assert.Fail('Success answers a PDF, got ' + TempArgument."Content Type" + ': ' + TempArgument.GetResponseText());
         TempArgument.CalcFields("Response Content");
         Assert.IsTrue(TempArgument."Response Content".HasValue(), 'The PDF has content');
