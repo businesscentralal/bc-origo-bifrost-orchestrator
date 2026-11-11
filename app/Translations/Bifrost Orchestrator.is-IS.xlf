@@ -1756,9 +1756,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType UnknownOperationErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 153936086" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Clear the Message Type on step %1: re-select Step Kind = Transform on the step (page or Data.Records.Set), which clears it, then verify the playbook again.</source>
-          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu aftur tegund skrefs Umbreyting á skrefinu (síða eða Data.Records.Set), það hreinsar hana, og yfirfarðu keðjuna aftur.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu aftur tegund skrefs Umbreyting á skrefinu (síða eða Data.Records.Set), það hreinsar hana, og yfirfarðu keðjuna aftur.</note>
+          <source>Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.</source>
+          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType ClearMessageTypeTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 2851206674" size-unit="char" translate="yes" xml:space="preserve">
