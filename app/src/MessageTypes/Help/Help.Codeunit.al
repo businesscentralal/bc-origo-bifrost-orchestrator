@@ -26,7 +26,7 @@ codeunit 10035576 "Help ori"
     begin
         O.AppendLine('# Job Queue Orchestrator & Playbook Workflow Engine');
         O.AppendLine('');
-        O.AppendLine('21 Bifrost message types for managing job queues, building workflow playbooks, and generating reports.');
+        O.AppendLine('26 Bifrost message types for managing job queues, building workflow playbooks, generating reports, and sending purchase orders, sales quotes and sales order confirmations.');
         O.AppendLine('Call `Help.Implementation.Get` with `subject = "<type>"` for per-type technical guides.');
         O.AppendLine('');
         O.AppendLine('## Quick Decision Tree for AI Agents');
@@ -47,12 +47,15 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Get report details + layouts → `Orchestrator.Report.Get`');
         O.AppendLine('- Inspect or export report layouts → `Orchestrator.ReportLayout.List` / `Orchestrator.ReportLayout.Get`');
         O.AppendLine('- Generate PDF/Excel/Word report → `Orchestrator.Report.SaveAs`');
+        O.AppendLine('- Send a purchase order through its document sending profile → `Purchase.Order.Send`');
+        O.AppendLine('- Send a sales quote through its document sending profile → `Sales.Quote.Send`');
+        O.AppendLine('- Send a sales order confirmation through its document sending profile → `Sales.OrderConfirmation.Send`');
         O.AppendLine('- Run a batch job / processing-only report → `Orchestrator.Report.Run`');
         O.AppendLine('- See what workspace variables are available → `Orchestrator.Workspace.Preview`');
         O.AppendLine('');
         BuildSafeAuthoringGuide(O);
         BuildWorkedExamples(O);
-        O.AppendLine('## Message Types (21)');
+        O.AppendLine('## Message Types (26)');
         O.AppendLine('');
         O.AppendLine('| Type | Description |');
         O.AppendLine('|---|---|');
@@ -76,6 +79,9 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `Orchestrator.ReportLayout.List` | List extension and user-defined report layouts |');
         O.AppendLine('| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |');
         O.AppendLine('| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |');
+        O.AppendLine('| `Purchase.Order.Send` | Send a purchase order through the Document Sending Profile |');
+        O.AppendLine('| `Sales.Quote.Send` | Send a sales quote through the Document Sending Profile |');
+        O.AppendLine('| `Sales.OrderConfirmation.Send` | Send a sales order confirmation through the Document Sending Profile |');
         O.AppendLine('| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |');
         O.AppendLine('| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |');
         O.AppendLine('| `Help.Orchestrator.Get` | This help document |');

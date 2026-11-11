@@ -12,6 +12,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
 
 ### Added
+- #94 `Purchase.Order.Send`, `Sales.Quote.Send` and `Sales.OrderConfirmation.Send` send the document through the Document Sending Profile, the same way `Sales.SalesInvoice.Send` does. The request takes the document number or SystemId and an optional `documentSendingProfile`. Unknown documents, unknown or client-bound profiles, conflicting identifiers and a missing e-mail address are refused with a Bifrost error code and `nextStep` before anything is sent. Tests mock the send and do not transmit e-mail. The matching PDF types remain issues 91-93.
 - #155 Phase 5: Table Data viewing, guarded field editing, JSON export/import and `bifrost-table-data` format guidance in the existing runtime help overview (codeunit 10035576). Documents full-filter exports, file-selected destination tables, dry-run confirmation, row identity, and validation/trigger failure behavior. Public website chapters remain tracked in `businesscentralal/bifrost#152`.
 
 ### Fixed

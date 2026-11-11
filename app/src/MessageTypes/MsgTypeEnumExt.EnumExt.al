@@ -127,4 +127,19 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
         Caption = 'Orchestrator.Playbook.Verify', Locked = true;
         Implementation = "Msg Interface ori" = "Playbook Verify Msg ori", "Msg Discovery ori" = "Playbook Verify Msg ori", "Msg Contract ori" = "Playbook Verify Msg ori";
     }
+    value(10035632; "Purchase.Order.Send")
+    {
+        Caption = 'Purchase.Order.Send', Locked = true;
+        Implementation = "Msg Interface ori" = "Purch Order Send Msg ori", "Msg Discovery ori" = "Purch Order Send Msg ori", "Msg Contract ori" = "Purch Order Send Msg ori";
+    }
+    value(10035633; "Sales.Quote.Send")
+    {
+        Caption = 'Sales.Quote.Send', Locked = true;
+        Implementation = "Msg Interface ori" = "Sales Quote Send Msg ori", "Msg Discovery ori" = "Sales Quote Send Msg ori", "Msg Contract ori" = "Sales Quote Send Msg ori";
+    }
+    value(10035634; "Sales.OrderConfirmation.Send")
+    {
+        Caption = 'Sales.OrderConfirmation.Send', Locked = true;
+        Implementation = "Msg Interface ori" = "Order Conf Send Msg ori", "Msg Discovery ori" = "Order Conf Send Msg ori", "Msg Contract ori" = "Order Conf Send Msg ori";
+    }
 }
