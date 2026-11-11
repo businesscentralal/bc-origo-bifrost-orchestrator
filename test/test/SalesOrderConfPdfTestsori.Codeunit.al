@@ -67,10 +67,19 @@ codeunit 96471 "Sales Order Conf Pdf Tests ori"
     procedure QuoteNoIsNotAnOrder()
     var
         SalesHeader: Record "Sales Header";
+        OrderWithSameNo: Record "Sales Header";
         TempArgument: Record "Message Argument ori" temporary;
     begin
-        // [SCENARIO #93 AC02 edge] A sales quote, by No. or by SystemId, is not an order
-        LibrarySales.CreateSalesQuoteForCustomerNo(SalesHeader, LibrarySales.CreateCustomerNo());
+        // [SCENARIO #93 AC02 edge] A sales quote, by No. or by SystemId, is not an order. Its No. is one no order has.
+        SalesHeader.Init();
+        SalesHeader."Document Type" := SalesHeader."Document Type"::Quote;
+        SalesHeader."No." := 'GL93Q' + CopyStr(DelChr(Format(CreateGuid()), '=', '{}-'), 1, 12);
+        SalesHeader.Insert(true);
+        SalesHeader.Validate("Sell-to Customer No.", LibrarySales.CreateCustomerNo());
+        SalesHeader.Modify(true);
+        OrderWithSameNo.SetRange("Document Type", OrderWithSameNo."Document Type"::Order);
+        OrderWithSameNo.SetRange("No.", SalesHeader."No.");
+        Assert.RecordIsEmpty(OrderWithSameNo);
 
         RunType(TempArgument, '{"orderNo":"' + SalesHeader."No." + '"}');
         AssertRefusal(TempArgument, 'RecordNotFound');
@@ -158,7 +167,8 @@ codeunit 96471 "Sales Order Conf Pdf Tests ori"
         InStr: InStream;
         Header: Text;
     begin
-        Assert.AreEqual('application/pdf', TempArgument."Content Type", 'Success answers a PDF: ' + TempArgument.GetResponseText());
+        if TempArgument."Content Type" <> 'application/pdf' then
+            Assert.Fail('Success answers a PDF, got ' + TempArgument."Content Type" + ': ' + TempArgument.GetResponseText());
         TempArgument.CalcFields("Response Content");
         Assert.IsTrue(TempArgument."Response Content".HasValue(), 'The PDF has content');
         TempArgument."Response Content".CreateInStream(InStr);
