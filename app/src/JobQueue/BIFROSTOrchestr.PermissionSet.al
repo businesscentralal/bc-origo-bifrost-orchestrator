@@ -98,6 +98,7 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "Playbook Response Scrub ori" = X,
         codeunit "Playbook Workspace ori" = X,
         codeunit "Report Data Restriction ori" = X,
+        codeunit "Purch Order Pdf Msg ori" = X,
         codeunit "Report Get Msg ori" = X,
         codeunit "Report List Msg ori" = X,
         codeunit "Report Msg Handler ori" = X,
