@@ -59,6 +59,6 @@ codeunit 10035554 "Playbook Effect Guard ori"
     end;
 
     var
-        OmitCommitIrreversibleErr: Label 'Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.', Locked = true;
-        OmitCommitNoContractErr: Label 'Playbook %1 step %2 cannot run %3 under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.', Locked = true;
+        OmitCommitIrreversibleErr: Label 'Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.', Comment = '%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.';
+        OmitCommitNoContractErr: Label 'Playbook %1 step %2 cannot run %3 under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.', Comment = '%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.';
 }

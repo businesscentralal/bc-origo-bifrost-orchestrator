@@ -26,6 +26,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     [Test]
     procedure ExternalWritesRefused()
     begin
+        GlobalLanguage(1033);
         asserterror Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Email.Send");
         Assert.AreEqual('Playbook XGUARD step 10 cannot run Orchestrator.Email.Send under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.', GetLastErrorText(), 'Email refusal');
         asserterror Guard.CheckOmitCommitAllowed('XGUARD', 20, "Message Type ori"::"Orchestrator.Telegram.Message");
@@ -36,6 +37,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     [Test]
     procedure MissingContractRefused()
     begin
+        GlobalLanguage(1033);
         asserterror Guard.CheckOmitCommitAllowed('XGUARD', 30, "Message Type ori"::"Test.Effect.Missing");
         Assert.AreEqual('Playbook XGUARD step 30 cannot run Test.Effect.Missing under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.', GetLastErrorText(), 'Missing contract refusal');
     end;
@@ -123,6 +125,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     var
         Playbook: Record "Playbook ori";
     begin
+        GlobalLanguage(1033);
         CreatePlaybook(Playbook);
         AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Playbook.Enqueue", false, false);
         AddStep(Playbook.Code, 20, "Message Type ori"::"Orchestrator.Telegram.Message", false, false);
@@ -137,6 +140,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     var
         Playbook: Record "Playbook ori";
     begin
+        GlobalLanguage(1033);
         CreatePlaybook(Playbook);
         AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Email.Send", false, true);
         asserterror Guard.ValidateOmitCommitChain(Playbook.Code);
@@ -250,6 +254,7 @@ codeunit 96461 "Playbook Effect Tests ori"
         Subject: Text[250];
         ExpectedError: Text;
     begin
+        GlobalLanguage(1033);
         Subject := Format(CreateGuid(), 0, 4);
         Executor.SetParameters(MessageType, Subject, '{}');
         Executor.SetOmitCommit(true, 'XEXECUTOR', 70);
@@ -264,6 +269,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     var
         Fixture: Codeunit "Effect Contract Fixture ori";
     begin
+        GlobalLanguage(1033);
         Fixture.Configure(EffectJson, HasEffect);
         asserterror Guard.CheckOmitCommitAllowed('XGUARD', 40, "Message Type ori"::"Test.Effect.Contract");
         Assert.AreEqual('Playbook XGUARD step 40 cannot run Test.Effect.Contract under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.', GetLastErrorText(), 'Malformed effect fails closed with context');
