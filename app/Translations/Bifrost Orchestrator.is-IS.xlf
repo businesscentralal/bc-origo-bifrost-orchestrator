@@ -634,9 +634,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Skip If Step Failed - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 3980180862 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies whether the step dispatches a message or transforms JSON locally.</source>
-          <target>Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum.</note>
+          <source>Specifies whether the step dispatches a message or transforms JSON locally. Choosing Transform clears the Message Type.</source>
+          <target>Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum. Val á umbreytingu hreinsar skilaboðagerðina.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum. Val á umbreytingu hreinsar skilaboðagerðina.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Step Kind - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 3980180862 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1754,6 +1754,12 @@
           <target>Umbreytingaraðgerðin er ekki studd.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingaraðgerðin er ekki studd.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType UnknownOperationErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3549054438 - NamedType 153936086" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.</source>
+          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType ClearMessageTypeTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 2851206674" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove the message type from the Transform step.</source>
