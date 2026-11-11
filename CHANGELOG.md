@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added
+- #92 `Sales.Quote.Pdf` returns one sales quote as a PDF through Report Selection usage S.Quote (default report 1304). A quote number or SystemId is accepted; an unknown quote is `RecordNotFound`; the read check matches `Sales.SalesInvoice.Pdf` on Sales Header. Object 10035629.
+
 ### Fixed
 - #162 A Message Type left on a Transform step can now be cleared: validating Step Kind = Transform on the step clears it (table 10035540, page and `Data.Records.Set`), and the `TransformMessageType` finding (codeunit 10035628) names the step to clear in 1033/1039. Test 96469 covers set, report, clear and clean Verify. No new message types.
 - Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
