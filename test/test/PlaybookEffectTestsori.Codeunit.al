@@ -148,6 +148,36 @@ codeunit 96461 "Playbook Effect Tests ori"
         Cleanup(Playbook);
     end;
 
+    /// <summary>A local Transform, including one whose message type was cleared, is not a dispatch.</summary>
+    [Test]
+    procedure SafeChainIgnoresTransform()
+    var
+        Playbook: Record "Playbook ori";
+    begin
+        CreatePlaybook(Playbook);
+        AddStep(Playbook.Code, 10, "Message Type ori"::"Orchestrator.Report.List", false, false);
+        AddTransformStep(Playbook.Code, 20, Enum::"Message Type ori".FromInteger(0));
+        AddTransformStep(Playbook.Code, 30, "Message Type ori"::"Orchestrator.Email.Send");
+        AddStep(Playbook.Code, 40, "Message Type ori"::"Orchestrator.Playbook.Enqueue", false, false);
+        Guard.ValidateOmitCommitChain(Playbook.Code);
+        Cleanup(Playbook);
+    end;
+
+    /// <summary>An irreversible Message step is still refused when the chain also contains a Transform.</summary>
+    [Test]
+    procedure IrreversibleMessageFailsBesideTransform()
+    var
+        Playbook: Record "Playbook ori";
+    begin
+        GlobalLanguage(1033);
+        CreatePlaybook(Playbook);
+        AddTransformStep(Playbook.Code, 10, Enum::"Message Type ori".FromInteger(0));
+        AddStep(Playbook.Code, 20, "Message Type ori"::"Orchestrator.Telegram.Message", false, false);
+        asserterror Guard.ValidateOmitCommitChain(Playbook.Code);
+        Assert.IsTrue(GetLastErrorText().Contains('Playbook ' + Playbook.Code + ' step 20 cannot run Orchestrator.Telegram.Message'), 'Transform does not hide the message step');
+        Cleanup(Playbook);
+    end;
+
     /// <summary>AC04 rejects actual email execution before any dispatcher queue write.</summary>
     [Test]
     procedure AC04_ExecutorEmailRefusedBeforeDispatch()
@@ -294,6 +324,19 @@ codeunit 96461 "Playbook Effect Tests ori"
         Step.Disabled := Disabled;
         if IsCheck then
             Step."Step Type" := Step."Step Type"::Check;
+        Step.Insert(true);
+    end;
+
+    local procedure AddTransformStep(PlaybookCode: Code[20]; StepNo: Integer; MessageType: Enum "Message Type ori")
+    var
+        Step: Record "Playbook Step ori";
+    begin
+        Step.Init();
+        Step."Playbook Code" := PlaybookCode;
+        Step."Step No." := StepNo;
+        Step."Step Kind" := Step."Step Kind"::Transform;
+        // Direct assignment keeps a cleared or leftover type. Validate would clear it again.
+        Step."Message Type" := MessageType;
         Step.Insert(true);
     end;
 

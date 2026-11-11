@@ -44,14 +44,16 @@ codeunit 10035554 "Playbook Effect Guard ori"
         end;
     end;
 
-    /// <summary>Checks every enabled dispatching step, including Check steps that still call a type.</summary>
+    /// <summary>Checks every enabled Message step, including Check steps. Local Transform steps do not dispatch.</summary>
     procedure ValidateOmitCommitChain(PlaybookCode: Code[20])
     var
         PlaybookStep: Record "Playbook Step ori";
     begin
         PlaybookStep.SetRange("Playbook Code", PlaybookCode);
         PlaybookStep.SetRange(Disabled, false);
-        PlaybookStep.SetLoadFields("Playbook Code", "Step No.", Disabled, "Message Type");
+        // Transform runs locally and its Message Type is cleared, so it is not a dispatch contract.
+        PlaybookStep.SetRange("Step Kind", PlaybookStep."Step Kind"::Message);
+        PlaybookStep.SetLoadFields("Playbook Code", "Step No.", Disabled, "Step Kind", "Message Type");
         if PlaybookStep.FindSet() then
             repeat
                 CheckOmitCommitAllowed(PlaybookCode, PlaybookStep."Step No.", PlaybookStep."Message Type");
