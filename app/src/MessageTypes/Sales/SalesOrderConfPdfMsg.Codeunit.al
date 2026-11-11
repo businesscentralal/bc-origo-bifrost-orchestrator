@@ -117,7 +117,7 @@ codeunit 10035629 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     procedure GetEffect(var Effect: JsonObject): Boolean
     begin
         Effect.Add('effect', 'write');
-        Effect.Add('changes', 'Increases No. Printed on the sales order: the standard report counts the print. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.');
+        Effect.Add('changes', 'Increases No. Printed on the sales order and, when an interaction template is set up for sales order confirmations, logs an interaction for the customer''s contact: the standard report does both. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.');
         Effect.Add('idempotent', false);
         exit(true);
     end;
