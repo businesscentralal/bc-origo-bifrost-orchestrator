@@ -3,6 +3,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 using Microsoft.Foundation.Reporting;
 using Microsoft.Purchases.Document;
 using Origo.Bifrost;
+using System.Utilities;
 using System.TestLibraries.Utilities;
 
 /// <summary>
@@ -43,8 +44,10 @@ codeunit 96480 "Purch Order Pdf Tests ori"
     var
         PurchaseHeader: Record "Purchase Header";
         Dispatcher: Codeunit "Dispatcher ori";
+        ResponseTempBlob: Codeunit "Temp Blob";
         RequestContent: BigText;
-        ResponseContent: BigText;
+        InStr: InStream;
+        Header: Text;
         ResponseContentType: Text[100];
         ResponseTime: Duration;
         MessageId: Guid;
@@ -55,10 +58,13 @@ codeunit 96480 "Purch Order Pdf Tests ori"
         RequestContent.AddText('{"documentNo":"' + PurchaseHeader."No." + '"}');
 
         Dispatcher.EnqueueAndProcess("Message Type ori"::"Purchase.Order.Pdf", "Message Version ori"::"1.0", CopyStr(Format(PurchaseHeader.SystemId, 0, 4), 1, 250), '', 'text/json',
-            RequestContent, EmptyTaskId, 1033, MessageId, ResponseContent, ResponseContentType, ResponseTime);
+            RequestContent, EmptyTaskId, 1033, MessageId, ResponseTempBlob, ResponseContentType, ResponseTime);
 
         Assert.AreEqual('application/pdf', ResponseContentType, 'Success answers a PDF');
-        Assert.IsTrue(ResponseContent.Length() > 0, 'The PDF has content');
+        Assert.IsTrue(ResponseTempBlob.HasValue(), 'The PDF has content');
+        ResponseTempBlob.CreateInStream(InStr);
+        InStr.ReadText(Header, 4);
+        Assert.AreEqual('%PDF', Header, 'The answer is a PDF file');
     end;
 
     [Test]
