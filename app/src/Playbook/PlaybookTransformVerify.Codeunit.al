@@ -13,11 +13,13 @@ codeunit 10035628 "Playbook Transform Verify ori"
     var
         Mapping: Record "Playbook Transform ori";
         Executor: Codeunit "Playbook Transform Exec ori";
+        Verify: Codeunit "Playbook Verify ori";
         Targets: List of [Text];
         Target: Text;
     begin
         if Step."Message Type".AsInteger() <> 0 then
-            AddError(Step, Findings, 'TransformMessageType', MessageTypeErr);
+            Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'TransformMessageType', MessageTypeErr,
+                StrSubstNo(ClearMessageTypeTxt, Step."Step No."), Step.Disabled);
         if Step.Paged then
             AddError(Step, Findings, 'TransformPaged', PagedErr);
         Mapping.SetRange("Playbook Code", Step."Playbook Code");
@@ -101,5 +103,6 @@ codeunit 10035628 "Playbook Transform Verify ori"
         SourcePathErr: Label 'Transform source path %1 is unknown in this input.', Comment = '%1 = source path, is-IS=Upprunaslóð umbreytingar %1 er óþekkt í þessu inntaki.';
         SearchErr: Label 'Replace Text requires a nonempty search string in Argument 1.', Comment = 'is-IS=Textaskipti krefjast leitartexta í viðfangi 1.';
         OperationErr: Label 'The transform operation is not supported.', Comment = 'is-IS=Umbreytingaraðgerðin er ekki studd.';
+        ClearMessageTypeTxt: Label 'Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.', Comment = '%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.';
         NextStepTxt: Label 'Correct the Transform field mappings and verify the playbook again.', Comment = 'is-IS=Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.';
 }

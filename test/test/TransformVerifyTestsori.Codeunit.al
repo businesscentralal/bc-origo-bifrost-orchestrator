@@ -47,6 +47,65 @@ codeunit 96469 "Transform Verify Tests ori"
         AssertMappingFinding('result', 'known', true, 'TransformMessageType', '{"known":1}');
     end;
 
+    /// <summary>A message type set on a Transform step is reported, can be cleared by validating the kind, and Verify is then clean.</summary>
+    [Test]
+    procedure Scenario_162_MessageTypeCanBeClearedOnTransform()
+    var
+        Step: Record "Playbook Step ori";
+        Mapping: Record "Playbook Transform ori";
+        Verify: Codeunit "Playbook Verify ori";
+        Findings: JsonArray;
+        Finding: JsonToken;
+        NextStepToken: JsonToken;
+        PlaybookCode: Code[20];
+    begin
+        // Issue #162, AC1-AC3 | Time: independent of Today/WorkDate | Risk: None
+        PlaybookCode := NewCode();
+        Lib.CreatePlaybook(PlaybookCode);
+        Step."Playbook Code" := PlaybookCode;
+        Step."Step No." := 10;
+        Step.Validate("Step Kind", Step."Step Kind"::Transform);
+        Step.SetRequestTemplate('{"known":1}');
+        Step.Insert(true);
+        Mapping."Playbook Code" := PlaybookCode;
+        Mapping."Step No." := 10;
+        Mapping."Line No." := 10000;
+        Mapping."Target Path" := 'result';
+        Mapping."Source Path" := 'known';
+        Mapping.Insert(true);
+
+        Step.Validate("Message Type", "Message Type ori"::"Data.Records.Get");
+        Step.Modify(true);
+        Verify.GetFindings(PlaybookCode, Findings);
+        Assert.IsTrue(FindFinding(Findings, 'TransformMessageType', Finding), 'Expected TransformMessageType');
+        Finding.AsObject().Get('nextStep', NextStepToken);
+        Assert.IsTrue(NextStepToken.AsValue().AsText().Contains('step 10'), 'The next step must name the step to clear');
+
+        Step.Validate("Step Kind", Step."Step Kind"::Transform);
+        Step.Modify(true);
+        Step.Get(PlaybookCode, 10);
+        Assert.AreEqual(0, Step."Message Type".AsInteger(), 'Message Type must be cleared');
+        Clear(Findings);
+        Verify.GetFindings(PlaybookCode, Findings);
+        Assert.IsFalse(FindFinding(Findings, 'TransformMessageType', Finding), 'TransformMessageType must be gone');
+        Lib.Cleanup(PlaybookCode);
+    end;
+
+    local procedure FindFinding(Findings: JsonArray; Expected: Text; var Found: JsonToken): Boolean
+    var
+        Finding: JsonToken;
+        CodeToken: JsonToken;
+    begin
+        foreach Finding in Findings do begin
+            Finding.AsObject().Get('code', CodeToken);
+            if CodeToken.AsValue().AsText() = Expected then begin
+                Found := Finding;
+                exit(true);
+            end;
+        end;
+        exit(false);
+    end;
+
     /// <summary>CopyOperationGeneratesVerifiedTransform.</summary>
     [Test]
     procedure Scenario_AC45_CopyOperationGeneratesVerifiedTransform()

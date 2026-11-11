@@ -98,7 +98,15 @@ table 10035540 "Playbook Step ori"
         {
             Caption = 'Step Kind', Comment = 'is-IS=Tegund skrefs';
             AllowInCustomizations = Never;
-            ToolTip = 'Specifies whether the step dispatches a message or transforms JSON locally.', Comment = 'is-IS=Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum.';
+            ToolTip = 'Specifies whether the step dispatches a message or transforms JSON locally. Choosing Transform clears the Message Type.', Comment = 'is-IS=Tilgreinir hvort skrefið sendir skilaboð eða umbreytir JSON á staðnum. Val á umbreytingu hreinsar skilaboðagerðina.';
+
+            trigger OnValidate()
+            begin
+                // A Transform step has no message type and the enum offers no blank choice, so validating
+                // the kind (also when it is already Transform) clears a stale message type.
+                if "Step Kind" = "Step Kind"::Transform then
+                    "Message Type" := Enum::"Message Type ori".FromInteger(0);
+            end;
         }
     }
 
