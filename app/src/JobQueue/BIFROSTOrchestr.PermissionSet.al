@@ -104,6 +104,7 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "Report Run Exec ori" = X,
         codeunit "Report Run Msg ori" = X,
         codeunit "Report SaveAs Msg ori" = X,
+        codeunit "Sales Order Conf Pdf Msg ori" = X,
         codeunit "SE Msg Handler ori" = X,
         codeunit "SE Register Msg ori" = X,
         codeunit "SE Restart Msg ori" = X,

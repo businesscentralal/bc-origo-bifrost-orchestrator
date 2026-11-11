@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added
+- #93 New message type `Sales.OrderConfirmation.Pdf` (enum value 10035615, codeunit 10035629 `Sales Order Conf Pdf Msg ori`): prints one open sales order with the report that Report Selections usage S.Order names for its Sell-to Customer (default 1305 `Standard Sales - Order Conf.`) and answers the PDF. The order is found by No. or SystemId from subject, `orderNo`, `orderId`, `documentNo` or `documentId`; only Document Type Order is found. Refusals answer `PermissionDenied` (read permission on Sales Header, as `Sales.SalesInvoice.Pdf`), `MissingParameter`, `RecordNotFound`, `ConflictingIdentifiers` or `PreconditionFailed` (no S.Order report) with a `nextStep`, in en-US and is-IS. Effect write (No. Printed), direction Inbound. Help overview (codeunit 10035576) lists the type; the contract envelope helper (codeunit 10035609) gains a subject envelope with a content type. Granted in `BIFROST Orchestr ori`. Tests: new codeunit 96471 `Sales Order Conf Pdf Tests ori`; the contract guard (96441) also checks this type.
+
 ### Fixed
 - #162 A Message Type left on a Transform step can now be cleared: validating Step Kind = Transform on the step clears it (table 10035540, page and `Data.Records.Set`), and the `TransformMessageType` finding (codeunit 10035628) names the step to clear in 1033/1039. Test 96469 covers set, report, clear and clean Verify. No new message types.
 - Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
