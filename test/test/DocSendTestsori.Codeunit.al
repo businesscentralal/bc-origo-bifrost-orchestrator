@@ -211,7 +211,7 @@ codeunit 96472 "Doc Send Tests ori"
     begin
         ResponseJson := TempArgument.GetResponseJson();
         Assert.IsTrue(ResponseJson.Get('status', Token), 'status');
-        Assert.AreEqual('Success', Token.AsValue().AsText(), 'status value');
+        Assert.AreEqual('Success', Token.AsValue().AsText(), ResponseJsonText(ResponseJson));
         Assert.IsTrue(ResponseJson.Get('documentType', Token), 'documentType');
         Assert.AreEqual(DocumentTypeText, Token.AsValue().AsText(), 'documentType value');
         Assert.IsTrue(ResponseJson.Get('documentSendingProfileCode', Token), 'profile');
@@ -276,18 +276,25 @@ codeunit 96472 "Doc Send Tests ori"
     local procedure CreateProfile(ProfileCode: Code[20]; Disk: Boolean)
     var
         DocumentSendingProfile: Record "Document Sending Profile";
+        Exists: Boolean;
     begin
-        if DocumentSendingProfile.Get(ProfileCode) then
-            DocumentSendingProfile.Delete(true);
-        DocumentSendingProfile.Init();
-        DocumentSendingProfile.Code := ProfileCode;
+        // The first profile in the company becomes the default. A later test in this codeunit
+        // cannot delete that row ("You cannot delete the default rule"), so an existing code is updated.
+        Exists := DocumentSendingProfile.Get(ProfileCode);
+        if not Exists then begin
+            DocumentSendingProfile.Init();
+            DocumentSendingProfile.Code := ProfileCode;
+        end;
         DocumentSendingProfile.Description := ProfileCode;
         DocumentSendingProfile."E-Mail" := DocumentSendingProfile."E-Mail"::"Yes (Use Default Settings)";
         if Disk then
             DocumentSendingProfile.Disk := DocumentSendingProfile.Disk::PDF
         else
             DocumentSendingProfile.Disk := DocumentSendingProfile.Disk::No;
-        DocumentSendingProfile.Insert(true);
+        if Exists then
+            DocumentSendingProfile.Modify(true)
+        else
+            DocumentSendingProfile.Insert(true);
     end;
 
     local procedure SentEmailCount(): Integer
