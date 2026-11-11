@@ -1,0 +1,15 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "tenant": "w129-12",
+  "owner": "worker-2",
+  "verified": true,
+  "remainingOwnedFixtures": {
+    "orders": 0,
+    "vendor": 0,
+    "contacts": 0,
+    "Purchase Line": 0,
+    "Purchase Header Archive": 0
+  },
+  "originalEmptyOrder106025Deleted": true,
+  "finishedAt": "2026-11-11T20:44:19.393Z"
+}

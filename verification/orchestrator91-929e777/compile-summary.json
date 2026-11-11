@@ -1,0 +1,21 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "app": {
+    "errors": 0,
+    "warnings": 0,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ]
+  },
+  "testApp": {
+    "errors": 0,
+    "warnings": 0,
+    "analyzers": [
+      "CodeCop",
+      "UICop"
+    ]
+  },
+  "note": "The separate PTE test app is not an AppSource package. An initial AppSourceCop attempt against that test app rejected its PTE range/manifest and missing test-table permission sets; its applicable CodeCop/UICop build passed without suppressions. No source was changed to bypass these findings."
+}

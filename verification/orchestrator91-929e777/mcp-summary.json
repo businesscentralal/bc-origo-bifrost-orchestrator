@@ -1,0 +1,150 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "tenant": "w129-12",
+  "touchedMessageTypes": [
+    "Purchase.Order.Pdf"
+  ],
+  "createsOwnData": true,
+  "fixtures": {
+    "vendor": "W2P91MCP",
+    "orders": [
+      "106026",
+      "106027"
+    ]
+  },
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "name": "catalogue-contract-filename",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "order-number-pdf-and-filename",
+      "passed": true,
+      "fileName": "PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf",
+      "mime": "application/pdf; name=\"PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf\"",
+      "pdfBytes": 66587,
+      "sha256": "c55888304bb75d9e61f92425e23cd5af9180413dd0d75d2875d87c150a3ada61"
+    },
+    {
+      "lcid": 1033,
+      "name": "subject-systemid-pdf-and-filename",
+      "passed": true,
+      "fileName": "PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf",
+      "mime": "application/pdf; name=\"PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf\"",
+      "pdfBytes": 66587,
+      "sha256": "a2debede862c4bc9deecdb76a8f132981ca5c57e24cfbe5732b8c445c95f33ca"
+    },
+    {
+      "lcid": 1033,
+      "name": "matching-identifiers-pdf-and-filename",
+      "passed": true,
+      "fileName": "PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf",
+      "mime": "application/pdf; name=\"PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf\"",
+      "pdfBytes": 66587,
+      "sha256": "2c3e8aa5f88d46b71c2a7e9105ffe7665f814be294bcb60e5c025f6e2a3d591c"
+    },
+    {
+      "lcid": 1033,
+      "name": "missing-refusal",
+      "passed": true,
+      "code": "MissingParameter",
+      "nextStep": "Send the order No. or SystemId as subject or as data.orderNo."
+    },
+    {
+      "lcid": 1033,
+      "name": "unknown-number-refusal",
+      "passed": true,
+      "code": "RecordNotFound",
+      "nextStep": "Check the number with Data.Records.Get on table Purchase Header."
+    },
+    {
+      "lcid": 1033,
+      "name": "unknown-systemid-refusal",
+      "passed": true,
+      "code": "RecordNotFound",
+      "nextStep": "Check the SystemId with Data.Records.Get on table Purchase Header."
+    },
+    {
+      "lcid": 1033,
+      "name": "conflicting-identifiers-refusal",
+      "passed": true,
+      "code": "ConflictingIdentifiers",
+      "nextStep": "Send one identifier, or identifiers of the same order."
+    },
+    {
+      "lcid": 1039,
+      "name": "catalogue-contract-filename",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "order-number-pdf-and-filename",
+      "passed": true,
+      "fileName": "PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf",
+      "mime": "application/pdf; name=\"PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf\"",
+      "pdfBytes": 66587,
+      "sha256": "43f538db5ad8640202662a621131f7ec808454712f162c1e0efd094ee3c0ae1c"
+    },
+    {
+      "lcid": 1039,
+      "name": "subject-systemid-pdf-and-filename",
+      "passed": true,
+      "fileName": "PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf",
+      "mime": "application/pdf; name=\"PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf\"",
+      "pdfBytes": 66587,
+      "sha256": "c5a677417eca1196cdbb031a4769b14bea13dd47e14c12d64b66b5f249a4b018"
+    },
+    {
+      "lcid": 1039,
+      "name": "matching-identifiers-pdf-and-filename",
+      "passed": true,
+      "fileName": "PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf",
+      "mime": "application/pdf; name=\"PurchaseOrder-70a97fed-0fde-f111-b6f8-00090ffe0001.pdf\"",
+      "pdfBytes": 66587,
+      "sha256": "644ec4e0a11f6b1a4fa42408823854448258ab0c7919878b97e969b8937927af"
+    },
+    {
+      "lcid": 1039,
+      "name": "missing-refusal",
+      "passed": true,
+      "code": "MissingParameter",
+      "nextStep": "Sendu númer eða SystemId pöntunarinnar sem subject eða sem data.orderNo."
+    },
+    {
+      "lcid": 1039,
+      "name": "unknown-number-refusal",
+      "passed": true,
+      "code": "RecordNotFound",
+      "nextStep": "Athugaðu númerið með Data.Records.Get á töflunni Purchase Header."
+    },
+    {
+      "lcid": 1039,
+      "name": "unknown-systemid-refusal",
+      "passed": true,
+      "code": "RecordNotFound",
+      "nextStep": "Athugaðu SystemId með Data.Records.Get á töflunni Purchase Header."
+    },
+    {
+      "lcid": 1039,
+      "name": "conflicting-identifiers-refusal",
+      "passed": true,
+      "code": "ConflictingIdentifiers",
+      "nextStep": "Sendu eitt auðkenni, eða auðkenni sömu pöntunar."
+    },
+    {
+      "name": "exact-document-filter-and-print-count",
+      "passed": true,
+      "firstOrder": "106026",
+      "firstOrderPrintCount": 6,
+      "secondOrder": "106027",
+      "secondOrderPrintCount": 0,
+      "evidence": "orders-after-prints.json"
+    }
+  ],
+  "total": 17,
+  "passed": 17,
+  "failed": 0,
+  "skipped": 0
+}

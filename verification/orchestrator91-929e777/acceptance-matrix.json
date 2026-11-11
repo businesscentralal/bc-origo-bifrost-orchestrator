@@ -1,0 +1,40 @@
+{
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/91",
+  "pr": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/166",
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "acceptance": {
+    "AC01": "Binary PDF and quoted MIME filename by No., subject SystemId and matching documentId/documentNo, real Report Selections P.Order",
+    "AC02": "Unknown number and SystemId return RecordNotFound",
+    "AC03": "Existing Purchase Header read-permission check preserved; full suite passes; no privilege changes",
+    "AC04": "Missing/conflicting/unknown input return code+nextStep in1033/1039; existing bilingual labels/XLF preserved; native edge scenarios pass",
+    "AC05": "Purchase.Order.Pdf retains exactly3dot-separated parts"
+  },
+  "counts": {
+    "native": {
+      "executed": 561,
+      "passed": 561,
+      "failed": 0,
+      "skipped": 0
+    },
+    "mcp": {
+      "executed": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ui": {
+      "executed": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "resources": {
+    "tenant": "w129-12",
+    "owner": "worker-2",
+    "fixtures": "cleanup verified0remaining; no permission/consent/licence guard was bypassed",
+    "installedArtifacts": "Own Orchestrator product/test retained on assigned local tenant for follow-up verification. Other apps untouched."
+  },
+  "pending": "Paired GitHub CI, amendment disposition, current-tip independent review/verification, approval, Architect merge/deployment and UAT",
+  "recordedAt": "2026-11-11T20:44:56.858713+00:00"
+}

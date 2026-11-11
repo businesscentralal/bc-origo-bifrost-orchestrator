@@ -1,0 +1,16 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "automated": {
+    "passed": 16,
+    "failed": 7,
+    "total": 23,
+    "ready": false
+  },
+  "findings": "Pre-existing branch findings: missing XML procedure docs in original implementation and existing Help namespace; exact wire captions are locked and need no translation; email examples are not secrets; procedure parameter semicolons are not multiple statements; read isolation advisories do not establish a correctness defect on existence checks. No new compiler warning or suppression. Unrelated Help/contract cleanup remains outside this filename amendment.",
+  "deepReview": "Preserves binary bytes, filter and permissions. Filename is a safe fixed prefix plus lowercase SystemId; fits Text100 MIME field. Both direct temporary and persisted public dispatch paths assert exact filename. Runtime verifies six prints only on intended order. Existing en-US/is-IS labels and XLF unchanged.",
+  "lessons": [
+    "orchestrator166-filename-ac01-6806101007-brokkr",
+    "orchestrator79-5516381138-foundation-provenance-worker6",
+    "orchestrator84-stack-mime-conflict-20261014-worker7"
+  ]
+}

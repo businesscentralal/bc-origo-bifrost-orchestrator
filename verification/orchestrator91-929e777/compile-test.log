@@ -1,0 +1,19 @@
+Microsoft (R) AL Compiler version 30.0.42.60748
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'Bifrost Orchestrator - Tests' containing '74' files at '20:31:30.332'.
+
+private/orchestrator91-brokkr/test/test/CopyPlanGeneratorTestsori.Codeunit.al(6,1): info AA0477: The using statements are not in a sorted order.
+private/orchestrator91-brokkr/test/test/PurchOrderPdfTestsori.Codeunit.al(7,1): info AA0477: The using statements are not in a sorted order.
+private/orchestrator91-brokkr/test/test/TableDataMgtTestsori.Codeunit.al(70,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableDataMgtTestsori.Codeunit.al(103,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableDataMgtTestsori.Codeunit.al(126,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableDataMgtTestsori.Codeunit.al(163,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableDataMgtTestsori.Codeunit.al(187,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableDataPageTestsori.Codeunit.al(144,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableDataPageTestsori.Codeunit.al(259,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/TableJSONExportTestsori.Codeunit.al(58,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+private/orchestrator91-brokkr/test/test/PlaybookLastRunTests.Codeunit.al(211,9): info AA0210: The table Job Queue Entry does not contain a key with the field Record ID to Process.
+
+Compilation ended at '20:31:42.614'.
+

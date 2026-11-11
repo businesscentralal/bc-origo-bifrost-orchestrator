@@ -1,0 +1,27 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "fullSuite": true,
+  "range": "96400..96499",
+  "executed": 561,
+  "passed": 561,
+  "failed": 0,
+  "skipped": 0,
+  "runs": [
+    {
+      "range": "96400..96455|96457..96499",
+      "runner": 130450,
+      "passed": 551,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "range": "96456",
+      "runner": 130451,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "tenant": "w129-12",
+  "mode": "local"
+}

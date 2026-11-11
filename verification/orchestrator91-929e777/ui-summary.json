@@ -1,0 +1,34 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "tenant": "w129-12",
+  "verified": true,
+  "scenarios": [
+    {
+      "name": "Message catalogue lists Purchase.Order.Pdf",
+      "passed": true,
+      "lcid": 1033
+    },
+    {
+      "name": "Purchase orders shows own vendor and printed orders",
+      "passed": true,
+      "lcid": 1033
+    },
+    {
+      "name": "Message catalogue lists Purchase.Order.Pdf",
+      "passed": true,
+      "lcid": 1039
+    },
+    {
+      "name": "Purchase orders shows own vendor and printed orders",
+      "passed": true,
+      "lcid": 1039
+    }
+  ],
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "languageRestore": {
+    "lcid": 1033,
+    "verified": true
+  }
+}

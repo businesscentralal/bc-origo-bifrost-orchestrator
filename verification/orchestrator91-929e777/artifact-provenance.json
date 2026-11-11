@@ -1,0 +1,52 @@
+{
+  "sha": "929e777d140e66703d188488f54e21065ca5274f",
+  "artifacts": [
+    {
+      "sourceSha": "929e777d140e66703d188488f54e21065ca5274f",
+      "name": "Bifrost Orchestrator",
+      "id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "version": "28.0.4.0",
+      "sha256": "a9799617c8458d20e912c990804e9dd25c23eec1eac7323dae0be81967a8a8ff",
+      "owner": "worker-2",
+      "tenant": "w129-12"
+    },
+    {
+      "sourceSha": "929e777d140e66703d188488f54e21065ca5274f",
+      "name": "Bifrost Orchestrator - Tests",
+      "id": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "version": "28.0.4.0",
+      "sha256": "a3497540981f6bb49da5ed623569e9095b21592045f38b426975a30a98ba7709",
+      "owner": "worker-2",
+      "tenant": "w129-12"
+    }
+  ],
+  "foundationVersion": "28.0.13.0",
+  "productPublication": {
+    "fileName": "Origo.Orchestrator.own.app",
+    "bytes": 535035,
+    "statusCode": 200,
+    "durationMs": 9963,
+    "developerBaseUrl": "http://host.docker.internal:7049/BC290",
+    "body": null,
+    "ok": true
+  },
+  "testPublication": {
+    "fileName": "tests.app",
+    "bytes": 228090,
+    "statusCode": 200,
+    "durationMs": 19004,
+    "developerBaseUrl": "http://host.docker.internal:7049/BC290",
+    "body": null,
+    "ok": true
+  },
+  "symbolDownload": {
+    "publisher": "Origo",
+    "appName": "Bifrost Foundation",
+    "versionText": "28.0.12.679",
+    "statusCode": 200,
+    "durationMs": 107,
+    "path": "/workspace/private/orchestrator91-symbols/Origo.Bifrost_Foundation.28.0.12.679.app",
+    "bytes": 2811941,
+    "developerBaseUrl": "http://host.docker.internal:7049/BC290"
+  }
+}
