@@ -33,7 +33,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Prints a purchase order as a PDF document.', Comment = 'is-IS=Prentar innkaupapöntun sem PDF-skjal.';
+        DescriptionLbl: Label 'Prints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.', Comment = 'is-IS=Prentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.';
     begin
         exit(DescriptionLbl);
     end;
@@ -47,7 +47,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Get an open purchase order as a PDF, printed with the vendor''s report selection for usage P.Order. Increases the order''s No. Printed. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
+        SelectionLbl: Label 'Get an open purchase order as a PDF, printed with the vendor''s report selection for usage P.Order. Increases the order''s No. Printed and, when an interaction template is set up, writes an interaction log entry. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
     begin
         exit(SelectionLbl);
     end;
@@ -118,7 +118,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
     procedure GetEffect(var Effect: JsonObject): Boolean
     begin
         Effect.Add('effect', 'write');
-        Effect.Add('changes', 'Increases No. Printed on the purchase order: the standard report counts the print, and it may also archive a version of the order when Purchases & Payables Setup archives orders. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.');
+        Effect.Add('changes', 'Increases No. Printed on the purchase order and, when an interaction template is set up for purchase orders, writes an interaction log entry for the vendor''s contact: the standard report does both. It may also archive a version of the order when Purchases & Payables Setup archives orders. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.');
         Effect.Add('idempotent', false);
         exit(true);
     end;
@@ -162,7 +162,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
     procedure GetOverview(var Overview: Text): Boolean
     begin
         Overview := 'Returns an open purchase order as a PDF, printed with the report the vendor''s Report Selection (usage P.Order) names; by default the standard purchase order. ' +
-            'Use it to hand the order to the vendor, a person or another system. Printing it increases No. Printed on the order.';
+            'Use it to hand the order to the vendor, a person or another system. Printing it increases No. Printed on the order and, when an interaction template is set up for purchase orders, writes an interaction log entry.';
         exit(true);
     end;
 
@@ -171,7 +171,8 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
         Notes := 'subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. ' +
             'Only purchase documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. ' +
             'The success MIME type carries name="PurchaseOrder-<SystemId>.pdf"; callers may use that filename when saving the unchanged binary PDF. Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. ' +
-            'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.';
+            'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. ' +
+            'When an interaction template is set up for purchase orders, the standard report writes an interaction log entry for the vendor''s contact. A replacement report in Report Selections may not. The call does not change whether that logging happens.';
         exit(true);
     end;
 

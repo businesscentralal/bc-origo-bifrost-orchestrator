@@ -48,7 +48,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Inspect or export report layouts → `Orchestrator.ReportLayout.List` / `Orchestrator.ReportLayout.Get`');
         O.AppendLine('- Generate PDF/Excel/Word report → `Orchestrator.Report.SaveAs`');
         O.AppendLine('- Run a batch job / processing-only report → `Orchestrator.Report.Run`');
-        O.AppendLine('- Print an open purchase order as a PDF → `Purchase.Order.Pdf`');
+        O.AppendLine('- Print an open purchase order as a PDF; writes an interaction log entry when an interaction template is set up → `Purchase.Order.Pdf`');
         O.AppendLine('- See what workspace variables are available → `Orchestrator.Workspace.Preview`');
         O.AppendLine('');
         BuildSafeAuthoringGuide(O);
@@ -78,7 +78,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |');
         O.AppendLine('| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |');
         O.AppendLine('| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |');
-        O.AppendLine('| `Purchase.Order.Pdf` | Print a purchase order (Report Selections usage P.Order) as PDF |');
+        O.AppendLine('| `Purchase.Order.Pdf` | Print a purchase order (Report Selections usage P.Order) as PDF; writes an interaction log entry when an interaction template is set up |');
         O.AppendLine('| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |');
         O.AppendLine('| `Help.Orchestrator.Get` | This help document |');
         O.AppendLine('');
