@@ -18,22 +18,36 @@ codeunit 10035603 "Msg Executor ori"
     trigger OnRun()
     var
         Dispatcher: Codeunit "Dispatcher ori";
+        EffectGuard: Codeunit "Playbook Effect Guard ori";
         ResponseTempBlob: Codeunit "Temp Blob";
         Base64Convert: Codeunit "Base64 Convert";
         RequestContent: BigText;
         ResponseBigText: BigText;
         ResponseInStr: InStream;
         MessageVersion: Enum "Message Version ori";
+        RequestedOmitCommit: Boolean;
+        RequestedPlaybookCode: Code[20];
+        RequestedStepNo: Integer;
     begin
         Clear(ResponseText);
         Clear(ResponseContentType);
         IsBinaryResponse := false;
 
+        // Consume the per-run signal before validation, including a failed run in this SingleInstance.
+        RequestedOmitCommit := OmitCommit;
+        RequestedPlaybookCode := PlaybookCode;
+        RequestedStepNo := StepNo;
+        Clear(OmitCommit);
+        Clear(PlaybookCode);
+        Clear(StepNo);
+        if RequestedOmitCommit then
+            EffectGuard.CheckOmitCommitAllowed(RequestedPlaybookCode, RequestedStepNo, MessageType);
+
         if RequestText <> '' then
             RequestContent.AddText(RequestText);
 
         Dispatcher.EnqueueAndProcess(MessageType, MessageVersion::"1.0", SubjectText, SourceText, 'application/json',
-            RequestContent, EmptyTaskId, 0, EmptyMessageId, ResponseTempBlob, ResponseContentType, ResponseTime);
+            RequestContent, EmptyTaskId, 0, EmptyMessageId, ResponseTempBlob, ResponseContentType, ResponseTime, RequestedOmitCommit);
 
         if IsPassThroughContentType(ResponseContentType) then begin
             ResponseTempBlob.CreateInStream(ResponseInStr, TextEncoding::UTF8);
@@ -55,6 +69,9 @@ codeunit 10035603 "Msg Executor ori"
     /// <param name="NewRequestText">JSON request payload. Pass an empty text when no payload is required.</param>
     procedure SetParameters(NewMessageType: Enum "Message Type ori"; NewSubject: Text; NewRequestText: Text)
     begin
+        Clear(OmitCommit);
+        Clear(PlaybookCode);
+        Clear(StepNo);
         MessageType := NewMessageType;
         SubjectText := CopyStr(NewSubject, 1, MaxStrLen(SubjectText));
         SourceText := SourceTok;
@@ -62,6 +79,17 @@ codeunit 10035603 "Msg Executor ori"
         Clear(ResponseText);
         Clear(ResponseContentType);
         IsBinaryResponse := false;
+    end;
+
+    /// <summary>Sets explicit commit control for the next run, after SetParameters. This does not create a multi-step transaction.</summary>
+    /// <param name="NewOmitCommit">True requires a safe effect contract before binary-preserving dispatch.</param>
+    /// <param name="NewPlaybookCode">The owning playbook for refusal diagnostics.</param>
+    /// <param name="NewStepNo">The step number for refusal diagnostics.</param>
+    procedure SetOmitCommit(NewOmitCommit: Boolean; NewPlaybookCode: Code[20]; NewStepNo: Integer)
+    begin
+        OmitCommit := NewOmitCommit;
+        PlaybookCode := NewPlaybookCode;
+        StepNo := NewStepNo;
     end;
 
     /// <summary>
@@ -125,6 +153,9 @@ codeunit 10035603 "Msg Executor ori"
         ResponseContentType: Text[100];
         ResponseTime: Duration;
         IsBinaryResponse: Boolean;
+        OmitCommit: Boolean;
+        PlaybookCode: Code[20];
+        StepNo: Integer;
         EmptyTaskId: Guid;
         EmptyMessageId: Guid;
         SourceTok: Label 'Bifrost Orchestrator Playbook', Locked = true;
