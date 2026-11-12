@@ -1,0 +1,22 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Purchase.Order.Send",
+    "data": {
+      "documentNo": "AV167-NO-1039",
+      "expectedCount": 1
+    },
+    "lcid": 1039
+  },
+  "startedAt": "2026-11-12T20:07:15.226Z",
+  "finishedAt": "2026-11-12T20:07:15.286Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"Error\",\"code\":\"RecordNotFound\",\"error\":\"Purchase order AV167-NO-1039 fannst ekki.\",\"parameter\":\"documentNo\",\"received\":\"AV167-NO-1039\",\"expected\":\"númer eða SystemId skjals af þessari tegund sem er til\",\"nextStep\":\"Sendu númer eða SystemId skjals af þessari tegund sem er til.\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Purchase.Order.Send\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+      }
+    ],
+    "isError": true
+  }
+}

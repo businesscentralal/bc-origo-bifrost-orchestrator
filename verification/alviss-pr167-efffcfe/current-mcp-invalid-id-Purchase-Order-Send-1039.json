@@ -1,0 +1,22 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Purchase.Order.Send",
+    "data": {
+      "documentId": "invalid-av167-guid",
+      "expectedCount": 1
+    },
+    "lcid": 1039
+  },
+  "startedAt": "2026-11-12T20:07:15.290Z",
+  "finishedAt": "2026-11-12T20:07:15.343Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"Error\",\"code\":\"InvalidParameterFormat\",\"error\":\"documentId er ekki GUID.\",\"parameter\":\"documentId\",\"received\":\"invalid-av167-guid\",\"expected\":\"GUID\",\"nextStep\":\"Sendu SystemId sem GUID, eða sendu skjalnúmerið.\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Purchase.Order.Send\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+      }
+    ],
+    "isError": true
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+  "tenant": "w129-14",
+  "verified": true,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "locale": 1033,
+      "passed": 3,
+      "results": [
+        {
+          "innerMessageId": "C407E5AF-7315-46B1-A45D-D44E630BC52F",
+          "kind": "PurchaseOrder",
+          "identityMode": "Number",
+          "request": {
+            "documentNo": "AV167BF3793D3DF0D403",
+            "documentSendingProfile": "AV167BF3793D3DF0D403",
+            "expectedCount": 1
+          },
+          "locale": 1033,
+          "fixtureNo": "AV167BF3793D3DF0D403",
+          "mockCaptured": true,
+          "capturedKind": "PurchaseOrder",
+          "emailDelta": 0,
+          "fixturesDeleted": true,
+          "shippingResponse": {
+            "status": "Success",
+            "documentType": "PurchaseOrder",
+            "documentNo": "AV167BF3793D3DF0D403",
+            "documentId": "06F1FD56-D5DE-F111-B6FB-00090FFE0001",
+            "vendorNo": "AV167BF3793D3DF0D403",
+            "vendorName": "",
+            "documentSendingProfileCode": "AV167BF3793D3DF0D403",
+            "documentSendingProfileSource": "Request",
+            "message": "Document sent successfully."
+          },
+          "passed": true
+        },
+        {
+          "innerMessageId": "182488DD-8D04-48F9-AA39-D3CA27B9B9BD",
+          "kind": "SalesQuote",
+          "identityMode": "Number",
+          "request": {
+            "documentNo": "AV167E197A937D66B44D",
+            "documentSendingProfile": "AV167E197A937D66B44D",
+            "expectedCount": 1
+          },
+          "locale": 1033,
+          "fixtureNo": "AV167E197A937D66B44D",
+          "mockCaptured": true,
+          "capturedKind": "SalesQuote",
+          "emailDelta": 0,
+          "fixturesDeleted": true,
+          "shippingResponse": {
+            "status": "Success",
+            "documentType": "SalesQuote",
+            "documentNo": "AV167E197A937D66B44D",
+            "documentId": "7D068073-D5DE-F111-B6FB-00090FFE0001",
+            "customerNo": "AV167E197A937D66B44D",
+            "customerName": "",
+            "documentSendingProfileCode": "AV167E197A937D66B44D",
+            "documentSendingProfileSource": "Request",
+            "message": "Document sent successfully."
+          },
+          "passed": true
+        },
+        {
+          "innerMessageId": "E4A0EA6B-4828-484E-AD12-B7B7A0ED82D6",
+          "kind": "SalesOrderConfirmation",
+          "identityMode": "Number",
+          "request": {
+            "documentNo": "AV16714321A00828D47B",
+            "documentSendingProfile": "AV16714321A00828D47B",
+            "expectedCount": 1
+          },
+          "locale": 1033,
+          "fixtureNo": "AV16714321A00828D47B",
+          "mockCaptured": true,
+          "capturedKind": "SalesOrderConfirmation",
+          "emailDelta": 0,
+          "fixturesDeleted": true,
+          "shippingResponse": {
+            "status": "Success",
+            "documentType": "SalesOrderConfirmation",
+            "documentNo": "AV16714321A00828D47B",
+            "documentId": "82068073-D5DE-F111-B6FB-00090FFE0001",
+            "customerNo": "AV16714321A00828D47B",
+            "customerName": "",
+            "documentSendingProfileCode": "AV16714321A00828D47B",
+            "documentSendingProfileSource": "Request",
+            "message": "Document sent successfully."
+          },
+          "passed": true
+        }
+      ]
+    },
+    {
+      "locale": 1039,
+      "passed": 3,
+      "results": [
+        {
+          "innerMessageId": "CBE24D25-DF95-4F96-9D36-49E0DA6CA854",
+          "kind": "PurchaseOrder",
+          "identityMode": "Number",
+          "request": {
+            "documentNo": "AV167AD7DF7143BA0487",
+            "documentSendingProfile": "AV167AD7DF7143BA0487",
+            "expectedCount": 1
+          },
+          "locale": 1039,
+          "fixtureNo": "AV167AD7DF7143BA0487",
+          "mockCaptured": true,
+          "capturedKind": "PurchaseOrder",
+          "emailDelta": 0,
+          "fixturesDeleted": true,
+          "shippingResponse": {
+            "status": "Success",
+            "documentType": "PurchaseOrder",
+            "documentNo": "AV167AD7DF7143BA0487",
+            "documentId": "79A180B0-D5DE-F111-B6FB-00090FFE0001",
+            "vendorNo": "AV167AD7DF7143BA0487",
+            "vendorName": "",
+            "documentSendingProfileCode": "AV167AD7DF7143BA0487",
+            "documentSendingProfileSource": "Request",
+            "message": "Skjal sent."
+          },
+          "passed": true
+        },
+        {
+          "innerMessageId": "7EEA1DA5-46D1-487A-9429-33192CC967E9",
+          "kind": "SalesQuote",
+          "identityMode": "Number",
+          "request": {
+            "documentNo": "AV16721B93645F141421",
+            "documentSendingProfile": "AV16721B93645F141421",
+            "expectedCount": 1
+          },
+          "locale": 1039,
+          "fixtureNo": "AV16721B93645F141421",
+          "mockCaptured": true,
+          "capturedKind": "SalesQuote",
+          "emailDelta": 0,
+          "fixturesDeleted": true,
+          "shippingResponse": {
+            "status": "Success",
+            "documentType": "SalesQuote",
+            "documentNo": "AV16721B93645F141421",
+            "documentId": "7EA180B0-D5DE-F111-B6FB-00090FFE0001",
+            "customerNo": "AV16721B93645F141421",
+            "customerName": "",
+            "documentSendingProfileCode": "AV16721B93645F141421",
+            "documentSendingProfileSource": "Request",
+            "message": "Skjal sent."
+          },
+          "passed": true
+        },
+        {
+          "innerMessageId": "62F7C3D1-E502-4114-B39D-B0068BAC652A",
+          "kind": "SalesOrderConfirmation",
+          "identityMode": "Number",
+          "request": {
+            "documentNo": "AV167D4FD5C87314C408",
+            "documentSendingProfile": "AV167D4FD5C87314C408",
+            "expectedCount": 1
+          },
+          "locale": 1039,
+          "fixtureNo": "AV167D4FD5C87314C408",
+          "mockCaptured": true,
+          "capturedKind": "SalesOrderConfirmation",
+          "emailDelta": 0,
+          "fixturesDeleted": true,
+          "shippingResponse": {
+            "status": "Success",
+            "documentType": "SalesOrderConfirmation",
+            "documentNo": "AV167D4FD5C87314C408",
+            "documentId": "92A180B0-D5DE-F111-B6FB-00090FFE0001",
+            "customerNo": "AV167D4FD5C87314C408",
+            "customerName": "",
+            "documentSendingProfileCode": "AV167D4FD5C87314C408",
+            "documentSendingProfileSource": "Request",
+            "message": "Skjal sent."
+          },
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "page": 96498,
+  "boundary": "Temporary worker-owned verification page invokes each shipping send handler through the real dispatcher and the candidate test-app send mock. No native external email transmission; no external provider used.",
+  "screenshots": [
+    "ui-en-PurchaseOrder.png",
+    "ui-en-SalesQuote.png",
+    "ui-en-SalesOrderConfirmation.png",
+    "ui-is-PurchaseOrder.png",
+    "ui-is-SalesQuote.png",
+    "ui-is-SalesOrderConfirmation.png"
+  ],
+  "verifiedAt": "2026-11-12T20:19:04.449Z"
+}

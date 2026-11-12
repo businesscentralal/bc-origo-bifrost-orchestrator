@@ -1,0 +1,946 @@
+[
+  {
+    "codeunit": 96430,
+    "count": 21,
+    "methods": [
+      "ErrorResponseKeepsCodeAndError",
+      "ErrorResponseWithoutCodeUsesErrorOrMessage",
+      "NonErrorResponsesAreNotErrors",
+      "ErroredIterationsAreCountedApartFromNo",
+      "SingleCheck_ErrorAnswer_FailsStepAndRun",
+      "SingleCheck_ErrorAnswer_FailsStepAndRun_Icelandic",
+      "SingleCheck_RaisedError_FailsStepAndRun",
+      "SingleCheck_RaisedError_FailsStepAndRun_Icelandic",
+      "SingleCheck_AnsweredNo_DoesNotFailTheRun",
+      "SingleCheck_AnsweredNo_DoesNotFailTheRun_Icelandic",
+      "SingleCheck_AnsweredYes_Completes",
+      "SingleCheck_AnsweredYes_Completes_Icelandic",
+      "ForEachCheck_ErrorAnswers_AreFailuresNotNo",
+      "ForEachCheck_ErrorAnswers_AreFailuresNotNo_Icelandic",
+      "ForEachCheck_RaisedErrors_AreFailuresNotNo",
+      "ForEachCheck_RaisedErrors_AreFailuresNotNo_Icelandic",
+      "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun",
+      "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun_Icelandic",
+      "ForEachCheck_AnsweredYes_Succeeds",
+      "ForEachCheck_AnsweredYes_Succeeds_Icelandic",
+      "ActionStep_ErrorAnswerWithSuccessCondition_StillFails"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96441,
+    "count": 10,
+    "methods": [
+      "TheGuardSeesEveryOrchestratorType",
+      "EveryType_DeclaresTheRequiredChapters",
+      "EveryType_EnvelopeStatesSubjectStrictAndContentType",
+      "EveryType_ParametersAndResponseFieldsAreDescribed",
+      "EveryType_EachErrorHasACodeOrATextAndTheStepToTake",
+      "EveryType_EffectMatchesTheDirection",
+      "EveryType_ExamplesAreRealRequestsAndAnswers",
+      "EveryType_RelatedAndWorkflowNameRealTypes",
+      "EveryType_HelpTextHasEnoughSubstanceAndNoAlObjectNames",
+      "EveryType_DiscoveryTextsExistAndAreTranslated"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96465,
+    "count": 14,
+    "methods": [
+      "AC32_GeneratedPlaybookHasNoErrors",
+      "AC33_CopyTwicePreservesKeysAndValues",
+      "Scenario_AC45_TransformedCopyRunsTwice",
+      "Scenario_AC33_GeneratedCopyEnqueuesAndSchedules",
+      "AC34_ParentBeforeOrderedChildren",
+      "AC36_RegenerationPreservesUnrelatedPlaybook",
+      "AC36_ExistingUnrelatedCodeIsRefused",
+      "AC31_InvalidFieldRefusedAtGeneration",
+      "AC31_DuplicateDestinationRefused",
+      "AC31_SkippedKeyCannotCreateUnnamedRows",
+      "AC35_RestrictedSourceFailsVisibly",
+      "AC35_UncoveredDestinationFailsVisibly",
+      "Scenario_AC35_WriteOnceFieldFailsVisibly",
+      "Scenario_AC31_InvalidSourceViewFailsClosed"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96466,
+    "count": 1,
+    "methods": [
+      "AC31_CardCreatesMappedPlaybook"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96428,
+    "count": 8,
+    "methods": [
+      "JobQueueEntry_WriteHint",
+      "JobQueueEntry_WriteHint_Icelandic",
+      "ScheduledTask_WriteHint",
+      "ScheduledTask_WriteHint_Icelandic",
+      "ReportRequestPreset_ReadWriteHint",
+      "ReportRequestPreset_ReadWriteHint_Icelandic",
+      "Customer_NoCompanionHints",
+      "Customer_NoCompanionHints_Icelandic"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96472,
+    "count": 11,
+    "methods": [
+      "Scenario_AC04_PurchaseOrderHelp_TranslatesChapters",
+      "Scenario_AC04_SalesQuoteHelp_TranslatesChapters",
+      "Scenario_AC04_OrderConfirmationHelp_TranslatesChapters",
+      "PurchaseOrderSend_HappyPathIsMockedAndSendsNoEmail",
+      "SalesQuoteSend_BySystemIdIsMocked",
+      "SalesOrderConfirmationSend_HappyPathIsMocked",
+      "SalesOrderConfirmationSend_UnknownDocumentIsRecordNotFound",
+      "PurchaseOrderSend_UnknownProfileIsRecordNotFound",
+      "SalesQuoteSend_DiskProfileIsPreconditionFailed",
+      "PurchaseOrderSend_ProfileTooLongIsInvalidParameterFormat",
+      "SalesQuoteSend_MissingEmailIsPreconditionFailed"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96414,
+    "count": 13,
+    "methods": [
+      "JQParameterStoresAndRetrievesRequestData",
+      "JQParameterGetRequestDataReturnsEmptyWhenNoBlob",
+      "EnqueuePlaybookCreatesNonRecurringJQEntry",
+      "EnqueuePlaybookCreatesParameterRecord",
+      "EnqueuePlaybookNoParameterWhenRequestEmpty",
+      "EnqueuePlaybookSetsJobQueueCategory",
+      "EnqueuePlaybookEnforcesMinimumDelay",
+      "EnqueuePlaybookDefaultOverloadUses60SecDelay",
+      "EnqueuePlaybookFailsWhenDisabled",
+      "DeleteJQEntryDeletesParameterRecord",
+      "EnqueuePlaybookSchedulesRealTask",
+      "EnqueuePlaybookDispatchesAndCreatesInstance",
+      "EnqueuePlaybookSetsRecordIdToProcess"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96420,
+    "count": 8,
+    "methods": [
+      "RestartSetsEntryToReady",
+      "RestartSetsOnHoldEntryToReady",
+      "RestartErrorsForMissingId",
+      "RestartIfNeededRestartsErrorEntry",
+      "RestartIfNeededSkipsReadyEntry",
+      "RestartIfNeededRestartsOnHoldEntry",
+      "RestartResponseIncludesEntryDetails",
+      "RestartAcceptsIdInSubject"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96407,
+    "count": 3,
+    "methods": [
+      "NewEntryHidesDialogs",
+      "ExistingEntryHidesDialogs",
+      "InteractiveEntryOpensCard"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96443,
+    "count": 13,
+    "methods": [
+      "Scenario_AC01_NeverRunDailyKeepsDueSlot",
+      "Scenario_AC02_NoEndingTimeKeepsDueSlot",
+      "Scenario_AC02_HourlyKeepsLatestDueSlot",
+      "Scenario_AC02_FutureWindowWaits",
+      "Scenario_AC07_ElapsedDailyWindowWaits",
+      "Scenario_AC07_ElapsedHourlyWindowWaits",
+      "Scenario_AC03_SuccessAdvancesDaily",
+      "Scenario_AC01_LateDailyRunKeepsNextDayAnchor",
+      "Scenario_AC01_MidnightDelayKeepsSameDayAnchor",
+      "Scenario_AC01_CreatedInsideWindowRunsFirstSlot",
+      "Scenario_AC05_StartChangeAndClearSyncReference",
+      "Scenario_AC01_AC04_AC06_FirstDispatchRunsPlaybook",
+      "Scenario_AC05_TemplateKeepsJobAndSyncsReference"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96422,
+    "count": 4,
+    "methods": [
+      "HelpGetReturnsNonEmptyMarkdown",
+      "WorkspacePreviewReturnsSysNamespace",
+      "WorkspacePreviewPassesThroughInitialRequest",
+      "EveryOrchestratorMessageTypeRefusesAnUnlicensedDirectCall"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96455,
+    "count": 2,
+    "methods": [
+      "ExecutingTypesAreInbound",
+      "ReadTypesStayOutboundOrBoth"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96452,
+    "count": 20,
+    "methods": [
+      "Batch1MessagesHaveContractChaptersAndDiscovery",
+      "CommittingTypesDeclareIrreversible",
+      "NonCommittingTypesKeepTheirEffect",
+      "Scenario_AC05_NotificationType_KeepsMainContract",
+      "Scenario_AC05_RetryPolicy_KeepsMainContract",
+      "Scenario_AC04_JobQueueEntryRestartIfNeeded_KeepsMainErrors",
+      "Scenario_AC04_JobQueueEntryRestart_KeepsMainErrors",
+      "Scenario_AC04_OrchestratorGet_KeepsMainErrors",
+      "Scenario_AC04_PlaybookEnqueue_KeepsMainErrors",
+      "Scenario_AC04_PlaybookRun_KeepsMainErrors",
+      "Scenario_AC04_PlaybookSchedule_KeepsMainErrors",
+      "Scenario_AC04_EmailSend_KeepsMainErrors",
+      "Scenario_AC04_EntryRegister_KeepsMainErrors",
+      "Scenario_AC04_EntryRestart_KeepsMainErrors",
+      "Scenario_AC04_EntryRun_KeepsMainErrors",
+      "Scenario_AC04_EntrySchedule_KeepsMainErrors",
+      "Scenario_AC04_StatusGet_KeepsMainErrors",
+      "Scenario_AC04_StatusRestartIfNeeded_KeepsMainErrors",
+      "Scenario_AC04_StatusRestart_KeepsMainErrors",
+      "Scenario_AC04_TelegramMessage_KeepsMainErrors"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96453,
+    "count": 12,
+    "methods": [
+      "Batch2MessagesHaveContractChaptersAndDiscovery",
+      "CommittingTypesDeclareIrreversible",
+      "PreviewDisclosesNestedCommit",
+      "NonCommittingTypesKeepTheirEffect",
+      "Scenario_AC05_Format_KeepsMainContract",
+      "Scenario_AC05_LayoutFormat_KeepsMainContract",
+      "Scenario_AC04_WorkspacePreview_KeepsMainErrors",
+      "Scenario_AC04_ReportGet_KeepsMainErrors",
+      "Scenario_AC04_ReportList_KeepsMainErrors",
+      "Scenario_AC04_ReportRun_KeepsMainErrors",
+      "Scenario_AC04_ReportSaveAs_KeepsMainErrors",
+      "Scenario_AC04_ReportLayoutSet_KeepsMainErrors"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96411,
+    "count": 39,
+    "methods": [
+      "BinaryEnvelopePreservesOfficeContentType",
+      "BinaryEnvelopePreservesMaximumContentType",
+      "CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage",
+      "JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage",
+      "JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun",
+      "CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified",
+      "BlockedEntriesAreSkipped",
+      "EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped",
+      "EarliestStartDateTimeIsRecalculated",
+      "NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank",
+      "EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress",
+      "EMailNotificationType_RestartNotificationType_VerifyEMailContent",
+      "BlockJobQueueSchedulerEntryOpenFromJQEntryCard",
+      "JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite",
+      "RecurringTemplateWeekdayValidation",
+      "RecurringTemplateTimeRangeValidation",
+      "RecurringTemplateCanBeInsertedWithValidData",
+      "RecurringTemplatesActionNavigationFromSetupPage",
+      "RecurringTemplateCardPageCanBeOpened",
+      "RecurringTemplateNoOfMinutesBetweenRunsValidation",
+      "RecurringTemplateNextRunDateFormulaValidation",
+      "SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy",
+      "ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry",
+      "ModifyStartingEndingTime_VerifyValidationAndSync",
+      "CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy",
+      "ChangingTemplate_VerifyExistingValuesOverwritten",
+      "TimeZoneCode_VerifyStored",
+      "CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate",
+      "CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError",
+      "CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay",
+      "CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime",
+      "CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday",
+      "CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun",
+      "CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly",
+      "RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter",
+      "RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed",
+      "RetryPolicyNever_ErrorEntry_SuppressesImmediately",
+      "RetryPolicy_ErrorCounterResetsOnSuccess",
+      "RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96423,
+    "count": 3,
+    "methods": [
+      "Scenario_AC03_LicenceAdmin_OpensSetupInEnglish",
+      "Scenario_AC03_LicenceAdmin_OpensSetupInIcelandic",
+      "OrchestratorIsRegisteredInTheAppRegistry"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96403,
+    "count": 17,
+    "methods": [
+      "Scenario_AC04_FoundationFull_Enabled",
+      "Scenario_AC05_NoUserSetupRead_Disabled",
+      "Scenario_AC06_UnsetToken_Disabled",
+      "Scenario_AC06_EmptyChat_Disabled",
+      "Scenario_AC01_IndirectRead_Enabled",
+      "SecretCodesFollowTheDocumentedPattern",
+      "LongCredentialCodesFitCode50AndStayDistinct",
+      "RegisterAllRegistersTheTelegramBotToken",
+      "RegisterAllRegistersBothSecretsOfEveryCredential",
+      "RegisterAllIsIdempotent",
+      "TelegramBotTokenSetIsSetAndClearRoundTrip",
+      "CredentialClientIdAndSecretRoundTrip",
+      "DeletingACredentialClearsItsSecrets",
+      "DeletingACredentialLeavesNoMissingSecretsBehind",
+      "RenamingACredentialMovesItsSecrets",
+      "AppSetupPageReportsTheTelegramSecretStatus",
+      "BifrostSetupExposesOrchestratorSetupAndPlaybooks"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96456,
+    "count": 10,
+    "methods": [
+      "AskForEach_RunGateInBothLanguages",
+      "AskDataCondition_RunGateInBothLanguages",
+      "AskTrace_RunGateInBothLanguages",
+      "Scrub_PreservesAllOtherProperties",
+      "Scrub_UnchangedPayloadsRetainBytes",
+      "SingleStep_NoTraceInAnyOrchestratorStore",
+      "FailedStep_WorkspaceSnapshotHasNoTrace",
+      "ForEach_NoTraceInLogsWorkspaceOrSummary",
+      "Paged_NoTraceAcrossPageAndIterationLogs",
+      "RunAndHelp_DescribeTimeoutAndRetentionBoundaries"
+    ],
+    "runner": 130451
+  },
+  {
+    "codeunit": 96418,
+    "count": 23,
+    "methods": [
+      "EmptyConditionSetIsTrue",
+      "AllConditionsInAGroupMustHold",
+      "AnyGroupHoldingIsEnough",
+      "GroupsAreIndependentNotLeftToRight",
+      "ConditionTypesAreEvaluatedIndependently",
+      "HasConditionsSeesOnlyItsOwnType",
+      "StepTypeDefaultsToAction",
+      "BeginRunSeedsRunNamespace",
+      "RollUpCountsAndFlagsFailure",
+      "ExcludedStepsLeaveRunStatusAlone",
+      "EscalateFailsTheRunWithoutTouchingCounters",
+      "RepeatedStepAccumulatesInsteadOfOverwriting",
+      "StatusDegradesAndNeverImproves",
+      "IterationFailuresCarryItemAndError",
+      "CheckFailuresAreCountedSeparatelyFromErrors",
+      "FailureListIsCappedButCountsStayExact",
+      "SkippedStepRecordsTheReason",
+      "SummaryPathsFeedTheReportNotTheWorkspaceData",
+      "RunAndStepsFilterToTheReportPayload",
+      "StatusTextComesFromTheEnumName",
+      "MessageTypeTextComesFromTheEnumName",
+      "ExcludedStepsAreStillReferenceableUnderTail",
+      "TailStaysOutOfTheReportPayload"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96461,
+    "count": 24,
+    "methods": [
+      "ReadAndWriteAllowed",
+      "ExternalWritesRefused",
+      "MissingContractRefused",
+      "MissingChapterRefused",
+      "MissingEffectRefused",
+      "UnknownEffectRefused",
+      "NullEffectRefused",
+      "ArrayEffectRefused",
+      "ObjectEffectRefused",
+      "BooleanEffectRefused",
+      "NumberEffectRefused",
+      "CaseVariantRefused",
+      "SafeChainIgnoresDisabled",
+      "UnsafeChainNamesStep",
+      "CheckStepCannotHideEffect",
+      "SafeChainIgnoresTransform",
+      "IrreversibleMessageFailsBesideTransform",
+      "AC04_ExecutorEmailRefusedBeforeDispatch",
+      "AC04_ExecutorTelegramRefusedBeforeDispatch",
+      "AC04_ExecutorMissingContractRefused",
+      "AC04_ExecutorMalformedEffectRefused",
+      "AC04_ReadDispatchOmitsCommit",
+      "AC05_SetParametersResetsCommitSignal",
+      "AC05_FailedRunConsumesCommitSignal"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96436,
+    "count": 15,
+    "methods": [
+      "Example1_PerRecordDecisionThenWrite_VerifiesClean",
+      "Example1_PerRecordDecisionThenWrite_VerifiesClean_Icelandic",
+      "Example2_ReadOnlyReport_VerifiesClean",
+      "Example2_ReadOnlyReport_VerifiesClean_Icelandic",
+      "Example3_AntiPattern_WarnsExactlyOnce",
+      "Example3_AntiPattern_WarnsExactlyOnce_Icelandic",
+      "Example1_WithEveryStepDisabled_StillVerifiesWithoutErrors",
+      "Help_CarriesTheWorkflowTheExamplesAndTheRules",
+      "Help_CarriesTheBase64OfEveryExampleTemplate",
+      "Example4_PostingAudit_VerifiesForTheInstalledAskType",
+      "Example4_PostingAudit_VerifiesForTheInstalledAskType_Icelandic",
+      "Example4_AskTemplateRaisesNoneOfTheAskWarnings",
+      "Help_CarriesThePostingAuditExample",
+      "Example4_RunRecordsPassFailUnknownAndErrorThenAllPassNotice",
+      "Help_ListsEveryFindingCodeOfVerify"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96437,
+    "count": 18,
+    "methods": [
+      "Run_RefusesAnError",
+      "Run_RefusesAnError_Icelandic",
+      "Run_RefusesAWarning_UnlessIgnoreWarnings",
+      "Run_RefusesAWarning_UnlessIgnoreWarnings_Icelandic",
+      "Run_IgnoreWarnings_NeverWaivesAnError",
+      "Run_ErrorOnDisabledStep_DoesNotBlock",
+      "Run_CleanPlaybook_Runs",
+      "Schedule_RefusesAnError_AndCreatesNoEntry",
+      "Schedule_RefusesAnError_AndCreatesNoEntry_Icelandic",
+      "Schedule_CleanPlaybook_IsScheduled",
+      "VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify",
+      "Schedule_RefusesAWarning_UnlessIgnoreWarnings",
+      "CreateOrchestratorEntry_RefusesAnError",
+      "CreateOrchestratorEntry_WarningNeedsIgnoreWarnings",
+      "ScheduledPlaybookWithErrors_IsReported",
+      "UnscheduledPlaybookWithErrors_HasNoScheduleFinding",
+      "VerifyMessageType_ReportsValidAndCounts",
+      "VerifyMessageType_CleanPlaybook_IsValid"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96432,
+    "count": 11,
+    "methods": [
+      "PlaybookRun_StampsHeader",
+      "PlaybookRun_StampsHeader_Icelandic",
+      "PlaybookEnqueue_ThenJobQueueRun_StampsHeader",
+      "PlaybookEnqueue_ThenJobQueueRun_StampsHeader_Icelandic",
+      "ScheduledRun_StampsHeader",
+      "ScheduledRun_StampsHeader_Icelandic",
+      "FailedRun_StampsHeaderFailed",
+      "FailedRun_StampsHeaderFailed_Icelandic",
+      "SecondRun_ReplacesTheFirst",
+      "EmptyPlaybook_StampsHeaderCompleted",
+      "HeaderIsRunningWhileTheRunIsInFlight"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96444,
+    "count": 9,
+    "methods": [
+      "PrimaryKeyUnderFieldsWarnsEnglish",
+      "PrimaryKeyUnderFieldsWarnsIcelandic",
+      "CorrectPathsResolve",
+      "UnresolvedRequestsAreRejected",
+      "LiteralMailAndResolvedDataRemainValid",
+      "SameIterationAndFilteredDumpResolve",
+      "SingleCheckMissingReferenceFails",
+      "ForEachCheckMissingReferenceFails",
+      "ForEachActionMissingReferenceFailsIcelandic"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96421,
+    "count": 3,
+    "methods": [
+      "RunErrorsWhenPlaybookCodeMissing",
+      "RunErrorsForUnknownPlaybookCode",
+      "Scenario_AC07_PagedStep_ReceivesItsOwnSkipAndTake"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96435,
+    "count": 33,
+    "methods": [
+      "AskForEach_BoundsAndTypeAreChecked",
+      "AskForEach_DisabledAndTranslated",
+      "CleanPlaybook_HasNoFindings",
+      "EmptyPlaybook_HasNoFindings",
+      "UnlistedMessageType_IsAnError",
+      "UnlistedMessageType_IsAnError_Icelandic",
+      "ListedEnabledMessageType_NoFinding",
+      "UnlistedMessageType_NameAndEnabled",
+      "KnownTypeThatIsNotEnabled_WithStartCondition_IsNotReported",
+      "UnlistedType_WithStartCondition_IsStillAnError",
+      "CheckWithoutSuccessCondition_IsAnError",
+      "CheckWithoutSuccessCondition_IsAnError_Icelandic",
+      "CheckWithSuccessCondition_NoFinding",
+      "ActionWithoutSuccessCondition_IsAWarning",
+      "ActionWithSuccessCondition_NoFinding",
+      "NextStepNotFound_IsAnError",
+      "NextStepExistingOrZero_NoFinding",
+      "IterateSource_Missing_IsAnError",
+      "IterateSource_NotEarlier_IsAnError",
+      "IterateSource_Earlier_NoFinding",
+      "SkipGate_Missing_IsAnError",
+      "SkipGate_NotEarlier_IsAnError",
+      "SkipGate_OnSingleStep_IsAnError",
+      "SkipGate_OnForEachCheck_NoFinding",
+      "ForEachSource_WithoutNoOfRecords_Warns",
+      "ForEachSource_WithoutNoOfRecords_Warns_Icelandic",
+      "ForEachSource_WithNoOfRecords_NoWarning",
+      "ForEachSource_NotARecordReader_NoWarning",
+      "ForEachSource_TwoConsumers_WarnsOnce",
+      "UnsafeWrite_OnDisabledStep_IsNotReported",
+      "FindingOnDisabledStep_CarriesStepDisabled",
+      "FindingOnEnabledStep_HasNoStepDisabled",
+      "Findings_AreInStepOrder_WithAllFields"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96439,
+    "count": 40,
+    "methods": [
+      "AskSchema_ConditionAndPresenceBoundaries",
+      "AskTrace_LiteralTrueOnly",
+      "AskTemplate_TranslatedMessagesAndNextSteps",
+      "TemplateNotJson_Truncated_IsAnError",
+      "TemplateNotJson_Truncated_IsAnError_Icelandic",
+      "TemplateNotJson_Array_IsAnError",
+      "TemplateValidOrEmpty_NoFinding",
+      "StepReference_Missing_IsAnError",
+      "StepReference_Missing_IsAnError_Icelandic",
+      "StepReference_CollectAndListForms_AreChecked",
+      "StepReference_NotEarlier_IsAnError",
+      "StepReference_NotEarlier_IsAnError_Icelandic",
+      "StepReference_ToItself_IsAnError",
+      "StepReference_ToEarlierStep_NoFinding",
+      "StepReference_ShapesThatAreNotReferences_NoFinding",
+      "StepReference_RepeatedReference_IsReportedOnce",
+      "RoleCode_Unknown_IsAnError",
+      "RoleCode_Unknown_IsAnError_Icelandic",
+      "RoleCode_Known_NoFinding",
+      "RoleCode_EmptyReferenceOrAbsent_IsNotLookedUp",
+      "RoleCode_OnOtherMessageType_IsNotLookedUp",
+      "RoleCode_LongerThanACode_IsAnError",
+      "RoleCode_InsideAWriteTransaction_IsNotDeterminable",
+      "CurrentField_Unknown_Warns",
+      "CurrentField_Unknown_Warns_Icelandic",
+      "CurrentField_Known_NoWarning",
+      "CurrentField_SourceTableUndeterminable_NoWarning",
+      "StepField_Unknown_IsAnError",
+      "StoredField_ErrorAndOriginalCasing",
+      "StoredField_ErrorAndOriginalCasing_Icelandic",
+      "StoredField_HelpExplainsError",
+      "StepField_Known_NoWarning",
+      "IterField_Unknown_IsAnError",
+      "IterField_Unknown_IsAnError_Icelandic",
+      "IterField_Known_NoWarning",
+      "IterField_ExplicitIteration_Unknown_IsAnError",
+      "StepField_OfPagedOrDisabledStep_IsNotJudged",
+      "Lookup_RecordExists_FoundNotFoundAndUndeterminable",
+      "Lookup_FieldNames_AreTheJsonNames",
+      "Lookup_ToJsonName_FollowsTheDataTypes"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96433,
+    "count": 8,
+    "methods": [
+      "UnsafePattern_Warns",
+      "UnsafePattern_Warns_Icelandic",
+      "CorrectedPattern_DoesNotWarn",
+      "CorrectedPattern_DoesNotWarn_Icelandic",
+      "TwoUnsafeWrites_WarnOncePerStep",
+      "SafeShapes_DoNotWarn",
+      "WriteMessageTypesAreRecognisedByTheirVerb",
+      "VerifyErrorsForMissingOrUnknownPlaybook"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96454,
+    "count": 14,
+    "methods": [
+      "Run_UnknownField_ReturnsErrorWithoutExecution",
+      "Run_MalformedView_ReturnsErrorWithoutExecution",
+      "Run_NonString_ReturnsErrorWithoutExecution",
+      "SaveAs_UnknownField_ReturnsErrorWithoutExecution",
+      "Scenario_AC01_PdfInvalidField_ReturnsError",
+      "Scenario_AC01_DefaultPdfInvalidField_ReturnsError",
+      "Scenario_AC01_ExcelInvalidField_ReturnsError",
+      "Scenario_AC01_WordInvalidField_ReturnsError",
+      "SaveAs_MalformedView_ReturnsErrorWithoutExecution",
+      "SaveAs_NonString_ReturnsErrorWithoutExecution",
+      "SaveAs_ValidView_ExecutesOnlySelectedRow",
+      "Run_ValidView_ExecutesSelectedRow",
+      "Run_EmptySelection_DoesNotWidenDataSet",
+      "Run_BothDebugStates_FailureHasNoCallstack"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96424,
+    "count": 6,
+    "methods": [
+      "SetErrorsWhenReportIdMissing",
+      "SetErrorsWhenNameMissing",
+      "SetErrorsForUnknownReport",
+      "SetErrorsForInvalidLayoutFormat",
+      "SetErrorsWhenLayoutBase64Missing",
+      "MessageTypeIsRegistered"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96409,
+    "count": 11,
+    "methods": [
+      "ListIncludesExtensionLayout",
+      "ListExcludesExtensionLayouts",
+      "GetExportsExtensionBytes",
+      "OwnUserLayoutRoundTripsBytes",
+      "SetTwiceReplacesUserLayout",
+      "ListRejectsUnknownReport",
+      "GetRejectsUnknownLayout",
+      "SaveAsOverrideRestoresSessionAndPreset",
+      "SaveAsOverrideRendersPdf",
+      "SaveAsRenderFailureRestoresSession",
+      "SaveAsRejectsUnknownLayout"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96458,
+    "count": 6,
+    "methods": [
+      "StagingIdImportsLikeBase64AndConsumesRow",
+      "StagingIdWithoutBracesReplacesExistingLayout",
+      "UnknownOrTakenStagingIdIsRefused",
+      "KeyCombinationsAndInvalidGuidAreRefusedWithoutTaking",
+      "FailedImportKeepsStagingRow",
+      "OrchestratorHasNoAttachmentsDependency"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96416,
+    "count": 20,
+    "methods": [
+      "PresetRoundTripsXml",
+      "PresetReturnsEmptyWhenNoXml",
+      "PresetHasRequestPageXmlReturnsTrueWhenPopulated",
+      "ListReturnsReportsWithCountField",
+      "ListFiltersByProcessingOnly",
+      "ListReportContainsExpectedFields",
+      "GetReturnsReportMetadata",
+      "GetReturnsLayoutsArray",
+      "GetReturnsPresetWhenExists",
+      "GetCreatesEmptyPresetWhenNoneExists",
+      "GetErrorsForInvalidReportId",
+      "GetErrorsWhenReportIdMissing",
+      "SaveAsGeneratesPdfOutput",
+      "SaveAsDefaultsToPdfWhenFormatOmitted",
+      "SaveAsUsesPresetWhenNoXmlProvided",
+      "SaveAsErrorsForInvalidFormat",
+      "SaveAsErrorsForMissingReportId",
+      "SaveAsErrorsForNonExistentReport",
+      "PresetTableIsBlockedFromDataRecordsRead",
+      "PresetTableIsBlockedFromDataRecordsWrite"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96431,
+    "count": 18,
+    "methods": [
+      "OverlayPreservesOtherValues",
+      "UnknownNameFails",
+      "MissingBaseFails",
+      "WrongReportXmlFails",
+      "MalformedXmlFails",
+      "DuplicateOptionFails",
+      "NonObjectParametersFail",
+      "NullValueFails",
+      "NestedValueFails",
+      "StatementTemplateMapsOptions",
+      "DuplicateAliasesFail",
+      "NativeCaptureMatchesTemplateSchema",
+      "StatementUnknownOptionFails",
+      "StatementBadChoiceFails",
+      "CallerXmlPrecedesTemplate",
+      "RegisteredTemplateRendersValues",
+      "ExplicitParametersDoNotUsePreset",
+      "StatementRendersOwnAgingData"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96417,
+    "count": 7,
+    "methods": [
+      "RunExecutesProcessingOnlyReport",
+      "RunEchoesReportMetadata",
+      "RunReturnsErrorObjectWhenReportFails",
+      "RunUsesExplicitParameterOverlay",
+      "RunRejectsReportThatProducesOutput",
+      "RunErrorsWhenReportIdMissing",
+      "RunErrorsForNonExistentReport"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96402,
+    "count": 11,
+    "methods": [
+      "StandaloneRefResolvesString",
+      "StandaloneRefResolvesNumericAsNumber",
+      "StandaloneRefResolvesObject",
+      "StandaloneRefResolvesArray",
+      "EmbeddedRefResolvesInString",
+      "EmbeddedRefBeforePeriodResolves",
+      "EmbeddedRefEscapesQuotesAndObjects",
+      "CollectDirective",
+      "FilteredDumpEscapesAsString",
+      "UnresolvedRefStaysIntact",
+      "MultipleRefsInSameTemplate"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96405,
+    "count": 7,
+    "methods": [
+      "Scenario_AC01_IdentityAndRecipientWritesAreRestricted",
+      "Scenario_AC02_IdentityAndRecipientReadsStayOpen",
+      "Scenario_AC03_NeighbourFieldsStayWritable",
+      "Scenario_AC04_TablesStayReadableAndWritable",
+      "Scenario_AC05_HintsNameSupportedPagesAndSchedule",
+      "Scenario_AC05_NeighboursHaveNoNewHints",
+      "Scenario_AC05_ExistingCompanionHintsArePreserved"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96415,
+    "count": 12,
+    "methods": [
+      "CreateOrchestratorEntryCreatesEntry",
+      "CreateOrchestratorEntryStoresIdOnPlaybook",
+      "ScheduledFlowFieldReflectsOrchestratorEntry",
+      "CreateOrchestratorEntryCopiesRecurringTemplate",
+      "CreateOrchestratorEntrySetsNotification",
+      "CreateOrchestratorEntrySetsRetryPolicy",
+      "CreateOrchestratorEntrySetsEmitTelemetry",
+      "CreateOrchestratorEntrySetsJobQueueCategory",
+      "CreateOrchestratorEntryBlocksDoubleSchedule",
+      "CreateOrchestratorEntrySetsRecordIdAndSystemId",
+      "CreateOrchestratorEntryAllowsRescheduleAfterOrphan",
+      "ScheduleResponseEmitsSystemIdAndPkId"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96446,
+    "count": 2,
+    "methods": [
+      "Scenario_AC02_English_RegistersMetadataOnly",
+      "Scenario_AC03_Icelandic_RegistersMetadataOnly"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96427,
+    "count": 5,
+    "methods": [
+      "ExecuteRunDispatchesCodeunitEntryHeadlessly",
+      "ExecuteRunReturnsErrorWhenJobFails",
+      "ExecuteRunReturnsErrorWhenDispatchFails",
+      "ExecuteRunUsesPlaybookRecordIdNotEntryRecordId",
+      "RunJobQueueEntryOnceStillConfirmsAndMessages"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96419,
+    "count": 7,
+    "methods": [
+      "GetReturnsSuccessWithEntryCounts",
+      "GetEntryCountsAreConsistent",
+      "RestartReturnsSuccessWithMessage",
+      "RestartIfNeededRestartsWhenNoJQEntry",
+      "RestartIfNeededSkipsWhenAlreadyRunning",
+      "RestartIfNeededSkipsWhenInProcess",
+      "RestartIfNeededRestartsWhenInError"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96470,
+    "count": 1,
+    "methods": [
+      "Scenario_AC41_LegacyDefinitionReadsAsMessage"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96426,
+    "count": 10,
+    "methods": [
+      "AC21_PagesFiftyRowsAtATime",
+      "AC21_OneRemainingRowHasNextPage",
+      "AC21_ViewFiltersAndRowShowsSummary",
+      "AC22_RestrictedTableIsRefused",
+      "AC23_EditFieldIsSaved",
+      "AC23_InvalidValueAndKeyAreRefused",
+      "JsonKeyFollowsSerializerNaming",
+      "AC22_ReadRestrictedFieldIsHidden",
+      "AC24_WriteRestrictedTableRefusesSave",
+      "AC24_WriteOnceFieldRefusesSave"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96448,
+    "count": 7,
+    "methods": [
+      "AC21_PageForwardAndBack",
+      "AC21_PageWithOneRemainingRow",
+      "AC23_OpenRecordAndEdit",
+      "AC24_RestrictedTablePageIsReadOnly",
+      "AC24_WriteOncePageIsReadOnly",
+      "AC25_PageImportConfirmsAfterDryRun",
+      "AC25_PageImportCancellationDoesNotWrite"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96406,
+    "count": 5,
+    "methods": [
+      "AC11_ExportWritesEnvelopeForFilteredRows",
+      "AC12_RowEqualsSerializerOutput",
+      "AC11_FieldListLimitsFields",
+      "AC14_RestrictedTableIsRefused",
+      "UnknownTableAndInvalidViewAreRefused"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96425,
+    "count": 7,
+    "methods": [
+      "AC15_RoundTripModifiesFromFile",
+      "RowWithoutMatchIsInserted",
+      "AC13_BadValueFailsOnlyThatRow",
+      "AC13_StopOnErrorWritesNothing",
+      "AC16_DryRunLeavesTableUnchanged",
+      "AC14_RestrictedTableIsRefused",
+      "WrongFormatIsRefused"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96468,
+    "count": 8,
+    "methods": [
+      "Scenario_AC42_CopyPreservesNestedJsonType",
+      "Scenario_AC42_ConstantDoesNotInterpretReferences",
+      "Scenario_AC42_NegatePreservesDecimalAndTextAcrossLanguages",
+      "Scenario_AC42_NegateLeavesNonnumericTextUnchanged",
+      "Scenario_AC42_ReplaceTextIsLiteralAndCaseSensitive",
+      "Scenario_AC42_MissingSourceReturnsFailureWithoutPartialOutput",
+      "Scenario_AC44_RunnerTransformsArrayWithoutDispatchingTheStep",
+      "Scenario_AC44_PreviewDoesNotRunTransformDefinitions"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96469,
+    "count": 7,
+    "methods": [
+      "Scenario_AC43_MissingTargetIsAFinding",
+      "Scenario_AC43_UnknownSourceIsAFinding",
+      "Scenario_AC43_InvalidInputIsAFinding",
+      "Scenario_AC43_MessageTypeOnTransformIsAFinding",
+      "Scenario_162_MessageTypeCanBeClearedOnTransform",
+      "Scenario_AC45_CopyOperationGeneratesVerifiedTransform",
+      "Scenario_AC44_CardAuthorsTransformMapping"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96442,
+    "count": 8,
+    "methods": [
+      "Scenario_AC01_DisabledErrors_DoNotBlock",
+      "Scenario_AC01_DisabledErrors_DoNotBlock_IsIS",
+      "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks",
+      "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks_IsIS",
+      "Scenario_AC01_EnabledError_StillBlocks",
+      "Scenario_AC01_EnabledError_StillBlocks_IsIS",
+      "Scenario_AC01_CleanPlaybook_HasZeroCounts",
+      "Scenario_AC02_Help_ExplainsBlockingCounts"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96408,
+    "count": 1,
+    "methods": [
+      "TelegramFieldDescribesCallerSetup"
+    ],
+    "runner": 130450
+  },
+  {
+    "codeunit": 96401,
+    "count": 14,
+    "methods": [
+      "SetValueAndGetValue",
+      "SetTokenAtNestedPath",
+      "SetTokenPreservesArray",
+      "WriteFromResponseWithRename",
+      "WriteFromResponseIteratedKeying",
+      "WriteFromResponseFirstElement",
+      "CollectGathersIterations",
+      "ToFilteredTextOnlyIncludesRequestedKeys",
+      "ResetClearsAllData",
+      "LastMonthEnd_TC001_September31DayMonth",
+      "LastMonthEnd_TC002_LeapYearFebruary",
+      "LastMonthEnd_TC003_JanuaryCrossYear",
+      "LastMonthEnd_TC004_May31ToApril30",
+      "LastMonthStartThisMonthStart_TC005_FormulasUnchanged"
+    ],
+    "runner": 130450
+  }
+]

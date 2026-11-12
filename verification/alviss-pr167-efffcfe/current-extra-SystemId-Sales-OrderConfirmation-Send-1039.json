@@ -1,0 +1,19 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Test.DocumentSend.Verify",
+    "subject": "SalesOrderConfirmation:SystemId",
+    "data": {},
+    "lcid": 1039
+  },
+  "startedAt": "2026-11-12T20:10:49.599Z",
+  "finishedAt": "2026-11-12T20:10:49.700Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"company\": \"CRONUS International Ltd.\",\n  \"messageType\": \"Test.DocumentSend.Verify\",\n  \"innerMessageId\": \"41ECD05D-20BF-42FF-A180-DE54B4B8427F\",\n  \"kind\": \"SalesOrderConfirmation\",\n  \"identityMode\": \"SystemId\",\n  \"request\": {\n    \"documentId\": \"4BECEE25-D5DE-F111-B6FB-00090FFE0001\",\n    \"documentSendingProfile\": \"AV16758ADF2E20AB649A\",\n    \"expectedCount\": 1\n  },\n  \"locale\": 1039,\n  \"fixtureNo\": \"AV16758ADF2E20AB649A\",\n  \"mockCaptured\": true,\n  \"capturedKind\": \"SalesOrderConfirmation\",\n  \"emailDelta\": 0,\n  \"fixturesDeleted\": true,\n  \"shippingResponse\": {\n    \"status\": \"Success\",\n    \"documentType\": \"SalesOrderConfirmation\",\n    \"documentNo\": \"AV16758ADF2E20AB649A\",\n    \"documentId\": \"4BECEE25-D5DE-F111-B6FB-00090FFE0001\",\n    \"customerNo\": \"AV16758ADF2E20AB649A\",\n    \"customerName\": \"\",\n    \"documentSendingProfileCode\": \"AV16758ADF2E20AB649A\",\n    \"documentSendingProfileSource\": \"Request\",\n    \"message\": \"Skjal sent.\"\n  },\n  \"passed\": true\n}"
+      }
+    ]
+  }
+}

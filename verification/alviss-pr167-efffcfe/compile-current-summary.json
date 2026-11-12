@@ -1,0 +1,42 @@
+{
+  "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+  "startedAt": "2026-11-12T19:58:42.476Z",
+  "builds": {
+    "app": {
+      "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "AppSourceCop"
+      ],
+      "startedAt": "2026-11-12T19:58:42.476Z",
+      "finishedAt": "2026-11-12T19:58:55.460Z",
+      "artifactSha256": "88a2d32a307304a4165c507f07c5ad2381283bf75733cb0d6d10433970c865e8"
+    },
+    "testApp": {
+      "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "analyzers": [
+        "CodeCop",
+        "UICop"
+      ],
+      "startedAt": "2026-11-12T19:58:55.497Z",
+      "finishedAt": "2026-11-12T19:59:05.742Z",
+      "artifactSha256": "f04efacdf8fde3069d264f70e4ac9bcb4511db750df9cbebc313c176ff7e7370"
+    },
+    "default": {
+      "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+      "errors": 0,
+      "warnings": 0,
+      "internalsVisibleTo": false,
+      "AS0081Suppression": false,
+      "evidence": "/workspace/private/orchestrator167-alviss-20261112/compile-current-default.log"
+    }
+  },
+  "finishedAt": "2026-11-12T19:59:05.745Z"
+}

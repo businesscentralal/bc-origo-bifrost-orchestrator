@@ -1,0 +1,11 @@
+{
+  "counts": {
+    "400": 216
+  },
+  "errors": {
+    "This Bifröst message has not been reported to the licensing service yet, so it cannot be changed or deleted. Try again after the next usage sync. ": 216
+  },
+  "bypassAttempted": false,
+  "usageSyncTriggered": false,
+  "recordedAt": "2026-11-12T20:25:03.357Z"
+}

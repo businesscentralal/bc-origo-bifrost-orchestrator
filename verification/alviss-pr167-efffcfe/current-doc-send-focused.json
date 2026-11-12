@@ -1,0 +1,23 @@
+{
+  "name": "bc_dev_run_tests",
+  "arguments": {
+    "testCodeunitRange": "96472",
+    "testSuite": "ORCHESTRAT",
+    "tenant": "w129-14",
+    "companyName": "CRONUS International Ltd.",
+    "mode": "local",
+    "testRunnerCodeunitId": 130450,
+    "timeoutMs": 120000,
+    "detailed": true
+  },
+  "startedAt": "2026-11-12T20:00:43.471Z",
+  "finishedAt": "2026-11-12T20:00:51.977Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"ok\": true,\n  \"mode\": \"local\",\n  \"exitCode\": 0,\n  \"durationMs\": 8491,\n  \"passed\": 11,\n  \"failed\": 0,\n  \"skipped\": 0,\n  \"errors\": 0,\n  \"cosmoExecTestEndpoint\": \"none\",\n  \"local\": {\n    \"clientServicesUrl\": \"http://host.docker.internal:8080/BC290/\",\n    \"serviceUrl\": \"http://host.docker.internal:8080/BC290/cs?tenant=w129-14&company=CRONUS%20International%20Ltd.\",\n    \"testAssembliesPath\": \"/opt/origo-mcp/bc29-test-assemblies\"\n  },\n  \"stdoutPreview\": \"[MCP] bc_dev_run_tests local start (native BC, Client Services)\\n[MCP] Client Services URL: http://host.docker.internal:8080/BC290/cs?tenant=w129-14&company=CRONUS%20International%20Ltd. (PowerShell 7.6.9)\\n[MCP] New-ClientContext + Run-Tests testPage=130455\\n[MCP] Walking InnerHandler from Microsoft.Dynamics.Framework.UI.Client.JsonHttpClient+BasicAuthHandler\\n[MCP] SSL trust-any on System.Net.Http.HttpClientHandler (depth=2)\\n[MCP] Page 130455 filters TestCodeunitRange='96472' TestCodeunit='' TestRunner='130450' RequiredTestIsolation=''\\nSetting test codeunit range '96472'\\n  Codeunit 96472 Doc Send Tests ori Success (3.439 seconds)\\n    Testfunction Scenario_AC04_PurchaseOrderHelp_TranslatesChapters Success (0.023 seconds)\\n    Testfunction Scenario_AC04_SalesQuoteHelp_TranslatesChapters Success (0.007 seconds)\\n    Testfunction Scenario_AC04_OrderConfirmationHelp_TranslatesChapters Success (0.006 seconds)\\n    Testfunction PurchaseOrderSend_HappyPathIsMockedAndSendsNoEmail Success (0.503 seconds)\\n    Testfunction SalesQuoteSend_BySystemIdIsMocked Success (0.373 seconds)\\n    Testfunction SalesOrderConfirmationSend_HappyPathIsMocked Success (0.227 seconds)\\n    Testfunction SalesOrderConfirmationSend_UnknownDocumentIsRecordNotFound Success (0.03 seconds)\\n    Testfunction PurchaseOrderSend_UnknownProfileIsRecordNotFound Success (0.237 seconds)\\n    Testfunction SalesQuoteSend_DiskProfileIsPreconditionFailed Success (0.187 seconds)\\n    Testfunction PurchaseOrderSend_ProfileTooLongIsInvalidParameterFormat Success (0.167 seconds)\\n    Testfunction SalesQuoteSend_MissingEmailIsPreconditionFailed Success (0.147 seconds)\\n[MCP] Tests finished (local Client Services)\\n\",\n  \"stderrPreview\": \"\",\n  \"commandPreview\": \"/opt/origo-mcp/pwsh/pwsh -NoProfile -NonInteractive -File run-tests.ps1 # local Client Services http://host.docker.internal:8080/BC290/cs?tenant=w129-14&company=CRONUS%20International%20Ltd.\"\n}"
+      }
+    ]
+  }
+}

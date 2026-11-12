@@ -1,0 +1,19 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Test.DocumentSend.Verify",
+    "subject": "PurchaseOrder:SystemId",
+    "data": {},
+    "lcid": 1033
+  },
+  "startedAt": "2026-11-12T20:10:47.960Z",
+  "finishedAt": "2026-11-12T20:10:48.432Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"company\": \"CRONUS International Ltd.\",\n  \"messageType\": \"Test.DocumentSend.Verify\",\n  \"innerMessageId\": \"377324BD-2A8D-49CB-9334-F448635FA651\",\n  \"kind\": \"PurchaseOrder\",\n  \"identityMode\": \"SystemId\",\n  \"request\": {\n    \"documentId\": \"0FECEE25-D5DE-F111-B6FB-00090FFE0001\",\n    \"documentSendingProfile\": \"AV167F2683361499444A\",\n    \"expectedCount\": 1\n  },\n  \"locale\": 1033,\n  \"fixtureNo\": \"AV167F2683361499444A\",\n  \"mockCaptured\": true,\n  \"capturedKind\": \"PurchaseOrder\",\n  \"emailDelta\": 0,\n  \"fixturesDeleted\": true,\n  \"shippingResponse\": {\n    \"status\": \"Success\",\n    \"documentType\": \"PurchaseOrder\",\n    \"documentNo\": \"AV167F2683361499444A\",\n    \"documentId\": \"0FECEE25-D5DE-F111-B6FB-00090FFE0001\",\n    \"vendorNo\": \"AV167F2683361499444A\",\n    \"vendorName\": \"\",\n    \"documentSendingProfileCode\": \"AV167F2683361499444A\",\n    \"documentSendingProfileSource\": \"Request\",\n    \"message\": \"Document sent successfully.\"\n  },\n  \"passed\": true\n}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Sales.Quote.Send",
+    "data": {
+      "expectedCount": 1
+    },
+    "lcid": 1033
+  },
+  "startedAt": "2026-11-12T20:07:14.477Z",
+  "finishedAt": "2026-11-12T20:07:14.533Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"Error\",\"code\":\"MissingParameter\",\"error\":\"Send the document number or SystemId.\",\"parameter\":\"documentNo\",\"expected\":\"a document number or SystemId\",\"nextStep\":\"Put the number in subject or data.documentNo, or the SystemId in subject or data.documentId.\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Sales.Quote.Send\\\". Always read the help before calling a message type.\"}"
+      }
+    ],
+    "isError": true
+  }
+}

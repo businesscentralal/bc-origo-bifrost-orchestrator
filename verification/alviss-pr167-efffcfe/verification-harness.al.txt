@@ -1,0 +1,244 @@
+namespace Origo.Bifrost.Orchestrator.Verification;
+
+using Microsoft.Foundation.Reporting;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Sales.Document;
+using Origo.Bifrost;
+using Origo.Bifrost.Orchestrator.Test;
+using System.Email;
+using System.Utilities;
+
+enumextension 96498 "AV167 Proof Type ori" extends "Message Type ori"
+{
+    value(96498; "Test.DocumentSend.Verify")
+    {
+        Implementation = "Msg Interface ori" = "AV167 Proof Message ori";
+    }
+}
+
+codeunit 96498 "AV167 Proof Engine ori"
+{
+    procedure Verify(Kind: Text): Text
+    var
+        Customer: Record Customer;
+        Vendor: Record Vendor;
+        SalesHeader: Record "Sales Header";
+        PurchaseHeader: Record "Purchase Header";
+        Profile: Record "Document Sending Profile";
+        SentEmail: Record "Sent Email";
+        Mock: Codeunit "Doc Send Mock ori";
+        Dispatcher: Codeunit "Dispatcher ori";
+        ResponseBlob: Codeunit "Temp Blob";
+        Request: BigText;
+        RequestJson: JsonObject;
+        ResponseJson: JsonObject;
+        Proof: JsonObject;
+        ResponseText: Text;
+        RequestText: Text;
+        ContentType: Text[100];
+        Elapsed: Duration;
+        EmptyGuid: Guid;
+        MessageId: Guid;
+        ResponseStream: InStream;
+        UniqueNo: Code[20];
+        Target: Enum "Message Type ori";
+        BeforeEmail: Integer;
+        Token: JsonToken;
+        Captured: Boolean;
+        CapturedKind: Text;
+        KindParts: List of [Text];
+        Mode: Text;
+    begin
+        KindParts := Kind.Split(':');
+        Kind := KindParts.Get(1);
+        Mode := 'Number';
+        if KindParts.Count() > 1 then
+            Mode := KindParts.Get(2);
+        if not (Mode in ['Number', 'SystemId', 'Party']) then
+            Error('Unknown proof identification mode.');
+        case Kind of
+            'PurchaseOrder': Target := Target::"Purchase.Order.Send";
+            'SalesQuote': Target := Target::"Sales.Quote.Send";
+            'SalesOrderConfirmation': Target := Target::"Sales.OrderConfirmation.Send";
+            else Error('Unknown proof scenario.');
+        end;
+        UniqueNo := CopyStr('AV167' + DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, 20);
+        Profile.Init();
+        Profile.Code := UniqueNo;
+        Profile.Description := 'Alviss isolated mock verification';
+        Profile."E-Mail" := Profile."E-Mail"::"Yes (Use Default Settings)";
+        Profile.Insert(false);
+        if Kind = 'PurchaseOrder' then begin
+            Vendor.Init();
+            Vendor."No." := UniqueNo;
+            Vendor.Name := 'Alviss isolated mock vendor';
+            Vendor."E-Mail" := 'pr167@example.invalid';
+            if Mode = 'Party' then
+                Vendor."Document Sending Profile" := UniqueNo;
+            Vendor.Insert(false);
+            PurchaseHeader.Init();
+            PurchaseHeader."Document Type" := PurchaseHeader."Document Type"::Order;
+            PurchaseHeader."No." := UniqueNo;
+            PurchaseHeader."Buy-from Vendor No." := UniqueNo;
+            PurchaseHeader."Pay-to Vendor No." := UniqueNo;
+            PurchaseHeader.Insert(false);
+        end else begin
+            Customer.Init();
+            Customer."No." := UniqueNo;
+            Customer.Name := 'Alviss isolated mock customer';
+            Customer."E-Mail" := 'pr167@example.invalid';
+            if Mode = 'Party' then
+                Customer."Document Sending Profile" := UniqueNo;
+            Customer.Insert(false);
+            SalesHeader.Init();
+            if Kind = 'SalesQuote' then
+                SalesHeader."Document Type" := SalesHeader."Document Type"::Quote
+            else
+                SalesHeader."Document Type" := SalesHeader."Document Type"::Order;
+            SalesHeader."No." := UniqueNo;
+            SalesHeader."Sell-to Customer No." := UniqueNo;
+            SalesHeader."Bill-to Customer No." := UniqueNo;
+            SalesHeader.Insert(false);
+        end;
+        if Mode = 'SystemId' then begin
+            if Kind = 'PurchaseOrder' then
+                RequestJson.Add('documentId', Format(PurchaseHeader.SystemId, 0, 4))
+            else
+                RequestJson.Add('documentId', Format(SalesHeader.SystemId, 0, 4));
+        end else
+            RequestJson.Add('documentNo', UniqueNo);
+        if Mode <> 'Party' then
+            RequestJson.Add('documentSendingProfile', UniqueNo);
+        RequestJson.Add('expectedCount', 1);
+        RequestJson.WriteTo(RequestText);
+        Request.AddText(RequestText);
+        BeforeEmail := SentEmail.Count();
+        Mock.Arm();
+        // The real dispatcher and shipping handler retain their normal licence and write gates.
+        // Only the existing candidate test subscriber handles the final external send event.
+        Dispatcher.EnqueueAndProcess(Target, "Message Version ori"::"1.0", UniqueNo, '', 'text/json', Request,
+            EmptyGuid, GlobalLanguage(), MessageId, ResponseBlob, ContentType, Elapsed);
+        Captured := Mock.WasCaptured();
+        CapturedKind := Mock.CapturedKind();
+        Mock.Disarm();
+        ResponseBlob.CreateInStream(ResponseStream, TextEncoding::UTF8);
+        ResponseStream.ReadText(ResponseText);
+        // Exact owned fixture cleanup, including the inner dispatcher message; no shared records.
+        if Kind = 'PurchaseOrder' then begin
+            PurchaseHeader.Delete(false);
+            Vendor.Delete(false);
+        end else begin
+            SalesHeader.Delete(false);
+            Customer.Delete(false);
+        end;
+        Profile.Delete(false);
+        Proof.Add('innerMessageId', Format(MessageId, 0, 4));
+        Proof.Add('kind', Kind);
+        Proof.Add('identityMode', Mode);
+        Proof.Add('request', RequestJson);
+        Proof.Add('locale', GlobalLanguage());
+        Proof.Add('fixtureNo', UniqueNo);
+        Proof.Add('mockCaptured', Captured);
+        Proof.Add('capturedKind', CapturedKind);
+        Proof.Add('emailDelta', SentEmail.Count() - BeforeEmail);
+        Proof.Add('fixturesDeleted', not Profile.Get(UniqueNo));
+        if ResponseJson.ReadFrom(ResponseText) then
+            Proof.Add('shippingResponse', ResponseJson)
+        else
+            Proof.Add('shippingResponseText', ResponseText);
+        Proof.Add('passed', Captured and (CapturedKind = Kind) and (SentEmail.Count() = BeforeEmail) and
+            ResponseJson.Get('status', Token) and (Token.AsValue().AsText() = 'Success'));
+        Proof.WriteTo(ResponseText);
+        exit(ResponseText);
+    end;
+}
+
+codeunit 96499 "AV167 Proof Message ori" implements "Msg Interface ori"
+{
+    procedure IsEnabled(): Boolean
+    begin
+        exit(true);
+    end;
+
+    procedure GetFilterTableNo(): Integer
+    begin
+        exit(0);
+    end;
+
+    procedure GetDescription(): Text[250]
+    begin
+        exit('Temporary worker-4 mock-only document-send verification.');
+    end;
+
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
+    begin
+        exit("Msg Direction ori"::Inbound);
+    end;
+
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    var
+        Engine: Codeunit "AV167 Proof Engine ori";
+    begin
+        Argument.SetResponseText(Engine.Verify(Argument.Subject));
+    end;
+}
+
+page 96498 "AV167 Proof Page ori"
+{
+    PageType = Card;
+    Caption = 'Mock document sending', Comment = 'is-IS=Prófun skjalsendinga';
+    UsageCategory = Tasks;
+    ApplicationArea = All;
+
+    layout
+    {
+        area(Content)
+        {
+            field(Result; ResultText)
+            {
+                ApplicationArea = All;
+                Caption = 'Verification result', Comment = 'is-IS=Niðurstaða prófunar';
+                MultiLine = true;
+                Editable = false;
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action(PurchaseOrder)
+            {
+                ApplicationArea = All;
+                Caption = 'Mock purchase order', Comment = 'is-IS=Prófa innkaupapöntun';
+                trigger OnAction()
+                begin
+                    ResultText := Engine.Verify('PurchaseOrder');
+                end;
+            }
+            action(SalesQuote)
+            {
+                ApplicationArea = All;
+                Caption = 'Mock sales quote', Comment = 'is-IS=Prófa sölutilboð';
+                trigger OnAction()
+                begin
+                    ResultText := Engine.Verify('SalesQuote');
+                end;
+            }
+            action(SalesOrder)
+            {
+                ApplicationArea = All;
+                Caption = 'Mock sales order confirmation', Comment = 'is-IS=Prófa staðfestingu sölupöntunar';
+                trigger OnAction()
+                begin
+                    ResultText := Engine.Verify('SalesOrderConfirmation');
+                end;
+            }
+        }
+    }
+    var
+        ResultText: Text;
+        Engine: Codeunit "AV167 Proof Engine ori";
+}

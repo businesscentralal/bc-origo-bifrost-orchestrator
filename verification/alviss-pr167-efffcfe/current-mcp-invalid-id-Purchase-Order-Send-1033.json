@@ -1,0 +1,22 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Purchase.Order.Send",
+    "data": {
+      "documentId": "invalid-av167-guid",
+      "expectedCount": 1
+    },
+    "lcid": 1033
+  },
+  "startedAt": "2026-11-12T20:07:13.915Z",
+  "finishedAt": "2026-11-12T20:07:13.983Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"Error\",\"code\":\"InvalidParameterFormat\",\"error\":\"documentId is not a GUID.\",\"parameter\":\"documentId\",\"received\":\"invalid-av167-guid\",\"expected\":\"a GUID\",\"nextStep\":\"Send the SystemId as a GUID, or send the document number.\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Purchase.Order.Send\\\". Always read the help before calling a message type.\"}"
+      }
+    ],
+    "isError": true
+  }
+}

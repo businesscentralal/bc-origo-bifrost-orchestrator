@@ -1,0 +1,18 @@
+Microsoft (R) AL Compiler version 30.0.42.60748
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'Bifrost Orchestrator - Tests' containing '78' files at '19:58:56.236'.
+
+test/test/CopyPlanGeneratorTestsori.Codeunit.al(6,1): info AA0477: The using statements are not in a sorted order.
+test/test/TableDataMgtTestsori.Codeunit.al(70,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableDataMgtTestsori.Codeunit.al(103,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableDataMgtTestsori.Codeunit.al(126,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableDataMgtTestsori.Codeunit.al(163,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableDataMgtTestsori.Codeunit.al(187,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableDataPageTestsori.Codeunit.al(144,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableDataPageTestsori.Codeunit.al(259,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/TableJSONExportTestsori.Codeunit.al(58,9): info AA0210: The table Test Run Marker does not contain a key with the field Source.
+test/test/PlaybookLastRunTests.Codeunit.al(211,9): info AA0210: The table Job Queue Entry does not contain a key with the field Record ID to Process.
+
+Compilation ended at '19:59:05.685'.
+

@@ -1,0 +1,21 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Sales.OrderConfirmation.Send",
+    "data": {
+      "expectedCount": 1
+    },
+    "lcid": 1039
+  },
+  "startedAt": "2026-11-12T20:07:16.280Z",
+  "finishedAt": "2026-11-12T20:07:16.342Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"Error\",\"code\":\"MissingParameter\",\"error\":\"Sendu númer skjals eða SystemId.\",\"parameter\":\"documentNo\",\"expected\":\"númer skjals eða SystemId\",\"nextStep\":\"Settu númerið í subject eða data.documentNo, eða SystemId í subject eða data.documentId.\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Sales.OrderConfirmation.Send\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+      }
+    ],
+    "isError": true
+  }
+}

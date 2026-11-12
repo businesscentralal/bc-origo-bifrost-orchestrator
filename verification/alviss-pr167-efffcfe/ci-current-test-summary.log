@@ -1,0 +1,11 @@
+2026-11-12T20:11:13.8094517Z       Write-Host "Bifrost full suite: $($seen.Count) distinct source tests executed; all passed=$allPassed."
+2026-11-12T20:11:14.0823010Z     Write-AlpacaDebug -Message "Checking test results file: $testResultsFileName"
+2026-11-12T20:11:14.0824641Z         $message = "Test results file '$testResultsFileName' was not found."
+2026-11-12T20:11:14.0838874Z     Write-AlpacaDebug -Message "Found $($testCaseNodes.Count) testcase element(s) in test results file"
+2026-11-12T20:16:42.3922721Z Bifrost full suite: 587 distinct source tests executed; all passed=True.
+2026-11-12T20:16:42.4011139Z Copying test results to output
+2026-11-12T20:17:01.8223110Z 1 TestApps, 587 tests, 0 failed, 0 skipped, 68.146 seconds
+2026-11-12T20:17:01.8557099Z - Bifrost Orchestrator - Tests, 587 tests, 587 passed, 0 failed, 0 skipped, 68.146 seconds
+2026-11-12T20:17:01.8731074Z Bifrost Orchestrator - Tests,587,587,0,0,68.146
+2026-11-12T20:17:01.8817841Z |Bifrost Orchestrator - Tests|587|587 :heavy_check_mark:|||68.146|
+2026-11-12T20:17:06.8845232Z Did not find test results file

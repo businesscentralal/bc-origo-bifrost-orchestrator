@@ -1,0 +1,147 @@
+{
+  "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+  "tenant": "w129-14",
+  "touchedMessageTypes": [
+    "Purchase.Order.Send",
+    "Sales.Quote.Send",
+    "Sales.OrderConfirmation.Send"
+  ],
+  "createsOwnData": true,
+  "total": 42,
+  "behavioral": {
+    "total": 36,
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0
+  },
+  "help": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "mockedSendProofs": [
+    {
+      "fixtureNo": "AV16783B7D2139EE741B",
+      "innerMessageId": "3337BC57-6353-4030-B01E-3762FE0B93C3",
+      "locale": 1033,
+      "kind": "PurchaseOrder"
+    },
+    {
+      "fixtureNo": "AV16700322FBDF0044B3",
+      "innerMessageId": "FA870ACD-BB69-4D10-B713-BC4D772BB58B",
+      "locale": 1033,
+      "kind": "SalesQuote"
+    },
+    {
+      "fixtureNo": "AV167382E79BADEA3435",
+      "innerMessageId": "26315809-CB16-44FB-86D7-4AB6F8CDBDE1",
+      "locale": 1033,
+      "kind": "SalesOrderConfirmation"
+    },
+    {
+      "fixtureNo": "AV1673FBE6D9676AC406",
+      "innerMessageId": "868E769F-FCCA-4FD3-94A3-111F32B956CE",
+      "locale": 1039,
+      "kind": "PurchaseOrder"
+    },
+    {
+      "fixtureNo": "AV1671C16620C1DA74AE",
+      "innerMessageId": "91D82DCC-21C0-41B8-A439-37F962075431",
+      "locale": 1039,
+      "kind": "SalesQuote"
+    },
+    {
+      "fixtureNo": "AV167D5D6F4569564451",
+      "innerMessageId": "58E04242-CE0F-421C-B470-FA67FE708639",
+      "locale": 1039,
+      "kind": "SalesOrderConfirmation"
+    },
+    {
+      "fixtureNo": "AV167F2683361499444A",
+      "innerMessageId": "377324BD-2A8D-49CB-9334-F448635FA651",
+      "locale": 1033,
+      "kind": "PurchaseOrder",
+      "mode": "SystemId"
+    },
+    {
+      "fixtureNo": "AV1672FB58E226FD949B",
+      "innerMessageId": "0E68135F-3D27-4501-8A94-86E7C72A5140",
+      "locale": 1033,
+      "kind": "PurchaseOrder",
+      "mode": "Party"
+    },
+    {
+      "fixtureNo": "AV1675FA522358AAF4BE",
+      "innerMessageId": "55B30A2B-1D9D-42E4-874D-3BF7C981355C",
+      "locale": 1033,
+      "kind": "SalesQuote",
+      "mode": "SystemId"
+    },
+    {
+      "fixtureNo": "AV167727B7FEEA0DB48B",
+      "innerMessageId": "4C12FCAE-DBD7-48D1-AFF2-595CA3EB6D54",
+      "locale": 1033,
+      "kind": "SalesQuote",
+      "mode": "Party"
+    },
+    {
+      "fixtureNo": "AV167A0024AF4866F4C0",
+      "innerMessageId": "597E9475-CEE8-4153-A71B-F3749D3328A6",
+      "locale": 1033,
+      "kind": "SalesOrderConfirmation",
+      "mode": "SystemId"
+    },
+    {
+      "fixtureNo": "AV167383EA6D6BA7E4A8",
+      "innerMessageId": "A4AE49A9-069C-49AB-9C01-05425706AC47",
+      "locale": 1033,
+      "kind": "SalesOrderConfirmation",
+      "mode": "Party"
+    },
+    {
+      "fixtureNo": "AV167E448A2BD56174F8",
+      "innerMessageId": "84E31405-3358-4CB3-9A9D-3767BA64DA20",
+      "locale": 1039,
+      "kind": "PurchaseOrder",
+      "mode": "SystemId"
+    },
+    {
+      "fixtureNo": "AV167683D7A39962C47B",
+      "innerMessageId": "04EFF9CC-C1C9-4262-B0C5-906627D65C82",
+      "locale": 1039,
+      "kind": "PurchaseOrder",
+      "mode": "Party"
+    },
+    {
+      "fixtureNo": "AV1676AB63A89FD6C47F",
+      "innerMessageId": "90E9A897-1088-49FD-9FB5-32831EEFC37A",
+      "locale": 1039,
+      "kind": "SalesQuote",
+      "mode": "SystemId"
+    },
+    {
+      "fixtureNo": "AV16746496D64C1F64D5",
+      "innerMessageId": "D8E9A26D-C794-4FF7-85CE-1B9810C0EE2C",
+      "locale": 1039,
+      "kind": "SalesQuote",
+      "mode": "Party"
+    },
+    {
+      "fixtureNo": "AV16758ADF2E20AB649A",
+      "innerMessageId": "41ECD05D-20BF-42FF-A180-DE54B4B8427F",
+      "locale": 1039,
+      "kind": "SalesOrderConfirmation",
+      "mode": "SystemId"
+    },
+    {
+      "fixtureNo": "AV1675ED9A63028A94EE",
+      "innerMessageId": "92F226C3-38A6-4168-A8EA-610DAAF68C8C",
+      "locale": 1039,
+      "kind": "SalesOrderConfirmation",
+      "mode": "Party"
+    }
+  ],
+  "externalEmailSent": 0,
+  "verifiedAt": "2026-11-12T20:11:08.837Z"
+}

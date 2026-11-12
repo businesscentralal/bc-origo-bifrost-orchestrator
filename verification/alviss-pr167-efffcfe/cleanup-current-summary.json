@@ -1,0 +1,35 @@
+{
+  "sha": "efffcfeb5d36c8ae314e181cad189ba5e91eac1a",
+  "tenant": "w129-14",
+  "status": "PARTIAL",
+  "businessFixtures": {
+    "customer": 0,
+    "vendor": 0,
+    "salesHeader": 0,
+    "purchaseHeader": 0,
+    "documentSendingProfile": 0,
+    "prefix": "AV167"
+  },
+  "ownedApps": {
+    "uninstalledAndUnpublished": 3,
+    "remaining": 0,
+    "deleteExtensionData": true
+  },
+  "suite": {
+    "name": "ORCHESTRAT",
+    "deleted": true
+  },
+  "userLanguageRestored": "English (United States)",
+  "preexistingOrigoPackagesPreserved": true,
+  "receipts": {
+    "attempted": 216,
+    "deleted": 0,
+    "retained": 216,
+    "http400": 216,
+    "reason": "Foundation refuses changes/deletion until usage reporting completes.",
+    "usageSyncTriggered": false,
+    "bypassAttempted": false
+  },
+  "nextOwner": "Gunnar / Claude Code for legitimate reporting or retention disposition; worker-4 retains source/cleanup accountability",
+  "verifiedAt": "2026-11-12T20:27:37.278Z"
+}

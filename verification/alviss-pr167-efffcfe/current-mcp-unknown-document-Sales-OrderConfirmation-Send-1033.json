@@ -1,0 +1,22 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Sales.OrderConfirmation.Send",
+    "data": {
+      "documentNo": "AV167-NO-1033",
+      "expectedCount": 1
+    },
+    "lcid": 1033
+  },
+  "startedAt": "2026-11-12T20:07:14.819Z",
+  "finishedAt": "2026-11-12T20:07:14.875Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"Error\",\"code\":\"RecordNotFound\",\"error\":\"Sales order AV167-NO-1033 was not found.\",\"parameter\":\"documentNo\",\"received\":\"AV167-NO-1033\",\"expected\":\"the number or SystemId of an existing document of this type\",\"nextStep\":\"Send the document number or SystemId of an existing document of this type.\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Sales.OrderConfirmation.Send\\\". Always read the help before calling a message type.\"}"
+      }
+    ],
+    "isError": true
+  }
+}

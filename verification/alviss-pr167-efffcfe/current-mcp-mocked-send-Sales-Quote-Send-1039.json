@@ -1,0 +1,19 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Test.DocumentSend.Verify",
+    "subject": "SalesQuote",
+    "data": {},
+    "lcid": 1039
+  },
+  "startedAt": "2026-11-12T20:07:15.895Z",
+  "finishedAt": "2026-11-12T20:07:16.051Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"company\": \"CRONUS International Ltd.\",\n  \"messageType\": \"Test.DocumentSend.Verify\",\n  \"innerMessageId\": \"91D82DCC-21C0-41B8-A439-37F962075431\",\n  \"kind\": \"SalesQuote\",\n  \"locale\": 1039,\n  \"fixtureNo\": \"AV1671C16620C1DA74AE\",\n  \"mockCaptured\": true,\n  \"capturedKind\": \"SalesQuote\",\n  \"emailDelta\": 0,\n  \"fixturesDeleted\": true,\n  \"shippingResponse\": {\n    \"status\": \"Success\",\n    \"documentType\": \"SalesQuote\",\n    \"documentNo\": \"AV1671C16620C1DA74AE\",\n    \"documentId\": \"737A22A6-D4DE-F111-B6FB-00090FFE0001\",\n    \"customerNo\": \"AV1671C16620C1DA74AE\",\n    \"customerName\": \"\",\n    \"documentSendingProfileCode\": \"AV1671C16620C1DA74AE\",\n    \"documentSendingProfileSource\": \"Request\",\n    \"message\": \"Skjal sent.\"\n  },\n  \"passed\": true\n}"
+      }
+    ]
+  }
+}

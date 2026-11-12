@@ -1,0 +1,19 @@
+{
+  "name": "call_message_type",
+  "arguments": {
+    "type": "Test.DocumentSend.Verify",
+    "subject": "SalesQuote",
+    "data": {},
+    "lcid": 1033
+  },
+  "startedAt": "2026-11-12T20:07:14.542Z",
+  "finishedAt": "2026-11-12T20:07:14.749Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"company\": \"CRONUS International Ltd.\",\n  \"messageType\": \"Test.DocumentSend.Verify\",\n  \"innerMessageId\": \"FA870ACD-BB69-4D10-B713-BC4D772BB58B\",\n  \"kind\": \"SalesQuote\",\n  \"locale\": 1033,\n  \"fixtureNo\": \"AV16700322FBDF0044B3\",\n  \"mockCaptured\": true,\n  \"capturedKind\": \"SalesQuote\",\n  \"emailDelta\": 0,\n  \"fixturesDeleted\": true,\n  \"shippingResponse\": {\n    \"status\": \"Success\",\n    \"documentType\": \"SalesQuote\",\n    \"documentNo\": \"AV16700322FBDF0044B3\",\n    \"documentId\": \"527A22A6-D4DE-F111-B6FB-00090FFE0001\",\n    \"customerNo\": \"AV16700322FBDF0044B3\",\n    \"customerName\": \"\",\n    \"documentSendingProfileCode\": \"AV16700322FBDF0044B3\",\n    \"documentSendingProfileSource\": \"Request\",\n    \"message\": \"Document sent successfully.\"\n  },\n  \"passed\": true\n}"
+      }
+    ]
+  }
+}
