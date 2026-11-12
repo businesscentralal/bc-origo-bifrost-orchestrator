@@ -20,7 +20,7 @@ Issue: https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues
 - Paired CI: https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43295815830 . Default, Test and status check succeeded. Test job 131459073580 reports 587/587/0/0; `ci-current-test-summary.log` retains the actual count lines.
 - MCP: 36 behavioral assertions passed plus 6 help checks; 0 failed / 0 skipped. All positive scenarios seed their own profiles, parties and documents. External send is intercepted by the candidate test app's existing mock. Every proof reports emailDelta=0.
 - UI: six successful mock-only actions on temporary page 96498, three in 1033 and three in 1039. The original English (United States) user language was restored. Screenshots and DOM/result receipts are retained.
-- No external email/provider call, licence/EULA/trial/HTTP/counter/backend write or usage sync was performed. Existing Foundation 28.0.13.0 and all pre-existing Origo packages were preserved.
+- No external email/provider call, operator consent/credential/metering write, usage sync or guard bypass was performed. Configured unit tests retain their normal isolated fixtures. Existing Foundation 28.0.13.0 and all pre-existing Origo packages were preserved.
 
 ## Cleanup and remaining delivery
 
