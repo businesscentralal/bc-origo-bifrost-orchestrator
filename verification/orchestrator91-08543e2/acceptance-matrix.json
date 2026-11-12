@@ -1,0 +1,57 @@
+{
+  "issueUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/91",
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "matrix": [
+    {
+      "ac": "AC01",
+      "status": "verified",
+      "method": "Current source uses Report Selections P.Order with exact Purchase Header.SetRecFilter; self-seeded MCP returns base64 PDF bytes and exact MIME filename by No./SystemId/matching identifiers in1033/1039; print counts6/0.",
+      "evidence": [
+        "mcp-summary.json",
+        "orders-readback.json"
+      ]
+    },
+    {
+      "ac": "AC02",
+      "status": "verified",
+      "method": "Unknown number and unknown GUID return RecordNotFound with nextStep in1033/1039.",
+      "evidence": [
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "ac": "AC03",
+      "status": "verified",
+      "method": "Source ReadPermission check on Purchase Header matches Foundation pattern; native96480 confirms filter table38/direction and live principal read/write permissions inspected. No restricted-user impersonation was performed.",
+      "evidence": [
+        "full-suite-summary.json",
+        "preflight-get_table_permissions.json"
+      ]
+    },
+    {
+      "ac": "AC04",
+      "status": "verified",
+      "method": "Native happy/invalid/quote/conflict/missing-selection cases and MCP missing/unknown/conflicting identifiers assert code+nextStep. en-US/is-IS help/catalogue and XLF in-sync CI.",
+      "evidence": [
+        "full-suite-summary.json",
+        "mcp-summary.json",
+        "ui-summary.json"
+      ]
+    },
+    {
+      "ac": "AC05",
+      "status": "verified",
+      "method": "Purchase.Order.Pdf retains exactly three dot-separated parts, asserted in96480 and visible in both locale catalogues.",
+      "evidence": [
+        "full-suite-summary.json",
+        "ui-summary.json"
+      ]
+    }
+  ],
+  "implementationChangedThisSession": false,
+  "remainingDelivery": [
+    "Independent exact-head Claude verification",
+    "Required sole Reviewer clearance and eligible non-author approval",
+    "Architect merge/deployment and UAT acceptance"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "app": {
+    "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+    "errors": 0,
+    "warnings": 0,
+    "info": 1,
+    "completed": true,
+    "artifactPath": "/workspace/private/orchestrator91-symbols/Origo.Orchestrator.08543e2.app",
+    "sha256": "dc19c5c7120f975edf7bc8e97b439322c5cd662603029f30fad4d335d257aeab",
+    "logPath": "/workspace/evidence/orchestrator91-andvari-08543e2/compile-app.log"
+  },
+  "testApp": {
+    "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+    "errors": 0,
+    "warnings": 0,
+    "info": 11,
+    "completed": true,
+    "artifactPath": "/workspace/private/orchestrator91-symbols/Origo.OrchestratorTests.08543e2.app",
+    "sha256": "61c6175cd633ec0926e7f40ffdc393962252d08336fd710e17cea941d494192b",
+    "logPath": "/workspace/evidence/orchestrator91-andvari-08543e2/compile-test.log"
+  }
+}

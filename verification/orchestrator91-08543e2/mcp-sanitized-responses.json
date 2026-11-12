@@ -1,0 +1,432 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "tenant": "w129-15",
+  "dataSetup": {
+    "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+    "tenant": "w129-15",
+    "owner": "worker-5",
+    "vendorNo": "ZZW5911112",
+    "orders": [
+      {
+        "id": "433C5532-D6DE-F111-B6FB-00090FFE0001",
+        "no": "106027"
+      },
+      {
+        "id": "473C5532-D6DE-F111-B6FB-00090FFE0001",
+        "no": "106028"
+      }
+    ],
+    "createdAt": "2026-11-12T20:18:18.323Z",
+    "vendorId": "3e3c5532-d6de-f111-b6fb-00090ffe0001"
+  },
+  "checks": [
+    {
+      "scenario": {
+        "name": "help-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "help-pdf-1033.json"
+      },
+      "response": {
+        "messageType": "Purchase.Order.Pdf",
+        "status": "Success",
+        "catalogue": {
+          "name": "Purchase.Order.Pdf",
+          "isEnabled": true,
+          "filterTableNo": 38,
+          "description": "Prints a purchase order as a PDF document.",
+          "selectionDescription": "Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.",
+          "messageDirection": "Inbound",
+          "keywords": [
+            "purchase order pdf",
+            "print purchase order",
+            "send order to vendor",
+            "purchase order copy",
+            "vendor order pdf",
+            "print po"
+          ],
+          "chargeable": true
+        },
+        "chapters": {
+          "envelope": {
+            "strict": {
+              "type": "boolean",
+              "required": false,
+              "default": false,
+              "description": "Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data."
+            },
+            "subject": {
+              "use": "optional",
+              "forms": [
+                "guid",
+                "no"
+              ],
+              "description": "The purchase order: its SystemId (a GUID) or its No."
+            },
+            "dataRequired": false,
+            "version": "1.0",
+            "contentType": "application/pdf"
+          },
+          "response": {
+            "contentType": "application/pdf",
+            "fields": [
+              {
+                "name": "binary",
+                "type": "binary",
+                "description": "The PDF file of the purchase order itself, not JSON. A client such as MCP hands it on as base64."
+              },
+              {
+                "name": "datacontenttype",
+                "type": "string",
+                "description": "application/pdf with a quoted name parameter containing PurchaseOrder-<SystemId>.pdf. The SystemId is lowercase without braces; this stable filename contains no unsafe document-number characters. Playbooks expose the same MIME value as contentType."
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "scenario": {
+        "name": "no-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-no-1033.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Purchase.Order.Pdf",
+        "datacontenttype": "application/pdf; name=\"PurchaseOrder-433c5532-d6de-f111-b6fb-00090ffe0001.pdf\"",
+        "pdfByteLength": 68248,
+        "pdfMagic": "%PDF-",
+        "pdfSha256": "7c22fa90ae0e0de2c448a77a5e2e4e521f482b50d4152efa828c2fc986ffe8f0"
+      }
+    },
+    {
+      "scenario": {
+        "name": "id-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-id-1033.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Purchase.Order.Pdf",
+        "datacontenttype": "application/pdf; name=\"PurchaseOrder-433c5532-d6de-f111-b6fb-00090ffe0001.pdf\"",
+        "pdfByteLength": 68248,
+        "pdfMagic": "%PDF-",
+        "pdfSha256": "fdc977454b08352fceb47e9e6a07b3861ad80f0334a594630b5cf22d8b2656cc"
+      }
+    },
+    {
+      "scenario": {
+        "name": "matching-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-matching-1033.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Purchase.Order.Pdf",
+        "datacontenttype": "application/pdf; name=\"PurchaseOrder-433c5532-d6de-f111-b6fb-00090ffe0001.pdf\"",
+        "pdfByteLength": 68248,
+        "pdfMagic": "%PDF-",
+        "pdfSha256": "17a8582ecbb1c8bd46a9dc49965bb3060e52a241d9a1657808ef71735fb8c646"
+      }
+    },
+    {
+      "scenario": {
+        "name": "unknown-no-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-unknown-no-1033.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "RecordNotFound",
+        "error": "Purchase Header \"ZZW591UNKNOWN\" was not found (from orderNo).",
+        "parameter": "orderNo",
+        "received": "ZZW591UNKNOWN",
+        "expected": "the number of a record that exists in table Purchase Header",
+        "nextStep": "Check the number with Data.Records.Get on table Purchase Header.",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Purchase.Order.Pdf\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "scenario": {
+        "name": "unknown-id-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-unknown-id-1033.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "RecordNotFound",
+        "error": "Purchase Header \"85d0fcc8-8e8b-4bb8-81eb-b120f7330278\" was not found (from orderId).",
+        "parameter": "orderId",
+        "received": "85d0fcc8-8e8b-4bb8-81eb-b120f7330278",
+        "expected": "the SystemId of a record that exists in table Purchase Header",
+        "nextStep": "Check the SystemId with Data.Records.Get on table Purchase Header.",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Purchase.Order.Pdf\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "scenario": {
+        "name": "missing-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-missing-1033.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "MissingParameter",
+        "error": "No purchase order was named. Send the order No. or SystemId.",
+        "parameter": "orderNo",
+        "expected": "The No. or SystemId of a purchase order",
+        "nextStep": "Send the order No. or SystemId as subject or as data.orderNo.",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Purchase.Order.Pdf\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "scenario": {
+        "name": "conflict-1033",
+        "lcid": 1033,
+        "passed": true,
+        "evidence": "mcp-conflict-1033.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "ConflictingIdentifiers",
+        "error": "subject 433C5532-D6DE-F111-B6FB-00090FFE0001 and orderNo 106028 name different purchase orders.",
+        "parameter": "orderNo",
+        "received": "106028",
+        "expected": "An identifier of the same order as 433C5532-D6DE-F111-B6FB-00090FFE0001",
+        "nextStep": "Send one identifier, or identifiers of the same order.",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Purchase.Order.Pdf\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "scenario": {
+        "name": "help-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "help-pdf-1039.json"
+      },
+      "response": {
+        "messageType": "Purchase.Order.Pdf",
+        "status": "Success",
+        "catalogue": {
+          "name": "Purchase.Order.Pdf",
+          "isEnabled": true,
+          "filterTableNo": 38,
+          "description": "Prentar innkaupap\u00f6ntun sem PDF-skjal.",
+          "selectionDescription": "S\u00e6kja opna innkaupap\u00f6ntun sem PDF, prenta\u00f0a me\u00f0 sk\u00fdrsluvali l\u00e1nardrottins fyrir notkunina P.Order. H\u00e6kkar prentteljara p\u00f6ntunarinnar. Fyrir p\u00f6ntunarsta\u00f0festingu s\u00f6lup\u00f6ntunar nota\u00f0u Sales.OrderConfirmation.Pdf; fyrir a\u00f0rar sk\u00fdrslur nota\u00f0u Orchestrator.Report.SaveAs.",
+          "messageDirection": "Inbound",
+          "keywords": [
+            "innkaupap\u00f6ntun pdf",
+            "prenta innkaupap\u00f6ntun",
+            "senda p\u00f6ntun til l\u00e1nardrottins",
+            "afrit innkaupap\u00f6ntunar",
+            "p\u00f6ntun l\u00e1nardrottins pdf",
+            "prenta innkaupap\u00f6ntun aftur"
+          ],
+          "chargeable": true
+        },
+        "chapters": {
+          "envelope": {
+            "strict": {
+              "type": "boolean",
+              "required": false,
+              "default": false,
+              "description": "Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data."
+            },
+            "subject": {
+              "use": "optional",
+              "forms": [
+                "guid",
+                "no"
+              ],
+              "description": "The purchase order: its SystemId (a GUID) or its No."
+            },
+            "dataRequired": false,
+            "version": "1.0",
+            "contentType": "application/pdf"
+          },
+          "response": {
+            "contentType": "application/pdf",
+            "fields": [
+              {
+                "name": "binary",
+                "type": "binary",
+                "description": "The PDF file of the purchase order itself, not JSON. A client such as MCP hands it on as base64."
+              },
+              {
+                "name": "datacontenttype",
+                "type": "string",
+                "description": "application/pdf with a quoted name parameter containing PurchaseOrder-<SystemId>.pdf. The SystemId is lowercase without braces; this stable filename contains no unsafe document-number characters. Playbooks expose the same MIME value as contentType."
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "scenario": {
+        "name": "no-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-no-1039.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Purchase.Order.Pdf",
+        "datacontenttype": "application/pdf; name=\"PurchaseOrder-433c5532-d6de-f111-b6fb-00090ffe0001.pdf\"",
+        "pdfByteLength": 68248,
+        "pdfMagic": "%PDF-",
+        "pdfSha256": "49c7eb8cb905a21f2aa4647642de0e284198fed04f12d2ac42e29f6356d3474f"
+      }
+    },
+    {
+      "scenario": {
+        "name": "id-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-id-1039.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Purchase.Order.Pdf",
+        "datacontenttype": "application/pdf; name=\"PurchaseOrder-433c5532-d6de-f111-b6fb-00090ffe0001.pdf\"",
+        "pdfByteLength": 68248,
+        "pdfMagic": "%PDF-",
+        "pdfSha256": "6583637fec9ed9fc2d5d6342c318f14f4010f5486bb72d3c1df138511a16de59"
+      }
+    },
+    {
+      "scenario": {
+        "name": "matching-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-matching-1039.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "messageType": "Purchase.Order.Pdf",
+        "datacontenttype": "application/pdf; name=\"PurchaseOrder-433c5532-d6de-f111-b6fb-00090ffe0001.pdf\"",
+        "pdfByteLength": 68248,
+        "pdfMagic": "%PDF-",
+        "pdfSha256": "b29eb8031e4ff0c2a576d55b425c826c8dee2ee2282581fe8a9c9f56c37c732a"
+      }
+    },
+    {
+      "scenario": {
+        "name": "unknown-no-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-unknown-no-1039.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "RecordNotFound",
+        "error": "Purchase Header \"ZZW591UNKNOWN\" fannst ekki (\u00far orderNo).",
+        "parameter": "orderNo",
+        "received": "ZZW591UNKNOWN",
+        "expected": "n\u00famer f\u00e6rslu sem er til \u00ed t\u00f6flunni Purchase Header",
+        "nextStep": "Athuga\u00f0u n\u00fameri\u00f0 me\u00f0 Data.Records.Get \u00e1 t\u00f6flunni Purchase Header.",
+        "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Purchase.Order.Pdf\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+      }
+    },
+    {
+      "scenario": {
+        "name": "unknown-id-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-unknown-id-1039.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "RecordNotFound",
+        "error": "Purchase Header \"85d0fcc8-8e8b-4bb8-81eb-b120f7330278\" fannst ekki (\u00far orderId).",
+        "parameter": "orderId",
+        "received": "85d0fcc8-8e8b-4bb8-81eb-b120f7330278",
+        "expected": "SystemId f\u00e6rslu sem er til \u00ed t\u00f6flunni Purchase Header",
+        "nextStep": "Athuga\u00f0u SystemId me\u00f0 Data.Records.Get \u00e1 t\u00f6flunni Purchase Header.",
+        "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Purchase.Order.Pdf\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+      }
+    },
+    {
+      "scenario": {
+        "name": "missing-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-missing-1039.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "MissingParameter",
+        "error": "Engin innkaupap\u00f6ntun var tilgreind. Sendu n\u00famer e\u00f0a SystemId p\u00f6ntunarinnar.",
+        "parameter": "orderNo",
+        "expected": "N\u00famer e\u00f0a SystemId innkaupap\u00f6ntunar",
+        "nextStep": "Sendu n\u00famer e\u00f0a SystemId p\u00f6ntunarinnar sem subject e\u00f0a sem data.orderNo.",
+        "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Purchase.Order.Pdf\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+      }
+    },
+    {
+      "scenario": {
+        "name": "conflict-1039",
+        "lcid": 1039,
+        "passed": true,
+        "evidence": "mcp-conflict-1039.json"
+      },
+      "response": {
+        "status": "Error",
+        "code": "ConflictingIdentifiers",
+        "error": "subject 433C5532-D6DE-F111-B6FB-00090FFE0001 og orderNo 106028 v\u00edsa \u00e1 mismunandi innkaupapantanir.",
+        "parameter": "orderNo",
+        "received": "106028",
+        "expected": "Au\u00f0kenni s\u00f6mu p\u00f6ntunar og 433C5532-D6DE-F111-B6FB-00090FFE0001",
+        "nextStep": "Sendu eitt au\u00f0kenni, e\u00f0a au\u00f0kenni s\u00f6mu p\u00f6ntunar.",
+        "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Purchase.Order.Pdf\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+      }
+    },
+    {
+      "scenario": {
+        "name": "exact-order-print-counts6-and0",
+        "passed": true,
+        "evidence": "orders-readback.json"
+      },
+      "response": {
+        "company": "CRONUS International Ltd.",
+        "table": "Purchase Header",
+        "skip": 0,
+        "take": 10,
+        "count": 2,
+        "records": [
+          {
+            "id": "433C5532-D6DE-F111-B6FB-00090FFE0001",
+            "primaryKey": {
+              "DocumentType": "Order",
+              "No_": "106027"
+            },
+            "fields": {
+              "No_Printed": "6",
+              "BuyfromVendorNo_": "ZZW5911112"
+            }
+          },
+          {
+            "id": "473C5532-D6DE-F111-B6FB-00090FFE0001",
+            "primaryKey": {
+              "DocumentType": "Order",
+              "No_": "106028"
+            },
+            "fields": {
+              "No_Printed": "0",
+              "BuyfromVendorNo_": "ZZW5911112"
+            }
+          }
+        ],
+        "noOfRecords": 2
+      }
+    }
+  ],
+  "harnessRecovery": "Error responses append message help. Parser updated to read the leading structured JSON; cached exact requests/responses reused, so no print calls were replayed. Initial counter field assertion corrected to documented JSON key No_Printed; server readback confirmed6/0."
+}

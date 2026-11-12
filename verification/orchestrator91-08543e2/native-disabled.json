@@ -1,0 +1,21 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "result": {
+    "ok": true,
+    "mode": "local",
+    "exitCode": 0,
+    "durationMs": 11916,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "cosmoExecTestEndpoint": "none",
+    "local": {
+      "clientServicesUrl": "http://host.docker.internal:8080/BC290/",
+      "serviceUrl": "http://host.docker.internal:8080/BC290/cs?tenant=w129-15&company=CRONUS%20International%20Ltd.",
+      "testAssembliesPath": "/opt/origo-mcp/bc29-test-assemblies"
+    },
+    "stdoutPreview": "[MCP] bc_dev_run_tests local start (native BC, Client Services)\n[MCP] Client Services URL: http://host.docker.internal:8080/BC290/cs?tenant=w129-15&company=CRONUS%20International%20Ltd. (PowerShell 7.6.9)\n[MCP] New-ClientContext + Run-Tests testPage=130455\n[MCP] Walking InnerHandler from Microsoft.Dynamics.Framework.UI.Client.JsonHttpClient+BasicAuthHandler\n[MCP] SSL trust-any on System.Net.Http.HttpClientHandler (depth=2)\n[MCP] Page 130455 filters TestCodeunitRange='96456..96456' TestCodeunit='' TestRunner='130451' RequiredTestIsolation=''\nSetting test codeunit range '96456..96456'\n  Codeunit 96456 Playbook Ask Scrub Tests ori Success (6.457 seconds)\n    Testfunction AskForEach_RunGateInBothLanguages Success (0.577 seconds)\n    Testfunction AskDataCondition_RunGateInBothLanguages Success (0.21 seconds)\n    Testfunction AskTrace_RunGateInBothLanguages Success (0.153 seconds)\n    Testfunction Scrub_PreservesAllOtherProperties Success (0.003 seconds)\n    Testfunction Scrub_UnchangedPayloadsRetainBytes Success (0.003 seconds)\n    Testfunction SingleStep_NoTraceInAnyOrchestratorStore Success (1.017 seconds)\n    Testfunction FailedStep_WorkspaceSnapshotHasNoTrace Success (0.957 seconds)\n    Testfunction ForEach_NoTraceInLogsWorkspaceOrSummary Success (1.137 seconds)\n    Testfunction Paged_NoTraceAcrossPageAndIterationLogs Success (0.907 seconds)\n    Testfunction RunAndHelp_DescribeTimeoutAndRetentionBoundaries Success (0.004 seconds)\n[MCP] Tests finished (local Client Services)\n",
+    "stderrPreview": ""
+  }
+}

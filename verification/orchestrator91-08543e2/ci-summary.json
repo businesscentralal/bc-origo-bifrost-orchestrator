@@ -1,0 +1,19 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43292517254",
+  "sourceGuardsRunUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43292517118",
+  "result": "completed/success",
+  "tests": {
+    "executed": 585,
+    "passed": 585,
+    "failed": 0,
+    "skipped": 0
+  },
+  "observedJobSkips": [
+    "Code Analysis Processing",
+    "Default nested cleanup",
+    "Test nested cleanup",
+    "PregateCheck"
+  ],
+  "note": "Conditional workflow jobs skipped; actual full AL suite executed585 with0skipped. Final cleanup job succeeded. No CI retry was needed."
+}

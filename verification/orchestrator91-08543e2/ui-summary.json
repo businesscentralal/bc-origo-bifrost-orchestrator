@@ -1,0 +1,63 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "verified": true,
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "tenant": "w129-15",
+  "languageRestored": true,
+  "scenarios": [
+    {
+      "name": "catalogue-1033",
+      "lcid": 1033,
+      "result": {
+        "lcid": 1033,
+        "wireName": "Purchase.Order.Pdf",
+        "row": "\t\tPurchase.Order.Pdf\t\tPrints a purchase order as a PDF document.\t38\tInbound\t",
+        "passed": true
+      },
+      "evidence": "result-ui-catalogue-scroll.js.json"
+    },
+    {
+      "name": "orders-1033",
+      "lcid": 1033,
+      "result": {
+        "lcid": 1033,
+        "passed": true,
+        "orders": [
+          "106027",
+          "106028"
+        ],
+        "text": "Skip to main content\nCRONUS International Ltd.\nSales\nPurchasing\nInventory\nPosted Documents\nShopify\nAll Reports\n\ue700\nPurchase Orders:\nAll\n\ue70d\n\ue721\nNew\nDelete\nHome\n\ue70d\nRelease\n\ue70d\nPost...\n\ue70d\nPrint/Send\n\ue70d\n\ue712\n\ue72d\n\ue71c\n\uf167\n\uedff\n\t\nNo.\n\t\n\t\nBuy-from Vendor No.\n\t\nBuy-from Vendor Name\n\t\nVendor Authorization No.\n\t\nLocation Code\n\t\nSubcontracting Location Code\n\t\nAssigned User ID\n\t\nDocument Date\n\t\nStatus\n\t\nAmount\n\t\nAmount Including VAT\n\t\n\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t106027\t\n\tZZW5911112\tAndvari issue91 own PDF verification\t\t\t\t\t11/12/2026\tOpen\t0.00\t0.00\t\n\t106028\t\tZZW5911112\tAndvari issue91 own PDF verification\t\t\t\t\t11/12/2026\tOpen\t0.00\t0.00\t\nDetails\nAttachments (0)\nVendor Details\nVendor No.\nName\nPhone No.\nEmail\nFax No.\nContact\nUse the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.\n\nList with title \"Purchase Orders\" now has 2 items\n\nNo., sorted in Ascending order"
+      },
+      "evidence": "result-ui-orders-1033.js.json"
+    },
+    {
+      "name": "catalogue-1039",
+      "lcid": 1039,
+      "result": {
+        "lcid": 1039,
+        "wireName": "Purchase.Order.Pdf",
+        "row": "\t\tPurchase.Order.Pdf\t\tPrentar innkaupap\u00f6ntun sem PDF-skjal.\t38\tInnsent\t",
+        "passed": true,
+        "title": "\ue72b\nPurchase.PurchaseInvoice.Correct\nSkilabo\u00f0ategundir Bifr\u00f6st\n\t\t\nHeiti\n\t\n\t\nL\u00fdsing\n\t\nAfmarkanir t\u00f6flun\u00famer\n\t\nStefna\n\t\n\t\t\t\n\t\t\t\t\n\n\t\tOrchestrator.ReportLayout.List\t\tS\u00fdnir \u00fatlit sk\u00fdrslu \u00far vi\u00f0b\u00f3tum og notan"
+      },
+      "evidence": "result-ui-catalogue-1039.js.json"
+    },
+    {
+      "name": "orders-1039",
+      "lcid": 1039,
+      "result": {
+        "lcid": 1039,
+        "passed": true,
+        "text": "Fara \u00ed a\u00f0alefni\nCRONUS International Ltd.\nSales\nPurchasing\nInventory\nPosted Documents\nShopify\nAllar sk\u00fdrslur\n\ue700\nPurchase Orders:\nAllt\n\ue70d\n\ue721\nN\u00fdtt\nEy\u00f0a\nHeim\n\ue70d\nRelease\n\ue70d\nPost...\n\ue70d\nPrint/Send\n\ue70d\n\ue712\n\ue72d\n\ue71c\n\uf167\n\uedff\n\t\nNo.\n\t\n\t\nBuy-from Vendor No.\n\t\nBuy-from Vendor Name\n\t\nVendor Authorization No.\n\t\nLocation Code\n\t\nSta\u00f0setningark\u00f3\u00f0i undirverktaka\n\t\nAssigned User ID\n\t\nDocument Date\n\t\nStatus\n\t\nAmount\n\t\nAmount Including VAT\n\t\n\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t106027\t\n\tZZW5911112\tAndvari issue91 own PDF verification\t\t\t\t\t11/12/2026\tOpen\t0.00\t0.00\t\n\t106028\t\tZZW5911112\tAndvari issue91 own PDF verification\t\t\t\t\t11/12/2026\tOpen\t0.00\t0.00\t\nUppl\u00fdsingar\nVi\u00f0hengi (0)\nVendor Details\nVendor No.\nName\nPhone No.\nEmail\nFax No.\nContact\nNota\u00f0u h\u00e6gri og vinstri \u00f6rvalyklana til a\u00f0 stilla st\u00e6r\u00f0ina. Nota\u00f0u Escape-lykilinn til a\u00f0 afturkalla e\u00f0a Enter-lykilinn til a\u00f0 sta\u00f0festa.\n\nListi me\u00f0 titilinn \u201ePurchase Orders\u201c hefur n\u00fa 2 atri\u00f0i\n\nNo., ra\u00f0a\u00f0 \u00ed p\u00f6ntunina H\u00e6kkandi"
+      },
+      "evidence": "result-ui-orders-1039.js.json"
+    }
+  ],
+  "note": "W1 base application captions remain English; shell and Orchestrator catalogue use actual selected1039 with translated description/direction.",
+  "attempts": "Retained navigation attempts: temporary catalogue rejects URL filter; row located by grid navigation. Language change reloaded frame; selection was inspected before continuing.",
+  "restoredLcid": 1033,
+  "restoreEvidence": "result-ui-confirm-language-1033.js.json"
+}

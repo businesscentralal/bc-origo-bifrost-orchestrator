@@ -1,0 +1,58 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "tenant": "w129-15",
+  "apps": [
+    {
+      "@odata.etag": "W/\"JzIwOzE0NjU5NzMyMDQ4OTE4NzAxNzg0MTswMDsn\"",
+      "packageId": "33adfdbb-08a8-4351-bd34-7c8678e6dd83",
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "displayName": "Bifrost Foundation",
+      "publisher": "Origo",
+      "versionMajor": 28,
+      "versionMinor": 0,
+      "versionBuild": 13,
+      "versionRevision": 0,
+      "isInstalled": true,
+      "publishedAs": " Dev"
+    },
+    {
+      "@odata.etag": "W/\"JzE5OzM5ODIwMTk4MjAyNTk2Mzc5MTcxOzAwOyc=\"",
+      "packageId": "97c0c1b4-dd88-4505-a62a-d792d8b104d9",
+      "id": "9db1a0c9-c503-4793-a9e4-bcda3d3f3c94",
+      "displayName": "Bifrost Foundation - Tests",
+      "publisher": "Origo",
+      "versionMajor": 28,
+      "versionMinor": 0,
+      "versionBuild": 13,
+      "versionRevision": 0,
+      "isInstalled": true,
+      "publishedAs": " Dev"
+    },
+    {
+      "@odata.etag": "W/\"JzE5OzI5OTc0NzYwNTEzNjQ3NjIzMTYxOzAwOyc=\"",
+      "packageId": "4bfd9855-4808-4bb7-959b-d5e968475252",
+      "id": "7da3f512-5c19-47cd-bbe4-4c2bc713f1db",
+      "displayName": "Bifrost Orchestrator",
+      "publisher": "Origo",
+      "versionMajor": 28,
+      "versionMinor": 0,
+      "versionBuild": 4,
+      "versionRevision": 0,
+      "isInstalled": true,
+      "publishedAs": " Dev"
+    },
+    {
+      "@odata.etag": "W/\"JzE5OzQ1MDU4NjA2MDI1OTM5OTgwMTQxOzAwOyc=\"",
+      "packageId": "fa54effd-f571-4a66-8f44-d80daaa55564",
+      "id": "194ecd04-5688-4af6-94bc-732c714251fc",
+      "displayName": "Bifrost Orchestrator - Tests",
+      "publisher": "Origo",
+      "versionMajor": 28,
+      "versionMinor": 0,
+      "versionBuild": 4,
+      "versionRevision": 0,
+      "isInstalled": true,
+      "publishedAs": " Dev"
+    }
+  ]
+}

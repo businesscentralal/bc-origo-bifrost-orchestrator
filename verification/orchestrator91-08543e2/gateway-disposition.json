@@ -1,0 +1,26 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "advisoryOnly": true,
+  "scriptUnmodified": true,
+  "initialAttempt": "Missing USERPROFILE caused modernization fallback Join-Path null; retained failure. Retried with the expected environment.",
+  "focusedRun": {
+    "mode": "diff (vs 912e1fac78be508804cd23aeb1a523a40286a74e)",
+    "filesScanned": 5,
+    "summary": {
+      "passed": 16,
+      "total": 23,
+      "ready": false,
+      "failed": 7
+    }
+  },
+  "disposition": {
+    "namespace": "Scanner checks the first nonblank line, which is an XML summary comment in Help.Codeunit.al. The file declares its namespace after the leading documentation; the compiler resolves it.",
+    "xml_doc_comments": "19 interface implementation methods rely on their interface/class contract docs. Advisory style debt retained; no functional change was made.",
+    "read_isolation": "Three (one duplicated) IsEmpty reads of report-selection setup use default isolation, matching the existing reporting pattern. No concurrency claim added.",
+    "one_statement_per_line": "14 false positives: semicolons separate AL procedure parameters, not executable statements.",
+    "caption_translation": "25 locked wire-name captions are intentionally not translated. Human-facing description and selection text have is-IS targets.",
+    "changelog": "Scanner expects a released 28.0.4.0 heading; the new feature and filename entry are under Unreleased. Existing current-head reviewer noted optional heading formatting, with no blocker.",
+    "hardcoded_values": "Two existing documentation example email addresses user@company.is, not credentials or live recipients."
+  },
+  "layer2": "Read current feature implementation, test96480, enum, permission grant, help/contract/XLF, and merge delta against main912e1fa. No newly established functional defect. Current-head worker reviewer CLEARED comment6834177325 retained; independent Claude receipt still pending."
+}

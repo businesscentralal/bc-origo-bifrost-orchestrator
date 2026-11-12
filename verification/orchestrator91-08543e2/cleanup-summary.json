@@ -1,0 +1,17 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "tenant": "w129-15",
+  "owner": "worker-5",
+  "verified": true,
+  "remainingOwnedFixtures": {
+    "orders": 0,
+    "lines": 0,
+    "archives": 0,
+    "vendor": 0,
+    "contacts": 0
+  },
+  "createdOwnData": true,
+  "finishedAt": "2026-11-12T20:24:10.804Z",
+  "appsRetainedForFollowup": true,
+  "cleanupScope": "Only manifest-owned unposted purchase orders, lines, vendor and generated contact; no foreign resources touched."
+}

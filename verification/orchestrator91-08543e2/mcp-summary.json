@@ -1,0 +1,114 @@
+{
+  "sha": "08543e272a687ee9fb0d6b703a5b82616c3ba42c",
+  "touchedMessageTypes": [
+    "Purchase.Order.Pdf"
+  ],
+  "createsOwnData": true,
+  "executed": 17,
+  "passed": 17,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "name": "help-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "help-pdf-1033.json"
+    },
+    {
+      "name": "no-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-no-1033.json"
+    },
+    {
+      "name": "id-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-id-1033.json"
+    },
+    {
+      "name": "matching-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-matching-1033.json"
+    },
+    {
+      "name": "unknown-no-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-unknown-no-1033.json"
+    },
+    {
+      "name": "unknown-id-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-unknown-id-1033.json"
+    },
+    {
+      "name": "missing-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-missing-1033.json"
+    },
+    {
+      "name": "conflict-1033",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "mcp-conflict-1033.json"
+    },
+    {
+      "name": "help-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "help-pdf-1039.json"
+    },
+    {
+      "name": "no-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-no-1039.json"
+    },
+    {
+      "name": "id-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-id-1039.json"
+    },
+    {
+      "name": "matching-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-matching-1039.json"
+    },
+    {
+      "name": "unknown-no-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-unknown-no-1039.json"
+    },
+    {
+      "name": "unknown-id-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-unknown-id-1039.json"
+    },
+    {
+      "name": "missing-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-missing-1039.json"
+    },
+    {
+      "name": "conflict-1039",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "mcp-conflict-1039.json"
+    },
+    {
+      "name": "exact-order-print-counts6-and0",
+      "passed": true,
+      "evidence": "orders-readback.json"
+    }
+  ]
+}
