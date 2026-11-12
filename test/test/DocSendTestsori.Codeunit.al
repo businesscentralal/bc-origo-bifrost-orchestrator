@@ -24,6 +24,22 @@ codeunit 96472 "Doc Send Tests ori"
         DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Mock: Codeunit "Doc Send Mock ori";
 
+    /// <summary>Purchase.Order.Send names Purchase.Order.Pdf. The other PDF types are not related names until they exist.</summary>
+    [Test]
+    procedure PurchaseOrderSend_RelatedNamesExistingPdfTypeOnly()
+    var
+        PurchaseRelated: List of [Text];
+        QuoteRelated: List of [Text];
+        ConfirmationRelated: List of [Text];
+    begin
+        PurchaseRelated := RelatedNames("Message Type ori"::"Purchase.Order.Send");
+        Assert.IsTrue(PurchaseRelated.Contains('Purchase.Order.Pdf'), 'Purchase.Order.Send names Purchase.Order.Pdf');
+        QuoteRelated := RelatedNames("Message Type ori"::"Sales.Quote.Send");
+        Assert.IsFalse(QuoteRelated.Contains('Sales.Quote.Pdf'), 'Sales.Quote.Pdf is not related until that type exists');
+        ConfirmationRelated := RelatedNames("Message Type ori"::"Sales.OrderConfirmation.Send");
+        Assert.IsFalse(ConfirmationRelated.Contains('Sales.OrderConfirmation.Pdf'), 'Sales.OrderConfirmation.Pdf is not related until that type exists');
+    end;
+
     /// <summary>Purchase-order help translates its chapters while preserving profile source wire values.</summary>
     [Test]
     procedure Scenario_AC04_PurchaseOrderHelp_TranslatesChapters()
@@ -292,6 +308,21 @@ codeunit 96472 "Doc Send Tests ori"
             end;
         end;
         Assert.Fail('Profile source response field was not found');
+    end;
+
+    local procedure RelatedNames(MessageType: Enum "Message Type ori") Names: List of [Text]
+    var
+        Contract: Interface "Msg Contract ori";
+        Related: JsonArray;
+        Entry: JsonToken;
+        NameToken: JsonToken;
+    begin
+        Contract := MessageType;
+        Contract.GetRelated(Related);
+        foreach Entry in Related do begin
+            Entry.AsObject().Get('name', NameToken);
+            Names.Add(NameToken.AsValue().AsText());
+        end;
     end;
 
     /// <summary>Reads each declared chapter without overriding the caller's language.</summary>

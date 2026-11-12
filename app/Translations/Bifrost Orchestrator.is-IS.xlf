@@ -1797,6 +1797,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Hvaðan forstillingin kom: Request (beiðni), forstilling viðskiptamanns eða lánardrottins, eða Default (sjálfgefin).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType WhereTheProfileCameFromRequestTheLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3483204542 - NamedType 2400607892" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You want the purchase order as a PDF and do not want to send it.</source>
+          <target>Þú vilt innkaupapöntunina sem PDF og vilt ekki senda hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú vilt innkaupapöntunina sem PDF og vilt ekki senda hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType YouWantThePurchaseOrderAsAPdfLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1724758639" size-unit="char" translate="yes" xml:space="preserve">
           <source>You want to read the document afterwards without sending it again.</source>
           <target>Þú vilt lesa skjalið eftir sendingu án þess að senda það aftur.</target>
@@ -1834,9 +1840,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method PurchaseOrderKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 4123636463 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf when that type is available.</source>
-          <target>Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf þegar sú tegund er tiltæk.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf þegar sú tegund er tiltæk.</note>
+          <source>Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf.</source>
+          <target>Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method PurchaseOrderSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 2108231248 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -2847,42 +2853,6 @@
           <note from="Developer" annotates="general" priority="2">%1 = storing step no, %2 = field name, is-IS=Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result&gt;%2), eða leiðréttu heitið í tilvísuninni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownStepFieldNextStepTxt</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1003015237 - NamedType 1731064519" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Purchase order</source>
-          <target>Innkaupapöntun</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Innkaupapöntun</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType PurchaseOrder2Lbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1003015237 - NamedType 1486506809" size-unit="char" translate="yes" xml:space="preserve">
-          <source>purchase order</source>
-          <target>innkaupapöntun</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=innkaupapöntun</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType PurchaseOrderLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1003015237 - NamedType 1215682009" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Purchase order number, or its SystemId.</source>
-          <target>Númer innkaupapöntunar eða SystemId hennar.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Númer innkaupapöntunar eða SystemId hennar.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType PurchaseOrderNumberOrItsSystemidLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1003015237 - NamedType 3851398830" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Sends the purchase order with the resolved profile, as the Send action does.</source>
-          <target>Sendir innkaupapöntun með forstillingunni sem fannst, eins og aðgerðin Senda gerir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendir innkaupapöntun með forstillingunni sem fannst, eins og aðgerðin Senda gerir.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType SendsThePurchaseOrderWithTheResolvedLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1003015237 - NamedType 745065878" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send that purchase order.</source>
-          <target>Sendu innkaupapöntunina.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu innkaupapöntunina.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType SendThatPurchaseOrderLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1003015237 - NamedType 1485212386" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Vendor</source>
-          <target>Lánardrottinn</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lánardrottinn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType VendorLbl</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3878585223 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1 %2 and %3 %4 name different purchase orders.</source>
           <target>%1 %2 og %3 %4 vísa á mismunandi innkaupapantanir.</target>
@@ -2972,6 +2942,42 @@
           <target>Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003015237 - NamedType 1731064519" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase order</source>
+          <target>Innkaupapöntun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Innkaupapöntun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType PurchaseOrder2Lbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003015237 - NamedType 1486506809" size-unit="char" translate="yes" xml:space="preserve">
+          <source>purchase order</source>
+          <target>innkaupapöntun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=innkaupapöntun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType PurchaseOrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003015237 - NamedType 1215682009" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase order number, or its SystemId.</source>
+          <target>Númer innkaupapöntunar eða SystemId hennar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer innkaupapöntunar eða SystemId hennar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType PurchaseOrderNumberOrItsSystemidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003015237 - NamedType 3851398830" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sends the purchase order with the resolved profile, as the Send action does.</source>
+          <target>Sendir innkaupapöntun með forstillingunni sem fannst, eins og aðgerðin Senda gerir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendir innkaupapöntun með forstillingunni sem fannst, eins og aðgerðin Senda gerir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType SendsThePurchaseOrderWithTheResolvedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003015237 - NamedType 745065878" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send that purchase order.</source>
+          <target>Sendu innkaupapöntunina.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu innkaupapöntunina.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType SendThatPurchaseOrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003015237 - NamedType 1485212386" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor</source>
+          <target>Lánardrottinn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánardrottinn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Send Msg ori - NamedType VendorLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Returns report metadata, available layouts, and saved request page preset.</source>
