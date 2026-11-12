@@ -220,6 +220,8 @@ codeunit 96472 "Doc Send Tests ori"
         ContractInterface: Interface "Msg Contract ori";
         EnglishContract: JsonObject;
         IcelandicContract: JsonObject;
+        CanonicalEnglish: JsonObject;
+        CanonicalIcelandic: JsonObject;
         EnglishChapter: JsonToken;
         IcelandicChapter: JsonToken;
         Field: JsonToken;
@@ -236,18 +238,25 @@ codeunit 96472 "Doc Send Tests ori"
         ChapterNames: List of [Text];
         PreviousLanguage: Integer;
     begin
-        // [SCENARIO #94 AC04] Help chapters are localized, not just the catalogue description.
+        // [SCENARIO #94 AC04] Declared help resources are bilingual. Foundation #777 deliberately
+        // renders the public structured contract in English regardless of the session language.
         ContractInterface := MessageType;
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(1033);
-        ContractMgt.GetContract(MessageType, EnglishContract);
+        EnglishContract := ReadDeclaredChapters(MessageType);
+        ContractMgt.GetContract(MessageType, CanonicalEnglish);
         ContractInterface.GetOverview(EnglishOverview);
         ContractInterface.GetNotes(EnglishNotes);
         GlobalLanguage(1039);
-        ContractMgt.GetContract(MessageType, IcelandicContract);
+        IcelandicContract := ReadDeclaredChapters(MessageType);
+        ContractMgt.GetContract(MessageType, CanonicalIcelandic);
         ContractInterface.GetOverview(IcelandicOverview);
         ContractInterface.GetNotes(IcelandicNotes);
         GlobalLanguage(PreviousLanguage);
+
+        CanonicalEnglish.WriteTo(EnglishText);
+        CanonicalIcelandic.WriteTo(IcelandicText);
+        Assert.AreEqual(EnglishText, IcelandicText, 'Foundation keeps the structured wire contract in canonical English');
 
         ChapterNames.Add('envelope');
         ChapterNames.Add('target');
@@ -283,6 +292,41 @@ codeunit 96472 "Doc Send Tests ori"
             end;
         end;
         Assert.Fail('Profile source response field was not found');
+    end;
+
+    /// <summary>Reads each declared chapter without overriding the caller's language.</summary>
+    local procedure ReadDeclaredChapters(MessageType: Enum "Message Type ori") Chapters: JsonObject
+    var
+        Contract: Interface "Msg Contract ori";
+        ObjectChapter: JsonObject;
+        ArrayChapter: JsonArray;
+    begin
+        Contract := MessageType;
+        Contract.GetEnvelope(ObjectChapter);
+        Chapters.Add('envelope', ObjectChapter);
+        Contract.GetTarget(ArrayChapter);
+        Chapters.Add('target', ArrayChapter);
+        Clear(ArrayChapter);
+        Contract.GetParameters(ArrayChapter);
+        Chapters.Add('parameters', ArrayChapter);
+        Clear(ObjectChapter);
+        Contract.GetResponse(ObjectChapter);
+        Chapters.Add('response', ObjectChapter);
+        Clear(ArrayChapter);
+        Contract.GetErrors(ArrayChapter);
+        Chapters.Add('errors', ArrayChapter);
+        Clear(ObjectChapter);
+        Contract.GetEffect(ObjectChapter);
+        Chapters.Add('effect', ObjectChapter);
+        Clear(ArrayChapter);
+        Contract.GetRelated(ArrayChapter);
+        Chapters.Add('related', ArrayChapter);
+        Clear(ObjectChapter);
+        Contract.GetWorkflow(ObjectChapter);
+        Chapters.Add('workflow', ObjectChapter);
+        Clear(ArrayChapter);
+        Contract.GetExamples(ArrayChapter);
+        Chapters.Add('examples', ArrayChapter);
     end;
 
     local procedure Dispatch(var TempArgument: Record "Message Argument ori" temporary; MessageType: Enum "Message Type ori"; DataJson: Text; Subject: Text)

@@ -14,7 +14,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Tests: codeunit 96461 `Playbook Effect Tests ori`, enumextension 96461 `Effect Guard Types ori` (values 96461/96462) and fixture codeunit 96462 `Effect Contract Fixture ori`. The fixture never dispatches.
 
 ### Fixed
-- #94 Localize the document-send contract chapters, examples, workflow, overview and notes in en-US/is-IS while preserving profile source wire values (codeunits 10035631–10035634). Test 96472 adds one bilingual chapter/wire-value regression for each send type.
+- #94 Add en-US/is-IS resources for document-send chapter declarations, examples, workflow, overview and notes, preserving Foundation’s canonical English structured contract and profile source wire values (codeunits 10035631–10035634). Test 96472 adds one bilingual chapter/wire-value regression for each send type.
 - #162 A Message Type left on a Transform step can now be cleared: validating Step Kind = Transform on the step clears it (table 10035540, page and `Data.Records.Set`), and the `TransformMessageType` finding (codeunit 10035628) names the step to clear in 1033/1039. Test 96469 covers set, report, clear and clean Verify. No new message types.
 - Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
 
