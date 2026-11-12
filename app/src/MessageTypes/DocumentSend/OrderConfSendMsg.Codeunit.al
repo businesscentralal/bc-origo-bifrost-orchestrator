@@ -48,7 +48,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Envelope := Contract.Envelope('Sales order number, or its SystemId.');
+        Envelope := Contract.Envelope(SalesOrderNumberOrItsSystemidLbl);
         exit(true);
     end;
 
@@ -56,7 +56,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Target := Contract.Target('orderNo', 'orderId', 'sales order');
+        Target := Contract.Target('orderNo', 'orderId', SalesOrderLbl);
         exit(true);
     end;
 
@@ -72,7 +72,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Response(Response, 'SalesOrderConfirmation', 'customerNo', 'customerName', 'Customer');
+        Contract.Response(Response, 'SalesOrderConfirmation', 'customerNo', 'customerName', CustomerLbl);
         exit(true);
     end;
 
@@ -80,7 +80,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Errors(Errors, 'Sales order', 'Sales Header');
+        Contract.Errors(Errors, SalesOrder2Lbl, 'Sales Header');
         exit(true);
     end;
 
@@ -88,7 +88,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Effect(Effect, 'Sends the sales order confirmation with the resolved profile, as the Send action does.');
+        Contract.Effect(Effect, SendsTheSalesOrderConfirmationWithTheLbl);
         exit(true);
     end;
 
@@ -109,7 +109,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Workflow(Workflow, 'Sales.OrderConfirmation.Send', 'Send that sales order confirmation.');
+        Contract.Workflow(Workflow, 'Sales.OrderConfirmation.Send', SendThatSalesOrderConfirmationLbl);
         exit(true);
     end;
 
@@ -125,7 +125,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Overview := Contract.Overview('sales order confirmation', 'Sales.OrderConfirmation.Pdf');
+        Overview := Contract.Overview(SalesOrderConfirmationLbl, 'Sales.OrderConfirmation.Pdf');
         exit(true);
     end;
 
@@ -148,4 +148,13 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     begin
         Process.Execute(Argument);
     end;
+
+    var
+        SalesOrderNumberOrItsSystemidLbl: Label 'Sales order number, or its SystemId.', Comment = 'is-IS=Númer sölupöntunar eða SystemId hennar.';
+        SalesOrderLbl: Label 'sales order', Comment = 'is-IS=sölupöntun';
+        CustomerLbl: Label 'Customer', Comment = 'is-IS=Viðskiptamaður';
+        SalesOrder2Lbl: Label 'Sales order', Comment = 'is-IS=Sölupöntun';
+        SendsTheSalesOrderConfirmationWithTheLbl: Label 'Sends the sales order confirmation with the resolved profile, as the Send action does.', Comment = 'is-IS=Sendir staðfestingu sölupöntunar með forstillingunni sem fannst, eins og aðgerðin Senda gerir.';
+        SendThatSalesOrderConfirmationLbl: Label 'Send that sales order confirmation.', Comment = 'is-IS=Sendu staðfestingu sölupöntunarinnar.';
+        SalesOrderConfirmationLbl: Label 'sales order confirmation', Comment = 'is-IS=staðfesting sölupöntunar';
 }

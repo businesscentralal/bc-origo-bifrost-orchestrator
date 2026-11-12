@@ -88,23 +88,23 @@ codeunit 10035631 "Doc Send Contract ori"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Result.Add(ContractMgt.TargetEntry('subject', 'guid|code', 'The ' + DocumentCaption + ' number, or its SystemId. A GUID is the SystemId. Anything else is the number.'));
-        Result.Add(ContractMgt.TargetEntry('data.documentNo', 'code', 'The ' + DocumentCaption + ' number. Optional when subject or ' + NumberKey + ' is sent.'));
-        Result.Add(ContractMgt.TargetEntry('data.' + NumberKey, 'code', 'The ' + DocumentCaption + ' number. Same document as documentNo when both are sent.'));
-        Result.Add(ContractMgt.TargetEntry('data.documentId', 'guid', 'SystemId of the ' + DocumentCaption + '.'));
-        Result.Add(ContractMgt.TargetEntry('data.' + IdKey, 'guid', 'SystemId of the ' + DocumentCaption + '. Same document as documentId when both are sent.'));
+        Result.Add(ContractMgt.TargetEntry('subject', 'guid|code', TargetSubjectLbl));
+        Result.Add(ContractMgt.TargetEntry('data.documentNo', 'code', StrSubstNo(TargetNumberLbl, NumberKey)));
+        Result.Add(ContractMgt.TargetEntry('data.' + NumberKey, 'code', TargetAliasLbl));
+        Result.Add(ContractMgt.TargetEntry('data.documentId', 'guid', TargetIdLbl));
+        Result.Add(ContractMgt.TargetEntry('data.' + IdKey, 'guid', TargetIdAliasLbl));
     end;
 
     internal procedure Parameters(var ParameterList: JsonArray; NumberKey: Text; IdKey: Text)
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        ParameterList.Add(ContractMgt.Parameter('documentNo', 'string', false, 'Document number. A GUID belongs in documentId or subject. At most 20 characters.'));
-        ParameterList.Add(ContractMgt.Parameter(NumberKey, 'string', false, 'Same as documentNo. When both are sent they must name the same document.'));
-        ParameterList.Add(ContractMgt.Parameter('documentId', 'string', false, 'SystemId (GUID) of the document.'));
-        ParameterList.Add(ContractMgt.Parameter(IdKey, 'string', false, 'Same as documentId. When both are sent they must name the same document.'));
+        ParameterList.Add(ContractMgt.Parameter('documentNo', 'string', false, DocumentNumberAGuidBelongsInDocumentidLbl));
+        ParameterList.Add(ContractMgt.Parameter(NumberKey, 'string', false, SameAsDocumentnoWhenBothAreSentLbl));
+        ParameterList.Add(ContractMgt.Parameter('documentId', 'string', false, SystemidGuidOfTheDocumentLbl));
+        ParameterList.Add(ContractMgt.Parameter(IdKey, 'string', false, SameAsDocumentidWhenBothAreSentLbl));
         ParameterList.Add(ContractMgt.Parameter('documentSendingProfile', 'string', false,
-            'Code of the Document Sending Profile for this call only, at most 20 characters. A longer value is refused (InvalidParameterFormat), never cut. Must exist, must not save to disk and must not prompt for e-mail settings. Left out: the vendor or customer profile, then the profile marked Default.'));
+            CodeOfTheDocumentSendingProfileForLbl));
     end;
 
     internal procedure Response(var ResponseObject: JsonObject; DocumentTypeText: Text; PartyNoName: Text; PartyNameName: Text; PartyCaption: Text)
@@ -116,22 +116,22 @@ codeunit 10035631 "Doc Send Contract ori"
         Source: JsonObject;
     begin
         Parts.AddResponseField(Fields, 'status', 'string', 'Success.');
-        Parts.AddResponseField(Fields, 'documentType', 'string', 'Always ' + DocumentTypeText + '.');
-        Parts.AddResponseField(Fields, 'documentNo', 'string', 'No. of the document.');
-        Parts.AddResponseField(Fields, 'documentId', 'string', 'SystemId of the document (GUID, no braces).');
-        Parts.AddResponseField(Fields, PartyNoName, 'string', PartyCaption + ' number.');
-        Parts.AddResponseField(Fields, PartyNameName, 'string', PartyCaption + ' name.');
-        Parts.AddResponseField(Fields, 'documentSendingProfileCode', 'string', 'Code of the Document Sending Profile that was used.');
+        Parts.AddResponseField(Fields, 'documentType', 'string', StrSubstNo(ResponseTypeLbl, DocumentTypeText));
+        Parts.AddResponseField(Fields, 'documentNo', 'string', NoOfTheDocumentLbl);
+        Parts.AddResponseField(Fields, 'documentId', 'string', SystemidOfTheDocumentGuidNoBracesLbl);
+        Parts.AddResponseField(Fields, PartyNoName, 'string', StrSubstNo(ResponsePartyNoLbl, PartyCaption));
+        Parts.AddResponseField(Fields, PartyNameName, 'string', StrSubstNo(ResponsePartyNameLbl, PartyCaption));
+        Parts.AddResponseField(Fields, 'documentSendingProfileCode', 'string', CodeOfTheDocumentSendingProfileThatLbl);
         Sources.Add('Request');
         if PartyNoName = 'vendorNo' then
             Sources.Add('Vendor')
         else
             Sources.Add('Customer');
         Sources.Add('Default');
-        Source := ContractMgt.ResponseField('documentSendingProfileSource', 'string', 'Where the profile came from: Request, the party profile, or Default.');
+        Source := ContractMgt.ResponseField('documentSendingProfileSource', 'string', WhereTheProfileCameFromRequestTheLbl);
         Source.Add('allowed', Sources);
         Fields.Add(Source);
-        Parts.AddResponseField(Fields, 'message', 'string', 'Document sent successfully.');
+        Parts.AddResponseField(Fields, 'message', 'string', DocumentSentSuccessfullyLbl);
         ResponseObject := Parts.Response(Fields, 'text/json');
     end;
 
@@ -139,33 +139,33 @@ codeunit 10035631 "Doc Send Contract ori"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PermissionDenied, 'Read permission denied.',
-            'The caller has no read permission on ' + TableCaptionText + '.', 'Ask an administrator to grant read access to ' + TableCaptionText + '.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::MissingParameter, 'Send the document number or SystemId.',
-            'subject and the document keys were all left out.', 'Put the number in subject or data.documentNo, or the SystemId in subject or data.documentId.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::RecordNotFound, DocumentCaption + ' was not found.',
-            'The number or SystemId is not an existing ' + DocumentCaption + ' of this type.', 'Send the document number or SystemId of an existing document of this type.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter "documentSendingProfile" is not a JSON string or is longer than 20 characters.',
-            'documentSendingProfile was sent as an object or an array, or is longer than 20 characters. A longer code is refused, never cut.',
-            'Send the value as a JSON string of at most 20 characters.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::InvalidParameterFormat, 'documentId is not a GUID.',
-            'documentId or the id key is not a GUID.', 'Send the SystemId as a GUID, or send the document number.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::ConflictingIdentifiers, 'The identifiers name different documents.',
-            'Two keys were sent and they do not name the same document. Nothing was sent.', 'Send one document number or one SystemId.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::RecordNotFound, 'Document Sending Profile "{code}" not found.',
-            'documentSendingProfile names a profile that does not exist. Nothing was sent.', 'Send the Code of an existing Document Sending Profile, or leave the key out.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'The party profile does not exist, or no profile resolves.',
-            'No documentSendingProfile was sent and the customer or vendor profile is missing or points at a deleted profile, and no profile is marked Default.',
-            'Send documentSendingProfile, fix the party profile, or mark one profile Default.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'Document Sending Profile "{code}" saves the document to disk, which needs a client.',
-            'The resolved profile has a Disk channel. Nothing was sent.', 'Send a profile that has no Disk channel.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'The resolved profile prompts for e-mail settings.',
-            'E-Mail is Yes (Prompt for Settings). Nothing was sent.', 'Pass a profile with E-Mail set to Yes (Use Default Settings).'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'The customer or vendor has no e-mail address for the profile.',
-            'The resolved profile sends e-mail and the party has no e-mail address. Nothing was sent.', 'Set the e-mail address or select a profile that does not send e-mail.'));
-        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::BusinessCentralError, 'Business Central''s own error text',
-            'Business Central refuses to send, for example no e-mail account or no report for the Report Selection usage.',
-            'Read the text. Check the document before sending again: a channel may already have delivered it.'));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PermissionDenied, ReadPermissionDeniedLbl,
+            StrSubstNo(ReadDeniedLbl, TableCaptionText), StrSubstNo(GrantReadLbl, TableCaptionText)));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::MissingParameter, SendTheDocumentNumberOrSystemidLbl,
+            SubjectAndTheDocumentKeysWereAllLbl, PutTheNumberInSubjectOrDataLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(NotFoundLbl, DocumentCaption),
+            StrSubstNo(NotFoundCauseLbl, DocumentCaption), SendTheDocumentNumberOrSystemidOfLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::InvalidParameterFormat, ParameterDocumentsendingprofileIsNotAJsonStringLbl,
+            DocumentsendingprofileWasSentAsAnObjectOrLbl,
+            SendTheValueAsAJsonStringLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::InvalidParameterFormat, DocumentidIsNotAGuidLbl,
+            DocumentidOrTheIdKeyIsNotLbl, SendTheSystemidAsAGuidOrLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::ConflictingIdentifiers, TheIdentifiersNameDifferentDocumentsLbl,
+            TwoKeysWereSentAndTheyDoLbl, SendOneDocumentNumberOrOneSystemidLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::RecordNotFound, DocumentSendingProfileCodeNotFoundLbl,
+            DocumentsendingprofileNamesAProfileThatDoesNotLbl, SendTheCodeOfAnExistingDocumentLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, ThePartyProfileDoesNotExistOrLbl,
+            NoDocumentsendingprofileWasSentAndTheCustomerLbl,
+            SendDocumentsendingprofileFixThePartyProfileOrLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, DocumentSendingProfileCodeSavesTheDocumentLbl,
+            TheResolvedProfileHasADiskChannelLbl, SendAProfileThatHasNoDiskLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, TheResolvedProfilePromptsForEMailLbl,
+            EMailIsYesPromptForSettingsLbl, PassAProfileWithEMailSetLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, TheCustomerOrVendorHasNoELbl,
+            TheResolvedProfileSendsEMailAndLbl, SetTheEMailAddressOrSelectLbl));
+        ErrorList.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::BusinessCentralError, BusinessCentralSOwnErrorTextLbl,
+            BusinessCentralRefusesToSendForExampleLbl,
+            ReadTheTextCheckTheDocumentBeforeLbl));
     end;
 
     internal procedure Effect(var EffectObject: JsonObject; Changes: Text)
@@ -180,12 +180,12 @@ codeunit 10035631 "Doc Send Contract ori"
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         if MessageTypeName <> 'Purchase.Order.Send' then
-            Parts.Related(Related, 'Purchase.Order.Send', 'The document is a purchase order.');
+            Parts.Related(Related, 'Purchase.Order.Send', TheDocumentIsAPurchaseOrderLbl);
         if MessageTypeName <> 'Sales.Quote.Send' then
-            Parts.Related(Related, 'Sales.Quote.Send', 'The document is a sales quote.');
+            Parts.Related(Related, 'Sales.Quote.Send', TheDocumentIsASalesQuoteLbl);
         if MessageTypeName <> 'Sales.OrderConfirmation.Send' then
-            Parts.Related(Related, 'Sales.OrderConfirmation.Send', 'The document is a sales order confirmation.');
-        Parts.Related(Related, 'Data.Records.Get', 'You want to read the document afterwards without sending it again.');
+            Parts.Related(Related, 'Sales.OrderConfirmation.Send', TheDocumentIsASalesOrderConfirmationLbl);
+        Parts.Related(Related, 'Data.Records.Get', YouWantToReadTheDocumentAfterwardsLbl);
     end;
 
     internal procedure Workflow(var WorkflowObject: JsonObject; MessageTypeName: Text; Purpose: Text)
@@ -193,7 +193,7 @@ codeunit 10035631 "Doc Send Contract ori"
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Steps: JsonArray;
     begin
-        Steps.Add(ContractMgt.WorkflowStep('Data.Records.Get', 'Read the document and take its number or SystemId.'));
+        Steps.Add(ContractMgt.WorkflowStep('Data.Records.Get', ReadTheDocumentAndTakeItsNumberLbl));
         Steps.Add(ContractMgt.WorkflowStep(MessageTypeName, Purpose));
         WorkflowObject.Add('steps', Steps);
     end;
@@ -202,26 +202,86 @@ codeunit 10035631 "Doc Send Contract ori"
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Parts.Example(Examples, 'Send with an explicit profile',
+        Parts.Example(Examples, SendWithAnExplicitProfileLbl,
             '{"type":"' + MessageTypeName + '","data":{"' + NumberKey + '":"' + SampleNo + '","documentSendingProfile":"EMAIL"}}',
             '{"status":"Success","documentNo":"' + SampleNo + '","documentSendingProfileCode":"EMAIL","documentSendingProfileSource":"Request","message":"Document sent successfully."}');
-        Parts.Example(Examples, 'Unknown document',
+        Parts.Example(Examples, UnknownDocumentLbl,
             '{"type":"' + MessageTypeName + '","data":{"documentNo":"DOES-NOT-EXIST"}}',
             '{"status":"Error","code":"RecordNotFound","parameter":"documentNo","nextStep":"Send the document number or SystemId of an existing document of this type."}');
     end;
 
     internal procedure Overview(DocumentCaption: Text; PdfTypeName: Text): Text
     begin
-        exit('Sends one ' + DocumentCaption + ' the way the Send action does, through a Document Sending Profile: the one named in the request, else the party profile, else the profile marked Default. ' +
-            'Irreversible. Nothing is sent when the document, the profile or a required e-mail address is missing. Tests and this API must not send real e-mail from a worker container; a Disk profile is refused because it needs a client. ' +
-            'The matching PDF type is ' + PdfTypeName + '.');
+        exit(StrSubstNo(OverviewLbl, DocumentCaption, PdfTypeName));
     end;
 
     internal procedure Notes(PdfTypeName: Text): Text
     begin
-        exit('Success means Business Central ran every channel of the profile without an error, not that the recipient received the document. Not retry-safe: a second call sends the document again. ' +
-            'subject and the keys under data are all tried. A GUID is the SystemId; anything else is the number. Two keys that name different documents are ConflictingIdentifiers. ' +
-            'The profile code is compared in upper case. A profile with a Disk channel, or E-Mail set to prompt, is refused before anything is sent. ' +
-            'Depends on the matching PDF message type ' + PdfTypeName + ' for callers that want the file instead of sending. That type is a separate message and is not called by this send.');
+        exit(StrSubstNo(NotesLbl, PdfTypeName));
     end;
+
+    var
+        NotesLbl: Label 'Success means every profile channel ran without error, not confirmed receipt. A retry sends again. subject and data identifiers must agree; a GUID is the SystemId, otherwise the number. Conflicting keys return ConflictingIdentifiers. Profile codes are compared in upper case. Disk or prompted e-mail profiles are refused before sending. The matching PDF type %1 is a separate dependency for callers wanting a file; this send does not call it.', Comment = 'is-IS=Success merkir að allar sendingarleiðir keyrðu án villu, ekki staðfesta móttöku. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Diskvistun og tölvupóststillingum sem krefjast spurningar er hafnað fyrir sendingu. Samsvarandi PDF-tegund %1 er sérstakt háð atriði fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.';
+        OverviewLbl: Label 'Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Irreversible. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.', Comment = 'is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Skjölum, forstillingum eða nauðsynlegum netföngum sem vantar er hafnað fyrir sendingu. Prófanir í vinnuumhverfi verða að herma eftir sendingu; diskvistun þarf biðlara og er hafnað. Samsvarandi PDF-tegund er %2.';
+        TargetSubjectLbl: Label 'The document number, or its SystemId. A GUID is the SystemId. Anything else is the number.', Comment = 'is-IS=Skjalnúmer eða SystemId skjalsins. GUID er SystemId. Annað gildi er skjalnúmer.';
+        TargetIdAliasLbl: Label 'SystemId of the document. Same document as documentId when both are sent.', Comment = 'is-IS=SystemId skjalsins. Verður að vísa á sama skjal og documentId ef bæði eru send.';
+        TargetNumberLbl: Label 'Document number. Optional when subject or %1 is sent.', Comment = 'is-IS=Skjalnúmer. Valfrjálst ef subject eða %1 er sent.';
+        TargetAliasLbl: Label 'Document number. Same document as documentNo when both are sent.', Comment = 'is-IS=Skjalnúmer. Verður að vísa á sama skjal og documentNo ef bæði eru send.';
+        NotFoundCauseLbl: Label 'The number or SystemId does not identify an existing document of this type (%1).', Comment = 'is-IS=Númerið eða SystemId vísar ekki á skjal af þessari tegund (%1) sem er til.';
+        GrantReadLbl: Label 'Ask an administrator to grant read access to %1.', Comment = 'is-IS=Biddu kerfisstjóra um lesaðgang að %1.';
+        ReadDeniedLbl: Label 'The caller has no read permission on %1.', Comment = 'is-IS=Kallandinn hefur ekki lesaðgang að %1.';
+        TargetIdLbl: Label 'SystemId of the document.', Comment = 'is-IS=SystemId skjalsins.';
+        NotFoundLbl: Label 'Document not found (%1).', Comment = 'is-IS=Skjal fannst ekki (%1).';
+        ResponseTypeLbl: Label 'Always %1.', Comment = 'is-IS=Alltaf %1.';
+        ResponsePartyNoLbl: Label 'Party number (%1).', Comment = 'is-IS=Númer aðila (%1).';
+        ResponsePartyNameLbl: Label 'Party name (%1).', Comment = 'is-IS=Nafn aðila (%1).';
+        DocumentNumberAGuidBelongsInDocumentidLbl: Label 'Document number. A GUID belongs in documentId or subject. At most 20 characters.', Comment = 'is-IS=Skjalnúmer, að hámarki 20 stafir. GUID á heima í documentId eða subject.';
+        SameAsDocumentnoWhenBothAreSentLbl: Label 'Same as documentNo. When both are sent they must name the same document.', Comment = 'is-IS=Sama og documentNo. Ef bæði eru send verða þau að vísa á sama skjal.';
+        SystemidGuidOfTheDocumentLbl: Label 'SystemId (GUID) of the document.', Comment = 'is-IS=SystemId skjalsins (GUID).';
+        SameAsDocumentidWhenBothAreSentLbl: Label 'Same as documentId. When both are sent they must name the same document.', Comment = 'is-IS=Sama og documentId. Ef bæði eru send verða þau að vísa á sama skjal.';
+        CodeOfTheDocumentSendingProfileForLbl: Label 'Code of the Document Sending Profile for this call only, at most 20 characters. A longer value is refused (InvalidParameterFormat), never cut. Must exist, must not save to disk and must not prompt for e-mail settings. Left out: the vendor or customer profile, then the profile marked Default.', Comment = 'is-IS=Kóði forstillingar skjalasendingar fyrir þetta kall, að hámarki 20 stafir. Lengri gildi eru höfnuð (InvalidParameterFormat), aldrei stytt. Forstillingin verður að vera til, má ekki vista á disk eða biðja um tölvupóststillingar. Ef lyklinum er sleppt er forstilling lánardrottins eða viðskiptamanns notuð, annars sjálfgefin forstilling.';
+        NoOfTheDocumentLbl: Label 'No. of the document.', Comment = 'is-IS=Númer skjalsins.';
+        SystemidOfTheDocumentGuidNoBracesLbl: Label 'SystemId of the document (GUID, no braces).', Comment = 'is-IS=SystemId skjalsins (GUID án slaufusviga).';
+        CodeOfTheDocumentSendingProfileThatLbl: Label 'Code of the Document Sending Profile that was used.', Comment = 'is-IS=Kóði forstillingar skjalasendingar sem var notuð.';
+        WhereTheProfileCameFromRequestTheLbl: Label 'Where the profile came from: Request, the party profile, or Default.', Comment = 'is-IS=Hvaðan forstillingin kom: Request (beiðni), forstilling viðskiptamanns eða lánardrottins, eða Default (sjálfgefin).';
+        DocumentSentSuccessfullyLbl: Label 'Document sent successfully.', Comment = 'is-IS=Skjal sent.';
+        ReadPermissionDeniedLbl: Label 'Read permission denied.', Comment = 'is-IS=Lesaðgangi hafnað.';
+        SendTheDocumentNumberOrSystemidLbl: Label 'Send the document number or SystemId.', Comment = 'is-IS=Sendu skjalnúmer eða SystemId.';
+        SubjectAndTheDocumentKeysWereAllLbl: Label 'subject and the document keys were all left out.', Comment = 'is-IS=Hvorki subject né auðkennislyklar skjals voru send.';
+        PutTheNumberInSubjectOrDataLbl: Label 'Put the number in subject or data.documentNo, or the SystemId in subject or data.documentId.', Comment = 'is-IS=Settu númerið í subject eða data.documentNo, eða SystemId í subject eða data.documentId.';
+        SendTheDocumentNumberOrSystemidOfLbl: Label 'Send the document number or SystemId of an existing document of this type.', Comment = 'is-IS=Sendu númer eða SystemId skjals af þessari tegund sem er til.';
+        ParameterDocumentsendingprofileIsNotAJsonStringLbl: Label 'Parameter "documentSendingProfile" is not a JSON string or is longer than 20 characters.', Comment = 'is-IS=Færibreytan "documentSendingProfile" er ekki JSON-strengur eða er lengri en 20 stafir.';
+        DocumentsendingprofileWasSentAsAnObjectOrLbl: Label 'documentSendingProfile was sent as an object or an array, or is longer than 20 characters. A longer code is refused, never cut.', Comment = 'is-IS=documentSendingProfile var sent sem hlutur eða fylki, eða er lengra en 20 stafir. Lengri kóða er hafnað, hann er aldrei styttur.';
+        SendTheValueAsAJsonStringLbl: Label 'Send the value as a JSON string of at most 20 characters.', Comment = 'is-IS=Sendu gildið sem JSON-streng sem er að hámarki 20 stafir.';
+        DocumentidIsNotAGuidLbl: Label 'documentId is not a GUID.', Comment = 'is-IS=documentId er ekki GUID.';
+        DocumentidOrTheIdKeyIsNotLbl: Label 'documentId or the id key is not a GUID.', Comment = 'is-IS=documentId eða annar auðkennislykill er ekki GUID.';
+        SendTheSystemidAsAGuidOrLbl: Label 'Send the SystemId as a GUID, or send the document number.', Comment = 'is-IS=Sendu SystemId sem GUID eða sendu skjalnúmerið.';
+        TheIdentifiersNameDifferentDocumentsLbl: Label 'The identifiers name different documents.', Comment = 'is-IS=Auðkennin vísa á mismunandi skjöl.';
+        TwoKeysWereSentAndTheyDoLbl: Label 'Two keys were sent and they do not name the same document. Nothing was sent.', Comment = 'is-IS=Tveir lyklar voru sendir og vísa ekki á sama skjal. Ekkert var sent.';
+        SendOneDocumentNumberOrOneSystemidLbl: Label 'Send one document number or one SystemId.', Comment = 'is-IS=Sendu eitt skjalnúmer eða eitt SystemId.';
+        DocumentSendingProfileCodeNotFoundLbl: Label 'Document Sending Profile "{code}" not found.', Comment = 'is-IS=Forstilling skjalasendingar "{code}" fannst ekki.';
+        DocumentsendingprofileNamesAProfileThatDoesNotLbl: Label 'documentSendingProfile names a profile that does not exist. Nothing was sent.', Comment = 'is-IS=documentSendingProfile vísar á forstillingu sem er ekki til. Ekkert var sent.';
+        SendTheCodeOfAnExistingDocumentLbl: Label 'Send the Code of an existing Document Sending Profile, or leave the key out.', Comment = 'is-IS=Sendu kóða forstillingar skjalasendingar sem er til eða slepptu lyklinum.';
+        ThePartyProfileDoesNotExistOrLbl: Label 'The party profile does not exist, or no profile resolves.', Comment = 'is-IS=Forstilling viðskiptamanns eða lánardrottins er ekki til eða engin forstilling finnst.';
+        NoDocumentsendingprofileWasSentAndTheCustomerLbl: Label 'No documentSendingProfile was sent and the customer or vendor profile is missing or points at a deleted profile, and no profile is marked Default.', Comment = 'is-IS=documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins vantar eða hefur verið eytt og engin forstilling er sjálfgefin.';
+        SendDocumentsendingprofileFixThePartyProfileOrLbl: Label 'Send documentSendingProfile, fix the party profile, or mark one profile Default.', Comment = 'is-IS=Sendu documentSendingProfile, lagfærðu forstillingu viðskiptamanns eða lánardrottins eða veldu sjálfgefna forstillingu.';
+        DocumentSendingProfileCodeSavesTheDocumentLbl: Label 'Document Sending Profile "{code}" saves the document to disk, which needs a client.', Comment = 'is-IS=Forstilling skjalasendingar "{code}" vistar skjalið á disk og þarf því biðlara.';
+        TheResolvedProfileHasADiskChannelLbl: Label 'The resolved profile has a Disk channel. Nothing was sent.', Comment = 'is-IS=Forstillingin vistar á disk. Ekkert var sent.';
+        SendAProfileThatHasNoDiskLbl: Label 'Send a profile that has no Disk channel.', Comment = 'is-IS=Sendu forstillingu sem vistar ekki á disk.';
+        TheResolvedProfilePromptsForEMailLbl: Label 'The resolved profile prompts for e-mail settings.', Comment = 'is-IS=Forstillingin biður um tölvupóststillingar.';
+        EMailIsYesPromptForSettingsLbl: Label 'E-Mail is Yes (Prompt for Settings). Nothing was sent.', Comment = 'is-IS=Tölvupóstur er stilltur á Já (biðja um stillingar). Ekkert var sent.';
+        PassAProfileWithEMailSetLbl: Label 'Pass a profile with E-Mail set to Yes (Use Default Settings).', Comment = 'is-IS=Sendu forstillingu með tölvupóst stilltan á Já (nota sjálfgefnar stillingar).';
+        TheCustomerOrVendorHasNoELbl: Label 'The customer or vendor has no e-mail address for the profile.', Comment = 'is-IS=Netfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.';
+        TheResolvedProfileSendsEMailAndLbl: Label 'The resolved profile sends e-mail and the party has no e-mail address. Nothing was sent.', Comment = 'is-IS=Forstillingin sendir tölvupóst en netfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.';
+        SetTheEMailAddressOrSelectLbl: Label 'Set the e-mail address or select a profile that does not send e-mail.', Comment = 'is-IS=Skráðu netfangið eða veldu forstillingu sem sendir ekki tölvupóst.';
+        BusinessCentralSOwnErrorTextLbl: Label 'Business Central''s own error text', Comment = 'is-IS=Villutexti frá Business Central';
+        BusinessCentralRefusesToSendForExampleLbl: Label 'Business Central refuses to send, for example no e-mail account or no report for the Report Selection usage.', Comment = 'is-IS=Business Central hafnar sendingu, til dæmis vegna þess að tölvupóstreikning eða skýrslu fyrir skýrsluvalið vantar.';
+        ReadTheTextCheckTheDocumentBeforeLbl: Label 'Read the text. Check the document before sending again: a channel may already have delivered it.', Comment = 'is-IS=Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein sendingarleið gæti þegar hafa afhent það.';
+        TheDocumentIsAPurchaseOrderLbl: Label 'The document is a purchase order.', Comment = 'is-IS=Skjalið er innkaupapöntun.';
+        TheDocumentIsASalesQuoteLbl: Label 'The document is a sales quote.', Comment = 'is-IS=Skjalið er sölutilboð.';
+        TheDocumentIsASalesOrderConfirmationLbl: Label 'The document is a sales order confirmation.', Comment = 'is-IS=Skjalið er staðfesting sölupöntunar.';
+        YouWantToReadTheDocumentAfterwardsLbl: Label 'You want to read the document afterwards without sending it again.', Comment = 'is-IS=Þú vilt lesa skjalið eftir sendingu án þess að senda það aftur.';
+        ReadTheDocumentAndTakeItsNumberLbl: Label 'Read the document and take its number or SystemId.', Comment = 'is-IS=Lestu skjalið og notaðu númer þess eða SystemId.';
+        SendWithAnExplicitProfileLbl: Label 'Send with an explicit profile', Comment = 'is-IS=Senda með tilgreindri forstillingu';
+        UnknownDocumentLbl: Label 'Unknown document', Comment = 'is-IS=Óþekkt skjal';
 }

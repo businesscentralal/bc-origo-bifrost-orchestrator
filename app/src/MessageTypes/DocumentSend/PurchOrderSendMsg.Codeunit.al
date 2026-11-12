@@ -48,7 +48,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Envelope := Contract.Envelope('Purchase order number, or its SystemId.');
+        Envelope := Contract.Envelope(PurchaseOrderNumberOrItsSystemidLbl);
         exit(true);
     end;
 
@@ -56,7 +56,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Target := Contract.Target('orderNo', 'orderId', 'purchase order');
+        Target := Contract.Target('orderNo', 'orderId', PurchaseOrderLbl);
         exit(true);
     end;
 
@@ -72,7 +72,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Response(Response, 'PurchaseOrder', 'vendorNo', 'vendorName', 'Vendor');
+        Contract.Response(Response, 'PurchaseOrder', 'vendorNo', 'vendorName', VendorLbl);
         exit(true);
     end;
 
@@ -80,7 +80,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Errors(Errors, 'Purchase order', 'Purchase Header');
+        Contract.Errors(Errors, PurchaseOrder2Lbl, 'Purchase Header');
         exit(true);
     end;
 
@@ -88,7 +88,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Effect(Effect, 'Sends the purchase order with the resolved profile, as the Send action does.');
+        Contract.Effect(Effect, SendsThePurchaseOrderWithTheResolvedLbl);
         exit(true);
     end;
 
@@ -109,7 +109,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Workflow(Workflow, 'Purchase.Order.Send', 'Send that purchase order.');
+        Contract.Workflow(Workflow, 'Purchase.Order.Send', SendThatPurchaseOrderLbl);
         exit(true);
     end;
 
@@ -125,7 +125,7 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Overview := Contract.Overview('purchase order', 'Purchase.Order.Pdf');
+        Overview := Contract.Overview(PurchaseOrderLbl, 'Purchase.Order.Pdf');
         exit(true);
     end;
 
@@ -148,4 +148,12 @@ codeunit 10035632 "Purch Order Send Msg ori" implements "Msg Interface ori", "Ms
     begin
         Process.Execute(Argument);
     end;
+
+    var
+        PurchaseOrderNumberOrItsSystemidLbl: Label 'Purchase order number, or its SystemId.', Comment = 'is-IS=Númer innkaupapöntunar eða SystemId hennar.';
+        PurchaseOrderLbl: Label 'purchase order', Comment = 'is-IS=innkaupapöntun';
+        VendorLbl: Label 'Vendor', Comment = 'is-IS=Lánardrottinn';
+        PurchaseOrder2Lbl: Label 'Purchase order', Comment = 'is-IS=Innkaupapöntun';
+        SendsThePurchaseOrderWithTheResolvedLbl: Label 'Sends the purchase order with the resolved profile, as the Send action does.', Comment = 'is-IS=Sendir innkaupapöntun með forstillingunni sem fannst, eins og aðgerðin Senda gerir.';
+        SendThatPurchaseOrderLbl: Label 'Send that purchase order.', Comment = 'is-IS=Sendu innkaupapöntunina.';
 }

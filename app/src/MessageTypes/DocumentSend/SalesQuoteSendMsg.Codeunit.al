@@ -48,7 +48,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Envelope := Contract.Envelope('Sales quote number, or its SystemId.');
+        Envelope := Contract.Envelope(SalesQuoteNumberOrItsSystemidLbl);
         exit(true);
     end;
 
@@ -56,7 +56,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Target := Contract.Target('quoteNo', 'quoteId', 'sales quote');
+        Target := Contract.Target('quoteNo', 'quoteId', SalesQuoteLbl);
         exit(true);
     end;
 
@@ -72,7 +72,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Response(Response, 'SalesQuote', 'customerNo', 'customerName', 'Customer');
+        Contract.Response(Response, 'SalesQuote', 'customerNo', 'customerName', CustomerLbl);
         exit(true);
     end;
 
@@ -80,7 +80,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Errors(Errors, 'Sales quote', 'Sales Header');
+        Contract.Errors(Errors, SalesQuote2Lbl, 'Sales Header');
         exit(true);
     end;
 
@@ -88,7 +88,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Effect(Effect, 'Sends the sales quote with the resolved profile, as the Send action does.');
+        Contract.Effect(Effect, SendsTheSalesQuoteWithTheResolvedLbl);
         exit(true);
     end;
 
@@ -109,7 +109,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Workflow(Workflow, 'Sales.Quote.Send', 'Send that sales quote.');
+        Contract.Workflow(Workflow, 'Sales.Quote.Send', SendThatSalesQuoteLbl);
         exit(true);
     end;
 
@@ -125,7 +125,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Overview := Contract.Overview('sales quote', 'Sales.Quote.Pdf');
+        Overview := Contract.Overview(SalesQuoteLbl, 'Sales.Quote.Pdf');
         exit(true);
     end;
 
@@ -148,4 +148,12 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     begin
         Process.Execute(Argument);
     end;
+
+    var
+        SalesQuoteNumberOrItsSystemidLbl: Label 'Sales quote number, or its SystemId.', Comment = 'is-IS=Númer sölutilboðs eða SystemId þess.';
+        SalesQuoteLbl: Label 'sales quote', Comment = 'is-IS=sölutilboð';
+        CustomerLbl: Label 'Customer', Comment = 'is-IS=Viðskiptamaður';
+        SalesQuote2Lbl: Label 'Sales quote', Comment = 'is-IS=Sölutilboð';
+        SendsTheSalesQuoteWithTheResolvedLbl: Label 'Sends the sales quote with the resolved profile, as the Send action does.', Comment = 'is-IS=Sendir sölutilboð með forstillingunni sem fannst, eins og aðgerðin Senda gerir.';
+        SendThatSalesQuoteLbl: Label 'Send that sales quote.', Comment = 'is-IS=Sendu sölutilboðið.';
 }

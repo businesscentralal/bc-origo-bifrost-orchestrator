@@ -24,6 +24,27 @@ codeunit 96472 "Doc Send Tests ori"
         DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Mock: Codeunit "Doc Send Mock ori";
 
+    /// <summary>Purchase-order help translates its chapters while preserving profile source wire values.</summary>
+    [Test]
+    procedure Scenario_AC04_PurchaseOrderHelp_TranslatesChapters()
+    begin
+        VerifyHelpTranslations("Message Type ori"::"Purchase.Order.Send", 'Vendor');
+    end;
+
+    /// <summary>Quote help translates its chapters while preserving profile source wire values.</summary>
+    [Test]
+    procedure Scenario_AC04_SalesQuoteHelp_TranslatesChapters()
+    begin
+        VerifyHelpTranslations("Message Type ori"::"Sales.Quote.Send", 'Customer');
+    end;
+
+    /// <summary>Order-confirmation help translates its chapters while preserving profile source wire values.</summary>
+    [Test]
+    procedure Scenario_AC04_OrderConfirmationHelp_TranslatesChapters()
+    begin
+        VerifyHelpTranslations("Message Type ori"::"Sales.OrderConfirmation.Send", 'Customer');
+    end;
+
     [Test]
     procedure PurchaseOrderSend_HappyPathIsMockedAndSendsNoEmail()
     var
@@ -190,6 +211,78 @@ codeunit 96472 "Doc Send Tests ori"
         ResponseJson := TempArgument.GetResponseJson();
         AssertErrorCode(ResponseJson, 'PreconditionFailed');
         Assert.IsFalse(Mock.WasCaptured(), 'Missing e-mail was not sent');
+    end;
+
+    /// <summary>Checks the real help contract in both supported languages, including stable machine values.</summary>
+    local procedure VerifyHelpTranslations(MessageType: Enum "Message Type ori"; PartySource: Text)
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        ContractInterface: Interface "Msg Contract ori";
+        EnglishContract: JsonObject;
+        IcelandicContract: JsonObject;
+        EnglishChapter: JsonToken;
+        IcelandicChapter: JsonToken;
+        Field: JsonToken;
+        Name: JsonToken;
+        Allowed: JsonToken;
+        ExpectedSources: JsonArray;
+        EnglishOverview: Text;
+        IcelandicOverview: Text;
+        EnglishNotes: Text;
+        IcelandicNotes: Text;
+        EnglishText: Text;
+        IcelandicText: Text;
+        ChapterName: Text;
+        ChapterNames: List of [Text];
+        PreviousLanguage: Integer;
+    begin
+        // [SCENARIO #94 AC04] Help chapters are localized, not just the catalogue description.
+        ContractInterface := MessageType;
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        ContractMgt.GetContract(MessageType, EnglishContract);
+        ContractInterface.GetOverview(EnglishOverview);
+        ContractInterface.GetNotes(EnglishNotes);
+        GlobalLanguage(1039);
+        ContractMgt.GetContract(MessageType, IcelandicContract);
+        ContractInterface.GetOverview(IcelandicOverview);
+        ContractInterface.GetNotes(IcelandicNotes);
+        GlobalLanguage(PreviousLanguage);
+
+        ChapterNames.Add('envelope');
+        ChapterNames.Add('target');
+        ChapterNames.Add('parameters');
+        ChapterNames.Add('response');
+        ChapterNames.Add('errors');
+        ChapterNames.Add('effect');
+        ChapterNames.Add('related');
+        ChapterNames.Add('workflow');
+        ChapterNames.Add('examples');
+        foreach ChapterName in ChapterNames do begin
+            Assert.IsTrue(EnglishContract.Get(ChapterName, EnglishChapter), 'English ' + ChapterName);
+            Assert.IsTrue(IcelandicContract.Get(ChapterName, IcelandicChapter), 'Icelandic ' + ChapterName);
+            EnglishChapter.WriteTo(EnglishText);
+            IcelandicChapter.WriteTo(IcelandicText);
+            Assert.AreNotEqual(EnglishText, IcelandicText, ChapterName + ' prose has an is-IS translation');
+        end;
+        Assert.AreNotEqual(EnglishOverview, IcelandicOverview, 'Overview has an is-IS translation');
+        Assert.AreNotEqual(EnglishNotes, IcelandicNotes, 'Notes have an is-IS translation');
+        ExpectedSources.Add('Request');
+        ExpectedSources.Add(PartySource);
+        ExpectedSources.Add('Default');
+        ExpectedSources.WriteTo(EnglishText);
+        IcelandicContract.Get('response', IcelandicChapter);
+        IcelandicChapter.AsObject().Get('fields', Allowed);
+        foreach Field in Allowed.AsArray() do begin
+            Field.AsObject().Get('name', Name);
+            if Name.AsValue().AsText() = 'documentSendingProfileSource' then begin
+                Assert.IsTrue(Field.AsObject().Get('allowed', Allowed), 'Profile sources are declared');
+                Allowed.WriteTo(IcelandicText);
+                Assert.AreEqual(EnglishText, IcelandicText, 'Machine profile sources are never translated');
+                exit;
+            end;
+        end;
+        Assert.Fail('Profile source response field was not found');
     end;
 
     local procedure Dispatch(var TempArgument: Record "Message Argument ori" temporary; MessageType: Enum "Message Type ori"; DataJson: Text; Subject: Text)
