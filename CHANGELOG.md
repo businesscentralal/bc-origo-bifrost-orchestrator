@@ -11,6 +11,12 @@ Business Central release versioning (`major.minor.build.revision`).
 - Keep shared WhoAmI contract text app-neutral in codeunit 10035585 `WhoAmI Subscriber ori`; retain the caller-specific Telegram field and empty-value behavior. Move installation and playbook wording into Orchestrator help (10035576 `Help ori`).
 - Test codeunit 96408 `WhoAmI Contract Tests ori` rejects the app name throughout the real shared contract and retains Telegram field/source assertions.
 
+### Added
+- #59 Omit Commit effect guard. New internal codeunit 10035554 `Playbook Effect Guard ori` allows Omit Commit only when the target type's contract declares effect `read` or `write`. It refuses `irreversible` with a translatable error (is-IS in the XLF), and it refuses a missing contract, a missing `effect` key or any other value with a translatable no-contract error. Both errors name the playbook, the step and the type. `ValidateOmitCommitChain` checks every enabled Message step, including Check steps, because they dispatch. Local Transform steps are skipped: they do not dispatch, and validating Transform clears the message type. Both permission sets grant execute.
+- `Msg Executor ori` (10035603) gets `SetOmitCommit(OmitCommit, PlaybookCode, StepNo)`. When this is set, the executor checks the guard before dispatch and passes the signal to Foundation's binary-safe Temp Blob `EnqueueAndProcess` overload. The signal is consumed on every run, refused runs included, and `SetParameters` resets it. Without it, behaviour is unchanged: each playbook step still commits on its own, and no playbook field or UI sets the signal yet.
+- Help Execution Model (codeunit 10035576) and the `Orchestrator.Playbook.Run` notes (10035562) describe the rule. The two Omit Commit error labels are translatable, with is-IS trans-units in the XLF; test 96461 asserts in 1033.
+- Tests: codeunit 96461 `Playbook Effect Tests ori`, enumextension 96461 `Effect Guard Types ori` (values 96461/96462) and fixture codeunit 96462 `Effect Contract Fixture ori`. The fixture never dispatches.
+
 ### Fixed
 - #162 A Message Type left on a Transform step can now be cleared: validating Step Kind = Transform on the step clears it (table 10035540, page and `Data.Records.Set`), and the `TransformMessageType` finding (codeunit 10035628) names the step to clear in 1033/1039. Test 96469 covers set, report, clear and clean Verify. No new message types.
 - Exclude temporary Table Data row and field buffers (tables 10035564/10035565) from customizations, resolving AppSourceCop AS0139 warnings (#155).
