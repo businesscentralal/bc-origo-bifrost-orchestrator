@@ -2115,6 +2115,96 @@
           <note from="Developer" annotates="general" priority="2">%1 = storing step no, %2 = field name, is-IS=Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result&gt;%2), eða leiðréttu heitið í tilvísuninni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownStepFieldNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 %2 and %3 %4 name different purchase orders.</source>
+          <target>%1 %2 og %3 %4 vísa á mismunandi innkaupapantanir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = first identifier source, %2 = first value, %3 = second identifier source, %4 = second value, is-IS=%1 %2 og %3 %4 vísa á mismunandi innkaupapantanir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType ConflictErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 1628813333" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send one identifier, or identifiers of the same order.</source>
+          <target>Sendu eitt auðkenni, eða auðkenni sömu pöntunar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu eitt auðkenni, eða auðkenni sömu pöntunar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType ConflictNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 2720402316" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The No. or SystemId of a purchase order</source>
+          <target>Númer eða SystemId innkaupapöntunar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer eða SystemId innkaupapöntunar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType ExpectedOrderTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 1614129439" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read permission on Purchase Header</source>
+          <target>Lesheimild á Purchase Header</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lesheimild á Purchase Header</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType ExpectedPermissionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 3045797580" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A report for Report Selections usage P.Order</source>
+          <target>Skýrsla fyrir notkunina P.Order í skýrsluvali</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla fyrir notkunina P.Order í skýrsluvali</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType ExpectedReportTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 4200801003" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the order No. or SystemId as subject or as data.orderNo.</source>
+          <target>Sendu númer eða SystemId pöntunarinnar sem subject eða sem data.orderNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu númer eða SystemId pöntunarinnar sem subject eða sem data.orderNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType MissingNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 3304850081" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No purchase order was named. Send the order No. or SystemId.</source>
+          <target>Engin innkaupapöntun var tilgreind. Sendu númer eða SystemId pöntunarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engin innkaupapöntun var tilgreind. Sendu númer eða SystemId pöntunarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType MissingOrderErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 969680382" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No report is set up for Report Selections usage P.Order.</source>
+          <target>Engin skýrsla er skilgreind fyrir notkunina P.Order í skýrsluvali.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engin skýrsla er skilgreind fyrir notkunina P.Order í skýrsluvali.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType NoReportErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 3234454030" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set up a purchase order report in Report Selection - Purchase, usage Order.</source>
+          <target>Skilgreindu skýrslu fyrir innkaupapöntun í Skýrsluval - Innkaup, notkun Pöntun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skilgreindu skýrslu fyrir innkaupapöntun í Skýrsluval - Innkaup, notkun Pöntun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType NoReportNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 1902290539" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read permission denied for purchase orders.</source>
+          <target>Lesheimild vantar fyrir innkaupapantanir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lesheimild vantar fyrir innkaupapantanir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType PermissionDeniedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 42286050" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator to grant read access to Purchase Header.</source>
+          <target>Biddu kerfisstjóra um lesaðgang að Purchase Header.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að Purchase Header.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType PermissionNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - NamedType 2486759152" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An identifier of the same order as %1</source>
+          <target>Auðkenni sömu pöntunar og %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the first identifier value, is-IS=Auðkenni sömu pöntunar og %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType SameOrderTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Prints a purchase order as a PDF document.</source>
+          <target>Prentar innkaupapöntun sem PDF-skjal.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Prentar innkaupapöntun sem PDF-skjal.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>purchase order pdf, print purchase order, send order to vendor, purchase order copy, vendor order pdf, print PO</source>
+          <target>innkaupapöntun pdf, prenta innkaupapöntun, senda pöntun til lánardrottins, afrit innkaupapöntunar, pöntun lánardrottins pdf, prenta innkaupapöntun aftur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=innkaupapöntun pdf, prenta innkaupapöntun, senda pöntun til lánardrottins, afrit innkaupapöntunar, pöntun lánardrottins pdf, prenta innkaupapöntun aftur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3878585223 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
+          <target>Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Returns report metadata, available layouts, and saved request page preset.</source>
           <target>Skilar lýsigögnum skýrslu, tiltækum útlitum og vistuðum forsendum beiðnisíðu.</target>
