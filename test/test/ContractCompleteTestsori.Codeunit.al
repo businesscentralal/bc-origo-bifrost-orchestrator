@@ -6,7 +6,7 @@ using System.TestLibraries.Utilities;
 /// <summary>
 /// Completeness guard for the message type contracts and discovery texts of Bifrost Orchestrator, in the
 /// shape of Foundation's contract tests. It walks every message type of this app (the enum values named
-/// Orchestrator.* and Help.Orchestrator.Get) and fails when a type lacks a required chapter, declares an
+/// Orchestrator.*, Help.Orchestrator.Get and Purchase.Order.Pdf) and fails when a type lacks a required chapter, declares an
 /// error without a code, an effect that disagrees with its direction, an example that is not a real request,
 /// AL object names in its help text, or discovery texts that are missing, shared with a sibling or not
 /// translated into Icelandic.
@@ -343,8 +343,8 @@ codeunit 96441 "Contract Complete Tests ori"
         Names := MessageType.Names();
         Values := MessageType.Ordinals();
         for Index := 1 to Names.Count() do
-            if Names.Get(Index).StartsWith('Orchestrator.') or (Names.Get(Index) = 'Help.Orchestrator.Get') or
-               (Names.Get(Index) in ['Purchase.Order.Send', 'Sales.Quote.Send', 'Sales.OrderConfirmation.Send'])
+            if Names.Get(Index).StartsWith('Orchestrator.') or
+               (Names.Get(Index) in ['Help.Orchestrator.Get', 'Purchase.Order.Pdf', 'Purchase.Order.Send', 'Sales.Quote.Send', 'Sales.OrderConfirmation.Send'])
             then
                 Ordinals.Add(Values.Get(Index));
     end;
@@ -367,7 +367,7 @@ codeunit 96441 "Contract Complete Tests ori"
         Names.AddRange('Orchestrator.Entry.Run', 'Orchestrator.Entry.Restart', 'Orchestrator.Entry.Register', 'Orchestrator.Entry.Schedule',
             'Orchestrator.JobQueueEntry.Restart', 'Orchestrator.JobQueueEntry.RestartIfNeeded',
             'Orchestrator.Playbook.Run', 'Orchestrator.Playbook.Schedule', 'Orchestrator.Playbook.Enqueue', 'Orchestrator.Playbook.Verify',
-            'Orchestrator.Email.Send',
+            'Orchestrator.Email.Send', 'Purchase.Order.Pdf',
             'Purchase.Order.Send', 'Sales.Quote.Send', 'Sales.OrderConfirmation.Send');
     end;
 

@@ -25,6 +25,19 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     end;
 
     /// <summary>
+    /// The envelope chapter of a type that reads subject and answers another content type than JSON, such as a PDF.
+    /// </summary>
+    /// <param name="SubjectForms">The forms subject accepts.</param>
+    /// <param name="SubjectDescription">What subject identifies.</param>
+    /// <param name="DataRequired">True when the call needs data.</param>
+    /// <param name="ContentType">The content type of the Success answer, e.g. application/pdf.</param>
+    /// <returns>The envelope chapter.</returns>
+    internal procedure Envelope(SubjectForms: List of [Text]; SubjectDescription: Text; DataRequired: Boolean; ContentType: Text): JsonObject
+    begin
+        exit(BuildEnvelope('optional', SubjectForms, SubjectDescription, DataRequired, ContentType));
+    end;
+
+    /// <summary>
     /// The envelope chapter of a type that does not read subject: subject notUsed, version 1.0, and the
     /// root option strict that Foundation honours for every type.
     /// </summary>
