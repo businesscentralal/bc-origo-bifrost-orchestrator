@@ -162,7 +162,8 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
             ' Each step runs in-process through the dispatcher and has no request timeout of its own. A timeout belongs to an external caller of Orchestrator.Playbook.Run: the answer is written only when the whole playbook finishes. External callers must use Orchestrator.Playbook.Enqueue for long playbooks and read the step log to follow progress. Enqueue, a schedule and Run Now in the BC client have no client timeout; a Job Queue Entry''s Job Timeout is the only outer bound for a background run.' +
             ' A failing step does not fail the call: the answer is Success with playbookStatus Failed and stepsFailed above 0. Read the Bifrost Playbook Step Log filtered on instanceId for the step errors.' +
             ' itemsProcessed counts forEach iterations summed over every step, not distinct items. Do not present it to a user as a record count.' +
-            ' A playbook without steps completes at once with every counter 0.';
+            ' A playbook without steps completes at once with every counter 0.' +
+            ' The internal executor refuses Omit Commit for irreversible, missing or unknown effect contracts; real posting, external writes and committing types declare irreversible. Only explicit read and write are allowed. This runner still commits each step independently and does not expose a roll-back-together signal.';
         exit(true);
     end;
 
