@@ -1593,6 +1593,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Valfrjálst Boolean-gildi á efsta stigi, sjálfgefið false. Þegar það er true er óþekktum gagnalyklum hafnað fyrir keyrslu með UnknownParameter. Ekki setja þennan valkost inni í data.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Orch B1 Contract Parts ori - Method BuildEnvelope - NamedType StrictDescriptionTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1127509453 - NamedType 3316397049" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.</source>
+          <target>Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitIrreversibleErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1127509453 - NamedType 1516695796" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 step %2 cannot run %3 under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.</source>
+          <target>Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitNoContractErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1379993334 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Enqueue a Bifrost Playbook for one-time execution via Job Queue with custom request data.</source>
           <target>Setja Bifröst keðju í biðröð til einskiptiskeyrslu í gegnum vinnsluröð með sérsniðnum beiðnigögnum.</target>
