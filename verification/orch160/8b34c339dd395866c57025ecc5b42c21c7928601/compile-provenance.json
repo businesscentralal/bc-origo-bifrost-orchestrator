@@ -1,0 +1,31 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "tenant": "w129-12",
+  "compiler": "30.0.42.60748",
+  "app": {
+    "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/orch160-brokkr-20261112/compile-app.log",
+    "artifact": "/workspace/private/orch160-symbols/Origo.Orchestrator.own.app",
+    "sha256": "0eb642ff47ead62e7074faed76928dcd5338978fbc414c484678306a5fac6b16",
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ]
+  },
+  "testApp": {
+    "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/orch160-brokkr-20261112/compile-test-supported.log",
+    "artifact": "/workspace/private/orch160-tests.own.app",
+    "sha256": "d6d4948ad982b880c291b1fb5d44d4a9888f198845193422a38727a66b36e749",
+    "analyzers": [
+      "CodeCop",
+      "UICop"
+    ]
+  },
+  "initialTestAppSourceCopAttempt": "compile-test.log; invalid AppSourceCop test-app configuration; corrected to repository CI analyzer scope without source edits"
+}

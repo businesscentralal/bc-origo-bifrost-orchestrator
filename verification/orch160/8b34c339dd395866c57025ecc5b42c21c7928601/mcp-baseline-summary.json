@@ -1,0 +1,54 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "tenant": "w129-12",
+  "phase": "baseline",
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "name": "shared-contract-app-neutral-and-field-semantics",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "implementation-help-app-neutral",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "app-owned-help-installation-and-playbook-wording",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "whoami-baseline-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "lcid": 1039,
+      "name": "shared-contract-app-neutral-and-field-semantics",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "implementation-help-app-neutral",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "app-owned-help-installation-and-playbook-wording",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-baseline-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0
+}

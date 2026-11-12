@@ -1,0 +1,104 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "touchedMessageTypes": [
+    "Help.WhoAmI.Get",
+    "Help.Orchestrator.Get"
+  ],
+  "additionalSurfaces": [
+    "Help.Implementation.Get subject=Help.WhoAmI.Get"
+  ],
+  "tenant": "w129-12",
+  "createsOwnData": true,
+  "dataSetup": "Unique numeric Telegram marker seeded and replaced through own tenant user UI in1033/1039; initial field empty. No providers called.",
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "name": "shared-contract-app-neutral-and-field-semantics",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "implementation-help-app-neutral",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "app-owned-help-installation-and-playbook-wording",
+      "passed": true
+    },
+    {
+      "lcid": 1033,
+      "name": "whoami-baseline-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "lcid": 1039,
+      "name": "shared-contract-app-neutral-and-field-semantics",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "implementation-help-app-neutral",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "app-owned-help-installation-and-playbook-wording",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-baseline-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "lcid": 1033,
+      "name": "whoami-seeded1033-value",
+      "passed": true,
+      "expected": "160202611120813",
+      "actual": "160202611120813"
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-seeded1033-value",
+      "passed": true,
+      "expected": "160202611120813",
+      "actual": "160202611120813"
+    },
+    {
+      "lcid": 1033,
+      "name": "whoami-seeded1039-value",
+      "passed": true,
+      "expected": "160202611120839",
+      "actual": "160202611120839"
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-seeded1039-value",
+      "passed": true,
+      "expected": "160202611120839",
+      "actual": "160202611120839"
+    },
+    {
+      "lcid": 1033,
+      "name": "whoami-cleaned-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-cleaned-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    }
+  ],
+  "failed": 0,
+  "skipped": 0,
+  "passed": 14
+}

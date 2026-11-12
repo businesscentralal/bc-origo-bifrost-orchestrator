@@ -1,0 +1,16 @@
+{
+  "candidateSha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "candidateBranch": "codex/sindri-orchestrator159-whoami",
+  "codeChangedThisExecution": false,
+  "mainContained": true,
+  "compile": "compile-provenance.json",
+  "fullSuite": "full-suite-summary.json",
+  "MCP": "mcp-summary.json",
+  "UI": "ui-summary.json",
+  "cleanup": "cleanup-summary.json",
+  "ACs": "acceptance-matrix.json",
+  "gateway": "gateway-assessment.json",
+  "CI": "ci-summary.json",
+  "publication": "publication.json",
+  "status": "Blocked only by external AC02; independent new-head Claude/Grok/approval, Architect merge/deployment and Tester UAT remain downstream. No handoff or completion claim."
+}

@@ -1,0 +1,44 @@
+{
+  "candidateSha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "target": "main",
+  "scope": "#159: two product descriptions, regression96408, CHANGELOG",
+  "layer1": {
+    "report": "gateway-layer1-diff.json",
+    "filesScanned": 2,
+    "passed": 20,
+    "failed": 3,
+    "findings": [
+      {
+        "check": "namespace",
+        "classification": "false positive",
+        "evidence": "Help.Codeunit.al declares Origo.Bifrost.Orchestrator on line6 after XML object documentation; script expects namespace at first line."
+      },
+      {
+        "check": "hardcoded_values",
+        "classification": "documentation examples, unchanged",
+        "evidence": "user@company.is in markdown sample table lines577/1032 is not a credential; existing main content."
+      },
+      {
+        "check": "changelog",
+        "classification": "false positive project-layout lookup",
+        "evidence": "Repository-root CHANGELOG.md contains [Unreleased] \u201428.0.4.0 and #159/codeunit IDs; script searches app folder."
+      }
+    ],
+    "scriptRuntimeCorrection": "Set USERPROFILE=/home/node; initial null-path failure was line760 USERPROFILE, not TEMP."
+  },
+  "layer2": {
+    "publicCompatibility": "No API/procedure/field/enum renames/removals; only text plus regression. CI Default uses previous-release baseline.",
+    "objects": "No new object allocation; existing96408 test.",
+    "translations": "No new labels; help prose remains English per Claude decision; current CI XLF check success. UI tested1033/1039.",
+    "testCoverage": "Real Msg Contract Mgt invokes installed subscriber; full source inventory553 executed553passed0failed0skipped.",
+    "documentation": "App-specific install/playbook note moved into own Help.Orchestrator.Get chapter; CHANGELOG includes IDs.",
+    "sourceReview": "No licensing/permissions/production dispatcher changes; installed type names preserved.",
+    "limits": "AC02 upstream Foundation guard repair unresolved, so NOT READY for review handoff."
+  },
+  "initialHarnessCorrections": [
+    "AppSourceCop incorrectly applied to test manifest; recompiled with CodeCop/UICop without source edits.",
+    "Gateway USERPROFILE unset on Linux; final invocation supplies USERPROFILE=/home/node and runs diff on named local branch.",
+    "MCP app help wording is returned by invoke Help.Orchestrator.Get; metadata-only help was an insufficient assertion surface.",
+    "Web Client textbox needs activation before inputValue/fill; unsuccessful attempt wrote nothing."
+  ]
+}

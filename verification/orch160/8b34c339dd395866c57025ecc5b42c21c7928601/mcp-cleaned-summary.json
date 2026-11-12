@@ -1,0 +1,24 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "tenant": "w129-12",
+  "phase": "cleaned",
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "name": "whoami-cleaned-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-cleaned-value",
+      "passed": true,
+      "expected": "",
+      "actual": ""
+    }
+  ],
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0
+}

@@ -1,0 +1,33 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "issueUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/159",
+  "PR": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/160",
+  "AC01": {
+    "status": "PASS",
+    "evidence": [
+      "mcp-summary.json",
+      "full-suite-summary.json"
+    ],
+    "summary": "Real WhoAmI contract and implementation help are app-neutral in1033/1039; app wording is in Help.Orchestrator.Get. Field retains own-user setup and empty behavior."
+  },
+  "AC02": {
+    "status": "UNVERIFIED_DEPENDENT",
+    "newExecuted": 0,
+    "newPassed": 0,
+    "dependencyUrl": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core/pull/1309",
+    "evidence": "foundation-dependency.json",
+    "summary": "Installed FoundationTests28.0.13.0 still has unchanged broad guard. Historical40/39/1/0 is not claimed at current tip. Upstream repair or explicit disposition required; no skip or released type rename."
+  },
+  "AC03": {
+    "status": "PASS",
+    "evidence": [
+      "test-inventory.json",
+      "full-suite-summary.json",
+      "ci-summary.json"
+    ],
+    "summary": "96408 includes real-contract regression and field assertions. Complete configured Orchestrator suite553/553/0/0 locally and in pairedCI."
+  },
+  "reviewReady": false,
+  "handoffPerformed": false,
+  "issueComplete": false
+}

@@ -1,0 +1,24 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "tenant": "w129-12",
+  "phase": "seeded1039",
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "name": "whoami-seeded1039-value",
+      "passed": true,
+      "expected": "160202611120839",
+      "actual": "160202611120839"
+    },
+    {
+      "lcid": 1039,
+      "name": "whoami-seeded1039-value",
+      "passed": true,
+      "expected": "160202611120839",
+      "actual": "160202611120839"
+    }
+  ],
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0
+}

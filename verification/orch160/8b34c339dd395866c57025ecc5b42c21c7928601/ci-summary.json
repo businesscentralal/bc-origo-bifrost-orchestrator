@@ -1,0 +1,23 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43049053430",
+  "conclusion": "success",
+  "sourceGuards": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43049053456",
+  "default": {
+    "jobUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43049053430/job/130621427065",
+    "conclusion": "success",
+    "logSha256": "d3bb6c1246779b2a07a11e2aedfbc4660423e9214cdeedb2c71d341e6585402c"
+  },
+  "test": {
+    "jobUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43049053430/job/130625627971",
+    "conclusion": "success",
+    "total": 553,
+    "passed": 553,
+    "failed": 0,
+    "skipped": 0,
+    "logSha256": "7f5b4b3c30dfc03f8d7124b383162fa65d64f25f91dce00c20af4e1022ec8426"
+  },
+  "countsSource": [
+    "2026-11-11T15:46:35.3586462Z Bifrost full suite: 553 distinct source tests executed; all passed=True."
+  ]
+}

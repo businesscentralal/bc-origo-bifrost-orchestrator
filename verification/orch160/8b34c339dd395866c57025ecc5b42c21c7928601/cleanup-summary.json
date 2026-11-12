@@ -1,0 +1,24 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "tenant": "w129-12",
+  "owner": "worker-2",
+  "ownTelegramFixture": {
+    "before": "",
+    "final": "",
+    "verified": true,
+    "uiReadback": "ui-summary.json",
+    "mcpReadbacks": [
+      "mcp-cleaned-summary.json"
+    ]
+  },
+  "profile": {
+    "before": 1033,
+    "final": 1033,
+    "verified": true,
+    "language": "English (United States)"
+  },
+  "suite": "543 tests under Codeunit rollback isolation;10 under required Disabled runner with explicit fixture cleanup assertions. No suite exclusions added.",
+  "apps": "Own exact-tip Orchestrator app/test retained on own fixed tenant for AC02 continuation and related verification; not uninstalled or claimed deleted. Other installed apps/foreign historical COSMO resource untouched.",
+  "licensing": "No EULA/trial/licence/counter write or outbound provider call performed in this assignment. Foundation dependencies not republished.",
+  "completedAt": "2026-11-12T08:23:04.860453+00:00"
+}

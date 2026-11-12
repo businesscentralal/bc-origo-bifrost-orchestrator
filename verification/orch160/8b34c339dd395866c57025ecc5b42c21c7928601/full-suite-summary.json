@@ -1,0 +1,24 @@
+{
+  "codeunit": {
+    "passed": 543,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "durationMs": 42193,
+    "exitCode": 0
+  },
+  "disabled": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "durationMs": 6580,
+    "exitCode": 0
+  },
+  "total": 553,
+  "passed": 553,
+  "failed": 0,
+  "skipped": 0,
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "fullSuite": true
+}

@@ -1,0 +1,131 @@
+{
+  "project": "Bifrost Orchestrator",
+  "files_scanned": 2,
+  "mode": "diff (vs origin/main)",
+  "publisher": "Origo",
+  "summary": {
+    "total": 23,
+    "passed": 20,
+    "failed": 3,
+    "ready": false
+  },
+  "version": "28.0.4.0",
+  "total_al_files": 146,
+  "checks": {
+    "xml_doc_comments": {
+      "pass": true,
+      "findings": []
+    },
+    "app_json": {
+      "pass": true,
+      "findings": []
+    },
+    "page_code_minimal": {
+      "pass": true,
+      "findings": []
+    },
+    "data_classification": {
+      "pass": true,
+      "findings": []
+    },
+    "set_load_fields": {
+      "advisory": "Loops without SetLoadFields - consider it only for wide tables; not a gate failure",
+      "findings": [],
+      "pass": true
+    },
+    "format_evaluate_enum": {
+      "pass": true,
+      "findings": []
+    },
+    "try_prefix_convention": {
+      "pass": true,
+      "findings": []
+    },
+    "object_naming": {
+      "pass": true,
+      "findings": []
+    },
+    "one_statement_per_line": {
+      "pass": true,
+      "findings": []
+    },
+    "modernization": {
+      "pass": true,
+      "findings": []
+    },
+    "namespace": {
+      "pass": false,
+      "findings": [
+        {
+          "file": "Help.Codeunit.al"
+        }
+      ]
+    },
+    "format_guid": {
+      "pass": true,
+      "findings": []
+    },
+    "global_variables": {
+      "pass": true,
+      "findings": []
+    },
+    "commit_in_loop": {
+      "pass": true,
+      "findings": []
+    },
+    "caption_translation": {
+      "findings": [],
+      "skipped": null,
+      "pass": true
+    },
+    "today_vs_workdate": {
+      "pass": true,
+      "findings": []
+    },
+    "hardcoded_values": {
+      "pass": false,
+      "findings": [
+        {
+          "file": "Help.Codeunit.al",
+          "text": "O.AppendLine('| `\"@_who.path\"` | WhoAmI user/company context | `\"@_who.salesperson.email\"` → `\"user@company.is\"` |');",
+          "severity": "medium",
+          "line": 577,
+          "issue": "Hardcoded email"
+        },
+        {
+          "file": "Help.Codeunit.al",
+          "text": "O.AppendLine('| `_who.salesperson.email` | `user@company.is` | Salesperson email |');",
+          "severity": "medium",
+          "line": 1032,
+          "issue": "Hardcoded email"
+        }
+      ]
+    },
+    "event_subscriber_placement": {
+      "pass": true,
+      "findings": []
+    },
+    "read_isolation": {
+      "pass": true,
+      "findings": []
+    },
+    "reserved_var_names": {
+      "pass": true,
+      "findings": []
+    },
+    "with_statements": {
+      "pass": true,
+      "findings": []
+    },
+    "changelog": {
+      "pass": false,
+      "findings": [
+        "No entry for version 28.0.4.0"
+      ]
+    },
+    "confirm_in_page": {
+      "pass": true,
+      "findings": []
+    }
+  }
+}

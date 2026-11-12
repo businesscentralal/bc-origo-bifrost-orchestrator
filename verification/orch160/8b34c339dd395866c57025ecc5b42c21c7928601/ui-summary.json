@@ -1,0 +1,41 @@
+{
+  "sha": "8b34c339dd395866c57025ecc5b42c21c7928601",
+  "tenant": "w129-12",
+  "verified": true,
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "before": "",
+      "after": "160202611120813",
+      "passed": true,
+      "scenario": "Own caller Telegram field editable in English"
+    },
+    {
+      "lcid": 1039,
+      "before": "160202611120813",
+      "after": "160202611120839",
+      "passed": true,
+      "scenario": "Own caller Telegram field editable with Icelandic caption"
+    }
+  ],
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "screenshots": [
+    "ui-telegram-1033.png",
+    "ui-telegram-1039.png"
+  ],
+  "cleanup": {
+    "lcid": 1039,
+    "before": "160202611120839",
+    "after": "",
+    "passed": true,
+    "scenario": "Own caller Telegram field cleared and read back in Icelandic"
+  },
+  "profileRestoration": {
+    "restored": true,
+    "language": "English (United States)",
+    "lcid": 1033,
+    "tenant": "w129-12"
+  }
+}
