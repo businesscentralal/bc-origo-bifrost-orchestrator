@@ -29,7 +29,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Retrieves a sales quote as a PDF document.', Comment = 'is-IS=Sækir sölutilboð sem PDF-skjal.';
+        DescriptionLbl: Label 'Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.', Comment = 'is-IS=Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.';
     begin
         exit(DescriptionLbl);
     end;
@@ -43,7 +43,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Get a sales quote as a PDF file, printed with the customer''s report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed.', Comment = 'is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann.';
+        SelectionLbl: Label 'Get a sales quote as a PDF file, printed with the customer''s report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up.', Comment = 'is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.';
     begin
         exit(SelectionLbl);
     end;
@@ -111,7 +111,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Renders the sales quote with Report Selection usage S.Quote. The standard report may increase No. Printed. Saving the PDF commits the work done so far.', false, '', Preconditions);
+        Effect := Parts.Effect('write', 'Renders the sales quote with Report Selection usage S.Quote. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. Saving the PDF commits the work done so far.', false, '', Preconditions);
         exit(true);
     end;
 
@@ -148,7 +148,8 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
     procedure GetOverview(var Overview: Text): Boolean
     begin
         Overview := 'Returns one sales quote as a PDF file, printed with the report the customer''s Report Selection (usage S.Quote, default report 1304) names. ' +
-            'Send the quote number or the SystemId. Only a sales quote matches; a sales order with the same number does not.';
+            'Send the quote number or the SystemId. Only a sales quote matches; a sales order with the same number does not. ' +
+            'The standard report writes an interaction log entry when an interaction template is set up.';
         exit(true);
     end;
 
@@ -159,6 +160,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
             'Two keys that name different quotes are ConflictingIdentifiers. One that matches nothing is RecordNotFound. ' +
             'Only the success answer is a PDF; an error answer is JSON. ' +
             'The same read-permission check as Sales.SalesInvoice.Pdf is applied to Sales Header. ' +
+            'The standard report writes an interaction log entry when an interaction template is set up. ' +
             'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.';
         exit(true);
     end;

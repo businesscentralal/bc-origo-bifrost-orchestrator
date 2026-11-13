@@ -2626,9 +2626,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType TooLongNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Retrieves a sales quote as a PDF document.</source>
-          <target>Sækir sölutilboð sem PDF-skjal.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækir sölutilboð sem PDF-skjal.</note>
+          <source>Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.</source>
+          <target>Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
@@ -2638,9 +2638,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed.</source>
-          <target>Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann.</note>
+          <source>Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up.</source>
+          <target>Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">
