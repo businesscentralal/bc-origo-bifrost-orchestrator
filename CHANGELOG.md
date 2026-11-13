@@ -7,6 +7,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+- Test codeunit 96469: isolate Transform card-authoring from the optional chat provider and restore the prior setting; retain every mapping assertion after the Playbook Card chat FactBox integration.
+
 - #170 / page 10035548: Playbook Card hosts Foundation page 10077898 `Bifrost Chat FactBox ori` in the FactBox area. The part is visible only when `Bifrost Chat Mgt ori.ShowBifrostChat()` is true, and the current playbook table, SystemId and a caption that includes the playbook code are passed to `SetRecordContext`. No Language Models dependency and no new message type. Test codeunit 96475. The `playbook-card` website topic stays in `businesscentralal/bifrost`.
 
 - #91 / codeunit 10035625: preserve binary purchase-order PDFs and return a stable, safe `PurchaseOrder-<SystemId>.pdf` filename in the response MIME `name` parameter; test codeunit 96480 asserts filename propagation through the public dispatcher.
