@@ -10,7 +10,7 @@ using System.TestLibraries.Utilities;
 /// S.Order and answered as a PDF; unknown, missing, conflicting and non-order identifiers and a missing report
 /// selection answer a Bifrost error code with a nextStep. Every test creates its own customer and order.
 /// </summary>
-codeunit 96471 "Sales Order Conf Pdf Tests ori"
+codeunit 96481 "Sales Order Conf Pdf Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;

@@ -191,6 +191,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `LLM.Prompt.Complete` | One-shot AI completion for reasoning, formatting, decisions | `Help.Implementation.Get` subject `LLM.Prompt.Complete` |');
         O.AppendLine('| `Email.Draft.Set` | Create email draft with attachments | `Help.Implementation.Get` subject `Email.Draft.Set` |');
         O.AppendLine('| `Customer.Statement.Pdf` | Generate customer statement PDF | `Help.Implementation.Get` subject `Customer.Statement.Pdf` |');
+        O.AppendLine('| `Sales.Quote.Pdf` | Print a sales quote as PDF | `Help.Implementation.Get` subject `Sales.Quote.Pdf` |');
         O.AppendLine('| `Iceland.Kennitala.Validate` | Validate Icelandic kennitala | `Help.Implementation.Get` subject `Iceland.Kennitala.Validate` |');
         O.AppendLine('| `Iceland.AddressInfo.Get` | Lookup address from national registry | `Help.Implementation.Get` subject `Iceland.AddressInfo.Get` |');
         O.AppendLine('| `DocumentExchange.Advania.*` | E-document exchange (GetUnread, GetDocument, UpdateStatus) | `Help.Implementation.Get` subject `DocumentExchange.Advania.GetUnread` |');

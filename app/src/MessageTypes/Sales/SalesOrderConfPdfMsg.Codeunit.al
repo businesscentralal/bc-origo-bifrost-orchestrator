@@ -11,7 +11,7 @@ using System.Utilities;
 /// S.Order names for its Sell-to Customer (by default 1305 Standard Sales - Order Conf.) and answers the PDF.
 /// The order is found by No. or SystemId from subject, orderNo, orderId, documentNo or documentId.
 /// </summary>
-codeunit 10035629 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
+codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
     Permissions = tabledata "Sales Header" = R,
@@ -306,8 +306,8 @@ codeunit 10035629 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         PermissionNextStepTxt: Label 'Ask an administrator to grant read access to Sales Header.', Comment = 'is-IS=Biddu kerfisstjóra um lesaðgang að Sales Header.';
         MissingOrderErr: Label 'No sales order was named. Send the order No. or SystemId.', Comment = 'is-IS=Engin sölupöntun var tilgreind. Sendu númer eða SystemId pöntunarinnar.';
         MissingNextStepTxt: Label 'Send the order No. or SystemId as subject or as data.orderNo.', Comment = 'is-IS=Sendu númer eða SystemId pöntunarinnar sem subject eða sem data.orderNo.';
-        ConflictErr: Label '%1 %2 and %3 %4 name different sales orders.', Comment = 'is-IS=%1 %2 og %3 %4 vísa á mismunandi sölupantanir.';
-        SameOrderTxt: Label 'An identifier of the same order as %1', Comment = 'is-IS=Auðkenni sömu pöntunar og %1';
+        ConflictErr: Label '%1 %2 and %3 %4 name different sales orders.', Comment = '%1 = first identifier source, %2 = first value, %3 = second identifier source, %4 = second value, is-IS=%1 %2 og %3 %4 vísa á mismunandi sölupantanir.';
+        SameOrderTxt: Label 'An identifier of the same order as %1', Comment = '%1 = first order identifier, is-IS=Auðkenni sömu pöntunar og %1';
         ConflictNextStepTxt: Label 'Send one identifier, or identifiers of the same order.', Comment = 'is-IS=Sendu eitt auðkenni, eða auðkenni sömu pöntunar.';
         NoReportErr: Label 'No report is set up for Report Selections usage S.Order.', Comment = 'is-IS=Engin skýrsla er skilgreind fyrir notkunina S.Order í skýrsluvali.';
         ExpectedPermissionTxt: Label 'Read permission on Sales Header', Comment = 'is-IS=Lesheimild á Sales Header';

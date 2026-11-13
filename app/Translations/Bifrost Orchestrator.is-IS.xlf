@@ -2496,7 +2496,7 @@
         <trans-unit id="Codeunit 208451927 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1 %2 and %3 %4 name different sales orders.</source>
           <target>%1 %2 og %3 %4 vísa á mismunandi sölupantanir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=%1 %2 og %3 %4 vísa á mismunandi sölupantanir.</note>
+          <note from="Developer" annotates="general" priority="2">%1 = first identifier source, %2 = first value, %3 = second identifier source, %4 = second value, is-IS=%1 %2 og %3 %4 vísa á mismunandi sölupantanir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - NamedType ConflictErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - NamedType 1628813333" size-unit="char" translate="yes" xml:space="preserve">
@@ -2562,7 +2562,7 @@
         <trans-unit id="Codeunit 208451927 - NamedType 2486759152" size-unit="char" translate="yes" xml:space="preserve">
           <source>An identifier of the same order as %1</source>
           <target>Auðkenni sömu pöntunar og %1</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni sömu pöntunar og %1</note>
+          <note from="Developer" annotates="general" priority="2">%1 = first order identifier, is-IS=Auðkenni sömu pöntunar og %1</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - NamedType SameOrderTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -2582,6 +2582,180 @@
           <target>Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The quote identifiers name different sales quotes.</source>
+          <target>Auðkenni tilboðsins nefna mismunandi sölutilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni tilboðsins nefna mismunandi sölutilboð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1157201780" size-unit="char" translate="yes" xml:space="preserve">
+          <source>identifiers for the same sales quote</source>
+          <target>auðkenni fyrir sama sölutilboð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=auðkenni fyrir sama sölutilboð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1628813333" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send one quote number or one SystemId, or make every identifier name the same quote.</source>
+          <target>Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 3485554166" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The sales quote PDF is empty.</source>
+          <target>PDF-skjal sölutilboðsins er tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=PDF-skjal sölutilboðsins er tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType EmptyPdfErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1439794518" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check Report Selection usage S.Quote for the sell-to customer.</source>
+          <target>Athugaðu skýrsluval notkunar S.Quote fyrir viðskiptamanninn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athugaðu skýrsluval notkunar S.Quote fyrir viðskiptamanninn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType EmptyPdfNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 860338395" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a GUID SystemId</source>
+          <target>GUID SystemId</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=GUID SystemId</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType GuidExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 248097893" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter "%1" must be text.</source>
+          <target>Færibreytan "%1" verður að vera texti.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, is-IS=Færibreytan "%1" verður að vera texti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType InvalidKeyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 2295998964" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a text quote number or SystemId</source>
+          <target>texti með númeri tilboðs eða SystemId</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=texti með númeri tilboðs eða SystemId</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType InvalidKeyExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 2767610517" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send "%1" as text, not a number, boolean, object or array.</source>
+          <target>Sendu "%1" sem texta, ekki tölu, Boolean-gildi, hlut eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, is-IS=Sendu "%1" sem texta, ekki tölu, Boolean-gildi, hlut eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType InvalidKeyNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 416993813" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A sales quote number or SystemId is required.</source>
+          <target>Númer sölutilboðs eða SystemId vantar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer sölutilboðs eða SystemId vantar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType MissingQuoteErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 3115631716" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a quote number or a SystemId</source>
+          <target>númer tilboðs eða SystemId</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=númer tilboðs eða SystemId</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType MissingQuoteExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1135110981" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send subject, quoteNo or systemId for one sales quote.</source>
+          <target>Sendu subject, quoteNo eða systemId fyrir eitt sölutilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu subject, quoteNo eða systemId fyrir eitt sölutilboð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType MissingQuoteNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1726334730" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter "%1" must be a SystemId.</source>
+          <target>Færibreytan "%1" verður að vera SystemId.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, is-IS=Færibreytan "%1" verður að vera SystemId.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType NotAGuidErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1677569946" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a GUID SystemId in "%1".</source>
+          <target>Sendu GUID SystemId í "%1".</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, is-IS=Sendu GUID SystemId í "%1".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType NotAGuidNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1213084520" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a PDF file</source>
+          <target>PDF-skrá</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=PDF-skrá</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType PdfExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 4125115575" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a quote number of at most 20 characters</source>
+          <target>númer tilboðs sem er í mesta lagi 20 stafir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=númer tilboðs sem er í mesta lagi 20 stafir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType QuoteNoExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 1258090656" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sales quote "%1" was not found (from %2).</source>
+          <target>Sölutilboð "%1" fannst ekki (úr %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = value, %2 = key, is-IS=Sölutilboð "%1" fannst ekki (úr %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType QuoteNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 3468863249" size-unit="char" translate="yes" xml:space="preserve">
+          <source>an existing sales quote</source>
+          <target>sölutilboð sem er til</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=sölutilboð sem er til</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType QuoteNotFoundExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 3833436032" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check the quote number. A sales order or another document with the same number is not a quote.</source>
+          <target>Athugaðu númer tilboðsins. Sölupöntun eða annað skjal með sama númeri er ekki tilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athugaðu númer tilboðsins. Sölupöntun eða annað skjal með sama númeri er ekki tilboð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType QuoteNotFoundNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 63599121" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check that the SystemId belongs to a sales quote.</source>
+          <target>Athugaðu að SystemId tilheyri sölutilboði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athugaðu að SystemId tilheyri sölutilboði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType QuoteSystemIdNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 3255873965" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter "%1" is longer than 20 characters and is not a SystemId.</source>
+          <target>Færibreytan "%1" er lengri en 20 stafir og er ekki SystemId.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, is-IS=Færibreytan "%1" er lengri en 20 stafir og er ekki SystemId.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType TooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - NamedType 3363460077" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the quote number (at most 20 characters) or the SystemId.</source>
+          <target>Sendu númer tilboðs (í mesta lagi 20 stafir) eða SystemId.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu númer tilboðs (í mesta lagi 20 stafir) eða SystemId.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType TooLongNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Retrieves a sales quote as a PDF document.</source>
+          <target>Sækir sölutilboð sem PDF-skjal.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækir sölutilboð sem PDF-skjal.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>sales quote pdf, print quote, download quote, quote copy, reprint quote</source>
+          <target>sölutilboð pdf, prenta tilboð, sækja tilboð, afrit tilboðs, endurprenta tilboð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=sölutilboð pdf, prenta tilboð, sækja tilboð, afrit tilboðs, endurprenta tilboð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed.</source>
+          <target>Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read permission denied for table %1.</source>
+          <target>Lesheimild neitað fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method HasSalesHeaderReadPermission - NamedType ReadPermissionDeniedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2255965785" size-unit="char" translate="yes" xml:space="preserve">
+          <source>read permission on the data of table %1</source>
+          <target>lesheimild á gögnum í töflu %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=lesheimild á gögnum í töflu %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method HasSalesHeaderReadPermission - NamedType ReadPermissionExpectedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 1163640856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator for a permission set that reads the table.</source>
+          <target>Biddu kerfisstjóra um heimildasamstæðu sem les töfluna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um heimildasamstæðu sem les töfluna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method HasSalesHeaderReadPermission - NamedType ReadPermissionNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 739276807 - Method 2888859624 - NamedType 1934196263" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data.</source>
+          <target>Valfrjálst Boolean-gildi á efsta stigi, sjálfgefið false. Þegar það er true er óþekktum gagnalyklum hafnað fyrir keyrslu með UnknownParameter. Ekki setja þennan valkost inni í data.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Valfrjálst Boolean-gildi á efsta stigi, sjálfgefið false. Þegar það er true er óþekktum gagnalyklum hafnað fyrir keyrslu með UnknownParameter. Ekki setja þennan valkost inni í data.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method QuoteEnvelope - NamedType StrictDescriptionTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3051959341 - NamedType 1146070434" size-unit="char" translate="yes" xml:space="preserve">
           <source>the Scheduled Entry card (Job Queue User ID)</source>
