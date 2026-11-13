@@ -40,11 +40,27 @@ codeunit 96408 "WhoAmI Contract Tests ori"
                     Assert.IsTrue(Description.Contains('calling user'), 'Caller-specific source');
                     Assert.IsTrue(Description.Contains('Bifrost user setup'), 'Setup source');
                     Assert.IsTrue(Description.Contains('empty string'), 'Missing value behavior');
-                    Assert.IsTrue(Description.Contains('only while Bifrost Orchestrator is installed'), 'Installation scope');
-                    Assert.IsTrue(Description.Contains('@_who.telegramChatId'), 'Playbook reference');
                 end;
         Assert.AreEqual(1, Found, 'One field from the automatic installed subscriber');
         Assert.IsTrue(Contract.Contains('errors'), 'Foundation error chapter retained');
         Assert.IsTrue(Contract.Contains('metering'), 'Foundation metering chapter retained');
     end;
+
+    /// <summary>Shared WhoAmI chapters remain app-neutral when this subscriber is installed.</summary>
+    [Test]
+    procedure Scenario_AC03_WhoAmIContract_HasNoAppName()
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Contract: JsonObject;
+        ContractText: Text;
+    begin
+        // [SCENARIO #159] The installed subscriber contributes no app branding to shared help.
+        // [GIVEN] The real Foundation contract with installed event subscribers.
+        Assert.IsTrue(ContractMgt.GetContract("Message Type ori"::"Help.WhoAmI.Get", Contract), 'WhoAmI has a contract');
+        // [WHEN] All shared chapters are serialized, including nested response-field descriptions.
+        Contract.WriteTo(ContractText);
+        // [THEN] The app name is absent; the separate field test pins its caller/setup semantics.
+        Assert.IsFalse(ContractText.ToLower().Contains('orchestrator'), 'Shared WhoAmI contract must remain app-neutral');
+    end;
+
 }
