@@ -166,15 +166,23 @@ codeunit 96469 "Transform Verify Tests ori"
     procedure Scenario_AC44_CardAuthorsTransformMapping()
     var
         Step: Record "Playbook Step ori";
+        BifrostSetup: Record "Setup ori";
         Mapping: Record "Playbook Transform ori";
         Playbook: Record "Playbook ori";
         Card: TestPage "Playbook Card ori";
         PlaybookCode: Code[20];
+        PreviousChatProvider: Enum "Chat Provider Type ori";
     begin
         // Story #155, AC4.4 | Time: independent of Today/WorkDate | Risk: None
         PlaybookCode := NewCode();
         Lib.CreatePlaybook(PlaybookCode);
         Playbook.Get(PlaybookCode);
+        // This surface test does not exercise chat. Isolate the optional FactBox from
+        // any provider left configured by another installed feature or test app.
+        BifrostSetup.Get();
+        PreviousChatProvider := BifrostSetup."Chat Provider Type";
+        BifrostSetup."Chat Provider Type" := "Chat Provider Type ori"::None;
+        BifrostSetup.Modify(true);
         Card.OpenEdit();
         Card.GoToRecord(Playbook);
         Card.Steps.New();
@@ -199,6 +207,9 @@ codeunit 96469 "Transform Verify Tests ori"
         Mapping.SetRange("Step No.", 10);
         Assert.IsTrue(Mapping.FindFirst(), 'Mapping saved from user surface');
         Assert.AreEqual('literal value', Mapping."Argument 1", 'Argument retained');
+        BifrostSetup.Get();
+        BifrostSetup."Chat Provider Type" := PreviousChatProvider;
+        BifrostSetup.Modify(true);
         Lib.Cleanup(PlaybookCode);
     end;
 
