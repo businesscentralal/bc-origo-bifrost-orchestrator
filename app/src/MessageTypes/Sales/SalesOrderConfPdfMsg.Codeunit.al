@@ -18,6 +18,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
                   tabledata "Report Selections" = R,
                   tabledata "Custom Report Selection" = R;
 
+    /// <summary>
+    /// Returns whether the caller can read sales headers.
+    /// </summary>
     procedure IsEnabled(): Boolean
     var
         RecRef: RecordRef;
@@ -26,11 +29,17 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(RecRef.ReadPermission());
     end;
 
+    /// <summary>
+    /// Identifies Sales Header as the record selection table.
+    /// </summary>
     procedure GetFilterTableNo(): Integer
     begin
         exit(Database::"Sales Header");
     end;
 
+    /// <summary>
+    /// Describes the order confirmation PDF operation in the session language.
+    /// </summary>
     procedure GetDescription(): Text[250]
     var
         DescriptionLbl: Label 'Prints a sales order confirmation as a PDF document.', Comment = 'is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.';
@@ -38,6 +47,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(DescriptionLbl);
     end;
 
+    /// <summary>
+    /// Returns localized discovery keywords.
+    /// </summary>
     procedure GetKeywords(): Text
     var
         KeywordsLbl: Label 'order confirmation pdf, sales order pdf, print order confirmation, confirm order to customer, order confirmation copy, print sales order', Comment = 'is-IS=pöntunarstaðfesting pdf, sölupöntun pdf, prenta pöntunarstaðfestingu, staðfesta pöntun til viðskiptamanns, afrit pöntunarstaðfestingar, prenta sölupöntun';
@@ -45,6 +57,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(KeywordsLbl);
     end;
 
+    /// <summary>
+    /// Explains when to select this message type.
+    /// </summary>
     procedure GetSelectionDescription(): Text
     var
         SelectionLbl: Label 'Get an open sales order as an order confirmation PDF, printed with the customer''s report selection for usage S.Order. Increases the order''s No. Printed. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
@@ -52,6 +67,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(SelectionLbl);
     end;
 
+    /// <summary>
+    /// Describes accepted order identifiers and the PDF content type.
+    /// </summary>
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
@@ -62,6 +80,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Describes every supported order identifier source.
+    /// </summary>
     procedure GetTarget(var Target: JsonArray): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
@@ -74,6 +95,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Lists the supported identifier parameters.
+    /// </summary>
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
@@ -85,6 +109,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Describes the binary PDF response.
+    /// </summary>
     procedure GetResponse(var Response: JsonObject): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
@@ -95,6 +122,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Describes refusal codes, causes and corrective next steps.
+    /// </summary>
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
@@ -114,6 +144,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Discloses printing, interaction logging and transaction side effects.
+    /// </summary>
     procedure GetEffect(var Effect: JsonObject): Boolean
     begin
         Effect.Add('effect', 'write');
@@ -122,11 +155,17 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Uses the Foundation default message metering contract.
+    /// </summary>
     procedure GetMetering(var Metering: JsonObject): Boolean
     begin
         exit(false);
     end;
 
+    /// <summary>
+    /// Lists related order, invoice and report operations.
+    /// </summary>
     procedure GetRelated(var Related: JsonArray): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
@@ -136,6 +175,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Describes the order confirmation workflow.
+    /// </summary>
     procedure GetWorkflow(var Workflow: JsonObject): Boolean
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
@@ -149,6 +191,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Provides example request envelopes.
+    /// </summary>
     procedure GetExamples(var Examples: JsonArray): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
@@ -158,6 +203,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Returns the short contract overview.
+    /// </summary>
     procedure GetOverview(var Overview: Text): Boolean
     begin
         Overview := 'Returns an open sales order as an order confirmation PDF, printed with the report the customer''s Report Selection (usage S.Order) names; by default the standard order confirmation. ' +
@@ -165,6 +213,9 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Documents report selection and printing behavior.
+    /// </summary>
     procedure GetNotes(var Notes: Text): Boolean
     begin
         Notes := 'subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. ' +
@@ -174,11 +225,17 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         exit(true);
     end;
 
+    /// <summary>
+    /// Declares this operation inbound.
+    /// </summary>
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit("Msg Direction ori"::Inbound);
     end;
 
+    /// <summary>
+    /// Validates identifiers and permissions, then returns the selected order confirmation PDF.
+    /// </summary>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         SalesHeader: Record "Sales Header";
