@@ -1,0 +1,2982 @@
+[
+  {
+    "id": 96430,
+    "method": "ErrorResponseKeepsCodeAndError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ErrorResponseWithoutCodeUsesErrorOrMessage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "NonErrorResponsesAreNotErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ErroredIterationsAreCountedApartFromNo",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_ErrorAnswer_FailsStepAndRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_ErrorAnswer_FailsStepAndRun_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_RaisedError_FailsStepAndRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_RaisedError_FailsStepAndRun_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_AnsweredNo_DoesNotFailTheRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_AnsweredNo_DoesNotFailTheRun_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_AnsweredYes_Completes",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "SingleCheck_AnsweredYes_Completes_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_ErrorAnswers_AreFailuresNotNo",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_ErrorAnswers_AreFailuresNotNo_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_RaisedErrors_AreFailuresNotNo",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_RaisedErrors_AreFailuresNotNo_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_AnsweredNo_IsCheckFailedAndDoesNotFailTheRun_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_AnsweredYes_Succeeds",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ForEachCheck_AnsweredYes_Succeeds_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96430,
+    "method": "ActionStep_ErrorAnswerWithSuccessCondition_StillFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "TheGuardSeesEveryOrchestratorType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_DeclaresTheRequiredChapters",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_EnvelopeStatesSubjectStrictAndContentType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_ParametersAndResponseFieldsAreDescribed",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_EachErrorHasACodeOrATextAndTheStepToTake",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_EffectMatchesTheDirection",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_ExamplesAreRealRequestsAndAnswers",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_RelatedAndWorkflowNameRealTypes",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_HelpTextHasEnoughSubstanceAndNoAlObjectNames",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96441,
+    "method": "EveryType_DiscoveryTextsExistAndAreTranslated",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC32_GeneratedPlaybookHasNoErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC33_CopyTwicePreservesKeysAndValues",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "Scenario_AC45_TransformedCopyRunsTwice",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "Scenario_AC33_GeneratedCopyEnqueuesAndSchedules",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC34_ParentBeforeOrderedChildren",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC36_RegenerationPreservesUnrelatedPlaybook",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC36_ExistingUnrelatedCodeIsRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC31_InvalidFieldRefusedAtGeneration",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC31_DuplicateDestinationRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC31_SkippedKeyCannotCreateUnnamedRows",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC35_RestrictedSourceFailsVisibly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "AC35_UncoveredDestinationFailsVisibly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "Scenario_AC35_WriteOnceFieldFailsVisibly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96465,
+    "method": "Scenario_AC31_InvalidSourceViewFailsClosed",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96466,
+    "method": "AC31_CardCreatesMappedPlaybook",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "JobQueueEntry_WriteHint",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "JobQueueEntry_WriteHint_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "ScheduledTask_WriteHint",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "ScheduledTask_WriteHint_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "ReportRequestPreset_ReadWriteHint",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "ReportRequestPreset_ReadWriteHint_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "Customer_NoCompanionHints",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96428,
+    "method": "Customer_NoCompanionHints_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "JQParameterStoresAndRetrievesRequestData",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "JQParameterGetRequestDataReturnsEmptyWhenNoBlob",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookCreatesNonRecurringJQEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookCreatesParameterRecord",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookNoParameterWhenRequestEmpty",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookSetsJobQueueCategory",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookEnforcesMinimumDelay",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookDefaultOverloadUses60SecDelay",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookFailsWhenDisabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "DeleteJQEntryDeletesParameterRecord",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookSchedulesRealTask",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookDispatchesAndCreatesInstance",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96414,
+    "method": "EnqueuePlaybookSetsRecordIdToProcess",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartSetsEntryToReady",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartSetsOnHoldEntryToReady",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartErrorsForMissingId",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartIfNeededRestartsErrorEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartIfNeededSkipsReadyEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartIfNeededRestartsOnHoldEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartResponseIncludesEntryDetails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96420,
+    "method": "RestartAcceptsIdInSubject",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96407,
+    "method": "NewEntryHidesDialogs",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96407,
+    "method": "ExistingEntryHidesDialogs",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96407,
+    "method": "InteractiveEntryOpensCard",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC01_NeverRunDailyKeepsDueSlot",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC02_NoEndingTimeKeepsDueSlot",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC02_HourlyKeepsLatestDueSlot",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC02_FutureWindowWaits",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC07_ElapsedDailyWindowWaits",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC07_ElapsedHourlyWindowWaits",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC03_SuccessAdvancesDaily",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC01_LateDailyRunKeepsNextDayAnchor",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC01_MidnightDelayKeepsSameDayAnchor",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC01_CreatedInsideWindowRunsFirstSlot",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC05_StartChangeAndClearSyncReference",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC01_AC04_AC06_FirstDispatchRunsPlaybook",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96443,
+    "method": "Scenario_AC05_TemplateKeepsJobAndSyncsReference",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96422,
+    "method": "HelpGetReturnsNonEmptyMarkdown",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96422,
+    "method": "WorkspacePreviewReturnsSysNamespace",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96422,
+    "method": "WorkspacePreviewPassesThroughInitialRequest",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96422,
+    "method": "EveryOrchestratorMessageTypeRefusesAnUnlicensedDirectCall",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96455,
+    "method": "ExecutingTypesAreInbound",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96455,
+    "method": "ReadTypesStayOutboundOrBoth",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Batch1MessagesHaveContractChaptersAndDiscovery",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "CommittingTypesDeclareIrreversible",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "NonCommittingTypesKeepTheirEffect",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC05_NotificationType_KeepsMainContract",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC05_RetryPolicy_KeepsMainContract",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_JobQueueEntryRestartIfNeeded_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_JobQueueEntryRestart_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_OrchestratorGet_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_PlaybookEnqueue_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_PlaybookRun_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_PlaybookSchedule_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_EmailSend_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_EntryRegister_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_EntryRestart_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_EntryRun_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_EntrySchedule_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_StatusGet_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_StatusRestartIfNeeded_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_StatusRestart_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96452,
+    "method": "Scenario_AC04_TelegramMessage_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Batch2MessagesHaveContractChaptersAndDiscovery",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "CommittingTypesDeclareIrreversible",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "PreviewDisclosesNestedCommit",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "NonCommittingTypesKeepTheirEffect",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC05_Format_KeepsMainContract",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC05_LayoutFormat_KeepsMainContract",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC04_WorkspacePreview_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC04_ReportGet_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC04_ReportList_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC04_ReportRun_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC04_ReportSaveAs_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96453,
+    "method": "Scenario_AC04_ReportLayoutSet_KeepsMainErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "BinaryEnvelopePreservesOfficeContentType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "BinaryEnvelopePreservesMaximumContentType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CodeunitsSubscribeAndAppearInSetupOnOpenGeneralSetupPage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "JobQueueSchedulerCategoryCodeIsSetOnOpenGeneralSetupPage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "JobQueueIsCreatedAndEnqueuedForCodeunitsInJobQueueSchedulerEntriesWhenJobQueueHendlerCUIsRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "BlockedEntriesAreSkipped",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "EntriesWithEarliestDateTimeSetLaterThenMomentOfRunningAreSkipped",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "EarliestStartDateTimeIsRecalculated",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "NoneNotificationType_EnterNotificationReceipient_VerifyErrorShouldBeBlank",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "EMailNotificationType_NonEmailEntered_VerifyErrorShouldBeEmailAddress",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "EMailNotificationType_RestartNotificationType_VerifyEMailContent",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "BlockJobQueueSchedulerEntryOpenFromJQEntryCard",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "JobQueueSchedulerEntryCardOpensWhenEntryExistsAndUserRefusesOverwrite",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplateWeekdayValidation",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplateTimeRangeValidation",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplateCanBeInsertedWithValidData",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplatesActionNavigationFromSetupPage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplateCardPageCanBeOpened",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplateNoOfMinutesBetweenRunsValidation",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RecurringTemplateNextRunDateFormulaValidation",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "SelectTemplateOnSchedulerEntry_VerifyAllFieldsCopy",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "ManuallyModifyWeekdayFields_VerifySyncToJobQueueEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "ModifyStartingEndingTime_VerifyValidationAndSync",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CreateSchedulerEntryFromJobQueueEntry_VerifyRecurringFieldsCopy",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "ChangingTemplate_VerifyExistingValuesOverwritten",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "TimeZoneCode_VerifyStored",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_NextRunDateFormula_CalculatesCorrectDate",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_NextRunDateFormula_InvalidFormulaRaisesError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_WeekdaysSelected_SchedulesOnCorrectDay",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_OutsideTimeWindow_SchedulesNextValidTime",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_FridayWithWeekendExcluded_SchedulesMonday",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_LastExecYesterday_CalculatesCorrectNextRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "CalcNextRunTime_NextRunDateFormula_WithLastExec_AdvancesCorrectly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RetryPolicyAlways_ErrorEntry_AlwaysRestartsAndIncrementsCounter",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RetryPolicyThreeTimes_ThirdRestartAllowed_FourthSuppressed",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RetryPolicyNever_ErrorEntry_SuppressesImmediately",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RetryPolicy_ErrorCounterResetsOnSuccess",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96411,
+    "method": "RestartNotificationFailure_DoesNotAbortScheduler_JobStillRestarted",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96423,
+    "method": "Scenario_AC03_LicenceAdmin_OpensSetupInEnglish",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96423,
+    "method": "Scenario_AC03_LicenceAdmin_OpensSetupInIcelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96423,
+    "method": "OrchestratorIsRegisteredInTheAppRegistry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "Scenario_AC04_FoundationFull_Enabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "Scenario_AC05_NoUserSetupRead_Disabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "Scenario_AC06_UnsetToken_Disabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "Scenario_AC06_EmptyChat_Disabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "Scenario_AC01_IndirectRead_Enabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "SecretCodesFollowTheDocumentedPattern",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "LongCredentialCodesFitCode50AndStayDistinct",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "RegisterAllRegistersTheTelegramBotToken",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "RegisterAllRegistersBothSecretsOfEveryCredential",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "RegisterAllIsIdempotent",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "TelegramBotTokenSetIsSetAndClearRoundTrip",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "CredentialClientIdAndSecretRoundTrip",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "DeletingACredentialClearsItsSecrets",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "DeletingACredentialLeavesNoMissingSecretsBehind",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "RenamingACredentialMovesItsSecrets",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "AppSetupPageReportsTheTelegramSecretStatus",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96403,
+    "method": "BifrostSetupExposesOrchestratorSetupAndPlaybooks",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96456,
+    "method": "AskForEach_RunGateInBothLanguages",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "AskDataCondition_RunGateInBothLanguages",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "AskTrace_RunGateInBothLanguages",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "Scrub_PreservesAllOtherProperties",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "Scrub_UnchangedPayloadsRetainBytes",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "SingleStep_NoTraceInAnyOrchestratorStore",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "FailedStep_WorkspaceSnapshotHasNoTrace",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "ForEach_NoTraceInLogsWorkspaceOrSummary",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "Paged_NoTraceAcrossPageAndIterationLogs",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96456,
+    "method": "RunAndHelp_DescribeTimeoutAndRetentionBoundaries",
+    "isolation": "Disabled"
+  },
+  {
+    "id": 96418,
+    "method": "EmptyConditionSetIsTrue",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "AllConditionsInAGroupMustHold",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "AnyGroupHoldingIsEnough",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "GroupsAreIndependentNotLeftToRight",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "ConditionTypesAreEvaluatedIndependently",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "HasConditionsSeesOnlyItsOwnType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "StepTypeDefaultsToAction",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "BeginRunSeedsRunNamespace",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "RollUpCountsAndFlagsFailure",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "ExcludedStepsLeaveRunStatusAlone",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "EscalateFailsTheRunWithoutTouchingCounters",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "RepeatedStepAccumulatesInsteadOfOverwriting",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "StatusDegradesAndNeverImproves",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "IterationFailuresCarryItemAndError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "CheckFailuresAreCountedSeparatelyFromErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "FailureListIsCappedButCountsStayExact",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "SkippedStepRecordsTheReason",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "SummaryPathsFeedTheReportNotTheWorkspaceData",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "RunAndStepsFilterToTheReportPayload",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "StatusTextComesFromTheEnumName",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "MessageTypeTextComesFromTheEnumName",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "ExcludedStepsAreStillReferenceableUnderTail",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96418,
+    "method": "TailStaysOutOfTheReportPayload",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "ReadAndWriteAllowed",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "ExternalWritesRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "MissingContractRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "MissingChapterRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "MissingEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "UnknownEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "NullEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "ArrayEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "ObjectEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "BooleanEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "NumberEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "CaseVariantRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "SafeChainIgnoresDisabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "UnsafeChainNamesStep",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "CheckStepCannotHideEffect",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "SafeChainIgnoresTransform",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "IrreversibleMessageFailsBesideTransform",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC04_ExecutorEmailRefusedBeforeDispatch",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC04_ExecutorTelegramRefusedBeforeDispatch",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC04_ExecutorMissingContractRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC04_ExecutorMalformedEffectRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC04_ReadDispatchOmitsCommit",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC05_SetParametersResetsCommitSignal",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96461,
+    "method": "AC05_FailedRunConsumesCommitSignal",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example1_PerRecordDecisionThenWrite_VerifiesClean",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example1_PerRecordDecisionThenWrite_VerifiesClean_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example2_ReadOnlyReport_VerifiesClean",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example2_ReadOnlyReport_VerifiesClean_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example3_AntiPattern_WarnsExactlyOnce",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example3_AntiPattern_WarnsExactlyOnce_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example1_WithEveryStepDisabled_StillVerifiesWithoutErrors",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Help_CarriesTheWorkflowTheExamplesAndTheRules",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Help_CarriesTheBase64OfEveryExampleTemplate",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example4_PostingAudit_VerifiesForTheInstalledAskType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example4_PostingAudit_VerifiesForTheInstalledAskType_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example4_AskTemplateRaisesNoneOfTheAskWarnings",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Help_CarriesThePostingAuditExample",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Example4_RunRecordsPassFailUnknownAndErrorThenAllPassNotice",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96436,
+    "method": "Help_ListsEveryFindingCodeOfVerify",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_RefusesAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_RefusesAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_RefusesAWarning_UnlessIgnoreWarnings",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_RefusesAWarning_UnlessIgnoreWarnings_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_IgnoreWarnings_NeverWaivesAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_ErrorOnDisabledStep_DoesNotBlock",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Run_CleanPlaybook_Runs",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Schedule_RefusesAnError_AndCreatesNoEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Schedule_RefusesAnError_AndCreatesNoEntry_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Schedule_CleanPlaybook_IsScheduled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "VerifyScheduleAndRun_AfterAnUncommittedWrite_StillVerify",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "Schedule_RefusesAWarning_UnlessIgnoreWarnings",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "CreateOrchestratorEntry_RefusesAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "CreateOrchestratorEntry_WarningNeedsIgnoreWarnings",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "ScheduledPlaybookWithErrors_IsReported",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "UnscheduledPlaybookWithErrors_HasNoScheduleFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "VerifyMessageType_ReportsValidAndCounts",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96437,
+    "method": "VerifyMessageType_CleanPlaybook_IsValid",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "PlaybookRun_StampsHeader",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "PlaybookRun_StampsHeader_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "PlaybookEnqueue_ThenJobQueueRun_StampsHeader",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "PlaybookEnqueue_ThenJobQueueRun_StampsHeader_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "ScheduledRun_StampsHeader",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "ScheduledRun_StampsHeader_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "FailedRun_StampsHeaderFailed",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "FailedRun_StampsHeaderFailed_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "SecondRun_ReplacesTheFirst",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "EmptyPlaybook_StampsHeaderCompleted",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96432,
+    "method": "HeaderIsRunningWhileTheRunIsInFlight",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "PrimaryKeyUnderFieldsWarnsEnglish",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "PrimaryKeyUnderFieldsWarnsIcelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "CorrectPathsResolve",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "UnresolvedRequestsAreRejected",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "LiteralMailAndResolvedDataRemainValid",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "SameIterationAndFilteredDumpResolve",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "SingleCheckMissingReferenceFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "ForEachCheckMissingReferenceFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96444,
+    "method": "ForEachActionMissingReferenceFailsIcelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96421,
+    "method": "RunErrorsWhenPlaybookCodeMissing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96421,
+    "method": "RunErrorsForUnknownPlaybookCode",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96421,
+    "method": "Scenario_AC07_PagedStep_ReceivesItsOwnSkipAndTake",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "AskForEach_BoundsAndTypeAreChecked",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "AskForEach_DisabledAndTranslated",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "CleanPlaybook_HasNoFindings",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "EmptyPlaybook_HasNoFindings",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "UnlistedMessageType_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "UnlistedMessageType_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ListedEnabledMessageType_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "UnlistedMessageType_NameAndEnabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "KnownTypeThatIsNotEnabled_WithStartCondition_IsNotReported",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "UnlistedType_WithStartCondition_IsStillAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "CheckWithoutSuccessCondition_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "CheckWithoutSuccessCondition_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "CheckWithSuccessCondition_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ActionWithoutSuccessCondition_IsAWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ActionWithSuccessCondition_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "NextStepNotFound_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "NextStepExistingOrZero_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "IterateSource_Missing_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "IterateSource_NotEarlier_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "IterateSource_Earlier_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "SkipGate_Missing_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "SkipGate_NotEarlier_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "SkipGate_OnSingleStep_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "SkipGate_OnForEachCheck_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ForEachSource_WithoutNoOfRecords_Warns",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ForEachSource_WithoutNoOfRecords_Warns_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ForEachSource_WithNoOfRecords_NoWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ForEachSource_NotARecordReader_NoWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "ForEachSource_TwoConsumers_WarnsOnce",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "UnsafeWrite_OnDisabledStep_IsNotReported",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "FindingOnDisabledStep_CarriesStepDisabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "FindingOnEnabledStep_HasNoStepDisabled",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96435,
+    "method": "Findings_AreInStepOrder_WithAllFields",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "AskSchema_ConditionAndPresenceBoundaries",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "AskTrace_LiteralTrueOnly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "AskTemplate_TranslatedMessagesAndNextSteps",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "TemplateNotJson_Truncated_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "TemplateNotJson_Truncated_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "TemplateNotJson_Array_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "TemplateValidOrEmpty_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_Missing_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_Missing_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_CollectAndListForms_AreChecked",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_NotEarlier_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_NotEarlier_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_ToItself_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_ToEarlierStep_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_ShapesThatAreNotReferences_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepReference_RepeatedReference_IsReportedOnce",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_Unknown_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_Unknown_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_Known_NoFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_EmptyReferenceOrAbsent_IsNotLookedUp",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_OnOtherMessageType_IsNotLookedUp",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_LongerThanACode_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "RoleCode_InsideAWriteTransaction_IsNotDeterminable",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "CurrentField_Unknown_Warns",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "CurrentField_Unknown_Warns_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "CurrentField_Known_NoWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "CurrentField_SourceTableUndeterminable_NoWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepField_Unknown_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StoredField_ErrorAndOriginalCasing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StoredField_ErrorAndOriginalCasing_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StoredField_HelpExplainsError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepField_Known_NoWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "IterField_Unknown_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "IterField_Unknown_IsAnError_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "IterField_Known_NoWarning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "IterField_ExplicitIteration_Unknown_IsAnError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "StepField_OfPagedOrDisabledStep_IsNotJudged",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "Lookup_RecordExists_FoundNotFoundAndUndeterminable",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "Lookup_FieldNames_AreTheJsonNames",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96439,
+    "method": "Lookup_ToJsonName_FollowsTheDataTypes",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "UnsafePattern_Warns",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "UnsafePattern_Warns_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "CorrectedPattern_DoesNotWarn",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "CorrectedPattern_DoesNotWarn_Icelandic",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "TwoUnsafeWrites_WarnOncePerStep",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "SafeShapes_DoNotWarn",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "WriteMessageTypesAreRecognisedByTheirVerb",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96433,
+    "method": "VerifyErrorsForMissingOrUnknownPlaybook",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "OrderNoAnswersThePdfAndCountsThePrint",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "SubjectSystemIdAndMatchingNoAnswerThePdf",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "UnknownOrderIsRecordNotFound",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "UnknownSystemIdIsRecordNotFound",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "QuoteIsNotAnOrder",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "NoIdentifierIsMissingParameter",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "TwoDifferentOrdersAreConflictingIdentifiers",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "NoOrderReportIsPreconditionFailed",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "TheTypeIsInboundAndReadsPurchaseHeader",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96480,
+    "method": "EffectAndHelpNameTheInteractionLogEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Run_UnknownField_ReturnsErrorWithoutExecution",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Run_MalformedView_ReturnsErrorWithoutExecution",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Run_NonString_ReturnsErrorWithoutExecution",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "SaveAs_UnknownField_ReturnsErrorWithoutExecution",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Scenario_AC01_PdfInvalidField_ReturnsError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Scenario_AC01_DefaultPdfInvalidField_ReturnsError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Scenario_AC01_ExcelInvalidField_ReturnsError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Scenario_AC01_WordInvalidField_ReturnsError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "SaveAs_MalformedView_ReturnsErrorWithoutExecution",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "SaveAs_NonString_ReturnsErrorWithoutExecution",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "SaveAs_ValidView_ExecutesOnlySelectedRow",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Run_ValidView_ExecutesSelectedRow",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Run_EmptySelection_DoesNotWidenDataSet",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96454,
+    "method": "Run_BothDebugStates_FailureHasNoCallstack",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96424,
+    "method": "SetErrorsWhenReportIdMissing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96424,
+    "method": "SetErrorsWhenNameMissing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96424,
+    "method": "SetErrorsForUnknownReport",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96424,
+    "method": "SetErrorsForInvalidLayoutFormat",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96424,
+    "method": "SetErrorsWhenLayoutBase64Missing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96424,
+    "method": "MessageTypeIsRegistered",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "ListIncludesExtensionLayout",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "ListExcludesExtensionLayouts",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "GetExportsExtensionBytes",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "OwnUserLayoutRoundTripsBytes",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "SetTwiceReplacesUserLayout",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "ListRejectsUnknownReport",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "GetRejectsUnknownLayout",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "SaveAsOverrideRestoresSessionAndPreset",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "SaveAsOverrideRendersPdf",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "SaveAsRenderFailureRestoresSession",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96409,
+    "method": "SaveAsRejectsUnknownLayout",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96458,
+    "method": "StagingIdImportsLikeBase64AndConsumesRow",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96458,
+    "method": "StagingIdWithoutBracesReplacesExistingLayout",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96458,
+    "method": "UnknownOrTakenStagingIdIsRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96458,
+    "method": "KeyCombinationsAndInvalidGuidAreRefusedWithoutTaking",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96458,
+    "method": "FailedImportKeepsStagingRow",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96458,
+    "method": "OrchestratorHasNoAttachmentsDependency",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "PresetRoundTripsXml",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "PresetReturnsEmptyWhenNoXml",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "PresetHasRequestPageXmlReturnsTrueWhenPopulated",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "ListReturnsReportsWithCountField",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "ListFiltersByProcessingOnly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "ListReportContainsExpectedFields",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "GetReturnsReportMetadata",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "GetReturnsLayoutsArray",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "GetReturnsPresetWhenExists",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "GetCreatesEmptyPresetWhenNoneExists",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "GetErrorsForInvalidReportId",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "GetErrorsWhenReportIdMissing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "SaveAsGeneratesPdfOutput",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "SaveAsDefaultsToPdfWhenFormatOmitted",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "SaveAsUsesPresetWhenNoXmlProvided",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "SaveAsErrorsForInvalidFormat",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "SaveAsErrorsForMissingReportId",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "SaveAsErrorsForNonExistentReport",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "PresetTableIsBlockedFromDataRecordsRead",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96416,
+    "method": "PresetTableIsBlockedFromDataRecordsWrite",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "OverlayPreservesOtherValues",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "UnknownNameFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "MissingBaseFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "WrongReportXmlFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "MalformedXmlFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "DuplicateOptionFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "NonObjectParametersFail",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "NullValueFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "NestedValueFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "StatementTemplateMapsOptions",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "DuplicateAliasesFail",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "NativeCaptureMatchesTemplateSchema",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "StatementUnknownOptionFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "StatementBadChoiceFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "CallerXmlPrecedesTemplate",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "RegisteredTemplateRendersValues",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "ExplicitParametersDoNotUsePreset",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96431,
+    "method": "StatementRendersOwnAgingData",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunExecutesProcessingOnlyReport",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunEchoesReportMetadata",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunReturnsErrorObjectWhenReportFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunUsesExplicitParameterOverlay",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunRejectsReportThatProducesOutput",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunErrorsWhenReportIdMissing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96417,
+    "method": "RunErrorsForNonExistentReport",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "StandaloneRefResolvesString",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "StandaloneRefResolvesNumericAsNumber",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "StandaloneRefResolvesObject",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "StandaloneRefResolvesArray",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "EmbeddedRefResolvesInString",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "EmbeddedRefBeforePeriodResolves",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "EmbeddedRefEscapesQuotesAndObjects",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "CollectDirective",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "FilteredDumpEscapesAsString",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "UnresolvedRefStaysIntact",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96402,
+    "method": "MultipleRefsInSameTemplate",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "MissingQuoteIsMissingParameter",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "UnknownQuoteNumberIsRecordNotFound",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "UnknownSystemIdIsRecordNotFound",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "NumericQuoteNoIsInvalidParameterFormat",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "QuoteNumberReturnsPdf",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "SystemIdReturnsPdf",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "SubjectReturnsPdf",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "OrderSystemIdIsNotAQuote",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "ConflictingIdentifiersAreRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96471,
+    "method": "NameHasThreePartsAndHelpIsTranslated",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC01_IdentityAndRecipientWritesAreRestricted",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC02_IdentityAndRecipientReadsStayOpen",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC03_NeighbourFieldsStayWritable",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC04_TablesStayReadableAndWritable",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC05_HintsNameSupportedPagesAndSchedule",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC05_NeighboursHaveNoNewHints",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96405,
+    "method": "Scenario_AC05_ExistingCompanionHintsArePreserved",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntryCreatesEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntryStoresIdOnPlaybook",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "ScheduledFlowFieldReflectsOrchestratorEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntryCopiesRecurringTemplate",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntrySetsNotification",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntrySetsRetryPolicy",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntrySetsEmitTelemetry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntrySetsJobQueueCategory",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntryBlocksDoubleSchedule",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntrySetsRecordIdAndSystemId",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "CreateOrchestratorEntryAllowsRescheduleAfterOrphan",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96415,
+    "method": "ScheduleResponseEmitsSystemIdAndPkId",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96446,
+    "method": "Scenario_AC02_English_RegistersMetadataOnly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96446,
+    "method": "Scenario_AC03_Icelandic_RegistersMetadataOnly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96427,
+    "method": "ExecuteRunDispatchesCodeunitEntryHeadlessly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96427,
+    "method": "ExecuteRunReturnsErrorWhenJobFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96427,
+    "method": "ExecuteRunReturnsErrorWhenDispatchFails",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96427,
+    "method": "ExecuteRunUsesPlaybookRecordIdNotEntryRecordId",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96427,
+    "method": "RunJobQueueEntryOnceStillConfirmsAndMessages",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "GetReturnsSuccessWithEntryCounts",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "GetEntryCountsAreConsistent",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "RestartReturnsSuccessWithMessage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "RestartIfNeededRestartsWhenNoJQEntry",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "RestartIfNeededSkipsWhenAlreadyRunning",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "RestartIfNeededSkipsWhenInProcess",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96419,
+    "method": "RestartIfNeededRestartsWhenInError",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96470,
+    "method": "Scenario_AC41_LegacyDefinitionReadsAsMessage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC21_PagesFiftyRowsAtATime",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC21_OneRemainingRowHasNextPage",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC21_ViewFiltersAndRowShowsSummary",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC22_RestrictedTableIsRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC23_EditFieldIsSaved",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC23_InvalidValueAndKeyAreRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "JsonKeyFollowsSerializerNaming",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC22_ReadRestrictedFieldIsHidden",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC24_WriteRestrictedTableRefusesSave",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96426,
+    "method": "AC24_WriteOnceFieldRefusesSave",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC21_PageForwardAndBack",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC21_PageWithOneRemainingRow",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC23_OpenRecordAndEdit",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC24_RestrictedTablePageIsReadOnly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC24_WriteOncePageIsReadOnly",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC25_PageImportConfirmsAfterDryRun",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96448,
+    "method": "AC25_PageImportCancellationDoesNotWrite",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96406,
+    "method": "AC11_ExportWritesEnvelopeForFilteredRows",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96406,
+    "method": "AC12_RowEqualsSerializerOutput",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96406,
+    "method": "AC11_FieldListLimitsFields",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96406,
+    "method": "AC14_RestrictedTableIsRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96406,
+    "method": "UnknownTableAndInvalidViewAreRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "AC15_RoundTripModifiesFromFile",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "RowWithoutMatchIsInserted",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "AC13_BadValueFailsOnlyThatRow",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "AC13_StopOnErrorWritesNothing",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "AC16_DryRunLeavesTableUnchanged",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "AC14_RestrictedTableIsRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96425,
+    "method": "WrongFormatIsRefused",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC42_CopyPreservesNestedJsonType",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC42_ConstantDoesNotInterpretReferences",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC42_NegatePreservesDecimalAndTextAcrossLanguages",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC42_NegateLeavesNonnumericTextUnchanged",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC42_ReplaceTextIsLiteralAndCaseSensitive",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC42_MissingSourceReturnsFailureWithoutPartialOutput",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC44_RunnerTransformsArrayWithoutDispatchingTheStep",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96468,
+    "method": "Scenario_AC44_PreviewDoesNotRunTransformDefinitions",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_AC43_MissingTargetIsAFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_AC43_UnknownSourceIsAFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_AC43_InvalidInputIsAFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_AC43_MessageTypeOnTransformIsAFinding",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_162_MessageTypeCanBeClearedOnTransform",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_AC45_CopyOperationGeneratesVerifiedTransform",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96469,
+    "method": "Scenario_AC44_CardAuthorsTransformMapping",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_DisabledErrors_DoNotBlock",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_DisabledErrors_DoNotBlock_IsIS",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_MixedFindings_OnlyEnabledWarningBlocks_IsIS",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_EnabledError_StillBlocks",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_EnabledError_StillBlocks_IsIS",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC01_CleanPlaybook_HasZeroCounts",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96442,
+    "method": "Scenario_AC02_Help_ExplainsBlockingCounts",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96408,
+    "method": "TelegramFieldDescribesCallerSetup",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "SetValueAndGetValue",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "SetTokenAtNestedPath",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "SetTokenPreservesArray",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "WriteFromResponseWithRename",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "WriteFromResponseIteratedKeying",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "WriteFromResponseFirstElement",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "CollectGathersIterations",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "ToFilteredTextOnlyIncludesRequestedKeys",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "ResetClearsAllData",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "LastMonthEnd_TC001_September31DayMonth",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "LastMonthEnd_TC002_LeapYearFebruary",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "LastMonthEnd_TC003_JanuaryCrossYear",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "LastMonthEnd_TC004_May31ToApril30",
+    "isolation": "Codeunit"
+  },
+  {
+    "id": 96401,
+    "method": "LastMonthStartThisMonthStart_TC005_FormulasUnchanged",
+    "isolation": "Codeunit"
+  }
+]

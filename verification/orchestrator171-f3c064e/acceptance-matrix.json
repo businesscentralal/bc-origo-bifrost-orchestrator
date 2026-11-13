@@ -1,0 +1,34 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/171",
+  "criteria": [
+    {
+      "id": "AC01",
+      "status": "VERIFIED",
+      "summary": "Purchase.Order.Pdf conditional interaction logging disclosed in discovery en-US/is-IS and effect/overview/notes; full suite, bilingual UI and MCP verify this candidate."
+    },
+    {
+      "id": "AC02",
+      "status": "VERIFIED",
+      "summary": "No production execution change. Sales Quote execution tail and public signatures identical to40bcc7c; purchase unchanged from prior verifiedc5df53b."
+    },
+    {
+      "id": "AC03",
+      "status": "PARTIAL_DEPENDENT",
+      "summary": "Sales.Quote.Pdf was merged fromPR168 and its wording is aligned in both languages at this candidate, with contract regression assertions. Sales.OrderConfirmation.Pdf exists only on openPR164; integration awaits merge or explicit Architect disposition. Read-only audit of deployed Foundation28.0.13.0 also finds posted-sales PDF wording gaps; a separate repository-scoped follow-up requires Architect assignment.",
+      "dependency": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/164"
+    },
+    {
+      "id": "paired-CI",
+      "status": "PENDING",
+      "summary": "Fresh paired CI43394980600 triggered by normal compiled candidate publication; no prior-tip green carried forward."
+    },
+    {
+      "id": "postdeploy-Tester-help",
+      "status": "NOT_RUN",
+      "summary": "Architect merge and same-SHA deployment precede Bifr\u00f6st Tester help-output acceptance."
+    }
+  ],
+  "issueComplete": false,
+  "readyForReview": false
+}

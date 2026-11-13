@@ -1,0 +1,20 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "owner": "worker-5",
+  "tenant": "w129-15",
+  "persistentMcpFixturesCreated": 0,
+  "syntheticPurchaseHeadersRemaining": 0,
+  "syntheticSalesHeadersRemaining": 0,
+  "verified": true,
+  "languageRestored": true,
+  "restoredLcid": 1033,
+  "evidence": [
+    "purchase-order-prestate.json",
+    "purchase-order-poststate.json",
+    "sales-quote-prestate.json",
+    "sales-quote-poststate.json",
+    "ui-language-restore-readback.json"
+  ],
+  "appsRetainedForFollowup": true,
+  "retentionReason": "OpenPR174 and unfinished issue171 acceptance. Standing localBC29 tenant retained; no COSMO resource created or used."
+}

@@ -1,0 +1,43 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "tenant": "w129-15",
+  "owner": "worker-5",
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "type": "Purchase.Order.Pdf",
+      "lcid": 1033,
+      "row": "\t\tPurchase.Order.Pdf\t\tPrints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.\t38\tInbound\t",
+      "passed": true,
+      "screenshot": "ui-Purchase.Order.Pdf-1033.png"
+    },
+    {
+      "type": "Sales.Quote.Pdf",
+      "lcid": 1033,
+      "row": "\t\tSales.Quote.Pdf\t\tRetrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.\t36\tBoth\t",
+      "passed": true,
+      "screenshot": "ui-Sales.Quote.Pdf-1033.png"
+    },
+    {
+      "type": "Purchase.Order.Pdf",
+      "lcid": 1039,
+      "row": "\t\tPurchase.Order.Pdf\t\tPrentar innkaupap\u00f6ntun sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.\t38\tInnsent\t",
+      "passed": true,
+      "screenshot": "ui-Purchase.Order.Pdf-1039.png"
+    },
+    {
+      "type": "Sales.Quote.Pdf",
+      "lcid": 1039,
+      "row": "\t\tSales.Quote.Pdf\t\tS\u00e6kir s\u00f6lutilbo\u00f0 sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.\t36\tB\u00e1\u00f0ar lei\u00f0ir\t",
+      "passed": true,
+      "screenshot": "ui-Sales.Quote.Pdf-1039.png"
+    }
+  ],
+  "languageRestorePending": false,
+  "toolSetupNote": "Changing language returned a frame-detach error after Save. The next fresh navigation proved1039 had applied; no language-change write was replayed.",
+  "languageRestored": true,
+  "restoredLcid": 1033
+}

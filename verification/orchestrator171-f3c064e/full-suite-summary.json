@@ -1,0 +1,27 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "owner": "worker-5",
+  "tenant": "w129-15",
+  "fullSuite": true,
+  "total": 596,
+  "executed": 596,
+  "passed": 596,
+  "failed": 0,
+  "skipped": 0,
+  "errors": 0,
+  "partitions": [
+    {
+      "runner": 130450,
+      "range": "96400..96455|96457..96499",
+      "passed": 586,
+      "evidence": "native-main.json"
+    },
+    {
+      "runner": 130451,
+      "range": "96456",
+      "passed": 10,
+      "evidence": "native-disabled.json"
+    }
+  ],
+  "sourceInventory": "source-test-inventory.json"
+}

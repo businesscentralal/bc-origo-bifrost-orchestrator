@@ -1,0 +1,1056 @@
+{
+  "purchase-order-help-1033.json": {
+    "request": {
+      "name": "get_message_type_help",
+      "arguments": {
+        "messageType": "Purchase.Order.Pdf",
+        "lcid": 1033
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Purchase.Order.Pdf",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Purchase.Order.Pdf",
+        "isEnabled": true,
+        "filterTableNo": 38,
+        "description": "Prints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.",
+        "selectionDescription": "Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed and, when an interaction template is set up, writes an interaction log entry. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "purchase order pdf",
+          "print purchase order",
+          "send order to vendor",
+          "purchase order copy",
+          "vendor order pdf",
+          "print po"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "strict": {
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data."
+          },
+          "subject": {
+            "use": "optional",
+            "forms": [
+              "guid",
+              "no"
+            ],
+            "description": "The purchase order: its SystemId (a GUID) or its No."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "application/pdf"
+        },
+        "target": [
+          {
+            "source": "subject",
+            "form": "guid|no",
+            "description": "A GUID is read as the SystemId of the purchase order, anything else as its No."
+          },
+          {
+            "source": "data.orderNo",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          },
+          {
+            "source": "data.orderId",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          },
+          {
+            "source": "data.documentNo",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          },
+          {
+            "source": "data.documentId",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "type": "string",
+            "required": false,
+            "description": "The No. or the SystemId of the purchase order. Needed when subject is empty."
+          },
+          {
+            "name": "orderId",
+            "type": "string",
+            "required": false,
+            "description": "The SystemId or the No. of the purchase order."
+          },
+          {
+            "name": "documentNo",
+            "type": "string",
+            "required": false,
+            "description": "Same as orderNo, for callers that use the generic document keys."
+          },
+          {
+            "name": "documentId",
+            "type": "string",
+            "required": false,
+            "description": "Same as orderId, for callers that use the generic document keys."
+          }
+        ],
+        "response": {
+          "contentType": "application/pdf",
+          "fields": [
+            {
+              "name": "binary",
+              "type": "binary",
+              "description": "The PDF file of the purchase order itself, not JSON. A client such as MCP hands it on as base64."
+            },
+            {
+              "name": "datacontenttype",
+              "type": "string",
+              "description": "application/pdf with a quoted name parameter containing PurchaseOrder-<SystemId>.pdf. The SystemId is lowercase without braces; this stable filename contains no unsafe document-number characters. Playbooks expose the same MIME value as contentType."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "PermissionDenied",
+            "error": "Read permission denied for purchase orders.",
+            "when": "The caller has no read permission on Purchase Header.",
+            "fix": "Ask an administrator to grant read access to Purchase Header."
+          },
+          {
+            "code": "MissingParameter",
+            "error": "No purchase order was named.",
+            "when": "subject, orderNo, orderId, documentNo and documentId are all empty.",
+            "fix": "Send the order No. or SystemId as subject or as data.orderNo."
+          },
+          {
+            "code": "RecordNotFound",
+            "error": "Purchase order <value> was not found.",
+            "when": "No purchase document of type Order has that No. or SystemId. Quotes, invoices, blanket orders and posted documents are not orders.",
+            "fix": "Find the order with Data.Records.Get on Purchase Header filtered on Document Type Order."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "error": "The identifiers name different purchase orders.",
+            "when": "Two of subject, orderNo, orderId, documentNo and documentId point at different orders.",
+            "fix": "Send one identifier, or identifiers of the same order."
+          },
+          {
+            "code": "PreconditionFailed",
+            "error": "No report is set up for Report Selections usage P.Order.",
+            "when": "Neither Report Selections nor the vendor's document layouts name a report for the purchase order.",
+            "fix": "Set up a purchase order report in Report Selection - Purchase, usage Order."
+          },
+          {
+            "code": "BusinessCentralError",
+            "error": "Business Central's own error text",
+            "when": "The report fails while rendering, for example a layout error.",
+            "fix": "Read the text and correct the report layout or the order."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Increases No. Printed on the purchase order and, when an interaction template is set up for purchase orders, writes an interaction log entry for the vendor's contact: the standard report does both. It may also archive a version of the order when Purchases & Payables Setup archives orders. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.",
+          "idempotent": false
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Sales.SalesInvoice.Pdf",
+            "useInsteadWhen": "You need a posted sales document for a customer, not a purchase order."
+          },
+          {
+            "name": "Orchestrator.Report.SaveAs",
+            "useInsteadWhen": "You need another report, a format other than PDF or your own request page options."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Data.Records.Get",
+              "purpose": "Find the purchase order on Purchase Header, filtered on Document Type Order; read its no or id."
+            },
+            {
+              "messageType": "Purchase.Order.Pdf",
+              "purpose": "Get the purchase order PDF with that no as subject."
+            },
+            {
+              "messageType": "Email.Draft.Set",
+              "purpose": "Attach the PDF to an e-mail draft for the vendor."
+            }
+          ],
+          "text": "Send a purchase order to the vendor."
+        },
+        "examples": [
+          {
+            "title": "Print a purchase order",
+            "request": {
+              "type": "Purchase.Order.Pdf",
+              "data": {
+                "orderNo": "106001"
+              }
+            },
+            "response": {
+              "contentType": "application/pdf; name=\"PurchaseOrder-00000000-0000-0000-0000-000000000001.pdf\"",
+              "size": 45120,
+              "base64": "<base64>"
+            }
+          },
+          {
+            "title": "Unknown order",
+            "request": {
+              "type": "Purchase.Order.Pdf",
+              "data": {
+                "orderNo": "NOSUCHORDER"
+              }
+            },
+            "response": {
+              "status": "Error",
+              "code": "RecordNotFound",
+              "parameter": "orderNo",
+              "received": "NOSUCHORDER"
+            }
+          }
+        ],
+        "overview": "Returns an open purchase order as a PDF, printed with the report the vendor's Report Selection (usage P.Order) names; by default the standard purchase order. Use it to hand the order to the vendor, a person or another system. Printing it increases No. Printed on the order and, when an interaction template is set up for purchase orders, writes an interaction log entry.",
+        "notes": "subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. Only purchase documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. The success MIME type carries name=\"PurchaseOrder-<SystemId>.pdf\"; callers may use that filename when saving the unchanged binary PDF. Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. When an interaction template is set up for purchase orders, the standard report writes an interaction log entry for the vendor's contact. A replacement report in Report Selections may not. The call does not change whether that logging happens."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\n`SecurityFilterApplied` is a warning from Data.Records.Get, severity `low`, `parameter` `table`: a security filter of the caller applies to the table, so the result may hold fewer records than the table. `securityFiltered` is then true. Status stays Success, and the hidden records are never counted or described. Ask an administrator if you expect more records.\r\nData.RecordIds.Get, Data.Totals.Get, Data.Entries.Find and CSV.Records.Get do not return `securityFiltered` or `SecurityFilterApplied`. Their results can still be limited by security filters: counts and totals cover only visible records, and the absence of a flag or warning does not prove that every record in the table was included. Their help explains this visibility limit; request filters such as tableView and date ranges are separate.\r\nWhen a Business Central operation fails, the error can identify the request parameter being applied, the expected input and what to do next. That guidance accompanies the original `BusinessCentralError` after rollback, including a failed queued task. It does not change which writes are rolled back or committed. Guidance is cleared between messages; a message without it keeps its existing response shape. Recognized lock errors follow the `Retryable` rules below.\r\nSome message types accept calls only through a particular path: a scheduled queue message, the Task API (`/tasks`), the in-product MCP tool server, another message type, or the Messages page Run Task action. Bifrost determines where the call came from; request values cannot override it. A call through an unsupported path is refused with `PreconditionFailed` and a `nextStep` naming the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps use the same preview and confirmation protocol for irreversible operations.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`, `SecurityFilterApplied`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  "purchase-order-help-1039.json": {
+    "request": {
+      "name": "get_message_type_help",
+      "arguments": {
+        "messageType": "Purchase.Order.Pdf",
+        "lcid": 1039
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Purchase.Order.Pdf",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Purchase.Order.Pdf",
+        "isEnabled": true,
+        "filterTableNo": 38,
+        "description": "Prentar innkaupap\u00f6ntun sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.",
+        "selectionDescription": "S\u00e6kja opna innkaupap\u00f6ntun sem PDF, prenta\u00f0a me\u00f0 sk\u00fdrsluvali l\u00e1nardrottins fyrir notkunina P.Order. H\u00e6kkar prentteljara p\u00f6ntunarinnar og, \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint, skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1. Fyrir p\u00f6ntunarsta\u00f0festingu s\u00f6lup\u00f6ntunar nota\u00f0u Sales.OrderConfirmation.Pdf; fyrir a\u00f0rar sk\u00fdrslur nota\u00f0u Orchestrator.Report.SaveAs.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "innkaupap\u00f6ntun pdf",
+          "prenta innkaupap\u00f6ntun",
+          "senda p\u00f6ntun til l\u00e1nardrottins",
+          "afrit innkaupap\u00f6ntunar",
+          "p\u00f6ntun l\u00e1nardrottins pdf",
+          "prenta innkaupap\u00f6ntun aftur"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "strict": {
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data."
+          },
+          "subject": {
+            "use": "optional",
+            "forms": [
+              "guid",
+              "no"
+            ],
+            "description": "The purchase order: its SystemId (a GUID) or its No."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "application/pdf"
+        },
+        "target": [
+          {
+            "source": "subject",
+            "form": "guid|no",
+            "description": "A GUID is read as the SystemId of the purchase order, anything else as its No."
+          },
+          {
+            "source": "data.orderNo",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          },
+          {
+            "source": "data.orderId",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          },
+          {
+            "source": "data.documentNo",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          },
+          {
+            "source": "data.documentId",
+            "form": "guid|no",
+            "description": "Read the same way as subject."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "type": "string",
+            "required": false,
+            "description": "The No. or the SystemId of the purchase order. Needed when subject is empty."
+          },
+          {
+            "name": "orderId",
+            "type": "string",
+            "required": false,
+            "description": "The SystemId or the No. of the purchase order."
+          },
+          {
+            "name": "documentNo",
+            "type": "string",
+            "required": false,
+            "description": "Same as orderNo, for callers that use the generic document keys."
+          },
+          {
+            "name": "documentId",
+            "type": "string",
+            "required": false,
+            "description": "Same as orderId, for callers that use the generic document keys."
+          }
+        ],
+        "response": {
+          "contentType": "application/pdf",
+          "fields": [
+            {
+              "name": "binary",
+              "type": "binary",
+              "description": "The PDF file of the purchase order itself, not JSON. A client such as MCP hands it on as base64."
+            },
+            {
+              "name": "datacontenttype",
+              "type": "string",
+              "description": "application/pdf with a quoted name parameter containing PurchaseOrder-<SystemId>.pdf. The SystemId is lowercase without braces; this stable filename contains no unsafe document-number characters. Playbooks expose the same MIME value as contentType."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "PermissionDenied",
+            "error": "Read permission denied for purchase orders.",
+            "when": "The caller has no read permission on Purchase Header.",
+            "fix": "Ask an administrator to grant read access to Purchase Header."
+          },
+          {
+            "code": "MissingParameter",
+            "error": "No purchase order was named.",
+            "when": "subject, orderNo, orderId, documentNo and documentId are all empty.",
+            "fix": "Send the order No. or SystemId as subject or as data.orderNo."
+          },
+          {
+            "code": "RecordNotFound",
+            "error": "Purchase order <value> was not found.",
+            "when": "No purchase document of type Order has that No. or SystemId. Quotes, invoices, blanket orders and posted documents are not orders.",
+            "fix": "Find the order with Data.Records.Get on Purchase Header filtered on Document Type Order."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "error": "The identifiers name different purchase orders.",
+            "when": "Two of subject, orderNo, orderId, documentNo and documentId point at different orders.",
+            "fix": "Send one identifier, or identifiers of the same order."
+          },
+          {
+            "code": "PreconditionFailed",
+            "error": "No report is set up for Report Selections usage P.Order.",
+            "when": "Neither Report Selections nor the vendor's document layouts name a report for the purchase order.",
+            "fix": "Set up a purchase order report in Report Selection - Purchase, usage Order."
+          },
+          {
+            "code": "BusinessCentralError",
+            "error": "Business Central's own error text",
+            "when": "The report fails while rendering, for example a layout error.",
+            "fix": "Read the text and correct the report layout or the order."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Increases No. Printed on the purchase order and, when an interaction template is set up for purchase orders, writes an interaction log entry for the vendor's contact: the standard report does both. It may also archive a version of the order when Purchases & Payables Setup archives orders. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.",
+          "idempotent": false
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Sales.SalesInvoice.Pdf",
+            "useInsteadWhen": "You need a posted sales document for a customer, not a purchase order."
+          },
+          {
+            "name": "Orchestrator.Report.SaveAs",
+            "useInsteadWhen": "You need another report, a format other than PDF or your own request page options."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Data.Records.Get",
+              "purpose": "Find the purchase order on Purchase Header, filtered on Document Type Order; read its no or id."
+            },
+            {
+              "messageType": "Purchase.Order.Pdf",
+              "purpose": "Get the purchase order PDF with that no as subject."
+            },
+            {
+              "messageType": "Email.Draft.Set",
+              "purpose": "Attach the PDF to an e-mail draft for the vendor."
+            }
+          ],
+          "text": "Send a purchase order to the vendor."
+        },
+        "examples": [
+          {
+            "title": "Print a purchase order",
+            "request": {
+              "type": "Purchase.Order.Pdf",
+              "data": {
+                "orderNo": "106001"
+              }
+            },
+            "response": {
+              "contentType": "application/pdf; name=\"PurchaseOrder-00000000-0000-0000-0000-000000000001.pdf\"",
+              "size": 45120,
+              "base64": "<base64>"
+            }
+          },
+          {
+            "title": "Unknown order",
+            "request": {
+              "type": "Purchase.Order.Pdf",
+              "data": {
+                "orderNo": "NOSUCHORDER"
+              }
+            },
+            "response": {
+              "status": "Error",
+              "code": "RecordNotFound",
+              "parameter": "orderNo",
+              "received": "NOSUCHORDER"
+            }
+          }
+        ],
+        "overview": "Returns an open purchase order as a PDF, printed with the report the vendor's Report Selection (usage P.Order) names; by default the standard purchase order. Use it to hand the order to the vendor, a person or another system. Printing it increases No. Printed on the order and, when an interaction template is set up for purchase orders, writes an interaction log entry.",
+        "notes": "subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. Only purchase documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. The success MIME type carries name=\"PurchaseOrder-<SystemId>.pdf\"; callers may use that filename when saving the unchanged binary PDF. Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. When an interaction template is set up for purchase orders, the standard report writes an interaction log entry for the vendor's contact. A replacement report in Report Selections may not. The call does not change whether that logging happens."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\n`SecurityFilterApplied` is a warning from Data.Records.Get, severity `low`, `parameter` `table`: a security filter of the caller applies to the table, so the result may hold fewer records than the table. `securityFiltered` is then true. Status stays Success, and the hidden records are never counted or described. Ask an administrator if you expect more records.\r\nData.RecordIds.Get, Data.Totals.Get, Data.Entries.Find and CSV.Records.Get do not return `securityFiltered` or `SecurityFilterApplied`. Their results can still be limited by security filters: counts and totals cover only visible records, and the absence of a flag or warning does not prove that every record in the table was included. Their help explains this visibility limit; request filters such as tableView and date ranges are separate.\r\nWhen a Business Central operation fails, the error can identify the request parameter being applied, the expected input and what to do next. That guidance accompanies the original `BusinessCentralError` after rollback, including a failed queued task. It does not change which writes are rolled back or committed. Guidance is cleared between messages; a message without it keeps its existing response shape. Recognized lock errors follow the `Retryable` rules below.\r\nSome message types accept calls only through a particular path: a scheduled queue message, the Task API (`/tasks`), the in-product MCP tool server, another message type, or the Messages page Run Task action. Bifrost determines where the call came from; request values cannot override it. A call through an unsupported path is refused with `PreconditionFailed` and a `nextStep` naming the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps use the same preview and confirmation protocol for irreversible operations.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`, `SecurityFilterApplied`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  "sales-quote-help-1033.json": {
+    "request": {
+      "name": "get_message_type_help",
+      "arguments": {
+        "messageType": "Sales.Quote.Pdf",
+        "lcid": 1033
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Sales.Quote.Pdf",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Sales.Quote.Pdf",
+        "isEnabled": true,
+        "filterTableNo": 36,
+        "description": "Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.",
+        "selectionDescription": "Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up.",
+        "messageDirection": "Both",
+        "keywords": [
+          "sales quote pdf",
+          "print quote",
+          "download quote",
+          "quote copy",
+          "reprint quote"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "strict": {
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data."
+          },
+          "subject": {
+            "use": "optional",
+            "forms": [
+              "guid",
+              "code"
+            ],
+            "description": "The quote number, or the SystemId of the sales quote."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "application/pdf"
+        },
+        "target": [
+          {
+            "source": "subject",
+            "form": "code",
+            "description": "A quote number, or a GUID read as the SystemId. Used when no data key names the quote."
+          },
+          {
+            "source": "data.quoteNo",
+            "form": "code",
+            "description": "The quote number. A GUID in this key is read as the SystemId."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "The SystemId of the sales quote."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "quoteNo",
+            "type": "string",
+            "required": false,
+            "description": "Quote number. A GUID is read as the SystemId. A sales order with the same number is not a quote."
+          },
+          {
+            "name": "quoteId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId or quote number. Same resolution as quoteNo."
+          },
+          {
+            "name": "documentNo",
+            "type": "string",
+            "required": false,
+            "description": "Quote number or SystemId. Same resolution as quoteNo."
+          },
+          {
+            "name": "documentId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId or quote number. Same resolution as quoteNo."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId of the sales quote. A value that is not a GUID is refused."
+          },
+          {
+            "name": "recordSystemId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId of the sales quote. Same rule as systemId."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "description": "SystemId of the sales quote. Same rule as systemId."
+          }
+        ],
+        "response": {
+          "contentType": "application/pdf",
+          "fields": [
+            {
+              "name": "binary",
+              "type": "binary",
+              "description": "The sales quote PDF. The success body is the file itself, with content type application/pdf, not JSON."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "PermissionDenied",
+            "error": "Read permission denied for table 36.",
+            "when": "The caller has no read permission on Sales Header.",
+            "fix": "Ask an administrator for a permission set that reads the table."
+          },
+          {
+            "code": "MissingParameter",
+            "error": "A sales quote number or SystemId is required.",
+            "when": "Neither subject nor a quote key was sent.",
+            "fix": "Send subject, quoteNo or systemId for one sales quote."
+          },
+          {
+            "code": "RecordNotFound",
+            "error": "Sales quote \"<value>\" was not found (from <key>).",
+            "when": "The number or SystemId is not a sales quote. An order or another document is not a quote.",
+            "fix": "Check the quote number, or send the SystemId of a sales quote."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "error": "The quote identifiers name different sales quotes.",
+            "when": "Two keys resolve to different quotes.",
+            "fix": "Send one quote number or one SystemId, or make every identifier name the same quote."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "error": "Parameter \"<key>\" must be text.",
+            "when": "The key is a number, boolean, object, array or null, or a SystemId key is not a GUID, or a number is longer than 20 characters.",
+            "fix": "Send the quote number as text of at most 20 characters, or a GUID SystemId."
+          },
+          {
+            "code": "BusinessCentralError",
+            "error": "The sales quote PDF is empty.",
+            "when": "Report Selection usage S.Quote produced no bytes.",
+            "fix": "Check Report Selection usage S.Quote for the sell-to customer."
+          },
+          {
+            "code": "BusinessCentralError",
+            "error": "Business Central's own error text",
+            "when": "No report is set up for usage S.Quote, or the report fails while rendering.",
+            "fix": "Check Report Selection usage S.Quote for the sell-to customer and the report layout."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Renders the sales quote with Report Selection usage S.Quote. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. Saving the PDF commits the work done so far.",
+          "idempotent": false,
+          "preconditions": []
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Sales.SalesInvoice.Pdf",
+            "useInsteadWhen": "You need a posted sales invoice, not an open quote."
+          },
+          {
+            "name": "Orchestrator.Report.SaveAs",
+            "useInsteadWhen": "You already know the report id and the table view, and you do not want the customer report selection."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Sales.Quote.Pdf",
+              "purpose": "Get the PDF with the quote number or its SystemId."
+            }
+          ]
+        },
+        "overview": "Returns one sales quote as a PDF file, printed with the report the customer's Report Selection (usage S.Quote, default report 1304) names. Send the quote number or the SystemId. Only a sales quote matches; a sales order with the same number does not. The standard report writes an interaction log entry when an interaction template is set up.",
+        "notes": "subject and the keys quoteNo, quoteId, documentNo, documentId, systemId, recordSystemId and id are all tried. A value that is a GUID is the SystemId. Anything else is the quote number, and only Document Type Quote matches. Two keys that name different quotes are ConflictingIdentifiers. One that matches nothing is RecordNotFound. Only the success answer is a PDF; an error answer is JSON. The same read-permission check as Sales.SalesInvoice.Pdf is applied to Sales Header. The standard report writes an interaction log entry when an interaction template is set up. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\n`SecurityFilterApplied` is a warning from Data.Records.Get, severity `low`, `parameter` `table`: a security filter of the caller applies to the table, so the result may hold fewer records than the table. `securityFiltered` is then true. Status stays Success, and the hidden records are never counted or described. Ask an administrator if you expect more records.\r\nData.RecordIds.Get, Data.Totals.Get, Data.Entries.Find and CSV.Records.Get do not return `securityFiltered` or `SecurityFilterApplied`. Their results can still be limited by security filters: counts and totals cover only visible records, and the absence of a flag or warning does not prove that every record in the table was included. Their help explains this visibility limit; request filters such as tableView and date ranges are separate.\r\nWhen a Business Central operation fails, the error can identify the request parameter being applied, the expected input and what to do next. That guidance accompanies the original `BusinessCentralError` after rollback, including a failed queued task. It does not change which writes are rolled back or committed. Guidance is cleared between messages; a message without it keeps its existing response shape. Recognized lock errors follow the `Retryable` rules below.\r\nSome message types accept calls only through a particular path: a scheduled queue message, the Task API (`/tasks`), the in-product MCP tool server, another message type, or the Messages page Run Task action. Bifrost determines where the call came from; request values cannot override it. A call through an unsupported path is refused with `PreconditionFailed` and a `nextStep` naming the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps use the same preview and confirmation protocol for irreversible operations.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`, `SecurityFilterApplied`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  "sales-quote-help-1039.json": {
+    "request": {
+      "name": "get_message_type_help",
+      "arguments": {
+        "messageType": "Sales.Quote.Pdf",
+        "lcid": 1039
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Sales.Quote.Pdf",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Sales.Quote.Pdf",
+        "isEnabled": true,
+        "filterTableNo": 36,
+        "description": "S\u00e6kir s\u00f6lutilbo\u00f0 sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.",
+        "selectionDescription": "S\u00e6kja s\u00f6lutilbo\u00f0 sem PDF-skr\u00e1, prenta\u00f0 me\u00f0 sk\u00fdrsluvali vi\u00f0skiptamanns (notkun S.Quote). Tekur n\u00famer tilbo\u00f0s e\u00f0a SystemId. Sta\u00f0alsk\u00fdrslan getur h\u00e6kka\u00f0 prentteljarann og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.",
+        "messageDirection": "Both",
+        "keywords": [
+          "s\u00f6lutilbo\u00f0 pdf",
+          "prenta tilbo\u00f0",
+          "s\u00e6kja tilbo\u00f0",
+          "afrit tilbo\u00f0s",
+          "endurprenta tilbo\u00f0"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "strict": {
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Optional root Boolean, default false. When true, unknown data keys are refused before execution with UnknownParameter. Do not place this option inside data."
+          },
+          "subject": {
+            "use": "optional",
+            "forms": [
+              "guid",
+              "code"
+            ],
+            "description": "The quote number, or the SystemId of the sales quote."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "application/pdf"
+        },
+        "target": [
+          {
+            "source": "subject",
+            "form": "code",
+            "description": "A quote number, or a GUID read as the SystemId. Used when no data key names the quote."
+          },
+          {
+            "source": "data.quoteNo",
+            "form": "code",
+            "description": "The quote number. A GUID in this key is read as the SystemId."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "The SystemId of the sales quote."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "quoteNo",
+            "type": "string",
+            "required": false,
+            "description": "Quote number. A GUID is read as the SystemId. A sales order with the same number is not a quote."
+          },
+          {
+            "name": "quoteId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId or quote number. Same resolution as quoteNo."
+          },
+          {
+            "name": "documentNo",
+            "type": "string",
+            "required": false,
+            "description": "Quote number or SystemId. Same resolution as quoteNo."
+          },
+          {
+            "name": "documentId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId or quote number. Same resolution as quoteNo."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId of the sales quote. A value that is not a GUID is refused."
+          },
+          {
+            "name": "recordSystemId",
+            "type": "string",
+            "required": false,
+            "description": "SystemId of the sales quote. Same rule as systemId."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "description": "SystemId of the sales quote. Same rule as systemId."
+          }
+        ],
+        "response": {
+          "contentType": "application/pdf",
+          "fields": [
+            {
+              "name": "binary",
+              "type": "binary",
+              "description": "The sales quote PDF. The success body is the file itself, with content type application/pdf, not JSON."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "PermissionDenied",
+            "error": "Read permission denied for table 36.",
+            "when": "The caller has no read permission on Sales Header.",
+            "fix": "Ask an administrator for a permission set that reads the table."
+          },
+          {
+            "code": "MissingParameter",
+            "error": "A sales quote number or SystemId is required.",
+            "when": "Neither subject nor a quote key was sent.",
+            "fix": "Send subject, quoteNo or systemId for one sales quote."
+          },
+          {
+            "code": "RecordNotFound",
+            "error": "Sales quote \"<value>\" was not found (from <key>).",
+            "when": "The number or SystemId is not a sales quote. An order or another document is not a quote.",
+            "fix": "Check the quote number, or send the SystemId of a sales quote."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "error": "The quote identifiers name different sales quotes.",
+            "when": "Two keys resolve to different quotes.",
+            "fix": "Send one quote number or one SystemId, or make every identifier name the same quote."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "error": "Parameter \"<key>\" must be text.",
+            "when": "The key is a number, boolean, object, array or null, or a SystemId key is not a GUID, or a number is longer than 20 characters.",
+            "fix": "Send the quote number as text of at most 20 characters, or a GUID SystemId."
+          },
+          {
+            "code": "BusinessCentralError",
+            "error": "The sales quote PDF is empty.",
+            "when": "Report Selection usage S.Quote produced no bytes.",
+            "fix": "Check Report Selection usage S.Quote for the sell-to customer."
+          },
+          {
+            "code": "BusinessCentralError",
+            "error": "Business Central's own error text",
+            "when": "No report is set up for usage S.Quote, or the report fails while rendering.",
+            "fix": "Check Report Selection usage S.Quote for the sell-to customer and the report layout."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Renders the sales quote with Report Selection usage S.Quote. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. Saving the PDF commits the work done so far.",
+          "idempotent": false,
+          "preconditions": []
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Sales.SalesInvoice.Pdf",
+            "useInsteadWhen": "You need a posted sales invoice, not an open quote."
+          },
+          {
+            "name": "Orchestrator.Report.SaveAs",
+            "useInsteadWhen": "You already know the report id and the table view, and you do not want the customer report selection."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Sales.Quote.Pdf",
+              "purpose": "Get the PDF with the quote number or its SystemId."
+            }
+          ]
+        },
+        "overview": "Returns one sales quote as a PDF file, printed with the report the customer's Report Selection (usage S.Quote, default report 1304) names. Send the quote number or the SystemId. Only a sales quote matches; a sales order with the same number does not. The standard report writes an interaction log entry when an interaction template is set up.",
+        "notes": "subject and the keys quoteNo, quoteId, documentNo, documentId, systemId, recordSystemId and id are all tried. A value that is a GUID is the SystemId. Anything else is the quote number, and only Document Type Quote matches. Two keys that name different quotes are ConflictingIdentifiers. One that matches nothing is RecordNotFound. Only the success answer is a PDF; an error answer is JSON. The same read-permission check as Sales.SalesInvoice.Pdf is applied to Sales Header. The standard report writes an interaction log entry when an interaction template is set up. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\n`SecurityFilterApplied` is a warning from Data.Records.Get, severity `low`, `parameter` `table`: a security filter of the caller applies to the table, so the result may hold fewer records than the table. `securityFiltered` is then true. Status stays Success, and the hidden records are never counted or described. Ask an administrator if you expect more records.\r\nData.RecordIds.Get, Data.Totals.Get, Data.Entries.Find and CSV.Records.Get do not return `securityFiltered` or `SecurityFilterApplied`. Their results can still be limited by security filters: counts and totals cover only visible records, and the absence of a flag or warning does not prove that every record in the table was included. Their help explains this visibility limit; request filters such as tableView and date ranges are separate.\r\nWhen a Business Central operation fails, the error can identify the request parameter being applied, the expected input and what to do next. That guidance accompanies the original `BusinessCentralError` after rollback, including a failed queued task. It does not change which writes are rolled back or committed. Guidance is cleared between messages; a message without it keeps its existing response shape. Recognized lock errors follow the `Retryable` rules below.\r\nSome message types accept calls only through a particular path: a scheduled queue message, the Task API (`/tasks`), the in-product MCP tool server, another message type, or the Messages page Run Task action. Bifrost determines where the call came from; request values cannot override it. A call through an unsupported path is refused with `PreconditionFailed` and a `nextStep` naming the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps use the same preview and confirmation protocol for irreversible operations.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`, `SecurityFilterApplied`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  "purchase-order-missing-1033.json": {
+    "request": {
+      "name": "invoke_message_type",
+      "arguments": {
+        "type": "Purchase.Order.Pdf",
+        "data": {
+          "orderNo": "XW5I171-P-1113"
+        },
+        "lcid": 1033
+      }
+    },
+    "response": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Purchase Header \"XW5I171-P-1113\" was not found (from orderNo).",
+      "parameter": "orderNo",
+      "received": "XW5I171-P-1113",
+      "expected": "the number of a record that exists in table Purchase Header",
+      "nextStep": "Check the number with Data.Records.Get on table Purchase Header.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Purchase.Order.Pdf\". Always read the help before calling a message type."
+    }
+  },
+  "purchase-order-missing-1039.json": {
+    "request": {
+      "name": "invoke_message_type",
+      "arguments": {
+        "type": "Purchase.Order.Pdf",
+        "data": {
+          "orderNo": "XW5I171-P-1113"
+        },
+        "lcid": 1039
+      }
+    },
+    "response": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Purchase Header \"XW5I171-P-1113\" fannst ekki (\u00far orderNo).",
+      "parameter": "orderNo",
+      "received": "XW5I171-P-1113",
+      "expected": "n\u00famer f\u00e6rslu sem er til \u00ed t\u00f6flunni Purchase Header",
+      "nextStep": "Athuga\u00f0u n\u00fameri\u00f0 me\u00f0 Data.Records.Get \u00e1 t\u00f6flunni Purchase Header.",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Purchase.Order.Pdf\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    }
+  },
+  "sales-quote-missing-1033.json": {
+    "request": {
+      "name": "invoke_message_type",
+      "arguments": {
+        "type": "Sales.Quote.Pdf",
+        "data": {
+          "quoteNo": "XW5I171-Q-1113"
+        },
+        "lcid": 1033
+      }
+    },
+    "response": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Sales quote \"XW5I171-Q-1113\" was not found (from quoteNo).",
+      "parameter": "quoteNo",
+      "received": "XW5I171-Q-1113",
+      "expected": "an existing sales quote",
+      "nextStep": "Check the quote number. A sales order or another document with the same number is not a quote.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Sales.Quote.Pdf\". Always read the help before calling a message type."
+    }
+  },
+  "sales-quote-missing-1039.json": {
+    "request": {
+      "name": "invoke_message_type",
+      "arguments": {
+        "type": "Sales.Quote.Pdf",
+        "data": {
+          "quoteNo": "XW5I171-Q-1113"
+        },
+        "lcid": 1039
+      }
+    },
+    "response": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "S\u00f6lutilbo\u00f0 \"XW5I171-Q-1113\" fannst ekki (\u00far quoteNo).",
+      "parameter": "quoteNo",
+      "received": "XW5I171-Q-1113",
+      "expected": "s\u00f6lutilbo\u00f0 sem er til",
+      "nextStep": "Athuga\u00f0u n\u00famer tilbo\u00f0sins. S\u00f6lup\u00f6ntun e\u00f0a anna\u00f0 skjal me\u00f0 sama n\u00fameri er ekki tilbo\u00f0.",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Sales.Quote.Pdf\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    }
+  },
+  "purchase-order-prestate.json": {
+    "request": {
+      "name": "get_records",
+      "arguments": {
+        "table": "Purchase Header",
+        "filter": "WHERE(No.=CONST(XW5I171-P-1113))",
+        "fields": [
+          "No."
+        ],
+        "take": 10
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "table": "Purchase Header",
+      "skip": 0,
+      "take": 10,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    }
+  },
+  "sales-quote-prestate.json": {
+    "request": {
+      "name": "get_records",
+      "arguments": {
+        "table": "Sales Header",
+        "filter": "WHERE(No.=CONST(XW5I171-Q-1113))",
+        "fields": [
+          "No."
+        ],
+        "take": 10
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "table": "Sales Header",
+      "skip": 0,
+      "take": 10,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    }
+  },
+  "purchase-order-poststate.json": {
+    "request": {
+      "name": "get_records",
+      "arguments": {
+        "table": "Purchase Header",
+        "filter": "WHERE(No.=CONST(XW5I171-P-1113))",
+        "fields": [
+          "No."
+        ],
+        "take": 10
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "table": "Purchase Header",
+      "skip": 0,
+      "take": 10,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    }
+  },
+  "sales-quote-poststate.json": {
+    "request": {
+      "name": "get_records",
+      "arguments": {
+        "table": "Sales Header",
+        "filter": "WHERE(No.=CONST(XW5I171-Q-1113))",
+        "fields": [
+          "No."
+        ],
+        "take": 10
+      }
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "table": "Sales Header",
+      "skip": 0,
+      "take": 10,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sourceSha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "owner": "worker-5",
+  "tenant": "w129-15",
+  "publishScope": "Tenant",
+  "productVersion": "28.0.4.0",
+  "testAppVersion": "28.0.4.0",
+  "foundationVersion": "28.0.13.0",
+  "foundationRepublished": false,
+  "packages": [
+    {
+      "compiledPath": "/workspace/private/orchestrator171-symbols/Origo.Orchestrator.quote171.app",
+      "downloadedPath": "/workspace/private/orchestrator171-provenance-f3c064e/Origo.Bifrost_Orchestrator.28.0.4.0.app",
+      "sha256": "7970f5a7455efb7e5e561c91632153e00f5ef78ed8b28c2c460c55da0af66e00",
+      "bytes": 548501,
+      "deployedHashMatches": true
+    },
+    {
+      "compiledPath": "/workspace/private/orchestrator171-symbols/Origo.OrchestratorTests.quote171.app",
+      "downloadedPath": "/workspace/private/orchestrator171-provenance-f3c064e/Origo.Bifrost_Orchestrator_Tests.28.0.4.0.app",
+      "sha256": "fdf719fb0caee1113424b5fd76f005869ad3e8bc336a746b6a5425cf249c7445",
+      "bytes": 238940,
+      "deployedHashMatches": true
+    }
+  ]
+}

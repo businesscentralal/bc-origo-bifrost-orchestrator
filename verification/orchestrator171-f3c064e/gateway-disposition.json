@@ -1,0 +1,26 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "rawLayer1": {
+    "checks": 23,
+    "passed": 15,
+    "failed": 8,
+    "report": "gateway-layer1-full.json"
+  },
+  "invocationRepair": "Snapshot scanner fallback USERPROFILE is unset on Linux; private invocation copy changes only modernization config path to the existing snapshot config. Shared standards/runtime are unchanged.",
+  "layer2": {
+    "behavior": "Purchase and Sales Quote execution untouched; only Sales Quote description/selection/effect/overview/notes and Help catalogue wording changed. Existing translated-help test96471 now asserts the disclosure in both languages and all contract chapters. Full596 native pass at this candidate; MCP8 pass.",
+    "compatibility": "No public field/procedure removed or renamed. No app manifest/permission/pipeline edits.",
+    "translations": "Current is-IS XLF description and selection match generated source labels; bilingual UI/MCP confirm text. Existing effect/overview/notes chapters are English in both LCIDs.",
+    "findingsDisposition": {
+      "changelog": "Current change is explicitly documented under Unreleased with issue/object IDs; scanner requires exact version heading.",
+      "read_isolation": "Existing unchanged IsEmpty reads outside help-text diff; disclosed baseline advisory, no isolation behavior change introduced.",
+      "hardcoded_values": "Existing documentation examples user@company.is, not real email credentials.",
+      "one_statement_per_line": "False positive: semicolons separate AL parameter declarations.",
+      "xml_doc_comments": "Existing interface implementation procedures, no public signature added in product diff.",
+      "namespace": "False positive: Help.Codeunit.al declares namespace Origo.Bifrost.Orchestrator after its existing XML summary (line6).",
+      "modernization": "Documentation mentions Report Selection/NAS; reporting still intentionally uses customer/vendor report selection. No obsolete API introduced.",
+      "try_prefix_convention": "Existing TryResolveQuote on merged PR168 is a boolean identifier parser, not a TryFunction, and execution tail is byte-identical. No new naming/API introduced."
+    }
+  },
+  "overall": "NOT_READY: Sales.OrderConfirmation.Pdf AC03 awaits PR164 integration; paired CI, independent verification and postdeploy acceptance pending. No gate pass or review clearance claimed."
+}

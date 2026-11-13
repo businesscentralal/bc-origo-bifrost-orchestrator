@@ -1,0 +1,49 @@
+{
+  "foundationArtifact": "Origo.Bifrost_Foundation.28.0.13.0.app",
+  "businessCentralSymbol": "Microsoft.Base_Application.29.0.0.0.app",
+  "reports": [
+    {
+      "report": "src/Sales/Document/StandardSalesQuote.Report.al",
+      "loggingCode": [
+        "LogInteraction := false;",
+        "if LogInteraction and not IsReportInPreviewMode() then",
+        "SegManagement.LogDocument(",
+        "SegManagement.LogDocument(",
+        "LogInteraction := SegManagement.FindInteractionTemplateCode(Enum::\"Interaction Log Entry Document Type\"::\"Sales Qte.\") <> '';",
+        "LogInteraction := NewLogInteraction;"
+      ]
+    },
+    {
+      "report": "src/Sales/History/StandardSalesCreditMemo.Report.al",
+      "loggingCode": [
+        "if LogInteraction and not IsReportInPreviewMode() then",
+        "SegManagement.LogDocument(",
+        "SegManagement.LogDocument(",
+        "LogInteraction := SegManagement.FindInteractionTemplateCode(Enum::\"Interaction Log Entry Document Type\"::\"Sales Cr. Memo\") <> '';",
+        "LogInteraction := NewLogInteraction;"
+      ]
+    },
+    {
+      "report": "src/Sales/History/StandardSalesInvoice.Report.al",
+      "loggingCode": [
+        "LogInteraction := LogInteractionTemplateExists();",
+        "if LogInteraction and not IsReportInPreviewMode() then",
+        "SegManagement.LogDocument(",
+        "SegManagement.LogDocument(",
+        "LogInteraction := NewLogInteraction;"
+      ]
+    },
+    {
+      "report": "src/Sales/History/StandardSalesShipment.Report.al",
+      "loggingCode": [
+        "if LogInteraction and not IsReportInPreviewMode() then",
+        "SegManagement.LogDocument(Enum::\"Interaction Log Entry Document Type\"::\"Sales Shpt. Note\".AsInteger(), Header.\"No.\", 0, 0, Database::Contact, Header.\"Sell-to Contact No.\", Header.\"Salesperson Code\", Header.\"Campaign No.\", Header.\"Posting Description\", '')",
+        "SegManagement.LogDocument(Enum::\"Interaction Log Entry Document Type\"::\"Sales Shpt. Note\".AsInteger(), Header.\"No.\", 0, 0, Database::Customer, Header.\"Sell-to Customer No.\", Header.\"Salesperson Code\", Header.\"Campaign No.\", Header.\"Posting Description\", '');",
+        "LogInteraction := SegManagement.FindInteractionTemplateCode(Enum::\"Interaction Log Entry Document Type\"::\"Sales Shpt. Note\") <> '';",
+        "LogInteraction := NewLogInteraction;"
+      ]
+    }
+  ],
+  "scope": "Orchestrator source only. Foundation Sales PDF implementations are a separately owned repository; no source edits there.",
+  "result": "Sales.Quote.Pdf gap fixed in this candidate; Sales.OrderConfirmation.Pdf absent pending PR164 integration. Foundation posted sales PDF effect texts omit interaction-log disclosure and need Architect separate scope/assignment."
+}

@@ -1,0 +1,76 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "owner": "worker-5",
+  "tenant": "w129-15",
+  "touchedMessageTypes": [
+    "Purchase.Order.Pdf",
+    "Sales.Quote.Pdf"
+  ],
+  "createsOwnData": true,
+  "dataSetup": "Self-created synthetic identifiers XW5I171-P-1113 and XW5I171-Q-1113; prestate and poststate absence verified. Help-text and missing-record probes require no persisted business fixtures and use no customer/shared fixture rows.",
+  "persistentFixturesCreated": 0,
+  "executed": 8,
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "name": "help-disclosure-1033",
+      "type": "Purchase.Order.Pdf",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "purchase-order-help-1033.json"
+    },
+    {
+      "name": "self-created-unknown-identifier-1033",
+      "type": "Purchase.Order.Pdf",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "purchase-order-missing-1033.json"
+    },
+    {
+      "name": "help-disclosure-1039",
+      "type": "Purchase.Order.Pdf",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "purchase-order-help-1039.json"
+    },
+    {
+      "name": "self-created-unknown-identifier-1039",
+      "type": "Purchase.Order.Pdf",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "purchase-order-missing-1039.json"
+    },
+    {
+      "name": "help-disclosure-1033",
+      "type": "Sales.Quote.Pdf",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "sales-quote-help-1033.json"
+    },
+    {
+      "name": "self-created-unknown-identifier-1033",
+      "type": "Sales.Quote.Pdf",
+      "lcid": 1033,
+      "passed": true,
+      "evidence": "sales-quote-missing-1033.json"
+    },
+    {
+      "name": "help-disclosure-1039",
+      "type": "Sales.Quote.Pdf",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "sales-quote-help-1039.json"
+    },
+    {
+      "name": "self-created-unknown-identifier-1039",
+      "type": "Sales.Quote.Pdf",
+      "lcid": 1039,
+      "passed": true,
+      "evidence": "sales-quote-missing-1039.json"
+    }
+  ],
+  "cleanupVerified": true,
+  "renderingScope": "Rendering behaviour unchanged by source comparison and exercised by full AL suite; these MCP probes verify changed help and missing-record behaviour, not a PDF rendering acceptance claim."
+}

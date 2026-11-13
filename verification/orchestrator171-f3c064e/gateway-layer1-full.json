@@ -1,0 +1,407 @@
+{
+  "publisher": "Origo",
+  "project": "Bifrost Orchestrator",
+  "total_al_files": 149,
+  "checks": {
+    "one_statement_per_line": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 264,
+          "text": "local procedure ReadIdentifier(RequestJson: JsonObject; KeyName: Text; var Argument: Record \"Message Argument ori\"): Text",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 271,
+          "text": "local procedure CollectIdentifier(var Argument: Record \"Message Argument ori\"; RequestJson: JsonObject; KeyName: Text; GuidOnly: Boolean; var Sources: List of [Text]; var Values: List of [Text]): Boolean",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 294,
+          "text": "local procedure AcceptIdentifierText(var Argument: Record \"Message Argument ori\"; KeyName: Text; TextValue: Text; GuidOnly: Boolean): Boolean",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 324,
+          "text": "local procedure RespondQuoteNotFound(var Argument: Record \"Message Argument ori\"; Source: Text; Value: Text)",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 344,
+          "text": "local procedure QuoteEnvelope(SubjectForms: List of [Text]; SubjectDescription: Text; DataRequired: Boolean; ContentType: Text) Result: JsonObject",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        }
+      ]
+    },
+    "namespace": {
+      "pass": false,
+      "findings": [
+        {
+          "file": "Help.Codeunit.al"
+        }
+      ]
+    },
+    "modernization": {
+      "pass": false,
+      "findings": [
+        {
+          "modern": "Multi-layout reports (RDLC + Word + Excel), Custom Report Layouts, Power BI embedded reports",
+          "matched": "Report Selection",
+          "area": "Reporting",
+          "transition": "MOD-REPORTING-001",
+          "severity": "warn",
+          "file": "Help.Codeunit.al"
+        },
+        {
+          "modern": "Multi-layout reports (RDLC + Word + Excel), Custom Report Layouts, Power BI embedded reports",
+          "matched": "Report Selection",
+          "area": "Reporting",
+          "transition": "MOD-REPORTING-001",
+          "severity": "warn",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "modern": "Multi-layout reports (RDLC + Word + Excel), Custom Report Layouts, Power BI embedded reports",
+          "matched": "Report Selection",
+          "area": "Reporting",
+          "transition": "MOD-REPORTING-001",
+          "severity": "warn",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "modern": "Enhanced Job Queue with recurrence, Task Scheduler, external notifications on failure",
+          "matched": "NAS",
+          "area": "Job Queue & Scheduling",
+          "transition": "MOD-JOBQUEUE-001",
+          "severity": "warn",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        }
+      ]
+    },
+    "format_guid": {
+      "pass": true,
+      "findings": []
+    },
+    "with_statements": {
+      "pass": true,
+      "findings": []
+    },
+    "commit_in_loop": {
+      "pass": true,
+      "findings": []
+    },
+    "global_variables": {
+      "pass": true,
+      "findings": []
+    },
+    "format_evaluate_enum": {
+      "pass": true,
+      "findings": []
+    },
+    "xml_doc_comments": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 21,
+          "procedure": "IsEnabled",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 29,
+          "procedure": "GetFilterTableNo",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 34,
+          "procedure": "GetDescription",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 41,
+          "procedure": "GetKeywords",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 48,
+          "procedure": "GetSelectionDescription",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 55,
+          "procedure": "GetEnvelope",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 65,
+          "procedure": "GetTarget",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 77,
+          "procedure": "GetParameters",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 88,
+          "procedure": "GetResponse",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 99,
+          "procedure": "GetErrors",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 118,
+          "procedure": "GetEffect",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 126,
+          "procedure": "GetMetering",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 131,
+          "procedure": "GetRelated",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 140,
+          "procedure": "GetWorkflow",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 153,
+          "procedure": "GetExamples",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 162,
+          "procedure": "GetOverview",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 169,
+          "procedure": "GetNotes",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 179,
+          "procedure": "GetMessageDirection",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 184,
+          "procedure": "ExecuteBifrostTask",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 17,
+          "procedure": "IsEnabled",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 25,
+          "procedure": "GetFilterTableNo",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 30,
+          "procedure": "GetDescription",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 37,
+          "procedure": "GetKeywords",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 44,
+          "procedure": "GetSelectionDescription",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 51,
+          "procedure": "GetEnvelope",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 61,
+          "procedure": "GetTarget",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 71,
+          "procedure": "GetParameters",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 85,
+          "procedure": "GetResponse",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 95,
+          "procedure": "GetErrors",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 109,
+          "procedure": "GetEffect",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 118,
+          "procedure": "GetMetering",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 123,
+          "procedure": "GetRelated",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 132,
+          "procedure": "GetWorkflow",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 142,
+          "procedure": "GetExamples",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 148,
+          "procedure": "GetOverview",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 156,
+          "procedure": "GetNotes",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 168,
+          "procedure": "GetMessageDirection",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        },
+        {
+          "line": 174,
+          "procedure": "ExecuteBifrostTask",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        }
+      ]
+    },
+    "read_isolation": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 299,
+          "text": "if not ReportSelections.IsEmpty() then",
+          "variable": "ReportSelections",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 299,
+          "text": "if not ReportSelections.IsEmpty() then",
+          "variable": "ReportSelections",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        },
+        {
+          "line": 305,
+          "text": "exit(not CustomReportSelection.IsEmpty());",
+          "variable": "CustomReportSelection",
+          "file": "PurchOrderPdfMsg.Codeunit.al"
+        }
+      ]
+    },
+    "hardcoded_values": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 581,
+          "issue": "Hardcoded email",
+          "text": "O.AppendLine('| `\"@_who.path\"` | WhoAmI user/company context | `\"@_who.salesperson.email\"` → `\"user@company.is\"` |');",
+          "severity": "medium",
+          "file": "Help.Codeunit.al"
+        },
+        {
+          "line": 1034,
+          "issue": "Hardcoded email",
+          "text": "O.AppendLine('| `_who.salesperson.email` | `user@company.is` | Salesperson email |');",
+          "severity": "medium",
+          "file": "Help.Codeunit.al"
+        }
+      ]
+    },
+    "event_subscriber_placement": {
+      "pass": true,
+      "findings": []
+    },
+    "data_classification": {
+      "pass": true,
+      "findings": []
+    },
+    "try_prefix_convention": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 309,
+          "procedure": "TryResolveQuote",
+          "issue": "Procedure 'TryResolveQuote' uses Try prefix but has no [TryFunction] attribute",
+          "file": "SalesQuotePdfMsg.Codeunit.al"
+        }
+      ]
+    },
+    "caption_translation": {
+      "findings": [],
+      "pass": true,
+      "skipped": null
+    },
+    "changelog": {
+      "pass": false,
+      "findings": [
+        "No entry for version 28.0.4.0"
+      ]
+    },
+    "reserved_var_names": {
+      "pass": true,
+      "findings": []
+    },
+    "page_code_minimal": {
+      "pass": true,
+      "findings": []
+    },
+    "app_json": {
+      "pass": true,
+      "findings": []
+    },
+    "set_load_fields": {
+      "advisory": "Loops without SetLoadFields - consider it only for wide tables; not a gate failure",
+      "findings": [],
+      "pass": true
+    },
+    "today_vs_workdate": {
+      "pass": true,
+      "findings": []
+    },
+    "object_naming": {
+      "pass": true,
+      "findings": []
+    },
+    "confirm_in_page": {
+      "pass": true,
+      "findings": []
+    }
+  },
+  "version": "28.0.4.0",
+  "summary": {
+    "ready": false,
+    "failed": 8,
+    "passed": 15,
+    "total": 23
+  },
+  "mode": "diff (vs 639ecb5c0508c82cba7da05d58e5beda6d4666df)",
+  "files_scanned": 3
+}

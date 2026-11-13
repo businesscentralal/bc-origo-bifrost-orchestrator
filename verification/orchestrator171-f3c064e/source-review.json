@@ -1,0 +1,18 @@
+{
+  "sha": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "executionUnchanged": true,
+  "comparisonBase": "40bcc7c147ff0ad55aa6db875b376647109aad38",
+  "publicMethodsUnchanged": true,
+  "reviewedFiles": [
+    "CHANGELOG.md",
+    "app/Translations/Bifrost Orchestrator.is-IS.xlf",
+    "app/src/MessageTypes/Sales/SalesQuotePdfMsg.Codeunit.al",
+    "app/src/MessageTypes/Help/Help.Codeunit.al",
+    "test/test/SalesQuotePdfTestsori.Codeunit.al"
+  ],
+  "lessonIds": [
+    "orchestrator171-read-dispatch-success-c5df53b-andvari"
+  ],
+  "noNewSuppressions": true,
+  "noSkippedTestsIntroduced": true
+}
