@@ -1,0 +1,44 @@
+[
+  {
+    "project": "app",
+    "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+    "startedAt": "2026-11-13T12:16:35.667040+00:00",
+    "finishedAt": "2026-11-13T12:16:57.681893+00:00",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "args": [
+      "/opt/devtools/dotnet/dotnet",
+      "/opt/devtools/al-language/extension/bin/alc.dll",
+      "/project:<private-evidence-root>/source/app",
+      "/packagecachepath:<private-evidence-root>/symbols",
+      "/out:<private-evidence-root>/app.app",
+      "/SourceCommit:16d7b9a10cb562e42381b7bde110534350697326",
+      "/SourceRepositoryUrl:https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+      "/errorlog:<private-evidence-root>/app-diagnostics.json",
+      "/analyzer:/opt/devtools/al-language/extension/bin/Microsoft.Dynamics.Nav.CodeCop.dll,/opt/devtools/al-language/extension/bin/Microsoft.Dynamics.Nav.UICop.dll,/opt/devtools/al-language/extension/bin/Microsoft.Dynamics.Nav.AppSourceCop.dll"
+    ],
+    "sha256": "25fd3cccb7fb85fc4b58dc182b24211c3b786902405310a3e88434d3e0b4733b"
+  },
+  {
+    "project": "test",
+    "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+    "startedAt": "2026-11-13T12:16:57.772347+00:00",
+    "finishedAt": "2026-11-13T12:17:15.021466+00:00",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "args": [
+      "/opt/devtools/dotnet/dotnet",
+      "/opt/devtools/al-language/extension/bin/alc.dll",
+      "/project:<private-evidence-root>/source/test",
+      "/packagecachepath:<private-evidence-root>/symbols",
+      "/out:<private-evidence-root>/test.app",
+      "/SourceCommit:16d7b9a10cb562e42381b7bde110534350697326",
+      "/SourceRepositoryUrl:https://github.com/businesscentralal/bc-origo-bifrost-orchestrator",
+      "/errorlog:<private-evidence-root>/test-diagnostics.json",
+      "/analyzer:/opt/devtools/al-language/extension/bin/Microsoft.Dynamics.Nav.CodeCop.dll,/opt/devtools/al-language/extension/bin/Microsoft.Dynamics.Nav.UICop.dll"
+    ],
+    "sha256": "46c9fbeaf9f68e4913447741a09bbc234d52e18be7024e9c3cdb7020d60f3de1"
+  }
+]

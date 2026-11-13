@@ -1,0 +1,8 @@
+{
+  "lcid": 1039,
+  "rows": [
+    "Purchase.Order.PdfPrentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.38Innsent",
+    "Sales.Quote.PdfSækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.36Báðar leiðir"
+  ],
+  "passed": 2
+}

@@ -1,0 +1,38 @@
+{
+  "headSha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43419957214",
+  "runAttempt": 1,
+  "buildSha": "f186cca9458cb638246da10658db5cf4b7fcc1fe",
+  "headTree": "056497ff0a14088bdee1396b3f7b0eff6d680b80",
+  "buildTree": "056497ff0a14088bdee1396b3f7b0eff6d680b80",
+  "treeEqualityVerified": true,
+  "sourceTests": 598,
+  "loggedExecuted": 598,
+  "passed": 598,
+  "failed": 0,
+  "skipped": 0,
+  "fullSuite": true,
+  "completionLine": "2026-11-13T12:04:15.3094998Z Bifrost full suite: 598 distinct source tests executed; all passed=True.",
+  "cleanup": "CI log: Container f0aae95e91ed deleted; Deleted 1 of 1 containers.",
+  "jobs": {
+    "Initialize COSMO Alpaca / COSMO Alpaca Initialization": "success",
+    "Initialization": "success",
+    "Initialize COSMO Alpaca / COSMO Alpaca Settings Files Check / COSMO Alpaca Settings Files Check": "success",
+    "PregateCheck": "skipped",
+    "Create COSMO Alpaca Containers / Create COSMO Alpaca Containers": "success",
+    "Build . (Default then Test) / Default / . (Default)": "success",
+    "Build . (Default then Test) / Test / . (Test)": "success",
+    "Build . (Default then Test) / Default / Remove COSMO Alpaca Containers": "skipped",
+    "Icelandic XLF in sync (compiled Default artifact)": "success",
+    "Remove COSMO Alpaca Containers / Remove COSMO Alpaca Containers": "success",
+    "Build . (Default then Test) / Test / Remove COSMO Alpaca Containers": "skipped",
+    "Code Analysis Processing": "skipped",
+    "Pull Request Status Check": "success"
+  },
+  "logHashes": {
+    "default": "c8fbe9decdfeefb7eaafd6df4b098692671ff75fa0d585f37fa9cc50760755dc",
+    "test": "157cce9ddf28746dcf9ef92e564b04ea1f1e72bf7b268079868d0e0fab979e7e",
+    "cleanup": "2470cad188c65d75b2f13a5d4b4932350a888ad7b3ec7637f8f7dbe96821088f"
+  },
+  "scope": "Read existing GitHub CI logs only; no COSMO access or lifecycle actions by worker8."
+}

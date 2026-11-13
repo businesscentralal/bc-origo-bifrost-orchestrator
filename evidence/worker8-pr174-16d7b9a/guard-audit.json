@@ -1,0 +1,91 @@
+{
+  "at": "2026-11-13T11:57:56.014016+00:00",
+  "candidateSha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "previousHead": "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+  "mainParent": "d5f8abdbdce6c0ca64057006077678236e88ac81",
+  "mergeBase": "639ecb5c0508c82cba7da05d58e5beda6d4666df",
+  "parents": [
+    "f3c064e9a560ffbb46edf613c891d1e0334bde56",
+    "d5f8abdbdce6c0ca64057006077678236e88ac81"
+  ],
+  "changedFiles": [
+    "CHANGELOG.md",
+    "app/src/Pages/PlaybookCard.Page.al",
+    "test/src/Handler/PlaybookChatHostSubori.Codeunit.al",
+    "test/src/Samples/ChatHostProviderTypeori.EnumExt.al",
+    "test/src/Samples/ChatHostProviderori.Codeunit.al",
+    "test/test/PlaybookChatHostTestsori.Codeunit.al"
+  ],
+  "mainBroughtFiles": [
+    "CHANGELOG.md",
+    "app/src/Pages/PlaybookCard.Page.al",
+    "test/src/Handler/PlaybookChatHostSubori.Codeunit.al",
+    "test/src/Samples/ChatHostProviderTypeori.EnumExt.al",
+    "test/src/Samples/ChatHostProviderori.Codeunit.al",
+    "test/test/PlaybookChatHostTestsori.Codeunit.al"
+  ],
+  "firstParentAdditions": [
+    "16d7b9a10cb562e42381b7bde110534350697326"
+  ],
+  "automaticMergeTree": "53f47c4b1709a5b23b71e99ee03cb0d21e25e379",
+  "automaticMergeExitCode": 1,
+  "manualResolutionFiles": [
+    "CHANGELOG.md"
+  ],
+  "incomingMainBlobMatches": {
+    "app/src/Pages/PlaybookCard.Page.al": true,
+    "test/src/Handler/PlaybookChatHostSubori.Codeunit.al": true,
+    "test/src/Samples/ChatHostProviderTypeori.EnumExt.al": true,
+    "test/src/Samples/ChatHostProviderori.Codeunit.al": true,
+    "test/test/PlaybookChatHostTestsori.Codeunit.al": true
+  },
+  "retainedBranchBlobMatches": {
+    "app/Translations/Bifrost Orchestrator.is-IS.xlf": true,
+    "app/src/MessageTypes/Help/Help.Codeunit.al": true,
+    "app/src/MessageTypes/Purchase/PurchOrderPdfMsg.Codeunit.al": true,
+    "app/src/MessageTypes/Sales/SalesQuotePdfMsg.Codeunit.al": true,
+    "test/test/PlaybookEffectTestsori.Codeunit.al": true,
+    "test/test/PurchOrderPdfTestsori.Codeunit.al": true,
+    "test/test/SalesQuotePdfTestsori.Codeunit.al": true
+  },
+  "changelogBothParentsPreserved": {
+    "f3c064e9a560ffbb46edf613c891d1e0334bde56": true,
+    "d5f8abdbdce6c0ca64057006077678236e88ac81": true
+  },
+  "aggregateAheadBy": 2,
+  "checks": {
+    "exact_two_parents": true,
+    "single_first_parent_addition": true,
+    "second_parent_current_main": true,
+    "only_changelog_or_main_files": true,
+    "non_changelog_matches_automatic_merge": true,
+    "incoming_main_only_blobs_match": true,
+    "retained_branch_only_blobs_match": true,
+    "both_changelog_parents_preserved": true,
+    "no_changelog_conflict_markers": true,
+    "canonical_local_guard_passed": true,
+    "working_tree_clean": true,
+    "aggregate_count_explained": true
+  },
+  "passed": 12,
+  "failed": 0,
+  "valid": true,
+  "finding": "Shared guard false positive: aggregate ahead_by counts incoming main plus one first-parent merge.",
+  "rootCause": "/opt/agent/runtime/claude-step2.cjs:647 requires cmp.ahead_by===1.",
+  "localGuard": {
+    "ok": true,
+    "head": "16d7b9a10cb562e42381b7bde110534350697326",
+    "changed": [
+      "CHANGELOG.md",
+      "app/src/Pages/PlaybookCard.Page.al",
+      "test/src/Handler/PlaybookChatHostSubori.Codeunit.al",
+      "test/src/Samples/ChatHostProviderTypeori.EnumExt.al",
+      "test/src/Samples/ChatHostProviderori.Codeunit.al",
+      "test/test/PlaybookChatHostTestsori.Codeunit.al"
+    ],
+    "extra": []
+  },
+  "productTestsExecuted": 0,
+  "sourceEdits": 0,
+  "pushes": 0
+}

@@ -1,0 +1,12 @@
+{
+  "id": "orchestrator174-local-isolation-range-worker8",
+  "at": "2026-11-13T12:57:08.762301+00:00",
+  "owner": "worker-8",
+  "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "finding": "The local runner executed every codeunit in96400..96499 despite requiredTestIsolation=Codeunit/Disabled; the requested isolation filter did not intersect the explicit numeric range.",
+  "cause": "A broad explicit range must not be assumed to narrow by requiredTestIsolation. The first run executed session-starting96456 under Codeunit, causing4failures; an overbroad Disabled run persisted fixtures before it was stopped.",
+  "prevention": "Build explicit disjoint ranges from actual source TestIsolation requirements. Run588normal tests underCodeunit and codeunit96456(10tests) underDisabled. On interruptedDisabled runs audit standard base tables as well as reinstalling owned feature apps.",
+  "verification": "Clean final runs588+10=598passed,0failed,0skipped, source-name reconciliation missing0unexpected0. Preserve failedattempts and cleanup records.",
+  "evidence": "<private-evidence-root>/full-suite-summary.json"
+}

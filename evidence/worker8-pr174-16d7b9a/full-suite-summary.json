@@ -1,0 +1,44 @@
+{
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "tenant": "w129-18",
+  "fullSuite": true,
+  "executed": 598,
+  "passed": 598,
+  "failed": 0,
+  "skipped": 0,
+  "sourceTests": 598,
+  "results": [
+    {
+      "mode": "codeunit",
+      "executed": 588,
+      "passed": 588,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "ok": true,
+      "durationMs": 296015,
+      "failures": [],
+      "file": "native-clean-codeunit.json"
+    },
+    {
+      "mode": "disabled",
+      "executed": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "ok": true,
+      "durationMs": 14293,
+      "failures": [],
+      "file": "native-clean-disabled.json"
+    }
+  ],
+  "junitFiles": [
+    "native-11.junit.xml",
+    "native-12.junit.xml"
+  ],
+  "missing": [],
+  "unexpected": [],
+  "priorAttempts": "Initial incorrect isolation command:598executed,594passed,4failed,0skipped. Second overbroad selector stopped; no completion counts. The first corrected588-test retry had570passed/18failed/0skipped due to persisted fixtures; its companion10-test run passed. Nine exact owned Job Queue Entries were deleted and zero-readback verified, then Orchestrator apps were uninstalled with extension data deletion/unpublished/republished before this clean full run. Corrected selectors cover all source tests; no exclusions.",
+  "finishedAt": "2026-11-13T12:49:26.753388+00:00"
+}

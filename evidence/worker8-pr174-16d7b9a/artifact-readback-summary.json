@@ -1,0 +1,12 @@
+{
+  "app.app": {
+    "localSha256": "25fd3cccb7fb85fc4b58dc182b24211c3b786902405310a3e88434d3e0b4733b",
+    "deployedSha256": "25fd3cccb7fb85fc4b58dc182b24211c3b786902405310a3e88434d3e0b4733b",
+    "equal": true
+  },
+  "test.app": {
+    "localSha256": "46c9fbeaf9f68e4913447741a09bbc234d52e18be7024e9c3cdb7020d60f3de1",
+    "deployedSha256": "46c9fbeaf9f68e4913447741a09bbc234d52e18be7024e9c3cdb7020d60f3de1",
+    "equal": true
+  }
+}

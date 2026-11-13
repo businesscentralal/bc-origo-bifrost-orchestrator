@@ -1,0 +1,52 @@
+[
+  {
+    "table": "Purchase Header",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Purchase Line",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Sales Header",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Sales Line",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Vendor",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Customer",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Item",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Report Selections",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Job Queue Entry",
+    "count": 0,
+    "error": null
+  },
+  {
+    "table": "Playbook ori",
+    "count": 0,
+    "error": null
+  }
+]

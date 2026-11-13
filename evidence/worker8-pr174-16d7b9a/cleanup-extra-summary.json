@@ -1,0 +1,14 @@
+[
+  {
+    "table": "Job Queue Category",
+    "deleted": 2,
+    "remainingOwned": 0,
+    "matchedCreationWindow": "2026-11-13T12:25:00Z..12:26:00Z"
+  },
+  {
+    "table": "Job Queue Log Entry",
+    "deleted": 10,
+    "remainingOwned": 0,
+    "matchedCreationWindow": "2026-11-13T12:25:00Z..12:26:00Z"
+  }
+]

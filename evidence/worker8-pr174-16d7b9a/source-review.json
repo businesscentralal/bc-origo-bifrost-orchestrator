@@ -1,0 +1,26 @@
+{
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "base": "d5f8abdbdce6c0ca64057006077678236e88ac81",
+  "files": [
+    {
+      "file": "app/src/MessageTypes/Purchase/PurchOrderPdfMsg.Codeunit.al",
+      "publicAndLocalSignaturesIdentical": true,
+      "reviewedDiffScope": "Only description, selection, effect, overview and notes strings changed; printing/logging execution unchanged.",
+      "sourceBlobBefore": "b24dbdd8898bb66a09b50114fc7248038d26e6840271c98f073fab6618e45614",
+      "sourceBlobAfter": "45c782651366578e229d9e2e977eba4dca0d9ba2e1cf72c23ea202156343c3ec"
+    },
+    {
+      "file": "app/src/MessageTypes/Sales/SalesQuotePdfMsg.Codeunit.al",
+      "publicAndLocalSignaturesIdentical": true,
+      "reviewedDiffScope": "Only description, selection, effect, overview and notes strings changed; printing/logging execution unchanged.",
+      "sourceBlobBefore": "5b48d0c8327056b02825c14a973bc6c161ac2c95f49b4d3674d961e46eac007a",
+      "sourceBlobAfter": "f6ce85f6a31c4aec7726efd6b84edf511dc36744abde6ddb6ad0f1de4449c3f4"
+    }
+  ],
+  "otherSourceChange": "Help catalogue strings aligned; en-US/is-IS XLF aligned. Test96461 retains expected Error path and validates Success envelope reports/count. New disclosure assertions in96480/96471.",
+  "noNewObjects": true,
+  "noNewDependencies": true,
+  "noNewSuppressions": true,
+  "compatibilityLimitation": "AppSourceCop ran but source configuration supplies no released .app baseline; no released binary comparison claimed.",
+  "AC03": "Sales.OrderConfirmation.Pdf absent from branch; dependency PR164 remains open."
+}

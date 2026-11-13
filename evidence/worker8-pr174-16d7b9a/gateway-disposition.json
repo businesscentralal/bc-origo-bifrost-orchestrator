@@ -1,0 +1,26 @@
+{
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "scriptSnapshot": "52ba4754cfd614e4a7c50af87b30149b18b313e3",
+  "scopedScan": {
+    "files": 3,
+    "checks": 23,
+    "passed": 16,
+    "flagged": 7
+  },
+  "dispositions": {
+    "namespace": "False positive: Help.Codeunit.al has namespace after XML doc block on line6.",
+    "one_statement_per_line": "False positives: semicolon-delimited AL procedure parameter lists, unchanged.",
+    "hardcoded_values": "Existing illustrative user@company.is text in runtime-help examples, not a credential.",
+    "try_prefix_convention": "Existing Boolean TryResolveQuote implements lookup success/failure without TryFunction; no change in this PR.",
+    "read_isolation": "Existing report-selection reads unchanged; disclose advisory for Architect follow-up.",
+    "xml_doc_comments": "38 existing interface implementations without per-procedure XML docs; no new public procedures or signatures introduced.",
+    "changelog": "Current change entries with object/test IDs are under existing Unreleased heading; scanner expects literal28.0.4.0. Disclosed format finding, no invented waiver."
+  },
+  "limitations": [
+    "Detached checkout caused an initial full scan; reran in a separate private branch to restrict to PR diff.",
+    "Initial Linux run failed due missing USERPROFILE; rerun uses actual /home/node, canonical script unchanged.",
+    "Modernization catalog missing from snapshot; no modernization completeness claim.",
+    "AppSourceCop ran with existing config but no released binary baseline supplied."
+  ],
+  "overall": "NOT_READY: AC03 dependencyPR164 remains open; full developer evidence/Claude receipt still pending at recording."
+}

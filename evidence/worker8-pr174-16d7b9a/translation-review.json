@@ -1,0 +1,30 @@
+{
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "xmlValid": true,
+  "relevantUnits": [
+    {
+      "id": "Codeunit 3878585223 - Method 4077369804 - NamedType 3569966352",
+      "source": "Prints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.",
+      "target": "Prentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.",
+      "state": null
+    },
+    {
+      "id": "Codeunit 3878585223 - Method 79446908 - NamedType 895773054",
+      "source": "Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed and, when an interaction template is set up, writes an interaction log entry. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.",
+      "target": "Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.",
+      "state": null
+    },
+    {
+      "id": "Codeunit 739276807 - Method 4077369804 - NamedType 3569966352",
+      "source": "Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.",
+      "target": "Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.",
+      "state": null
+    },
+    {
+      "id": "Codeunit 739276807 - Method 79446908 - NamedType 895773054",
+      "source": "Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up.",
+      "target": "Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.",
+      "state": null
+    }
+  ]
+}

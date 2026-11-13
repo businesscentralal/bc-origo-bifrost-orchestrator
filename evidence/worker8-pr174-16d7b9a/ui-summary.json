@@ -1,0 +1,33 @@
+{
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "tenant": "w129-18",
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "rows": [
+        "Purchase.Order.PdfPrints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.38Inbound",
+        "Sales.Quote.PdfRetrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.36Both"
+      ],
+      "passed": 2
+    },
+    {
+      "lcid": 1039,
+      "rows": [
+        "Purchase.Order.PdfPrentar innkaupap\u00f6ntun sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.38Innsent",
+        "Sales.Quote.PdfS\u00e6kir s\u00f6lutilbo\u00f0 sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.36B\u00e1\u00f0ar lei\u00f0ir"
+      ],
+      "passed": 2
+    }
+  ],
+  "screenshots": [
+    "ui-pdf-1033.png",
+    "ui-pdf-1039.png"
+  ],
+  "scope": "BC Web Client Bifrost Setup message catalogue; verify conditional interaction-log disclosure for Purchase.Order.Pdf and Sales.Quote.Pdf. No business records edited.",
+  "originalLanguage": 1039,
+  "languageRestored": true,
+  "screenshotsNote": "Grid screenshots show catalogue rows; full accessible description text is captured in scenarios, since fixed-width grid cells visually truncate long strings."
+}

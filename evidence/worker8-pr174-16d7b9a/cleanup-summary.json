@@ -1,0 +1,179 @@
+{
+  "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+  "tenant": "w129-18",
+  "owner": "worker-8",
+  "status": "VERIFIED",
+  "finishedAt": "2026-11-13T13:00:41.957Z",
+  "extensionCleanup": {
+    "initialFourApps": {
+      "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+      "tenant": "w129-18",
+      "status": "VERIFIED",
+      "finishedAt": "2026-11-13T12:54:05.496Z",
+      "ownExtensionDataDeleted": true,
+      "ownPackagesUnpublished": true,
+      "remainingOrigoExtensions": [],
+      "events": [
+        {
+          "id": "4922b971-2b43-4a57-a808-5c7e1a46ccb9",
+          "action": "uninstallAndDeleteExtensionData",
+          "at": "2026-11-13T12:54:02.331Z",
+          "statusCode": 204
+        },
+        {
+          "id": "4922b971-2b43-4a57-a808-5c7e1a46ccb9",
+          "action": "unpublish",
+          "at": "2026-11-13T12:54:02.654Z",
+          "statusCode": 204
+        },
+        {
+          "id": "4ff5cc22-b45a-48df-81a2-b7bbe83c5257",
+          "action": "uninstallAndDeleteExtensionData",
+          "at": "2026-11-13T12:54:03.183Z",
+          "statusCode": 204
+        },
+        {
+          "id": "4ff5cc22-b45a-48df-81a2-b7bbe83c5257",
+          "action": "unpublish",
+          "at": "2026-11-13T12:54:03.517Z",
+          "statusCode": 204
+        },
+        {
+          "id": "5016ef36-a4df-4252-8e65-8686a1a1455a",
+          "action": "uninstallAndDeleteExtensionData",
+          "at": "2026-11-13T12:54:03.994Z",
+          "statusCode": 204
+        },
+        {
+          "id": "5016ef36-a4df-4252-8e65-8686a1a1455a",
+          "action": "unpublish",
+          "at": "2026-11-13T12:54:04.379Z",
+          "statusCode": 204
+        },
+        {
+          "id": "05947d54-5fa2-429c-b527-2928fe047ad4",
+          "action": "uninstallAndDeleteExtensionData",
+          "at": "2026-11-13T12:54:05.091Z",
+          "statusCode": 204
+        },
+        {
+          "id": "05947d54-5fa2-429c-b527-2928fe047ad4",
+          "action": "unpublish",
+          "at": "2026-11-13T12:54:05.439Z",
+          "statusCode": 204
+        }
+      ]
+    },
+    "temporaryFoundationAuditApps": {
+      "sha": "16d7b9a10cb562e42381b7bde110534350697326",
+      "tenant": "w129-18",
+      "status": "VERIFIED",
+      "finishedAt": "2026-11-13T13:00:41.957Z",
+      "ownExtensionDataDeleted": true,
+      "ownPackagesUnpublished": true,
+      "remainingOrigoExtensions": [],
+      "events": [
+        {
+          "id": "5016ef36-a4df-4252-8e65-8686a1a1455a",
+          "action": "uninstallAndDeleteExtensionData",
+          "at": "2026-11-13T13:00:40.364Z",
+          "statusCode": 204
+        },
+        {
+          "id": "5016ef36-a4df-4252-8e65-8686a1a1455a",
+          "action": "unpublish",
+          "at": "2026-11-13T13:00:40.672Z",
+          "statusCode": 204
+        },
+        {
+          "id": "05947d54-5fa2-429c-b527-2928fe047ad4",
+          "action": "uninstallAndDeleteExtensionData",
+          "at": "2026-11-13T13:00:41.351Z",
+          "statusCode": 204
+        },
+        {
+          "id": "05947d54-5fa2-429c-b527-2928fe047ad4",
+          "action": "unpublish",
+          "at": "2026-11-13T13:00:41.857Z",
+          "statusCode": 204
+        }
+      ]
+    }
+  },
+  "ownedBaseFixtureCleanup": [
+    {
+      "table": "Job Queue Entry",
+      "deleted": 9,
+      "remainingOwned": 0
+    },
+    {
+      "table": "Job Queue Category",
+      "deleted": 2,
+      "remainingOwned": 0,
+      "matchedCreationWindow": "2026-11-13T12:25:00Z..12:26:00Z"
+    },
+    {
+      "table": "Job Queue Log Entry",
+      "deleted": 10,
+      "remainingOwned": 0,
+      "matchedCreationWindow": "2026-11-13T12:25:00Z..12:26:00Z"
+    }
+  ],
+  "finalBusinessTableAudit": [
+    {
+      "table": "Purchase Header",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Purchase Line",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Sales Header",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Sales Line",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Vendor",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Customer",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Item",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Report Selections",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Job Queue Entry",
+      "count": 0,
+      "error": null
+    },
+    {
+      "table": "Playbook ori",
+      "count": 0,
+      "error": null
+    }
+  ],
+  "tenantReportLayoutsModified": 0,
+  "testRunMarker": "Table96450 belongs to uninstalled test app; absent after extension-data deletion.",
+  "languageRestored": 1039,
+  "helperAppPublished": false,
+  "tenantDeleted": false
+}

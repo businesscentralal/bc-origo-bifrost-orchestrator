@@ -1,0 +1,8 @@
+{
+  "lcid": 1033,
+  "rows": [
+    "Purchase.Order.PdfPrints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.38Inbound",
+    "Sales.Quote.PdfRetrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.36Both"
+  ],
+  "passed": 2
+}
