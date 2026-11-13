@@ -116,7 +116,7 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         // [GIVEN] A quote whose number is unsuitable as a filename or MIME parameter.
         DeleteMarkedDocuments();
         CreateQuote(SalesHeader);
-        SalesHeader.Rename(SalesHeader."Document Type", 'BIFT/177"Á:0123456789');
+        SalesHeader.Rename(SalesHeader."Document Type", 'BIFT/177"Á:012345678');
 
         // [WHEN] The same quote is requested in English and Icelandic.
         DispatchSubject(SalesHeader."No.", 1033, EnglishContentType, ResponseBlob);
