@@ -130,6 +130,11 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
     var
         MessageTypeInterface: Interface "Msg Interface ori";
         Discovery: Interface "Msg Discovery ori";
+        Contract: Interface "Msg Contract ori";
+        Effect: JsonObject;
+        Changes: JsonToken;
+        Overview: Text;
+        Notes: Text;
         PreviousLanguage: Integer;
         EnglishDescription: Text;
         IcelandicDescription: Text;
@@ -154,6 +159,20 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         IcelandicSelection := Discovery.GetSelectionDescription();
         IcelandicKeywords := Discovery.GetKeywords();
         GlobalLanguage(PreviousLanguage);
+
+        // [SCENARIO #171 AC03] Both discovery languages and the contract disclose the report's interaction log side effect.
+        Assert.IsTrue(EnglishDescription.Contains('interaction log entry'), 'en-US description discloses interaction logging');
+        Assert.IsTrue(EnglishSelection.Contains('interaction log entry'), 'en-US selection discloses interaction logging');
+        Assert.IsTrue(IcelandicDescription.Contains('samskiptaskrá'), 'is-IS description discloses interaction logging');
+        Assert.IsTrue(IcelandicSelection.Contains('samskiptaskrá'), 'is-IS selection discloses interaction logging');
+        Contract := "Message Type ori"::"Sales.Quote.Pdf";
+        Assert.IsTrue(Contract.GetEffect(Effect), 'effect exists');
+        Assert.IsTrue(Effect.Get('changes', Changes), 'effect changes exist');
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('interaction log entry when an interaction template is set up'), 'conditional interaction log effect');
+        Assert.IsTrue(Contract.GetOverview(Overview), 'overview exists');
+        Assert.IsTrue(Overview.Contains('interaction log entry'), 'overview discloses interaction logging');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'notes exist');
+        Assert.IsTrue(Notes.Contains('interaction log entry'), 'notes disclose interaction logging');
 
         Assert.AreNotEqual('', EnglishDescription, 'en-US description');
         Assert.AreNotEqual(EnglishDescription, IcelandicDescription, 'is-IS description');
