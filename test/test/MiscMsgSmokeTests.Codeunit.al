@@ -111,6 +111,9 @@ codeunit 96422 "Misc Msg Smoke Tests"
         AssertDirectCallRefused("Message Type ori"::"Orchestrator.ReportLayout.List");
         AssertDirectCallRefused("Message Type ori"::"Orchestrator.ReportLayout.Get");
         AssertDirectCallRefused("Message Type ori"::"Orchestrator.Playbook.Verify");
+        AssertDirectCallRefused("Message Type ori"::"Purchase.Order.Send");
+        AssertDirectCallRefused("Message Type ori"::"Sales.Quote.Send");
+        AssertDirectCallRefused("Message Type ori"::"Sales.OrderConfirmation.Send");
     end;
 
     local procedure AssertDirectCallRefused(MessageType: Enum "Message Type ori")

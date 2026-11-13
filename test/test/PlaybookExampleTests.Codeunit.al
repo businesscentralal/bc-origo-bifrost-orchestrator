@@ -114,7 +114,7 @@ codeunit 96436 "Playbook Example Tests"
         AssertContains(HelpText, '**Never write in a forEach without a per-record gate.**');
         AssertContains(HelpText, '**Check that every message type and every role code you name exists.**');
         AssertContains(HelpText, 'read "Building a playbook safely"');
-        Assert.IsTrue(HelpText.IndexOf('## Building a playbook safely') < HelpText.IndexOf('## Message Types (21)'), 'The chapter comes before the message type table');
+        Assert.IsTrue(HelpText.IndexOf('## Building a playbook safely') < HelpText.IndexOf('## Message Types (26)'), 'The chapter comes before the message type table');
         Assert.IsTrue(HelpText.IndexOf('**I need to...**') < HelpText.IndexOf('## Building a playbook safely'), 'The chapter comes after the Quick Decision Tree');
     end;
 
