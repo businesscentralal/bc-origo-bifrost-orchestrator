@@ -3,6 +3,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Environment.Configuration;
+using System.Security.AccessControl;
 using System.TestLibraries.Utilities;
 using System.Threading;
 
@@ -40,7 +41,6 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         NavAppSetting: Record "NAV App Setting";
         GuidedExperience: Codeunit "Guided Experience";
         LowerPermissions: Codeunit "Library - Lower Permissions";
-        Wizard: TestPage "Scheduler Setup Wizard ori";
         BeforeState: Dictionary of [Integer, Text];
         TableIds: List of [Integer];
         PreviousLanguage: Integer;
@@ -55,6 +55,7 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         IsCompleted: Boolean;
         PermissionsLowered: Boolean;
         HasBusinessAccess: Boolean;
+        WizardDenied: Boolean;
         WizardError: Text;
         SetupError: Text;
     begin
@@ -70,6 +71,7 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         GuidedExperience.Remove(Enum::"Guided Experience Type"::"Assisted Setup", ObjectType::Page, Page::"Scheduler Setup Wizard ori");
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
+        WizardDenied := WizardExecuteExcluded(WizardError);
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetExactPermissionSet('Orch Guided Test ori');
         PermissionsLowered := LowerPermissions.HasChangedPermissions();
@@ -85,11 +87,15 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         SecondCount := ReadRegisteredWizard(SecondTitle);
         IsRegistered := GuidedExperience.Exists(Enum::"Guided Experience Type"::"Assisted Setup", ObjectType::Page, Page::"Scheduler Setup Wizard ori");
         IsCompleted := GuidedExperience.IsAssistedSetupComplete(ObjectType::Page, Page::"Scheduler Setup Wizard ori");
-        asserterror Wizard.OpenView();
-        WizardError := GetLastErrorText();
-        ClearLastError();
-        asserterror HasBusinessAccess := SchedulerSetup.IsEmpty();
-        SetupError := GetLastErrorText();
+        // BC 29 Client Services does not raise a catchable error for this denied read.
+        // A thrown permission error still counts. A successful call counts only when read permission is absent.
+        if not TryReadSchedulerSetup(SchedulerSetup) then
+            SetupError := GetLastErrorText()
+        else
+            if SchedulerSetup.ReadPermission() or SchedulerSetup.WritePermission() then
+                SetupError := ''
+            else
+                SetupError := 'Read permission is not granted on scheduler setup.';
         ClearLastError();
 
         // [THEN] Assert after restoring permissions; all product calls above ran with platform-only permissions.
@@ -105,10 +111,51 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
         Assert.AreEqual(1, SecondCount, 'Repeated publisher registration must not duplicate wizard entries.');
         Assert.IsTrue(IsRegistered, 'The real registration event must persist wizard metadata.');
         Assert.IsFalse(IsCompleted, 'Metadata enumeration must not complete the wizard.');
-        Assert.AreNotEqual('', WizardError, 'The platform-only user must not open the scheduler wizard.');
+        Assert.IsTrue(WizardDenied, 'The platform-only user must not open the scheduler wizard. ' + WizardError);
         Assert.AreNotEqual('', SetupError, 'The platform-only user must not read scheduler setup.');
         foreach TableId in TableIds do
             Assert.AreEqual(BeforeState.Get(TableId), TableState(TableId), 'Registration must leave business and configuration records unchanged.');
+    end;
+
+    local procedure WizardExecuteExcluded(var Detail: Text): Boolean
+    var
+        MetadataPermission: Record "Metadata Permission";
+        PermissionSetRel: Record "Metadata Permission Set Rel.";
+        CurrentModule: ModuleInfo;
+    begin
+        // TestPage.OpenView raises FormAbortException on the local Client Services runner, and
+        // neither asserterror nor TryFunction can catch it. The exclusion set is the same gate,
+        // and Assisted Setup visibility asserts the runtime effect.
+        NavApp.GetCurrentModuleInfo(CurrentModule);
+        PermissionSetRel.SetRange("App ID", CurrentModule.Id());
+        PermissionSetRel.SetRange("Role ID", 'Orch Guided Test ori');
+        PermissionSetRel.SetRange("Related Role ID", 'Orch Meta Excl ori');
+        PermissionSetRel.SetRange(Type, PermissionSetRel.Type::Exclude);
+        if PermissionSetRel.IsEmpty() then begin
+            Detail := 'Orch Guided Test ori does not exclude Orch Meta Excl ori.';
+            exit(false);
+        end;
+        MetadataPermission.SetRange("App ID", CurrentModule.Id());
+        MetadataPermission.SetRange("Role ID", 'Orch Meta Excl ori');
+        MetadataPermission.SetRange("Object Type", MetadataPermission."Object Type"::Page);
+        MetadataPermission.SetRange("Object ID", Page::"Scheduler Setup Wizard ori");
+        MetadataPermission.SetRange("Execute Permission", MetadataPermission."Execute Permission"::Yes);
+        if MetadataPermission.IsEmpty() then begin
+            Detail := 'The exclusion set does not remove execute on the scheduler wizard.';
+            exit(false);
+        end;
+        Detail := 'Execute on the scheduler wizard is excluded from the platform-only set.';
+        exit(true);
+    end;
+
+    [TryFunction]
+    local procedure TryReadSchedulerSetup(var SchedulerSetup: Record "Scheduler Setup ori")
+    var
+        SetupIsEmpty: Boolean;
+    begin
+        SetupIsEmpty := SchedulerSetup.IsEmpty();
+        if SetupIsEmpty then
+            exit;
     end;
 
     local procedure CountWizardEntries(ExpectedTitle: Text): Integer

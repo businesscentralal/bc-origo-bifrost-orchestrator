@@ -147,4 +147,9 @@ enumextension 10035536 "MsgType.EnumExt ori" extends "Message Type ori"
         Caption = 'Sales.OrderConfirmation.Send', Locked = true;
         Implementation = "Msg Interface ori" = "Order Conf Send Msg ori", "Msg Discovery ori" = "Order Conf Send Msg ori", "Msg Contract ori" = "Order Conf Send Msg ori";
     }
+    value(10035629; "Sales.Quote.Pdf")
+    {
+        Caption = 'Sales.Quote.Pdf', Locked = true;
+        Implementation = "Msg Interface ori" = "Sales Quote Pdf Msg ori", "Msg Discovery ori" = "Sales Quote Pdf Msg ori", "Msg Contract ori" = "Sales Quote Pdf Msg ori";
+    }
 }

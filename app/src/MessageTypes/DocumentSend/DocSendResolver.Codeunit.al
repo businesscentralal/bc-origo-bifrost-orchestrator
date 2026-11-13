@@ -10,7 +10,7 @@ using Origo.Bifrost;
 /// Resolution order matches Sales.SalesInvoice.Send: request override, then the vendor or customer profile, then Default.
 /// A profile that needs a client is refused before anything is sent.
 /// </summary>
-codeunit 10035629 "Doc Send Resolver ori"
+codeunit 10035564 "Doc Send Resolver ori"
 {
     Access = Internal;
     Permissions = tabledata Customer = R,

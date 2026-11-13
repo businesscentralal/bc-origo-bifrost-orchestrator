@@ -9,7 +9,7 @@ using Origo.Bifrost.Orchestrator;
 /// Arms the document-send mock for the current session. The subscriber skips the platform send only while armed,
 /// so a refusal test still reaches the real checks and a happy-path test never transmits e-mail.
 /// </summary>
-codeunit 96471 "Doc Send Mock ori"
+codeunit 96473 "Doc Send Mock ori"
 {
     SingleInstance = true;
 
