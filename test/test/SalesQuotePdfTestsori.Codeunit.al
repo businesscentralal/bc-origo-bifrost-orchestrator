@@ -115,8 +115,7 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         // Story #177 AC02 | Time: independent of Today/WorkDate | Risk: standard report selection.
         // [GIVEN] A quote whose number is unsuitable as a filename or MIME parameter.
         DeleteMarkedDocuments();
-        CreateQuote(SalesHeader);
-        SalesHeader.Rename(SalesHeader."Document Type", 'BIFT/177"Á:012345678');
+        CreateDocument(SalesHeader, SalesHeader."Document Type"::Quote, 'BIFT/177"Á:012345678');
 
         // [WHEN] The same quote is requested in English and Icelandic.
         DispatchSubject(SalesHeader."No.", 1033, EnglishContentType, ResponseBlob);
@@ -311,15 +310,15 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
 
     local procedure CreateQuote(var SalesHeader: Record "Sales Header")
     begin
-        CreateDocument(SalesHeader, SalesHeader."Document Type"::Quote);
+        CreateDocument(SalesHeader, SalesHeader."Document Type"::Quote, '');
     end;
 
     local procedure CreateOrder(var SalesHeader: Record "Sales Header")
     begin
-        CreateDocument(SalesHeader, SalesHeader."Document Type"::Order);
+        CreateDocument(SalesHeader, SalesHeader."Document Type"::Order, '');
     end;
 
-    local procedure CreateDocument(var SalesHeader: Record "Sales Header"; DocumentType: Enum "Sales Document Type")
+    local procedure CreateDocument(var SalesHeader: Record "Sales Header"; DocumentType: Enum "Sales Document Type"; DocumentNo: Code[20])
     var
         Customer: Record Customer;
         Item: Record Item;
@@ -327,7 +326,16 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
     begin
         LibrarySales.CreateCustomer(Customer);
         LibraryInventory.CreateItem(Item);
-        LibrarySales.CreateSalesHeader(SalesHeader, DocumentType, Customer."No.");
+        if DocumentNo = '' then
+            LibrarySales.CreateSalesHeader(SalesHeader, DocumentType, Customer."No.")
+        else begin
+            SalesHeader.Init();
+            SalesHeader."Document Type" := DocumentType;
+            SalesHeader."No." := DocumentNo;
+            SalesHeader.Insert(true);
+            SalesHeader.Validate("Sell-to Customer No.", Customer."No.");
+            SalesHeader.Modify(true);
+        end;
         LibrarySales.CreateSalesLine(SalesLine, SalesHeader, SalesLine.Type::Item, Item."No.", 1);
         SalesLine.Validate("Unit Price", 100);
         SalesLine.Modify(true);
