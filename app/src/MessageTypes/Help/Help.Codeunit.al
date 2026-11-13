@@ -1026,6 +1026,8 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         O.AppendLine('### `_who` — User & Company Context (from Help.WhoAmI.Get)');
         O.AppendLine('');
+        O.AppendLine('Bifrost Orchestrator adds `telegramChatId` while installed. Playbooks read it as `@_who.telegramChatId`; it is an empty string when no Telegram chat ID is set in the calling user''s Bifrost user setup.');
+        O.AppendLine('');
         O.AppendLine('| Path | Example | Description |');
         O.AppendLine('|---|---|---|');
         O.AppendLine('| `_who.user.userName` | `JOHN` | Login name |');

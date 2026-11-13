@@ -5,7 +5,11 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased]
+## [Unreleased] — 28.0.4.0
+
+### Fixed — #159
+- Keep shared WhoAmI contract text app-neutral in codeunit 10035585 `WhoAmI Subscriber ori`; retain the caller-specific Telegram field and empty-value behavior. Move installation and playbook wording into Orchestrator help (10035576 `Help ori`).
+- Test codeunit 96408 `WhoAmI Contract Tests ori` rejects the app name throughout the real shared contract and retains Telegram field/source assertions.
 
 - #170 / page 10035548: Playbook Card hosts Foundation page 10077898 `Bifrost Chat FactBox ori` in the FactBox area. The part is visible only when `Bifrost Chat Mgt ori.ShowBifrostChat()` is true, and the current playbook table, SystemId and a caption that includes the playbook code are passed to `SetRecordContext`. No Language Models dependency and no new message type. Test codeunit 96475. The `playbook-card` website topic stays in `businesscentralal/bifrost`.
 

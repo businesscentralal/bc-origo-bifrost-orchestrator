@@ -34,6 +34,6 @@ codeunit 10035585 "WhoAmI Subscriber ori"
             exit;
         Fields := FieldsToken.AsArray();
         Fields.Add(ContractMgt.ResponseField('telegramChatId', 'string',
-            'Telegram chat ID from the calling user''s Bifrost user setup; an empty string when none is set. Present only while Bifrost Orchestrator is installed. Playbooks read it as @_who.telegramChatId.'));
+            'Telegram chat ID from the calling user''s Bifrost user setup; an empty string when none is set.'));
     end;
 }
