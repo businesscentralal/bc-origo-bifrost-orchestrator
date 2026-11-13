@@ -88,6 +88,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
         Fields: JsonArray;
     begin
         Parts.AddResponseField(Fields, 'binary', 'binary', 'The sales quote PDF. The success body is the file itself, with content type application/pdf, not JSON.');
+        Parts.AddResponseField(Fields, 'datacontenttype', 'string', 'application/pdf with a quoted name parameter containing SalesQuote-<SystemId>.pdf. The SystemId is lowercase without braces; this stable filename contains no unsafe document-number characters. Playbooks expose the same MIME value as contentType.');
         Response := Parts.Response(Fields, 'application/pdf');
         exit(true);
     end;
@@ -191,6 +192,8 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
             exit;
         end;
         Argument.SetResponsePdf(TempBlob);
+        // Match Purchase.Order.Pdf: preserve the bytes and put the filename in the MIME metadata.
+        Argument."Content Type" := CopyStr('application/pdf; name="SalesQuote-' + Format(SalesHeader.SystemId, 0, 4).ToLower() + '.pdf"', 1, MaxStrLen(Argument."Content Type"));
     end;
 
     local procedure HasSalesHeaderReadPermission(var Argument: Record "Message Argument ori"): Boolean

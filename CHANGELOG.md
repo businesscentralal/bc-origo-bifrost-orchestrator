@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased] — 28.0.4.0
 
+### Fixed — #177
+- `Sales.Quote.Pdf` returns the stable `SalesQuote-<SystemId>.pdf` filename through the MIME `name` parameter, matching `Purchase.Order.Pdf` while preserving the binary response. Codeunit 10035629 documents the metadata; test codeunit 96471 checks number/SystemId/subject dispatch, locale-independent filenames and JSON errors. No new object IDs or translated labels.
+
 ### Fixed — #159
 - Keep shared WhoAmI contract text app-neutral in codeunit 10035585 `WhoAmI Subscriber ori`; retain the caller-specific Telegram field and empty-value behavior. Move installation and playbook wording into Orchestrator help (10035576 `Help ori`).
 - Test codeunit 96408 `WhoAmI Contract Tests ori` rejects the app name throughout the real shared contract and retains Telegram field/source assertions.
