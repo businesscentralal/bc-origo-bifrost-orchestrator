@@ -147,6 +147,58 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
         Assert.AreEqual(3, Format("Message Type ori"::"Sales.OrderConfirmation.Pdf").Split('.').Count(), 'Three dot-separated parts');
     end;
 
+    [Test]
+    procedure EffectAndHelpNameTheInteractionLogEntry()
+    var
+        Contract: Interface "Msg Contract ori";
+        Effect: JsonObject;
+        Token: JsonToken;
+        Overview: Text;
+        Notes: Text;
+    begin
+        // [SCENARIO #171 AC03] Effect and translated help name the interaction log entry. AC02: this test does not print.
+        Contract := "Message Type ori"::"Sales.OrderConfirmation.Pdf";
+        Assert.IsTrue(Contract.GetEffect(Effect), 'Effect is declared');
+        Assert.IsTrue(Effect.Get('changes', Token), 'changes is present');
+        Assert.IsTrue(Token.AsValue().AsText().Contains('interaction'), 'Effect names the interaction log');
+        Assert.IsTrue(Contract.GetOverview(Overview), 'Overview is declared');
+        Assert.IsTrue(Overview.Contains('interaction log entry'), 'Overview names the interaction log entry');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'Notes are declared');
+        Assert.IsTrue(Notes.Contains('interaction log entry'), 'Notes name the interaction log entry');
+        Assert.IsTrue(ReadDescription(1033).Contains('interaction log entry'), 'en-US description names the interaction log entry');
+        Assert.IsTrue(ReadSelection(1033).Contains('interaction log entry'), 'en-US selection names the interaction log entry');
+        Assert.IsTrue(ReadDescription(1039).Contains('samskiptaskrá'), 'is-IS description names the interaction log');
+        Assert.IsTrue(ReadSelection(1039).Contains('samskiptaskrá'), 'is-IS selection names the interaction log');
+    end;
+
+    local procedure ReadDescription(LanguageId: Integer): Text
+    var
+        MessageTypeInterface: Interface "Msg Interface ori";
+        PreviousLanguage: Integer;
+        Description: Text;
+    begin
+        MessageTypeInterface := "Message Type ori"::"Sales.OrderConfirmation.Pdf";
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        Description := MessageTypeInterface.GetDescription();
+        GlobalLanguage(PreviousLanguage);
+        exit(Description);
+    end;
+
+    local procedure ReadSelection(LanguageId: Integer): Text
+    var
+        Discovery: Interface "Msg Discovery ori";
+        PreviousLanguage: Integer;
+        Selection: Text;
+    begin
+        Discovery := "Message Type ori"::"Sales.OrderConfirmation.Pdf";
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        Selection := Discovery.GetSelectionDescription();
+        GlobalLanguage(PreviousLanguage);
+        exit(Selection);
+    end;
+
     local procedure RunType(var TempArgument: Record "Message Argument ori" temporary; RequestText: Text)
     var
         RequestJson: JsonObject;

@@ -43,7 +43,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     /// </summary>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Prints a sales order confirmation as a PDF document.', Comment = 'is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.';
+        DescriptionLbl: Label 'Prints a sales order confirmation as a PDF document and writes an interaction log entry when an interaction template is set up.', Comment = 'is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.';
     begin
         exit(DescriptionLbl);
     end;
@@ -63,7 +63,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     /// </summary>
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Get an open sales order as an order confirmation PDF, printed with the customer''s report selection for usage S.Order. Increases the order''s No. Printed. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
+        SelectionLbl: Label 'Get an open sales order as an order confirmation PDF, printed with the customer''s report selection for usage S.Order. Increases the order''s No. Printed and, when an interaction template is set up, writes an interaction log entry. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
     begin
         exit(SelectionLbl);
     end;
@@ -210,7 +210,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     procedure GetOverview(var Overview: Text): Boolean
     begin
         Overview := 'Returns an open sales order as an order confirmation PDF, printed with the report the customer''s Report Selection (usage S.Order) names; by default the standard order confirmation. ' +
-            'Use it to hand a confirmation of the order to a person or another system. Printing it increases No. Printed on the order.';
+            'Use it to hand a confirmation of the order to a person or another system. Printing it increases No. Printed on the order and, when an interaction template is set up for sales order confirmations, writes an interaction log entry.';
         exit(true);
     end;
 
@@ -222,7 +222,8 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         Notes := 'subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. ' +
             'Only documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. ' +
             'Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Sales Header is required as for reading the order. ' +
-            'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.';
+            'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. ' +
+            'When an interaction template is set up for sales order confirmations, the standard report writes an interaction log entry for the customer''s contact. A replacement report in Report Selections may not. The call does not change whether that logging happens.';
         exit(true);
     end;
 

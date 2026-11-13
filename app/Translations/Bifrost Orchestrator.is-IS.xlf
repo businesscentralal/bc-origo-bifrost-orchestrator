@@ -2566,9 +2566,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - NamedType SameOrderTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Prints a sales order confirmation as a PDF document.</source>
-          <target>Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.</note>
+          <source>Prints a sales order confirmation as a PDF document and writes an interaction log entry when an interaction template is set up.</source>
+          <target>Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
@@ -2578,9 +2578,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Get an open sales order as an order confirmation PDF, printed with the customer's report selection for usage S.Order. Increases the order's No. Printed. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
-          <target>Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
+          <source>Get an open sales order as an order confirmation PDF, printed with the customer's report selection for usage S.Order. Increases the order's No. Printed and, when an interaction template is set up, writes an interaction log entry. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
+          <target>Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
