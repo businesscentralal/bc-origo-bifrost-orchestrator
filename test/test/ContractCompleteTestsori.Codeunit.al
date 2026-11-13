@@ -343,7 +343,9 @@ codeunit 96441 "Contract Complete Tests ori"
         Names := MessageType.Names();
         Values := MessageType.Ordinals();
         for Index := 1 to Names.Count() do
-            if Names.Get(Index).StartsWith('Orchestrator.') or (Names.Get(Index) in ['Help.Orchestrator.Get', 'Sales.OrderConfirmation.Pdf', 'Purchase.Order.Pdf']) then
+            if Names.Get(Index).StartsWith('Orchestrator.') or
+               (Names.Get(Index) in ['Help.Orchestrator.Get', 'Sales.OrderConfirmation.Pdf', 'Purchase.Order.Pdf', 'Purchase.Order.Send', 'Sales.Quote.Send', 'Sales.OrderConfirmation.Send'])
+            then
                 Ordinals.Add(Values.Get(Index));
     end;
 
@@ -365,7 +367,8 @@ codeunit 96441 "Contract Complete Tests ori"
         Names.AddRange('Orchestrator.Entry.Run', 'Orchestrator.Entry.Restart', 'Orchestrator.Entry.Register', 'Orchestrator.Entry.Schedule',
             'Orchestrator.JobQueueEntry.Restart', 'Orchestrator.JobQueueEntry.RestartIfNeeded',
             'Orchestrator.Playbook.Run', 'Orchestrator.Playbook.Schedule', 'Orchestrator.Playbook.Enqueue', 'Orchestrator.Playbook.Verify',
-            'Orchestrator.Email.Send', 'Sales.OrderConfirmation.Pdf', 'Purchase.Order.Pdf');
+            'Orchestrator.Email.Send', 'Sales.OrderConfirmation.Pdf', 'Purchase.Order.Pdf',
+            'Purchase.Order.Send', 'Sales.Quote.Send', 'Sales.OrderConfirmation.Send');
     end;
 
     local procedure TypeReadsNoParameters(TypeName: Text): Boolean

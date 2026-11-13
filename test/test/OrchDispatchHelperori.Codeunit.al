@@ -67,7 +67,7 @@ codeunit 96457 "Orch Dispatch Helper ori"
         RequestJson.WriteTo(RequestText);
         RequestContent.AddText(RequestText);
 
-        Dispatcher.EnqueueAndProcess(MessageType, "Message Version ori"::"1.0", '', '', 'text/json', RequestContent, EmptyTaskId, 1033, MessageId, ResponseTempBlob, ResponseContentType, ResponseTime);
+        Dispatcher.EnqueueAndProcess(MessageType, "Message Version ori"::"1.0", TempArgument.Subject, '', 'text/json', RequestContent, EmptyTaskId, 1033, MessageId, ResponseTempBlob, ResponseContentType, ResponseTime);
 
         TempArgument."Content Type" := ResponseContentType;
         if IsTextContent(ResponseContentType) then begin

@@ -129,5 +129,11 @@ permissionset 10035535 "BIFROST Orchestr ori"
         codeunit "Telegram Notif. ori" = X,
         codeunit "Telegram Send ori" = X,
         codeunit "WhoAmI Subscriber ori" = X,
+        codeunit "Doc Send Contract ori" = X,
+        codeunit "Doc Send Process ori" = X,
+        codeunit "Doc Send Resolver ori" = X,
+        codeunit "Order Conf Send Msg ori" = X,
+        codeunit "Purch Order Send Msg ori" = X,
+        codeunit "Sales Quote Send Msg ori" = X,
         codeunit "Workspace Preview Msg ori" = X;
 }
