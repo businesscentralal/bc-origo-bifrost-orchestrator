@@ -1,0 +1,22 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "tenant": "w129-15",
+  "executed": 2,
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "languageRestored": true,
+  "restoredLcid": 1033,
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "row": "\t\tPurchase.Order.Pdf\t\tPrints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.\t38\tInbound\t",
+      "passed": true
+    },
+    {
+      "lcid": 1039,
+      "row": "\t\tPurchase.Order.Pdf\t\tPrentar innkaupap\u00f6ntun sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.\t38\tInnsent\t",
+      "passed": true
+    }
+  ]
+}

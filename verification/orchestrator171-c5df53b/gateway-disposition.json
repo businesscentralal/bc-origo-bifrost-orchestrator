@@ -1,0 +1,25 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "rawLayer1": {
+    "checks": 23,
+    "passed": 16,
+    "failed": 7,
+    "report": "gateway-layer1-retry.txt"
+  },
+  "invocationRepair": "Snapshot scanner fallback USERPROFILE is unset on Linux; private invocation copy changes only modernization config path to the existing snapshot config. Shared standards/runtime are unchanged.",
+  "layer2": {
+    "behavior": "Production execution untouched; purchase description/selection/effect/help updated; inherited test branch now validates explicit Success and the same reports/count assertions. CommitBehavior(Error) remains around actual executor.",
+    "compatibility": "No public field/procedure removed or renamed. No app manifest/permission/pipeline edits.",
+    "translations": "Current is-IS XLF description and selection match generated source labels; bilingual UI/MCP confirm text. Existing effect/overview/notes chapters are English in both LCIDs.",
+    "findingsDisposition": {
+      "changelog": "Current change is explicitly documented under Unreleased with issue/object IDs; scanner requires exact version heading.",
+      "read_isolation": "Existing unchanged IsEmpty reads outside help-text diff; disclosed baseline advisory, no isolation behavior change introduced.",
+      "hardcoded_values": "Existing documentation examples user@company.is, not real email credentials.",
+      "one_statement_per_line": "False positive: semicolons separate AL parameter declarations.",
+      "xml_doc_comments": "Existing interface implementation procedures, no public signature added in product diff.",
+      "namespace": "False positive: Help.Codeunit.al declares namespace Origo.Bifrost.Orchestrator after its existing XML summary (line6).",
+      "modernization": "Documentation mentions Report Selection/NAS; reporting still intentionally uses customer/vendor report selection. No obsolete API introduced."
+    }
+  },
+  "overall": "NOT_READY: issue171 AC03 remains incomplete; paired CI pending. No gate pass or review clearance claimed."
+}

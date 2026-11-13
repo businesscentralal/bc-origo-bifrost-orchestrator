@@ -1,0 +1,9 @@
+Microsoft (R) AL Compiler version 30.0.42.60748
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'Bifrost Orchestrator' containing '148' files at '07:29:24.391'.
+
+private/orchestrator171-andvari/app/src/CopyPlan/CopyPlanCard.Page.al(6,15): info AW0006: The page 'Copy Plan Card ori' should use the UsageCategory and ApplicationArea properties to be searchable.
+
+Compilation ended at '07:29:40.531'.
+

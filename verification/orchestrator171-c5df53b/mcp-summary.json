@@ -1,0 +1,52 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "touchedMessageTypes": [
+    "Purchase.Order.Pdf"
+  ],
+  "tenant": "w129-15",
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "createsOwnData": true,
+  "dataSetup": "Self-created synthetic orderNo W5I171-NONE-1113; help and missing-record checks need no persisted business fixtures; no existing customer data used. Printing behavior covered by unchanged execution diff and full AL suite.",
+  "scenarios": [
+    {
+      "name": "help-disclosure-1033",
+      "passed": true,
+      "lcid": 1033,
+      "evidence": "help-pdf-1033.json"
+    },
+    {
+      "name": "self-created-unknown-order-1033",
+      "passed": true,
+      "lcid": 1033,
+      "evidence": "mcp-unknown-1033.json"
+    },
+    {
+      "name": "help-disclosure-1039",
+      "passed": true,
+      "lcid": 1039,
+      "evidence": "help-pdf-1039.json"
+    },
+    {
+      "name": "self-created-unknown-order-1039",
+      "passed": true,
+      "lcid": 1039,
+      "evidence": "mcp-unknown-1039.json"
+    }
+  ],
+  "persistentFixturesCreated": 0,
+  "cleanup": "Read-back of synthetic Purchase Header W5I171-NONE-1113 confirms count0. No persisted MCP fixture seeded.",
+  "note": "GetEffect/Overview/Notes were already invariant English contract chapters, now naming interaction log entry in both LCID responses; description and selection use en-US/is-IS XLF.",
+  "supportingScenarios": [
+    {
+      "type": "Orchestrator.Report.List",
+      "passed": true,
+      "scenario": "Explicit Success envelope retains reports/count consistency",
+      "count": 327,
+      "evidence": "mcp-report-list-success.json"
+    }
+  ],
+  "supportingPassed": 1
+}

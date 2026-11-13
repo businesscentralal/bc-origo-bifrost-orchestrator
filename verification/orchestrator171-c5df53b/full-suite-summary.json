@@ -1,0 +1,23 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "tenant": "w129-15",
+  "owner": "worker-5",
+  "fullSuite": true,
+  "executed": 586,
+  "total": 586,
+  "passed": 586,
+  "failed": 0,
+  "skipped": 0,
+  "partition": {
+    "Codeunit130450": {
+      "range": "96400..96455|96457..96499",
+      "passed": 576,
+      "durationMs": 280788
+    },
+    "Disabled130451": {
+      "range": "96456",
+      "passed": 10,
+      "durationMs": 11534
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/issues/171",
+  "criteria": {
+    "AC01": {
+      "status": "VERIFIED",
+      "scope": "Purchase.Order.Pdf effect/overview/notes and bilingual description/selection name interaction log entry; configured-template condition stated."
+    },
+    "AC02": {
+      "status": "VERIFIED",
+      "scope": "No product execution changes. Full configured AL suite586/586/0/0, including repaired read-dispatch assertion and purchase PDF tests. CommitBehavior(Error), reports array and count checks retained."
+    },
+    "AC03": {
+      "status": "DEPENDENT",
+      "scope": "Sales.OrderConfirmation.Pdf and Sales.Quote.Pdf inspected and gaps confirmed on unmerged foreign PR164/168; absent from main and this candidate; no alignment implemented. Architect integration decision requested.",
+      "dependencyUrls": [
+        "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/164",
+        "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/pull/168"
+      ]
+    },
+    "PairedCI": {
+      "status": "RUNNING",
+      "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/43386232347"
+    },
+    "TesterMCPAfterDeploy": {
+      "status": "PENDING",
+      "owner": "PR Reviewer/Tester after Architect merge and same-SHA deployment"
+    }
+  }
+}

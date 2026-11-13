@@ -1,0 +1,12 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "tenant": "w129-15",
+  "owner": "worker-5",
+  "persistentFixturesCreated": 0,
+  "syntheticOrderRemaining": 0,
+  "verified": true,
+  "appsRetainedForFollowup": true,
+  "evidence": "cleanup-no-synthetic-order.json",
+  "languageRestorePending": false,
+  "restoredLcid": 1033
+}

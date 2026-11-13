@@ -1,0 +1,43 @@
+{
+  "id": "orchestrator171-read-dispatch-success-c5df53b-andvari",
+  "repo": "businesscentralal/bc-origo-bifrost-orchestrator",
+  "source": {
+    "kind": "own-native-suite",
+    "evidence": "/workspace/evidence/orchestrator171-andvari/native-main-default.json"
+  },
+  "reviewedSha": "a96259e5933c7aab5093e6db71984487bf70182c",
+  "finding": "96461 AC04_ReadDispatchOmitsCommit rejected a real Report.List response containing status Success, reports and count.",
+  "rootCause": "The assertion treated presence of status as synonymous with Error; Foundation success normalization adds status Success to the existing report payload.",
+  "prevention": "Branch on explicit Error; allow legacy no-status and require Success for other declared statuses; always validate success reports array and exact count. Preserve CommitBehavior(Error) around dispatch.",
+  "fixSha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "status": "verified-full586-native-and-real-MCP-success",
+  "recordedBy": "worker-5",
+  "recordedAt": "2026-11-13T07:29:58.179188+00:00",
+  "verification": {
+    "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+    "fullSuite": {
+      "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+      "tenant": "w129-15",
+      "owner": "worker-5",
+      "fullSuite": true,
+      "executed": 586,
+      "total": 586,
+      "passed": 586,
+      "failed": 0,
+      "skipped": 0,
+      "partition": {
+        "Codeunit130450": {
+          "range": "96400..96455|96457..96499",
+          "passed": 576,
+          "durationMs": 280788
+        },
+        "Disabled130451": {
+          "range": "96456",
+          "passed": 10,
+          "durationMs": 11534
+        }
+      }
+    },
+    "mcpReportList": "status Success, reports327/count327"
+  }
+}

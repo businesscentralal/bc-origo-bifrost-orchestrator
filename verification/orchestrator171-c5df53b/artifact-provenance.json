@@ -1,0 +1,16 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "tenant": "w129-15",
+  "owner": "worker-5",
+  "productVersion": "28.0.4.0",
+  "testAppVersion": "28.0.4.0",
+  "foundationVersion": "28.0.13.0",
+  "foundationPackageId": "b734426e-0812-49ba-be80-4e72e6b361c9",
+  "ownProductAndTestPackagesDeployed": true,
+  "downloadedSymbolsMatchCompiledSha256": true,
+  "productSha256": "7b1a1356edb7f7bc9a8876bfa4cf071cf38ea2c90962f321149e113385663251",
+  "testAppSha256": "704991d54f26cd4353749401a7e51159865bfde01e4558cb4c6d8bbaa11dffa9",
+  "compiler": "AL30.0.42.60748, BC29 symbols",
+  "noNewSuppressions": true,
+  "existingManifestAS0081Unchanged": true
+}

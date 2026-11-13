@@ -1,0 +1,90 @@
+{
+  "sha": "c5df53b916c49cf77924ebccab5e2647e55895a9",
+  "results": [
+    {
+      "lcid": 1033,
+      "scenario": "purchase-help-disclosure",
+      "status": "Success",
+      "catalogue": {
+        "name": "Purchase.Order.Pdf",
+        "isEnabled": true,
+        "filterTableNo": 38,
+        "description": "Prints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.",
+        "selectionDescription": "Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed and, when an interaction template is set up, writes an interaction log entry. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "purchase order pdf",
+          "print purchase order",
+          "send order to vendor",
+          "purchase order copy",
+          "vendor order pdf",
+          "print po"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "effect": {
+          "effect": "write",
+          "changes": "Increases No. Printed on the purchase order and, when an interaction template is set up for purchase orders, writes an interaction log entry for the vendor's contact: the standard report does both. It may also archive a version of the order when Purchases & Payables Setup archives orders. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.",
+          "idempotent": false
+        },
+        "overview": "Returns an open purchase order as a PDF, printed with the report the vendor's Report Selection (usage P.Order) names; by default the standard purchase order. Use it to hand the order to the vendor, a person or another system. Printing it increases No. Printed on the order and, when an interaction template is set up for purchase orders, writes an interaction log entry.",
+        "notes": "subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. Only purchase documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. The success MIME type carries name=\"PurchaseOrder-<SystemId>.pdf\"; callers may use that filename when saving the unchanged binary PDF. Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. When an interaction template is set up for purchase orders, the standard report writes an interaction log entry for the vendor's contact. A replacement report in Report Selections may not. The call does not change whether that logging happens."
+      }
+    },
+    {
+      "lcid": 1033,
+      "scenario": "synthetic-unknown-order",
+      "request": {
+        "orderNo": "W5I171-NONE-1113"
+      },
+      "status": "Error",
+      "code": "RecordNotFound"
+    },
+    {
+      "lcid": 1039,
+      "scenario": "purchase-help-disclosure",
+      "status": "Success",
+      "catalogue": {
+        "name": "Purchase.Order.Pdf",
+        "isEnabled": true,
+        "filterTableNo": 38,
+        "description": "Prentar innkaupap\u00f6ntun sem PDF-skjal og skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1 \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint.",
+        "selectionDescription": "S\u00e6kja opna innkaupap\u00f6ntun sem PDF, prenta\u00f0a me\u00f0 sk\u00fdrsluvali l\u00e1nardrottins fyrir notkunina P.Order. H\u00e6kkar prentteljara p\u00f6ntunarinnar og, \u00feegar samskiptasni\u00f0m\u00e1t er skilgreint, skrifar f\u00e6rslu \u00ed samskiptaskr\u00e1. Fyrir p\u00f6ntunarsta\u00f0festingu s\u00f6lup\u00f6ntunar nota\u00f0u Sales.OrderConfirmation.Pdf; fyrir a\u00f0rar sk\u00fdrslur nota\u00f0u Orchestrator.Report.SaveAs.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "innkaupap\u00f6ntun pdf",
+          "prenta innkaupap\u00f6ntun",
+          "senda p\u00f6ntun til l\u00e1nardrottins",
+          "afrit innkaupap\u00f6ntunar",
+          "p\u00f6ntun l\u00e1nardrottins pdf",
+          "prenta innkaupap\u00f6ntun aftur"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "effect": {
+          "effect": "write",
+          "changes": "Increases No. Printed on the purchase order and, when an interaction template is set up for purchase orders, writes an interaction log entry for the vendor's contact: the standard report does both. It may also archive a version of the order when Purchases & Payables Setup archives orders. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.",
+          "idempotent": false
+        },
+        "overview": "Returns an open purchase order as a PDF, printed with the report the vendor's Report Selection (usage P.Order) names; by default the standard purchase order. Use it to hand the order to the vendor, a person or another system. Printing it increases No. Printed on the order and, when an interaction template is set up for purchase orders, writes an interaction log entry.",
+        "notes": "subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. Only purchase documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. The success MIME type carries name=\"PurchaseOrder-<SystemId>.pdf\"; callers may use that filename when saving the unchanged binary PDF. Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Purchase Header is required as for reading the order. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. When an interaction template is set up for purchase orders, the standard report writes an interaction log entry for the vendor's contact. A replacement report in Report Selections may not. The call does not change whether that logging happens."
+      }
+    },
+    {
+      "lcid": 1039,
+      "scenario": "synthetic-unknown-order",
+      "request": {
+        "orderNo": "W5I171-NONE-1113"
+      },
+      "status": "Error",
+      "code": "RecordNotFound"
+    }
+  ],
+  "supportingReportList": {
+    "status": "Success",
+    "count": 327,
+    "reportsCount": 327
+  }
+}
