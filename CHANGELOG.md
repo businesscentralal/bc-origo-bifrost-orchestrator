@@ -11,6 +11,11 @@ Business Central release versioning (`major.minor.build.revision`).
 - Keep shared WhoAmI contract text app-neutral in codeunit 10035585 `WhoAmI Subscriber ori`; retain the caller-specific Telegram field and empty-value behavior. Move installation and playbook wording into Orchestrator help (10035576 `Help ori`).
 - Test codeunit 96408 `WhoAmI Contract Tests ori` rejects the app name throughout the real shared contract and retains Telegram field/source assertions.
 
+- #171 / codeunit 10035629: `Sales.Quote.Pdf` effect, overview, notes and en-US/is-IS discovery help disclose interaction log entries when an interaction template is configured. Printing and logging behaviour remain unchanged. Test codeunit 96471 verifies the disclosure in both languages.
+
+- #171 verification / test codeunit 96461: accept the dispatcher's explicit `Success` status in the Omit Commit read test while retaining report-array and exact-count assertions; keep legacy responses without a status and error refusals supported.
+- #171 / codeunit 10035625 and codeunit 10035576: `Purchase.Order.Pdf` effect, overview, notes and the en-US/is-IS description and selection help state that the standard report writes an interaction log entry when an interaction template is set up. Printing behaviour is unchanged. Test codeunit 96480 asserts that wording in 1033 and 1039.
+
 - Test codeunit 96469: isolate Transform card-authoring from the optional chat provider and restore the prior setting; retain every mapping assertion after the Playbook Card chat FactBox integration.
 
 - #170 / page 10035548: Playbook Card hosts Foundation page 10077898 `Bifrost Chat FactBox ori` in the FactBox area. The part is visible only when `Bifrost Chat Mgt ori.ShowBifrostChat()` is true, and the current playbook table, SystemId and a caption that includes the playbook code are passed to `SetRecordContext`. No Language Models dependency and no new message type. Test codeunit 96475. The `playbook-card` website topic stays in `businesscentralal/bifrost`.
