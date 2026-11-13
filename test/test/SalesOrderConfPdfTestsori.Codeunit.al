@@ -147,6 +147,60 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
         Assert.AreEqual(3, Format("Message Type ori"::"Sales.OrderConfirmation.Pdf").Split('.').Count(), 'Three dot-separated parts');
     end;
 
+    [Test]
+    procedure HelpStatesTheOrderArchiveSideEffect()
+    var
+        MessageTypeInterface: Interface "Msg Interface ori";
+        Discovery: Interface "Msg Discovery ori";
+        Contract: Interface "Msg Contract ori";
+        Effect: JsonObject;
+        Changes: JsonToken;
+        Overview: Text;
+        Notes: Text;
+        PreviousLanguage: Integer;
+        EnglishDescription: Text;
+        IcelandicDescription: Text;
+        EnglishSelection: Text;
+        IcelandicSelection: Text;
+    begin
+        // [SCENARIO #176 AC01] The order confirmation PDF help states the archive side effect where Archive Orders applies.
+        // [GIVEN] Sales.OrderConfirmation.Pdf
+        MessageTypeInterface := "Message Type ori"::"Sales.OrderConfirmation.Pdf";
+        Discovery := "Message Type ori"::"Sales.OrderConfirmation.Pdf";
+        Contract := "Message Type ori"::"Sales.OrderConfirmation.Pdf";
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        EnglishDescription := MessageTypeInterface.GetDescription();
+        EnglishSelection := Discovery.GetSelectionDescription();
+        GlobalLanguage(1039);
+        IcelandicDescription := MessageTypeInterface.GetDescription();
+        IcelandicSelection := Discovery.GetSelectionDescription();
+        GlobalLanguage(PreviousLanguage);
+
+        // [THEN] happy path: both catalogue languages and the English chapters name Sales Header Archive
+        Assert.IsTrue(EnglishDescription.Contains('Sales Header Archive'), 'en-US description names the archive');
+        Assert.IsTrue(EnglishDescription.Contains('Archive Orders'), 'en-US description names the setup');
+        Assert.IsTrue(EnglishSelection.Contains('cannot be removed over MCP'), 'en-US selection says the archive stays');
+        Assert.IsTrue(IcelandicDescription.Contains('Sales Header Archive'), 'is-IS description names the archive');
+        Assert.IsTrue(IcelandicSelection.Contains('MCP'), 'is-IS selection names MCP');
+        Assert.IsTrue(StrLen(EnglishDescription) <= 250, 'en-US description fits Text[250]');
+        Assert.IsTrue(StrLen(IcelandicDescription) <= 250, 'is-IS description fits Text[250]');
+        Assert.IsTrue(Contract.GetEffect(Effect), 'effect exists');
+        Assert.IsTrue(Effect.Get('changes', Changes), 'effect changes exist');
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('Sales Header Archive version that cannot be removed over MCP'), 'effect names the archive');
+        Assert.IsTrue(Contract.GetOverview(Overview), 'overview exists');
+        Assert.IsTrue(Overview.Contains('Archive Orders'), 'overview names the setup');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'notes exist');
+        Assert.IsTrue(Notes.Contains('cannot be removed over MCP'), 'notes say the archive stays');
+
+        // [THEN] invalid reading: this is not the quote option, and the archive is not described as deleted
+        Assert.IsFalse(EnglishDescription.Contains('Archive Quotes'), 'order help does not use Archive Quotes');
+        Assert.IsFalse(Notes.Contains('deleted'), 'notes do not say the archive is deleted');
+
+        // [THEN] edge: a replacement report may not archive
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('A replacement report in Report Selections may not archive'), 'effect allows a replacement report to skip archiving');
+    end;
+
     local procedure RunType(var TempArgument: Record "Message Argument ori" temporary; RequestText: Text)
     var
         RequestJson: JsonObject;

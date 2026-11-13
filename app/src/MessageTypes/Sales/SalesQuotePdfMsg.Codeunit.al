@@ -29,7 +29,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.', Comment = 'is-IS=Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.';
+        DescriptionLbl: Label 'Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up. When Archive Quotes is Always, it stores a Sales Header Archive version.', Comment = 'is-IS=Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Þegar Archive Quotes er Always er útgáfa vistuð í Sales Header Archive.';
     begin
         exit(DescriptionLbl);
     end;
@@ -43,7 +43,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Get a sales quote as a PDF file, printed with the customer''s report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up.', Comment = 'is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.';
+        SelectionLbl: Label 'Get a sales quote as a PDF file, printed with the customer''s report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. When Archive Quotes is Always, it stores a Sales Header Archive version that cannot be removed over MCP. Question and Never do not archive on this call. A replacement report may not archive.', Comment = 'is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Þegar Archive Quotes er Always vistar hún útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP. Question og Never skrá ekki í safn í þessu kalli. Önnur skýrsla gerir það ef til vill ekki.';
     begin
         exit(SelectionLbl);
     end;
@@ -111,7 +111,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('write', 'Renders the sales quote with Report Selection usage S.Quote. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. Saving the PDF commits the work done so far.', false, '', Preconditions);
+        Effect := Parts.Effect('write', 'Renders the sales quote with Report Selection usage S.Quote. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. When Archive Quotes is Always, the standard report stores a Sales Header Archive version that cannot be removed over MCP. Question and Never do not archive on this call. A replacement report may not archive. Saving the PDF commits the work done so far.', false, '', Preconditions);
         exit(true);
     end;
 
@@ -149,7 +149,8 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
     begin
         Overview := 'Returns one sales quote as a PDF file, printed with the report the customer''s Report Selection (usage S.Quote, default report 1304) names. ' +
             'Send the quote number or the SystemId. Only a sales quote matches; a sales order with the same number does not. ' +
-            'The standard report writes an interaction log entry when an interaction template is set up.';
+            'The standard report writes an interaction log entry when an interaction template is set up. ' +
+            'When Archive Quotes is Always, the standard report stores a Sales Header Archive version that cannot be removed over MCP.';
         exit(true);
     end;
 
@@ -161,6 +162,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
             'Only the success answer is a PDF; an error answer is JSON. ' +
             'The same read-permission check as Sales.SalesInvoice.Pdf is applied to Sales Header. ' +
             'The standard report writes an interaction log entry when an interaction template is set up. ' +
+            'When Sales & Receivables Setup Archive Quotes is Always, the standard report stores a Sales Header Archive version that cannot be removed over MCP. Question asks, and this call does not confirm, so it does not archive. Never does not archive. A replacement report in Report Selections may not archive. ' +
             'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.';
         exit(true);
     end;

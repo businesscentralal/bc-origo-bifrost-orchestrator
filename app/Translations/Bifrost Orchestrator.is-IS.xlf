@@ -2188,9 +2188,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType SameOrderTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Prints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up.</source>
-          <target>Prentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Prentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</note>
+          <source>Prints a purchase order as a PDF document and writes an interaction log entry when an interaction template is set up. The standard report does not store a Purchase Header Archive version on this call.</source>
+          <target>Prentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Staðalskýrslan skráir ekki útgáfu í Purchase Header Archive í þessu kalli.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Prentar innkaupapöntun sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Staðalskýrslan skráir ekki útgáfu í Purchase Header Archive í þessu kalli.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
@@ -2200,9 +2200,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed and, when an interaction template is set up, writes an interaction log entry. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
-          <target>Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
+          <source>Get an open purchase order as a PDF, printed with the vendor's report selection for usage P.Order. Increases the order's No. Printed and, when an interaction template is set up, writes an interaction log entry. The standard report stores a Purchase Header Archive version only when Archive Document is on. This call does not open the request page, so it does not archive the order. That version cannot be removed over MCP. A replacement report may still archive. For a sales order confirmation use Sales.OrderConfirmation.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
+          <target>Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Staðalskýrslan skráir útgáfu í Purchase Header Archive aðeins þegar Archive Document er á. Þetta kall opnar ekki beiðnisíðuna og skráir því ekki pöntunina í safn. Þá útgáfu er ekki hægt að fjarlægja í gegnum MCP. Önnur skýrsla getur samt skráð í safn. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna innkaupapöntun sem PDF, prentaða með skýrsluvali lánardrottins fyrir notkunina P.Order. Hækkar prentteljara pöntunarinnar og, þegar samskiptasniðmát er skilgreint, skrifar færslu í samskiptaskrá. Staðalskýrslan skráir útgáfu í Purchase Header Archive aðeins þegar Archive Document er á. Þetta kall opnar ekki beiðnisíðuna og skráir því ekki pöntunina í safn. Þá útgáfu er ekki hægt að fjarlægja í gegnum MCP. Önnur skýrsla getur samt skráð í safn. Fyrir pöntunarstaðfestingu sölupöntunar notaðu Sales.OrderConfirmation.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4069915351 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -2566,9 +2566,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - NamedType SameOrderTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Prints a sales order confirmation as a PDF document.</source>
-          <target>Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.</note>
+          <source>Prints a sales order confirmation as a PDF document. When Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP.</source>
+          <target>Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal. Þegar Archive Orders er virkt vistar staðalskýrslan útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal. Þegar Archive Orders er virkt vistar staðalskýrslan útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
@@ -2578,9 +2578,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Get an open sales order as an order confirmation PDF, printed with the customer's report selection for usage S.Order. Increases the order's No. Printed. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
-          <target>Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
+          <source>Get an open sales order as an order confirmation PDF, printed with the customer's report selection for usage S.Order. Increases the order's No. Printed. When Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP. A replacement report may not archive. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.</source>
+          <target>Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Þegar Archive Orders er virkt vistar staðalskýrslan útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP. Önnur skýrsla gerir það ef til vill ekki. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Þegar Archive Orders er virkt vistar staðalskýrslan útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP. Önnur skýrsla gerir það ef til vill ekki. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
@@ -2716,9 +2716,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType TooLongNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up.</source>
-          <target>Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</note>
+          <source>Retrieves a sales quote as a PDF document and writes an interaction log entry when an interaction template is set up. When Archive Quotes is Always, it stores a Sales Header Archive version.</source>
+          <target>Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Þegar Archive Quotes er Always er útgáfa vistuð í Sales Header Archive.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækir sölutilboð sem PDF-skjal og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Þegar Archive Quotes er Always er útgáfa vistuð í Sales Header Archive.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
@@ -2728,9 +2728,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up.</source>
-          <target>Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint.</note>
+          <source>Get a sales quote as a PDF file, printed with the customer's report selection (usage S.Quote). Takes a quote number or SystemId. The standard report may increase No. Printed and writes an interaction log entry when an interaction template is set up. When Archive Quotes is Always, it stores a Sales Header Archive version that cannot be removed over MCP. Question and Never do not archive on this call. A replacement report may not archive.</source>
+          <target>Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Þegar Archive Quotes er Always vistar hún útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP. Question og Never skrá ekki í safn í þessu kalli. Önnur skýrsla gerir það ef til vill ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækja sölutilboð sem PDF-skrá, prentað með skýrsluvali viðskiptamanns (notkun S.Quote). Tekur númer tilboðs eða SystemId. Staðalskýrslan getur hækkað prentteljarann og skrifar færslu í samskiptaskrá þegar samskiptasniðmát er skilgreint. Þegar Archive Quotes er Always vistar hún útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP. Question og Never skrá ekki í safn í þessu kalli. Önnur skýrsla gerir það ef til vill ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">

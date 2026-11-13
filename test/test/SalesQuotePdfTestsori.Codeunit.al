@@ -182,6 +182,95 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         Assert.AreEqual("Msg Direction ori"::Both, MessageTypeInterface.GetMessageDirection(), 'direction');
     end;
 
+    [Test]
+    procedure HelpStatesTheQuoteArchiveSideEffect()
+    var
+        MessageTypeInterface: Interface "Msg Interface ori";
+        Discovery: Interface "Msg Discovery ori";
+        Contract: Interface "Msg Contract ori";
+        Effect: JsonObject;
+        Changes: JsonToken;
+        Overview: Text;
+        Notes: Text;
+        PreviousLanguage: Integer;
+        EnglishDescription: Text;
+        IcelandicDescription: Text;
+        EnglishSelection: Text;
+        IcelandicSelection: Text;
+        EnglishOverview: Text;
+    begin
+        // [SCENARIO #176 AC01] Happy path: the quote PDF help states the archive side effect in both catalogue languages.
+        // [GIVEN] Sales.Quote.Pdf
+        MessageTypeInterface := "Message Type ori"::"Sales.Quote.Pdf";
+        Discovery := "Message Type ori"::"Sales.Quote.Pdf";
+        Contract := "Message Type ori"::"Sales.Quote.Pdf";
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        EnglishDescription := MessageTypeInterface.GetDescription();
+        EnglishSelection := Discovery.GetSelectionDescription();
+        Assert.IsTrue(Contract.GetOverview(EnglishOverview), 'overview in 1033');
+        GlobalLanguage(1039);
+        IcelandicDescription := MessageTypeInterface.GetDescription();
+        IcelandicSelection := Discovery.GetSelectionDescription();
+        Assert.IsTrue(Contract.GetOverview(Overview), 'overview in 1039');
+        GlobalLanguage(PreviousLanguage);
+
+        // [THEN] en-US and is-IS catalogue texts name Archive Quotes Always and Sales Header Archive
+        Assert.IsTrue(EnglishDescription.Contains('Archive Quotes is Always'), 'en-US description names Always');
+        Assert.IsTrue(EnglishDescription.Contains('Sales Header Archive'), 'en-US description names the archive table');
+        Assert.IsTrue(EnglishSelection.Contains('cannot be removed over MCP'), 'en-US selection says the archive stays');
+        Assert.IsTrue(IcelandicDescription.Contains('Sales Header Archive'), 'is-IS description names the archive table');
+        Assert.IsTrue(IcelandicDescription.Contains('Always'), 'is-IS description names Always');
+        Assert.IsTrue(IcelandicSelection.Contains('Sales Header Archive'), 'is-IS selection names the archive table');
+        Assert.IsTrue(IcelandicSelection.Contains('MCP'), 'is-IS selection names MCP');
+        Assert.IsTrue(StrLen(EnglishDescription) <= 250, 'en-US description fits Text[250]');
+        Assert.IsTrue(StrLen(IcelandicDescription) <= 250, 'is-IS description fits Text[250]');
+
+        // [THEN] help chapters stay English and state the same side effect
+        Assert.AreEqual(EnglishOverview, Overview, 'overview chapter stays English at 1039');
+        Assert.IsTrue(Contract.GetEffect(Effect), 'effect exists');
+        Assert.IsTrue(Effect.Get('changes', Changes), 'effect changes exist');
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('Sales Header Archive version that cannot be removed over MCP'), 'effect names the archive');
+        Assert.IsTrue(EnglishOverview.Contains('Sales Header Archive'), 'overview names the archive');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'notes exist');
+        Assert.IsTrue(Notes.Contains('Sales Header Archive'), 'notes name the archive');
+    end;
+
+    [Test]
+    procedure HelpDoesNotSayTheQuoteArchiveIsRemoved()
+    var
+        Contract: Interface "Msg Contract ori";
+        Notes: Text;
+    begin
+        // [SCENARIO #176] Invalid reading: the help must not say the archived quote is removed.
+        // [GIVEN] Sales.Quote.Pdf notes
+        Contract := "Message Type ori"::"Sales.Quote.Pdf";
+        Assert.IsTrue(Contract.GetNotes(Notes), 'notes exist');
+        // [THEN] the archive cannot be removed over MCP, and the notes do not say it is deleted
+        Assert.IsTrue(Notes.Contains('cannot be removed over MCP'), 'notes say the archive stays');
+        Assert.IsFalse(Notes.Contains('deleted'), 'notes do not say the archive is deleted');
+    end;
+
+    [Test]
+    procedure HelpLimitsQuoteArchivingToAlways()
+    var
+        Contract: Interface "Msg Contract ori";
+        Effect: JsonObject;
+        Changes: JsonToken;
+        Notes: Text;
+    begin
+        // [SCENARIO #176] Edge: Question and Never do not archive on this call, and a replacement report may not.
+        Contract := "Message Type ori"::"Sales.Quote.Pdf";
+        Assert.IsTrue(Contract.GetEffect(Effect), 'effect exists');
+        Assert.IsTrue(Effect.Get('changes', Changes), 'effect changes exist');
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('Question and Never do not archive on this call'), 'effect limits archiving to Always');
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('A replacement report may not archive'), 'effect allows a replacement report to skip archiving');
+        Assert.IsFalse(Changes.AsValue().AsText().Contains('always archives'), 'effect does not say every print archives');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'notes exist');
+        Assert.IsTrue(Notes.Contains('this call does not confirm'), 'notes say a Question setup is not confirmed');
+        Assert.IsTrue(Notes.Contains('Never does not archive'), 'notes name Never');
+    end;
+
     local procedure AssertRefusal(RequestText: Text; ExpectedCode: Text)
     var
         TempArgument: Record "Message Argument ori" temporary;
