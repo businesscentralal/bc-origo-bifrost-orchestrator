@@ -230,14 +230,15 @@ codeunit 96461 "Playbook Effect Tests ori"
         RunWithoutCommit();
         Assert.AreEqual('text/json', Executor.GetResponseContentType(), 'The actual dispatcher preserves the Report.List JSON content type.');
         Assert.IsTrue(ResponseJson.ReadFrom(Executor.GetResponseText()), 'The dispatch must produce valid JSON without committing.');
-        if ResponseJson.Get('status', ResponseToken) then
-            Assert.AreEqual('Error', ResponseToken.AsValue().AsText(), 'A dispatcher refusal must be an error envelope.')
-        else begin
-            Assert.IsTrue(ResponseJson.Get('reports', ResponseToken), 'Report.List success must contain reports.');
-            ReportCount := ResponseToken.AsArray().Count();
-            Assert.IsTrue(ResponseJson.Get('count', ResponseToken), 'Report.List success must contain count.');
-            Assert.AreEqual(ReportCount, ResponseToken.AsValue().AsInteger(), 'Report.List count must match its metadata array.');
+        if ResponseJson.Get('status', ResponseToken) then begin
+            if ResponseToken.AsValue().AsText() = 'Error' then
+                exit;
+            Assert.AreEqual('Success', ResponseToken.AsValue().AsText(), 'A successful dispatcher envelope must declare Success.');
         end;
+        Assert.IsTrue(ResponseJson.Get('reports', ResponseToken), 'Report.List success must contain reports.');
+        ReportCount := ResponseToken.AsArray().Count();
+        Assert.IsTrue(ResponseJson.Get('count', ResponseToken), 'Report.List success must contain count.');
+        Assert.AreEqual(ReportCount, ResponseToken.AsValue().AsInteger(), 'Report.List count must match its metadata array.');
         // The configured codeunit test isolation rolls back the owned request; container cleanup is verified too.
     end;
 
