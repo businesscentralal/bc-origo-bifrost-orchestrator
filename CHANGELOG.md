@@ -11,6 +11,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - #171 verification / test codeunit 96461: accept the dispatcher's explicit `Success` status in the Omit Commit read test while retaining report-array and exact-count assertions; keep legacy responses without a status and error refusals supported.
 - #171 / codeunit 10035625 and codeunit 10035576: `Purchase.Order.Pdf` effect, overview, notes and the en-US/is-IS description and selection help state that the standard report writes an interaction log entry when an interaction template is set up. Printing behaviour is unchanged. Test codeunit 96480 asserts that wording in 1033 and 1039.
+- #170 / page 10035548: Playbook Card hosts Foundation page 10077898 `Bifrost Chat FactBox ori` in the FactBox area. The part is visible only when `Bifrost Chat Mgt ori.ShowBifrostChat()` is true, and the current playbook table, SystemId and a caption that includes the playbook code are passed to `SetRecordContext`. No Language Models dependency and no new message type. Test codeunit 96475. The `playbook-card` website topic stays in `businesscentralal/bifrost`.
+
 - #91 / codeunit 10035625: preserve binary purchase-order PDFs and return a stable, safe `PurchaseOrder-<SystemId>.pdf` filename in the response MIME `name` parameter; test codeunit 96480 asserts filename propagation through the public dispatcher.
 
 ### Added

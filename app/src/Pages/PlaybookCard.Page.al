@@ -99,6 +99,11 @@ page 10035548 "Playbook Card ori"
                 SubPageLink = ID = field("Last Run Instance ID");
                 Caption = 'Last Execution', Comment = 'is-IS=Síðasta keyrsla';
             }
+            part(BifrostChat; "Bifrost Chat FactBox ori")
+            {
+                ApplicationArea = All;
+                Visible = ChatFactBoxVisible;
+            }
         }
     }
 
@@ -205,12 +210,47 @@ page 10035548 "Playbook Card ori"
 
     var
         InitialRequestText: Text;
+        ChatFactBoxVisible: Boolean;
         RunCompletedMsg: Label 'Playbook %1 completed with status: %2.', Comment = '%1 = playbook code, %2 = status, is-IS=Keðja %1 lauk með stöðu: %2.';
         ScheduledMsg: Label 'Playbook %1 has been scheduled.', Comment = '%1 = playbook code, is-IS=Keðja %1 hefur verið tímasett.';
+        ChatContextTok: Label '%1 %2', Locked = true;
+
+    trigger OnOpenPage()
+    var
+        BifrostChatMgt: Codeunit "Bifrost Chat Mgt ori";
+    begin
+        ChatFactBoxVisible := BifrostChatMgt.ShowBifrostChat();
+    end;
 
     trigger OnAfterGetCurrRecord()
     begin
         InitialRequestText := Rec.GetInitialRequestTemplate();
+        ApplyChatRecordContext();
+    end;
+
+    local procedure ApplyChatRecordContext()
+    var
+        CaptionText: Text;
+    begin
+        if not ChatFactBoxVisible then
+            exit;
+        if Rec.Code = '' then
+            exit;
+        if Rec.Description = '' then
+            CaptionText := Rec.Code
+        else
+            CaptionText := StrSubstNo(ChatContextTok, Rec.Code, Rec.Description);
+        CurrPage.BifrostChat.Page.SetRecordContext(Database::"Playbook ori", Rec.SystemId, CaptionText);
+        OnChatRecordContextApplied(Database::"Playbook ori", Rec.SystemId, CaptionText);
+    end;
+
+    /// <summary>
+    /// Raised after the card passes the current playbook to the chat FactBox.
+    /// Test code reads the arguments; the FactBox does not expose them.
+    /// </summary>
+    [IntegrationEvent(false, false)]
+    internal procedure OnChatRecordContextApplied(TableId: Integer; RecordSystemId: Guid; DataCaption: Text)
+    begin
     end;
 
     local procedure GetInstanceStatus(InstanceId: Guid): Enum "Playbook Inst. Status ori"
