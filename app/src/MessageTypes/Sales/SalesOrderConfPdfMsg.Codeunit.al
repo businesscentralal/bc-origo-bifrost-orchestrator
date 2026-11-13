@@ -26,6 +26,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         RecRef: RecordRef;
     begin
         RecRef.Open(GetFilterTableNo());
+        RecRef.ReadIsolation := IsolationLevel::Default;
         exit(RecRef.ReadPermission());
     end;
 
@@ -247,6 +248,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         Argument.AssertIsLicensed();
 
         RecRef.Open(Database::"Sales Header");
+        RecRef.ReadIsolation := IsolationLevel::Default;
         if not RecRef.ReadPermission() then begin
             Argument.RespondWithError("Bifrost Error Code ori"::PermissionDenied, PermissionDeniedErr, '', '', ExpectedPermissionTxt, PermissionNextStepTxt);
             exit;
@@ -332,6 +334,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         OrderId: Guid;
     begin
         Clear(SalesHeader);
+        SalesHeader.ReadIsolation := IsolationLevel::Default;
         if Evaluate(OrderId, Value) then begin
             if not SalesHeader.GetBySystemId(OrderId) then
                 exit(false);
@@ -347,10 +350,12 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         ReportSelections: Record "Report Selections";
         CustomReportSelection: Record "Custom Report Selection";
     begin
+        ReportSelections.ReadIsolation := IsolationLevel::Default;
         ReportSelections.SetRange(Usage, ReportSelections.Usage::"S.Order");
         ReportSelections.SetFilter("Report ID", '<>0');
         if not ReportSelections.IsEmpty() then
             exit(true);
+        CustomReportSelection.ReadIsolation := IsolationLevel::Default;
         CustomReportSelection.SetRange("Source Type", Database::Customer);
         CustomReportSelection.SetRange("Source No.", SalesHeader."Sell-to Customer No.");
         CustomReportSelection.SetRange(Usage, CustomReportSelection.Usage::"S.Order");
