@@ -26,7 +26,7 @@ codeunit 10035576 "Help ori"
     begin
         O.AppendLine('# Job Queue Orchestrator & Playbook Workflow Engine');
         O.AppendLine('');
-        O.AppendLine('21 Bifrost message types for managing job queues, building workflow playbooks, and generating reports.');
+        O.AppendLine('26 Bifrost message types for managing job queues, building workflow playbooks, generating reports, and sending purchase orders, sales quotes and sales order confirmations.');
         O.AppendLine('Call `Help.Implementation.Get` with `subject = "<type>"` for per-type technical guides.');
         O.AppendLine('');
         O.AppendLine('## Quick Decision Tree for AI Agents');
@@ -47,14 +47,17 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Get report details + layouts → `Orchestrator.Report.Get`');
         O.AppendLine('- Inspect or export report layouts → `Orchestrator.ReportLayout.List` / `Orchestrator.ReportLayout.Get`');
         O.AppendLine('- Generate PDF/Excel/Word report → `Orchestrator.Report.SaveAs`');
+        O.AppendLine('- Send a purchase order through its document sending profile → `Purchase.Order.Send`');
+        O.AppendLine('- Send a sales quote through its document sending profile → `Sales.Quote.Send`');
+        O.AppendLine('- Send a sales order confirmation through its document sending profile → `Sales.OrderConfirmation.Send`');
         O.AppendLine('- Run a batch job / processing-only report → `Orchestrator.Report.Run`');
-        O.AppendLine('- Print an open sales order as an order confirmation PDF → `Sales.OrderConfirmation.Pdf`');
-        O.AppendLine('- Print an open purchase order as a PDF; writes an interaction log entry when an interaction template is set up → `Purchase.Order.Pdf`');
+        O.AppendLine('- Print an open sales order as an order confirmation PDF; when Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP → `Sales.OrderConfirmation.Pdf`');
+        O.AppendLine('- Print an open purchase order as a PDF; writes an interaction log entry when an interaction template is set up. The standard report does not archive the order on this call → `Purchase.Order.Pdf`');
         O.AppendLine('- See what workspace variables are available → `Orchestrator.Workspace.Preview`');
         O.AppendLine('');
         BuildSafeAuthoringGuide(O);
         BuildWorkedExamples(O);
-        O.AppendLine('## Message Types (21)');
+        O.AppendLine('## Message Types (26)');
         O.AppendLine('');
         O.AppendLine('| Type | Description |');
         O.AppendLine('|---|---|');
@@ -78,9 +81,12 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `Orchestrator.ReportLayout.List` | List extension and user-defined report layouts |');
         O.AppendLine('| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |');
         O.AppendLine('| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |');
+        O.AppendLine('| `Purchase.Order.Send` | Send a purchase order through the Document Sending Profile |');
+        O.AppendLine('| `Sales.Quote.Send` | Send a sales quote through the Document Sending Profile |');
+        O.AppendLine('| `Sales.OrderConfirmation.Send` | Send a sales order confirmation through the Document Sending Profile |');
         O.AppendLine('| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |');
-        O.AppendLine('| `Sales.OrderConfirmation.Pdf` | Print a sales order confirmation (Report Selections usage S.Order) as PDF |');
-        O.AppendLine('| `Purchase.Order.Pdf` | Print a purchase order (Report Selections usage P.Order) as PDF; writes an interaction log entry when an interaction template is set up |');
+        O.AppendLine('| `Sales.OrderConfirmation.Pdf` | Print a sales order confirmation (Report Selections usage S.Order) as PDF; when Archive Orders is on, stores a Sales Header Archive version that cannot be removed over MCP |');
+        O.AppendLine('| `Purchase.Order.Pdf` | Print a purchase order (Report Selections usage P.Order) as PDF; writes an interaction log entry when an interaction template is set up. The standard report does not archive the order on this call |');
         O.AppendLine('| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |');
         O.AppendLine('| `Help.Orchestrator.Get` | This help document |');
         O.AppendLine('');
@@ -191,7 +197,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `LLM.Prompt.Complete` | One-shot AI completion for reasoning, formatting, decisions | `Help.Implementation.Get` subject `LLM.Prompt.Complete` |');
         O.AppendLine('| `Email.Draft.Set` | Create email draft with attachments | `Help.Implementation.Get` subject `Email.Draft.Set` |');
         O.AppendLine('| `Customer.Statement.Pdf` | Generate customer statement PDF | `Help.Implementation.Get` subject `Customer.Statement.Pdf` |');
-        O.AppendLine('| `Sales.Quote.Pdf` | Print a sales quote as PDF; writes an interaction log entry when an interaction template is set up | `Help.Implementation.Get` subject `Sales.Quote.Pdf` |');
+        O.AppendLine('| `Sales.Quote.Pdf` | Print a sales quote as PDF; writes an interaction log entry when an interaction template is set up. When Archive Quotes is Always, stores a Sales Header Archive version that cannot be removed over MCP | `Help.Implementation.Get` subject `Sales.Quote.Pdf` |');
         O.AppendLine('| `Iceland.Kennitala.Validate` | Validate Icelandic kennitala | `Help.Implementation.Get` subject `Iceland.Kennitala.Validate` |');
         O.AppendLine('| `Iceland.AddressInfo.Get` | Lookup address from national registry | `Help.Implementation.Get` subject `Iceland.AddressInfo.Get` |');
         O.AppendLine('| `DocumentExchange.Advania.*` | E-document exchange (GetUnread, GetDocument, UpdateStatus) | `Help.Implementation.Get` subject `DocumentExchange.Advania.GetUnread` |');

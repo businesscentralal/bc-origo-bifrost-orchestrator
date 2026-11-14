@@ -36,6 +36,9 @@ codeunit 96455 "Msg Direction Tests ori"
         AssertDirection("Message Type ori"::"Orchestrator.Email.Send", "Msg Direction ori"::Inbound, 'Orchestrator.Email.Send');
         AssertDirection("Message Type ori"::"Orchestrator.Telegram.Message", "Msg Direction ori"::Inbound, 'Orchestrator.Telegram.Message');
         AssertDirection("Message Type ori"::"Orchestrator.ReportLayout.Set", "Msg Direction ori"::Inbound, 'Orchestrator.ReportLayout.Set');
+        AssertDirection("Message Type ori"::"Purchase.Order.Send", "Msg Direction ori"::Inbound, 'Purchase.Order.Send');
+        AssertDirection("Message Type ori"::"Sales.Quote.Send", "Msg Direction ori"::Inbound, 'Sales.Quote.Send');
+        AssertDirection("Message Type ori"::"Sales.OrderConfirmation.Send", "Msg Direction ori"::Inbound, 'Sales.OrderConfirmation.Send');
     end;
 
     [Test]
