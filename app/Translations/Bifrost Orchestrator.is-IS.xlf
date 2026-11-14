@@ -1797,11 +1797,23 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Hvaðan forstillingin kom: Request (beiðni), forstilling viðskiptamanns eða lánardrottins, eða Default (sjálfgefin).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType WhereTheProfileCameFromRequestTheLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3483204542 - NamedType 3549752384" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You want the sales order confirmation as a PDF and do not want to send it.</source>
+          <target>Þú vilt staðfestingu sölupöntunarinnar sem PDF og vilt ekki senda hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú vilt staðfestingu sölupöntunarinnar sem PDF og vilt ekki senda hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType YouWantTheOrderConfirmationAsAPdfLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2400607892" size-unit="char" translate="yes" xml:space="preserve">
           <source>You want the purchase order as a PDF and do not want to send it.</source>
           <target>Þú vilt innkaupapöntunina sem PDF og vilt ekki senda hana.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Þú vilt innkaupapöntunina sem PDF og vilt ekki senda hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType YouWantThePurchaseOrderAsAPdfLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3483204542 - NamedType 2888710649" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You want the sales quote as a PDF and do not want to send it.</source>
+          <target>Þú vilt sölutilboðið sem PDF og vilt ekki senda það.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú vilt sölutilboðið sem PDF og vilt ekki senda það.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType YouWantTheSalesQuoteAsAPdfLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1724758639" size-unit="char" translate="yes" xml:space="preserve">
           <source>You want to read the document afterwards without sending it again.</source>
@@ -1822,9 +1834,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method OrderConfirmationKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 299948515 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf when that type is available.</source>
-          <target>Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf þegar sú tegund er tiltæk.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf þegar sú tegund er tiltæk.</note>
+          <source>Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf.</source>
+          <target>Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method OrderConfirmationSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 2555313517 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1858,9 +1870,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method SalesQuoteKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 969018638 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf when that type is available.</source>
-          <target>Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf þegar sú tegund er tiltæk.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf þegar sú tegund er tiltæk.</note>
+          <source>Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf.</source>
+          <target>Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method SalesQuoteSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - NamedType 2897282207" size-unit="char" translate="yes" xml:space="preserve">

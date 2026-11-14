@@ -8,6 +8,7 @@ Business Central release versioning (`major.minor.build.revision`).
 ## [Unreleased] — 28.0.4.0
 
 ### Fixed
+- #176 / codeunit 10035631 `Doc Send Contract ori`: `Sales.Quote.Send` and `Sales.OrderConfirmation.Send` selection text names the live PDF type and no longer says to use it when that type is available. `Sales.Quote.Send` lists `Sales.Quote.Pdf` and `Sales.OrderConfirmation.Send` lists `Sales.OrderConfirmation.Pdf` in the related chapter, the same way `Purchase.Order.Send` lists `Purchase.Order.Pdf`. Catalogue selection stays in en-US and is-IS. Help chapters stay English (Gunnar 16.10.2026 option B; Foundation keeps the public structured contract in English). No new objects. Test codeunit 96472.
 - #176 / codeunits 10035629 `Sales Quote Pdf Msg ori`, 10035626 `Sales Order Conf Pdf Msg ori`, 10035625 `Purch Order Pdf Msg ori` and 10035576 `Help ori`: the PDF help states the document-archive side effect. `Sales.Quote.Pdf` stores a Sales Header Archive version when Archive Quotes is Always; that version cannot be removed over MCP. Question and Never do not archive on this call. `Sales.OrderConfirmation.Pdf` stores a Sales Header Archive version when Archive Orders is on. `Purchase.Order.Pdf` does not archive on this call, because the standard report archives only when its request page turns Archive Document on. Catalogue description and selection are in en-US and is-IS. Help chapters stay English. No new objects and no printing change. Tests 96471, 96481 and 96480.
 
 ### Fixed — #159

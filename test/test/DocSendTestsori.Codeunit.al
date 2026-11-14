@@ -24,9 +24,9 @@ codeunit 96472 "Doc Send Tests ori"
         DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Mock: Codeunit "Doc Send Mock ori";
 
-    /// <summary>Purchase.Order.Send names Purchase.Order.Pdf. The other PDF types are not related names until they exist.</summary>
+    /// <summary>Each send type names its own PDF type. It does not name another document's PDF type.</summary>
     [Test]
-    procedure PurchaseOrderSend_RelatedNamesExistingPdfTypeOnly()
+    procedure SendTypes_RelatedNamesIncludeTheirOwnPdfType()
     var
         PurchaseRelated: List of [Text];
         QuoteRelated: List of [Text];
@@ -34,10 +34,57 @@ codeunit 96472 "Doc Send Tests ori"
     begin
         PurchaseRelated := RelatedNames("Message Type ori"::"Purchase.Order.Send");
         Assert.IsTrue(PurchaseRelated.Contains('Purchase.Order.Pdf'), 'Purchase.Order.Send names Purchase.Order.Pdf');
+        Assert.IsFalse(PurchaseRelated.Contains('Sales.Quote.Pdf'), 'Purchase.Order.Send does not name Sales.Quote.Pdf');
+        Assert.IsFalse(PurchaseRelated.Contains('Sales.OrderConfirmation.Pdf'), 'Purchase.Order.Send does not name Sales.OrderConfirmation.Pdf');
+
         QuoteRelated := RelatedNames("Message Type ori"::"Sales.Quote.Send");
-        Assert.IsFalse(QuoteRelated.Contains('Sales.Quote.Pdf'), 'Sales.Quote.Pdf is not related until that type exists');
+        Assert.IsTrue(QuoteRelated.Contains('Sales.Quote.Pdf'), 'Sales.Quote.Send names Sales.Quote.Pdf');
+        Assert.IsFalse(QuoteRelated.Contains('Sales.OrderConfirmation.Pdf'), 'Sales.Quote.Send does not name Sales.OrderConfirmation.Pdf');
+        Assert.IsFalse(QuoteRelated.Contains('Purchase.Order.Pdf'), 'Sales.Quote.Send does not name Purchase.Order.Pdf');
+
         ConfirmationRelated := RelatedNames("Message Type ori"::"Sales.OrderConfirmation.Send");
-        Assert.IsFalse(ConfirmationRelated.Contains('Sales.OrderConfirmation.Pdf'), 'Sales.OrderConfirmation.Pdf is not related until that type exists');
+        Assert.IsTrue(ConfirmationRelated.Contains('Sales.OrderConfirmation.Pdf'), 'Sales.OrderConfirmation.Send names Sales.OrderConfirmation.Pdf');
+        Assert.IsFalse(ConfirmationRelated.Contains('Sales.Quote.Pdf'), 'Sales.OrderConfirmation.Send does not name Sales.Quote.Pdf');
+        Assert.IsFalse(ConfirmationRelated.Contains('Purchase.Order.Pdf'), 'Sales.OrderConfirmation.Send does not name Purchase.Order.Pdf');
+    end;
+
+    /// <summary>Selection text names the live PDF type and does not say that type is still pending.</summary>
+    [Test]
+    procedure SalesSendSelection_NamesLivePdfTypeInBothLanguages()
+    var
+        Discovery: Interface "Msg Discovery ori";
+        PreviousLanguage: Integer;
+        EnglishQuote: Text;
+        IcelandicQuote: Text;
+        EnglishConfirmation: Text;
+        IcelandicConfirmation: Text;
+    begin
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        Discovery := "Message Type ori"::"Sales.Quote.Send";
+        EnglishQuote := Discovery.GetSelectionDescription();
+        Discovery := "Message Type ori"::"Sales.OrderConfirmation.Send";
+        EnglishConfirmation := Discovery.GetSelectionDescription();
+        GlobalLanguage(1039);
+        Discovery := "Message Type ori"::"Sales.Quote.Send";
+        IcelandicQuote := Discovery.GetSelectionDescription();
+        Discovery := "Message Type ori"::"Sales.OrderConfirmation.Send";
+        IcelandicConfirmation := Discovery.GetSelectionDescription();
+        GlobalLanguage(PreviousLanguage);
+
+        Assert.IsTrue(EnglishQuote.Contains('Sales.Quote.Pdf'), 'en-US quote selection names Sales.Quote.Pdf');
+        Assert.IsFalse(EnglishQuote.Contains('when that type is available'), 'en-US quote selection does not say the PDF type is pending');
+        Assert.IsFalse(EnglishQuote.Contains('Sales.OrderConfirmation.Pdf'), 'en-US quote selection does not name the order confirmation PDF');
+        Assert.IsTrue(IcelandicQuote.Contains('Sales.Quote.Pdf'), 'is-IS quote selection names Sales.Quote.Pdf');
+        Assert.IsFalse(IcelandicQuote.Contains('þegar sú tegund er tiltæk'), 'is-IS quote selection does not say the PDF type is pending');
+        Assert.AreNotEqual(EnglishQuote, IcelandicQuote, 'quote selection has an is-IS translation');
+
+        Assert.IsTrue(EnglishConfirmation.Contains('Sales.OrderConfirmation.Pdf'), 'en-US confirmation selection names Sales.OrderConfirmation.Pdf');
+        Assert.IsFalse(EnglishConfirmation.Contains('when that type is available'), 'en-US confirmation selection does not say the PDF type is pending');
+        Assert.IsFalse(EnglishConfirmation.Contains('Sales.Quote.Pdf'), 'en-US confirmation selection does not name the quote PDF');
+        Assert.IsTrue(IcelandicConfirmation.Contains('Sales.OrderConfirmation.Pdf'), 'is-IS confirmation selection names Sales.OrderConfirmation.Pdf');
+        Assert.IsFalse(IcelandicConfirmation.Contains('þegar sú tegund er tiltæk'), 'is-IS confirmation selection does not say the PDF type is pending');
+        Assert.AreNotEqual(EnglishConfirmation, IcelandicConfirmation, 'confirmation selection has an is-IS translation');
     end;
 
     /// <summary>Purchase-order help translates its chapters while preserving profile source wire values.</summary>
