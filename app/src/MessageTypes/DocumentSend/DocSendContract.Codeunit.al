@@ -4,8 +4,7 @@ using Origo.Bifrost;
 
 /// <summary>
 /// Shared contract chapters for Purchase.Order.Send, Sales.Quote.Send and Sales.OrderConfirmation.Send.
-/// Purchase.Order.Pdf is a related entry now that issue 91 is in this app.
-/// Sales.Quote.Pdf and Sales.OrderConfirmation.Pdf stay in the notes until issues 92 and 93 add those types.
+/// Each send type names its matching PDF type in the related chapter now that those types exist.
 /// Foundation refuses an unknown related name, so a type is listed only after it exists.
 /// </summary>
 codeunit 10035631 "Doc Send Contract ori"
@@ -63,14 +62,14 @@ codeunit 10035631 "Doc Send Contract ori"
 
     internal procedure SalesQuoteSelection(): Text
     var
-        SelectionLbl: Label 'Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf when that type is available.', Comment = 'is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf þegar sú tegund er tiltæk.';
+        SelectionLbl: Label 'Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf.', Comment = 'is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.';
     begin
         exit(SelectionLbl);
     end;
 
     internal procedure OrderConfirmationSelection(): Text
     var
-        SelectionLbl: Label 'Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf when that type is available.', Comment = 'is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf þegar sú tegund er tiltæk.';
+        SelectionLbl: Label 'Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf.', Comment = 'is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.';
     begin
         exit(SelectionLbl);
     end;
@@ -188,6 +187,10 @@ codeunit 10035631 "Doc Send Contract ori"
             Parts.Related(Related, 'Sales.OrderConfirmation.Send', TheDocumentIsASalesOrderConfirmationLbl);
         if MessageTypeName = 'Purchase.Order.Send' then
             Parts.Related(Related, 'Purchase.Order.Pdf', YouWantThePurchaseOrderAsAPdfLbl);
+        if MessageTypeName = 'Sales.Quote.Send' then
+            Parts.Related(Related, 'Sales.Quote.Pdf', YouWantTheSalesQuoteAsAPdfLbl);
+        if MessageTypeName = 'Sales.OrderConfirmation.Send' then
+            Parts.Related(Related, 'Sales.OrderConfirmation.Pdf', YouWantTheOrderConfirmationAsAPdfLbl);
         Parts.Related(Related, 'Data.Records.Get', YouWantToReadTheDocumentAfterwardsLbl);
     end;
 
@@ -284,6 +287,8 @@ codeunit 10035631 "Doc Send Contract ori"
         TheDocumentIsASalesQuoteLbl: Label 'The document is a sales quote.', Comment = 'is-IS=Skjalið er sölutilboð.';
         TheDocumentIsASalesOrderConfirmationLbl: Label 'The document is a sales order confirmation.', Comment = 'is-IS=Skjalið er staðfesting sölupöntunar.';
         YouWantThePurchaseOrderAsAPdfLbl: Label 'You want the purchase order as a PDF and do not want to send it.', Comment = 'is-IS=Þú vilt innkaupapöntunina sem PDF og vilt ekki senda hana.';
+        YouWantTheSalesQuoteAsAPdfLbl: Label 'You want the sales quote as a PDF and do not want to send it.', Comment = 'is-IS=Þú vilt sölutilboðið sem PDF og vilt ekki senda það.';
+        YouWantTheOrderConfirmationAsAPdfLbl: Label 'You want the sales order confirmation as a PDF and do not want to send it.', Comment = 'is-IS=Þú vilt staðfestingu sölupöntunarinnar sem PDF og vilt ekki senda hana.';
         YouWantToReadTheDocumentAfterwardsLbl: Label 'You want to read the document afterwards without sending it again.', Comment = 'is-IS=Þú vilt lesa skjalið eftir sendingu án þess að senda það aftur.';
         ReadTheDocumentAndTakeItsNumberLbl: Label 'Read the document and take its number or SystemId.', Comment = 'is-IS=Lestu skjalið og notaðu númer þess eða SystemId.';
         SendWithAnExplicitProfileLbl: Label 'Send with an explicit profile', Comment = 'is-IS=Senda með tilgreindri forstillingu';

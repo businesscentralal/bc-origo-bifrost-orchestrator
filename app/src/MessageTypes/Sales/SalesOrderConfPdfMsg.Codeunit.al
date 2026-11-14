@@ -43,7 +43,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     /// </summary>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Prints a sales order confirmation as a PDF document.', Comment = 'is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal.';
+        DescriptionLbl: Label 'Prints a sales order confirmation as a PDF document. When Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP.', Comment = 'is-IS=Prentar pöntunarstaðfestingu sölupöntunar sem PDF-skjal. Þegar Archive Orders er virkt vistar staðalskýrslan útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP.';
     begin
         exit(DescriptionLbl);
     end;
@@ -63,7 +63,7 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     /// </summary>
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Get an open sales order as an order confirmation PDF, printed with the customer''s report selection for usage S.Order. Increases the order''s No. Printed. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
+        SelectionLbl: Label 'Get an open sales order as an order confirmation PDF, printed with the customer''s report selection for usage S.Order. Increases the order''s No. Printed. When Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP. A replacement report may not archive. For a posted invoice use Sales.SalesInvoice.Pdf; for any other report use Orchestrator.Report.SaveAs.', Comment = 'is-IS=Sækja opna sölupöntun sem PDF-pöntunarstaðfestingu, prentaða með skýrsluvali viðskiptamanns fyrir notkunina S.Order. Hækkar prentteljara pöntunarinnar. Þegar Archive Orders er virkt vistar staðalskýrslan útgáfu í Sales Header Archive sem ekki er hægt að fjarlægja í gegnum MCP. Önnur skýrsla gerir það ef til vill ekki. Fyrir bókaðan reikning notaðu Sales.SalesInvoice.Pdf; fyrir aðrar skýrslur notaðu Orchestrator.Report.SaveAs.';
     begin
         exit(SelectionLbl);
     end;
@@ -146,12 +146,12 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     end;
 
     /// <summary>
-    /// Discloses printing, interaction logging and transaction side effects.
+    /// Discloses printing, interaction logging, archiving and transaction side effects.
     /// </summary>
     procedure GetEffect(var Effect: JsonObject): Boolean
     begin
         Effect.Add('effect', 'write');
-        Effect.Add('changes', 'Increases No. Printed on the sales order and, when an interaction template is set up for sales order confirmations, logs an interaction for the customer''s contact: the standard report does both. A replacement report in Report Selections may not. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.');
+        Effect.Add('changes', 'Increases No. Printed on the sales order and, when an interaction template is set up for sales order confirmations, logs an interaction for the customer''s contact: the standard report does both. When Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP. A replacement report in Report Selections may not archive. Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.');
         Effect.Add('idempotent', false);
         exit(true);
     end;
@@ -210,7 +210,8 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
     procedure GetOverview(var Overview: Text): Boolean
     begin
         Overview := 'Returns an open sales order as an order confirmation PDF, printed with the report the customer''s Report Selection (usage S.Order) names; by default the standard order confirmation. ' +
-            'Use it to hand a confirmation of the order to a person or another system. Printing it increases No. Printed on the order.';
+            'Use it to hand a confirmation of the order to a person or another system. Printing it increases No. Printed on the order. ' +
+            'When Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP.';
         exit(true);
     end;
 
@@ -222,7 +223,8 @@ codeunit 10035626 "Sales Order Conf Pdf Msg ori" implements "Msg Interface ori",
         Notes := 'subject and the keys under data (orderNo, orderId, documentNo, documentId) are all tried: a value that looks like a GUID is read as the SystemId, anything else as the No. ' +
             'Only documents of type Order are found. Two identifiers that name different orders are refused with ConflictingIdentifiers. ' +
             'Only the Success answer is a PDF; an error answer is JSON (text/json). The same read permission on Sales Header is required as for reading the order. ' +
-            'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back.';
+            'Saving the PDF commits the work done so far, so the call cannot run inside a larger transaction that is rolled back. ' +
+            'When Sales & Receivables Setup Archive Orders is on, the standard report stores a Sales Header Archive version that cannot be removed over MCP. This call does not open the request page; the standard report still archives when that setup is on. A replacement report may not archive.';
         exit(true);
     end;
 

@@ -198,6 +198,50 @@ codeunit 96480 "Purch Order Pdf Tests ori"
         Assert.IsTrue(ReadSelection(1039).Contains('samskiptaskrá'), 'is-IS selection names the interaction log');
     end;
 
+    [Test]
+    procedure HelpStatesWhenAPurchaseOrderIsArchived()
+    var
+        Contract: Interface "Msg Contract ori";
+        Effect: JsonObject;
+        Changes: JsonToken;
+        Overview: Text;
+        Notes: Text;
+        EnglishDescription: Text;
+        IcelandicDescription: Text;
+        EnglishSelection: Text;
+        IcelandicSelection: Text;
+    begin
+        // [SCENARIO #176 AC01] Purchase.Order.Pdf states the archive side effect where it applies: not on this headless call.
+        Contract := "Message Type ori"::"Purchase.Order.Pdf";
+        EnglishDescription := ReadDescription(1033);
+        IcelandicDescription := ReadDescription(1039);
+        EnglishSelection := ReadSelection(1033);
+        IcelandicSelection := ReadSelection(1039);
+
+        // [THEN] happy path: the catalogue names Purchase Header Archive and says this call does not store one
+        Assert.IsTrue(EnglishDescription.Contains('does not store a Purchase Header Archive version on this call'), 'en-US description says this call does not archive');
+        Assert.IsTrue(IcelandicDescription.Contains('Purchase Header Archive'), 'is-IS description names the archive table');
+        Assert.IsTrue(EnglishSelection.Contains('cannot be removed over MCP'), 'en-US selection says an archive version stays');
+        Assert.IsTrue(IcelandicSelection.Contains('Purchase Header Archive'), 'is-IS selection names the archive table');
+        Assert.IsTrue(IcelandicSelection.Contains('MCP'), 'is-IS selection names MCP');
+        Assert.IsTrue(StrLen(EnglishDescription) <= 250, 'en-US description fits Text[250]');
+        Assert.IsTrue(StrLen(IcelandicDescription) <= 250, 'is-IS description fits Text[250]');
+        Assert.IsTrue(Contract.GetEffect(Effect), 'effect exists');
+        Assert.IsTrue(Effect.Get('changes', Changes), 'effect changes exist');
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('Purchase Header Archive version cannot be removed over MCP'), 'effect says an archive version stays');
+        Assert.IsTrue(Contract.GetOverview(Overview), 'overview exists');
+        Assert.IsTrue(Overview.Contains('does not archive the order on this call'), 'overview says this call does not archive');
+        Assert.IsTrue(Contract.GetNotes(Notes), 'notes exist');
+        Assert.IsTrue(Notes.Contains('does not open the request page'), 'notes name the request page');
+
+        // [THEN] invalid reading: setup alone does not make this call archive, and the notes do not say the archive is deleted
+        Assert.IsFalse(Changes.AsValue().AsText().Contains('when Purchases & Payables Setup archives orders'), 'effect no longer says setup alone archives');
+        Assert.IsFalse(Notes.Contains('deleted'), 'notes do not say the archive is deleted');
+
+        // [THEN] edge: a replacement report may still archive
+        Assert.IsTrue(Changes.AsValue().AsText().Contains('A replacement report may still archive'), 'effect allows a replacement report to archive');
+    end;
+
     local procedure ReadDescription(LanguageId: Integer): Text
     var
         MessageTypeInterface: Interface "Msg Interface ori";
