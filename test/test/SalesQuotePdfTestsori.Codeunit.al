@@ -54,17 +54,21 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         AssertRefusal('{"quoteNo":12345}', 'InvalidParameterFormat');
     end;
 
+    /// <summary>Preserves the PDF and returns its stable filename when selected by quote number.</summary>
     [Test]
-    procedure QuoteNumberReturnsPdf()
+    procedure Scenario_AC01_AC02_QuoteNumber_ReturnsNamedPdf()
     var
         SalesHeader: Record "Sales Header";
         TempArgument: Record "Message Argument ori" temporary;
     begin
-        // [SCENARIO #92] The quote number returns a non-empty PDF.
+        // Story #177 AC01/AC02 | Time: independent of Today/WorkDate | Risk: standard report selection.
+        // [GIVEN] A self-seeded sales quote.
         DeleteMarkedDocuments();
         CreateQuote(SalesHeader);
+        // [WHEN] The quote is printed through the public dispatcher by number.
         DispatchJson('{"quoteNo":"' + SalesHeader."No." + '"}', TempArgument);
-        AssertPdf(TempArgument);
+        // [THEN] Binary PDF content and the stable filename survive dispatch.
+        AssertPdf(TempArgument, SalesHeader.SystemId);
         DeleteMarkedDocuments();
     end;
 
@@ -78,7 +82,7 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         DeleteMarkedDocuments();
         CreateQuote(SalesHeader);
         DispatchJson('{"systemId":"' + Format(SalesHeader.SystemId, 0, 4) + '"}', TempArgument);
-        AssertPdf(TempArgument);
+        AssertPdf(TempArgument, SalesHeader.SystemId);
         DeleteMarkedDocuments();
     end;
 
@@ -93,10 +97,55 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         DeleteMarkedDocuments();
         CreateQuote(SalesHeader);
         DispatchSubject(SalesHeader."No.", 1033, ContentType, ResponseBlob);
-        Assert.AreEqual('application/pdf', ContentType, 'content type');
+        Assert.AreEqual(ExpectedContentType(SalesHeader.SystemId), ContentType, 'The public dispatcher preserves the PDF filename');
         Assert.IsTrue(ResponseBlob.Length() > 100, 'pdf length');
         Assert.IsTrue(BlobStartsWithPdf(ResponseBlob), 'pdf header');
         DeleteMarkedDocuments();
+    end;
+
+    /// <summary>Uses the SystemId for a safe filename in both supported languages, regardless of quote-number characters.</summary>
+    [Test]
+    procedure Scenario_AC02_UnsafeNumber_BothLanguagesKeepStableFilename()
+    var
+        SalesHeader: Record "Sales Header";
+        ResponseBlob: Codeunit "Temp Blob";
+        ContentType: Text;
+        EnglishContentType: Text;
+    begin
+        // Story #177 AC02 | Time: independent of Today/WorkDate | Risk: standard report selection.
+        // [GIVEN] A quote whose number is unsuitable as a filename or MIME parameter.
+        DeleteMarkedDocuments();
+        CreateDocument(SalesHeader, SalesHeader."Document Type"::Quote, 'BIFT/177"Á:012345678');
+
+        // [WHEN] The same quote is requested in English and Icelandic.
+        DispatchSubject(SalesHeader."No.", 1033, EnglishContentType, ResponseBlob);
+        Assert.IsTrue(BlobStartsWithPdf(ResponseBlob), 'English response is still a PDF');
+        Clear(ResponseBlob);
+        DispatchSubject(SalesHeader."No.", 1039, ContentType, ResponseBlob);
+
+        // [THEN] Both responses name the same SystemId-based PDF without unsafe quote-number characters.
+        Assert.AreEqual(ExpectedContentType(SalesHeader.SystemId), EnglishContentType, 'English filename');
+        Assert.AreEqual(EnglishContentType, ContentType, 'Filename is independent of request language');
+        Assert.IsTrue(BlobStartsWithPdf(ResponseBlob), 'Icelandic response is still a PDF');
+        DeleteMarkedDocuments();
+    end;
+
+    /// <summary>Leaves invalid-input responses as JSON without PDF filename metadata.</summary>
+    [Test]
+    procedure Scenario_AC02_InvalidQuoteNumber_ReturnsJsonWithoutFilename()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        ResponseJson: JsonObject;
+    begin
+        // Story #177 AC02 | Time: independent of Today/WorkDate | Risk: None.
+        // [GIVEN/WHEN] A quote number has the wrong JSON type.
+        DispatchJson('{"quoteNo":12345}', TempArgument);
+
+        // [THEN] The structured error retains JSON content type and has no PDF name parameter.
+        Assert.IsTrue(TempArgument."Content Type" in ['application/json', 'text/json'], 'Error content type remains JSON');
+        ResponseJson := TempArgument.GetResponseJson();
+        Assert.AreEqual('Error', JsonText(ResponseJson, 'status'), 'Invalid quote status');
+        Assert.AreEqual('InvalidParameterFormat', JsonText(ResponseJson, 'code'), 'Invalid quote error');
     end;
 
     [Test]
@@ -283,17 +332,22 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
         Assert.AreNotEqual('', JsonText(ResponseJson, 'nextStep'), 'nextStep ' + RequestText);
     end;
 
-    local procedure AssertPdf(var TempArgument: Record "Message Argument ori" temporary)
+    local procedure AssertPdf(var TempArgument: Record "Message Argument ori" temporary; QuoteSystemId: Guid)
     var
         InStream: InStream;
         Prefix: Text;
     begin
-        Assert.AreEqual('application/pdf', TempArgument."Content Type", 'content type');
+        Assert.AreEqual(ExpectedContentType(QuoteSystemId), TempArgument."Content Type", 'The caller receives the stable filename in the MIME metadata');
         TempArgument.CalcFields("Response Content");
         Assert.IsTrue(TempArgument."Response Content".Length > 100, 'pdf length');
         TempArgument."Response Content".CreateInStream(InStream);
         InStream.ReadText(Prefix, 4);
         Assert.AreEqual('%PDF', Prefix, 'pdf header');
+    end;
+
+    local procedure ExpectedContentType(QuoteSystemId: Guid): Text
+    begin
+        exit('application/pdf; name="SalesQuote-' + Format(QuoteSystemId, 0, 4).ToLower() + '.pdf"');
     end;
 
     local procedure BlobStartsWithPdf(var TempBlob: Codeunit "Temp Blob"): Boolean
@@ -345,15 +399,15 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
 
     local procedure CreateQuote(var SalesHeader: Record "Sales Header")
     begin
-        CreateDocument(SalesHeader, SalesHeader."Document Type"::Quote);
+        CreateDocument(SalesHeader, SalesHeader."Document Type"::Quote, '');
     end;
 
     local procedure CreateOrder(var SalesHeader: Record "Sales Header")
     begin
-        CreateDocument(SalesHeader, SalesHeader."Document Type"::Order);
+        CreateDocument(SalesHeader, SalesHeader."Document Type"::Order, '');
     end;
 
-    local procedure CreateDocument(var SalesHeader: Record "Sales Header"; DocumentType: Enum "Sales Document Type")
+    local procedure CreateDocument(var SalesHeader: Record "Sales Header"; DocumentType: Enum "Sales Document Type"; DocumentNo: Code[20])
     var
         Customer: Record Customer;
         Item: Record Item;
@@ -361,7 +415,16 @@ codeunit 96471 "Sales Quote Pdf Tests ori"
     begin
         LibrarySales.CreateCustomer(Customer);
         LibraryInventory.CreateItem(Item);
-        LibrarySales.CreateSalesHeader(SalesHeader, DocumentType, Customer."No.");
+        if DocumentNo = '' then
+            LibrarySales.CreateSalesHeader(SalesHeader, DocumentType, Customer."No.")
+        else begin
+            SalesHeader.Init();
+            SalesHeader."Document Type" := DocumentType;
+            SalesHeader."No." := DocumentNo;
+            SalesHeader.Insert(true);
+            SalesHeader.Validate("Sell-to Customer No.", Customer."No.");
+            SalesHeader.Modify(true);
+        end;
         LibrarySales.CreateSalesLine(SalesLine, SalesHeader, SalesLine.Type::Item, Item."No.", 1);
         SalesLine.Validate("Unit Price", 100);
         SalesLine.Modify(true);
