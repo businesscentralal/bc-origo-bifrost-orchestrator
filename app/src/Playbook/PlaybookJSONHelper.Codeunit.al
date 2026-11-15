@@ -358,7 +358,7 @@ codeunit 10035546 "Playbook JSON Helper ori"
             exit(true);
 
         if Operator = Operator::Exists then
-            exit(ResolveJsonPath(SourceJson, ConditionPath, ResolvedToken));
+            exit(ResolveJsonPath(SourceJson, ConditionPath, ResolvedToken) and not IsEmptyToken(ResolvedToken));
 
         if not ResolveJsonPath(SourceJson, ConditionPath, ResolvedToken) then
             exit(false);
@@ -486,25 +486,113 @@ codeunit 10035546 "Playbook JSON Helper ori"
         exit(Result);
     end;
 
-    /// <summary>Converts a token to a JSON literal, auto-detecting numeric strings as bare numbers.</summary>
+    /// <summary>
+    /// Converts a token to a JSON literal that keeps the source value's JSON type: a string stays a
+    /// string (also a digit-only Code such as "1001"), a number stays a number, a boolean stays a boolean.
+    /// </summary>
     local procedure TokenToJsonLiteral(Token: JsonToken): Text
     var
-        TextVal: Text;
-        DecVal: Decimal;
         Result: Text;
     begin
-        if not Token.IsValue() then begin
-            Token.WriteTo(Result);
-            exit(Result);
-        end;
-        TextVal := Token.AsValue().AsText();
-        if TextVal in ['true', 'false'] then
-            exit(TextVal);
-        if (TextVal <> '') and Evaluate(DecVal, TextVal, 9) and (StrLen(TextVal) < 20) then
-            exit(TextVal);
         Token.WriteTo(Result);
         exit(Result);
     end;
+
+    /// <summary>
+    /// True for a value that carries nothing: null, an empty string, an empty array or an empty object.
+    /// A number or a boolean (also 0 and false) is never empty.
+    /// </summary>
+    local procedure IsEmptyToken(Token: JsonToken): Boolean
+    begin
+        case true of
+            Token.IsValue():
+                begin
+                    if Token.AsValue().IsNull() then
+                        exit(true);
+                    exit(Token.AsValue().AsText() = '');
+                end;
+            Token.IsArray():
+                exit(Token.AsArray().Count() = 0);
+            Token.IsObject():
+                exit(Token.AsObject().Keys().Count() = 0);
+        end;
+        exit(false);
+    end;
+
+    /// <summary>
+    /// Explains why a step failed, so the step log never shows a Failed step with an empty reason.
+    /// A response that is itself an error answer gives "code: error"; otherwise the first condition
+    /// of each group that does not hold is named with its type, path, operator, expected and actual value.
+    /// </summary>
+    /// <param name="ResponseText">The response text of the step; may be empty or not JSON.</param>
+    /// <param name="PlaybookCode">The playbook of the step.</param>
+    /// <param name="StepNo">The step number.</param>
+    /// <param name="CondType">The condition type that was evaluated (Success).</param>
+    /// <returns>A text that is never empty.</returns>
+    procedure DescribeStepFailure(ResponseText: Text; PlaybookCode: Code[20]; StepNo: Integer; CondType: Enum "Playbook Cond. Type ori"): Text
     var
+        Condition: Record "Playbook Condition ori";
+        ResponseJson: JsonObject;
+        ErrorText: Text;
+        Result: Text;
+        ActualText: Text;
+        CurrentGroup: Integer;
+        GroupNamed: Boolean;
+        HasJson: Boolean;
+        ResolvedToken: JsonToken;
+    begin
+        if IsErrorResponse(ResponseText, ErrorText) then
+            exit(ErrorText);
+
+        HasJson := (ResponseText <> '') and ResponseJson.ReadFrom(ResponseText);
+        if HasJson then begin
+            Condition.FilterForStep(PlaybookCode, StepNo, CondType);
+            Condition.ReadIsolation := IsolationLevel::ReadCommitted;
+            if Condition.FindSet() then begin
+                CurrentGroup := Condition."Group No." - 1;
+                repeat
+                    if Condition."Group No." <> CurrentGroup then begin
+                        CurrentGroup := Condition."Group No.";
+                        GroupNamed := false;
+                    end;
+                    if not GroupNamed then
+                        if not EvaluateCondition(ResponseJson, Condition.Path, Condition.Operator, Condition."Value") then begin
+                            GroupNamed := true;
+                            if ResolveJsonPath(ResponseJson, Condition.Path, ResolvedToken) then begin
+                                ActualText := GetTokenAsText(ResolvedToken);
+                                if ActualText = '' then
+                                    ActualText := '""';
+                            end else
+                                ActualText := MissingTok;
+                            if Result <> '' then
+                                Result += ' | ';
+                            Result += StrSubstNo(ConditionFailedErr, CondTypeToText(CondType),
+                                Condition.Path, OperatorToText(Condition.Operator), Condition."Value", ActualText);
+                        end;
+                until Condition.Next() = 0;
+            end;
+        end;
+        if Result <> '' then
+            exit(Result);
+        if not HasJson then
+            exit(StrSubstNo(NoJsonResponseErr, StepNo));
+        exit(StrSubstNo(NoReasonErr, StepNo));
+    end;
+
+    local procedure OperatorToText(Operator: Enum "Playbook Cond. Operator ori"): Text
+    begin
+        exit(Operator.Names().Get(Operator.Ordinals().IndexOf(Operator.AsInteger())));
+    end;
+
+    local procedure CondTypeToText(CondType: Enum "Playbook Cond. Type ori"): Text
+    begin
+        exit(CondType.Names().Get(CondType.Ordinals().IndexOf(CondType.AsInteger())));
+    end;
+
+    var
+        MissingTok: Label '(missing)', Locked = true;
+        ConditionFailedErr: Label '%1 condition not met: path "%2" %3 "%4", actual %5.', Comment = '%1 = condition type, %2 = path, %3 = operator, %4 = expected value, %5 = actual value, is-IS=%1 skilyrði ekki uppfyllt: slóð "%2" %3 "%4", raunverulegt gildi %5.';
+        NoJsonResponseErr: Label 'Step %1 failed and its response was empty or not a JSON object, so no condition could be evaluated.', Comment = '%1 = step number, is-IS=Skref %1 mistókst og svar þess var autt eða ekki JSON-hlutur, svo ekki var hægt að meta skilyrði.';
+        NoReasonErr: Label 'Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.', Comment = '%1 = step number, is-IS=Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.';
         UnresolvedReferenceErr: Label 'Unresolved workspace reference %1. Inspect the source response and correct the path before running the step. No message was sent.', Comment = '%1 = workspace reference, is-IS=Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.';
 }

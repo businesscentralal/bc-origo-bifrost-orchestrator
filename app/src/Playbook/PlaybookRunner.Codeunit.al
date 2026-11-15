@@ -271,8 +271,12 @@ codeunit 10035547 "Playbook Runner ori"
                 JsonHelper.IsErrorResponse(PageResponseText, PageErrorText);
             LastResponseText := PageResponseText;
             StepsExecuted += 1;
-            if not PageSuccess then
+            if not PageSuccess then begin
                 StepsFailed += 1;
+                if PageErrorText = '' then
+                    PageErrorText := JsonHelper.DescribeStepFailure(PageResponseText, PagedStep."Playbook Code",
+                        PagedStep."Step No.", "Playbook Cond. Type ori"::Success);
+            end;
 
             if PageSuccess then
                 PageStepStatus := "Playbook Inst. Status ori"::Completed
@@ -423,6 +427,12 @@ codeunit 10035547 "Playbook Runner ori"
         end else begin
             StepStatus := "Playbook Inst. Status ori"::Failed;
             StepsFailed += 1;
+            // A Failed step always says why: the message type's own error, else the condition that did not hold.
+            if LogErrorText = '' then begin
+                ErrorText := JsonHelper.DescribeStepFailure(ResponseText, PlaybookStep."Playbook Code",
+                    PlaybookStep."Step No.", "Playbook Cond. Type ori"::Success);
+                LogErrorText := ErrorText;
+            end;
         end;
 
         LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", CurrentPageNo, PlaybookStep."Message Type",
@@ -579,7 +589,11 @@ codeunit 10035547 "Playbook Runner ori"
 
                 LogErrorText := ErrorText;
                 if ItemOutcome = 'CheckFailed' then
-                    LogErrorText := CheckAnsweredNoTok;
+                    LogErrorText := CheckAnsweredNoTok
+                else
+                    if (StepStatus = "Playbook Inst. Status ori"::Failed) and (LogErrorText = '') then
+                        LogErrorText := JsonHelper.DescribeStepFailure(ResponseText, PlaybookStep."Playbook Code",
+                            PlaybookStep."Step No.", "Playbook Cond. Type ori"::Success);
 
                 LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", PageItemOffset + i, PlaybookStep."Message Type",
                     RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, ElementText, Workspace.ToText());
