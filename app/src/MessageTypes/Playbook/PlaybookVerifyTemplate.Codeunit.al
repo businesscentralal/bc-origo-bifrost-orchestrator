@@ -220,7 +220,8 @@ codeunit 10035618 "Playbook Verify Template ori"
     /// <summary>
     /// Run-time refusals a first run would hit: an irreversible type without expectedCount while Bifrost Setup requires
     /// confirmation (IrreversibleWithoutConfirmation), and request keys the type does not declare (UnknownRequestKey).
-    /// Both read the contract of the message type; a type without a readable contract is not judged.
+    /// Both read the contract of the message type; a type without a readable contract is not judged. A key is declared
+    /// when it is a data parameter or an envelope key (subject, strict and any other option the envelope chapter lists).
     /// </summary>
     /// <param name="Step">The step.</param>
     /// <param name="TemplateJson">The parsed request template; empty when no template is set.</param>
@@ -228,14 +229,15 @@ codeunit 10035618 "Playbook Verify Template ori"
     internal procedure CheckRuntimeRefusals(Step: Record "Playbook Step ori"; TemplateJson: JsonObject; var Findings: JsonArray)
     var
         Effect: JsonObject;
+        Envelope: JsonObject;
         Parameters: JsonArray;
     begin
         if Step."Step Kind" <> Step."Step Kind"::Message then
             exit;
-        if not TryGetContract(Step."Message Type", Effect, Parameters) then
+        if not TryGetContract(Step."Message Type", Effect, Envelope, Parameters) then
             exit;
         CheckIrreversible(Step, GetEffectName(Effect), TemplateJson, Findings);
-        CheckRequestKeys(Step, GetEffectName(Effect), Parameters, TemplateJson, Findings);
+        CheckRequestKeys(Step, GetEffectName(Effect), Parameters, Envelope, TemplateJson, Findings);
     end;
 
     local procedure CheckIrreversible(Step: Record "Playbook Step ori"; EffectName: Text; TemplateJson: JsonObject; var Findings: JsonArray)
@@ -279,10 +281,11 @@ codeunit 10035618 "Playbook Verify Template ori"
         Required := RequiredField.Value();
     end;
 
-    local procedure CheckRequestKeys(Step: Record "Playbook Step ori"; EffectName: Text; Parameters: JsonArray; TemplateJson: JsonObject; var Findings: JsonArray)
+    local procedure CheckRequestKeys(Step: Record "Playbook Step ori"; EffectName: Text; Parameters: JsonArray; Envelope: JsonObject; TemplateJson: JsonObject; var Findings: JsonArray)
     var
         Verify: Codeunit "Playbook Verify ori";
         Declared: List of [Text];
+        EnvelopeKeys: List of [Text];
         DeclaredText: Text;
         ParameterToken: JsonToken;
         NameToken: JsonToken;
@@ -305,11 +308,31 @@ codeunit 10035618 "Playbook Verify Template ori"
                 DeclaredText += ', ';
             DeclaredText += DeclaredName;
         end;
+        GetEnvelopeKeys(Envelope, EnvelopeKeys);
         foreach RequestKey in TemplateJson.Keys() do
-            if not Declared.Contains(RequestKey.ToLower()) and (RequestKey.ToLower() <> 'expectedcount') then
+            if not Declared.Contains(RequestKey.ToLower()) and not EnvelopeKeys.Contains(RequestKey.ToLower()) then
                 Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownRequestKey',
                     StrSubstNo(UnknownKeyMsg, Step."Step No.", Verify.GetTypeName(Step."Message Type"), RequestKey),
                     StrSubstNo(UnknownKeyNextStepTxt, RequestKey, DeclaredText), Step.Disabled);
+    end;
+
+    /// <summary>
+    /// The keys a request may carry beside its data parameters: expectedCount, the envelope keys subject and strict, and
+    /// every option the envelope chapter describes as an object. The chapter's scalar facts (dataRequired, version,
+    /// contentType) describe the type, not a request key, and are not accepted.
+    /// </summary>
+    local procedure GetEnvelopeKeys(Envelope: JsonObject; var EnvelopeKeys: List of [Text])
+    var
+        EnvelopeKey: Text;
+        OptionToken: JsonToken;
+    begin
+        EnvelopeKeys.Add('expectedcount');
+        EnvelopeKeys.Add('subject');
+        EnvelopeKeys.Add('strict');
+        foreach EnvelopeKey in Envelope.Keys() do
+            if Envelope.Get(EnvelopeKey, OptionToken) then
+                if OptionToken.IsObject() and not EnvelopeKeys.Contains(EnvelopeKey.ToLower()) then
+                    EnvelopeKeys.Add(EnvelopeKey.ToLower());
     end;
 
     local procedure GetEffectName(Effect: JsonObject): Text
@@ -324,13 +347,15 @@ codeunit 10035618 "Playbook Verify Template ori"
     end;
 
     [TryFunction]
-    local procedure TryGetContract(MessageType: Enum "Message Type ori"; var Effect: JsonObject; var Parameters: JsonArray)
+    local procedure TryGetContract(MessageType: Enum "Message Type ori"; var Effect: JsonObject; var Envelope: JsonObject; var Parameters: JsonArray)
     var
         Contract: Interface "Msg Contract ori";
     begin
         Contract := MessageType;
         if not Contract.GetEffect(Effect) then
             Clear(Effect);
+        if not Contract.GetEnvelope(Envelope) then
+            Clear(Envelope);
         if not Contract.GetParameters(Parameters) then
             Clear(Parameters);
     end;

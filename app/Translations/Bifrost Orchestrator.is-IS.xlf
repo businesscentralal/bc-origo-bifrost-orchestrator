@@ -2445,11 +2445,29 @@
           <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Keðja %1 fannst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType PlaybookNotFoundErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3386553435 - NamedType 35624052" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 failed: %2</source>
+          <target>Skref %1 mistókst: %2</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = the error text of that step, is-IS=Skref %1 mistókst: %2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType RunFailedAtStepErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3386553435 - NamedType 1442449695" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 failed.</source>
+          <target>Skref %1 mistókst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Skref %1 mistókst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType RunFailedAtStepNoReasonErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 2419334471" size-unit="char" translate="yes" xml:space="preserve">
           <source>Skipped: start conditions not met.</source>
           <target>Sleppt: upphafsskilyrði ekki uppfyllt.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sleppt: upphafsskilyrði ekki uppfyllt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType SkippedByStartCondTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3386553435 - NamedType 710147015" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Skipped: prior step failed for this item.</source>
+          <target>Sleppt: fyrra skref mistókst fyrir þennan hlut.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sleppt: fyrra skref mistókst fyrir þennan hlut.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Runner ori - NamedType SkippedPriorFailedTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 2315590968" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 not found in playbook %2.</source>

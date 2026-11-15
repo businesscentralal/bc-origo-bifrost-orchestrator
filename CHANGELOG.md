@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased] — 28.0.4.0
 
+### Fixed — #187
+- #187 AC01 / codeunit 10035618 `Playbook Verify Template ori`: `UnknownRequestKey` no longer warns on the envelope keys. A template key is accepted when it is a data parameter, `expectedCount`, `subject`, `strict` or any other option the type's envelope chapter (`GetEnvelope`) describes. The `UnknownRequestKey` row in `Help ori` (10035576) says so.
+- #187 AC02 / codeunits 10035547 `Playbook Runner ori`, 10035549 `Playbook Log Mgt ori` and 10035583 `Playbook Workspace ori`: a Failed `Playbook Instance ori` has an `Error Text`: "Step N failed: <that step's Error Text>" for the first step that failed the run (for a forEach step, its first failed iteration), in the run's language (en-US and is-IS labels). A run failed by an Error condition names the step on its own. New internal procedures `GetStepErrorText`, `GetFirstFailedStepNo` and `FirstFailedStepNo`.
+- #187 AC03 / codeunit 10035547: the forEach skip text "Skipped: prior step failed for this item." is a translatable label with an is-IS translation (XLF regenerated).
+- Tests: new test codeunit 96487 `Playbook Release Items Tests` (Verify with `subject` + an unknown data key, `subject` + `strict` in 1033 and 1039, instance Error Text in 1033 and 1039, forEach first failed iteration, Completed instance without text, skip text in 1033 and 1039). No new product objects.
 ### Fixed — #183
 - #183 AC01 / codeunit 10035546 `Playbook JSON Helper ori`: the `Exists` condition operator is false for a missing path, `null`, an empty string, an empty array and an empty object, so `_who.telegramChatId Exists` no longer passes for a user without a chat id. Numbers and booleans (also `0` and `false`) exist. The Operator tooltip on page 10035602 `Playbook Cond. Subpage ori` and the playbook condition help in `Help ori` (10035576) say so in en-US and is-IS.
 - #183 AC02 / codeunit 10035546: a whole-value `@reference` keeps the JSON type of its source. A string, including a digit-only Code such as `No_` = `1001`, stays a string; numbers (`EntryNo_`) and booleans keep their type. Previously digit-only strings were sent as numbers and `Purchase.Document.PreviewPost` refused them.

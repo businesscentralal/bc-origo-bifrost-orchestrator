@@ -475,6 +475,19 @@ codeunit 10035583 "Playbook Workspace ori"
         SetTokenAtPath('_run', RunObj.AsToken());
     end;
 
+    /// <summary>The number of the first step that failed the run, or 0 when no step has.</summary>
+    /// <returns>_run.firstFailedStepNo.</returns>
+    procedure FirstFailedStepNo(): Integer
+    var
+        Token: JsonToken;
+    begin
+        if not GetTokenAtPath('_run', Token) then
+            exit(0);
+        if not Token.IsObject() then
+            exit(0);
+        exit(GetJsonInt(Token.AsObject(), 'firstFailedStepNo'));
+    end;
+
     /// <summary>True when any step has failed or an Error condition has escalated.</summary>
     procedure RunFailed(): Boolean
     var

@@ -54,6 +54,43 @@ codeunit 10035549 "Playbook Log Mgt ori"
     end;
 
     /// <summary>
+    /// The Error Text of a failed step: the first of its Failed log rows (the lowest iteration) that has one.
+    /// </summary>
+    /// <param name="InstanceId">The playbook instance.</param>
+    /// <param name="StepNo">The step.</param>
+    /// <returns>The step's error text, or empty when the step logged none.</returns>
+    procedure GetStepErrorText(InstanceId: Guid; StepNo: Integer): Text
+    var
+        StepLog: Record "Playbook Step Log ori";
+    begin
+        StepLog.SetLoadFields("Error Text");
+        StepLog.SetRange("Instance ID", InstanceId);
+        StepLog.SetRange("Step No.", StepNo);
+        StepLog.SetRange(Status, StepLog.Status::Failed);
+        StepLog.SetFilter("Error Text", '<>%1', '');
+        if StepLog.FindFirst() then
+            exit(StepLog."Error Text");
+        exit('');
+    end;
+
+    /// <summary>
+    /// The number of the first step of an instance that logged a Failed row, or 0.
+    /// </summary>
+    /// <param name="InstanceId">The playbook instance.</param>
+    /// <returns>The lowest failed step number, or 0.</returns>
+    procedure GetFirstFailedStepNo(InstanceId: Guid): Integer
+    var
+        StepLog: Record "Playbook Step Log ori";
+    begin
+        StepLog.SetLoadFields("Step No.");
+        StepLog.SetRange("Instance ID", InstanceId);
+        StepLog.SetRange(Status, StepLog.Status::Failed);
+        if StepLog.FindFirst() then
+            exit(StepLog."Step No.");
+        exit(0);
+    end;
+
+    /// <summary>
     /// Logs a single step execution (one Dispatcher call).
     /// </summary>
     procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text)
