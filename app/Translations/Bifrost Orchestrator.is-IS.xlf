@@ -2793,6 +2793,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu includeTrace úr Ask-beiðninni. Notaðu answer, data og talningarnar í keðjunni í staðinn.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskTraceDiscardedNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 587238951" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 calls %2, which is irreversible, without expectedCount in its request, and Bifrost Setup requires confirmation for irreversible messages. Every run answers ConfirmationRequired and the step fails.</source>
+          <target>Skref %1 kallar á %2, sem er óafturkræft, án expectedCount í beiðninni, og Bifröst-uppsetning krefst staðfestingar fyrir óafturkræf skilaboð. Hver keyrsla svarar ConfirmationRequired og skrefið mistekst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, is-IS=Skref %1 kallar á %2, sem er óafturkræft, án expectedCount í beiðninni, og Bifröst-uppsetning krefst staðfestingar fyrir óafturkræf skilaboð. Hver keyrsla svarar ConfirmationRequired og skrefið mistekst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IrreversibleMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2751708411" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add expectedCount with the number of messages the step sends (for example 1) to the request template, or turn off Require Confirmation for Irreversible Messages in Bifrost Setup if that is the policy of this company.</source>
+          <target>Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða slökktu á Krefjast staðfestingar fyrir óafturkræf skilaboð í Bifröst-uppsetningu ef það er stefna fyrirtækisins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða slökktu á Krefjast staðfestingar fyrir óafturkræf skilaboð í Bifröst-uppsetningu ef það er stefna fyrirtækisins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IrreversibleNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1991160535" size-unit="char" translate="yes" xml:space="preserve">
           <source>nothing</source>
           <target>ekkert</target>
@@ -2871,6 +2883,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = table name, is-IS=Reitaheiti í svari hefur engin bil og engin greinarmerki nema _ (til dæmis No_ fyrir No.). Kallaðu á Help.Fields.Get á töfluna %1 til að sjá reitina.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownCurrentFieldNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1380240250" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.</source>
+          <target>Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 4255824126" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove %1 or rename it to a declared parameter. The type declares: %2.</source>
+          <target>Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1834680235" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 reads @%2.%3, but step %2 stores no field %3 in the workspace (its Result Log Paths store: %4). The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
           <target>Skref %1 les @%2.%3, en skref %2 geymir ekkert %3 í vinnusvæðinu (Niðurstöðuskráningarslóðir þess geyma: %4). Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
@@ -2882,6 +2906,18 @@
           <target>Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result&gt;%2), eða leiðréttu heitið í tilvísuninni.</target>
           <note from="Developer" annotates="general" priority="2">%1 = storing step no, %2 = field name, is-IS=Bættu reitnum við Niðurstöðuskráningarslóðir í skrefi %1 (til dæmis result&gt;%2), eða leiðréttu heitið í tilvísuninni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownStepFieldNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 725261787" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.</source>
+          <target>Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnresolvableMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 888877383" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Write the position in brackets on the field, for example @20.result[0].id instead of @20.result.0.id.</source>
+          <target>Skrifaðu stöðuna í hornklofum á reitnum, til dæmis @20.result[0].id í stað @20.result.0.id.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrifaðu stöðuna í hornklofum á reitnum, til dæmis @20.result[0].id í stað @20.result.0.id.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnresolvableNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1 %2 and %3 %4 name different purchase orders.</source>

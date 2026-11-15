@@ -89,7 +89,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure CreditNoticeTemplate(): Text
     begin
-        exit('{"message":"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked."}');
+        exit('{"expectedCount":1,"message":"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked."}');
     end;
 
     /// <summary>The request template of step 10 of example 2.</summary>
@@ -103,7 +103,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure ReportNoticeTemplate(): Text
     begin
-        exit('{"message":"Customers with an overdue balance: @10.overdueCount"}');
+        exit('{"expectedCount":1,"message":"Customers with an overdue balance: @10.overdueCount"}');
     end;
 
     /// <summary>
@@ -168,7 +168,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure PostingAuditNoticeTemplate(): Text
     begin
-        exit('{"message":"Posting audit finished: @_steps.30.items"}');
+        exit('{"expectedCount":1,"message":"Posting audit finished: @_steps.30.items"}');
     end;
 
     /// <summary>

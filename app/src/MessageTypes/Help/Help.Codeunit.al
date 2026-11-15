@@ -146,7 +146,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('          LLM.Prompt.Complete  prompt "@_run,_steps"');
         O.AppendLine('          Result Log Paths: text>noticeText       → next 910 on BOTH edges');
         O.AppendLine('Step 910  Start: 900.noticeText Exists           [Exclude From Run Status]');
-        O.AppendLine('          Orchestrator.Telegram.Message  {"message":"@900.noticeText"}');
+        O.AppendLine('          Orchestrator.Telegram.Message  {"expectedCount":1,"message":"@900.noticeText"}');
         O.AppendLine('                                                  → next 920 on BOTH edges');
         O.AppendLine('Step 920  Start: _run.failed Equals true         [Exclude From Run Status]');
         O.AppendLine('          ... same shape, → 930');
@@ -313,6 +313,9 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `AskTraceDiscarded` | warning | Ask requests `includeTrace: true`, but Orchestrator discards the trace before using or storing the response |');
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
         O.AppendLine('| `UnknownFieldReference` | error for stored fields; warning for `@_current.fields` | `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths: this is an Error and blocks Run/Schedule even with `ignoreWarnings=true`. Stored names retain their original casing; matching stays case-insensitive. `@_current.fields.X` findings remain warnings when the source table does not have the field or returns it under `primaryKey`. |');
+        O.AppendLine('| `IrreversibleWithoutConfirmation` | warning | The step sends an irreversible message type without `expectedCount` while Bifrost Setup requires confirmation for irreversible messages: the type answers `ConfirmationRequired` and the step fails. Add `"expectedCount"` to the request |');
+        O.AppendLine('| `UnknownRequestKey` | warning | The request template has a key the message type does not declare in its request chapter (`expectedCount` is always accepted): the type refuses the request. Remove or rename the key |');
+        O.AppendLine('| `UnresolvableReference` | warning | An `@N.path` reference writes a list position as a segment (`@20.result.0.id`). References use `[0]` (`@20.result[0].id`), so the segment never matches and the runner fails the step with an unresolved reference. The iteration number of a forEach step (`@N.<index>.field`) is allowed |');
         O.AppendLine('');
         O.AppendLine('When `Orchestrator.Playbook.Run` or `Orchestrator.Playbook.Schedule` refuses, the answer is `PreconditionFailed` on `playbookCode`, the text lists the blocking findings, and `findings` holds them:');
         O.AppendLine('');
@@ -367,7 +370,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('    { "primaryKey": { "PlaybookCode": "CREDIT-CTRL", "StepNo_": 90 },');
         O.AppendLine('      "fields": { "Description": "Tell the credit controller", "StepType": "Action", "MessageType": "Orchestrator.Telegram.Message",');
         O.AppendLine('        "ExcludeFromRunStatus": true,');
-        O.AppendLine('        "RequestTemplate": "eyJtZXNzYWdlIjoiQ3JlZGl0IGNvbnRyb2w6IEAxMC5jdXN0b21lckNvdW50IGN1c3RvbWVycyBjaGVja2VkLCBAX3N0ZXBzLjQwLml0ZW1zLnN1Y2NlZWRlZCBibG9ja2VkLiJ9" } }');
+        O.AppendLine('        "RequestTemplate": "eyJleHBlY3RlZENvdW50IjoxLCJtZXNzYWdlIjoiQ3JlZGl0IGNvbnRyb2w6IEAxMC5jdXN0b21lckNvdW50IGN1c3RvbWVycyBjaGVja2VkLCBAX3N0ZXBzLjQwLml0ZW1zLnN1Y2NlZWRlZCBibG9ja2VkLiJ9" } }');
         O.AppendLine('  ] } }');
         O.AppendLine('```');
         O.AppendLine('');
@@ -378,7 +381,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| 10 | `{"tableName":"Customer","fieldNumbers":[1,2],"tableView":"WHERE(Blocked=CONST( ))"}` |');
         O.AppendLine('| 30 | `{"tableName":"Customer","fieldNumbers":[1],"tableView":"WHERE(No.=CONST(@_current.primaryKey.No_),Balance Due (LCY)=FILTER(>0))"}` |');
         O.AppendLine('| 40 | `{"tableName":"Customer","data":[{"id":"@_current.id","fields":{"Blocked":"Invoice"}}]}` |');
-        O.AppendLine('| 90 | `{"message":"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked."}` |');
+        O.AppendLine('| 90 | `{"expectedCount":1,"message":"Credit control: @10.customerCount customers checked, @_steps.40.items.succeeded blocked."}` |');
         O.AppendLine('');
         O.AppendLine('**Conditions** (one call, all five rows)');
         O.AppendLine('```json');
@@ -434,11 +437,11 @@ codeunit 10035576 "Help ori"
         O.AppendLine('        "ResultLogPaths": "noOfRecords>overdueCount", "NextStepNo_Success": 20, "NextStepNo_Failure": 20 } },');
         O.AppendLine('    { "primaryKey": { "PlaybookCode": "OVERDUE-REPORT", "StepNo_": 20 },');
         O.AppendLine('      "fields": { "Description": "Send the number", "StepType": "Action", "MessageType": "Orchestrator.Telegram.Message",');
-        O.AppendLine('        "RequestTemplate": "eyJtZXNzYWdlIjoiQ3VzdG9tZXJzIHdpdGggYW4gb3ZlcmR1ZSBiYWxhbmNlOiBAMTAub3ZlcmR1ZUNvdW50In0=" } }');
+        O.AppendLine('        "RequestTemplate": "eyJleHBlY3RlZENvdW50IjoxLCJtZXNzYWdlIjoiQ3VzdG9tZXJzIHdpdGggYW4gb3ZlcmR1ZSBiYWxhbmNlOiBAMTAub3ZlcmR1ZUNvdW50In0=" } }');
         O.AppendLine('  ] } }');
         O.AppendLine('```');
         O.AppendLine('');
-        O.AppendLine('Templates: step 10 `{"tableName":"Customer","fieldNumbers":[1,2],"tableView":"WHERE(Balance Due (LCY)=FILTER(>0))"}`; step 20 `{"message":"Customers with an overdue balance: @10.overdueCount"}`.');
+        O.AppendLine('Templates: step 10 `{"tableName":"Customer","fieldNumbers":[1,2],"tableView":"WHERE(Balance Due (LCY)=FILTER(>0))"}`; step 20 `{"expectedCount":1,"message":"Customers with an overdue balance: @10.overdueCount"}`.');
         O.AppendLine('');
         O.AppendLine('**Conditions**: step 10 `Success` `status Equals Success`; step 20 `Start` `_who.telegramChatId Exists` and `Success` `status Equals Success`, written as the rows in example 1 (`LineNo_` 10000, `GroupNo_` 1).');
         O.AppendLine('');
@@ -489,7 +492,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('    { "primaryKey": { "PlaybookCode": "POSTING-AUDIT", "StepNo_": 90 },');
         O.AppendLine('      "fields": { "Description": "Send the audit counts", "StepType": "Action", "MessageType": "Orchestrator.Telegram.Message",');
         O.AppendLine('        "ExcludeFromRunStatus": true,');
-        O.AppendLine('        "RequestTemplate": "eyJtZXNzYWdlIjoiUG9zdGluZyBhdWRpdCBmaW5pc2hlZDogQF9zdGVwcy4zMC5pdGVtcyJ9" } }');
+        O.AppendLine('        "RequestTemplate": "eyJleHBlY3RlZENvdW50IjoxLCJtZXNzYWdlIjoiUG9zdGluZyBhdWRpdCBmaW5pc2hlZDogQF9zdGVwcy4zMC5pdGVtcyJ9" } }');
         O.AppendLine('  ] } }');
         O.AppendLine('```');
         O.AppendLine('');
@@ -499,7 +502,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('|---|---|');
         O.AppendLine('| 10 | `{"tableName":"Customer","fieldNumbers":[1,2],"tableView":"WHERE(Blocked=CONST( ))","take":25}` |');
         O.AppendLine('| 30 | `{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","record":{"tableName":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}` |');
-        O.AppendLine('| 90 | `{"message":"Posting audit finished: @_steps.30.items"}` |');
+        O.AppendLine('| 90 | `{"expectedCount":1,"message":"Posting audit finished: @_steps.30.items"}` |');
         O.AppendLine('');
         O.AppendLine('**Conditions** (one call)');
         O.AppendLine('```json');
@@ -943,7 +946,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('```');
         O.AppendLine('');
         O.AppendLine('Then `Result Log Paths: text>noticeText`, and send it from the next step with');
-        O.AppendLine('`{"message":"@900.noticeText"}`. Failure notices are the same with `_run.failed`');
+        O.AppendLine('`{"expectedCount":1,"message":"@900.noticeText"}`. Failure notices are the same with `_run.failed`');
         O.AppendLine('inverted and `_run.firstFailedStepNo` named in the prompt.');
         O.AppendLine('');
         O.AppendLine('Four things the model gets wrong unless told:');

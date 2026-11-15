@@ -6,10 +6,13 @@
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
+using Origo.Bifrost;
+
 codeunit 10035618 "Playbook Verify Template ori"
 {
     Access = Internal;
-    Permissions = tabledata "Playbook Step ori" = R,
+    Permissions = tabledata "Setup ori" = R,
+                  tabledata "Playbook Step ori" = R,
                   tabledata "Playbook Condition ori" = R;
 
     /// <summary>
@@ -27,6 +30,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         TemplateText := Step.GetRequestTemplate();
         if TemplateText.Trim() = '' then begin
             CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
+            CheckRuntimeRefusals(Step, TemplateJson, Findings);
             exit;
         end;
 
@@ -40,6 +44,7 @@ codeunit 10035618 "Playbook Verify Template ori"
 
         CheckRoleCode(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
         CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
+        CheckRuntimeRefusals(Step, TemplateJson, Findings);
         ScanToken(Step, TemplateJson.AsToken(), Seen, Findings);
     end;
 
@@ -199,6 +204,7 @@ codeunit 10035618 "Playbook Verify Template ori"
 
         if TryGetStepNo(FirstSegment, StepNo) then begin
             CheckStepReference(Step, StepNo, Seen, Findings);
+            CheckReferenceSyntax(Step, StepNo, Segments, Seen, Findings);
             CheckStepField(Step, StepNo, Segments, Seen, Findings);
             exit;
         end;
@@ -209,6 +215,168 @@ codeunit 10035618 "Playbook Verify Template ori"
         end;
         if FirstSegment = '_current' then
             CheckCurrentField(Step, Segments, Seen, Findings);
+    end;
+
+    /// <summary>
+    /// Run-time refusals a first run would hit: an irreversible type without expectedCount while Bifrost Setup requires
+    /// confirmation (IrreversibleWithoutConfirmation), and request keys the type does not declare (UnknownRequestKey).
+    /// Both read the contract of the message type; a type without a readable contract is not judged.
+    /// </summary>
+    /// <param name="Step">The step.</param>
+    /// <param name="TemplateJson">The parsed request template; empty when no template is set.</param>
+    /// <param name="Findings">Receives the warnings.</param>
+    internal procedure CheckRuntimeRefusals(Step: Record "Playbook Step ori"; TemplateJson: JsonObject; var Findings: JsonArray)
+    var
+        Effect: JsonObject;
+        Parameters: JsonArray;
+    begin
+        if Step."Step Kind" <> Step."Step Kind"::Message then
+            exit;
+        if not TryGetContract(Step."Message Type", Effect, Parameters) then
+            exit;
+        CheckIrreversible(Step, GetEffectName(Effect), TemplateJson, Findings);
+        CheckRequestKeys(Step, GetEffectName(Effect), Parameters, TemplateJson, Findings);
+    end;
+
+    local procedure CheckIrreversible(Step: Record "Playbook Step ori"; EffectName: Text; TemplateJson: JsonObject; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
+    begin
+        if EffectName <> 'irreversible' then
+            exit;
+        if TemplateJson.Contains('expectedCount') then
+            exit;
+        if not IsConfirmationRequired() then
+            exit;
+        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'IrreversibleWithoutConfirmation',
+            StrSubstNo(IrreversibleMsg, Step."Step No.", Verify.GetTypeName(Step."Message Type")),
+            IrreversibleNextStepTxt, Step.Disabled);
+    end;
+
+    /// <summary>
+    /// The Require Confirmation for Irreversible Messages setting of Bifrost Setup (field 36, on by default). Foundation
+    /// keeps the accessor internal, so the field is read by number; a setup that cannot be read counts as on.
+    /// </summary>
+    local procedure IsConfirmationRequired(): Boolean
+    var
+        Required: Boolean;
+    begin
+        Required := true;
+        TryReadConfirmationSetting(Required);
+        exit(Required);
+    end;
+
+    [TryFunction]
+    local procedure TryReadConfirmationSetting(var Required: Boolean)
+    var
+        SetupRef: RecordRef;
+        RequiredField: FieldRef;
+    begin
+        SetupRef.Open(Database::"Setup ori");
+        if not SetupRef.FindFirst() then
+            exit;
+        RequiredField := SetupRef.Field(36);
+        Required := RequiredField.Value();
+    end;
+
+    local procedure CheckRequestKeys(Step: Record "Playbook Step ori"; EffectName: Text; Parameters: JsonArray; TemplateJson: JsonObject; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
+        Declared: List of [Text];
+        DeclaredText: Text;
+        ParameterToken: JsonToken;
+        NameToken: JsonToken;
+        RequestKey: Text;
+        DeclaredName: Text;
+    begin
+        // A read type ignores keys it does not know; every other type refuses them at run time.
+        if (EffectName = '') or (EffectName = 'read') then
+            exit;
+        foreach ParameterToken in Parameters do
+            if ParameterToken.IsObject() then
+                if ParameterToken.AsObject().Get('name', NameToken) then
+                    if NameToken.IsValue() then
+                        Declared.Add(NameToken.AsValue().AsText().ToLower());
+        // A type that declares no parameters cannot be judged.
+        if Declared.Count() = 0 then
+            exit;
+        foreach DeclaredName in Declared do begin
+            if DeclaredText <> '' then
+                DeclaredText += ', ';
+            DeclaredText += DeclaredName;
+        end;
+        foreach RequestKey in TemplateJson.Keys() do
+            if not Declared.Contains(RequestKey.ToLower()) and (RequestKey.ToLower() <> 'expectedcount') then
+                Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownRequestKey',
+                    StrSubstNo(UnknownKeyMsg, Step."Step No.", Verify.GetTypeName(Step."Message Type"), RequestKey),
+                    StrSubstNo(UnknownKeyNextStepTxt, RequestKey, DeclaredText), Step.Disabled);
+    end;
+
+    local procedure GetEffectName(Effect: JsonObject): Text
+    var
+        Token: JsonToken;
+    begin
+        if not Effect.Get('effect', Token) then
+            exit('');
+        if not Token.IsValue() or Token.AsValue().IsNull() then
+            exit('');
+        exit(Token.AsValue().AsText());
+    end;
+
+    [TryFunction]
+    local procedure TryGetContract(MessageType: Enum "Message Type ori"; var Effect: JsonObject; var Parameters: JsonArray)
+    var
+        Contract: Interface "Msg Contract ori";
+    begin
+        Contract := MessageType;
+        if not Contract.GetEffect(Effect) then
+            Clear(Effect);
+        if not Contract.GetParameters(Parameters) then
+            Clear(Parameters);
+    end;
+
+    /// <summary>
+    /// @N.path where a list position is written as a segment (result.0.id). The workspace and the answers use
+    /// result[0].id, so the segment never matches and the runner fails the step with "unresolved reference". The first
+    /// segment after the step number of a forEach step is the iteration number and is allowed.
+    /// Reports UnresolvableReference once per reference.
+    /// </summary>
+    local procedure CheckReferenceSyntax(Step: Record "Playbook Step ori"; ReferencedStepNo: Integer; Segments: List of [Text]; var Seen: List of [Text]; var Findings: JsonArray)
+    var
+        ReferencedStep: Record "Playbook Step ori";
+        Verify: Codeunit "Playbook Verify ori";
+        Position: Integer;
+        FirstChecked: Integer;
+        Number: Integer;
+        Original: Text;
+        Segment: Text;
+        SeenKey: Text;
+        Found: Boolean;
+    begin
+        if Segments.Count() < 3 then
+            exit;
+        ReferencedStep.SetLoadFields("Step No.", "Iterate Array Path");
+        if not ReferencedStep.Get(Step."Playbook Code", ReferencedStepNo) then
+            exit;
+        FirstChecked := 2;
+        if ReferencedStep.IsForEach() then
+            FirstChecked := 3;
+        for Position := 1 to Segments.Count() do begin
+            Segment := Segments.Get(Position);
+            if Original <> '' then
+                Original += '.';
+            Original += Segment;
+            if (Position >= FirstChecked) and TryGetStepNo(Segment, Number) then
+                Found := true;
+        end;
+        if not Found then
+            exit;
+        SeenKey := StrSubstNo(SeenSyntaxTok, Original);
+        if Seen.Contains(SeenKey) then
+            exit;
+        Seen.Add(SeenKey);
+        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnresolvableReference',
+            StrSubstNo(UnresolvableMsg, Step."Step No.", Original), UnresolvableNextStepTxt, Step.Disabled);
     end;
 
     local procedure CheckStepReference(Step: Record "Playbook Step ori"; ReferencedStepNo: Integer; var Seen: List of [Text]; var Findings: JsonArray)
@@ -493,6 +661,13 @@ codeunit 10035618 "Playbook Verify Template ori"
         SeenStepTok: Label 'step|%1', Locked = true;
         SeenFieldTok: Label 'field|%1|%2', Locked = true;
         SeenCurrentTok: Label 'current|%1', Locked = true;
+        SeenSyntaxTok: Label 'syntax|%1', Locked = true;
+        IrreversibleMsg: Label 'Step %1 calls %2, which is irreversible, without expectedCount in its request, and Bifrost Setup requires confirmation for irreversible messages. Every run answers ConfirmationRequired and the step fails.', Comment = '%1 = step no, %2 = message type, is-IS=Skref %1 kallar á %2, sem er óafturkræft, án expectedCount í beiðninni, og Bifröst-uppsetning krefst staðfestingar fyrir óafturkræf skilaboð. Hver keyrsla svarar ConfirmationRequired og skrefið mistekst.';
+        IrreversibleNextStepTxt: Label 'Add expectedCount with the number of messages the step sends (for example 1) to the request template, or turn off Require Confirmation for Irreversible Messages in Bifrost Setup if that is the policy of this company.', Comment = 'is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða slökktu á Krefjast staðfestingar fyrir óafturkræf skilaboð í Bifröst-uppsetningu ef það er stefna fyrirtækisins.';
+        UnknownKeyMsg: Label 'Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.', Comment = '%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.';
+        UnknownKeyNextStepTxt: Label 'Remove %1 or rename it to a declared parameter. The type declares: %2.', Comment = '%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.';
+        UnresolvableMsg: Label 'Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.', Comment = '%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.';
+        UnresolvableNextStepTxt: Label 'Write the position in brackets on the field, for example @20.result[0].id instead of @20.result.0.id.', Comment = 'is-IS=Skrifaðu stöðuna í hornklofum á reitnum, til dæmis @20.result[0].id í stað @20.result.0.id.';
         TemplateNotJsonMsg: Label 'The request template of step %1 is not a valid JSON object. The engine does not fail on it: it sends an empty request {} to the message type.', Comment = '%1 = step no, is-IS=Beiðnisniðmát skrefs %1 er ekki gildur JSON-hlutur. Vélin stoppar ekki á því: hún sendir tóma beiðni {} til skilaboðategundarinnar.';
         TemplateNotJsonNextStepTxt: Label 'Fix the template: it must be one JSON object, with every string in double quotes and no comma after the last item. Set it again as base64 of the corrected JSON.', Comment = 'is-IS=Lagaðu sniðmátið: það verður að vera einn JSON-hlutur, með alla strengi innan tvöfaldra gæsalappa og án kommu á eftir síðasta atriði. Settu það aftur sem base64 af leiðrétta JSON-textanum.';
         StepNotFoundMsg: Label 'Step %1 refers to step %2 (@%2...), which does not exist in this playbook. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.', Comment = '%1 = step no, %2 = referenced step no, is-IS=Skref %1 vísar í skref %2 (@%2...), sem er ekki til í þessari keðju. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.';

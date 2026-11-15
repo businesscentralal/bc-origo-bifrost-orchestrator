@@ -267,6 +267,8 @@ codeunit 10035547 "Playbook Runner ori"
                 if ResponseJson.ReadFrom(PageResponseText) then
                     PageSuccess := JsonHelper.EvaluateConditionSet(ResponseJson, PagedStep."Playbook Code",
                         PagedStep."Step No.", "Playbook Cond. Type ori"::Success);
+            if (PageErrorText = '') and not PageSuccess then
+                JsonHelper.IsErrorResponse(PageResponseText, PageErrorText);
             LastResponseText := PageResponseText;
             StepsExecuted += 1;
             if not PageSuccess then begin
@@ -392,6 +394,9 @@ codeunit 10035547 "Playbook Runner ori"
         if StepSuccess and PlaybookStep.IsCheck() then
             if JsonHelper.IsErrorResponse(ResponseText, ErrorText) then
                 StepSuccess := false;
+        // A refusal (ConfirmationRequired, UnknownParameter...) is named in Error Text whatever the step kind.
+        if ErrorText = '' then
+            JsonHelper.IsErrorResponse(ResponseText, ErrorText);
 
         // Store response for downstream bindings
         if (ResponseText <> '') and ResponseJson.ReadFrom(ResponseText) then begin
@@ -535,6 +540,8 @@ codeunit 10035547 "Playbook Runner ori"
                 if ItemSuccess and PlaybookStep.IsCheck() then
                     if JsonHelper.IsErrorResponse(ResponseText, ErrorText) then
                         ItemSuccess := false;
+                if ErrorText = '' then
+                    JsonHelper.IsErrorResponse(ResponseText, ErrorText);
 
                 StepsExecuted += 1;
                 ItemsProcessed += 1;
