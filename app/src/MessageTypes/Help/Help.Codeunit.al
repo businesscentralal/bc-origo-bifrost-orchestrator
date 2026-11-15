@@ -314,6 +314,8 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
         O.AppendLine('| `UnknownFieldReference` | error for stored fields; warning for `@_current.fields` | `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths: this is an Error and blocks Run/Schedule even with `ignoreWarnings=true`. Stored names retain their original casing; matching stays case-insensitive. `@_current.fields.X` findings remain warnings when the source table does not have the field or returns it under `primaryKey`. |');
         O.AppendLine('| `IrreversibleWithoutConfirmation` | warning | The step sends an irreversible message type without `expectedCount` while Bifrost Setup requires confirmation for irreversible messages: the type answers `ConfirmationRequired` and the step fails. Add `"expectedCount"` to the request |');
+        O.AppendLine('| `PreviewWithoutMaxCount` | error | The request sends `"expectedCount": "@preview"` but the step has no Max Count: every run refuses the step with `ConfirmationRequired` and nothing is executed. Set Max Count |');
+        O.AppendLine('| `MaxCountWithoutPreview` | error | The step has a Max Count but the request does not send `"expectedCount": "@preview"`, so the cap is never applied. Send `@preview` or clear Max Count |');
         O.AppendLine('| `UnknownRequestKey` | warning | The request template has a key the message type does not declare in its request chapter (`expectedCount` and the envelope keys the type declares, such as `subject` and `strict`, are always accepted): the type refuses the request. Remove or rename the key |');
         O.AppendLine('| `UnresolvableReference` | warning | An `@N.path` reference writes a list position as a segment (`@20.result.0.id`). References use `[0]` (`@20.result[0].id`), so the segment never matches and the runner fails the step with an unresolved reference. The iteration number of a forEach step (`@N.<index>.field`) is allowed |');
         O.AppendLine('');
@@ -618,6 +620,21 @@ codeunit 10035576 "Help ori"
         O.AppendLine('- Each iteration writes to workspace at `<StepNo>.<IterationNo>.<field>`');
         O.AppendLine('- The iterator element is also stored at `<StepNo>.<IterationNo>._item`');
         O.AppendLine('- Use `@collect:N` to gather all iterations into an array');
+        O.AppendLine('');
+        O.AppendLine('### Confirm from the preview (unattended irreversible steps)');
+        O.AppendLine('');
+        O.AppendLine('An irreversible message type needs `expectedCount` while Require Confirmation for Irreversible Messages is on, and an unattended');
+        O.AppendLine('playbook cannot read the preview. A step may send `"expectedCount": "@preview"` and carry a **Max Count** (field `MaxCount`, set by the');
+        O.AppendLine('playbook author). The runner calls the type without `expectedCount`, reads `expected` of the `ConfirmationRequired` answer, and');
+        O.AppendLine('- when `expected` is at most Max Count, repeats the call with `expectedCount` set to that count;');
+        O.AppendLine('- when `expected` is above Max Count, fails the step with `ConfirmationRequired`, names the previewed count and the cap, and executes nothing;');
+        O.AppendLine('- when the answer carries no whole count, or Max Count is missing, fails the step the same way and executes nothing;');
+        O.AppendLine('- when the type asks for no confirmation (it is not irreversible, or the setting is off), uses that single call as the run.');
+        O.AppendLine('');
+        O.AppendLine('The cap applies to every call of the step (once per forEach item, once per page). Every such call writes the preview count and the');
+        O.AppendLine('confirmed count, or the refusal, to the **Confirmation** column of the step log. The setting stays on and no playbook is pre-authorised.');
+        O.AppendLine('`Orchestrator.Playbook.Verify` rejects `@preview` without Max Count and Max Count without `@preview`. The type must define what its');
+        O.AppendLine('count counts (core#1365).');
         O.AppendLine('');
         O.AppendLine('### Per-item decisions in a forEach');
         O.AppendLine('');
@@ -1141,6 +1158,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| Summary Paths | SummaryPaths | Text[2048] | Response paths copied into the run report. Keep small |');
         O.AppendLine('| Exclude From Run Status | ExcludeFromRunStatus | Boolean | Keep this step out of _run and _steps |');
         O.AppendLine('| Stop On Item Error | StopOnItemError | Boolean | For foreach: abort on first failure |');
+        O.AppendLine('| Max Count | MaxCount | Integer | The most a step may confirm on its own when its request sends `"expectedCount": "@preview"`. Blank otherwise |');
         O.AppendLine('| Skip If Step Failed | SkipIfStepFailed | Integer | The per-item gate: skip this iteration if the named step''s same iteration did not succeed, an answer of no included. Next Step edges are per step, not per item |');
         O.AppendLine('| Paged | Paged | Boolean | Enable auto-paging (skip/take) |');
         O.AppendLine('| Page Size | PageSize | Integer | Records per page (default 500) |');

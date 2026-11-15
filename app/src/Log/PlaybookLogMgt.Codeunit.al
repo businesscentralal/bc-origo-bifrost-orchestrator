@@ -94,6 +94,15 @@ codeunit 10035549 "Playbook Log Mgt ori"
     /// Logs a single step execution (one Dispatcher call).
     /// </summary>
     procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text)
+    begin
+        LogStep(InstanceId, StepNo, IterationNo, MessageType, RequestText, ResponseText, StepDuration, StepStatus, ErrorText, ElementText, WorkspaceText, '');
+    end;
+
+    /// <summary>
+    /// Logs a single step execution with the line a step that confirms from the preview writes (issue #189).
+    /// </summary>
+    /// <param name="ConfirmationNote">The preview count and the confirmed count, or the refusal; empty for an ordinary step.</param>
+    procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text; ConfirmationNote: Text)
     var
         StepLog: Record "Playbook Step Log ori";
         Instance: Record "Playbook Instance ori";
@@ -112,6 +121,7 @@ codeunit 10035549 "Playbook Log Mgt ori"
         StepLog.Status := StepStatus;
         StepLog.Duration := StepDuration;
         StepLog."Error Text" := CopyStr(ErrorText, 1, MaxStrLen(StepLog."Error Text"));
+        StepLog."Confirmation Note" := CopyStr(ConfirmationNote, 1, MaxStrLen(StepLog."Confirmation Note"));
 
         if RequestText <> '' then
             StepLog.SetRequestSent(RequestText);

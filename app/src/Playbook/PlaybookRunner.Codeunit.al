@@ -21,6 +21,7 @@ codeunit 10035547 "Playbook Runner ori"
         JsonHelper: Codeunit "Playbook JSON Helper ori";
         LogMgt: Codeunit "Playbook Log Mgt ori";
         Workspace: Codeunit "Playbook Workspace ori";
+        PreviewCountMgt: Codeunit "Playbook Preview Count ori";
         PlaybookNotFoundErr: Label 'Playbook %1 not found.', Comment = '%1 = playbook code, is-IS=Keðja %1 fannst ekki.';
         StepNotFoundErr: Label 'Step %1 not found in playbook %2.', Comment = '%1 = step no, %2 = playbook code, is-IS=Skref %1 fannst ekki í keðju %2.';
         MaxIterationsErr: Label 'Step %1 exceeded max iterations (%2).', Comment = '%1 = step no, %2 = max, is-IS=Skref %1 fór yfir hámarksfjölda ítrana (%2).';
@@ -231,6 +232,8 @@ codeunit 10035547 "Playbook Runner ori"
         PageSuccess: Boolean;
         PageStepStatus: Enum "Playbook Inst. Status ori";
         StartTime: DateTime;
+        PreviewMode: Boolean;
+        ConfirmationNote: Text;
     begin
         PageSize := PagedStep."Page Size";
         if PageSize <= 0 then
@@ -250,6 +253,8 @@ codeunit 10035547 "Playbook Runner ori"
             if BaseRequestText <> '' then
                 PageRequestJson.ReadFrom(BaseRequestText);
             Clear(PageResponseText);
+            Clear(ConfirmationNote);
+            PreviewMode := PreviewCountMgt.TakeMarker(PageRequestJson);
             PageSuccess := JsonHelper.TryResolveWorkspaceRefs(PageRequestJson, PageErrorText);
             if PageRequestJson.Contains('skip') then PageRequestJson.Remove('skip');
             if PageRequestJson.Contains('take') then PageRequestJson.Remove('take');
@@ -260,7 +265,10 @@ codeunit 10035547 "Playbook Runner ori"
             // Execute the paged data step directly (not through ExecuteStep to control logging)
             StartTime := CurrentDateTime();
             if PageSuccess then
-                ExecuteMessageType(PagedStep."Message Type", PagedRequestText, PageResponseText, PageSuccess, PageErrorText);
+                if PreviewMode then
+                    PreviewCountMgt.Run(PagedStep, PagedRequestText, PageResponseText, PageSuccess, PageErrorText, ConfirmationNote)
+                else
+                    ExecuteMessageType(PagedStep."Message Type", PagedRequestText, PageResponseText, PageSuccess, PageErrorText);
             // Foundation may return a structured refusal without raising an AL error.
             // A paged source must fail visibly instead of treating that response as an empty page.
             if PageSuccess then
@@ -288,7 +296,7 @@ codeunit 10035547 "Playbook Runner ori"
 
             LogMgt.LogStep(InstanceId, PagedStep."Step No.", PageNo, PagedStep."Message Type",
                 PagedRequestText, PageResponseText, CurrentDateTime() - StartTime,
-                PageStepStatus, PageErrorText, '', Workspace.ToText());
+                PageStepStatus, PageErrorText, '', Workspace.ToText(), ConfirmationNote);
             Workspace.RecordPage(PagedStep."Step No.", PagedStep."Exclude From Run Status");
             RecordStepOutcome(PagedStep, Workspace.StatusToText(PageStepStatus), false, false,
                 CurrentDateTime() - StartTime, PageErrorText, PageResponseText, 0, 0);
@@ -397,6 +405,8 @@ codeunit 10035547 "Playbook Runner ori"
         CheckAnswered: Boolean;
         TechnicalFailure: Boolean;
         LogErrorText: Text;
+        PreviewMode: Boolean;
+        ConfirmationNote: Text;
     begin
         // Build request from template or initial request
         RequestText := PlaybookStep.GetRequestTemplate();
@@ -404,13 +414,14 @@ codeunit 10035547 "Playbook Runner ori"
             RequestText := InitialRequestText;
         if RequestText <> '' then
             RequestJson.ReadFrom(RequestText);
+        PreviewMode := PreviewCountMgt.TakeMarker(RequestJson) and (PlaybookStep."Step Kind" = PlaybookStep."Step Kind"::Message);
 
         StepSuccess := JsonHelper.TryResolveWorkspaceRefs(RequestJson, ErrorText);
         RequestJson.WriteTo(RequestText);
 
         StartTime := CurrentDateTime();
         if StepSuccess then
-            ExecuteStepKind(PlaybookStep, RequestJson, RequestText, ResponseText, StepSuccess, ErrorText);
+            ExecuteStepKind(PlaybookStep, RequestJson, RequestText, PreviewMode, ResponseText, StepSuccess, ErrorText, ConfirmationNote);
         StepDuration := CurrentDateTime() - StartTime;
 
         // A Check step answers a question, but an error answer from the message type is not an
@@ -460,7 +471,7 @@ codeunit 10035547 "Playbook Runner ori"
         end;
 
         LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", CurrentPageNo, PlaybookStep."Message Type",
-            RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, '', Workspace.ToText());
+            RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, '', Workspace.ToText(), ConfirmationNote);
         Workspace.WriteFromResponse(PlaybookStep."Step No.", CurrentPageNo, false, ResponseText, PlaybookStep."Result Log Paths");
 
         RecordStepOutcome(PlaybookStep, Workspace.StatusToText(StepStatus), PlaybookStep.IsCheck() and CheckAnswered, ConditionHolds, StepDuration, ErrorText, ResponseText, 0, 0);
@@ -494,6 +505,8 @@ codeunit 10035547 "Playbook Runner ori"
         ItemsHere: Integer;
         ItemsFailedHere: Integer;
         LogErrorText: Text;
+        PreviewMode: Boolean;
+        ConfirmationNote: Text;
     begin
         StepSuccess := true;
         RequestTemplate := PlaybookStep.GetRequestTemplate();
@@ -547,6 +560,8 @@ codeunit 10035547 "Playbook Runner ori"
                 Clear(RequestJson);
                 if RequestTemplate <> '' then
                     RequestJson.ReadFrom(RequestTemplate);
+                PreviewMode := PreviewCountMgt.TakeMarker(RequestJson) and (PlaybookStep."Step Kind" = PlaybookStep."Step Kind"::Message);
+                Clear(ConfirmationNote);
                 Clear(ResponseText);
                 ItemSuccess := JsonHelper.TryResolveWorkspaceRefs(RequestJson, ErrorText);
                 RequestJson.WriteTo(RequestText);
@@ -554,9 +569,9 @@ codeunit 10035547 "Playbook Runner ori"
                 StartTime := CurrentDateTime();
                 if ItemSuccess then
                     if PlaybookStep."Step Kind" = PlaybookStep."Step Kind"::Transform then
-                        ExecuteStepKind(PlaybookStep, ElementObj, ElementText, ResponseText, ItemSuccess, ErrorText)
+                        ExecuteStepKind(PlaybookStep, ElementObj, ElementText, false, ResponseText, ItemSuccess, ErrorText, ConfirmationNote)
                     else
-                        ExecuteStepKind(PlaybookStep, RequestJson, RequestText, ResponseText, ItemSuccess, ErrorText);
+                        ExecuteStepKind(PlaybookStep, RequestJson, RequestText, PreviewMode, ResponseText, ItemSuccess, ErrorText, ConfirmationNote);
                 StepDuration := CurrentDateTime() - StartTime;
 
                 // An error answer from the message type is a technical failure, not the answer
@@ -620,7 +635,7 @@ codeunit 10035547 "Playbook Runner ori"
                             PlaybookStep."Step No.", "Playbook Cond. Type ori"::Success);
 
                 LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", PageItemOffset + i, PlaybookStep."Message Type",
-                    RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, ElementText, Workspace.ToText());
+                    RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, ElementText, Workspace.ToText(), ConfirmationNote);
                 SetIterationSuccess(PlaybookStep."Step No.", PageItemOffset + i, ItemSuccess);
                 Workspace.WriteFromResponse(PlaybookStep."Step No.", PageItemOffset + i, true, ResponseText, PlaybookStep."Result Log Paths");
                 Workspace.SetToken(Format(PlaybookStep."Step No.") + '.' + Format(PageItemOffset + i) + '._item', ElementToken);
@@ -678,15 +693,20 @@ codeunit 10035547 "Playbook Runner ori"
         exit(Workspace.MessageTypeToText(Step."Message Type"));
     end;
 
-    local procedure ExecuteStepKind(Step: Record "Playbook Step ori"; Input: JsonObject; RequestText: Text; var ResponseText: Text; var Success: Boolean; var ErrorText: Text)
+    local procedure ExecuteStepKind(Step: Record "Playbook Step ori"; Input: JsonObject; var RequestText: Text; PreviewMode: Boolean; var ResponseText: Text; var Success: Boolean; var ErrorText: Text; var ConfirmationNote: Text)
     var
         Transform: Codeunit "Playbook Transform Exec ori";
+        PreviewCount: Codeunit "Playbook Preview Count ori";
     begin
+        ConfirmationNote := '';
         case Step."Step Kind" of
             Step."Step Kind"::Transform:
                 Success := Transform.Execute(Step, Input, ResponseText, ErrorText);
             Step."Step Kind"::Message:
-                ExecuteMessageType(Step."Message Type", RequestText, ResponseText, Success, ErrorText);
+                if PreviewMode then
+                    PreviewCount.Run(Step, RequestText, ResponseText, Success, ErrorText, ConfirmationNote)
+                else
+                    ExecuteMessageType(Step."Message Type", RequestText, ResponseText, Success, ErrorText);
             else begin
                 Success := false;
                 ErrorText := UnsupportedKindErr;

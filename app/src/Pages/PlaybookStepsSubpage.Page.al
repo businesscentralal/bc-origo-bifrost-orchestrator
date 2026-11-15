@@ -77,6 +77,11 @@ page 10035553 "Playbook Steps Subpage ori"
                     ApplicationArea = All;
                     ToolTip = 'Response paths copied into the run report for this step. Keep it small — this feeds the report, not later steps.', Comment = 'is-IS=Slóðir í svari sem afritast í keyrsluskýrslu þessa skrefs. Hafðu það stutt — þetta fer í skýrsluna, ekki í síðari skref.';
                 }
+                field("Max Count"; Rec."Max Count")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the most the step may confirm on its own when its request sends "expectedCount": "@preview". Above it the step stops with ConfirmationRequired. Leave blank otherwise.', Comment = 'is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft þegar beiðnin sendir "expectedCount": "@preview". Yfir því stöðvast skrefið með ConfirmationRequired. Skildu annars autt.';
+                }
                 field("Exclude From Run Status"; Rec."Exclude From Run Status")
                 {
                     ApplicationArea = All;
