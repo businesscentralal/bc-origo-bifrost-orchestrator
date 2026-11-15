@@ -27,6 +27,9 @@ codeunit 10035547 "Playbook Runner ori"
         CheckAnsweredNoTok: Label 'Check answered no.', Comment = 'is-IS=Athugun svaraði nei.';
         UnsupportedKindErr: Label 'This playbook step kind is not supported.', Comment = 'is-IS=Þessi tegund keðjuskrefs er ekki studd.';
         SkippedByStartCondTok: Label 'Skipped: start conditions not met.', Comment = 'is-IS=Sleppt: upphafsskilyrði ekki uppfyllt.';
+        SkippedPriorFailedTok: Label 'Skipped: prior step failed for this item.', Comment = 'is-IS=Sleppt: fyrra skref mistókst fyrir þennan hlut.';
+        RunFailedAtStepErr: Label 'Step %1 failed: %2', Comment = '%1 = step no, %2 = the error text of that step, is-IS=Skref %1 mistókst: %2';
+        RunFailedAtStepNoReasonErr: Label 'Step %1 failed.', Comment = '%1 = step no, is-IS=Skref %1 mistókst.';
         PerItemResults: Dictionary of [Text, Boolean];
         PageItemOffset: Integer;
         CurrentPageNo: Integer;
@@ -110,7 +113,7 @@ codeunit 10035547 "Playbook Runner ori"
         Workspace.CompleteRun(CurrentDateTime() - RunStartTime);
         PlaybookFailed := Workspace.RunFailed();
         if PlaybookFailed then begin
-            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, '');
+            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, BuildRunErrorText(InstanceId));
             UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Failed);
         end else begin
             LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Completed, StepsExecuted, StepsFailed, ItemsProcessed, '');
@@ -182,7 +185,7 @@ codeunit 10035547 "Playbook Runner ori"
         Workspace.CompleteRun(CurrentDateTime() - RunStartTime);
         PlaybookFailed := Workspace.RunFailed();
         if PlaybookFailed then begin
-            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, '');
+            LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, BuildRunErrorText(InstanceId));
             UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Failed);
         end else begin
             LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Completed, StepsExecuted, StepsFailed, ItemsProcessed, '');
@@ -339,6 +342,27 @@ codeunit 10035547 "Playbook Runner ori"
             CurrentSkip += PageSize;
             PageNo += 1;
         until CurrentSkip >= TotalRecords;
+    end;
+
+    /// <summary>
+    /// The Error Text of a Failed instance: the first failed step's number and that step's own Error Text, in the
+    /// language of the run. The step is the one that first failed the run; when the run failed without a Failed step
+    /// row (an Error condition), the step that escalated is named on its own.
+    /// </summary>
+    local procedure BuildRunErrorText(InstanceId: Guid): Text
+    var
+        StepNo: Integer;
+        StepErrorText: Text;
+    begin
+        StepNo := Workspace.FirstFailedStepNo();
+        if StepNo = 0 then
+            StepNo := LogMgt.GetFirstFailedStepNo(InstanceId);
+        if StepNo = 0 then
+            exit('');
+        StepErrorText := LogMgt.GetStepErrorText(InstanceId, StepNo);
+        if StepErrorText = '' then
+            exit(StrSubstNo(RunFailedAtStepNoReasonErr, StepNo));
+        exit(StrSubstNo(RunFailedAtStepErr, StepNo, StepErrorText));
     end;
 
     local procedure GetIntFromJson(JObj: JsonObject; FieldName: Text): Integer
@@ -502,7 +526,7 @@ codeunit 10035547 "Playbook Runner ori"
                 ItemsArray.Get(i, ElementToken);
                 ElementToken.WriteTo(ElementText);
                 LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", PageItemOffset + i, PlaybookStep."Message Type",
-                    '', '', 0, "Playbook Inst. Status ori"::Cancelled, 'Skipped: prior step failed for this item.', ElementText, Workspace.ToText());
+                    '', '', 0, "Playbook Inst. Status ori"::Cancelled, SkippedPriorFailedTok, ElementText, Workspace.ToText());
                 Workspace.RecordIteration(PlaybookStep."Step No.", PageItemOffset + i, 'Skipped', ElementToken, '',
                     PlaybookStep."Exclude From Run Status");
             end else begin
