@@ -465,6 +465,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Atburðaskrá keðjuskrefs</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2002508345 - Field 3457752257 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the preview count and the confirmed count of a step that confirms from the preview, or the refusal.</source>
+          <target>Tilgreinir forskoðunarfjölda og staðfestan fjölda skrefs sem staðfestir út frá forskoðun, eða höfnunina.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir forskoðunarfjölda og staðfestan fjölda skrefs sem staðfestir út frá forskoðun, eða höfnunina.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Field Confirmation Note - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2002508345 - Field 3457752257 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Confirmation</source>
+          <target>Staðfesting</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Staðfesting</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Field Confirmation Note - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2002508345 - Field 1637095154 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Duration</source>
           <target>Tímalengd</target>
@@ -572,6 +584,18 @@
           <target>Upprunaskref ítrunar</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Upprunaskref ítrunar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Iterate Source Step No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2378468741 - Field 4167960641 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the most the step may confirm on its own. Required when the request sends "expectedCount": "@preview": the runner previews the call, confirms with the previewed count if it is at most Max Count, and otherwise stops with ConfirmationRequired. Leave blank when the step does not use @preview.</source>
+          <target>Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er í mesta lagi hámarksfjöldi, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er í mesta lagi hámarksfjöldi, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Max Count - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2378468741 - Field 4167960641 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Max Count</source>
+          <target>Hámarksfjöldi</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hámarksfjöldi</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Max Count - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 3880909165 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Message Type</source>
@@ -2409,6 +2433,42 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "recurringTemplateCode".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType MissingTemplateCodeErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2457996212 - NamedType 2409500461" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Preview count %1, Max Count %2: confirmed with expectedCount %3.</source>
+          <target>Forskoðunarfjöldi %1, hámarksfjöldi %2: staðfest með expectedCount %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = previewed count, %2 = Max Count, %3 = confirmed count, is-IS=Forskoðunarfjöldi %1, hámarksfjöldi %2: staðfest með expectedCount %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Preview Count ori - NamedType ConfirmedTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2457996212 - NamedType 35762522" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Max Count %1: the type asked for no confirmation, so it ran once without expectedCount.</source>
+          <target>Hámarksfjöldi %1: tegundin bað ekki um staðfestingu, svo hún keyrði einu sinni án expectedCount.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Max Count, is-IS=Hámarksfjöldi %1: tegundin bað ekki um staðfestingu, svo hún keyrði einu sinni án expectedCount.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Preview Count ori - NamedType NoConfirmationTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2457996212 - NamedType 380518729" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The preview of step %1 returned no whole count in "expected", so there is nothing to confirm. Nothing was executed.</source>
+          <target>Forskoðun skrefs %1 skilaði engum heiltölufjölda í "expected", svo ekkert er til að staðfesta. Ekkert var keyrt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Forskoðun skrefs %1 skilaði engum heiltölufjölda í "expected", svo ekkert er til að staðfesta. Ekkert var keyrt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Preview Count ori - NamedType NoCountErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2457996212 - NamedType 2025405717" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 sends "expectedCount": "@preview" but has no Max Count. Set Max Count on the step to the most the playbook may confirm. Nothing was executed.</source>
+          <target>Skref %1 sendir "expectedCount": "@preview" en hefur engan hámarksfjölda. Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta. Ekkert var keyrt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Skref %1 sendir "expectedCount": "@preview" en hefur engan hámarksfjölda. Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta. Ekkert var keyrt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Preview Count ori - NamedType NoMaxCountErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2457996212 - NamedType 2082026699" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The preview of step %1 counts %2, above the Max Count of %3. The step was not confirmed and nothing was executed.</source>
+          <target>Forskoðun skrefs %1 telur %2, yfir hámarksfjölda %3. Skrefið var ekki staðfest og ekkert var keyrt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = previewed count, %3 = Max Count, is-IS=Forskoðun skrefs %1 telur %2, yfir hámarksfjölda %3. Skrefið var ekki staðfest og ekkert var keyrt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Preview Count ori - NamedType OverCapErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2457996212 - NamedType 1660392146" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refused: %1</source>
+          <target>Hafnað: %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the reason, is-IS=Hafnað: %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Preview Count ori - NamedType RefusedTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2498592579 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Execute a Bifrost Playbook immediately and return results.</source>
           <target>Keyra Bifröst keðju strax og skila niðurstöðum.</target>
@@ -2818,16 +2878,40 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IrreversibleMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 2751708411" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Add expectedCount with the number of messages the step sends (for example 1) to the request template, or turn off Require Confirmation for Irreversible Messages in Bifrost Setup if that is the policy of this company.</source>
-          <target>Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða slökktu á Krefjast staðfestingar fyrir óafturkræf skilaboð í Bifröst-uppsetningu ef það er stefna fyrirtækisins.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða slökktu á Krefjast staðfestingar fyrir óafturkræf skilaboð í Bifröst-uppsetningu ef það er stefna fyrirtækisins.</note>
+          <source>Add expectedCount with the number of messages the step sends (for example 1) to the request template, or send "expectedCount": "@preview" and set Max Count on the step, so a run confirms the previewed count up to that cap.</source>
+          <target>Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða sendu "expectedCount": "@preview" og settu hámarksfjölda á skrefið, svo keyrsla staðfesti forskoðaðan fjölda upp að því hámarki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða sendu "expectedCount": "@preview" og settu hámarksfjölda á skrefið, svo keyrsla staðfesti forskoðaðan fjölda upp að því hámarki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IrreversibleNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1130969501" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 has Max Count %2 but its request does not send "expectedCount": "@preview", so the cap is never applied.</source>
+          <target>Skref %1 hefur hámarksfjölda %2 en beiðnin sendir ekki "expectedCount": "@preview", svo hámarkið er aldrei notað.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = Max Count, is-IS=Skref %1 hefur hámarksfjölda %2 en beiðnin sendir ekki "expectedCount": "@preview", svo hámarkið er aldrei notað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType MaxWithoutPreviewMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 2090835561" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send "expectedCount": "@preview" in the request template so the cap bounds the confirmation, or clear Max Count.</source>
+          <target>Sendu "expectedCount": "@preview" í beiðnisniðmátinu svo hámarkið afmarki staðfestinguna, eða hreinsaðu hámarksfjölda.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu "expectedCount": "@preview" í beiðnisniðmátinu svo hámarkið afmarki staðfestinguna, eða hreinsaðu hámarksfjölda.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType MaxWithoutPreviewNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1991160535" size-unit="char" translate="yes" xml:space="preserve">
           <source>nothing</source>
           <target>ekkert</target>
           <note from="Developer" annotates="general" priority="2">is-IS=ekkert</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType NothingTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1560564269" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 sends "expectedCount": "@preview" but has no Max Count. Every run refuses the step with ConfirmationRequired and nothing is executed.</source>
+          <target>Skref %1 sendir "expectedCount": "@preview" en hefur engan hámarksfjölda. Hver keyrsla hafnar skrefinu með ConfirmationRequired og ekkert er keyrt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Skref %1 sendir "expectedCount": "@preview" en hefur engan hámarksfjölda. Hver keyrsla hafnar skrefinu með ConfirmationRequired og ekkert er keyrt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PreviewWithoutMaxMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 303900121" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Max Count on the step to the most the playbook may confirm without a person, or send a fixed expectedCount instead.</source>
+          <target>Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PreviewWithoutMaxNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 4056349108" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 reads @_current.fields.%2, but %2 is a primary-key field of table %3 and is returned under primaryKey, not fields.</source>
@@ -5283,6 +5367,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Ekkert efni til niðurhals.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - NamedType NoContentErr</note>
         </trans-unit>
+        <trans-unit id="Page 611875482 - Control 3457752257 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the preview count and the confirmed count of a step that confirms from the preview, or the refusal.</source>
+          <target>Tilgreinir forskoðunarfjölda og staðfestan fjölda skrefs sem staðfestir út frá forskoðun, eða höfnunina.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir forskoðunarfjölda og staðfestan fjölda skrefs sem staðfestir út frá forskoðun, eða höfnunina.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Confirmation Note - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 611875482 - Control 1637095154 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies how long this step took.</source>
           <target>Tilgreinir hversu lengi skrefið tók.</target>
@@ -5468,6 +5558,12 @@
           <target>Síðasta keyrsla</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Síðasta keyrsla</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Steps Subpage ori - Control LastStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 17830481 - Control 4167960641 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the most the step may confirm on its own when its request sends "expectedCount": "@preview". Above it the step stops with ConfirmationRequired. Leave blank otherwise.</source>
+          <target>Tilgreinir mest það sem skrefið má staðfesta sjálft þegar beiðnin sendir "expectedCount": "@preview". Yfir því stöðvast skrefið með ConfirmationRequired. Skildu annars autt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft þegar beiðnin sendir "expectedCount": "@preview". Yfir því stöðvast skrefið með ConfirmationRequired. Skildu annars autt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Steps Subpage ori - Control Max Count - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 17830481 - Control 3880909165 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Bifrost message type to execute.</source>

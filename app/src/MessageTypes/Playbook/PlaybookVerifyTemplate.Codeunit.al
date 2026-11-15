@@ -31,6 +31,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         if TemplateText.Trim() = '' then begin
             CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
             CheckRuntimeRefusals(Step, TemplateJson, Findings);
+            CheckPreviewCount(Step, TemplateJson, Findings);
             exit;
         end;
 
@@ -45,6 +46,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         CheckRoleCode(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
         CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
         CheckRuntimeRefusals(Step, TemplateJson, Findings);
+        CheckPreviewCount(Step, TemplateJson, Findings);
         ScanToken(Step, TemplateJson.AsToken(), Seen, Findings);
     end;
 
@@ -238,6 +240,29 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         CheckIrreversible(Step, GetEffectName(Effect), TemplateJson, Findings);
         CheckRequestKeys(Step, GetEffectName(Effect), Parameters, Envelope, TemplateJson, Findings);
+    end;
+
+    /// <summary>
+    /// Confirm-from-preview (issue #189): a step that sends "expectedCount": "@preview" needs a Max Count, and a Max Count
+    /// is only meaningful with @preview. Both mismatches are errors: the run would refuse the first and ignore the
+    /// second, and a cap that is silently ignored is a false safety.
+    /// </summary>
+    /// <param name="Step">The step.</param>
+    /// <param name="TemplateJson">The parsed request template; empty when no template is set.</param>
+    /// <param name="Findings">Receives the errors.</param>
+    internal procedure CheckPreviewCount(Step: Record "Playbook Step ori"; TemplateJson: JsonObject; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
+        PreviewCount: Codeunit "Playbook Preview Count ori";
+        UsesPreview: Boolean;
+    begin
+        UsesPreview := PreviewCount.IsMarker(TemplateJson);
+        if UsesPreview and (Step."Max Count" <= 0) then
+            Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'PreviewWithoutMaxCount',
+                StrSubstNo(PreviewWithoutMaxMsg, Step."Step No."), PreviewWithoutMaxNextStepTxt, Step.Disabled);
+        if (Step."Max Count" > 0) and not UsesPreview then
+            Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'MaxCountWithoutPreview',
+                StrSubstNo(MaxWithoutPreviewMsg, Step."Step No.", Step."Max Count"), MaxWithoutPreviewNextStepTxt, Step.Disabled);
     end;
 
     local procedure CheckIrreversible(Step: Record "Playbook Step ori"; EffectName: Text; TemplateJson: JsonObject; var Findings: JsonArray)
@@ -687,8 +712,12 @@ codeunit 10035618 "Playbook Verify Template ori"
         SeenFieldTok: Label 'field|%1|%2', Locked = true;
         SeenCurrentTok: Label 'current|%1', Locked = true;
         SeenSyntaxTok: Label 'syntax|%1', Locked = true;
+        PreviewWithoutMaxMsg: Label 'Step %1 sends "expectedCount": "@preview" but has no Max Count. Every run refuses the step with ConfirmationRequired and nothing is executed.', Comment = '%1 = step no, is-IS=Skref %1 sendir "expectedCount": "@preview" en hefur engan hámarksfjölda. Hver keyrsla hafnar skrefinu með ConfirmationRequired og ekkert er keyrt.';
+        PreviewWithoutMaxNextStepTxt: Label 'Set Max Count on the step to the most the playbook may confirm without a person, or send a fixed expectedCount instead.', Comment = 'is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.';
+        MaxWithoutPreviewMsg: Label 'Step %1 has Max Count %2 but its request does not send "expectedCount": "@preview", so the cap is never applied.', Comment = '%1 = step no, %2 = Max Count, is-IS=Skref %1 hefur hámarksfjölda %2 en beiðnin sendir ekki "expectedCount": "@preview", svo hámarkið er aldrei notað.';
+        MaxWithoutPreviewNextStepTxt: Label 'Send "expectedCount": "@preview" in the request template so the cap bounds the confirmation, or clear Max Count.', Comment = 'is-IS=Sendu "expectedCount": "@preview" í beiðnisniðmátinu svo hámarkið afmarki staðfestinguna, eða hreinsaðu hámarksfjölda.';
         IrreversibleMsg: Label 'Step %1 calls %2, which is irreversible, without expectedCount in its request, and Bifrost Setup requires confirmation for irreversible messages. Every run answers ConfirmationRequired and the step fails.', Comment = '%1 = step no, %2 = message type, is-IS=Skref %1 kallar á %2, sem er óafturkræft, án expectedCount í beiðninni, og Bifröst-uppsetning krefst staðfestingar fyrir óafturkræf skilaboð. Hver keyrsla svarar ConfirmationRequired og skrefið mistekst.';
-        IrreversibleNextStepTxt: Label 'Add expectedCount with the number of messages the step sends (for example 1) to the request template, or turn off Require Confirmation for Irreversible Messages in Bifrost Setup if that is the policy of this company.', Comment = 'is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða slökktu á Krefjast staðfestingar fyrir óafturkræf skilaboð í Bifröst-uppsetningu ef það er stefna fyrirtækisins.';
+        IrreversibleNextStepTxt: Label 'Add expectedCount with the number of messages the step sends (for example 1) to the request template, or send "expectedCount": "@preview" and set Max Count on the step, so a run confirms the previewed count up to that cap.', Comment = 'is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða sendu "expectedCount": "@preview" og settu hámarksfjölda á skrefið, svo keyrsla staðfesti forskoðaðan fjölda upp að því hámarki.';
         UnknownKeyMsg: Label 'Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.', Comment = '%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.';
         UnknownKeyNextStepTxt: Label 'Remove %1 or rename it to a declared parameter. The type declares: %2.', Comment = '%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.';
         UnresolvableMsg: Label 'Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.', Comment = '%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.';

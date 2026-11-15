@@ -57,6 +57,11 @@ page 10035552 "Playbook Step Logs Sub. ori"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the error message if the step failed.', Comment = 'is-IS=Tilgreinir villuboð ef skrefið mistókst.';
                 }
+                field("Confirmation Note"; Rec."Confirmation Note")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the preview count and the confirmed count of a step that confirms from the preview, or the refusal.', Comment = 'is-IS=Tilgreinir forskoðunarfjölda og staðfestan fjölda skrefs sem staðfestir út frá forskoðun, eða höfnunina.';
+                }
             }
         }
     }
