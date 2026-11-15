@@ -45,7 +45,7 @@ page 10035602 "Playbook Cond. Subpage ori"
                 field(Operator; Rec.Operator)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.', Comment = 'is-IS=Hvernig gildið á slóðinni er borið saman. Er til á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki autt fylki og ekki autt hlutur.';
+                    ToolTip = 'How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.', Comment = 'is-IS=Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.';
                 }
                 field("Value"; Rec."Value")
                 {

@@ -4955,8 +4955,8 @@
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 358941092 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.</source>
-          <target>Hvernig gildið á slóðinni er borið saman. Er til á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki autt fylki og ekki autt hlutur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. Er til á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki autt fylki og ekki autt hlutur.</note>
+          <target>Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Cond. Subpage ori - Control Operator - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 2206733951 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">

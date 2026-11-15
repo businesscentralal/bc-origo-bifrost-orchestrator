@@ -158,20 +158,26 @@ table 10035543 "Playbook Step Log ori"
     end;
 
     /// <summary>
-    /// Gets the workspace snapshot blob as text.
-    /// </summary>
-    /// <returns>Text. The stored workspace JSON, or empty when no snapshot was taken.</returns>
-    /// <summary>
     /// The message type to show for this log. A Transform step dispatches no message type, so its
     /// stored enum value is the unnamed 0 and the log shows blank, never "0".
     /// </summary>
+    /// <returns>Text. The message type key, or empty for a Transform step or an unknown value.</returns>
     internal procedure GetMessageTypeText(): Text
+    var
+        ValueIndex: Integer;
     begin
         if ("Step Kind" = "Step Kind"::Transform) or ("Message Type".AsInteger() = 0) then
             exit('');
-        exit(Format("Message Type"));
+        ValueIndex := "Message Type".Ordinals().IndexOf("Message Type".AsInteger());
+        if ValueIndex = 0 then
+            exit('');
+        exit("Message Type".Names().Get(ValueIndex));
     end;
 
+    /// <summary>
+    /// Gets the workspace snapshot blob as text.
+    /// </summary>
+    /// <returns>Text. The stored workspace JSON, or empty when no snapshot was taken.</returns>
     procedure GetWorkspaceSnapshot(): Text
     var
         InStr: InStream;
