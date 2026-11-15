@@ -9,7 +9,7 @@ using System.TestLibraries.Utilities;
 /// expectedCount, request keys the type does not declare, list positions written name.0) and the step log names every
 /// refusal. Name-based seams only: the Telegram type is verified, never dispatched; the run uses the test fixtures.
 /// </summary>
-codeunit 96485 "Playbook Runtime Refusal Tests"
+codeunit 96486 "Playbook Runtime Refusal Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
