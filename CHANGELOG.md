@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased] — 28.0.4.0
 
+### Fixed — #183
+- #183 AC01 / codeunit 10035546 `Playbook JSON Helper ori`: the `Exists` condition operator is false for a missing path, `null`, an empty string, an empty array and an empty object, so `_who.telegramChatId Exists` no longer passes for a user without a chat id. Numbers and booleans (also `0` and `false`) exist. The Operator tooltip on page 10035602 `Playbook Cond. Subpage ori` and the playbook condition help in `Help ori` (10035576) say so in en-US and is-IS.
+- #183 AC02 / codeunit 10035546: a whole-value `@reference` keeps the JSON type of its source. A string, including a digit-only Code such as `No_` = `1001`, stays a string; numbers (`EntryNo_`) and booleans keep their type. Previously digit-only strings were sent as numbers and `Purchase.Document.PreviewPost` refused them.
+- #183 AC03 / codeunit 10035546 and `Playbook Runner ori`: a Failed step always has an `Error Text`. A message answered with `status` Error gives `code: error` from the response; a Success condition that does not hold names its type, path, operator, expected and actual value (en-US and is-IS labels). Applies to single, forEach and paged steps. New procedure `DescribeStepFailure`.
+- #183 AC04 / table 10035543 `Playbook Step Log ori` and its list part: a Transform step shows a blank message type in the log, not `0` (new internal procedure `GetMessageTypeText`). `_steps.N.messageType` already reads `Transform`. Raw reads of the enum field still return its stored value 0.
+- Tests: test codeunit 96485 `Playbook Runner Defects ori` (Exists, reference types, failed-step texts at 1033 and 1039, Transform log). No new product objects.
+
 ### Tests — #180
 - #180 AC06: mock-only playbook shapes that hand a PDF or a picture from one step to an LLM step as an inline file (`LLM.Prompt.Complete` `file` = `{data, mimeType, fileName}` from `@<step>.base64` or a record's base64 picture), plus the error branch for an unreadable file and the edge case that a binary envelope has no `status` (gate it on `contentType`). New test objects: codeunit 96482 `LLM File Fixture Msg ori` (test-only types `Test.Orchestrator.FileSource` / `Test.Orchestrator.FileReader`, enumextension 96483 `LLM File Fixture Type ori`, values 96482 and 96483) and test codeunit 96484 `Playbook LLM File Tests ori`, each scenario in 1033 and 1039. No provider call, no credentials and no product change. The text forEach verdict shape and the Ask error branch stay covered by `Example4_RunRecordsPassFailUnknownAndErrorThenAllPassNotice` (test codeunit 96436). Live Claude evidence is on the issue.
 
