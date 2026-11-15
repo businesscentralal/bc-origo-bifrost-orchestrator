@@ -35,9 +35,10 @@ page 10035552 "Playbook Step Logs Sub. ori"
                     ApplicationArea = All;
                     ToolTip = 'Shows whether this log records a message or a local transform.', Comment = 'is-IS=Sýnir hvort færslan skráir skilaboð eða staðbundna umbreytingu.';
                 }
-                field("Message Type"; Rec."Message Type")
+                field(MessageTypeText; MessageTypeText)
                 {
                     ApplicationArea = All;
+                    Caption = 'Message Type', Comment = 'is-IS=Skilaboðagerð';
                     ToolTip = 'Specifies the message type that was executed.', Comment = 'is-IS=Tilgreinir skilaboðagerð sem var keyrð.';
                 }
                 field(Status; Rec.Status)
@@ -106,6 +107,7 @@ page 10035552 "Playbook Step Logs Sub. ori"
 
     var
         StatusStyle: Text;
+        MessageTypeText: Text;
         FileNameTok: Label '%1-step%2-iter%3.json', Locked = true;
         NoContentErr: Label 'No content available for download.', Comment = 'is-IS=Ekkert efni til niðurhals.';
 
@@ -125,6 +127,7 @@ page 10035552 "Playbook Step Logs Sub. ori"
 
     trigger OnAfterGetRecord()
     begin
+        MessageTypeText := Rec.GetMessageTypeText();
         case Rec.Status of
             Rec.Status::Completed:
                 StatusStyle := 'Favorable';

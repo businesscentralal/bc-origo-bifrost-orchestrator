@@ -2373,6 +2373,24 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Settu Bifröst-keðju í biðröð fyrir einskiptis bakgrunnsvinnslu. Skrifaðgerð. Notaðu Orchestrator.Playbook.Run fyrir tafarlausa keyrslu í forgrunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Enqueue Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2939314393 - NamedType 2023570327" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 condition not met: path "%2" %3 "%4", actual %5.</source>
+          <target>%1 skilyrði ekki uppfyllt: slóð "%2" %3 "%4", raunverulegt gildi %5.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = condition type, %2 = path, %3 = operator, %4 = expected value, %5 = actual value, is-IS=%1 skilyrði ekki uppfyllt: slóð "%2" %3 "%4", raunverulegt gildi %5.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType ConditionFailedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2939314393 - NamedType 3539155225" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 failed and its response was empty or not a JSON object, so no condition could be evaluated.</source>
+          <target>Skref %1 mistókst og svar þess var autt eða ekki JSON-hlutur, svo ekki var hægt að meta skilyrði.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Skref %1 mistókst og svar þess var autt eða ekki JSON-hlutur, svo ekki var hægt að meta skilyrði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType NoJsonResponseErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2939314393 - NamedType 413497156" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.</source>
+          <target>Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType NoReasonErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2939314393 - NamedType 665073879" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unresolved workspace reference %1. Inspect the source response and correct the path before running the step. No message was sent.</source>
           <target>Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.</target>
@@ -4936,9 +4954,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Cond. Subpage ori - Control Group No. - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 358941092 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>How the value at the path is compared.</source>
-          <target>Hvernig gildið á slóðinni er borið saman.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman.</note>
+          <source>How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.</source>
+          <target>Hvernig gildið á slóðinni er borið saman. Er til á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki autt fylki og ekki autt hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. Er til á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki autt fylki og ekki autt hlutur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Cond. Subpage ori - Control Operator - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 2206733951 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -5229,11 +5247,17 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir ítrunarnúmer (0 fyrir einfalt kall).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Iteration No. - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 611875482 - Control 3880909165 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 611875482 - Control 2998659146 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the message type that was executed.</source>
           <target>Tilgreinir skilaboðagerð sem var keyrð.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir skilaboðagerð sem var keyrð.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Message Type - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control MessageTypeText - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 611875482 - Control 2998659146 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Message Type</source>
+          <target>Skilaboðagerð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skilaboðagerð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control MessageTypeText - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 611875482 - Control 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the step execution status.</source>

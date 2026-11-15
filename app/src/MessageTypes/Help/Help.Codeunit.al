@@ -666,6 +666,8 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         O.AppendLine('Operators: Equals, NotEquals, Contains, GreaterThan, LessThan, GreaterOrEqual, LessOrEqual, Exists.');
         O.AppendLine('');
+        O.AppendLine('`Exists` holds only when the path is present and carries a value: it is false for a missing path, `null`, an empty string `""`, an empty array `[]` and an empty object `{}`. A number or a boolean, also `0` and `false`, exists. So `_who.telegramChatId Exists` is false for a user without a chat id.');
+        O.AppendLine('');
         O.AppendLine('### `status Equals Success` is not enough');
         O.AppendLine('');
         O.AppendLine('A message type reports `Success` when it did what was asked, and finding nothing is');
