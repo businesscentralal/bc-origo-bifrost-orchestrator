@@ -117,9 +117,10 @@ codeunit 10035611 "Report Layout Read Handler ori"
         Selection: Record "Tenant Report Layout Selection";
         EmptyGuid: Guid;
     begin
-        // Match the Report Layouts page's current-company default lookup, without writing selection records.
+        // Current-company selection, then the all-companies selection (blank Company Name), else the
+        // built-in default; without writing selection records (#197).
         Selection.SetLoadFields("Layout Name", "App ID");
-        if Selection.Get(LayoutList."Report ID", CompanyName(), EmptyGuid) then
+        if Selection.Get(LayoutList."Report ID", CompanyName(), EmptyGuid) or Selection.Get(LayoutList."Report ID", '', EmptyGuid) then
             exit((Selection."Layout Name" = LayoutList.Name) and (Selection."App ID" = LayoutList."Application ID"));
         exit((ReportMeta."DefaultLayoutName" = LayoutList.Name) and (ReportMeta."App ID" = LayoutList."Application ID"));
     end;

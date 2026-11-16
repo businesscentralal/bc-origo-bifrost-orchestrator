@@ -218,31 +218,34 @@ codeunit 10035600 "Report Layout Handler ori"
         LayoutList: Record "Report Layout List";
         ResponseJson: JsonObject;
         EmptyGuid: Guid;
+        DefaultAppId: Guid;
+        DefaultName: Text[250];
         HadSelection: Boolean;
     begin
         ReportMeta.SetLoadFields(ID, "DefaultLayoutName", "App ID");
         if not ReportMeta.Get(ReportId) then
             Error(ReportNotFoundErr, ReportId);
 
+        AddPreviousDefault(ResponseJson, ReportMeta);
+        HadSelection := TenantSelection.Get(ReportId, CompanyName(), EmptyGuid);
+        if HadSelection then
+            TenantSelection.Delete(true);
+        // The default that applies now: the all-companies selection if there is one, else the built-in default.
+        GetCurrentDefault(ReportMeta, DefaultName, DefaultAppId);
         ResponseJson.Add('status', 'Success');
         ResponseJson.Add('reportId', ReportId);
-        ResponseJson.Add('name', ReportMeta."DefaultLayoutName");
-        if FindBuiltInDefault(ReportMeta, LayoutList) then
+        ResponseJson.Add('name', DefaultName);
+        if FindLayout(ReportId, DefaultName, DefaultAppId, LayoutList) then
             ResponseJson.Add('layoutFormat', FormatName(LayoutList."Layout Format"))
         else
             ResponseJson.Add('layoutFormat', '');
-        ResponseJson.Add('appId', Format(ReportMeta."App ID", 0, 4));
-        AddPreviousDefault(ResponseJson, ReportMeta);
-
-        HadSelection := TenantSelection.Get(ReportId, CompanyName(), EmptyGuid);
+        ResponseJson.Add('appId', Format(DefaultAppId, 0, 4));
         if HadSelection then begin
-            TenantSelection.Delete(true);
-            // Report Layout Selection follows the built-in default again, as SetDefault would write it.
-            if LayoutSelection.Get(ReportId, CompanyName()) then
-                if FindBuiltInDefault(ReportMeta, LayoutList) then begin
-                    LayoutSelection.Type := SelectionTypeFor(LayoutList."Layout Format");
-                    LayoutSelection.Modify(true);
-                end;
+            // Report Layout Selection follows the default that applies now, as SetDefault would write it.
+            if LayoutSelection.Get(ReportId, CompanyName()) and FindLayout(ReportId, DefaultName, DefaultAppId, LayoutList) then begin
+                LayoutSelection.Type := SelectionTypeFor(LayoutList."Layout Format");
+                LayoutSelection.Modify(true);
+            end;
             ResponseJson.Add('action', 'DefaultCleared');
         end else
             ResponseJson.Add('action', 'NoChange');
@@ -288,12 +291,12 @@ codeunit 10035600 "Report Layout Handler ori"
         end;
     end;
 
-    local procedure FindBuiltInDefault(ReportMeta: Record "Report Metadata"; var LayoutList: Record "Report Layout List"): Boolean
+    local procedure FindLayout(ReportId: Integer; LayoutName: Text[250]; AppId: Guid; var LayoutList: Record "Report Layout List"): Boolean
     begin
         LayoutList.Reset();
-        LayoutList.SetRange("Report ID", ReportMeta.ID);
-        LayoutList.SetRange(Name, ReportMeta."DefaultLayoutName");
-        LayoutList.SetRange("Application ID", ReportMeta."App ID");
+        LayoutList.SetRange("Report ID", ReportId);
+        LayoutList.SetRange(Name, LayoutName);
+        LayoutList.SetRange("Application ID", AppId);
         LayoutList.SetLoadFields("Layout Format");
         exit(LayoutList.FindFirst());
     end;
@@ -344,9 +347,10 @@ codeunit 10035600 "Report Layout Handler ori"
         TenantSelection: Record "Tenant Report Layout Selection";
         EmptyGuid: Guid;
     begin
-        // Same lookup as Orchestrator.ReportLayout.List isDefault: current-company selection, else the built-in default.
+        // Same lookup as Orchestrator.ReportLayout.List isDefault: current-company selection, then the
+        // all-companies selection (blank Company Name), else the built-in default.
         TenantSelection.SetLoadFields("Layout Name", "App ID");
-        if TenantSelection.Get(ReportMeta.ID, CompanyName(), EmptyGuid) then begin
+        if TenantSelection.Get(ReportMeta.ID, CompanyName(), EmptyGuid) or TenantSelection.Get(ReportMeta.ID, '', EmptyGuid) then begin
             LayoutName := TenantSelection."Layout Name";
             AppId := TenantSelection."App ID";
             exit;

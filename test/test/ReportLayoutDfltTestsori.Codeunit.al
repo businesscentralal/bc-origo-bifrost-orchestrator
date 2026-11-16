@@ -218,6 +218,47 @@ codeunit 96494 "Report Layout Dflt Tests ori"
         Cleanup(LayoutName);
     end;
 
+    /// <summary>An all-companies selection (blank Company Name) is the default when the company has none; clearDefault falls back to it (edge case).</summary>
+    [Test]
+    procedure AllCompaniesSelectionIsTheFallbackDefault()
+    var
+        TenantSelection: Record "Tenant Report Layout Selection";
+        Fixture: Record "Report Layout List";
+        Request: JsonObject;
+        Response: JsonObject;
+        LayoutName: Text[250];
+        EmptyGuid: Guid;
+    begin
+        // [GIVEN] A user layout chosen for all companies, no company selection
+        ResetDefault();
+        FindFixture(Fixture);
+        LayoutName := NewName('XDEF-ALL-');
+        Execute(ImportRequest(LayoutName));
+        TenantSelection.Init();
+        TenantSelection."Report ID" := Report::"Layout Sample Report ori";
+        TenantSelection."Company Name" := '';
+        TenantSelection."User ID" := EmptyGuid;
+        TenantSelection."Layout Name" := LayoutName;
+        TenantSelection.Insert();
+        // [THEN] List reports it as default
+        Assert.IsTrue(ListIsDefault(LayoutName, EmptyGuid), 'All-companies selection is the default');
+        // [WHEN] The extension layout is chosen for this company, then cleared again
+        Request := SelectRequest(Fixture.Name);
+        Request.Add('appId', Format(Fixture."Application ID", 0, 4));
+        Response := Execute(Request);
+        Assert.AreEqual(LayoutName, GetText(Response, 'previousDefault'), 'Previous default is the all-companies selection');
+        Clear(Request);
+        Request.Add('reportId', Report::"Layout Sample Report ori");
+        Request.Add('clearDefault', true);
+        Response := Execute(Request);
+        // [THEN] The all-companies selection applies again and is kept
+        Assert.AreEqual('DefaultCleared', GetText(Response, 'action'), 'Company selection cleared');
+        Assert.AreEqual(LayoutName, GetText(Response, 'name'), 'All-companies selection applies');
+        Assert.IsTrue(TenantSelection.Get(Report::"Layout Sample Report ori", '', EmptyGuid), 'All-companies row kept');
+        TenantSelection.Delete();
+        Cleanup(LayoutName);
+    end;
+
     /// <summary>The refusal and the effect help are translated in 1039 and stay English in 1033 (AC03).</summary>
     [Test]
     procedure DefaultTextsInEnglishAndIcelandic()
