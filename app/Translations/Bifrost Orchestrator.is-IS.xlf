@@ -3261,12 +3261,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS="%1" verður að vera true eða false.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NotBooleanErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3031661732 - NamedType 1130782252" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Layout %1 is a header, footer or theme part and cannot be the default layout of report %2.</source>
-          <target>Útlit %1 er haus-, fót- eða þemahluti og getur ekki verið sjálfgefið útlit skýrslu %2.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 er haus-, fót- eða þemahluti og getur ekki verið sjálfgefið útlit skýrslu %2.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType PartLayoutErr</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 572047844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 not found.</source>
           <target>Skýrsla %1 finnst ekki.</target>

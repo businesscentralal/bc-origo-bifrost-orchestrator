@@ -183,13 +183,11 @@ codeunit 10035600 "Report Layout Handler ori"
         LayoutList.SetRange(Name, LayoutName);
         if HasAppId then
             LayoutList.SetRange("Application ID", AppId);
-        LayoutList.SetLoadFields("Report ID", Name, "Application ID", "Layout Format", "Layout Subtype");
+        LayoutList.SetLoadFields("Report ID", Name, "Application ID", "Layout Format");
         if not LayoutList.FindFirst() then
             Error(LayoutNotFoundErr, LayoutName, ReportId);
         if LayoutList.Count() > 1 then
             Error(AmbiguousLayoutErr, LayoutName, ReportId);
-        if LayoutList."Layout Subtype" in [LayoutList."Layout Subtype"::HeaderFooter, LayoutList."Layout Subtype"::Theme] then
-            Error(PartLayoutErr, LayoutName, ReportId);
         if IsNullGuid(LayoutList."Application ID") then begin
             TenantReportLayout.SetLoadFields("Company Name");
             if TenantReportLayout.Get(ReportId, LayoutList.Name, LayoutList."Application ID") then
@@ -467,7 +465,6 @@ codeunit 10035600 "Report Layout Handler ori"
         InvalidAppIdErr: Label '"appId" %1 is not a valid GUID.', Comment = 'is-IS="appId" %1 er ekki gilt GUID.';
         LayoutNotFoundErr: Label 'Layout %1 not found on report %2.', Comment = 'is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.';
         AmbiguousLayoutErr: Label 'More than one layout named %1 exists on report %2. Send "appId".', Comment = 'is-IS=Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".';
-        PartLayoutErr: Label 'Layout %1 is a header, footer or theme part and cannot be the default layout of report %2.', Comment = 'is-IS=Útlit %1 er haus-, fót- eða þemahluti og getur ekki verið sjálfgefið útlit skýrslu %2.';
         LayoutOtherCompanyErr: Label 'Layout %1 belongs to company %2 and cannot be the default in company %3.', Comment = 'is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.';
         NotBooleanErr: Label '"%1" must be true or false.', Comment = 'is-IS="%1" verður að vera true eða false.';
 }
