@@ -36,7 +36,7 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Irreversible. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.', Comment = 'is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir.';
+        SelectionLbl: Label 'Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Irreversible. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact. expectedCount counts the one entry whose schedule is rebuilt.', Comment = 'is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir. expectedCount telur þá einu færslu sem áætlun er endurbyggð fyrir.';
     begin
         exit(SelectionLbl);
     end;
@@ -61,9 +61,11 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the orchestrator entry (Job Queue Orchestrator Entry). Required unless subject carries it.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one orchestrator entry whose schedule is rebuilt (1)'));
         exit(true);
     end;
 
@@ -92,9 +94,10 @@ codeunit 10035581 "SE Schedule Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Rebuilds the Job Queue schedule of the orchestrator entry. With client credentials the scheduling API commits the change in its own session; otherwise the Job Queue Entry is deleted and created again.', false);
+        Effect := Parts.CommittingEffect('Rebuilds the Job Queue schedule of the orchestrator entry. With client credentials the scheduling API commits the change in its own session; otherwise the Job Queue Entry is deleted and created again.' + ' ' + CountParts.CountSentence('the one orchestrator entry whose schedule is rebuilt (1)'), false);
         exit(true);
     end;
 

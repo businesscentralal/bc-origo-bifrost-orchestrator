@@ -64,7 +64,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Parameters(Parameters, 'orderNo', 'orderId');
+        Contract.Parameters(Parameters, 'orderNo', 'orderId', 'the one sales order confirmation that is sent (1), not its recipients');
         exit(true);
     end;
 
@@ -88,7 +88,7 @@ codeunit 10035634 "Order Conf Send Msg ori" implements "Msg Interface ori", "Msg
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Effect(Effect, SendsTheSalesOrderConfirmationWithTheLbl);
+        Contract.Effect(Effect, SendsTheSalesOrderConfirmationWithTheLbl, 'the one sales order confirmation that is sent (1), not its recipients');
         exit(true);
     end;
 

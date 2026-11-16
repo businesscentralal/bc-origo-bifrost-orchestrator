@@ -48,7 +48,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery.', Comment = 'is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.';
+        SelectionLbl: Label 'Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery. expectedCount counts the one message that is sent.', Comment = 'is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu. expectedCount telur þau einu skilaboð sem eru send.';
     begin
         exit(SelectionLbl);
     end;
@@ -68,9 +68,11 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('message', 'string', true, 'Text sent to the current user''s Telegram chat, with parse mode HTML: Telegram''s HTML tags format it. There is no chat ID parameter.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one Telegram message that is sent to the current user (1)'));
         exit(true);
     end;
 
@@ -100,10 +102,11 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('irreversible', 'Sends a message to the current user through Telegram.', false, '', Preconditions);
+        Effect := Parts.Effect('irreversible', 'Sends a message to the current user through Telegram.' + ' ' + CountParts.CountSentence('the one Telegram message that is sent to the current user (1)'), false, '', Preconditions);
         exit(true);
     end;
 

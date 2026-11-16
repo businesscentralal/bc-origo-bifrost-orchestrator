@@ -64,7 +64,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Parameters(Parameters, 'quoteNo', 'quoteId');
+        Contract.Parameters(Parameters, 'quoteNo', 'quoteId', 'the one sales quote that is sent (1), not its recipients');
         exit(true);
     end;
 
@@ -88,7 +88,7 @@ codeunit 10035633 "Sales Quote Send Msg ori" implements "Msg Interface ori", "Ms
     var
         Contract: Codeunit "Doc Send Contract ori";
     begin
-        Contract.Effect(Effect, SendsTheSalesQuoteWithTheResolvedLbl);
+        Contract.Effect(Effect, SendsTheSalesQuoteWithTheResolvedLbl, 'the one sales quote that is sent (1), not its recipients');
         exit(true);
     end;
 

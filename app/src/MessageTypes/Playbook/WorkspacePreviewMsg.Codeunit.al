@@ -32,7 +32,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Preview the seeded Playbook workspace without running steps. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook.', Comment = 'is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju.';
+        SelectionLbl: Label 'Preview the seeded Playbook workspace without running steps. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook. expectedCount counts the one preview call.', Comment = 'is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju. expectedCount telur það eina forskoðunarkall.';
     begin
         exit(SelectionLbl);
     end;
@@ -52,9 +52,11 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'Simulates a run''s initial request: stored at _initial. A JSON string that holds an object is accepted too; any other string, number or boolean is ignored.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one preview call (1)'));
         exit(true);
     end;
 
@@ -93,9 +95,10 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Builds a temporary workspace, but seeds _who through a nested Help.WhoAmI.Get dispatch that writes and commits its queue entry and may create the caller''s Bifrost user setup.', true);
+        Effect := Parts.CommittingEffect('Builds a temporary workspace, but seeds _who through a nested Help.WhoAmI.Get dispatch that writes and commits its queue entry and may create the caller''s Bifrost user setup.' + ' ' + CountParts.CountSentence('the one preview call (1)'), true);
         exit(true);
     end;
 

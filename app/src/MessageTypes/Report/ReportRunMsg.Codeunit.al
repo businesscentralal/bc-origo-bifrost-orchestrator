@@ -32,7 +32,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Run a processing-only report as a batch job and return its result. Irreversible. Use Orchestrator.Report.SaveAs for reports that produce output.', Comment = 'is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.';
+        SelectionLbl: Label 'Run a processing-only report as a batch job and return its result. Irreversible. Use Orchestrator.Report.SaveAs for reports that produce output. expectedCount counts the one report run, not the records it processes.', Comment = 'is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki. expectedCount telur þá einu skýrslukeyrslu, ekki færslurnar sem hún vinnur.';
     begin
         exit(SelectionLbl);
     end;
@@ -55,12 +55,14 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('reportId', 'integer', true, 'Report object ID; must be a processing-only report (processingOnly true in Orchestrator.Report.List).'));
         Parameters.Add(ContractMgt.Parameter('parameters', 'object', false, 'Explicit scalar option values over caller requestPageXml or a registered template. Never reads or changes saved settings. Unknown names fail. Report 1316 has a built-in template; see notes.'));
         Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Caller XML takes precedence over registered templates. parameters overlays its named options. Without parameters, existing raw XML / saved-preset behavior is retained.'));
         Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item. Ignored when the report has no data item table.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one report run (1), not the records the report processes'));
         exit(true);
     end;
 
@@ -96,9 +98,10 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the processing-only report. Most batch reports commit as they go, and the work they committed stays when they fail.', false);
+        Effect := Parts.CommittingEffect('Runs the processing-only report. Most batch reports commit as they go, and the work they committed stays when they fail.' + ' ' + CountParts.CountSentence('the one report run (1), not the records the report processes'), false);
         exit(true);
     end;
 
