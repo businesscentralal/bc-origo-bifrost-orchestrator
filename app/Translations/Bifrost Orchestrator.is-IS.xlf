@@ -2313,6 +2313,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lestu yfirlit yfir skilaboðategundir Bifröst stjórnanda og uppsetningarleiðbeiningar. Lesaðgerð. Notaðu Help.Implementation.Get fyrir samning einnar tegundar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help Get Impl ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 3153258668" size-unit="char" translate="yes" xml:space="preserve">
+          <source>## Find the tools in the Web Client</source>
+          <target>## Finna verkfærin í vefbiðlaranum</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=## Finna verkfærin í vefbiðlaranum</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType HeadingTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 60656952" size-unit="char" translate="yes" xml:space="preserve">
+          <source>On **Bifrost Setup**, open **Related &gt; Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
+          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType SetupToolsTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 2977294634" size-unit="char" translate="yes" xml:space="preserve">
+          <source>On the **Bifrost Playbooks** list, open **Related &gt; Tools** for **Table Data** and **Copy Plans**. These tools are Web Client pages, not new message types.</source>
+          <target>Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType PlaybookToolsTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 1357293956" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tools follow your page permissions. **Table Data** requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.</source>
+          <target>Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType ToolPermissionsTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1910912853 - Method 4183778207 - NamedType 1852605995" size-unit="char" translate="yes" xml:space="preserve">
           <source>%3 is not supported for %1 %2</source>
           <target>%3 er ekki stutt fyrir %1 %2</target>
@@ -5673,6 +5697,42 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action Instances - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 608463566 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open playbook and table data tools.</source>
+          <target>Opna verkfæri fyrir keðjur og töflugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna verkfæri fyrir keðjur og töflugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action Tools - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 3587537701 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tools</source>
+          <target>Verkfæri</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action Tools - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 2836670895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View copy plans and configure table-to-table playbooks within your permissions.</source>
+          <target>Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyPlans - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 2836670895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Plans</source>
+          <target>Afritunaráætlanir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyPlans - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View, edit, export and import table data within your permissions.</source>
+          <target>Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableData - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data</source>
+          <target>Töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableData - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 905065511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Recurring Template</source>
           <target>Endurtekningarsniðmát vinnsluraða</target>
@@ -7281,6 +7341,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort Bifröst stjórnandinn fylgist með þessari vinnsluraðarfærslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobQueueEntryCard.PageExt ori - Control Scheduler Enabled ori - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Open playbook and table data tools.</source>
+          <target>Opna verkfæri fyrir keðjur og töflugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna verkfæri fyrir keðjur og töflugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Tools - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Tools</source>
+          <target>Verkfæri</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Tools - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 2836670895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>View copy plans and configure table-to-table playbooks within your permissions.</source>
+          <target>Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 2836670895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Copy Plans</source>
+          <target>Afritunaráætlanir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>View the execution log for playbook runs.</source>
           <target>Skoða keyrsluskrá keðjukeyrslna.</target>
@@ -7304,6 +7388,18 @@
           <target>Bifröst keðjur</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>View, edit, export and import table data within your permissions.</source>
+          <target>Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Table Data</source>
+          <target>Töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Configure Bifrost Orchestrator: job queue scheduling, playbooks, client credentials and secrets.</source>
@@ -7562,102 +7658,6 @@
           <target>Bifröst keðjuskoðun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjuskoðun</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybVw ori - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 3153258668" size-unit="char" translate="yes" xml:space="preserve">
-          <source>## Find the tools in the Web Client</source>
-          <target>## Finna verkfærin í vefbiðlaranum</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=## Finna verkfærin í vefbiðlaranum</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType HeadingTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 60656952" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On **Bifrost Setup**, open **Related &gt; Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
-          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType SetupToolsTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 2977294634" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On the **Bifrost Playbooks** list, open **Related &gt; Tools** for **Table Data** and **Copy Plans**. These tools are Web Client pages, not new message types.</source>
-          <target>Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType PlaybookToolsTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 1357293956" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Tools follow your page permissions. **Table Data** requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.</source>
-          <target>Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType ToolPermissionsTxt</note>
-        </trans-unit>
-        <trans-unit id="Page 608463566 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Open playbook and table data tools.</source>
-          <target>Opna verkfæri fyrir keðjur og töflugögn.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Opna verkfæri fyrir keðjur og töflugögn.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action Tools - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 608463566 - Action 3587537701 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Tools</source>
-          <target>Verkfæri</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action Tools - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 608463566 - Action 2836670895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>View copy plans and configure table-to-table playbooks within your permissions.</source>
-          <target>Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyPlans - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 608463566 - Action 2836670895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Copy Plans</source>
-          <target>Afritunaráætlanir</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyPlans - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 608463566 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>View, edit, export and import table data within your permissions.</source>
-          <target>Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableData - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 608463566 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Table Data</source>
-          <target>Töflugögn</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableData - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>Open playbook and table data tools.</source>
-          <target>Opna verkfæri fyrir keðjur og töflugögn.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Opna verkfæri fyrir keðjur og töflugögn.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Tools - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>Tools</source>
-          <target>Verkfæri</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Tools - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 2836670895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>View copy plans and configure table-to-table playbooks within your permissions.</source>
-          <target>Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 2836670895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>Copy Plans</source>
-          <target>Afritunaráætlanir</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>View, edit, export and import table data within your permissions.</source>
-          <target>Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>Table Data</source>
-          <target>Töflugögn</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property Caption</note>
         </trans-unit>
       </group>
     </body>
