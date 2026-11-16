@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
+using Microsoft.Foundation.Reporting;
 using System.Environment.Configuration;
 using System.Reflection;
 using System.Text;
@@ -16,14 +17,19 @@ using System.Utilities;
 /// so the supported bytes path available to extensions is Layout.ImportStream on
 /// table "Tenant Report Layout" — the same Media import the Report Layouts page uses
 /// under the hood for user-defined layouts.
-/// setAsDefault is deferred: SetDefaultReportLayoutSelection is also Internal; ship
-/// Orchestrator.ReportLayout.SetDefault later if product needs it.
+/// setAsDefault / clearDefault (#197): SetDefaultReportLayoutSelection is also Internal, so the
+/// handler makes the same two writes that procedure makes for the current company: the
+/// company-wide Tenant Report Layout Selection row (empty User ID) and the Report Layout Selection
+/// type. It never writes a per-user selection, a layout override or another company.
 /// </remarks>
 codeunit 10035600 "Report Layout Handler ori"
 {
     Access = Internal;
     Permissions =
         tabledata "Tenant Report Layout" = RIMD,
+        tabledata "Tenant Report Layout Selection" = RIMD,
+        tabledata "Report Layout Selection" = RIMD,
+        tabledata "Report Layout List" = R,
         tabledata "Report Metadata" = R;
 
     procedure ExecuteSet(var Argument: Record "Message Argument ori")
@@ -51,16 +57,36 @@ codeunit 10035600 "Report Layout Handler ori"
         InStr: InStream;
         EmptyGuid: Guid;
         Replacing: Boolean;
+        SetAsDefault: Boolean;
+        ClearDefault: Boolean;
+        PreviousDefaultName: Text[250];
+        PreviousDefaultAppId: Guid;
         Token: JsonToken;
     begin
         RequestJson := Argument.GetRequestJson();
         ReportId := GetRequiredInteger(RequestJson, 'reportId');
-        LayoutName := CopyStr(GetRequiredText(RequestJson, 'name'), 1, MaxStrLen(LayoutName));
-        LayoutFormatText := GetRequiredText(RequestJson, 'layoutFormat');
+        SetAsDefault := GetOptionalBoolean(RequestJson, 'setAsDefault');
+        ClearDefault := GetOptionalBoolean(RequestJson, 'clearDefault');
         HasBase64 := RequestJson.Contains('layoutBase64');
         HasStagingId := RequestJson.Contains('stagingId');
+        if SetAsDefault and ClearDefault then
+            Error(SetAndClearDefaultErr);
+        if ClearDefault then begin
+            if HasBase64 or HasStagingId then
+                Error(ClearDefaultWithLayoutErr);
+            ExecuteClearDefault(Argument, ReportId);
+            exit;
+        end;
+        LayoutName := CopyStr(GetRequiredText(RequestJson, 'name'), 1, MaxStrLen(LayoutName));
         if HasBase64 and HasStagingId then
             Error(BothLayoutSourcesErr);
+        if RequestJson.Contains('appId') and (HasBase64 or HasStagingId) then
+            Error(AppIdWithLayoutErr);
+        if SetAsDefault and not (HasBase64 or HasStagingId) then begin
+            ExecuteSelectDefault(Argument, RequestJson, ReportId, LayoutName);
+            exit;
+        end;
+        LayoutFormatText := GetRequiredText(RequestJson, 'layoutFormat');
         if not (HasBase64 or HasStagingId) then
             Error(NoLayoutSourceErr);
         if HasStagingId then begin
@@ -79,11 +105,11 @@ codeunit 10035600 "Report Layout Handler ori"
         if RequestJson.Get('companyName', Token) then
             CompanyNameValue := CopyStr(Token.AsValue().AsText(), 1, MaxStrLen(CompanyNameValue));
 
-        // setAsDefault deferred — Report Layouts Impl SetDefault is Internal; see remarks.
-
-        ReportMeta.SetLoadFields(ID);
+        ReportMeta.SetLoadFields(ID, "DefaultLayoutName", "App ID");
         if not ReportMeta.Get(ReportId) then
             Error(ReportNotFoundErr, ReportId);
+        if SetAsDefault and (CompanyNameValue <> '') and (CompanyNameValue <> CompanyName()) then
+            Error(LayoutOtherCompanyErr, LayoutName, CompanyNameValue, CompanyName());
 
         if HasStagingId then begin
             // Take reads and deletes the row in this transaction. A later import error rolls the delete back,
@@ -101,6 +127,7 @@ codeunit 10035600 "Report Layout Handler ori"
         // The platform refuses to modify the content or type of an existing layout, so a replace
         // deletes the user-defined row and inserts it again under the same key, as the
         // Report Layouts page's Replace Layout action does (Report Layouts Impl. InsertNewLayout).
+        GetCurrentDefault(ReportMeta, PreviousDefaultName, PreviousDefaultAppId);
         Replacing := TenantReportLayout.Get(ReportId, LayoutName, EmptyGuid);
         if Replacing then begin
             ActionText := 'Replaced';
@@ -123,8 +150,222 @@ codeunit 10035600 "Report Layout Handler ori"
         ResponseJson.Add('name', LayoutName);
         ResponseJson.Add('layoutFormat', FormatName(LayoutFormat));
         ResponseJson.Add('action', ActionText);
-        ResponseJson.Add('isDefault', false);
+        if SetAsDefault then begin
+            AddPreviousDefault(ResponseJson, PreviousDefaultName, PreviousDefaultAppId);
+            WriteDefaultSelection(ReportId, LayoutName, EmptyGuid, LayoutFormat);
+        end;
+        ResponseJson.Add('isDefault', SetAsDefault or IsCurrentDefault(ReportMeta, LayoutName, EmptyGuid));
         Argument.SetResponseJson(ResponseJson);
+    end;
+
+    /// <summary>Makes an existing layout (extension or user-defined) the report's default in the current company.</summary>
+    local procedure ExecuteSelectDefault(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; ReportId: Integer; LayoutName: Text[250])
+    var
+        ReportMeta: Record "Report Metadata";
+        LayoutList: Record "Report Layout List";
+        TenantReportLayout: Record "Tenant Report Layout";
+        ResponseJson: JsonObject;
+        AppIdText: Text;
+        AppId: Guid;
+        HasAppId: Boolean;
+    begin
+        HasAppId := RequestJson.Contains('appId');
+        if HasAppId then begin
+            AppIdText := GetRequiredText(RequestJson, 'appId');
+            if not Evaluate(AppId, AppIdText) then
+                Error(InvalidAppIdErr, AppIdText);
+        end;
+        ReportMeta.SetLoadFields(ID, "DefaultLayoutName", "App ID");
+        if not ReportMeta.Get(ReportId) then
+            Error(ReportNotFoundErr, ReportId);
+
+        LayoutList.SetRange("Report ID", ReportId);
+        LayoutList.SetRange(Name, LayoutName);
+        if HasAppId then
+            LayoutList.SetRange("Application ID", AppId);
+        LayoutList.SetLoadFields("Report ID", Name, "Application ID", "Layout Format", "Layout Subtype");
+        if not LayoutList.FindFirst() then
+            Error(LayoutNotFoundErr, LayoutName, ReportId);
+        if LayoutList.Count() > 1 then
+            Error(AmbiguousLayoutErr, LayoutName, ReportId);
+        if LayoutList."Layout Subtype" in [LayoutList."Layout Subtype"::HeaderFooter, LayoutList."Layout Subtype"::Theme] then
+            Error(PartLayoutErr, LayoutName, ReportId);
+        if IsNullGuid(LayoutList."Application ID") then begin
+            TenantReportLayout.SetLoadFields("Company Name");
+            if TenantReportLayout.Get(ReportId, LayoutList.Name, LayoutList."Application ID") then
+                if (TenantReportLayout."Company Name" <> '') and (TenantReportLayout."Company Name" <> CompanyName()) then
+                    Error(LayoutOtherCompanyErr, LayoutName, TenantReportLayout."Company Name", CompanyName());
+        end;
+
+        ResponseJson.Add('status', 'Success');
+        ResponseJson.Add('reportId', ReportId);
+        ResponseJson.Add('name', LayoutList.Name);
+        ResponseJson.Add('layoutFormat', FormatName(LayoutList."Layout Format"));
+        ResponseJson.Add('appId', Format(LayoutList."Application ID", 0, 4));
+        ResponseJson.Add('action', 'DefaultSet');
+        AddPreviousDefault(ResponseJson, ReportMeta);
+        WriteDefaultSelection(ReportId, LayoutList.Name, LayoutList."Application ID", LayoutList."Layout Format");
+        ResponseJson.Add('isDefault', true);
+        Argument.SetResponseJson(ResponseJson);
+    end;
+
+    /// <summary>Removes the current company's default layout selection, so the report's built-in default applies again.</summary>
+    local procedure ExecuteClearDefault(var Argument: Record "Message Argument ori"; ReportId: Integer)
+    var
+        ReportMeta: Record "Report Metadata";
+        TenantSelection: Record "Tenant Report Layout Selection";
+        LayoutSelection: Record "Report Layout Selection";
+        LayoutList: Record "Report Layout List";
+        ResponseJson: JsonObject;
+        EmptyGuid: Guid;
+        HadSelection: Boolean;
+    begin
+        ReportMeta.SetLoadFields(ID, "DefaultLayoutName", "App ID");
+        if not ReportMeta.Get(ReportId) then
+            Error(ReportNotFoundErr, ReportId);
+
+        ResponseJson.Add('status', 'Success');
+        ResponseJson.Add('reportId', ReportId);
+        ResponseJson.Add('name', ReportMeta."DefaultLayoutName");
+        if FindBuiltInDefault(ReportMeta, LayoutList) then
+            ResponseJson.Add('layoutFormat', FormatName(LayoutList."Layout Format"))
+        else
+            ResponseJson.Add('layoutFormat', '');
+        ResponseJson.Add('appId', Format(ReportMeta."App ID", 0, 4));
+        AddPreviousDefault(ResponseJson, ReportMeta);
+
+        HadSelection := TenantSelection.Get(ReportId, CompanyName(), EmptyGuid);
+        if HadSelection then begin
+            TenantSelection.Delete(true);
+            // Report Layout Selection follows the built-in default again, as SetDefault would write it.
+            if LayoutSelection.Get(ReportId, CompanyName()) then
+                if FindBuiltInDefault(ReportMeta, LayoutList) then begin
+                    LayoutSelection.Type := SelectionTypeFor(LayoutList."Layout Format");
+                    LayoutSelection.Modify(true);
+                end;
+            ResponseJson.Add('action', 'DefaultCleared');
+        end else
+            ResponseJson.Add('action', 'NoChange');
+        ResponseJson.Add('isDefault', true);
+        Argument.SetResponseJson(ResponseJson);
+    end;
+
+    /// <summary>
+    /// The same writes as Report Layouts Impl. SetDefaultReportLayoutSelection for the current company:
+    /// the company-wide Tenant Report Layout Selection row and the Report Layout Selection type.
+    /// </summary>
+    local procedure WriteDefaultSelection(ReportId: Integer; LayoutName: Text[250]; AppId: Guid; LayoutFormat: Option RDLC,Word,Excel,Custom)
+    var
+        TenantSelection: Record "Tenant Report Layout Selection";
+        LayoutSelection: Record "Report Layout Selection";
+        EmptyGuid: Guid;
+    begin
+        if TenantSelection.Get(ReportId, CompanyName(), EmptyGuid) then begin
+            TenantSelection."Layout Name" := LayoutName;
+            TenantSelection."App ID" := AppId;
+            TenantSelection.Modify(true);
+        end else begin
+            TenantSelection.Init();
+            TenantSelection."Report ID" := ReportId;
+            TenantSelection."Company Name" := CopyStr(CompanyName(), 1, MaxStrLen(TenantSelection."Company Name"));
+            TenantSelection."User ID" := EmptyGuid;
+            TenantSelection."Layout Name" := LayoutName;
+            TenantSelection."App ID" := AppId;
+            TenantSelection.Insert(true);
+        end;
+
+        if LayoutSelection.Get(ReportId, CompanyName()) then begin
+            LayoutSelection.Type := SelectionTypeFor(LayoutFormat);
+            LayoutSelection."Custom Report Layout Code" := '';
+            LayoutSelection.Modify(true);
+        end else begin
+            LayoutSelection.Init();
+            LayoutSelection."Report ID" := ReportId;
+            LayoutSelection."Company Name" := CopyStr(CompanyName(), 1, MaxStrLen(LayoutSelection."Company Name"));
+            LayoutSelection.Type := SelectionTypeFor(LayoutFormat);
+            LayoutSelection."Custom Report Layout Code" := '';
+            LayoutSelection.Insert(true);
+        end;
+    end;
+
+    local procedure FindBuiltInDefault(ReportMeta: Record "Report Metadata"; var LayoutList: Record "Report Layout List"): Boolean
+    begin
+        LayoutList.Reset();
+        LayoutList.SetRange("Report ID", ReportMeta.ID);
+        LayoutList.SetRange(Name, ReportMeta."DefaultLayoutName");
+        LayoutList.SetRange("Application ID", ReportMeta."App ID");
+        LayoutList.SetLoadFields("Layout Format");
+        exit(LayoutList.FindFirst());
+    end;
+
+    local procedure SelectionTypeFor(LayoutFormat: Option RDLC,Word,Excel,Custom): Integer
+    var
+        LayoutSelection: Record "Report Layout Selection";
+    begin
+        case LayoutFormat of
+            LayoutFormat::Word:
+                exit(LayoutSelection.Type::"Word (built-in)");
+            LayoutFormat::Excel:
+                exit(LayoutSelection.Type::"Excel Layout");
+            LayoutFormat::Custom:
+                exit(LayoutSelection.Type::"External Layout");
+            else
+                exit(LayoutSelection.Type::"RDLC (built-in)");
+        end;
+    end;
+
+    /// <summary>Adds the default that applied before this call (current-company selection, else the built-in default).</summary>
+    local procedure AddPreviousDefault(var ResponseJson: JsonObject; ReportMeta: Record "Report Metadata")
+    var
+        LayoutName: Text[250];
+        AppId: Guid;
+    begin
+        GetCurrentDefault(ReportMeta, LayoutName, AppId);
+        AddPreviousDefault(ResponseJson, LayoutName, AppId);
+    end;
+
+    local procedure AddPreviousDefault(var ResponseJson: JsonObject; LayoutName: Text[250]; AppId: Guid)
+    begin
+        ResponseJson.Add('previousDefault', LayoutName);
+        ResponseJson.Add('previousDefaultAppId', Format(AppId, 0, 4));
+    end;
+
+    local procedure IsCurrentDefault(ReportMeta: Record "Report Metadata"; LayoutName: Text[250]; AppId: Guid): Boolean
+    var
+        DefaultName: Text[250];
+        DefaultAppId: Guid;
+    begin
+        GetCurrentDefault(ReportMeta, DefaultName, DefaultAppId);
+        exit((DefaultName = LayoutName) and (DefaultAppId = AppId));
+    end;
+
+    local procedure GetCurrentDefault(ReportMeta: Record "Report Metadata"; var LayoutName: Text[250]; var AppId: Guid)
+    var
+        TenantSelection: Record "Tenant Report Layout Selection";
+        EmptyGuid: Guid;
+    begin
+        // Same lookup as Orchestrator.ReportLayout.List isDefault: current-company selection, else the built-in default.
+        TenantSelection.SetLoadFields("Layout Name", "App ID");
+        if TenantSelection.Get(ReportMeta.ID, CompanyName(), EmptyGuid) then begin
+            LayoutName := TenantSelection."Layout Name";
+            AppId := TenantSelection."App ID";
+            exit;
+        end;
+        LayoutName := CopyStr(ReportMeta."DefaultLayoutName", 1, MaxStrLen(LayoutName));
+        AppId := ReportMeta."App ID";
+    end;
+
+    local procedure GetOptionalBoolean(RequestJson: JsonObject; FieldName: Text): Boolean
+    var
+        Token: JsonToken;
+    begin
+        if not RequestJson.Get(FieldName, Token) then
+            exit(false);
+        if not Token.IsValue() then
+            Error(NotBooleanErr, FieldName);
+        if Token.AsValue().IsNull() then
+            exit(false);
+        exit(Token.AsValue().AsBoolean());
     end;
 
     local procedure GetRequiredInteger(RequestJson: JsonObject; FieldName: Text): Integer
@@ -214,4 +455,13 @@ codeunit 10035600 "Report Layout Handler ori"
         InvalidStagingIdErr: Label '"stagingId" %1 is not a valid GUID.', Comment = 'is-IS="stagingId" %1 er ekki gilt GUID.';
         StagingIdNotFoundErr: Label 'Staging row %1 was not found or has already been taken.', Comment = 'is-IS=Milligeymslufærsla %1 fannst ekki eða hefur þegar verið tekin.';
         MissingLayoutBase64Err: Label 'Request must include non-empty "layoutBase64".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" sem er ekki autt.';
+        SetAndClearDefaultErr: Label 'Send either "setAsDefault" or "clearDefault", not both.', Comment = 'is-IS=Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.';
+        ClearDefaultWithLayoutErr: Label 'Send "clearDefault" without "layoutBase64" or "stagingId".', Comment = 'is-IS=Sendu "clearDefault" án "layoutBase64" eða "stagingId".';
+        AppIdWithLayoutErr: Label 'Send "appId" only with "setAsDefault" and no layout file.', Comment = 'is-IS=Sendu "appId" aðeins með "setAsDefault" og engri útlitsskrá.';
+        InvalidAppIdErr: Label '"appId" %1 is not a valid GUID.', Comment = 'is-IS="appId" %1 er ekki gilt GUID.';
+        LayoutNotFoundErr: Label 'Layout %1 not found on report %2.', Comment = 'is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.';
+        AmbiguousLayoutErr: Label 'More than one layout named %1 exists on report %2. Send "appId".', Comment = 'is-IS=Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".';
+        PartLayoutErr: Label 'Layout %1 is a header, footer or theme part and cannot be the default layout of report %2.', Comment = 'is-IS=Útlit %1 er haus-, fót- eða þemahluti og getur ekki verið sjálfgefið útlit skýrslu %2.';
+        LayoutOtherCompanyErr: Label 'Layout %1 belongs to company %2 and cannot be the default in company %3.', Comment = 'is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.';
+        NotBooleanErr: Label '"%1" must be true or false.', Comment = 'is-IS="%1" verður að vera true eða false.';
 }
