@@ -40,19 +40,26 @@ codeunit 96448 "Table Data Page Tests ori"
     [Test]
     procedure Scenario_AC03_Viewer_HidesTableDataAndOpensCopyPlans()
     var
+        Plan: Record "Copy Plan ori";
         LowerPermissions: Codeunit "Library - Lower Permissions";
         Playbooks: TestPage "Playbooks ori";
         CopyPlans: TestPage "Copy Plans ori";
     begin
         // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
-        // [GIVEN] The exact read-only playbook role, without SUPER or an admin role.
+        // [GIVEN] The read-only playbook role and the standard login baseline, without SUPER or an admin role.
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetExactPermissionSet('BIFROST PlaybVw ori');
+        LowerPermissions.AddPermissionSet('LOGIN');
         Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions must be lowered');
         // [WHEN] The viewer opens Playbooks.
         Playbooks.OpenView();
         // [THEN] Only the permitted tool is offered and can be opened.
-        Assert.IsFalse(Playbooks.TableData.Visible(), 'Table Data must not be a dead action for viewers');
+        asserterror Playbooks.TableData.Invoke();
+        Assert.ExpectedError('The action with ID');
+        ClearLastError();
+        Assert.IsTrue(Plan.ReadPermission(), 'The viewer has Copy Plan read permission');
+        CopyPlans.OpenView();
+        CopyPlans.Close();
         Assert.IsTrue(Playbooks.CopyPlans.Visible(), 'Copy Plans remains available to viewers');
         CopyPlans.Trap();
         Playbooks.CopyPlans.Invoke();
@@ -71,9 +78,36 @@ codeunit 96448 "Table Data Page Tests ori"
         // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetExactPermissionSet('BIFROST PlaybAdm ori');
+        LowerPermissions.AddPermissionSet('LOGIN');
         Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions must be lowered');
         VerifyToolsNavigation(1033, false);
         LowerPermissions.StopLoggingNAVPermissions();
+    end;
+
+    /// <summary>A login-only user cannot run either tool directly.</summary>
+    [Test]
+    procedure Scenario_AC03_NoToolRole_RefusesDirectPages()
+    var
+        LowerPermissions: Codeunit "Library - Lower Permissions";
+        CopyPlanError: Text;
+        TableDataError: Text;
+        PreviousLanguage: Integer;
+    begin
+        // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        LowerPermissions.StartLoggingNAVPermissions();
+        LowerPermissions.SetExactPermissionSet('LOGIN');
+        asserterror Page.Run(Page::"Copy Plans ori");
+        CopyPlanError := GetLastErrorText();
+        ClearLastError();
+        asserterror Page.Run(Page::"Table Data ori");
+        TableDataError := GetLastErrorText();
+        ClearLastError();
+        LowerPermissions.StopLoggingNAVPermissions();
+        GlobalLanguage(PreviousLanguage);
+        Assert.IsTrue(LowerCase(CopyPlanError).Contains('permission'), 'Copy Plans must fail on permissions: ' + CopyPlanError);
+        Assert.IsTrue(LowerCase(TableDataError).Contains('permission'), 'Table Data must fail on permissions: ' + TableDataError);
     end;
 
     local procedure VerifyToolsNavigation(LanguageId: Integer; FromSetup: Boolean)

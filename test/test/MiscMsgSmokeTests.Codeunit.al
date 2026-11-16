@@ -3,6 +3,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 
+/// <summary>Checks the help overview, workspace preview and unlicensed direct-call boundaries.</summary>
 codeunit 96422 "Misc Msg Smoke Tests"
 {
     Subtype = Test;

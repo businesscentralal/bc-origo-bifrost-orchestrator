@@ -1,7 +1,7 @@
 /// <summary>
 /// Adds Bifrost Orchestrator to the Bifröst Setup page. The Apps action opens the application setup
 /// page. Tools groups the playbook list, execution log, Table Data and Copy Plans without
-/// changing the existing action names or their permission grants.
+/// changing the existing action names.
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
