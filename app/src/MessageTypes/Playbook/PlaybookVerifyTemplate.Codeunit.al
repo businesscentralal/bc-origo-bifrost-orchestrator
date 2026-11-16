@@ -319,7 +319,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         Contract: Interface "Msg Contract ori";
         Response: JsonObject;
         Fields: JsonToken;
-        Field: JsonToken;
+        ResponseField: JsonToken;
         NameToken: JsonToken;
         TypeToken: JsonToken;
     begin
@@ -328,8 +328,8 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         if not Response.Get('fields', Fields) then
             exit;
-        foreach Field in Fields.AsArray() do
-            if Field.AsObject().Get('name', NameToken) and Field.AsObject().Get('type', TypeToken) then
+        foreach ResponseField in Fields.AsArray() do
+            if ResponseField.AsObject().Get('name', NameToken) and ResponseField.AsObject().Get('type', TypeToken) then
                 if NameToken.AsValue().AsText() = FieldName then
                     IsString := TypeToken.AsValue().AsText() = 'string';
     end;
