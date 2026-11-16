@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased] — 28.0.4.0
 
+### Fixed — #202
+- #202 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf` and the matching `is-IS=` comments in the document-sending objects (`Doc Send Contract ori`, `Doc Send Process ori`, `Doc Send Resolver ori`, `Purch Order Pdf Msg ori`, `Sales Order Conf Pdf Msg ori`, `Sales Quote Pdf Msg ori`): review of the 200 is-IS units for the document-sending, PDF and Report Layout message types added since 28.0.3. 28 targets corrected (e-mail address term aligned with Foundation, one read-permission term, `JSON-strengur`, 'vísa á' for identifiers that name a document, meaningless or garbled sentences). Placeholders, keys and Locked labels unchanged; no en-US file; no new objects.
+
 ### Added — #189 (core#1365 D3)
 - #189 AC01 / AC02 / AC04 / new codeunit 10035621 `Playbook Preview Count ori`, table 10035540 `Playbook Step ori` (new field 130 `Max Count`) and `Playbook Runner ori`: a message step may send `"expectedCount": "@preview"`. The runner calls the type without `expectedCount`, reads `expected` of the `ConfirmationRequired` answer and repeats the call with that count only when it is at most Max Count. Above the cap, with no Max Count, or when the preview carries no whole count, the step fails with `ConfirmationRequired` (it names the previewed count and the cap) and nothing irreversible is executed. A type that asks for no confirmation runs once. Single, forEach (per item) and paged steps are covered. Require Confirmation for Irreversible Messages stays on; no playbook is pre-authorised.
 - #189 AC04 / table 10035543 `Playbook Step Log ori` (new field 80 `Confirmation Note`, shown on page 10035552 step log list) and codeunit 10035549 `Playbook Log Mgt ori` (`LogStep` overload): the preview count and the confirmed count, or the refusal, are in the run log of every `@preview` call, in 1033 and 1039.
