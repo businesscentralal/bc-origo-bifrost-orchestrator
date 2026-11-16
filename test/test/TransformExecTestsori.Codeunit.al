@@ -90,6 +90,102 @@ codeunit 96468 "Transform Exec Tests ori"
         Assert.AreEqual('X abc X', Result.AsValue().AsText(), 'Literal replacement');
     end;
 
+    /// <summary>ParseJsonTurnsTextIntoObject (#193).</summary>
+    [Test]
+    procedure Scenario_193_ParseJsonTurnsTextIntoObject()
+    var
+        TextValue: JsonValue;
+        Source: JsonToken;
+        Result: JsonToken;
+        Value: JsonToken;
+        Reply: JsonObject;
+        ReplyText: Text;
+    begin
+        // Issue #193 | Time: independent of Today/WorkDate | Risk: None
+        Reply.Add('header', 'INV-1');
+        Reply.WriteTo(ReplyText);
+        TextValue.SetValue(ReplyText);
+        Source := TextValue.AsToken();
+        Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.IsTrue(Result.IsObject(), 'Text holding a JSON object becomes an object');
+        Result.AsObject().Get('header', Value);
+        Assert.AreEqual('INV-1', Value.AsValue().AsText(), 'Property survives');
+        TextValue.SetValue('[1,2]');
+        Source := TextValue.AsToken();
+        Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.IsTrue(Result.IsArray(), 'Text holding a JSON array becomes an array');
+        Assert.AreEqual(2, Result.AsArray().Count(), 'Both elements kept');
+    end;
+
+    /// <summary>ParseJsonAcceptsMarkdownFenceAndPassesThroughObjects (#193).</summary>
+    [Test]
+    procedure Scenario_193_ParseJsonAcceptsFenceAndPassesThroughObjects()
+    var
+        TextValue: JsonValue;
+        Source: JsonToken;
+        Result: JsonToken;
+        Value: JsonToken;
+        LineFeed: Text[1];
+        Fenced: Text;
+    begin
+        // Issue #193 edge: language models wrap JSON in a code fence | Risk: None
+        LineFeed[1] := 10;
+        Fenced := '```json' + LineFeed + '{"a":1}' + LineFeed + '```';
+        TextValue.SetValue(Fenced);
+        Source := TextValue.AsToken();
+        Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.IsTrue(Result.IsObject(), 'Fenced JSON is parsed');
+        Result.AsObject().Get('a', Value);
+        Assert.AreEqual(1, Value.AsValue().AsInteger(), 'Fenced value');
+        Source.ReadFrom('{"b":2}');
+        Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.IsTrue(Result.IsObject(), 'An object source is copied');
+        Source.ReadFrom('null');
+        Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.IsTrue(Result.AsValue().IsNull(), 'Null stays null');
+    end;
+
+    /// <summary>ParseJsonRejectsInvalidAndScalarText (#193).</summary>
+    [Test]
+    procedure Scenario_193_ParseJsonRejectsInvalidAndScalarText()
+    var
+        TextValue: JsonValue;
+        Source: JsonToken;
+        Result: JsonToken;
+    begin
+        // Issue #193 invalid input | Risk: None
+        TextValue.SetValue('not json {');
+        Source := TextValue.AsToken();
+        asserterror Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.ExpectedError('not valid JSON');
+        TextValue.SetValue('42');
+        Source := TextValue.AsToken();
+        asserterror Result := Executor.ApplyOperation("Transform Operation ori"::"Parse JSON", Source, '', '');
+        Assert.ExpectedError('JSON object or array');
+    end;
+
+    /// <summary>TransformStepDeliversParsedObjectToTarget (#193).</summary>
+    [Test]
+    procedure Scenario_193_TransformStepDeliversParsedObject()
+    var
+        Step: Record "Playbook Step ori";
+        Input: JsonObject;
+        Output: JsonObject;
+        Token: JsonToken;
+        ResponseText: Text;
+        ErrorText: Text;
+    begin
+        // Issue #193 AC: whole-value text reply becomes an object a later step can pass on | Risk: None
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'documentData', 'reply', "Transform Operation ori"::"Parse JSON");
+        Input.Add('reply', '{"header":{"number":"INV-1"}}');
+        Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+        Output.ReadFrom(ResponseText);
+        Output.Get('documentData', Token);
+        Assert.IsTrue(Token.IsObject(), 'documentData is an object, not text');
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
     /// <summary>MissingSourceReturnsFailureWithoutPartialOutput.</summary>
     [Test]
     procedure Scenario_AC42_MissingSourceReturnsFailureWithoutPartialOutput()

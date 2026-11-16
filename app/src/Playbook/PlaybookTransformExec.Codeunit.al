@@ -105,10 +105,48 @@ codeunit 10035627 "Playbook Transform Exec ori"
                         Error(ErrorInfo.Create(EmptySearchErr));
                     Value.SetValue(Source.AsValue().AsText().Replace(Argument1, Argument2));
                 end;
+            Operation::"Parse JSON":
+                exit(ParseJson(Source));
             else
                 Error(ErrorInfo.Create(UnknownOperationErr));
         end;
         exit(Value.AsToken());
+    end;
+
+    /// <summary>Turns JSON text into a JSON object or array token. An object or array source is copied, null stays null.</summary>
+    /// <param name="Source">Source value holding JSON text, optionally wrapped in a Markdown code fence.</param>
+    /// <returns>The parsed object or array.</returns>
+    internal procedure ParseJson(Source: JsonToken): JsonToken
+    var
+        Parsed: JsonToken;
+        JsonText: Text;
+    begin
+        if not Source.IsValue() then
+            exit(Source.Clone());
+        if Source.AsValue().IsNull() then
+            exit(Source.Clone());
+        JsonText := StripCodeFence(Source.AsValue().AsText());
+        if not Parsed.ReadFrom(JsonText) then
+            Error(ErrorInfo.Create(ParseJsonErr));
+        if not (Parsed.IsObject() or Parsed.IsArray()) then
+            Error(ErrorInfo.Create(ParseJsonScalarErr));
+        exit(Parsed);
+    end;
+
+    local procedure StripCodeFence(JsonText: Text): Text
+    var
+        LineFeed: Text[1];
+        FirstLineEnd: Integer;
+    begin
+        LineFeed[1] := 10;
+        JsonText := JsonText.Trim();
+        if not (JsonText.StartsWith('```') and JsonText.EndsWith('```') and (StrLen(JsonText) >= 6)) then
+            exit(JsonText);
+        JsonText := CopyStr(JsonText, 4, StrLen(JsonText) - 6);
+        FirstLineEnd := JsonText.IndexOf(LineFeed);
+        if (FirstLineEnd > 0) and (not CopyStr(JsonText, 1, FirstLineEnd - 1).Trim().StartsWith('{')) and (not CopyStr(JsonText, 1, FirstLineEnd - 1).Trim().StartsWith('[')) then
+            JsonText := CopyStr(JsonText, FirstLineEnd + 1);
+        exit(JsonText.Trim());
     end;
 
     /// <summary>Checks output property paths; output arrays and workspace writes are deliberately unsupported.</summary>
@@ -161,6 +199,8 @@ codeunit 10035627 "Playbook Transform Exec ori"
         SourcePathErr: Label 'Transform source path %1 was not found.', Comment = '%1 = source path, is-IS=Upprunaslóð umbreytingar %1 fannst ekki.';
         ScalarErr: Label 'This transform operation requires a scalar value.', Comment = 'is-IS=Þessi umbreytingaraðgerð krefst staks gildis.';
         EmptySearchErr: Label 'Replace Text requires a nonempty Argument 1.', Comment = 'is-IS=Viðfang 1 má ekki vera autt við textaskipti.';
+        ParseJsonErr: Label 'Parse JSON: the source text is not valid JSON.', Comment = 'is-IS=Þátta JSON: upprunatextinn er ekki gilt JSON.';
+        ParseJsonScalarErr: Label 'Parse JSON: the source text must hold a JSON object or array.', Comment = 'is-IS=Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.';
         UnknownOperationErr: Label 'The transform operation is not supported.', Comment = 'is-IS=Umbreytingaraðgerðin er ekki studd.';
         DuplicateTargetErr: Label 'Transform target path %1 overlaps another mapping.', Comment = '%1 = target path, is-IS=Markslóð umbreytingar %1 skarast við aðra vörpun.';
 }

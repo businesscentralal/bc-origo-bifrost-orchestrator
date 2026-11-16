@@ -41,7 +41,7 @@ codeunit 10035628 "Playbook Transform Verify ori"
                 CheckSource(Step, Mapping."Source Path", Findings);
             if (Mapping.Operation = Mapping.Operation::"Replace Text") and (Mapping."Argument 1" = '') then
                 AddError(Step, Findings, 'TransformSearchEmpty', SearchErr);
-            if not (Mapping.Operation in [Mapping.Operation::Copy, Mapping.Operation::Constant, Mapping.Operation::Negate, Mapping.Operation::"Replace Text"]) then
+            if not (Mapping.Operation in [Mapping.Operation::Copy, Mapping.Operation::Constant, Mapping.Operation::Negate, Mapping.Operation::"Replace Text", Mapping.Operation::"Parse JSON"]) then
                 AddError(Step, Findings, 'TransformOperationUnknown', OperationErr);
         until Mapping.Next() = 0;
     end;

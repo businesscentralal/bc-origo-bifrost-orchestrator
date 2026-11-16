@@ -2565,6 +2565,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = target path, is-IS=Markslóð umbreytingar %1 skarast við aðra vörpun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType DuplicateTargetErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 4185224284" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parse JSON: the source text is not valid JSON.</source>
+          <target>Þátta JSON: upprunatextinn er ekki gilt JSON.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON: upprunatextinn er ekki gilt JSON.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ParseJsonErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 2079128554" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parse JSON: the source text must hold a JSON object or array.</source>
+          <target>Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ParseJsonScalarErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4053576474 - NamedType 3741080962" size-unit="char" translate="yes" xml:space="preserve">
           <source>Replace Text requires a nonempty Argument 1.</source>
           <target>Viðfang 1 má ekki vera autt við textaskipti.</target>
@@ -7520,6 +7532,12 @@
           <target>Skipta út texta</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skipta út texta</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Replace Text - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2268432847 - EnumValue 1067242159 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parse JSON</source>
+          <target>Þátta JSON</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Parse JSON - Property Caption</note>
         </trans-unit>
         <trans-unit id="EnumExtension 1969099318 - EnumValue 3097961541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 2593693414">
           <source>Bifrost Orchestrator</source>
