@@ -247,6 +247,8 @@ codeunit 96494 "Report Layout Dflt Tests ori"
         Request.Add('appId', Format(Fixture."Application ID", 0, 4));
         Response := Execute(Request);
         Assert.AreEqual(LayoutName, GetText(Response, 'previousDefault'), 'Previous default is the all-companies selection');
+        Assert.IsTrue(ListIsDefault(Fixture.Name, Fixture."Application ID"), 'Company selection wins over the all-companies selection');
+        Assert.IsFalse(ListIsDefault(LayoutName, EmptyGuid), 'All-companies layout is not the company default');
         Clear(Request);
         Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('clearDefault', true);

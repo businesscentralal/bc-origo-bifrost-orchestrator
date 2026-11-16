@@ -350,13 +350,15 @@ codeunit 10035600 "Report Layout Handler ori"
         // Same lookup as Orchestrator.ReportLayout.List isDefault: current-company selection, then the
         // all-companies selection (blank Company Name), else the built-in default.
         TenantSelection.SetLoadFields("Layout Name", "App ID");
-        if TenantSelection.Get(ReportMeta.ID, CompanyName(), EmptyGuid) or TenantSelection.Get(ReportMeta.ID, '', EmptyGuid) then begin
-            LayoutName := TenantSelection."Layout Name";
-            AppId := TenantSelection."App ID";
-            exit;
-        end;
-        LayoutName := CopyStr(ReportMeta."DefaultLayoutName", 1, MaxStrLen(LayoutName));
-        AppId := ReportMeta."App ID";
+        // AL evaluates both operands of "or", so the two Gets are separate: the company row must win.
+        if not TenantSelection.Get(ReportMeta.ID, CompanyName(), EmptyGuid) then
+            if not TenantSelection.Get(ReportMeta.ID, '', EmptyGuid) then begin
+                LayoutName := CopyStr(ReportMeta."DefaultLayoutName", 1, MaxStrLen(LayoutName));
+                AppId := ReportMeta."App ID";
+                exit;
+            end;
+        LayoutName := TenantSelection."Layout Name";
+        AppId := TenantSelection."App ID";
     end;
 
     local procedure GetOptionalBoolean(RequestJson: JsonObject; FieldName: Text): Boolean

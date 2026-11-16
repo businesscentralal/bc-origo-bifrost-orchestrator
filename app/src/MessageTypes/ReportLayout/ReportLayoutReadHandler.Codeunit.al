@@ -120,9 +120,11 @@ codeunit 10035611 "Report Layout Read Handler ori"
         // Current-company selection, then the all-companies selection (blank Company Name), else the
         // built-in default; without writing selection records (#197).
         Selection.SetLoadFields("Layout Name", "App ID");
-        if Selection.Get(LayoutList."Report ID", CompanyName(), EmptyGuid) or Selection.Get(LayoutList."Report ID", '', EmptyGuid) then
-            exit((Selection."Layout Name" = LayoutList.Name) and (Selection."App ID" = LayoutList."Application ID"));
-        exit((ReportMeta."DefaultLayoutName" = LayoutList.Name) and (ReportMeta."App ID" = LayoutList."Application ID"));
+        // AL evaluates both operands of "or", so the two Gets are separate: the company row must win.
+        if not Selection.Get(LayoutList."Report ID", CompanyName(), EmptyGuid) then
+            if not Selection.Get(LayoutList."Report ID", '', EmptyGuid) then
+                exit((ReportMeta."DefaultLayoutName" = LayoutList.Name) and (ReportMeta."App ID" = LayoutList."Application ID"));
+        exit((Selection."Layout Name" = LayoutList.Name) and (Selection."App ID" = LayoutList."Application ID"));
     end;
 
     local procedure FormatName(LayoutFormat: Option RDLC,Word,Excel,Custom): Text
