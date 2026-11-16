@@ -5,7 +5,10 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — 28.0.4.0
+## [Unreleased]
+
+### Added
+- #199: **Tools / Verkfæri** on Bifröst Setup (pageextension 10035537) groups the existing Playbooks and Execution Log actions with permission-aware Table Data and Copy Plans links. The Playbooks list (page 10035551) offers the same two tools; Orchestrator Setup stays under Apps. Existing action names and permission grants are preserved. Runtime help (codeunit 10035576) documents the navigation in en-US/is-IS. No new object IDs or message types. — 28.0.4.0
 
 ### Added — #189 (core#1365 D3)
 - #189 AC01 / AC02 / AC04 / new codeunit 10035621 `Playbook Preview Count ori`, table 10035540 `Playbook Step ori` (new field 130 `Max Count`) and `Playbook Runner ori`: a message step may send `"expectedCount": "@preview"`. The runner calls the type without `expectedCount`, reads `expected` of the `ConfirmationRequired` answer and repeats the call with that count only when it is at most Max Count. Above the cap, with no Max Count, or when the preview carries no whole count, the step fails with `ConfirmationRequired` (it names the previewed count and the cap) and nothing irreversible is executed. A type that asks for no confirmation runs once. Single, forEach (per item) and paged steps are covered. Require Confirmation for Irreversible Messages stays on; no playbook is pre-authorised.

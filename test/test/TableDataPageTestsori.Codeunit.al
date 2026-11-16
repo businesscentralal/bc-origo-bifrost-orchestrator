@@ -1,5 +1,6 @@
 namespace Origo.Bifrost.Orchestrator.Test;
 
+using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
 using System.Diagnostics;
 using System.TestLibraries.Utilities;
@@ -16,6 +17,112 @@ codeunit 96448 "Table Data Page Tests ori"
         ConfirmImport: Boolean;
         ImportMarkerId: Guid;
         ReadOnlyFieldName: Text;
+
+    /// <summary>Tools open the intended pages from Setup in both supported languages.</summary>
+    [Test]
+    procedure Scenario_AC01_SetupTools_OpenTargetPages()
+    begin
+        // Story #199, AC01 | Time: independent of Today/WorkDate | Risk: Foundation setup UI.
+        VerifyToolsNavigation(1033, true);
+        VerifyToolsNavigation(1039, true);
+    end;
+
+    /// <summary>Tools remain usable on an empty Playbooks list in both supported languages.</summary>
+    [Test]
+    procedure Scenario_AC02_EmptyPlaybooks_OpenTargetPages()
+    begin
+        // Story #199, AC02 | Time: independent of Today/WorkDate | Risk: None.
+        VerifyToolsNavigation(1033, false);
+        VerifyToolsNavigation(1039, false);
+    end;
+
+    /// <summary>The view role can reach Copy Plans but has no Table Data action.</summary>
+    [Test]
+    procedure Scenario_AC03_Viewer_HidesTableDataAndOpensCopyPlans()
+    var
+        LowerPermissions: Codeunit "Library - Lower Permissions";
+        Playbooks: TestPage "Playbooks ori";
+        CopyPlans: TestPage "Copy Plans ori";
+    begin
+        // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
+        // [GIVEN] The exact read-only playbook role, without SUPER or an admin role.
+        LowerPermissions.StartLoggingNAVPermissions();
+        LowerPermissions.SetExactPermissionSet('BIFROST PlaybVw ori');
+        Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions must be lowered');
+        // [WHEN] The viewer opens Playbooks.
+        Playbooks.OpenView();
+        // [THEN] Only the permitted tool is offered and can be opened.
+        Assert.IsFalse(Playbooks.TableData.Visible(), 'Table Data must not be a dead action for viewers');
+        Assert.IsTrue(Playbooks.CopyPlans.Visible(), 'Copy Plans remains available to viewers');
+        CopyPlans.Trap();
+        Playbooks.CopyPlans.Invoke();
+        Assert.IsFalse(CopyPlans.Editable(), 'Copy Plans list remains read-only');
+        CopyPlans.Close();
+        Playbooks.Close();
+        LowerPermissions.StopLoggingNAVPermissions();
+    end;
+
+    /// <summary>The admin role retains access to both tools.</summary>
+    [Test]
+    procedure Scenario_AC03_Admin_OpensBothTools()
+    var
+        LowerPermissions: Codeunit "Library - Lower Permissions";
+    begin
+        // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
+        LowerPermissions.StartLoggingNAVPermissions();
+        LowerPermissions.SetExactPermissionSet('BIFROST PlaybAdm ori');
+        Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions must be lowered');
+        VerifyToolsNavigation(1033, false);
+        LowerPermissions.StopLoggingNAVPermissions();
+    end;
+
+    local procedure VerifyToolsNavigation(LanguageId: Integer; FromSetup: Boolean)
+    var
+        Setup: TestPage "Setup ori";
+        Playbooks: TestPage "Playbooks ori";
+        TableData: TestPage "Table Data ori";
+        CopyPlans: TestPage "Copy Plans ori";
+        Instances: TestPage "Playbook Instances ori";
+        PreviousLanguage: Integer;
+    begin
+        // [GIVEN] No selected playbook is needed for a table tool.
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        // [WHEN] Each action is invoked through the real page surface.
+        if FromSetup then begin
+            Setup.OpenView();
+            TableData.Trap();
+            Setup.TableData.Invoke();
+            TableData.PageSizeField.AssertEquals(50);
+            TableData.Close();
+            CopyPlans.Trap();
+            Setup.CopyPlans.Invoke();
+            Assert.IsFalse(CopyPlans.Editable(), 'Copy Plans list opens');
+            CopyPlans.Close();
+            Playbooks.Trap();
+            Setup.Playbooks.Invoke();
+            Playbooks.Close();
+            Instances.Trap();
+            Setup.PlaybookInstances.Invoke();
+            Instances.Close();
+            Setup.Close();
+        end else begin
+            Playbooks.OpenView();
+            Playbooks.Filter.SetFilter(Code, 'X199-NO-PLAYBOOK');
+            Assert.IsFalse(Playbooks.First(), 'The navigation test uses an empty list');
+            TableData.Trap();
+            Playbooks.TableData.Invoke();
+            // [THEN] The target starts with its normal empty table selection and default page size.
+            TableData.PageSizeField.AssertEquals(50);
+            TableData.Close();
+            CopyPlans.Trap();
+            Playbooks.CopyPlans.Invoke();
+            Assert.IsFalse(CopyPlans.Editable(), 'Copy Plans list opens');
+            CopyPlans.Close();
+            Playbooks.Close();
+        end;
+        GlobalLanguage(PreviousLanguage);
+    end;
 
     /// <summary>AC2.1: open the page on a table, page forward and back.</summary>
     [Test]

@@ -20,6 +20,27 @@ codeunit 96422 "Misc Msg Smoke Tests"
         IsInitialized := true;
     end;
 
+    /// <summary>Runtime help explains both Tools locations and role boundaries in both languages.</summary>
+    [Test]
+    procedure Scenario_AC04_ToolsHelp_IsBilingual()
+    var
+        Help: Codeunit "Help ori";
+        Overview: Text;
+        PreviousLanguage: Integer;
+    begin
+        // Story #199, AC04 | Time: independent of Today/WorkDate | Risk: None.
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        Overview := Help.GetOverview();
+        Assert.IsTrue(Overview.Contains('**Related > Tools**'), 'English navigation');
+        Assert.IsTrue(Overview.Contains('**Bifrost Playbook View**'), 'English role boundary');
+        GlobalLanguage(1039);
+        Overview := Help.GetOverview();
+        Assert.IsTrue(Overview.Contains('**Tengt > Verkfæri**'), 'Icelandic navigation');
+        Assert.IsTrue(Overview.Contains('**Bifröst keðjuskoðun**'), 'Icelandic role boundary');
+        GlobalLanguage(PreviousLanguage);
+    end;
+
     [Test]
     procedure HelpGetReturnsNonEmptyMarkdown()
     var
