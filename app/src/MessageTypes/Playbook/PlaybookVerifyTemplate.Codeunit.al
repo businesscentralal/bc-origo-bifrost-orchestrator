@@ -27,6 +27,8 @@ codeunit 10035618 "Playbook Verify Template ori"
         Seen: List of [Text];
         TemplateText: Text;
     begin
+        if Step."Step Kind" = Step."Step Kind"::Message then
+            CheckConditionPaths(Step, Findings);
         TemplateText := Step.GetRequestTemplate();
         if TemplateText.Trim() = '' then begin
             CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
@@ -240,7 +242,6 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         CheckIrreversible(Step, GetEffectName(Effect), TemplateJson, Findings);
         CheckRequestKeys(Step, GetEffectName(Effect), Parameters, Envelope, TemplateJson, Findings);
-        CheckConditionPaths(Step, Findings);
     end;
 
     /// <summary>
@@ -265,8 +266,9 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         if Fields.Count() = 0 then
             exit;
+        Condition.ReadIsolation := IsolationLevel::ReadCommitted;
         Condition.FilterForStep(Step."Playbook Code", Step."Step No.", "Playbook Cond. Type ori"::Success);
-        Condition.SetLoadFields(Path);
+        Condition.SetLoadFields("Playbook Code", "Step No.", "Condition Type", Path);
         if not Condition.FindSet() then
             exit;
         repeat
