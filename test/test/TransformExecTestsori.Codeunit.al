@@ -293,6 +293,103 @@ codeunit 96468 "Transform Exec Tests ori"
         Commit();
     end;
 
+    /// <summary>Verify warns on declared string output feeding an object or array, including iteration references.</summary>
+    [Test]
+    procedure Scenario_AC02_StringReferenceToObject_Warns()
+    begin
+        // Issue #193, AC02 | Time: independent of Today/WorkDate | Risk: None
+        CheckStringReference('{"initialRequest":"@10.playbookCode"}', false, false, false, 1033, 1);
+        CheckStringReference('{"initialRequest":"@10.@_iter.playbookCode"}', true, false, false, 1033, 1);
+        CheckStringReference('{"initialRequest":"@10.0.playbookCode"}', true, false, false, 1033, 1);
+        CheckStringReference('{"fieldNumbers":"@10.playbookCode"}', false, true, false, 1033, 1);
+    end;
+
+    /// <summary>Literal objects, non-string or unknown output and converted Transform output do not warn.</summary>
+    [Test]
+    procedure Scenario_AC02_ObjectAndUnknownReferences_NoWarning()
+    begin
+        // Issue #193, AC02 | Time: independent of Today/WorkDate | Risk: None
+        CheckStringReference('{"initialRequest":{}}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":null}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":"@10.findings"}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":"@10.unknown"}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":"@_initial.documentData"}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":"prefix @10.playbookCode"}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":"@10.playbookCode suffix"}', false, false, false, 1033, 0);
+        CheckStringReference('{"playbookCode":"@10.playbookCode"}', false, false, false, 1033, 0);
+        CheckStringReference('{"initialRequest":"@10.result"}', false, false, true, 1033, 0);
+    end;
+
+    /// <summary>The warning and conversion advice are localized, and disabled steps never block.</summary>
+    [Test]
+    procedure Scenario_AC02_StringWarning_LocalizedAndDisabled()
+    begin
+        // Issue #193, AC02 | Time: independent of Today/WorkDate | Risk: None
+        CheckStringReference('{"initialRequest":"@10.playbookCode"}', false, false, false, 1039, 1);
+    end;
+
+    local procedure CheckStringReference(Template: Text; ForEachSource: Boolean; ArrayParameter: Boolean; ParsedSource: Boolean; LanguageId: Integer; ExpectedCount: Integer)
+    var
+        SourceStep: Record "Playbook Step ori";
+        TargetStep: Record "Playbook Step ori";
+        Verify: Codeunit "Playbook Verify ori";
+        Findings: JsonArray;
+        Finding: JsonToken;
+        Value: JsonToken;
+        Code: Code[20];
+        Count: Integer;
+        PreviousLanguage: Integer;
+    begin
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        Code := CopyStr('P193-' + DelChr(Format(CreateGuid(), 0, 4), '=', '{}-'), 1, 20);
+        Lib.CreatePlaybook(Code);
+        Lib.AddStep(Code, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Playbook.Verify", '{}', 0, '', 0);
+        SourceStep.Get(Code, 10);
+        if ForEachSource then
+            SourceStep."Iterate Array Path" := 'result';
+        if ParsedSource then begin
+            SourceStep.Validate("Step Kind", SourceStep."Step Kind"::Transform);
+            SourceStep.SetRequestTemplate('{"reply":"{\"header\":{}}"}');
+            AddMapping(SourceStep, 10000, 'result', 'reply', "Transform Operation ori"::"Parse JSON");
+        end;
+        SourceStep.Modify(true);
+        if ArrayParameter then
+            Lib.AddStep(Code, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", Template, 0, '', 0)
+        else
+            Lib.AddStep(Code, 20, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Playbook.Run", Template, 0, '', 0);
+        TargetStep.Get(Code, 20);
+        TargetStep.Disabled := LanguageId = 1039;
+        TargetStep.Modify(true);
+        // [WHEN] The normal Verify entry point collects all step and template checks.
+        Verify.GetFindings(Code, Findings);
+        // [THEN] Only proved string-to-object mismatches receive this warning.
+        foreach Finding in Findings do begin
+            Finding.AsObject().Get('code', Value);
+            if Value.AsValue().AsText() = 'StringReferenceToObject' then begin
+                Count += 1;
+                Finding.AsObject().Get('severity', Value);
+                Assert.AreEqual('warning', Value.AsValue().AsText(), 'A type mismatch is a warning');
+                Finding.AsObject().Get('stepNo', Value);
+                Assert.AreEqual(20, Value.AsValue().AsInteger(), 'Warning names the consumer');
+                Finding.AsObject().Get('message', Value);
+                if LanguageId = 1039 then begin
+                    Assert.IsTrue(Value.AsValue().AsText().StartsWith('Skref 20'), 'Icelandic warning');
+                    Assert.IsTrue(Finding.AsObject().Contains('stepDisabled'), 'Disabled warning is informational');
+                end else
+                    Assert.IsTrue(Value.AsValue().AsText().StartsWith('Step 20'), 'English warning');
+                Finding.AsObject().Get('nextStep', Value);
+                if LanguageId = 1039 then
+                    Assert.IsTrue(Value.AsValue().AsText().Contains('Þátta JSON'), 'Icelandic conversion advice')
+                else
+                    Assert.IsTrue(Value.AsValue().AsText().Contains('Parse JSON'), 'English conversion advice');
+            end;
+        end;
+        Assert.AreEqual(ExpectedCount, Count, 'StringReferenceToObject count: ' + Template);
+        Lib.Cleanup(Code);
+        GlobalLanguage(PreviousLanguage);
+    end;
+
     local procedure CreateTransform(var Step: Record "Playbook Step ori")
     var
         Code: Code[20];

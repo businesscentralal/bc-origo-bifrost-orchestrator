@@ -2565,18 +2565,6 @@
           <note from="Developer" annotates="general" priority="2">%1 = target path, is-IS=Markslóð umbreytingar %1 skarast við aðra vörpun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType DuplicateTargetErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 4053576474 - NamedType 4185224284" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Parse JSON: the source text is not valid JSON.</source>
-          <target>Þátta JSON: upprunatextinn er ekki gilt JSON.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON: upprunatextinn er ekki gilt JSON.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ParseJsonErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 4053576474 - NamedType 2079128554" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Parse JSON: the source text must hold a JSON object or array.</source>
-          <target>Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ParseJsonScalarErr</note>
-        </trans-unit>
         <trans-unit id="Codeunit 4053576474 - NamedType 3741080962" size-unit="char" translate="yes" xml:space="preserve">
           <source>Replace Text requires a nonempty Argument 1.</source>
           <target>Viðfang 1 má ekki vera autt við textaskipti.</target>
@@ -2600,6 +2588,18 @@
           <target>Umbreytingarskref geta ekki sótt síður. Notaðu fyrra síðuskipt lestrarskref.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref geta ekki sótt síður. Notaðu fyrra síðuskipt lestrarskref.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType PagedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 4185224284" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parse JSON: the source text is not valid JSON.</source>
+          <target>Þátta JSON: upprunatextinn er ekki gilt JSON.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON: upprunatextinn er ekki gilt JSON.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ParseJsonErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4053576474 - NamedType 2079128554" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parse JSON: the source text must hold a JSON object or array.</source>
+          <target>Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON: upprunatextinn verður að innihalda JSON hlut eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Exec ori - NamedType ParseJsonScalarErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 4053576474 - NamedType 541553205" size-unit="char" translate="yes" xml:space="preserve">
           <source>This transform operation requires a scalar value.</source>
@@ -2972,6 +2972,18 @@
           <target>Leiðréttu skrefsnúmerið í tilvísuninni, eða bættu við skrefinu sem vantar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu skrefsnúmerið í tilvísuninni, eða bættu við skrefinu sem vantar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StepNotFoundNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1182094209" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 passes %4, a string-producing reference, to parameter %2, which requires a JSON %3.</source>
+          <target>Skref %1 sendir %4, tilvísun sem skilar texta, í færibreytuna %2 sem krefst JSON af gerðinni %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = parameter, %3 = object or array, %4 = reference, is-IS=Skref %1 sendir %4, tilvísun sem skilar texta, í færibreytuna %2 sem krefst JSON af gerðinni %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StringReferenceMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3649058869" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a Transform step with Parse JSON before this step, then reference its parsed object or array instead of the original text.</source>
+          <target>Bættu við umbreytingarskrefi með Þátta JSON á undan þessu skrefi og vísaðu svo í þáttaðan hlut eða fylki þess í stað upprunalega textans.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu við umbreytingarskrefi með Þátta JSON á undan þessu skrefi og vísaðu svo í þáttaðan hlut eða fylki þess í stað upprunalega textans.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType StringReferenceNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 3733960680" size-unit="char" translate="yes" xml:space="preserve">
           <source>The request template of step %1 is not a valid JSON object. The engine does not fail on it: it sends an empty request {} to the message type.</source>
@@ -7527,17 +7539,17 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Skipta um formerki</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Negate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Enum 2268432847 - EnumValue 2769871211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Replace Text</source>
-          <target>Skipta út texta</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skipta út texta</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Replace Text - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Enum 2268432847 - EnumValue 1067242159 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parse JSON</source>
           <target>Þátta JSON</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Þátta JSON</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Parse JSON - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2268432847 - EnumValue 2769871211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Replace Text</source>
+          <target>Skipta út texta</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skipta út texta</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Transform Operation ori - EnumValue Replace Text - Property Caption</note>
         </trans-unit>
         <trans-unit id="EnumExtension 1969099318 - EnumValue 3097961541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 2593693414">
           <source>Bifrost Orchestrator</source>

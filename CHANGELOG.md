@@ -8,6 +8,8 @@ Business Central release versioning (`major.minor.build.revision`).
 ## [Unreleased] — 28.0.4.0
 
 ### Added — #193
+
+- Verify warns when a whole-value string response reference feeds an object or array parameter; Parse JSON provides the conversion (#193).
 - #193 AC01 / enum 10035624 `Transform Operation ori` (new value 4 `Parse JSON`, caption `Þátta JSON`) and codeunit 10035627 `Playbook Transform Exec ori` (new internal procedure `ParseJson`): a Transform mapping with Parse JSON turns a text value that holds JSON, such as a language model reply (also inside a Markdown code fence), into a JSON object or array. A Transform step ahead of the target step therefore gives a later `@N.result[..]` reference a real object for an object or array parameter such as `documentData` of `DocumentExchange.UBL.RenderBilling`. An object or array source is copied and null stays null; text that is not valid JSON, or is a JSON scalar, fails the step with an actionable en-US/is-IS error and no partial output. Codeunit 10035628 `Playbook Transform Verify ori` accepts the operation; the Transform chapter of `Help ori` documents it. No new object IDs. is-IS XLF updated.
 - #193 not yet done: the Verify warning for a string-producing reference that feeds an object parameter, and automatic object insertion for whole-value references (the issue's first option). Parse JSON is the issue's second option.
 - Tests: four new scenarios in test codeunit 96468 `Transform Exec Tests ori` (text to object and array, Markdown fence, object and null pass-through, invalid and scalar text, Transform step output holds an object).

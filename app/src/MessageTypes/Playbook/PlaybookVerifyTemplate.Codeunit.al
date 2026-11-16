@@ -240,6 +240,98 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit;
         CheckIrreversible(Step, GetEffectName(Effect), TemplateJson, Findings);
         CheckRequestKeys(Step, GetEffectName(Effect), Parameters, Envelope, TemplateJson, Findings);
+        CheckStringReferences(Step, Parameters, TemplateJson, Findings);
+    end;
+
+    // Only diagnose types proved by a readable contract. Unknown or runtime-only paths stay silent.
+    local procedure CheckStringReferences(Step: Record "Playbook Step ori"; Parameters: JsonArray; TemplateJson: JsonObject; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
+        Parameter: JsonToken;
+        Value: JsonToken;
+        NameToken: JsonToken;
+        TypeToken: JsonToken;
+        ParameterName: Text;
+        ParameterType: Text;
+        Reference: Text;
+    begin
+        foreach Parameter in Parameters do
+            if Parameter.IsObject() then
+                if Parameter.AsObject().Get('name', NameToken) and Parameter.AsObject().Get('type', TypeToken) then begin
+                    ParameterName := NameToken.AsValue().AsText();
+                    ParameterType := TypeToken.AsValue().AsText();
+                    if ParameterType in ['object', 'array'] then
+                        if TemplateJson.Get(ParameterName, Value) then
+                            if Value.IsValue() then
+                                if not Value.AsValue().IsNull() then begin
+                                    Reference := Value.AsValue().AsText();
+                                    if IsStringReference(Step, Reference) then
+                                        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'StringReferenceToObject',
+                                            StrSubstNo(StringReferenceMsg, Step."Step No.", ParameterName, ParameterType, Reference),
+                                            StringReferenceNextStepTxt, Step.Disabled);
+                                end;
+                end;
+    end;
+
+    local procedure IsStringReference(Step: Record "Playbook Step ori"; Reference: Text): Boolean
+    var
+        SourceStep: Record "Playbook Step ori";
+        Segments: List of [Text];
+        SourceStepNo: Integer;
+        IterationNo: Integer;
+        FieldPosition: Integer;
+        IsString: Boolean;
+    begin
+        if not Reference.StartsWith('@') then
+            exit(false);
+        Segments := CopyStr(Reference, 2).Split('.');
+        if Segments.Count() < 2 then
+            exit(false);
+        if not TryGetStepNo(Segments.Get(1), SourceStepNo) then
+            exit(false);
+        if SourceStepNo >= Step."Step No." then
+            exit(false);
+        SourceStep.SetLoadFields("Step Kind", "Message Type", "Iterate Array Path");
+        if not SourceStep.Get(Step."Playbook Code", SourceStepNo) then
+            exit(false);
+        if SourceStep."Step Kind" <> SourceStep."Step Kind"::Message then
+            exit(false);
+        FieldPosition := 2;
+        if SourceStep.IsForEach() then begin
+            if Segments.Count() < 3 then
+                exit(false);
+            if Segments.Get(2) <> '@_iter' then
+                if not TryGetStepNo(Segments.Get(2), IterationNo) then
+                    exit(false);
+            FieldPosition := 3;
+        end;
+        // A scalar response field cannot have child paths or interpolation suffixes.
+        if Segments.Count() <> FieldPosition then
+            exit(false);
+        if not TryIsStringResponse(SourceStep."Message Type", Segments.Get(FieldPosition), IsString) then
+            exit(false);
+        exit(IsString);
+    end;
+
+    [TryFunction]
+    local procedure TryIsStringResponse(MessageType: Enum "Message Type ori"; FieldName: Text; var IsString: Boolean)
+    var
+        Contract: Interface "Msg Contract ori";
+        Response: JsonObject;
+        Fields: JsonToken;
+        Field: JsonToken;
+        NameToken: JsonToken;
+        TypeToken: JsonToken;
+    begin
+        Contract := MessageType;
+        if not Contract.GetResponse(Response) then
+            exit;
+        if not Response.Get('fields', Fields) then
+            exit;
+        foreach Field in Fields.AsArray() do
+            if Field.AsObject().Get('name', NameToken) and Field.AsObject().Get('type', TypeToken) then
+                if NameToken.AsValue().AsText() = FieldName then
+                    IsString := TypeToken.AsValue().AsText() = 'string';
     end;
 
     /// <summary>
@@ -736,5 +828,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         UnknownCurrentFieldNextStepTxt: Label 'A field name in an answer has no spaces and no punctuation except _ (for example No_ for No.). Call Help.Fields.Get on table %1 to list the fields.', Comment = '%1 = table name, is-IS=Reitaheiti í svari hefur engin bil og engin greinarmerki nema _ (til dæmis No_ fyrir No.). Kallaðu á Help.Fields.Get á töfluna %1 til að sjá reitina.';
         PrimaryKeyFieldMsg: Label 'Step %1 reads @_current.fields.%2, but %2 is a primary-key field of table %3 and is returned under primaryKey, not fields.', Comment = '%1 = step no, %2 = JSON field name, %3 = table name, is-IS=Skref %1 les @_current.fields.%2, en %2 er aðallykilsreitur í töflunni %3 og er skilað undir primaryKey, ekki fields.';
         PrimaryKeyFieldNextStepTxt: Label 'Use @_current.primaryKey.%1 and inspect the source answer before running the playbook.', Comment = '%1 = JSON field name, is-IS=Notaðu @_current.primaryKey.%1 og skoðaðu upprunasvarið áður en keðjan er keyrð.';
+        StringReferenceMsg: Label 'Step %1 passes %4, a string-producing reference, to parameter %2, which requires a JSON %3.', Comment = '%1 = step no, %2 = parameter, %3 = object or array, %4 = reference, is-IS=Skref %1 sendir %4, tilvísun sem skilar texta, í færibreytuna %2 sem krefst JSON af gerðinni %3.';
+        StringReferenceNextStepTxt: Label 'Add a Transform step with Parse JSON before this step, then reference its parsed object or array instead of the original text.', Comment = 'is-IS=Bættu við umbreytingarskrefi með Þátta JSON á undan þessu skrefi og vísaðu svo í þáttaðan hlut eða fylki þess í stað upprunalega textans.';
         NothingTxt: Label 'nothing', Comment = 'is-IS=ekkert';
 }
