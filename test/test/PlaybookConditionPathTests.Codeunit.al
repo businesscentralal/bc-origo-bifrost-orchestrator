@@ -183,6 +183,23 @@ codeunit 96490 "Playbook Condition Path Tests"
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
+    /// <summary>A Success condition is a response path, so workspace reference syntax does not exempt it.</summary>
+    [Test]
+    procedure Scenario_AC01_SuccessWorkspaceSyntax_IsWarned()
+    var
+        Findings: JsonArray;
+    begin
+        // Story #194, AC01 | Time: independent of Today and WorkDate | Risk: None
+        // [GIVEN] A Success condition mistakenly uses request-reference syntax.
+        SetupNestedStep();
+        Lib.AddSuccessCondition(PlaybookCodeTok, 10, '@_initial.valid', 'true');
+        // [WHEN] The playbook is verified.
+        GetFindings(Findings);
+        // [THEN] Success paths are compared to the response, not exempted as workspace references.
+        Assert.AreEqual(1, CountCode(Findings), 'Success paths cannot read the workspace');
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
     local procedure SetupNestedStep()
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);

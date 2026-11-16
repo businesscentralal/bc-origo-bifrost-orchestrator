@@ -310,8 +310,6 @@ codeunit 10035618 "Playbook Verify Template ori"
         Children: JsonArray;
         First: Text;
     begin
-        if PathText.StartsWith('@') then
-            exit(true);
         Segments := PathText.Split('.');
         First := StripIndex(Segments.Get(1)).ToLower();
         if (First = 'status') or (First = 'error') then
