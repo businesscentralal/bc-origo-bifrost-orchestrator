@@ -38,6 +38,7 @@ codeunit 96448 "Table Data Page Tests ori"
 
     /// <summary>The view role can reach Copy Plans but has no Table Data action.</summary>
     [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
     procedure Scenario_AC03_Viewer_HidesTableDataAndOpensCopyPlans()
     var
         Plan: Record "Copy Plan ori";
@@ -71,6 +72,7 @@ codeunit 96448 "Table Data Page Tests ori"
 
     /// <summary>The admin role retains access to both tools.</summary>
     [Test]
+    [TestPermissions(TestPermissions::Restrictive)]
     procedure Scenario_AC03_Admin_OpensBothTools()
     var
         LowerPermissions: Codeunit "Library - Lower Permissions";
@@ -84,30 +86,30 @@ codeunit 96448 "Table Data Page Tests ori"
         LowerPermissions.StopLoggingNAVPermissions();
     end;
 
-    /// <summary>A login-only user cannot run either tool directly.</summary>
+    /// <summary>A login-only user is not offered either tool action.</summary>
     [Test]
-    procedure Scenario_AC03_NoToolRole_RefusesDirectPages()
+    [TestPermissions(TestPermissions::Restrictive)]
+    procedure Scenario_AC03_NoToolRole_HidesBothTools()
     var
+        Plan: Record "Copy Plan ori";
         LowerPermissions: Codeunit "Library - Lower Permissions";
-        CopyPlanError: Text;
-        TableDataError: Text;
-        PreviousLanguage: Integer;
+        Playbooks: TestPage "Playbooks ori";
     begin
         // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
-        PreviousLanguage := GlobalLanguage();
-        GlobalLanguage(1033);
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetExactPermissionSet('LOGIN');
-        asserterror Page.Run(Page::"Copy Plans ori");
-        CopyPlanError := GetLastErrorText();
+        Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions must be lowered');
+        Assert.IsFalse(Plan.ReadPermission(), 'Login alone does not grant access to Copy Plans data');
+        Playbooks.OpenView();
+        // TestPage can open a parent under the mock; its permission-filtered actions are the contract under test.
+        asserterror Playbooks.CopyPlans.Invoke();
+        Assert.ExpectedError('The action with ID');
         ClearLastError();
-        asserterror Page.Run(Page::"Table Data ori");
-        TableDataError := GetLastErrorText();
+        asserterror Playbooks.TableData.Invoke();
+        Assert.ExpectedError('The action with ID');
         ClearLastError();
+        Playbooks.Close();
         LowerPermissions.StopLoggingNAVPermissions();
-        GlobalLanguage(PreviousLanguage);
-        Assert.IsTrue(LowerCase(CopyPlanError).Contains('permission'), 'Copy Plans must fail on permissions: ' + CopyPlanError);
-        Assert.IsTrue(LowerCase(TableDataError).Contains('permission'), 'Table Data must fail on permissions: ' + TableDataError);
     end;
 
     local procedure VerifyToolsNavigation(LanguageId: Integer; FromSetup: Boolean)
