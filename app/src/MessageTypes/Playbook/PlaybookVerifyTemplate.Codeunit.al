@@ -271,16 +271,15 @@ codeunit 10035618 "Playbook Verify Template ori"
         Condition.SetLoadFields("Playbook Code", "Step No.", "Condition Type", Path);
         if not Condition.FindSet() then
             exit;
+        GetDeclaredResponseNames(Fields, DeclaredText);
         repeat
             PathText := Condition.Path.Trim();
-            if (PathText <> '') and not Seen.Contains(PathText.ToLower()) then begin
-                Seen.Add(PathText.ToLower());
-                if not IsDeclaredResponsePath(PathText, Fields) then begin
-                    GetDeclaredResponseNames(Fields, DeclaredText);
+            if (PathText <> '') and not Seen.Contains(PathText) then begin
+                Seen.Add(PathText);
+                if not IsDeclaredResponsePath(PathText, Fields) then
                     Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownFieldReference',
                         StrSubstNo(UnknownConditionPathMsg, Step."Step No.", PathText, Verify.GetTypeName(Step."Message Type"), DeclaredText),
                         StrSubstNo(UnknownConditionPathNextStepTxt, PathText), Step.Disabled);
-                end;
             end;
         until Condition.Next() = 0;
     end;
@@ -301,7 +300,8 @@ codeunit 10035618 "Playbook Verify Template ori"
 
     /// <summary>
     /// True when the path can be found in the declared response: status and error always can; otherwise the first segment
-    /// must be a declared field and, when that field lists children, the second segment must be one of them.
+    /// must match a declared field exactly and, when that field lists children, the second segment must match
+    /// a child or a placeholder child whose name starts with &lt;.
     /// </summary>
     local procedure IsDeclaredResponsePath(PathText: Text; Fields: JsonArray): Boolean
     var
@@ -311,7 +311,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         First: Text;
     begin
         Segments := PathText.Split('.');
-        First := StripIndex(Segments.Get(1)).ToLower();
+        First := StripIndex(Segments.Get(1));
         if (First = 'status') or (First = 'error') then
             exit(true);
         foreach FieldToken in Fields do
@@ -320,7 +320,7 @@ codeunit 10035618 "Playbook Verify Template ori"
                     exit(true);
                 if not GetChildren(FieldToken, Children) then
                     exit(true);
-                exit(HasField(Children, StripIndex(Segments.Get(2)).ToLower()));
+                exit(HasField(Children, StripIndex(Segments.Get(2))));
             end;
         exit(false);
     end;
@@ -328,10 +328,13 @@ codeunit 10035618 "Playbook Verify Template ori"
     local procedure HasField(Fields: JsonArray; FieldName: Text): Boolean
     var
         FieldToken: JsonToken;
+        DeclaredName: Text;
     begin
-        foreach FieldToken in Fields do
-            if GetFieldName(FieldToken) = FieldName then
+        foreach FieldToken in Fields do begin
+            DeclaredName := GetFieldName(FieldToken);
+            if (DeclaredName = FieldName) or DeclaredName.StartsWith('<') then
                 exit(true);
+        end;
         exit(false);
     end;
 
@@ -345,7 +348,7 @@ codeunit 10035618 "Playbook Verify Template ori"
             exit('');
         if not NameToken.IsValue() then
             exit('');
-        exit(StripIndex(NameToken.AsValue().AsText()).ToLower());
+        exit(StripIndex(NameToken.AsValue().AsText()));
     end;
 
     local procedure GetChildren(FieldToken: JsonToken; var Children: JsonArray): Boolean

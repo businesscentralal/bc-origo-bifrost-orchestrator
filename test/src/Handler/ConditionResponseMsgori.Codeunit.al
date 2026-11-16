@@ -35,7 +35,7 @@ codeunit 96491 "Condition Response Msg ori" implements "Msg Interface ori", "Msg
     var
         Response: JsonObject;
     begin
-        Response.ReadFrom('{"status":"Success","result":{"valid":true,"temporary":false}}');
+        Response.ReadFrom('{"status":"Success","result":{"valid":true,"temporary":false},"totals":[{"group":{},"Amount":1}],"primaryKey":{"LineNo_":10000}}');
         Argument.SetResponseJson(Response);
     end;
 
@@ -82,12 +82,12 @@ codeunit 96491 "Condition Response Msg ori" implements "Msg Interface ori", "Msg
         exit(false);
     end;
 
-    /// <summary>Declares result.valid and result.temporary, matching the shape reported in #194.</summary>
+    /// <summary>Declares fixed validation children plus array and primary-key placeholder children for issue #194.</summary>
     /// <param name="Response">Receives the nested response fields.</param>
     /// <returns>True; the response is declared.</returns>
     procedure GetResponse(var Response: JsonObject): Boolean
     begin
-        Response.ReadFrom('{"contentType":"text/json","fields":[{"name":"status","type":"string"},{"name":"result","type":"object","children":[{"name":"valid","type":"boolean"},{"name":"temporary","type":"boolean"}]}]}');
+        Response.ReadFrom('{"contentType":"text/json","fields":[{"name":"status","type":"string"},{"name":"result","type":"object","children":[{"name":"valid","type":"boolean"},{"name":"temporary","type":"boolean"}]},{"name":"totals[]","type":"array","children":[{"name":"group","type":"object"},{"name":"<field name>","type":"number"}]},{"name":"primaryKey","type":"object","children":[{"name":"<parent key fields>","type":"string"},{"name":"<line number field>","type":"integer"}]}]}');
         exit(true);
     end;
 

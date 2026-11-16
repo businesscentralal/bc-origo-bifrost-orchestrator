@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased] — 28.0.4.0
 
+### Fixed — #194 review amendments
+- Codeunit 10035618 accepts dynamic response children declared with placeholder names such as `<field name>`, preserving valid aggregate and primary-key Success conditions. Fixed field names match the runtime JSON path casing; differently cased paths warn separately. Declared response names are listed once per step.
+- Test codeunit 96490 and fixture 96491 cover placeholder array/key children, wildcard scope, and case-sensitive Verify/runtime parity.
+
 ### Added — #194
 - #194 / codeunit 10035618 `Playbook Verify Template ori`: Verify checks every Success condition path of a message step against the response fields the called message type declares (`GetResponse`). A path whose first segment, or second segment under a field that lists children, is not declared gets the warning `UnknownFieldReference` (once per path, naming the path and the declared fields), so a condition such as `valid` where the type answers under `result` is reported before the first run. `status` and `error` are always accepted; a type that declares no response fields is not judged. en-US and is-IS texts; `Orchestrator.Playbook.Verify` help (notes) lists the check.
 - Tests: new test codeunit 96490 `Playbook Condition Path Tests` (declared paths, undeclared path, unknown child, exact result prefix, duplicate/disabled paths, workspace conditions, missing response contract, 1033 and 1039 text and next steps). Test fixture codeunit/enumextension 96491 reproduce result.valid and result.temporary without an Iceland dependency. No new product objects.

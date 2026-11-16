@@ -200,6 +200,72 @@ codeunit 96490 "Playbook Condition Path Tests"
         Lib.Cleanup(PlaybookCodeTok);
     end;
 
+    /// <summary>Placeholder children accept dynamic array fields and primary-key names without blocking the playbook.</summary>
+    [Test]
+    procedure Scenario_AC02_PlaceholderChildren_NoFinding()
+    var
+        Verify: Codeunit "Playbook Verify ori";
+        Findings: JsonArray;
+        Blocking: JsonArray;
+        Summary: Text;
+    begin
+        // Story #194, AC02 | Time: independent of Today and WorkDate | Risk: None
+        // [GIVEN] A contract declares array children group + <field name> and primary-key placeholders.
+        SetupNestedStep();
+        Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'totals[0].Amount', '1');
+        Lib.AddCondition(PlaybookCodeTok, 10, "Playbook Cond. Type ori"::Success, 20000, 'primaryKey.LineNo_', "Playbook Cond. Operator ori"::Exists, '');
+        // [WHEN] Verify checks the concrete dynamic names.
+        GetFindings(Findings);
+        // [THEN] Valid dynamic paths do not warn or block Run/Schedule.
+        Assert.AreEqual(0, Findings.Count(), 'Placeholder children accept concrete field names');
+        Assert.IsFalse(Verify.GetBlockingFindings(PlaybookCodeTok, false, Blocking, Summary), 'Placeholder paths do not block execution');
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    /// <summary>A child placeholder cannot hide an undeclared parent or an unknown child in a fixed schema.</summary>
+    [Test]
+    procedure Scenario_AC01_PlaceholderScope_StillWarns()
+    var
+        Findings: JsonArray;
+    begin
+        // Story #194, AC01 | Time: independent of Today and WorkDate | Risk: None
+        // [GIVEN] Only totals and primaryKey have placeholder children.
+        SetupNestedStep();
+        Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'missing.Amount', '1');
+        Lib.AddCondition(PlaybookCodeTok, 10, "Playbook Cond. Type ori"::Success, 20000, 'result.bogus', "Playbook Cond. Operator ori"::Exists, '');
+        // [WHEN] Verify checks an unknown parent and a fixed-schema child.
+        GetFindings(Findings);
+        // [THEN] The unrelated wildcard declarations do not mask either error.
+        Assert.AreEqual(2, CountCode(Findings), 'Wildcards apply only to children of their declared parent');
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    /// <summary>Verify uses the same case-sensitive names as runtime JSON path resolution.</summary>
+    [Test]
+    procedure Scenario_AC01_WrongCase_IsWarned()
+    var
+        Helper: Codeunit "Playbook JSON Helper ori";
+        Source: JsonObject;
+        Resolved: JsonToken;
+        Findings: JsonArray;
+    begin
+        // Story #194, AC01 | Time: independent of Today and WorkDate | Risk: None
+        // [GIVEN] A valid path precedes two differently cased invalid paths.
+        SetupNestedStep();
+        Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'result.valid', 'true');
+        Lib.AddCondition(PlaybookCodeTok, 10, "Playbook Cond. Type ori"::Success, 20000, 'Result.valid', "Playbook Cond. Operator ori"::Equals, 'true');
+        Lib.AddCondition(PlaybookCodeTok, 10, "Playbook Cond. Type ori"::Success, 30000, 'result.Valid', "Playbook Cond. Operator ori"::Equals, 'true');
+        Source.ReadFrom('{"result":{"valid":true}}');
+        // [WHEN] Runtime and Verify resolve these names.
+        Assert.IsTrue(Helper.ResolveJsonPath(Source, 'result.valid', Resolved), 'Exact casing resolves');
+        Assert.IsFalse(Helper.ResolveJsonPath(Source, 'Result.valid', Resolved), 'Wrong parent casing does not resolve');
+        Assert.IsFalse(Helper.ResolveJsonPath(Source, 'result.Valid', Resolved), 'Wrong child casing does not resolve');
+        GetFindings(Findings);
+        // [THEN] Both runtime failures warn; the preceding valid path does not suppress them.
+        Assert.AreEqual(2, CountCode(Findings), 'Both incorrectly cased paths warn separately');
+        Lib.Cleanup(PlaybookCodeTok);
+    end;
+
     local procedure SetupNestedStep()
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);
