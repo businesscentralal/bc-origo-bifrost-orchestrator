@@ -131,8 +131,8 @@
         </trans-unit>
         <trans-unit id="Table 4153413238 - NamedType 880944479" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove or reparent the child plans before deleting this plan.</source>
-          <target>Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</note>
+          <target>Fjarlægðu undirskipaðar áætlanir eða tengdu þær við aðra yfirskipaða áætlun áður en þessari áætlun er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu undirskipaðar áætlanir eða tengdu þær við aðra yfirskipaða áætlun áður en þessari áætlun er eytt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - NamedType ChildrenExistErr</note>
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -209,8 +209,8 @@
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3014885516 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the order of child plans under the same parent.</source>
-          <target>Tilgreinir röð undirskipaðra áætlana undir sama foreldri.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð undirskipaðra áætlana undir sama foreldri.</note>
+          <target>Tilgreinir röð undirskipaðra áætlana undir sömu yfirskipuðu áætlun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð undirskipaðra áætlana undir sömu yfirskipuðu áætlun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Sequence No. - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3014885516 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -587,8 +587,8 @@
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 4167960641 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the most the step may confirm on its own. Required when the request sends "expectedCount": "@preview": the runner previews the call, confirms with the previewed count if it is at most Max Count, and otherwise stops with ConfirmationRequired. Leave blank when the step does not use @preview.</source>
-          <target>Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er í mesta lagi hámarksfjöldi, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er í mesta lagi hámarksfjöldi, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</note>
+          <target>Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er ekki hærri en hámarksfjöldinn, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er ekki hærri en hámarksfjöldinn, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Max Count - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 4167960641 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -761,8 +761,8 @@
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 1597973756 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the path in the input row, or an @workspace reference.</source>
-          <target>Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.</note>
+          <target>Tilgreinir slóðina í inntaksfærslunni eða @workspace-tilvísun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í inntaksfærslunni eða @workspace-tilvísun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Source Path - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 1597973756 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -785,8 +785,8 @@
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 4011441648 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the dot-separated path in the output row.</source>
-          <target>Tilgreinir slóðina í úttaksfærslunni.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í úttaksfærslunni.</note>
+          <target>Tilgreinir slóðina í úttaksfærslunni, með punktum á milli hluta.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í úttaksfærslunni, með punktum á milli hluta.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Target Path - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 4011441648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1295,8 +1295,8 @@
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 2710354593 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the key of the field in the serializer JSON.</source>
-          <target>Tilgreinir lykil reitsins í JSON raðarans.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lykil reitsins í JSON raðarans.</note>
+          <target>Tilgreinir lykil reitsins í JSON-útgáfu raðgerðarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lykil reitsins í JSON-útgáfu raðgerðarinnar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Json Key - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 2710354593 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1331,8 +1331,8 @@
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 1131619133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the field as the serializer writes it. Change it to save a new value.</source>
-          <target>Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</note>
+          <target>Tilgreinir gildi reitsins eins og það er skrifað í JSON. Breyttu því til að vista nýtt gildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins eins og það er skrifað í JSON. Breyttu því til að vista nýtt gildi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Value - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 1131619133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1385,8 +1385,8 @@
         </trans-unit>
         <trans-unit id="Table 2871538196 - Field 2166945456 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the first fields of the record as Name=Value pairs.</source>
-          <target>Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</note>
+          <target>Tilgreinir fyrstu reiti færslunnar sem pör af gerðinni Heiti=Gildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrstu reiti færslunnar sem pör af gerðinni Heiti=Gildi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2871538196 - Field 2166945456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1397,8 +1397,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2797933787 - NamedType 1913014239" size-unit="char" translate="yes" xml:space="preserve">
           <source>Copy plan %1 occurs twice in the parent hierarchy.</source>
-          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</note>
+          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldi yfirskipaðra áætlana.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldi yfirskipaðra áætlana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType CycleErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2797933787 - NamedType 2712193876" size-unit="char" translate="yes" xml:space="preserve">
@@ -2393,14 +2393,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 1127509453 - NamedType 3316397049" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.</source>
-          <target>Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.</note>
+          <target>Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla og því er ekki hægt að bakka því með keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla og því er ekki hægt að bakka því með keðjunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitIrreversibleErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1127509453 - NamedType 1516695796" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook %1 step %2 cannot run %3 under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.</source>
-          <target>Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.</note>
+          <target>Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin lýsir ekki yfir neinum áhrifasamningi og því er ekki talið öruggt að bakka henni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin lýsir ekki yfir neinum áhrifasamningi og því er ekki talið öruggt að bakka henni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitNoContractErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1379993334 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -2435,8 +2435,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2939314393 - NamedType 413497156" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.</source>
-          <target>Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.</note>
+          <target>Skref %1 mistókst. Svarið inniheldur enga villu og öll skilyrði eru uppfyllt; skoðaðu beiðnina og svarið.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Skref %1 mistókst. Svarið inniheldur enga villu og öll skilyrði eru uppfyllt; skoðaðu beiðnina og svarið.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType NoReasonErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2939314393 - NamedType 665073879" size-unit="char" translate="yes" xml:space="preserve">
@@ -2639,8 +2639,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 153936086" size-unit="char" translate="yes" xml:space="preserve">
           <source>Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.</source>
-          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</note>
+          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og sannreyndu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og sannreyndu keðjuna aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType ClearMessageTypeTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 2851206674" size-unit="char" translate="yes" xml:space="preserve">
@@ -2651,8 +2651,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 761809759" size-unit="char" translate="yes" xml:space="preserve">
           <source>Correct the Transform field mappings and verify the playbook again.</source>
-          <target>Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.</note>
+          <target>Leiðréttu reitavarpanir umbreytingarinnar og sannreyndu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitavarpanir umbreytingarinnar og sannreyndu keðjuna aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType NextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 533737573" size-unit="char" translate="yes" xml:space="preserve">
@@ -2669,8 +2669,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 1441009422" size-unit="char" translate="yes" xml:space="preserve">
           <source>A Transform step cannot fetch pages. Iterate over a preceding reader step instead.</source>
-          <target>Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.</note>
+          <target>Umbreytingarskref getur ekki sótt síður. Láttu í staðinn endurtaka yfir fyrra lestrarskref.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref getur ekki sótt síður. Láttu í staðinn endurtaka yfir fyrra lestrarskref.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType PagedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 486583733" size-unit="char" translate="yes" xml:space="preserve">
@@ -2885,8 +2885,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 203386158" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.</source>
-          <target>Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</note>
+          <target>Ask-skref %1 biður um rakningu sem Orchestrator fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem Orchestrator fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskTraceDiscardedMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 3422069962" size-unit="char" translate="yes" xml:space="preserve">
@@ -2933,8 +2933,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 303900121" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Max Count on the step to the most the playbook may confirm without a person, or send a fixed expectedCount instead.</source>
-          <target>Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.</note>
+          <target>Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án aðkomu manns, eða sendu fastan expectedCount í staðinn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án aðkomu manns, eða sendu fastan expectedCount í staðinn.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PreviewWithoutMaxNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 4056349108" size-unit="char" translate="yes" xml:space="preserve">
@@ -3023,14 +3023,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1380240250" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.</source>
-          <target>Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</note>
+          <target>Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 4255824126" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove %1 or rename it to a declared parameter. The type declares: %2.</source>
-          <target>Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.</note>
+          <target>Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1834680235" size-unit="char" translate="yes" xml:space="preserve">
@@ -3047,8 +3047,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 725261787" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.</source>
-          <target>Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</note>
+          <target>Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin samsvarar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin samsvarar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnresolvableMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 888877383" size-unit="char" translate="yes" xml:space="preserve">
@@ -4169,20 +4169,20 @@
         </trans-unit>
         <trans-unit id="Codeunit 2389894866 - NamedType 3901123449" size-unit="char" translate="yes" xml:space="preserve">
           <source>The table view is not valid for table %1.</source>
-          <target>Töflusýnin á ekki við töflu %1.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin á ekki við töflu %1.</note>
+          <target>Töflusýnin er ekki gild fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin er ekki gild fyrir töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableViewInvalidErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1468028954" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file is not a Bifrost table data file (format %1, version %2 expected).</source>
-          <target>Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</target>
-          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</note>
+          <target>Skráin er ekki Bifröst-töflugagnaskrá (búist var við sniði %1, útgáfu %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-töflugagnaskrá (búist var við sniði %1, útgáfu %2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType FormatErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1030601889" size-unit="char" translate="yes" xml:space="preserve">
           <source>A new row cannot be inserted into table %1 (%2).</source>
-          <target>Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</note>
+          <target>Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1065153784" size-unit="char" translate="yes" xml:space="preserve">
@@ -4199,8 +4199,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 2095975556" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file has no rows array.</source>
-          <target>Skráin hefur engan línulista (rows).</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráin hefur engan línulista (rows).</note>
+          <target>Skráin inniheldur engan línulista (rows).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin inniheldur engan línulista (rows).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowsMissingErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1899388161" size-unit="char" translate="yes" xml:space="preserve">
@@ -5027,8 +5027,8 @@
         </trans-unit>
         <trans-unit id="Page 853968823 - Control 1949447633 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Transform Fields</source>
-          <target>Umbreyting reita</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting reita</note>
+          <target>Reitaumbreytingar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitaumbreytingar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Card ori - Control Transforms - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 853968823 - Control 1113252865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -5129,8 +5129,8 @@
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 358941092 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.</source>
-          <target>Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.</note>
+          <target>Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki tómur texti, ekki tómt fylki og ekki tómur hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki tómur texti, ekki tómt fylki og ekki tómur hlutur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Cond. Subpage ori - Control Operator - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 2206733951 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -5663,8 +5663,8 @@
         </trans-unit>
         <trans-unit id="Page 2155707330 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Transform Fields</source>
-          <target>Umbreyting reita</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting reita</note>
+          <target>Reitaumbreytingar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitaumbreytingar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Transforms ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -7181,8 +7181,8 @@
         </trans-unit>
         <trans-unit id="Page 337517078 - NamedType 629381524" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file is not valid JSON.</source>
-          <target>Skráin er ekki gilt JSON.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gilt JSON.</note>
+          <target>Skráin er ekki gild JSON-skrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gild JSON-skrá.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType NotJsonErr</note>
         </trans-unit>
         <trans-unit id="Page 337517078 - NamedType 3237890445" size-unit="char" translate="yes" xml:space="preserve">
