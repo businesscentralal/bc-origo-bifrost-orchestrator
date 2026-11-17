@@ -593,6 +593,6 @@ codeunit 10035546 "Playbook JSON Helper ori"
         MissingTok: Label '(missing)', Locked = true;
         ConditionFailedErr: Label '%1 condition not met: path "%2" %3 "%4", actual %5.', Comment = '%1 = condition type, %2 = path, %3 = operator, %4 = expected value, %5 = actual value, is-IS=%1 skilyrði ekki uppfyllt: slóð "%2" %3 "%4", raunverulegt gildi %5.';
         NoJsonResponseErr: Label 'Step %1 failed and its response was empty or not a JSON object, so no condition could be evaluated.', Comment = '%1 = step number, is-IS=Skref %1 mistókst og svar þess var autt eða ekki JSON-hlutur, svo ekki var hægt að meta skilyrði.';
-        NoReasonErr: Label 'Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.', Comment = '%1 = step number, is-IS=Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.';
+        NoReasonErr: Label 'Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.', Comment = '%1 = step number, is-IS=Skref %1 mistókst. Svarið inniheldur enga villu og öll skilyrði eru uppfyllt; skoðaðu beiðnina og svarið.';
         UnresolvedReferenceErr: Label 'Unresolved workspace reference %1. Inspect the source response and correct the path before running the step. No message was sent.', Comment = '%1 = workspace reference, is-IS=Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.';
 }

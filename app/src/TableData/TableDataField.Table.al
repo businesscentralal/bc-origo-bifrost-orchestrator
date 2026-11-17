@@ -26,7 +26,7 @@ table 10035565 "Table Data Field ori"
         field(3; Value; Text[2048])
         {
             Caption = 'Value', Comment = 'is-IS=Gildi';
-            ToolTip = 'Specifies the value of the field as the serializer writes it. Change it to save a new value.', Comment = 'is-IS=Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.';
+            ToolTip = 'Specifies the value of the field as the serializer writes it. Change it to save a new value.', Comment = 'is-IS=Tilgreinir gildi reitsins eins og það er skrifað í JSON. Breyttu því til að vista nýtt gildi.';
         }
         field(4; Type; Text[30])
         {
@@ -41,7 +41,7 @@ table 10035565 "Table Data Field ori"
         field(6; "Json Key"; Text[80])
         {
             Caption = 'Json Key', Comment = 'is-IS=JSON-lykill';
-            ToolTip = 'Specifies the key of the field in the serializer JSON.', Comment = 'is-IS=Tilgreinir lykil reitsins í JSON raðarans.';
+            ToolTip = 'Specifies the key of the field in the serializer JSON.', Comment = 'is-IS=Tilgreinir lykil reitsins í JSON-útgáfu raðgerðarinnar.';
         }
     }
 
