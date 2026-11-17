@@ -718,3 +718,7 @@ parameter has been added.
 
 JSON file export/import and the Table Data editor are separate phases of issue #155; they require
 a released Foundation version containing public `Serializer ori` and are not included in this phase.
+
+### Tools navigation
+
+In the Web Client, **Bifrost Setup > Related > Tools** opens **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data** and **Copy Plans**. The **Bifrost Playbooks** list also has **Related > Tools** for **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**. Actions follow the target page permissions: Table Data is for Playbook Admin; Copy Plans is also readable by Playbook View. Both roles include Execute on the Copy Plan table for navigation, with their existing data access unchanged. `Help.Orchestrator.Get` includes this navigation guide in English and Icelandic.

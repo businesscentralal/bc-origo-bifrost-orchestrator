@@ -207,11 +207,27 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildPlaybookWorkflowGuide(O);
         BuildDataRecordsGuide(O);
+        BuildToolsNavigationGuide(O);
         BuildTableDataGuide(O);
         BuildCopyPlanGuide(O);
         BuildSchedulingGuide(O);
         BuildLLMPatternsGuide(O);
         BuildAgentRules(O);
+    end;
+
+    local procedure BuildToolsNavigationGuide(var O: TextBuilder)
+    var
+        HeadingTxt: Label '## Find the tools in the Web Client', Comment = 'is-IS=## Finna verkfærin í vefbiðlaranum';
+        SetupToolsTxt: Label 'On **Bifrost Setup**, open **Related > Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.', Comment = 'is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt > Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.';
+        PlaybookToolsTxt: Label 'On the **Bifrost Playbooks** list, open **Related > Tools** for **Table Data** and **Copy Plans**. These tools are Web Client pages, not new message types.', Comment = 'is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt > Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.';
+        ToolPermissionsTxt: Label 'Tools follow your page permissions. **Table Data** requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.', Comment = 'is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.';
+    begin
+        O.AppendLine(HeadingTxt);
+        O.AppendLine('');
+        O.AppendLine(SetupToolsTxt);
+        O.AppendLine(PlaybookToolsTxt);
+        O.AppendLine(ToolPermissionsTxt);
+        O.AppendLine('');
     end;
 
     local procedure BuildTableDataGuide(var O: TextBuilder)
