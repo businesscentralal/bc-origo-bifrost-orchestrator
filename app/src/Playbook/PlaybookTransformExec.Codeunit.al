@@ -53,12 +53,13 @@ codeunit 10035627 "Playbook Transform Exec ori"
             Clear(Token);
             if Mapping.Operation <> Mapping.Operation::Constant then begin
                 SourcePath := Mapping."Source Path";
-                // Same pass 0 as request templates: @50.@_iter.reply reads the item of the current iteration.
-                if SourcePath.Contains('@_iter') and Workspace.GetValue('_iter', IterValue) then
-                    SourcePath := SourcePath.Replace('@_iter', IterValue);
-                if SourcePath.StartsWith('@') then
-                    Found := Workspace.GetToken(CopyStr(SourcePath, 2), Token)
-                else
+                if SourcePath.StartsWith('@') then begin
+                    SourcePath := CopyStr(SourcePath, 2);
+                    // Expand embedded iteration references while preserving the direct @_iter workspace key.
+                    if SourcePath.Contains('@_iter') and Workspace.GetValue('_iter', IterValue) then
+                        SourcePath := SourcePath.Replace('@_iter', IterValue);
+                    Found := Workspace.GetToken(SourcePath, Token);
+                end else
                     Found := JsonHelper.ResolveJsonPath(Input, Mapping."Source Path", Token);
                 if not Found then
                     Error(ErrorInfo.Create(StrSubstNo(SourcePathErr, Mapping."Source Path")));

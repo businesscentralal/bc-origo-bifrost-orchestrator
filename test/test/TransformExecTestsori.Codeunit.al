@@ -220,6 +220,37 @@ codeunit 96468 "Transform Exec Tests ori"
         Lib.Cleanup(Step."Playbook Code");
     end;
 
+    /// <summary>Standalone iteration references copy the workspace index at both zero and one.</summary>
+    [Test]
+    procedure Scenario_212_StandaloneIterCopiesWorkspaceIndex()
+    var
+        Step: Record "Playbook Step ori";
+        Workspace: Codeunit "Playbook Workspace ori";
+        Input: JsonObject;
+        Output: JsonObject;
+        Token: JsonToken;
+        ResponseText: Text;
+        ErrorText: Text;
+        Index: Integer;
+    begin
+        // Issue #212 regression | Time: independent of Today/WorkDate | Risk: Workspace is single instance
+        // [GIVEN] A Copy mapping reads the current iteration directly from the workspace.
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'index', '@_iter', "Transform Operation ori"::Copy);
+        for Index := 0 to 1 do begin
+            Workspace.SetValue('_iter', Format(Index, 0, 9));
+
+            // [WHEN] The Transform executes with no input fields.
+            Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+
+            // [THEN] The copied value is the workspace index, including zero.
+            Output.ReadFrom(ResponseText);
+            Output.Get('index', Token);
+            Assert.AreEqual(Format(Index, 0, 9), Token.AsValue().AsText(), 'Standalone @_iter reads the workspace');
+        end;
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
     /// <summary>MissingIterationItemFailsWithPath (#212).</summary>
     [Test]
     procedure Scenario_212_MissingIterationItemFails()
