@@ -19,6 +19,7 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
         Assert: Codeunit "Library Assert";
         LibrarySales: Codeunit "Library - Sales";
         Dispatch: Codeunit "Orch Dispatch Helper ori";
+        SeededReportSelectionSequence: Code[10];
 
     [Test]
     procedure OrderNoAnswersThePdfAndCountsThePrint()
@@ -27,6 +28,7 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
         TempArgument: Record "Message Argument ori" temporary;
         PrintedBefore: Integer;
     begin
+        SeedOrderReportSelection();
         // [SCENARIO #93 AC01] An order No. answers the order confirmation as a PDF and the print is counted
         LibrarySales.CreateSalesOrder(SalesHeader);
         PrintedBefore := SalesHeader."No. Printed";
@@ -36,6 +38,7 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
         AssertIsPdf(TempArgument);
         SalesHeader.Get(SalesHeader."Document Type", SalesHeader."No.");
         Assert.AreEqual(PrintedBefore + 1, SalesHeader."No. Printed", 'The standard order confirmation counts the print');
+        RemoveSeededReportSelection();
     end;
 
     [Test]
@@ -44,12 +47,14 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
         SalesHeader: Record "Sales Header";
         TempArgument: Record "Message Argument ori" temporary;
     begin
+        SeedOrderReportSelection();
         // [SCENARIO #93 AC01] orderId as SystemId, together with documentNo of the same order, answers the PDF
         LibrarySales.CreateSalesOrder(SalesHeader);
 
         RunType(TempArgument, '{"orderId":"' + Format(SalesHeader.SystemId, 0, 4) + '","documentNo":"' + SalesHeader."No." + '"}');
 
         AssertIsPdf(TempArgument);
+        RemoveSeededReportSelection();
     end;
 
     [Test]
@@ -119,20 +124,19 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
     procedure NoOrderReportIsPreconditionFailed()
     var
         SalesHeader: Record "Sales Header";
-        ReportSelections: Record "Report Selections";
-        CustomReportSelection: Record "Custom Report Selection";
+        TempReportSelections: Record "Report Selections" temporary;
+        TempCustomReportSelection: Record "Custom Report Selection" temporary;
         TempArgument: Record "Message Argument ori" temporary;
     begin
         // [SCENARIO #93 AC04 edge] Without a report for usage S.Order the call is refused with PreconditionFailed, not a BC error
         LibrarySales.CreateSalesOrder(SalesHeader);
-        ReportSelections.SetRange(Usage, ReportSelections.Usage::"S.Order");
-        ReportSelections.DeleteAll();
-        CustomReportSelection.SetRange(Usage, CustomReportSelection.Usage::"S.Order");
-        CustomReportSelection.DeleteAll();
+        // The tenant's own rows are parked in temporary records and restored after the call
+        BackupReportSelections(TempReportSelections, TempCustomReportSelection);
 
         RunType(TempArgument, '{"orderNo":"' + SalesHeader."No." + '"}');
 
         AssertRefusal(TempArgument, 'PreconditionFailed');
+        RestoreReportSelections(TempReportSelections, TempCustomReportSelection);
     end;
 
     [Test]
@@ -199,6 +203,72 @@ codeunit 96481 "Sales Order Conf Pdf Tests ori"
 
         // [THEN] edge: a replacement report may not archive
         Assert.IsTrue(Changes.AsValue().AsText().Contains('A replacement report in Report Selections may not archive'), 'effect allows a replacement report to skip archiving');
+    end;
+
+    local procedure SeedOrderReportSelection()
+    var
+        ReportSelections: Record "Report Selections";
+    begin
+        // The test owns the Report Selections row it needs: a tenant without one gets a row that is removed again
+        SeededReportSelectionSequence := '';
+        ReportSelections.SetRange(Usage, ReportSelections.Usage::"S.Order");
+        if not ReportSelections.IsEmpty() then
+            exit;
+        ReportSelections.Init();
+        ReportSelections.Usage := ReportSelections.Usage::"S.Order";
+        ReportSelections.Sequence := '9';
+        ReportSelections."Report ID" := Report::"Standard Sales - Order Conf.";
+        ReportSelections.Insert();
+        SeededReportSelectionSequence := ReportSelections.Sequence;
+    end;
+
+    local procedure RemoveSeededReportSelection()
+    var
+        ReportSelections: Record "Report Selections";
+    begin
+        if SeededReportSelectionSequence = '' then
+            exit;
+        if ReportSelections.Get(ReportSelections.Usage::"S.Order", SeededReportSelectionSequence) then
+            ReportSelections.Delete();
+        SeededReportSelectionSequence := '';
+    end;
+
+    local procedure BackupReportSelections(var TempReportSelections: Record "Report Selections" temporary; var TempCustomReportSelection: Record "Custom Report Selection" temporary)
+    var
+        ReportSelections: Record "Report Selections";
+        CustomReportSelection: Record "Custom Report Selection";
+    begin
+        ReportSelections.SetRange(Usage, ReportSelections.Usage::"S.Order");
+        if ReportSelections.FindSet() then
+            repeat
+                TempReportSelections := ReportSelections;
+                TempReportSelections.Insert();
+            until ReportSelections.Next() = 0;
+        ReportSelections.DeleteAll();
+        CustomReportSelection.SetRange(Usage, CustomReportSelection.Usage::"S.Order");
+        if CustomReportSelection.FindSet() then
+            repeat
+                TempCustomReportSelection := CustomReportSelection;
+                TempCustomReportSelection.Insert();
+            until CustomReportSelection.Next() = 0;
+        CustomReportSelection.DeleteAll();
+    end;
+
+    local procedure RestoreReportSelections(var TempReportSelections: Record "Report Selections" temporary; var TempCustomReportSelection: Record "Custom Report Selection" temporary)
+    var
+        ReportSelections: Record "Report Selections";
+        CustomReportSelection: Record "Custom Report Selection";
+    begin
+        if TempReportSelections.FindSet() then
+            repeat
+                ReportSelections := TempReportSelections;
+                ReportSelections.Insert();
+            until TempReportSelections.Next() = 0;
+        if TempCustomReportSelection.FindSet() then
+            repeat
+                CustomReportSelection := TempCustomReportSelection;
+                CustomReportSelection.Insert();
+            until TempCustomReportSelection.Next() = 0;
     end;
 
     local procedure RunType(var TempArgument: Record "Message Argument ori" temporary; RequestText: Text)

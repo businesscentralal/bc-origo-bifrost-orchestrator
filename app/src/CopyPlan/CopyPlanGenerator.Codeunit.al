@@ -326,7 +326,7 @@ codeunit 10035622 "Copy Plan Generator ori"
         SourceViewErr: Label 'The source table view is invalid. Use existing field names and permitted filters.', Comment = 'is-IS=Upprunatöflusýn er ógild. Notaðu gild reitaheiti og leyfilegar síur.';
         TransformDescriptionLbl: Label 'Transform copy fields', Comment = 'is-IS=Umbreyta afritunarreitum';
         PlaybookExistsErr: Label 'Playbook %1 already exists. Choose a different plan code; generation never takes over an unrelated playbook.', Comment = '%1 = playbook code, is-IS=Keðjan %1 er þegar til. Veldu annan áætlunarkóða; myndun tekur aldrei yfir ótengda keðju.';
-        CycleErr: Label 'Copy plan %1 occurs twice in the parent hierarchy.', Comment = '%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.';
+        CycleErr: Label 'Copy plan %1 occurs twice in the parent hierarchy.', Comment = '%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldi yfirskipaðra áætlana.';
         NoFieldsErr: Label 'Copy plan %1 needs at least one active field mapping.', Comment = '%1 = plan code, is-IS=Afritunaráætlunin %1 þarf að minnsta kosti eina virka reitavörpun.';
         PageSizeErr: Label 'Page size must be between 1 and 500.', Comment = 'is-IS=Síðustærð verður að vera á milli 1 og 500.';
         DuplicateFieldErr: Label 'Destination field %1 is mapped more than once.', Comment = '%1 = field number, is-IS=Markreitnum %1 er varpað oftar en einu sinni.';

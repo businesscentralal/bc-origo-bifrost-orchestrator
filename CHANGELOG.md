@@ -10,9 +10,15 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Fixed — #202
 - #202 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf` and the matching `is-IS=` comments in the document-sending objects (`Doc Send Contract ori`, `Doc Send Process ori`, `Doc Send Resolver ori`, `Purch Order Pdf Msg ori`, `Sales Order Conf Pdf Msg ori`, `Sales Quote Pdf Msg ori`): review of the 200 is-IS units for the document-sending, PDF and Report Layout message types added since 28.0.3. 28 targets corrected (e-mail address term aligned with Foundation, one read-permission term, `JSON-strengur`, 'vísa á' for identifiers that name a document, meaningless or garbled sentences). Placeholders, keys and Locked labels unchanged; no en-US file; no new objects.
 
+### Fixed — #209
+- Test isolation only, no product change and no new object IDs. Codeunit 96411 `CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified` deletes old Ok Sample (96410) Job Queue Entries before it enqueues, so `FindFirst` reads its own entry. Codeunits 96480 and 96481 seed the P.Order / S.Order Report Selections row when the tenant has none and remove it again; the `NoOrderReportIsPreconditionFailed` tests park and restore the tenant rows instead of deleting them.
 
 ### Added
 - #199: **Tools / Verkfæri** on Bifröst Setup (pageextension 10035537) groups the existing Playbooks and Execution Log actions with permission-aware Table Data and Copy Plans links. The Playbooks list (page 10035551) offers the same two tools; Orchestrator Setup stays under Apps. Existing action names are preserved. Playbook Admin/View (permission sets 10035538/10035539) gain Execute on their already-readable Copy Plan table (10035577), which BC requires for RunObject navigation; data permissions are unchanged. Runtime help (codeunit 10035576) documents the navigation in en-US/is-IS. No new object IDs or message types. — 28.0.4.0
+
+### Fixed — #203
+- #207 review amendment: the restricted tool-navigation test now grants only Playbooks parent read/open permissions before asserting that Copy Plans remains unreadable and both tool actions are unavailable. This supplies BC 29's parent-page prerequisite without granting either tool or changing product permissions.
+- #203 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf`: review of the Playbook, Copy Plan and Table Data is-IS texts added since 28.0.3 (about 220 units, non-document-sending). 28 targets corrected (wrong or awkward meaning, `@workspace` left untranslated, "Orchestrator" no longer rendered as "stjórnandi", parent/child plan wording, verify/confirm terms separated, `%n` placeholders and JSON names unchanged). is-IS= comments in the AL source (the authority) carry the same text. No AL object, ID or en-US text changed; no en-US XLF added.
 
 ### Fixed — #194 review amendments
 - Codeunit 10035618 accepts dynamic response children declared with placeholder names such as `<field name>`, preserving valid aggregate and primary-key Success conditions. Fixed field names match the runtime JSON path casing; differently cased paths warn separately. Declared response names are listed once per step.

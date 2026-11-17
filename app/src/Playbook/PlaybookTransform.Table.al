@@ -28,12 +28,12 @@ table 10035625 "Playbook Transform ori"
         field(10; "Target Path"; Text[250])
         {
             Caption = 'Target Path', Comment = 'is-IS=Markslóð';
-            ToolTip = 'Specifies the dot-separated path in the output row.', Comment = 'is-IS=Tilgreinir slóðina í úttaksfærslunni.';
+            ToolTip = 'Specifies the dot-separated path in the output row.', Comment = 'is-IS=Tilgreinir slóðina í úttaksfærslunni, með punktum á milli hluta.';
         }
         field(20; "Source Path"; Text[250])
         {
             Caption = 'Source Path', Comment = 'is-IS=Upprunaslóð';
-            ToolTip = 'Specifies the path in the input row, or an @workspace reference.', Comment = 'is-IS=Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.';
+            ToolTip = 'Specifies the path in the input row, or an @workspace reference.', Comment = 'is-IS=Tilgreinir slóðina í inntaksfærslunni eða @workspace-tilvísun.';
         }
         field(30; "Operation"; Enum "Transform Operation ori")
         {
