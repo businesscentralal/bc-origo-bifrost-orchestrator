@@ -37,6 +37,8 @@ permissionset 10035539 "BIFROST PlaybVw ori"
     Permissions =
         tabledata "Playbook Transform ori" = R,
         page "Playbook Transforms ori" = X,
+        // The RunObject navigation check also requires Execute on the source table.
+        table "Copy Plan ori" = X,
         page "Copy Plans ori" = X,
         page "Copy Plan Card ori" = X,
         page "Copy Plan Fields ori" = X,
