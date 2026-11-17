@@ -5,7 +5,10 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — 28.0.4.0
+## [Unreleased]
+
+### Added
+- #199: **Tools / Verkfæri** on Bifröst Setup (pageextension 10035537) groups the existing Playbooks and Execution Log actions with permission-aware Table Data and Copy Plans links. The Playbooks list (page 10035551) offers the same two tools; Orchestrator Setup stays under Apps. Existing action names are preserved. Playbook Admin/View (permission sets 10035538/10035539) gain Execute on their already-readable Copy Plan table (10035577), which BC requires for RunObject navigation; data permissions are unchanged. Runtime help (codeunit 10035576) documents the navigation in en-US/is-IS. No new object IDs or message types. — 28.0.4.0
 
 ### Added — #197 (decision d-20261116-report-layout-default-delete, option B)
 - #197 AC01 / codeunits 10035600 `Report Layout Handler ori` and 10035599 `Report Layout Set Msg ori`: `Orchestrator.ReportLayout.Set` takes `setAsDefault` (boolean). With `layoutBase64` or `stagingId` the imported layout becomes the default of the report in the current company; without a file, `name` (and the new optional `appId` when the name is not unique) selects an existing built-in, extension or user-defined layout and `layoutFormat` is not needed (`action` `DefaultSet`). The handler makes the same writes as the Set Default action of the Report Layouts page (`Report Layouts Impl.` 9660 is still `Access = Internal` in BC 29): the company-wide `Tenant Report Layout Selection` row (empty User ID) and the `Report Layout Selection` type, for the current company only. Layouts limited to another company are refused.
