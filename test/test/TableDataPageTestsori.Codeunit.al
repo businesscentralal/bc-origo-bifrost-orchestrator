@@ -86,7 +86,7 @@ codeunit 96448 "Table Data Page Tests ori"
         LowerPermissions.StopLoggingNAVPermissions();
     end;
 
-    /// <summary>A login-only user is not offered either tool action.</summary>
+    /// <summary>A user who can read Playbooks but has neither tool role is not offered either tool action.</summary>
     [Test]
     [TestPermissions(TestPermissions::Restrictive)]
     procedure Scenario_AC03_NoToolRole_HidesBothTools()
@@ -98,10 +98,11 @@ codeunit 96448 "Table Data Page Tests ori"
         // Story #199, AC03 | Time: independent of Today/WorkDate | Risk: Permission mock must be active.
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetExactPermissionSet('LOGIN');
+        LowerPermissions.AddPermissionSet('Orch NoTools ori');
         Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions must be lowered');
-        Assert.IsFalse(Plan.ReadPermission(), 'Login alone does not grant access to Copy Plans data');
+        Assert.IsFalse(Plan.ReadPermission(), 'The parent-only fixture does not grant access to Copy Plans data');
         Playbooks.OpenView();
-        // TestPage can open a parent under the mock; its permission-filtered actions are the contract under test.
+        // Parent read/execute is only a prerequisite; neither tool permission is granted.
         asserterror Playbooks.CopyPlans.Invoke();
         Assert.ExpectedError('The action with ID');
         ClearLastError();
