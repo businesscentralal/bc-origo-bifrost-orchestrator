@@ -27,6 +27,8 @@ codeunit 10035618 "Playbook Verify Template ori"
         Seen: List of [Text];
         TemplateText: Text;
     begin
+        if Step."Step Kind" = Step."Step Kind"::Message then
+            CheckConditionPaths(Step, Findings);
         TemplateText := Step.GetRequestTemplate();
         if TemplateText.Trim() = '' then begin
             CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
@@ -332,6 +334,143 @@ codeunit 10035618 "Playbook Verify Template ori"
             if ResponseField.AsObject().Get('name', NameToken) and ResponseField.AsObject().Get('type', TypeToken) then
                 if NameToken.AsValue().AsText() = FieldName then
                     IsString := TypeToken.AsValue().AsText() = 'string';
+    end;
+
+    /// <summary>
+    /// Success condition paths against the response contract of the called message type (issue #194). A path whose
+    /// first segment, or second segment under a field that lists children, is not declared in the response fields can
+    /// never be found in the answer, so the step fails on every run. A type without a declared response is not judged.
+    /// Reported as the warning UnknownFieldReference, once per path.
+    /// </summary>
+    /// <param name="Step">The step.</param>
+    /// <param name="Findings">Receives the warnings.</param>
+    local procedure CheckConditionPaths(Step: Record "Playbook Step ori"; var Findings: JsonArray)
+    var
+        Condition: Record "Playbook Condition ori";
+        Verify: Codeunit "Playbook Verify ori";
+        Response: JsonObject;
+        Fields: JsonArray;
+        Seen: List of [Text];
+        DeclaredText: Text;
+        PathText: Text;
+    begin
+        if not TryGetResponseFields(Step."Message Type", Response, Fields) then
+            exit;
+        if Fields.Count() = 0 then
+            exit;
+        Condition.ReadIsolation := IsolationLevel::ReadCommitted;
+        Condition.FilterForStep(Step."Playbook Code", Step."Step No.", "Playbook Cond. Type ori"::Success);
+        Condition.SetLoadFields("Playbook Code", "Step No.", "Condition Type", Path);
+        if not Condition.FindSet() then
+            exit;
+        GetDeclaredResponseNames(Fields, DeclaredText);
+        repeat
+            PathText := Condition.Path.Trim();
+            if (PathText <> '') and not Seen.Contains(PathText) then begin
+                Seen.Add(PathText);
+                if not IsDeclaredResponsePath(PathText, Fields) then
+                    Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownFieldReference',
+                        StrSubstNo(UnknownConditionPathMsg, Step."Step No.", PathText, Verify.GetTypeName(Step."Message Type"), DeclaredText),
+                        StrSubstNo(UnknownConditionPathNextStepTxt, PathText), Step.Disabled);
+            end;
+        until Condition.Next() = 0;
+    end;
+
+    [TryFunction]
+    local procedure TryGetResponseFields(MessageType: Enum "Message Type ori"; var Response: JsonObject; var Fields: JsonArray)
+    var
+        Contract: Interface "Msg Contract ori";
+        Token: JsonToken;
+    begin
+        Contract := MessageType;
+        if not Contract.GetResponse(Response) then
+            exit;
+        if Response.Get('fields', Token) then
+            if Token.IsArray() then
+                Fields := Token.AsArray();
+    end;
+
+    /// <summary>
+    /// True when the path can be found in the declared response: status and error always can; otherwise the first segment
+    /// must match a declared field exactly and, when that field lists children, the second segment must match
+    /// a child or a placeholder child whose name starts with &lt;.
+    /// </summary>
+    local procedure IsDeclaredResponsePath(PathText: Text; Fields: JsonArray): Boolean
+    var
+        Segments: List of [Text];
+        FieldToken: JsonToken;
+        Children: JsonArray;
+        First: Text;
+    begin
+        Segments := PathText.Split('.');
+        First := StripIndex(Segments.Get(1));
+        if (First = 'status') or (First = 'error') then
+            exit(true);
+        foreach FieldToken in Fields do
+            if GetFieldName(FieldToken) = First then begin
+                if Segments.Count() < 2 then
+                    exit(true);
+                if not GetChildren(FieldToken, Children) then
+                    exit(true);
+                exit(HasField(Children, StripIndex(Segments.Get(2))));
+            end;
+        exit(false);
+    end;
+
+    local procedure HasField(Fields: JsonArray; FieldName: Text): Boolean
+    var
+        FieldToken: JsonToken;
+        DeclaredName: Text;
+    begin
+        foreach FieldToken in Fields do begin
+            DeclaredName := GetFieldName(FieldToken);
+            if (DeclaredName = FieldName) or DeclaredName.StartsWith('<') then
+                exit(true);
+        end;
+        exit(false);
+    end;
+
+    local procedure GetFieldName(FieldToken: JsonToken): Text
+    var
+        NameToken: JsonToken;
+    begin
+        if not FieldToken.IsObject() then
+            exit('');
+        if not FieldToken.AsObject().Get('name', NameToken) then
+            exit('');
+        if not NameToken.IsValue() then
+            exit('');
+        exit(StripIndex(NameToken.AsValue().AsText()));
+    end;
+
+    local procedure GetChildren(FieldToken: JsonToken; var Children: JsonArray): Boolean
+    var
+        ChildrenToken: JsonToken;
+    begin
+        if not FieldToken.IsObject() then
+            exit(false);
+        if not FieldToken.AsObject().Get('children', ChildrenToken) then
+            exit(false);
+        if not ChildrenToken.IsArray() then
+            exit(false);
+        Children := ChildrenToken.AsArray();
+        exit(Children.Count() > 0);
+    end;
+
+    local procedure GetDeclaredResponseNames(Fields: JsonArray; var DeclaredText: Text)
+    var
+        FieldToken: JsonToken;
+        NameToken: JsonToken;
+    begin
+        DeclaredText := '';
+        foreach FieldToken in Fields do
+            if FieldToken.IsObject() then
+                if FieldToken.AsObject().Get('name', NameToken) then
+                    if NameToken.IsValue() then begin
+                        if DeclaredText <> '' then
+                            DeclaredText += ', ';
+                        DeclaredText += NameToken.AsValue().AsText();
+                    end;
     end;
 
     /// <summary>
@@ -800,6 +939,8 @@ codeunit 10035618 "Playbook Verify Template ori"
         AskDataConditionNextStepTxt: Label 'Add responseSchema to the Ask request and test schemaValid as well as the verdict field.', Comment = 'is-IS=Bættu responseSchema við Ask-beiðnina og prófaðu schemaValid ásamt niðurstöðureitnum.';
         AskTraceDiscardedMsg: Label 'Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.', Comment = '%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.';
         AskTraceDiscardedNextStepTxt: Label 'Remove includeTrace from the Ask request. Use answer, data and the counts in the playbook instead.', Comment = 'is-IS=Fjarlægðu includeTrace úr Ask-beiðninni. Notaðu answer, data og talningarnar í keðjunni í staðinn.';
+        UnknownConditionPathMsg: Label 'Step %1 has a Success condition on %2, but the response of %3 declares no such field (declared: %4). The condition never finds the value, so the step fails on every run.', Comment = '%1 = step no, %2 = condition path, %3 = message type, %4 = declared response fields, is-IS=Skref %1 hefur árangursskilyrði á %2, en svar %3 skilgreinir engan slíkan reit (skilgreindir: %4). Skilyrðið finnur gildið aldrei, svo skrefið mistekst í hverri keyrslu.';
+        UnknownConditionPathNextStepTxt: Label 'Change the condition path %1 to a field the response declares; read the response chapter of the message type contract.', Comment = '%1 = condition path, is-IS=Breyttu slóð skilyrðisins %1 í reit sem svarið skilgreinir; lestu svarkafla samningslýsingar skilaboðategundarinnar.';
         SeenStepTok: Label 'step|%1', Locked = true;
         SeenFieldTok: Label 'field|%1|%2', Locked = true;
         SeenCurrentTok: Label 'current|%1', Locked = true;

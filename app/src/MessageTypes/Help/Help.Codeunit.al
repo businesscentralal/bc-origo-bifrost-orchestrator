@@ -207,11 +207,27 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildPlaybookWorkflowGuide(O);
         BuildDataRecordsGuide(O);
+        BuildToolsNavigationGuide(O);
         BuildTableDataGuide(O);
         BuildCopyPlanGuide(O);
         BuildSchedulingGuide(O);
         BuildLLMPatternsGuide(O);
         BuildAgentRules(O);
+    end;
+
+    local procedure BuildToolsNavigationGuide(var O: TextBuilder)
+    var
+        HeadingTxt: Label '## Find the tools in the Web Client', Comment = 'is-IS=## Finna verkfærin í vefbiðlaranum';
+        SetupToolsTxt: Label 'On **Bifrost Setup**, open **Related > Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.', Comment = 'is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt > Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.';
+        PlaybookToolsTxt: Label 'On the **Bifrost Playbooks** list, open **Related > Tools** for **Table Data** and **Copy Plans**. These tools are Web Client pages, not new message types.', Comment = 'is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt > Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.';
+        ToolPermissionsTxt: Label 'Tools follow your page permissions. **Table Data** requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.', Comment = 'is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.';
+    begin
+        O.AppendLine(HeadingTxt);
+        O.AppendLine('');
+        O.AppendLine(SetupToolsTxt);
+        O.AppendLine(PlaybookToolsTxt);
+        O.AppendLine(ToolPermissionsTxt);
+        O.AppendLine('');
     end;
 
     local procedure BuildTableDataGuide(var O: TextBuilder)
@@ -312,7 +328,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `AskDataConditionWithoutSchema` | warning | An Ask Success or Error condition reads `data` without `responseSchema` |');
         O.AppendLine('| `AskTraceDiscarded` | warning | Ask requests `includeTrace: true`, but Orchestrator discards the trace before using or storing the response |');
         O.AppendLine('| `ForEachSourceUnguarded` | warning | A record reader (`Data.Records.Get`) feeds a forEach but has no Success condition on `noOfRecords`: an empty answer still succeeds and the forEach does nothing |');
-        O.AppendLine('| `UnknownFieldReference` | error for stored fields; warning for `@_current.fields` | `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths: this is an Error and blocks Run/Schedule even with `ignoreWarnings=true`. Stored names retain their original casing; matching stays case-insensitive. `@_current.fields.X` findings remain warnings when the source table does not have the field or returns it under `primaryKey`. |');
+        O.AppendLine('| `UnknownFieldReference` | error for stored fields; warning for `@_current.fields` | `@N.field` / `@N.@_iter.field` names a field step N does not store in its Result Log Paths: this is an Error and blocks Run/Schedule even with `ignoreWarnings=true`. Stored names retain their original casing; matching stays case-insensitive. `@_current.fields.X` findings remain warnings when the source table does not have the field or returns it under `primaryKey`. A Success condition path that the response contract of the message type does not declare (for example `valid` where the type answers under `result`) is also a warning, once per path. |');
         O.AppendLine('| `IrreversibleWithoutConfirmation` | warning | The step sends an irreversible message type without `expectedCount` while Bifrost Setup requires confirmation for irreversible messages: the type answers `ConfirmationRequired` and the step fails. Add `"expectedCount"` to the request |');
         O.AppendLine('| `PreviewWithoutMaxCount` | error | The request sends `"expectedCount": "@preview"` but the step has no Max Count: every run refuses the step with `ConfirmationRequired` and nothing is executed. Set Max Count |');
         O.AppendLine('| `MaxCountWithoutPreview` | error | The step has a Max Count but the request does not send `"expectedCount": "@preview"`, so the cap is never applied. Send `@preview` or clear Max Count |');

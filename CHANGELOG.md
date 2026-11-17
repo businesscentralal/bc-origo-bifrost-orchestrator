@@ -5,7 +5,7 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — 28.0.4.0
+## [Unreleased]
 
 ### Added — #193
 
@@ -13,6 +13,18 @@ Business Central release versioning (`major.minor.build.revision`).
 - #193 AC01 / enum 10035624 `Transform Operation ori` (new value 4 `Parse JSON`, caption `Þátta JSON`) and codeunit 10035627 `Playbook Transform Exec ori` (new internal procedure `ParseJson`): a Transform mapping with Parse JSON turns a text value that holds JSON, such as a language model reply (also inside a Markdown code fence), into a JSON object or array. A Transform step ahead of the target step therefore gives a later `@N.result[..]` reference a real object for an object or array parameter such as `documentData` of `DocumentExchange.UBL.RenderBilling`. An object or array source is copied and null stays null; text that is not valid JSON, or is a JSON scalar, fails the step with an actionable en-US/is-IS error and no partial output. Codeunit 10035628 `Playbook Transform Verify ori` accepts the operation; the Transform chapter of `Help ori` documents it. No new object IDs. is-IS XLF updated.
 - #193 not yet done: the Verify warning for a string-producing reference that feeds an object parameter, and automatic object insertion for whole-value references (the issue's first option). Parse JSON is the issue's second option.
 - Tests: four new scenarios in test codeunit 96468 `Transform Exec Tests ori` (text to object and array, Markdown fence, object and null pass-through, invalid and scalar text, Transform step output holds an object).
+
+### Added
+- #199: **Tools / Verkfæri** on Bifröst Setup (pageextension 10035537) groups the existing Playbooks and Execution Log actions with permission-aware Table Data and Copy Plans links. The Playbooks list (page 10035551) offers the same two tools; Orchestrator Setup stays under Apps. Existing action names are preserved. Playbook Admin/View (permission sets 10035538/10035539) gain Execute on their already-readable Copy Plan table (10035577), which BC requires for RunObject navigation; data permissions are unchanged. Runtime help (codeunit 10035576) documents the navigation in en-US/is-IS. No new object IDs or message types. — 28.0.4.0
+
+### Fixed — #194 review amendments
+- Codeunit 10035618 accepts dynamic response children declared with placeholder names such as `<field name>`, preserving valid aggregate and primary-key Success conditions. Fixed field names match the runtime JSON path casing; differently cased paths warn separately. Declared response names are listed once per step.
+- Test codeunit 96490 and fixture 96491 cover placeholder array/key children, wildcard scope, and case-sensitive Verify/runtime parity.
+
+### Added — #194
+- #194 / codeunit 10035618 `Playbook Verify Template ori`: Verify checks every Success condition path of a message step against the response fields the called message type declares (`GetResponse`). A path whose first segment, or second segment under a field that lists children, is not declared gets the warning `UnknownFieldReference` (once per path, naming the path and the declared fields), so a condition such as `valid` where the type answers under `result` is reported before the first run. `status` and `error` are always accepted; a type that declares no response fields is not judged. en-US and is-IS texts; `Orchestrator.Playbook.Verify` help (notes) lists the check.
+- Tests: new test codeunit 96490 `Playbook Condition Path Tests` (declared paths, undeclared path, unknown child, exact result prefix, duplicate/disabled paths, workspace conditions, missing response contract, 1033 and 1039 text and next steps). Test fixture codeunit/enumextension 96491 reproduce result.valid and result.temporary without an Iceland dependency. No new product objects.
+
 ### Added — #189 (core#1365 D3)
 - #189 AC01 / AC02 / AC04 / new codeunit 10035621 `Playbook Preview Count ori`, table 10035540 `Playbook Step ori` (new field 130 `Max Count`) and `Playbook Runner ori`: a message step may send `"expectedCount": "@preview"`. The runner calls the type without `expectedCount`, reads `expected` of the `ConfirmationRequired` answer and repeats the call with that count only when it is at most Max Count. Above the cap, with no Max Count, or when the preview carries no whole count, the step fails with `ConfirmationRequired` (it names the previewed count and the cap) and nothing irreversible is executed. A type that asks for no confirmation runs once. Single, forEach (per item) and paged steps are covered. Require Confirmation for Irreversible Messages stays on; no playbook is pre-authorised.
 - #189 AC04 / table 10035543 `Playbook Step Log ori` (new field 80 `Confirmation Note`, shown on page 10035552 step log list) and codeunit 10035549 `Playbook Log Mgt ori` (`LogStep` overload): the preview count and the confirmed count, or the refusal, are in the run log of every `@preview` call, in 1033 and 1039.
