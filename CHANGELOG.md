@@ -5,7 +5,10 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — 28.0.4.0
+## [Unreleased]
+
+### Added
+- #199: **Tools / Verkfæri** on Bifröst Setup (pageextension 10035537) groups the existing Playbooks and Execution Log actions with permission-aware Table Data and Copy Plans links. The Playbooks list (page 10035551) offers the same two tools; Orchestrator Setup stays under Apps. Existing action names are preserved. Playbook Admin/View (permission sets 10035538/10035539) gain Execute on their already-readable Copy Plan table (10035577), which BC requires for RunObject navigation; data permissions are unchanged. Runtime help (codeunit 10035576) documents the navigation in en-US/is-IS. No new object IDs or message types. — 28.0.4.0
 
 ### Fixed — #194 review amendments
 - Codeunit 10035618 accepts dynamic response children declared with placeholder names such as `<field name>`, preserving valid aggregate and primary-key Success conditions. Fixed field names match the runtime JSON path casing; differently cased paths warn separately. Declared response names are listed once per step.
