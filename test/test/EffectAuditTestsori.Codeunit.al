@@ -8,7 +8,7 @@ using System.TestLibraries.Utilities;
 /// Issue #191 (core#1365 D1/D2): every irreversible Orchestrator type declares its real effect and names what
 /// expectedCount counts, in effect.changes, on the expectedCount parameter and (en-US and is-IS) in its selection help.
 /// </summary>
-codeunit 96490 "Effect Audit Tests ori"
+codeunit 96492 "Effect Audit Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;
