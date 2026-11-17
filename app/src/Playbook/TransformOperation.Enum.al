@@ -23,4 +23,9 @@ enum 10035624 "Transform Operation ori"
     {
         Caption = 'Replace Text', Comment = 'is-IS=Skipta út texta';
     }
+    /// <summary>Parses JSON text (for example a language model reply) into a JSON object or array.</summary>
+    value(4; "Parse JSON")
+    {
+        Caption = 'Parse JSON', Comment = 'is-IS=Þátta JSON';
+    }
 }

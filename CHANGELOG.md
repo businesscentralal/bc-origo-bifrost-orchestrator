@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added — #193
+
+- Verify warns when a whole-value string response reference feeds an object or array parameter; Parse JSON provides the conversion (#193).
+- #193 AC01 / enum 10035624 `Transform Operation ori` (new value 4 `Parse JSON`, caption `Þátta JSON`) and codeunit 10035627 `Playbook Transform Exec ori` (new internal procedure `ParseJson`): a Transform mapping with Parse JSON turns a text value that holds JSON, such as a language model reply (also inside a Markdown code fence), into a JSON object or array. A Transform step ahead of the target step therefore gives a later `@N.result[..]` reference a real object for an object or array parameter such as `documentData` of `DocumentExchange.UBL.RenderBilling`. An object or array source is copied and null stays null; text that is not valid JSON, or is a JSON scalar, fails the step with an actionable en-US/is-IS error and no partial output. Codeunit 10035628 `Playbook Transform Verify ori` accepts the operation; the Transform chapter of `Help ori` documents it. No new object IDs. is-IS XLF updated.
+- #193 not yet done: the Verify warning for a string-producing reference that feeds an object parameter, and automatic object insertion for whole-value references (the issue's first option). Parse JSON is the issue's second option.
+- Tests: four new scenarios in test codeunit 96468 `Transform Exec Tests ori` (text to object and array, Markdown fence, object and null pass-through, invalid and scalar text, Transform step output holds an object).
 ### Fixed — #202
 - #202 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf` and the matching `is-IS=` comments in the document-sending objects (`Doc Send Contract ori`, `Doc Send Process ori`, `Doc Send Resolver ori`, `Purch Order Pdf Msg ori`, `Sales Order Conf Pdf Msg ori`, `Sales Quote Pdf Msg ori`): review of the 200 is-IS units for the document-sending, PDF and Report Layout message types added since 28.0.3. 28 targets corrected (e-mail address term aligned with Foundation, one read-permission term, `JSON-strengur`, 'vísa á' for identifiers that name a document, meaningless or garbled sentences). Placeholders, keys and Locked labels unchanged; no en-US file; no new objects.
 
