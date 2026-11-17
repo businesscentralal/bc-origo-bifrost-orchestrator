@@ -276,8 +276,8 @@ codeunit 10035600 "Report Layout Handler ori"
         end;
 
         if LayoutSelection.Get(ReportId, CompanyName()) then begin
+            // As SetDefaultReportLayoutSelection: only Type changes; a saved Custom Report Layout Code is kept.
             LayoutSelection.Type := SelectionTypeFor(LayoutFormat);
-            LayoutSelection."Custom Report Layout Code" := '';
             LayoutSelection.Modify(true);
         end else begin
             LayoutSelection.Init();

@@ -97,6 +97,38 @@ codeunit 96494 "Report Layout Dflt Tests ori"
         Cleanup(LayoutName);
     end;
 
+    /// <summary>setAsDefault on an existing Report Layout Selection changes only Type and keeps a saved custom layout code, as the Report Layouts page does (AC01, review finding at e6a245f).</summary>
+    [Test]
+    procedure SetAsDefaultKeepsSavedCustomLayoutCode()
+    var
+        LayoutSelection: Record "Report Layout Selection";
+        Fixture: Record "Report Layout List";
+        Request: JsonObject;
+        Response: JsonObject;
+        SavedCode: Code[20];
+    begin
+        // [GIVEN] The sample report with a Report Layout Selection row that has a saved custom layout code
+        ResetDefault();
+        FindFixture(Fixture);
+        SavedCode := 'BIFT-200-OLD';
+        LayoutSelection.Init();
+        LayoutSelection."Report ID" := Report::"Layout Sample Report ori";
+        LayoutSelection."Company Name" := CopyStr(CompanyName(), 1, MaxStrLen(LayoutSelection."Company Name"));
+        LayoutSelection.Type := LayoutSelection.Type::"Word (built-in)";
+        LayoutSelection."Custom Report Layout Code" := SavedCode;
+        LayoutSelection.Insert();
+        // [WHEN] The existing extension layout is selected with setAsDefault
+        Request := SelectRequest(Fixture.Name);
+        Request.Add('appId', Format(Fixture."Application ID", 0, 4));
+        Response := Execute(Request);
+        // [THEN] DefaultSet, Type follows the RDLC layout, and the saved code is kept
+        Assert.AreEqual('DefaultSet', GetText(Response, 'action'), 'DefaultSet');
+        Assert.IsTrue(LayoutSelection.Get(Report::"Layout Sample Report ori", CompanyName()), 'Report Layout Selection row');
+        Assert.AreEqual(LayoutSelection.Type::"RDLC (built-in)", LayoutSelection.Type, 'Type follows the selected layout');
+        Assert.AreEqual(SavedCode, LayoutSelection."Custom Report Layout Code", 'Saved custom layout code kept');
+        ResetDefault();
+    end;
+
     /// <summary>clearDefault removes the company selection so the built-in default applies; a second call changes nothing (AC02).</summary>
     [Test]
     procedure ClearDefaultFallsBackToBuiltInDefault()
