@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #212
+
+- #212: a Transform Source Path such as `@50.@_iter.reply` now expands `@_iter` to the current forEach index before the workspace lookup, as request templates already do, so a per-item Transform can read the same item of an earlier forEach step (for example Parse JSON on an LLM reply before `DocumentExchange.UBL.RenderBilling`). Codeunit 10035627 `Playbook Transform Exec ori` only; no new object IDs, no new texts. Verify already accepted the path. Tests: two scenarios in codeunit 96468 (iteration 0/1 read, missing item fails naming the path).
+
 ### Added — #193
 
 - Verify warns when a whole-value string response reference feeds an object or array parameter; Parse JSON provides the conversion (#193).

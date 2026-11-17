@@ -186,6 +186,60 @@ codeunit 96468 "Transform Exec Tests ori"
         Lib.Cleanup(Step."Playbook Code");
     end;
 
+    /// <summary>TransformSourceExpandsIterationIndex (#212).</summary>
+    [Test]
+    procedure Scenario_212_SourcePathExpandsIterationIndex()
+    var
+        Step: Record "Playbook Step ori";
+        Workspace: Codeunit "Playbook Workspace ori";
+        Input: JsonObject;
+        Output: JsonObject;
+        Token: JsonToken;
+        Inner: JsonToken;
+        ResponseText: Text;
+        ErrorText: Text;
+    begin
+        // Issue #212 AC: @50.@_iter.reply reads the same item of an earlier forEach step | Risk: Workspace is single instance
+        Workspace.SetValue('50.0.reply', '{"n":"first"}');
+        Workspace.SetValue('50.1.reply', '{"n":"second"}');
+        Workspace.SetValue('_iter', '1');
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'documentData', '@50.@_iter.reply', "Transform Operation ori"::"Parse JSON");
+        Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+        Output.ReadFrom(ResponseText);
+        Output.Get('documentData', Token);
+        Assert.IsTrue(Token.IsObject(), 'documentData is an object');
+        Token.AsObject().Get('n', Inner);
+        Assert.AreEqual('second', Inner.AsValue().AsText(), 'Item of iteration 1 is read');
+        Workspace.SetValue('_iter', '0');
+        Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+        Output.ReadFrom(ResponseText);
+        Output.Get('documentData', Token);
+        Token.AsObject().Get('n', Inner);
+        Assert.AreEqual('first', Inner.AsValue().AsText(), 'Item of iteration 0 is read');
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
+    /// <summary>MissingIterationItemFailsWithPath (#212).</summary>
+    [Test]
+    procedure Scenario_212_MissingIterationItemFails()
+    var
+        Step: Record "Playbook Step ori";
+        Workspace: Codeunit "Playbook Workspace ori";
+        Input: JsonObject;
+        ResponseText: Text;
+        ErrorText: Text;
+    begin
+        // Issue #212 invalid input: iteration without an item fails and names the path | Risk: None
+        Workspace.SetValue('50.0.reply', '{}');
+        Workspace.SetValue('_iter', '5');
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'documentData', '@50.@_iter.reply', "Transform Operation ori"::Copy);
+        Assert.IsFalse(Executor.Execute(Step, Input, ResponseText, ErrorText), 'Missing item fails');
+        Assert.IsTrue(ErrorText.Contains('@50.@_iter.reply'), 'Error names the source path');
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
     /// <summary>MissingSourceReturnsFailureWithoutPartialOutput.</summary>
     [Test]
     procedure Scenario_AC42_MissingSourceReturnsFailureWithoutPartialOutput()
