@@ -40,7 +40,7 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Send an email draft identified by its outbox SystemId. Irreversible. Use Email.Draft.Set to create the draft first.', Comment = 'is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst.';
+        SelectionLbl: Label 'Send an email draft identified by its outbox SystemId. Irreversible. Use Email.Draft.Set to create the draft first. expectedCount counts the one e-mail draft that is sent, not its recipients.', Comment = 'is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst. expectedCount telur þau einu tölvupóstsdrög sem eru send, ekki viðtakendur.';
     begin
         exit(SelectionLbl);
     end;
@@ -66,9 +66,11 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('outboxSystemId', 'string', false, 'SystemId of the Email Outbox entry, from the Email.Draft.Set answer. Required unless subject carries it.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one e-mail draft that is sent (1), not its recipients'));
         exit(true);
     end;
 
@@ -96,10 +98,11 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
         Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('irreversible', 'Sends the email draft and creates a sent email.', false, '', Preconditions);
+        Effect := Parts.Effect('irreversible', 'Sends the email draft and creates a sent email.' + ' ' + CountParts.CountSentence('the one e-mail draft that is sent (1), not its recipients'), false, '', Preconditions);
         exit(true);
     end;
 

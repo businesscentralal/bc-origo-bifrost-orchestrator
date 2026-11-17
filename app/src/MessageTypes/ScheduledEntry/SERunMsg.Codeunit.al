@@ -48,7 +48,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Run an orchestrator entry once immediately. Irreversible. Use Orchestrator.Entry.Restart to requeue a failed entry instead.', Comment = 'is-IS=Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.';
+        SelectionLbl: Label 'Run an orchestrator entry once immediately. Irreversible. Use Orchestrator.Entry.Restart to requeue a failed entry instead. expectedCount counts the one entry that is run.', Comment = 'is-IS=Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið. expectedCount telur þá einu færslu sem er keyrð.';
     begin
         exit(SelectionLbl);
     end;
@@ -73,9 +73,11 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the orchestrator entry (Job Queue Orchestrator Entry). Required unless subject carries it.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one orchestrator entry that is run (1), not the work its job does'));
         exit(true);
     end;
 
@@ -102,9 +104,10 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the entry''s job once through a one-time Job Queue Entry and commits, on the success and on the error path.', false);
+        Effect := Parts.CommittingEffect('Runs the entry''s job once through a one-time Job Queue Entry and commits, on the success and on the error path.' + ' ' + CountParts.CountSentence('the one orchestrator entry that is run (1), not the work its job does'), false);
         exit(true);
     end;
 

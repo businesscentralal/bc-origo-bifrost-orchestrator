@@ -55,21 +55,21 @@ codeunit 10035631 "Doc Send Contract ori"
 
     internal procedure PurchaseOrderSelection(): Text
     var
-        SelectionLbl: Label 'Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf.', Comment = 'is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.';
+        SelectionLbl: Label 'Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf. expectedCount counts the one document that is sent, not its recipients.', Comment = 'is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.';
     begin
         exit(SelectionLbl);
     end;
 
     internal procedure SalesQuoteSelection(): Text
     var
-        SelectionLbl: Label 'Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf.', Comment = 'is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.';
+        SelectionLbl: Label 'Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf. expectedCount counts the one document that is sent, not its recipients.', Comment = 'is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.';
     begin
         exit(SelectionLbl);
     end;
 
     internal procedure OrderConfirmationSelection(): Text
     var
-        SelectionLbl: Label 'Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf.', Comment = 'is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.';
+        SelectionLbl: Label 'Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf. expectedCount counts the one document that is sent, not its recipients.', Comment = 'is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.';
     begin
         exit(SelectionLbl);
     end;
@@ -95,9 +95,10 @@ codeunit 10035631 "Doc Send Contract ori"
         Result.Add(ContractMgt.TargetEntry('data.' + IdKey, 'guid', TargetIdAliasLbl));
     end;
 
-    internal procedure Parameters(var ParameterList: JsonArray; NumberKey: Text; IdKey: Text)
+    internal procedure Parameters(var ParameterList: JsonArray; NumberKey: Text; IdKey: Text; CountUnit: Text)
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
     begin
         ParameterList.Add(ContractMgt.Parameter('documentNo', 'string', false, DocumentNumberAGuidBelongsInDocumentidLbl));
         ParameterList.Add(ContractMgt.Parameter(NumberKey, 'string', false, SameAsDocumentnoWhenBothAreSentLbl));
@@ -105,6 +106,7 @@ codeunit 10035631 "Doc Send Contract ori"
         ParameterList.Add(ContractMgt.Parameter(IdKey, 'string', false, SameAsDocumentidWhenBothAreSentLbl));
         ParameterList.Add(ContractMgt.Parameter('documentSendingProfile', 'string', false,
             CodeOfTheDocumentSendingProfileForLbl));
+        ParameterList.Add(CountParts.ExpectedCountParameter(CountUnit));
     end;
 
     internal procedure Response(var ResponseObject: JsonObject; DocumentTypeText: Text; PartyNoName: Text; PartyNameName: Text; PartyCaption: Text)
@@ -168,11 +170,12 @@ codeunit 10035631 "Doc Send Contract ori"
             ReadTheTextCheckTheDocumentBeforeLbl));
     end;
 
-    internal procedure Effect(var EffectObject: JsonObject; Changes: Text)
+    internal procedure Effect(var EffectObject: JsonObject; Changes: Text; CountUnit: Text)
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        EffectObject := Parts.CommittingEffect(Changes, false);
+        EffectObject := Parts.CommittingEffect(Changes + ' ' + CountParts.CountSentence(CountUnit), false);
     end;
 
     internal procedure RelatedSales(var Related: JsonArray; MessageTypeName: Text)

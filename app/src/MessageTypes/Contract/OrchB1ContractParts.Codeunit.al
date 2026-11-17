@@ -287,6 +287,30 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     end;
 
     /// <summary>
+    /// The sentence that names what expectedCount counts for an irreversible type, and how to read the count
+    /// without a side effect (core#1365, core#1367).
+    /// </summary>
+    /// <param name="CountUnit">The unit, as a noun phrase, for example "the one orchestrator entry that is run".</param>
+    /// <returns>The sentence, to append to the changes text of the effect chapter.</returns>
+    internal procedure CountSentence(CountUnit: Text): Text
+    begin
+        exit('expectedCount counts ' + CountUnit + '. To read that count without a side effect, send the same request without expectedCount and read expected from the ConfirmationRequired answer, or send "expectedCount": "@preview" with a Max Count in a playbook step.');
+    end;
+
+    /// <summary>
+    /// The expectedCount parameter of an irreversible type, naming its unit. Foundation keeps a sentence the
+    /// feature app declares.
+    /// </summary>
+    /// <param name="CountUnit">The unit, as a noun phrase, for example "the one orchestrator entry that is run".</param>
+    /// <returns>The parameter entry.</returns>
+    internal procedure ExpectedCountParameter(CountUnit: Text): JsonObject
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        exit(ContractMgt.Parameter('expectedCount', 'integer', false, 'Counts ' + CountUnit + '. Always checked when sent; required only while Require Confirmation for Irreversible Messages is on in Bifrost Setup. Send the request without it to read expected, or use "@preview" with a Max Count in a playbook step.'));
+    end;
+
+    /// <summary>
     /// Adds an entry to the related chapter.
     /// </summary>
     /// <param name="RelatedEntries">Receives the entry.</param>
