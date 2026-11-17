@@ -3219,11 +3219,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Fluttu út gögn eins skýrsluútlits, úr viðbót eða notandaskilgreind, sem base64. Lesaðgerð. Notaðu Orchestrator.ReportLayout.List fyrst til að finna heiti útlitsins og appId, eða Orchestrator.ReportLayout.Set til að flytja inn útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Get Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 1474270157" size-unit="char" translate="yes" xml:space="preserve">
+          <source>More than one layout named %1 exists on report %2. Send "appId".</source>
+          <target>Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType AmbiguousLayoutErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 2883624667" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send "appId" only with "setAsDefault" and no layout file.</source>
+          <target>Sendu "appId" aðeins með "setAsDefault" og engri útlitsskrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu "appId" aðeins með "setAsDefault" og engri útlitsskrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType AppIdWithLayoutErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 3730852756" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send either "layoutBase64" or "stagingId", not both.</source>
           <target>Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType BothLayoutSourcesErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 2470017265" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send "clearDefault" without "layoutBase64" or "stagingId".</source>
+          <target>Sendu "clearDefault" án "layoutBase64" eða "stagingId".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu "clearDefault" án "layoutBase64" eða "stagingId".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType ClearDefaultWithLayoutErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 1435033756" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"appId" %1 is not a valid GUID.</source>
+          <target>"appId" %1 er ekki gilt GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="appId" %1 er ekki gilt GUID.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType InvalidAppIdErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 1047023575" size-unit="char" translate="yes" xml:space="preserve">
           <source>Layout format %1 is not valid for report %2.</source>
@@ -3236,6 +3260,18 @@
           <target>"stagingId" %1 er ekki gilt GUID.</target>
           <note from="Developer" annotates="general" priority="2">is-IS="stagingId" %1 er ekki gilt GUID.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType InvalidStagingIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 not found on report %2.</source>
+          <target>Útlit %1 fannst ekki fyrir skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 959653816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 belongs to company %2 and cannot be the default in company %3.</source>
+          <target>Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutOtherCompanyErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 2128685181" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "%1".</source>
@@ -3255,11 +3291,23 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "layoutBase64" eða "stagingId".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NoLayoutSourceErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 911648352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"%1" must be true or false.</source>
+          <target>"%1" verður að vera true eða false.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="%1" verður að vera true eða false.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NotBooleanErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 572047844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 not found.</source>
           <target>Skýrsla %1 finnst ekki.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 finnst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType ReportNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 193818898" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send either "setAsDefault" or "clearDefault", not both.</source>
+          <target>Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType SetAndClearDefaultErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 1462950238" size-unit="char" translate="yes" xml:space="preserve">
           <source>Staging row %1 was not found or has already been taken.</source>
@@ -3315,22 +3363,28 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 fannst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType ReportNotFoundErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1823936061 - NamedType 1449450473" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imports a user-defined layout and creates or replaces the tenant layout row. With setAsDefault, the layout becomes the default of the report in the current company (Tenant Report Layout Selection and Report Layout Selection); with clearDefault, that company default is removed and the all-companies or built-in default applies. Both can be set back with another call.</source>
+          <target>Flytur inn notandaskilgreint útlit og býr til eða skiptir út útlitsfærslu leigjanda. Með setAsDefault verður útlitið sjálfgefið útlit skýrslunnar í núverandi fyrirtæki (Tenant Report Layout Selection og Report Layout Selection); með clearDefault er sjálfgefna útlitið fjarlægt og sjálfgefið útlit allra fyrirtækja eða innbyggða sjálfgefna útlitið gildir. Hvort tveggja má setja til baka með öðru kalli.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytur inn notandaskilgreint útlit og býr til eða skiptir út útlitsfærslu leigjanda. Með setAsDefault verður útlitið sjálfgefið útlit skýrslunnar í núverandi fyrirtæki (Tenant Report Layout Selection og Report Layout Selection); með clearDefault er sjálfgefna útlitið fjarlægt og sjálfgefið útlit allra fyrirtækja eða innbyggða sjálfgefna útlitið gildir. Hvort tveggja má setja til baka með öðru kalli.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - NamedType ChangesLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Creates or replaces a user-defined report layout via the BC layout import path.</source>
-          <target>Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC.</note>
+          <source>Creates or replaces a user-defined report layout via the BC layout import path, and sets or clears the default layout.</source>
+          <target>Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC og stillir eða hreinsar sjálfgefið útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC og stillir eða hreinsar sjálfgefið útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
-          <source>set report layout, import report layout, replace report layout, base64 layout, Word layout, Excel layout, RDLC layout</source>
-          <target>stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit</note>
+          <source>set report layout, import report layout, replace report layout, base64 layout, Word layout, Excel layout, RDLC layout, default report layout, clear default layout</source>
+          <target>stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit, sjálfgefið skýrsluútlit, hreinsa sjálfgefið útlit</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit, sjálfgefið skýrsluútlit, hreinsa sjálfgefið útlit</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Create or replace a user-defined tenant report layout from base64 or from a staging row. Write operation. Use Orchestrator.Report.Get to inspect existing layouts.</source>
-          <target>Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</note>
+          <source>Create or replace a user-defined tenant report layout from base64 or from a staging row, and optionally make it the default; or make an existing layout the default, or clear the default, in the current company. Write operation. Use Orchestrator.ReportLayout.List to inspect existing layouts.</source>
+          <target>Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu og gerðu það sjálfgefið ef þú vilt; eða gerðu útlit sem er til sjálfgefið, eða hreinsaðu sjálfgefna útlitið, í núverandi fyrirtæki. Skrifaðgerð. Notaðu Orchestrator.ReportLayout.List til að skoða núverandi útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu og gerðu það sjálfgefið ef þú vilt; eða gerðu útlit sem er til sjálfgefið, eða hreinsaðu sjálfgefna útlitið, í núverandi fyrirtæki. Skrifaðgerð. Notaðu Orchestrator.ReportLayout.List til að skoða núverandi útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1335621907 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
