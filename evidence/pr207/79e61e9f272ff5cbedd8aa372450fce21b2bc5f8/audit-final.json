@@ -1,0 +1,151 @@
+{
+  "changedTargets": 28,
+  "totalUnits": 1278,
+  "unitIdsUnchanged": true,
+  "englishSourcesUnchanged": true,
+  "placeholderMultisetsUnchanged": true,
+  "developerNotesMatch": true,
+  "alChangesOnlyIcelandicComments": true,
+  "changed": [
+    {
+      "id": "Table 4153413238 - NamedType 880944479",
+      "source": "Remove or reparent the child plans before deleting this plan.",
+      "target": "Fjarlægðu undirskipaðar áætlanir eða tengdu þær við aðra yfirskipaða áætlun áður en þessari áætlun er eytt."
+    },
+    {
+      "id": "Table 4153413238 - Field 3014885516 - Property 1295455071",
+      "source": "Specifies the order of child plans under the same parent.",
+      "target": "Tilgreinir röð undirskipaðra áætlana undir sömu yfirskipuðu áætlun."
+    },
+    {
+      "id": "Table 2378468741 - Field 4167960641 - Property 1295455071",
+      "source": "Specifies the most the step may confirm on its own. Required when the request sends \"expectedCount\": \"@preview\": the runner previews the call, confirms with the previewed count if it is at most Max Count, and otherwise stops with ConfirmationRequired. Leave blank when the step does not use @preview.",
+      "target": "Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir \"expectedCount\": \"@preview\": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er ekki hærri en hámarksfjöldinn, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview."
+    },
+    {
+      "id": "Table 580399095 - Field 1597973756 - Property 1295455071",
+      "source": "Specifies the path in the input row, or an @workspace reference.",
+      "target": "Tilgreinir slóðina í inntaksfærslunni eða @workspace-tilvísun."
+    },
+    {
+      "id": "Table 580399095 - Field 4011441648 - Property 1295455071",
+      "source": "Specifies the dot-separated path in the output row.",
+      "target": "Tilgreinir slóðina í úttaksfærslunni, með punktum á milli hluta."
+    },
+    {
+      "id": "Table 392052156 - Field 2710354593 - Property 1295455071",
+      "source": "Specifies the key of the field in the serializer JSON.",
+      "target": "Tilgreinir lykil reitsins í JSON-útgáfu raðgerðarinnar."
+    },
+    {
+      "id": "Table 392052156 - Field 1131619133 - Property 1295455071",
+      "source": "Specifies the value of the field as the serializer writes it. Change it to save a new value.",
+      "target": "Tilgreinir gildi reitsins eins og það er skrifað í JSON. Breyttu því til að vista nýtt gildi."
+    },
+    {
+      "id": "Table 2871538196 - Field 2166945456 - Property 1295455071",
+      "source": "Specifies the first fields of the record as Name=Value pairs.",
+      "target": "Tilgreinir fyrstu reiti færslunnar sem pör af gerðinni Heiti=Gildi."
+    },
+    {
+      "id": "Codeunit 2797933787 - NamedType 1913014239",
+      "source": "Copy plan %1 occurs twice in the parent hierarchy.",
+      "target": "Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldi yfirskipaðra áætlana."
+    },
+    {
+      "id": "Codeunit 1127509453 - NamedType 3316397049",
+      "source": "Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.",
+      "target": "Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla og því er ekki hægt að bakka því með keðjunni."
+    },
+    {
+      "id": "Codeunit 1127509453 - NamedType 1516695796",
+      "source": "Playbook %1 step %2 cannot run %3 under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.",
+      "target": "Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin lýsir ekki yfir neinum áhrifasamningi og því er ekki talið öruggt að bakka henni."
+    },
+    {
+      "id": "Codeunit 2939314393 - NamedType 413497156",
+      "source": "Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.",
+      "target": "Skref %1 mistókst. Svarið inniheldur enga villu og öll skilyrði eru uppfyllt; skoðaðu beiðnina og svarið."
+    },
+    {
+      "id": "Codeunit 3549054438 - NamedType 153936086",
+      "source": "Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.",
+      "target": "Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og sannreyndu keðjuna aftur."
+    },
+    {
+      "id": "Codeunit 3549054438 - NamedType 761809759",
+      "source": "Correct the Transform field mappings and verify the playbook again.",
+      "target": "Leiðréttu reitavarpanir umbreytingarinnar og sannreyndu keðjuna aftur."
+    },
+    {
+      "id": "Codeunit 3549054438 - NamedType 1441009422",
+      "source": "A Transform step cannot fetch pages. Iterate over a preceding reader step instead.",
+      "target": "Umbreytingarskref getur ekki sótt síður. Láttu í staðinn endurtaka yfir fyrra lestrarskref."
+    },
+    {
+      "id": "Codeunit 2653460954 - NamedType 203386158",
+      "source": "Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.",
+      "target": "Ask-skref %1 biður um rakningu sem Orchestrator fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni."
+    },
+    {
+      "id": "Codeunit 2653460954 - NamedType 303900121",
+      "source": "Set Max Count on the step to the most the playbook may confirm without a person, or send a fixed expectedCount instead.",
+      "target": "Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án aðkomu manns, eða sendu fastan expectedCount í staðinn."
+    },
+    {
+      "id": "Codeunit 2653460954 - NamedType 1380240250",
+      "source": "Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.",
+      "target": "Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst."
+    },
+    {
+      "id": "Codeunit 2653460954 - NamedType 4255824126",
+      "source": "Remove %1 or rename it to a declared parameter. The type declares: %2.",
+      "target": "Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2."
+    },
+    {
+      "id": "Codeunit 2653460954 - NamedType 725261787",
+      "source": "Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.",
+      "target": "Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin samsvarar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun."
+    },
+    {
+      "id": "Codeunit 2389894866 - NamedType 3901123449",
+      "source": "The table view is not valid for table %1.",
+      "target": "Töflusýnin er ekki gild fyrir töflu %1."
+    },
+    {
+      "id": "Codeunit 1136529745 - NamedType 1468028954",
+      "source": "The file is not a Bifrost table data file (format %1, version %2 expected).",
+      "target": "Skráin er ekki Bifröst-töflugagnaskrá (búist var við sniði %1, útgáfu %2)."
+    },
+    {
+      "id": "Codeunit 1136529745 - NamedType 1030601889",
+      "source": "A new row cannot be inserted into table %1 (%2).",
+      "target": "Ekki er hægt að bæta nýrri línu við töflu %1 (%2)."
+    },
+    {
+      "id": "Codeunit 1136529745 - NamedType 2095975556",
+      "source": "The file has no rows array.",
+      "target": "Skráin inniheldur engan línulista (rows)."
+    },
+    {
+      "id": "Page 853968823 - Control 1949447633 - Property 2879900210",
+      "source": "Transform Fields",
+      "target": "Reitaumbreytingar"
+    },
+    {
+      "id": "Page 441524090 - Control 358941092 - Property 1295455071",
+      "source": "How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.",
+      "target": "Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki tómur texti, ekki tómt fylki og ekki tómur hlutur."
+    },
+    {
+      "id": "Page 2155707330 - Property 2879900210",
+      "source": "Transform Fields",
+      "target": "Reitaumbreytingar"
+    },
+    {
+      "id": "Page 337517078 - NamedType 629381524",
+      "source": "The file is not valid JSON.",
+      "target": "Skráin er ekki gild JSON-skrá."
+    }
+  ]
+}

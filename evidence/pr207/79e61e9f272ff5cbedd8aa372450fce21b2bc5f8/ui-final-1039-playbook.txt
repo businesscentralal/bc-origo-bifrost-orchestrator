@@ -1,0 +1,133 @@
+
+
+Bifröst keðja | Vinnudagsetning: 1/27/2028
+
+
+
+
+
+
+XUI207
+Heim
+Saga
+
+Keyra núna
+Tímasetja
+Vinnsluraðarstjórafærsla
+
+Almennt
+Kóði
+XUI207
+Lýsing
+XUI207 translation review
+Skref
+Ný lína
+Eyða línu
+
+
+		
+Skrefnúmer
+	
+	
+Síðasta keyrsla
+	
+Lýsing
+	
+Tegund skrefs
+	
+Skilaboðagerð
+	
+Slóð fylkis til ítrunar
+	
+Upprunaskref ítrunar
+	
+Tegund skrefs
+	
+Slóðir samantektar
+	
+Hámarksfjöldi
+	
+Undanskilja frá stöðu keyrslu
+	
+Næsta skref (árangur)
+	
+Næsta skref (misbrestur)
+	
+Stöðva við villu hlutar
+	
+Óvirkt
+	
+			
+															
+		10	
+		XUI207 Transform	Umbreyting				Aðgerð			
+	0	0	
+	
+	
+Skilyrði skrefa
+Ný lína
+Eyða línu
+
+
+		
+Skrefnúmer
+	
+	
+Tegund skilyrðis
+	
+Hópnúmer
+	
+Slóð
+	
+Virki
+	
+Gildi
+	
+Lýsing
+	
+			
+							
+		10	
+	Upphaf	1	@input.value	Er til			
+Reitaumbreytingar
+Ný lína
+Eyða línu
+
+
+		
+Markslóð
+	
+	
+Upprunaslóð
+	
+Aðgerð
+	
+Viðfang 1
+	
+Viðfang 2
+	
+			
+					
+		value	
+	value	Afrita			
+Tímaáætlun
+Upphafsbeiðni
+Sniðmát beiðni
+Síðasta keyrsla
+Staða
+Byrjaði
+Heildartími
+Skref keyrð
+Skref mistókst  
+Hlutir unnir
+
+
+Virki
+
+Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki tómur texti, ekki tómt fylki og ekki tómur hlutur.
+
+Sýna hjálp
+
+Skrefnúmer, raðað í pöntunina Hækkandi
+
+Notaðu hægri og vinstri örvalyklana til að stilla stærðina. Notaðu Escape-lykilinn til að afturkalla eða Enter-lykilinn til að staðfesta.

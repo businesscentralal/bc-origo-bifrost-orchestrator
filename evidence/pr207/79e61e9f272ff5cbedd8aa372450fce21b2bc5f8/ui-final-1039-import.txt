@@ -1,0 +1,38 @@
+
+Töflugögn
+Vistað
+
+
+
+Tafla
+Töflunr.
+Heiti töflu
+Töflusýn
+Síðustærð
+Síða
+1
+Fyrri síða
+Næsta síða
+Opna færslu
+Flytja út JSON
+Flytja inn JSON
+
+
+		
+Aðallykill
+	
+	
+Samantekt
+	
+			
+		
+(Það eru engin atriði til að sýna í þessu yfirliti)
+
+Skráin er ekki gild JSON-skrá.
+
+Deila upplýsingum
+Voru þessar upplýsingar gagnlegar?
+Já
+Nei
+Í lagi
+Notaðu hægri og vinstri örvalyklana til að stilla stærðina. Notaðu Escape-lykilinn til að afturkalla eða Enter-lykilinn til að staðfesta.

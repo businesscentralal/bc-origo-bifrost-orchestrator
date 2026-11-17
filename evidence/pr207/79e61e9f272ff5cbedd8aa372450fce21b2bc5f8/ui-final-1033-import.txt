@@ -1,0 +1,38 @@
+
+Table Data
+Saved
+
+
+
+Table
+Table No.
+Table Name
+Table View
+Page Size
+Page
+1
+Previous Page
+Next Page
+Open Record
+Export JSON
+Import JSON
+
+
+		
+Primary Key
+	
+	
+Summary
+	
+			
+		
+(There is nothing to show in this view)
+
+The file is not valid JSON.
+
+Share details
+Was this information helpful?
+Yes
+No
+OK
+Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.

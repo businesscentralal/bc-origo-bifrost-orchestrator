@@ -1,0 +1,144 @@
+
+
+Bifrost Playbook | Work Date: 1/27/2028
+
+
+
+
+
+
+XUI207
+Home
+History
+
+Run Now
+Schedule
+Orchestrator Entry
+
+General
+Code
+XUI207
+Description
+XUI207 translation review
+Steps
+New Line
+Delete Line
+
+
+		
+Step No.
+	
+	
+Last Run
+	
+Description
+	
+Step Kind
+	
+Message Type
+	
+Iterate Array Path
+	
+Iterate Source Step No.
+	
+Step Type
+	
+Summary Paths
+	
+Max Count
+	
+Exclude From Run Status
+	
+Next Step No. (Success)
+	
+Next Step No. (Failure)
+	
+Stop On Item Error
+	
+Disabled
+	
+			
+															
+		10	
+		XUI207 Transform	Transform				Action			
+	0	0	
+	
+	
+Step Conditions
+New Line
+Delete Line
+
+
+		
+Step No.
+	
+	
+Condition Type
+	
+Group No.
+	
+Path
+	
+Operator
+	
+Value
+	
+Description
+	
+			
+							
+		10	
+	Start	1	@input.value	Exists			
+Transform Fields
+New Line
+Delete Line
+
+
+		
+Target Path
+	
+	
+Source Path
+	
+Operation
+	
+Argument 1
+	
+Argument 2
+	
+			
+					
+		value	
+	value	Copy			
+Schedule
+Initial Request
+Request Template
+Last Execution
+Status
+Started At
+Total Duration
+Steps Executed
+Steps Failed  
+Items Processed
+
+
+Operator
+
+How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.
+
+Show Help
+Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+
+XUI207. Bifrost Playbook | Work Date: 1/27/2028
+
+List with title "Playbook Steps" now has one item
+
+Step No., sorted in Ascending order
+
+Condition Type, sorted in Ascending order
+
+Group No., sorted in Ascending order
+
+List with title "Step Conditions" now has one item
+
+List with title "Transform Fields" now has one item
