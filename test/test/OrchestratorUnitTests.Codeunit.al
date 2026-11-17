@@ -161,6 +161,8 @@ codeunit 96411 "Orchestrator Unit Tests"
         // [GIVEN] Clean Job Queue Scheduler General Setup 
         CleanJobQueueSchedulerSetup();
         CleanArtifacts();
+        // [GIVEN] Old Ok Sample entries left on the tenant are removed, so FindFirst reads the entry enqueued here
+        DeleteAllOkSampleJobQueueEntries();
 
         // [GIVEN] Job Queue Scheduler General Setup is opened
         // [GIVEN] JobQueueOkSample is registered in setup
@@ -591,6 +593,15 @@ codeunit 96411 "Orchestrator Unit Tests"
         JobQueueEntry.SetRange("Record ID to Process", TempOrchestratorEntry.RecordId());
         if not JobQueueEntry.IsEmpty() then
             JobQueueEntry.DeleteAll();
+    end;
+
+    local procedure DeleteAllOkSampleJobQueueEntries()
+    var
+        JobQueueEntry: Record "Job Queue Entry";
+    begin
+        JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Codeunit);
+        JobQueueEntry.SetRange("Object ID to Run", Codeunit::"Ok Sample");
+        JobQueueEntry.DeleteAll();
     end;
 
     local procedure DeleteAllJobQueueSchedulerEntries()
