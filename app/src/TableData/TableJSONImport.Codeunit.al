@@ -22,10 +22,10 @@ codeunit 10035563 "Table JSON Import ori"
     var
         TableNotFoundErr: Label 'Table %1 does not exist.', Comment = '%1 = table number, is-IS=Tafla %1 er ekki til.';
         TableWriteRestrictedErr: Label 'Table %1 (%2) cannot be written by the table data import.', Comment = '%1 = table number, %2 = table name, is-IS=Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).';
-        InsertRestrictedErr: Label 'A new row cannot be inserted into table %1 (%2).', Comment = '%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu í töflu %1 (%2).';
-        FormatErr: Label 'The file is not a Bifrost table data file (format %1, version %2 expected).', Comment = '%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).';
+        InsertRestrictedErr: Label 'A new row cannot be inserted into table %1 (%2).', Comment = '%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu við töflu %1 (%2).';
+        FormatErr: Label 'The file is not a Bifrost table data file (format %1, version %2 expected).', Comment = '%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-töflugagnaskrá (búist var við sniði %1, útgáfu %2).';
         TableNoMissingErr: Label 'The file does not name a table (tableNo).', Comment = 'is-IS=Skráin tilgreinir ekki töflu (tableNo).';
-        RowsMissingErr: Label 'The file has no rows array.', Comment = 'is-IS=Skráin hefur engan línulista (rows).';
+        RowsMissingErr: Label 'The file has no rows array.', Comment = 'is-IS=Skráin inniheldur engan línulista (rows).';
         RowNotObjectErr: Label 'The row is not a JSON object.', Comment = 'is-IS=Línan er ekki JSON-hlutur.';
         RowKeyMissingErr: Label 'The row has neither an id nor a primaryKey.', Comment = 'is-IS=Línan hefur hvorki id né primaryKey.';
         RowStopErr: Label 'Row %1 failed: %2', Comment = '%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2';

@@ -53,7 +53,7 @@ page 10035548 "Playbook Card ori"
                 ApplicationArea = All;
                 Provider = Steps;
                 SubPageLink = "Playbook Code" = field("Playbook Code"), "Step No." = field("Step No.");
-                Caption = 'Transform Fields', Comment = 'is-IS=Umbreyting reita';
+                Caption = 'Transform Fields', Comment = 'is-IS=Reitaumbreytingar';
             }
             group(Schedule)
             {

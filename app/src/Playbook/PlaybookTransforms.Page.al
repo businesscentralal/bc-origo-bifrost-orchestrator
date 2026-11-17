@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Orchestrator;
 /// <summary>Edits the ordered mappings for the selected Transform step.</summary>
 page 10035626 "Playbook Transforms ori"
 {
-    Caption = 'Transform Fields', Comment = 'is-IS=Umbreyting reita';
+    Caption = 'Transform Fields', Comment = 'is-IS=Reitaumbreytingar';
     PageType = ListPart;
     SourceTable = "Playbook Transform ori";
     ApplicationArea = All;

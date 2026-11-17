@@ -204,7 +204,7 @@ page 10035569 "Table Data ori"
         FileNameTxt: Label 'TableData.json', Locked = true;
         DownloadTitleTxt: Label 'Export table data', Comment = 'is-IS=Flytja út töflugögn';
         UploadTitleTxt: Label 'Import table data', Comment = 'is-IS=Flytja inn töflugögn';
-        NotJsonErr: Label 'The file is not valid JSON.', Comment = 'is-IS=Skráin er ekki gilt JSON.';
+        NotJsonErr: Label 'The file is not valid JSON.', Comment = 'is-IS=Skráin er ekki gild JSON-skrá.';
         DryRunQst: Label 'Dry run of %1 rows: %2 to insert, %3 to modify, %4 failed. Import the rows that passed?', Comment = '%1 = rows, %2 = inserted, %3 = modified, %4 = failed, is-IS=Prufukeyrsla %1 lína: %2 til að bæta við, %3 til að breyta, %4 mistókust. Flytja inn línurnar sem stóðust?';
         ImportedMsg: Label '%1 rows inserted, %2 rows modified, %3 rows failed.', Comment = '%1 = inserted, %2 = modified, %3 = failed, is-IS=%1 línum bætt við, %2 línum breytt, %3 línur mistókust.';
 

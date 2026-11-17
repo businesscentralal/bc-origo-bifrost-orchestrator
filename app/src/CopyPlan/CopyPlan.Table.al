@@ -58,7 +58,7 @@ table 10035577 "Copy Plan ori"
         field(8; "Sequence No."; Integer)
         {
             Caption = 'Sequence No.', Comment = 'is-IS=Raðnúmer';
-            ToolTip = 'Specifies the order of child plans under the same parent.', Comment = 'is-IS=Tilgreinir röð undirskipaðra áætlana undir sama foreldri.';
+            ToolTip = 'Specifies the order of child plans under the same parent.', Comment = 'is-IS=Tilgreinir röð undirskipaðra áætlana undir sömu yfirskipuðu áætlun.';
         }
         field(9; "Generated Playbook Code"; Code[20])
         {
@@ -86,5 +86,5 @@ table 10035577 "Copy Plan ori"
         CopyField.DeleteAll(true);
     end;
     var
-        ChildrenExistErr: Label 'Remove or reparent the child plans before deleting this plan.', Comment = 'is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.';
+        ChildrenExistErr: Label 'Remove or reparent the child plans before deleting this plan.', Comment = 'is-IS=Fjarlægðu undirskipaðar áætlanir eða tengdu þær við aðra yfirskipaða áætlun áður en þessari áætlun er eytt.';
 }
