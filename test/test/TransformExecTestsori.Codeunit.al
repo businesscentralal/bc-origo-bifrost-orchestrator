@@ -186,6 +186,91 @@ codeunit 96468 "Transform Exec Tests ori"
         Lib.Cleanup(Step."Playbook Code");
     end;
 
+    /// <summary>TransformSourceExpandsIterationIndex (#212).</summary>
+    [Test]
+    procedure Scenario_212_SourcePathExpandsIterationIndex()
+    var
+        Step: Record "Playbook Step ori";
+        Workspace: Codeunit "Playbook Workspace ori";
+        Input: JsonObject;
+        Output: JsonObject;
+        Token: JsonToken;
+        Inner: JsonToken;
+        ResponseText: Text;
+        ErrorText: Text;
+    begin
+        // Issue #212 AC: @50.@_iter.reply reads the same item of an earlier forEach step | Risk: Workspace is single instance
+        Workspace.SetValue('50.0.reply', '{"n":"first"}');
+        Workspace.SetValue('50.1.reply', '{"n":"second"}');
+        Workspace.SetValue('_iter', '1');
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'documentData', '@50.@_iter.reply', "Transform Operation ori"::"Parse JSON");
+        Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+        Output.ReadFrom(ResponseText);
+        Output.Get('documentData', Token);
+        Assert.IsTrue(Token.IsObject(), 'documentData is an object');
+        Token.AsObject().Get('n', Inner);
+        Assert.AreEqual('second', Inner.AsValue().AsText(), 'Item of iteration 1 is read');
+        Workspace.SetValue('_iter', '0');
+        Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+        Output.ReadFrom(ResponseText);
+        Output.Get('documentData', Token);
+        Token.AsObject().Get('n', Inner);
+        Assert.AreEqual('first', Inner.AsValue().AsText(), 'Item of iteration 0 is read');
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
+    /// <summary>Standalone iteration references copy the workspace index at both zero and one.</summary>
+    [Test]
+    procedure Scenario_212_StandaloneIterCopiesWorkspaceIndex()
+    var
+        Step: Record "Playbook Step ori";
+        Workspace: Codeunit "Playbook Workspace ori";
+        Input: JsonObject;
+        Output: JsonObject;
+        Token: JsonToken;
+        ResponseText: Text;
+        ErrorText: Text;
+        Index: Integer;
+    begin
+        // Issue #212 regression | Time: independent of Today/WorkDate | Risk: Workspace is single instance
+        // [GIVEN] A Copy mapping reads the current iteration directly from the workspace.
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'index', '@_iter', "Transform Operation ori"::Copy);
+        for Index := 0 to 1 do begin
+            Workspace.SetValue('_iter', Format(Index, 0, 9));
+
+            // [WHEN] The Transform executes with no input fields.
+            Assert.IsTrue(Executor.Execute(Step, Input, ResponseText, ErrorText), ErrorText);
+
+            // [THEN] The copied value is the workspace index, including zero.
+            Output.ReadFrom(ResponseText);
+            Output.Get('index', Token);
+            Assert.AreEqual(Format(Index, 0, 9), Token.AsValue().AsText(), 'Standalone @_iter reads the workspace');
+        end;
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
+    /// <summary>MissingIterationItemFailsWithPath (#212).</summary>
+    [Test]
+    procedure Scenario_212_MissingIterationItemFails()
+    var
+        Step: Record "Playbook Step ori";
+        Workspace: Codeunit "Playbook Workspace ori";
+        Input: JsonObject;
+        ResponseText: Text;
+        ErrorText: Text;
+    begin
+        // Issue #212 invalid input: iteration without an item fails and names the path | Risk: None
+        Workspace.SetValue('50.0.reply', '{}');
+        Workspace.SetValue('_iter', '5');
+        CreateTransform(Step);
+        AddMapping(Step, 10000, 'documentData', '@50.@_iter.reply', "Transform Operation ori"::Copy);
+        Assert.IsFalse(Executor.Execute(Step, Input, ResponseText, ErrorText), 'Missing item fails');
+        Assert.IsTrue(ErrorText.Contains('@50.@_iter.reply'), 'Error names the source path');
+        Lib.Cleanup(Step."Playbook Code");
+    end;
+
     /// <summary>MissingSourceReturnsFailureWithoutPartialOutput.</summary>
     [Test]
     procedure Scenario_AC42_MissingSourceReturnsFailureWithoutPartialOutput()

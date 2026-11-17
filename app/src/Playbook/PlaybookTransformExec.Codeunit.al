@@ -34,6 +34,8 @@ codeunit 10035627 "Playbook Transform Exec ori"
         JsonHelper: Codeunit "Playbook JSON Helper ori";
         Token: JsonToken;
         Found: Boolean;
+        SourcePath: Text;
+        IterValue: Text;
     begin
         if Step."Message Type".AsInteger() <> 0 then
             Error(ErrorInfo.Create(MessageTypeErr));
@@ -50,9 +52,14 @@ codeunit 10035627 "Playbook Transform Exec ori"
                 Error(ErrorInfo.Create(StrSubstNo(TargetPathErr, Mapping."Target Path")));
             Clear(Token);
             if Mapping.Operation <> Mapping.Operation::Constant then begin
-                if Mapping."Source Path".StartsWith('@') then
-                    Found := Workspace.GetToken(CopyStr(Mapping."Source Path", 2), Token)
-                else
+                SourcePath := Mapping."Source Path";
+                if SourcePath.StartsWith('@') then begin
+                    SourcePath := CopyStr(SourcePath, 2);
+                    // Expand embedded iteration references while preserving the direct @_iter workspace key.
+                    if SourcePath.Contains('@_iter') and Workspace.GetValue('_iter', IterValue) then
+                        SourcePath := SourcePath.Replace('@_iter', IterValue);
+                    Found := Workspace.GetToken(SourcePath, Token);
+                end else
                     Found := JsonHelper.ResolveJsonPath(Input, Mapping."Source Path", Token);
                 if not Found then
                     Error(ErrorInfo.Create(StrSubstNo(SourcePathErr, Mapping."Source Path")));
