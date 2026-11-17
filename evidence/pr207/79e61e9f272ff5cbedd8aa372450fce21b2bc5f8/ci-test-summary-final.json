@@ -1,0 +1,14 @@
+{
+  "sha": "79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+  "runId": 44021401003,
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/44021401003",
+  "jobId": 133834591403,
+  "artifactId": 14302126835,
+  "artifactDigest": "sha256:8e939ac7563d0bffa1476e73a43227270979b3b8c91fe585863275dc579919c2",
+  "tests": 687,
+  "passed": 687,
+  "failed": 0,
+  "skipped": 0,
+  "source": "Completed CI Test job, Analyze Test Results step",
+  "summaryLine": "2026-11-17T05:20:09.7823716Z - Bifrost Orchestrator - Tests, 687 tests, 687 passed, 0 failed, 0 skipped, 94.229 seconds"
+}

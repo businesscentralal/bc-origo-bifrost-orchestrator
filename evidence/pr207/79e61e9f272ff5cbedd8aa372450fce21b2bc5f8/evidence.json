@@ -1,0 +1,210 @@
+{
+  "sha": "79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+  "acceptanceCriteriaVerified": true,
+  "noSuppressions": true,
+  "summary": "PR207: both AMEND findings addressed; Foundation guard prerequisite reconciled, BC29 parent-page test fixture repaired with all action/data denial assertions retained; affected192/192 and four UI surfaces PASS in1033/1039; cleanup complete.",
+  "evidenceUrls": [
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/evidence-alviss-orchestrator207-79e61e9/evidence/pr207/79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/44021401003",
+    "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/44021401006"
+  ],
+  "compile": {
+    "app": {
+      "sha": "79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+      "errors": 0,
+      "warnings": 0,
+      "evidenceUrls": [
+        "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/evidence-alviss-orchestrator207-79e61e9/evidence/pr207/79e61e9f272ff5cbedd8aa372450fce21b2bc5f8/build-product.log"
+      ]
+    },
+    "testApp": {
+      "sha": "79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+      "errors": 0,
+      "warnings": 0,
+      "evidenceUrls": [
+        "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/evidence-alviss-orchestrator207-79e61e9/evidence/pr207/79e61e9f272ff5cbedd8aa372450fce21b2bc5f8/build-tests.log"
+      ]
+    }
+  },
+  "tests": {
+    "fullSuite": true,
+    "total": 687,
+    "passed": 687,
+    "failed": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "evidenceUrls": [
+      "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/actions/runs/44021401003",
+      "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/evidence-alviss-orchestrator207-79e61e9/evidence/pr207/79e61e9f272ff5cbedd8aa372450fce21b2bc5f8/ci-test-summary-final.json"
+    ]
+  },
+  "inlineResults": {
+    "build": {
+      "app": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "testApp": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "codeunits": [
+      {
+        "id": 96406,
+        "executed": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96418,
+        "executed": 23,
+        "passed": 23,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96425,
+        "executed": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96426,
+        "executed": 10,
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96430,
+        "executed": 21,
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96439,
+        "executed": 40,
+        "passed": 40,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96448,
+        "executed": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96461,
+        "executed": 24,
+        "passed": 24,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96465,
+        "executed": 14,
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96466,
+        "executed": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96468,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96469,
+        "executed": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96487,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "id": 96489,
+        "executed": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      }
+    ]
+  },
+  "ui": {
+    "sha": "79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+    "verified": true,
+    "summary": "Four affected UI surfaces, actual Exists tooltip and invalid JSON errors PASS in1033/1039.",
+    "evidenceUrls": [
+      "https://github.com/businesscentralal/bc-origo-bifrost-orchestrator/tree/codex/evidence-alviss-orchestrator207-79e61e9/evidence/pr207/79e61e9f272ff5cbedd8aa372450fce21b2bc5f8"
+    ],
+    "cells": [
+      {
+        "name": "Playbook Card LCID1033",
+        "status": "PASS"
+      },
+      {
+        "name": "Step Conditions LCID1033",
+        "status": "PASS"
+      },
+      {
+        "name": "Playbook Transforms LCID1033",
+        "status": "PASS"
+      },
+      {
+        "name": "Table Data LCID1033",
+        "status": "PASS"
+      },
+      {
+        "name": "Playbook Card LCID1039",
+        "status": "PASS"
+      },
+      {
+        "name": "Step Conditions LCID1039",
+        "status": "PASS"
+      },
+      {
+        "name": "Playbook Transforms LCID1039",
+        "status": "PASS"
+      },
+      {
+        "name": "Table Data LCID1039",
+        "status": "PASS"
+      }
+    ]
+  },
+  "mcp": {
+    "touchedMessageTypes": [],
+    "notApplicableReason": "No message implementation/contract touched by the amendment; untouched-part evidence carries forward."
+  },
+  "cleanup": {
+    "clean": true,
+    "tenant": "w129-14",
+    "residue": []
+  },
+  "ci": {
+    "sha": "79e61e9f272ff5cbedd8aa372450fce21b2bc5f8",
+    "pairedBuildRun": 44021401003,
+    "sourceGuardsRun": 44021401006,
+    "status": "success"
+  }
+}
