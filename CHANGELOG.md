@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #209
+- Test isolation only, no product change and no new object IDs. Codeunit 96411 `CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified` deletes old Ok Sample (96410) Job Queue Entries before it enqueues, so `FindFirst` reads its own entry. Codeunits 96480 and 96481 seed the P.Order / S.Order Report Selections row when the tenant has none and remove it again; the `NoOrderReportIsPreconditionFailed` tests park and restore the tenant rows instead of deleting them.
+
 ### Added
 - #199: **Tools / Verkfæri** on Bifröst Setup (pageextension 10035537) groups the existing Playbooks and Execution Log actions with permission-aware Table Data and Copy Plans links. The Playbooks list (page 10035551) offers the same two tools; Orchestrator Setup stays under Apps. Existing action names are preserved. Playbook Admin/View (permission sets 10035538/10035539) gain Execute on their already-readable Copy Plan table (10035577), which BC requires for RunObject navigation; data permissions are unchanged. Runtime help (codeunit 10035576) documents the navigation in en-US/is-IS. No new object IDs or message types. — 28.0.4.0
 
