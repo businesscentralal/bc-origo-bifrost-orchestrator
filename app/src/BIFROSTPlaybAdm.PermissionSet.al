@@ -25,6 +25,8 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         page "Playbook Transforms ori" = X,
         codeunit "Playbook Transform Exec ori" = X,
         codeunit "Playbook Transform Verify ori" = X,
+        // The RunObject navigation check also requires Execute on the source table.
+        table "Copy Plan ori" = X,
         page "Copy Plans ori" = X,
         page "Copy Plan Card ori" = X,
         page "Copy Plan Fields ori" = X,
