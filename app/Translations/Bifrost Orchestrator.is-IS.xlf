@@ -2997,6 +2997,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lagaðu sniðmátið: það verður að vera einn JSON-hlutur, með alla strengi innan tvöfaldra gæsalappa og án kommu á eftir síðasta atriði. Settu það aftur sem base64 af leiðrétta JSON-textanum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType TemplateNotJsonNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1433383529" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 has a Success condition on %2, but the response of %3 declares no such field (declared: %4). The condition never finds the value, so the step fails on every run.</source>
+          <target>Skref %1 hefur árangursskilyrði á %2, en svar %3 skilgreinir engan slíkan reit (skilgreindir: %4). Skilyrðið finnur gildið aldrei, svo skrefið mistekst í hverri keyrslu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = condition path, %3 = message type, %4 = declared response fields, is-IS=Skref %1 hefur árangursskilyrði á %2, en svar %3 skilgreinir engan slíkan reit (skilgreindir: %4). Skilyrðið finnur gildið aldrei, svo skrefið mistekst í hverri keyrslu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownConditionPathMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3893262493" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Change the condition path %1 to a field the response declares; read the response chapter of the message type contract.</source>
+          <target>Breyttu slóð skilyrðisins %1 í reit sem svarið skilgreinir; lestu svarkafla samningslýsingar skilaboðategundarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = condition path, is-IS=Breyttu slóð skilyrðisins %1 í reit sem svarið skilgreinir; lestu svarkafla samningslýsingar skilaboðategundarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownConditionPathNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 2764084366" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 reads @_current.fields.%2, but table %3 has no field with that name. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
           <target>Skref %1 les @_current.fields.%2, en taflan %3 hefur engan reit með því nafni. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
