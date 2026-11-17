@@ -39,12 +39,12 @@ codeunit 10035564 "Doc Send Resolver ori"
         Token: JsonToken;
         Written: Text;
         Shown: Text;
-        NotAStringErr: Label 'Parameter "%1" is not a JSON string.', Comment = '%1 = parameter name, is-IS=Færibreyta "%1" er ekki JSON strengur.';
-        NotAStringExpectedTok: Label 'a JSON string', Comment = 'is-IS=JSON strengur';
-        NotAStringNextStepTok: Label 'Send %1 as a JSON string, or leave the key out.', Comment = '%1 = parameter name, is-IS=Sendu %1 sem JSON streng, eða slepptu lyklinum.';
-        TooLongErr: Label 'Parameter "%1" has value "%2", which is longer than %3 characters.', Comment = '%1 = parameter name, %2 = received value, %3 = maximum length, is-IS=Færibreyta "%1" hefur gildið "%2", sem er lengra en %3 stafir.';
+        NotAStringErr: Label 'Parameter "%1" is not a JSON string.', Comment = '%1 = parameter name, is-IS=Færibreytan "%1" er ekki JSON-strengur.';
+        NotAStringExpectedTok: Label 'a JSON string', Comment = 'is-IS=JSON-strengur';
+        NotAStringNextStepTok: Label 'Send %1 as a JSON string, or leave the key out.', Comment = '%1 = parameter name, is-IS=Sendu %1 sem JSON-streng, eða slepptu lyklinum.';
+        TooLongErr: Label 'Parameter "%1" has value "%2", which is longer than %3 characters.', Comment = '%1 = parameter name, %2 = received value, %3 = maximum length, is-IS=Færibreytan "%1" hefur gildið "%2", sem er lengra en %3 stafir.';
         TooLongExpectedTok: Label 'at most %1 characters', Comment = '%1 = maximum length, is-IS=í mesta lagi %1 stafir';
-        TooLongNextStepTok: Label 'Send a value of at most %1 characters. A longer value is refused and is never cut.', Comment = '%1 = maximum length, is-IS=Sendu gildi sem er mest %1 stafir að lengd. Lengra gildi er hafnað og er aldrei skorið.';
+        TooLongNextStepTok: Label 'Send a value of at most %1 characters. A longer value is refused and is never cut.', Comment = '%1 = maximum length, is-IS=Sendu gildi sem er í mesta lagi %1 stafir að lengd. Lengra gildi er hafnað og er aldrei stytt.';
     begin
         Value := '';
         if not RequestJson.Get(KeyName, Token) then
@@ -105,7 +105,7 @@ codeunit 10035564 "Doc Send Resolver ori"
         ProfileNotFoundErr: Label 'Document Sending Profile "%1" not found.', Comment = '%1 = profile code, is-IS=Forstilling skjalasendingar "%1" fannst ekki.';
         ProfileNotFoundNextStepTok: Label 'Send the Code of an existing Document Sending Profile, or leave the key out.', Comment = 'is-IS=Sendu kóða forstillingar skjalasendingar sem er til, eða slepptu lyklinum.';
         ProfileExpectedTok: Label 'the Code of an existing Document Sending Profile', Comment = 'is-IS=kóði forstillingar skjalasendingar sem er til';
-        PartyProfileMissingErr: Label 'Document Sending Profile "%1" referenced by %2 %3 does not exist.', Comment = '%1 = profile code, %2 = customer or vendor, %3 = party no., is-IS=Forstilling skjalasendingar "%1" sem %2 %3 vísar í er ekki til.';
+        PartyProfileMissingErr: Label 'Document Sending Profile "%1" referenced by %2 %3 does not exist.', Comment = '%1 = profile code, %2 = customer or vendor, %3 = party no., is-IS=Forstilling skjalasendingar "%1" sem %2 %3 vísar á er ekki til.';
         PartyProfileNextStepTok: Label 'Fix the profile on the customer or vendor card, or send documentSendingProfile.', Comment = 'is-IS=Lagaðu forstillinguna á viðskiptamanns- eða lánardrottnaspjaldinu, eða sendu documentSendingProfile.';
         NoProfileExpectedTok: Label 'a Document Sending Profile on the customer or vendor, or one profile marked Default', Comment = 'is-IS=forstilling skjalasendingar á viðskiptamanninum eða lánardrottninum, eða ein forstilling merkt sem sjálfgefin';
         NoProfileResolvedErr: Label 'No Document Sending Profile resolved for %1 %2 and no system default profile exists.', Comment = '%1 = customer or vendor, %2 = party no., is-IS=Engin forstilling skjalasendingar fannst fyrir %1 %2 og engin sjálfgefin kerfisforstilling er til.';
@@ -169,7 +169,7 @@ codeunit 10035564 "Doc Send Resolver ori"
         DiskProfileNextStepTok: Label 'Send documentSendingProfile with a profile that has no Disk channel: E-Mail, Electronic Document, or Printer with default settings.', Comment = 'is-IS=Sendu documentSendingProfile með forstillingu sem hefur enga Disk-rás: tölvupóst, rafrænt skjal eða prentara með sjálfgefnum stillingum.';
         DiskProfileExpectedTok: Label 'a Document Sending Profile without a Disk channel', Comment = 'is-IS=forstilling skjalasendingar án Disk-rásar';
         PromptEmailErr: Label 'Document Sending Profile "%1" prompts for e-mail settings, which needs a client; it cannot run through the API.', Comment = '%1 = profile code, is-IS=Forstilling skjalasendingar "%1" biður um tölvupóststillingar, sem krefst biðlara; það er ekki hægt að keyra hana í gegnum API.';
-        PromptEmailNextStepLbl: Label 'Pass documentSendingProfile with E-Mail set to Yes (Use Default Settings), or change the resolved profile to use default e-mail settings. Nothing was sent.', Comment = 'is-IS=Sendu documentSendingProfile með tölvupóst stilltan á Yes (Use Default Settings), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.';
+        PromptEmailNextStepLbl: Label 'Pass documentSendingProfile with E-Mail set to Yes (Use Default Settings), or change the resolved profile to use default e-mail settings. Nothing was sent.', Comment = 'is-IS=Sendu documentSendingProfile með tölvupóst stilltan á Já (nota sjálfgefnar stillingar), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.';
         PromptEmailExpectedLbl: Label 'a Document Sending Profile without an e-mail settings prompt', Comment = 'is-IS=forstilling skjalasendingar sem biður ekki um tölvupóststillingar';
     begin
         if DocumentSendingProfile.Disk <> DocumentSendingProfile.Disk::No then begin

@@ -309,7 +309,7 @@ codeunit 10035625 "Purch Order Pdf Msg ori" implements "Msg Interface ori", "Msg
 
     var
         PermissionDeniedErr: Label 'Read permission denied for purchase orders.', Comment = 'is-IS=Lesheimild vantar fyrir innkaupapantanir.';
-        PermissionNextStepTxt: Label 'Ask an administrator to grant read access to Purchase Header.', Comment = 'is-IS=Biddu kerfisstjóra um lesaðgang að Purchase Header.';
+        PermissionNextStepTxt: Label 'Ask an administrator to grant read access to Purchase Header.', Comment = 'is-IS=Biddu kerfisstjóra um lesheimild fyrir Purchase Header.';
         MissingOrderErr: Label 'No purchase order was named. Send the order No. or SystemId.', Comment = 'is-IS=Engin innkaupapöntun var tilgreind. Sendu númer eða SystemId pöntunarinnar.';
         MissingNextStepTxt: Label 'Send the order No. or SystemId as subject or as data.orderNo.', Comment = 'is-IS=Sendu númer eða SystemId pöntunarinnar sem subject eða sem data.orderNo.';
         ConflictErr: Label '%1 %2 and %3 %4 name different purchase orders.', Comment = '%1 = first identifier source, %2 = first value, %3 = second identifier source, %4 = second value, is-IS=%1 %2 og %3 %4 vísa á mismunandi innkaupapantanir.';

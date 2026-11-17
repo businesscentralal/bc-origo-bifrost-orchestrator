@@ -7,6 +7,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #202
+- #202 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf` and the matching `is-IS=` comments in the document-sending objects (`Doc Send Contract ori`, `Doc Send Process ori`, `Doc Send Resolver ori`, `Purch Order Pdf Msg ori`, `Sales Order Conf Pdf Msg ori`, `Sales Quote Pdf Msg ori`): review of the 200 is-IS units for the document-sending, PDF and Report Layout message types added since 28.0.3. 28 targets corrected (e-mail address term aligned with Foundation, one read-permission term, `JSON-strengur`, 'vísa á' for identifiers that name a document, meaningless or garbled sentences). Placeholders, keys and Locked labels unchanged; no en-US file; no new objects.
+
 ### Fixed — #209
 - Test isolation only, no product change and no new object IDs. Codeunit 96411 `CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified` deletes old Ok Sample (96410) Job Queue Entries before it enqueues, so `FindFirst` reads its own entry. Codeunits 96480 and 96481 seed the P.Order / S.Order Report Selections row when the tenant has none and remove it again; the `NoOrderReportIsPreconditionFailed` tests park and restore the tenant rows instead of deleting them.
 

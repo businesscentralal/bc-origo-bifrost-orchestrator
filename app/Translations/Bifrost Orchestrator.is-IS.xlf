@@ -1481,8 +1481,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1051849347" size-unit="char" translate="yes" xml:space="preserve">
           <source>documentId or the id key is not a GUID.</source>
-          <target>documentId eða annar auðkennislykill er ekki GUID.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=documentId eða annar auðkennislykill er ekki GUID.</note>
+          <target>documentId eða id-lykillinn er ekki GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=documentId eða id-lykillinn er ekki GUID.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType DocumentidOrTheIdKeyIsNotLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1097436829" size-unit="char" translate="yes" xml:space="preserve">
@@ -1517,8 +1517,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1017580948" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document sent successfully.</source>
-          <target>Skjal sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skjal sent.</note>
+          <target>Skjalið var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skjalið var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType DocumentSentSuccessfullyLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 785167619" size-unit="char" translate="yes" xml:space="preserve">
@@ -1529,14 +1529,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2509430370" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask an administrator to grant read access to %1.</source>
-          <target>Biddu kerfisstjóra um lesaðgang að %1.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að %1.</note>
+          <target>Biddu kerfisstjóra um lesheimild fyrir %1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimild fyrir %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType GrantReadLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2855862072" size-unit="char" translate="yes" xml:space="preserve">
           <source>No documentSendingProfile was sent and the customer or vendor profile is missing or points at a deleted profile, and no profile is marked Default.</source>
-          <target>documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins vantar eða hefur verið eytt og engin forstilling er sjálfgefin.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins vantar eða hefur verið eytt og engin forstilling er sjálfgefin.</note>
+          <target>documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins er ekki til eða vísar á forstillingu sem hefur verið eytt, og engin forstilling er merkt sem sjálfgefin.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins er ekki til eða vísar á forstillingu sem hefur verið eytt, og engin forstilling er merkt sem sjálfgefin.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NoDocumentsendingprofileWasSentAndTheCustomerLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2154386112" size-unit="char" translate="yes" xml:space="preserve">
@@ -1547,14 +1547,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2344026547" size-unit="char" translate="yes" xml:space="preserve">
           <source>Success means every profile channel ran without error, not confirmed receipt. A retry sends again. subject and data identifiers must agree; a GUID is the SystemId, otherwise the number. Conflicting keys return ConflictingIdentifiers. Profile codes are compared in upper case. Disk or prompted e-mail profiles are refused before sending. The matching PDF type %1 is a separate dependency for callers wanting a file; this send does not call it.</source>
-          <target>Success merkir að allar sendingarleiðir keyrðu án villu, ekki staðfesta móttöku. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Diskvistun og tölvupóststillingum sem krefjast spurningar er hafnað fyrir sendingu. Samsvarandi PDF-tegund %1 er sérstakt háð atriði fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Success merkir að allar sendingarleiðir keyrðu án villu, ekki staðfesta móttöku. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Diskvistun og tölvupóststillingum sem krefjast spurningar er hafnað fyrir sendingu. Samsvarandi PDF-tegund %1 er sérstakt háð atriði fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</note>
+          <target>Success merkir að allar rásir forstillingarinnar keyrðu án villu, ekki að móttaka sé staðfest. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Forstillingum sem vista á disk eða biðja um tölvupóststillingar er hafnað fyrir sendingu. Samsvarandi PDF-skilaboðategund %1 er sérstök skilaboðategund fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Success merkir að allar rásir forstillingarinnar keyrðu án villu, ekki að móttaka sé staðfest. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Forstillingum sem vista á disk eða biðja um tölvupóststillingar er hafnað fyrir sendingu. Samsvarandi PDF-skilaboðategund %1 er sérstök skilaboðategund fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NotesLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3772547188" size-unit="char" translate="yes" xml:space="preserve">
           <source>The number or SystemId does not identify an existing document of this type (%1).</source>
-          <target>Númerið eða SystemId vísar ekki á skjal af þessari tegund (%1) sem er til.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Númerið eða SystemId vísar ekki á skjal af þessari tegund (%1) sem er til.</note>
+          <target>Númerið eða SystemId vísar ekki á neitt skjal af þessari tegund (%1).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númerið eða SystemId vísar ekki á neitt skjal af þessari tegund (%1).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NotFoundCauseLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
@@ -1565,8 +1565,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3593894611" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Irreversible. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.</source>
-          <target>Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Skjölum, forstillingum eða nauðsynlegum netföngum sem vantar er hafnað fyrir sendingu. Prófanir í vinnuumhverfi verða að herma eftir sendingu; diskvistun þarf biðlara og er hafnað. Samsvarandi PDF-tegund er %2.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Skjölum, forstillingum eða nauðsynlegum netföngum sem vantar er hafnað fyrir sendingu. Prófanir í vinnuumhverfi verða að herma eftir sendingu; diskvistun þarf biðlara og er hafnað. Samsvarandi PDF-tegund er %2.</note>
+          <target>Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType OverviewLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2300073700" size-unit="char" translate="yes" xml:space="preserve">
@@ -1589,14 +1589,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3597886617" size-unit="char" translate="yes" xml:space="preserve">
           <source>The caller has no read permission on %1.</source>
-          <target>Kallandinn hefur ekki lesaðgang að %1.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Kallandinn hefur ekki lesaðgang að %1.</note>
+          <target>Kallandinn hefur ekki lesheimild fyrir %1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kallandinn hefur ekki lesheimild fyrir %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType ReadDeniedLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3347249848" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read permission denied.</source>
-          <target>Lesaðgangi hafnað.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lesaðgangi hafnað.</note>
+          <target>Lesheimild vantar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lesheimild vantar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType ReadPermissionDeniedLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 4274113069" size-unit="char" translate="yes" xml:space="preserve">
@@ -1607,8 +1607,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2936959895" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read the text. Check the document before sending again: a channel may already have delivered it.</source>
-          <target>Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein sendingarleið gæti þegar hafa afhent það.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein sendingarleið gæti þegar hafa afhent það.</note>
+          <target>Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein rás kann þegar að hafa afhent það.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein rás kann þegar að hafa afhent það.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType ReadTheTextCheckTheDocumentBeforeLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 746665804" size-unit="char" translate="yes" xml:space="preserve">
@@ -1697,8 +1697,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 349832546" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set the e-mail address or select a profile that does not send e-mail.</source>
-          <target>Skráðu netfangið eða veldu forstillingu sem sendir ekki tölvupóst.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu netfangið eða veldu forstillingu sem sendir ekki tölvupóst.</note>
+          <target>Stilltu tölvupóstfangið eða veldu forstillingu sem sendir ekki tölvupóst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stilltu tölvupóstfangið eða veldu forstillingu sem sendir ekki tölvupóst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType SetTheEMailAddressOrSelectLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 172107405" size-unit="char" translate="yes" xml:space="preserve">
@@ -1751,8 +1751,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 61631052" size-unit="char" translate="yes" xml:space="preserve">
           <source>The customer or vendor has no e-mail address for the profile.</source>
-          <target>Netfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Netfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</note>
+          <target>Tölvupóstfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tölvupóstfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType TheCustomerOrVendorHasNoELbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2377753414" size-unit="char" translate="yes" xml:space="preserve">
@@ -1799,8 +1799,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1992053932" size-unit="char" translate="yes" xml:space="preserve">
           <source>The resolved profile sends e-mail and the party has no e-mail address. Nothing was sent.</source>
-          <target>Forstillingin sendir tölvupóst en netfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Forstillingin sendir tölvupóst en netfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</note>
+          <target>Forstillingin sendir tölvupóst en tölvupóstfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Forstillingin sendir tölvupóst en tölvupóstfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType TheResolvedProfileSendsEMailAndLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3444417253" size-unit="char" translate="yes" xml:space="preserve">
@@ -1901,14 +1901,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - NamedType 2897282207" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document sent successfully.</source>
-          <target>Skjal sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skjal sent.</note>
+          <target>Skjalið var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skjalið var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Process ori - NamedType SentMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 2037228664 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>The identifiers name different documents.</source>
-          <target>Auðkennin nefna mismunandi skjöl.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin nefna mismunandi skjöl.</note>
+          <target>Auðkennin vísa á mismunandi skjöl.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa á mismunandi skjöl.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Process ori - Method Agree - NamedType ConflictErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 2037228664 - NamedType 329776869" size-unit="char" translate="yes" xml:space="preserve">
@@ -1955,8 +1955,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 1721141631 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read permission denied for table %1.</source>
-          <target>Lesheimild neitað fyrir töflu %1.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.</note>
+          <target>Lesheimild vantar fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild vantar fyrir töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Process ori - Method HasTableReadPermission - NamedType ReadPermissionDeniedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 1721141631 - NamedType 2255965785" size-unit="char" translate="yes" xml:space="preserve">
@@ -2051,8 +2051,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1974426909 - NamedType 3915261265" size-unit="char" translate="yes" xml:space="preserve">
           <source>Pass documentSendingProfile with E-Mail set to Yes (Use Default Settings), or change the resolved profile to use default e-mail settings. Nothing was sent.</source>
-          <target>Sendu documentSendingProfile með tölvupóst stilltan á Yes (Use Default Settings), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentSendingProfile með tölvupóst stilltan á Yes (Use Default Settings), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</note>
+          <target>Sendu documentSendingProfile með tölvupóst stilltan á Já (nota sjálfgefnar stillingar), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentSendingProfile með tölvupóst stilltan á Já (nota sjálfgefnar stillingar), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method IsUsableWithoutClient - NamedType PromptEmailNextStepLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1974426909 - NamedType 2238078080" size-unit="char" translate="yes" xml:space="preserve">
@@ -2063,26 +2063,26 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2488070088" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter "%1" is not a JSON string.</source>
-          <target>Færibreyta "%1" er ekki JSON strengur.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreyta "%1" er ekki JSON strengur.</note>
+          <target>Færibreytan "%1" er ekki JSON-strengur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreytan "%1" er ekki JSON-strengur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType NotAStringErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2819497145" size-unit="char" translate="yes" xml:space="preserve">
           <source>a JSON string</source>
-          <target>JSON strengur</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=JSON strengur</note>
+          <target>JSON-strengur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=JSON-strengur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType NotAStringExpectedTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2504475128" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send %1 as a JSON string, or leave the key out.</source>
-          <target>Sendu %1 sem JSON streng, eða slepptu lyklinum.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Sendu %1 sem JSON streng, eða slepptu lyklinum.</note>
+          <target>Sendu %1 sem JSON-streng, eða slepptu lyklinum.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Sendu %1 sem JSON-streng, eða slepptu lyklinum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType NotAStringNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 3255873965" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter "%1" has value "%2", which is longer than %3 characters.</source>
-          <target>Færibreyta "%1" hefur gildið "%2", sem er lengra en %3 stafir.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = received value, %3 = maximum length, is-IS=Færibreyta "%1" hefur gildið "%2", sem er lengra en %3 stafir.</note>
+          <target>Færibreytan "%1" hefur gildið "%2", sem er lengra en %3 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = received value, %3 = maximum length, is-IS=Færibreytan "%1" hefur gildið "%2", sem er lengra en %3 stafir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType TooLongErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 3351212732" size-unit="char" translate="yes" xml:space="preserve">
@@ -2093,8 +2093,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2474722125" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send a value of at most %1 characters. A longer value is refused and is never cut.</source>
-          <target>Sendu gildi sem er mest %1 stafir að lengd. Lengra gildi er hafnað og er aldrei skorið.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = maximum length, is-IS=Sendu gildi sem er mest %1 stafir að lengd. Lengra gildi er hafnað og er aldrei skorið.</note>
+          <target>Sendu gildi sem er í mesta lagi %1 stafir að lengd. Lengra gildi er hafnað og er aldrei stytt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = maximum length, is-IS=Sendu gildi sem er í mesta lagi %1 stafir að lengd. Lengra gildi er hafnað og er aldrei stytt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType TooLongNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 23205597 - NamedType 1568912471" size-unit="char" translate="yes" xml:space="preserve">
@@ -2117,8 +2117,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 23205597 - NamedType 330138280" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document Sending Profile "%1" referenced by %2 %3 does not exist.</source>
-          <target>Forstilling skjalasendingar "%1" sem %2 %3 vísar í er ekki til.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = profile code, %2 = customer or vendor, %3 = party no., is-IS=Forstilling skjalasendingar "%1" sem %2 %3 vísar í er ekki til.</note>
+          <target>Forstilling skjalasendingar "%1" sem %2 %3 vísar á er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = profile code, %2 = customer or vendor, %3 = party no., is-IS=Forstilling skjalasendingar "%1" sem %2 %3 vísar á er ekki til.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryResolve - NamedType PartyProfileMissingErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 23205597 - NamedType 3333379676" size-unit="char" translate="yes" xml:space="preserve">
@@ -3119,8 +3119,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - NamedType 42286050" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask an administrator to grant read access to Purchase Header.</source>
-          <target>Biddu kerfisstjóra um lesaðgang að Purchase Header.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að Purchase Header.</note>
+          <target>Biddu kerfisstjóra um lesheimild fyrir Purchase Header.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimild fyrir Purchase Header.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType PermissionNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - NamedType 2486759152" size-unit="char" translate="yes" xml:space="preserve">
@@ -3533,8 +3533,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - NamedType 42286050" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask an administrator to grant read access to Sales Header.</source>
-          <target>Biddu kerfisstjóra um lesaðgang að Sales Header.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að Sales Header.</note>
+          <target>Biddu kerfisstjóra um lesheimild fyrir Sales Header.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimild fyrir Sales Header.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - NamedType PermissionNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - NamedType 2486759152" size-unit="char" translate="yes" xml:space="preserve">
@@ -3563,8 +3563,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>The quote identifiers name different sales quotes.</source>
-          <target>Auðkenni tilboðsins nefna mismunandi sölutilboð.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni tilboðsins nefna mismunandi sölutilboð.</note>
+          <target>Auðkenni tilboðsins vísa á mismunandi sölutilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni tilboðsins vísa á mismunandi sölutilboð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1157201780" size-unit="char" translate="yes" xml:space="preserve">
@@ -3575,8 +3575,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1628813333" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send one quote number or one SystemId, or make every identifier name the same quote.</source>
-          <target>Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.</note>
+          <target>Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni vísa á sama tilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni vísa á sama tilboð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 3485554166" size-unit="char" translate="yes" xml:space="preserve">
@@ -3713,8 +3713,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read permission denied for table %1.</source>
-          <target>Lesheimild neitað fyrir töflu %1.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.</note>
+          <target>Lesheimild vantar fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild vantar fyrir töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method HasSalesHeaderReadPermission - NamedType ReadPermissionDeniedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2255965785" size-unit="char" translate="yes" xml:space="preserve">
