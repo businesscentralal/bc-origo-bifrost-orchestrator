@@ -51,6 +51,30 @@ page 10035551 "Playbooks ori"
     {
         area(Navigation)
         {
+            group(Tools)
+            {
+                Caption = 'Tools', Comment = 'is-IS=Verkfæri';
+                ToolTip = 'Open playbook and table data tools.', Comment = 'is-IS=Opna verkfæri fyrir keðjur og töflugögn.';
+                Image = Tools;
+                action(TableData)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Table Data', Comment = 'is-IS=Töflugögn';
+                    ToolTip = 'View, edit, export and import table data within your permissions.', Comment = 'is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.';
+                    Image = Table;
+                    RunObject = page "Table Data ori";
+                    AccessByPermission = page "Table Data ori" = X;
+                }
+                action(CopyPlans)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Copy Plans', Comment = 'is-IS=Afritunaráætlanir';
+                    ToolTip = 'View copy plans and configure table-to-table playbooks within your permissions.', Comment = 'is-IS=Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.';
+                    Image = Copy;
+                    RunObject = page "Copy Plans ori";
+                    AccessByPermission = page "Copy Plans ori" = X;
+                }
+            }
             action(Instances)
             {
                 Caption = 'Execution Log', Comment = 'is-IS=Keyrsluskrá';
