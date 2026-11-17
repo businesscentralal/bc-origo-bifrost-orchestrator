@@ -16,7 +16,7 @@ codeunit 10035558 "Table JSON Export ori"
     var
         TableNotFoundErr: Label 'Table %1 does not exist.', Comment = '%1 = table number, is-IS=Tafla %1 er ekki til.';
         TableReadRestrictedErr: Label 'Table %1 (%2) cannot be read by the table data export.', Comment = '%1 = table number, %2 = table name, is-IS=Útflutningur töflugagna getur ekki lesið töflu %1 (%2).';
-        TableViewInvalidErr: Label 'The table view is not valid for table %1.', Comment = '%1 = table number, is-IS=Töflusýnin á ekki við töflu %1.';
+        TableViewInvalidErr: Label 'The table view is not valid for table %1.', Comment = '%1 = table number, is-IS=Töflusýnin er ekki gild fyrir töflu %1.';
 
     /// <summary>
     /// Builds the table data file envelope for a table.

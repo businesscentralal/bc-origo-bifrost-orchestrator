@@ -96,13 +96,13 @@ codeunit 10035628 "Playbook Transform Verify ori"
 
     var
         MessageTypeErr: Label 'Remove the message type from the Transform step.', Comment = 'is-IS=Fjarlægðu skilaboðagerðina úr umbreytingarskrefinu.';
-        PagedErr: Label 'A Transform step cannot fetch pages. Iterate over a preceding reader step instead.', Comment = 'is-IS=Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.';
+        PagedErr: Label 'A Transform step cannot fetch pages. Iterate over a preceding reader step instead.', Comment = 'is-IS=Umbreytingarskref getur ekki sótt síður. Láttu í staðinn endurtaka yfir fyrra lestrarskref.';
         NoMappingsErr: Label 'A Transform step needs at least one field mapping.', Comment = 'is-IS=Umbreytingarskref þarf að minnsta kosti eina reitavörpun.';
         TargetErr: Label 'Transform target %1 is empty, invalid or overlaps another target.', Comment = '%1 = target path, is-IS=Markslóð umbreytingar %1 er auð, ógild eða skarast við aðra markslóð.';
         SourceErr: Label 'A non-Constant transform needs a source path.', Comment = 'is-IS=Umbreyting sem er ekki fasti þarf upprunaslóð.';
         SourcePathErr: Label 'Transform source path %1 is unknown in this input.', Comment = '%1 = source path, is-IS=Upprunaslóð umbreytingar %1 er óþekkt í þessu inntaki.';
         SearchErr: Label 'Replace Text requires a nonempty search string in Argument 1.', Comment = 'is-IS=Textaskipti krefjast leitartexta í viðfangi 1.';
         OperationErr: Label 'The transform operation is not supported.', Comment = 'is-IS=Umbreytingaraðgerðin er ekki studd.';
-        ClearMessageTypeTxt: Label 'Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.', Comment = '%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.';
-        NextStepTxt: Label 'Correct the Transform field mappings and verify the playbook again.', Comment = 'is-IS=Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.';
+        ClearMessageTypeTxt: Label 'Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.', Comment = '%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og sannreyndu keðjuna aftur.';
+        NextStepTxt: Label 'Correct the Transform field mappings and verify the playbook again.', Comment = 'is-IS=Leiðréttu reitavarpanir umbreytingarinnar og sannreyndu keðjuna aftur.';
 }

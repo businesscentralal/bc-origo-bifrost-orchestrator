@@ -24,7 +24,7 @@ codeunit 10035630 "Doc Send Process ori"
                   tabledata "Document Sending Profile" = R;
 
     var
-        SentMsg: Label 'Document sent successfully.', Comment = 'is-IS=Skjal sent.';
+        SentMsg: Label 'Document sent successfully.', Comment = 'is-IS=Skjalið var sent.';
 
     trigger OnRun()
     begin
@@ -273,7 +273,7 @@ codeunit 10035630 "Doc Send Process ori"
 
     local procedure Agree(var Argument: Record "Message Argument ori"; var Current: Text; Candidate: Text; ParameterName: Text): Boolean
     var
-        ConflictErr: Label 'The identifiers name different documents.', Comment = 'is-IS=Auðkennin nefna mismunandi skjöl.';
+        ConflictErr: Label 'The identifiers name different documents.', Comment = 'is-IS=Auðkennin vísa á mismunandi skjöl.';
         ConflictNextStepTok: Label 'Send one document number or one SystemId, or send the same document in every key.', Comment = 'is-IS=Sendu eitt skjalnúmer eða eitt SystemId, eða sama skjalið í öllum lyklum.';
         ConflictExpectedTok: Label 'one document', Comment = 'is-IS=eitt skjal';
     begin
@@ -443,7 +443,7 @@ codeunit 10035630 "Doc Send Process ori"
     local procedure HasTableReadPermission(var Argument: Record "Message Argument ori"; TableId: Integer): Boolean
     var
         RecRef: RecordRef;
-        ReadPermissionDeniedErr: Label 'Read permission denied for table %1.', Comment = '%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.';
+        ReadPermissionDeniedErr: Label 'Read permission denied for table %1.', Comment = '%1 = table number, is-IS=Lesheimild vantar fyrir töflu %1.';
         ReadPermissionExpectedTxt: Label 'read permission on the data of table %1', Comment = '%1 = table number, is-IS=lesheimild á gögnum í töflu %1';
         ReadPermissionNextStepTxt: Label 'Ask an administrator for a permission set that reads the table.', Comment = 'is-IS=Biddu kerfisstjóra um heimildasamstæðu sem les töfluna.';
     begin

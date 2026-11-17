@@ -48,7 +48,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution.', Comment = 'is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.';
+        SelectionLbl: Label 'Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution. expectedCount counts the one playbook that is run, not its steps.', Comment = 'is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu. expectedCount telur þá einu keðju sem er keyrð, ekki skref hennar.';
     begin
         exit(SelectionLbl);
     end;
@@ -73,11 +73,13 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to execute (Code[20]). Required unless subject carries the code.'));
         Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored in the workspace at _initial for the steps to reference as @_initial.<key>. When it is left out, the playbook''s own initial request template is used.'));
         Parameters.Add(ContractMgt.Parameter('ignoreWarnings', 'boolean', false, 'True accepts the warnings of the verification on purpose, for example an ungated per-item write you really want. Never waives an error. Default false: warnings refuse the run like errors.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one playbook that is run (1), not its steps, forEach items or the records those steps change; each step confirms its own irreversible message type'));
         exit(true);
     end;
 
@@ -110,9 +112,10 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. The playbook runner commits before every step, so the writes of the steps that ran stay when a later step fails.', false);
+        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. The playbook runner commits before every step, so the writes of the steps that ran stay when a later step fails.' + ' ' + CountParts.CountSentence('the one playbook that is run (1), not its steps, forEach items or the records those steps change; each step confirms its own irreversible message type'), false);
         exit(true);
     end;
 

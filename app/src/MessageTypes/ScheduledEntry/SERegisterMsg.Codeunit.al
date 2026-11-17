@@ -36,7 +36,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings.', Comment = 'is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.';
+        SelectionLbl: Label 'Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings. expectedCount counts the one Job Queue Entry that is registered.', Comment = 'is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum. expectedCount telur þá einu vinnsluröðarfærslu sem er skráð.';
     begin
         exit(SelectionLbl);
     end;
@@ -62,9 +62,11 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('jobQueueEntryId', 'string', false, 'ID (primary key) of the Job Queue Entry to register. Required unless subject carries it.'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the one Job Queue Entry that is registered (1)'));
         exit(true);
     end;
 
@@ -93,9 +95,10 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
+        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Creates the orchestrator entry from the Job Queue Entry, replacing an existing one, and commits it.', false);
+        Effect := Parts.CommittingEffect('Creates the orchestrator entry from the Job Queue Entry, replacing an existing one, and commits it.' + ' ' + CountParts.CountSentence('the one Job Queue Entry that is registered (1)'), false);
         exit(true);
     end;
 

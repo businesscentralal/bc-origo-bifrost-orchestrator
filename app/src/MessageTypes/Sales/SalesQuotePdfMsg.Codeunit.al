@@ -201,7 +201,7 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
     local procedure HasSalesHeaderReadPermission(var Argument: Record "Message Argument ori"): Boolean
     var
         RecRef: RecordRef;
-        ReadPermissionDeniedErr: Label 'Read permission denied for table %1.', Comment = '%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.';
+        ReadPermissionDeniedErr: Label 'Read permission denied for table %1.', Comment = '%1 = table number, is-IS=Lesheimild vantar fyrir töflu %1.';
         ReadPermissionExpectedTxt: Label 'read permission on the data of table %1', Comment = '%1 = table number, is-IS=lesheimild á gögnum í töflu %1';
         ReadPermissionNextStepTxt: Label 'Ask an administrator for a permission set that reads the table.', Comment = 'is-IS=Biddu kerfisstjóra um heimildasamstæðu sem les töfluna.';
     begin
@@ -378,9 +378,9 @@ codeunit 10035629 "Sales Quote Pdf Msg ori" implements "Msg Interface ori", "Msg
         QuoteNotFoundExpectedTxt: Label 'an existing sales quote', Comment = 'is-IS=sölutilboð sem er til';
         QuoteNotFoundNextStepTxt: Label 'Check the quote number. A sales order or another document with the same number is not a quote.', Comment = 'is-IS=Athugaðu númer tilboðsins. Sölupöntun eða annað skjal með sama númeri er ekki tilboð.';
         QuoteSystemIdNextStepTxt: Label 'Check that the SystemId belongs to a sales quote.', Comment = 'is-IS=Athugaðu að SystemId tilheyri sölutilboði.';
-        ConflictErr: Label 'The quote identifiers name different sales quotes.', Comment = 'is-IS=Auðkenni tilboðsins nefna mismunandi sölutilboð.';
+        ConflictErr: Label 'The quote identifiers name different sales quotes.', Comment = 'is-IS=Auðkenni tilboðsins vísa á mismunandi sölutilboð.';
         ConflictExpectedTxt: Label 'identifiers for the same sales quote', Comment = 'is-IS=auðkenni fyrir sama sölutilboð';
-        ConflictNextStepTxt: Label 'Send one quote number or one SystemId, or make every identifier name the same quote.', Comment = 'is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.';
+        ConflictNextStepTxt: Label 'Send one quote number or one SystemId, or make every identifier name the same quote.', Comment = 'is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni vísa á sama tilboð.';
         InvalidKeyErr: Label 'Parameter "%1" must be text.', Comment = '%1 = key, is-IS=Færibreytan "%1" verður að vera texti.';
         InvalidKeyExpectedTxt: Label 'a text quote number or SystemId', Comment = 'is-IS=texti með númeri tilboðs eða SystemId';
         InvalidKeyNextStepTxt: Label 'Send "%1" as text, not a number, boolean, object or array.', Comment = '%1 = key, is-IS=Sendu "%1" sem texta, ekki tölu, Boolean-gildi, hlut eða fylki.';

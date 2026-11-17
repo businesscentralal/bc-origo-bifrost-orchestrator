@@ -131,8 +131,8 @@
         </trans-unit>
         <trans-unit id="Table 4153413238 - NamedType 880944479" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove or reparent the child plans before deleting this plan.</source>
-          <target>Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu eða tengdu undirskipaðar áætlanir við annað foreldri áður en þessari áætlun er eytt.</note>
+          <target>Fjarlægðu undirskipaðar áætlanir eða tengdu þær við aðra yfirskipaða áætlun áður en þessari áætlun er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu undirskipaðar áætlanir eða tengdu þær við aðra yfirskipaða áætlun áður en þessari áætlun er eytt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - NamedType ChildrenExistErr</note>
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -209,8 +209,8 @@
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3014885516 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the order of child plans under the same parent.</source>
-          <target>Tilgreinir röð undirskipaðra áætlana undir sama foreldri.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð undirskipaðra áætlana undir sama foreldri.</note>
+          <target>Tilgreinir röð undirskipaðra áætlana undir sömu yfirskipuðu áætlun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir röð undirskipaðra áætlana undir sömu yfirskipuðu áætlun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Sequence No. - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 4153413238 - Field 3014885516 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -587,8 +587,8 @@
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 4167960641 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the most the step may confirm on its own. Required when the request sends "expectedCount": "@preview": the runner previews the call, confirms with the previewed count if it is at most Max Count, and otherwise stops with ConfirmationRequired. Leave blank when the step does not use @preview.</source>
-          <target>Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er í mesta lagi hámarksfjöldi, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er í mesta lagi hámarksfjöldi, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</note>
+          <target>Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er ekki hærri en hámarksfjöldinn, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er ekki hærri en hámarksfjöldinn, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step ori - Field Max Count - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2378468741 - Field 4167960641 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -761,8 +761,8 @@
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 1597973756 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the path in the input row, or an @workspace reference.</source>
-          <target>Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í inntaksfærslunni eða @tilvísun í vinnusvæði.</note>
+          <target>Tilgreinir slóðina í inntaksfærslunni eða @workspace-tilvísun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í inntaksfærslunni eða @workspace-tilvísun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Source Path - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 1597973756 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -785,8 +785,8 @@
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 4011441648 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the dot-separated path in the output row.</source>
-          <target>Tilgreinir slóðina í úttaksfærslunni.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í úttaksfærslunni.</note>
+          <target>Tilgreinir slóðina í úttaksfærslunni, með punktum á milli hluta.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir slóðina í úttaksfærslunni, með punktum á milli hluta.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Transform ori - Field Target Path - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 580399095 - Field 4011441648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1295,8 +1295,8 @@
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 2710354593 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the key of the field in the serializer JSON.</source>
-          <target>Tilgreinir lykil reitsins í JSON raðarans.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lykil reitsins í JSON raðarans.</note>
+          <target>Tilgreinir lykil reitsins í JSON-útgáfu raðgerðarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir lykil reitsins í JSON-útgáfu raðgerðarinnar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Json Key - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 2710354593 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1331,8 +1331,8 @@
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 1131619133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the field as the serializer writes it. Change it to save a new value.</source>
-          <target>Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins eins og raðarinn skrifar það. Breyttu því til að vista nýtt gildi.</note>
+          <target>Tilgreinir gildi reitsins eins og það er skrifað í JSON. Breyttu því til að vista nýtt gildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins eins og það er skrifað í JSON. Breyttu því til að vista nýtt gildi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Field ori - Field Value - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 392052156 - Field 1131619133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1385,8 +1385,8 @@
         </trans-unit>
         <trans-unit id="Table 2871538196 - Field 2166945456 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the first fields of the record as Name=Value pairs.</source>
-          <target>Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.</note>
+          <target>Tilgreinir fyrstu reiti færslunnar sem pör af gerðinni Heiti=Gildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir fyrstu reiti færslunnar sem pör af gerðinni Heiti=Gildi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Table Data Row ori - Field Summary - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2871538196 - Field 2166945456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1397,8 +1397,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2797933787 - NamedType 1913014239" size-unit="char" translate="yes" xml:space="preserve">
           <source>Copy plan %1 occurs twice in the parent hierarchy.</source>
-          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldinu.</note>
+          <target>Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldi yfirskipaðra áætlana.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = plan code, is-IS=Afritunaráætlunin %1 kemur tvisvar fyrir í stigveldi yfirskipaðra áætlana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType CycleErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2797933787 - NamedType 2712193876" size-unit="char" translate="yes" xml:space="preserve">
@@ -1481,8 +1481,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1051849347" size-unit="char" translate="yes" xml:space="preserve">
           <source>documentId or the id key is not a GUID.</source>
-          <target>documentId eða annar auðkennislykill er ekki GUID.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=documentId eða annar auðkennislykill er ekki GUID.</note>
+          <target>documentId eða id-lykillinn er ekki GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=documentId eða id-lykillinn er ekki GUID.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType DocumentidOrTheIdKeyIsNotLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1097436829" size-unit="char" translate="yes" xml:space="preserve">
@@ -1517,8 +1517,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1017580948" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document sent successfully.</source>
-          <target>Skjal sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skjal sent.</note>
+          <target>Skjalið var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skjalið var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType DocumentSentSuccessfullyLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 785167619" size-unit="char" translate="yes" xml:space="preserve">
@@ -1529,14 +1529,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2509430370" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask an administrator to grant read access to %1.</source>
-          <target>Biddu kerfisstjóra um lesaðgang að %1.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að %1.</note>
+          <target>Biddu kerfisstjóra um lesheimild fyrir %1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimild fyrir %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType GrantReadLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2855862072" size-unit="char" translate="yes" xml:space="preserve">
           <source>No documentSendingProfile was sent and the customer or vendor profile is missing or points at a deleted profile, and no profile is marked Default.</source>
-          <target>documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins vantar eða hefur verið eytt og engin forstilling er sjálfgefin.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins vantar eða hefur verið eytt og engin forstilling er sjálfgefin.</note>
+          <target>documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins er ekki til eða vísar á forstillingu sem hefur verið eytt, og engin forstilling er merkt sem sjálfgefin.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=documentSendingProfile var ekki sent, forstilling viðskiptamanns eða lánardrottins er ekki til eða vísar á forstillingu sem hefur verið eytt, og engin forstilling er merkt sem sjálfgefin.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NoDocumentsendingprofileWasSentAndTheCustomerLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2154386112" size-unit="char" translate="yes" xml:space="preserve">
@@ -1547,14 +1547,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2344026547" size-unit="char" translate="yes" xml:space="preserve">
           <source>Success means every profile channel ran without error, not confirmed receipt. A retry sends again. subject and data identifiers must agree; a GUID is the SystemId, otherwise the number. Conflicting keys return ConflictingIdentifiers. Profile codes are compared in upper case. Disk or prompted e-mail profiles are refused before sending. The matching PDF type %1 is a separate dependency for callers wanting a file; this send does not call it.</source>
-          <target>Success merkir að allar sendingarleiðir keyrðu án villu, ekki staðfesta móttöku. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Diskvistun og tölvupóststillingum sem krefjast spurningar er hafnað fyrir sendingu. Samsvarandi PDF-tegund %1 er sérstakt háð atriði fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Success merkir að allar sendingarleiðir keyrðu án villu, ekki staðfesta móttöku. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Diskvistun og tölvupóststillingum sem krefjast spurningar er hafnað fyrir sendingu. Samsvarandi PDF-tegund %1 er sérstakt háð atriði fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</note>
+          <target>Success merkir að allar rásir forstillingarinnar keyrðu án villu, ekki að móttaka sé staðfest. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Forstillingum sem vista á disk eða biðja um tölvupóststillingar er hafnað fyrir sendingu. Samsvarandi PDF-skilaboðategund %1 er sérstök skilaboðategund fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Success merkir að allar rásir forstillingarinnar keyrðu án villu, ekki að móttaka sé staðfest. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Forstillingum sem vista á disk eða biðja um tölvupóststillingar er hafnað fyrir sendingu. Samsvarandi PDF-skilaboðategund %1 er sérstök skilaboðategund fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NotesLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3772547188" size-unit="char" translate="yes" xml:space="preserve">
           <source>The number or SystemId does not identify an existing document of this type (%1).</source>
-          <target>Númerið eða SystemId vísar ekki á skjal af þessari tegund (%1) sem er til.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Númerið eða SystemId vísar ekki á skjal af þessari tegund (%1) sem er til.</note>
+          <target>Númerið eða SystemId vísar ekki á neitt skjal af þessari tegund (%1).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númerið eða SystemId vísar ekki á neitt skjal af þessari tegund (%1).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NotFoundCauseLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
@@ -1565,8 +1565,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3593894611" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Irreversible. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.</source>
-          <target>Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Skjölum, forstillingum eða nauðsynlegum netföngum sem vantar er hafnað fyrir sendingu. Prófanir í vinnuumhverfi verða að herma eftir sendingu; diskvistun þarf biðlara og er hafnað. Samsvarandi PDF-tegund er %2.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Skjölum, forstillingum eða nauðsynlegum netföngum sem vantar er hafnað fyrir sendingu. Prófanir í vinnuumhverfi verða að herma eftir sendingu; diskvistun þarf biðlara og er hafnað. Samsvarandi PDF-tegund er %2.</note>
+          <target>Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType OverviewLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2300073700" size-unit="char" translate="yes" xml:space="preserve">
@@ -1589,14 +1589,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3597886617" size-unit="char" translate="yes" xml:space="preserve">
           <source>The caller has no read permission on %1.</source>
-          <target>Kallandinn hefur ekki lesaðgang að %1.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Kallandinn hefur ekki lesaðgang að %1.</note>
+          <target>Kallandinn hefur ekki lesheimild fyrir %1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kallandinn hefur ekki lesheimild fyrir %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType ReadDeniedLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3347249848" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read permission denied.</source>
-          <target>Lesaðgangi hafnað.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lesaðgangi hafnað.</note>
+          <target>Lesheimild vantar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lesheimild vantar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType ReadPermissionDeniedLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 4274113069" size-unit="char" translate="yes" xml:space="preserve">
@@ -1607,8 +1607,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2936959895" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read the text. Check the document before sending again: a channel may already have delivered it.</source>
-          <target>Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein sendingarleið gæti þegar hafa afhent það.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein sendingarleið gæti þegar hafa afhent það.</note>
+          <target>Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein rás kann þegar að hafa afhent það.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu textann. Athugaðu skjalið áður en þú sendir aftur: ein rás kann þegar að hafa afhent það.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType ReadTheTextCheckTheDocumentBeforeLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 746665804" size-unit="char" translate="yes" xml:space="preserve">
@@ -1697,8 +1697,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 349832546" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set the e-mail address or select a profile that does not send e-mail.</source>
-          <target>Skráðu netfangið eða veldu forstillingu sem sendir ekki tölvupóst.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu netfangið eða veldu forstillingu sem sendir ekki tölvupóst.</note>
+          <target>Stilltu tölvupóstfangið eða veldu forstillingu sem sendir ekki tölvupóst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stilltu tölvupóstfangið eða veldu forstillingu sem sendir ekki tölvupóst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType SetTheEMailAddressOrSelectLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 172107405" size-unit="char" translate="yes" xml:space="preserve">
@@ -1751,8 +1751,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 61631052" size-unit="char" translate="yes" xml:space="preserve">
           <source>The customer or vendor has no e-mail address for the profile.</source>
-          <target>Netfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Netfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</note>
+          <target>Tölvupóstfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tölvupóstfang viðskiptamanns eða lánardrottins vantar fyrir forstillinguna.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType TheCustomerOrVendorHasNoELbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2377753414" size-unit="char" translate="yes" xml:space="preserve">
@@ -1799,8 +1799,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 1992053932" size-unit="char" translate="yes" xml:space="preserve">
           <source>The resolved profile sends e-mail and the party has no e-mail address. Nothing was sent.</source>
-          <target>Forstillingin sendir tölvupóst en netfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Forstillingin sendir tölvupóst en netfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</note>
+          <target>Forstillingin sendir tölvupóst en tölvupóstfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Forstillingin sendir tölvupóst en tölvupóstfang viðskiptamanns eða lánardrottins vantar. Ekkert var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType TheResolvedProfileSendsEMailAndLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3444417253" size-unit="char" translate="yes" xml:space="preserve">
@@ -1858,9 +1858,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method OrderConfirmationKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 299948515 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf.</source>
-          <target>Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.</note>
+          <source>Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf. expectedCount counts the one document that is sent, not its recipients.</source>
+          <target>Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method OrderConfirmationSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 2555313517 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1876,9 +1876,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method PurchaseOrderKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 4123636463 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf.</source>
-          <target>Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.</note>
+          <source>Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf. expectedCount counts the one document that is sent, not its recipients.</source>
+          <target>Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method PurchaseOrderSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 2108231248 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1894,21 +1894,21 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method SalesQuoteKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 969018638 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf.</source>
-          <target>Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.</note>
+          <source>Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf. expectedCount counts the one document that is sent, not its recipients.</source>
+          <target>Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method SalesQuoteSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - NamedType 2897282207" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document sent successfully.</source>
-          <target>Skjal sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skjal sent.</note>
+          <target>Skjalið var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skjalið var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Process ori - NamedType SentMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 2037228664 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>The identifiers name different documents.</source>
-          <target>Auðkennin nefna mismunandi skjöl.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin nefna mismunandi skjöl.</note>
+          <target>Auðkennin vísa á mismunandi skjöl.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa á mismunandi skjöl.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Process ori - Method Agree - NamedType ConflictErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 2037228664 - NamedType 329776869" size-unit="char" translate="yes" xml:space="preserve">
@@ -1955,8 +1955,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 1721141631 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read permission denied for table %1.</source>
-          <target>Lesheimild neitað fyrir töflu %1.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.</note>
+          <target>Lesheimild vantar fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild vantar fyrir töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Process ori - Method HasTableReadPermission - NamedType ReadPermissionDeniedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - Method 1721141631 - NamedType 2255965785" size-unit="char" translate="yes" xml:space="preserve">
@@ -2051,8 +2051,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1974426909 - NamedType 3915261265" size-unit="char" translate="yes" xml:space="preserve">
           <source>Pass documentSendingProfile with E-Mail set to Yes (Use Default Settings), or change the resolved profile to use default e-mail settings. Nothing was sent.</source>
-          <target>Sendu documentSendingProfile með tölvupóst stilltan á Yes (Use Default Settings), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentSendingProfile með tölvupóst stilltan á Yes (Use Default Settings), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</note>
+          <target>Sendu documentSendingProfile með tölvupóst stilltan á Já (nota sjálfgefnar stillingar), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentSendingProfile með tölvupóst stilltan á Já (nota sjálfgefnar stillingar), eða breyttu forstillingunni þannig að hún noti sjálfgefnar tölvupóststillingar. Ekkert var sent.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method IsUsableWithoutClient - NamedType PromptEmailNextStepLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1974426909 - NamedType 2238078080" size-unit="char" translate="yes" xml:space="preserve">
@@ -2063,26 +2063,26 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2488070088" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter "%1" is not a JSON string.</source>
-          <target>Færibreyta "%1" er ekki JSON strengur.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreyta "%1" er ekki JSON strengur.</note>
+          <target>Færibreytan "%1" er ekki JSON-strengur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreytan "%1" er ekki JSON-strengur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType NotAStringErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2819497145" size-unit="char" translate="yes" xml:space="preserve">
           <source>a JSON string</source>
-          <target>JSON strengur</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=JSON strengur</note>
+          <target>JSON-strengur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=JSON-strengur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType NotAStringExpectedTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2504475128" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send %1 as a JSON string, or leave the key out.</source>
-          <target>Sendu %1 sem JSON streng, eða slepptu lyklinum.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Sendu %1 sem JSON streng, eða slepptu lyklinum.</note>
+          <target>Sendu %1 sem JSON-streng, eða slepptu lyklinum.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Sendu %1 sem JSON-streng, eða slepptu lyklinum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType NotAStringNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 3255873965" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter "%1" has value "%2", which is longer than %3 characters.</source>
-          <target>Færibreyta "%1" hefur gildið "%2", sem er lengra en %3 stafir.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = received value, %3 = maximum length, is-IS=Færibreyta "%1" hefur gildið "%2", sem er lengra en %3 stafir.</note>
+          <target>Færibreytan "%1" hefur gildið "%2", sem er lengra en %3 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = received value, %3 = maximum length, is-IS=Færibreytan "%1" hefur gildið "%2", sem er lengra en %3 stafir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType TooLongErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 3351212732" size-unit="char" translate="yes" xml:space="preserve">
@@ -2093,8 +2093,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 1684709170 - NamedType 2474722125" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send a value of at most %1 characters. A longer value is refused and is never cut.</source>
-          <target>Sendu gildi sem er mest %1 stafir að lengd. Lengra gildi er hafnað og er aldrei skorið.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = maximum length, is-IS=Sendu gildi sem er mest %1 stafir að lengd. Lengra gildi er hafnað og er aldrei skorið.</note>
+          <target>Sendu gildi sem er í mesta lagi %1 stafir að lengd. Lengra gildi er hafnað og er aldrei stytt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = maximum length, is-IS=Sendu gildi sem er í mesta lagi %1 stafir að lengd. Lengra gildi er hafnað og er aldrei stytt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryReadOptionalText - NamedType TooLongNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 23205597 - NamedType 1568912471" size-unit="char" translate="yes" xml:space="preserve">
@@ -2117,8 +2117,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 23205597 - NamedType 330138280" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document Sending Profile "%1" referenced by %2 %3 does not exist.</source>
-          <target>Forstilling skjalasendingar "%1" sem %2 %3 vísar í er ekki til.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = profile code, %2 = customer or vendor, %3 = party no., is-IS=Forstilling skjalasendingar "%1" sem %2 %3 vísar í er ekki til.</note>
+          <target>Forstilling skjalasendingar "%1" sem %2 %3 vísar á er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = profile code, %2 = customer or vendor, %3 = party no., is-IS=Forstilling skjalasendingar "%1" sem %2 %3 vísar á er ekki til.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Resolver ori - Method TryResolve - NamedType PartyProfileMissingErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2346813898 - Method 23205597 - NamedType 3333379676" size-unit="char" translate="yes" xml:space="preserve">
@@ -2236,9 +2236,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2518225199 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send an email draft identified by its outbox SystemId. Irreversible. Use Email.Draft.Set to create the draft first.</source>
-          <target>Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst.</note>
+          <source>Send an email draft identified by its outbox SystemId. Irreversible. Use Email.Draft.Set to create the draft first. expectedCount counts the one e-mail draft that is sent, not its recipients.</source>
+          <target>Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst. expectedCount telur þau einu tölvupóstsdrög sem eru send, ekki viðtakendur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst. expectedCount telur þau einu tölvupóstsdrög sem eru send, ekki viðtakendur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3713907355 - NamedType 823878488" size-unit="char" translate="yes" xml:space="preserve">
@@ -2393,14 +2393,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 1127509453 - NamedType 3316397049" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.</source>
-          <target>Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla, svo ekki er hægt að bakka því með keðjunni.</note>
+          <target>Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla og því er ekki hægt að bakka því með keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla og því er ekki hægt að bakka því með keðjunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitIrreversibleErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1127509453 - NamedType 1516695796" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook %1 step %2 cannot run %3 under Omit Commit: the type declares no effect contract, so it is treated as not safe to roll back.</source>
-          <target>Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Keðja %1 skref %2 getur ekki keyrt %3 með Omit Commit: tegundin lýsir engum áhrifasamningi og því er ekki öruggt að bakka henni.</note>
+          <target>Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin lýsir ekki yfir neinum áhrifasamningi og því er ekki talið öruggt að bakka henni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin lýsir ekki yfir neinum áhrifasamningi og því er ekki talið öruggt að bakka henni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitNoContractErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1379993334 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -2435,8 +2435,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2939314393 - NamedType 413497156" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 failed. The response carries no error and every condition holds; inspect the request and the response.</source>
-          <target>Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Skref %1 mistókst. Svarið geymir enga villu og öll skilyrði standast; skoðaðu beiðnina og svarið.</note>
+          <target>Skref %1 mistókst. Svarið inniheldur enga villu og öll skilyrði eru uppfyllt; skoðaðu beiðnina og svarið.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Skref %1 mistókst. Svarið inniheldur enga villu og öll skilyrði eru uppfyllt; skoðaðu beiðnina og svarið.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType NoReasonErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2939314393 - NamedType 665073879" size-unit="char" translate="yes" xml:space="preserve">
@@ -2506,9 +2506,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2498592579 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution.</source>
-          <target>Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</note>
+          <source>Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution. expectedCount counts the one playbook that is run, not its steps.</source>
+          <target>Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu. expectedCount telur þá einu keðju sem er keyrð, ekki skref hennar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu. expectedCount telur þá einu keðju sem er keyrð, ekki skref hennar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 1706382334" size-unit="char" translate="yes" xml:space="preserve">
@@ -2651,8 +2651,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 153936086" size-unit="char" translate="yes" xml:space="preserve">
           <source>Clear the Message Type on step %1: set Step Kind to Transform again, which clears it (on the page choose Message and then Transform; in Data.Records.Set send StepKind Transform), then verify the playbook again.</source>
-          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og yfirfarðu keðjuna aftur.</note>
+          <target>Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og sannreyndu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step number, is-IS=Hreinsaðu skilaboðagerðina á skrefi %1: veldu tegund skrefs Umbreyting aftur, það hreinsar hana (á síðunni velurðu Skilaboð og svo Umbreyting; í Data.Records.Set sendirðu StepKind Transform), og sannreyndu keðjuna aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType ClearMessageTypeTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 2851206674" size-unit="char" translate="yes" xml:space="preserve">
@@ -2663,8 +2663,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 761809759" size-unit="char" translate="yes" xml:space="preserve">
           <source>Correct the Transform field mappings and verify the playbook again.</source>
-          <target>Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitavarpanir umbreytingarinnar og yfirfarðu keðjuna aftur.</note>
+          <target>Leiðréttu reitavarpanir umbreytingarinnar og sannreyndu keðjuna aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitavarpanir umbreytingarinnar og sannreyndu keðjuna aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType NextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 533737573" size-unit="char" translate="yes" xml:space="preserve">
@@ -2681,8 +2681,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 1441009422" size-unit="char" translate="yes" xml:space="preserve">
           <source>A Transform step cannot fetch pages. Iterate over a preceding reader step instead.</source>
-          <target>Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref getur ekki sótt síður. Ítraðu í staðinn yfir fyrra lestrarskref.</note>
+          <target>Umbreytingarskref getur ekki sótt síður. Láttu í staðinn endurtaka yfir fyrra lestrarskref.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarskref getur ekki sótt síður. Láttu í staðinn endurtaka yfir fyrra lestrarskref.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Transform Verify ori - NamedType PagedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3549054438 - NamedType 486583733" size-unit="char" translate="yes" xml:space="preserve">
@@ -2897,8 +2897,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 203386158" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.</source>
-          <target>Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem stjórnandinn fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</note>
+          <target>Ask-skref %1 biður um rakningu sem Orchestrator fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 biður um rakningu sem Orchestrator fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskTraceDiscardedMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 3422069962" size-unit="char" translate="yes" xml:space="preserve">
@@ -2945,8 +2945,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 303900121" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Max Count on the step to the most the playbook may confirm without a person, or send a fixed expectedCount instead.</source>
-          <target>Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án manneskju, eða sendu fastan expectedCount í staðinn.</note>
+          <target>Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án aðkomu manns, eða sendu fastan expectedCount í staðinn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án aðkomu manns, eða sendu fastan expectedCount í staðinn.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType PreviewWithoutMaxNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 4056349108" size-unit="char" translate="yes" xml:space="preserve">
@@ -3047,14 +3047,14 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1380240250" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.</source>
-          <target>Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem lýsir honum ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</note>
+          <target>Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 4255824126" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove %1 or rename it to a declared parameter. The type declares: %2.</source>
-          <target>Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í yfirlýsta færibreytu. Tegundin lýsir: %2.</note>
+          <target>Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1834680235" size-unit="char" translate="yes" xml:space="preserve">
@@ -3071,8 +3071,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 725261787" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.</source>
-          <target>Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin passar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</note>
+          <target>Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin samsvarar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin samsvarar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnresolvableMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 888877383" size-unit="char" translate="yes" xml:space="preserve">
@@ -3143,8 +3143,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - NamedType 42286050" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask an administrator to grant read access to Purchase Header.</source>
-          <target>Biddu kerfisstjóra um lesaðgang að Purchase Header.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að Purchase Header.</note>
+          <target>Biddu kerfisstjóra um lesheimild fyrir Purchase Header.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimild fyrir Purchase Header.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Purch Order Pdf Msg ori - NamedType PermissionNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3878585223 - NamedType 2486759152" size-unit="char" translate="yes" xml:space="preserve">
@@ -3243,11 +3243,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Fluttu út gögn eins skýrsluútlits, úr viðbót eða notandaskilgreind, sem base64. Lesaðgerð. Notaðu Orchestrator.ReportLayout.List fyrst til að finna heiti útlitsins og appId, eða Orchestrator.ReportLayout.Set til að flytja inn útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Get Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 1474270157" size-unit="char" translate="yes" xml:space="preserve">
+          <source>More than one layout named %1 exists on report %2. Send "appId".</source>
+          <target>Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType AmbiguousLayoutErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 2883624667" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send "appId" only with "setAsDefault" and no layout file.</source>
+          <target>Sendu "appId" aðeins með "setAsDefault" og engri útlitsskrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu "appId" aðeins með "setAsDefault" og engri útlitsskrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType AppIdWithLayoutErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 3730852756" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send either "layoutBase64" or "stagingId", not both.</source>
           <target>Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType BothLayoutSourcesErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 2470017265" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send "clearDefault" without "layoutBase64" or "stagingId".</source>
+          <target>Sendu "clearDefault" án "layoutBase64" eða "stagingId".</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu "clearDefault" án "layoutBase64" eða "stagingId".</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType ClearDefaultWithLayoutErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 1435033756" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"appId" %1 is not a valid GUID.</source>
+          <target>"appId" %1 er ekki gilt GUID.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="appId" %1 er ekki gilt GUID.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType InvalidAppIdErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 1047023575" size-unit="char" translate="yes" xml:space="preserve">
           <source>Layout format %1 is not valid for report %2.</source>
@@ -3260,6 +3284,18 @@
           <target>"stagingId" %1 er ekki gilt GUID.</target>
           <note from="Developer" annotates="general" priority="2">is-IS="stagingId" %1 er ekki gilt GUID.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType InvalidStagingIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 not found on report %2.</source>
+          <target>Útlit %1 fannst ekki fyrir skýrslu %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 959653816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 belongs to company %2 and cannot be the default in company %3.</source>
+          <target>Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutOtherCompanyErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 2128685181" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "%1".</source>
@@ -3279,11 +3315,23 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "layoutBase64" eða "stagingId".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NoLayoutSourceErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 911648352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"%1" must be true or false.</source>
+          <target>"%1" verður að vera true eða false.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="%1" verður að vera true eða false.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NotBooleanErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 572047844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 not found.</source>
           <target>Skýrsla %1 finnst ekki.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 finnst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType ReportNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 193818898" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send either "setAsDefault" or "clearDefault", not both.</source>
+          <target>Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType SetAndClearDefaultErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 1462950238" size-unit="char" translate="yes" xml:space="preserve">
           <source>Staging row %1 was not found or has already been taken.</source>
@@ -3339,22 +3387,28 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 fannst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Read Handler ori - NamedType ReportNotFoundErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1823936061 - NamedType 1449450473" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imports a user-defined layout and creates or replaces the tenant layout row. With setAsDefault, the layout becomes the default of the report in the current company (Tenant Report Layout Selection and Report Layout Selection); with clearDefault, that company default is removed and the all-companies or built-in default applies. Both can be set back with another call.</source>
+          <target>Flytur inn notandaskilgreint útlit og býr til eða skiptir út útlitsfærslu leigjanda. Með setAsDefault verður útlitið sjálfgefið útlit skýrslunnar í núverandi fyrirtæki (Tenant Report Layout Selection og Report Layout Selection); með clearDefault er sjálfgefna útlitið fjarlægt og sjálfgefið útlit allra fyrirtækja eða innbyggða sjálfgefna útlitið gildir. Hvort tveggja má setja til baka með öðru kalli.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytur inn notandaskilgreint útlit og býr til eða skiptir út útlitsfærslu leigjanda. Með setAsDefault verður útlitið sjálfgefið útlit skýrslunnar í núverandi fyrirtæki (Tenant Report Layout Selection og Report Layout Selection); með clearDefault er sjálfgefna útlitið fjarlægt og sjálfgefið útlit allra fyrirtækja eða innbyggða sjálfgefna útlitið gildir. Hvort tveggja má setja til baka með öðru kalli.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - NamedType ChangesLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Creates or replaces a user-defined report layout via the BC layout import path.</source>
-          <target>Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC.</note>
+          <source>Creates or replaces a user-defined report layout via the BC layout import path, and sets or clears the default layout.</source>
+          <target>Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC og stillir eða hreinsar sjálfgefið útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Býr til eða skiptir út notandaskilgreindu skýrsluútliti um innflutningsleið BC og stillir eða hreinsar sjálfgefið útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
-          <source>set report layout, import report layout, replace report layout, base64 layout, Word layout, Excel layout, RDLC layout</source>
-          <target>stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit</note>
+          <source>set report layout, import report layout, replace report layout, base64 layout, Word layout, Excel layout, RDLC layout, default report layout, clear default layout</source>
+          <target>stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit, sjálfgefið skýrsluútlit, hreinsa sjálfgefið útlit</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=stilla skýrsluútlit, flytja inn skýrsluútlit, skipta út skýrsluútliti, base64 útlit, Word útlit, Excel útlit, RDLC útlit, sjálfgefið skýrsluútlit, hreinsa sjálfgefið útlit</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1823936061 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Create or replace a user-defined tenant report layout from base64 or from a staging row. Write operation. Use Orchestrator.Report.Get to inspect existing layouts.</source>
-          <target>Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu. Skrifaðgerð. Notaðu Orchestrator.Report.Get til að skoða núverandi útlit.</note>
+          <source>Create or replace a user-defined tenant report layout from base64 or from a staging row, and optionally make it the default; or make an existing layout the default, or clear the default, in the current company. Write operation. Use Orchestrator.ReportLayout.List to inspect existing layouts.</source>
+          <target>Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu og gerðu það sjálfgefið ef þú vilt; eða gerðu útlit sem er til sjálfgefið, eða hreinsaðu sjálfgefna útlitið, í núverandi fyrirtæki. Skrifaðgerð. Notaðu Orchestrator.ReportLayout.List til að skoða núverandi útlit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu og gerðu það sjálfgefið ef þú vilt; eða gerðu útlit sem er til sjálfgefið, eða hreinsaðu sjálfgefna útlitið, í núverandi fyrirtæki. Skrifaðgerð. Notaðu Orchestrator.ReportLayout.List til að skoða núverandi útlit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1335621907 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -3472,9 +3526,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2046287294 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Run a processing-only report as a batch job and return its result. Irreversible. Use Orchestrator.Report.SaveAs for reports that produce output.</source>
-          <target>Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki.</note>
+          <source>Run a processing-only report as a batch job and return its result. Irreversible. Use Orchestrator.Report.SaveAs for reports that produce output. expectedCount counts the one report run, not the records it processes.</source>
+          <target>Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki. expectedCount telur þá einu skýrslukeyrslu, ekki færslurnar sem hún vinnur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu vinnsluskýrslu sem runuvinnslu og skilaðu niðurstöðu. Óafturkræft. Notaðu Orchestrator.Report.SaveAs fyrir skýrslur sem skila úttaki. expectedCount telur þá einu skýrslukeyrslu, ekki færslurnar sem hún vinnur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3308826164 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -3557,8 +3611,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - NamedType 42286050" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask an administrator to grant read access to Sales Header.</source>
-          <target>Biddu kerfisstjóra um lesaðgang að Sales Header.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að Sales Header.</note>
+          <target>Biddu kerfisstjóra um lesheimild fyrir Sales Header.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimild fyrir Sales Header.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Order Conf Pdf Msg ori - NamedType PermissionNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 208451927 - NamedType 2486759152" size-unit="char" translate="yes" xml:space="preserve">
@@ -3587,8 +3641,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1342218725" size-unit="char" translate="yes" xml:space="preserve">
           <source>The quote identifiers name different sales quotes.</source>
-          <target>Auðkenni tilboðsins nefna mismunandi sölutilboð.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni tilboðsins nefna mismunandi sölutilboð.</note>
+          <target>Auðkenni tilboðsins vísa á mismunandi sölutilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni tilboðsins vísa á mismunandi sölutilboð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1157201780" size-unit="char" translate="yes" xml:space="preserve">
@@ -3599,8 +3653,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 1628813333" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send one quote number or one SystemId, or make every identifier name the same quote.</source>
-          <target>Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni nefna sama tilboð.</note>
+          <target>Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni vísa á sama tilboð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu eitt tilboðsnúmer eða eitt SystemId, eða láttu öll auðkenni vísa á sama tilboð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - NamedType ConflictNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - NamedType 3485554166" size-unit="char" translate="yes" xml:space="preserve">
@@ -3737,8 +3791,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2836319989" size-unit="char" translate="yes" xml:space="preserve">
           <source>Read permission denied for table %1.</source>
-          <target>Lesheimild neitað fyrir töflu %1.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild neitað fyrir töflu %1.</note>
+          <target>Lesheimild vantar fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Lesheimild vantar fyrir töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Sales Quote Pdf Msg ori - Method HasSalesHeaderReadPermission - NamedType ReadPermissionDeniedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 739276807 - Method 330033080 - NamedType 2255965785" size-unit="char" translate="yes" xml:space="preserve">
@@ -4000,9 +4054,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1062491014 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings.</source>
-          <target>Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</note>
+          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings. expectedCount counts the one Job Queue Entry that is registered.</source>
+          <target>Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum. expectedCount telur þá einu vinnsluröðarfærslu sem er skráð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum. expectedCount telur þá einu vinnsluröðarfærslu sem er skráð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4018,9 +4072,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart a failed or held orchestrator entry according to its retry policy. Irreversible. Use Orchestrator.Entry.Run for a one-time foreground run.</source>
-          <target>Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</note>
+          <source>Restart a failed or held orchestrator entry according to its retry policy. Irreversible. Use Orchestrator.Entry.Run for a one-time foreground run. expectedCount counts the one entry that is restarted.</source>
+          <target>Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni. expectedCount telur þá einu færslu sem er endurræst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni. expectedCount telur þá einu færslu sem er endurræst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 251919310 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4036,9 +4090,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 251919310 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Run an orchestrator entry once immediately. Irreversible. Use Orchestrator.Entry.Restart to requeue a failed entry instead.</source>
-          <target>Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið.</note>
+          <source>Run an orchestrator entry once immediately. Irreversible. Use Orchestrator.Entry.Restart to requeue a failed entry instead. expectedCount counts the one entry that is run.</source>
+          <target>Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið. expectedCount telur þá einu færslu sem er keyrð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyra áætlunarfærslu einu sinni strax. Óafturkræft. Notaðu Orchestrator.Entry.Restart til að setja bilaða færslu aftur í bið. expectedCount telur þá einu færslu sem er keyrð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3024542026 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4054,9 +4108,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3024542026 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Irreversible. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.</source>
-          <target>Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir.</note>
+          <source>Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Irreversible. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact. expectedCount counts the one entry whose schedule is rebuilt.</source>
+          <target>Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir. expectedCount telur þá einu færslu sem áætlun er endurbyggð fyrir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir. expectedCount telur þá einu færslu sem áætlun er endurbyggð fyrir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4100043099 - NamedType 3536930844" size-unit="char" translate="yes" xml:space="preserve">
@@ -4126,9 +4180,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2057945186 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.</source>
-          <target>Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</note>
+          <source>Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved. expectedCount counts the one management entry that is restarted.</source>
+          <target>Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara. expectedCount telur þá einu stjórnunarfærslu sem er endurræst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara. expectedCount telur þá einu stjórnunarfærslu sem er endurræst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4144,9 +4198,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart.</source>
-          <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
+          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart. expectedCount counts the one management entry that may be restarted.</source>
+          <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur þá einu stjórnunarfærslu sem gæti verið endurræst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur þá einu stjórnunarfærslu sem gæti verið endurræst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1169993136 - NamedType 3954339052" size-unit="char" translate="yes" xml:space="preserve">
@@ -4193,20 +4247,20 @@
         </trans-unit>
         <trans-unit id="Codeunit 2389894866 - NamedType 3901123449" size-unit="char" translate="yes" xml:space="preserve">
           <source>The table view is not valid for table %1.</source>
-          <target>Töflusýnin á ekki við töflu %1.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin á ekki við töflu %1.</note>
+          <target>Töflusýnin er ekki gild fyrir töflu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Töflusýnin er ekki gild fyrir töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType TableViewInvalidErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1468028954" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file is not a Bifrost table data file (format %1, version %2 expected).</source>
-          <target>Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</target>
-          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst töflugagnaskrá (vænst var sniðs %1, útgáfu %2).</note>
+          <target>Skráin er ekki Bifröst-töflugagnaskrá (búist var við sniði %1, útgáfu %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-töflugagnaskrá (búist var við sniði %1, útgáfu %2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType FormatErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1030601889" size-unit="char" translate="yes" xml:space="preserve">
           <source>A new row cannot be inserted into table %1 (%2).</source>
-          <target>Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu í töflu %1 (%2).</note>
+          <target>Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1065153784" size-unit="char" translate="yes" xml:space="preserve">
@@ -4223,8 +4277,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 2095975556" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file has no rows array.</source>
-          <target>Skráin hefur engan línulista (rows).</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráin hefur engan línulista (rows).</note>
+          <target>Skráin inniheldur engan línulista (rows).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin inniheldur engan línulista (rows).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType RowsMissingErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1899388161" size-unit="char" translate="yes" xml:space="preserve">
@@ -4294,9 +4348,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery.</source>
-          <target>Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.</note>
+          <source>Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery. expectedCount counts the one message that is sent.</source>
+          <target>Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu. expectedCount telur þau einu skilaboð sem eru send.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu. expectedCount telur þau einu skilaboð sem eru send.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2083975675 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
@@ -4354,9 +4408,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetNotes - NamedType DirectionNoteLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Preview the seeded Playbook workspace without running steps. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook.</source>
-          <target>Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</note>
+          <source>Preview the seeded Playbook workspace without running steps. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook. expectedCount counts the one preview call.</source>
+          <target>Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju. expectedCount telur það eina forskoðunarkall.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju. expectedCount telur það eina forskoðunarkall.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Page 3387562382 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -5051,8 +5105,8 @@
         </trans-unit>
         <trans-unit id="Page 853968823 - Control 1949447633 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Transform Fields</source>
-          <target>Umbreyting reita</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting reita</note>
+          <target>Reitaumbreytingar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitaumbreytingar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Card ori - Control Transforms - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 853968823 - Control 1113252865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -5153,8 +5207,8 @@
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 358941092 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>How the value at the path is compared. Exists holds when the path is present and its value is not null, not an empty text, not an empty array and not an empty object.</source>
-          <target>Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki auður texti, ekki tómt fylki og ekki tómur hlutur.</note>
+          <target>Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki tómur texti, ekki tómt fylki og ekki tómur hlutur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hvernig gildið á slóðinni er borið saman. „Er til“ á við þegar slóðin er til og gildi hennar er ekki null, ekki tómur texti, ekki tómt fylki og ekki tómur hlutur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Cond. Subpage ori - Control Operator - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 441524090 - Control 2206733951 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -5687,8 +5741,8 @@
         </trans-unit>
         <trans-unit id="Page 2155707330 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Transform Fields</source>
-          <target>Umbreyting reita</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Umbreyting reita</note>
+          <target>Reitaumbreytingar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitaumbreytingar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Transforms ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -7205,8 +7259,8 @@
         </trans-unit>
         <trans-unit id="Page 337517078 - NamedType 629381524" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file is not valid JSON.</source>
-          <target>Skráin er ekki gilt JSON.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gilt JSON.</note>
+          <target>Skráin er ekki gild JSON-skrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gild JSON-skrá.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Table Data ori - NamedType NotJsonErr</note>
         </trans-unit>
         <trans-unit id="Page 337517078 - NamedType 3237890445" size-unit="char" translate="yes" xml:space="preserve">

@@ -32,7 +32,7 @@ table 10035564 "Table Data Row ori"
         field(4; Summary; Text[2048])
         {
             Caption = 'Summary', Comment = 'is-IS=Samantekt';
-            ToolTip = 'Specifies the first fields of the record as Name=Value pairs.', Comment = 'is-IS=Tilgreinir fyrstu reiti færslunnar sem Heiti=Gildi pör.';
+            ToolTip = 'Specifies the first fields of the record as Name=Value pairs.', Comment = 'is-IS=Tilgreinir fyrstu reiti færslunnar sem pör af gerðinni Heiti=Gildi.';
         }
     }
 
