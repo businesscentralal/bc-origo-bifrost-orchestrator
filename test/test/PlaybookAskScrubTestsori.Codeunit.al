@@ -188,8 +188,8 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
     [Test]
     procedure FailedStepSnapshot_RedactsWhoAndKeepsStepResults()
     var
-        LogMgt: Codeunit "Playbook Log Mgt ori";
         StepLog: Record "Playbook Step Log ori";
+        LogMgt: Codeunit "Playbook Log Mgt ori";
         Workspace: JsonObject;
         Who: JsonObject;
         Steps: JsonObject;
@@ -281,10 +281,10 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
 
     local procedure JsonRun(): JsonObject
     var
-        Run: JsonObject;
+        RunResult: JsonObject;
     begin
-        Run.Add('status', 'Failed');
-        exit(Run);
+        RunResult.Add('status', 'Failed');
+        exit(RunResult);
     end;
 
     [Test]
