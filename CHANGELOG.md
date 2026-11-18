@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #216
+
+- #216: the Workspace Snapshot of a failed Playbook Step Log (field 70) no longer stores personal data. Codeunit 10035549 `Playbook Log Mgt ori` (new internal procedure `RedactWorkspaceSnapshot`, used by `LogStep`) replaces `_who` and `_sys.userId` with `[redacted]` and masks the value of secret-like properties (password, secret, apikey, authorization, bearer, credential, access/refresh token) at any depth. Step results, `_run`, `_initial` and the other `_sys` values stay for debugging. The Playbook Step Log table is already registered for retention (Reten. Pol. Allowed Tables); field 70 stays CustomerContent and the help of `Help ori` states what the snapshot keeps. No new object IDs, no new translated texts. Tests: three new scenarios in codeunit 96456 `Playbook Ask Scrub Tests ori` (redaction and kept step results, nested secret keys, help text).
+
 ### Fixed — #212
 
 - #212: a Transform Source Path such as `@50.@_iter.reply` now expands `@_iter` to the current forEach index before the workspace lookup, as request templates already do, so a per-item Transform can read the same item of an earlier forEach step (for example Parse JSON on an LLM reply before `DocumentExchange.UBL.RenderBilling`). Codeunit 10035627 `Playbook Transform Exec ori` only; no new object IDs, no new texts. Verify already accepted the path. Tests: two scenarios in codeunit 96468 (iteration 0/1 read, missing item fails naming the path).
