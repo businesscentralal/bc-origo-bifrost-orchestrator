@@ -1231,6 +1231,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('#### Playbook Step Log ori (PK: InstanceID + StepNo_ + IterationNo_)');
         O.AppendLine('One record per step execution. Fields: MessageType, Status, Duration, ErrorText,');
         O.AppendLine('RequestSent (base64 BLOB), ResponseReceived (base64 BLOB), IteratorElement, WorkspaceSnapshot (base64 BLOB, only on failed steps).');
+        O.AppendLine('WorkspaceSnapshot is redacted before it is stored: `_who` (user, salesperson, company contact data, Telegram chat ID, notifications, approvals) is replaced by `[redacted]`, so is `_sys.userId`, and so is the value of any property named like a secret (password, secret, apikey, authorization, bearer, credential, access or refresh token). It keeps the step results (`_steps`), `_run`, `_initial` and the other `_sys` values, which can hold customer content, so the step log is covered by the Playbook Step Log retention policy.');
         O.AppendLine('');
     end;
 }

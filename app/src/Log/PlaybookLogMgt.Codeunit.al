@@ -11,6 +11,10 @@ codeunit 10035549 "Playbook Log Mgt ori"
     Permissions = tabledata "Playbook Instance ori" = RIMD,
                   tabledata "Playbook Step Log ori" = RIMD;
 
+    var
+        RedactedTok: Label '[redacted]', Locked = true;
+        SecretMarkersTok: Label 'password,secret,apikey,api_key,authorization,bearer,credential,accesstoken,refreshtoken,access_token,refresh_token', Locked = true;
+
     /// <summary>
     /// Creates a new playbook instance record and returns its ID.
     /// </summary>
@@ -130,8 +134,85 @@ codeunit 10035549 "Playbook Log Mgt ori"
         if ElementText <> '' then
             StepLog.SetIteratorElement(ElementText);
         if (WorkspaceText <> '') and (StepStatus = StepStatus::Failed) then
-            StepLog.SetWorkspaceSnapshot(WorkspaceText);
+            StepLog.SetWorkspaceSnapshot(RedactWorkspaceSnapshot(WorkspaceText));
 
         StepLog.Insert(true);
+    end;
+
+    /// <summary>
+    /// Removes personal data and secret-like values from a workspace document before it is stored in a
+    /// long-lived step log (issue #216). The whole <c>_who</c> context (user, salesperson, company contact
+    /// data, Telegram chat ID, notifications, approvals, system prompt) is replaced by a marker, <c>_sys.userId</c>
+    /// is masked, and any property whose name looks like a secret is masked at every depth. Step results
+    /// (<c>_steps</c>), <c>_run</c>, <c>_initial</c> and the other <c>_sys</c> values stay, so a failed step
+    /// can still be debugged.
+    /// </summary>
+    /// <param name="WorkspaceText">The serialised workspace JSON.</param>
+    /// <returns>Text. The redacted JSON, or the original text when it is not a JSON object.</returns>
+    internal procedure RedactWorkspaceSnapshot(WorkspaceText: Text): Text
+    var
+        Root: JsonObject;
+        SysToken: JsonToken;
+        Result: Text;
+    begin
+        if not Root.ReadFrom(WorkspaceText) then
+            exit(WorkspaceText);
+        if Root.Contains('_who') then begin
+            Root.Remove('_who');
+            Root.Add('_who', RedactedTok);
+        end;
+        if Root.Get('_sys', SysToken) then
+            if SysToken.IsObject() then
+                if SysToken.AsObject().Contains('userId') then begin
+                    SysToken.AsObject().Remove('userId');
+                    SysToken.AsObject().Add('userId', RedactedTok);
+                end;
+        MaskSecretLikeKeys(Root);
+        Root.WriteTo(Result);
+        exit(Result);
+    end;
+
+    local procedure MaskSecretLikeKeys(var Node: JsonObject)
+    var
+        Child: JsonToken;
+        Element: JsonToken;
+        ChildArray: JsonArray;
+        ChildObject: JsonObject;
+        KeyName: Text;
+        Keys: List of [Text];
+    begin
+        Keys := Node.Keys();
+        foreach KeyName in Keys do begin
+            Node.Get(KeyName, Child);
+            if IsSecretLikeKey(KeyName) and Child.IsValue() then begin
+                if not Child.AsValue().IsNull() then
+                    Node.Replace(KeyName, RedactedTok);
+                continue;
+            end;
+            if Child.IsObject() then begin
+                ChildObject := Child.AsObject();
+                MaskSecretLikeKeys(ChildObject);
+            end else
+                if Child.IsArray() then begin
+                    ChildArray := Child.AsArray();
+                    foreach Element in ChildArray do
+                        if Element.IsObject() then begin
+                            ChildObject := Element.AsObject();
+                            MaskSecretLikeKeys(ChildObject);
+                        end;
+                end;
+        end;
+    end;
+
+    local procedure IsSecretLikeKey(KeyName: Text): Boolean
+    var
+        Marker: Text;
+        Lower: Text;
+    begin
+        Lower := KeyName.ToLower();
+        foreach Marker in SecretMarkersTok.Split(',') do
+            if Lower.Contains(Marker) then
+                exit(true);
+        exit(false);
     end;
 }
