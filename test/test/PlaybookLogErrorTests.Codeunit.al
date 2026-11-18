@@ -97,8 +97,8 @@ codeunit 96495 "Playbook Log Error Tests ori"
         StepLog.SetRange("Outcome Note", AnsweredNoTxt);
         Assert.IsTrue(StepLog.FindFirst(), 'The no is in Outcome Note');
         Assert.AreEqual('', StepLog."Error Text", 'Error Text stays empty');
-        Assert.IsFalse(Workspace.GetValue('_steps.30.failures[1].error', Result), 'The summary has no error for a no');
-        Assert.IsTrue(Workspace.GetValue('_steps.30.failures[1].note', Result), 'The summary has the note');
+        Assert.IsFalse(Workspace.GetValue('_steps.30.failures[0].error', Result), 'The summary has no error for a no');
+        Assert.IsTrue(Workspace.GetValue('_steps.30.failures[0].note', Result), 'The summary has the note');
         Assert.AreEqual(AnsweredNoTxt, Result, 'note text');
         Lib.Cleanup(PlaybookCodeTok);
     end;
