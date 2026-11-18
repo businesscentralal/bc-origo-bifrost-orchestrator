@@ -77,6 +77,8 @@ table 10035543 "Playbook Step Log ori"
         field(70; "Workspace Snapshot"; Blob)
         {
             Caption = 'Workspace Snapshot', Comment = 'is-IS=Vinnusvæðisafrit';
+            // Failed steps only. The snapshot keeps the step results, _run, _initial and _sys, which can hold customer
+            // content (CustomerContent); _who and secret-like values are redacted before storage (#216).
             DataClassification = CustomerContent;
         }
     }

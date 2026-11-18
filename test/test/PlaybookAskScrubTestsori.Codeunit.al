@@ -185,6 +185,108 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
     end;
 
     [Test]
+    procedure FailedStepSnapshot_RedactsWhoAndKeepsStepResults()
+    var
+        LogMgt: Codeunit "Playbook Log Mgt ori";
+        StepLog: Record "Playbook Step Log ori";
+        Workspace: JsonObject;
+        Who: JsonObject;
+        Steps: JsonObject;
+        Step10: JsonObject;
+        Snapshot: JsonObject;
+        Token: JsonToken;
+        InstanceId: Guid;
+        SnapshotText: Text;
+        WorkspaceText: Text;
+    begin
+        // [GIVEN] A workspace with personal _who data, a secret-like key and a step result a later step references
+        Who.Add('telegramChatId', 'XPII-CHAT-4711');
+        Who.Add('systemPrompt', 'XPII-FREE-TEXT-PROMPT');
+        Who.Add('email', 'xpii.user@example.invalid');
+        Who.Add('fullName', 'XPII Full Name');
+        Who.Add('notifications', 'XPII-NOTIFICATION-SUBJECT');
+        Who.Add('approvals', 'XPII-APPROVAL-TEXT');
+        Workspace.Add('_who', Who);
+        Workspace.Add('_sys', JsonSysWithUser());
+        Step10.Add('customerNo', '10000');
+        Step10.Add('apiKey', 'XPII-SECRET-VALUE');
+        Steps.Add('10', Step10);
+        Workspace.Add('_steps', Steps);
+        Workspace.Add('_run', JsonRun());
+        Workspace.WriteTo(WorkspaceText);
+        InstanceId := CreateGuid();
+
+        // [WHEN] A failed step is logged
+        LogMgt.LogStep(InstanceId, 20, 0, "Message Type ori"::"Data.Records.Get", '{}', '{}', 0, "Playbook Inst. Status ori"::Failed, 'boom', '', WorkspaceText);
+        StepLog.Get(InstanceId, 20, 0);
+        SnapshotText := StepLog.GetWorkspaceSnapshot();
+
+        // [THEN] No personal field or secret value is stored (AC01)
+        Assert.IsFalse(SnapshotText.Contains('XPII-CHAT-4711'), 'Telegram chat id');
+        Assert.IsFalse(SnapshotText.Contains('XPII-FREE-TEXT-PROMPT'), 'System prompt');
+        Assert.IsFalse(SnapshotText.Contains('xpii.user@example.invalid'), 'Email');
+        Assert.IsFalse(SnapshotText.Contains('XPII Full Name'), 'Full name');
+        Assert.IsFalse(SnapshotText.Contains('XPII-NOTIFICATION-SUBJECT'), 'Notification subject');
+        Assert.IsFalse(SnapshotText.Contains('XPII-APPROVAL-TEXT'), 'Approval text');
+        Assert.IsFalse(SnapshotText.Contains('XPII-SECRET-VALUE'), 'Secret-like value');
+        Assert.IsFalse(SnapshotText.Contains('XPII-SYS-USER'), '_sys.userId');
+
+        // [THEN] The debugging value stays (AC02)
+        Assert.IsTrue(Snapshot.ReadFrom(SnapshotText), 'Snapshot is JSON');
+        Snapshot.SelectToken('_steps.10.customerNo', Token);
+        Assert.AreEqual('10000', Token.AsValue().AsText(), 'Step result kept');
+        Snapshot.SelectToken('_sys.today', Token);
+        Assert.AreEqual('2026-11-18', Token.AsValue().AsText(), '_sys kept');
+        Snapshot.SelectToken('_run.status', Token);
+        Assert.AreEqual('Failed', Token.AsValue().AsText(), '_run kept');
+
+        StepLog.Delete();
+    end;
+
+    [Test]
+    procedure RedactSnapshot_MasksSecretLikeKeysInNestedArraysAndLeavesPlainTextAlone()
+    var
+        LogMgt: Codeunit "Playbook Log Mgt ori";
+        Result: Text;
+    begin
+        Result := LogMgt.RedactWorkspaceSnapshot('{"_steps":{"10":{"items":[{"password":"XPII-PW","name":"kept"}],"Authorization":"Bearer XPII-TOKEN","continuationToken":"page2"}}}');
+        Assert.IsFalse(Result.Contains('XPII-PW'), 'Password inside array element masked');
+        Assert.IsFalse(Result.Contains('XPII-TOKEN'), 'Authorization masked');
+        Assert.IsTrue(Result.Contains('kept'), 'Neighbour kept');
+        Assert.IsTrue(Result.Contains('page2'), 'Paging token is not a secret-like key');
+        Assert.AreEqual('not json', LogMgt.RedactWorkspaceSnapshot('not json'), 'Non-JSON text is unchanged');
+        Assert.AreEqual('{"_who":"[redacted]"}', LogMgt.RedactWorkspaceSnapshot('{"_who":{"email":"x"}}'), 'Whole _who replaced');
+    end;
+
+    [Test]
+    procedure Help_DescribesWhatTheSnapshotKeeps()
+    var
+        Help: Codeunit "Help ori";
+        Overview: Text;
+    begin
+        Overview := Help.GetOverview();
+        Assert.IsTrue(Overview.Contains('WorkspaceSnapshot is redacted before it is stored'), 'Redaction documented');
+        Assert.IsTrue(Overview.Contains('It keeps the step results'), 'Kept parts documented');
+    end;
+
+    local procedure JsonSysWithUser(): JsonObject
+    var
+        Sys: JsonObject;
+    begin
+        Sys.Add('today', '2026-11-18');
+        Sys.Add('userId', 'XPII-SYS-USER');
+        exit(Sys);
+    end;
+
+    local procedure JsonRun(): JsonObject
+    var
+        Run: JsonObject;
+    begin
+        Run.Add('status', 'Failed');
+        exit(Run);
+    end;
+
+    [Test]
     procedure RunAndHelp_DescribeTimeoutAndRetentionBoundaries()
     var
         RunMessage: Codeunit "Playbook Run Msg ori";
