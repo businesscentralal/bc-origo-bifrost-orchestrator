@@ -28,6 +28,9 @@ codeunit 10035563 "Table JSON Import ori"
         RowsMissingErr: Label 'The file has no rows array.', Comment = 'is-IS=Skráin inniheldur engan línulista (rows).';
         RowNotObjectErr: Label 'The row is not a JSON object.', Comment = 'is-IS=Línan er ekki JSON-hlutur.';
         RowKeyMissingErr: Label 'The row has neither an id nor a primaryKey.', Comment = 'is-IS=Línan hefur hvorki id né primaryKey.';
+        PlaybookFormatErr: Label 'The file is not a Bifrost playbook file (format %1, version %2 expected).', Comment = '%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-keðjuskrá (búist var við sniði %1, útgáfu %2).';
+        PlaybookTablesMissingErr: Label 'The file has no tables array of table data files.', Comment = 'is-IS=Skráin inniheldur engan töflulista með töflugagnaskrám.';
+        PlaybookTableRefusedErr: Label 'Table %1 does not belong in a playbook file.', Comment = '%1 = table number, is-IS=Tafla %1 á ekki heima í keðjuskrá.';
         RowStopErr: Label 'Row %1 failed: %2', Comment = '%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2';
 
     /// <summary>
@@ -153,6 +156,8 @@ codeunit 10035563 "Table JSON Import ori"
         TempArgument: Record "Message Argument ori" temporary;
         Serializer: Codeunit "Serializer ori";
         Token: JsonToken;
+        FieldsJson: JsonObject;
+        BlankFieldNos: List of [Integer];
     begin
         RecRef.Open(TableNo);
         LocateRow(Row, RecRef, IsNew);
@@ -160,8 +165,130 @@ codeunit 10035563 "Table JSON Import ori"
             if TempArgument.IsTableInsertRestrictedForDataRecords(TableNo, RecRef, false, false) then
                 Error(ErrorInfo.Create(TempArgument.GetRestrictedTableErrorText(TableNo, StrSubstNo(InsertRestrictedErr, TableNo, RecRef.Name()), true)));
         if Row.Get('fields', Token) then
-            if Token.IsObject() then
-                RecRef := Serializer.DeserializeFromJson(RecRef, Token.AsObject());
+            if Token.IsObject() then begin
+                FieldsJson := Token.AsObject().Clone().AsObject();
+                BlankFieldNos := TakeBlankOptionValues(RecRef, FieldsJson);
+                RecRef := Serializer.DeserializeFromJson(RecRef, FieldsJson);
+                SetBlankOptionValues(RecRef, BlankFieldNos);
+            end;
+    end;
+
+    /// <summary>
+    /// Removes option and enum values written as "0" or "" for the unnamed ordinal 0 of a field (a file from before
+    /// #223 holds "MessageType": "0" on Transform steps); Foundation refuses those values. The field numbers are
+    /// returned so the blank member is assigned after the other fields.
+    /// </summary>
+    local procedure TakeBlankOptionValues(RecRef: RecordRef; var FieldsJson: JsonObject) BlankFieldNos: List of [Integer]
+    var
+        TableJSONExport: Codeunit "Table JSON Export ori";
+        TableDataMgt: Codeunit "Table Data Mgt ori";
+        FieldRef: FieldRef;
+        Token: JsonToken;
+        JsonKey: Text;
+        Index: Integer;
+    begin
+        for Index := 1 to RecRef.FieldCount() do begin
+            FieldRef := RecRef.FieldIndex(Index);
+            if (FieldRef.Class() = FieldClass::Normal) and (FieldRef.Type() = FieldType::Option) then begin
+                JsonKey := TableDataMgt.GetJsonKey(FieldRef.Name());
+                if FieldsJson.Get(JsonKey, Token) then
+                    if Token.IsValue() then
+                        if TableJSONExport.IsUnnamedZero(FieldRef, Token.AsValue().AsText()) then begin
+                            FieldsJson.Remove(JsonKey);
+                            BlankFieldNos.Add(FieldRef.Number());
+                        end;
+            end;
+        end;
+    end;
+
+    local procedure SetBlankOptionValues(var RecRef: RecordRef; BlankFieldNos: List of [Integer])
+    var
+        FieldNo: Integer;
+    begin
+        foreach FieldNo in BlankFieldNos do
+            RecRef.Field(FieldNo).Value := 0;
+    end;
+
+    /// <summary>
+    /// Imports a playbook file written by "Table JSON Export ori".ExportPlaybook (#223): the playbook, its steps, its
+    /// conditions and its Transform rows, parents first, through the same row import as a table data file. Existing rows
+    /// with the same key are modified, others inserted; rows of the playbook that are not in the file stay. The first
+    /// failed row stops the import with its error, so the caller's transaction writes nothing.
+    /// </summary>
+    /// <param name="Envelope">The playbook file envelope.</param>
+    /// <returns>Result: playbookCode and tables (tableNo, rows, inserted, modified).</returns>
+    internal procedure ImportPlaybook(Envelope: JsonObject) Result: JsonObject
+    var
+        TableJSONExport: Codeunit "Table JSON Export ori";
+        Tables: JsonArray;
+        TableResults: JsonArray;
+        TableFile: JsonObject;
+        TableResult: JsonObject;
+        Token: JsonToken;
+        TableNo: Integer;
+        Index: Integer;
+        PlaybookCode: Text;
+    begin
+        ReadPlaybookEnvelope(Envelope, PlaybookCode, Tables);
+        foreach TableNo in TableJSONExport.GetPlaybookTables() do
+            for Index := 1 to Tables.Count() do begin
+                Tables.Get(Index - 1, Token);
+                TableFile := Token.AsObject();
+                if GetTableNo(TableFile) = TableNo then begin
+                    TableResult := ImportTable(TableFile, false, true);
+                    TableResult.Remove('dryRun');
+                    TableResult.Remove('failed');
+                    TableResult.Remove('errors');
+                    TableResults.Add(TableResult);
+                end;
+            end;
+        Result.Add('playbookCode', PlaybookCode);
+        Result.Add('tables', TableResults);
+    end;
+
+    local procedure ReadPlaybookEnvelope(Envelope: JsonObject; var PlaybookCode: Text; var Tables: JsonArray)
+    var
+        TableJSONExport: Codeunit "Table JSON Export ori";
+        TableNos: List of [Integer];
+        Token: JsonToken;
+        TableToken: JsonToken;
+        FormatName: Text;
+        Version: Integer;
+        Index: Integer;
+    begin
+        if Envelope.Get('format', Token) then
+            if Token.IsValue() then
+                FormatName := Token.AsValue().AsText();
+        if Envelope.Get('version', Token) then
+            if Token.IsValue() then
+                Version := Token.AsValue().AsInteger();
+        if (FormatName <> TableJSONExport.GetPlaybookFormatName()) or (Version <> TableJSONExport.GetFormatVersion()) then
+            Error(ErrorInfo.Create(StrSubstNo(PlaybookFormatErr, TableJSONExport.GetPlaybookFormatName(), TableJSONExport.GetFormatVersion())));
+        if Envelope.Get('playbookCode', Token) then
+            if Token.IsValue() then
+                PlaybookCode := Token.AsValue().AsText();
+        if not Envelope.Get('tables', Token) then
+            Error(ErrorInfo.Create(PlaybookTablesMissingErr));
+        if not Token.IsArray() then
+            Error(ErrorInfo.Create(PlaybookTablesMissingErr));
+        Tables := Token.AsArray();
+        TableNos := TableJSONExport.GetPlaybookTables();
+        for Index := 1 to Tables.Count() do begin
+            Tables.Get(Index - 1, TableToken);
+            if not TableToken.IsObject() then
+                Error(ErrorInfo.Create(PlaybookTablesMissingErr));
+            if not TableNos.Contains(GetTableNo(TableToken.AsObject())) then
+                Error(ErrorInfo.Create(StrSubstNo(PlaybookTableRefusedErr, GetTableNo(TableToken.AsObject()))));
+        end;
+    end;
+
+    local procedure GetTableNo(TableFile: JsonObject) TableNo: Integer
+    var
+        Token: JsonToken;
+    begin
+        if TableFile.Get('tableNo', Token) then
+            if Token.IsValue() then
+                TableNo := Token.AsValue().AsInteger();
     end;
 
     local procedure LocateRow(Row: JsonObject; var RecRef: RecordRef; var IsNew: Boolean)

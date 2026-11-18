@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Added — #223
+
+- #223 AC01 / codeunits 10035558 `Table JSON Export ori` (`ExportPlaybook`) and 10035563 `Table JSON Import ori` (`ImportPlaybook`), page 10035551 `Playbooks ori` actions Export Playbook / Import Playbook: a playbook file (`bifrost-playbook`, version 1) holds the playbook, its steps, conditions and Transform rows; import confirms first and stops at the first failed row.
+- #223 AC02: an enum value that is the unnamed ordinal 0 (Message Type on Transform steps) is left out of the export and imported as blank, so files with `"MessageType": "0"` import too.
+- #223 AC03: test codeunit 96498 `Playbook Export Tests ori` (round trip verifies and runs identically). is-IS texts are in the label comments.
+
 ### Fixed — #217
 
 - #217 AC01 / codeunit 10035618 `Playbook Verify Template ori`: `UnknownRequestKey` names the declared keys in their real casing (`tableName`, `tableNumber`), and the Verify help lists the code (1033/1039 messages).
