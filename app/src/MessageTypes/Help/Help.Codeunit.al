@@ -1224,6 +1224,12 @@ codeunit 10035576 "Help ori"
         O.AppendLine('`Status` stays `Running` until the run writes its own completion, so an instance');
         O.AppendLine('abandoned mid-flight — a session killed, a caller that timed out — stays `Running`');
         O.AppendLine('for ever. Judge such a run by the timestamps on its step log, not by this field.');
+        O.AppendLine('A run whose step graph points at a step that does not exist is closed as `Failed` with the');
+        O.AppendLine('error text and `CompletedAt`, and the playbook header says `Failed`. To close older');
+        O.AppendLine('abandoned instances, open the Playbook Execution Log and choose **Close Abandoned Runs**:');
+        O.AppendLine('every `Running` instance in the list that started more than 24 hours ago is marked `Failed`');
+        O.AppendLine('with an explanatory error text. Nothing is deleted. `Data.Records.Set` cannot do this: the');
+        O.AppendLine('change log write guard blocks the instance table.');
         O.AppendLine('');
         O.AppendLine('#### Playbook Step Log ori (PK: InstanceID + StepNo_ + IterationNo_)');
         O.AppendLine('One record per step execution. Fields: MessageType, Status, Duration, ErrorText,');

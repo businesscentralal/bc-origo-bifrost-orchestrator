@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #215 (partial: AC01, AC03, AC04)
+
+- #215 AC01: a run whose step graph points at a step that does not exist (Next Step Success or Failure) is now closed as Failed with the error text and Completed At, the playbook header says Failed, and the Job Queue still gets the error. Before, the Commit() ahead of the earlier step's message call had persisted the instance as Running while the error rolled back the step log and the completion, so it stayed Running forever. Codeunit 10035547 `Playbook Runner ori` (new local procedure `FailRunAtMissingStep`).
+- #215 AC03: Playbook Execution Log (page 10035550) gets the action **Close Abandoned Runs / Loka yfirgefnum keyrslum**; codeunit 10035549 `Playbook Log Mgt ori` gets `CloseAbandonedInstances`. It marks Running instances in the list that started more than 24 hours ago as Failed with an explanatory error text, corrects a header that still points at them, and deletes nothing. Runtime help documents it. is-IS XLF updated (5 units). No new object IDs.
+- #215 AC02 (four instances per attempt) is not reproduced from source: one Job Queue Dispatcher run creates one instance. See the issue for the open question.
+- Tests: new codeunit 96495 `Playbook Missing Step Tests` (5 scenarios).
+
 ### Fixed — #212
 
 - #212: a Transform Source Path such as `@50.@_iter.reply` now expands `@_iter` to the current forEach index before the workspace lookup, as request templates already do, so a per-item Transform can read the same item of an earlier forEach step (for example Parse JSON on an LLM reply before `DocumentExchange.UBL.RenderBilling`). Codeunit 10035627 `Playbook Transform Exec ori` only; no new object IDs, no new texts. Verify already accepted the path. Tests: two scenarios in codeunit 96468 (iteration 0/1 read, missing item fails naming the path).
