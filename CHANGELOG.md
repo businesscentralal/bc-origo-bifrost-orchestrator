@@ -7,6 +7,13 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #218
+
+- #218 AC01: every Failed step and instance carries an Error Text for the error-answer, raised-error and condition-failed paths alike (already true for single and paged steps since #183; now also the `error` of a forEach step with failed items in the run summary, which was empty). Tests in codeunit 96495.
+- #218 AC02: `Response Received` in the step log is always JSON. A plain-text error answer (for example a raised `Skýrsla ... finnst ekki.`) is stored as `{"status":"Error","error":"..."}`; a plain-text success answer as `{"status":"Success","result":"..."}`. Codeunit 10035549 `Playbook Log Mgt ori` (new `LogStep` overload; no new object IDs).
+- #218 AC03: a Check that answers no is no longer written to Error Text. Table 10035543 `Playbook Step Log ori` gets field 90 `Outcome Note` (Text[250], caption `Niðurstaða`), shown on page `Playbook Step Logs Sub. ori`; the run summary `failures` entries of a `checkFailed` item carry `note` instead of `error`. Existing tests updated; is-IS XLF updated.
+- #218 AC04: Help (Playbooks chapters) describes Outcome Note and the JSON Response Received.
+
 ### Fixed — #216
 
 - #216: the Workspace Snapshot of a failed Playbook Step Log (field 70) no longer stores personal data. Codeunit 10035549 `Playbook Log Mgt ori` (new internal procedure `RedactWorkspaceSnapshot`, used by `LogStep`) replaces `_who` and `_sys.userId` with `[redacted]` and masks the value of secret-like properties (password, secret, apikey, authorization, bearer, credential, access/refresh token) at any depth. Step results, `_run`, `_initial` and the other `_sys` values stay for debugging. The Playbook Step Log table is already registered for retention (Reten. Pol. Allowed Tables); field 70 stays CustomerContent and the help of `Help ori` states what the snapshot keeps. No new object IDs, no new translated texts. Tests: three new scenarios in codeunit 96456 `Playbook Ask Scrub Tests ori` (redaction and kept step results, nested secret keys, help text).

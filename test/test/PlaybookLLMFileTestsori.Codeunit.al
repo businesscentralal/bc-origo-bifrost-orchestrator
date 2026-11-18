@@ -132,7 +132,7 @@ codeunit 96484 "Playbook LLM File Tests ori"
             Assert.IsTrue(StepLog.Get(InstanceId, 30, 0), 'The yes branch runs the next step');
         end else begin
             Assert.AreEqual(StepLog.Status::Completed, StepLog.Status, 'A single Check that answers no is not a failure');
-            Assert.IsTrue(StepLog."Error Text" in [AnsweredNoTxt, AnsweredNoIsTxt], 'The no answer is logged: ' + StepLog."Error Text");
+            Assert.IsTrue(StepLog."Outcome Note" in [AnsweredNoTxt, AnsweredNoIsTxt], 'The no answer is logged: ' + StepLog."Outcome Note");
             Assert.IsFalse(StepLog.Get(InstanceId, 30, 0), 'The no branch does not run the next step');
         end;
         Lib.Cleanup(PlaybookCodeTok);

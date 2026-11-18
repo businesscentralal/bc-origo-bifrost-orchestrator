@@ -298,7 +298,8 @@ codeunit 96430 "Check Step Error Tests"
         Assert.AreEqual(0, Instance."Steps Failed", 'No step failed');
         StepLog.Get(InstanceId, 10, 0);
         Assert.AreEqual(StepLog.Status::Completed, StepLog.Status, 'Step log status');
-        Assert.AreEqual(ExpectedLogText, StepLog."Error Text", 'Step log tells no from yes');
+        Assert.AreEqual('', StepLog."Error Text", 'An answer is not an error: Error Text stays empty');
+        Assert.AreEqual(ExpectedLogText, StepLog."Outcome Note", 'Step log tells no from yes');
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
     end;
@@ -396,7 +397,8 @@ codeunit 96430 "Check Step Error Tests"
         Assert.AreEqual(Instance.Status::Completed, Instance.Status, 'An answer never fails the run');
         Assert.AreEqual(0, Instance."Steps Failed", 'No step failed');
         StepLog.Get(InstanceId, 30, 0);
-        Assert.AreEqual(ExpectedLogText, StepLog."Error Text", 'Step log tells no from yes');
+        Assert.AreEqual('', StepLog."Error Text", 'An answer is not an error: Error Text stays empty');
+        Assert.AreEqual(ExpectedLogText, StepLog."Outcome Note", 'Step log tells no from yes');
         Assert.IsFalse(Workspace.GetValue('_steps.30.items.errored', Result), 'Nothing errored');
         if ExpectedLogText = '' then begin
             Assert.AreEqual(StepLog.Status::Completed, StepLog.Status, 'yes is Completed');
