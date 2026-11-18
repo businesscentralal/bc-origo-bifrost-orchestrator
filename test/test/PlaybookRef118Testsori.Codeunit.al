@@ -146,7 +146,7 @@ codeunit 96444 "Playbook Ref 118 Tests ori"
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{"tableName":"Customer","fieldNumbers":[1,2]}', 0, '', 0);
         Lib.AddStatusSuccessCondition(PlaybookCodeTok, 10);
         Lib.AddNoOfRecordsCondition(PlaybookCodeTok, 10);
-        Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Data.Records.Get", '{"tableView":"WHERE(No.=CONST(@_current.fields.No_))","again":"@_current.fields.No_"}', 10, 'result', 0);
+        Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Check, "Message Type ori"::"Data.Records.Get", '{"tableView":"WHERE(No.=CONST(@_current.fields.No_)|No.=CONST(@_current.fields.No_))"}', 10, 'result', 0);
         Lib.AddStatusSuccessCondition(PlaybookCodeTok, 30);
         Verify.GetFindings(PlaybookCodeTok, Findings);
         Assert.AreEqual(1, Findings.Count(), 'Repeated wrong path warns once');

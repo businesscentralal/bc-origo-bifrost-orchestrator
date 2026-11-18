@@ -53,11 +53,11 @@ codeunit 96486 "Playbook Runtime Refusal Tests"
     end;
 
     [Test]
-    procedure UnknownKey_NamesKeyAndDeclaredParameters_ReadTypeIsSilent()
+    procedure UnknownKey_NamesKeyAndDeclaredParameters_ReadTypeWarnsToo()
     var
         Findings: JsonArray;
     begin
-        // [SCENARIO] AC02: a key a write type does not declare warns and names the declared parameters; a read type is silent.
+        // [SCENARIO] AC02: a key a write type does not declare warns and names the declared parameters; a read type warns too (#217).
         SetupPlaybook(TelegramUnknownKeyTok);
         GetFindings(Findings);
         Assert.AreEqual(1, CountCode(Findings, 'UnknownRequestKey'), 'chatId is not declared');
@@ -74,7 +74,7 @@ codeunit 96486 "Playbook Runtime Refusal Tests"
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{"tableName":"Customer","madeUpKey":1}', 0, '', 0);
         Clear(Findings);
         GetFindings(Findings);
-        Assert.AreEqual(0, CountCode(Findings, 'UnknownRequestKey'), 'A read type ignores unknown keys');
+        Assert.AreEqual(1, CountCode(Findings, 'UnknownRequestKey'), 'A read type warns on an unknown key (#217)');
         Lib.Cleanup(PlaybookCodeTok);
     end;
 

@@ -29,9 +29,11 @@ codeunit 10035618 "Playbook Verify Template ori"
     begin
         if Step."Step Kind" = Step."Step Kind"::Message then
             CheckConditionPaths(Step, Findings);
+        CheckIterateArrayPath(Step, Findings);
         TemplateText := Step.GetRequestTemplate();
         if TemplateText.Trim() = '' then begin
             CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
+            CheckAskStopReason(Step, Verify.GetAskCheckTypeName(Step."Message Type"), Findings);
             CheckRuntimeRefusals(Step, TemplateJson, Findings);
             CheckPreviewCount(Step, TemplateJson, Findings);
             exit;
@@ -47,6 +49,7 @@ codeunit 10035618 "Playbook Verify Template ori"
 
         CheckRoleCode(Step, Verify.GetTypeName(Step."Message Type"), TemplateJson, Findings);
         CheckAskTemplate(Step, Verify.GetAskCheckTypeName(Step."Message Type"), TemplateJson, Findings);
+        CheckAskStopReason(Step, Verify.GetAskCheckTypeName(Step."Message Type"), Findings);
         CheckRuntimeRefusals(Step, TemplateJson, Findings);
         CheckPreviewCount(Step, TemplateJson, Findings);
         ScanToken(Step, TemplateJson.AsToken(), Seen, Findings);
@@ -111,6 +114,37 @@ codeunit 10035618 "Playbook Verify Template ori"
         if Token.AsValue().AsText() = 'true' then
             Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'AskTraceDiscarded',
                 StrSubstNo(AskTraceDiscardedMsg, Step."Step No."), AskTraceDiscardedNextStepTxt, Step.Disabled);
+    end;
+
+    /// <summary>
+    /// An Ask step that has Success conditions but none on stopReason: a truncated answer (stopReason maxToolCalls,
+    /// maxTokens) still answers status Success with no warning, so the playbook passes on an incomplete answer.
+    /// Reported as the warning AskStopReasonUnchecked. A step without any Success condition has its own finding.
+    /// </summary>
+    /// <param name="Step">The step.</param>
+    /// <param name="TypeName">The invariant message type name; only LLM.Prompt.Ask is judged.</param>
+    /// <param name="Findings">Receives the warning.</param>
+    internal procedure CheckAskStopReason(Step: Record "Playbook Step ori"; TypeName: Text; var Findings: JsonArray)
+    var
+        Condition: Record "Playbook Condition ori";
+        Verify: Codeunit "Playbook Verify ori";
+        HasSuccess: Boolean;
+    begin
+        if TypeName <> 'LLM.Prompt.Ask' then
+            exit;
+        Condition.ReadIsolation := IsolationLevel::ReadCommitted;
+        Condition.FilterForStep(Step."Playbook Code", Step."Step No.", "Playbook Cond. Type ori"::Success);
+        Condition.SetLoadFields("Playbook Code", "Step No.", "Condition Type", Path);
+        if Condition.FindSet() then
+            repeat
+                HasSuccess := true;
+                if StripIndex(Condition.Path.Trim().Split('.').Get(1)).ToLower() = 'stopreason' then
+                    exit;
+            until Condition.Next() = 0;
+        if not HasSuccess then
+            exit;
+        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'AskStopReasonUnchecked',
+            StrSubstNo(AskStopReasonMsg, Step."Step No."), AskStopReasonNextStepTxt, Step.Disabled);
     end;
 
     local procedure HasDataCondition(Step: Record "Playbook Step ori"): Boolean
@@ -217,8 +251,70 @@ codeunit 10035618 "Playbook Verify Template ori"
                 CheckIterField(Step, StepNo, Segments, Seen, Findings);
             exit;
         end;
-        if FirstSegment = '_current' then
+        if FirstSegment = '_current' then begin
+            if not Step.IsForEach() then begin
+                CheckCurrentOutsideForEach(Step, Path, Seen, Findings);
+                exit;
+            end;
             CheckCurrentField(Step, Segments, Seen, Findings);
+        end;
+    end;
+
+    /// <summary>
+    /// @_current.* in a step that does not iterate (no Iterate Array Path): the runner has no current item, so the
+    /// reference cannot be resolved and the step fails before its message is sent. Reported once per step as the
+    /// error CurrentOutsideForEach.
+    /// </summary>
+    local procedure CheckCurrentOutsideForEach(Step: Record "Playbook Step ori"; Path: Text; var Seen: List of [Text]; var Findings: JsonArray)
+    var
+        Verify: Codeunit "Playbook Verify ori";
+        SeenKey: Text;
+    begin
+        SeenKey := StrSubstNo(SeenOutsideTok, Step."Step No.");
+        if Seen.Contains(SeenKey) then
+            exit;
+        Seen.Add(SeenKey);
+        Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'CurrentOutsideForEach',
+            StrSubstNo(CurrentOutsideMsg, Step."Step No.", Path), CurrentOutsideNextStepTxt, Step.Disabled);
+    end;
+
+    /// <summary>
+    /// The Iterate Array Path of a forEach step against the declared response of the source step: a path whose first
+    /// segment the source type does not declare finds no array, so the step iterates nothing. A source without a
+    /// declared response, a path that holds a reference and a source that is not a message step are not judged.
+    /// Reported as the warning IteratePathNotInSourceResponse.
+    /// </summary>
+    local procedure CheckIterateArrayPath(Step: Record "Playbook Step ori"; var Findings: JsonArray)
+    var
+        SourceStep: Record "Playbook Step ori";
+        Verify: Codeunit "Playbook Verify ori";
+        Response: JsonObject;
+        Fields: JsonArray;
+        DeclaredText: Text;
+        PathText: Text;
+    begin
+        if not Step.IsForEach() then
+            exit;
+        PathText := Step."Iterate Array Path".Trim();
+        if PathText.Contains('@') then
+            exit;
+        if (Step."Iterate Source Step No." <= 0) or (Step."Iterate Source Step No." >= Step."Step No.") then
+            exit;
+        SourceStep.SetLoadFields("Step No.", "Step Kind", "Message Type");
+        if not SourceStep.Get(Step."Playbook Code", Step."Iterate Source Step No.") then
+            exit;
+        if SourceStep."Step Kind" <> SourceStep."Step Kind"::Message then
+            exit;
+        if not TryGetResponseFields(SourceStep."Message Type", Response, Fields) then
+            exit;
+        if Fields.Count() = 0 then
+            exit;
+        if IsDeclaredResponsePath(PathText, Fields) then
+            exit;
+        GetDeclaredResponseNames(Fields, DeclaredText);
+        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'IteratePathNotInSourceResponse',
+            StrSubstNo(IteratePathMsg, Step."Step No.", PathText, SourceStep."Step No.", Verify.GetTypeName(SourceStep."Message Type"), DeclaredText),
+            StrSubstNo(IteratePathNextStepTxt, PathText), Step.Disabled);
     end;
 
     /// <summary>
@@ -541,21 +637,29 @@ codeunit 10035618 "Playbook Verify Template ori"
     var
         Verify: Codeunit "Playbook Verify ori";
         Declared: List of [Text];
+        DeclaredLower: List of [Text];
         EnvelopeKeys: List of [Text];
         DeclaredText: Text;
         ParameterToken: JsonToken;
         NameToken: JsonToken;
         RequestKey: Text;
         DeclaredName: Text;
+        IsRead: Boolean;
     begin
-        // A read type ignores keys it does not know; every other type refuses them at run time.
-        if (EffectName = '') or (EffectName = 'read') then
+        // A type whose effect is unknown cannot be judged. A write type refuses unknown keys at run time; a read type
+        // answers with a warning and ignores them, which still leaves the step doing something else than intended.
+        if EffectName = '' then
             exit;
+        IsRead := EffectName = 'read';
         foreach ParameterToken in Parameters do
             if ParameterToken.IsObject() then
                 if ParameterToken.AsObject().Get('name', NameToken) then
-                    if NameToken.IsValue() then
-                        Declared.Add(NameToken.AsValue().AsText().ToLower());
+                    if NameToken.IsValue() then begin
+                        // The declared name keeps its casing for the next-step text; matching is case-insensitive.
+                        Declared.Add(NameToken.AsValue().AsText());
+                        DeclaredLower.Add(NameToken.AsValue().AsText().ToLower());
+                        AddAliases(ParameterToken.AsObject(), DeclaredLower);
+                    end;
         // A type that declares no parameters cannot be judged.
         if Declared.Count() = 0 then
             exit;
@@ -566,10 +670,46 @@ codeunit 10035618 "Playbook Verify Template ori"
         end;
         GetEnvelopeKeys(Envelope, EnvelopeKeys);
         foreach RequestKey in TemplateJson.Keys() do
-            if not Declared.Contains(RequestKey.ToLower()) and not EnvelopeKeys.Contains(RequestKey.ToLower()) then
-                Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownRequestKey',
-                    StrSubstNo(UnknownKeyMsg, Step."Step No.", Verify.GetTypeName(Step."Message Type"), RequestKey),
-                    StrSubstNo(UnknownKeyNextStepTxt, RequestKey, DeclaredText), Step.Disabled);
+            if not DeclaredLower.Contains(RequestKey.ToLower()) and not EnvelopeKeys.Contains(RequestKey.ToLower()) then
+                if IsRead then
+                    Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownRequestKey',
+                        StrSubstNo(UnknownKeyReadMsg, Step."Step No.", Verify.GetTypeName(Step."Message Type"), RequestKey),
+                        StrSubstNo(UnknownKeyNextStepTxt, RequestKey, DeclaredText), Step.Disabled)
+                else
+                    Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownRequestKey',
+                        StrSubstNo(UnknownKeyMsg, Step."Step No.", Verify.GetTypeName(Step."Message Type"), RequestKey),
+                        StrSubstNo(UnknownKeyNextStepTxt, RequestKey, DeclaredText), Step.Disabled);
+    end;
+
+    /// <summary>
+    /// A parameter description may end its sentence with "Aliases: a, b." (Data.Records.Get lists tableNo and tableId
+    /// that way). The aliases are accepted request keys, so they are added to the declared names.
+    /// </summary>
+    local procedure AddAliases(Parameter: JsonObject; var DeclaredLower: List of [Text])
+    var
+        DescriptionToken: JsonToken;
+        Description: Text;
+        Alias: Text;
+        Aliases: List of [Text];
+        StartPos: Integer;
+        EndPos: Integer;
+    begin
+        if not Parameter.Get('description', DescriptionToken) then
+            exit;
+        if not DescriptionToken.IsValue() or DescriptionToken.AsValue().IsNull() then
+            exit;
+        Description := DescriptionToken.AsValue().AsText();
+        StartPos := Description.IndexOf('Aliases: ');
+        if StartPos = 0 then
+            exit;
+        Description := CopyStr(Description, StartPos + 9);
+        EndPos := Description.IndexOf('.');
+        if EndPos > 0 then
+            Description := CopyStr(Description, 1, EndPos - 1);
+        Aliases := Description.Split(',');
+        foreach Alias in Aliases do
+            if Alias.Trim() <> '' then
+                DeclaredLower.Add(Alias.Trim().ToLower());
     end;
 
     /// <summary>
@@ -860,7 +1000,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         if Seen.Contains(SeenKey) then
             exit;
         Seen.Add(SeenKey);
-        Verify.AddFinding(Findings, Verify.WarningSeverity(), Step."Step No.", 'UnknownFieldReference',
+        Verify.AddFinding(Findings, Verify.ErrorSeverity(), Step."Step No.", 'UnknownFieldReference',
             StrSubstNo(UnknownCurrentFieldMsg, Step."Step No.", FieldName, ResolvedTableName),
             StrSubstNo(UnknownCurrentFieldNextStepTxt, ResolvedTableName), Step.Disabled);
     end;
@@ -944,6 +1084,7 @@ codeunit 10035618 "Playbook Verify Template ori"
         SeenStepTok: Label 'step|%1', Locked = true;
         SeenFieldTok: Label 'field|%1|%2', Locked = true;
         SeenCurrentTok: Label 'current|%1', Locked = true;
+        SeenOutsideTok: Label 'outside|%1', Locked = true;
         SeenSyntaxTok: Label 'syntax|%1', Locked = true;
         PreviewWithoutMaxMsg: Label 'Step %1 sends "expectedCount": "@preview" but has no Max Count. Every run refuses the step with ConfirmationRequired and nothing is executed.', Comment = '%1 = step no, is-IS=Skref %1 sendir "expectedCount": "@preview" en hefur engan hámarksfjölda. Hver keyrsla hafnar skrefinu með ConfirmationRequired og ekkert er keyrt.';
         PreviewWithoutMaxNextStepTxt: Label 'Set Max Count on the step to the most the playbook may confirm without a person, or send a fixed expectedCount instead.', Comment = 'is-IS=Settu hámarksfjölda á skrefið, mest það sem keðjan má staðfesta án aðkomu manns, eða sendu fastan expectedCount í staðinn.';
@@ -951,6 +1092,13 @@ codeunit 10035618 "Playbook Verify Template ori"
         MaxWithoutPreviewNextStepTxt: Label 'Send "expectedCount": "@preview" in the request template so the cap bounds the confirmation, or clear Max Count.', Comment = 'is-IS=Sendu "expectedCount": "@preview" í beiðnisniðmátinu svo hámarkið afmarki staðfestinguna, eða hreinsaðu hámarksfjölda.';
         IrreversibleMsg: Label 'Step %1 calls %2, which is irreversible, without expectedCount in its request, and Bifrost Setup requires confirmation for irreversible messages. Every run answers ConfirmationRequired and the step fails.', Comment = '%1 = step no, %2 = message type, is-IS=Skref %1 kallar á %2, sem er óafturkræft, án expectedCount í beiðninni, og Bifröst-uppsetning krefst staðfestingar fyrir óafturkræf skilaboð. Hver keyrsla svarar ConfirmationRequired og skrefið mistekst.';
         IrreversibleNextStepTxt: Label 'Add expectedCount with the number of messages the step sends (for example 1) to the request template, or send "expectedCount": "@preview" and set Max Count on the step, so a run confirms the previewed count up to that cap.', Comment = 'is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða sendu "expectedCount": "@preview" og settu hámarksfjölda á skrefið, svo keyrsla staðfesti forskoðaðan fjölda upp að því hámarki.';
+        CurrentOutsideMsg: Label 'Step %1 reads @%2, but the step does not iterate (no Iterate Array Path), so there is no current item. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.', Comment = '%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en skrefið ítrar ekki (engin ítrunarslóð fylkis), svo það er enginn núverandi hlutur. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.';
+        CurrentOutsideNextStepTxt: Label 'Set Iterate Source Step No. and Iterate Array Path on the step so it runs once per item, or read the value from a numbered step (@N.path) instead of @_current.', Comment = 'is-IS=Stilltu Upprunaskref ítrunar og Ítrunarslóð fylkis á skrefinu svo það keyri einu sinni fyrir hvern hlut, eða lestu gildið úr númeruðu skrefi (@N.slóð) í stað @_current.';
+        IteratePathMsg: Label 'Step %1 iterates %2 from step %3, but the response of %4 declares no such field (declared: %5). The step finds no array and does nothing.', Comment = '%1 = step no, %2 = iterate array path, %3 = source step no, %4 = source message type, %5 = declared response fields, is-IS=Skref %1 ítrar %2 úr skrefi %3, en svar %4 skilgreinir engan slíkan reit (skilgreindir: %5). Skrefið finnur ekkert fylki og gerir ekkert.';
+        IteratePathNextStepTxt: Label 'Change Iterate Array Path %1 to a field of the source response that holds the array; read the response chapter of the source message type contract.', Comment = '%1 = iterate array path, is-IS=Breyttu Ítrunarslóð fylkis %1 í reit í svari upprunaskrefsins sem geymir fylkið; lestu svarkafla samningslýsingar skilaboðategundar upprunaskrefsins.';
+        AskStopReasonMsg: Label 'Ask step %1 has Success conditions but none on stopReason. An answer cut short (stopReason maxToolCalls or maxTokens) still answers status Success with no warnings, so the step passes on an incomplete answer.', Comment = '%1 = step no, is-IS=Ask-skref %1 hefur árangursskilyrði en ekkert á stopReason. Svar sem var stytt (stopReason maxToolCalls eða maxTokens) svarar samt status Success án viðvarana, svo skrefið stenst á ófullkomnu svari.';
+        AskStopReasonNextStepTxt: Label 'Add the Success condition stopReason Equals completed beside status Equals Success, in the same group.', Comment = 'is-IS=Bættu árangursskilyrðinu stopReason Equals completed við hlið status Equals Success, í sama hópi.';
+        UnknownKeyReadMsg: Label 'Step %1 sends the key %3 to %2, which does not declare it. A read type ignores the key and answers with a warning, so the step reads something other than you meant (for example the table is missing).', Comment = '%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Lestrartegund hunsar lykilinn og svarar með viðvörun, svo skrefið les eitthvað annað en þú ætlaðir (til dæmis vantar töfluna).';
         UnknownKeyMsg: Label 'Step %1 sends the key %3 to %2, which does not declare it. A type that changes data refuses unknown keys at run time (UnknownParameter) and the step fails.', Comment = '%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Tegund sem breytir gögnum hafnar óþekktum lyklum í keyrslu (UnknownParameter) og skrefið mistekst.';
         UnknownKeyNextStepTxt: Label 'Remove %1 or rename it to a declared parameter. The type declares: %2.', Comment = '%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.';
         UnresolvableMsg: Label 'Step %1 reads @%2, but a list position is written name[0], not name.0, so the reference never matches. The step fails before its message is sent with an unresolved reference.', Comment = '%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en staða í lista er skrifuð nafn[0], ekki nafn.0, svo tilvísunin samsvarar aldrei. Skrefið mistekst áður en skilaboðin eru send með óleystri tilvísun.';

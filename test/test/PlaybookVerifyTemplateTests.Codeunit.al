@@ -361,13 +361,13 @@ codeunit 96439 "Playbook Verify Template Tests"
     end;
 
     [Test]
-    procedure CurrentField_Unknown_Warns()
+    procedure CurrentField_Unknown_IsAnError()
     begin
         VerifyUnknownCurrentField(1033, CurrentFieldStartTxt);
     end;
 
     [Test]
-    procedure CurrentField_Unknown_Warns_Icelandic()
+    procedure CurrentField_Unknown_IsAnError_Icelandic()
     begin
         VerifyUnknownCurrentField(1039, CurrentFieldStartIsTxt);
     end;
@@ -442,7 +442,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         Contract.GetNotes(Notes);
         Assert.IsTrue(Notes.Contains('Errors: UnknownFieldReference for @N.field and @N.@_iter.field'), 'Contract lists stored-field errors');
         Assert.IsTrue(Notes.Contains('unknown stored-field reference that previously only warned'), 'Contract explains the stronger gate');
-        Assert.IsTrue(HelpMgt.GetOverview().Contains('error for stored fields; warning for `@_current.fields`'), 'Overview severity agrees with the contract');
+        Assert.IsTrue(HelpMgt.GetOverview().Contains('error for stored fields and unknown `@_current.fields`; warning for primary-key fields and Success condition paths'), 'Overview severity agrees with the contract');
     end;
 
     [Test]
@@ -701,7 +701,7 @@ codeunit 96439 "Playbook Verify Template Tests"
         GetFindings(Findings);
 
         Assert.AreEqual(1, Findings.Count(), 'One finding');
-        AssertFinding(Findings, 'UnknownFieldReference', 30, WarningTok);
+        AssertFinding(Findings, 'UnknownFieldReference', 30, ErrorTok);
         AssertReferenceMessage(Findings, 'UnknownFieldReference', ExpectedStart);
         Lib.Cleanup(PlaybookCodeTok);
         GlobalLanguage(PreviousLanguage);
@@ -775,13 +775,13 @@ codeunit 96439 "Playbook Verify Template Tests"
 
     local procedure AddForEachStep(StepNo: Integer; Template: Text)
     begin
-        Lib.AddStep(PlaybookCodeTok, StepNo, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", Template, 10, 'result', 0);
+        Lib.AddStep(PlaybookCodeTok, StepNo, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.ConditionResponse", Template, 10, 'result', 0);
         Lib.AddStatusSuccessCondition(PlaybookCodeTok, StepNo);
     end;
 
     local procedure AddStepWithTemplate(StepNo: Integer; Template: Text)
     begin
-        Lib.AddStep(PlaybookCodeTok, StepNo, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", Template, 0, '', 0);
+        Lib.AddStep(PlaybookCodeTok, StepNo, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.ConditionResponse", Template, 0, '', 0);
         Lib.AddStatusSuccessCondition(PlaybookCodeTok, StepNo);
     end;
 

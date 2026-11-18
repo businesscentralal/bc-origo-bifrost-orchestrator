@@ -7,6 +7,14 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #217
+
+- #217 AC01 / codeunit 10035618 `Playbook Verify Template ori`: `UnknownRequestKey` names the declared keys in their real casing (`tableName`, `tableNumber`), and the Verify help lists the code (1033/1039 messages).
+- #217 AC02 / codeunits 10035618 and 10035616: unknown request keys on read types warn too (aliases a parameter lists, such as `tableNo`, are accepted); new error `CurrentOutsideForEach` (`@_current` in a step that does not iterate); new warning `IteratePathNotInSourceResponse` (Iterate Array Path not declared by the source response); new warning `AskStopReasonUnchecked` (an `LLM.Prompt.Ask` step with Success conditions but none on `stopReason`; documented pattern `stopReason Equals completed`). Existing Ask playbooks with only `status Equals Success` now carry this warning, which blocks Run and Schedule unless `ignoreWarnings` is set.
+- #217 AC03: `UnknownFieldReference` for an unknown `@_current.fields.X` is an error, matching its text "the step fails before its message is sent"; primary-key fields and Success condition paths stay warnings.
+- #217 AC04 / codeunit 10035616 `Playbook Verify ori`: findings are sorted by step number, then severity (errors first), then code; findings about the playbook as a whole come last.
+- Tests: new test codeunit 96495 `Playbook Verify Gaps Tests ori`; is-IS texts are in the label comments (1033 and 1039 tested).
+
 ### Fixed — #212
 
 - #212: a Transform Source Path such as `@50.@_iter.reply` now expands `@_iter` to the current forEach index before the workspace lookup, as request templates already do, so a per-item Transform can read the same item of an earlier forEach step (for example Parse JSON on an LLM reply before `DocumentExchange.UBL.RenderBilling`). Codeunit 10035627 `Playbook Transform Exec ori` only; no new object IDs, no new texts. Verify already accepted the path. Tests: two scenarios in codeunit 96468 (iteration 0/1 read, missing item fails naming the path).
