@@ -57,6 +57,11 @@ page 10035552 "Playbook Step Logs Sub. ori"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the error message if the step failed.', Comment = 'is-IS=Tilgreinir villuboð ef skrefið mistókst.';
                 }
+                field("Outcome Note"; Rec."Outcome Note")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the outcome of a step that is not an error, such as a Check that answered no. Error Text is only for errors.', Comment = 'is-IS=Tilgreinir niðurstöðu skrefs sem er ekki villa, til dæmis athugun sem svaraði nei. Villuboð eru aðeins fyrir villur.';
+                }
                 field("Confirmation Note"; Rec."Confirmation Note")
                 {
                     ApplicationArea = All;

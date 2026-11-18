@@ -427,6 +427,7 @@ codeunit 10035547 "Playbook Runner ori"
         CheckAnswered: Boolean;
         TechnicalFailure: Boolean;
         LogErrorText: Text;
+        OutcomeNote: Text;
         PreviewMode: Boolean;
         ConfirmationNote: Text;
     begin
@@ -480,7 +481,7 @@ codeunit 10035547 "Playbook Runner ori"
         if not TechnicalFailure then begin
             StepStatus := "Playbook Inst. Status ori"::Completed;
             if PlaybookStep.IsCheck() and CheckAnswered and not ConditionHolds then
-                LogErrorText := CheckAnsweredNoTok;
+                OutcomeNote := CheckAnsweredNoTok;
         end else begin
             StepStatus := "Playbook Inst. Status ori"::Failed;
             StepsFailed += 1;
@@ -493,7 +494,7 @@ codeunit 10035547 "Playbook Runner ori"
         end;
 
         LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", CurrentPageNo, PlaybookStep."Message Type",
-            RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, '', Workspace.ToText(), ConfirmationNote);
+            RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, '', Workspace.ToText(), ConfirmationNote, OutcomeNote);
         Workspace.WriteFromResponse(PlaybookStep."Step No.", CurrentPageNo, false, ResponseText, PlaybookStep."Result Log Paths");
 
         RecordStepOutcome(PlaybookStep, Workspace.StatusToText(StepStatus), PlaybookStep.IsCheck() and CheckAnswered, ConditionHolds, StepDuration, ErrorText, ResponseText, 0, 0);
@@ -527,6 +528,8 @@ codeunit 10035547 "Playbook Runner ori"
         ItemsHere: Integer;
         ItemsFailedHere: Integer;
         LogErrorText: Text;
+        OutcomeNote: Text;
+        FirstItemErrorText: Text;
         PreviewMode: Boolean;
         ConfirmationNote: Text;
     begin
@@ -649,20 +652,25 @@ codeunit 10035547 "Playbook Runner ori"
                 end;
 
                 LogErrorText := ErrorText;
-                if ItemOutcome = 'CheckFailed' then
-                    LogErrorText := CheckAnsweredNoTok
-                else
+                OutcomeNote := '';
+                if ItemOutcome = 'CheckFailed' then begin
+                    // The answer no is an outcome, not an error: it never goes to Error Text.
+                    LogErrorText := '';
+                    OutcomeNote := CheckAnsweredNoTok;
+                end else
                     if (StepStatus = "Playbook Inst. Status ori"::Failed) and (LogErrorText = '') then
                         LogErrorText := JsonHelper.DescribeStepFailure(ResponseText, PlaybookStep."Playbook Code",
                             PlaybookStep."Step No.", "Playbook Cond. Type ori"::Success);
+                if (StepStatus = "Playbook Inst. Status ori"::Failed) and (FirstItemErrorText = '') then
+                    FirstItemErrorText := LogErrorText;
 
                 LogMgt.LogStep(InstanceId, PlaybookStep."Step No.", PageItemOffset + i, PlaybookStep."Message Type",
-                    RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, ElementText, Workspace.ToText(), ConfirmationNote);
+                    RequestText, ResponseText, StepDuration, StepStatus, LogErrorText, ElementText, Workspace.ToText(), ConfirmationNote, OutcomeNote);
                 SetIterationSuccess(PlaybookStep."Step No.", PageItemOffset + i, ItemSuccess);
                 Workspace.WriteFromResponse(PlaybookStep."Step No.", PageItemOffset + i, true, ResponseText, PlaybookStep."Result Log Paths");
                 Workspace.SetToken(Format(PlaybookStep."Step No.") + '.' + Format(PageItemOffset + i) + '._item', ElementToken);
                 Workspace.RecordIteration(PlaybookStep."Step No.", PageItemOffset + i, ItemOutcome, ElementToken,
-                    LogErrorText, PlaybookStep."Exclude From Run Status");
+                    LogErrorText + OutcomeNote, PlaybookStep."Exclude From Run Status");
                 Workspace.RecordStepSummary(PlaybookStep."Step No.", ResponseText, PlaybookStep."Summary Paths",
                     PlaybookStep."Exclude From Run Status");
                 if ItemOutcome in ['Failed', 'Errored'] then
@@ -702,7 +710,7 @@ codeunit 10035547 "Playbook Runner ori"
             AggregateStatus := 'Failed'
         else
             AggregateStatus := 'Completed';
-        RecordStepOutcome(PlaybookStep, AggregateStatus, false, false, 0, '', '', ItemsHere, ItemsFailedHere);
+        RecordStepOutcome(PlaybookStep, AggregateStatus, false, false, 0, FirstItemErrorText, '', ItemsHere, ItemsFailedHere);
         ApplyErrorConditions(PlaybookStep);
 
         LastResponseText := ResponseText;

@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #218
+
+- #218 AC01: every Failed step and instance carries an Error Text for the error-answer, raised-error and condition-failed paths alike (already true for single and paged steps since #183; now also the `error` of a forEach step with failed items in the run summary, which was empty). Tests in codeunit 96495.
+- #218 AC02: `Response Received` in the step log is always JSON. A plain-text error answer (for example a raised `Skýrsla ... finnst ekki.`) is stored as `{"status":"Error","error":"..."}`; a plain-text success answer as `{"status":"Success","result":"..."}`. Codeunit 10035549 `Playbook Log Mgt ori` (new `LogStep` overload; no new object IDs).
+- #218 AC03: a Check that answers no is no longer written to Error Text. Table 10035543 `Playbook Step Log ori` gets field 90 `Outcome Note` (Text[250], caption `Niðurstaða`), shown on page `Playbook Step Logs Sub. ori`; the run summary `failures` entries of a `checkFailed` item carry `note` instead of `error`. Existing tests updated; is-IS XLF updated.
+- #218 AC04: Help (Playbooks chapters) describes Outcome Note and the JSON Response Received.
 ### Fixed — #215 (partial: AC01, AC03, AC04)
 
 - #215 AC01: a run whose step graph points at a step that does not exist (Next Step Success or Failure) is now closed as Failed with the error text and Completed At, the playbook header says Failed, and the Job Queue still gets the error. Before, the Commit() ahead of the earlier step's message call had persisted the instance as Running while the error rolled back the step log and the completion, so it stayed Running forever. Codeunit 10035547 `Playbook Runner ori` (new local procedure `FailRunAtMissingStep`).
