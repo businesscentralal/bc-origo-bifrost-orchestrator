@@ -343,7 +343,11 @@ codeunit 10035583 "Playbook Workspace ori"
                 FailureObj.Add('iteration', IterationNo);
                 FailureObj.Add('outcome', Outcome);
                 FailureObj.Add('item', ProjectItem(ItemToken));
-                FailureObj.Add('error', CopyStr(ErrorText, 1, MaxErrorLen()));
+                // A Check that answered no is an outcome, not an error: its text goes to 'note'.
+                if Outcome = 'CheckFailed' then
+                    FailureObj.Add('note', CopyStr(ErrorText, 1, MaxErrorLen()))
+                else
+                    FailureObj.Add('error', CopyStr(ErrorText, 1, MaxErrorLen()));
                 FailuresArr.Add(FailureObj);
                 SetJsonArray(StepObj, 'failures', FailuresArr);
             end else

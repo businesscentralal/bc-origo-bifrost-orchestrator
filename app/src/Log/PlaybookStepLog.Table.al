@@ -64,6 +64,11 @@ table 10035543 "Playbook Step Log ori"
             Caption = 'Confirmation', Comment = 'is-IS=Staðfesting';
             ToolTip = 'Specifies the preview count and the confirmed count of a step that confirms from the preview, or the refusal.', Comment = 'is-IS=Tilgreinir forskoðunarfjölda og staðfestan fjölda skrefs sem staðfestir út frá forskoðun, eða höfnunina.';
         }
+        field(90; "Outcome Note"; Text[250])
+        {
+            Caption = 'Outcome', Comment = 'is-IS=Niðurstaða';
+            ToolTip = 'Specifies the outcome of a step that is not an error, such as a Check that answered no. Error Text is only for errors.', Comment = 'is-IS=Tilgreinir niðurstöðu skrefs sem er ekki villa, til dæmis athugun sem svaraði nei. Villuboð eru aðeins fyrir villur.';
+        }
         field(60; "Iterator Element"; Blob)
         {
             Caption = 'Iterator Element', Comment = 'is-IS=Ítrunarstök';

@@ -372,14 +372,14 @@ codeunit 96436 "Playbook Example Tests"
                 if Request.Contains('Z135B') then begin
                     SawFail := true;
                     Assert.AreEqual("Playbook Inst. Status ori"::Cancelled, StepLog.Status, 'fail is not a run failure');
-                    Assert.AreEqual(CheckAnsweredNoTok, StepLog."Error Text", 'fail says the check answered no');
+                    Assert.AreEqual(CheckAnsweredNoTok, StepLog."Outcome Note", 'fail says the check answered no');
                     Assert.IsTrue(Workspace.GetValue(FindingsPath(StepLog."Iteration No."), Findings), 'fail findings stored');
                     FailFindings := Findings;
                 end;
                 if Request.Contains('Z135C') then begin
                     SawUnknown := true;
                     Assert.AreEqual("Playbook Inst. Status ori"::Cancelled, StepLog.Status, 'unknown is not a run failure');
-                    Assert.AreEqual(CheckAnsweredNoTok, StepLog."Error Text", 'unknown says the check answered no');
+                    Assert.AreEqual(CheckAnsweredNoTok, StepLog."Outcome Note", 'unknown says the check answered no');
                     Assert.IsTrue(Workspace.GetValue(FindingsPath(StepLog."Iteration No."), Findings), 'unknown findings stored');
                     UnknownFindings := Findings;
                 end;
