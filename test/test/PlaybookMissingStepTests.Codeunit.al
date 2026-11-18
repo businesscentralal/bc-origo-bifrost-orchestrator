@@ -10,7 +10,7 @@ using System.Threading;
 /// closed as Failed with the error text and CompletedAt, and the playbook header says Failed. Before the
 /// fix the instance, committed by the Commit() ahead of step 10's message call, stayed Running forever.
 /// </summary>
-codeunit 96495 "Playbook Missing Step Tests"
+codeunit 96496 "Playbook Missing Step Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -127,6 +127,52 @@ codeunit 96495 "Playbook Missing Step Tests"
         Playbook.Get(PlaybookCodeTok);
         Assert.AreEqual(Playbook."Last Run Status"::Failed, Playbook."Last Run Status", 'Header corrected');
         Lib.Cleanup(PlaybookCodeTok);
+    end;
+
+    /// <summary>AC02: the platform must not rerun a failed playbook run (4 instances per attempt); other entries keep 3 attempts.</summary>
+    [Test]
+    procedure ScheduledPlaybookEntry_JobQueueEntryHasNoPlatformRetries()
+    var
+        PlaybookEntry: Record "Scheduled Entry ori";
+        OtherEntry: Record "Scheduled Entry ori";
+        JobQueueEntry: Record "Job Queue Entry";
+        SchedulerHandler: Codeunit "Scheduler Handler ori";
+    begin
+        // [GIVEN] A scheduled entry for the playbook dispatcher and one for another codeunit
+        InsertScheduledEntry(PlaybookEntry, Codeunit::"Playbook JQ Dispatcher ori");
+        InsertScheduledEntry(OtherEntry, Codeunit::"Scheduler Handler ori");
+
+        // [WHEN] The scheduler creates the Job Queue Entries
+        SchedulerHandler.ScheduleTask(PlaybookEntry, true);
+        SchedulerHandler.ScheduleTask(OtherEntry, true);
+
+        // [THEN] The playbook entry has no platform retries, the other keeps 3
+        JobQueueEntry.Get(PlaybookEntry.ID);
+        Assert.AreEqual(0, JobQueueEntry."Maximum No. of Attempts to Run", 'Playbook entry: the Retry Policy restarts, not the platform');
+        JobQueueEntry.Delete();
+        JobQueueEntry.Get(OtherEntry.ID);
+        Assert.AreEqual(3, JobQueueEntry."Maximum No. of Attempts to Run", 'Other entries keep 3 attempts');
+        JobQueueEntry.Delete();
+        PlaybookEntry.Delete();
+        OtherEntry.Delete();
+    end;
+
+    local procedure InsertScheduledEntry(var Entry: Record "Scheduled Entry ori"; ObjectId: Integer)
+    begin
+        Entry.Init();
+        Entry.ID := CreateGuid();
+        Entry."Object Type to Run" := Entry."Object Type to Run"::Codeunit;
+        Entry."Object ID to Run" := ObjectId;
+        Entry."Run on Mondays" := true;
+        Entry."Run on Tuesdays" := true;
+        Entry."Run on Wednesdays" := true;
+        Entry."Run on Thursdays" := true;
+        Entry."Run on Fridays" := true;
+        Entry."Run on Saturdays" := true;
+        Entry."Run on Sundays" := true;
+        Entry."No. of Minutes between Runs" := 60;
+        Entry."Earliest Start Date/Time" := CurrentDateTime();
+        Entry.Insert();
     end;
 
     local procedure InsertInstance(NewStatus: Enum "Playbook Inst. Status ori"; StartedAt: DateTime): Guid

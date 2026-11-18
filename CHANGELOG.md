@@ -13,12 +13,12 @@ Business Central release versioning (`major.minor.build.revision`).
 - #218 AC02: `Response Received` in the step log is always JSON. A plain-text error answer (for example a raised `Skýrsla ... finnst ekki.`) is stored as `{"status":"Error","error":"..."}`; a plain-text success answer as `{"status":"Success","result":"..."}`. Codeunit 10035549 `Playbook Log Mgt ori` (new `LogStep` overload; no new object IDs).
 - #218 AC03: a Check that answers no is no longer written to Error Text. Table 10035543 `Playbook Step Log ori` gets field 90 `Outcome Note` (Text[250], caption `Niðurstaða`), shown on page `Playbook Step Logs Sub. ori`; the run summary `failures` entries of a `checkFailed` item carry `note` instead of `error`. Existing tests updated; is-IS XLF updated.
 - #218 AC04: Help (Playbooks chapters) describes Outcome Note and the JSON Response Received.
-### Fixed — #215 (partial: AC01, AC03, AC04)
+### Fixed — #215
 
 - #215 AC01: a run whose step graph points at a step that does not exist (Next Step Success or Failure) is now closed as Failed with the error text and Completed At, the playbook header says Failed, and the Job Queue still gets the error. Before, the Commit() ahead of the earlier step's message call had persisted the instance as Running while the error rolled back the step log and the completion, so it stayed Running forever. Codeunit 10035547 `Playbook Runner ori` (new local procedure `FailRunAtMissingStep`).
 - #215 AC03: Playbook Execution Log (page 10035550) gets the action **Close Abandoned Runs / Loka yfirgefnum keyrslum**; codeunit 10035549 `Playbook Log Mgt ori` gets `CloseAbandonedInstances`. It marks Running instances in the list that started more than 24 hours ago as Failed with an explanatory error text, corrects a header that still points at them, and deletes nothing. Runtime help documents it. is-IS XLF updated (5 units). No new object IDs.
-- #215 AC02 (four instances per attempt) is not reproduced from source: one Job Queue Dispatcher run creates one instance. See the issue for the open question.
-- Tests: new codeunit 96495 `Playbook Missing Step Tests` (5 scenarios).
+- #215 AC02: the four instances per attempt came from the Job Queue Entry that `Scheduler Handler ori` created with Maximum No. of Attempts to Run = 3 and Rerun Delay 0: after a deterministic failure the platform reran the playbook dispatcher three more times within seconds, and each rerun started a new instance. Job Queue Entries for the Playbook JQ Dispatcher (codeunit 10035548) now get 0 platform attempts; the Retry Policy of the Scheduled Entry decides about restarts. Other entries keep 3. Existing entries pick it up when the scheduler recreates them.
+- Tests: new codeunit 96496 `Playbook Missing Step Tests` (6 scenarios).
 
 ### Fixed — #216
 
