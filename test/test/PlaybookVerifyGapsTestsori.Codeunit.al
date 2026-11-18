@@ -10,7 +10,7 @@ using System.TestLibraries.Utilities;
 /// step that never checks stopReason, gives an unknown @_current.fields name the severity its text claims (error), and
 /// returns the findings sorted by step number. No dispatch: playbooks are verified, never run.
 /// </summary>
-codeunit 96495 "Playbook Verify Gaps Tests ori"
+codeunit 96497 "Playbook Verify Gaps Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -153,8 +153,8 @@ codeunit 96495 "Playbook Verify Gaps Tests ori"
     [Test]
     procedure AskStopReason_UncheckedWarns_CheckedOrNoConditionDoesNot()
     var
-        Findings: JsonArray;
         Verifier: Codeunit "Playbook Verify ori";
+        Findings: JsonArray;
     begin
         // [SCENARIO] AC02: an Ask step whose only Success condition is status Equals Success passes truncated answers.
         Verifier.SetTestAskType(AskFixtureTok);
@@ -184,8 +184,8 @@ codeunit 96495 "Playbook Verify Gaps Tests ori"
     [Test]
     procedure AskStopReason_IsTranslated()
     var
-        Findings: JsonArray;
         Verifier: Codeunit "Playbook Verify ori";
+        Findings: JsonArray;
         PreviousLanguage: Integer;
     begin
         PreviousLanguage := GlobalLanguage();
@@ -252,6 +252,8 @@ codeunit 96495 "Playbook Verify Gaps Tests ori"
         Lib.AddStep(PlaybookCodeTok, 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Data.Records.Get", '{"table":"Currency"}', 0, '', 0);
         Verify(Findings);
         Assert.IsTrue(Findings.Count() >= 3, 'Findings on several steps');
+        PreviousStep := 0;
+        PreviousRank := 0;
         SourceIndex := -1;
         Step20Index := -1;
         for Index := 0 to Findings.Count() - 1 do begin
