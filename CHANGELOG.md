@@ -7,6 +7,14 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #217
+
+- #217 AC01 / codeunit 10035618 `Playbook Verify Template ori`: `UnknownRequestKey` names the declared keys in their real casing (`tableName`, `tableNumber`), and the Verify help lists the code (1033/1039 messages).
+- #217 AC02 / codeunits 10035618 and 10035616: unknown request keys on read types warn too (aliases a parameter lists, such as `tableNo`, are accepted); new error `CurrentOutsideForEach` (`@_current` in a step that does not iterate); new warning `IteratePathNotInSourceResponse` (Iterate Array Path not declared by the source response); new warning `AskStopReasonUnchecked` (an `LLM.Prompt.Ask` step with Success conditions but none on `stopReason`; documented pattern `stopReason Equals completed`). Existing Ask playbooks with only `status Equals Success` now carry this warning, which blocks Run and Schedule unless `ignoreWarnings` is set.
+- #217 AC03: `UnknownFieldReference` for an unknown `@_current.fields.X` is an error, matching its text "the step fails before its message is sent"; primary-key fields and Success condition paths stay warnings.
+- #217 AC04 / codeunit 10035616 `Playbook Verify ori`: findings are sorted by step number, then severity (errors first), then code; findings about the playbook as a whole come last.
+- Tests: new test codeunit 96497 `Playbook Verify Gaps Tests ori`; is-IS texts are in the label comments (1033 and 1039 tested).
+
 ### Fixed — #218
 
 - #218 AC01: every Failed step and instance carries an Error Text for the error-answer, raised-error and condition-failed paths alike (already true for single and paged steps since #183; now also the `error` of a forEach step with failed items in the run summary, which was empty). Tests in codeunit 96495.

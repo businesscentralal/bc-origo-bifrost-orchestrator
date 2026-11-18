@@ -238,3 +238,8 @@ Key rules always in effect:
 - #63: test codeunit 96408 `WhoAmI Contract Tests ori`; existing app codeunit 10035585.
 - #59: app codeunit 10035554 `Playbook Effect Guard ori`; tests codeunit 96461 `Playbook Effect Tests ori`, enumextension 96461 (values 96461/96462) and fixture codeunit 96462 `Effect Contract Fixture ori` (96406/96430 were taken by other objects before #59 landed).
 - #62: 10035557 and 96405 remain reserved to Claude; no custody transfer.
+
+## Verify gap tests (#217 / PR #222)
+
+- Test codeunit 96497 is reserved for `Playbook Verify Gaps Tests ori`. It moved
+  from 96495 to avoid the allocations in sibling PRs #220 and #221.

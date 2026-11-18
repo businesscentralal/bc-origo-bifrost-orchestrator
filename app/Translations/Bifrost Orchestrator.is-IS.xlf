@@ -2907,6 +2907,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Bættu responseSchema við Ask-beiðnina og prófaðu schemaValid ásamt niðurstöðureitnum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskDataConditionNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1230774496" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask step %1 has Success conditions but none on stopReason. An answer cut short (stopReason maxToolCalls or maxTokens) still answers status Success with no warnings, so the step passes on an incomplete answer.</source>
+          <target>Ask-skref %1 hefur árangursskilyrði en ekkert á stopReason. Svar sem var stytt (stopReason maxToolCalls eða maxTokens) svarar samt status Success án viðvarana, svo skrefið stenst á ófullkomnu svari.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, is-IS=Ask-skref %1 hefur árangursskilyrði en ekkert á stopReason. Svar sem var stytt (stopReason maxToolCalls eða maxTokens) svarar samt status Success án viðvarana, svo skrefið stenst á ófullkomnu svari.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskStopReasonMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 3935390788" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add the Success condition stopReason Equals completed beside status Equals Success, in the same group.</source>
+          <target>Bættu árangursskilyrðinu stopReason Equals completed við hlið status Equals Success, í sama hópi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu árangursskilyrðinu stopReason Equals completed við hlið status Equals Success, í sama hópi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskStopReasonNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 203386158" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ask step %1 requests a trace that Orchestrator removes before storing or using the response. The trace cannot be used in the playbook.</source>
           <target>Ask-skref %1 biður um rakningu sem Orchestrator fjarlægir áður en svarið er geymt eða notað. Rakninguna er ekki hægt að nota í keðjunni.</target>
@@ -2919,6 +2931,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægðu includeTrace úr Ask-beiðninni. Notaðu answer, data og talningarnar í keðjunni í staðinn.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType AskTraceDiscardedNextStepTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 4051401063" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 reads @%2, but the step does not iterate (no Iterate Array Path), so there is no current item. The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>
+          <target>Skref %1 les @%2, en skrefið ítrar ekki (engin ítrunarslóð fylkis), svo það er enginn núverandi hlutur. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = reference, is-IS=Skref %1 les @%2, en skrefið ítrar ekki (engin ítrunarslóð fylkis), svo það er enginn núverandi hlutur. Skrefið mistekst áður en skilaboð þess eru send. Keyrsluskráin sýnir skrefið sem Mistókst og tilgreinir tilvísunina sem ekki tókst að leysa.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType CurrentOutsideMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1509406523" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Iterate Source Step No. and Iterate Array Path on the step so it runs once per item, or read the value from a numbered step (@N.path) instead of @_current.</source>
+          <target>Stilltu Upprunaskref ítrunar og Ítrunarslóð fylkis á skrefinu svo það keyri einu sinni fyrir hvern hlut, eða lestu gildið úr númeruðu skrefi (@N.slóð) í stað @_current.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stilltu Upprunaskref ítrunar og Ítrunarslóð fylkis á skrefinu svo það keyri einu sinni fyrir hvern hlut, eða lestu gildið úr númeruðu skrefi (@N.slóð) í stað @_current.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType CurrentOutsideNextStepTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 587238951" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 calls %2, which is irreversible, without expectedCount in its request, and Bifrost Setup requires confirmation for irreversible messages. Every run answers ConfirmationRequired and the step fails.</source>
           <target>Skref %1 kallar á %2, sem er óafturkræft, án expectedCount í beiðninni, og Bifröst-uppsetning krefst staðfestingar fyrir óafturkræf skilaboð. Hver keyrsla svarar ConfirmationRequired og skrefið mistekst.</target>
@@ -2930,6 +2954,18 @@
           <target>Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða sendu "expectedCount": "@preview" og settu hámarksfjölda á skrefið, svo keyrsla staðfesti forskoðaðan fjölda upp að því hámarki.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bættu expectedCount með fjölda skilaboða sem skrefið sendir (til dæmis 1) við beiðnisniðmátið, eða sendu "expectedCount": "@preview" og settu hámarksfjölda á skrefið, svo keyrsla staðfesti forskoðaðan fjölda upp að því hámarki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IrreversibleNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 486233562" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 iterates %2 from step %3, but the response of %4 declares no such field (declared: %5). The step finds no array and does nothing.</source>
+          <target>Skref %1 ítrar %2 úr skrefi %3, en svar %4 skilgreinir engan slíkan reit (skilgreindir: %5). Skrefið finnur ekkert fylki og gerir ekkert.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = iterate array path, %3 = source step no, %4 = source message type, %5 = declared response fields, is-IS=Skref %1 ítrar %2 úr skrefi %3, en svar %4 skilgreinir engan slíkan reit (skilgreindir: %5). Skrefið finnur ekkert fylki og gerir ekkert.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IteratePathMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 1614160734" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Change Iterate Array Path %1 to a field of the source response that holds the array; read the response chapter of the source message type contract.</source>
+          <target>Breyttu Ítrunarslóð fylkis %1 í reit í svari upprunaskrefsins sem geymir fylkið; lestu svarkafla samningslýsingar skilaboðategundar upprunaskrefsins.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = iterate array path, is-IS=Breyttu Ítrunarslóð fylkis %1 í reit í svari upprunaskrefsins sem geymir fylkið; lestu svarkafla samningslýsingar skilaboðategundar upprunaskrefsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType IteratePathNextStepTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1130969501" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 has Max Count %2 but its request does not send "expectedCount": "@preview", so the cap is never applied.</source>
@@ -3068,6 +3104,12 @@
           <target>Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.</target>
           <note from="Developer" annotates="general" priority="2">%1 = key, %2 = declared parameters, is-IS=Fjarlægðu %1 eða endurnefndu það í tilgreinda færibreytu. Tegundin tilgreinir: %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyNextStepTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2653460954 - NamedType 316312624" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step %1 sends the key %3 to %2, which does not declare it. A read type ignores the key and answers with a warning, so the step reads something other than you meant (for example the table is missing).</source>
+          <target>Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Lestrartegund hunsar lykilinn og svarar með viðvörun, svo skrefið les eitthvað annað en þú ætlaðir (til dæmis vantar töfluna).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = step no, %2 = message type, %3 = key, is-IS=Skref %1 sendir lykilinn %3 til %2, sem tilgreinir hann ekki. Lestrartegund hunsar lykilinn og svarar með viðvörun, svo skrefið les eitthvað annað en þú ætlaðir (til dæmis vantar töfluna).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify Template ori - NamedType UnknownKeyReadMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 2653460954 - NamedType 1834680235" size-unit="char" translate="yes" xml:space="preserve">
           <source>Step %1 reads @%2.%3, but step %2 stores no field %3 in the workspace (its Result Log Paths store: %4). The step fails before its message is sent. The run log shows a Failed step and names the unresolved reference.</source>

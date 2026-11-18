@@ -47,7 +47,7 @@ codeunit 10035616 "Playbook Verify ori"
     end;
 
     /// <summary>
-    /// Collects the findings for one playbook, in step order, then the findings about the playbook as a whole.
+    /// Collects the findings for one playbook, sorted by step number, then by severity (errors first) and code, then the findings about the playbook as a whole.
     /// Every step is checked, enabled or not, so a playbook built with all steps disabled can be verified
     /// before anything is switched on; a finding about a disabled step carries <c>stepDisabled: true</c>
     /// and never blocks a run or a schedule.
@@ -70,6 +70,7 @@ codeunit 10035616 "Playbook Verify ori"
                 TemplateChecks.CheckTemplate(Step, Findings);
             until Step.Next() = 0;
 
+        SortFindings(Findings);
         CheckScheduleWithErrors(PlaybookCode, Findings);
     end;
 
@@ -352,6 +353,84 @@ codeunit 10035616 "Playbook Verify ori"
         Segments := MessageTypeName.Split('.');
         Verbs.AddRange('Get', 'Find', 'Search', 'List');
         exit(Verbs.Contains(Segments.Get(Segments.Count())));
+    end;
+
+    /// <summary>
+    /// Sorts the findings by step number, then severity (errors before warnings), then code. The order is stable: findings
+    /// that agree on all three keep the order they were found in. A check on one step may report about another step
+    /// (ForEachSourceUnguarded names the source step), so the checks do not produce step order on their own.
+    /// </summary>
+    local procedure SortFindings(var Findings: JsonArray)
+    var
+        Sorted: JsonArray;
+        Candidate: JsonToken;
+        Best: JsonToken;
+        Remaining: List of [Integer];
+        Index: Integer;
+        BestIndex: Integer;
+        RemainingIndex: Integer;
+        BestRemaining: Integer;
+    begin
+        if Findings.Count() < 2 then
+            exit;
+        for Index := 0 to Findings.Count() - 1 do
+            Remaining.Add(Index);
+        while Remaining.Count() > 0 do begin
+            BestRemaining := 1;
+            BestIndex := Remaining.Get(1);
+            Findings.Get(BestIndex, Best);
+            for RemainingIndex := 2 to Remaining.Count() do begin
+                Index := Remaining.Get(RemainingIndex);
+                Findings.Get(Index, Candidate);
+                if SortsBefore(Candidate.AsObject(), Best.AsObject()) then begin
+                    Best := Candidate;
+                    BestIndex := Index;
+                    BestRemaining := RemainingIndex;
+                end;
+            end;
+            Sorted.Add(Best);
+            Remaining.RemoveAt(BestRemaining);
+        end;
+        Findings := Sorted;
+    end;
+
+    local procedure SortsBefore(Left: JsonObject; Right: JsonObject): Boolean
+    var
+        LeftStep: Integer;
+        RightStep: Integer;
+        LeftRank: Integer;
+        RightRank: Integer;
+        LeftCode: Text;
+        RightCode: Text;
+    begin
+        LeftStep := GetStepNo(Left);
+        RightStep := GetStepNo(Right);
+        if LeftStep <> RightStep then
+            exit(LeftStep < RightStep);
+        LeftRank := SeverityRank(GetText(Left, 'severity'));
+        RightRank := SeverityRank(GetText(Right, 'severity'));
+        if LeftRank <> RightRank then
+            exit(LeftRank < RightRank);
+        LeftCode := GetText(Left, 'code').ToLower();
+        RightCode := GetText(Right, 'code').ToLower();
+        exit(LeftCode < RightCode);
+    end;
+
+    local procedure GetStepNo(Finding: JsonObject): Integer
+    var
+        Token: JsonToken;
+    begin
+        if Finding.Get('stepNo', Token) then
+            if Token.IsValue() then
+                exit(Token.AsValue().AsInteger());
+        exit(0);
+    end;
+
+    local procedure SeverityRank(Severity: Text): Integer
+    begin
+        if Severity = ErrorTok then
+            exit(0);
+        exit(1);
     end;
 
     local procedure CheckScheduleWithErrors(PlaybookCode: Code[20]; var Findings: JsonArray)

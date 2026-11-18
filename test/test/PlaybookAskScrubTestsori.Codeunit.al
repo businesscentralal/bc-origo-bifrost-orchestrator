@@ -75,6 +75,7 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
             Template := '{"includeTrace":true}';
         Lib.AddStep('XASK-GATE', 30, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Orchestrator.Ask", Template, SourceStepNo, ArrayPath, 0);
         Lib.AddStatusSuccessCondition('XASK-GATE', 30);
+        Lib.AddCondition('XASK-GATE', 30, "Playbook Cond. Type ori"::Success, 19000, 'stopReason', "Playbook Cond. Operator ori"::Equals, 'completed');
         if FindingCode = 'AskDataConditionWithoutSchema' then
             Lib.AddCondition('XASK-GATE', 30, "Playbook Cond. Type ori"::Success, 20000, 'data.verdict', "Playbook Cond. Operator ori"::Equals, 'pass');
         Verify.SetTestAskType('Test.Orchestrator.Ask');
@@ -187,8 +188,8 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
     [Test]
     procedure FailedStepSnapshot_RedactsWhoAndKeepsStepResults()
     var
-        LogMgt: Codeunit "Playbook Log Mgt ori";
         StepLog: Record "Playbook Step Log ori";
+        LogMgt: Codeunit "Playbook Log Mgt ori";
         Workspace: JsonObject;
         Who: JsonObject;
         Steps: JsonObject;
@@ -280,10 +281,10 @@ codeunit 96456 "Playbook Ask Scrub Tests ori"
 
     local procedure JsonRun(): JsonObject
     var
-        Run: JsonObject;
+        RunResult: JsonObject;
     begin
-        Run.Add('status', 'Failed');
-        exit(Run);
+        RunResult.Add('status', 'Failed');
+        exit(RunResult);
     end;
 
     [Test]

@@ -38,7 +38,7 @@ codeunit 96445 "Ask Fixture Msg ori" implements "Msg Interface ori", "Msg Contra
     begin
         // Register only this test fixture in the dispatch session, including owned UI/MCP checks.
         Scrub.AddTestType('Test.Orchestrator.Ask');
-        Argument.SetResponseText('{"status":"Success","trace":{"secret":"XASK-PRIVATE-TRACE"},"answer":"audit complete","data":{"verdict":"pass","findings":[],"trace":"nested-kept"},"schemaValid":true,"toolCalls":2,"noOfRecords":2,"result":[{"value":"owned-fixture"}]}');
+        Argument.SetResponseText('{"status":"Success","trace":{"secret":"XASK-PRIVATE-TRACE"},"answer":"audit complete","data":{"verdict":"pass","findings":[],"trace":"nested-kept"},"schemaValid":true,"stopReason":"completed","toolCalls":2,"noOfRecords":2,"result":[{"value":"owned-fixture"}]}');
     end;
 
     /// <summary>Declares the test request envelope.</summary>
