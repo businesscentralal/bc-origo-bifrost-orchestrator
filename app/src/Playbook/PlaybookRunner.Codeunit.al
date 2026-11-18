@@ -85,8 +85,10 @@ codeunit 10035547 "Playbook Runner ori"
 
         // Step loop
         while NextStepNo > 0 do begin
-            if not PlaybookStep.Get(PlaybookCode, NextStepNo) then
-                Error(StepNotFoundErr, NextStepNo, PlaybookCode);
+            if not PlaybookStep.Get(PlaybookCode, NextStepNo) then begin
+                FailRunAtMissingStep(PlaybookCode, InstanceId, NextStepNo, StepsExecuted, StepsFailed, ItemsProcessed);
+                exit;
+            end;
 
             if PlaybookStep.Disabled then
                 NextStepNo := PlaybookStep."Next Step No. (Success)"
@@ -157,8 +159,10 @@ codeunit 10035547 "Playbook Runner ori"
         NextStepNo := StartStepNo;
 
         while NextStepNo > 0 do begin
-            if not PlaybookStep.Get(PlaybookCode, NextStepNo) then
-                Error(StepNotFoundErr, NextStepNo, PlaybookCode);
+            if not PlaybookStep.Get(PlaybookCode, NextStepNo) then begin
+                FailRunAtMissingStep(PlaybookCode, InstanceId, NextStepNo, StepsExecuted, StepsFailed, ItemsProcessed);
+                exit;
+            end;
 
             if PlaybookStep.Disabled then
                 NextStepNo := PlaybookStep."Next Step No. (Success)"
@@ -194,6 +198,24 @@ codeunit 10035547 "Playbook Runner ori"
         end;
 
         TextToBigText(LastResponseText, FinalResponse);
+    end;
+
+    /// <summary>
+    /// Closes the instance as Failed when the step graph points at a step that does not exist, then
+    /// raises the error. The instance, the playbook header and the log rows are committed first: the
+    /// error would otherwise roll back the failure while the Commit() before an earlier step's message
+    /// call had already persisted the instance as Running, which left it Running forever.
+    /// </summary>
+    local procedure FailRunAtMissingStep(PlaybookCode: Code[20]; InstanceId: Guid; MissingStepNo: Integer; StepsExecuted: Integer; StepsFailed: Integer; ItemsProcessed: Integer)
+    var
+        ErrorText: Text;
+    begin
+        ErrorText := StrSubstNo(StepNotFoundErr, MissingStepNo, PlaybookCode);
+        Workspace.CompleteRun(CurrentDateTime() - RunStartTime);
+        LogMgt.CompleteInstance(InstanceId, "Playbook Inst. Status ori"::Failed, StepsExecuted, StepsFailed, ItemsProcessed, ErrorText);
+        UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Failed);
+        Commit();
+        Error(ErrorText);
     end;
 
     /// <summary>

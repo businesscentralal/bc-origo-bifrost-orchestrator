@@ -180,7 +180,14 @@ codeunit 10035535 "Scheduler Handler ori"
         JobQueueEntry."Next Run Date Formula" := "Scheduled Entry ori"."Next Run Date Formula";
         JobQueueEntry."Recurring Job" := true;
 
-        JobQueueEntry."Maximum No. of Attempts to Run" := 3;
+        // A playbook run is restarted by the Retry Policy of the Scheduled Entry, never by the platform: a platform
+        // rerun with a delay of 0 would start a new playbook instance seconds later, 4 per attempt (#215).
+        if (JobQueueEntry."Object Type to Run" = JobQueueEntry."Object Type to Run"::Codeunit) and
+           (JobQueueEntry."Object ID to Run" = Codeunit::"Playbook JQ Dispatcher ori")
+        then
+            JobQueueEntry."Maximum No. of Attempts to Run" := 0
+        else
+            JobQueueEntry."Maximum No. of Attempts to Run" := 3;
         JobQueueEntry.Description := CopyStr("Scheduled Entry ori".Description, 1, MaxStrLen(JobQueueEntry.Description));
         JobQueueEntry.Insert();
         OnAfterInitJobQueueEntryBeforeEnqueueTask("Scheduled Entry ori", JobQueueEntry);

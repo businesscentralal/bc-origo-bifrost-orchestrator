@@ -8,10 +8,12 @@ using Origo.Bifrost;
 codeunit 10035549 "Playbook Log Mgt ori"
 {
     Access = Internal;
-    Permissions = tabledata "Playbook Instance ori" = RIMD,
+    Permissions = tabledata "Playbook ori" = RM,
+                  tabledata "Playbook Instance ori" = RIMD,
                   tabledata "Playbook Step Log ori" = RIMD;
 
     var
+        AbandonedErr: Label 'Closed as abandoned: the run was still Running %1 hours after it started and never wrote its own completion.', Comment = '%1 = hours since the run started, is-IS=Lokað sem yfirgefið: keyrslan var enn í gangi %1 klukkustundum eftir að hún hófst og skráði aldrei lok sín.';
         RedactedTok: Label '[redacted]', Locked = true;
         SecretMarkersTok: Label 'password,secret,apikey,api_key,authorization,bearer,credential,accesstoken,refreshtoken,access_token,refresh_token', Locked = true;
 
@@ -55,6 +57,40 @@ codeunit 10035549 "Playbook Log Mgt ori"
         Instance."Items Processed" := ItemsProcessed;
         Instance."Error Text" := CopyStr(ErrorText, 1, MaxStrLen(Instance."Error Text"));
         Instance.Modify(true);
+    end;
+
+    /// <summary>
+    /// Closes instances that are still Running long after they started as Failed, with an error text and
+    /// Completed At. Nothing is deleted; the step log rows stay. A playbook header that still points at a
+    /// closed instance is corrected to Failed. Only instances in the record's current filter are touched.
+    /// </summary>
+    /// <param name="Instance">The instances to look at (filters are kept).</param>
+    /// <param name="OlderThanHours">Only instances that started more than this many hours ago are closed.</param>
+    /// <returns>The number of instances closed.</returns>
+    procedure CloseAbandonedInstances(var Instance: Record "Playbook Instance ori"; OlderThanHours: Integer): Integer
+    var
+        Candidate: Record "Playbook Instance ori";
+        Playbook: Record "Playbook ori";
+        Closed: Integer;
+    begin
+        Candidate.CopyFilters(Instance);
+        Candidate.SetRange(Status, Candidate.Status::Running);
+        Candidate.SetFilter("Started At", '<%1', CurrentDateTime() - OlderThanHours * 3600000L);
+        if Candidate.FindSet(true) then
+            repeat
+                Candidate.Status := Candidate.Status::Failed;
+                Candidate."Completed At" := CurrentDateTime();
+                Candidate."Total Duration" := Candidate."Completed At" - Candidate."Started At";
+                Candidate."Error Text" := CopyStr(StrSubstNo(AbandonedErr, OlderThanHours), 1, MaxStrLen(Candidate."Error Text"));
+                Candidate.Modify(true);
+                if Playbook.Get(Candidate."Playbook Code") then
+                    if (Playbook."Last Run Instance ID" = Candidate.ID) and (Playbook."Last Run Status" = Playbook."Last Run Status"::Running) then begin
+                        Playbook."Last Run Status" := Playbook."Last Run Status"::Failed;
+                        Playbook.Modify();
+                    end;
+                Closed += 1;
+            until Candidate.Next() = 0;
+        exit(Closed);
     end;
 
     /// <summary>

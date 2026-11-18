@@ -74,8 +74,42 @@ page 10035550 "Playbook Instances ori"
         }
     }
 
+    actions
+    {
+        area(Processing)
+        {
+            action(CloseAbandoned)
+            {
+                ApplicationArea = All;
+                Caption = 'Close Abandoned Runs', Comment = 'is-IS=Loka yfirgefnum keyrslum';
+                ToolTip = 'Marks the runs in this list that have been Running for more than 24 hours as Failed, with an error text and a completion time. Nothing is deleted and the step log stays.', Comment = 'is-IS=Merkir keyrslur á þessum lista sem hafa verið í gangi í meira en 24 klukkustundir sem mistókst, með villutexta og lokatíma. Engu er eytt og skrefaskráin helst.';
+                Image = Close;
+
+                trigger OnAction()
+                var
+                    Instance: Record "Playbook Instance ori";
+                    LogMgt: Codeunit "Playbook Log Mgt ori";
+                    Closed: Integer;
+                begin
+                    if not Confirm(CloseAbandonedQst) then
+                        exit;
+                    Instance.CopyFilters(Rec);
+                    Closed := LogMgt.CloseAbandonedInstances(Instance, 24);
+                    CurrPage.Update(false);
+                    Message(ClosedMsg, Closed);
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            actionref(CloseAbandoned_Promoted; CloseAbandoned) { }
+        }
+    }
+
     var
         StatusStyle: Text;
+        CloseAbandonedQst: Label 'Mark every run in this list that has been Running for more than 24 hours as Failed? Nothing is deleted.', Comment = 'is-IS=Merkja allar keyrslur á þessum lista sem hafa verið í gangi í meira en 24 klukkustundir sem mistókst? Engu er eytt.';
+        ClosedMsg: Label '%1 abandoned run(s) closed as Failed.', Comment = '%1 = number of runs, is-IS=%1 yfirgefnum keyrslum var lokað sem mistókst.';
 
     trigger OnAfterGetRecord()
     begin

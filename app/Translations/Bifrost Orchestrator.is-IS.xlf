@@ -2457,6 +2457,12 @@
           <note from="Developer" annotates="general" priority="2">%1 = workspace reference, is-IS=Óleyst vinnusvæðistilvísun %1. Skoðaðu upprunasvarið og leiðréttu slóðina áður en skrefið er keyrt. Engin skilaboð voru send.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook JSON Helper ori - NamedType UnresolvedReferenceErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1796249101 - NamedType 2606877023" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Closed as abandoned: the run was still Running %1 hours after it started and never wrote its own completion.</source>
+          <target>Lokað sem yfirgefið: keyrslan var enn í gangi %1 klukkustundum eftir að hún hófst og skráði aldrei lok sín.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = hours since the run started, is-IS=Lokað sem yfirgefið: keyrslan var enn í gangi %1 klukkustundum eftir að hún hófst og skráði aldrei lok sín.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Log Mgt ori - NamedType AbandonedErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4100168724 - NamedType 2208007315" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "playbookCode" in the data payload or as the subject.</source>
           <target>Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</target>
@@ -5379,6 +5385,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá keðju</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 726155029 - NamedType 4174176020" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mark every run in this list that has been Running for more than 24 hours as Failed? Nothing is deleted.</source>
+          <target>Merkja allar keyrslur á þessum lista sem hafa verið í gangi í meira en 24 klukkustundir sem mistókst? Engu er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Merkja allar keyrslur á þessum lista sem hafa verið í gangi í meira en 24 klukkustundir sem mistókst? Engu er eytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - NamedType CloseAbandonedQst</note>
+        </trans-unit>
+        <trans-unit id="Page 726155029 - NamedType 1201137581" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 abandoned run(s) closed as Failed.</source>
+          <target>%1 yfirgefnum keyrslum var lokað sem mistókst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = number of runs, is-IS=%1 yfirgefnum keyrslum var lokað sem mistókst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - NamedType ClosedMsg</note>
+        </trans-unit>
         <trans-unit id="Page 726155029 - Control 1540107796 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies when the execution completed.</source>
           <target>Tilgreinir hvenær keyrslu lauk.</target>
@@ -5432,6 +5450,18 @@
           <target>Tilgreinir heildartíma keyrslu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir heildartíma keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - Control Total Duration - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 726155029 - Action 2783573250 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Marks the runs in this list that have been Running for more than 24 hours as Failed, with an error text and a completion time. Nothing is deleted and the step log stays.</source>
+          <target>Merkir keyrslur á þessum lista sem hafa verið í gangi í meira en 24 klukkustundir sem mistókst, með villutexta og lokatíma. Engu er eytt og skrefaskráin helst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Merkir keyrslur á þessum lista sem hafa verið í gangi í meira en 24 klukkustundir sem mistókst, með villutexta og lokatíma. Engu er eytt og skrefaskráin helst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - Action CloseAbandoned - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 726155029 - Action 2783573250 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Close Abandoned Runs</source>
+          <target>Loka yfirgefnum keyrslum</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Loka yfirgefnum keyrslum</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Instances ori - Action CloseAbandoned - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3865433394 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Last Execution</source>
