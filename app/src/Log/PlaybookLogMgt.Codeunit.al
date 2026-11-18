@@ -91,6 +91,29 @@ codeunit 10035549 "Playbook Log Mgt ori"
     end;
 
     /// <summary>
+    /// The response as JSON: JSON text is kept as it is, a plain-text answer becomes {"status":"Error","error":"..."}.
+    /// </summary>
+    local procedure AsJsonResponse(ResponseText: Text; IsError: Boolean): Text
+    var
+        Token: JsonToken;
+        Wrapped: JsonObject;
+        Result: Text;
+    begin
+        if Token.ReadFrom(ResponseText) then
+            if Token.IsObject() or Token.IsArray() then
+                exit(ResponseText);
+        if IsError then begin
+            Wrapped.Add('status', 'Error');
+            Wrapped.Add('error', ResponseText);
+        end else begin
+            Wrapped.Add('status', 'Success');
+            Wrapped.Add('result', ResponseText);
+        end;
+        Wrapped.WriteTo(Result);
+        exit(Result);
+    end;
+
+    /// <summary>
     /// Logs a single step execution (one Dispatcher call).
     /// </summary>
     procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text)
@@ -103,6 +126,17 @@ codeunit 10035549 "Playbook Log Mgt ori"
     /// </summary>
     /// <param name="ConfirmationNote">The preview count and the confirmed count, or the refusal; empty for an ordinary step.</param>
     procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text; ConfirmationNote: Text)
+    begin
+        LogStep(InstanceId, StepNo, IterationNo, MessageType, RequestText, ResponseText, StepDuration, StepStatus, ErrorText, ElementText, WorkspaceText, ConfirmationNote, '');
+    end;
+
+    /// <summary>
+    /// Logs a single step execution with an outcome note (issue #218). An outcome that is not an error, such as a
+    /// Check that answered no, goes in the note and never in Error Text. Response Received is always JSON: a
+    /// plain-text error answer is stored as {"status":"Error","error":"..."}.
+    /// </summary>
+    /// <param name="OutcomeNote">The non-error outcome of the step, or empty.</param>
+    procedure LogStep(InstanceId: Guid; StepNo: Integer; IterationNo: Integer; MessageType: Enum "Message Type ori"; RequestText: Text; ResponseText: Text; StepDuration: Duration; StepStatus: Enum "Playbook Inst. Status ori"; ErrorText: Text; ElementText: Text; WorkspaceText: Text; ConfirmationNote: Text; OutcomeNote: Text)
     var
         StepLog: Record "Playbook Step Log ori";
         Instance: Record "Playbook Instance ori";
@@ -122,11 +156,12 @@ codeunit 10035549 "Playbook Log Mgt ori"
         StepLog.Duration := StepDuration;
         StepLog."Error Text" := CopyStr(ErrorText, 1, MaxStrLen(StepLog."Error Text"));
         StepLog."Confirmation Note" := CopyStr(ConfirmationNote, 1, MaxStrLen(StepLog."Confirmation Note"));
+        StepLog."Outcome Note" := CopyStr(OutcomeNote, 1, MaxStrLen(StepLog."Outcome Note"));
 
         if RequestText <> '' then
             StepLog.SetRequestSent(RequestText);
         if ResponseText <> '' then
-            StepLog.SetResponseReceived(ResponseText);
+            StepLog.SetResponseReceived(AsJsonResponse(ResponseText, (StepStatus = StepStatus::Failed) or (ErrorText <> '')));
         if ElementText <> '' then
             StepLog.SetIteratorElement(ElementText);
         if (WorkspaceText <> '') and (StepStatus = StepStatus::Failed) then

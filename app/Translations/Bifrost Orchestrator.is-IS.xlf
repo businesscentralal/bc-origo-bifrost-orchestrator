@@ -7755,6 +7755,24 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjuskoðun</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST PlaybVw ori - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2002508345 - Field 3547860982 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the outcome of a step that is not an error, such as a Check that answered no. Error Text is only for errors.</source>
+          <target>Tilgreinir niðurstöðu skrefs sem er ekki villa, til dæmis athugun sem svaraði nei. Villuboð eru aðeins fyrir villur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir niðurstöðu skrefs sem er ekki villa, til dæmis athugun sem svaraði nei. Villuboð eru aðeins fyrir villur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Field Outcome Note - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2002508345 - Field 3547860982 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Outcome</source>
+          <target>Niðurstaða</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Niðurstaða</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Playbook Step Log ori - Field Outcome Note - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 611875482 - Control 3547860982 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the outcome of a step that is not an error, such as a Check that answered no. Error Text is only for errors.</source>
+          <target>Tilgreinir niðurstöðu skrefs sem er ekki villa, til dæmis athugun sem svaraði nei. Villuboð eru aðeins fyrir villur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir niðurstöðu skrefs sem er ekki villa, til dæmis athugun sem svaraði nei. Villuboð eru aðeins fyrir villur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbook Step Logs Sub. ori - Control Outcome Note - Property ToolTip</note>
+        </trans-unit>
       </group>
     </body>
   </file>
