@@ -2,6 +2,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 
 using Origo.Bifrost;
 using Origo.Bifrost.Orchestrator;
+using System.Diagnostics;
 using System.TestLibraries.Utilities;
 
 /// <summary>Issue #223: playbook file export/import keeps the Transform rows and writes no Message Type 0 on Transform steps.</summary>
@@ -15,6 +16,8 @@ codeunit 96498 "Playbook Export Tests ori"
         Lib: Codeunit "Playbook Test Library ori";
         TableJSONExport: Codeunit "Table JSON Export ori";
         TableJSONImport: Codeunit "Table JSON Import ori";
+        WasActivated: Boolean;
+        AddedTables: List of [Integer];
 
     /// <summary>AC01 and AC02: the file holds the playbook, its steps and its Transform rows, and Transform steps carry no MessageType.</summary>
     [Test]
@@ -58,6 +61,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Envelope: JsonObject;
         Result: JsonObject;
     begin
+        Setup();
         // Story #223 AC02 | Time: independent of Today/WorkDate | Risk: None
         PlaybookCode := BuildPlaybook();
         Envelope := TableJSONExport.ExportPlaybook(PlaybookCode);
@@ -69,6 +73,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Assert.AreEqual(Step."Step Kind"::Transform, Step."Step Kind", 'step kind');
         Assert.AreEqual(0, Step."Message Type".AsInteger(), 'Message Type stays blank');
         Lib.Cleanup(PlaybookCode);
+        TearDown();
     end;
 
     /// <summary>A message step keeps its Message Type through export, delete and import.</summary>
@@ -79,6 +84,7 @@ codeunit 96498 "Playbook Export Tests ori"
         PlaybookCode: Code[20];
         Envelope: JsonObject;
     begin
+        Setup();
         // Story #223 AC02 | Time: independent of Today/WorkDate | Risk: None
         PlaybookCode := CopyStr('T' + DelChr(Format(CreateGuid(), 0, 4), '=', '{}-'), 1, 20);
         Lib.CreatePlaybook(PlaybookCode);
@@ -95,6 +101,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Assert.AreEqual("Message Type ori"::"Data.Records.Get", Step."Message Type", 'Message Type is kept');
         Assert.AreEqual('{"tableName":"Playbook ori"}', Step.GetRequestTemplate(), 'Request template is kept');
         Lib.Cleanup(PlaybookCode);
+        TearDown();
     end;
 
     /// <summary>AC03: export, delete, import, then Verify has no errors and the run gives the same result.</summary>
@@ -116,6 +123,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Finding: JsonToken;
         Severity: JsonToken;
     begin
+        Setup();
         // Story #223 AC03 | Time: independent of Today/WorkDate | Risk: Run seeds the workspace
         PlaybookCode := BuildPlaybook();
         Commit();
@@ -144,6 +152,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Assert.AreEqual(FirstSteps, Instance."Steps Executed", 'same number of steps');
         Assert.AreEqual(FirstResponse, Format(Response), 'same run result');
         Lib.Cleanup(PlaybookCode);
+        TearDown();
     end;
 
     /// <summary>A file that is not a playbook file, or holds a foreign table, is refused.</summary>
@@ -254,5 +263,57 @@ codeunit 96498 "Playbook Export Tests ori"
     begin
         if Source.Get(KeyName, Token) then
             exit(Token.AsValue().AsText());
+    end;
+
+    local procedure Setup()
+    var
+        ChangeLogSetup: Record "Change Log Setup";
+        TableNo: Integer;
+    begin
+        Clear(AddedTables);
+        if not ChangeLogSetup.Get() then begin
+            ChangeLogSetup.Init();
+            ChangeLogSetup.Insert(true);
+        end;
+        WasActivated := ChangeLogSetup."Change Log Activated";
+        ChangeLogSetup."Change Log Activated" := true;
+        ChangeLogSetup.Modify(true);
+        foreach TableNo in PlaybookTables() do
+            AddCoverage(TableNo);
+    end;
+
+    local procedure TearDown()
+    var
+        ChangeLogSetup: Record "Change Log Setup";
+        Coverage: Record "Change Log Setup (Table)";
+        TableNo: Integer;
+    begin
+        foreach TableNo in AddedTables do
+            if Coverage.Get(TableNo) then
+                Coverage.Delete(true);
+        ChangeLogSetup.Get();
+        ChangeLogSetup."Change Log Activated" := WasActivated;
+        ChangeLogSetup.Modify(true);
+    end;
+
+    local procedure AddCoverage(TableNo: Integer)
+    var
+        Coverage: Record "Change Log Setup (Table)";
+    begin
+        if Coverage.Get(TableNo) then
+            exit;
+        Coverage."Table No." := TableNo;
+        Coverage."Log Insertion" := Coverage."Log Insertion"::"All Fields";
+        Coverage."Log Modification" := Coverage."Log Modification"::"All Fields";
+        Coverage.Insert(true);
+        AddedTables.Add(TableNo);
+    end;
+
+    local procedure PlaybookTables() TableNos: List of [Integer]
+    begin
+        TableNos.Add(Database::"Playbook ori");
+        TableNos.Add(Database::"Playbook Step ori");
+        TableNos.Add(Database::"Playbook Condition ori");
+        TableNos.Add(Database::"Playbook Transform ori");
     end;
 }
