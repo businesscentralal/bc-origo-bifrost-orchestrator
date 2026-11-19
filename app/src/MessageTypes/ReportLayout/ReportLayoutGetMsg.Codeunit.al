@@ -38,9 +38,13 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     /// <summary>Provides the GetSelectionDescription part of the report layout get message.</summary>
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'Export the bytes of one report layout, extension or user-defined, as base64. Read-only. Use Orchestrator.ReportLayout.List first to find the layout name and appId, or Orchestrator.ReportLayout.Set to import a layout.', Comment = 'is-IS=Fluttu út gögn eins skýrsluútlits, úr viðbót eða notandaskilgreind, sem base64. Lesaðgerð. Notaðu Orchestrator.ReportLayout.List fyrst til að finna heiti útlitsins og appId, eða Orchestrator.ReportLayout.Set til að flytja inn útlit.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(MimeHelpLbl);
+        Builder.AppendLine(DeletePolicyLbl);
+        exit(Builder.ToText());
     end;
 
     /// <summary>Provides the GetEnvelope part of the report layout get message.</summary>

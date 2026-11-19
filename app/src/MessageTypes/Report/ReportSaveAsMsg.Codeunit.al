@@ -32,9 +32,13 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'Render a non-processing-only report as PDF, Excel, Word or XML. Read-only with binary output. Use Orchestrator.Report.Run for processing-only reports.', Comment = 'is-IS=Birttu skýrslu sem er ekki eingöngu vinnsluskýrsla sem PDF, Excel, Word eða XML. Lesaðgerð með tvíundarúttaki. Notaðu Orchestrator.Report.Run fyrir vinnsluskýrslur.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(TableViewHelpLbl);
+        Builder.AppendLine(OutputHelpLbl);
+        exit(Builder.ToText());
     end;
 
     procedure GetEnvelope(var Envelope: JsonObject): Boolean

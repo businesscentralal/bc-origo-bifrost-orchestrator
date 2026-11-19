@@ -32,9 +32,14 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
 
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'Create or replace a user-defined tenant report layout from base64 or from a staging row, and optionally make it the default; or make an existing layout the default, or clear the default, in the current company. Write operation. Use Orchestrator.ReportLayout.List to inspect existing layouts.', Comment = 'is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu og gerðu það sjálfgefið ef þú vilt; eða gerðu útlit sem er til sjálfgefið, eða hreinsaðu sjálfgefna útlitið, í núverandi fyrirtæki. Skrifaðgerð. Notaðu Orchestrator.ReportLayout.List til að skoða núverandi útlit.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(SetDefaultHelpLbl);
+        Builder.AppendLine(AppIdHelpLbl);
+        Builder.AppendLine(DeletePolicyLbl);
+        exit(Builder.ToText());
     end;
 
     procedure GetEnvelope(var Envelope: JsonObject): Boolean

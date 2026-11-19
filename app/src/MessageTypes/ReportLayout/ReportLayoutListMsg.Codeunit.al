@@ -38,9 +38,13 @@ codeunit 10035612 "Report Layout List Msg ori" implements "Msg Interface ori", "
     /// <summary>Provides the GetSelectionDescription part of the report layout list message.</summary>
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'List the layouts of one report, extension and user-defined, with name, format, appId and whether each is the default. Read-only. Use Orchestrator.ReportLayout.Get to export the bytes of one layout.', Comment = 'is-IS=Listaðu útlit einnar skýrslu, úr viðbótum og notandaskilgreind, með heiti, sniði, appId og hvort hvert þeirra er sjálfgefið. Lesaðgerð. Notaðu Orchestrator.ReportLayout.Get til að flytja út gögn eins útlits.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(CompanyHelpLbl);
+        Builder.AppendLine(DeletePolicyLbl);
+        exit(Builder.ToText());
     end;
 
     /// <summary>Provides the GetEnvelope part of the report layout list message.</summary>

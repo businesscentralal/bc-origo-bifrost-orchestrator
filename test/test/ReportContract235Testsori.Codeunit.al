@@ -150,6 +150,23 @@ codeunit 96499 "Report Contract 235 Tests ori"
     begin
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
+        // Foundation keeps JSON contract chapters English; the MCP catalogue must carry localized guidance.
+        TextValue := SetMsg.GetSelectionDescription();
+        AssertContains(TextValue, 'setAsDefault');
+        AssertContains(TextValue, 'isDefault');
+        AssertContains(TextValue, '00000000-0000-0000-0000-000000000000');
+        AssertDeletePolicy(TextValue, LanguageId);
+        TextValue := ListMsg.GetSelectionDescription();
+        AssertDeletePolicy(TextValue, LanguageId);
+        TextValue := GetMsg.GetSelectionDescription();
+        AssertContains(TextValue, 'application/xml');
+        AssertDeletePolicy(TextValue, LanguageId);
+        TextValue := SaveMsg.GetSelectionDescription();
+        AssertContains(TextValue, 'tableView');
+        if LanguageId = 1039 then
+            AssertContains(TextValue, 'biðtíma')
+        else
+            AssertContains(TextValue, 'timeout');
         SetMsg.GetParameters(Entries);
         Entries.WriteTo(TextValue);
         AssertContains(TextValue, 'setAsDefault');
