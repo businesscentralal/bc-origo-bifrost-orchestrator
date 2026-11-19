@@ -150,9 +150,13 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        Builder: TextBuilder;
     begin
         Notes := 'The report 1316 template accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item). PrintEntriesNotDue is not a BC 28.5 control and is rejected. Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. ';
-        Notes += OutputHelpLbl;
+        Builder.AppendLine(Notes);
+        Builder.AppendLine(OutputHelpLbl);
+        Notes := Builder.ToText();
         exit(true);
     end;
 

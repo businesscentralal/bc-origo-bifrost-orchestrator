@@ -176,10 +176,14 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        Builder: TextBuilder;
     begin
         Notes := 'Only user-defined layouts (no App ID) are created or replaced; a layout an extension ships is never changed. The file is imported through the Tenant Report Layout media field, the path the Report Layouts page uses. Do not write the layout with Data.Records.Set on Tenant Report Layout (2000000232) or Tenant Report Layout Selection (2000000233).' +
             ' setAsDefault and clearDefault make the same writes as the Set Default action of the Report Layouts page, for the current company only: the company-wide Tenant Report Layout Selection row (no per-user selection) and the type in Report Layout Selection. Other companies and users'' own layout choices are not changed. Deleting a layout is not available as a message type; use the Report Layouts page.';
-        Notes += ' ' + DeletePolicyLbl;
+        Builder.AppendLine(Notes);
+        Builder.AppendLine(DeletePolicyLbl);
+        Notes := Builder.ToText();
         exit(true);
     end;
 

@@ -87,6 +87,47 @@ codeunit 96499 "Report Contract 235 Tests ori"
         VerifyOutput('Word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'PK');
     end;
 
+    /// <summary>AC04 Word and Excel layout exports report their real format MIME types.</summary>
+    [Test]
+    procedure OfficeLayoutMimeTypes()
+    begin
+        VerifyOfficeLayoutMime('Word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 1033);
+        VerifyOfficeLayoutMime('Excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 1039);
+    end;
+
+    local procedure VerifyOfficeLayoutMime(OutputFormat: Text; ExpectedMime: Text; LanguageId: Integer)
+    var
+        Argument: Record "Message Argument ori" temporary;
+        TenantLayout: Record "Tenant Report Layout";
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
+        Base64Convert: Codeunit "Base64 Convert";
+        Request: JsonObject;
+        Response: JsonObject;
+        Input: InStream;
+        LayoutName: Text[250];
+        EmptyGuid: Guid;
+    begin
+        Request.Add('reportId', Report::"Layout Sample Report ori");
+        Request.Add('format', OutputFormat);
+        Request.Add('tableView', 'WHERE(Number=CONST(1))');
+        Argument.Init();
+        Argument.Insert();
+        Argument.SetRequestJson(Request);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", Argument);
+        Assert.AreEqual(ExpectedMime, Argument."Content Type", 'Render valid Office bytes');
+        Argument."Response Content".CreateInStream(Input);
+        LayoutName := CopyStr('X235-OFFICE-' + Format(CreateGuid(), 0, 4), 1, MaxStrLen(LayoutName));
+        Request := LayoutRequest(LayoutName);
+        Request.Add('layoutFormat', OutputFormat);
+        Request.Add('layoutBase64', Base64Convert.ToBase64(Input));
+        Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Set", Request, LanguageId);
+        Assert.AreEqual('Created', GetText(Response, 'action'), 'Owned Office layout imported');
+        Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Get", LayoutRequest(LayoutName), LanguageId);
+        Assert.AreEqual(ExpectedMime, GetText(Response, 'mimeType'), 'Layout MIME type follows format');
+        TenantLayout.Get(Report::"Layout Sample Report ori", LayoutName, EmptyGuid);
+        TenantLayout.Delete(true);
+    end;
+
     local procedure VerifyHelp(LanguageId: Integer)
     var
         SetMsg: Codeunit "Report Layout Set Msg ori";
@@ -187,6 +228,19 @@ codeunit 96499 "Report Contract 235 Tests ori"
         Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Get", LayoutRequest(FixtureName), LanguageId);
         Assert.AreEqual('application/xml', GetText(Response, 'mimeType'), 'User-defined RDLC MIME type');
         Assert.AreEqual(Exported, GetText(Response, 'layoutBase64'), 'Export preserves bytes');
+        Request := LayoutRequest(FixtureName);
+        Request.Add('layoutFormat', 'RDLC');
+        Request.Add('layoutBase64', Exported);
+        Request.Add('companyName', '');
+        Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Set", Request, LanguageId);
+        Assert.AreEqual('Replaced', GetText(Response, 'action'), 'Same layout changed to all companies');
+        Clear(Request);
+        Request.Add('reportId', Report::"Layout Sample Report ori");
+        Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.List", Request, LanguageId);
+        Response.Get('layouts', Value);
+        foreach Item in Value.AsArray() do
+            if GetText(Item.AsObject(), 'name') = FixtureName then
+                Assert.AreEqual('', GetText(Item.AsObject(), 'companyName'), 'Empty company means all companies');
         TenantLayout.Get(Report::"Layout Sample Report ori", FixtureName, EmptyGuid);
         TenantLayout.Delete(true);
     end;

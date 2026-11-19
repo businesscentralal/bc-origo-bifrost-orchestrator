@@ -115,8 +115,8 @@ codeunit 10035600 "Report Layout Handler ori"
             // Take reads and deletes the row in this transaction. A later import error rolls the delete back,
             // so the row survives a failed import and the call can be retried with the same id.
             if not BlobStaging.Take(StagingId, TempBlob) then begin
-                Argument.AddError("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(StagingIdNotFoundErr, StagingIdText), 'stagingId', StagingIdText, StagingExpectedLbl, StageAgainLbl);
-                Argument.RaiseCollectedErrors("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(StagingIdNotFoundErr, StagingIdText));
+                Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(StagingIdNotFoundErr, StagingIdText), 'stagingId', StagingIdText, StagingExpectedLbl, StageAgainLbl);
+                exit;
             end;
         end else begin
             if LayoutBase64 = '' then

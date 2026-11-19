@@ -158,9 +158,13 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
 
     /// <summary>Provides the GetNotes part of the report layout get message.</summary>
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        Builder: TextBuilder;
     begin
         Notes := 'Read-only. No layout import, default-selection change or update-on-export is performed. Layout names and app IDs are returned by Orchestrator.ReportLayout.List.';
-        Notes += ' ' + DeletePolicyLbl;
+        Builder.AppendLine(Notes);
+        Builder.AppendLine(DeletePolicyLbl);
+        Notes := Builder.ToText();
         exit(true);
     end;
 

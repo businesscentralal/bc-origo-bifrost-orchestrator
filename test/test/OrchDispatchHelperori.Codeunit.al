@@ -36,7 +36,8 @@ codeunit 96457 "Orch Dispatch Helper ori"
         ResponseJson: JsonObject;
         Token: JsonToken;
     begin
-        if not IsTextContent(TempArgument."Content Type") then
+        // Binary and XML success responses are not JSON confirmation envelopes.
+        if not (TempArgument."Content Type" in ['text/json', 'application/json']) then
             exit(false);
         ResponseJson := TempArgument.GetResponseJson();
         if not ResponseJson.Get('code', Token) then

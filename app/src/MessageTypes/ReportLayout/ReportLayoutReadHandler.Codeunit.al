@@ -80,8 +80,8 @@ codeunit 10035611 "Report Layout Read Handler ori"
         Request := Argument.GetRequestJson();
         ReportId := GetReport(Request, ReportMeta);
         if not Request.Get('name', Value) then begin
-            Argument.AddError("Bifrost Error Code ori"::MissingParameter, MissingNameErr, 'name', '', NameExpectedLbl, NameNextStepLbl);
-            Argument.RaiseCollectedErrors("Bifrost Error Code ori"::MissingParameter, MissingNameErr);
+            Argument.RespondWithError("Bifrost Error Code ori"::MissingParameter, MissingNameErr, 'name', '', NameExpectedLbl, NameNextStepLbl);
+            exit;
         end;
         LayoutName := Value.AsValue().AsText();
         if (LayoutName = '') or (StrLen(LayoutName) > MaxStrLen(LayoutList.Name)) then
