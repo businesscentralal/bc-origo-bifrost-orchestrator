@@ -400,10 +400,10 @@ codeunit 96436 "Playbook Example Tests"
         CustomerId: Guid;
     begin
         Assert.IsTrue(Request.ReadFrom(RequestText), 'The resolved Ask request is JSON');
-        Assert.IsTrue(Request.Get('record', Token), 'The Ask request includes record context');
+        Assert.IsTrue(Request.Get('subject', Token), 'The Ask request includes the subject record context');
         Assert.IsTrue(Token.IsObject(), 'Record context must be an object, not a GUID string');
         RecordContext := Token.AsObject();
-        Assert.IsTrue(RecordContext.Get('tableName', Token), 'Record context identifies the table');
+        Assert.IsTrue(RecordContext.Get('table', Token), 'Record context identifies the table');
         Assert.AreEqual('Customer', Token.AsValue().AsText(), 'Record context is a Customer');
         Assert.IsTrue(RecordContext.Get('systemId', Token), 'Record context identifies the customer SystemId');
         Assert.IsTrue(Evaluate(CustomerId, Token.AsValue().AsText()), 'The current customer id resolves to a GUID');
