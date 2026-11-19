@@ -166,6 +166,7 @@ codeunit 96443 "First Schedule Tests ori"
         StartTime: Time;
     begin
         // #143 AC01/02; #130 AC01/04/06 | Time: explicitly due slot | Risk: background scheduling intercepted
+        LibraryQueue.EnsureSchedulerSetup();
         BindSubscription(LibraryQueue);
         Playbook.Code := CopyStr(DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, 20);
         Playbook.Description := 'Owned first-dispatch regression';
@@ -246,9 +247,11 @@ codeunit 96443 "First Schedule Tests ori"
         Entry: Record "Scheduled Entry ori";
         Job: Record "Job Queue Entry";
         RecurringTemplate: Record "Recurring Template ori";
+        LibraryQueue: Codeunit "Library Orchestrator";
         JobSystemId: Guid;
     begin
         // #130 AC05 | Time: fixed times | Risk: no task scheduled
+        LibraryQueue.EnsureSchedulerSetup();
         RecurringTemplate.Code := CopyStr(DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, 20);
         RecurringTemplate."Run on Mondays" := true;
         RecurringTemplate."Starting Time" := 103000T;

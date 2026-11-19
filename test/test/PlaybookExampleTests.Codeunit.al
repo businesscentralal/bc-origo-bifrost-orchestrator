@@ -146,7 +146,7 @@ codeunit 96436 "Playbook Example Tests"
         AssertContains(Examples.PostingAuditAskTemplate(), 'Check the posting groups, the VAT business posting group, the payment terms');
         AssertContains(Examples.PostingAuditAskTemplate(), 'the posting groups have their accounts filled');
         AssertContains(Examples.PostingAuditAskTemplate(), 'list each problem with the field name');
-        AssertContains(Examples.PostingAuditAskTemplate(), '"record":{"tableName":"Customer","systemId":"@_current.id"}');
+        AssertContains(Examples.PostingAuditAskTemplate(), '"subject":{"table":"Customer","systemId":"@_current.id"}');
         AssertContains(HelpText, Examples.PostingAuditNoticeTemplate());
     end;
 

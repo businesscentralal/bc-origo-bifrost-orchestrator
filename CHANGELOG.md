@@ -9,7 +9,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ### Fixed — #209
 
-- #209: tests only, no app change, no new objects. Example 4 (POSTING-AUDIT) in test library `Playbook Example Library ori` now carries a `stopReason` Success condition on its Ask step, so `96436 Playbook Example Tests` stays clean on tenants where `LLM.Prompt.Ask` is installed (it raised `AskStopReasonUnchecked`). The 96411 stale Ok Sample Job Queue Entry filter and the 96480/96481 Report Selections seeding were delivered in #210. 96456 needs a Disabled-isolation test runner (130451).
+- #209: no new objects. Codeunit 10035576 `Help ori` (, example 4 POSTING-AUDIT) and test library `Playbook Example Library ori`: the Ask step 30 now sends `subject` `{"table":"Customer","systemId":"@_current.id"}`, the request key `LLM.Prompt.Ask` declares (`record`/`tableName` were refused with `UnknownRequestKey` on tenants with the real Ask), and carries the Success condition `stopReason Equals completed` (no `AskStopReasonUnchecked`). Decision by Claude Code (acting Architect) 19.11.2026, option A.
+- #209 tests: `96411 Orchestrator Unit Tests` removes stale Ok Sample Job Queue Entries before the enqueue test; `96419 Status Msg Tests` and `96443 First Schedule Tests ori` create the Orchestrator setup row when the tenant has none (new procedure `EnsureSchedulerSetup` in test library 96413 `Library Orchestrator`). The 96411 category filter and the 96480/96481 Report Selections seeding were delivered in #210. 96456 needs a Disabled-isolation test runner (130451).
 
 ### Added — #223
 
