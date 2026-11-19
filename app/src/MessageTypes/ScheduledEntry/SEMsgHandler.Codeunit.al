@@ -71,8 +71,9 @@ codeunit 10035550 "SE Msg Handler ori"
             if Argument.SubjectIsGuid() then
                 Evaluate(EntryId, Argument.Subject)
             else
-                Error(MissingJQIdErr);
-        JQEntry.Get(EntryId);
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingJQIdErr, 'jobQueueEntryId', '', GuidExpectedTok, MissingJQIdNextStepTok);
+        if not JQEntry.Get(EntryId) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(JQEntryNotFoundErr, Format(EntryId, 0, 4)), 'jobQueueEntryId', Format(EntryId, 0, 4), GuidExpectedTok, JQEntryNotFoundNextStepTok);
         Entry.InsertFromJobQueueEntry(JQEntry, true);
         Entry.Get(EntryId);
         RespondWithEntry(Argument, Entry, RegisteredMsg);
@@ -112,12 +113,23 @@ codeunit 10035550 "SE Msg Handler ori"
             if Argument.SubjectIsGuid() then
                 Evaluate(EntryId, Argument.Subject)
             else
-                Error(MissingIdErr);
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingIdErr, 'id', '', GuidExpectedTok, MissingIdNextStepTok);
         Entry.SetLoadFields(
             Blocked, "Notification Type", "Notification Recipient",
             "Object Type to Run", "Object ID to Run", "Record ID to Process", Description);
         if not Entry.GetBySystemId(EntryId) then
-            Entry.Get(EntryId);
+            if not Entry.Get(EntryId) then
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(EntryNotFoundErr, Format(EntryId, 0, 4)), 'id', Format(EntryId, 0, 4), GuidExpectedTok, EntryNotFoundNextStepTok);
+    end;
+
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
     end;
 
     local procedure RespondWithEntry(var Argument: Record "Message Argument ori"; Entry: Record "Scheduled Entry ori"; Message: Text)
@@ -145,6 +157,13 @@ codeunit 10035550 "SE Msg Handler ori"
     var
         MissingIdErr: Label 'Request must include "id" (GUID) in the data payload or as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.';
         MissingJQIdErr: Label 'Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "jobQueueEntryId" (GUID) í gagnahleðslunni eða auðkenni vinnsluraðarfærslu sem viðfang.';
+        GuidExpectedTok: Label 'a GUID', Comment = 'is-IS=GUID-auðkenni';
+        MissingIdNextStepTok: Label 'Send the SystemId of the orchestrator entry in data.id or as the subject.', Comment = 'is-IS=Sendu SystemId áætlunarfærslunnar í data.id eða sem viðfang.';
+        MissingJQIdNextStepTok: Label 'Send the SystemId of the Job Queue Entry in data.jobQueueEntryId or as the subject.', Comment = 'is-IS=Sendu SystemId vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.';
+        EntryNotFoundErr: Label 'No orchestrator entry has the ID %1.', Comment = '%1 = the GUID received, is-IS=Engin áætlunarfærsla hefur auðkennið %1.';
+        EntryNotFoundNextStepTok: Label 'Send the SystemId or ID of an existing orchestrator entry.', Comment = 'is-IS=Sendu SystemId eða auðkenni áætlunarfærslu sem er til.';
+        JQEntryNotFoundErr: Label 'No Job Queue Entry has the ID %1.', Comment = '%1 = the GUID received, is-IS=Engin vinnsluraðarfærsla hefur auðkennið %1.';
+        JQEntryNotFoundNextStepTok: Label 'Send the ID of an existing Job Queue Entry.', Comment = 'is-IS=Sendu auðkenni vinnsluraðarfærslu sem er til.';
         ExecutedMsg: Label 'Job queue entry executed.', Comment = 'is-IS=Vinnsluraðafærsla keyrð.';
         RestartedMsg: Label 'Orchestrator entry restarted.', Comment = 'is-IS=Áætlunarfærsla endurræst.';
         RegisteredMsg: Label 'Job Queue Entry registered with orchestrator.', Comment = 'is-IS=Vinnsluraðarfærsla skráð hjá vinnsluraðara.';

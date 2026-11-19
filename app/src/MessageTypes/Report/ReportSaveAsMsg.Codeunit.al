@@ -94,8 +94,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts.AddReportErrors(Errors);
         Parts.AddContractError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
         Parts.AddContractError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
-        Parts.AddContractError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
-        Parts.AddContractError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
         Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
         exit(true);
     end;

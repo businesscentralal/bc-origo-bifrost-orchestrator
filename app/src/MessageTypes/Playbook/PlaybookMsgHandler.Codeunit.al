@@ -35,7 +35,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
         InstanceId: Guid;
     begin
         RequestJson := Argument.GetRequestJson();
-        Playbook.Get(GetPlaybookCode(Argument, RequestJson));
+        GetPlaybook(Argument, RequestJson, Playbook);
 
         // A playbook that does not verify is not started: errors always refuse, warnings unless ignoreWarnings is true.
         if Verify.RefuseIfUnsafe(Argument, Playbook.Code, GetJsonBool(RequestJson, 'ignoreWarnings')) then
@@ -68,6 +68,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
     procedure ExecuteSchedule(var Argument: Record "Message Argument ori")
     var
         Playbook: Record "Playbook ori";
+        RecurringTemplate: Record "Recurring Template ori";
         Verify: Codeunit "Playbook Verify ori";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
@@ -82,7 +83,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
         IgnoreWarnings: Boolean;
     begin
         RequestJson := Argument.GetRequestJson();
-        Playbook.Get(GetPlaybookCode(Argument, RequestJson));
+        GetPlaybook(Argument, RequestJson, Playbook);
 
         // Enabling a schedule runs the same verification as Orchestrator.Playbook.Run.
         IgnoreWarnings := GetJsonBool(RequestJson, 'ignoreWarnings');
@@ -91,7 +92,9 @@ codeunit 10035552 "Playbook Msg Handler ori"
 
         RecurringTemplateCode := CopyStr(GetJsonText(RequestJson, 'recurringTemplateCode'), 1, 20);
         if RecurringTemplateCode = '' then
-            Error(MissingTemplateCodeErr);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingTemplateCodeErr, 'recurringTemplateCode', '', TemplateExpectedTok, MissingTemplateNextStepTok);
+        if not RecurringTemplate.Get(RecurringTemplateCode) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(TemplateNotFoundErr, RecurringTemplateCode), 'recurringTemplateCode', RecurringTemplateCode, TemplateExpectedTok, TemplateNotFoundNextStepTok);
 
         NotificationType := ParseNotificationType(GetJsonText(RequestJson, 'notificationType'));
         NotificationRecipient := CopyStr(GetJsonText(RequestJson, 'notificationRecipient'), 1, 2048);
@@ -131,7 +134,7 @@ codeunit 10035552 "Playbook Msg Handler ori"
         DelaySeconds: Integer;
     begin
         RequestJson := Argument.GetRequestJson();
-        Playbook.Get(GetPlaybookCode(Argument, RequestJson));
+        GetPlaybook(Argument, RequestJson, Playbook);
 
         if RequestJson.Get('initialRequest', InitialRequestToken) then
             RequestDataText := Format(InitialRequestToken);
@@ -164,12 +167,39 @@ codeunit 10035552 "Playbook Msg Handler ori"
             exit(CopyStr(PlaybookCodeToken.AsValue().AsText(), 1, 20));
         if Argument.Subject <> '' then
             exit(CopyStr(Argument.Subject, 1, 20));
-        Error(MissingPlaybookCodeErr);
+        RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingPlaybookCodeErr, 'playbookCode', '', PlaybookExpectedTok, MissingPlaybookNextStepTok);
+    end;
+
+    local procedure GetPlaybook(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; var Playbook: Record "Playbook ori")
+    var
+        PlaybookCode: Code[20];
+    begin
+        PlaybookCode := GetPlaybookCode(Argument, RequestJson);
+        if not Playbook.Get(PlaybookCode) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(PlaybookNotFoundErr, PlaybookCode), 'playbookCode', PlaybookCode, PlaybookExpectedTok, PlaybookNotFoundNextStepTok);
+    end;
+
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
     end;
 
     var
         MissingPlaybookCodeErr: Label 'Request must include "playbookCode" in the data payload or as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.';
         MissingTemplateCodeErr: Label 'Request must include "recurringTemplateCode".', Comment = 'is-IS=Beiðni verður að innihalda "recurringTemplateCode".';
+        PlaybookExpectedTok: Label 'the code of a playbook', Comment = 'is-IS=kóði verkáætlunar';
+        MissingPlaybookNextStepTok: Label 'Send the playbook code in data.playbookCode or as the subject.', Comment = 'is-IS=Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.';
+        PlaybookNotFoundErr: Label 'No playbook has the code %1.', Comment = '%1 = the playbook code received, is-IS=Engin verkáætlun hefur kóðann %1.';
+        PlaybookNotFoundNextStepTok: Label 'Send the code of an existing playbook.', Comment = 'is-IS=Sendu kóða verkáætlunar sem er til.';
+        TemplateExpectedTok: Label 'the code of a recurring template', Comment = 'is-IS=kóði endurtekningarsniðmáts';
+        MissingTemplateNextStepTok: Label 'Send the code of a recurring template in data.recurringTemplateCode.', Comment = 'is-IS=Sendu kóða endurtekningarsniðmáts í data.recurringTemplateCode.';
+        TemplateNotFoundErr: Label 'No recurring template has the code %1.', Comment = '%1 = the template code received, is-IS=Ekkert endurtekningarsniðmát hefur kóðann %1.';
+        TemplateNotFoundNextStepTok: Label 'Send the code of an existing recurring template.', Comment = 'is-IS=Sendu kóða endurtekningarsniðmáts sem er til.';
 
     local procedure GetJsonText(RequestJson: JsonObject; PropertyName: Text): Text
     var

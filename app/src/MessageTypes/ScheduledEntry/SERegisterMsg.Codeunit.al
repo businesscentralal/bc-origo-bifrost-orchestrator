@@ -87,8 +87,8 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddContractError(Errors, 'Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.', 'data.jobQueueEntryId is missing or not a GUID, and subject is not a GUID.', 'Send the ID of the Job Queue Entry.');
-        Parts.AddRuntimeError(Errors, 'No Job Queue Entry has that ID (Business Central''s record-not-found text).', 'Send the ID of the Job Queue Entry, not its SystemId.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, 'Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.', 'data.jobQueueEntryId is missing or not a GUID, and subject is not a GUID.', 'Send the ID of the Job Queue Entry.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'No Job Queue Entry has the ID <jobQueueEntryId>.', 'No Job Queue Entry has that ID.', 'Send the ID of the Job Queue Entry, not its SystemId.');
         Parts.AddContractError(Errors, 'The Job Queue Orchestrator Management Job Queue Entry cannot be one of the Job Queue Orchestrator Entries.', 'The ID is the orchestrator''s own management Job Queue Entry.', 'Register a different Job Queue Entry.');
         exit(true);
     end;

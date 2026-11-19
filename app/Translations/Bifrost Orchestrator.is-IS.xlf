@@ -2229,11 +2229,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Prófunarpóstur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Notification ori - Method SendTestNotification - NamedType TestEmailMsg</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2518225199 - NamedType 2873124987" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a GUID</source>
+          <target>GUID-auðkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=GUID-auðkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - NamedType GuidExpectedTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2518225199 - NamedType 263175697" size-unit="char" translate="yes" xml:space="preserve">
           <source>"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.</source>
           <target>"outboxSystemId" (GUID frá Email.Draft.Set svari) er nauðsynlegt í gögnum eða sem viðfang.</target>
           <note from="Developer" annotates="general" priority="2">is-IS="outboxSystemId" (GUID frá Email.Draft.Set svari) er nauðsynlegt í gögnum eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - NamedType MissingOutboxIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2518225199 - NamedType 991232273" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the outboxSystemId from the Email.Draft.Set answer in data.outboxSystemId or as the subject.</source>
+          <target>Sendu outboxSystemId úr svari Email.Draft.Set í data.outboxSystemId eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu outboxSystemId úr svari Email.Draft.Set í data.outboxSystemId eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - NamedType MissingOutboxIdNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2518225199 - NamedType 2104243727" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No email draft in the outbox has the SystemId %1.</source>
+          <target>Engin tölvupóstsdrög í úthólfinu hafa SystemId %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the GUID received, is-IS=Engin tölvupóstsdrög í úthólfinu hafa SystemId %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - NamedType OutboxNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2518225199 - NamedType 430847439" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the outboxSystemId from the Email.Draft.Set answer. A sent draft leaves the outbox.</source>
+          <target>Sendu outboxSystemId úr svari Email.Draft.Set. Send drög fara úr úthólfinu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu outboxSystemId úr svari Email.Draft.Set. Send drög fara úr úthólfinu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - NamedType OutboxNotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2518225199 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send an email draft created by Email.Draft.Set.</source>
@@ -2253,17 +2277,41 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst. expectedCount telur þau einu tölvupóstsdrög sem eru send, ekki viðtakendur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3713907355 - NamedType 2873124987" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a GUID</source>
+          <target>GUID-auðkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=GUID-auðkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Msg Handler ori - NamedType GuidExpectedTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3713907355 - NamedType 823878488" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "id" (GUID) in the data payload or as the subject.</source>
           <target>Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Msg Handler ori - NamedType MissingIdErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3713907355 - NamedType 3564603976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the SystemId of the Job Queue Entry in data.id or as the subject.</source>
+          <target>Sendu SystemId vinnsluraðarfærslunnar í data.id eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu SystemId vinnsluraðarfærslunnar í data.id eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Msg Handler ori - NamedType MissingIdNextStepTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3713907355 - NamedType 2848625872" size-unit="char" translate="yes" xml:space="preserve">
           <source>No restart needed.</source>
           <target>Engin endurræsing nauðsynleg.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Engin endurræsing nauðsynleg.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Msg Handler ori - NamedType NoRestartNeededMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3713907355 - NamedType 3351274" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No Job Queue Entry has the SystemId %1.</source>
+          <target>Engin vinnsluraðarfærsla hefur SystemId %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the GUID received, is-IS=Engin vinnsluraðarfærsla hefur SystemId %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Msg Handler ori - NamedType NotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3713907355 - NamedType 555972826" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the SystemId of an existing Job Queue Entry; its ID is not accepted.</source>
+          <target>Sendu SystemId vinnsluraðarfærslu sem er til; auðkenni hennar er ekki tekið gilt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu SystemId vinnsluraðarfærslu sem er til; auðkenni hennar er ekki tekið gilt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Entry Msg Handler ori - NamedType NotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3713907355 - NamedType 838312617" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Entry restarted.</source>
@@ -2469,11 +2517,59 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType MissingPlaybookCodeErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 2609707408" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the playbook code in data.playbookCode or as the subject.</source>
+          <target>Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType MissingPlaybookNextStepTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4100168724 - NamedType 939426784" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "recurringTemplateCode".</source>
           <target>Beiðni verður að innihalda "recurringTemplateCode".</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "recurringTemplateCode".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType MissingTemplateCodeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 743508355" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the code of a recurring template in data.recurringTemplateCode.</source>
+          <target>Sendu kóða endurtekningarsniðmáts í data.recurringTemplateCode.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kóða endurtekningarsniðmáts í data.recurringTemplateCode.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType MissingTemplateNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 1470811021" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the code of a playbook</source>
+          <target>kóði verkáætlunar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=kóði verkáætlunar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType PlaybookExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 631086101" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No playbook has the code %1.</source>
+          <target>Engin verkáætlun hefur kóðann %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the playbook code received, is-IS=Engin verkáætlun hefur kóðann %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType PlaybookNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 2760965653" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the code of an existing playbook.</source>
+          <target>Sendu kóða verkáætlunar sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kóða verkáætlunar sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType PlaybookNotFoundNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 3674166842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the code of a recurring template</source>
+          <target>kóði endurtekningarsniðmáts</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=kóði endurtekningarsniðmáts</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType TemplateExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 1069379362" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No recurring template has the code %1.</source>
+          <target>Ekkert endurtekningarsniðmát hefur kóðann %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the template code received, is-IS=Ekkert endurtekningarsniðmát hefur kóðann %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType TemplateNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4100168724 - NamedType 1552040210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the code of an existing recurring template.</source>
+          <target>Sendu kóða endurtekningarsniðmáts sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kóða endurtekningarsniðmáts sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Msg Handler ori - NamedType TemplateNotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2457996212 - NamedType 2409500461" size-unit="char" translate="yes" xml:space="preserve">
           <source>Preview count %1, Max Count %2: confirmed with expectedCount %3.</source>
@@ -2762,6 +2858,30 @@
           <target>Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType MissingPlaybookCodeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 2609707408" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the playbook code in data.playbookCode or as the subject.</source>
+          <target>Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType MissingPlaybookNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 1470811021" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the code of a playbook</source>
+          <target>kóði verkáætlunar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=kóði verkáætlunar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType PlaybookExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 631086101" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No playbook has the code %1.</source>
+          <target>Engin verkáætlun hefur kóðann %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the playbook code received, is-IS=Engin verkáætlun hefur kóðann %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType PlaybookNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 367103690 - NamedType 2760965653" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the code of an existing playbook.</source>
+          <target>Sendu kóða verkáætlunar sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kóða verkáætlunar sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Verify ori - NamedType PlaybookNotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 367103690 - NamedType 1235961909" size-unit="char" translate="yes" xml:space="preserve">
           <source>Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings = true; an error cannot.</source>
@@ -3597,11 +3717,41 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lista skýrslur sem núverandi notandi sér, mögulega síaðar eftir því hvort þær séu vinnsluskýrslur. Lesaðgerð. Notaðu Orchestrator.Report.Get fyrir eina skýrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report List Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3567093383" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PDF, Excel, Word or XML</source>
+          <target>PDF, Excel, Word eða XML</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=PDF, Excel, Word eða XML</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType FormatExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 1327159626" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send format PDF, Excel, Word or XML, or leave format out for PDF.</source>
+          <target>Sendu sniðið PDF, Excel, Word eða XML, eða slepptu format til að fá PDF.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu sniðið PDF, Excel, Word eða XML, eða slepptu format til að fá PDF.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType FormatNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 2873124987" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a GUID</source>
+          <target>GUID-auðkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=GUID-auðkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType GuidExpectedTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3557924230" size-unit="char" translate="yes" xml:space="preserve">
           <source>appId must be a valid GUID.</source>
           <target>appId verður að vera gilt GUID.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=appId verður að vera gilt GUID.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType InvalidLayoutAppIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 481652086" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the app ID of the layout as a GUID, or leave appId out.</source>
+          <target>Sendu auðkenni forrits útlitsins sem GUID, eða slepptu appId.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni forrits útlitsins sem GUID, eða slepptu appId.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType InvalidLayoutAppIdNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 2947264232" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the name of a layout of the report</source>
+          <target>heiti útlits skýrslunnar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=heiti útlits skýrslunnar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType LayoutExpectedTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
           <source>Layout %1 not found on report %2.</source>
@@ -3609,11 +3759,29 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType LayoutNotFoundErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 692884224" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the name of a layout of this report. Orchestrator.ReportLayout.List lists them.</source>
+          <target>Sendu heiti útlits þessarar skýrslu. Orchestrator.ReportLayout.List birtir þau.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu heiti útlits þessarar skýrslu. Orchestrator.ReportLayout.List birtir þau.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType LayoutNotFoundNextStepTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3444540953" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.</source>
           <target>Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType NotProcessingOnlyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 4221701625" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Save a report that produces output with Orchestrator.Report.SaveAs.</source>
+          <target>Vistaðu skýrslu sem skilar úttaki með Orchestrator.Report.SaveAs.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vistaðu skýrslu sem skilar úttaki með Orchestrator.Report.SaveAs.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType NotProcessingOnlyNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 4143805441" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a report that produces output</source>
+          <target>skýrsla sem skilar úttaki</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=skýrsla sem skilar úttaki</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType OutputReportExpectedTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 4086553982" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 is processing-only and cannot be saved.</source>
@@ -3621,11 +3789,35 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 er eingöngu keyrsluskýrsla og ekki hægt að vista hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ProcessingOnlyErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3020540011" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a processing-only report</source>
+          <target>keyrsluskýrsla</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=keyrsluskýrsla</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ProcessingOnlyExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 2944354222" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run a processing-only report with Orchestrator.Report.Run.</source>
+          <target>Keyrðu keyrsluskýrslu með Orchestrator.Report.Run.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu keyrsluskýrslu með Orchestrator.Report.Run.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ProcessingOnlyNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 3643047783" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the object ID of a report</source>
+          <target>kennitala skýrsluhlutar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=kennitala skýrsluhlutar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ReportIdExpectedTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 572047844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 not found.</source>
           <target>Skýrsla %1 finnst ekki.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skýrsla %1 finnst ekki.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ReportNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - NamedType 64191700" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the object ID of an existing report. Orchestrator.Report.List lists them.</source>
+          <target>Sendu kennitölu skýrslu sem er til. Orchestrator.Report.List birtir þær.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kennitölu skýrslu sem er til. Orchestrator.Report.List birtir þær.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ReportNotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 2855561205" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unsupported format "%1". Use PDF, Excel, Word, or XML.</source>
@@ -3638,6 +3830,18 @@
           <target>Beiðni verður að innihalda "reportId".</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "reportId".</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - Method GetReportId - NamedType MissingReportIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - Method 1925016623 - NamedType 1036855462" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the report object ID as a number in data.reportId. Orchestrator.Report.List lists them.</source>
+          <target>Sendu kennitölu skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kennitölu skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - Method GetReportId - NamedType MissingReportIdNextStepTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3520747181 - Method 1925016623 - NamedType 3245444279" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"reportId" must be a whole number.</source>
+          <target>"reportId" verður að vera heiltala.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="reportId" verður að vera heiltala.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - Method GetReportId - NamedType ReportIdNotIntegerErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3954080676 - NamedType 2566772706" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request page parameter %1 must be one of: %2.</source>
@@ -4191,11 +4395,41 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Stilla vinnsluraðarann: virkja HTTP-biðlarabeiðnir, staðfesta stjórnunarvinnsluröð og setja upp tímasetningarstefnur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Scheduler Wizard Reg. ori - Method RegisterOrchSetupWizard - NamedType SetupDescriptionTok</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 2791289126" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No orchestrator entry has the ID %1.</source>
+          <target>Engin áætlunarfærsla hefur auðkennið %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the GUID received, is-IS=Engin áætlunarfærsla hefur auðkennið %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType EntryNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 2550794134" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the SystemId or ID of an existing orchestrator entry.</source>
+          <target>Sendu SystemId eða auðkenni áætlunarfærslu sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu SystemId eða auðkenni áætlunarfærslu sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType EntryNotFoundNextStepTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3204704989 - NamedType 2029772686" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job queue entry executed.</source>
           <target>Vinnsluraðafærsla keyrð.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Vinnsluraðafærsla keyrð.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType ExecutedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 2873124987" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a GUID</source>
+          <target>GUID-auðkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=GUID-auðkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType GuidExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 3357543715" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No Job Queue Entry has the ID %1.</source>
+          <target>Engin vinnsluraðarfærsla hefur auðkennið %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the GUID received, is-IS=Engin vinnsluraðarfærsla hefur auðkennið %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType JQEntryNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 1209848291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the ID of an existing Job Queue Entry.</source>
+          <target>Sendu auðkenni vinnsluraðarfærslu sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni vinnsluraðarfærslu sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType JQEntryNotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3204704989 - NamedType 823878488" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "id" (GUID) in the data payload or as the subject.</source>
@@ -4203,11 +4437,23 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType MissingIdErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 3564603976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the SystemId of the orchestrator entry in data.id or as the subject.</source>
+          <target>Sendu SystemId áætlunarfærslunnar í data.id eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu SystemId áætlunarfærslunnar í data.id eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType MissingIdNextStepTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3204704989 - NamedType 1848745009" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.</source>
           <target>Beiðni verður að innihalda "jobQueueEntryId" (GUID) í gagnahleðslunni eða auðkenni vinnsluraðarfærslu sem viðfang.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "jobQueueEntryId" (GUID) í gagnahleðslunni eða auðkenni vinnsluraðarfærslu sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType MissingJQIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3204704989 - NamedType 4164042545" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the SystemId of the Job Queue Entry in data.jobQueueEntryId or as the subject.</source>
+          <target>Sendu SystemId vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu SystemId vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType MissingJQIdNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3204704989 - NamedType 3542876107" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Entry registered with orchestrator.</source>
@@ -4551,11 +4797,29 @@
           <note from="Developer" annotates="general" priority="2">is-IS=HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Virkjaðu Leyfa HttpClient-beiðnir í stillingum viðbótar áður en Telegram-skilaboð eru send.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType HttpClientNotEnabledErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2638307712 - NamedType 3835800663" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the message text as a JSON string</source>
+          <target>texti skilaboðanna sem JSON-strengur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=texti skilaboðanna sem JSON-strengur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType MessageExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2638307712 - NamedType 28703578" size-unit="char" translate="yes" xml:space="preserve">
+          <source>"message" must be a text value, not an object or an array.</source>
+          <target>"message" verður að vera textagildi, ekki hlutur eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS="message" verður að vera textagildi, ekki hlutur eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType MessageNotTextErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 512775446" size-unit="char" translate="yes" xml:space="preserve">
           <source>"message" is required in the request data.</source>
           <target>"message" er nauðsynlegt í beiðnigögnum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS="message" er nauðsynlegt í beiðnigögnum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType MissingMessageErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2638307712 - NamedType 2526476038" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the text of the message in data.message.</source>
+          <target>Sendu texta skilaboðanna í data.message.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu texta skilaboðanna í data.message.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - NamedType MissingMessageNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2167751529" size-unit="char" translate="yes" xml:space="preserve">
           <source>No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.</source>
