@@ -167,16 +167,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     begin
         Argument.AssertVersion1();
         Argument.AssertIsLicensed();
-        VerifyHttpClientEnabled();
-        if not Secrets.IsTelegramBotTokenSet() then
-            Error(BotTokenNotConfiguredErr);
-
-        UserSetup.SetLoadFields("Telegram Chat ID ori");
-        UserSetup.Get(UserSecurityId());
-        ChatId := UserSetup."Telegram Chat ID ori";
-        if ChatId = '' then
-            Error(NoChatIdErr);
-
+        // The request is checked first, so a missing message is reported as MissingParameter whatever the setup.
         RequestJson := Argument.GetRequestJson();
 
         if not RequestJson.Get('message', JsonToken) then
@@ -186,6 +177,16 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         MessageText := JsonToken.AsValue().AsText();
         if MessageText = '' then
             RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingMessageErr, 'message', '', MessageExpectedTok, MissingMessageNextStepTok);
+
+        VerifyHttpClientEnabled();
+        if not Secrets.IsTelegramBotTokenSet() then
+            Error(BotTokenNotConfiguredErr);
+
+        UserSetup.SetLoadFields("Telegram Chat ID ori");
+        UserSetup.Get(UserSecurityId());
+        ChatId := UserSetup."Telegram Chat ID ori";
+        if ChatId = '' then
+            Error(NoChatIdErr);
 
         if not TelegramSend.SendMessage(Secrets.GetTelegramBotToken(), ChatId, MessageText) then
             Error(SendFailedErr, ChatId, TelegramSend.GetLastResponse());
