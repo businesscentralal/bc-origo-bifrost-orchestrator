@@ -17,6 +17,7 @@ codeunit 10035611 "Report Layout Read Handler ori"
     var
         ReportMeta: Record "Report Metadata";
         LayoutList: Record "Report Layout List";
+        TenantLayout: Record "Tenant Report Layout";
         Request: JsonObject;
         Response: JsonObject;
         Layout: JsonObject;
@@ -43,6 +44,11 @@ codeunit 10035611 "Report Layout Read Handler ori"
                 else
                     Layout.Add('source', 'Extension');
                 Layout.Add('appId', Format(LayoutList."Application ID", 0, 4));
+                TenantLayout.SetLoadFields("Company Name");
+                if LayoutList."User Defined" and TenantLayout.Get(ReportId, LayoutList.Name, LayoutList."Application ID") then
+                    Layout.Add('companyName', TenantLayout."Company Name")
+                else
+                    Layout.Add('companyName', '');
                 Layout.Add('description', LayoutList.Description);
                 Layout.Add('layoutStatus', LayoutList."Layout Status".Names().Get(LayoutList."Layout Status".Ordinals().IndexOf(LayoutList."Layout Status".AsInteger())));
                 Layout.Add('isDefault', IsDefaultLayout(LayoutList, ReportMeta));
@@ -73,8 +79,10 @@ codeunit 10035611 "Report Layout Read Handler ori"
     begin
         Request := Argument.GetRequestJson();
         ReportId := GetReport(Request, ReportMeta);
-        if not Request.Get('name', Value) then
-            Error(MissingNameErr);
+        if not Request.Get('name', Value) then begin
+            Argument.RespondWithError("Bifrost Error Code ori"::MissingParameter, MissingNameErr, 'name', '', NameExpectedLbl, NameNextStepLbl);
+            exit;
+        end;
         LayoutName := Value.AsValue().AsText();
         if (LayoutName = '') or (StrLen(LayoutName) > MaxStrLen(LayoutList.Name)) then
             Error(LayoutNotFoundErr, LayoutName, ReportId);
@@ -95,7 +103,7 @@ codeunit 10035611 "Report Layout Read Handler ori"
         Response.Add('name', LayoutName);
         Response.Add('appId', Format(AppId, 0, 4));
         Response.Add('format', FormatName(LayoutList."Layout Format"));
-        Response.Add('mimeType', LayoutList."MIME Type");
+        Response.Add('mimeType', LayoutMimeType(LayoutList));
         Response.Add('layoutBase64', Base64Convert.ToBase64(Content));
         Argument.SetResponseJson(Response);
     end;
@@ -127,6 +135,19 @@ codeunit 10035611 "Report Layout Read Handler ori"
         exit((Selection."Layout Name" = LayoutList.Name) and (Selection."App ID" = LayoutList."Application ID"));
     end;
 
+    local procedure LayoutMimeType(LayoutList: Record "Report Layout List"): Text
+    begin
+        case LayoutList."Layout Format" of
+            LayoutList."Layout Format"::Word:
+                exit('application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+            LayoutList."Layout Format"::Excel:
+                exit('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            LayoutList."Layout Format"::RDLC:
+                exit('application/xml');
+        end;
+        exit(LayoutList."MIME Type");
+    end;
+
     local procedure FormatName(LayoutFormat: Option RDLC,Word,Excel,Custom): Text
     begin
         case LayoutFormat of
@@ -143,6 +164,8 @@ codeunit 10035611 "Report Layout Read Handler ori"
 
     var
         MissingReportIdErr: Label 'Request must include "reportId".', Comment = 'is-IS=Beiðni verður að innihalda "reportId".';
+        NameExpectedLbl: Label 'A report layout name.', Comment = 'is-IS=Heiti skýrsluútlits.';
+        NameNextStepLbl: Label 'Send name from Orchestrator.ReportLayout.List.', Comment = 'is-IS=Sendu name úr Orchestrator.ReportLayout.List.';
         MissingNameErr: Label 'Request must include "name".', Comment = 'is-IS=Beiðni verður að innihalda "name".';
         ReportNotFoundErr: Label 'Report %1 not found.', Comment = 'is-IS=Skýrsla %1 fannst ekki.';
         LayoutNotFoundErr: Label 'Layout %1 not found on report %2.', Comment = 'is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.';

@@ -5,6 +5,13 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #235
+
+### Fixed
+- Report layout contracts name `setAsDefault`, the user-defined layout GUID and the no-delete policy in English and Icelandic. List exposes company scope; Get supplies format-specific MIME types. Missing layout names and missing/consumed staging IDs return stable errors with recovery guidance.
+- Report.SaveAs help explains document filters, inline output and client timeouts. Its existing application/pdf envelope is preserved for every output format. AC05 response size and AC07 format-specific content types were split to #239 pending the MCP runtime fix (Architect ruling, 19 November 2026).
+- Added test codeunit 96499 `Report Contract 235 Tests ori` for bilingual help, metadata, structured refusals and existing binary-output compatibility.
+
 ## [Unreleased]
 
 ### Fixed — #237
