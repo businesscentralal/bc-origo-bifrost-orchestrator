@@ -3369,6 +3369,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS="stagingId" %1 er ekki gilt GUID.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType InvalidStagingIdErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 38745058" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 on report %2 is limited to another company and cannot be replaced from company %3. Use another layout name.</source>
+          <target>Útlit %1 í skýrslu %2 er takmarkað við annað fyrirtæki og er ekki hægt að skipta um það úr fyrirtækinu %3. Notaðu annað heiti á útlitið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 í skýrslu %2 er takmarkað við annað fyrirtæki og er ekki hægt að skipta um það úr fyrirtækinu %3. Notaðu annað heiti á útlitið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutNameTakenOtherCompanyErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 3121725712" size-unit="char" translate="yes" xml:space="preserve">
           <source>Layout %1 not found on report %2.</source>
           <target>Útlit %1 fannst ekki fyrir skýrslu %2.</target>
@@ -3392,6 +3398,18 @@
           <target>Beiðni verður að innihalda "layoutBase64" sem er ekki autt.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Beiðni verður að innihalda "layoutBase64" sem er ekki autt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType MissingLayoutBase64Err</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 4185445611" size-unit="char" translate="yes" xml:space="preserve">
+          <source>a layout name that is not used by a layout limited to another company</source>
+          <target>útlitsheiti sem er ekki notað af útliti sem takmarkað er við annað fyrirtæki</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=útlitsheiti sem er ekki notað af útliti sem takmarkað er við annað fyrirtæki</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NameExpectedTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 4109259822" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use another layout name.</source>
+          <target>Notaðu annað heiti á útlitið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu annað heiti á útlitið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType NameNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 3965801693" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "layoutBase64" or "stagingId".</source>
