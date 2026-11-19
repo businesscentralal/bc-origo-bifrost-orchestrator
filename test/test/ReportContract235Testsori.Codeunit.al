@@ -321,7 +321,10 @@ codeunit 96499 "Report Contract 235 Tests ori"
         TempArgument.SetRequestJson(Request);
         DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
         Assert.AreEqual(ExpectedMime, TempArgument."Content Type", 'Legacy binary envelope is preserved until issue 239');
-        TempArgument."Response Content".CreateInStream(Input);
+        if OutputFormat = 'XML' then
+            TempArgument."Response Content".CreateInStream(Input, TextEncoding::UTF8)
+        else
+            TempArgument."Response Content".CreateInStream(Input);
         Input.ReadText(Prefix, StrLen(Magic));
         Assert.AreEqual(Magic, Prefix, 'Actual bytes match declared format');
     end;
