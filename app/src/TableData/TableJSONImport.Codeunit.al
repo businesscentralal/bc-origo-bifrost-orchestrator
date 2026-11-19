@@ -20,6 +20,7 @@ codeunit 10035563 "Table JSON Import ori"
     Access = Internal;
 
     var
+        ExpectedPlaybookCode: Text;
         TableNotFoundErr: Label 'Table %1 does not exist.', Comment = '%1 = table number, is-IS=Tafla %1 er ekki til.';
         TableWriteRestrictedErr: Label 'Table %1 (%2) cannot be written by the table data import.', Comment = '%1 = table number, %2 = table name, is-IS=Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).';
         InsertRestrictedErr: Label 'A new row cannot be inserted into table %1 (%2).', Comment = '%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu við töflu %1 (%2).';
@@ -31,6 +32,9 @@ codeunit 10035563 "Table JSON Import ori"
         PlaybookFormatErr: Label 'The file is not a Bifrost playbook file (format %1, version %2 expected).', Comment = '%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-keðjuskrá (búist var við sniði %1, útgáfu %2).';
         PlaybookTablesMissingErr: Label 'The file has no tables array of table data files.', Comment = 'is-IS=Skráin inniheldur engan töflulista með töflugagnaskrám.';
         PlaybookTableRefusedErr: Label 'Table %1 does not belong in a playbook file.', Comment = '%1 = table number, is-IS=Tafla %1 á ekki heima í keðjuskrá.';
+        PlaybookCodeMissingErr: Label 'The file does not name the playbook (playbookCode).', Comment = 'is-IS=Skráin tilgreinir ekki keðjuna (playbookCode).';
+        PlaybookHeaderMissingErr: Label 'The file has no Playbook row for playbook %1.', Comment = '%1 = playbook code, is-IS=Skráin inniheldur enga keðjulínu fyrir keðjuna %1.';
+        PlaybookRowMismatchErr: Label 'A row belongs to playbook %1, not to the playbook %2 named in the file.', Comment = '%1 = playbook code of the row, %2 = playbook code of the file, is-IS=Lína tilheyrir keðjunni %1 en ekki keðjunni %2 sem skráin tilgreinir.';
         RowStopErr: Label 'Row %1 failed: %2', Comment = '%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2';
 
     /// <summary>
@@ -161,6 +165,7 @@ codeunit 10035563 "Table JSON Import ori"
     begin
         RecRef.Open(TableNo);
         LocateRow(Row, RecRef, IsNew);
+        AssertRowInPlaybook(RecRef);
         if IsNew then
             if TempArgument.IsTableInsertRestrictedForDataRecords(TableNo, RecRef, false, false) then
                 Error(ErrorInfo.Create(TempArgument.GetRestrictedTableErrorText(TableNo, StrSubstNo(InsertRestrictedErr, TableNo, RecRef.Name()), true)));
@@ -171,6 +176,7 @@ codeunit 10035563 "Table JSON Import ori"
                 RecRef := Serializer.DeserializeFromJson(RecRef, FieldsJson);
                 SetBlankOptionValues(RecRef, BlankFieldNos);
             end;
+        AssertRowInPlaybook(RecRef);
     end;
 
     /// <summary>
@@ -230,6 +236,7 @@ codeunit 10035563 "Table JSON Import ori"
         PlaybookCode: Text;
     begin
         ReadPlaybookEnvelope(Envelope, PlaybookCode, Tables);
+        ExpectedPlaybookCode := PlaybookCode;
         foreach TableNo in TableJSONExport.GetPlaybookTables() do
             for Index := 1 to Tables.Count() do begin
                 Tables.Get(Index - 1, Token);
@@ -242,8 +249,50 @@ codeunit 10035563 "Table JSON Import ori"
                     TableResults.Add(TableResult);
                 end;
             end;
+        ExpectedPlaybookCode := '';
         Result.Add('playbookCode', PlaybookCode);
         Result.Add('tables', TableResults);
+    end;
+
+    local procedure AssertRowInPlaybook(RecRef: RecordRef)
+    var
+        RowPlaybookCode: Text;
+    begin
+        if ExpectedPlaybookCode = '' then
+            exit;
+        RowPlaybookCode := Format(RecRef.Field(1).Value());
+        if RowPlaybookCode <> ExpectedPlaybookCode then
+            Error(ErrorInfo.Create(StrSubstNo(PlaybookRowMismatchErr, RowPlaybookCode, ExpectedPlaybookCode)));
+    end;
+
+    local procedure AssertPlaybookHeader(Tables: JsonArray; PlaybookCode: Text)
+    var
+        Token: JsonToken;
+        RowToken: JsonToken;
+        FieldsToken: JsonToken;
+        KeyToken: JsonToken;
+        RowsToken: JsonToken;
+        Index: Integer;
+        RowIndex: Integer;
+    begin
+        for Index := 1 to Tables.Count() do begin
+            Tables.Get(Index - 1, Token);
+            if GetTableNo(Token.AsObject()) = Database::"Playbook ori" then
+                if Token.AsObject().Get('rows', RowsToken) then
+                    if RowsToken.IsArray() then
+                        for RowIndex := 1 to RowsToken.AsArray().Count() do begin
+                            RowsToken.AsArray().Get(RowIndex - 1, RowToken);
+                            if RowToken.IsObject() then
+                                if RowToken.AsObject().Get('primaryKey', KeyToken) then
+                                    if KeyToken.IsObject() then
+                                        if KeyToken.AsObject().Keys().Count() > 0 then
+                                            if KeyToken.AsObject().Get(KeyToken.AsObject().Keys().Get(1), FieldsToken) then
+                                                if FieldsToken.IsValue() then
+                                                    if FieldsToken.AsValue().AsText() = PlaybookCode then
+                                                        exit;
+                        end;
+        end;
+        Error(ErrorInfo.Create(StrSubstNo(PlaybookHeaderMissingErr, PlaybookCode)));
     end;
 
     local procedure ReadPlaybookEnvelope(Envelope: JsonObject; var PlaybookCode: Text; var Tables: JsonArray)
@@ -272,6 +321,8 @@ codeunit 10035563 "Table JSON Import ori"
         if not Token.IsArray() then
             Error(ErrorInfo.Create(PlaybookTablesMissingErr));
         Tables := Token.AsArray();
+        if PlaybookCode = '' then
+            Error(ErrorInfo.Create(PlaybookCodeMissingErr));
         TableNos := TableJSONExport.GetPlaybookTables();
         for Index := 1 to Tables.Count() do begin
             Tables.Get(Index - 1, TableToken);
@@ -280,6 +331,7 @@ codeunit 10035563 "Table JSON Import ori"
             if not TableNos.Contains(GetTableNo(TableToken.AsObject())) then
                 Error(ErrorInfo.Create(StrSubstNo(PlaybookTableRefusedErr, GetTableNo(TableToken.AsObject()))));
         end;
+        AssertPlaybookHeader(Tables, PlaybookCode);
     end;
 
     local procedure GetTableNo(TableFile: JsonObject) TableNo: Integer

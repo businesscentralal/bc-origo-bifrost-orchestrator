@@ -4329,11 +4329,29 @@
           <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 597325203" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file does not name the playbook (playbookCode).</source>
+          <target>Skráin tilgreinir ekki keðjuna (playbookCode).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin tilgreinir ekki keðjuna (playbookCode).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookCodeMissingErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 3055617349" size-unit="char" translate="yes" xml:space="preserve">
           <source>The file is not a Bifrost playbook file (format %1, version %2 expected).</source>
           <target>Skráin er ekki Bifröst-keðjuskrá (búist var við sniði %1, útgáfu %2).</target>
           <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-keðjuskrá (búist var við sniði %1, útgáfu %2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 339686941" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file has no Playbook row for playbook %1.</source>
+          <target>Skráin inniheldur enga keðjulínu fyrir keðjuna %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Skráin inniheldur enga keðjulínu fyrir keðjuna %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookHeaderMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1350891370" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A row belongs to playbook %1, not to the playbook %2 named in the file.</source>
+          <target>Lína tilheyrir keðjunni %1 en ekki keðjunni %2 sem skráin tilgreinir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code of the row, %2 = playbook code of the file, is-IS=Lína tilheyrir keðjunni %1 en ekki keðjunni %2 sem skráin tilgreinir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookRowMismatchErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 3225884580" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table %1 does not belong in a playbook file.</source>

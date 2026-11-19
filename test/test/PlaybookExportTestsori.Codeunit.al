@@ -181,6 +181,93 @@ codeunit 96498 "Playbook Export Tests ori"
         Assert.ExpectedError('does not exist');
     end;
 
+    /// <summary>A file labelled with one playbook that carries another playbook's header or rows is refused before anything is written.</summary>
+    [Test]
+    procedure Scenario_ImportRefusesRowsOfAnotherPlaybook()
+    var
+        StepA: Record "Playbook Step ori";
+        StepB: Record "Playbook Step ori";
+        CodeA: Code[20];
+        CodeB: Code[20];
+        EnvelopeA: JsonObject;
+        EnvelopeB: JsonObject;
+        Mixed: JsonObject;
+    begin
+        Setup();
+        // Story #223 | Time: independent of Today/WorkDate | Risk: None
+        CodeA := BuildPlaybook();
+        CodeB := BuildPlaybook();
+        Commit(); // an asserterror rolls back; keep the playbooks so the unchanged checks mean something
+        EnvelopeB := TableJSONExport.ExportPlaybook(CodeB);
+        SetStepDescription(EnvelopeB, 'HIJACK');
+
+        // File labelled A with the header and rows of B: no Playbook row for A.
+        Mixed := EnvelopeB.Clone().AsObject();
+        Mixed.Replace('playbookCode', CodeA);
+        asserterror TableJSONImport.ImportPlaybook(Mixed);
+        Assert.ExpectedError('has no Playbook row for playbook');
+        StepB.Get(CodeB, 10);
+        Assert.AreNotEqual('HIJACK', StepB.Description, 'playbook B unchanged after header mismatch');
+
+        // File with A header and A rows plus a step row of B (matched by id): refused, nothing written.
+        EnvelopeA := TableJSONExport.ExportPlaybook(CodeA);
+        AppendStepRows(EnvelopeA, EnvelopeB);
+        asserterror TableJSONImport.ImportPlaybook(EnvelopeA);
+        Assert.ExpectedError('belongs to playbook');
+        StepB.Get(CodeB, 10);
+        Assert.AreNotEqual('HIJACK', StepB.Description, 'playbook B unchanged after row mismatch');
+        StepA.Get(CodeA, 10);
+        Assert.AreNotEqual('HIJACK', StepA.Description, 'playbook A unchanged after row mismatch');
+        Lib.Cleanup(CodeA);
+        Lib.Cleanup(CodeB);
+        TearDown();
+    end;
+
+    local procedure SetStepDescription(var Envelope: JsonObject; Value: Text)
+    var
+        Tables: JsonArray;
+        TableToken: JsonToken;
+        Rows: JsonToken;
+        Row: JsonToken;
+        Fields: JsonToken;
+        Token: JsonToken;
+    begin
+        Envelope.Get('tables', Token);
+        Tables := Token.AsArray();
+        Tables.Get(1, TableToken);
+        TableToken.AsObject().Get('rows', Rows);
+        foreach Row in Rows.AsArray() do begin
+            Row.AsObject().Get('fields', Fields);
+            begin
+                Fields.AsObject().Remove('Description');
+                Fields.AsObject().Add('Description', Value);
+            end;
+        end;
+    end;
+
+    local procedure AppendStepRows(var Target: JsonObject; Source: JsonObject)
+    var
+        TargetTables: JsonArray;
+        SourceTables: JsonArray;
+        TargetTable: JsonToken;
+        SourceTable: JsonToken;
+        TargetRows: JsonToken;
+        SourceRows: JsonToken;
+        Row: JsonToken;
+        Token: JsonToken;
+    begin
+        Target.Get('tables', Token);
+        TargetTables := Token.AsArray();
+        Source.Get('tables', Token);
+        SourceTables := Token.AsArray();
+        TargetTables.Get(1, TargetTable);
+        SourceTables.Get(1, SourceTable);
+        TargetTable.AsObject().Get('rows', TargetRows);
+        SourceTable.AsObject().Get('rows', SourceRows);
+        foreach Row in SourceRows.AsArray() do
+            TargetRows.AsArray().Add(Row.AsObject().Clone());
+    end;
+
     local procedure BuildPlaybook() PlaybookCode: Code[20]
     var
         FirstStep: Record "Playbook Step ori";
