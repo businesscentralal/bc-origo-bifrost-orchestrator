@@ -5,6 +5,8 @@
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
+using Origo.Bifrost;
+
 codeunit 10035576 "Help ori"
 {
     Access = Internal;
@@ -22,11 +24,22 @@ codeunit 10035576 "Help ori"
         exit(O.ToText());
     end;
 
+    /// <summary>Counts the message types this app registers, from the enum values in the app's object ID range, so the overview cannot go stale.</summary>
+    local procedure RosterCount() Count: Integer
+    var
+        MessageType: Enum "Message Type ori";
+        Ordinal: Integer;
+    begin
+        foreach Ordinal in MessageType.Ordinals() do
+            if (Ordinal >= 10035535) and (Ordinal <= 10035634) then
+                Count += 1;
+    end;
+
     local procedure BuildOverview(var O: TextBuilder)
     begin
         O.AppendLine('# Job Queue Orchestrator & Playbook Workflow Engine');
         O.AppendLine('');
-        O.AppendLine('26 Bifrost message types for managing job queues, building workflow playbooks, generating reports, and sending purchase orders, sales quotes and sales order confirmations.');
+        O.AppendLine(StrSubstNo('%1 Bifrost message types for managing job queues, building workflow playbooks, generating reports, and sending purchase orders, sales quotes and sales order confirmations.', RosterCount()));
         O.AppendLine('Call `Help.Implementation.Get` with `subject = "<type>"` for per-type technical guides.');
         O.AppendLine('');
         O.AppendLine('## Quick Decision Tree for AI Agents');
@@ -57,38 +70,40 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildSafeAuthoringGuide(O);
         BuildWorkedExamples(O);
-        O.AppendLine('## Message Types (26)');
+        O.AppendLine(StrSubstNo('## Message Types (%1)', RosterCount()));
         O.AppendLine('');
-        O.AppendLine('| Type | Description |');
-        O.AppendLine('|---|---|');
-        O.AppendLine('| `Orchestrator.Entry.Run` | Execute entry immediately (one-time) |');
-        O.AppendLine('| `Orchestrator.Entry.Restart` | Restart a failed/held entry |');
-        O.AppendLine('| `Orchestrator.Entry.Register` | Register a Job Queue Entry as an orchestrator entry |');
-        O.AppendLine('| `Orchestrator.Entry.Schedule` | Delete + immediately reschedule entry |');
-        O.AppendLine('| `Orchestrator.Email.Send` | Send an email (same params as Email.Draft.Set) |');
-        O.AppendLine('| `Orchestrator.Status.Get` | Get orchestrator health + entry counts |');
-        O.AppendLine('| `Orchestrator.Status.Restart` | Restart orchestrator unconditionally |');
-        O.AppendLine('| `Orchestrator.Status.RestartIfNeeded` | Restart only if not running |');
-        O.AppendLine('| `Orchestrator.JobQueueEntry.Restart` | Restart any Job Queue Entry |');
-        O.AppendLine('| `Orchestrator.JobQueueEntry.RestartIfNeeded` | Restart only if in Error/On Hold |');
-        O.AppendLine('| `Orchestrator.Playbook.Run` | Execute playbook, return results |');
-        O.AppendLine('| `Orchestrator.Playbook.Schedule` | Schedule playbook as an Orchestrator Entry with recurring template |');
-        O.AppendLine('| `Orchestrator.Playbook.Enqueue` | Queue playbook for one-time execution with custom data |');
-        O.AppendLine('| `Orchestrator.Playbook.Verify` | Read a playbook and return errors and warnings (unknown message type or role, bad template, ungated per-item write ...) before it runs |');
-        O.AppendLine('| `Orchestrator.Telegram.Message` | Send a Telegram message to the current user |');
-        O.AppendLine('| `Orchestrator.Report.List` | List available reports with metadata |');
-        O.AppendLine('| `Orchestrator.Report.Get` | Get report details, layouts, and saved preset |');
-        O.AppendLine('| `Orchestrator.ReportLayout.List` | List extension and user-defined report layouts |');
-        O.AppendLine('| `Orchestrator.ReportLayout.Get` | Export layout bytes without changing defaults |');
-        O.AppendLine('| `Orchestrator.Report.SaveAs` | Generate report output (PDF, Excel, Word, XML) |');
-        O.AppendLine('| `Purchase.Order.Send` | Send a purchase order through the Document Sending Profile |');
-        O.AppendLine('| `Sales.Quote.Send` | Send a sales quote through the Document Sending Profile |');
-        O.AppendLine('| `Sales.OrderConfirmation.Send` | Send a sales order confirmation through the Document Sending Profile |');
-        O.AppendLine('| `Orchestrator.Report.Run` | Run a processing-only report (batch job) |');
-        O.AppendLine('| `Sales.OrderConfirmation.Pdf` | Print a sales order confirmation (Report Selections usage S.Order) as PDF; when Archive Orders is on, stores a Sales Header Archive version that cannot be removed over MCP |');
-        O.AppendLine('| `Purchase.Order.Pdf` | Print a purchase order (Report Selections usage P.Order) as PDF; writes an interaction log entry when an interaction template is set up. The standard report does not archive the order on this call |');
-        O.AppendLine('| `Orchestrator.Workspace.Preview` | Preview seeded workspace (_sys dates, _who user context) |');
-        O.AppendLine('| `Help.Orchestrator.Get` | This help document |');
+        O.AppendLine('| Type | Required parameters | Description |');
+        O.AppendLine('|---|---|---|');
+        O.AppendLine('| `Orchestrator.Entry.Run` | `id` | Execute entry immediately (one-time) |');
+        O.AppendLine('| `Orchestrator.Entry.Restart` | `id` | Restart a failed/held entry |');
+        O.AppendLine('| `Orchestrator.Entry.Register` | `jobQueueEntryId` | Register a Job Queue Entry as an orchestrator entry |');
+        O.AppendLine('| `Orchestrator.Entry.Schedule` | `id` | Delete + immediately reschedule entry |');
+        O.AppendLine('| `Orchestrator.Email.Send` | `outboxSystemId` | Send an email (same params as Email.Draft.Set) |');
+        O.AppendLine('| `Orchestrator.Status.Get` | none | Get orchestrator health + entry counts |');
+        O.AppendLine('| `Orchestrator.Status.Restart` | none | Restart orchestrator unconditionally |');
+        O.AppendLine('| `Orchestrator.Status.RestartIfNeeded` | none | Restart only if not running |');
+        O.AppendLine('| `Orchestrator.JobQueueEntry.Restart` | `id` | Restart any Job Queue Entry |');
+        O.AppendLine('| `Orchestrator.JobQueueEntry.RestartIfNeeded` | `id` | Restart only if in Error/On Hold |');
+        O.AppendLine('| `Orchestrator.Playbook.Run` | `playbookCode` | Execute playbook, return results |');
+        O.AppendLine('| `Orchestrator.Playbook.Schedule` | `playbookCode`, `recurringTemplateCode` | Schedule playbook as an Orchestrator Entry with recurring template |');
+        O.AppendLine('| `Orchestrator.Playbook.Enqueue` | `playbookCode` | Queue playbook for one-time execution with custom data |');
+        O.AppendLine('| `Orchestrator.Playbook.Verify` | `playbookCode` | Read a playbook and return errors and warnings (unknown message type or role, bad template, ungated per-item write ...) before it runs |');
+        O.AppendLine('| `Orchestrator.Telegram.Message` | `message` | Send a Telegram message to the current user |');
+        O.AppendLine('| `Orchestrator.Report.List` | none | List available reports with metadata |');
+        O.AppendLine('| `Orchestrator.Report.Get` | `reportId` | Get report details, layouts, and saved preset |');
+        O.AppendLine('| `Orchestrator.ReportLayout.List` | `reportId` | List extension and user-defined report layouts |');
+        O.AppendLine('| `Orchestrator.ReportLayout.Get` | `reportId`, `name` | Export layout bytes without changing defaults |');
+        O.AppendLine('| `Orchestrator.Report.SaveAs` | `reportId` (`format` optional, default PDF) | Generate report output (PDF, Excel, Word, XML) |');
+        O.AppendLine('| `Purchase.Order.Send` | `documentNo` or `documentId` | Send a purchase order through the Document Sending Profile |');
+        O.AppendLine('| `Sales.Quote.Send` | `documentNo` or `documentId` | Send a sales quote through the Document Sending Profile |');
+        O.AppendLine('| `Sales.OrderConfirmation.Send` | `documentNo` or `documentId` | Send a sales order confirmation through the Document Sending Profile |');
+        O.AppendLine('| `Orchestrator.Report.Run` | `reportId` | Run a processing-only report (batch job) |');
+        O.AppendLine('| `Sales.OrderConfirmation.Pdf` | `orderNo` or `orderId` | Print a sales order confirmation (Report Selections usage S.Order) as PDF; when Archive Orders is on, stores a Sales Header Archive version that cannot be removed over MCP |');
+        O.AppendLine('| `Purchase.Order.Pdf` | `orderNo` or `orderId` | Print a purchase order (Report Selections usage P.Order) as PDF; writes an interaction log entry when an interaction template is set up. The standard report does not archive the order on this call |');
+        O.AppendLine('| `Orchestrator.Workspace.Preview` | none | Preview seeded workspace (_sys dates, _who user context) |');
+        O.AppendLine('| `Orchestrator.ReportLayout.Set` | `reportId`, `name`, `layoutFormat` (+ `layoutBase64` or `stagingId` for an import) | Import a user-defined report layout or change the report default layout |');
+        O.AppendLine('| `Sales.Quote.Pdf` | `quoteNo` or `quoteId` | Print a sales quote as PDF |');
+        O.AppendLine('| `Help.Orchestrator.Get` | none | This help document |');
         O.AppendLine('');
         O.AppendLine('## Run Reporting — `_run` and `_steps`');
         O.AppendLine('');

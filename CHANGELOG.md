@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #228
+
+- #228 AC01 / codeunit 10035576 `Help ori`: the Help.Orchestrator.Get overview counts the registered message types from the enum values of this app (no hard-coded 26; the roster is 30) and the table lists `Orchestrator.ReportLayout.Set` too. Tests in codeunit 96422 `Misc Msg Smoke Tests` compare the count and every row with the enum.
+- #228 AC02: the overview table has a Required parameters column for every type (`name` for ReportLayout.Get, `reportId` and optional `format` for Report.SaveAs).
+- #228 AC03: help text only, no behaviour change.
+
 ### Added — #223
 
 - #223 AC01 / codeunits 10035558 `Table JSON Export ori` (`ExportPlaybook`) and 10035563 `Table JSON Import ori` (`ImportPlaybook`), page 10035551 `Playbooks ori` actions Export Playbook / Import Playbook: a playbook file (`bifrost-playbook`, version 1) holds the playbook, its steps, conditions and Transform rows; import confirms first and stops at the first failed row.
