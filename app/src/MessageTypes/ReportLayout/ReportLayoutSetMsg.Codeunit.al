@@ -97,6 +97,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parts.AddContractError(Errors, 'Request must include "<key>".', 'reportId, name or layoutFormat is missing.', 'Send reportId, name, layoutFormat and one of layoutBase64 or stagingId.');
         Parts.AddContractError(Errors, 'Layout format <layoutFormat> is not valid for report <reportId>.', 'layoutFormat is not Word, Excel, RDLC or RDL.', 'Send one of those formats.');
@@ -113,6 +114,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
         Parts.AddContractError(Errors, 'Layout <name> not found on report <reportId>.', 'setAsDefault without a layout file names a layout (and appId) the report does not have.', 'Find the name and appId with Orchestrator.ReportLayout.List. Nothing is changed.');
         Parts.AddContractError(Errors, 'More than one layout named <name> exists on report <reportId>. Send "appId".', 'setAsDefault without a layout file and without appId matches layouts from more than one app.', 'Send the appId of the layout from Orchestrator.ReportLayout.List.');
         Parts.AddContractError(Errors, 'Layout <name> belongs to company <companyName> and cannot be the default in company <current company>.', 'The user-defined layout is limited to another company.', 'Make it the default in that company, or import it for all companies (no companyName).');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current company>.', 'A layout with that name is limited to another company. The name is unique per report across the tenant, so the import would replace and re-scope that company''s layout.', 'Use another layout name. The other company''s layout is not changed. Get and setAsDefault for such a layout answer "Layout <name> not found", because the layout list only shows layouts for the current company.'));
         Parts.AddContractError(Errors, '"<key>" must be true or false.', 'setAsDefault or clearDefault is an object or array.', 'Send true or false.');
         Parts.AddRuntimeError(Errors, 'layoutBase64 is not valid base64, or the layout import fails. A failed import of a staged layout leaves the staging row in place.', 'Send the file content base64-encoded, in the format named by layoutFormat.');
         exit(true);
