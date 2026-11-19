@@ -129,6 +129,10 @@ codeunit 10035600 "Report Layout Handler ori"
         // Report Layouts page's Replace Layout action does (Report Layouts Impl. InsertNewLayout).
         GetCurrentDefault(ReportMeta, PreviousDefaultName, PreviousDefaultAppId);
         Replacing := TenantReportLayout.Get(ReportId, LayoutName, EmptyGuid);
+        // The key has no company, so a layout limited to another company holds this name for the whole tenant.
+        // It must not be replaced or re-scoped from here (#237); nothing has been changed yet.
+        if Replacing and (TenantReportLayout."Company Name" <> '') and (TenantReportLayout."Company Name" <> CompanyName()) then
+            Error(LayoutNameTakenOtherCompanyErr, LayoutName, ReportId, CompanyName());
         if Replacing then begin
             ActionText := 'Replaced';
             TenantReportLayout.Delete(true);
@@ -466,5 +470,6 @@ codeunit 10035600 "Report Layout Handler ori"
         LayoutNotFoundErr: Label 'Layout %1 not found on report %2.', Comment = 'is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.';
         AmbiguousLayoutErr: Label 'More than one layout named %1 exists on report %2. Send "appId".', Comment = 'is-IS=Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".';
         LayoutOtherCompanyErr: Label 'Layout %1 belongs to company %2 and cannot be the default in company %3.', Comment = 'is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.';
+        LayoutNameTakenOtherCompanyErr: Label 'Layout %1 on report %2 is limited to another company and cannot be replaced from company %3. Use another layout name.', Comment = 'is-IS=Útlit %1 í skýrslu %2 er takmarkað við annað fyrirtæki og er ekki hægt að skipta um það úr fyrirtækinu %3. Notaðu annað heiti á útlitið.';
         NotBooleanErr: Label '"%1" must be true or false.', Comment = 'is-IS="%1" verður að vera true eða false.';
 }

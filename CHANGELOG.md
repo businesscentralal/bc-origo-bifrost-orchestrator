@@ -7,6 +7,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #237
+
+- #237 AC01 / codeunit 10035600 `Report Layout Handler ori`: `Orchestrator.ReportLayout.Set` by name no longer replaces or re-scopes a user-defined layout limited to another company; it is refused with `Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current>. Use another layout name.` and nothing is changed (is-IS translated).
+- #237 AC02: `ReportLayout.Get` and `setAsDefault` for another company's layout keep answering `Layout <name> not found on report <reportId>` (the list only shows the current company's layouts, so the other company is not disclosed); the Set contract help now says so.
+- #237 AC03: tests `SetByNameDoesNotReplaceOtherCompanyLayout` and `SetAsDefaultDoesNotSeeOtherCompanyLayout` in codeunit 96494 (no new object IDs).
+
 ### Fixed — #231
 
 - #231: Import Playbook now writes the four playbook tables under the administrator's BC permissions, with field validation and table triggers, even when ChangeLog Write Guard is Blocked and no Change Log coverage exists. The UI import does not change guard settings. Generic table imports, message-type writes and exports retain their guards. Regression tests cover the page import, cancellation, all four tables, guarded imports and malformed/cross-playbook files.

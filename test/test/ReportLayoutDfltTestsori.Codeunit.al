@@ -231,6 +231,65 @@ codeunit 96494 "Report Layout Dflt Tests ori"
         Assert.IsFalse(TenantSelection.Get(Report::"Layout Sample Report ori", CompanyName(), EmptyGuid), 'No selection written');
     end;
 
+    /// <summary>Set by name in this company never replaces or re-scopes a layout limited to another company (#237 AC01/AC03).</summary>
+    [Test]
+    procedure SetByNameDoesNotReplaceOtherCompanyLayout()
+    var
+        TenantLayout: Record "Tenant Report Layout";
+        Request: JsonObject;
+        LayoutName: Text[250];
+        EmptyGuid: Guid;
+    begin
+        // [GIVEN] A user layout limited to another company
+        ResetDefault();
+        LayoutName := NewName('XDEF-OWN-');
+        InsertOtherCompanyLayout(LayoutName);
+        // [WHEN] Set with the same name is sent in this company, without companyName
+        Request := ImportRequest(LayoutName);
+        asserterror Execute(Request);
+        // [THEN] It is refused and the other company's row keeps its company and description
+        Assert.ExpectedError('is limited to another company and cannot be replaced');
+        Assert.IsTrue(TenantLayout.Get(Report::"Layout Sample Report ori", LayoutName, EmptyGuid), 'Row still exists');
+        Assert.AreEqual('XDEF OTHER COMPANY', TenantLayout."Company Name", 'Company unchanged');
+        Assert.AreEqual('XDEF other description', TenantLayout.Description, 'Description unchanged');
+        Cleanup(LayoutName);
+    end;
+
+    /// <summary>Select-default for a layout limited to another company answers not found and writes nothing (#237 AC02/AC03).</summary>
+    [Test]
+    procedure SetAsDefaultDoesNotSeeOtherCompanyLayout()
+    var
+        TenantSelection: Record "Tenant Report Layout Selection";
+        TenantLayout: Record "Tenant Report Layout";
+        LayoutName: Text[250];
+        EmptyGuid: Guid;
+    begin
+        ResetDefault();
+        LayoutName := NewName('XDEF-OSD-');
+        InsertOtherCompanyLayout(LayoutName);
+        asserterror Execute(SelectRequest(LayoutName));
+        Assert.ExpectedError('not found on report');
+        Assert.IsFalse(TenantSelection.Get(Report::"Layout Sample Report ori", CompanyName(), EmptyGuid), 'No selection written');
+        Assert.IsTrue(TenantLayout.Get(Report::"Layout Sample Report ori", LayoutName, EmptyGuid), 'Row still exists');
+        Assert.AreEqual('XDEF OTHER COMPANY', TenantLayout."Company Name", 'Company unchanged');
+        Cleanup(LayoutName);
+    end;
+
+    local procedure InsertOtherCompanyLayout(LayoutName: Text[250])
+    var
+        TenantLayout: Record "Tenant Report Layout";
+        EmptyGuid: Guid;
+    begin
+        TenantLayout.Init();
+        TenantLayout."Report ID" := Report::"Layout Sample Report ori";
+        TenantLayout.Name := LayoutName;
+        TenantLayout."App ID" := EmptyGuid;
+        TenantLayout."Layout Format" := TenantLayout."Layout Format"::RDLC;
+        TenantLayout.Description := 'XDEF other description';
+        TenantLayout."Company Name" := 'XDEF OTHER COMPANY';
+        TenantLayout.Insert(true);
+    end;
+
     /// <summary>Without setAsDefault an import leaves the default alone and reports isDefault false (unchanged behaviour).</summary>
     [Test]
     procedure ImportWithoutSetAsDefaultKeepsDefault()
