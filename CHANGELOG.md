@@ -14,6 +14,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #242
+
+- #242: test only, no new objects, no app change. Codeunit 96446 `Scheduler Wizard Reg Tests ori` (AC02/AC03) no longer snapshots `SystemModifiedAt` of every Job Queue Entry; it compares only the existence (SystemId) of Job Queue Entries that run Orchestrator codeunits, so a running Job Queue on the tenant no longer makes it flaky.
+
 ### Fixed — #237
 
 - #237 AC01 / codeunit 10035600 `Report Layout Handler ori`: `Orchestrator.ReportLayout.Set` by name no longer replaces or re-scopes a user-defined layout limited to another company; it is refused with `Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current>. Use another layout name.` and nothing is changed (is-IS translated).
