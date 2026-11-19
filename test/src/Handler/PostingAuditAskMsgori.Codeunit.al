@@ -99,7 +99,7 @@ codeunit 96460 "Posting Audit Ask Msg ori" implements "Msg Interface ori", "Msg 
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('question', 'string', true, 'The audit question, with the customer already filled in.'));
-        Parameters.Add(ContractMgt.Parameter('record', 'object', true, 'The customer record context with tableName and systemId.'));
+        Parameters.Add(ContractMgt.Parameter('subject', 'object', true, 'The customer record context with table and systemId, as LLM.Prompt.Ask declares it.'));
         Parameters.Add(ContractMgt.Parameter('limits', 'object', false, 'Explicit tool-call limit.'));
         Parameters.Add(ContractMgt.Parameter('responseSchema', 'object', true, 'Verdict and findings schema.'));
         exit(true);
@@ -206,8 +206,8 @@ codeunit 96460 "Posting Audit Ask Msg ori" implements "Msg Interface ori", "Msg 
         FailNoTok: Label 'Z135B', Locked = true;
         UnknownNoTok: Label 'Z135C', Locked = true;
         ErrorNoTok: Label 'Z135D', Locked = true;
-        PassResponseTok: Label '{"status":"Success","schemaValid":true,"stopReason":"answered","data":{"verdict":"pass","findings":[]}}', Locked = true;
-        FailResponseTok: Label '{"status":"Success","schemaValid":true,"stopReason":"answered","data":{"verdict":"fail","findings":["Payment Terms Code"]}}', Locked = true;
-        UnknownResponseTok: Label '{"status":"Success","schemaValid":true,"stopReason":"answered","data":{"verdict":"unknown","findings":["Gen. Bus. Posting Group"]}}', Locked = true;
+        PassResponseTok: Label '{"status":"Success","schemaValid":true,"stopReason":"completed","data":{"verdict":"pass","findings":[]}}', Locked = true;
+        FailResponseTok: Label '{"status":"Success","schemaValid":true,"stopReason":"completed","data":{"verdict":"fail","findings":["Payment Terms Code"]}}', Locked = true;
+        UnknownResponseTok: Label '{"status":"Success","schemaValid":true,"stopReason":"completed","data":{"verdict":"unknown","findings":["Gen. Bus. Posting Group"]}}', Locked = true;
         ErrorResponseTok: Label '{"status":"Error","code":"ModelError","error":"The model could not answer."}', Locked = true;
 }

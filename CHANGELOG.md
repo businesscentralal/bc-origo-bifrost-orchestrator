@@ -14,6 +14,12 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #209
+
+- #209: no new objects. Codeunit 10035576 `Help ori` (, example 4 POSTING-AUDIT) and test library `Playbook Example Library ori`: the Ask step 30 now sends `subject` `{"table":"Customer","systemId":"@_current.id"}`, the request key `LLM.Prompt.Ask` declares (`record`/`tableName` were refused with `UnknownRequestKey` on tenants with the real Ask), and carries the Success condition `stopReason Equals completed` (no `AskStopReasonUnchecked`). Test fixture `Test.Orchestrator.PostingAudit` (PostingAuditAskMsgori) declares `subject` and answers `stopReason` `completed`, the values the real Ask returns. Decision by Claude Code (acting Architect) 19.11.2026, option A.
+- #209 build: fields `Confirmation Note` and `Outcome Note` (table `Playbook Step Log ori`) and `Max Count` (table `Playbook Step ori`) declare `AllowInCustomizations` (AsReadOnly / AsReadWrite), which clears the three AS0139 warnings also present on main.
+- #209 tests: `96411 Orchestrator Unit Tests` removes stale Ok Sample Job Queue Entries before the enqueue test; `96419 Status Msg Tests` and `96443 First Schedule Tests ori` create the Orchestrator setup row when the tenant has none (new procedure `EnsureSchedulerSetup` in test library 96413 `Library Orchestrator`). The 96411 category filter and the 96480/96481 Report Selections seeding were delivered in #210. 96456 needs a Disabled-isolation test runner (130451).
+
 ### Fixed — #231
 
 - #231: Import Playbook now writes the four playbook tables under the administrator's BC permissions, with field validation and table triggers, even when ChangeLog Write Guard is Blocked and no Change Log coverage exists. The UI import does not change guard settings. Generic table imports, message-type writes and exports retain their guards. Regression tests cover the page import, cancellation, all four tables, guarded imports and malformed/cross-playbook files.
