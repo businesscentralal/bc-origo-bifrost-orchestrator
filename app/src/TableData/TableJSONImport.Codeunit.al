@@ -246,8 +246,9 @@ codeunit 10035563 "Table JSON Import ori"
                 if GetTableNo(TableFile) = TableNo then begin
                     Clear(TableResult);
                     ClearLastError();
-                    if not TryImportTable(TableFile, TableResult) then
+                    if not TryCheckTable(TableFile) then
                         ThrowPlaybookImportError(GetLastErrorText());
+                    TableResult := ImportTable(TableFile, false, true);
                     TableResult.Remove('dryRun');
                     TableResult.Remove('failed');
                     TableResult.Remove('errors');
@@ -259,10 +260,11 @@ codeunit 10035563 "Table JSON Import ori"
         Result.Add('tables', TableResults);
     end;
 
+    /// <summary>Reads every row of the table without writing (the first pass of the import); a TryFunction cannot write.</summary>
     [TryFunction]
-    local procedure TryImportTable(TableFile: JsonObject; var TableResult: JsonObject)
+    local procedure TryCheckTable(TableFile: JsonObject)
     begin
-        TableResult := ImportTable(TableFile, false, true);
+        ImportTable(TableFile, true, true);
     end;
 
     /// <summary>
