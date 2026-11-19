@@ -116,10 +116,19 @@ codeunit 96499 "Report Contract 235 Tests ori"
         DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", Argument);
         Assert.AreEqual(ExpectedMime, Argument."Content Type", 'Render valid Office bytes');
         Argument."Response Content".CreateInStream(Input);
+        if OutputFormat = 'Excel' then begin
+            Request := LayoutRequest('FixtureExcel');
+            Request.Add('appId', '194ecd04-5688-4af6-94bc-732c714251fc');
+            Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Get", Request, LanguageId);
+            Assert.AreEqual(ExpectedMime, GetText(Response, 'mimeType'), 'Extension Excel MIME type');
+        end;
         LayoutName := CopyStr('X235-OFFICE-' + Format(CreateGuid(), 0, 4), 1, MaxStrLen(LayoutName));
         Request := LayoutRequest(LayoutName);
         Request.Add('layoutFormat', OutputFormat);
-        Request.Add('layoutBase64', Base64Convert.ToBase64(Input));
+        if OutputFormat = 'Excel' then
+            Request.Add('layoutBase64', GetText(Response, 'layoutBase64'))
+        else
+            Request.Add('layoutBase64', Base64Convert.ToBase64(Input));
         Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Set", Request, LanguageId);
         Assert.AreEqual('Created', GetText(Response, 'action'), 'Owned Office layout imported');
         Response := Dispatch("Message Type ori"::"Orchestrator.ReportLayout.Get", LayoutRequest(LayoutName), LanguageId);

@@ -47,6 +47,14 @@ report 96455 "Layout Sample Report ori"
 
     rendering
     {
+        layout(FixtureExcel)
+        {
+            Type = Excel;
+            LayoutFile = 'src/Samples/Layout235.xlsx';
+            Caption = 'Owned Excel layout fixture', Locked = true;
+            Summary = 'Issue 235 Excel layout MIME fixture', Locked = true;
+        }
+
         layout(Fixture)
         {
             Type = RDLC;

@@ -83,6 +83,7 @@ codeunit 96458 "Report Layout Stage Tests ori"
     procedure UnknownOrTakenStagingIdIsRefused()
     var
         Request: JsonObject;
+        Response: JsonObject;
         LayoutName: Text[250];
         StagingId: Guid;
         Exported: Text;
@@ -91,8 +92,12 @@ codeunit 96458 "Report Layout Stage Tests ori"
         LayoutName := CopyStr('XSTG-UNK-' + Format(CreateGuid(), 0, 4), 1, MaxStrLen(LayoutName));
         Request := SetRequest(LayoutName);
         Request.Add('stagingId', Format(CreateGuid(), 0, 4));
-        asserterror Execute(Request);
-        Assert.ExpectedError('was not found or has already been taken');
+        Response := Execute(Request);
+        Assert.AreEqual('Error', GetText(Response, 'status'), 'Refusal status');
+        Assert.AreEqual('RecordNotFound', GetText(Response, 'code'), 'Stable missing staging code');
+        Assert.AreEqual('stagingId', GetText(Response, 'parameter'), 'Refusal identifies the staging parameter');
+        Assert.IsTrue(GetText(Response, 'error').Contains('was not found or has already been taken'), 'Explains absent staging row');
+        Assert.AreNotEqual('', GetText(Response, 'nextStep'), 'Restaging guidance');
         Assert.IsFalse(LayoutExists(LayoutName), 'Nothing imported');
         // Taken: the first call consumes the row, the second is refused
         StagingId := CreateStagingRow(Exported);
@@ -100,8 +105,12 @@ codeunit 96458 "Report Layout Stage Tests ori"
         Request.Add('stagingId', Format(StagingId, 0, 4));
         Execute(Request);
         DeleteLayout(LayoutName);
-        asserterror Execute(Request);
-        Assert.ExpectedError('was not found or has already been taken');
+        Response := Execute(Request);
+        Assert.AreEqual('Error', GetText(Response, 'status'), 'Refusal status');
+        Assert.AreEqual('RecordNotFound', GetText(Response, 'code'), 'Stable missing staging code');
+        Assert.AreEqual('stagingId', GetText(Response, 'parameter'), 'Refusal identifies the staging parameter');
+        Assert.IsTrue(GetText(Response, 'error').Contains('was not found or has already been taken'), 'Explains absent staging row');
+        Assert.AreNotEqual('', GetText(Response, 'nextStep'), 'Restaging guidance');
         Assert.IsFalse(LayoutExists(LayoutName), 'Nothing imported for a taken id');
     end;
 
