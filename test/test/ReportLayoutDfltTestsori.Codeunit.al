@@ -277,17 +277,13 @@ codeunit 96494 "Report Layout Dflt Tests ori"
 
     local procedure InsertOtherCompanyLayout(LayoutName: Text[250])
     var
-        TenantLayout: Record "Tenant Report Layout";
-        EmptyGuid: Guid;
+        Request: JsonObject;
     begin
-        TenantLayout.Init();
-        TenantLayout."Report ID" := Report::"Layout Sample Report ori";
-        TenantLayout.Name := LayoutName;
-        TenantLayout."App ID" := EmptyGuid;
-        TenantLayout."Layout Format" := TenantLayout."Layout Format"::RDLC;
-        TenantLayout.Description := 'XDEF other description';
-        TenantLayout."Company Name" := 'XDEF OTHER COMPANY';
-        TenantLayout.Insert(true);
+        // Created through the handler with a real layout file; the platform refuses an empty RDLC layout.
+        Request := ImportRequest(LayoutName);
+        Request.Add('companyName', 'XDEF OTHER COMPANY');
+        Request.Add('description', 'XDEF other description');
+        Execute(Request);
     end;
 
     /// <summary>Without setAsDefault an import leaves the default alone and reports isDefault false (unchanged behaviour).</summary>
