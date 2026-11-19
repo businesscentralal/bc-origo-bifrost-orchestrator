@@ -101,7 +101,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('| `Sales.OrderConfirmation.Pdf` | `orderNo` or `orderId` | Print a sales order confirmation (Report Selections usage S.Order) as PDF; when Archive Orders is on, stores a Sales Header Archive version that cannot be removed over MCP |');
         O.AppendLine('| `Purchase.Order.Pdf` | `orderNo` or `orderId` | Print a purchase order (Report Selections usage P.Order) as PDF; writes an interaction log entry when an interaction template is set up. The standard report does not archive the order on this call |');
         O.AppendLine('| `Orchestrator.Workspace.Preview` | none | Preview seeded workspace (_sys dates, _who user context) |');
-        O.AppendLine('| `Orchestrator.ReportLayout.Set` | `reportId`, `name`, `layoutFormat` (+ `layoutBase64` or `stagingId` for an import) | Import a user-defined report layout or change the report default layout |');
+        O.AppendLine('| `Orchestrator.ReportLayout.Set` | `reportId` + one of: import `name`, `layoutFormat` and `layoutBase64` or `stagingId`; select default `name` and `setAsDefault: true` (no `layoutFormat`); clear default `clearDefault: true` (no `name`, `layoutFormat` or layout source) | Import a user-defined report layout, select an existing layout as the report default, or clear the report default |');
         O.AppendLine('| `Sales.Quote.Pdf` | `quoteNo` or `quoteId` | Print a sales quote as PDF |');
         O.AppendLine('| `Help.Orchestrator.Get` | none | This help document |');
         O.AppendLine('');

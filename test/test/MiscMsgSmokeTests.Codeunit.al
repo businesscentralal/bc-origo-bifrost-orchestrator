@@ -79,6 +79,10 @@ codeunit 96422 "Misc Msg Smoke Tests"
         Assert.IsTrue(Overview.Contains('| Type | Required parameters | Description |'), 'Table has a Required parameters column');
         Assert.IsTrue(Overview.Contains('| `Orchestrator.ReportLayout.Get` | `reportId`, `name` |'), 'ReportLayout.Get names reportId and name');
         Assert.IsTrue(Overview.Contains('| `Orchestrator.Report.SaveAs` | `reportId` (`format` optional'), 'Report.SaveAs names reportId and format');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.ReportLayout.Set` | `reportId` + one of:'), 'ReportLayout.Set lists alternatives');
+        Assert.IsTrue(Overview.Contains('import `name`, `layoutFormat` and `layoutBase64` or `stagingId`'), 'ReportLayout.Set describes the import path');
+        Assert.IsTrue(Overview.Contains('select default `name` and `setAsDefault: true` (no `layoutFormat`)'), 'ReportLayout.Set describes select-default');
+        Assert.IsTrue(Overview.Contains('clear default `clearDefault: true` (no `name`, `layoutFormat` or layout source)'), 'ReportLayout.Set describes clear-default');
         Assert.IsTrue(Overview.Contains('| `Orchestrator.Report.Get` | `reportId` |'), 'Report.Get names reportId');
         Assert.IsTrue(Overview.Contains('| `Orchestrator.Telegram.Message` | `message` |'), 'Telegram names message');
         Assert.IsTrue(Overview.Contains('| `Orchestrator.Status.Get` | none |'), 'A type without required parameters says none');
