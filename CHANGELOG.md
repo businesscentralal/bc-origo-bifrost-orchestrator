@@ -9,7 +9,7 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ### Fixed — #231
 
-- #231 / codeunit 10035563 `Table JSON Import ori` (`ImportPlaybook`): when a playbook row fails and the Change Log setup does not cover all four playbook tables (Playbook, Playbook Step, Playbook Condition, Playbook Transform), the error now names every uncovered table and the one-time setup, instead of only the first field Foundation's write guard meets. Test: `Scenario_ImportErrorNamesUncoveredPlaybookTables` in codeunit 96498. is-IS text in the label comment.
+- #231: Import Playbook now writes the four playbook tables under the administrator's BC permissions, with field validation and table triggers, even when ChangeLog Write Guard is Blocked and no Change Log coverage exists. The UI import does not change guard settings. Generic table imports, message-type writes and exports retain their guards. Regression tests cover the page import, cancellation, all four tables, guarded imports and malformed/cross-playbook files.
 
 ### Added — #223
 

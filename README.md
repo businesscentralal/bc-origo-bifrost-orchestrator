@@ -57,6 +57,20 @@ scheduled Job Queue Entry does. It is the successor of *Origo Cloud Events Orche
 
 ---
 
+## Move a playbook between companies
+
+On **Bifrost Playbooks**, choose **Related > Tools > Export Playbook** to download a JSON file,
+then **Import Playbook** in the destination company and confirm. The file includes the playbook,
+steps, conditions and Transform mappings. Existing rows with matching keys are updated; rows
+absent from the file are kept.
+
+Import Playbook uses your Business Central permissions and field validation. It works with the
+default **Blocked** ChangeLog Write Guard without adding Change Log coverage. It does not change
+the guard setup. Export, generic table imports and writes through Bifröst message types retain
+their existing guards.
+
+---
+
 ## Benefits
 
 - **One place to watch the job queue.** Restart policy, failure counter, weekday windows and

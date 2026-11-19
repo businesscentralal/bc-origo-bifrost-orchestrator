@@ -12,12 +12,15 @@ codeunit 96498 "Playbook Export Tests ori"
     TestPermissions = Disabled;
 
     var
+        TempSavedCoverage: Record "Change Log Setup (Table)" temporary;
         Assert: Codeunit "Library Assert";
         Lib: Codeunit "Playbook Test Library ori";
         TableJSONExport: Codeunit "Table JSON Export ori";
         TableJSONImport: Codeunit "Table JSON Import ori";
+        SavedGuard: Text;
         WasActivated: Boolean;
-        AddedTables: List of [Integer];
+        SavedLanguage: Integer;
+        ConfirmImport: Boolean;
 
     /// <summary>AC01 and AC02: the file holds the playbook, its steps and its Transform rows, and Transform steps carry no MessageType.</summary>
     [Test]
@@ -67,7 +70,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Envelope := TableJSONExport.ExportPlaybook(PlaybookCode);
         AddLegacyMessageType(Envelope, '0');
         Lib.Cleanup(PlaybookCode);
-        Result := TableJSONImport.ImportPlaybook(Envelope);
+        Result := TableJSONImport.ImportPlaybookFromUI(Envelope);
         Assert.AreEqual(PlaybookCode, Text(Result, 'playbookCode'), 'result names the playbook');
         Step.Get(PlaybookCode, 10);
         Assert.AreEqual(Step."Step Kind"::Transform, Step."Step Kind", 'step kind');
@@ -96,7 +99,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Step.Insert(true);
         Envelope := TableJSONExport.ExportPlaybook(PlaybookCode);
         Lib.Cleanup(PlaybookCode);
-        TableJSONImport.ImportPlaybook(Envelope);
+        TableJSONImport.ImportPlaybookFromUI(Envelope);
         Step.Get(PlaybookCode, 10);
         Assert.AreEqual("Message Type ori"::"Data.Records.Get", Step."Message Type", 'Message Type is kept');
         Assert.AreEqual('{"tableName":"Playbook ori"}', Step.GetRequestTemplate(), 'Request template is kept');
@@ -112,10 +115,10 @@ codeunit 96498 "Playbook Export Tests ori"
         Transform: Record "Playbook Transform ori";
         Verify: Codeunit "Playbook Verify ori";
         Runner: Codeunit "Playbook Runner ori";
-        PlaybookCode: Code[20];
-        Envelope: JsonObject;
         InitialRequest: BigText;
         Response: BigText;
+        PlaybookCode: Code[20];
+        Envelope: JsonObject;
         InstanceId: Guid;
         FirstResponse: Text;
         FirstSteps: Integer;
@@ -136,7 +139,7 @@ codeunit 96498 "Playbook Export Tests ori"
         Lib.Cleanup(PlaybookCode);
         Transform.SetRange("Playbook Code", PlaybookCode);
         Assert.IsTrue(Transform.IsEmpty(), 'deleted');
-        TableJSONImport.ImportPlaybook(Envelope);
+        TableJSONImport.ImportPlaybookFromUI(Envelope);
         Transform.SetRange("Playbook Code", PlaybookCode);
         Assert.AreEqual(2, Transform.Count(), 'Transform rows are back');
         Verify.GetFindings(PlaybookCode, Findings);
@@ -166,7 +169,7 @@ codeunit 96498 "Playbook Export Tests ori"
         // Story #223 | Time: independent of Today/WorkDate | Risk: None
         Envelope.Add('format', 'bifrost-table-data');
         Envelope.Add('version', 1);
-        asserterror TableJSONImport.ImportPlaybook(Envelope);
+        asserterror TableJSONImport.ImportPlaybookFromUI(Envelope);
         Assert.ExpectedError('not a Bifrost playbook file');
         Clear(Envelope);
         Foreign.Add('tableNo', Database::"Test Run Marker");
@@ -175,49 +178,136 @@ codeunit 96498 "Playbook Export Tests ori"
         Envelope.Add('version', 1);
         Envelope.Add('playbookCode', 'X');
         Envelope.Add('tables', Tables);
-        asserterror TableJSONImport.ImportPlaybook(Envelope);
+        asserterror TableJSONImport.ImportPlaybookFromUI(Envelope);
         Assert.ExpectedError('does not belong in a playbook file');
         asserterror TableJSONExport.ExportPlaybook('NOPE-223');
         Assert.ExpectedError('does not exist');
     end;
 
-    /// <summary>#231: a failed row on a company whose Change Log setup misses a playbook table names every uncovered table and the one-time setup; with full coverage the error stays unchanged.</summary>
+    /// <summary>#231 AC01: the page imports all four tables with the default blocked guard and no coverage.</summary>
     [Test]
-    procedure Scenario_ImportErrorNamesUncoveredPlaybookTables()
-    var
-        Coverage: Record "Change Log Setup (Table)";
-        CodeA: Code[20];
-        CodeB: Code[20];
-        EnvelopeA: JsonObject;
-        EnvelopeB: JsonObject;
-        ErrorText: Text;
+    [HandlerFunctions('ImportConfirmHandler,ImportMessageHandler')]
+    procedure Scenario_AC01_PageImportsWithoutChangeLogCoverage()
     begin
+        VerifyPageImport(true);
+    end;
+
+    /// <summary>#231 AC01: declining the UI confirmation writes nothing.</summary>
+    [Test]
+    [HandlerFunctions('ImportConfirmHandler')]
+    procedure Scenario_AC01_CancelledPageImportWritesNothing()
+    begin
+        VerifyPageImport(false);
+    end;
+
+    local procedure VerifyPageImport(Confirmed: Boolean)
+    var
+        Playbook: Record "Playbook ori";
+        Step: Record "Playbook Step ori";
+        Condition: Record "Playbook Condition ori";
+        Transform: Record "Playbook Transform ori";
+        Playbooks: Page "Playbooks ori";
+        Envelope: JsonObject;
+        PlaybookCode: Code[20];
+    begin
+        // Story #231 AC01 | Time: independent of Today/WorkDate | Risk: guard setup restored by TearDown
         Setup();
-        // Story #231 | Time: independent of Today/WorkDate | Risk: None
-        CodeA := BuildPlaybook();
-        CodeB := BuildPlaybook();
-        Commit();
-        EnvelopeB := TableJSONExport.ExportPlaybook(CodeB);
-        EnvelopeA := TableJSONExport.ExportPlaybook(CodeA);
-        AppendStepRows(EnvelopeA, EnvelopeB);
-
-        asserterror TableJSONImport.ImportPlaybook(EnvelopeA);
-        ErrorText := GetLastErrorText();
-        Assert.IsTrue(ErrorText.Contains('belongs to playbook'), 'row error is kept');
-        Assert.IsFalse(ErrorText.Contains('does not cover'), 'no hint when all four tables are covered');
-
-        Coverage.Get(Database::"Playbook Step ori");
-        Coverage.Delete(true);
-        Coverage.Get(Database::"Playbook Transform ori");
-        Coverage.Delete(true);
-        asserterror TableJSONImport.ImportPlaybook(EnvelopeA);
-        ErrorText := GetLastErrorText();
-        Assert.IsTrue(ErrorText.Contains('does not cover these playbook tables'), 'hint names the setup');
-        Assert.IsTrue(ErrorText.Contains('Playbook Step'), 'uncovered Playbook Step is named');
-        Assert.IsTrue(ErrorText.Contains('Playbook Transform'), 'uncovered Playbook Transform is named');
-        Lib.Cleanup(CodeA);
-        Lib.Cleanup(CodeB);
+        PlaybookCode := BuildPlaybook();
+        Condition."Playbook Code" := PlaybookCode;
+        Condition."Step No." := 10;
+        Condition."Group No." := 1;
+        Condition."Line No." := 10000;
+        Condition.Path := 'result';
+        Condition.Insert(true);
+        Envelope := TableJSONExport.ExportPlaybook(PlaybookCode);
+        Lib.Cleanup(PlaybookCode);
+        ConfirmImport := Confirmed;
+        // The action delegates here after UploadIntoStream; browser checks cover the actual file picker.
+        Assert.AreEqual(Confirmed, Playbooks.ImportPlaybookFile(Envelope), 'Confirmation controls import');
+        Assert.AreEqual(Confirmed, Playbook.Get(PlaybookCode), 'Header imported only on confirmation');
+        Step.SetRange("Playbook Code", PlaybookCode);
+        Condition.SetRange("Playbook Code", PlaybookCode);
+        Transform.SetRange("Playbook Code", PlaybookCode);
+        if Confirmed then begin
+            Assert.AreEqual(2, Step.Count(), 'Both steps imported');
+            Assert.AreEqual(1, Condition.Count(), 'Condition imported');
+            Assert.AreEqual(2, Transform.Count(), 'Both transforms imported');
+            Step.Get(PlaybookCode, 10);
+            Assert.AreEqual('{"rows":[{"amount":12.5},{"amount":-8}]}', Step.GetRequestTemplate(), 'Template BLOB preserved');
+            // Repeat through the same page path: existing rows are updated, not duplicated.
+            Assert.IsTrue(Playbooks.ImportPlaybookFile(Envelope), 'Repeat import succeeds');
+            Assert.AreEqual(2, Step.Count(), 'Repeat import does not duplicate steps');
+        end else begin
+            Assert.IsTrue(Step.IsEmpty(), 'No steps after cancellation');
+            Assert.IsTrue(Condition.IsEmpty(), 'No conditions after cancellation');
+            Assert.IsTrue(Transform.IsEmpty(), 'No transforms after cancellation');
+        end;
+        AssertDefaultGuard();
+        Lib.Cleanup(PlaybookCode);
         TearDown();
+    end;
+
+    /// <summary>#231 AC02: the UI exemption does not open the generic table/playbook import paths.</summary>
+    [Test]
+    procedure Scenario_AC02_GenericImportsRemainGuarded()
+    var
+        Envelope: JsonObject;
+        TableToken: JsonToken;
+        Tables: JsonToken;
+        PlaybookCode: Code[20];
+    begin
+        // Story #231 AC02 | Time: independent of Today/WorkDate | Risk: None
+        Setup();
+        PlaybookCode := BuildPlaybook();
+        Envelope := TableJSONExport.ExportPlaybook(PlaybookCode);
+        TableJSONImport.ImportPlaybookFromUI(Envelope);
+        Commit();
+        asserterror TableJSONImport.ImportPlaybook(Envelope);
+        Assert.IsTrue(GetLastErrorText().ToLower().Contains('change log'), 'Generic import is refused by the Change Log guard');
+        Envelope.Get('tables', Tables);
+        Tables.AsArray().Get(0, TableToken);
+        asserterror TableJSONImport.ImportTable(TableToken.AsObject(), false, true);
+        Assert.IsTrue(GetLastErrorText().ToLower().Contains('change log'), 'Generic import is refused by the Change Log guard');
+        AssertDefaultGuard();
+        Lib.Cleanup(PlaybookCode);
+        TearDown();
+    end;
+
+    /// <summary>#231 AC01: invalid values fail instead of being silently kept or truncated.</summary>
+    [Test]
+    procedure Scenario_AC01_InvalidUIFieldRollsBackImport()
+    var
+        Step: Record "Playbook Step ori";
+        Envelope: JsonObject;
+        PlaybookCode: Code[20];
+    begin
+        // Story #231 AC01 | Time: independent of Today/WorkDate | Risk: None
+        Setup();
+        PlaybookCode := BuildPlaybook();
+        Envelope := TableJSONExport.ExportPlaybook(PlaybookCode);
+        SetStepDescription(Envelope, PadStr('TOO LONG', 251, 'X'));
+        Commit();
+        asserterror TableJSONImport.ImportPlaybookFromUI(Envelope);
+        Step.Get(PlaybookCode, 10);
+        Assert.AreEqual('', Step.Description, 'Invalid value did not persist');
+        AssertDefaultGuard();
+        Lib.Cleanup(PlaybookCode);
+        TearDown();
+    end;
+
+    /// <summary>Answers the page's import confirmation.</summary>
+    [ConfirmHandler]
+    procedure ImportConfirmHandler(Question: Text[1024]; var Reply: Boolean)
+    begin
+        Assert.AreNotEqual('', Question, 'The user sees a confirmation');
+        Reply := ConfirmImport;
+    end;
+
+    /// <summary>Checks that the page reports the imported row counts.</summary>
+    [MessageHandler]
+    procedure ImportMessageHandler(Message: Text[1024])
+    begin
+        Assert.AreNotEqual('', Message, 'The user sees the import result');
     end;
 
     /// <summary>A file labelled with one playbook that carries another playbook's header or rows is refused before anything is written.</summary>
@@ -243,7 +333,7 @@ codeunit 96498 "Playbook Export Tests ori"
         // File labelled A with the header and rows of B: no Playbook row for A.
         Mixed := EnvelopeB.Clone().AsObject();
         Mixed.Replace('playbookCode', CodeA);
-        asserterror TableJSONImport.ImportPlaybook(Mixed);
+        asserterror TableJSONImport.ImportPlaybookFromUI(Mixed);
         Assert.ExpectedError('has no Playbook row for playbook');
         StepB.Get(CodeB, 10);
         Assert.AreNotEqual('HIJACK', StepB.Description, 'playbook B unchanged after header mismatch');
@@ -251,7 +341,7 @@ codeunit 96498 "Playbook Export Tests ori"
         // File with A header and A rows plus a step row of B (matched by id): refused, nothing written.
         EnvelopeA := TableJSONExport.ExportPlaybook(CodeA);
         AppendStepRows(EnvelopeA, EnvelopeB);
-        asserterror TableJSONImport.ImportPlaybook(EnvelopeA);
+        asserterror TableJSONImport.ImportPlaybookFromUI(EnvelopeA);
         Assert.ExpectedError('belongs to playbook');
         StepB.Get(CodeB, 10);
         Assert.AreNotEqual('HIJACK', StepB.Description, 'playbook B unchanged after row mismatch');
@@ -394,9 +484,12 @@ codeunit 96498 "Playbook Export Tests ori"
     local procedure Setup()
     var
         ChangeLogSetup: Record "Change Log Setup";
+        Coverage: Record "Change Log Setup (Table)";
+        SetupPage: TestPage "Setup ori";
         TableNo: Integer;
     begin
-        Clear(AddedTables);
+        SavedLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
         if not ChangeLogSetup.Get() then begin
             ChangeLogSetup.Init();
             ChangeLogSetup.Insert(true);
@@ -404,35 +497,52 @@ codeunit 96498 "Playbook Export Tests ori"
         WasActivated := ChangeLogSetup."Change Log Activated";
         ChangeLogSetup."Change Log Activated" := true;
         ChangeLogSetup.Modify(true);
+        SetupPage.OpenEdit();
+        SavedGuard := SetupPage."ChangeLog Write Guard ori".Value();
+        SetupPage."ChangeLog Write Guard ori".SetValue('Blocked');
+        SetupPage.Close();
+        TempSavedCoverage.Reset();
+        TempSavedCoverage.DeleteAll();
         foreach TableNo in PlaybookTables() do
-            AddCoverage(TableNo);
+            if Coverage.Get(TableNo) then begin
+                TempSavedCoverage := Coverage;
+                TempSavedCoverage.Insert();
+                Coverage.Delete(true);
+            end;
+        AssertDefaultGuard();
+    end;
+
+    local procedure AssertDefaultGuard()
+    var
+        Coverage: Record "Change Log Setup (Table)";
+        SetupPage: TestPage "Setup ori";
+        TableNo: Integer;
+    begin
+        SetupPage.OpenView();
+        SetupPage."ChangeLog Write Guard ori".AssertEquals('Blocked');
+        SetupPage.Close();
+        foreach TableNo in PlaybookTables() do
+            Assert.IsFalse(Coverage.Get(TableNo), 'No playbook Change Log coverage');
     end;
 
     local procedure TearDown()
     var
         ChangeLogSetup: Record "Change Log Setup";
         Coverage: Record "Change Log Setup (Table)";
-        TableNo: Integer;
+        SetupPage: TestPage "Setup ori";
     begin
-        foreach TableNo in AddedTables do
-            if Coverage.Get(TableNo) then
-                Coverage.Delete(true);
+        if TempSavedCoverage.FindSet() then
+            repeat
+                Coverage := TempSavedCoverage;
+                Coverage.Insert(true);
+            until TempSavedCoverage.Next() = 0;
+        SetupPage.OpenEdit();
+        SetupPage."ChangeLog Write Guard ori".SetValue(SavedGuard);
+        SetupPage.Close();
         ChangeLogSetup.Get();
         ChangeLogSetup."Change Log Activated" := WasActivated;
         ChangeLogSetup.Modify(true);
-    end;
-
-    local procedure AddCoverage(TableNo: Integer)
-    var
-        Coverage: Record "Change Log Setup (Table)";
-    begin
-        if Coverage.Get(TableNo) then
-            exit;
-        Coverage."Table No." := TableNo;
-        Coverage."Log Insertion" := Coverage."Log Insertion"::"All Fields";
-        Coverage."Log Modification" := Coverage."Log Modification"::"All Fields";
-        Coverage.Insert(true);
-        AddedTables.Add(TableNo);
+        GlobalLanguage(SavedLanguage);
     end;
 
     local procedure PlaybookTables() TableNos: List of [Integer]
