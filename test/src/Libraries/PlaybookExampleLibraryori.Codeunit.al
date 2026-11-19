@@ -137,6 +137,7 @@ codeunit 96438 "Playbook Example Library ori"
         Lib.AddStatusSuccessCondition(PlaybookCode, 30);
         Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 20000, 'data.verdict', "Playbook Cond. Operator ori"::Equals, 'pass');
         Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 30000, 'schemaValid', "Playbook Cond. Operator ori"::Equals, 'true');
+        Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 40000, 'stopReason', "Playbook Cond. Operator ori"::Equals, 'answered');
         Lib.AddCondition(PlaybookCode, 90, "Playbook Cond. Type ori"::Start, 10000, '_who.telegramChatId', "Playbook Cond. Operator ori"::Exists, '');
         Lib.AddStatusSuccessCondition(PlaybookCode, 90);
     end;

@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #209
+
+- #209: tests only, no app change, no new objects. Example 4 (POSTING-AUDIT) in test library `Playbook Example Library ori` now carries a `stopReason` Success condition on its Ask step, so `96436 Playbook Example Tests` stays clean on tenants where `LLM.Prompt.Ask` is installed (it raised `AskStopReasonUnchecked`). The 96411 stale Ok Sample Job Queue Entry filter and the 96480/96481 Report Selections seeding were delivered in #210. 96456 needs a Disabled-isolation test runner (130451).
+
 ### Added — #223
 
 - #223 AC01 / codeunits 10035558 `Table JSON Export ori` (`ExportPlaybook`) and 10035563 `Table JSON Import ori` (`ImportPlaybook`), page 10035551 `Playbooks ori` actions Export Playbook / Import Playbook: a playbook file (`bifrost-playbook`, version 1) holds the playbook, its steps, conditions and Transform rows; import confirms first and stops at the first failed row.

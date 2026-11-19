@@ -116,6 +116,8 @@ codeunit 96411 "Orchestrator Unit Tests"
         // [FEATURE] [JOB QUEUE SCHEDULER]  
 
         CleanArtifacts();
+        // [GIVEN] stale Ok Sample Job Queue Entries from earlier runs on this tenant do not count
+        DeleteAllOkSampleJobQueueEntries();
 
         // [GIVEN] Job Queue Scheduler General Setup is opened
         // [GIVEN] JobQueueOkSample is registered in setup
