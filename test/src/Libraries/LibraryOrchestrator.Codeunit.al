@@ -17,6 +17,14 @@ codeunit 96413 "Library Orchestrator"
     begin
     end;
 
+    /// <summary>Creates the Orchestrator setup row when the tenant has none, as opening the setup page does, so a test does not rely on tenant state.</summary>
+    procedure EnsureSchedulerSetup()
+    var
+        SchedulerSetup: Record "Scheduler Setup ori";
+    begin
+        SchedulerSetup.OnOpenEmptyRec();
+    end;
+
     /// <summary>Declares only the owned copy fixture amount write-once while this manual subscriber is bound.</summary>
     /// <param name="Enabled">Whether to enable the restrictive fixture rule.</param>
     procedure SetCopyAmountWriteOnce(Enabled: Boolean)
