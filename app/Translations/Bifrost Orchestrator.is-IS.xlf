@@ -4293,6 +4293,12 @@
           <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Færslan er ekki lengur til í töflu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table Data Mgt ori - NamedType RecordNotFoundErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2389894866 - NamedType 631086101" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 does not exist.</source>
+          <target>Keðjan %1 er ekki til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Keðjan %1 er ekki til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Export ori - NamedType PlaybookNotFoundErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2389894866 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table %1 does not exist.</source>
           <target>Tafla %1 er ekki til.</target>
@@ -4322,6 +4328,42 @@
           <target>Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</target>
           <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Ekki er hægt að bæta nýrri línu við töflu %1 (%2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType InsertRestrictedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 597325203" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file does not name the playbook (playbookCode).</source>
+          <target>Skráin tilgreinir ekki keðjuna (playbookCode).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin tilgreinir ekki keðjuna (playbookCode).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookCodeMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 3055617349" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not a Bifrost playbook file (format %1, version %2 expected).</source>
+          <target>Skráin er ekki Bifröst-keðjuskrá (búist var við sniði %1, útgáfu %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = format name, %2 = version number, is-IS=Skráin er ekki Bifröst-keðjuskrá (búist var við sniði %1, útgáfu %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 339686941" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file has no Playbook row for playbook %1.</source>
+          <target>Skráin inniheldur enga keðjulínu fyrir keðjuna %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Skráin inniheldur enga keðjulínu fyrir keðjuna %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookHeaderMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 1350891370" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A row belongs to playbook %1, not to the playbook %2 named in the file.</source>
+          <target>Lína tilheyrir keðjunni %1 en ekki keðjunni %2 sem skráin tilgreinir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code of the row, %2 = playbook code of the file, is-IS=Lína tilheyrir keðjunni %1 en ekki keðjunni %2 sem skráin tilgreinir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookRowMismatchErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 3225884580" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table %1 does not belong in a playbook file.</source>
+          <target>Tafla %1 á ekki heima í keðjuskrá.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table number, is-IS=Tafla %1 á ekki heima í keðjuskrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookTableRefusedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - NamedType 476098835" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file has no tables array of table data files.</source>
+          <target>Skráin inniheldur engan töflulista með töflugagnaskrám.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin inniheldur engan töflulista með töflugagnaskrám.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType PlaybookTablesMissingErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1136529745 - NamedType 1065153784" size-unit="char" translate="yes" xml:space="preserve">
           <source>The row has neither an id nor a primaryKey.</source>
@@ -5841,6 +5883,36 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 772952000" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export playbook</source>
+          <target>Flytja út keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja út keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType DownloadTitleTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 3907048935" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 imported: %2 steps, %3 conditions and %4 transform rows.</source>
+          <target>Keðjan %1 var flutt inn: %2 skref, %3 skilyrði og %4 umbreytingarlínur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = steps, %3 = conditions, %4 = transform rows, is-IS=Keðjan %1 var flutt inn: %2 skref, %3 skilyrði og %4 umbreytingarlínur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType ImportedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 2130936629" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import playbook %1? Rows with the same key are overwritten, and an error stops the import without writing anything.</source>
+          <target>Flytja inn keðjuna %1? Línur með sama lykil eru yfirskrifaðar og villa stöðvar innflutninginn án þess að nokkuð sé skrifað.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, is-IS=Flytja inn keðjuna %1? Línur með sama lykil eru yfirskrifaðar og villa stöðvar innflutninginn án þess að nokkuð sé skrifað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType ImportQst</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 629381524" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file is not valid JSON.</source>
+          <target>Skráin er ekki gild JSON-skrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráin er ekki gild JSON-skrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType NotJsonErr</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 3237890445" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import playbook</source>
+          <target>Flytja inn keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja inn keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType UploadTitleTxt</note>
+        </trans-unit>
         <trans-unit id="Page 608463566 - Control 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the unique code for this playbook.</source>
           <target>Tilgreinir einstakan kóða fyrir þessa keðju.</target>
@@ -5864,6 +5936,30 @@
           <target>Tilgreinir stöðu síðustu keyrslu.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir stöðu síðustu keyrslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Control Last Run Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 3604439787 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Downloads the selected playbook with its steps, conditions and Transform mappings as a playbook file.</source>
+          <target>Sækir valda keðju með skrefum, skilyrðum og umbreytingarvörpunum sem keðjuskrá.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sækir valda keðju með skrefum, skilyrðum og umbreytingarvörpunum sem keðjuskrá.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action ExportPlaybook - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 3604439787 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export Playbook</source>
+          <target>Flytja út keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja út keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action ExportPlaybook - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 4272985708 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Uploads a playbook file and imports the playbook, its steps, conditions and Transform mappings after you confirm.</source>
+          <target>Hleður upp keðjuskrá og flytur inn keðjuna, skrefin, skilyrðin og umbreytingarvörpunirnar eftir staðfestingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hleður upp keðjuskrá og flytur inn keðjuna, skrefin, skilyrðin og umbreytingarvörpunirnar eftir staðfestingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action ImportPlaybook - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 4272985708 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import Playbook</source>
+          <target>Flytja inn keðju</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Flytja inn keðju</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action ImportPlaybook - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Action 2020531406 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View execution history for this playbook.</source>

@@ -4,6 +4,7 @@
 namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
+using System.Utilities;
 
 page 10035551 "Playbooks ori"
 {
@@ -75,6 +76,34 @@ page 10035551 "Playbooks ori"
                     AccessByPermission = page "Copy Plans ori" = X;
                 }
             }
+            action(ExportPlaybook)
+            {
+                ApplicationArea = All;
+                Caption = 'Export Playbook', Comment = 'is-IS=Flytja út keðju';
+                ToolTip = 'Downloads the selected playbook with its steps, conditions and Transform mappings as a playbook file.', Comment = 'is-IS=Sækir valda keðju með skrefum, skilyrðum og umbreytingarvörpunum sem keðjuskrá.';
+                Image = Export;
+                Scope = Repeater;
+                AccessByPermission = codeunit "Table JSON Export ori" = X;
+                Enabled = Rec.Code <> '';
+
+                trigger OnAction()
+                begin
+                    ExportSelected();
+                end;
+            }
+            action(ImportPlaybook)
+            {
+                ApplicationArea = All;
+                Caption = 'Import Playbook', Comment = 'is-IS=Flytja inn keðju';
+                ToolTip = 'Uploads a playbook file and imports the playbook, its steps, conditions and Transform mappings after you confirm.', Comment = 'is-IS=Hleður upp keðjuskrá og flytur inn keðjuna, skrefin, skilyrðin og umbreytingarvörpunirnar eftir staðfestingu.';
+                Image = Import;
+                AccessByPermission = codeunit "Table JSON Import ori" = X;
+
+                trigger OnAction()
+                begin
+                    ImportFile();
+                end;
+            }
             action(Instances)
             {
                 Caption = 'Execution Log', Comment = 'is-IS=Keyrsluskrá';
@@ -86,4 +115,81 @@ page 10035551 "Playbooks ori"
             }
         }
     }
+
+    var
+        FileNameTxt: Label 'Playbook-%1.json', Locked = true;
+        DownloadTitleTxt: Label 'Export playbook', Comment = 'is-IS=Flytja út keðju';
+        UploadTitleTxt: Label 'Import playbook', Comment = 'is-IS=Flytja inn keðju';
+        NotJsonErr: Label 'The file is not valid JSON.', Comment = 'is-IS=Skráin er ekki gild JSON-skrá.';
+        ImportQst: Label 'Import playbook %1? Rows with the same key are overwritten, and an error stops the import without writing anything.', Comment = '%1 = playbook code, is-IS=Flytja inn keðjuna %1? Línur með sama lykil eru yfirskrifaðar og villa stöðvar innflutninginn án þess að nokkuð sé skrifað.';
+        ImportedMsg: Label 'Playbook %1 imported: %2 steps, %3 conditions and %4 transform rows.', Comment = '%1 = playbook code, %2 = steps, %3 = conditions, %4 = transform rows, is-IS=Keðjan %1 var flutt inn: %2 skref, %3 skilyrði og %4 umbreytingarlínur.';
+
+    local procedure ExportSelected()
+    var
+        TableJSONExport: Codeunit "Table JSON Export ori";
+        TempBlob: Codeunit "Temp Blob";
+        InStr: InStream;
+        OutStr: OutStream;
+        FileName: Text;
+    begin
+        TempBlob.CreateOutStream(OutStr, TextEncoding::UTF8);
+        TableJSONExport.ExportPlaybook(Rec.Code).WriteTo(OutStr);
+        TempBlob.CreateInStream(InStr, TextEncoding::UTF8);
+        FileName := StrSubstNo(FileNameTxt, Rec.Code);
+        DownloadFromStream(InStr, DownloadTitleTxt, '', '', FileName);
+    end;
+
+    local procedure ImportFile()
+    var
+        InStr: InStream;
+        Envelope: JsonObject;
+        FileName: Text;
+    begin
+        if not UploadIntoStream(UploadTitleTxt, '', '', FileName, InStr) then
+            exit;
+        if not Envelope.ReadFrom(InStr) then
+            Error(ErrorInfo.Create(NotJsonErr));
+        ImportPlaybookFile(Envelope);
+    end;
+
+    /// <summary>Imports a playbook file after the user confirms (used by the Import Playbook action and tests).</summary>
+    /// <param name="Envelope">The uploaded playbook file.</param>
+    /// <returns>True when the user confirmed and the playbook was imported.</returns>
+    internal procedure ImportPlaybookFile(Envelope: JsonObject): Boolean
+    var
+        TableJSONImport: Codeunit "Table JSON Import ori";
+        Result: JsonObject;
+        Token: JsonToken;
+        PlaybookCode: Text;
+    begin
+        if Envelope.Get('playbookCode', Token) then
+            if Token.IsValue() then
+                PlaybookCode := Token.AsValue().AsText();
+        if not Confirm(StrSubstNo(ImportQst, PlaybookCode), false) then
+            exit(false);
+        Result := TableJSONImport.ImportPlaybook(Envelope);
+        CurrPage.Update(false);
+        Message(StrSubstNo(ImportedMsg, PlaybookCode, TableRows(Result, Database::"Playbook Step ori"), TableRows(Result, Database::"Playbook Condition ori"), TableRows(Result, Database::"Playbook Transform ori")));
+        exit(true);
+    end;
+
+    local procedure TableRows(Result: JsonObject; TableNo: Integer): Integer
+    var
+        Tables: JsonArray;
+        Token: JsonToken;
+        TableToken: JsonToken;
+        RowsToken: JsonToken;
+        Index: Integer;
+    begin
+        if not Result.Get('tables', Token) then
+            exit(0);
+        Tables := Token.AsArray();
+        for Index := 1 to Tables.Count() do begin
+            Tables.Get(Index - 1, TableToken);
+            if TableToken.AsObject().Get('tableNo', RowsToken) then
+                if RowsToken.AsValue().AsInteger() = TableNo then
+                    if TableToken.AsObject().Get('rows', RowsToken) then
+                        exit(RowsToken.AsValue().AsInteger());
+        end;
+    end;
 }
