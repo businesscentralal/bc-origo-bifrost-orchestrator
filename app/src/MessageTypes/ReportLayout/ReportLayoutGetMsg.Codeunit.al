@@ -187,9 +187,9 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     end;
 
     var
+        Handler: Codeunit "Report Layout Read Handler ori";
         MissingNameLbl: Label 'name is missing. parameter: name.', Comment = 'is-IS=name vantar. parameter: name.';
         NameNextStepLbl: Label 'Send name from Orchestrator.ReportLayout.List.', Comment = 'is-IS=Sendu name úr Orchestrator.ReportLayout.List.';
         MimeHelpLbl: Label 'MIME type: Word = application/vnd.openxmlformats-officedocument.wordprocessingml.document; RDLC = application/xml; Excel = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.', Comment = 'is-IS=MIME-gerð: Word = application/vnd.openxmlformats-officedocument.wordprocessingml.document; RDLC = application/xml; Excel = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.';
         DeletePolicyLbl: Label 'No layout delete message type exists by design: message types must not delete data. Remove a test layout in BC on the Report Layouts page.', Comment = 'is-IS=Engin skilaboðategund til að eyða útliti er til samkvæmt hönnun: skilaboðategundir mega ekki eyða gögnum. Fjarlægðu prófunarútlit í BC á síðunni Skýrsluútlit.';
-        Handler: Codeunit "Report Layout Read Handler ori";
 }

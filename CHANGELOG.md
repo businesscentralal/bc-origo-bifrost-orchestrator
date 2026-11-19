@@ -9,8 +9,8 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ### Fixed
 - Report layout contracts name `setAsDefault`, the user-defined layout GUID and the no-delete policy in English and Icelandic. List exposes company scope; Get supplies format-specific MIME types. Missing layout names and missing/consumed staging IDs return stable errors with recovery guidance.
-- Report.SaveAs content types follow PDF, Word, Excel and XML output. Help explains document filters, inline output and client timeouts. The additional binary response size field remains dependent on the MCP response wrapper outside this repository.
-- Added test codeunit 96499 `Report Contract 235 Tests ori` for bilingual help, metadata, structured refusals and output content types.
+- Report.SaveAs help explains document filters, inline output and client timeouts. Its existing application/pdf envelope is preserved for every output format. AC05 response size and AC07 format-specific content types were split to #239 pending the MCP runtime fix (Architect ruling, 19 November 2026).
+- Added test codeunit 96499 `Report Contract 235 Tests ori` for bilingual help, metadata, structured refusals and existing binary-output compatibility.
 
 ## [Unreleased]
 

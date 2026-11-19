@@ -46,7 +46,6 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Envelope := Parts.NoSubjectEnvelope(true, 'application/pdf');
-        Envelope.Add('contentTypesByFormat', ContentTypesByFormat());
         exit(true);
     end;
 
@@ -85,7 +84,6 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     begin
         Parts.AddResponseField(Fields, 'binary', 'binary', BinaryHelpLbl);
         Response := Parts.Response(Fields, 'application/pdf');
-        Response.Add('contentTypesByFormat', ContentTypesByFormat());
         exit(true);
     end;
 
@@ -176,17 +174,9 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Handler.ExecuteSaveAs(Argument);
     end;
 
-    local procedure ContentTypesByFormat() ContentTypes: JsonObject
-    begin
-        ContentTypes.Add('PDF', 'application/pdf');
-        ContentTypes.Add('Word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        ContentTypes.Add('Excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        ContentTypes.Add('XML', 'application/xml');
-    end;
-
     var
-        OutputHelpLbl: Label 'For document reports, tableView must select the document. PDF and other output return inline; no size hint is available before rendering. A slow tenant may require a longer client timeout. datacontenttype follows format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.', Comment = 'is-IS=Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. datacontenttype fylgir format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.';
-        BinaryHelpLbl: Label 'Inline document bytes in the requested format; datacontenttype follows format (PDF, Word, Excel or XML).', Comment = 'is-IS=Skjalsgögn beint í svari á umbeðnu sniði; datacontenttype fylgir format (PDF, Word, Excel eða XML).';
-        TableViewHelpLbl: Label 'For a document report, send tableView to select the document, for example WHERE(No.=CONST(XINV001)). Applied to the first data item; ignored when there is no data item table.', Comment = 'is-IS=Fyrir skjalaskýrslu skaltu senda tableView til að velja skjalið, til dæmis WHERE(No.=CONST(XINV001)). Gildir fyrir fyrsta gagnalið; hunsað þegar engin gagnaliðstafla er til.';
         Handler: Codeunit "Report Msg Handler ori";
+        OutputHelpLbl: Label 'For document reports, tableView must select the document. PDF and other output return inline; no size hint is available before rendering. A slow tenant may require a longer client timeout. The answer is marked application/pdf for every format; the bytes are in the requested format.', Comment = 'is-IS=Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. Svarið er merkt application/pdf fyrir öll snið; gögnin eru á umbeðnu sniði.';
+        BinaryHelpLbl: Label 'Inline document bytes in the requested format (PDF, Word, Excel or XML); datacontenttype remains application/pdf.', Comment = 'is-IS=Skjalsgögn beint í svari á umbeðnu sniði (PDF, Word, Excel eða XML); datacontenttype helst application/pdf.';
+        TableViewHelpLbl: Label 'For a document report, send tableView to select the document, for example WHERE(No.=CONST(XINV001)). Applied to the first data item; ignored when there is no data item table.', Comment = 'is-IS=Fyrir skjalaskýrslu skaltu senda tableView til að velja skjalið, til dæmis WHERE(No.=CONST(XINV001)). Gildir fyrir fyrsta gagnalið; hunsað þegar engin gagnaliðstafla er til.';
 }

@@ -188,7 +188,7 @@ codeunit 10035612 "Report Layout List Msg ori" implements "Msg Interface ori", "
     end;
 
     var
+        Handler: Codeunit "Report Layout Read Handler ori";
         CompanyHelpLbl: Label 'Company name for a company-limited user-defined layout; empty means all companies. Inspect this before selecting a default in another company.', Comment = 'is-IS=Fyrirtækisheiti fyrir notandaskilgreint útlit sem er takmarkað við fyrirtæki; tómt merkir öll fyrirtæki. Skoðaðu þetta áður en sjálfgefið útlit er valið í öðru fyrirtæki.';
         DeletePolicyLbl: Label 'No layout delete message type exists by design: message types must not delete data. Remove a test layout in BC on the Report Layouts page.', Comment = 'is-IS=Engin skilaboðategund til að eyða útliti er til samkvæmt hönnun: skilaboðategundir mega ekki eyða gögnum. Fjarlægðu prófunarútlit í BC á síðunni Skýrsluútlit.';
-        Handler: Codeunit "Report Layout Read Handler ori";
 }

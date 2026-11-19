@@ -8038,15 +8038,15 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Set Msg ori - NamedType StagingMissingLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3308826164 - NamedType 4093078032" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Inline document bytes in the requested format; datacontenttype follows format (PDF, Word, Excel or XML).</source>
-          <target>Skjalsgögn beint í svari á umbeðnu sniði; datacontenttype fylgir format (PDF, Word, Excel eða XML).</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skjalsgögn beint í svari á umbeðnu sniði; datacontenttype fylgir format (PDF, Word, Excel eða XML).</note>
+          <source>Inline document bytes in the requested format (PDF, Word, Excel or XML); datacontenttype remains application/pdf.</source>
+          <target>Skjalsgögn beint í svari á umbeðnu sniði (PDF, Word, Excel eða XML); datacontenttype helst application/pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skjalsgögn beint í svari á umbeðnu sniði (PDF, Word, Excel eða XML); datacontenttype helst application/pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - NamedType BinaryHelpLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3308826164 - NamedType 3413981584" size-unit="char" translate="yes" xml:space="preserve">
-          <source>For document reports, tableView must select the document. PDF and other output return inline; no size hint is available before rendering. A slow tenant may require a longer client timeout. datacontenttype follows format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.</source>
-          <target>Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. datacontenttype fylgir format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. datacontenttype fylgir format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.</note>
+          <source>For document reports, tableView must select the document. PDF and other output return inline; no size hint is available before rendering. A slow tenant may require a longer client timeout. The answer is marked application/pdf for every format; the bytes are in the requested format.</source>
+          <target>Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. Svarið er merkt application/pdf fyrir öll snið; gögnin eru á umbeðnu sniði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. Svarið er merkt application/pdf fyrir öll snið; gögnin eru á umbeðnu sniði.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report SaveAs Msg ori - NamedType OutputHelpLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3308826164 - NamedType 1007226324" size-unit="char" translate="yes" xml:space="preserve">

@@ -59,32 +59,32 @@ codeunit 96499 "Report Contract 235 Tests ori"
         VerifyErrors(1039);
     end;
 
-    /// <summary>AC07 XML output keeps XML content type and actual bytes.</summary>
+    /// <summary>XML keeps the legacy binary envelope and actual XML bytes until issue 239.</summary>
     [Test]
     procedure SaveAsXmlContentType()
     begin
-        VerifyOutput('XML', 'application/xml', '<?xml');
+        VerifyOutput('XML', 'application/pdf', '<?xml');
     end;
 
-    /// <summary>AC07 PDF remains binary PDF for existing callers.</summary>
+    /// <summary>PDF remains binary PDF for existing callers.</summary>
     [Test]
     procedure SaveAsPdfContentType()
     begin
         VerifyOutput('PDF', 'application/pdf', '%PDF');
     end;
 
-    /// <summary>AC07 Excel declares the spreadsheet MIME type for ZIP document bytes.</summary>
+    /// <summary>Excel keeps the legacy binary envelope and ZIP bytes until issue 239.</summary>
     [Test]
     procedure SaveAsExcelContentType()
     begin
-        VerifyOutput('Excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'PK');
+        VerifyOutput('Excel', 'application/pdf', 'PK');
     end;
 
-    /// <summary>AC07 Word declares the Word MIME type for ZIP document bytes.</summary>
+    /// <summary>Word keeps the legacy binary envelope and ZIP bytes until issue 239.</summary>
     [Test]
     procedure SaveAsWordContentType()
     begin
-        VerifyOutput('Word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'PK');
+        VerifyOutput('Word', 'application/pdf', 'PK');
     end;
 
     /// <summary>AC04 Word and Excel layout exports report their real format MIME types.</summary>
@@ -97,7 +97,7 @@ codeunit 96499 "Report Contract 235 Tests ori"
 
     local procedure VerifyOfficeLayoutMime(OutputFormat: Text; ExpectedMime: Text; LanguageId: Integer)
     var
-        Argument: Record "Message Argument ori" temporary;
+        TempArgument: Record "Message Argument ori" temporary;
         TenantLayout: Record "Tenant Report Layout";
         DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Base64Convert: Codeunit "Base64 Convert";
@@ -110,12 +110,12 @@ codeunit 96499 "Report Contract 235 Tests ori"
         Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('format', OutputFormat);
         Request.Add('tableView', 'WHERE(Number=CONST(1))');
-        Argument.Init();
-        Argument.Insert();
-        Argument.SetRequestJson(Request);
-        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", Argument);
-        Assert.AreEqual(ExpectedMime, Argument."Content Type", 'Render valid Office bytes');
-        Argument."Response Content".CreateInStream(Input);
+        TempArgument.Init();
+        TempArgument.Insert();
+        TempArgument.SetRequestJson(Request);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
+        Assert.AreEqual('application/pdf', TempArgument."Content Type", 'Legacy binary envelope with valid Office bytes');
+        TempArgument."Response Content".CreateInStream(Input);
         if OutputFormat = 'Excel' then begin
             Request := LayoutRequest('FixtureExcel');
             Request.Add('appId', '194ecd04-5688-4af6-94bc-732c714251fc');
@@ -191,6 +191,11 @@ codeunit 96499 "Report Contract 235 Tests ori"
         AssertContains(TextValue, 'application/xml');
         AssertContains(TextValue, 'wordprocessingml.document');
         AssertContains(TextValue, 'spreadsheetml.sheet');
+        SaveMsg.GetEnvelope(Chapter);
+        Assert.IsFalse(Chapter.Contains('contentTypesByFormat'), 'Do not promise MIME types pending issue 239');
+        Assert.AreEqual('application/pdf', GetText(Chapter, 'contentType'), 'Legacy envelope content type');
+        SaveMsg.GetResponse(Chapter);
+        Assert.IsFalse(Chapter.Contains('contentTypesByFormat'), 'Response keeps the existing MIME contract');
         SaveMsg.GetNotes(TextValue);
         AssertContains(TextValue, 'tableView');
         if LanguageId = 1039 then begin
@@ -302,7 +307,7 @@ codeunit 96499 "Report Contract 235 Tests ori"
 
     local procedure VerifyOutput(OutputFormat: Text; ExpectedMime: Text; Magic: Text)
     var
-        Argument: Record "Message Argument ori" temporary;
+        TempArgument: Record "Message Argument ori" temporary;
         DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         Request: JsonObject;
         Input: InStream;
@@ -311,12 +316,12 @@ codeunit 96499 "Report Contract 235 Tests ori"
         Request.Add('reportId', Report::"Layout Sample Report ori");
         Request.Add('format', OutputFormat);
         Request.Add('tableView', 'WHERE(Number=CONST(1))');
-        Argument.Init();
-        Argument.Insert();
-        Argument.SetRequestJson(Request);
-        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", Argument);
-        Assert.AreEqual(ExpectedMime, Argument."Content Type", 'Content type follows format');
-        Argument."Response Content".CreateInStream(Input);
+        TempArgument.Init();
+        TempArgument.Insert();
+        TempArgument.SetRequestJson(Request);
+        DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
+        Assert.AreEqual(ExpectedMime, TempArgument."Content Type", 'Legacy binary envelope is preserved until issue 239');
+        TempArgument."Response Content".CreateInStream(Input);
         Input.ReadText(Prefix, StrLen(Magic));
         Assert.AreEqual(Magic, Prefix, 'Actual bytes match declared format');
     end;
