@@ -42,6 +42,52 @@ codeunit 96422 "Misc Msg Smoke Tests"
         GlobalLanguage(PreviousLanguage);
     end;
 
+    /// <summary>Issue #228 AC01: the count in the overview equals the registered roster and every registered type has a table row.</summary>
+    [Test]
+    procedure Scenario_228_AC01_OverviewCountAndRosterMatchEnum()
+    var
+        Help: Codeunit "Help ori";
+        MessageType: Enum "Message Type ori";
+        Names: List of [Text];
+        Ordinals: List of [Integer];
+        Overview: Text;
+        Index: Integer;
+        RosterCount: Integer;
+    begin
+        Names := MessageType.Names();
+        Ordinals := MessageType.Ordinals();
+        Overview := Help.GetOverview();
+        for Index := 1 to Names.Count() do
+            if (Ordinals.Get(Index) >= 10035535) and (Ordinals.Get(Index) <= 10035634) then begin
+                RosterCount += 1;
+                Assert.IsTrue(Overview.Contains('| `' + Names.Get(Index) + '` |'), Names.Get(Index) + ' has a row in the overview table');
+            end;
+        Assert.IsTrue(RosterCount >= 29, 'The roster holds at least the 29 known types');
+        Assert.IsTrue(Overview.Contains(Format(RosterCount) + ' Bifrost message types for'), 'Intro sentence carries the roster count');
+        Assert.IsTrue(Overview.Contains('## Message Types (' + Format(RosterCount) + ')'), 'Table heading carries the roster count');
+        Assert.IsFalse(Overview.Contains('26 Bifrost message types'), 'No stale count');
+    end;
+
+    /// <summary>Issue #228 AC02: the overview table names the required parameters, including name for ReportLayout.Get.</summary>
+    [Test]
+    procedure Scenario_228_AC02_OverviewNamesRequiredParameters()
+    var
+        Help: Codeunit "Help ori";
+        Overview: Text;
+    begin
+        Overview := Help.GetOverview();
+        Assert.IsTrue(Overview.Contains('| Type | Required parameters | Description |'), 'Table has a Required parameters column');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.ReportLayout.Get` | `reportId`, `name` |'), 'ReportLayout.Get names reportId and name');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.Report.SaveAs` | `reportId` (`format` optional'), 'Report.SaveAs names reportId and format');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.ReportLayout.Set` | `reportId` + one of:'), 'ReportLayout.Set lists alternatives');
+        Assert.IsTrue(Overview.Contains('import `name`, `layoutFormat` and `layoutBase64` or `stagingId`'), 'ReportLayout.Set describes the import path');
+        Assert.IsTrue(Overview.Contains('select default `name` and `setAsDefault: true` (no `layoutFormat`)'), 'ReportLayout.Set describes select-default');
+        Assert.IsTrue(Overview.Contains('clear default `clearDefault: true` (no `name`, `layoutFormat` or layout source)'), 'ReportLayout.Set describes clear-default');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.Report.Get` | `reportId` |'), 'Report.Get names reportId');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.Telegram.Message` | `message` |'), 'Telegram names message');
+        Assert.IsTrue(Overview.Contains('| `Orchestrator.Status.Get` | none |'), 'A type without required parameters says none');
+    end;
+
     [Test]
     procedure HelpGetReturnsNonEmptyMarkdown()
     var
