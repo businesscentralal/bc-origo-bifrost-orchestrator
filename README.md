@@ -59,7 +59,7 @@ scheduled Job Queue Entry does. It is the successor of *Origo Cloud Events Orche
 
 ## Move a playbook between companies
 
-On **Bifrost Playbooks**, choose **Related > Tools > Export Playbook** to download a JSON file,
+On **Bifrost Playbooks**, choose **Related > Export Playbook** to download a JSON file,
 then **Import Playbook** in the destination company and confirm. The file includes the playbook,
 steps, conditions and Transform mappings. Existing rows with matching keys are updated; rows
 absent from the file are kept.
