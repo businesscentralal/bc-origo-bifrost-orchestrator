@@ -167,7 +167,7 @@ page 10035551 "Playbooks ori"
                 PlaybookCode := Token.AsValue().AsText();
         if not Confirm(StrSubstNo(ImportQst, PlaybookCode), false) then
             exit(false);
-        Result := TableJSONImport.ImportPlaybook(Envelope);
+        Result := TableJSONImport.ImportPlaybookFromUI(Envelope);
         CurrPage.Update(false);
         Message(StrSubstNo(ImportedMsg, PlaybookCode, TableRows(Result, Database::"Playbook Step ori"), TableRows(Result, Database::"Playbook Condition ori"), TableRows(Result, Database::"Playbook Transform ori")));
         exit(true);

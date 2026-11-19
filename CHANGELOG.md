@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #231
+
+- #231: Import Playbook now writes the four playbook tables under the administrator's BC permissions, with field validation and table triggers, even when ChangeLog Write Guard is Blocked and no Change Log coverage exists. The UI import does not change guard settings. Generic table imports, message-type writes and exports retain their guards. Regression tests cover the page import, cancellation, all four tables, guarded imports and malformed/cross-playbook files.
+
 ### Fixed — #228
 
 - #228 AC01 / codeunit 10035576 `Help ori`: the Help.Orchestrator.Get overview counts the registered message types from the enum values of this app (no hard-coded 26; the roster is 30) and the table lists `Orchestrator.ReportLayout.Set` too. Tests in codeunit 96422 `Misc Msg Smoke Tests` compare the count and every row with the enum.

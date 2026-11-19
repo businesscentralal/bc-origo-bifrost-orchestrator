@@ -36,10 +36,13 @@ codeunit 10035576 "Help ori"
     end;
 
     local procedure BuildOverview(var O: TextBuilder)
+    var
+        RosterSummaryLbl: Label '%1 Bifrost message types for managing job queues, building workflow playbooks, generating reports, and sending purchase orders, sales quotes and sales order confirmations.', Locked = true, Comment = '%1 = number of registered message types; invariant technical help.';
+        RosterHeadingLbl: Label '## Message Types (%1)', Locked = true, Comment = '%1 = number of registered message types; invariant Markdown heading.';
     begin
         O.AppendLine('# Job Queue Orchestrator & Playbook Workflow Engine');
         O.AppendLine('');
-        O.AppendLine(StrSubstNo('%1 Bifrost message types for managing job queues, building workflow playbooks, generating reports, and sending purchase orders, sales quotes and sales order confirmations.', RosterCount()));
+        O.AppendLine(StrSubstNo(RosterSummaryLbl, RosterCount()));
         O.AppendLine('Call `Help.Implementation.Get` with `subject = "<type>"` for per-type technical guides.');
         O.AppendLine('');
         O.AppendLine('## Quick Decision Tree for AI Agents');
@@ -70,7 +73,7 @@ codeunit 10035576 "Help ori"
         O.AppendLine('');
         BuildSafeAuthoringGuide(O);
         BuildWorkedExamples(O);
-        O.AppendLine(StrSubstNo('## Message Types (%1)', RosterCount()));
+        O.AppendLine(StrSubstNo(RosterHeadingLbl, RosterCount()));
         O.AppendLine('');
         O.AppendLine('| Type | Required parameters | Description |');
         O.AppendLine('|---|---|---|');
