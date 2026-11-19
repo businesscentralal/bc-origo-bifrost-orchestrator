@@ -3357,6 +3357,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutOtherCompanyErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3031661732 - NamedType 38745058" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Layout %1 on report %2 is limited to another company and cannot be replaced from company %3. Use another layout name.</source>
+          <target>Útlit %1 í skýrslu %2 er takmarkað við annað fyrirtæki og er ekki hægt að skipta um það úr fyrirtækinu %3. Notaðu annað heiti á útlitið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Útlit %1 í skýrslu %2 er takmarkað við annað fyrirtæki og er ekki hægt að skipta um það úr fyrirtækinu %3. Notaðu annað heiti á útlitið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Layout Handler ori - NamedType LayoutNameTakenOtherCompanyErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3031661732 - NamedType 2128685181" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request must include "%1".</source>
           <target>Beiðni verður að innihalda "%1".</target>
