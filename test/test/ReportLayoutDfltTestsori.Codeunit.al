@@ -236,23 +236,42 @@ codeunit 96494 "Report Layout Dflt Tests ori"
     procedure SetByNameDoesNotReplaceOtherCompanyLayout()
     var
         TenantLayout: Record "Tenant Report Layout";
+        Response: JsonObject;
         Request: JsonObject;
         LayoutName: Text[250];
         EmptyGuid: Guid;
+        OriginalSystemId: Guid;
+        OriginalContent: Text;
     begin
         // [GIVEN] A user layout limited to another company
         ResetDefault();
         LayoutName := NewName('XDEF-OWN-');
         InsertOtherCompanyLayout(LayoutName);
+        TenantLayout.Get(Report::"Layout Sample Report ori", LayoutName, EmptyGuid);
+        OriginalSystemId := TenantLayout.SystemId;
+        OriginalContent := LayoutContent(TenantLayout);
         // [WHEN] Set with the same name is sent in this company, without companyName
         Request := ImportRequest(LayoutName);
-        asserterror Execute(Request);
-        // [THEN] It is refused and the other company's row keeps its company and description
-        Assert.ExpectedError('is limited to another company and cannot be replaced');
+        Response := Execute(Request);
+        // [THEN] It is refused with PreconditionFailed on "name" and the other company's row is untouched
+        Assert.AreEqual('Error', GetText(Response, 'status'), 'Refused');
+        Assert.AreEqual('PreconditionFailed', GetText(Response, 'code'), 'Stable code');
+        Assert.AreEqual('name', GetText(Response, 'parameter'), 'Parameter');
+        Assert.IsTrue(StrPos(GetText(Response, 'error'), 'is limited to another company and cannot be replaced') > 0, 'Text');
+        Assert.AreNotEqual('', GetText(Response, 'nextStep'), 'Next step');
         Assert.IsTrue(TenantLayout.Get(Report::"Layout Sample Report ori", LayoutName, EmptyGuid), 'Row still exists');
         Assert.AreEqual('XDEF OTHER COMPANY', TenantLayout."Company Name", 'Company unchanged');
         Assert.AreEqual('XDEF other description', TenantLayout.Description, 'Description unchanged');
+        Assert.AreEqual(OriginalSystemId, TenantLayout.SystemId, 'Row not deleted and recreated');
+        Assert.AreEqual(OriginalContent, LayoutContent(TenantLayout), 'Layout content unchanged');
         Cleanup(LayoutName);
+    end;
+
+    local procedure LayoutContent(var TenantLayout: Record "Tenant Report Layout"): Text
+    begin
+        // The layout file is a Media: a replace stores a new media object, so its id identifies the content.
+        Assert.IsTrue(TenantLayout.Layout.HasValue(), 'Layout file present');
+        exit(Format(TenantLayout.Layout.MediaId));
     end;
 
     /// <summary>Select-default for a layout limited to another company answers not found and writes nothing (#237 AC02/AC03).</summary>

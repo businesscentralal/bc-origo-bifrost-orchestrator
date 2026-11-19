@@ -10,6 +10,7 @@ Business Central release versioning (`major.minor.build.revision`).
 ### Fixed — #237
 
 - #237 AC01 / codeunit 10035600 `Report Layout Handler ori`: `Orchestrator.ReportLayout.Set` by name no longer replaces or re-scopes a user-defined layout limited to another company; it is refused with `Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current>. Use another layout name.` and nothing is changed (is-IS translated).
+- #237 AC01 (review): the refusal now answers code `PreconditionFailed`, `parameter` `name`, `received`, `expected` and a `nextStep`, and is listed with that code under errors in the Set contract; two labels (`NameExpectedTok`, `NameNextStepTok`) with is-IS translations, `Bifrost Orchestrator.is-IS.xlf` regenerated.
 - #237 AC02: `ReportLayout.Get` and `setAsDefault` for another company's layout keep answering `Layout <name> not found on report <reportId>` (the list only shows the current company's layouts, so the other company is not disclosed); the Set contract help now says so.
 - #237 AC03: tests `SetByNameDoesNotReplaceOtherCompanyLayout` and `SetAsDefaultDoesNotSeeOtherCompanyLayout` in codeunit 96494 (no new object IDs).
 
