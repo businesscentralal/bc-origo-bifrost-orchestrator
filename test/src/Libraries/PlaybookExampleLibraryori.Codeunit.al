@@ -137,6 +137,7 @@ codeunit 96438 "Playbook Example Library ori"
         Lib.AddStatusSuccessCondition(PlaybookCode, 30);
         Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 20000, 'data.verdict', "Playbook Cond. Operator ori"::Equals, 'pass');
         Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 30000, 'schemaValid', "Playbook Cond. Operator ori"::Equals, 'true');
+        Lib.AddCondition(PlaybookCode, 30, "Playbook Cond. Type ori"::Success, 40000, 'stopReason', "Playbook Cond. Operator ori"::Equals, 'completed');
         Lib.AddCondition(PlaybookCode, 90, "Playbook Cond. Type ori"::Start, 10000, '_who.telegramChatId', "Playbook Cond. Operator ori"::Exists, '');
         Lib.AddStatusSuccessCondition(PlaybookCode, 90);
     end;
@@ -161,7 +162,7 @@ codeunit 96438 "Playbook Example Library ori"
     /// <returns>The JSON text.</returns>
     procedure PostingAuditAskTemplate(): Text
     begin
-        exit('{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","record":{"tableName":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
+        exit('{"question":"Is customer @_current.primaryKey.No_ (@_current.fields.Name) configured correctly for posting sales invoices? Check the posting groups, the VAT business posting group, the payment terms, and that the posting groups have their accounts filled. Answer with a verdict of pass, fail or unknown and list each problem with the field name. Read only; do not change the customer.","subject":{"table":"Customer","systemId":"@_current.id"},"limits":{"maxToolCalls":4},"responseSchema":{"type":"object","properties":{"verdict":{"type":"string","enum":["pass","fail","unknown"]},"findings":{"type":"array","items":{"type":"string"}}},"required":["verdict","findings"]}}');
     end;
 
     /// <summary>The request template of step 90 of example 4.</summary>

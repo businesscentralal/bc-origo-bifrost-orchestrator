@@ -244,8 +244,11 @@ codeunit 96419 "Status Msg Tests"
 
     local procedure CreateArgument(var TempArgument: Record "Message Argument ori" temporary; RequestJsonText: Text)
     var
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
         RequestJson: JsonObject;
     begin
+        // The handlers read the setup row; an earlier test or a fresh tenant may have none.
+        LibraryOrchestrator.EnsureSchedulerSetup();
         TempArgument.Init();
         TempArgument.Insert();
         RequestJson.ReadFrom(RequestJsonText);
