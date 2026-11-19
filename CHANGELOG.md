@@ -13,6 +13,13 @@ Business Central release versioning (`major.minor.build.revision`).
 - #209 build: fields `Confirmation Note` and `Outcome Note` (table `Playbook Step Log ori`) and `Max Count` (table `Playbook Step ori`) declare `AllowInCustomizations` (AsReadOnly / AsReadWrite), which clears the three AS0139 warnings also present on main.
 - #209 tests: `96411 Orchestrator Unit Tests` removes stale Ok Sample Job Queue Entries before the enqueue test; `96419 Status Msg Tests` and `96443 First Schedule Tests ori` create the Orchestrator setup row when the tenant has none (new procedure `EnsureSchedulerSetup` in test library 96413 `Library Orchestrator`). The 96411 category filter and the 96480/96481 Report Selections seeding were delivered in #210. 96456 needs a Disabled-isolation test runner (130451).
 
+### Fixed — #228
+
+- #228 AC01 / codeunit 10035576 `Help ori`: the Help.Orchestrator.Get overview counts the registered message types from the enum values of this app (no hard-coded 26; the roster is 30) and the table lists `Orchestrator.ReportLayout.Set` too. Tests in codeunit 96422 `Misc Msg Smoke Tests` compare the count and every row with the enum.
+- #228 AC02: the overview table has a Required parameters column for every type (`name` for ReportLayout.Get, `reportId` and optional `format` for Report.SaveAs).
+- #228 AC02 (review amend): the `Orchestrator.ReportLayout.Set` row now lists the import, select-default (`setAsDefault`) and clear-default (`clearDefault`) alternatives with their conditional parameters; asserted in Misc Msg Smoke Tests.
+- #228 AC03: help text only, no behaviour change.
+
 ### Added — #223
 
 - #223 AC01 / codeunits 10035558 `Table JSON Export ori` (`ExportPlaybook`) and 10035563 `Table JSON Import ori` (`ImportPlaybook`), page 10035551 `Playbooks ori` actions Export Playbook / Import Playbook: a playbook file (`bifrost-playbook`, version 1) holds the playbook, its steps, conditions and Transform rows; import confirms first and stops at the first failed row.
