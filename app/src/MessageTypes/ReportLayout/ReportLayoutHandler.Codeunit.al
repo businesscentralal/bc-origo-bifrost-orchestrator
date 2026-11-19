@@ -114,8 +114,10 @@ codeunit 10035600 "Report Layout Handler ori"
         if HasStagingId then begin
             // Take reads and deletes the row in this transaction. A later import error rolls the delete back,
             // so the row survives a failed import and the call can be retried with the same id.
-            if not BlobStaging.Take(StagingId, TempBlob) then
-                Error(StagingIdNotFoundErr, StagingIdText);
+            if not BlobStaging.Take(StagingId, TempBlob) then begin
+                Argument.AddError("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(StagingIdNotFoundErr, StagingIdText), 'stagingId', StagingIdText, StagingExpectedLbl, StageAgainLbl);
+                Argument.RaiseCollectedErrors("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(StagingIdNotFoundErr, StagingIdText));
+            end;
         end else begin
             if LayoutBase64 = '' then
                 Error(MissingLayoutBase64Err);
@@ -457,6 +459,8 @@ codeunit 10035600 "Report Layout Handler ori"
         BothLayoutSourcesErr: Label 'Send either "layoutBase64" or "stagingId", not both.', Comment = 'is-IS=Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.';
         NoLayoutSourceErr: Label 'Request must include "layoutBase64" or "stagingId".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" eða "stagingId".';
         InvalidStagingIdErr: Label '"stagingId" %1 is not a valid GUID.', Comment = 'is-IS="stagingId" %1 er ekki gilt GUID.';
+        StagingExpectedLbl: Label 'An unused staging row owned by the calling user in this company.', Comment = 'is-IS=Ónotuð biðfærsla í eigu þess sem kallar í þessu fyrirtæki.';
+        StageAgainLbl: Label 'Stage the file again and send the new stagingId.', Comment = 'is-IS=Settu skrána aftur í bið og sendu nýtt stagingId.';
         StagingIdNotFoundErr: Label 'Staging row %1 was not found or has already been taken.', Comment = 'is-IS=Milligeymslufærsla %1 fannst ekki eða hefur þegar verið tekin.';
         MissingLayoutBase64Err: Label 'Request must include non-empty "layoutBase64".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" sem er ekki autt.';
         SetAndClearDefaultErr: Label 'Send either "setAsDefault" or "clearDefault", not both.', Comment = 'is-IS=Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.';

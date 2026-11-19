@@ -80,7 +80,7 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
         Parts.AddResponseField(Fields, 'name', 'string', 'Layout name.');
         Parts.AddResponseField(Fields, 'appId', 'string', 'Layout app GUID.');
         Parts.AddResponseField(Fields, 'format', 'string', 'Word, RDLC, Excel or Custom.');
-        Parts.AddResponseField(Fields, 'mimeType', 'string', 'Stored MIME type.');
+        Parts.AddResponseField(Fields, 'mimeType', 'string', MimeHelpLbl);
         Parts.AddResponseField(Fields, 'layoutBase64', 'string', 'Unmodified exported layout bytes encoded as base64.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
@@ -89,10 +89,12 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     /// <summary>Provides the GetErrors part of the report layout get message.</summary>
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddContractError(Errors, 'Report <reportId> not found.', 'The report does not exist.', 'Use Orchestrator.Report.List.');
-        Parts.AddContractError(Errors, 'Request must include "<key>".', 'A required key is missing.', 'Supply the documented required fields.');
+        Parts.AddContractError(Errors, 'Request must include "reportId".', 'reportId is missing.', 'Send reportId.');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::MissingParameter, MissingNameLbl, NameNextStepLbl));
         Parts.AddContractError(Errors, 'appId must be a valid GUID.', 'The supplied appId is not a GUID.', 'Use the appId returned by ReportLayout.List.');
         Parts.AddContractError(Errors, 'Layout <name> not found on report <reportId>.', 'No layout matches the name and appId.', 'Use ReportLayout.List and send the returned name and appId.');
 
@@ -158,6 +160,7 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     procedure GetNotes(var Notes: Text): Boolean
     begin
         Notes := 'Read-only. No layout import, default-selection change or update-on-export is performed. Layout names and app IDs are returned by Orchestrator.ReportLayout.List.';
+        Notes += ' ' + DeletePolicyLbl;
         exit(true);
     end;
 
@@ -176,5 +179,9 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     end;
 
     var
+        MissingNameLbl: Label 'name is missing. parameter: name.', Comment = 'is-IS=name vantar. parameter: name.';
+        NameNextStepLbl: Label 'Send name from Orchestrator.ReportLayout.List.', Comment = 'is-IS=Sendu name úr Orchestrator.ReportLayout.List.';
+        MimeHelpLbl: Label 'MIME type: Word = application/vnd.openxmlformats-officedocument.wordprocessingml.document; RDLC = application/xml; Excel = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.', Comment = 'is-IS=MIME-gerð: Word = application/vnd.openxmlformats-officedocument.wordprocessingml.document; RDLC = application/xml; Excel = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.';
+        DeletePolicyLbl: Label 'No layout delete message type exists by design: message types must not delete data. Remove a test layout in BC on the Report Layouts page.', Comment = 'is-IS=Engin skilaboðategund til að eyða útliti er til samkvæmt hönnun: skilaboðategundir mega ekki eyða gögnum. Fjarlægðu prófunarútlit í BC á síðunni Skýrsluútlit.';
         Handler: Codeunit "Report Layout Read Handler ori";
 }

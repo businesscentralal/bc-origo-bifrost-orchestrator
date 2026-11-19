@@ -82,6 +82,7 @@ codeunit 10035612 "Report Layout List Msg ori" implements "Msg Interface ori", "
         Parts.AddResponseField(LayoutFields, 'format', 'string', 'RDLC, Word, Excel or Custom.');
         Parts.AddResponseField(LayoutFields, 'userDefined', 'boolean', 'Whether a user created the layout.');
         Parts.AddResponseField(LayoutFields, 'source', 'string', 'UserDefined or Extension.');
+        Parts.AddResponseField(LayoutFields, 'companyName', 'string', CompanyHelpLbl);
         Parts.AddResponseField(LayoutFields, 'appId', 'string', 'Application GUID of the extension that ships the layout; all zeros for a user-defined layout.');
         Parts.AddResponseField(LayoutFields, 'description', 'string', 'Layout description.');
         Parts.AddResponseField(LayoutFields, 'layoutStatus', 'string', 'Status of the layout as the Business Central enum name.');
@@ -160,6 +161,7 @@ codeunit 10035612 "Report Layout List Msg ori" implements "Msg Interface ori", "
     procedure GetNotes(var Notes: Text): Boolean
     begin
         Notes := 'Read-only. No layout import, default-selection change or update-on-export is performed. Layout names and app IDs are returned by Orchestrator.ReportLayout.List.';
+        Notes += ' ' + DeletePolicyLbl;
         exit(true);
     end;
 
@@ -178,5 +180,7 @@ codeunit 10035612 "Report Layout List Msg ori" implements "Msg Interface ori", "
     end;
 
     var
+        CompanyHelpLbl: Label 'Company name for a company-limited user-defined layout; empty means all companies. Inspect this before selecting a default in another company.', Comment = 'is-IS=Fyrirtækisheiti fyrir notandaskilgreint útlit sem er takmarkað við fyrirtæki; tómt merkir öll fyrirtæki. Skoðaðu þetta áður en sjálfgefið útlit er valið í öðru fyrirtæki.';
+        DeletePolicyLbl: Label 'No layout delete message type exists by design: message types must not delete data. Remove a test layout in BC on the Report Layouts page.', Comment = 'is-IS=Engin skilaboðategund til að eyða útliti er til samkvæmt hönnun: skilaboðategundir mega ekki eyða gögnum. Fjarlægðu prófunarútlit í BC á síðunni Skýrsluútlit.';
         Handler: Codeunit "Report Layout Read Handler ori";
 }

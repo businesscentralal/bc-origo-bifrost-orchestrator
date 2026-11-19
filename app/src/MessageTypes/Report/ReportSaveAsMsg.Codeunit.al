@@ -42,6 +42,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Envelope := Parts.NoSubjectEnvelope(true, 'application/pdf');
+        Envelope.Add('contentTypesByFormat', ContentTypesByFormat());
         exit(true);
     end;
 
@@ -69,7 +70,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Caller XML takes precedence over registered templates. parameters overlays its named options. Without parameters, existing raw XML / saved-preset behavior is retained.'));
         Parameters.Add(ContractMgt.Parameter('layoutName', 'string', false, 'Temporary layout override from Orchestrator.ReportLayout.List. The prior session selection and stored defaults are preserved.'));
         Parameters.Add(ContractMgt.Parameter('appId', 'string', false, 'Extension layout application GUID; omitted means a user-defined layout. Used with layoutName.'));
-        Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item, e.g. WHERE(Sell-to Customer No.=CONST(10000)). Ignored when the report has no data item table.'));
+        Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, TableViewHelpLbl));
         exit(true);
     end;
 
@@ -78,8 +79,9 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Fields: JsonArray;
     begin
-        Parts.AddResponseField(Fields, 'binary', 'binary', 'The rendered document in the requested format.');
+        Parts.AddResponseField(Fields, 'binary', 'binary', BinaryHelpLbl);
         Response := Parts.Response(Fields, 'application/pdf');
+        Response.Add('contentTypesByFormat', ContentTypesByFormat());
         exit(true);
     end;
 
@@ -149,7 +151,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The report 1316 template accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item). PrintEntriesNotDue is not a BC 28.5 control and is rejected. Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
+        Notes := 'The report 1316 template accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item). PrintEntriesNotDue is not a BC 28.5 control and is rejected. Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. ';
+        Notes += OutputHelpLbl;
         exit(true);
     end;
 
@@ -165,6 +168,17 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Handler.ExecuteSaveAs(Argument);
     end;
 
+    local procedure ContentTypesByFormat() ContentTypes: JsonObject
+    begin
+        ContentTypes.Add('PDF', 'application/pdf');
+        ContentTypes.Add('Word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        ContentTypes.Add('Excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        ContentTypes.Add('XML', 'application/xml');
+    end;
+
     var
+        OutputHelpLbl: Label 'For document reports, tableView must select the document. PDF and other output return inline; no size hint is available before rendering. A slow tenant may require a longer client timeout. datacontenttype follows format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.', Comment = 'is-IS=Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. datacontenttype fylgir format: PDF application/pdf; Word application/vnd.openxmlformats-officedocument.wordprocessingml.document; Excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; XML application/xml.';
+        BinaryHelpLbl: Label 'Inline document bytes in the requested format; datacontenttype follows format (PDF, Word, Excel or XML).', Comment = 'is-IS=Skjalsgögn beint í svari á umbeðnu sniði; datacontenttype fylgir format (PDF, Word, Excel eða XML).';
+        TableViewHelpLbl: Label 'For a document report, send tableView to select the document, for example WHERE(No.=CONST(XINV001)). Applied to the first data item; ignored when there is no data item table.', Comment = 'is-IS=Fyrir skjalaskýrslu skaltu senda tableView til að velja skjalið, til dæmis WHERE(No.=CONST(XINV001)). Gildir fyrir fyrsta gagnalið; hunsað þegar engin gagnaliðstafla er til.';
         Handler: Codeunit "Report Msg Handler ori";
 }
