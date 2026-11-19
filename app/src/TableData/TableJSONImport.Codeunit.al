@@ -2,6 +2,8 @@ namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
 using System.Reflection;
+using System.Text;
+using System.Utilities;
 
 /// <summary>
 /// Imports a Bifrost table data file written by "Table JSON Export ori" (#155, Phase 1). Every row is applied through
@@ -13,7 +15,8 @@ using System.Reflection;
 /// nothing. The second pass, skipped by a dry run, persists only the rows that passed. An error raised by a table
 /// trigger while persisting stops the import and the transaction is rolled back.
 /// The Foundation table write guard is called first, with Force = false; a restricted table is refused and nothing
-/// is read or written.
+/// is read or written. The separate ImportPlaybookFromUI entry point assigns fields directly under the user's
+/// BC permissions, only for the four validated playbook tables; message and generic imports retain their guards.
 /// </summary>
 codeunit 10035563 "Table JSON Import ori"
 {
@@ -46,6 +49,11 @@ codeunit 10035563 "Table JSON Import ori"
     /// <returns>Result: tableNo, dryRun, rows, inserted, modified, failed and errors (row number and error text). In a
     /// dry run inserted and modified count the rows that would be inserted or modified.</returns>
     internal procedure ImportTable(Envelope: JsonObject; DryRun: Boolean; StopOnError: Boolean) Result: JsonObject
+    begin
+        exit(ImportTableRows(Envelope, DryRun, StopOnError, false));
+    end;
+
+    local procedure ImportTableRows(Envelope: JsonObject; DryRun: Boolean; StopOnError: Boolean; FromPlaybookUI: Boolean) Result: JsonObject
     var
         Rows: JsonArray;
         Errors: JsonArray;
@@ -58,11 +66,12 @@ codeunit 10035563 "Table JSON Import ori"
         Modified: Integer;
     begin
         ReadEnvelope(Envelope, TableNo, Rows);
-        AssertTableWritable(TableNo);
+        if not FromPlaybookUI then
+            AssertTableWritable(TableNo);
         for RowNo := 1 to Rows.Count() do begin
             Rows.Get(RowNo - 1, RowToken);
             ClearLastError();
-            if TryCheckRow(TableNo, RowToken, IsNew) then begin
+            if TryCheckRow(TableNo, RowToken, IsNew, FromPlaybookUI) then begin
                 PassedRows.Add(RowNo);
                 if IsNew then
                     Inserted += 1
@@ -77,7 +86,7 @@ codeunit 10035563 "Table JSON Import ori"
         if not DryRun then
             foreach RowNo in PassedRows do begin
                 Rows.Get(RowNo - 1, RowToken);
-                PersistRow(TableNo, RowToken.AsObject());
+                PersistRow(TableNo, RowToken.AsObject(), FromPlaybookUI);
             end;
         Result.Add('tableNo', TableNo);
         Result.Add('dryRun', DryRun);
@@ -132,22 +141,22 @@ codeunit 10035563 "Table JSON Import ori"
     end;
 
     [TryFunction]
-    local procedure TryCheckRow(TableNo: Integer; RowToken: JsonToken; var IsNew: Boolean)
+    local procedure TryCheckRow(TableNo: Integer; RowToken: JsonToken; var IsNew: Boolean; FromPlaybookUI: Boolean)
     var
         RecRef: RecordRef;
     begin
         if not RowToken.IsObject() then
             Error(ErrorInfo.Create(RowNotObjectErr));
-        PrepareRow(TableNo, RowToken.AsObject(), RecRef, IsNew);
+        PrepareRow(TableNo, RowToken.AsObject(), RecRef, IsNew, FromPlaybookUI);
         RecRef.Close();
     end;
 
-    local procedure PersistRow(TableNo: Integer; Row: JsonObject)
+    local procedure PersistRow(TableNo: Integer; Row: JsonObject; FromPlaybookUI: Boolean)
     var
         RecRef: RecordRef;
         IsNew: Boolean;
     begin
-        PrepareRow(TableNo, Row, RecRef, IsNew);
+        PrepareRow(TableNo, Row, RecRef, IsNew, FromPlaybookUI);
         if IsNew then
             RecRef.Insert(true)
         else
@@ -155,25 +164,24 @@ codeunit 10035563 "Table JSON Import ori"
         RecRef.Close();
     end;
 
-    local procedure PrepareRow(TableNo: Integer; Row: JsonObject; var RecRef: RecordRef; var IsNew: Boolean)
+    local procedure PrepareRow(TableNo: Integer; Row: JsonObject; var RecRef: RecordRef; var IsNew: Boolean; FromPlaybookUI: Boolean)
     var
         TempArgument: Record "Message Argument ori" temporary;
-        Serializer: Codeunit "Serializer ori";
         Token: JsonToken;
         FieldsJson: JsonObject;
         BlankFieldNos: List of [Integer];
     begin
         RecRef.Open(TableNo);
-        LocateRow(Row, RecRef, IsNew);
+        LocateRow(Row, RecRef, IsNew, FromPlaybookUI);
         AssertRowInPlaybook(RecRef);
-        if IsNew then
+        if IsNew and not FromPlaybookUI then
             if TempArgument.IsTableInsertRestrictedForDataRecords(TableNo, RecRef, false, false) then
                 Error(ErrorInfo.Create(TempArgument.GetRestrictedTableErrorText(TableNo, StrSubstNo(InsertRestrictedErr, TableNo, RecRef.Name()), true)));
         if Row.Get('fields', Token) then
             if Token.IsObject() then begin
                 FieldsJson := Token.AsObject().Clone().AsObject();
                 BlankFieldNos := TakeBlankOptionValues(RecRef, FieldsJson);
-                RecRef := Serializer.DeserializeFromJson(RecRef, FieldsJson);
+                ApplyFields(RecRef, FieldsJson, FromPlaybookUI);
                 SetBlankOptionValues(RecRef, BlankFieldNos);
             end;
         AssertRowInPlaybook(RecRef);
@@ -224,6 +232,20 @@ codeunit 10035563 "Table JSON Import ori"
     /// <param name="Envelope">The playbook file envelope.</param>
     /// <returns>Result: playbookCode and tables (tableNo, rows, inserted, modified).</returns>
     internal procedure ImportPlaybook(Envelope: JsonObject) Result: JsonObject
+    begin
+        exit(ImportPlaybookFile(Envelope, false));
+    end;
+
+    /// <summary>Imports the four playbook tables as an admin UI action under the user's BC permissions.
+    /// Does not change Foundation's guard setup or the guarded table/message import paths.</summary>
+    /// <param name="Envelope">The uploaded playbook file.</param>
+    /// <returns>The imported playbook code and row counts per table.</returns>
+    internal procedure ImportPlaybookFromUI(Envelope: JsonObject): JsonObject
+    begin
+        exit(ImportPlaybookFile(Envelope, true));
+    end;
+
+    local procedure ImportPlaybookFile(Envelope: JsonObject; FromPlaybookUI: Boolean) Result: JsonObject
     var
         TableJSONExport: Codeunit "Table JSON Export ori";
         Tables: JsonArray;
@@ -242,7 +264,8 @@ codeunit 10035563 "Table JSON Import ori"
                 Tables.Get(Index - 1, Token);
                 TableFile := Token.AsObject();
                 if GetTableNo(TableFile) = TableNo then begin
-                    TableResult := ImportTable(TableFile, false, true);
+                    Clear(TableResult);
+                    TableResult := ImportTableRows(TableFile, false, true, FromPlaybookUI);
                     TableResult.Remove('dryRun');
                     TableResult.Remove('failed');
                     TableResult.Remove('errors');
@@ -343,9 +366,8 @@ codeunit 10035563 "Table JSON Import ori"
                 TableNo := Token.AsValue().AsInteger();
     end;
 
-    local procedure LocateRow(Row: JsonObject; var RecRef: RecordRef; var IsNew: Boolean)
+    local procedure LocateRow(Row: JsonObject; var RecRef: RecordRef; var IsNew: Boolean; FromPlaybookUI: Boolean)
     var
-        Serializer: Codeunit "Serializer ori";
         Token: JsonToken;
         RowSystemId: Guid;
         HasKey: Boolean;
@@ -360,12 +382,93 @@ codeunit 10035563 "Table JSON Import ori"
         if Row.Get('primaryKey', Token) then
             if Token.IsObject() then
                 if Token.AsObject().Keys().Count() > 0 then begin
-                    RecRef := Serializer.DeserializeFromJson(RecRef, Token.AsObject());
+                    ApplyFields(RecRef, Token.AsObject(), FromPlaybookUI);
                     HasKey := true;
                 end;
         if not HasKey then
             Error(ErrorInfo.Create(RowKeyMissingErr));
         IsNew := not RecRef.Find('=');
+    end;
+
+    // Only ImportPlaybookFromUI can reach the direct assignment branch, after ReadPlaybookEnvelope
+    // has restricted the file to the four playbook tables. No permissions are elevated here.
+    local procedure ApplyFields(var RecRef: RecordRef; Fields: JsonObject; FromPlaybookUI: Boolean)
+    var
+        Serializer: Codeunit "Serializer ori";
+        TableDataMgt: Codeunit "Table Data Mgt ori";
+        FieldRef: FieldRef;
+        Token: JsonToken;
+        Index: Integer;
+    begin
+        if not FromPlaybookUI then begin
+            RecRef := Serializer.DeserializeFromJson(RecRef, Fields);
+            exit;
+        end;
+        for Index := 1 to RecRef.FieldCount() do begin
+            FieldRef := RecRef.FieldIndex(Index);
+            if (FieldRef.Class() = FieldClass::Normal) and (FieldRef.Number() < 2000000000) then
+                if Fields.Get(TableDataMgt.GetJsonKey(FieldRef.Name()), Token) then
+                    ApplyUIField(RecRef, FieldRef, Token);
+        end;
+    end;
+
+    local procedure ApplyUIField(var RecRef: RecordRef; var FieldRef: FieldRef; Token: JsonToken)
+    var
+        TempBlob: Codeunit "Temp Blob";
+        Base64Convert: Codeunit "Base64 Convert";
+        OutStr: OutStream;
+        ValueText: Text;
+        GuidValue: Guid;
+        DateTimeValue: DateTime;
+        Ordinal: Integer;
+        Index: Integer;
+        InvalidFieldErr: Label 'The value for field %1 is not valid.', Comment = '%1 = field name, is-IS=Gildið fyrir reitinn %1 er ekki gilt.';
+    begin
+        if not Token.IsValue() then
+            Error(ErrorInfo.Create(StrSubstNo(InvalidFieldErr, FieldRef.Name())));
+        ValueText := Token.AsValue().AsText();
+        case FieldRef.Type() of
+            FieldType::Text, FieldType::Code:
+                FieldRef.Validate(ValueText);
+            FieldType::Integer:
+                FieldRef.Validate(Token.AsValue().AsInteger());
+            FieldType::Boolean:
+                FieldRef.Validate(Token.AsValue().AsBoolean());
+            FieldType::GUID:
+                begin
+                    if ValueText <> '' then
+                        Evaluate(GuidValue, ValueText);
+                    FieldRef.Validate(GuidValue);
+                end;
+            FieldType::DateTime:
+                begin
+                    if ValueText <> '' then
+                        Evaluate(DateTimeValue, ValueText, 9);
+                    FieldRef.Validate(DateTimeValue);
+                end;
+            FieldType::Option:
+                begin
+                    for Index := 1 to FieldRef.EnumValueCount() do begin
+                        Ordinal := FieldRef.GetEnumValueOrdinal(Index);
+                        if (ValueText = FieldRef.GetEnumValueNameFromOrdinalValue(Ordinal)) or
+                           (ValueText = FieldRef.GetEnumValueCaptionFromOrdinalValue(Ordinal)) or
+                           (ValueText = Format(Ordinal, 0, 9))
+                        then begin
+                            FieldRef.Validate(Ordinal);
+                            exit;
+                        end;
+                    end;
+                    Error(ErrorInfo.Create(StrSubstNo(InvalidFieldErr, FieldRef.Name())));
+                end;
+            FieldType::Blob:
+                begin
+                    TempBlob.CreateOutStream(OutStr);
+                    Base64Convert.FromBase64(ValueText, OutStr);
+                    TempBlob.ToRecordRef(RecRef, FieldRef.Number());
+                end;
+            else
+                Error(ErrorInfo.Create(StrSubstNo(InvalidFieldErr, FieldRef.Name())));
+        end;
     end;
 
     local procedure AddRowError(var Errors: JsonArray; RowNo: Integer; ErrorText: Text)

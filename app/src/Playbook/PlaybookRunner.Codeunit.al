@@ -69,6 +69,9 @@ codeunit 10035547 "Playbook Runner ori"
         StoreInitialRequest(InitialRequestText);
         InstanceId := LogMgt.CreateInstance(PlaybookCode, InitialRequestText);
         RunStartTime := CurrentDateTime();
+        StepsExecuted := 0;
+        StepsFailed := 0;
+        ItemsProcessed := 0;
         UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Running);
         Workspace.BeginRun(PlaybookCode, Playbook.Description, InstanceId);
 
@@ -153,6 +156,9 @@ codeunit 10035547 "Playbook Runner ori"
         StoreInitialRequest(InitialRequestText);
         InstanceId := LogMgt.CreateInstance(PlaybookCode, InitialRequestText);
         RunStartTime := CurrentDateTime();
+        StepsExecuted := 0;
+        StepsFailed := 0;
+        ItemsProcessed := 0;
         UpdateLastRun(PlaybookCode, InstanceId, "Playbook Inst. Status ori"::Running);
         Workspace.BeginRun(PlaybookCode, Playbook.Description, InstanceId);
 

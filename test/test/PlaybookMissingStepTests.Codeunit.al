@@ -74,10 +74,11 @@ codeunit 96496 "Playbook Missing Step Tests"
         PlaybookStep: Record "Playbook Step ori";
         Instance: Record "Playbook Instance ori";
         InstanceId: Guid;
+        ReportRequestTok: Label '{"reportId":%1}', Locked = true;
     begin
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Report.Run",
-            StrSubstNo('{"reportId":%1}', Report::"Test Failing Report"), 0, '', 0);
+            StrSubstNo(ReportRequestTok, Report::"Test Failing Report"), 0, '', 0);
         Lib.AddSuccessCondition(PlaybookCodeTok, 10, 'status', 'Success');
         PlaybookStep.Get(PlaybookCodeTok, 10);
         PlaybookStep."Next Step No. (Failure)" := 20;

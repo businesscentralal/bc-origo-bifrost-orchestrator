@@ -4407,6 +4407,12 @@
           <note from="Developer" annotates="general" priority="2">%1 = table number, %2 = table name, is-IS=Innflutningur töflugagna getur ekki skrifað í töflu %1 (%2).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - NamedType TableWriteRestrictedErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1136529745 - Method 121768046 - NamedType 4076095586" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The value for field %1 is not valid.</source>
+          <target>Gildið fyrir reitinn %1 er ekki gilt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field name, is-IS=Gildið fyrir reitinn %1 er ekki gilt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Table JSON Import ori - Method ApplyUIField - NamedType InvalidFieldErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2638307712 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telegram Bot Token is not configured in Orchestrator Setup.</source>
           <target>Telegram-vélmennislykill er ekki stilltur í uppsetningu vinnsluraðara.</target>
