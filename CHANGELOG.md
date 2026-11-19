@@ -7,6 +7,10 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased]
 
+### Fixed — #231
+
+- #231 / codeunit 10035563 `Table JSON Import ori` (`ImportPlaybook`): when a playbook row fails and the Change Log setup does not cover all four playbook tables (Playbook, Playbook Step, Playbook Condition, Playbook Transform), the error now names every uncovered table and the one-time setup, instead of only the first field Foundation's write guard meets. Test: `Scenario_ImportErrorNamesUncoveredPlaybookTables` in codeunit 96498. is-IS text in the label comment.
+
 ### Added — #223
 
 - #223 AC01 / codeunits 10035558 `Table JSON Export ori` (`ExportPlaybook`) and 10035563 `Table JSON Import ori` (`ImportPlaybook`), page 10035551 `Playbooks ori` actions Export Playbook / Import Playbook: a playbook file (`bifrost-playbook`, version 1) holds the playbook, its steps, conditions and Transform rows; import confirms first and stops at the first failed row.

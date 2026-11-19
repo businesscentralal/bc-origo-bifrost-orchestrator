@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.Orchestrator;
 
 using Origo.Bifrost;
+using System.Diagnostics;
 using System.Reflection;
 
 /// <summary>
@@ -35,6 +36,7 @@ codeunit 10035563 "Table JSON Import ori"
         PlaybookCodeMissingErr: Label 'The file does not name the playbook (playbookCode).', Comment = 'is-IS=Skráin tilgreinir ekki keðjuna (playbookCode).';
         PlaybookHeaderMissingErr: Label 'The file has no Playbook row for playbook %1.', Comment = '%1 = playbook code, is-IS=Skráin inniheldur enga keðjulínu fyrir keðjuna %1.';
         PlaybookRowMismatchErr: Label 'A row belongs to playbook %1, not to the playbook %2 named in the file.', Comment = '%1 = playbook code of the row, %2 = playbook code of the file, is-IS=Lína tilheyrir keðjunni %1 en ekki keðjunni %2 sem skráin tilgreinir.';
+        RowStopHintErr: Label '%1 The Change Log setup does not cover these playbook tables: %2. If the ChangeLog Write Guard refused the row, turn Change Log on and add all of these tables once (Change Log Setup > Tables, log insertion and modification for all fields), then import again.', Comment = '%1 = error text, %2 = list of table captions, is-IS=%1 Breytingaskráning nær ekki yfir þessar keðjutöflur: %2. Ef ChangeLog-skrifvörnin hafnaði línunni skal kveikja á breytingaskráningu og bæta öllum þessum töflum við einu sinni (Uppsetning breytingaskráar > Töflur, skrá innsetningu og breytingu fyrir alla reiti) og flytja svo inn aftur.';
         RowStopErr: Label 'Row %1 failed: %2', Comment = '%1 = row number, %2 = error text, is-IS=Lína %1 mistókst: %2';
 
     /// <summary>
@@ -242,7 +244,10 @@ codeunit 10035563 "Table JSON Import ori"
                 Tables.Get(Index - 1, Token);
                 TableFile := Token.AsObject();
                 if GetTableNo(TableFile) = TableNo then begin
-                    TableResult := ImportTable(TableFile, false, true);
+                    Clear(TableResult);
+                    ClearLastError();
+                    if not TryImportTable(TableFile, TableResult) then
+                        ThrowPlaybookImportError(GetLastErrorText());
                     TableResult.Remove('dryRun');
                     TableResult.Remove('failed');
                     TableResult.Remove('errors');
@@ -252,6 +257,44 @@ codeunit 10035563 "Table JSON Import ori"
         ExpectedPlaybookCode := '';
         Result.Add('playbookCode', PlaybookCode);
         Result.Add('tables', TableResults);
+    end;
+
+    [TryFunction]
+    local procedure TryImportTable(TableFile: JsonObject; var TableResult: JsonObject)
+    begin
+        TableResult := ImportTable(TableFile, false, true);
+    end;
+
+    /// <summary>
+    /// Raises the import error. When the Change Log setup does not cover the playbook tables, the error also names every
+    /// such table and the one-time setup, because Foundation's write guard reports only the first field it meets (#231).
+    /// </summary>
+    local procedure ThrowPlaybookImportError(ErrorText: Text)
+    var
+        ChangeLogSetup: Record "Change Log Setup";
+        Coverage: Record "Change Log Setup (Table)";
+        TableJSONExport: Codeunit "Table JSON Export ori";
+        AllObj: Record AllObjWithCaption;
+        TableNo: Integer;
+        Uncovered: Text;
+        LogActive: Boolean;
+    begin
+        if ChangeLogSetup.Get() then
+            LogActive := ChangeLogSetup."Change Log Activated";
+        foreach TableNo in TableJSONExport.GetPlaybookTables() do
+            if not LogActive or not Coverage.Get(TableNo) or
+               (Coverage."Log Insertion" = Coverage."Log Insertion"::" ") or (Coverage."Log Modification" = Coverage."Log Modification"::" ")
+            then begin
+                AllObj.SetLoadFields("Object Caption");
+                if AllObj.Get(AllObj."Object Type"::Table, TableNo) then;
+                if Uncovered <> '' then
+                    Uncovered += ', ';
+                Uncovered += AllObj."Object Caption";
+                Clear(AllObj);
+            end;
+        if Uncovered = '' then
+            Error(ErrorInfo.Create(ErrorText));
+        Error(ErrorInfo.Create(StrSubstNo(RowStopHintErr, ErrorText, Uncovered)));
     end;
 
     local procedure AssertRowInPlaybook(RecRef: RecordRef)

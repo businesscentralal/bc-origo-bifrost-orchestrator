@@ -181,6 +181,45 @@ codeunit 96498 "Playbook Export Tests ori"
         Assert.ExpectedError('does not exist');
     end;
 
+    /// <summary>#231: a failed row on a company whose Change Log setup misses a playbook table names every uncovered table and the one-time setup; with full coverage the error stays unchanged.</summary>
+    [Test]
+    procedure Scenario_ImportErrorNamesUncoveredPlaybookTables()
+    var
+        Coverage: Record "Change Log Setup (Table)";
+        CodeA: Code[20];
+        CodeB: Code[20];
+        EnvelopeA: JsonObject;
+        EnvelopeB: JsonObject;
+        ErrorText: Text;
+    begin
+        Setup();
+        // Story #231 | Time: independent of Today/WorkDate | Risk: None
+        CodeA := BuildPlaybook();
+        CodeB := BuildPlaybook();
+        Commit();
+        EnvelopeB := TableJSONExport.ExportPlaybook(CodeB);
+        EnvelopeA := TableJSONExport.ExportPlaybook(CodeA);
+        AppendStepRows(EnvelopeA, EnvelopeB);
+
+        asserterror TableJSONImport.ImportPlaybook(EnvelopeA);
+        ErrorText := GetLastErrorText();
+        Assert.IsTrue(ErrorText.Contains('belongs to playbook'), 'row error is kept');
+        Assert.IsFalse(ErrorText.Contains('does not cover'), 'no hint when all four tables are covered');
+
+        Coverage.Get(Database::"Playbook Step ori");
+        Coverage.Delete(true);
+        Coverage.Get(Database::"Playbook Transform ori");
+        Coverage.Delete(true);
+        asserterror TableJSONImport.ImportPlaybook(EnvelopeA);
+        ErrorText := GetLastErrorText();
+        Assert.IsTrue(ErrorText.Contains('does not cover these playbook tables'), 'hint names the setup');
+        Assert.IsTrue(ErrorText.Contains('Playbook Step'), 'uncovered Playbook Step is named');
+        Assert.IsTrue(ErrorText.Contains('Playbook Transform'), 'uncovered Playbook Transform is named');
+        Lib.Cleanup(CodeA);
+        Lib.Cleanup(CodeB);
+        TearDown();
+    end;
+
     /// <summary>A file labelled with one playbook that carries another playbook's header or rows is refused before anything is written.</summary>
     [Test]
     procedure Scenario_ImportRefusesRowsOfAnotherPlaybook()
