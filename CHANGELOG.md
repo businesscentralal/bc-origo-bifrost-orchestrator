@@ -12,6 +12,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - #237 AC01 / codeunit 10035600 `Report Layout Handler ori`: `Orchestrator.ReportLayout.Set` by name no longer replaces or re-scopes a user-defined layout limited to another company; it is refused with `Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current>. Use another layout name.` and nothing is changed (is-IS translated).
 - #237 AC02: `ReportLayout.Get` and `setAsDefault` for another company's layout keep answering `Layout <name> not found on report <reportId>` (the list only shows the current company's layouts, so the other company is not disclosed); the Set contract help now says so.
 - #237 AC03: tests `SetByNameDoesNotReplaceOtherCompanyLayout` and `SetAsDefaultDoesNotSeeOtherCompanyLayout` in codeunit 96494 (no new object IDs).
+
 ### Fixed — #209
 
 - #209: no new objects. Codeunit 10035576 `Help ori` (, example 4 POSTING-AUDIT) and test library `Playbook Example Library ori`: the Ask step 30 now sends `subject` `{"table":"Customer","systemId":"@_current.id"}`, the request key `LLM.Prompt.Ask` declares (`record`/`tableName` were refused with `UnknownRequestKey` on tenants with the real Ask), and carries the Success condition `stopReason Equals completed` (no `AskStopReasonUnchecked`). Test fixture `Test.Orchestrator.PostingAudit` (PostingAuditAskMsgori) declares `subject` and answers `stopReason` `completed`, the values the real Ask returns. Decision by Claude Code (acting Architect) 19.11.2026, option A.
@@ -72,6 +73,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Tests: four new scenarios in test codeunit 96468 `Transform Exec Tests ori` (text to object and array, Markdown fence, object and null pass-through, invalid and scalar text, Transform step output holds an object).
 ### Fixed — #202
 - #202 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf` and the matching `is-IS=` comments in the document-sending objects (`Doc Send Contract ori`, `Doc Send Process ori`, `Doc Send Resolver ori`, `Purch Order Pdf Msg ori`, `Sales Order Conf Pdf Msg ori`, `Sales Quote Pdf Msg ori`): review of the 200 is-IS units for the document-sending, PDF and Report Layout message types added since 28.0.3. 28 targets corrected (e-mail address term aligned with Foundation, one read-permission term, `JSON-strengur`, 'vísa á' for identifiers that name a document, meaningless or garbled sentences). Placeholders, keys and Locked labels unchanged; no en-US file; no new objects.
+
 
 ### Fixed — #209
 - Test isolation only, no product change and no new object IDs. Codeunit 96411 `CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified` deletes old Ok Sample (96410) Job Queue Entries before it enqueues, so `FindFirst` reads its own entry. Codeunits 96480 and 96481 seed the P.Order / S.Order Report Selections row when the tenant has none and remove it again; the `NoOrderReportIsPreconditionFailed` tests park and restore the tenant rows instead of deleting them.
