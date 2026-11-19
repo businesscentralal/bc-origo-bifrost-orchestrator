@@ -97,6 +97,7 @@ table 10035540 "Playbook Step ori"
         field(130; "Max Count"; Integer)
         {
             Caption = 'Max Count', Comment = 'is-IS=Hámarksfjöldi';
+            AllowInCustomizations = AsReadWrite;
             BlankZero = true;
             MinValue = 0;
             ToolTip = 'Specifies the most the step may confirm on its own. Required when the request sends "expectedCount": "@preview": the runner previews the call, confirms with the previewed count if it is at most Max Count, and otherwise stops with ConfirmationRequired. Leave blank when the step does not use @preview.', Comment = 'is-IS=Tilgreinir mest það sem skrefið má staðfesta sjálft. Krafist þegar beiðnin sendir "expectedCount": "@preview": keyrsluvélin forskoðar kallið, staðfestir með forskoðaða fjöldanum ef hann er ekki hærri en hámarksfjöldinn, og stöðvar annars með ConfirmationRequired. Skildu autt ef skrefið notar ekki @preview.';
