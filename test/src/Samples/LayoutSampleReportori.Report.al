@@ -3,7 +3,7 @@ namespace Origo.Bifrost.Orchestrator.Test;
 using Microsoft.Foundation.Reporting;
 using System.Utilities;
 
-/// <summary>Own installed RDLC layout fixture for report layout discovery and export tests.</summary>
+/// <summary>Own installed RDLC and Excel layout fixtures for report layout discovery and export tests.</summary>
 report 96455 "Layout Sample Report ori"
 {
     Caption = 'Layout sample report', Locked = true;
