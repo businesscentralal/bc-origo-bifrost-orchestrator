@@ -185,6 +185,33 @@ codeunit 96447 "Orch Param Error Tests"
         Assert.AreEqual('Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.', GetText(Entry, 'nextStep'), 'is-IS nextStep');
     end;
 
+    /// <summary>Entry.Register asks for the primary ID in both languages, matching its lookup.</summary>
+    [Test]
+    procedure Scenario_EntryRegister_MissingId_RequestsPrimaryId()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        TempArgumentIcelandic: Record "Message Argument ori" temporary;
+        Handler: Codeunit "SE Msg Handler ori";
+        Entry: JsonObject;
+        OriginalLanguage: Integer;
+    begin
+        // [GIVEN] No Job Queue Entry ID; independent of tenant data and date.
+        OriginalLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        CreateArgument(TempArgument, '{}');
+        // [WHEN] Register rejects the missing primary ID.
+        asserterror Handler.ExecuteRegister(TempArgument);
+        Entry := AssertSingleError(TempArgument, 'MissingParameter', 'jobQueueEntryId', '');
+        // [THEN] Recovery names ID, never SystemId.
+        Assert.AreEqual('Send the ID of the Job Queue Entry in data.jobQueueEntryId or as the subject.', GetText(Entry, 'nextStep'), 'English primary ID instruction');
+        GlobalLanguage(1039);
+        CreateArgument(TempArgumentIcelandic, '{}');
+        asserterror Handler.ExecuteRegister(TempArgumentIcelandic);
+        Entry := AssertSingleError(TempArgumentIcelandic, 'MissingParameter', 'jobQueueEntryId', '');
+        GlobalLanguage(OriginalLanguage);
+        Assert.AreEqual('Sendu auðkenni vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.', GetText(Entry, 'nextStep'), 'Icelandic primary ID instruction');
+    end;
+
     local procedure AssertSingleError(var TempArgument: Record "Message Argument ori" temporary; ExpectedCode: Text; ExpectedParameter: Text; ExpectedReceived: Text) Entry: JsonObject
     var
         Errors: JsonArray;

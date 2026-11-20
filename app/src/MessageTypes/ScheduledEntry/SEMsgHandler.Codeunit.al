@@ -159,7 +159,7 @@ codeunit 10035550 "SE Msg Handler ori"
         MissingJQIdErr: Label 'Request must include "jobQueueEntryId" (GUID) in the data payload or the Job Queue Entry ID as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "jobQueueEntryId" (GUID) í gagnahleðslunni eða auðkenni vinnsluraðarfærslu sem viðfang.';
         GuidExpectedTok: Label 'a GUID', Comment = 'is-IS=GUID-auðkenni';
         MissingIdNextStepTok: Label 'Send the SystemId of the orchestrator entry in data.id or as the subject.', Comment = 'is-IS=Sendu SystemId áætlunarfærslunnar í data.id eða sem viðfang.';
-        MissingJQIdNextStepTok: Label 'Send the SystemId of the Job Queue Entry in data.jobQueueEntryId or as the subject.', Comment = 'is-IS=Sendu SystemId vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.';
+        MissingJQIdNextStepTok: Label 'Send the ID of the Job Queue Entry in data.jobQueueEntryId or as the subject.', Comment = 'is-IS=Sendu auðkenni vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.';
         EntryNotFoundErr: Label 'No orchestrator entry has the ID %1.', Comment = '%1 = the GUID received, is-IS=Engin áætlunarfærsla hefur auðkennið %1.';
         EntryNotFoundNextStepTok: Label 'Send the SystemId or ID of an existing orchestrator entry.', Comment = 'is-IS=Sendu SystemId eða auðkenni áætlunarfærslu sem er til.';
         JQEntryNotFoundErr: Label 'No Job Queue Entry has the ID %1.', Comment = '%1 = the GUID received, is-IS=Engin vinnsluraðarfærsla hefur auðkennið %1.';

@@ -97,6 +97,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         Parts.AddContractError(Errors, 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', 'The calling user''s Telegram Chat ID is empty.', 'Set the Telegram Chat ID in Bifrost User Setup.');
         Parts.AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, '"message" is required in the request data.', 'data.message is missing or empty.', 'Send the text in data.message.');
         Parts.AddContractError(Errors, 'Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>', 'Telegram rejected the request.', 'Read the Telegram response and correct the message or the configuration.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameterFormat, '"message" must be text.', 'data.message is an object or array.', 'Send the text in data.message.');
         exit(true);
     end;
 

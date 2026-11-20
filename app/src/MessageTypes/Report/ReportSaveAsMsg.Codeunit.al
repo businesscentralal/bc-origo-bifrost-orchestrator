@@ -97,6 +97,8 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
         Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
         Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'Layout <layoutName> not found on report <reportId>.', 'No layout with that name exists for the selected report and appId.', 'Send the name of a layout of this report. Orchestrator.ReportLayout.List lists them.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameterFormat, 'appId must be a valid GUID.', 'data.appId is not a valid GUID.', 'Send the app ID of the layout as a GUID, or leave appId out.');
         exit(true);
     end;
 

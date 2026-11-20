@@ -4450,9 +4450,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType MissingJQIdErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3204704989 - NamedType 4164042545" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send the SystemId of the Job Queue Entry in data.jobQueueEntryId or as the subject.</source>
-          <target>Sendu SystemId vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu SystemId vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.</note>
+          <source>Send the ID of the Job Queue Entry in data.jobQueueEntryId or as the subject.</source>
+          <target>Sendu auðkenni vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni vinnsluraðarfærslunnar í data.jobQueueEntryId eða sem viðfang.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Msg Handler ori - NamedType MissingJQIdNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3204704989 - NamedType 3542876107" size-unit="char" translate="yes" xml:space="preserve">
