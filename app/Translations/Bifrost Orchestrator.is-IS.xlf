@@ -3803,8 +3803,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 3643047783" size-unit="char" translate="yes" xml:space="preserve">
           <source>the object ID of a report</source>
-          <target>kennitala skýrsluhlutar</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=kennitala skýrsluhlutar</note>
+          <target>auðkenni skýrsluhlutar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=auðkenni skýrsluhlutar</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ReportIdExpectedTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 572047844" size-unit="char" translate="yes" xml:space="preserve">
@@ -3815,8 +3815,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 64191700" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send the object ID of an existing report. Orchestrator.Report.List lists them.</source>
-          <target>Sendu kennitölu skýrslu sem er til. Orchestrator.Report.List birtir þær.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kennitölu skýrslu sem er til. Orchestrator.Report.List birtir þær.</note>
+          <target>Sendu auðkenni skýrslu sem er til. Orchestrator.Report.List birtir þær.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni skýrslu sem er til. Orchestrator.Report.List birtir þær.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - NamedType ReportNotFoundNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - NamedType 2855561205" size-unit="char" translate="yes" xml:space="preserve">
@@ -3833,8 +3833,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - Method 1925016623 - NamedType 1036855462" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send the report object ID as a number in data.reportId. Orchestrator.Report.List lists them.</source>
-          <target>Sendu kennitölu skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu kennitölu skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.</note>
+          <target>Sendu auðkenni skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Report Msg Handler ori - Method GetReportId - NamedType MissingReportIdNextStepTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 3520747181 - Method 1925016623 - NamedType 3245444279" size-unit="char" translate="yes" xml:space="preserve">
