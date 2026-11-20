@@ -5,6 +5,11 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #248
+
+### Fixed
+- is-IS: the #246 Report parameter errors translated a report object ID as *kennitala* (national ID number). They now use *auðkenni* (the term used for Object ID elsewhere, e.g. "Auðkenni hluts til keyrslu"): `ReportIdExpectedTok`, `ReportNotFoundNextStepTok` and `MissingReportIdNextStepTok` in codeunit 10035592 `Report Msg Handler ori` (label comments and `Bifrost Orchestrator.is-IS.xlf`). Translation-only; no new app objects, no English text or behaviour change.
+
 ## [Unreleased] — Issue #244
 
 ### Fixed

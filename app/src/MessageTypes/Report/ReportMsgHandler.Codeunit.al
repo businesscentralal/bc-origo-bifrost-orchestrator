@@ -319,7 +319,7 @@ codeunit 10035592 "Report Msg Handler ori"
     var
         ReportIdToken: JsonToken;
         MissingReportIdErr: Label 'Request must include "reportId".', Comment = 'is-IS=Beiðni verður að innihalda "reportId".';
-        MissingReportIdNextStepTok: Label 'Send the report object ID as a number in data.reportId. Orchestrator.Report.List lists them.', Comment = 'is-IS=Sendu kennitölu skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.';
+        MissingReportIdNextStepTok: Label 'Send the report object ID as a number in data.reportId. Orchestrator.Report.List lists them.', Comment = 'is-IS=Sendu auðkenni skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.';
         ReportIdNotIntegerErr: Label '"reportId" must be a whole number.', Comment = 'is-IS="reportId" verður að vera heiltala.';
     begin
         if not RequestJson.Get('reportId', ReportIdToken) then
@@ -373,8 +373,8 @@ codeunit 10035592 "Report Msg Handler ori"
         ReportNotFoundErr: Label 'Report %1 not found.', Comment = 'is-IS=Skýrsla %1 finnst ekki.';
         ProcessingOnlyErr: Label 'Report %1 is processing-only and cannot be saved.', Comment = 'is-IS=Skýrsla %1 er eingöngu keyrsluskýrsla og ekki hægt að vista hana.';
         NotProcessingOnlyErr: Label 'Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', Comment = 'is-IS=Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.';
-        ReportIdExpectedTok: Label 'the object ID of a report', Comment = 'is-IS=kennitala skýrsluhlutar';
-        ReportNotFoundNextStepTok: Label 'Send the object ID of an existing report. Orchestrator.Report.List lists them.', Comment = 'is-IS=Sendu kennitölu skýrslu sem er til. Orchestrator.Report.List birtir þær.';
+        ReportIdExpectedTok: Label 'the object ID of a report', Comment = 'is-IS=auðkenni skýrsluhlutar';
+        ReportNotFoundNextStepTok: Label 'Send the object ID of an existing report. Orchestrator.Report.List lists them.', Comment = 'is-IS=Sendu auðkenni skýrslu sem er til. Orchestrator.Report.List birtir þær.';
         OutputReportExpectedTok: Label 'a report that produces output', Comment = 'is-IS=skýrsla sem skilar úttaki';
         ProcessingOnlyNextStepTok: Label 'Run a processing-only report with Orchestrator.Report.Run.', Comment = 'is-IS=Keyrðu keyrsluskýrslu með Orchestrator.Report.Run.';
         ProcessingOnlyExpectedTok: Label 'a processing-only report', Comment = 'is-IS=keyrsluskýrsla';
