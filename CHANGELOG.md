@@ -5,6 +5,11 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #251
+
+### Fixed
+- Test-only: the errors-chapter contract tests in `Orch B1 Contract Tests` (96452) and `Orch B2 Contract Tests` (96453) no longer pin the wording of Foundation's shared `Retryable` entry (#1458, core#1497). The entry must still exist; this app's own entries are still compared byte for byte. No app change, no new objects. Passes on Foundation 28.0.14.765 and 28.0.14.777.
+
 ## [Unreleased] — Issue #248
 
 ### Fixed

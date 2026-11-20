@@ -300,9 +300,31 @@ codeunit 96452 "Orch B1 Contract Tests"
         Assert.IsTrue(ContractMgt.GetContract(MessageType, Contract), 'Contract exists');
         Assert.IsTrue(Contract.Get('errors', Actual), 'Errors chapter exists');
         Assert.IsTrue(Expected.ReadFrom(ExpectedJson), 'Valid captured main fixture');
+        // Foundation owns the shared Retryable entry; its when/fix wording changes with Foundation (#1458, core#1497).
+        // Keep the entry (code, position) but compare only this app's own entries byte for byte.
+        NormalizeFoundationRetryable(Actual);
+        NormalizeFoundationRetryable(Expected);
         Actual.WriteTo(ActualText);
         Expected.WriteTo(ExpectedText);
-        Assert.AreEqual(ExpectedText, ActualText, 'Errors chapter matches main byte for byte');
+        Assert.AreEqual(ExpectedText, ActualText, 'Errors chapter matches main byte for byte (Foundation Retryable wording excluded)');
+    end;
+
+    local procedure NormalizeFoundationRetryable(Errors: JsonToken)
+    var
+        Entry: JsonToken;
+        CodeToken: JsonToken;
+        EntryObject: JsonObject;
+    begin
+        foreach Entry in Errors.AsArray() do begin
+            EntryObject := Entry.AsObject();
+            if EntryObject.Get('code', CodeToken) then
+                if CodeToken.AsValue().AsText() = 'Retryable' then begin
+                    Assert.IsTrue(EntryObject.Contains('when'), 'Foundation Retryable entry has a when text');
+                    EntryObject.Replace('when', '<Foundation text>');
+                    if EntryObject.Contains('fix') then
+                        EntryObject.Replace('fix', '<Foundation text>');
+                end;
+        end;
     end;
 
     local procedure AssertContract(MessageType: Enum "Message Type ori"; Name: Text)
