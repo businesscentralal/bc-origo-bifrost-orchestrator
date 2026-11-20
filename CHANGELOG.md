@@ -5,6 +5,11 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #245
+
+### Changed
+- Foundation dependency raised from 28.0.12.679 to 28.0.14.778, the Bifrost Foundation 28.0.14 build released on AppSource on 20.11.2026, in the app and test app (only `dependencies[].version`). The top-level version stays 28.0.5.0. No new objects and no AL code change.
+
 ## [Unreleased] — Issue #251
 
 ### Fixed
