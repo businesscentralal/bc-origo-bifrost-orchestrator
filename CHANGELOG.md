@@ -5,6 +5,14 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #244
+
+### Fixed
+- #246 amendment: corrected Entry.Register recovery to request the Job Queue Entry primary ID in English and Icelandic; declared Telegram message-format and Report.SaveAs layout/app-ID errors in help. Updated structured-error and contract regressions.
+- #244: a missing or unknown parameter of the Entry, JobQueueEntry, Playbook, Email, Telegram and Report types no longer answers the generic `BusinessCentralError`. It answers `MissingParameter` (missing `id`, `jobQueueEntryId`, `playbookCode`, `recurringTemplateCode`, `outboxSystemId`, `message`, `reportId`), `RecordNotFound` (no entry, Job Queue Entry, playbook, recurring template, outbox draft, report or layout with the value received), `InvalidParameter` (unsupported `format`, a processing-only report for SaveAs, an output report for Run) or `InvalidParameterFormat` (non-numeric `reportId`, non-GUID layout `appId`, non-text `message`), with `parameter`, `received`, `expected` and a `nextStep`, all in English and Icelandic. Telegram.Message checks `message` before its setup checks, so a missing message is `MissingParameter` even when HTTP requests or the bot token are not set up. The errors chapters of the contracts declare the same codes.
+- No new app objects. Changed codeunits 10035550 `SE Msg Handler ori`, 10035566 `Entry Msg Handler ori`, 10035552 `Playbook Msg Handler ori`, 10035616 `Playbook Verify ori`, 10035582 `Email Send Msg ori`, 10035588 `Telegram Msg ori`, 10035592 `Report Msg Handler ori` and the contract parts 10035609/10035610 `Orch B1/B2 Contract Parts ori` (new internal `AddContractError` overload with an error code). `Bifrost Orchestrator.is-IS.xlf` regenerated.
+- Tests: new test codeunit 96447 `Orch Param Error Tests` (missing, unknown and malformed parameters, plus the Icelandic texts in 1039); the errors chapters in 96452/96453 `Orch B1/B2 Contract Tests` now expect the new codes.
+
 ## [Unreleased] — Issue #235
 
 ### Fixed

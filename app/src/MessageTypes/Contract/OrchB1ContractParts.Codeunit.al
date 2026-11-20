@@ -162,6 +162,21 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     end;
 
     /// <summary>
+    /// Adds a structured error of the type: the answer carries this code and this text, with the parameter and a nextStep.
+    /// </summary>
+    /// <param name="Errors">Receives the entry.</param>
+    /// <param name="ErrorCode">The stable error code of the answer.</param>
+    /// <param name="ErrorText">The error text, or its pattern.</param>
+    /// <param name="When">When the error is returned.</param>
+    /// <param name="Fix">What the caller does about it.</param>
+    internal procedure AddContractError(var Errors: JsonArray; ErrorCode: Enum "Bifrost Error Code ori"; ErrorText: Text; When: Text; Fix: Text)
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Errors.Add(ContractMgt.ErrorEntry(ErrorCode, ErrorText, When, Fix));
+    end;
+
+    /// <summary>
     /// Adds an error that Business Central itself raises on the execute path; answered with code
     /// BusinessCentralError and Business Central's own text.
     /// </summary>
@@ -179,10 +194,10 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddPlaybookErrors(var Errors: JsonArray)
     begin
-        AddContractError(Errors, 'Request must include "playbookCode" in the data payload or as the subject.',
+        AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, 'Request must include "playbookCode" in the data payload or as the subject.',
             'Neither data.playbookCode nor subject was sent.', 'Send the playbook code in data.playbookCode or as subject.');
-        AddRuntimeError(Errors, 'No Playbook ori exists with that code (Business Central''s record-not-found text).',
-            'Check the code with Data.Records.Get on table Playbook ori.');
+        AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'No playbook has the code <playbookCode>.', 'No Playbook ori exists with that code.',
+            'Send the code of an existing playbook.');
     end;
 
     /// <summary>
@@ -191,10 +206,10 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddScheduledEntryErrors(var Errors: JsonArray)
     begin
-        AddContractError(Errors, 'Request must include "id" (GUID) in the data payload or as the subject.',
+        AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, 'Request must include "id" (GUID) in the data payload or as the subject.',
             'data.id is missing or not a GUID, and subject is not a GUID.', 'Send the SystemId of the Scheduled Entry ori in data.id or as subject.');
-        AddRuntimeError(Errors, 'No Scheduled Entry ori has that SystemId or ID (Business Central''s record-not-found text).',
-            'Check the identifier with Data.Records.Get on table Scheduled Entry ori.');
+        AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'No orchestrator entry has the ID <id>.', 'No Scheduled Entry ori has that SystemId or ID.',
+            'Send the SystemId or ID of an existing orchestrator entry.');
     end;
 
     /// <summary>
@@ -203,9 +218,9 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddJobQueueEntryErrors(var Errors: JsonArray)
     begin
-        AddContractError(Errors, 'Request must include "id" (GUID) in the data payload or as the subject.',
+        AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, 'Request must include "id" (GUID) in the data payload or as the subject.',
             'data.id is missing or not a GUID, and subject is not a GUID.', 'Send the SystemId of the Job Queue Entry in data.id or as subject.');
-        AddRuntimeError(Errors, 'No Job Queue Entry has that SystemId (Business Central''s record-not-found text).',
+        AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'No Job Queue Entry has the SystemId <id>.', 'No Job Queue Entry has that SystemId.',
             'Send the SystemId of the Job Queue Entry; its ID is not accepted.');
     end;
 

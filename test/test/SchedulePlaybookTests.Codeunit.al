@@ -296,7 +296,17 @@ codeunit 96415 "Schedule Playbook Tests"
         UnknownId := CreateGuid();
         CreateArgument(TempArgumentUnknown, '{"id": "' + Format(UnknownId, 0, 4) + '"}');
         asserterror Handler.ExecuteRun(TempArgumentUnknown);
-        Assert.ExpectedError('does not exist');
+        Assert.AreEqual(1, TempArgumentUnknown.GetCollectedErrorsJson().Count(), 'One unknown-ID error');
+        TempArgumentUnknown.GetCollectedErrorsJson().Get(0, Token);
+        ResponseJson := Token.AsObject();
+        ResponseJson.Get('code', Token);
+        Assert.AreEqual('RecordNotFound', Token.AsValue().AsText(), 'Unknown ID error code');
+        ResponseJson.Get('parameter', Token);
+        Assert.AreEqual('id', Token.AsValue().AsText(), 'Unknown ID parameter');
+        ResponseJson.Get('received', Token);
+        Assert.AreEqual(Format(UnknownId, 0, 4), Token.AsValue().AsText(), 'Unknown ID received');
+        ResponseJson.Get('nextStep', Token);
+        Assert.AreNotEqual('', Token.AsValue().AsText(), 'Unknown ID recovery instruction');
 
         Cleanup(Playbook.Code);
     end;

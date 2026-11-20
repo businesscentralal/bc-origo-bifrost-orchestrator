@@ -91,7 +91,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         Parts.AddReportErrors(Errors);
         Parts.AddContractError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
         Parts.AddContractError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
-        Parts.AddContractError(Errors, 'Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', 'The report is not processing-only.', 'Use Orchestrator.Report.SaveAs for reports that produce output.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Report <reportId> produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', 'The report is not processing-only.', 'Use Orchestrator.Report.SaveAs for reports that produce output.');
         Parts.AddRuntimeError(Errors, 'tableView is not a valid view for the report''s data item table.', 'Fix the view or leave it out.');
         exit(true);
     end;

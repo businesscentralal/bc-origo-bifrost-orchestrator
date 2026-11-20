@@ -77,11 +77,11 @@ codeunit 10035592 "Report Msg Handler ori"
         TableName: Text;
     begin
         RequestJson := Argument.GetRequestJson();
-        ReportId := GetReportId(RequestJson);
+        ReportId := GetReportId(Argument, RequestJson);
 
         ReportMeta.SetLoadFields(ID, Name, Caption, ProcessingOnly, DefaultLayout, FirstDataItemTableID, UseRequestPage);
         if not ReportMeta.Get(ReportId) then
-            Error(ReportNotFoundErr, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(ReportNotFoundErr, ReportId), 'reportId', Format(ReportId), ReportIdExpectedTok, ReportNotFoundNextStepTok);
 
         AllObj.SetLoadFields("Object Caption");
         if AllObj.Get(AllObj."Object Type"::Table, ReportMeta.FirstDataItemTableID) then
@@ -150,13 +150,13 @@ codeunit 10035592 "Report Msg Handler ori"
         XmlToken: JsonToken;
     begin
         RequestJson := Argument.GetRequestJson();
-        ReportId := GetReportId(RequestJson);
+        ReportId := GetReportId(Argument, RequestJson);
 
         ReportMeta.SetLoadFields(ProcessingOnly, FirstDataItemTableID);
         if not ReportMeta.Get(ReportId) then
-            Error(ReportNotFoundErr, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(ReportNotFoundErr, ReportId), 'reportId', Format(ReportId), ReportIdExpectedTok, ReportNotFoundNextStepTok);
         if ReportMeta.ProcessingOnly then
-            Error(ProcessingOnlyErr, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::InvalidParameter, StrSubstNo(ProcessingOnlyErr, ReportId), 'reportId', Format(ReportId), OutputReportExpectedTok, ProcessingOnlyNextStepTok);
 
         if RequestJson.Contains('parameters') then
             XmlParams := Parameters.Resolve(ReportId, RequestJson)
@@ -167,7 +167,7 @@ codeunit 10035592 "Report Msg Handler ori"
                 if Preset.Get(ReportId, UserSecurityId()) then
                     XmlParams := Preset.GetRequestPageXml();
 
-        OutputFormat := ParseFormat(RequestJson);
+        OutputFormat := ParseFormat(Argument, RequestJson);
 
         if ReportMeta.FirstDataItemTableID <> 0 then begin
             RecRef.Open(ReportMeta.FirstDataItemTableID);
@@ -179,7 +179,7 @@ codeunit 10035592 "Report Msg Handler ori"
 
         TempBlob.CreateOutStream(OutStr);
         if RequestJson.Contains('layoutName') then
-            SaveWithLayout(RequestJson, ReportId, XmlParams, OutputFormat, OutStr, RecRef)
+            SaveWithLayout(Argument, RequestJson, ReportId, XmlParams, OutputFormat, OutStr, RecRef)
         else
             Report.SaveAs(ReportId, XmlParams, OutputFormat, OutStr, RecRef);
         if RecRef.Number <> 0 then
@@ -214,13 +214,13 @@ codeunit 10035592 "Report Msg Handler ori"
         TableViewToken: JsonToken;
     begin
         RequestJson := Argument.GetRequestJson();
-        ReportId := GetReportId(RequestJson);
+        ReportId := GetReportId(Argument, RequestJson);
 
         ReportMeta.SetLoadFields(ProcessingOnly, FirstDataItemTableID, Name, Caption);
         if not ReportMeta.Get(ReportId) then
-            Error(ReportNotFoundErr, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(ReportNotFoundErr, ReportId), 'reportId', Format(ReportId), ReportIdExpectedTok, ReportNotFoundNextStepTok);
         if not ReportMeta.ProcessingOnly then
-            Error(NotProcessingOnlyErr, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::InvalidParameter, StrSubstNo(NotProcessingOnlyErr, ReportId), 'reportId', Format(ReportId), ProcessingOnlyExpectedTok, NotProcessingOnlyNextStepTok);
 
         if RequestJson.Contains('parameters') then
             XmlParams := Parameters.Resolve(ReportId, RequestJson)
@@ -271,7 +271,7 @@ codeunit 10035592 "Report Msg Handler ori"
         Argument.SetResponseJson(ResponseJson);
     end;
 
-    local procedure SaveWithLayout(Request: JsonObject; ReportId: Integer; XmlParams: Text; OutputFormat: ReportFormat; var Output: OutStream; var RecRef: RecordRef)
+    local procedure SaveWithLayout(var Argument: Record "Message Argument ori"; Request: JsonObject; ReportId: Integer; XmlParams: Text; OutputFormat: ReportFormat; var Output: OutStream; var RecRef: RecordRef)
     var
         Layout: Record "Report Layout List";
         Selection: Codeunit "Design-time Report Selection";
@@ -287,16 +287,16 @@ codeunit 10035592 "Report Msg Handler ori"
         Request.Get('layoutName', Value);
         LayoutName := Value.AsValue().AsText();
         if (LayoutName = '') or (StrLen(LayoutName) > MaxStrLen(Layout.Name)) then
-            Error(LayoutNotFoundErr, LayoutName, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(LayoutNotFoundErr, LayoutName, ReportId), 'layoutName', LayoutName, LayoutExpectedTok, LayoutNotFoundNextStepTok);
         if Request.Get('appId', Value) then
             if not Evaluate(AppId, Value.AsValue().AsText()) then
-                Error(InvalidLayoutAppIdErr);
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::InvalidParameterFormat, InvalidLayoutAppIdErr, 'appId', Value.AsValue().AsText(), GuidExpectedTok, InvalidLayoutAppIdNextStepTok);
         Layout.SetRange("Report ID", ReportId);
         Layout.SetRange(Name, LayoutName);
         Layout.SetRange("Application ID", AppId);
         Layout.SetLoadFields(Name);
         if not Layout.FindFirst() then
-            Error(LayoutNotFoundErr, LayoutName, ReportId);
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(LayoutNotFoundErr, LayoutName, ReportId), 'layoutName', LayoutName, LayoutExpectedTok, LayoutNotFoundNextStepTok);
 
         PreviousCustom := Selection.GetSelectedCustomLayout();
         PreviousAppId := Selection.GetSelectedAppID();
@@ -315,17 +315,20 @@ codeunit 10035592 "Report Msg Handler ori"
             Error(RenderError);
     end;
 
-    local procedure GetReportId(RequestJson: JsonObject) ReportId: Integer
+    local procedure GetReportId(var Argument: Record "Message Argument ori"; RequestJson: JsonObject) ReportId: Integer
     var
         ReportIdToken: JsonToken;
         MissingReportIdErr: Label 'Request must include "reportId".', Comment = 'is-IS=Beiðni verður að innihalda "reportId".';
+        MissingReportIdNextStepTok: Label 'Send the report object ID as a number in data.reportId. Orchestrator.Report.List lists them.', Comment = 'is-IS=Sendu kennitölu skýrsluhlutarins sem tölu í data.reportId. Orchestrator.Report.List birtir þær.';
+        ReportIdNotIntegerErr: Label '"reportId" must be a whole number.', Comment = 'is-IS="reportId" verður að vera heiltala.';
     begin
         if not RequestJson.Get('reportId', ReportIdToken) then
-            Error(MissingReportIdErr);
-        ReportId := ReportIdToken.AsValue().AsInteger();
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingReportIdErr, 'reportId', '', ReportIdExpectedTok, MissingReportIdNextStepTok);
+        if not TryReadInteger(ReportIdToken, ReportId) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::InvalidParameterFormat, ReportIdNotIntegerErr, 'reportId', Format(ReportIdToken), ReportIdExpectedTok, MissingReportIdNextStepTok);
     end;
 
-    local procedure ParseFormat(RequestJson: JsonObject): ReportFormat
+    local procedure ParseFormat(var Argument: Record "Message Argument ori"; RequestJson: JsonObject): ReportFormat
     var
         FormatToken: JsonToken;
         FormatText: Text;
@@ -344,8 +347,24 @@ codeunit 10035592 "Report Msg Handler ori"
             'XML':
                 exit(ReportFormat::Xml);
             else
-                Error(UnsupportedFormatErr, FormatText);
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::InvalidParameter, StrSubstNo(UnsupportedFormatErr, FormatText), 'format', FormatText, FormatExpectedTok, FormatNextStepTok);
         end;
+    end;
+
+    [TryFunction]
+    local procedure TryReadInteger(Token: JsonToken; var Value: Integer)
+    begin
+        Value := Token.AsValue().AsInteger();
+    end;
+
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
     end;
 
     var
@@ -354,5 +373,17 @@ codeunit 10035592 "Report Msg Handler ori"
         ReportNotFoundErr: Label 'Report %1 not found.', Comment = 'is-IS=Skýrsla %1 finnst ekki.';
         ProcessingOnlyErr: Label 'Report %1 is processing-only and cannot be saved.', Comment = 'is-IS=Skýrsla %1 er eingöngu keyrsluskýrsla og ekki hægt að vista hana.';
         NotProcessingOnlyErr: Label 'Report %1 produces output and cannot be run as a batch job. Use Orchestrator.Report.SaveAs instead.', Comment = 'is-IS=Skýrsla %1 skilar úttaki og er ekki hægt að keyra sem runuvinnslu. Notaðu Orchestrator.Report.SaveAs í staðinn.';
+        ReportIdExpectedTok: Label 'the object ID of a report', Comment = 'is-IS=kennitala skýrsluhlutar';
+        ReportNotFoundNextStepTok: Label 'Send the object ID of an existing report. Orchestrator.Report.List lists them.', Comment = 'is-IS=Sendu kennitölu skýrslu sem er til. Orchestrator.Report.List birtir þær.';
+        OutputReportExpectedTok: Label 'a report that produces output', Comment = 'is-IS=skýrsla sem skilar úttaki';
+        ProcessingOnlyNextStepTok: Label 'Run a processing-only report with Orchestrator.Report.Run.', Comment = 'is-IS=Keyrðu keyrsluskýrslu með Orchestrator.Report.Run.';
+        ProcessingOnlyExpectedTok: Label 'a processing-only report', Comment = 'is-IS=keyrsluskýrsla';
+        NotProcessingOnlyNextStepTok: Label 'Save a report that produces output with Orchestrator.Report.SaveAs.', Comment = 'is-IS=Vistaðu skýrslu sem skilar úttaki með Orchestrator.Report.SaveAs.';
+        LayoutExpectedTok: Label 'the name of a layout of the report', Comment = 'is-IS=heiti útlits skýrslunnar';
+        LayoutNotFoundNextStepTok: Label 'Send the name of a layout of this report. Orchestrator.ReportLayout.List lists them.', Comment = 'is-IS=Sendu heiti útlits þessarar skýrslu. Orchestrator.ReportLayout.List birtir þau.';
+        GuidExpectedTok: Label 'a GUID', Comment = 'is-IS=GUID-auðkenni';
+        InvalidLayoutAppIdNextStepTok: Label 'Send the app ID of the layout as a GUID, or leave appId out.', Comment = 'is-IS=Sendu auðkenni forrits útlitsins sem GUID, eða slepptu appId.';
+        FormatExpectedTok: Label 'PDF, Excel, Word or XML', Comment = 'is-IS=PDF, Excel, Word eða XML';
+        FormatNextStepTok: Label 'Send format PDF, Excel, Word or XML, or leave format out for PDF.', Comment = 'is-IS=Sendu sniðið PDF, Excel, Word eða XML, eða slepptu format til að fá PDF.';
         UnsupportedFormatErr: Label 'Unsupported format "%1". Use PDF, Excel, Word, or XML.', Comment = 'is-IS=Óstutt snið "%1". Notaðu PDF, Excel, Word eða XML.';
 }

@@ -95,8 +95,9 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         Parts.AddContractError(Errors, 'Telegram Bot Token is not configured in Orchestrator Setup.', 'No bot token is stored.', 'Set the Telegram Bot Token in the Orchestrator setup.');
         Parts.AddRuntimeError(Errors, 'The calling user has no User Setup ori record (Business Central''s record-not-found text).', 'Create the user''s Bifrost User Setup with a Telegram Chat ID.');
         Parts.AddContractError(Errors, 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', 'The calling user''s Telegram Chat ID is empty.', 'Set the Telegram Chat ID in Bifrost User Setup.');
-        Parts.AddContractError(Errors, '"message" is required in the request data.', 'data.message is missing.', 'Send the text in data.message.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, '"message" is required in the request data.', 'data.message is missing or empty.', 'Send the text in data.message.');
         Parts.AddContractError(Errors, 'Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>', 'Telegram rejected the request.', 'Read the Telegram response and correct the message or the configuration.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameterFormat, '"message" must be a text value, not an object or an array.', 'data.message is an object or array.', 'Send the text of the message in data.message.');
         exit(true);
     end;
 
@@ -167,6 +168,17 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
     begin
         Argument.AssertVersion1();
         Argument.AssertIsLicensed();
+        // The request is checked first, so a missing message is reported as MissingParameter whatever the setup.
+        RequestJson := Argument.GetRequestJson();
+
+        if not RequestJson.Get('message', JsonToken) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingMessageErr, 'message', '', MessageExpectedTok, MissingMessageNextStepTok);
+        if not JsonToken.IsValue() then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::InvalidParameterFormat, MessageNotTextErr, 'message', '', MessageExpectedTok, MissingMessageNextStepTok);
+        MessageText := JsonToken.AsValue().AsText();
+        if MessageText = '' then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingMessageErr, 'message', '', MessageExpectedTok, MissingMessageNextStepTok);
+
         VerifyHttpClientEnabled();
         if not Secrets.IsTelegramBotTokenSet() then
             Error(BotTokenNotConfiguredErr);
@@ -176,12 +188,6 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         ChatId := UserSetup."Telegram Chat ID ori";
         if ChatId = '' then
             Error(NoChatIdErr);
-
-        RequestJson := Argument.GetRequestJson();
-
-        if not RequestJson.Get('message', JsonToken) then
-            Error(MissingMessageErr);
-        MessageText := JsonToken.AsValue().AsText();
 
         if not TelegramSend.SendMessage(Secrets.GetTelegramBotToken(), ChatId, MessageText) then
             Error(SendFailedErr, ChatId, TelegramSend.GetLastResponse());
@@ -195,8 +201,21 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         BotTokenNotConfiguredErr: Label 'Telegram Bot Token is not configured in Orchestrator Setup.', Comment = 'is-IS=Telegram-vélmennislykill er ekki stilltur í uppsetningu vinnsluraðara.';
         HttpClientNotEnabledErr: Label 'HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.', Comment = 'is-IS=HTTP-biðlarabeiðnir eru ekki virkar fyrir þessa viðbót. Virkjaðu Leyfa HttpClient-beiðnir í stillingum viðbótar áður en Telegram-skilaboð eru send.';
         MissingMessageErr: Label '"message" is required in the request data.', Comment = 'is-IS="message" er nauðsynlegt í beiðnigögnum.';
+        MessageExpectedTok: Label 'the message text as a JSON string', Comment = 'is-IS=texti skilaboðanna sem JSON-strengur';
+        MissingMessageNextStepTok: Label 'Send the text of the message in data.message.', Comment = 'is-IS=Sendu texta skilaboðanna í data.message.';
+        MessageNotTextErr: Label '"message" must be a text value, not an object or an array.', Comment = 'is-IS="message" verður að vera textagildi, ekki hlutur eða fylki.';
         NoChatIdErr: Label 'No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.', Comment = 'is-IS=Ekkert Telegram-spjallauðkenni stillt fyrir núverandi notanda. Stilltu það í uppsetningu Bifröst notanda.';
         SendFailedErr: Label 'Failed to send Telegram message to Chat ID %1. Response: %2', Comment = '%1 = chat id, %2 = API response, is-IS=Ekki tókst að senda Telegram-skilaboð á spjallauðkenni %1. Svar: %2';
+
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
+    end;
 
     local procedure VerifyHttpClientEnabled()
     var
