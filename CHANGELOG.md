@@ -5,6 +5,11 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #254
+
+### Fixed
+- `Orchestrator.Status.RestartIfNeeded` now compares a sent `expectedCount` with the number of entries the call would affect (1 when the management Job Queue Entry would be restarted, 0 when the orchestrator is already running) and answers `ConfirmationMismatch` without changing anything on a mismatch. Before, any count was accepted when nothing needed a restart. Help, contract text and is-IS translations updated. No new object IDs. Tests added to codeunit 96419 "Status Msg Tests" (1033 and 1039).
+
 ## [Unreleased] — Issue #245
 
 ### Changed

@@ -684,7 +684,8 @@ codeunit 10035576 "Help ori"
         O.AppendLine('|---|---|');
         O.AppendLine('| `Orchestrator.Entry.Run`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule` | the one orchestrator entry |');
         O.AppendLine('| `Orchestrator.Entry.Register` | the one Job Queue Entry that is registered |');
-        O.AppendLine('| `Orchestrator.Status.Restart`, `Orchestrator.Status.RestartIfNeeded` | the one management Job Queue Entry |');
+        O.AppendLine('| `Orchestrator.Status.Restart` | the one management Job Queue Entry |');
+        O.AppendLine('| `Orchestrator.Status.RestartIfNeeded` | the management Job Queue Entry that would be restarted: 1, or 0 when the orchestrator is already running |');
         O.AppendLine('| `Orchestrator.Playbook.Run` | the one playbook, not its steps (each step confirms its own type) |');
         O.AppendLine('| `Orchestrator.Email.Send` | the one e-mail draft, not its recipients |');
         O.AppendLine('| `Orchestrator.Telegram.Message` | the one message |');
