@@ -193,10 +193,21 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
 
     local procedure TableState(TableId: Integer): Text
     var
+        JobQueueEntry: Record "Job Queue Entry";
         TableReference: RecordRef;
         State: TextBuilder;
     begin
         TableReference.Open(TableId);
+        if TableId = Database::"Job Queue Entry" then begin
+            // Other apps' Job Queue Entries change while the queue runs; only this app's entries are in scope, and only their existence counts.
+            TableReference.Field(JobQueueEntry.FieldNo("Object ID to Run")).SetRange(OrchestratorObjectIdFrom(), OrchestratorObjectIdTo());
+            if TableReference.FindSet() then
+                repeat
+                    State.Append(Format(TableReference.Field(TableReference.SystemIdNo()).Value));
+                until TableReference.Next() = 0;
+            TableReference.Close();
+            exit(State.ToText());
+        end;
         if TableReference.FindSet() then
             repeat
                 State.Append(Format(TableReference.Field(TableReference.SystemIdNo()).Value));
@@ -204,5 +215,15 @@ codeunit 96446 "Scheduler Wizard Reg Tests ori"
             until TableReference.Next() = 0;
         TableReference.Close();
         exit(State.ToText());
+    end;
+
+    local procedure OrchestratorObjectIdFrom(): Integer
+    begin
+        exit(10035535);
+    end;
+
+    local procedure OrchestratorObjectIdTo(): Integer
+    begin
+        exit(10035634);
     end;
 }
