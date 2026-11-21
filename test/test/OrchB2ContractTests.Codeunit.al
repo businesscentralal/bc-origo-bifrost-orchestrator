@@ -147,9 +147,9 @@ codeunit 96453 "Orch B2 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Workspace.Preview",
-            '[{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"initialRequest is a JSON array.","fix":"Send an object, a string that holds one, or leave initialRequest out."}]');
+            '[{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"initialRequest is a JSON array.","fix":"Send an object, a string that holds one, or leave initialRequest out."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Report.Get.</summary>
