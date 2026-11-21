@@ -48,7 +48,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart. expectedCount counts the one management entry that may be restarted.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur þá einu stjórnunarfærslu sem gæti verið endurræst.';
+        SelectionLbl: Label 'Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart. expectedCount counts the management entry that would be restarted: 1, or 0 when it is already running; a different count changes nothing.', Comment = 'is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur stjórnunarfærsluna sem yrði endurræst: 1, eða 0 þegar hún er þegar í gangi; annar fjöldi breytir engu.';
     begin
         exit(SelectionLbl);
     end;
@@ -70,7 +70,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
     var
         CountParts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parameters.Add(CountParts.ExpectedCountParameter('the one orchestrator management Job Queue Entry that the call may restart (1), also when it turns out that no restart is needed'));
+        Parameters.Add(CountParts.ExpectedCountParameter('the orchestrator management Job Queue Entry that the call would restart: 1 when a restart is needed, 0 when the orchestrator is already running and nothing changes'));
         exit(true);
     end;
 
@@ -99,7 +99,7 @@ codeunit 10035561 "Status RestartIf Msg ori" implements "Msg Interface ori", "Ms
         CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Restarts the orchestrator only when its management entry is not Ready or In Process; the restart cancels and schedules the management Job Queue Entry and commits.' + ' ' + CountParts.CountSentence('the one orchestrator management Job Queue Entry that the call may restart (1), also when it turns out that no restart is needed'), true);
+        Effect := Parts.CommittingEffect('Restarts the orchestrator only when its management entry is not Ready or In Process; the restart cancels and schedules the management Job Queue Entry and commits.' + ' ' + CountParts.CountSentence('the orchestrator management Job Queue Entry that the call would restart: 1 when a restart is needed, 0 when the orchestrator is already running and nothing changes'), true);
         exit(true);
     end;
 
