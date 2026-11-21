@@ -94,14 +94,13 @@ codeunit 10035551 "Status Msg Handler ori"
 
         // Foundation does not gate a type without a subject, so the count is checked here, before anything changes:
         // 0 when nothing needs a restart, 1 when the management entry would be restarted (issue #254).
-        if ConfirmGate.HasExpectedCount(Argument) then begin
+        if ConfirmGate.HasExpectedCount(Argument) then
             if AlreadyRunning then begin
                 if not ConfirmGate.Confirm(Argument, 0, NoRestartCountMsg) then
                     exit;
             end else
                 if not ConfirmGate.Confirm(Argument, 1, RestartCountMsg) then
                     exit;
-        end;
 
         if AlreadyRunning then begin
             ResponseJson.Add('status', 'Success');

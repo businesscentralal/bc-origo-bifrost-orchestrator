@@ -4593,6 +4593,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Áætlari er þegar í gangi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType AlreadyRunningMsg</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1369520475 - NamedType 2778900552" size-unit="char" translate="yes" xml:space="preserve">
+          <source>no orchestrator management Job Queue Entry (it is already running)</source>
+          <target>engin stjórnunarfærsla áætlara (hann er þegar í gangi)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=engin stjórnunarfærsla áætlara (hann er þegar í gangi)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType NoRestartCountMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1369520475 - NamedType 2736748247" size-unit="char" translate="yes" xml:space="preserve">
+          <source>the orchestrator management Job Queue Entry (it would be restarted)</source>
+          <target>stjórnunarfærsla áætlara (henni yrði endurræst)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=stjórnunarfærsla áætlara (henni yrði endurræst)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType RestartCountMsg</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1369520475 - NamedType 838312617" size-unit="char" translate="yes" xml:space="preserve">
           <source>Orchestrator restarted.</source>
           <target>Áætlari endurræstur.</target>
@@ -4630,9 +4642,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart. expectedCount counts the one management entry that may be restarted.</source>
-          <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur þá einu stjórnunarfærslu sem gæti verið endurræst.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur þá einu stjórnunarfærslu sem gæti verið endurræst.</note>
+          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart. expectedCount counts the management entry that would be restarted: 1, or 0 when it is already running; a different count changes nothing.</source>
+          <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur stjórnunarfærsluna sem yrði endurræst: 1, eða 0 þegar hún er þegar í gangi; annar fjöldi breytir engu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur stjórnunarfærsluna sem yrði endurræst: 1, eða 0 þegar hún er þegar í gangi; annar fjöldi breytir engu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1169993136 - NamedType 3954339052" size-unit="char" translate="yes" xml:space="preserve">
