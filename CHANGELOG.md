@@ -5,7 +5,63 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #254
+
+### Fixed
+- `Orchestrator.Status.RestartIfNeeded` now compares a sent `expectedCount` with the number of entries the call would affect (1 when the management Job Queue Entry would be restarted, 0 when the orchestrator is already running) and answers `ConfirmationMismatch` without changing anything on a mismatch. Before, any count was accepted when nothing needed a restart. Help, contract text and is-IS translations updated. No new object IDs. Tests added to codeunit 96419 "Status Msg Tests" (1033 and 1039).
+
+## [Unreleased] — Issue #245
+
+### Changed
+- Foundation dependency raised from 28.0.12.679 to 28.0.14.778, the Bifrost Foundation 28.0.14 build released on AppSource on 20.11.2026, in the app and test app (only `dependencies[].version`). The top-level version stays 28.0.5.0. No new objects and no AL code change.
+
+## [Unreleased] — Issue #251
+
+### Fixed
+- Test-only: the errors-chapter contract tests in `Orch B1 Contract Tests` (96452) and `Orch B2 Contract Tests` (96453) no longer pin the wording of Foundation's shared `Retryable` entry (#1458, core#1497). The entry must still exist; this app's own entries are still compared byte for byte. No app change, no new objects. Passes on Foundation 28.0.14.765 and 28.0.14.777.
+
+## [Unreleased] — Issue #248
+
+### Fixed
+- is-IS: the #246 Report parameter errors translated a report object ID as *kennitala* (national ID number). They now use *auðkenni* (the term used for Object ID elsewhere, e.g. "Auðkenni hluts til keyrslu"): `ReportIdExpectedTok`, `ReportNotFoundNextStepTok` and `MissingReportIdNextStepTok` in codeunit 10035592 `Report Msg Handler ori` (label comments and `Bifrost Orchestrator.is-IS.xlf`). Translation-only; no new app objects, no English text or behaviour change.
+
+## [Unreleased] — Issue #244
+
+### Fixed
+- #246 amendment: corrected Entry.Register recovery to request the Job Queue Entry primary ID in English and Icelandic; declared Telegram message-format and Report.SaveAs layout/app-ID errors in help. Updated structured-error and contract regressions.
+- #244: a missing or unknown parameter of the Entry, JobQueueEntry, Playbook, Email, Telegram and Report types no longer answers the generic `BusinessCentralError`. It answers `MissingParameter` (missing `id`, `jobQueueEntryId`, `playbookCode`, `recurringTemplateCode`, `outboxSystemId`, `message`, `reportId`), `RecordNotFound` (no entry, Job Queue Entry, playbook, recurring template, outbox draft, report or layout with the value received), `InvalidParameter` (unsupported `format`, a processing-only report for SaveAs, an output report for Run) or `InvalidParameterFormat` (non-numeric `reportId`, non-GUID layout `appId`, non-text `message`), with `parameter`, `received`, `expected` and a `nextStep`, all in English and Icelandic. Telegram.Message checks `message` before its setup checks, so a missing message is `MissingParameter` even when HTTP requests or the bot token are not set up. The errors chapters of the contracts declare the same codes.
+- No new app objects. Changed codeunits 10035550 `SE Msg Handler ori`, 10035566 `Entry Msg Handler ori`, 10035552 `Playbook Msg Handler ori`, 10035616 `Playbook Verify ori`, 10035582 `Email Send Msg ori`, 10035588 `Telegram Msg ori`, 10035592 `Report Msg Handler ori` and the contract parts 10035609/10035610 `Orch B1/B2 Contract Parts ori` (new internal `AddContractError` overload with an error code). `Bifrost Orchestrator.is-IS.xlf` regenerated.
+- Tests: new test codeunit 96447 `Orch Param Error Tests` (missing, unknown and malformed parameters, plus the Icelandic texts in 1039); the errors chapters in 96452/96453 `Orch B1/B2 Contract Tests` now expect the new codes.
+
+## [Unreleased] — Issue #235
+
+### Fixed
+- Report layout contracts name `setAsDefault`, the user-defined layout GUID and the no-delete policy in English and Icelandic. List exposes company scope; Get supplies format-specific MIME types. Missing layout names and missing/consumed staging IDs return stable errors with recovery guidance.
+- Report.SaveAs help explains document filters, inline output and client timeouts. Its existing application/pdf envelope is preserved for every output format. AC05 response size and AC07 format-specific content types were split to #239 pending the MCP runtime fix (Architect ruling, 19 November 2026).
+- Added test codeunit 96499 `Report Contract 235 Tests ori` for bilingual help, metadata, structured refusals and existing binary-output compatibility.
+
 ## [Unreleased]
+
+### Fixed — #242
+
+- #242: test only, no new objects, no app change. Codeunit 96446 `Scheduler Wizard Reg Tests ori` (AC02/AC03) no longer snapshots `SystemModifiedAt` of every Job Queue Entry; it compares only the existence (SystemId) of Job Queue Entries that run Orchestrator codeunits, so a running Job Queue on the tenant no longer makes it flaky.
+
+### Fixed — #237
+
+- #237 AC01 / codeunit 10035600 `Report Layout Handler ori`: `Orchestrator.ReportLayout.Set` by name no longer replaces or re-scopes a user-defined layout limited to another company; it is refused with `Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current>. Use another layout name.` and nothing is changed (is-IS translated).
+- #237 AC01 (review): the refusal now answers code `PreconditionFailed`, `parameter` `name`, `received`, `expected` and a `nextStep`, and is listed with that code under errors in the Set contract; two labels (`NameExpectedTok`, `NameNextStepTok`) with is-IS translations, `Bifrost Orchestrator.is-IS.xlf` regenerated.
+- #237 AC02: `ReportLayout.Get` and `setAsDefault` for another company's layout keep answering `Layout <name> not found on report <reportId>` (the list only shows the current company's layouts, so the other company is not disclosed); the Set contract help now says so.
+- #237 AC03: tests `SetByNameDoesNotReplaceOtherCompanyLayout` and `SetAsDefaultDoesNotSeeOtherCompanyLayout` in codeunit 96494 (no new object IDs).
+
+### Fixed — #209
+
+- #209: no new objects. Codeunit 10035576 `Help ori` (, example 4 POSTING-AUDIT) and test library `Playbook Example Library ori`: the Ask step 30 now sends `subject` `{"table":"Customer","systemId":"@_current.id"}`, the request key `LLM.Prompt.Ask` declares (`record`/`tableName` were refused with `UnknownRequestKey` on tenants with the real Ask), and carries the Success condition `stopReason Equals completed` (no `AskStopReasonUnchecked`). Test fixture `Test.Orchestrator.PostingAudit` (PostingAuditAskMsgori) declares `subject` and answers `stopReason` `completed`, the values the real Ask returns. Decision by Claude Code (acting Architect) 19.11.2026, option A.
+- #209 build: fields `Confirmation Note` and `Outcome Note` (table `Playbook Step Log ori`) and `Max Count` (table `Playbook Step ori`) declare `AllowInCustomizations` (AsReadOnly / AsReadWrite), which clears the three AS0139 warnings also present on main.
+- #209 tests: `96411 Orchestrator Unit Tests` removes stale Ok Sample Job Queue Entries before the enqueue test; `96419 Status Msg Tests` and `96443 First Schedule Tests ori` create the Orchestrator setup row when the tenant has none (new procedure `EnsureSchedulerSetup` in test library 96413 `Library Orchestrator`). The 96411 category filter and the 96480/96481 Report Selections seeding were delivered in #210. 96456 needs a Disabled-isolation test runner (130451).
+
+### Fixed — #231
+
+- #231: Import Playbook now writes the four playbook tables under the administrator's BC permissions, with field validation and table triggers, even when ChangeLog Write Guard is Blocked and no Change Log coverage exists. The UI import does not change guard settings. Generic table imports, message-type writes and exports retain their guards. Regression tests cover the page import, cancellation, all four tables, guarded imports and malformed/cross-playbook files.
 
 ### Fixed — #228
 
@@ -57,6 +113,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Tests: four new scenarios in test codeunit 96468 `Transform Exec Tests ori` (text to object and array, Markdown fence, object and null pass-through, invalid and scalar text, Transform step output holds an object).
 ### Fixed — #202
 - #202 AC01 / AC02 / AC03 / `Bifrost Orchestrator.is-IS.xlf` and the matching `is-IS=` comments in the document-sending objects (`Doc Send Contract ori`, `Doc Send Process ori`, `Doc Send Resolver ori`, `Purch Order Pdf Msg ori`, `Sales Order Conf Pdf Msg ori`, `Sales Quote Pdf Msg ori`): review of the 200 is-IS units for the document-sending, PDF and Report Layout message types added since 28.0.3. 28 targets corrected (e-mail address term aligned with Foundation, one read-permission term, `JSON-strengur`, 'vísa á' for identifiers that name a document, meaningless or garbled sentences). Placeholders, keys and Locked labels unchanged; no en-US file; no new objects.
+
 
 ### Fixed — #209
 - Test isolation only, no product change and no new object IDs. Codeunit 96411 `CategoryCodeIsGotFromJobQueueSchedulerEntryIfSpecified` deletes old Ok Sample (96410) Job Queue Entries before it enqueues, so `FindFirst` reads its own entry. Codeunits 96480 and 96481 seed the P.Order / S.Order Report Selections row when the tenant has none and remove it again; the `NoOrderReportIsPreconditionFailed` tests park and restore the tenant rows instead of deleting them.

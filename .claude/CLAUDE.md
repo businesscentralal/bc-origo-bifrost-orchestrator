@@ -243,3 +243,7 @@ Key rules always in effect:
 
 - Test codeunit 96497 is reserved for `Playbook Verify Gaps Tests ori`. It moved
   from 96495 to avoid the allocations in sibling PRs #220 and #221.
+
+## Report contract regression tests (#235)
+
+- Test codeunit 96499 `Report Contract 235 Tests ori` verifies bilingual report/layout help and response contracts.

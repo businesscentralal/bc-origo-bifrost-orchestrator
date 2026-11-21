@@ -25,13 +25,16 @@ codeunit 10035616 "Playbook Verify ori"
     procedure ExecuteVerify(var Argument: Record "Message Argument ori")
     var
         Playbook: Record "Playbook ori";
+        PlaybookCode: Code[20];
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
         Findings: JsonArray;
     begin
         RequestJson := Argument.GetRequestJson();
         Playbook.SetLoadFields(Code);
-        Playbook.Get(GetPlaybookCode(Argument, RequestJson));
+        PlaybookCode := GetPlaybookCode(Argument, RequestJson);
+        if not Playbook.Get(PlaybookCode) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(PlaybookNotFoundErr, PlaybookCode), 'playbookCode', PlaybookCode, PlaybookExpectedTok, PlaybookNotFoundNextStepTok);
 
         GetFindings(Playbook.Code, Findings);
 
@@ -476,7 +479,7 @@ codeunit 10035616 "Playbook Verify ori"
             exit(CopyStr(PlaybookCodeToken.AsValue().AsText(), 1, 20));
         if Argument.Subject <> '' then
             exit(CopyStr(Argument.Subject, 1, 20));
-        Error(MissingPlaybookCodeErr);
+        RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingPlaybookCodeErr, 'playbookCode', '', PlaybookExpectedTok, MissingPlaybookNextStepTok);
     end;
 
     var
@@ -485,10 +488,24 @@ codeunit 10035616 "Playbook Verify ori"
         WarningTok: Label 'warning', Locked = true;
         UnknownNameTok: Label 'Unknown(%1)', Locked = true;
         MissingPlaybookCodeErr: Label 'Request must include "playbookCode" in the data payload or as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "playbookCode" í gagnahleðslunni eða sem viðfang.';
+        PlaybookExpectedTok: Label 'the code of a playbook', Comment = 'is-IS=kóði verkáætlunar';
+        MissingPlaybookNextStepTok: Label 'Send the playbook code in data.playbookCode or as the subject.', Comment = 'is-IS=Sendu kóða verkáætlunarinnar í data.playbookCode eða sem viðfang.';
+        PlaybookNotFoundErr: Label 'No playbook has the code %1.', Comment = '%1 = the playbook code received, is-IS=Engin verkáætlun hefur kóðann %1.';
+        PlaybookNotFoundNextStepTok: Label 'Send the code of an existing playbook.', Comment = 'is-IS=Sendu kóða verkáætlunar sem er til.';
         RefusedTxt: Label 'Playbook %1 was not started: errors on enabled steps: %2, warnings: %3. %4', Comment = '%1 = playbook code, %2 = number of errors, %3 = number of warnings, %4 = the findings, is-IS=Keðjan %1 var ekki ræst: villur í virkum skrefum: %2, viðvaranir: %3. %4';
         FindingLineTxt: Label 'Step %1 [%2]: %3', Comment = '%1 = step no, %2 = finding code, %3 = the message, is-IS=Skref %1 [%2]: %3';
         ExpectedTxt: Label 'a playbook whose enabled steps verify without errors, and without warnings unless ignoreWarnings is true', Comment = 'is-IS=keðja þar sem virk skref sannreynast án villna, og án viðvarana nema ignoreWarnings sé true';
         RefusedNextStepTxt: Label 'Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings = true; an error cannot.', Comment = 'is-IS=Kallaðu á Orchestrator.Playbook.Verify með sama playbookCode, lagaðu niðurstöðurnar og kallaðu svo aftur. Viðvörun má samþykkja viljandi með ignoreWarnings = true; villu má ekki samþykkja.';
         ScheduledWithErrorsMsg: Label 'Playbook %1 is scheduled, but its enabled steps have errors (%2) that will fail the next scheduled run.', Comment = '%1 = playbook code, %2 = number of errors, is-IS=Keðjan %1 er tímasett, en virk skref hennar eru með villur (%2) sem láta næstu tímasettu keyrslu mistakast.';
         ScheduledWithErrorsNextStepTxt: Label 'Fix the errors above, or remove the schedule (delete the Scheduled Entry ori of the playbook) until they are fixed.', Comment = 'is-IS=Lagaðu villurnar hér að ofan, eða fjarlægðu tímasetninguna (eyddu Scheduled Entry ori keðjunnar) þar til þær eru lagaðar.';
+
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
+    end;
 }

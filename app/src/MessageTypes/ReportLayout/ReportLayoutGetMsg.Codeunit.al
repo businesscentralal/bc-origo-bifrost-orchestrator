@@ -38,9 +38,13 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     /// <summary>Provides the GetSelectionDescription part of the report layout get message.</summary>
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'Export the bytes of one report layout, extension or user-defined, as base64. Read-only. Use Orchestrator.ReportLayout.List first to find the layout name and appId, or Orchestrator.ReportLayout.Set to import a layout.', Comment = 'is-IS=Fluttu út gögn eins skýrsluútlits, úr viðbót eða notandaskilgreind, sem base64. Lesaðgerð. Notaðu Orchestrator.ReportLayout.List fyrst til að finna heiti útlitsins og appId, eða Orchestrator.ReportLayout.Set til að flytja inn útlit.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(MimeHelpLbl);
+        Builder.AppendLine(DeletePolicyLbl);
+        exit(Builder.ToText());
     end;
 
     /// <summary>Provides the GetEnvelope part of the report layout get message.</summary>
@@ -80,7 +84,7 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
         Parts.AddResponseField(Fields, 'name', 'string', 'Layout name.');
         Parts.AddResponseField(Fields, 'appId', 'string', 'Layout app GUID.');
         Parts.AddResponseField(Fields, 'format', 'string', 'Word, RDLC, Excel or Custom.');
-        Parts.AddResponseField(Fields, 'mimeType', 'string', 'Stored MIME type.');
+        Parts.AddResponseField(Fields, 'mimeType', 'string', MimeHelpLbl);
         Parts.AddResponseField(Fields, 'layoutBase64', 'string', 'Unmodified exported layout bytes encoded as base64.');
         Response := Parts.Response(Fields, 'text/json');
         exit(true);
@@ -89,10 +93,12 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
     /// <summary>Provides the GetErrors part of the report layout get message.</summary>
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
         Parts.AddContractError(Errors, 'Report <reportId> not found.', 'The report does not exist.', 'Use Orchestrator.Report.List.');
-        Parts.AddContractError(Errors, 'Request must include "<key>".', 'A required key is missing.', 'Supply the documented required fields.');
+        Parts.AddContractError(Errors, 'Request must include "reportId".', 'reportId is missing.', 'Send reportId.');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::MissingParameter, MissingNameLbl, NameNextStepLbl));
         Parts.AddContractError(Errors, 'appId must be a valid GUID.', 'The supplied appId is not a GUID.', 'Use the appId returned by ReportLayout.List.');
         Parts.AddContractError(Errors, 'Layout <name> not found on report <reportId>.', 'No layout matches the name and appId.', 'Use ReportLayout.List and send the returned name and appId.');
 
@@ -156,8 +162,13 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
 
     /// <summary>Provides the GetNotes part of the report layout get message.</summary>
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        Builder: TextBuilder;
     begin
         Notes := 'Read-only. No layout import, default-selection change or update-on-export is performed. Layout names and app IDs are returned by Orchestrator.ReportLayout.List.';
+        Builder.AppendLine(Notes);
+        Builder.AppendLine(DeletePolicyLbl);
+        Notes := Builder.ToText();
         exit(true);
     end;
 
@@ -177,4 +188,8 @@ codeunit 10035613 "Report Layout Get Msg ori" implements "Msg Interface ori", "M
 
     var
         Handler: Codeunit "Report Layout Read Handler ori";
+        MissingNameLbl: Label 'name is missing. parameter: name.', Comment = 'is-IS=name vantar. parameter: name.';
+        NameNextStepLbl: Label 'Send name from Orchestrator.ReportLayout.List.', Comment = 'is-IS=Sendu name úr Orchestrator.ReportLayout.List.';
+        MimeHelpLbl: Label 'MIME type: Word = application/vnd.openxmlformats-officedocument.wordprocessingml.document; RDLC = application/xml; Excel = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.', Comment = 'is-IS=MIME-gerð: Word = application/vnd.openxmlformats-officedocument.wordprocessingml.document; RDLC = application/xml; Excel = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.';
+        DeletePolicyLbl: Label 'No layout delete message type exists by design: message types must not delete data. Remove a test layout in BC on the Report Layouts page.', Comment = 'is-IS=Engin skilaboðategund til að eyða útliti er til samkvæmt hönnun: skilaboðategundir mega ekki eyða gögnum. Fjarlægðu prófunarútlit í BC á síðunni Skýrsluútlit.';
 }

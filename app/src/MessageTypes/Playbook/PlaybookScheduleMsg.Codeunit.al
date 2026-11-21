@@ -115,9 +115,9 @@ codeunit 10035574 "Playbook Schedule Msg ori" implements "Msg Interface ori", "M
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
         Parts.AddPlaybookErrors(Errors);
-        Parts.AddContractError(Errors, 'Request must include "recurringTemplateCode".', 'data.recurringTemplateCode is missing or empty.', 'Send the code of a Recurring Template ori.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, 'Request must include "recurringTemplateCode".', 'data.recurringTemplateCode is missing or empty.', 'Send the code of a Recurring Template ori.');
         Parts.AddContractError(Errors, 'Playbook <playbookCode> is already scheduled. Remove the existing orchestrator entry first.', 'The playbook already has an orchestrator entry.', 'Delete that Scheduled Entry ori first, or keep the schedule it has.');
-        Parts.AddRuntimeError(Errors, 'No Recurring Template ori has that code (Business Central''s table relation error).', 'Check the code with Data.Records.Get on table Recurring Template ori.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'No recurring template has the code <recurringTemplateCode>.', 'No Recurring Template ori has that code.', 'Check the code with Data.Records.Get on table Recurring Template ori.');
         Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>', 'The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.', 'Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot.'));
         exit(true);
     end;

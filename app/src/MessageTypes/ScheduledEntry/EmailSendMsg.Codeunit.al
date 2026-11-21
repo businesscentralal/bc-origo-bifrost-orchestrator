@@ -90,8 +90,8 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
     var
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parts.AddContractError(Errors, '"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.', 'data.outboxSystemId is missing or not a GUID, and subject is not a GUID.', 'Send the outboxSystemId of the draft.');
-        Parts.AddRuntimeError(Errors, 'No Email Outbox entry has that SystemId (Business Central''s record-not-found text).', 'Send the outboxSystemId from the Email.Draft.Set answer.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, '"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.', 'data.outboxSystemId is missing or not a GUID, and subject is not a GUID.', 'Send the outboxSystemId of the draft.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'No email draft in the outbox has the SystemId <outboxSystemId>.', 'No Email Outbox entry has that SystemId.', 'Send the outboxSystemId from the Email.Draft.Set answer.');
         Parts.AddRuntimeError(Errors, 'The email account or its connector refuses to send.', 'Check the email account of the draft.');
         exit(true);
     end;
@@ -174,7 +174,7 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
             if Argument.SubjectIsGuid() then
                 Evaluate(OutboxSystemId, Argument.Subject)
             else
-                Error(MissingOutboxIdErr);
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingOutboxIdErr, 'outboxSystemId', '', GuidExpectedTok, MissingOutboxIdNextStepTok);
 
         // KNOWN GAP: there is no ownership check here. This codeunit elevates itself with
         // Permissions = tabledata "Email Outbox" = RIMD, so a caller who learns another user's
@@ -183,7 +183,8 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
         // Access = Internal, the only accessors are GetMessageId/GetAccountId/GetConnector, and
         // query "Outbox Emails" is Access = Internal too. Closing this needs a design decision -
         // see the PR gateway report of 2026-09-07.
-        EmailOutbox.GetBySystemId(OutboxSystemId);
+        if not EmailOutbox.GetBySystemId(OutboxSystemId) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(OutboxNotFoundErr, Format(OutboxSystemId, 0, 4)), 'outboxSystemId', Format(OutboxSystemId, 0, 4), GuidExpectedTok, OutboxNotFoundNextStepTok);
         EmailMessage.Get(EmailOutbox.GetMessageId());
         Email.Send(EmailMessage);
 
@@ -193,6 +194,20 @@ codeunit 10035582 "Email Send Msg ori" implements "Msg Interface ori", "Msg Disc
         Argument.SetResponseJson(ResponseJson);
     end;
 
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
+    end;
+
     var
         MissingOutboxIdErr: Label '"outboxSystemId" (GUID from Email.Draft.Set response) is required in data or as subject.', Comment = 'is-IS="outboxSystemId" (GUID frá Email.Draft.Set svari) er nauðsynlegt í gögnum eða sem viðfang.';
+        GuidExpectedTok: Label 'a GUID', Comment = 'is-IS=GUID-auðkenni';
+        MissingOutboxIdNextStepTok: Label 'Send the outboxSystemId from the Email.Draft.Set answer in data.outboxSystemId or as the subject.', Comment = 'is-IS=Sendu outboxSystemId úr svari Email.Draft.Set í data.outboxSystemId eða sem viðfang.';
+        OutboxNotFoundErr: Label 'No email draft in the outbox has the SystemId %1.', Comment = '%1 = the GUID received, is-IS=Engin tölvupóstsdrög í úthólfinu hafa SystemId %1.';
+        OutboxNotFoundNextStepTok: Label 'Send the outboxSystemId from the Email.Draft.Set answer. A sent draft leaves the outbox.', Comment = 'is-IS=Sendu outboxSystemId úr svari Email.Draft.Set. Send drög fara úr úthólfinu.';
 }

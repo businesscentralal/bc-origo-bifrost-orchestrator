@@ -32,9 +32,13 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'Render a non-processing-only report as PDF, Excel, Word or XML. Read-only with binary output. Use Orchestrator.Report.Run for processing-only reports.', Comment = 'is-IS=Birttu skýrslu sem er ekki eingöngu vinnsluskýrsla sem PDF, Excel, Word eða XML. Lesaðgerð með tvíundarúttaki. Notaðu Orchestrator.Report.Run fyrir vinnsluskýrslur.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(TableViewHelpLbl);
+        Builder.AppendLine(OutputHelpLbl);
+        exit(Builder.ToText());
     end;
 
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
@@ -69,7 +73,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parameters.Add(ContractMgt.Parameter('requestPageXml', 'string', false, 'Caller XML takes precedence over registered templates. parameters overlays its named options. Without parameters, existing raw XML / saved-preset behavior is retained.'));
         Parameters.Add(ContractMgt.Parameter('layoutName', 'string', false, 'Temporary layout override from Orchestrator.ReportLayout.List. The prior session selection and stored defaults are preserved.'));
         Parameters.Add(ContractMgt.Parameter('appId', 'string', false, 'Extension layout application GUID; omitted means a user-defined layout. Used with layoutName.'));
-        Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, 'Table view applied to the report''s first data item, e.g. WHERE(Sell-to Customer No.=CONST(10000)). Ignored when the report has no data item table.'));
+        Parameters.Add(ContractMgt.Parameter('tableView', 'string', false, TableViewHelpLbl));
         exit(true);
     end;
 
@@ -78,7 +82,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts: Codeunit "Orch B2 Contract Parts ori";
         Fields: JsonArray;
     begin
-        Parts.AddResponseField(Fields, 'binary', 'binary', 'The rendered document in the requested format.');
+        Parts.AddResponseField(Fields, 'binary', 'binary', BinaryHelpLbl);
         Response := Parts.Response(Fields, 'application/pdf');
         exit(true);
     end;
@@ -90,9 +94,11 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
         Parts.AddReportErrors(Errors);
         Parts.AddContractError(Errors, 'Unknown request page parameter <name> on report <reportId>.', 'The option name is not in the selected base XML.', 'Use a known control name or register a report template.');
         Parts.AddContractError(Errors, 'No request page template is registered for report <reportId>. Provide requestPageXml.', 'Explicit parameters need a caller XML base or registered template.', 'Send requestPageXml containing the report options.');
-        Parts.AddContractError(Errors, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
-        Parts.AddContractError(Errors, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Report <reportId> is processing-only and cannot be saved.', 'The report is a batch job that produces no document.', 'Use Orchestrator.Report.Run for it.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameter, 'Unsupported format "<FORMAT>". Use PDF, Excel, Word, or XML.', 'data.format is not one of the four formats.', 'Send PDF, Excel, Word or XML, or leave format out.');
         Parts.AddRuntimeError(Errors, 'The report fails while rendering, or tableView is not a valid view.', 'Read the text; check the request page XML and the view.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'Layout <layoutName> not found on report <reportId>.', 'No layout with that name exists for the selected report and appId.', 'Send the name of a layout of this report. Orchestrator.ReportLayout.List lists them.');
+        Parts.AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameterFormat, 'appId must be a valid GUID.', 'data.appId is not a valid GUID.', 'Send the app ID of the layout as a GUID, or leave appId out.');
         exit(true);
     end;
 
@@ -148,8 +154,13 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        Builder: TextBuilder;
     begin
-        Notes := 'The report 1316 template accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item). PrintEntriesNotDue is not a BC 28.5 control and is rejected. Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. The answer is marked application/pdf for every format; the bytes are in the format that was asked for.';
+        Notes := 'The report 1316 template accepts StartDate, EndDate (ISO dates), DateChoice (Due Date/Posting Date), PrintAging, AgingBandPeriodLength, PrintAllHavingBalance and StatementStyle (Balance/Open Item). PrintEntriesNotDue is not a BC 28.5 control and is rejected. Processing-only reports do not produce a document and must be run with Orchestrator.Report.Run. layoutName and appId temporarily select an installed layout for this call; stored defaults and the prior session selection are unchanged on success or rendering failure. Omit layoutName to retain the existing default selection. ';
+        Builder.AppendLine(Notes);
+        Builder.AppendLine(OutputHelpLbl);
+        Notes := Builder.ToText();
         exit(true);
     end;
 
@@ -167,4 +178,7 @@ codeunit 10035595 "Report SaveAs Msg ori" implements "Msg Interface ori", "Msg D
 
     var
         Handler: Codeunit "Report Msg Handler ori";
+        OutputHelpLbl: Label 'For document reports, tableView must select the document. PDF and other output return inline; no size hint is available before rendering. A slow tenant may require a longer client timeout. The answer is marked application/pdf for every format; the bytes are in the requested format.', Comment = 'is-IS=Fyrir skjalaskýrslur verður tableView að velja skjalið. PDF og önnur úttaksgögn koma beint í svari; engin stærðarvísbending er tiltæk fyrir myndun. Hægur leigjandi getur krafist lengri biðtíma biðlara. Svarið er merkt application/pdf fyrir öll snið; gögnin eru á umbeðnu sniði.';
+        BinaryHelpLbl: Label 'Inline document bytes in the requested format (PDF, Word, Excel or XML); datacontenttype remains application/pdf.', Comment = 'is-IS=Skjalsgögn beint í svari á umbeðnu sniði (PDF, Word, Excel eða XML); datacontenttype helst application/pdf.';
+        TableViewHelpLbl: Label 'For a document report, send tableView to select the document, for example WHERE(No.=CONST(XINV001)). Applied to the first data item; ignored when there is no data item table.', Comment = 'is-IS=Fyrir skjalaskýrslu skaltu senda tableView til að velja skjalið, til dæmis WHERE(No.=CONST(XINV001)). Gildir fyrir fyrsta gagnalið; hunsað þegar engin gagnaliðstafla er til.';
 }

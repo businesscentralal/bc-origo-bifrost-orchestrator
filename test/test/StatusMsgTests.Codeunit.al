@@ -215,6 +215,190 @@ codeunit 96419 "Status Msg Tests"
         CleanupManagementJQEntry();
     end;
 
+    [Test]
+    procedure RestartIfNeededWrongCountRefusedWhenRunning1033()
+    begin
+        // [SCENARIO] Issue #254: expectedCount 999 on a running orchestrator is refused in English
+        VerifyWrongCountWhenRunning(1033);
+    end;
+
+    [Test]
+    procedure RestartIfNeededWrongCountRefusedWhenRunning1039()
+    begin
+        // [SCENARIO] Issue #254: expectedCount 999 on a running orchestrator is refused in Icelandic
+        VerifyWrongCountWhenRunning(1039);
+    end;
+
+    [Test]
+    procedure RestartIfNeededCountOneRefusedWhenRunning()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        JQEntry: Record "Job Queue Entry";
+        JQEntryBefore: Record "Job Queue Entry";
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+    begin
+        // [SCENARIO] Nothing needs a restart, so 1 is a wrong count (the call would affect 0)
+        CleanupManagementJQEntry();
+        JQEntry.Init();
+        JQEntry.Status := JQEntry.Status::Ready;
+        InsertManagementJQEntry(JQEntry);
+        JQEntryBefore := JQEntry;
+        CreateArgument(TempArgument, '{"expectedCount":1}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        AssertConfirmationMismatch(TempArgument, '1', '0');
+        AssertManagementJQEntryUnchanged(JQEntryBefore);
+        CleanupManagementJQEntry();
+    end;
+
+    [Test]
+    procedure RestartIfNeededCountZeroAcceptedWhenRunning()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        JQEntry: Record "Job Queue Entry";
+        JQEntryBefore: Record "Job Queue Entry";
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+    begin
+        // [SCENARIO] The matching count 0 runs the no-op and reports restarted false
+        CleanupManagementJQEntry();
+        JQEntry.Init();
+        JQEntry.Status := JQEntry.Status::"In Process";
+        InsertManagementJQEntry(JQEntry);
+        JQEntryBefore := JQEntry;
+        CreateArgument(TempArgument, '{"expectedCount":0}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        ResponseJson := TempArgument.GetResponseJson();
+        ResponseJson.Get('status', Token);
+        Assert.AreEqual('Success', Token.AsValue().AsText(), 'Status should be Success');
+        ResponseJson.Get('restarted', Token);
+        Assert.IsFalse(Token.AsValue().AsBoolean(), 'Should not have restarted');
+        AssertManagementJQEntryUnchanged(JQEntryBefore);
+        CleanupManagementJQEntry();
+    end;
+
+    [Test]
+    procedure RestartIfNeededWrongCountRefusedWhenRestartNeeded()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        JQEntry: Record "Job Queue Entry";
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        Mgt: Codeunit "Scheduler Mgt ori";
+    begin
+        // [SCENARIO] A restart is needed (no entry), so 0 is a wrong count and nothing is scheduled
+        CleanupManagementJQEntry();
+        CreateArgument(TempArgument, '{"expectedCount":0}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        AssertConfirmationMismatch(TempArgument, '0', '1');
+        Assert.IsFalse(JQEntry.Get(Mgt.GetManagementJobQueueId()), 'No management entry should have been scheduled');
+    end;
+
+    [Test]
+    procedure RestartIfNeededCountOneAcceptedWhenRestartNeeded()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+    begin
+        // [SCENARIO] The matching count 1 restarts the orchestrator
+        CleanupManagementJQEntry();
+        CreateArgument(TempArgument, '{"expectedCount":1}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        ResponseJson := TempArgument.GetResponseJson();
+        ResponseJson.Get('restarted', Token);
+        Assert.IsTrue(Token.AsValue().AsBoolean(), 'Should have restarted');
+        CleanupManagementJQEntry();
+    end;
+
+    [Test]
+    procedure RestartIfNeededInvalidCountRefused()
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+    begin
+        // [SCENARIO] An expectedCount that is not a whole number is refused and nothing is restarted
+        CleanupManagementJQEntry();
+        CreateArgument(TempArgument, '{"expectedCount":"many"}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+
+        ResponseJson := TempArgument.GetResponseJson();
+        ResponseJson.Get('status', Token);
+        Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
+        Assert.IsFalse(ResponseJson.Contains('restarted'), 'Nothing should have been restarted');
+    end;
+
+    local procedure VerifyWrongCountWhenRunning(LanguageId: Integer)
+    var
+        TempArgument: Record "Message Argument ori" temporary;
+        JQEntry: Record "Job Queue Entry";
+        JQEntryBefore: Record "Job Queue Entry";
+        Handler: Codeunit "Status Msg Handler ori";
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
+        PreviousLanguage: Integer;
+    begin
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(LanguageId);
+        CleanupManagementJQEntry();
+        JQEntry.Init();
+        JQEntry.Status := JQEntry.Status::Ready;
+        InsertManagementJQEntry(JQEntry);
+        JQEntryBefore := JQEntry;
+        CreateArgument(TempArgument, '{"expectedCount":999}');
+
+        BindSubscription(LibraryOrchestrator);
+        Handler.ExecuteRestartIfNeeded(TempArgument);
+        UnbindSubscription(LibraryOrchestrator);
+        GlobalLanguage(PreviousLanguage);
+
+        AssertConfirmationMismatch(TempArgument, '999', '0');
+        AssertManagementJQEntryUnchanged(JQEntryBefore);
+        CleanupManagementJQEntry();
+    end;
+
+    local procedure AssertConfirmationMismatch(var TempArgument: Record "Message Argument ori" temporary; Sent: Text; Actual: Text)
+    var
+        ResponseJson: JsonObject;
+        Token: JsonToken;
+    begin
+        ResponseJson := TempArgument.GetResponseJson();
+        ResponseJson.Get('status', Token);
+        Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
+        ResponseJson.Get('code', Token);
+        Assert.AreEqual('ConfirmationMismatch', Token.AsValue().AsText(), 'Code should be ConfirmationMismatch');
+        ResponseJson.Get('received', Token);
+        Assert.AreEqual(Sent, Token.AsValue().AsText(), 'Received should be the sent count');
+        ResponseJson.Get('expected', Token);
+        Assert.AreEqual(Actual, Token.AsValue().AsText(), 'Expected should be the actual count');
+        Assert.IsFalse(ResponseJson.Contains('restarted'), 'Nothing should have been restarted');
+    end;
+
     local procedure InsertManagementJQEntry(var JQEntry: Record "Job Queue Entry")
     var
         Mgt: Codeunit "Scheduler Mgt ori";
@@ -244,8 +428,11 @@ codeunit 96419 "Status Msg Tests"
 
     local procedure CreateArgument(var TempArgument: Record "Message Argument ori" temporary; RequestJsonText: Text)
     var
+        LibraryOrchestrator: Codeunit "Library Orchestrator";
         RequestJson: JsonObject;
     begin
+        // The handlers read the setup row; an earlier test or a fresh tenant may have none.
+        LibraryOrchestrator.EnsureSchedulerSetup();
         TempArgument.Init();
         TempArgument.Insert();
         RequestJson.ReadFrom(RequestJsonText);

@@ -78,22 +78,36 @@ codeunit 10035551 "Status Msg Handler ori"
     var
         Setup: Record "Scheduler Setup ori";
         JQEntry: Record "Job Queue Entry";
+        ConfirmGate: Codeunit "Confirm Gate ori";
         Mgt: Codeunit "Scheduler Mgt ori";
         ResponseJson: JsonObject;
         MgtJQPkId: Guid;
+        AlreadyRunning: Boolean;
     begin
         Setup.GetRecordOnce();
         MgtJQPkId := Mgt.GetManagementJobQueueId();
         if not IsNullGuid(MgtJQPkId) then begin
             JQEntry.SetLoadFields(Status);
             if JQEntry.Get(MgtJQPkId) then
-                if JQEntry.Status in [JQEntry.Status::Ready, JQEntry.Status::"In Process"] then begin
-                    ResponseJson.Add('status', 'Success');
-                    ResponseJson.Add('message', AlreadyRunningMsg);
-                    ResponseJson.Add('restarted', false);
-                    Argument.SetResponseJson(ResponseJson);
+                AlreadyRunning := JQEntry.Status in [JQEntry.Status::Ready, JQEntry.Status::"In Process"];
+        end;
+
+        // Foundation does not gate a type without a subject, so the count is checked here, before anything changes:
+        // 0 when nothing needs a restart, 1 when the management entry would be restarted (issue #254).
+        if ConfirmGate.HasExpectedCount(Argument) then
+            if AlreadyRunning then begin
+                if not ConfirmGate.Confirm(Argument, 0, NoRestartCountMsg) then
                     exit;
-                end;
+            end else
+                if not ConfirmGate.Confirm(Argument, 1, RestartCountMsg) then
+                    exit;
+
+        if AlreadyRunning then begin
+            ResponseJson.Add('status', 'Success');
+            ResponseJson.Add('message', AlreadyRunningMsg);
+            ResponseJson.Add('restarted', false);
+            Argument.SetResponseJson(ResponseJson);
+            exit;
         end;
 
         Mgt.CancelJobQueueEntry();
@@ -106,5 +120,7 @@ codeunit 10035551 "Status Msg Handler ori"
 
     var
         RestartedMsg: Label 'Orchestrator restarted.', Comment = 'is-IS=Áætlari endurræstur.';
+        NoRestartCountMsg: Label 'no orchestrator management Job Queue Entry (it is already running)', Comment = 'is-IS=engin stjórnunarfærsla áætlara (hann er þegar í gangi)';
+        RestartCountMsg: Label 'the orchestrator management Job Queue Entry (it would be restarted)', Comment = 'is-IS=stjórnunarfærsla áætlara (hún yrði endurræst)';
         AlreadyRunningMsg: Label 'Orchestrator is already running.', Comment = 'is-IS=Áætlari er þegar í gangi.';
 }

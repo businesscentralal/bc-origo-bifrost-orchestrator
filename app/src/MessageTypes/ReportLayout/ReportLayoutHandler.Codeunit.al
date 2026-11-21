@@ -114,8 +114,10 @@ codeunit 10035600 "Report Layout Handler ori"
         if HasStagingId then begin
             // Take reads and deletes the row in this transaction. A later import error rolls the delete back,
             // so the row survives a failed import and the call can be retried with the same id.
-            if not BlobStaging.Take(StagingId, TempBlob) then
-                Error(StagingIdNotFoundErr, StagingIdText);
+            if not BlobStaging.Take(StagingId, TempBlob) then begin
+                Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(StagingIdNotFoundErr, StagingIdText), 'stagingId', StagingIdText, StagingExpectedLbl, StageAgainLbl);
+                exit;
+            end;
         end else begin
             if LayoutBase64 = '' then
                 Error(MissingLayoutBase64Err);
@@ -129,6 +131,12 @@ codeunit 10035600 "Report Layout Handler ori"
         // Report Layouts page's Replace Layout action does (Report Layouts Impl. InsertNewLayout).
         GetCurrentDefault(ReportMeta, PreviousDefaultName, PreviousDefaultAppId);
         Replacing := TenantReportLayout.Get(ReportId, LayoutName, EmptyGuid);
+        // The key has no company, so a layout limited to another company holds this name for the whole tenant.
+        // It must not be replaced or re-scoped from here (#237); nothing has been changed yet.
+        if Replacing and (TenantReportLayout."Company Name" <> '') and (TenantReportLayout."Company Name" <> CompanyName()) then begin
+            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(LayoutNameTakenOtherCompanyErr, LayoutName, ReportId, CompanyName()), 'name', LayoutName, NameExpectedTok, NameNextStepTok);
+            exit;
+        end;
         if Replacing then begin
             ActionText := 'Replaced';
             TenantReportLayout.Delete(true);
@@ -457,6 +465,8 @@ codeunit 10035600 "Report Layout Handler ori"
         BothLayoutSourcesErr: Label 'Send either "layoutBase64" or "stagingId", not both.', Comment = 'is-IS=Sendu annaðhvort "layoutBase64" eða "stagingId", ekki bæði.';
         NoLayoutSourceErr: Label 'Request must include "layoutBase64" or "stagingId".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" eða "stagingId".';
         InvalidStagingIdErr: Label '"stagingId" %1 is not a valid GUID.', Comment = 'is-IS="stagingId" %1 er ekki gilt GUID.';
+        StagingExpectedLbl: Label 'An unused staging row owned by the calling user in this company.', Comment = 'is-IS=Ónotuð biðfærsla í eigu þess sem kallar í þessu fyrirtæki.';
+        StageAgainLbl: Label 'Stage the file again and send the new stagingId.', Comment = 'is-IS=Settu skrána aftur í bið og sendu nýtt stagingId.';
         StagingIdNotFoundErr: Label 'Staging row %1 was not found or has already been taken.', Comment = 'is-IS=Milligeymslufærsla %1 fannst ekki eða hefur þegar verið tekin.';
         MissingLayoutBase64Err: Label 'Request must include non-empty "layoutBase64".', Comment = 'is-IS=Beiðni verður að innihalda "layoutBase64" sem er ekki autt.';
         SetAndClearDefaultErr: Label 'Send either "setAsDefault" or "clearDefault", not both.', Comment = 'is-IS=Sendu annaðhvort "setAsDefault" eða "clearDefault", ekki bæði.';
@@ -466,5 +476,8 @@ codeunit 10035600 "Report Layout Handler ori"
         LayoutNotFoundErr: Label 'Layout %1 not found on report %2.', Comment = 'is-IS=Útlit %1 fannst ekki fyrir skýrslu %2.';
         AmbiguousLayoutErr: Label 'More than one layout named %1 exists on report %2. Send "appId".', Comment = 'is-IS=Fleiri en eitt útlit heitir %1 í skýrslu %2. Sendu "appId".';
         LayoutOtherCompanyErr: Label 'Layout %1 belongs to company %2 and cannot be the default in company %3.', Comment = 'is-IS=Útlit %1 tilheyrir fyrirtækinu %2 og getur ekki verið sjálfgefið í fyrirtækinu %3.';
+        LayoutNameTakenOtherCompanyErr: Label 'Layout %1 on report %2 is limited to another company and cannot be replaced from company %3. Use another layout name.', Comment = 'is-IS=Útlit %1 í skýrslu %2 er takmarkað við annað fyrirtæki og er ekki hægt að skipta um það úr fyrirtækinu %3. Notaðu annað heiti á útlitið.';
+        NameExpectedTok: Label 'a layout name that is not used by a layout limited to another company', Comment = 'is-IS=útlitsheiti sem er ekki notað af útliti sem takmarkað er við annað fyrirtæki';
+        NameNextStepTok: Label 'Use another layout name.', Comment = 'is-IS=Notaðu annað heiti á útlitið.';
         NotBooleanErr: Label '"%1" must be true or false.', Comment = 'is-IS="%1" verður að vera true eða false.';
 }

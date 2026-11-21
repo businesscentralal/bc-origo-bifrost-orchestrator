@@ -74,6 +74,21 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     end;
 
     /// <summary>
+    /// Adds a structured error of the type: the answer carries this code and this text, with the parameter and a nextStep.
+    /// </summary>
+    /// <param name="Errors">Receives the entry.</param>
+    /// <param name="ErrorCode">The stable error code of the answer.</param>
+    /// <param name="ErrorText">The error text, or its pattern.</param>
+    /// <param name="When">When the error is returned.</param>
+    /// <param name="Fix">What the caller does about it.</param>
+    internal procedure AddContractError(var Errors: JsonArray; ErrorCode: Enum "Bifrost Error Code ori"; ErrorText: Text; When: Text; Fix: Text)
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Errors.Add(ContractMgt.ErrorEntry(ErrorCode, ErrorText, When, Fix));
+    end;
+
+    /// <summary>
     /// Adds an error that Business Central itself raises on the execute path; answered with code
     /// BusinessCentralError and Business Central's own text.
     /// </summary>
@@ -91,9 +106,9 @@ codeunit 10035610 "Orch B2 Contract Parts ori"
     /// <param name="Errors">Receives the entries.</param>
     internal procedure AddReportErrors(var Errors: JsonArray)
     begin
-        AddContractError(Errors, 'Request must include "reportId".', 'data.reportId is missing.', 'Send the report object ID in data.reportId.');
-        AddContractError(Errors, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
-        AddRuntimeError(Errors, 'data.reportId is not a whole number.', 'Send reportId as an integer.');
+        AddContractError(Errors, "Bifrost Error Code ori"::MissingParameter, 'Request must include "reportId".', 'data.reportId is missing.', 'Send the report object ID in data.reportId.');
+        AddContractError(Errors, "Bifrost Error Code ori"::RecordNotFound, 'Report <reportId> not found.', 'No report with that ID exists in Report Metadata.', 'Find the ID with Orchestrator.Report.List.');
+        AddContractError(Errors, "Bifrost Error Code ori"::InvalidParameterFormat, '"reportId" must be a whole number.', 'data.reportId is not a whole number.', 'Send reportId as an integer.');
     end;
 
     /// <summary>

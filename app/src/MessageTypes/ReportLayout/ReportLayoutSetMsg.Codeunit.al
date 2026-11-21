@@ -32,9 +32,14 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
 
     procedure GetSelectionDescription(): Text
     var
+        Builder: TextBuilder;
         SelectionLbl: Label 'Create or replace a user-defined tenant report layout from base64 or from a staging row, and optionally make it the default; or make an existing layout the default, or clear the default, in the current company. Write operation. Use Orchestrator.ReportLayout.List to inspect existing layouts.', Comment = 'is-IS=Búðu til eða skiptu út notandaskilgreindu útliti leigjanda úr base64 eða milligeymslufærslu og gerðu það sjálfgefið ef þú vilt; eða gerðu útlit sem er til sjálfgefið, eða hreinsaðu sjálfgefna útlitið, í núverandi fyrirtæki. Skrifaðgerð. Notaðu Orchestrator.ReportLayout.List til að skoða núverandi útlit.';
     begin
-        exit(SelectionLbl);
+        Builder.AppendLine(SelectionLbl);
+        Builder.AppendLine(SetDefaultHelpLbl);
+        Builder.AppendLine(AppIdHelpLbl);
+        Builder.AppendLine(DeletePolicyLbl);
+        exit(Builder.ToText());
     end;
 
     procedure GetEnvelope(var Envelope: JsonObject): Boolean
@@ -70,9 +75,9 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
         Parameters.Add(ContractMgt.Parameter('description', 'string', false, 'Layout description, cut to 250 characters; defaults to name.'));
         Parameters.Add(ContractMgt.Parameter('companyName', 'string', false, 'Company the layout belongs to, cut to 30 characters; empty for all companies.'));
         Parameters.Add(ContractMgt.Parameter('stagingId', 'string', false, 'Id (GUID, with or without braces) of a staging row you created, holding the layout file. For an import, send exactly one of layoutBase64 or stagingId; not sent when setAsDefault selects an existing layout or with clearDefault. The row is read and deleted in the same transaction as the import, so a failed import leaves it in place and the call can be retried.'));
-        Parameters.Add(ContractMgt.Parameter('setAsDefault', 'boolean', false, 'true makes the layout the default of the report in the current company. With layoutBase64 or stagingId the imported layout becomes the default. Without a layout file, name (and appId when the name is not unique) selects an existing built-in, extension or user-defined layout; layoutFormat is then not needed. Default false.'));
+        Parameters.Add(ContractMgt.Parameter('setAsDefault', 'boolean', false, SetDefaultHelpLbl));
         Parameters.Add(ContractMgt.Parameter('clearDefault', 'boolean', false, 'true removes the current company''s default layout selection, so the all-companies selection applies, or the report''s built-in default when there is none. Send it with reportId only: name and layoutFormat are not needed, and layoutBase64, stagingId and setAsDefault are refused. Default false.'));
-        Parameters.Add(ContractMgt.Parameter('appId', 'string', false, 'App ID (GUID) of the layout to make the default, as Orchestrator.ReportLayout.List returns it; the empty GUID is a user-defined layout. Only with setAsDefault and no layout file. Needed when more than one layout on the report has that name.'));
+        Parameters.Add(ContractMgt.Parameter('appId', 'string', false, AppIdHelpLbl));
         exit(true);
     end;
 
@@ -97,6 +102,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parts.AddContractError(Errors, 'Request must include "<key>".', 'reportId, name or layoutFormat is missing.', 'Send reportId, name, layoutFormat and one of layoutBase64 or stagingId.');
         Parts.AddContractError(Errors, 'Layout format <layoutFormat> is not valid for report <reportId>.', 'layoutFormat is not Word, Excel, RDLC or RDL.', 'Send one of those formats.');
@@ -105,7 +111,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
         Parts.AddContractError(Errors, 'Send either "layoutBase64" or "stagingId", not both.', 'Both layoutBase64 and stagingId are in the request.', 'Send exactly one of them. Nothing is imported or taken.');
         Parts.AddContractError(Errors, 'Request must include "layoutBase64" or "stagingId".', 'Neither layoutBase64 nor stagingId is in the request.', 'Send exactly one of them.');
         Parts.AddContractError(Errors, '"stagingId" <stagingId> is not a valid GUID.', 'stagingId is not a GUID.', 'Send the id of the staging row, with or without braces.');
-        Parts.AddContractError(Errors, 'Staging row <stagingId> was not found or has already been taken.', 'No staging row with that id exists for the calling user in this company, or it was already taken.', 'Create a new staging row and send its id. Nothing is imported.');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::RecordNotFound, StagingMissingLbl, StageAgainLbl));
         Parts.AddContractError(Errors, 'Send either "setAsDefault" or "clearDefault", not both.', 'Both setAsDefault and clearDefault are true.', 'Send one of them. Nothing is changed.');
         Parts.AddContractError(Errors, 'Send "clearDefault" without "layoutBase64" or "stagingId".', 'clearDefault is true and a layout file is in the request.', 'Clear the default in its own call. Nothing is changed or taken.');
         Parts.AddContractError(Errors, 'Send "appId" only with "setAsDefault" and no layout file.', 'appId is in a request that imports a layout file.', 'Leave out appId: an imported layout is always user-defined.');
@@ -113,6 +119,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
         Parts.AddContractError(Errors, 'Layout <name> not found on report <reportId>.', 'setAsDefault without a layout file names a layout (and appId) the report does not have.', 'Find the name and appId with Orchestrator.ReportLayout.List. Nothing is changed.');
         Parts.AddContractError(Errors, 'More than one layout named <name> exists on report <reportId>. Send "appId".', 'setAsDefault without a layout file and without appId matches layouts from more than one app.', 'Send the appId of the layout from Orchestrator.ReportLayout.List.');
         Parts.AddContractError(Errors, 'Layout <name> belongs to company <companyName> and cannot be the default in company <current company>.', 'The user-defined layout is limited to another company.', 'Make it the default in that company, or import it for all companies (no companyName).');
+        Errors.Add(ContractMgt.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'Layout <name> on report <reportId> is limited to another company and cannot be replaced from company <current company>.', 'A layout with that name is limited to another company. The name is unique per report across the tenant, so the import would replace and re-scope that company''s layout.', 'Use another layout name. The other company''s layout is not changed. Get and setAsDefault for such a layout answer "Layout <name> not found", because the layout list only shows layouts for the current company.'));
         Parts.AddContractError(Errors, '"<key>" must be true or false.', 'setAsDefault or clearDefault is an object or array.', 'Send true or false.');
         Parts.AddRuntimeError(Errors, 'layoutBase64 is not valid base64, or the layout import fails. A failed import of a staged layout leaves the staging row in place.', 'Send the file content base64-encoded, in the format named by layoutFormat.');
         exit(true);
@@ -162,6 +169,7 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
         Parts.Example(Examples, 'Create a Word layout', '{"type":"Orchestrator.ReportLayout.Set","data":{"reportId":50100,"name":"custom","layoutFormat":"Word","layoutBase64":"<base64>"}}', '{"status":"Success","reportId":50100,"name":"custom","layoutFormat":"Word","action":"Created","isDefault":false}');
         Parts.Example(Examples, 'Import a Word layout and make it the default', '{"type":"Orchestrator.ReportLayout.Set","data":{"reportId":1306,"name":"Christmas","layoutFormat":"Word","stagingId":"<staging row id>","setAsDefault":true}}', '{"status":"Success","reportId":1306,"name":"Christmas","layoutFormat":"Word","action":"Created","previousDefault":"StandardSalesInvoice.docx","previousDefaultAppId":"<app id>","isDefault":true}');
         Parts.Example(Examples, 'Make an existing layout the default', '{"type":"Orchestrator.ReportLayout.Set","data":{"reportId":1306,"name":"StandardSalesInvoice.docx","appId":"<app id>","setAsDefault":true}}', '{"status":"Success","reportId":1306,"name":"StandardSalesInvoice.docx","layoutFormat":"Word","appId":"<app id>","action":"DefaultSet","previousDefault":"Christmas","previousDefaultAppId":"00000000-0000-0000-0000-000000000000","isDefault":true}');
+        Parts.Example(Examples, 'Select a user-defined layout', '{"type":"Orchestrator.ReportLayout.Set","data":{"reportId":1306,"name":"Christmas","appId":"00000000-0000-0000-0000-000000000000","setAsDefault":true}}', '{"status":"Success","action":"DefaultSet","isDefault":true}');
         Parts.Example(Examples, 'Clear the company default', '{"type":"Orchestrator.ReportLayout.Set","data":{"reportId":1306,"clearDefault":true}}', '{"status":"Success","reportId":1306,"name":"StandardSalesInvoice.docx","layoutFormat":"Word","appId":"<app id>","previousDefault":"Christmas","previousDefaultAppId":"00000000-0000-0000-0000-000000000000","action":"DefaultCleared","isDefault":true}');
         Parts.Example(Examples, 'Create a Word layout from a staging row', '{"type":"Orchestrator.ReportLayout.Set","data":{"reportId":50100,"name":"custom","layoutFormat":"Word","stagingId":"<staging row id>"}}', '{"status":"Success","reportId":50100,"name":"custom","layoutFormat":"Word","action":"Created","isDefault":false}');
         exit(true);
@@ -174,9 +182,14 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
+    var
+        Builder: TextBuilder;
     begin
         Notes := 'Only user-defined layouts (no App ID) are created or replaced; a layout an extension ships is never changed. The file is imported through the Tenant Report Layout media field, the path the Report Layouts page uses. Do not write the layout with Data.Records.Set on Tenant Report Layout (2000000232) or Tenant Report Layout Selection (2000000233).' +
             ' setAsDefault and clearDefault make the same writes as the Set Default action of the Report Layouts page, for the current company only: the company-wide Tenant Report Layout Selection row (no per-user selection) and the type in Report Layout Selection. Other companies and users'' own layout choices are not changed. Deleting a layout is not available as a message type; use the Report Layouts page.';
+        Builder.AppendLine(Notes);
+        Builder.AppendLine(DeletePolicyLbl);
+        Notes := Builder.ToText();
         exit(true);
     end;
 
@@ -194,5 +207,10 @@ codeunit 10035599 "Report Layout Set Msg ori" implements "Msg Interface ori", "M
 
     var
         Handler: Codeunit "Report Layout Handler ori";
+        DeletePolicyLbl: Label 'No layout delete message type exists by design: message types must not delete data. Remove a test layout in BC on the Report Layouts page.', Comment = 'is-IS=Engin skilaboðategund til að eyða útliti er til samkvæmt hönnun: skilaboðategundir mega ekki eyða gögnum. Fjarlægðu prófunarútlit í BC á síðunni Skýrsluútlit.';
+        SetDefaultHelpLbl: Label 'Send setAsDefault: true to select the default in the current company. isDefault is a response field only, never a request parameter. With a file, selects the imported layout; without a file, send name and appId from List. layoutFormat is not required for an existing layout. Default false.', Comment = 'is-IS=Sendu setAsDefault: true til að velja sjálfgefið útlit í núverandi fyrirtæki. isDefault er aðeins svarreitur, aldrei beiðnifæribreyta. Með skrá er innflutta útlitið valið; án skrár skaltu senda name og appId úr List. layoutFormat er ekki nauðsynlegt fyrir fyrirliggjandi útlit. Sjálfgefið false.';
+        AppIdHelpLbl: Label 'App ID from Orchestrator.ReportLayout.List. For a user-defined layout send 00000000-0000-0000-0000-000000000000. Only with setAsDefault and no layout file; required when the name is not unique.', Comment = 'is-IS=App ID úr Orchestrator.ReportLayout.List. Fyrir notandaskilgreint útlit skaltu senda 00000000-0000-0000-0000-000000000000. Aðeins með setAsDefault án útlitsskrár; nauðsynlegt þegar heitið er ekki einkvæmt.';
+        StagingMissingLbl: Label 'stagingId identifies a missing or consumed staging row owned by the caller in this company. parameter: stagingId.', Comment = 'is-IS=stagingId vísar á biðfærslu sem vantar eða hefur verið tekin, í eigu þess sem kallar í þessu fyrirtæki. parameter: stagingId.';
+        StageAgainLbl: Label 'Stage the file again and send the new stagingId.', Comment = 'is-IS=Settu skrána aftur í bið og sendu nýtt stagingId.';
         ChangesLbl: Label 'Imports a user-defined layout and creates or replaces the tenant layout row. With setAsDefault, the layout becomes the default of the report in the current company (Tenant Report Layout Selection and Report Layout Selection); with clearDefault, that company default is removed and the all-companies or built-in default applies. Both can be set back with another call.', Comment = 'is-IS=Flytur inn notandaskilgreint útlit og býr til eða skiptir út útlitsfærslu leigjanda. Með setAsDefault verður útlitið sjálfgefið útlit skýrslunnar í núverandi fyrirtæki (Tenant Report Layout Selection og Report Layout Selection); með clearDefault er sjálfgefna útlitið fjarlægt og sjálfgefið útlit allra fyrirtækja eða innbyggða sjálfgefna útlitið gildir. Hvort tveggja má setja til baka með öðru kalli.';
 }

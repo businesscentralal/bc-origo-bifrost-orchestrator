@@ -53,9 +53,20 @@ codeunit 10035566 "Entry Msg Handler ori"
             if Argument.SubjectIsGuid() then
                 Evaluate(EntryId, Argument.Subject)
             else
-                Error(MissingIdErr);
+                RaiseParameterError(Argument, "Bifrost Error Code ori"::MissingParameter, MissingIdErr, 'id', '', GuidExpectedTok, MissingIdNextStepTok);
         JQEntry.SetLoadFields(Status, Description, "Object Type to Run", "Object ID to Run");
-        JQEntry.GetBySystemId(EntryId);
+        if not JQEntry.GetBySystemId(EntryId) then
+            RaiseParameterError(Argument, "Bifrost Error Code ori"::RecordNotFound, StrSubstNo(NotFoundErr, Format(EntryId, 0, 4)), 'id', Format(EntryId, 0, 4), GuidExpectedTok, NotFoundNextStepTok);
+    end;
+
+    /// <summary>
+    /// Raises one structured parameter error: the answer carries this code, the parameter, the received value,
+    /// what was expected and the next step, instead of BusinessCentralError.
+    /// </summary>
+    local procedure RaiseParameterError(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; Message: Text; Parameter: Text; Received: Text; Expected: Text; NextStep: Text)
+    begin
+        Argument.AddError(ErrorCode, Message, Parameter, Received, Expected, NextStep);
+        Argument.RaiseCollectedErrors(ErrorCode, Message);
     end;
 
     local procedure RespondWithEntry(var Argument: Record "Message Argument ori"; JQEntry: Record "Job Queue Entry"; Message: Text)
@@ -72,6 +83,10 @@ codeunit 10035566 "Entry Msg Handler ori"
 
     var
         MissingIdErr: Label 'Request must include "id" (GUID) in the data payload or as the subject.', Comment = 'is-IS=Beiðni verður að innihalda "id" (GUID) í gagnahleðslunni eða sem viðfang.';
+        GuidExpectedTok: Label 'a GUID', Comment = 'is-IS=GUID-auðkenni';
+        MissingIdNextStepTok: Label 'Send the SystemId of the Job Queue Entry in data.id or as the subject.', Comment = 'is-IS=Sendu SystemId vinnsluraðarfærslunnar í data.id eða sem viðfang.';
+        NotFoundErr: Label 'No Job Queue Entry has the SystemId %1.', Comment = '%1 = the GUID received, is-IS=Engin vinnsluraðarfærsla hefur SystemId %1.';
+        NotFoundNextStepTok: Label 'Send the SystemId of an existing Job Queue Entry; its ID is not accepted.', Comment = 'is-IS=Sendu SystemId vinnsluraðarfærslu sem er til; auðkenni hennar er ekki tekið gilt.';
         RestartedMsg: Label 'Job Queue Entry restarted.', Comment = 'is-IS=Vinnsluraðafærsla endurræst.';
         NoRestartNeededMsg: Label 'No restart needed.', Comment = 'is-IS=Engin endurræsing nauðsynleg.';
 }
