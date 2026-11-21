@@ -48,7 +48,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution. expectedCount counts the one playbook that is run, not its steps.', Comment = 'is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu. expectedCount telur þá einu keðju sem er keyrð, ekki skref hennar.';
+        SelectionLbl: Label 'Execute a Bifrost Playbook immediately and return its results. Writes. Use Orchestrator.Playbook.Enqueue for background execution.', Comment = 'is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifar. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.';
     begin
         exit(SelectionLbl);
     end;
@@ -79,7 +79,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
         Parameters.Add(ContractMgt.Parameter('playbookCode', 'string', false, 'Code of the playbook to execute (Code[20]). Required unless subject carries the code.'));
         Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'JSON payload stored in the workspace at _initial for the steps to reference as @_initial.<key>. When it is left out, the playbook''s own initial request template is used.'));
         Parameters.Add(ContractMgt.Parameter('ignoreWarnings', 'boolean', false, 'True accepts the warnings of the verification on purpose, for example an ungated per-item write you really want. Never waives an error. Default false: warnings refuse the run like errors.'));
-        Parameters.Add(CountParts.ExpectedCountParameter('the one playbook that is run (1), not its steps, forEach items or the records those steps change; each step confirms its own irreversible message type'));
+        Parameters.Add(CountParts.IgnoredExpectedCountParameter());
         exit(true);
     end;
 
@@ -112,10 +112,9 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. The playbook runner commits before every step, so the writes of the steps that ran stay when a later step fails.' + ' ' + CountParts.CountSentence('the one playbook that is run (1), not its steps, forEach items or the records those steps change; each step confirms its own irreversible message type'), false);
+        Effect := Parts.CommittingEffect('Runs the playbook and writes its instance and step log. The playbook runner commits before every step, so the writes of the steps that ran stay when a later step fails.', false);
         exit(true);
     end;
 
@@ -155,7 +154,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Runs a configured Bifröst Playbook inline, step by step, in the calling session and returns the counters of its completed instance: status, steps executed and failed, and forEach iterations. The playbook is verified first and refused when it does not verify. Use Orchestrator.Playbook.Enqueue for a run that must not depend on the caller session. Irreversible: the runner commits before every step.';
+        Overview := 'Runs a configured Bifröst Playbook inline, step by step, in the calling session and returns the counters of its completed instance: status, steps executed and failed, and forEach iterations. The playbook is verified first and refused when it does not verify. Use Orchestrator.Playbook.Enqueue for a run that must not depend on the caller session. Writes: the runner commits before every step.';
         exit(true);
     end;
 
@@ -166,7 +165,7 @@ codeunit 10035562 "Playbook Run Msg ori" implements "Msg Interface ori", "Msg Di
             ' A failing step does not fail the call: the answer is Success with playbookStatus Failed and stepsFailed above 0. Read the Bifrost Playbook Step Log filtered on instanceId for the step errors.' +
             ' itemsProcessed counts forEach iterations summed over every step, not distinct items. Do not present it to a user as a record count.' +
             ' A playbook without steps completes at once with every counter 0.' +
-            ' The internal executor refuses Omit Commit for irreversible, missing or unknown effect contracts; real posting, external writes and committing types declare irreversible. Only explicit read and write are allowed. This runner still commits each step independently and does not expose a roll-back-together signal.';
+            ' The internal executor refuses Omit Commit for irreversible, missing or unknown effect contracts and for the Orchestrator types that commit on their own execute path; only posting types declare irreversible, and committing or external-write types declare write. Only explicit read and write types that do not commit are allowed. This runner still commits each step independently and does not expose a roll-back-together signal.';
         exit(true);
     end;
 

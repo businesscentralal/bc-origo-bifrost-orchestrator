@@ -37,28 +37,29 @@ codeunit 96452 "Orch B1 Contract Tests"
     end;
 
     [Test]
-    procedure CommittingTypesDeclareIrreversible()
+    procedure CommittingTypesDeclareTheirEffectAndNameTheCommit()
     begin
-        // [SCENARIO #60] Types that commit on their execute path declare effect irreversible
-        AssertEffect("Message Type ori"::"Orchestrator.Playbook.Run", 'Orchestrator.Playbook.Run', 'irreversible', true);
+        // [SCENARIO #60, #257] Types that commit on their execute path name the commit; only Entry.Run, which can run a
+        // posting job, stays irreversible; the others never post and declare write
+        AssertEffect("Message Type ori"::"Orchestrator.Playbook.Run", 'Orchestrator.Playbook.Run', 'write', true);
         AssertEffect("Message Type ori"::"Orchestrator.Entry.Run", 'Orchestrator.Entry.Run', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Entry.Register", 'Orchestrator.Entry.Register', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Status.Restart", 'Orchestrator.Status.Restart', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Status.RestartIfNeeded", 'Orchestrator.Status.RestartIfNeeded', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Entry.Restart", 'Orchestrator.Entry.Restart', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Entry.Schedule", 'Orchestrator.Entry.Schedule', 'irreversible', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Entry.Register", 'Orchestrator.Entry.Register', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Status.Restart", 'Orchestrator.Status.Restart', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Status.RestartIfNeeded", 'Orchestrator.Status.RestartIfNeeded', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Entry.Restart", 'Orchestrator.Entry.Restart', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Entry.Schedule", 'Orchestrator.Entry.Schedule', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'write', true);
     end;
 
     [Test]
     procedure NonCommittingTypesKeepTheirEffect()
     begin
-        // [SCENARIO #60] Types without a commit on their execute path keep write or read; external writes stay irreversible
+        // [SCENARIO #60] Types without a commit on their execute path keep write or read
         AssertEffect("Message Type ori"::"Orchestrator.Playbook.Schedule", 'Orchestrator.Playbook.Schedule', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.Playbook.Enqueue", 'Orchestrator.Playbook.Enqueue', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.JobQueueEntry.Restart", 'Orchestrator.JobQueueEntry.Restart', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.JobQueueEntry.RestartIfNeeded", 'Orchestrator.JobQueueEntry.RestartIfNeeded', 'write', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'irreversible', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'irreversible', false);
         AssertEffect("Message Type ori"::"Orchestrator.Status.Get", 'Orchestrator.Status.Get', 'read', false);
         AssertEffect("Message Type ori"::"Help.Orchestrator.Get", 'Help.Orchestrator.Get', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.Playbook.Verify", 'Orchestrator.Playbook.Verify', 'read', false);

@@ -48,7 +48,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery. expectedCount counts the one message that is sent.', Comment = 'is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu. expectedCount telur þau einu skilaboð sem eru send.';
+        SelectionLbl: Label 'Send a Telegram message to the current user. Writes. Use Orchestrator.Email.Send for email delivery.', Comment = 'is-IS=Sendu Telegram-skilaboð til núverandi notanda. Skrifar. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.';
     begin
         exit(SelectionLbl);
     end;
@@ -72,7 +72,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('message', 'string', true, 'Text sent to the current user''s Telegram chat, with parse mode HTML: Telegram''s HTML tags format it. There is no chat ID parameter.'));
-        Parameters.Add(CountParts.ExpectedCountParameter('the one Telegram message that is sent to the current user (1)'));
+        Parameters.Add(CountParts.IgnoredExpectedCountParameter());
         exit(true);
     end;
 
@@ -103,11 +103,9 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
-        Preconditions: JsonArray;
     begin
-        Effect := Parts.Effect('irreversible', 'Sends a message to the current user through Telegram.' + ' ' + CountParts.CountSentence('the one Telegram message that is sent to the current user (1)'), false, '', Preconditions);
+        Effect := Parts.CommittingEffect('Sends a message to the current user through Telegram.', false);
         exit(true);
     end;
 
@@ -139,7 +137,7 @@ codeunit 10035588 "Telegram Msg ori" implements "Msg Interface ori", "Msg Discov
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Sends a text message to the calling user''s own Telegram chat through the configured Bifröst bot. The chat ID always comes from the caller''s Bifrost User Setup, so it cannot message another user. Irreversible: a sent message cannot be recalled.';
+        Overview := 'Sends a text message to the calling user''s own Telegram chat through the configured Bifröst bot. The chat ID always comes from the caller''s Bifrost User Setup, so it cannot message another user. Writes: a sent message cannot be recalled.';
         exit(true);
     end;
 

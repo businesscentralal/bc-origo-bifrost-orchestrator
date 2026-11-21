@@ -48,7 +48,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart a failed or held orchestrator entry according to its retry policy. Irreversible. Use Orchestrator.Entry.Run for a one-time foreground run. expectedCount counts the one entry that is restarted.', Comment = 'is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni. expectedCount telur þá einu færslu sem er endurræst.';
+        SelectionLbl: Label 'Restart a failed or held orchestrator entry according to its retry policy. Writes. Use Orchestrator.Entry.Run for a one-time foreground run.', Comment = 'is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifar. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.';
     begin
         exit(SelectionLbl);
     end;
@@ -77,7 +77,7 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('id', 'string', false, 'SystemId, or ID, of the orchestrator entry (Job Queue Orchestrator Entry). Required unless subject carries it.'));
-        Parameters.Add(CountParts.ExpectedCountParameter('the one orchestrator entry that is restarted (1)'));
+        Parameters.Add(CountParts.IgnoredExpectedCountParameter());
         exit(true);
     end;
 
@@ -105,10 +105,9 @@ codeunit 10035556 "SE Restart Msg ori" implements "Msg Interface ori", "Msg Disc
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Requeues the orchestrator entry and applies its retry and notification rules. An e-mail restart notification commits before it is sent, and a Telegram notification or the scheduling API writes outside this transaction.' + ' ' + CountParts.CountSentence('the one orchestrator entry that is restarted (1)'), false);
+        Effect := Parts.CommittingEffect('Requeues the orchestrator entry and applies its retry and notification rules. An e-mail restart notification commits before it is sent, and a Telegram notification or the scheduling API writes outside this transaction.', false);
         exit(true);
     end;
 

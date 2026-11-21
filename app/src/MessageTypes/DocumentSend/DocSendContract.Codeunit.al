@@ -55,21 +55,21 @@ codeunit 10035631 "Doc Send Contract ori"
 
     internal procedure PurchaseOrderSelection(): Text
     var
-        SelectionLbl: Label 'Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf. expectedCount counts the one document that is sent, not its recipients.', Comment = 'is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.';
+        SelectionLbl: Label 'Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Writes. To get a PDF without sending, use Purchase.Order.Pdf.', Comment = 'is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Skrifar. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.';
     begin
         exit(SelectionLbl);
     end;
 
     internal procedure SalesQuoteSelection(): Text
     var
-        SelectionLbl: Label 'Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf. expectedCount counts the one document that is sent, not its recipients.', Comment = 'is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.';
+        SelectionLbl: Label 'Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Writes. To get a PDF without sending, use Sales.Quote.Pdf.', Comment = 'is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Skrifar. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.';
     begin
         exit(SelectionLbl);
     end;
 
     internal procedure OrderConfirmationSelection(): Text
     var
-        SelectionLbl: Label 'Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf. expectedCount counts the one document that is sent, not its recipients.', Comment = 'is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.';
+        SelectionLbl: Label 'Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Writes. To get a PDF without sending, use Sales.OrderConfirmation.Pdf.', Comment = 'is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Skrifar. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.';
     begin
         exit(SelectionLbl);
     end;
@@ -106,7 +106,7 @@ codeunit 10035631 "Doc Send Contract ori"
         ParameterList.Add(ContractMgt.Parameter(IdKey, 'string', false, SameAsDocumentidWhenBothAreSentLbl));
         ParameterList.Add(ContractMgt.Parameter('documentSendingProfile', 'string', false,
             CodeOfTheDocumentSendingProfileForLbl));
-        ParameterList.Add(CountParts.ExpectedCountParameter(CountUnit));
+        ParameterList.Add(CountParts.IgnoredExpectedCountParameter());
     end;
 
     internal procedure Response(var ResponseObject: JsonObject; DocumentTypeText: Text; PartyNoName: Text; PartyNameName: Text; PartyCaption: Text)
@@ -173,9 +173,8 @@ codeunit 10035631 "Doc Send Contract ori"
     internal procedure Effect(var EffectObject: JsonObject; Changes: Text; CountUnit: Text)
     var
         Parts: Codeunit "Orch B2 Contract Parts ori";
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        EffectObject := Parts.CommittingEffect(Changes + ' ' + CountParts.CountSentence(CountUnit), false);
+        EffectObject := Parts.CommittingEffect(Changes, false);
     end;
 
     internal procedure RelatedSales(var Related: JsonArray; MessageTypeName: Text)
@@ -231,7 +230,7 @@ codeunit 10035631 "Doc Send Contract ori"
 
     var
         NotesLbl: Label 'Success means every profile channel ran without error, not confirmed receipt. A retry sends again. subject and data identifiers must agree; a GUID is the SystemId, otherwise the number. Conflicting keys return ConflictingIdentifiers. Profile codes are compared in upper case. Disk or prompted e-mail profiles are refused before sending. The matching PDF type %1 is a separate dependency for callers wanting a file; this send does not call it.', Comment = 'is-IS=Success merkir að allar rásir forstillingarinnar keyrðu án villu, ekki að móttaka sé staðfest. Endurtekið kall sendir aftur. Auðkenni í subject og data verða að vísa á sama skjal; GUID er SystemId, annað gildi skjalnúmer. Misvísandi lyklar skila ConflictingIdentifiers. Forstillingarkóðar eru bornir saman með hástöfum. Forstillingum sem vista á disk eða biðja um tölvupóststillingar er hafnað fyrir sendingu. Samsvarandi PDF-skilaboðategund %1 er sérstök skilaboðategund fyrir þá sem vilja skrá; þessi sending kallar ekki á hana.';
-        OverviewLbl: Label 'Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Irreversible. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.', Comment = 'is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.';
+        OverviewLbl: Label 'Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Writes. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.', Comment = 'is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Skrifar. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.';
         TargetSubjectLbl: Label 'The document number, or its SystemId. A GUID is the SystemId. Anything else is the number.', Comment = 'is-IS=Skjalnúmer eða SystemId skjalsins. GUID er SystemId. Annað gildi er skjalnúmer.';
         TargetIdAliasLbl: Label 'SystemId of the document. Same document as documentId when both are sent.', Comment = 'is-IS=SystemId skjalsins. Verður að vísa á sama skjal og documentId ef bæði eru send.';
         TargetNumberLbl: Label 'Document number. Optional when subject or %1 is sent.', Comment = 'is-IS=Skjalnúmer. Valfrjálst ef subject eða %1 er sent.';

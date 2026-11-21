@@ -33,8 +33,8 @@ codeunit 96453 "Orch B2 Contract Tests"
     begin
         // [SCENARIO #60] Report.Run runs caller-named batch reports that commit, so it declares irreversible
         AssertEffect("Message Type ori"::"Orchestrator.Report.Run", 'Orchestrator.Report.Run', 'irreversible', true);
-        // [SCENARIO #80] Preview seeds _who through a nested Help.WhoAmI.Get dispatch that commits
-        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'irreversible', true);
+        // [SCENARIO #80, #257] Preview seeds _who through a nested Help.WhoAmI.Get dispatch that commits; it never posts, so write
+        AssertEffect("Message Type ori"::"Orchestrator.Workspace.Preview", 'Orchestrator.Workspace.Preview', 'write', true);
     end;
 
     /// <summary>Preview names the nested committed dispatch and is offered in both directions (#80, #117).</summary>
