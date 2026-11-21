@@ -288,8 +288,9 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     end;
 
     /// <summary>
-    /// The effect chapter of a type that commits on its execute path: effect irreversible, and the
-    /// changes text says that Orchestrator's Omit Commit guard refuses the type in a rollback chain.
+    /// The effect chapter of a type that commits on its execute path but never posts: effect write (issue #257,
+    /// only posting is irreversible), and the changes text says that Orchestrator's Omit Commit guard refuses the
+    /// type in a rollback chain. The guard keeps its own list of these types (Playbook Effect Guard ori).
     /// </summary>
     /// <param name="Changes">What the type changes, naming the commit.</param>
     /// <param name="Idempotent">True when repeating the call changes nothing more.</param>
@@ -298,11 +299,37 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     var
         Preconditions: JsonArray;
     begin
-        exit(Effect('irreversible', Changes + ' It cannot be rolled back with the caller, so Orchestrator''s Omit Commit guard refuses it in a playbook chain that must roll back together.', Idempotent, '', Preconditions));
+        exit(Effect('write', Changes + CommitNoteTok, Idempotent, '', Preconditions));
     end;
 
     /// <summary>
-    /// The sentence that names what expectedCount counts for an irreversible type, and how to read the count
+    /// The effect chapter of a committing type that can post, because the caller names the job or report it runs
+    /// and that can be a posting batch: effect irreversible (issue #257, Gunnar 21.11.2026).
+    /// </summary>
+    /// <param name="Changes">What the type changes, naming the commit.</param>
+    /// <param name="Idempotent">True when repeating the call changes nothing more.</param>
+    /// <returns>The effect chapter.</returns>
+    internal procedure PostingCapableEffect(Changes: Text; Idempotent: Boolean): JsonObject
+    var
+        Preconditions: JsonArray;
+    begin
+        exit(Effect('irreversible', Changes + CommitNoteTok, Idempotent, '', Preconditions));
+    end;
+
+    /// <summary>
+    /// The expectedCount parameter of a type that writes but never posts (issue #257): accepted so that callers
+    /// which send it are not refused as an unknown key, and ignored, because Foundation confirms only irreversible types.
+    /// </summary>
+    /// <returns>The parameter entry.</returns>
+    internal procedure IgnoredExpectedCountParameter(): JsonObject
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        exit(ContractMgt.Parameter('expectedCount', 'integer', false, 'Accepted and ignored. This type writes but never posts, so it asks for no confirmation; "@preview" in a playbook step runs it once.'));
+    end;
+
+    /// <summary>
+    /// The sentence that names what expectedCount counts for an irreversible type (Orchestrator.Entry.Run, Orchestrator.Report.Run), and how to read the count
     /// without a side effect (core#1365, core#1367).
     /// </summary>
     /// <param name="CountUnit">The unit, as a noun phrase, for example "the one orchestrator entry that is run".</param>
@@ -366,4 +393,7 @@ codeunit 10035609 "Orch B1 Contract Parts ori"
     begin
         Examples.Add(ContractMgt.Example(Title, Request, ResponseText));
     end;
+
+    var
+        CommitNoteTok: Label ' It commits and cannot be rolled back with the caller, so Orchestrator''s Omit Commit guard refuses it in a playbook chain that must roll back together.', Locked = true;
 }
