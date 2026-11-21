@@ -121,6 +121,6 @@ codeunit 10035551 "Status Msg Handler ori"
     var
         RestartedMsg: Label 'Orchestrator restarted.', Comment = 'is-IS=Áætlari endurræstur.';
         NoRestartCountMsg: Label 'no orchestrator management Job Queue Entry (it is already running)', Comment = 'is-IS=engin stjórnunarfærsla áætlara (hann er þegar í gangi)';
-        RestartCountMsg: Label 'the orchestrator management Job Queue Entry (it would be restarted)', Comment = 'is-IS=stjórnunarfærsla áætlara (henni yrði endurræst)';
+        RestartCountMsg: Label 'the orchestrator management Job Queue Entry (it would be restarted)', Comment = 'is-IS=stjórnunarfærsla áætlara (hún yrði endurræst)';
         AlreadyRunningMsg: Label 'Orchestrator is already running.', Comment = 'is-IS=Áætlari er þegar í gangi.';
 }

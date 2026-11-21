@@ -4601,8 +4601,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 1369520475 - NamedType 2736748247" size-unit="char" translate="yes" xml:space="preserve">
           <source>the orchestrator management Job Queue Entry (it would be restarted)</source>
-          <target>stjórnunarfærsla áætlara (henni yrði endurræst)</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=stjórnunarfærsla áætlara (henni yrði endurræst)</note>
+          <target>stjórnunarfærsla áætlara (hún yrði endurræst)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=stjórnunarfærsla áætlara (hún yrði endurræst)</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType RestartCountMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 1369520475 - NamedType 838312617" size-unit="char" translate="yes" xml:space="preserve">
