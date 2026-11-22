@@ -35,6 +35,9 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ### Not ported (recorded in the PR)
 - Skip Field and Record Validation / Skip Record Validation (no guarded equivalent in Foundation), the Validated Fields toggle (Foundation validates every field), Isolated Storage Lookup, Update VLE On-Hold and Update ILE Variant.
+## [Unreleased] — Issue #260
+
+- #260: On Bifröst Setup, **Bifrost Playbooks / Bifröst keðjur** (pageextension 10035537) is a standalone Navigation action directly before the **Tools / Verkfæri** group, which keeps Playbook Execution Log, Table Data and Copy Plans. Runtime help (codeunit 10035576), README and is-IS translation updated. No new objects.
 
 ## [28.0.6.152] - 2026-11-22 (AppSource) — Issue #257
 

@@ -1,6 +1,6 @@
 /// <summary>
 /// Adds Bifrost Orchestrator to the Bifröst Setup page. The Apps action opens the application setup
-/// page. Tools groups the playbook list, execution log, Table Data and Copy Plans without
+/// page. Bifrost Playbooks stands directly before the Tools group, which holds the execution log, Table Data and Copy Plans without
 /// changing the existing action names.
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
@@ -13,20 +13,20 @@ pageextension 10035537 "Setup JQ ori" extends "Setup ori"
     {
         addlast(Navigation)
         {
+            action(Playbooks)
+            {
+                ApplicationArea = All;
+                Caption = 'Bifrost Playbooks', Comment = 'is-IS=Bifröst keðjur';
+                Image = Relationship;
+                RunObject = page "Playbooks ori";
+                AccessByPermission = page "Playbooks ori" = X;
+                ToolTip = 'View and configure Bifrost message playbooks.', Comment = 'is-IS=Skoða og stilla keðjur Bifröst skilaboða.';
+            }
             group(Tools)
             {
                 Caption = 'Tools', Comment = 'is-IS=Verkfæri';
                 ToolTip = 'Open playbook and table data tools.', Comment = 'is-IS=Opna verkfæri fyrir keðjur og töflugögn.';
                 Image = Tools;
-                action(Playbooks)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Bifrost Playbooks', Comment = 'is-IS=Bifröst keðjur';
-                    Image = Relationship;
-                    RunObject = page "Playbooks ori";
-                    AccessByPermission = page "Playbooks ori" = X;
-                    ToolTip = 'View and configure Bifrost message playbooks.', Comment = 'is-IS=Skoða og stilla keðjur Bifröst skilaboða.';
-                }
                 action(PlaybookInstances)
                 {
                     ApplicationArea = All;

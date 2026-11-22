@@ -2752,9 +2752,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType HeadingTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 60656952" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On **Bifrost Setup**, open **Related &gt; Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
-          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
+          <source>On **Bifrost Setup**, open **Related &gt; Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
+          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType SetupToolsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 2977294634" size-unit="char" translate="yes" xml:space="preserve">
@@ -11433,6 +11433,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort Bifröst stjórnandinn fylgist með þessari vinnsluraðarfærslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobQueueEntryCard.PageExt ori - Control Scheduler Enabled ori - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>View and configure Bifrost message playbooks.</source>
+          <target>Skoða og stilla keðjur Bifröst skilaboða.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða og stilla keðjur Bifröst skilaboða.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Bifrost Playbooks</source>
+          <target>Bifröst keðjur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Open playbook and table data tools.</source>
           <target>Opna verkfæri fyrir keðjur og töflugögn.</target>
@@ -11480,18 +11492,6 @@
           <target>Keyrsluskrá keðju</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá keðju</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action PlaybookInstances - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>View and configure Bifrost message playbooks.</source>
-          <target>Skoða og stilla keðjur Bifröst skilaboða.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða og stilla keðjur Bifröst skilaboða.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>Bifrost Playbooks</source>
-          <target>Bifröst keðjur</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>View, edit, export and import table data within your permissions.</source>
