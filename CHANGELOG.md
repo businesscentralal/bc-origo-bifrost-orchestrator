@@ -5,9 +5,20 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — Issue #260
+## [Unreleased] — Issue #261
+
+### Added
+- Table Data Management, a port of the Tools for Power Users table data pages (option B: same pages, captions in en-US and is-IS, field order and actions; `UsageCategory = None` on every Table Data page, the existing Table Data worksheet included; JSON through Foundation's `Serializer ori`; every write through the Foundation guards). Pages `Table Data Management ori` (10035627, main list with Show Audit Fields, the four date filters, the Permissions fact box and the Edit/View/JSON/Excel actions), `Table Data Editor ori` (10035628, editable multi-record grid with guarded Delete Selected Lines), `Table Data Import ori` (10035629, Excel preview), `Validated Fields ori` (10035630), `Table Data Permissions ori` (10035631); tables `Table Data Edit ori` (10035630, temporary) and `Table Data Access ori` (10035631, access object); codeunits `Table Data Filter Mgt ori` (10035601), `Table Data Edit Mgt ori` (10035602), `Table Data JSON Mgt ori` (10035604), `Table Data Excel Export ori` (10035605), `Table Data Excel Import ori` (10035608); permission set `BIFROST TblRead ori` (10035540, read-only: view and export); `BIFROST PlaybAdm ori` gets the new objects with modify access.
+- JSON files use the original's shape `{ "<TableName>": [ { "RecordSystemId", "PrimaryKeyFields", "Fields" } ] }`, so files move between the two tools; an Orchestrator table data file is also read on import.
+- Access gating like the original `TableDataManagementAccess`: Read on `Table Data Access ori` exports and views, Modify (insert, modify, delete) is also needed to edit, delete and import.
 
 ### Changed
+- `Table Data ori` (10035569) is `UsageCategory = None` (was `Tasks`).
+
+### Not ported (recorded in the PR)
+- Skip Field and Record Validation / Skip Record Validation (no guarded equivalent in Foundation), the Validated Fields toggle (Foundation validates every field), Isolated Storage Lookup, Update VLE On-Hold and Update ILE Variant.
+## [Unreleased] — Issue #260
+
 - #260: On Bifröst Setup, **Bifrost Playbooks / Bifröst keðjur** (pageextension 10035537) is a standalone Navigation action directly before the **Tools / Verkfæri** group, which keeps Playbook Execution Log, Table Data and Copy Plans. Runtime help (codeunit 10035576), README and is-IS translation updated. No new objects.
 
 ## [28.0.6.152] - 2026-11-22 (AppSource) — Issue #257
