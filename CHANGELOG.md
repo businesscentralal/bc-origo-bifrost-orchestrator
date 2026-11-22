@@ -19,11 +19,6 @@ Business Central release versioning (`major.minor.build.revision`).
 - The Omit Commit guard (`Playbook Effect Guard ori`, 10035554) keeps refusing every Orchestrator type that commits on its own execute path through its own list (`CommitsOnExecute`, new label `OmitCommitCommitsErr`), whatever the effect says; foreign `irreversible` types and missing or unknown effects are refused as before, and `IrreversibleWithoutConfirmation` still fires for foreign posting types.
 - No new objects. Contract helpers `CommittingEffect` (now `write`), `PostingCapableEffect` and `IgnoredExpectedCountParameter` in `Orch B1/B2 Contract Parts ori`. Test helper `Orch Dispatch Helper ori.ExecuteOnce`.
 
-## [Unreleased] — Issue #260
-
-### Changed
-- #260: On Bifröst Setup, **Bifrost Playbooks / Bifröst keðjur** (pageextension 10035537) is a standalone Navigation action directly before the **Tools / Verkfæri** group, which keeps Playbook Execution Log, Table Data and Copy Plans. Runtime help (codeunit 10035576), README and is-IS translation updated. No new objects.
-
 ## [28.0.6.152] - 2026-11-22 (AppSource) — Issue #254
 
 ### Fixed
