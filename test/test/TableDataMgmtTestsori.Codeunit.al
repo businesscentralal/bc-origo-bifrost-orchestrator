@@ -277,6 +277,29 @@ codeunit 96449 "Table Data Mgmt Tests ori"
         TearDown();
     end;
 
+    /// <summary>AC01: the main page shows the original's captions in en-US (1033) and is-IS (1039).</summary>
+    [Test]
+    procedure AC01_MainPageCaptionsInBothLanguages()
+    var
+        MainPage: TestPage "Table Data Management ori";
+        PreviousLanguage: Integer;
+    begin
+        PreviousLanguage := GlobalLanguage();
+        GlobalLanguage(1033);
+        MainPage.OpenView();
+        Assert.AreEqual('Table Data Management', MainPage.Caption(), 'Caption 1033');
+        Assert.AreEqual('Show Audit Fields', MainPage.ShowAuditFieldsField.Caption(), 'Show Audit Fields 1033');
+        Assert.AreEqual('Created After Date & Time', MainPage.TempFilterCreatedAfterField.Caption(), 'Created after 1033');
+        MainPage.Close();
+        GlobalLanguage(1039);
+        MainPage.OpenView();
+        Assert.AreEqual('Vinna með töflugögn', MainPage.Caption(), 'Caption 1039');
+        Assert.AreEqual('Sýna eftirlitsreiti', MainPage.ShowAuditFieldsField.Caption(), 'Show Audit Fields 1039');
+        Assert.AreEqual('Stofnað eftir dags. og tíma', MainPage.TempFilterCreatedAfterField.Caption(), 'Created after 1039');
+        MainPage.Close();
+        GlobalLanguage(PreviousLanguage);
+    end;
+
     local procedure MarkerFixtureText(): Text
     begin
         exit('{"TestRunMarker":[{"PrimaryKeyFields":{"Entry_No_":9001},"Fields":{"Source":"TJD-X"}}]}');
