@@ -5,7 +5,7 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — Issue #257
+## [28.0.6.152] - 2026-11-22 (AppSource) — Issue #257
 
 ### Changed
 - Effect reclassified by Gunnar's rule of 21.11.2026 ("Irreversible should only be posting actions"): `Orchestrator.Email.Send`, `Orchestrator.Telegram.Message`, `Purchase.Order.Send`, `Sales.Quote.Send`, `Sales.OrderConfirmation.Send`, `Orchestrator.Playbook.Run`, `Orchestrator.Workspace.Preview`, `Orchestrator.Entry.Register`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule`, `Orchestrator.Status.Restart` and `Orchestrator.Status.RestartIfNeeded` now declare `write`. `Orchestrator.Entry.Run` and `Orchestrator.Report.Run` stay `irreversible` because they run a caller-named job or report that can be a posting batch (Claude Code ruling on the issue).
@@ -14,7 +14,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - The Omit Commit guard (`Playbook Effect Guard ori`, 10035554) keeps refusing every Orchestrator type that commits on its own execute path through its own list (`CommitsOnExecute`, new label `OmitCommitCommitsErr`), whatever the effect says; foreign `irreversible` types and missing or unknown effects are refused as before, and `IrreversibleWithoutConfirmation` still fires for foreign posting types.
 - No new objects. Contract helpers `CommittingEffect` (now `write`), `PostingCapableEffect` and `IgnoredExpectedCountParameter` in `Orch B1/B2 Contract Parts ori`. Test helper `Orch Dispatch Helper ori.ExecuteOnce`.
 
-## [Unreleased] — Issue #254
+## [28.0.6.152] - 2026-11-22 (AppSource) — Issue #254
 
 ### Fixed
 - `Orchestrator.Status.RestartIfNeeded` now compares a sent `expectedCount` with the number of entries the call would affect (1 when the management Job Queue Entry would be restarted, 0 when the orchestrator is already running) and answers `ConfirmationMismatch` without changing anything on a mismatch. Before, any count was accepted when nothing needed a restart. Help, contract text and is-IS translations updated. No new object IDs. Tests added to codeunit 96419 "Status Msg Tests" (1033 and 1039).
