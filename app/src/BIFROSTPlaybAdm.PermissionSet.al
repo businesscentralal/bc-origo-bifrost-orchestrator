@@ -79,5 +79,19 @@ permissionset 10035538 "BIFROST PlaybAdm ori"
         codeunit "Playbook Log Mgt ori" = X,
         codeunit "Table JSON Export ori" = X,
         codeunit "Table JSON Import ori" = X,
-        codeunit "Table Data Mgt ori" = X;
+        codeunit "Table Data Mgt ori" = X,
+        page "Table Data Management ori" = X,
+        page "Table Data Editor ori" = X,
+        page "Table Data Import ori" = X,
+        page "Validated Fields ori" = X,
+        page "Table Data Permissions ori" = X,
+        table "Table Data Edit ori" = X,
+        table "Table Data Access ori" = X,
+        tabledata "Table Data Edit ori" = RIMD,
+        tabledata "Table Data Access ori" = RIMD,
+        codeunit "Table Data Filter Mgt ori" = X,
+        codeunit "Table Data Edit Mgt ori" = X,
+        codeunit "Table Data JSON Mgt ori" = X,
+        codeunit "Table Data Excel Export ori" = X,
+        codeunit "Table Data Excel Import ori" = X;
 }
