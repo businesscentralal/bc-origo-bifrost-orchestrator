@@ -16,7 +16,7 @@ page 10035569 "Table Data ori"
     Caption = 'Table Data', Comment = 'is-IS=Töflugögn';
     PageType = Worksheet;
     ApplicationArea = All;
-    UsageCategory = Tasks;
+    UsageCategory = None;
     SourceTable = "Table Data Row ori";
     SourceTableTemporary = true;
     InsertAllowed = false;
