@@ -34,10 +34,12 @@ codeunit 96422 "Misc Msg Smoke Tests"
         GlobalLanguage(1033);
         Overview := Help.GetOverview();
         Assert.IsTrue(Overview.Contains('**Related > Tools**'), 'English navigation');
+        Assert.IsTrue(Overview.Contains('**Related > Bifrost Playbooks**, which sits before the **Tools** group'), 'English playbooks before Tools');
         Assert.IsTrue(Overview.Contains('**Bifrost Playbook View**'), 'English role boundary');
         GlobalLanguage(1039);
         Overview := Help.GetOverview();
         Assert.IsTrue(Overview.Contains('**Tengt > Verkfæri**'), 'Icelandic navigation');
+        Assert.IsTrue(Overview.Contains('**Tengt > Bifröst keðjur**, sem er á undan hópnum **Verkfæri**'), 'Icelandic playbooks before Tools');
         Assert.IsTrue(Overview.Contains('**Bifröst keðjuskoðun**'), 'Icelandic role boundary');
         GlobalLanguage(PreviousLanguage);
     end;

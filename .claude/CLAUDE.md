@@ -47,7 +47,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 ## Setup Page and Secrets (Bifröst platform rules)
 - The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) adds the Apps action
   `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in `addlast(Category_Apps)`,
-  and the Tools group in Navigate (`addlast(Navigation)`) opening `Playbooks ori`,
+  and, in Navigate (`addlast(Navigation)`), the `Playbooks` action opening `Playbooks ori` directly before the Tools group (#260), whose actions open
   `Playbook Instances ori`, `Table Data ori` and `Copy Plans ori`. Existing action names are retained. No layout changes, no notification and **no `ContextSensitiveHelpPage`
   override** - that property belongs to Foundation's own page. Client credentials, secrets and the
   setup wizard stay on `Scheduler Setup ori`.
