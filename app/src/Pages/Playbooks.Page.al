@@ -66,6 +66,15 @@ page 10035551 "Playbooks ori"
                     RunObject = page "Table Data ori";
                     AccessByPermission = page "Table Data ori" = X;
                 }
+                action(CopyTablesMapping)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Copy Tables Mapping', Comment = 'is-IS=Töfluafritun - vörpun';
+                    ToolTip = 'Map source tables to destination tables and copy their data through the Bifrost write guards.', Comment = 'is-IS=Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.';
+                    Image = CopyFromTask;
+                    RunObject = page "Copy Tables Mapping ori";
+                    AccessByPermission = page "Copy Tables Mapping ori" = X;
+                }
                 action(CopyPlans)
                 {
                     ApplicationArea = All;

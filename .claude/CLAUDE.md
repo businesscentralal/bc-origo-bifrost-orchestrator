@@ -39,6 +39,9 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   96452 = `Orch B1 Contract Tests` and 96453 = `Orch B2 Contract Tests` (#56).
   96454 = `Report Boundary Tests ori` and report `Test Output Report ori` (PR #67 report validation regressions).
   96427 `Test No Source Read` permission set removed; codeunit 96427 `SE Run Msg Tests` remains allocated.)
+- #262 Data Copy (port of Tools for Power Users): tables 10035632-10035633, pages 10035612-10035616,
+  codeunits 10035577, 10035578, 10035580, 10035591, 10035623, 10035624, enum 10035625, enumextension 10035606;
+  test codeunit 96476 `Data Copy Tests ori`. Checked against main and open PR #264 (#261 Table Data) on 2026-11-22.
 - #194: codeunit 96490 `Playbook Condition Path Tests` and fixture codeunit/enumextension 96491
   `Condition Response Msg ori` / `Condition Response Type ori`; #191: codeunit 96492 `Effect Audit Tests ori`
   (moved from 96490 after merging #194; checked against main and all open PR heads on 2026-11-17).

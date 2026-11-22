@@ -10,7 +10,7 @@ page 10035580 "Copy Plans ori"
     SourceTable = "Copy Plan ori";
     ApplicationArea = All;
     ContextSensitiveHelpPage = 'playbooks';
-    UsageCategory = Lists;
+    UsageCategory = None;
     CardPageId = "Copy Plan Card ori";
     Editable = false;
     layout
