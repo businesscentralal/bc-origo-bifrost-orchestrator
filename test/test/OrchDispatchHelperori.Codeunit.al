@@ -89,6 +89,14 @@ codeunit 96457 "Orch Dispatch Helper ori"
         TempArgument.Modify();
     end;
 
+    /// <summary>Dispatches the request once, without repeating it after a ConfirmationRequired answer (issue #257).</summary>
+    /// <param name="MessageType">The registered message type to run.</param>
+    /// <param name="TempArgument">Temporary argument carrying the request JSON; receives the response and content type.</param>
+    procedure ExecuteOnce(MessageType: Enum "Message Type ori"; var TempArgument: Record "Message Argument ori" temporary)
+    begin
+        Dispatch(MessageType, TempArgument.GetRequestJson(), TempArgument);
+    end;
+
     /// <summary>Dispatches like Execute and raises the response error text when the dispatcher returns a failure.</summary>
     /// <param name="MessageType">The registered message type to run.</param>
     /// <param name="TempArgument">Temporary argument carrying the request JSON.</param>

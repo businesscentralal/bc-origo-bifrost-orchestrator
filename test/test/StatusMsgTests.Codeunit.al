@@ -11,6 +11,7 @@ codeunit 96419 "Status Msg Tests"
 
     var
         Assert: Codeunit Assert;
+        PreviewPlaybookTok: Label 'XST-257', Locked = true;
 
     [Test]
     procedure GetReturnsSuccessWithEntryCounts()
@@ -216,47 +217,7 @@ codeunit 96419 "Status Msg Tests"
     end;
 
     [Test]
-    procedure RestartIfNeededWrongCountRefusedWhenRunning1033()
-    begin
-        // [SCENARIO] Issue #254: expectedCount 999 on a running orchestrator is refused in English
-        VerifyWrongCountWhenRunning(1033);
-    end;
-
-    [Test]
-    procedure RestartIfNeededWrongCountRefusedWhenRunning1039()
-    begin
-        // [SCENARIO] Issue #254: expectedCount 999 on a running orchestrator is refused in Icelandic
-        VerifyWrongCountWhenRunning(1039);
-    end;
-
-    [Test]
-    procedure RestartIfNeededCountOneRefusedWhenRunning()
-    var
-        TempArgument: Record "Message Argument ori" temporary;
-        JQEntry: Record "Job Queue Entry";
-        JQEntryBefore: Record "Job Queue Entry";
-        Handler: Codeunit "Status Msg Handler ori";
-        LibraryOrchestrator: Codeunit "Library Orchestrator";
-    begin
-        // [SCENARIO] Nothing needs a restart, so 1 is a wrong count (the call would affect 0)
-        CleanupManagementJQEntry();
-        JQEntry.Init();
-        JQEntry.Status := JQEntry.Status::Ready;
-        InsertManagementJQEntry(JQEntry);
-        JQEntryBefore := JQEntry;
-        CreateArgument(TempArgument, '{"expectedCount":1}');
-
-        BindSubscription(LibraryOrchestrator);
-        Handler.ExecuteRestartIfNeeded(TempArgument);
-        UnbindSubscription(LibraryOrchestrator);
-
-        AssertConfirmationMismatch(TempArgument, '1', '0');
-        AssertManagementJQEntryUnchanged(JQEntryBefore);
-        CleanupManagementJQEntry();
-    end;
-
-    [Test]
-    procedure RestartIfNeededCountZeroAcceptedWhenRunning()
+    procedure RestartIfNeededExpectedCountIgnoredWhenRunning()
     var
         TempArgument: Record "Message Argument ori" temporary;
         JQEntry: Record "Job Queue Entry";
@@ -266,18 +227,21 @@ codeunit 96419 "Status Msg Tests"
         ResponseJson: JsonObject;
         Token: JsonToken;
     begin
-        // [SCENARIO] The matching count 0 runs the no-op and reports restarted false
+        // [SCENARIO] Issue #257 AC02: the type writes and never posts, so any expectedCount is accepted and ignored
+        // [GIVEN] a running orchestrator and expectedCount 999
         CleanupManagementJQEntry();
         JQEntry.Init();
-        JQEntry.Status := JQEntry.Status::"In Process";
+        JQEntry.Status := JQEntry.Status::Ready;
         InsertManagementJQEntry(JQEntry);
         JQEntryBefore := JQEntry;
-        CreateArgument(TempArgument, '{"expectedCount":0}');
+        CreateArgument(TempArgument, '{"expectedCount":999}');
 
+        // [WHEN] RestartIfNeeded runs
         BindSubscription(LibraryOrchestrator);
         Handler.ExecuteRestartIfNeeded(TempArgument);
         UnbindSubscription(LibraryOrchestrator);
 
+        // [THEN] it succeeds as the no-op it would be without expectedCount
         ResponseJson := TempArgument.GetResponseJson();
         ResponseJson.Get('status', Token);
         Assert.AreEqual('Success', Token.AsValue().AsText(), 'Status should be Success');
@@ -288,28 +252,7 @@ codeunit 96419 "Status Msg Tests"
     end;
 
     [Test]
-    procedure RestartIfNeededWrongCountRefusedWhenRestartNeeded()
-    var
-        TempArgument: Record "Message Argument ori" temporary;
-        JQEntry: Record "Job Queue Entry";
-        Handler: Codeunit "Status Msg Handler ori";
-        LibraryOrchestrator: Codeunit "Library Orchestrator";
-        Mgt: Codeunit "Scheduler Mgt ori";
-    begin
-        // [SCENARIO] A restart is needed (no entry), so 0 is a wrong count and nothing is scheduled
-        CleanupManagementJQEntry();
-        CreateArgument(TempArgument, '{"expectedCount":0}');
-
-        BindSubscription(LibraryOrchestrator);
-        Handler.ExecuteRestartIfNeeded(TempArgument);
-        UnbindSubscription(LibraryOrchestrator);
-
-        AssertConfirmationMismatch(TempArgument, '0', '1');
-        Assert.IsFalse(JQEntry.Get(Mgt.GetManagementJobQueueId()), 'No management entry should have been scheduled');
-    end;
-
-    [Test]
-    procedure RestartIfNeededCountOneAcceptedWhenRestartNeeded()
+    procedure RestartIfNeededExpectedCountIgnoredWhenRestartNeeded()
     var
         TempArgument: Record "Message Argument ori" temporary;
         Handler: Codeunit "Status Msg Handler ori";
@@ -317,9 +260,9 @@ codeunit 96419 "Status Msg Tests"
         ResponseJson: JsonObject;
         Token: JsonToken;
     begin
-        // [SCENARIO] The matching count 1 restarts the orchestrator
+        // [SCENARIO] Issue #257 AC02 edge: expectedCount 0 no longer blocks a needed restart
         CleanupManagementJQEntry();
-        CreateArgument(TempArgument, '{"expectedCount":1}');
+        CreateArgument(TempArgument, '{"expectedCount":0}');
 
         BindSubscription(LibraryOrchestrator);
         Handler.ExecuteRestartIfNeeded(TempArgument);
@@ -332,71 +275,91 @@ codeunit 96419 "Status Msg Tests"
     end;
 
     [Test]
-    procedure RestartIfNeededInvalidCountRefused()
+    procedure RestartExpectedCountIgnoredThroughDispatcherWithConfirmationRequired()
     var
         TempArgument: Record "Message Argument ori" temporary;
-        Handler: Codeunit "Status Msg Handler ori";
+        DispatchHelper: Codeunit "Orch Dispatch Helper ori";
         LibraryOrchestrator: Codeunit "Library Orchestrator";
-        ResponseJson: JsonObject;
-        Token: JsonToken;
+        PreviousRequired: Boolean;
+        ResponseText: Text;
     begin
-        // [SCENARIO] An expectedCount that is not a whole number is refused and nothing is restarted
+        // [SCENARIO] Issue #257 AC02: Orchestrator.Status.Restart with a wrong expectedCount, through Foundation's dispatcher,
+        // while Require Confirmation for Irreversible Messages is on: accepted, ignored, no ConfirmationRequired/Mismatch
         CleanupManagementJQEntry();
-        CreateArgument(TempArgument, '{"expectedCount":"many"}');
+        PreviousRequired := SetConfirmationRequired(true);
+        CreateArgument(TempArgument, '{"expectedCount":5}');
 
         BindSubscription(LibraryOrchestrator);
-        Handler.ExecuteRestartIfNeeded(TempArgument);
+        DispatchHelper.ExecuteOnce("Message Type ori"::"Orchestrator.Status.Restart", TempArgument);
         UnbindSubscription(LibraryOrchestrator);
+        SetConfirmationRequired(PreviousRequired);
+        TempArgument.GetResponseJson().WriteTo(ResponseText);
 
-        ResponseJson := TempArgument.GetResponseJson();
-        ResponseJson.Get('status', Token);
-        Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
-        Assert.IsFalse(ResponseJson.Contains('restarted'), 'Nothing should have been restarted');
+        Assert.IsFalse(ResponseText.Contains('ConfirmationRequired'), 'No confirmation is asked: ' + ResponseText);
+        Assert.IsFalse(ResponseText.Contains('ConfirmationMismatch'), 'The count is not checked: ' + ResponseText);
+        Assert.IsFalse(ResponseText.Contains('UnknownParameter'), 'expectedCount stays a declared key: ' + ResponseText);
+        Assert.IsTrue(ResponseText.Contains('"status":"Success"'), 'The restart runs: ' + ResponseText);
+        CleanupManagementJQEntry();
     end;
 
-    local procedure VerifyWrongCountWhenRunning(LanguageId: Integer)
+    [Test]
+    procedure RestartIfNeededPreviewMarkerInPlaybookRunsOnce()
     var
-        TempArgument: Record "Message Argument ori" temporary;
         JQEntry: Record "Job Queue Entry";
         JQEntryBefore: Record "Job Queue Entry";
-        Handler: Codeunit "Status Msg Handler ori";
+        Step: Record "Playbook Step ori";
+        StepLog: Record "Playbook Step Log ori";
+        Lib: Codeunit "Playbook Test Library ori";
         LibraryOrchestrator: Codeunit "Library Orchestrator";
-        PreviousLanguage: Integer;
+        InstanceId: Guid;
+        PreviousRequired: Boolean;
     begin
-        PreviousLanguage := GlobalLanguage();
-        GlobalLanguage(LanguageId);
+        // [SCENARIO] Issue #257 AC02: "expectedCount": "@preview" with a Max Count on a former irreversible type does not fail;
+        // the type asks for no confirmation, so the single call is the run
+        // [GIVEN] a running orchestrator, confirmation required, and a playbook step RestartIfNeeded with @preview and Max Count 1
         CleanupManagementJQEntry();
         JQEntry.Init();
         JQEntry.Status := JQEntry.Status::Ready;
         InsertManagementJQEntry(JQEntry);
         JQEntryBefore := JQEntry;
-        CreateArgument(TempArgument, '{"expectedCount":999}');
+        PreviousRequired := SetConfirmationRequired(true);
+        Lib.Cleanup(PreviewPlaybookTok);
+        Lib.CreatePlaybook(PreviewPlaybookTok);
+        Lib.AddStep(PreviewPlaybookTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Status.RestartIfNeeded", '{"expectedCount":"@preview"}', 0, '', 0);
+        Step.Get(PreviewPlaybookTok, 10);
+        Step."Max Count" := 1;
+        Step.Modify(true);
 
+        // [WHEN] the playbook runs
         BindSubscription(LibraryOrchestrator);
-        Handler.ExecuteRestartIfNeeded(TempArgument);
+        Lib.RunPlaybook(PreviewPlaybookTok, InstanceId);
         UnbindSubscription(LibraryOrchestrator);
-        GlobalLanguage(PreviousLanguage);
+        SetConfirmationRequired(PreviousRequired);
 
-        AssertConfirmationMismatch(TempArgument, '999', '0');
+        // [THEN] the step completes once and the log says the type asked for no confirmation
+        StepLog.Get(InstanceId, 10, 0);
+        Assert.AreEqual(StepLog.Status::Completed, StepLog.Status, 'The @preview step completes: ' + StepLog."Error Text");
+        Assert.IsTrue(StepLog."Confirmation Note".Contains('ran once'), StepLog."Confirmation Note");
         AssertManagementJQEntryUnchanged(JQEntryBefore);
+        Lib.Cleanup(PreviewPlaybookTok);
         CleanupManagementJQEntry();
     end;
 
-    local procedure AssertConfirmationMismatch(var TempArgument: Record "Message Argument ori" temporary; Sent: Text; Actual: Text)
+    local procedure SetConfirmationRequired(Value: Boolean) Previous: Boolean
     var
-        ResponseJson: JsonObject;
-        Token: JsonToken;
+        SetupRef: RecordRef;
+        RequiredField: FieldRef;
     begin
-        ResponseJson := TempArgument.GetResponseJson();
-        ResponseJson.Get('status', Token);
-        Assert.AreEqual('Error', Token.AsValue().AsText(), 'Status should be Error');
-        ResponseJson.Get('code', Token);
-        Assert.AreEqual('ConfirmationMismatch', Token.AsValue().AsText(), 'Code should be ConfirmationMismatch');
-        ResponseJson.Get('received', Token);
-        Assert.AreEqual(Sent, Token.AsValue().AsText(), 'Received should be the sent count');
-        ResponseJson.Get('expected', Token);
-        Assert.AreEqual(Actual, Token.AsValue().AsText(), 'Expected should be the actual count');
-        Assert.IsFalse(ResponseJson.Contains('restarted'), 'Nothing should have been restarted');
+        // Bifrost Setup field 36, Require Confirmation for Irreversible Messages (Foundation public table).
+        SetupRef.Open(Database::"Setup ori");
+        if not SetupRef.FindFirst() then begin
+            SetupRef.Init();
+            SetupRef.Insert();
+        end;
+        RequiredField := SetupRef.Field(36);
+        Previous := RequiredField.Value();
+        RequiredField.Value := Value;
+        SetupRef.Modify();
     end;
 
     local procedure InsertManagementJQEntry(var JQEntry: Record "Job Queue Entry")

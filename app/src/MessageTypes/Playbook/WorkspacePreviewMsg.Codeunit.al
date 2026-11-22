@@ -32,7 +32,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Preview the seeded Playbook workspace without running steps. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook. expectedCount counts the one preview call.', Comment = 'is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju. expectedCount telur það eina forskoðunarkall.';
+        SelectionLbl: Label 'Preview the seeded Playbook workspace without running steps. Writes. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook.', Comment = 'is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Skrifar. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju.';
     begin
         exit(SelectionLbl);
     end;
@@ -56,7 +56,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('initialRequest', 'object', false, 'Simulates a run''s initial request: stored at _initial. A JSON string that holds an object is accepted too; any other string, number or boolean is ignored.'));
-        Parameters.Add(CountParts.ExpectedCountParameter('the one preview call (1)'));
+        Parameters.Add(CountParts.IgnoredExpectedCountParameter());
         exit(true);
     end;
 
@@ -95,10 +95,9 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Builds a temporary workspace, but seeds _who through a nested Help.WhoAmI.Get dispatch that writes and commits its queue entry and may create the caller''s Bifrost user setup.' + ' ' + CountParts.CountSentence('the one preview call (1)'), true);
+        Effect := Parts.CommittingEffect('Builds a temporary workspace, but seeds _who through a nested Help.WhoAmI.Get dispatch that writes and commits its queue entry and may create the caller''s Bifrost user setup.', true);
         exit(true);
     end;
 
@@ -147,7 +146,7 @@ codeunit 10035596 "Workspace Preview Msg ori" implements "Msg Interface ori", "M
         DirectionNoteLbl: Label 'It changes no business data.', Comment = 'is-IS=Það breytir engum viðskiptagögnum.';
     begin
         Notes := 'The workspace is temporary; this message does not create a playbook instance or step log.' +
-            ' Seeding _who dispatches Help.WhoAmI.Get in its own committed scope. Its queue entry and a possible first-use user setup cannot roll back with an outer transaction, so the effect is irreversible and the type cannot run inside an open write transaction. ' + DirectionNoteLbl +
+            ' Seeding _who dispatches Help.WhoAmI.Get in its own committed scope. Its queue entry and a possible first-use user setup cannot roll back with an outer transaction, so the effect is write, the Omit Commit guard refuses the type, and it cannot run inside an open write transaction. ' + DirectionNoteLbl +
             ' Call it before building a playbook to find the paths the request templates can use, such as @_sys.lastMonthStart and @_sys.lastMonthEnd for monthly filters, @_who.companyInfo.registrationNo, @_who.salesperson.email for recipients and @_who.telegramChatId. When debugging, compare it with the workspace snapshot of a failed step in the Bifrost Playbook Step Log.';
         exit(true);
     end;

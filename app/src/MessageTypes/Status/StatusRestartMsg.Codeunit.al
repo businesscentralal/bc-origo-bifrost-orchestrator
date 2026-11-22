@@ -48,7 +48,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved. expectedCount counts the one management entry that is restarted.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara. expectedCount telur þá einu stjórnunarfærslu sem er endurræst.';
+        SelectionLbl: Label 'Restart the orchestrator management Job Queue Entry unconditionally. Writes. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.', Comment = 'is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifar. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.';
     begin
         exit(SelectionLbl);
     end;
@@ -70,7 +70,7 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
     var
         CountParts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Parameters.Add(CountParts.ExpectedCountParameter('the one orchestrator management Job Queue Entry that is cancelled and scheduled again (1)'));
+        Parameters.Add(CountParts.IgnoredExpectedCountParameter());
         exit(true);
     end;
 
@@ -96,10 +96,9 @@ codeunit 10035560 "Status Restart Msg ori" implements "Msg Interface ori", "Msg 
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Cancels the orchestrator management Job Queue Entry, schedules a new one and commits.' + ' ' + CountParts.CountSentence('the one orchestrator management Job Queue Entry that is cancelled and scheduled again (1)'), false);
+        Effect := Parts.CommittingEffect('Cancels the orchestrator management Job Queue Entry, schedules a new one and commits.', false);
         exit(true);
     end;
 

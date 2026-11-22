@@ -101,7 +101,7 @@ codeunit 10035597 "Report Run Msg ori" implements "Msg Interface ori", "Msg Disc
         CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B2 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the processing-only report. Most batch reports commit as they go, and the work they committed stays when they fail.' + ' ' + CountParts.CountSentence('the one report run (1), not the records the report processes'), false);
+        Effect := Parts.PostingCapableEffect('Runs the processing-only report. Most batch reports commit as they go, and the work they committed stays when they fail.' + ' ' + CountParts.CountSentence('the one report run (1), not the records the report processes'), false);
         exit(true);
     end;
 
