@@ -236,8 +236,8 @@ codeunit 10035576 "Help ori"
     local procedure BuildToolsNavigationGuide(var O: TextBuilder)
     var
         HeadingTxt: Label '## Find the tools in the Web Client', Comment = 'is-IS=## Finna verkfærin í vefbiðlaranum';
-        SetupToolsTxt: Label 'On **Bifrost Setup**, open **Related > Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.', Comment = 'is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt > Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.';
-        PlaybookToolsTxt: Label 'On the **Bifrost Playbooks** list, open **Related > Tools** for **Table Data** and **Copy Plans**. These tools are Web Client pages, not new message types.', Comment = 'is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt > Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.';
+        SetupToolsTxt: Label 'On **Bifrost Setup**, open **Related > Tools** for **Bifrost Playbooks**, **Playbook Execution Log**, **Table Data**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.', Comment = 'is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt > Verkfæri** til að finna **Bifröst keðjur**, **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.';
+        PlaybookToolsTxt: Label 'On the **Bifrost Playbooks** list, open **Related > Tools** for **Table Data**, **Copy Tables Mapping** and **Copy Plans**. These tools are Web Client pages, not new message types.', Comment = 'is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt > Verkfæri** til að finna **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.';
         ToolPermissionsTxt: Label 'Tools follow your page permissions. **Table Data** requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.', Comment = 'is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.';
     begin
         O.AppendLine(HeadingTxt);
@@ -295,6 +295,10 @@ codeunit 10035576 "Help ori"
 
     local procedure BuildCopyPlanGuide(var O: TextBuilder)
     begin
+        O.AppendLine('## Data copy (Copy Tables Mapping)');
+        O.AppendLine('');
+        O.AppendLine('Open **Copy Tables Mapping** to map a source table to a destination table, set a source filter, a data template, field matches and Transformation Rules (including **Swap Amount Sign**), then choose **Copy Table Data**. Each source record is matched on the destination primary key: a new record gets the template and the mapped values, an existing record is updated only when a mapped value changed. Every write goes through Data.Records.Set, so the change log write guard, field restrictions and your permissions apply. Codeunit Copy Table Job Queue ori copies one mapping or every mapping not marked Manual Copy, parents before children. This is the primary copy path; Copy Plans below generate a playbook instead.');
+        O.AppendLine('');
         O.AppendLine('## Copy Plans and local Transform steps');
         O.AppendLine('');
         O.AppendLine('Open **Copy Plans**, create a plan, choose source and destination tables, and use field lookups to add mappings. Map every destination primary-key field explicitly. Source SystemId is never copied. Set a source table view to limit the rows and Page Size (1–500) to bound each read.');
