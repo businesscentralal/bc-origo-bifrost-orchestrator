@@ -37,28 +37,29 @@ codeunit 96452 "Orch B1 Contract Tests"
     end;
 
     [Test]
-    procedure CommittingTypesDeclareIrreversible()
+    procedure CommittingTypesDeclareTheirEffectAndNameTheCommit()
     begin
-        // [SCENARIO #60] Types that commit on their execute path declare effect irreversible
-        AssertEffect("Message Type ori"::"Orchestrator.Playbook.Run", 'Orchestrator.Playbook.Run', 'irreversible', true);
+        // [SCENARIO #60, #257] Types that commit on their execute path name the commit; only Entry.Run, which can run a
+        // posting job, stays irreversible; the others never post and declare write
+        AssertEffect("Message Type ori"::"Orchestrator.Playbook.Run", 'Orchestrator.Playbook.Run', 'write', true);
         AssertEffect("Message Type ori"::"Orchestrator.Entry.Run", 'Orchestrator.Entry.Run', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Entry.Register", 'Orchestrator.Entry.Register', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Status.Restart", 'Orchestrator.Status.Restart', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Status.RestartIfNeeded", 'Orchestrator.Status.RestartIfNeeded', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Entry.Restart", 'Orchestrator.Entry.Restart', 'irreversible', true);
-        AssertEffect("Message Type ori"::"Orchestrator.Entry.Schedule", 'Orchestrator.Entry.Schedule', 'irreversible', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Entry.Register", 'Orchestrator.Entry.Register', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Status.Restart", 'Orchestrator.Status.Restart', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Status.RestartIfNeeded", 'Orchestrator.Status.RestartIfNeeded', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Entry.Restart", 'Orchestrator.Entry.Restart', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Entry.Schedule", 'Orchestrator.Entry.Schedule', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'write', true);
+        AssertEffect("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'write', true);
     end;
 
     [Test]
     procedure NonCommittingTypesKeepTheirEffect()
     begin
-        // [SCENARIO #60] Types without a commit on their execute path keep write or read; external writes stay irreversible
+        // [SCENARIO #60] Types without a commit on their execute path keep write or read
         AssertEffect("Message Type ori"::"Orchestrator.Playbook.Schedule", 'Orchestrator.Playbook.Schedule', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.Playbook.Enqueue", 'Orchestrator.Playbook.Enqueue', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.JobQueueEntry.Restart", 'Orchestrator.JobQueueEntry.Restart', 'write', false);
         AssertEffect("Message Type ori"::"Orchestrator.JobQueueEntry.RestartIfNeeded", 'Orchestrator.JobQueueEntry.RestartIfNeeded', 'write', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'irreversible', false);
-        AssertEffect("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'irreversible', false);
         AssertEffect("Message Type ori"::"Orchestrator.Status.Get", 'Orchestrator.Status.Get', 'read', false);
         AssertEffect("Message Type ori"::"Help.Orchestrator.Get", 'Help.Orchestrator.Get', 'read', false);
         AssertEffect("Message Type ori"::"Orchestrator.Playbook.Verify", 'Orchestrator.Playbook.Verify', 'read', false);
@@ -163,9 +164,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Playbook.Run",
-            '[{"code":"MissingParameter","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"RecordNotFound","error":"No playbook has the code <playbookCode>.","when":"No Playbook ori exists with that code.","fix":"Send the code of an existing playbook."},{"code":"BusinessCentralError","error":"Step <stepNo> not found in playbook <playbookCode>.","when":"A Next Step No. of a step that ran points to a step that does not exist.","fix":"Fix the step chain of the playbook."},{"code":"PreconditionFailed","error":"Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>","when":"The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.","fix":"Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot."}]');
+            '[{"code":"MissingParameter","error":"Request must include \"playbookCode\" in the data payload or as the subject.","when":"Neither data.playbookCode nor subject was sent.","fix":"Send the playbook code in data.playbookCode or as subject."},{"code":"RecordNotFound","error":"No playbook has the code <playbookCode>.","when":"No Playbook ori exists with that code.","fix":"Send the code of an existing playbook."},{"code":"BusinessCentralError","error":"Step <stepNo> not found in playbook <playbookCode>.","when":"A Next Step No. of a step that ran points to a step that does not exist.","fix":"Fix the step chain of the playbook."},{"code":"PreconditionFailed","error":"Playbook <playbookCode> was not started: errors on enabled steps: <n>, warnings: <m>. <findings>","when":"The playbook does not verify: an enabled step has an error, or a warning while ignoreWarnings is not true. The answer names the findings in findings[] and the summary lists them.","fix":"Call Orchestrator.Playbook.Verify with the same playbookCode, fix the findings, then call again. A warning can be accepted on purpose with ignoreWarnings true; an error cannot."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Playbook.Schedule and ends with the PreconditionFailed entry of #109 (verify before start).</summary>
@@ -187,9 +188,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Email.Send",
-            '[{"code":"MissingParameter","error":"\"outboxSystemId\" (GUID from Email.Draft.Set response) is required in data or as subject.","when":"data.outboxSystemId is missing or not a GUID, and subject is not a GUID.","fix":"Send the outboxSystemId of the draft."},{"code":"RecordNotFound","error":"No email draft in the outbox has the SystemId <outboxSystemId>.","when":"No Email Outbox entry has that SystemId.","fix":"Send the outboxSystemId from the Email.Draft.Set answer."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The email account or its connector refuses to send.","fix":"Check the email account of the draft."}]');
+            '[{"code":"MissingParameter","error":"\"outboxSystemId\" (GUID from Email.Draft.Set response) is required in data or as subject.","when":"data.outboxSystemId is missing or not a GUID, and subject is not a GUID.","fix":"Send the outboxSystemId of the draft."},{"code":"RecordNotFound","error":"No email draft in the outbox has the SystemId <outboxSystemId>.","when":"No Email Outbox entry has that SystemId.","fix":"Send the outboxSystemId from the Email.Draft.Set answer."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The email account or its connector refuses to send.","fix":"Check the email account of the draft."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Entry.Register.</summary>
@@ -199,9 +200,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Entry.Register",
-            '[{"code":"MissingParameter","error":"Request must include \"jobQueueEntryId\" (GUID) in the data payload or the Job Queue Entry ID as the subject.","when":"data.jobQueueEntryId is missing or not a GUID, and subject is not a GUID.","fix":"Send the ID of the Job Queue Entry."},{"code":"RecordNotFound","error":"No Job Queue Entry has the ID <jobQueueEntryId>.","when":"No Job Queue Entry has that ID.","fix":"Send the ID of the Job Queue Entry, not its SystemId."},{"code":"BusinessCentralError","error":"The Job Queue Orchestrator Management Job Queue Entry cannot be one of the Job Queue Orchestrator Entries.","when":"The ID is the orchestrator''s own management Job Queue Entry.","fix":"Register a different Job Queue Entry."}]');
+            '[{"code":"MissingParameter","error":"Request must include \"jobQueueEntryId\" (GUID) in the data payload or the Job Queue Entry ID as the subject.","when":"data.jobQueueEntryId is missing or not a GUID, and subject is not a GUID.","fix":"Send the ID of the Job Queue Entry."},{"code":"RecordNotFound","error":"No Job Queue Entry has the ID <jobQueueEntryId>.","when":"No Job Queue Entry has that ID.","fix":"Send the ID of the Job Queue Entry, not its SystemId."},{"code":"BusinessCentralError","error":"The Job Queue Orchestrator Management Job Queue Entry cannot be one of the Job Queue Orchestrator Entries.","when":"The ID is the orchestrator''s own management Job Queue Entry.","fix":"Register a different Job Queue Entry."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Entry.Restart.</summary>
@@ -211,9 +212,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Entry.Restart",
-            '[{"code":"MissingParameter","error":"Request must include \"id\" (GUID) in the data payload or as the subject.","when":"data.id is missing or not a GUID, and subject is not a GUID.","fix":"Send the SystemId of the Scheduled Entry ori in data.id or as subject."},{"code":"RecordNotFound","error":"No orchestrator entry has the ID <id>.","when":"No Scheduled Entry ori has that SystemId or ID.","fix":"Send the SystemId or ID of an existing orchestrator entry."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The Job Queue Entry cannot be restarted or created.","fix":"Check the entry''s object to run, its client credentials and the scheduler setup."}]');
+            '[{"code":"MissingParameter","error":"Request must include \"id\" (GUID) in the data payload or as the subject.","when":"data.id is missing or not a GUID, and subject is not a GUID.","fix":"Send the SystemId of the Scheduled Entry ori in data.id or as subject."},{"code":"RecordNotFound","error":"No orchestrator entry has the ID <id>.","when":"No Scheduled Entry ori has that SystemId or ID.","fix":"Send the SystemId or ID of an existing orchestrator entry."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The Job Queue Entry cannot be restarted or created.","fix":"Check the entry''s object to run, its client credentials and the scheduler setup."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Entry.Run.</summary>
@@ -235,9 +236,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Entry.Schedule",
-            '[{"code":"MissingParameter","error":"Request must include \"id\" (GUID) in the data payload or as the subject.","when":"data.id is missing or not a GUID, and subject is not a GUID.","fix":"Send the SystemId of the Scheduled Entry ori in data.id or as subject."},{"code":"RecordNotFound","error":"No orchestrator entry has the ID <id>.","when":"No Scheduled Entry ori has that SystemId or ID.","fix":"Send the SystemId or ID of an existing orchestrator entry."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The entry is blocked (Business Central''s TestField error on Blocked).","fix":"Unblock the entry first."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The scheduling API call or the local scheduling fails.","fix":"Check the entry''s client credentials and the scheduler setup."}]');
+            '[{"code":"MissingParameter","error":"Request must include \"id\" (GUID) in the data payload or as the subject.","when":"data.id is missing or not a GUID, and subject is not a GUID.","fix":"Send the SystemId of the Scheduled Entry ori in data.id or as subject."},{"code":"RecordNotFound","error":"No orchestrator entry has the ID <id>.","when":"No Scheduled Entry ori has that SystemId or ID.","fix":"Send the SystemId or ID of an existing orchestrator entry."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The entry is blocked (Business Central''s TestField error on Blocked).","fix":"Unblock the entry first."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The scheduling API call or the local scheduling fails.","fix":"Check the entry''s client credentials and the scheduler setup."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Status.Get.</summary>
@@ -259,9 +260,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Status.RestartIfNeeded",
-            '[{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The scheduler cannot be inspected or restarted.","fix":"Check scheduler setup and Job Queue permissions."}]');
+            '[{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The scheduler cannot be inspected or restarted.","fix":"Check scheduler setup and Job Queue permissions."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Status.Restart.</summary>
@@ -271,9 +272,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Status.Restart",
-            '[{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The scheduler cannot be restarted.","fix":"Check scheduler setup and Job Queue permissions."}]');
+            '[{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The scheduler cannot be restarted.","fix":"Check scheduler setup and Job Queue permissions."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     /// <summary>Preserves the main errors chapter for Orchestrator.Telegram.Message.</summary>
@@ -283,9 +284,9 @@ codeunit 96452 "Orch B1 Contract Tests"
         // Story #71, AC04 | Time: independent of Today/WorkDate | Risk: shared contract helpers.
         // [GIVEN] The errors chapter captured from main 6413d705.
         // [WHEN] The current contract is generated.
-        // [THEN] All entries, their order, codes and text are identical.
+        // [THEN] All entries, their order, codes and text are identical; since #257 the type is write, so Foundation adds Retryable.
         AssertMainErrors("Message Type ori"::"Orchestrator.Telegram.Message",
-            '[{"code":"BusinessCentralError","error":"HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.","when":"Allow HttpClient Requests is off for Bifrost Orchestrator.","fix":"Enable it in Extension Settings (page 2500)."},{"code":"BusinessCentralError","error":"Telegram Bot Token is not configured in Orchestrator Setup.","when":"No bot token is stored.","fix":"Set the Telegram Bot Token in the Orchestrator setup."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The calling user has no User Setup ori record (Business Central''s record-not-found text).","fix":"Create the user''s Bifrost User Setup with a Telegram Chat ID."},{"code":"BusinessCentralError","error":"No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.","when":"The calling user''s Telegram Chat ID is empty.","fix":"Set the Telegram Chat ID in Bifrost User Setup."},{"code":"MissingParameter","error":"\"message\" is required in the request data.","when":"data.message is missing or empty.","fix":"Send the text in data.message."},{"code":"BusinessCentralError","error":"Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>","when":"Telegram rejected the request.","fix":"Read the Telegram response and correct the message or the configuration."},{"code":"InvalidParameterFormat","error":"\"message\" must be a text value, not an object or an array.","when":"data.message is an object or array.","fix":"Send the text of the message in data.message."}]');
+            '[{"code":"BusinessCentralError","error":"HTTP client requests are not enabled for this extension. Enable Allow HttpClient Requests in Extension Settings before sending Telegram messages.","when":"Allow HttpClient Requests is off for Bifrost Orchestrator.","fix":"Enable it in Extension Settings (page 2500)."},{"code":"BusinessCentralError","error":"Telegram Bot Token is not configured in Orchestrator Setup.","when":"No bot token is stored.","fix":"Set the Telegram Bot Token in the Orchestrator setup."},{"code":"BusinessCentralError","error":"Business Central''s own error text","when":"The calling user has no User Setup ori record (Business Central''s record-not-found text).","fix":"Create the user''s Bifrost User Setup with a Telegram Chat ID."},{"code":"BusinessCentralError","error":"No Telegram Chat ID configured for the current user. Set it in Bifrost User Setup.","when":"The calling user''s Telegram Chat ID is empty.","fix":"Set the Telegram Chat ID in Bifrost User Setup."},{"code":"MissingParameter","error":"\"message\" is required in the request data.","when":"data.message is missing or empty.","fix":"Send the text in data.message."},{"code":"BusinessCentralError","error":"Failed to send Telegram message to Chat ID <chatId>. Response: <Telegram response>","when":"Telegram rejected the request.","fix":"Read the Telegram response and correct the message or the configuration."},{"code":"InvalidParameterFormat","error":"\"message\" must be a text value, not an object or an array.","when":"data.message is an object or array.","fix":"Send the text of the message in data.message."},{"code":"Retryable","when":"A transient lock or deadlock caught while writing or posting. The error preserves Business Central''s original text. Uncaught errors are Retryable only for types with effect write.","fix":"Retry the same call after a few seconds; nothing was changed."}]');
     end;
 
     local procedure AssertMainErrors(MessageType: Enum "Message Type ori"; ExpectedJson: Text)

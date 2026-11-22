@@ -1576,9 +1576,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType NotFoundLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 3593894611" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Irreversible. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.</source>
-          <target>Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Óafturkræft. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</note>
+          <source>Sends one document (%1) through a Document Sending Profile: the request profile, otherwise the party profile, otherwise the Default profile. Writes. Missing documents, profiles or required e-mail addresses are refused before sending. Worker tests must mock the send; Disk profiles need a client and are refused. The matching PDF type is %2.</source>
+          <target>Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Skrifar. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendir eitt skjal (%1) með forstillingu skjalasendingar: forstillingu úr beiðni, annars forstillingu aðila, annars sjálfgefinni forstillingu. Skrifar. Ef skjal, forstilling eða nauðsynlegt tölvupóstfang vantar er sendingu hafnað áður en hún hefst. Prófanir vinnuaðila (worker) verða að herma eftir sendingu; forstillingum sem vista á disk er hafnað því þær þurfa biðlara. Samsvarandi PDF-tegund er %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - NamedType OverviewLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 2300073700" size-unit="char" translate="yes" xml:space="preserve">
@@ -1870,9 +1870,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method OrderConfirmationKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 299948515 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Irreversible. To get a PDF without sending, use Sales.OrderConfirmation.Pdf. expectedCount counts the one document that is sent, not its recipients.</source>
-          <target>Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</note>
+          <source>Send a sales order confirmation to the customer through a document sending profile, as the Send action on the sales order does. Writes. To get a PDF without sending, use Sales.OrderConfirmation.Pdf.</source>
+          <target>Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Skrifar. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölupöntunarstaðfestingu með forstillingu skjalasendingar, eins og aðgerðin Senda á sölupöntuninni. Skrifar. Til að fá PDF án sendingar, notaðu Sales.OrderConfirmation.Pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method OrderConfirmationSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 2555313517 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1888,9 +1888,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method PurchaseOrderKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 4123636463 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Irreversible. To get a PDF without sending, use Purchase.Order.Pdf. expectedCount counts the one document that is sent, not its recipients.</source>
-          <target>Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Óafturkræft. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</note>
+          <source>Send a purchase order to the vendor through a document sending profile, as the Send action on the purchase order does. Writes. To get a PDF without sending, use Purchase.Order.Pdf.</source>
+          <target>Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Skrifar. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda lánardrottni innkaupapöntun með forstillingu skjalasendingar, eins og aðgerðin Senda á innkaupapöntuninni. Skrifar. Til að fá PDF án sendingar, notaðu Purchase.Order.Pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method PurchaseOrderSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 2108231248 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -1906,9 +1906,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method SalesQuoteKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3483204542 - Method 969018638 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Irreversible. To get a PDF without sending, use Sales.Quote.Pdf. expectedCount counts the one document that is sent, not its recipients.</source>
-          <target>Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Óafturkræft. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf. expectedCount telur það eina skjal sem er sent, ekki viðtakendur þess.</note>
+          <source>Send a sales quote to the customer through a document sending profile, as the Send action on the quote does. Writes. To get a PDF without sending, use Sales.Quote.Pdf.</source>
+          <target>Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Skrifar. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Senda viðskiptamanni sölutilboð með forstillingu skjalasendingar, eins og aðgerðin Senda á tilboðinu. Skrifar. Til að fá PDF án sendingar, notaðu Sales.Quote.Pdf.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Doc Send Contract ori - Method SalesQuoteSelection - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2620533973 - NamedType 2897282207" size-unit="char" translate="yes" xml:space="preserve">
@@ -2272,9 +2272,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2518225199 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send an email draft identified by its outbox SystemId. Irreversible. Use Email.Draft.Set to create the draft first. expectedCount counts the one e-mail draft that is sent, not its recipients.</source>
-          <target>Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst. expectedCount telur þau einu tölvupóstsdrög sem eru send, ekki viðtakendur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Óafturkræft. Notaðu Email.Draft.Set til að búa til drögin fyrst. expectedCount telur þau einu tölvupóstsdrög sem eru send, ekki viðtakendur.</note>
+          <source>Send an email draft identified by its outbox SystemId. Writes. Use Email.Draft.Set to create the draft first.</source>
+          <target>Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Skrifar. Notaðu Email.Draft.Set til að búa til drögin fyrst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu tölvupóstsdrög sem auðkennd eru með SystemId úthólfs. Skrifar. Notaðu Email.Draft.Set til að búa til drögin fyrst.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Email Send Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3713907355 - NamedType 2873124987" size-unit="char" translate="yes" xml:space="preserve">
@@ -2451,6 +2451,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Sendu staðfestingu sölupöntunarinnar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Order Conf Send Msg ori - NamedType SendThatSalesOrderConfirmationLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1127509453 - NamedType 1577587659" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Playbook %1 step %2 cannot run %3 under Omit Commit: the type commits on its own execute path, so it cannot be rolled back with the chain.</source>
+          <target>Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin staðfestir sjálf breytingar sínar og því er ekki hægt að bakka henni með keðjunni.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = playbook code, %2 = step no, %3 = message type, is-IS=Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: tegundin staðfestir sjálf breytingar sínar og því er ekki hægt að bakka henni með keðjunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Effect Guard ori - NamedType OmitCommitCommitsErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1127509453 - NamedType 3316397049" size-unit="char" translate="yes" xml:space="preserve">
           <source>Playbook %1 step %2 cannot run %3 under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.</source>
           <target>Skref %2 í keðjunni %1 getur ekki keyrt %3 með Omit Commit: samningur þess lýsir áhrifum sem ekki er hægt að afturkalla og því er ekki hægt að bakka því með keðjunni.</target>
@@ -2620,9 +2626,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2498592579 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Execute a Bifrost Playbook immediately and return its results. Irreversible. Use Orchestrator.Playbook.Enqueue for background execution. expectedCount counts the one playbook that is run, not its steps.</source>
-          <target>Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu. expectedCount telur þá einu keðju sem er keyrð, ekki skref hennar.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Óafturkræft. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu. expectedCount telur þá einu keðju sem er keyrð, ekki skref hennar.</note>
+          <source>Execute a Bifrost Playbook immediately and return its results. Writes. Use Orchestrator.Playbook.Enqueue for background execution.</source>
+          <target>Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifar. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu Bifröst-keðju strax og skilaðu niðurstöðum. Skrifar. Notaðu Orchestrator.Playbook.Enqueue fyrir bakgrunnsvinnslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Playbook Run Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3386553435 - NamedType 1706382334" size-unit="char" translate="yes" xml:space="preserve">
@@ -4486,9 +4492,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1062491014 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings. expectedCount counts the one Job Queue Entry that is registered.</source>
-          <target>Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum. expectedCount telur þá einu vinnsluröðarfærslu sem er skráð.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum. expectedCount telur þá einu vinnsluröðarfærslu sem er skráð.</note>
+          <source>Register an existing Job Queue Entry under Bifrost Orchestrator control. Writes. Use Orchestrator.Entry.Schedule after changing its recurring settings.</source>
+          <target>Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifar. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifar. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Register Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4504,9 +4510,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1382261728 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart a failed or held orchestrator entry according to its retry policy. Irreversible. Use Orchestrator.Entry.Run for a one-time foreground run. expectedCount counts the one entry that is restarted.</source>
-          <target>Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni. expectedCount telur þá einu færslu sem er endurræst.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Óafturkræft. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni. expectedCount telur þá einu færslu sem er endurræst.</note>
+          <source>Restart a failed or held orchestrator entry according to its retry policy. Writes. Use Orchestrator.Entry.Run for a one-time foreground run.</source>
+          <target>Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifar. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu bilaða eða stöðvaða áætlunarfærslu samkvæmt endurtekningarstefnu hennar. Skrifar. Notaðu Orchestrator.Entry.Run fyrir einskiptis keyrslu í forgrunni.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 251919310 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4540,9 +4546,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3024542026 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Irreversible. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact. expectedCount counts the one entry whose schedule is rebuilt.</source>
-          <target>Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir. expectedCount telur þá einu færslu sem áætlun er endurbyggð fyrir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Óafturkræft. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir. expectedCount telur þá einu færslu sem áætlun er endurbyggð fyrir.</note>
+          <source>Rebuild the Job Queue schedule of an orchestrator entry from its recurrence settings. Writes. A blocked entry is refused. Use Orchestrator.Entry.Run for a foreground run that leaves the schedule intact.</source>
+          <target>Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Skrifar. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurbyggðu vinnsluraðaráætlun áætlunarfærslu út frá endurtekningarstillingum hennar. Skrifar. Læstri færslu er hafnað. Notaðu Orchestrator.Entry.Run fyrir keyrslu í forgrunni sem skilur áætlunina eftir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SE Schedule Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4100043099 - NamedType 3536930844" size-unit="char" translate="yes" xml:space="preserve">
@@ -4593,18 +4599,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Áætlari er þegar í gangi.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType AlreadyRunningMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1369520475 - NamedType 2778900552" size-unit="char" translate="yes" xml:space="preserve">
-          <source>no orchestrator management Job Queue Entry (it is already running)</source>
-          <target>engin stjórnunarfærsla áætlara (hann er þegar í gangi)</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=engin stjórnunarfærsla áætlara (hann er þegar í gangi)</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType NoRestartCountMsg</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1369520475 - NamedType 2736748247" size-unit="char" translate="yes" xml:space="preserve">
-          <source>the orchestrator management Job Queue Entry (it would be restarted)</source>
-          <target>stjórnunarfærsla áætlara (hún yrði endurræst)</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=stjórnunarfærsla áætlara (hún yrði endurræst)</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Msg Handler ori - NamedType RestartCountMsg</note>
-        </trans-unit>
         <trans-unit id="Codeunit 1369520475 - NamedType 838312617" size-unit="char" translate="yes" xml:space="preserve">
           <source>Orchestrator restarted.</source>
           <target>Áætlari endurræstur.</target>
@@ -4624,9 +4618,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2057945186 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator management Job Queue Entry unconditionally. Irreversible. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved. expectedCount counts the one management entry that is restarted.</source>
-          <target>Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara. expectedCount telur þá einu stjórnunarfærslu sem er endurræst.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Óafturkræft. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara. expectedCount telur þá einu stjórnunarfærslu sem er endurræst.</note>
+          <source>Restart the orchestrator management Job Queue Entry unconditionally. Writes. Use Orchestrator.Status.RestartIfNeeded when an already running orchestrator must be preserved.</source>
+          <target>Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifar. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu stjórnunarfærslu áætlunara skilyrðislaust. Skrifar. Notaðu Orchestrator.Status.RestartIfNeeded þegar halda á gangandi áætlunara.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status Restart Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
@@ -4642,9 +4636,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1421266779 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Irreversible. Use Orchestrator.Status.Restart for an unconditional restart. expectedCount counts the management entry that would be restarted: 1, or 0 when it is already running; a different count changes nothing.</source>
-          <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur stjórnunarfærsluna sem yrði endurræst: 1, eða 0 þegar hún er þegar í gangi; annar fjöldi breytir engu.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Óafturkræft. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu. expectedCount telur stjórnunarfærsluna sem yrði endurræst: 1, eða 0 þegar hún er þegar í gangi; annar fjöldi breytir engu.</note>
+          <source>Restart the orchestrator only when its management Job Queue Entry is not Ready or In Process. Writes. Use Orchestrator.Status.Restart for an unconditional restart.</source>
+          <target>Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifar. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurræstu áætlara aðeins þegar stjórnunarfærsla hans er ekki Tilbúin eða Í vinnslu. Skrifar. Notaðu Orchestrator.Status.Restart fyrir skilyrðislausa endurræsingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Status RestartIf Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1169993136 - NamedType 3954339052" size-unit="char" translate="yes" xml:space="preserve">
@@ -4858,9 +4852,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2638307712 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Send a Telegram message to the current user. Irreversible. Use Orchestrator.Email.Send for email delivery. expectedCount counts the one message that is sent.</source>
-          <target>Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu. expectedCount telur þau einu skilaboð sem eru send.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Sendu Telegram-skilaboð til núverandi notanda. Óafturkræft. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu. expectedCount telur þau einu skilaboð sem eru send.</note>
+          <source>Send a Telegram message to the current user. Writes. Use Orchestrator.Email.Send for email delivery.</source>
+          <target>Sendu Telegram-skilaboð til núverandi notanda. Skrifar. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu Telegram-skilaboð til núverandi notanda. Skrifar. Notaðu Orchestrator.Email.Send fyrir tölvupóstsendingu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Telegram Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2083975675 - NamedType 2175961898" size-unit="char" translate="yes" xml:space="preserve">
@@ -4918,9 +4912,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetNotes - NamedType DirectionNoteLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4247402998 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Preview the seeded Playbook workspace without running steps. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook. expectedCount counts the one preview call.</source>
-          <target>Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju. expectedCount telur það eina forskoðunarkall.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju. expectedCount telur það eina forskoðunarkall.</note>
+          <source>Preview the seeded Playbook workspace without running steps. Writes. Seeding _who dispatches Help.WhoAmI.Get, which commits its own queue entry. Use Orchestrator.Playbook.Run to execute a playbook.</source>
+          <target>Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Skrifar. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Forskoðaðu upphafsstillt vinnusvæði keðju án þess að keyra skref. Skrifar. Upphafsstilling _who sendir Help.WhoAmI.Get, sem staðfestir eigin biðraðarfærslu. Notaðu Orchestrator.Playbook.Run til að keyra keðju.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Workspace Preview Msg ori - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Page 3387562382 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">

@@ -22,15 +22,83 @@ codeunit 96461 "Playbook Effect Tests ori"
         Guard.CheckOmitCommitAllowed('XGUARD', 20, "Message Type ori"::"Orchestrator.Playbook.Enqueue");
     end;
 
-    /// <summary>Real external-write types are refused with exact playbook, step and type context.</summary>
+    /// <summary>
+    /// Real external-write types are refused with exact playbook, step and type context. They declare write since
+    /// issue #257, so the refusal comes from the committing-type list, not from the effect.
+    /// </summary>
     [Test]
     procedure ExternalWritesRefused()
     begin
         GlobalLanguage(1033);
         asserterror Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Email.Send");
-        Assert.AreEqual('Playbook XGUARD step 10 cannot run Orchestrator.Email.Send under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.', GetLastErrorText(), 'Email refusal');
+        Assert.AreEqual('Playbook XGUARD step 10 cannot run Orchestrator.Email.Send under Omit Commit: the type commits on its own execute path, so it cannot be rolled back with the chain.', GetLastErrorText(), 'Email refusal');
         asserterror Guard.CheckOmitCommitAllowed('XGUARD', 20, "Message Type ori"::"Orchestrator.Telegram.Message");
-        Assert.AreEqual('Playbook XGUARD step 20 cannot run Orchestrator.Telegram.Message under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.', GetLastErrorText(), 'Telegram refusal');
+        Assert.AreEqual('Playbook XGUARD step 20 cannot run Orchestrator.Telegram.Message under Omit Commit: the type commits on its own execute path, so it cannot be rolled back with the chain.', GetLastErrorText(), 'Telegram refusal');
+    end;
+
+    /// <summary>
+    /// Issue #257 AC03: every Orchestrator type that commits on its execute path is still refused under Omit Commit,
+    /// whether it now declares write or stays irreversible, in English and Icelandic.
+    /// </summary>
+    [Test]
+    procedure CommittingTypesStillRefusedUnderOmitCommit()
+    begin
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Email.Send");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Telegram.Message");
+        AssertCommittingRefused("Message Type ori"::"Purchase.Order.Send");
+        AssertCommittingRefused("Message Type ori"::"Sales.Quote.Send");
+        AssertCommittingRefused("Message Type ori"::"Sales.OrderConfirmation.Send");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Playbook.Run");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Workspace.Preview");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Entry.Register");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Entry.Restart");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Entry.Schedule");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Entry.Run");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Status.Restart");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Status.RestartIfNeeded");
+        AssertCommittingRefused("Message Type ori"::"Orchestrator.Report.Run");
+
+        GlobalLanguage(1039);
+        asserterror Guard.CheckOmitCommitAllowed('XGUARD', 10, "Message Type ori"::"Orchestrator.Status.Restart");
+        Assert.IsTrue(GetLastErrorText().Contains('staðfestir sjálf breytingar sínar'), 'Icelandic committing refusal: ' + GetLastErrorText());
+        GlobalLanguage(1033);
+    end;
+
+    /// <summary>Issue #257 AC03: a foreign type that declares irreversible (a posting type) is still refused.</summary>
+    [Test]
+    procedure ForeignIrreversibleTypeStillRefused()
+    var
+        Fixture: Codeunit "Effect Contract Fixture ori";
+    begin
+        GlobalLanguage(1033);
+        Fixture.Configure('{"effect":"irreversible"}', true);
+        asserterror Guard.CheckOmitCommitAllowed('XGUARD', 50, "Message Type ori"::"Test.Effect.Contract");
+        Fixture.Configure('', false);
+        Assert.AreEqual('Playbook XGUARD step 50 cannot run Test.Effect.Contract under Omit Commit: its contract declares effect irreversible, so it cannot be rolled back with the chain.', GetLastErrorText(), 'Foreign posting type refusal');
+    end;
+
+    /// <summary>Issue #257 edge: a write type that does not commit is still allowed under Omit Commit.</summary>
+    [Test]
+    procedure NonCommittingWriteTypeStillAllowed()
+    var
+        Fixture: Codeunit "Effect Contract Fixture ori";
+    begin
+        Fixture.Configure('{"effect":"write"}', true);
+        Guard.CheckOmitCommitAllowed('XGUARD', 60, "Message Type ori"::"Test.Effect.Contract");
+        Guard.CheckOmitCommitAllowed('XGUARD', 70, "Message Type ori"::"Orchestrator.JobQueueEntry.Restart");
+        Fixture.Configure('', false);
+        Assert.IsFalse(Guard.CommitsOnExecute("Message Type ori"::"Orchestrator.Playbook.Enqueue"), 'Enqueue only queues and does not commit on its execute path');
+    end;
+
+    local procedure AssertCommittingRefused(MessageType: Enum "Message Type ori")
+    var
+        TypeName: Text;
+    begin
+        GlobalLanguage(1033);
+        TypeName := MessageType.Names().Get(MessageType.Ordinals().IndexOf(MessageType.AsInteger()));
+        Assert.IsTrue(Guard.CommitsOnExecute(MessageType), TypeName + ' is listed as committing');
+        asserterror Guard.CheckOmitCommitAllowed('XGUARD', 10, MessageType);
+        Assert.AreEqual('Playbook XGUARD step 10 cannot run ' + TypeName + ' under Omit Commit: the type commits on its own execute path, so it cannot be rolled back with the chain.', GetLastErrorText(), TypeName + ' refusal');
     end;
 
     /// <summary>The Foundation fallback contract is refused for a stable test enum value.</summary>
@@ -183,7 +251,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     procedure AC04_ExecutorEmailRefusedBeforeDispatch()
     begin
         // Story #59 AC04 | Time: independent | Risk: no email or external request is allowed.
-        AssertExecutorRefused("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'irreversible');
+        AssertExecutorRefused("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'commits on its own execute path');
     end;
 
     /// <summary>AC04 rejects actual Telegram execution before any dispatcher queue write.</summary>
@@ -191,7 +259,7 @@ codeunit 96461 "Playbook Effect Tests ori"
     procedure AC04_ExecutorTelegramRefusedBeforeDispatch()
     begin
         // Story #59 AC04 | Time: independent | Risk: no Telegram request is allowed.
-        AssertExecutorRefused("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'irreversible');
+        AssertExecutorRefused("Message Type ori"::"Orchestrator.Telegram.Message", 'Orchestrator.Telegram.Message', 'commits on its own execute path');
     end;
 
     /// <summary>AC04 rejects a missing contract at the executor boundary, not just the guard helper.</summary>
@@ -264,7 +332,7 @@ codeunit 96461 "Playbook Effect Tests ori"
         Executor: Codeunit "Msg Executor ori";
     begin
         // Story #59 AC05 | Time: independent | Risk: commit-error scope stops before any handler.
-        AssertExecutorRefused("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'irreversible');
+        AssertExecutorRefused("Message Type ori"::"Orchestrator.Email.Send", 'Orchestrator.Email.Send', 'commits on its own execute path');
         asserterror RunWithoutCommit();
         Assert.IsTrue(LowerCase(GetLastErrorText()).Contains('commit'), 'A later default run must attempt its normal commit.');
         Assert.IsFalse(GetLastErrorText().Contains('cannot run'), 'A refused run must consume the Omit Commit flag.');

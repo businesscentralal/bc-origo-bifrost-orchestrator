@@ -107,7 +107,7 @@ codeunit 10035555 "SE Run Msg ori" implements "Msg Interface ori", "Msg Discover
         CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Runs the entry''s job once through a one-time Job Queue Entry and commits, on the success and on the error path.' + ' ' + CountParts.CountSentence('the one orchestrator entry that is run (1), not the work its job does'), false);
+        Effect := Parts.PostingCapableEffect('Runs the entry''s job once through a one-time Job Queue Entry and commits, on the success and on the error path.' + ' ' + CountParts.CountSentence('the one orchestrator entry that is run (1), not the work its job does'), false);
         exit(true);
     end;
 

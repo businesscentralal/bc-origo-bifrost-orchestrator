@@ -29,7 +29,8 @@ codeunit 96486 "Playbook Runtime Refusal Tests"
         Findings: JsonArray;
     begin
         // [SCENARIO] AC01: an irreversible type without expectedCount warns while the confirmation setting is on.
-        SetupPlaybook(TelegramNoCountTok);
+        // Since #257 no Orchestrator type that never posts is irreversible; the fixture stands in for a foreign posting type.
+        SetupForeignPostingPlaybook(TelegramNoCountTok);
         GetFindings(Findings);
         Assert.AreEqual(1, CountCode(Findings, 'IrreversibleWithoutConfirmation'), 'No expectedCount warns');
         Assert.AreEqual('warning', GetField(Findings, 'IrreversibleWithoutConfirmation', 'severity'), 'Warning severity');
@@ -43,13 +44,26 @@ codeunit 96486 "Playbook Runtime Refusal Tests"
         WithConfirmationSetting(false, Findings);
         Assert.AreEqual(0, CountCode(Findings, 'IrreversibleWithoutConfirmation'), 'Setting off is silent');
         Lib.Cleanup(PlaybookCodeTok);
+        ResetForeignPostingFixture();
+    end;
+
+    [Test]
+    procedure WriteType_WithoutExpectedCountDoesNotWarn()
+    var
+        Findings: JsonArray;
+    begin
+        // [SCENARIO] #257 AC02: Telegram writes and never posts, so a step without expectedCount gets no confirmation warning.
+        SetupPlaybook(TelegramNoCountTok);
+        GetFindings(Findings);
+        Assert.AreEqual(0, CountCode(Findings, 'IrreversibleWithoutConfirmation'), 'A write type needs no expectedCount');
+        Lib.Cleanup(PlaybookCodeTok);
     end;
 
     [Test]
     procedure Irreversible_MessageIsTranslated()
     begin
-        VerifyIrreversibleLanguage(1033, 'Step 10 calls Orchestrator.Telegram.Message, which is irreversible', 'Add expectedCount');
-        VerifyIrreversibleLanguage(1039, 'Skref 10 kallar á Orchestrator.Telegram.Message, sem er óafturkræft', 'Bættu expectedCount');
+        VerifyIrreversibleLanguage(1033, 'Step 10 calls Test.Effect.Contract, which is irreversible', 'Add expectedCount');
+        VerifyIrreversibleLanguage(1039, 'Skref 10 kallar á Test.Effect.Contract, sem er óafturkræft', 'Bættu expectedCount');
     end;
 
     [Test]
@@ -152,11 +166,12 @@ codeunit 96486 "Playbook Runtime Refusal Tests"
     begin
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
-        SetupPlaybook(TelegramNoCountTok);
+        SetupForeignPostingPlaybook(TelegramNoCountTok);
         GetFindings(Findings);
         Assert.IsTrue(GetField(Findings, 'IrreversibleWithoutConfirmation', 'message').StartsWith(MessageStart), 'Localized message');
         Assert.IsTrue(GetField(Findings, 'IrreversibleWithoutConfirmation', 'nextStep').StartsWith(NextStart), 'Localized next step');
         Lib.Cleanup(PlaybookCodeTok);
+        ResetForeignPostingFixture();
         GlobalLanguage(PreviousLanguage);
     end;
 
@@ -183,6 +198,23 @@ codeunit 96486 "Playbook Runtime Refusal Tests"
         Lib.Cleanup(PlaybookCodeTok);
         Lib.CreatePlaybook(PlaybookCodeTok);
         Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Orchestrator.Telegram.Message", Template, 0, '', 0);
+    end;
+
+    local procedure SetupForeignPostingPlaybook(Template: Text)
+    var
+        Fixture: Codeunit "Effect Contract Fixture ori";
+    begin
+        Fixture.Configure('{"effect":"irreversible"}', true);
+        Lib.Cleanup(PlaybookCodeTok);
+        Lib.CreatePlaybook(PlaybookCodeTok);
+        Lib.AddStep(PlaybookCodeTok, 10, "Playbook Step Type ori"::Action, "Message Type ori"::"Test.Effect.Contract", Template, 0, '', 0);
+    end;
+
+    local procedure ResetForeignPostingFixture()
+    var
+        Fixture: Codeunit "Effect Contract Fixture ori";
+    begin
+        Fixture.Configure('', false);
     end;
 
     local procedure SetTemplate(Template: Text)

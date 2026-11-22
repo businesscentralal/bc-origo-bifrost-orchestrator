@@ -36,7 +36,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Register an existing Job Queue Entry under Bifrost Orchestrator control. Irreversible. Use Orchestrator.Entry.Schedule after changing its recurring settings. expectedCount counts the one Job Queue Entry that is registered.', Comment = 'is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Óafturkræft. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum. expectedCount telur þá einu vinnsluröðarfærslu sem er skráð.';
+        SelectionLbl: Label 'Register an existing Job Queue Entry under Bifrost Orchestrator control. Writes. Use Orchestrator.Entry.Schedule after changing its recurring settings.', Comment = 'is-IS=Skráðu núverandi vinnsluröðarfærslu undir stjórn Bifröst stjórnanda. Skrifar. Notaðu Orchestrator.Entry.Schedule eftir breytingu á endurteknum stillingum.';
     begin
         exit(SelectionLbl);
     end;
@@ -66,7 +66,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Parameters.Add(ContractMgt.Parameter('jobQueueEntryId', 'string', false, 'ID (primary key) of the Job Queue Entry to register. Required unless subject carries it.'));
-        Parameters.Add(CountParts.ExpectedCountParameter('the one Job Queue Entry that is registered (1)'));
+        Parameters.Add(CountParts.IgnoredExpectedCountParameter());
         exit(true);
     end;
 
@@ -95,10 +95,9 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
-        CountParts: Codeunit "Orch B1 Contract Parts ori";
         Parts: Codeunit "Orch B1 Contract Parts ori";
     begin
-        Effect := Parts.CommittingEffect('Creates the orchestrator entry from the Job Queue Entry, replacing an existing one, and commits it.' + ' ' + CountParts.CountSentence('the one Job Queue Entry that is registered (1)'), false);
+        Effect := Parts.CommittingEffect('Creates the orchestrator entry from the Job Queue Entry, replacing an existing one, and commits it.', false);
         exit(true);
     end;
 
@@ -137,7 +136,7 @@ codeunit 10035579 "SE Register Msg ori" implements "Msg Interface ori", "Msg Dis
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Brings an existing Job Queue Entry under orchestrator scheduling, monitoring and notification control by creating the matching orchestrator entry from it. Use it once for each Job Queue Entry that should be supervised; registering it again replaces the orchestrator entry with a fresh copy. Irreversible: the call commits.';
+        Overview := 'Brings an existing Job Queue Entry under orchestrator scheduling, monitoring and notification control by creating the matching orchestrator entry from it. Use it once for each Job Queue Entry that should be supervised; registering it again replaces the orchestrator entry with a fresh copy. Writes: the call commits.';
         exit(true);
     end;
 

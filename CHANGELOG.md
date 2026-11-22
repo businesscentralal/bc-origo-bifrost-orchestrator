@@ -5,6 +5,15 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #257
+
+### Changed
+- Effect reclassified by Gunnar's rule of 21.11.2026 ("Irreversible should only be posting actions"): `Orchestrator.Email.Send`, `Orchestrator.Telegram.Message`, `Purchase.Order.Send`, `Sales.Quote.Send`, `Sales.OrderConfirmation.Send`, `Orchestrator.Playbook.Run`, `Orchestrator.Workspace.Preview`, `Orchestrator.Entry.Register`, `Orchestrator.Entry.Restart`, `Orchestrator.Entry.Schedule`, `Orchestrator.Status.Restart` and `Orchestrator.Status.RestartIfNeeded` now declare `write`. `Orchestrator.Entry.Run` and `Orchestrator.Report.Run` stay `irreversible` because they run a caller-named job or report that can be a posting batch (Claude Code ruling on the issue).
+- The twelve types still accept `expectedCount` (no UnknownParameter for existing callers) and ignore it: no confirmation, also while Require Confirmation for Irreversible Messages is on, and `"expectedCount": "@preview"` runs them once. `Orchestrator.Status.RestartIfNeeded` no longer compares the count (reverts the #254 check).
+- Selection help in en-US and is-IS says "Writes." / "Skrifar." instead of "Irreversible." / "Óafturkræft." and drops the count sentence; the Overview texts and the `Help.Orchestrator.Get` sections on Omit Commit, confirm-from-preview and expectedCount are aligned.
+- The Omit Commit guard (`Playbook Effect Guard ori`, 10035554) keeps refusing every Orchestrator type that commits on its own execute path through its own list (`CommitsOnExecute`, new label `OmitCommitCommitsErr`), whatever the effect says; foreign `irreversible` types and missing or unknown effects are refused as before, and `IrreversibleWithoutConfirmation` still fires for foreign posting types.
+- No new objects. Contract helpers `CommittingEffect` (now `write`), `PostingCapableEffect` and `IgnoredExpectedCountParameter` in `Orch B1/B2 Contract Parts ori`. Test helper `Orch Dispatch Helper ori.ExecuteOnce`.
+
 ## [Unreleased] — Issue #254
 
 ### Fixed
