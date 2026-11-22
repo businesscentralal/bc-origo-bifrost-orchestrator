@@ -5,6 +5,16 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #262
+
+### Added
+- Data Copy: port of the Tools for Power Users data copy (`app/src/Data Copy/`, `app/src/Transformation Rule/` at b3533af), option B (Gunnar 22.11.2026). Same pages, fields, field order, captions (en-US and is-IS), actions and integration events as the original; names carry the `ori` affix, every page has `UsageCategory = None`, and every write goes through Bifrost Foundation's guarded `Data.Records.Set` (record JSON from Foundation's `Serializer ori`). No plain Insert/Modify on the destination, no `Permissions` property, no base-table permissions in the permission sets, no new message types.
+- New objects: table 10035632 `Copy Table Mapping ori`, table 10035633 `Copy Field Mapping ori`; page 10035612 `Copy Tables Mapping ori`, 10035613 `Copy Table Mapping Card ori`, 10035614 `Copy Fields Mapping ori`, 10035615 `Copy Tbl. Fields Selection ori`, 10035616 `Copy Table Templates ori`; codeunit 10035577 `Swap Amount Sign ori`, 10035578 `Copy Table Task ori`, 10035580 `Copy Table Progress Dialog ori`, 10035591 `Copy Table Job Queue ori`, 10035623 `Copy Table Events ori`, 10035624 `Internal Copy Table ori`; enum 10035625 and interface `Copy Table Data Transfer ori`; enumextension 10035606 `Swap Amount Sign ori` (Transformation Rule Type value 10035606). Test codeunit 96476 `Data Copy Tests ori`.
+- Permission sets `BIFROST PLAYB ADM` and `BIFROST ORCH MGT` grant the new objects (own tables RIMD only).
+
+### Changed
+- `Copy Plans ori` (10035580) is `UsageCategory = None`; playbook generation from a copy plan stays as an extra path.
+
 ## [Unreleased] — Issue #261
 
 ### Added

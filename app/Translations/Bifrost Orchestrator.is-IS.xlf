@@ -21,6 +21,102 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Client Credentials ori - Field Description - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3946899753 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Field Mapping</source>
+          <target>Afrita reit - vörpun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita reit - vörpun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 1511947150 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Mapping ID</source>
+          <target>Afrita töflu - vörpunarkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita töflu - vörpunarkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Copy Table Mapping ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2635100628 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Destination Field Caption field.</source>
+          <target>Tilgreinir gildi reitsins reitatexti viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins reitatexti viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Destination Field Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2635100628 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Field Caption</source>
+          <target>Texti viðtökureits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Texti viðtökureits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Destination Field Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2951992125 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Destination Field ID field.</source>
+          <target>Tilgreinir gildi reitsins reitakenni viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins reitakenni viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Destination Field ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2951992125 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Field ID</source>
+          <target>Kenni viðtökureits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kenni viðtökureits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Destination Field ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2771754529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Table ID</source>
+          <target>Töflukenni viðtökustaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflukenni viðtökustaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Destination Table ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2492540457 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Is Part Of Primary Key field.</source>
+          <target>Tilgreinir gildi reitsins hluti af frumlykli.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins hluti af frumlykli.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Is Part Of Primary Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 2492540457 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Is Part Of Primary Key</source>
+          <target>Er hluti af frumlykli</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Er hluti af frumlykli</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Is Part Of Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 4163973499 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Source Field Caption field.</source>
+          <target>Tilgreinir gildi reitsins reitatexti upprunastaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins reitatexti upprunastaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Source Field Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 4163973499 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Field Caption</source>
+          <target>Texti upprunareits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Texti upprunareits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Source Field Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 3784552926 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Source Field ID field.</source>
+          <target>Tilgreinir gildi reitsins reitakenni upprunastaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins reitakenni upprunastaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Source Field ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 3784552926 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Field ID</source>
+          <target>Kenni upprunareits</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kenni upprunareits</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Source Field ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 90601618 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table ID</source>
+          <target>Töflukenni upprunastaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflukenni upprunastaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Source Table ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 1420580905 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Transformation Rule field.</source>
+          <target>Tilgreinir gildi reitsins umbreytingarregla.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins umbreytingarregla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Transformation Rule - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3946899753 - Field 1420580905 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transformation Rule</source>
+          <target>Umbreytingarregla</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Umbreytingarregla</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Field Mapping ori - Field Transformation Rule - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3499757020 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Copy Plan Field</source>
           <target>Reitur afritunaráætlunar</target>
@@ -242,6 +338,180 @@
           <target>Upprunasýn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Upprunasýn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Copy Plan ori - Field Source View - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Mapping</source>
+          <target>Afrita töflu - vörpun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita töflu - vörpun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - NamedType 2405194813" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy data from %1 to %2?</source>
+          <target>Afrita gögn frá %1 til %2?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Source Table Caption, %2 = Destination Table Caption, is-IS=Afrita gögn frá %1 til %2?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - NamedType CopyDataQst</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - NamedType 1095609322" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specify criteria for when the template will be applied.</source>
+          <target>Tilgreina skilyrði um hvenær nota á sniðmátið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreina skilyrði um hvenær nota á sniðmátið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - NamedType DefineFiltersTxt</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - NamedType 1585409831" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete this table mapping because it has child table mappings.</source>
+          <target>Þú getur ekki eytt þessari töfluvörpun þar sem það eru til undirtöfluvarpanir sem tengjast þessari vörpun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú getur ekki eytt þessari töfluvörpun þar sem það eru til undirtöfluvarpanir sem tengjast þessari vörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - NamedType DeleteWithChildrenErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - NamedType 1660612816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 and %2 can not be the same table Id!</source>
+          <target>%1 og %2 geta ekki verið sama töflukennið!</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Parent Source Table ID, %2 = Source Table ID, is-IS=%1 og %2 geta ekki verið sama töflukennið!</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - NamedType SameTableIdErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 235015414 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Copy Method field.</source>
+          <target>Tilgreinir gildi reitsins afritunaraðferð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins afritunaraðferð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Copy Method - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 235015414 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Method</source>
+          <target>Afritunaraðferð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afritunaraðferð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Copy Method - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2756853695 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Data Template Code field.</source>
+          <target>Tilgreinir gildi reitsins kóti gagnasniðmáts.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins kóti gagnasniðmáts.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Data Template Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2756853695 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Data Template Code</source>
+          <target>Gagnasnið mátskóti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Gagnasnið mátskóti</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Data Template Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3342193144 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Destination Table Caption field.</source>
+          <target>Tilgreinir gildi reitsins töflutexti viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töflutexti viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Destination Table Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3342193144 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Table Caption</source>
+          <target>Texti viðtökustaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Texti viðtökustaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Destination Table Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2771754529 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Destination Table ID field.</source>
+          <target>Tilgreinir gildi reitsins töflukenni viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töflukenni viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Destination Table ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2771754529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Table ID</source>
+          <target>Töflukenni viðtökustaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflukenni viðtökustaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Destination Table ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3742946067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Has Children</source>
+          <target>Hefur undireiningar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hefur undireiningar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Has Children - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3641927271 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the unique identifier of the table mapping.</source>
+          <target>Tilgreinir einkvæmt kenni töfluvörpunarinnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir einkvæmt kenni töfluvörpunarinnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3641927271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ID</source>
+          <target>Kenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2200046723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Indentation</source>
+          <target>Inndráttur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Inndráttur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Indentation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2957152318 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Last Copy Time field.</source>
+          <target>Tilgreinir gildi reitsins síðast afritað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins síðast afritað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Last Copy Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 2957152318 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Copy Time</source>
+          <target>Síðast afritað</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Síðast afritað</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Last Copy Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 347837521 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Manual Copy field.</source>
+          <target>Tilgreinir gildi reitsins handvirkt afritað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins handvirkt afritað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Manual Copy - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 347837521 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual Copy</source>
+          <target>Afrita handvirkt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita handvirkt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Manual Copy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3640165302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Parent Source Table ID field.</source>
+          <target>Tilgreinir gildi reitsins töflukenni upprunastaðs foreldris.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töflukenni upprunastaðs foreldris.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Parent Source Table ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3640165302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parent Source Table ID</source>
+          <target>Kenni upprunastaðs foreldris</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Kenni upprunastaðs foreldris</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Parent Source Table ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 4203609468 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Presentation Order</source>
+          <target>Framsetningarröð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Framsetningarröð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Presentation Order - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3793209967 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Source Table Caption field.</source>
+          <target>Tilgreinir gildi reitsins töflutexti upprunastaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töflutexti upprunastaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Source Table Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 3793209967 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table Caption</source>
+          <target>Texti upprunastaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Texti upprunastaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Source Table Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 1144461605 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table Filter</source>
+          <target>Töfluafmörkun upprunastaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafmörkun upprunastaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Source Table Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 90601618 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Source Table ID field.</source>
+          <target>Tilgreinir gildi reitsins töflukenni upprunastaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töflukenni upprunastaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Source Table ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4188658997 - Field 90601618 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table ID</source>
+          <target>Töflukenni upprunastaðs</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflukenni upprunastaðs</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Copy Table Mapping ori - Field Source Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3364439874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost JQ Parameter</source>
@@ -1545,6 +1815,24 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Umbreyta afritunarreitum</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Plan Generator ori - NamedType TransformDescriptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1152855974 - NamedType 3022036506" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copying #1###### #2###### out of #3#######</source>
+          <target>Afritar #1###### #2###### af #3#######</target>
+          <note from="Developer" annotates="general" priority="2">#1######=Type of object copied; #2######=amount copied; #3#######=total amount to copy, is-IS=Afritar #1###### #2###### af #3#######</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Table Progress Dialog ori - NamedType ProgressCopyCountMaxMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1152855974 - NamedType 1184827862" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copying #1###### #2######</source>
+          <target>Afritar #1###### #2######</target>
+          <note from="Developer" annotates="general" priority="2">#1######=Type of object copied; #2######=amount copied, is-IS=Afritar #1###### #2######</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Table Progress Dialog ori - NamedType ProgressCopyCountMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1248143646 - Method 3032205413 - NamedType 2440517418" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data</source>
+          <target>Töflugögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Copy Table Task ori - Method StartDataTransfer - NamedType TableDataTok</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3483204542 - NamedType 831079534" size-unit="char" translate="yes" xml:space="preserve">
           <source>Business Central refuses to send, for example no e-mail account or no report for the Report Selection usage.</source>
           <target>Business Central hafnar sendingu, til dæmis vegna þess að tölvupóstreikning eða skýrslu fyrir skýrsluvalið vantar.</target>
@@ -2464,15 +2752,15 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType HeadingTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 60656952" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On **Bifrost Setup**, open **Related &gt; Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
-          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
+          <source>On **Bifrost Setup**, open **Related &gt; Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
+          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType SetupToolsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 2977294634" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On the **Bifrost Playbooks** list, open **Related &gt; Tools** for **Table Data** and **Copy Plans**. These tools are Web Client pages, not new message types.</source>
-          <target>Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</note>
+          <source>On the **Bifrost Playbooks** list, open **Related &gt; Tools** for **Table Data**, **Copy Tables Mapping** and **Copy Plans**. These tools are Web Client pages, not new message types.</source>
+          <target>Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType PlaybookToolsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 1357293956" size-unit="char" translate="yes" xml:space="preserve">
@@ -2480,6 +2768,12 @@
           <target>Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType ToolPermissionsTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2566759388 - NamedType 1603624325" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bifrost refused to write %1 in table %2: %3</source>
+          <target>Bifröst hafnaði því að skrifa %1 í töflu %2: %3</target>
+          <note from="Developer" annotates="general" priority="2">%1 = record key, %2 = table caption, %3 = Foundation refusal, is-IS=Bifröst hafnaði því að skrifa %1 í töflu %2: %3</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Internal Copy Table ori - NamedType RefusedErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1910912853 - Method 4183778207 - NamedType 1852605995" size-unit="char" translate="yes" xml:space="preserve">
           <source>%3 is not supported for %1 %2</source>
@@ -5097,6 +5391,24 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Categories ori - Control description - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1856127328 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Fields Mapping</source>
+          <target>Reitaafritun - vörpun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Reitaafritun - vörpun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Fields Mapping ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1856127328 - Action 973812875 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clears the Destination Field ID field.</source>
+          <target>Hreinsar reitarkenni viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hreinsar reitarkenni viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Fields Mapping ori - Action ClearDestinationMapping - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1856127328 - Action 973812875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear Destination Mapping</source>
+          <target>Hreinsa vörpun viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hreinsa vörpun viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Fields Mapping ori - Action ClearDestinationMapping - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3082714482 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Copy Plan</source>
           <target>Afritunaráætlun</target>
@@ -5144,6 +5456,204 @@
           <target>Afritunaráætlanir</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Copy Plans ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Mapping Card</source>
+          <target>Töfluvörpunarspjald</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluvörpunarspjald</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target>Almennt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Almennt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Control 1144461605 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Source Table Filter field.</source>
+          <target>Tilgreinir gildi reitsins töfluafmörkun upprunastaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töfluafmörkun upprunastaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Control Source Table Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Control 1144461605 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table Filter</source>
+          <target>Töfluafmörkun upprunastaðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafmörkun upprunastaðar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Control Source Table Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Action 2573355370 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View or edit the field mapping for the selected table mapping.</source>
+          <target>Skoða eða breyta reitavörpun fyrir valda töfluvörpun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða eða breyta reitavörpun fyrir valda töfluvörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Action FieldMapping - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Action 2573355370 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Mapping</source>
+          <target>Vörpun reita</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vörpun reita</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Action FieldMapping - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Action 3421721381 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy data from the source table to the destination table.</source>
+          <target>Afrita gögn frá upprunastað til viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita gögn frá upprunastað til viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Action CopyTableData - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Action 3421721381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Data</source>
+          <target>Afrita töfluggögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita töfluggögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Action CopyTableData - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Action 3049229744 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show the source table filter as a view to be used in development.</source>
+          <target>Sýna töfluafmörkun upprunastaðar sem sjónarhorn til notkunar í forritun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýna töfluafmörkun upprunastaðar sem sjónarhorn til notkunar í forritun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Action ShowFilterAsView - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2003977017 - Action 3049229744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Filter as View</source>
+          <target>Sýna afmörkun sem sjónarhorn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýna afmörkun sem sjónarhorn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Mapping Card ori - Action ShowFilterAsView - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2577868096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Templates</source>
+          <target>Töfluafritun - sniðmát</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafritun - sniðmát</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Templates ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2577868096 - Control 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Code field</source>
+          <target>Tilgreinir gildi reitsins kóti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins kóti</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Templates ori - Control Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2577868096 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Description field</source>
+          <target>Tilgreinir gildi reitsins lýsing</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins lýsing</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Templates ori - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2577868096 - Control 2891538263 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Enabled field</source>
+          <target>Tilgreinir gildi reitsins virkt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins virkt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Table Templates ori - Control Enabled - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Tables Mapping</source>
+          <target>Töfluafritun - vörpun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafritun - vörpun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Control 2781636452 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Data Template field</source>
+          <target>Tilgreinir gildi reitsins gagnasniðmát</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins gagnasniðmát</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Control Data Template - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Control 2781636452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Data Template</source>
+          <target>Gagnasniðmát</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Gagnasniðmát</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Control Data Template - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Control 1144461605 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Source Table Filter field.</source>
+          <target>Tilgreinir gildi reitsins töfluafmörkun upprunastaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins töfluafmörkun upprunastaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Control Source Table Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Control 1144461605 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Table Filter</source>
+          <target>Töfluafmörkun upprunastaðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafmörkun upprunastaðar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Control Source Table Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 2573355370 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View or edit the field mapping for the selected table mapping.</source>
+          <target>Skoða eða breyta reitavörpun fyrir valda töfluvörpun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skoða eða breyta reitavörpun fyrir valda töfluvörpun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action FieldMapping - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 2573355370 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Mapping</source>
+          <target>Vörpun reita</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vörpun reita</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action FieldMapping - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 3421721381 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy data from the source table to the destination table.</source>
+          <target>Afrita gögn frá upprunastað til viðtökustaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita gögn frá upprunastað til viðtökustaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action CopyTableData - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 3421721381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Data</source>
+          <target>Afrita töfluggögn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afrita töfluggögn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action CopyTableData - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 3421721381 - Method 1377591017 - NamedType 2405194813" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy data for %1 table(s)?</source>
+          <target>Afrita gögn fyrir %1 töflu(r)?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = No. of tables selected, is-IS=Afrita gögn fyrir %1 töflu(r)?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action CopyTableData - Method OnAction - NamedType CopyDataQst</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 2986646893 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Update the tree of table mapping based on recent changes.</source>
+          <target>Uppfæra vörpunartré sem byggist á nýlegum breytingum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppfæra vörpunartré sem byggist á nýlegum breytingum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action Recalculate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 2986646893 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Recalculate</source>
+          <target>Endurreikna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Endurreikna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action Recalculate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 3049229744 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show the source table filter as a view to be used in development.</source>
+          <target>Sýna töfluafmörkun upprunastaðar sem sjónarhorn til notkunar í forritun.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýna töfluafmörkun upprunastaðar sem sjónarhorn til notkunar í forritun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action ShowFilterAsView - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3641486060 - Action 3049229744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Filter as View</source>
+          <target>Sýna afmörkun sem sjónarhorn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýna afmörkun sem sjónarhorn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tables Mapping ori - Action ShowFilterAsView - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 767494280 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Table Field Selection</source>
+          <target>Velja afritaða reiti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Velja afritaða reiti</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tbl. Fields Selection ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 767494280 - Control 823559016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the field.</source>
+          <target>Tilgreinir heiti reitsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir heiti reitsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tbl. Fields Selection ori - Control Field Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 767494280 - Control 823559016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target>Heiti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Heiti</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tbl. Fields Selection ori - Control Field Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 767494280 - Control 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the No. field</source>
+          <target>Tilgreinir gildi reitsins reitanúmer</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins reitanúmer</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tbl. Fields Selection ori - Control No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 767494280 - Control 1878130204 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Type field</source>
+          <target>Tilgreinir gildi reitsins reitategund</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir gildi reitsins reitategund</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Copy Tbl. Fields Selection ori - Control Type - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3564186828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client Credentials Card</source>
@@ -6536,6 +7046,18 @@
           <target>Afritunaráætlanir</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyPlans - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 1021686464 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Map source tables to destination tables and copy their data through the Bifrost write guards.</source>
+          <target>Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyTablesMapping - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 1021686464 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy Tables Mapping</source>
+          <target>Töfluafritun - vörpun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafritun - vörpun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyTablesMapping - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View, edit, export and import table data within your permissions.</source>
@@ -10947,6 +11469,18 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1021686464 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Map source tables to destination tables and copy their data through the Bifrost write guards.</source>
+          <target>Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyTablesMapping - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 1021686464 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Copy Tables Mapping</source>
+          <target>Töfluafritun - vörpun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Töfluafritun - vörpun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyTablesMapping - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>View the execution log for playbook runs.</source>
           <target>Skoða keyrsluskrá keðjukeyrslna.</target>
@@ -11000,6 +11534,12 @@
           <target>Telegram-spjallauðkenni</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Telegram-spjallauðkenni</note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension User Setup Ext ori - Field Telegram Chat ID ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2990303016 - EnumValue 990296649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Internal</source>
+          <target>Innanhúss</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Innanhúss</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Copy Table Data Transfer ori - EnumValue Internal - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 1845063620 - EnumValue 1472620112 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>EMail</source>
@@ -11204,6 +11744,12 @@
           <target>Bifröst keðja</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðja</note>
           <note from="Xliff Generator" annotates="general" priority="3">EnumExtension RequestLogType.EnumExt ori - EnumValue Orchestrator Playbook - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="EnumExtension 1122262538 - EnumValue 1122262538 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 1006768881">
+          <source>Swap Amount Sign</source>
+          <target>Breyta formerki upphæðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Breyta formerki upphæðar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">EnumExtension Swap Amount Sign ori - EnumValue Swap Amount Sign ori - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 1202486007 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Orchestrator</source>

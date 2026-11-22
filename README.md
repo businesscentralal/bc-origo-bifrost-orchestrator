@@ -678,6 +678,32 @@ stored defaults are preserved, including on rendering failure. Existing
 and `setAsDefault` are non-goals for #5 because no supported public platform API
 is available; revisit only when Microsoft exposes one.
 
+## Data copy (Copy Tables Mapping)
+
+A port of the Tools for Power Users data copy (#262). In the Web Client, **Bifrost Setup > Related > Tools**
+(or **Bifrost Playbooks > Related > Tools**) opens **Copy Tables Mapping**. Each row maps a source table to a
+destination table; the list is an indented parent/child tree with root and parent rows in bold, sorted by
+presentation order (**Recalculate** rebuilds the tree).
+
+- **Source Table Filter** opens the filter dialog; the filter is stored as request-page parameters, and
+  **Show Filter as View** shows it as a table view.
+- Setting the source and destination table creates one field line for every normal, enabled, non-obsolete
+  source field and matches the destination field by number and compatible type (text/code of at least the
+  same length, integer to integer or big integer, otherwise the same type). **Field Mapping** opens
+  **Copy Fields Mapping**, where **Clear Destination Mapping** removes a match and a BC **Transformation Rule**
+  can be set per field. The rule type **Swap Amount Sign** turns 100 into -100 and back.
+- **Data Template** applies a configuration template (Copy Table Templates) when a record is inserted.
+- **Copy Table Data** matches each filtered source record on the destination primary key. A new record gets the
+  template and the mapped values; an existing record is updated only when a mapped value changed, and an
+  unchanged one is not written. **Last Copy Time** is stamped and a progress dialog is shown.
+- Every write goes through Bifrost Foundation's **Data.Records.Set** (the change log write guard, field and
+  write-once restrictions and the user's permissions apply). A refusal stops the copy with Foundation's message.
+  The data copy grants no base-table permissions.
+- **Copy Method** is an extensible enum and interface (`Copy Table Data Transfer ori`); **Internal** is the guarded
+  copy. Integration events are kept from the original.
+- Job queue: codeunit **Copy Table Job Queue ori** (10035591) copies the mapping in *Record ID to Process*, or every
+  mapping not marked **Manual Copy**, parents before children.
+
 ## Copy plans
 
 Open **Copy Plans**, create a plan, choose source and destination tables, and add field mappings.
@@ -735,4 +761,4 @@ a released Foundation version containing public `Serializer ori` and are not inc
 
 ### Tools navigation
 
-In the Web Client, **Bifrost Setup > Related > Bifrost Playbooks** opens the playbook list and sits before the **Tools** group; **Related > Tools** opens **Playbook Execution Log**, **Table Data** and **Copy Plans**. The **Bifrost Playbooks** list also has **Related > Tools** for **Table Data** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**. Actions follow the target page permissions: Table Data is for Playbook Admin; Copy Plans is also readable by Playbook View. Both roles include Execute on the Copy Plan table for navigation, with their existing data access unchanged. `Help.Orchestrator.Get` includes this navigation guide in English and Icelandic.
+In the Web Client, **Bifrost Setup > Related > Bifrost Playbooks** opens the playbook list and sits before the **Tools** group; **Related > Tools** opens **Playbook Execution Log**, **Table Data**, **Copy Tables Mapping** and **Copy Plans**. The **Bifrost Playbooks** list also has **Related > Tools** for **Table Data**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**. Actions follow the target page permissions: Table Data is for Playbook Admin; Copy Plans is also readable by Playbook View. Both roles include Execute on the Copy Plan table for navigation, with their existing data access unchanged. `Help.Orchestrator.Get` includes this navigation guide in English and Icelandic.
