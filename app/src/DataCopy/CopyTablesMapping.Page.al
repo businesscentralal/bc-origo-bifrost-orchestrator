@@ -14,6 +14,7 @@ page 10035612 "Copy Tables Mapping ori"
     SourceTable = "Copy Table Mapping ori";
     SourceTableView = sorting("Presentation Order") order(ascending);
     UsageCategory = None;
+    ContextSensitiveHelpPage = 'playbooks';
 
     layout
     {

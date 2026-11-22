@@ -14,6 +14,7 @@ page 10035613 "Copy Table Mapping Card ori"
     PageType = Card;
     SourceTable = "Copy Table Mapping ori";
     UsageCategory = None;
+    ContextSensitiveHelpPage = 'playbooks';
 
     layout
     {

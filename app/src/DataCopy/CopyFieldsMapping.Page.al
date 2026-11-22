@@ -11,6 +11,7 @@ page 10035614 "Copy Fields Mapping ori"
     PageType = List;
     SourceTable = "Copy Field Mapping ori";
     UsageCategory = None;
+    ContextSensitiveHelpPage = 'playbooks';
 
     layout
     {

@@ -14,6 +14,7 @@ page 10035616 "Copy Table Templates ori"
     PageType = List;
     SourceTable = "Config. Template Header";
     UsageCategory = None;
+    ContextSensitiveHelpPage = 'playbooks';
 
     layout
     {

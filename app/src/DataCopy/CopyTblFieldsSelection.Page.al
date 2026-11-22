@@ -14,6 +14,7 @@ page 10035615 "Copy Tbl. Fields Selection ori"
     PageType = List;
     SourceTable = "Field";
     UsageCategory = None;
+    ContextSensitiveHelpPage = 'playbooks';
 
     layout
     {
