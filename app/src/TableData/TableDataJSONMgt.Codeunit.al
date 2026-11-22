@@ -179,8 +179,8 @@ codeunit 10035604 "Table Data JSON Mgt ori"
     /// <returns>The key, as the original tool writes it.</returns>
     internal procedure GetFileKey(TableNo: Integer): Text
     var
-        TableDataMgt: Codeunit "Table Data Mgt ori";
         AllObj: Record AllObjWithCaption;
+        TableDataMgt: Codeunit "Table Data Mgt ori";
     begin
         AllObj.SetLoadFields("Object Name");
         AllObj.Get(AllObj."Object Type"::Table, TableNo);
