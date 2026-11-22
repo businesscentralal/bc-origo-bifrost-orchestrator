@@ -434,16 +434,23 @@ table 10035632 "Copy Table Mapping ori"
     /// <summary>Sets Indentation on this record and, recursively, on its child mappings.</summary>
     /// <param name="Level">The indentation level (0 = root).</param>
     procedure UpdateIndentationTree(Level: Integer)
+    begin
+        Indentation := Level;
+        UpdateChildIndentation(Level + 1);
+    end;
+
+    /// <summary>Sets and saves Indentation on the child mappings of this record and, recursively, on their children.</summary>
+    /// <param name="ChildLevel">The indentation level of the direct children.</param>
+    internal procedure UpdateChildIndentation(ChildLevel: Integer)
     var
         TableMapping: Record "Copy Table Mapping ori";
     begin
-        Indentation := Level;
-
         TableMapping.SetRange("Parent Source Table ID", "Source Table ID");
         if TableMapping.FindSet() then
             repeat
-                TableMapping.UpdateIndentationTree(Level + 1);
+                TableMapping.Indentation := ChildLevel;
                 TableMapping.Modify(false);
+                TableMapping.UpdateChildIndentation(ChildLevel + 1);
             until TableMapping.Next() = 0;
     end;
 

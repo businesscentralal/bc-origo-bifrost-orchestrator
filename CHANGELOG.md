@@ -5,6 +5,14 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #266
+
+### Fixed
+- CodeCop warnings from the #261 and #262 ports, without suppressions or ruleset changes: AA0214 in `Copy Table Mapping ori` (10035632) `UpdateIndentationTree` (each child mapping now gets its Indentation set before `Modify`, through the new internal procedure `UpdateChildIndentation`; same results), AA0021 in `Table Data JSON Mgt ori` `GetFileKey` (variable order), and AA0215 file names: `BIFROSTTblDataRd.PermissionSet.al` is now `BIFROSTTblReadori.PermissionSet.al` and test `OrchTblDataTestori.PermissionSet.al` is now `OrchTblDataTori.PermissionSet.al` (object names and IDs unchanged).
+
+### Added
+- Test codeunit 96459 `Copy Mapping Indent Tests ori`: linking a mapping that has a child under a root saves Indentation 1 and 2 down the chain.
+
 ## [Unreleased] — Issue #262
 
 ### Added
