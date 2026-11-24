@@ -45,7 +45,7 @@ codeunit 96463 "Table Data Nav Tests ori"
         Rows: JsonArray;
     begin
         LowerPermissions.StartLoggingNAVPermissions();
-        LowerPermissions.SetO365Basic();
+        LowerPermissions.SetExactPermissionSet('LOGIN');
         LowerPermissions.AddPermissionSet('BIFROST TblRead ori');
         // Parent-page access and the owned export fixture grant no table-management permissions.
         LowerPermissions.AddPermissionSet('Orch NoTools ori');
