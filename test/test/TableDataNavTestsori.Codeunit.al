@@ -43,16 +43,16 @@ codeunit 96463 "Table Data Nav Tests ori"
         Management: TestPage "Table Data Management ori";
         Rows: JsonArray;
     begin
-        Marker.Init();
-        Marker.Source := 'X268-READ';
-        Marker.Insert(true);
-        Marker.SetRange(Source, Marker.Source);
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetO365Basic();
         LowerPermissions.AddPermissionSet('BIFROST TblRead ori');
         // Parent-page access and the owned export fixture grant no table-management permissions.
         LowerPermissions.AddPermissionSet('Orch NoTools ori');
         LowerPermissions.AddPermissionSet('Orch TblDataT ori');
+        Marker.Init();
+        Marker.Source := 'X268-READ';
+        Marker.Insert(true);
+        Marker.SetRange(Source, Marker.Source);
         Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions are lowered');
         AccessTo.AssertReadAccess();
         asserterror AccessTo.AssertModifyAccess();

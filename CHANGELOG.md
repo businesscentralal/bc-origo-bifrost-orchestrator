@@ -5,7 +5,7 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — Issue #268
+## [28.0.7.0] - 2026-11-24 — Issue #268
 
 ### Fixed
 - **Table Data / Töflugögn** on Bifrost Setup and Bifrost Playbooks now opens Table Data Management (10035627), gated by that page's execute permission. The original worksheet (10035569) remains available beside it as **Table Data Worksheet / Vinnublað töflugagna** with its existing permissions. No page UsageCategory or message contract changed.
