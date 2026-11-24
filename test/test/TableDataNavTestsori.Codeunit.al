@@ -43,6 +43,9 @@ codeunit 96463 "Table Data Nav Tests ori"
         Playbooks: TestPage "Playbooks ori";
         Management: TestPage "Table Data Management ori";
         Rows: JsonArray;
+        RowToken: JsonToken;
+        SourceToken: JsonToken;
+        OwnedRows: Integer;
     begin
         LowerPermissions.StartLoggingNAVPermissions();
         LowerPermissions.SetExactPermissionSet('LOGIN');
@@ -74,8 +77,12 @@ codeunit 96463 "Table Data Nav Tests ori"
         asserterror EditMgt.SaveCell(Database::"Test Run Marker", Marker.SystemId, Marker.FieldNo(Source), 'X268-DENIED');
         Assert.ExpectedError('modify access');
         ClearLastError();
-        Rows := JsonMgt.ExportRows(Database::"Test Run Marker", false, Marker.GetView(false), TempFilter);
-        Assert.AreEqual(1, Rows.Count(), 'Read role exports exactly its owned row');
+        Rows := JsonMgt.ExportRows(Database::"Test Run Marker", false, '', TempFilter);
+        foreach RowToken in Rows do
+            if RowToken.SelectToken('Fields.Source', SourceToken) then
+                if SourceToken.AsValue().AsText() = 'X268-READ' then
+                    OwnedRows += 1;
+        Assert.AreEqual(1, OwnedRows, 'Read role exports its owned row exactly once');
         Marker.Get(Marker."Entry No.");
         Assert.AreEqual('X268-READ', Marker.Source, 'The refused edit leaves the exported record unchanged');
         Management.Close();
