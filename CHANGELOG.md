@@ -12,6 +12,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Runtime help (10035576), README and Icelandic translations describe both paths and the read/export access granted by BIFROST TblRead ori.
 
 - The navigation tests retain access to Library Assert under lowered permissions, so the read/export and missing-role checks verify product permissions without failing on the assertion library.
+- **BIFROST TblRead ori** (10035540) now grants execute on the Serializer codeunit that the JSON export uses, so a read-only user can export; the AC03 test adds Foundation BIFROST Read ori and change-log fixture permissions.
 
 ### Added
 - Test codeunit 96463 `Table Data Nav Tests ori`: bilingual TestPage navigation, empty-list navigation, read-only export, missing-permission refusal and help regressions. Existing worksheet tests follow the distinct worksheet action. No new product objects.
