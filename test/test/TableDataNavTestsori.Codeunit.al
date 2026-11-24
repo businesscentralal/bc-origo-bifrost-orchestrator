@@ -38,6 +38,7 @@ codeunit 96463 "Table Data Nav Tests ori"
         TempFilter: Record "Table Data Edit ori" temporary;
         AccessTo: Record "Table Data Access ori";
         JsonMgt: Codeunit "Table Data JSON Mgt ori";
+        EditMgt: Codeunit "Table Data Edit Mgt ori";
         LowerPermissions: Codeunit "Library - Lower Permissions";
         Playbooks: TestPage "Playbooks ori";
         Management: TestPage "Table Data Management ori";
@@ -49,6 +50,8 @@ codeunit 96463 "Table Data Nav Tests ori"
         // Parent-page access and the owned export fixture grant no table-management permissions.
         LowerPermissions.AddPermissionSet('Orch NoTools ori');
         LowerPermissions.AddPermissionSet('Orch TblDataT ori');
+        Marker.SetRange(Source, 'X268-READ');
+        Marker.DeleteAll(true);
         Marker.Init();
         Marker.Source := 'X268-READ';
         Marker.Insert(true);
@@ -65,9 +68,14 @@ codeunit 96463 "Table Data Nav Tests ori"
         Management.Filter.SetFilter(ID, Format(Database::"Test Run Marker", 0, 9));
         Assert.IsTrue(Management.First(), 'Owned table is listed');
         Assert.IsTrue(Management.ExportRecordsJSONAction.Visible(), 'Read role sees JSON export');
-        Assert.IsFalse(Management.EditRecords.Enabled(), 'Read role cannot edit');
+        // The existing Edit records entry can open a viewer; the write boundary must refuse changes.
+        asserterror EditMgt.SaveCell(Database::"Test Run Marker", Marker.SystemId, Marker.FieldNo(Source), 'X268-DENIED');
+        Assert.ExpectedError('modify access');
+        ClearLastError();
         Rows := JsonMgt.ExportRows(Database::"Test Run Marker", false, Marker.GetView(false), TempFilter);
         Assert.AreEqual(1, Rows.Count(), 'Read role exports exactly its owned row');
+        Marker.Get(Marker."Entry No.");
+        Assert.AreEqual('X268-READ', Marker.Source, 'The refused edit leaves the exported record unchanged');
         Management.Close();
         asserterror Playbooks.TableDataWorksheet.Invoke();
         Assert.ExpectedError('The action with ID');
