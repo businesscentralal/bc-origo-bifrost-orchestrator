@@ -2752,21 +2752,21 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType HeadingTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 60656952" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On **Bifrost Setup**, open **Related &gt; Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
-          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
+          <source>On **Bifrost Setup**, open **Related &gt; Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data**, **Table Data Worksheet**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
+          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType SetupToolsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 2977294634" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On the **Bifrost Playbooks** list, open **Related &gt; Tools** for **Table Data**, **Copy Tables Mapping** and **Copy Plans**. These tools are Web Client pages, not new message types.</source>
-          <target>Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</note>
+          <source>On the **Bifrost Playbooks** list, open **Related &gt; Tools** for **Table Data**, **Table Data Worksheet**, **Copy Tables Mapping** and **Copy Plans**. These tools are Web Client pages, not new message types.</source>
+          <target>Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á listanum **Bifröst keðjur** skaltu opna **Tengt &gt; Verkfæri** til að finna **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. Þessi verkfæri eru síður í vefbiðlara, ekki nýjar skilaboðategundir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType PlaybookToolsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 1357293956" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Tools follow your page permissions. **Table Data** requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.</source>
-          <target>Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** krefjast heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</note>
+          <source>Tools follow your page permissions. **Table Data** opens **Table Data Management** (table list, audit fields, date filters and Permissions FactBox). **BIFROST TblRead ori** grants view and export; **Bifrost Playbook Admin** also grants edit and import. **Table Data Worksheet** opens the original single-table worksheet and requires **Bifrost Playbook Admin**; **Copy Plans** is also available to **Bifrost Playbook View** for reading. Ask your administrator for access if an action is unavailable. Table and field permissions still apply.</source>
+          <target>Verkfæri fylgja síðuheimildum þínum. **Töflugögn** opna **Vinna með töflugögn** (töflulista, eftirlitsreiti, dagsetningarafmarkanir og upplýsingareitinn Heimildir). **BIFROST TblRead ori** veitir skoðunar- og útflutningsheimildir; **Bifröst keðjustjórnandi** veitir einnig breytinga- og innflutningsheimildir. **Vinnublað töflugagna** opnar upphaflega vinnublaðið fyrir eina töflu og krefst heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri fylgja síðuheimildum þínum. **Töflugögn** opna **Vinna með töflugögn** (töflulista, eftirlitsreiti, dagsetningarafmarkanir og upplýsingareitinn Heimildir). **BIFROST TblRead ori** veitir skoðunar- og útflutningsheimildir; **Bifröst keðjustjórnandi** veitir einnig breytinga- og innflutningsheimildir. **Vinnublað töflugagna** opnar upphaflega vinnublaðið fyrir eina töflu og krefst heimildasamstæðunnar **Bifröst keðjustjórnandi**; **Afritunaráætlanir** eru einnig aðgengilegar til lestrar með **Bifröst keðjuskoðun**. Leitaðu til kerfisstjóra ef aðgerð er ekki aðgengileg. Töflu- og reitaheimildir gilda áfram.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType ToolPermissionsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2566759388 - NamedType 1603624325" size-unit="char" translate="yes" xml:space="preserve">
@@ -7060,9 +7060,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action CopyTablesMapping - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>View, edit, export and import table data within your permissions.</source>
-          <target>Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</note>
+          <source>Open Table Data Management to view, filter and export tables, or edit and import with write access.</source>
+          <target>Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableData - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 608463566 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -7070,6 +7070,18 @@
           <target>Töflugögn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableData - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 441680100 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the single-table worksheet to browse and edit records within your permissions.</source>
+          <target>Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableDataWorksheet - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 441680100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Data Worksheet</source>
+          <target>Vinnublað töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vinnublað töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action TableDataWorksheet - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 905065511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Queue Recurring Template</source>
@@ -11494,9 +11506,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action PlaybookInstances - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
-          <source>View, edit, export and import table data within your permissions.</source>
-          <target>Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.</note>
+          <source>Open Table Data Management to view, filter and export tables, or edit and import with write access.</source>
+          <target>Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
@@ -11504,6 +11516,18 @@
           <target>Töflugögn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 441680100 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Open the single-table worksheet to browse and edit records within your permissions.</source>
+          <target>Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableDataWorksheet - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2327273444 - Action 441680100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Table Data Worksheet</source>
+          <target>Vinnublað töflugagna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vinnublað töflugagna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableDataWorksheet - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Configure Bifrost Orchestrator: job queue scheduling, playbooks, client credentials and secrets.</source>

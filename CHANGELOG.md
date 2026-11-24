@@ -5,6 +5,18 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #268
+
+### Fixed
+- **Table Data / Töflugögn** on Bifrost Setup and Bifrost Playbooks now opens Table Data Management (10035627), gated by that page's execute permission. The original worksheet (10035569) remains available beside it as **Table Data Worksheet / Vinnublað töflugagna** with its existing permissions. No page UsageCategory or message contract changed.
+- Runtime help (10035576), README and Icelandic translations describe both paths and the read/export access granted by BIFROST TblRead ori.
+
+- The navigation tests retain access to Library Assert under lowered permissions, so the read/export and missing-role checks verify product permissions without failing on the assertion library.
+- **BIFROST TblRead ori** (10035540) now grants execute on the Serializer codeunit that the JSON export uses, so a read-only user can export; the AC03 test adds Foundation BIFROST Read ori and change-log fixture permissions.
+
+### Added
+- Test codeunit 96463 `Table Data Nav Tests ori`: bilingual TestPage navigation, empty-list navigation, read-only export, missing-permission refusal and help regressions. Existing worksheet tests follow the distinct worksheet action. No new product objects.
+
 ## [Unreleased] — Issue #266
 
 ### Fixed

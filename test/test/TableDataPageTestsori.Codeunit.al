@@ -55,7 +55,7 @@ codeunit 96448 "Table Data Page Tests ori"
         // [WHEN] The viewer opens Playbooks.
         Playbooks.OpenView();
         // [THEN] Only the permitted tool is offered and can be opened.
-        asserterror Playbooks.TableData.Invoke();
+        asserterror Playbooks.TableDataWorksheet.Invoke();
         Assert.ExpectedError('The action with ID');
         ClearLastError();
         Assert.IsTrue(Plan.ReadPermission(), 'The viewer has Copy Plan read permission');
@@ -106,7 +106,7 @@ codeunit 96448 "Table Data Page Tests ori"
         asserterror Playbooks.CopyPlans.Invoke();
         Assert.ExpectedError('The action with ID');
         ClearLastError();
-        asserterror Playbooks.TableData.Invoke();
+        asserterror Playbooks.TableDataWorksheet.Invoke();
         Assert.ExpectedError('The action with ID');
         ClearLastError();
         Playbooks.Close();
@@ -129,7 +129,7 @@ codeunit 96448 "Table Data Page Tests ori"
         if FromSetup then begin
             Setup.OpenView();
             TableData.Trap();
-            Setup.TableData.Invoke();
+            Setup.TableDataWorksheet.Invoke();
             TableData.PageSizeField.AssertEquals(50);
             TableData.Close();
             CopyPlans.Trap();
@@ -148,7 +148,7 @@ codeunit 96448 "Table Data Page Tests ori"
             Playbooks.Filter.SetFilter(Code, 'X199-NO-PLAYBOOK');
             Assert.IsFalse(Playbooks.First(), 'The navigation test uses an empty list');
             TableData.Trap();
-            Playbooks.TableData.Invoke();
+            Playbooks.TableDataWorksheet.Invoke();
             // [THEN] The target starts with its normal empty table selection and default page size.
             TableData.PageSizeField.AssertEquals(50);
             TableData.Close();

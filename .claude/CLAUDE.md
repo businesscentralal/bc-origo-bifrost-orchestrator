@@ -30,6 +30,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 - #261 (Table Data Management port): app tables 10035630-10035631, pages 10035627-10035631, codeunits 10035601, 10035602,
   10035604, 10035605, 10035608, permission set 10035540; test codeunit 96449, test permission set 96493 (checked against the
   sources of main on 2026-11-22; the free lists above are older than the sources, which are authoritative).
+- #268: test codeunit 96463 `Table Data Nav Tests ori`.
 - #266: test codeunit 96459 `Copy Mapping Indent Tests ori`.
 - Used test ids: 96400-96404, 96410-96426, 96428, 96450-96454, 96490-96492.
   **Free: 96405-96409, 96429-96449, 96455-96489, 96493-96499.**
@@ -55,7 +56,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 - The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) adds the Apps action
   `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in `addlast(Category_Apps)`,
   and, in Navigate (`addlast(Navigation)`), the `Playbooks` action opening `Playbooks ori` directly before the Tools group (#260), whose actions open
-  `Playbook Instances ori`, `Table Data ori` and `Copy Plans ori`. Existing action names are retained. No layout changes, no notification and **no `ContextSensitiveHelpPage`
+  `Playbook Instances ori`, `Table Data Management ori`, the separate `Table Data ori` worksheet, `Copy Tables Mapping ori` and `Copy Plans ori`. Existing action names are retained. No layout changes, no notification and **no `ContextSensitiveHelpPage`
   override** - that property belongs to Foundation's own page. Client credentials, secrets and the
   setup wizard stay on `Scheduler Setup ori`.
 - `Scheduler Setup ori` (page 10035536, caption *Bifrost Orchestrator Setup*, help slug `nornir-setup`) is

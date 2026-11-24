@@ -5,6 +5,8 @@
 /// </summary>
 namespace Origo.Bifrost.Orchestrator;
 
+using Origo.Bifrost;
+
 permissionset 10035540 "BIFROST TblRead ori"
 {
     Caption = 'Bifrost Table Data Read', Comment = 'is-IS=Bifröst töflugögn lestur';
@@ -23,5 +25,6 @@ permissionset 10035540 "BIFROST TblRead ori"
         codeunit "Table Data Filter Mgt ori" = X,
         codeunit "Table Data Edit Mgt ori" = X,
         codeunit "Table Data JSON Mgt ori" = X,
-        codeunit "Table Data Excel Export ori" = X;
+        codeunit "Table Data Excel Export ori" = X,
+        codeunit "Serializer ori" = X;
 }
