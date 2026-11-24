@@ -56,6 +56,8 @@ codeunit 96463 "Table Data Nav Tests ori"
         Marker.Source := 'X268-READ';
         Marker.Insert(true);
         Marker.SetRange(Source, Marker.Source);
+        // Expected permission errors roll back the transaction; retain the owned fixture until explicit cleanup.
+        Commit();
         Assert.IsTrue(LowerPermissions.HasChangedPermissions(), 'Permissions are lowered');
         AccessTo.AssertReadAccess();
         asserterror AccessTo.AssertModifyAccess();
@@ -83,6 +85,7 @@ codeunit 96463 "Table Data Nav Tests ori"
         Playbooks.Close();
         LowerPermissions.StopLoggingNAVPermissions();
         Marker.Delete(true);
+        Commit();
     end;
 
     /// <summary>AC03: parent-page access alone neither exposes the tool nor permits export.</summary>
