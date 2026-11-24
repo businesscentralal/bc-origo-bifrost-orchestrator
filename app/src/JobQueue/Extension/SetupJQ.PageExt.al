@@ -40,8 +40,17 @@ pageextension 10035537 "Setup JQ ori" extends "Setup ori"
                 {
                     ApplicationArea = All;
                     Caption = 'Table Data', Comment = 'is-IS=Töflugögn';
-                    ToolTip = 'View, edit, export and import table data within your permissions.', Comment = 'is-IS=Skoða, breyta, flytja út og flytja inn töflugögn innan heimilda þinna.';
+                    ToolTip = 'Open Table Data Management to view, filter and export tables, or edit and import with write access.', Comment = 'is-IS=Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.';
                     Image = Table;
+                    RunObject = page "Table Data Management ori";
+                    AccessByPermission = page "Table Data Management ori" = X;
+                }
+                action(TableDataWorksheet)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Table Data Worksheet', Comment = 'is-IS=Vinnublað töflugagna';
+                    ToolTip = 'Open the single-table worksheet to browse and edit records within your permissions.', Comment = 'is-IS=Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.';
+                    Image = Worksheet;
                     RunObject = page "Table Data ori";
                     AccessByPermission = page "Table Data ori" = X;
                 }
