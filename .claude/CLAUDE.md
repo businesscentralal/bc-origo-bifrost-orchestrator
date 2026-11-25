@@ -255,3 +255,7 @@ Key rules always in effect:
 ## Report contract regression tests (#235)
 
 - Test codeunit 96499 `Report Contract 235 Tests ori` verifies bilingual report/layout help and response contracts.
+
+## Report output regression tests (#239)
+
+- Test codeunit 96464 `Report Output 239 Tests ori` verifies format-specific MIME types and rendered byte lengths.

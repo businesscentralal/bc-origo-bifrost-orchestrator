@@ -59,11 +59,11 @@ codeunit 96499 "Report Contract 235 Tests ori"
         VerifyErrors(1039);
     end;
 
-    /// <summary>XML keeps the legacy binary envelope and actual XML bytes until issue 239.</summary>
+    /// <summary>XML declares its actual content type and retains XML bytes.</summary>
     [Test]
     procedure SaveAsXmlContentType()
     begin
-        VerifyOutput('XML', 'application/pdf', '<?xml');
+        VerifyOutput('XML', 'application/xml', '<?xml');
     end;
 
     /// <summary>PDF remains binary PDF for existing callers.</summary>
@@ -73,18 +73,18 @@ codeunit 96499 "Report Contract 235 Tests ori"
         VerifyOutput('PDF', 'application/pdf', '%PDF');
     end;
 
-    /// <summary>Excel keeps the legacy binary envelope and ZIP bytes until issue 239.</summary>
+    /// <summary>Excel declares its actual content type and retains ZIP bytes.</summary>
     [Test]
     procedure SaveAsExcelContentType()
     begin
-        VerifyOutput('Excel', 'application/pdf', 'PK');
+        VerifyOutput('Excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'PK');
     end;
 
-    /// <summary>Word keeps the legacy binary envelope and ZIP bytes until issue 239.</summary>
+    /// <summary>Word declares its actual content type and retains ZIP bytes.</summary>
     [Test]
     procedure SaveAsWordContentType()
     begin
-        VerifyOutput('Word', 'application/pdf', 'PK');
+        VerifyOutput('Word', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'PK');
     end;
 
     /// <summary>AC04 Word and Excel layout exports report their real format MIME types.</summary>
@@ -192,10 +192,10 @@ codeunit 96499 "Report Contract 235 Tests ori"
         AssertContains(TextValue, 'wordprocessingml.document');
         AssertContains(TextValue, 'spreadsheetml.sheet');
         SaveMsg.GetEnvelope(Chapter);
-        Assert.IsFalse(Chapter.Contains('contentTypesByFormat'), 'Do not promise MIME types pending issue 239');
+        Assert.IsTrue(Chapter.Contains('contentTypesByFormat'), 'Envelope documents every output MIME type');
         Assert.AreEqual('application/pdf', GetText(Chapter, 'contentType'), 'Legacy envelope content type');
         SaveMsg.GetResponse(Chapter);
-        Assert.IsFalse(Chapter.Contains('contentTypesByFormat'), 'Response keeps the existing MIME contract');
+        Assert.IsTrue(Chapter.Contains('contentTypesByFormat'), 'Response documents every output MIME type');
         SaveMsg.GetNotes(TextValue);
         AssertContains(TextValue, 'tableView');
         if LanguageId = 1039 then begin
@@ -320,7 +320,7 @@ codeunit 96499 "Report Contract 235 Tests ori"
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);
         DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
-        Assert.AreEqual(ExpectedMime, TempArgument."Content Type", 'Legacy binary envelope is preserved until issue 239');
+        Assert.AreEqual(ExpectedMime, TempArgument."Content Type", 'Content type matches actual output');
         if OutputFormat = 'XML' then
             TempArgument."Response Content".CreateInStream(Input, TextEncoding::UTF8)
         else
