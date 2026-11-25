@@ -114,7 +114,7 @@ codeunit 96499 "Report Contract 235 Tests ori"
         TempArgument.Insert();
         TempArgument.SetRequestJson(Request);
         DispatchHelper.Execute("Message Type ori"::"Orchestrator.Report.SaveAs", TempArgument);
-        Assert.AreEqual('application/pdf', TempArgument."Content Type", 'Legacy binary envelope with valid Office bytes');
+        Assert.AreEqual(ExpectedMime, TempArgument."Content Type", 'Office bytes carry their actual MIME type');
         TempArgument."Response Content".CreateInStream(Input);
         if OutputFormat = 'Excel' then begin
             Request := LayoutRequest('FixtureExcel');

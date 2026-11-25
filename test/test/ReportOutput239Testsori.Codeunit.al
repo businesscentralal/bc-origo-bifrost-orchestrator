@@ -105,6 +105,7 @@ codeunit 96464 "Report Output 239 Tests ori"
         Request: JsonObject;
         Input: InStream;
         Prefix: Text;
+        ByteLength: BigInteger;
         PriorLanguage: Integer;
     begin
         // [GIVEN] An extension-owned report, restricted to its single successful fixture row.
@@ -124,7 +125,8 @@ codeunit 96464 "Report Output 239 Tests ori"
         Assert.AreEqual(ExpectedMime, TempArgument."Content Type", 'MIME type matches rendered format');
         Assert.IsTrue(TempArgument.GetResponseContentLength() > 0, 'Rendered file is not empty');
         TempArgument."Response Content".CreateInStream(Input, TextEncoding::UTF8);
-        Assert.AreEqual(Input.Length(), TempArgument.GetResponseContentLength(), 'Length counts stream bytes');
+        ByteLength := TempArgument.GetResponseContentLength();
+        Assert.AreEqual(Input.Length(), ByteLength, 'Length counts stream bytes');
         Input.ReadText(Prefix, StrLen(Magic));
         Assert.AreEqual(Magic, Prefix, 'Original file signature survives');
     end;
