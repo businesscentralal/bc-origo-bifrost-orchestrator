@@ -186,6 +186,14 @@ codeunit 10035592 "Report Msg Handler ori"
             RecRef.Close();
 
         Argument.SetResponsePdf(TempBlob);
+        case OutputFormat of
+            ReportFormat::Word:
+                Argument."Content Type" := 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            ReportFormat::Excel:
+                Argument."Content Type" := 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            ReportFormat::Xml:
+                Argument."Content Type" := 'application/xml';
+        end;
     end;
 
     /// <summary>

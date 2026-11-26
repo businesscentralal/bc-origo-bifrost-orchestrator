@@ -7,6 +7,11 @@ Business Central release versioning (`major.minor.build.revision`).
 
 ## [Unreleased] — Issue #268
 
+### Fixed — #239
+- `Orchestrator.Report.SaveAs` now labels Word, Excel and XML output with their real MIME types; PDF remains `application/pdf`. English and Icelandic help lists all four types.
+- File-size follow-up (AC02): the rendered BLOB byte length is available through Foundation, but SaveAs returns a binary stream. Adding a `size` field to the MCP reply belongs to the MCP runtime in mcp-stateless#265; no JSON wrapper replaces the binary contract here.
+- Added test codeunit 96464 `Report Output 239 Tests ori` for bilingual rendering, byte lengths, omitted/case-insensitive formats and invalid inputs. No product object IDs added.
+
 ### Fixed
 - **Table Data / Töflugögn** on Bifrost Setup and Bifrost Playbooks now opens Table Data Management (10035627), gated by that page's execute permission. The original worksheet (10035569) remains available beside it as **Table Data Worksheet / Vinnublað töflugagna** with its existing permissions. No page UsageCategory or message contract changed.
 - Runtime help (10035576), README and Icelandic translations describe both paths and the read/export access granted by BIFROST TblRead ori.
