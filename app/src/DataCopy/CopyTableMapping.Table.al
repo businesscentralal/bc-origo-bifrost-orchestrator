@@ -14,6 +14,7 @@ table 10035632 "Copy Table Mapping ori"
 {
     Caption = 'Copy Table Mapping', Comment = 'is-IS=Afrita töflu - vörpun';
     DataClassification = SystemMetadata;
+    AllowInCustomizations = AsReadOnly;
     Access = Public;
     LookupPageId = "Copy Tables Mapping ori";
     DrillDownPageId = "Copy Tables Mapping ori";
