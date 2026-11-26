@@ -11,6 +11,7 @@ table 10035633 "Copy Field Mapping ori"
 {
     Caption = 'Copy Field Mapping', Comment = 'is-IS=Afrita reit - vörpun';
     DataClassification = SystemMetadata;
+    AllowInCustomizations = AsReadOnly;
     Access = Public;
 
     fields

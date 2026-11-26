@@ -5,6 +5,11 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #271
+
+### Fixed
+- AppSourceCop AS0139: **Copy Table Mapping ori** (10035632) and **Copy Field Mapping ori** (10035633) now set `AllowInCustomizations = AsReadOnly` on the table, so the 18 Data Copy fields no longer default to ToBeClassified. Per-tenant extensions can read the mappings but not edit them through customization. No object IDs added; no field, page or message contract changed.
+
 ## [Unreleased] — Issue #268
 
 ### Fixed — #239
