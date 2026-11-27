@@ -129,11 +129,19 @@ table 10035539 "Playbook ori"
     local procedure DeleteStepFamily(PlaybookCode: Code[20]): Integer
     var
         PlaybookStep: Record "Playbook Step ori";
+        PlaybookCondition: Record "Playbook Condition ori";
+        PlaybookTransform: Record "Playbook Transform ori";
         Removed: Integer;
     begin
+        // Count conditions and Transform rows before the step OnDelete cascade removes them,
+        // so the returned number covers every orphan row of the playbook code.
         PlaybookStep.SetRange("Playbook Code", PlaybookCode);
-        Removed := PlaybookStep.Count();
+        PlaybookCondition.SetRange("Playbook Code", PlaybookCode);
+        PlaybookTransform.SetRange("Playbook Code", PlaybookCode);
+        Removed := PlaybookStep.Count() + PlaybookCondition.Count() + PlaybookTransform.Count();
         PlaybookStep.DeleteAll(true);
+        PlaybookCondition.DeleteAll(true);
+        PlaybookTransform.DeleteAll(true);
         exit(Removed);
     end;
 

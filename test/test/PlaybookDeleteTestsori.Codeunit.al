@@ -92,7 +92,7 @@ codeunit 96450 "Playbook Delete Tests ori"
         Playbook.Get('T275D');
         Playbook.Delete(false);
         Removed := Playbook.DeleteOrphanChildren();
-        Assert.IsTrue(Removed >= 2, 'at least the two orphan steps are counted');
+        Assert.AreEqual(4, Removed, 'two orphan steps, one condition and one transform are counted');
         Cond.SetRange("Playbook Code", 'T275D');
         Assert.RecordIsEmpty(Cond);
         Transform.SetRange("Playbook Code", 'T275D');
