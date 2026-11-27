@@ -95,34 +95,36 @@ table 10035539 "Playbook ori"
         PlaybookCondition: Record "Playbook Condition ori";
         PlaybookTransform: Record "Playbook Transform ori";
         Playbook: Record "Playbook ori";
+        CurrentCode: Code[20];
         Removed: Integer;
     begin
-        if PlaybookStep.FindSet() then
+        if PlaybookStep.FindFirst() then
             repeat
-                if not Playbook.Get(PlaybookStep."Playbook Code") then
-                    Removed += DeleteStepFamily(PlaybookStep."Playbook Code");
-                PlaybookStep.SetFilter("Playbook Code", '>%1', PlaybookStep."Playbook Code");
-            until not PlaybookStep.FindSet();
-        if PlaybookCondition.FindSet() then
+                CurrentCode := PlaybookStep."Playbook Code";
+                if not Playbook.Get(CurrentCode) then
+                    Removed += DeleteStepFamily(CurrentCode);
+                PlaybookStep.SetFilter("Playbook Code", '>%1', CurrentCode);
+            until not PlaybookStep.FindFirst();
+        if PlaybookCondition.FindFirst() then
             repeat
-                if not Playbook.Get(PlaybookCondition."Playbook Code") then begin
-                    PlaybookCondition.SetRange("Playbook Code", PlaybookCondition."Playbook Code");
+                CurrentCode := PlaybookCondition."Playbook Code";
+                if not Playbook.Get(CurrentCode) then begin
+                    PlaybookCondition.SetRange("Playbook Code", CurrentCode);
                     Removed += PlaybookCondition.Count();
                     PlaybookCondition.DeleteAll(true);
-                    PlaybookCondition.SetRange("Playbook Code");
-                end else
-                    PlaybookCondition.SetFilter("Playbook Code", '>%1', PlaybookCondition."Playbook Code");
-            until not PlaybookCondition.FindSet();
-        if PlaybookTransform.FindSet() then
+                end;
+                PlaybookCondition.SetFilter("Playbook Code", '>%1', CurrentCode);
+            until not PlaybookCondition.FindFirst();
+        if PlaybookTransform.FindFirst() then
             repeat
-                if not Playbook.Get(PlaybookTransform."Playbook Code") then begin
-                    PlaybookTransform.SetRange("Playbook Code", PlaybookTransform."Playbook Code");
+                CurrentCode := PlaybookTransform."Playbook Code";
+                if not Playbook.Get(CurrentCode) then begin
+                    PlaybookTransform.SetRange("Playbook Code", CurrentCode);
                     Removed += PlaybookTransform.Count();
                     PlaybookTransform.DeleteAll(true);
-                    PlaybookTransform.SetRange("Playbook Code");
-                end else
-                    PlaybookTransform.SetFilter("Playbook Code", '>%1', PlaybookTransform."Playbook Code");
-            until not PlaybookTransform.FindSet();
+                end;
+                PlaybookTransform.SetFilter("Playbook Code", '>%1', CurrentCode);
+            until not PlaybookTransform.FindFirst();
         exit(Removed);
     end;
 
