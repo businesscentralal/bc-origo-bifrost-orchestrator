@@ -6993,6 +6993,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Sækir valda keðju með skrefum, skilyrðum og umbreytingarvörpunum sem keðjuskrá.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action ExportPlaybook - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 2763896" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete all steps, conditions and Transform mappings whose playbook no longer exists? Execution history is kept.</source>
+          <target>Eyða öllum skrefum, skilyrðum og umbreytingarvörpunum sem tilheyra keðju sem er ekki lengur til? Keyrsluskrá er varðveitt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eyða öllum skrefum, skilyrðum og umbreytingarvörpunum sem tilheyra keðju sem er ekki lengur til? Keyrsluskrá er varðveitt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType OrphanQst</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - NamedType 303803307" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 orphan rows deleted.</source>
+          <target>%1 munaðarlausum línum var eytt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = number of rows, is-IS=%1 munaðarlausum línum var eytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - NamedType OrphanRemovedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 4244321887 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deletes steps, conditions and Transform mappings whose playbook no longer exists. Execution history is kept.</source>
+          <target>Eyðir skrefum, skilyrðum og umbreytingarvörpunum sem tilheyra keðju sem er ekki lengur til. Keyrsluskrá er varðveitt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eyðir skrefum, skilyrðum og umbreytingarvörpunum sem tilheyra keðju sem er ekki lengur til. Keyrsluskrá er varðveitt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action RemoveOrphanSteps - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 608463566 - Action 4244321887 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove Orphan Steps</source>
+          <target>Fjarlægja munaðarlaus skref</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja munaðarlaus skref</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Playbooks ori - Action RemoveOrphanSteps - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 608463566 - Action 3604439787 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Export Playbook</source>
           <target>Flytja út keðju</target>
