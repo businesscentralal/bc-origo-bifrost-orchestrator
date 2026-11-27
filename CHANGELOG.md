@@ -5,7 +5,7 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
-## [Unreleased] — Issue #273
+## [28.0.7.0] — Unreleased — Issue #273
 
 ### Changed
 - Bifröst Related now opens Orchestrator setup immediately after Bifrost Setup, then Playbooks and Tools. The original Setup extension retains only the setup entry; permissions and target pages are unchanged.
