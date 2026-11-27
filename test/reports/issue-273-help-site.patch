@@ -1,0 +1,24 @@
+--- a/help/orchestrator/orchestrator-setup.md
++++ b/help/orchestrator/orchestrator-setup.md
+@@ -6,0 +7,3 @@
++Open **Bifröst > Related > Bifrost Orchestrator Setup** to configure Orchestrator. The action follows **Bifrost Setup**. **Bifrost Playbooks** and **Tools** follow it; Tools contains **Playbook Execution Log**, **Table Data**, **Table Data Worksheet**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Setup > Apps** retains the setup entry; playbooks and tools are now on **Bifröst**.
++
++
+--- a/i18n/is-IS/docusaurus-plugin-content-docs-help-orchestrator/current/orchestrator-setup.md
++++ b/i18n/is-IS/docusaurus-plugin-content-docs-help-orchestrator/current/orchestrator-setup.md
+@@ -6,0 +7,3 @@
++Opnaðu **Bifröst > Tengt > Uppsetning Bifröst stjórnanda** til að stilla stjórnandann. Aðgerðin er á eftir **Uppsetning Bifröst**. Þar á eftir eru **Bifröst keðjur** og **Verkfæri**, með **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst > Forrit** heldur uppsetningaraðgerðinni; keðjur og verkfæri eru nú á síðunni **Bifröst**.
++
++
+--- a/help/orchestrator/playbooks.md
++++ b/help/orchestrator/playbooks.md
+@@ -6,0 +7,3 @@
++Open **Bifröst > Related > Bifrost Orchestrator Setup** to configure Orchestrator. The action follows **Bifrost Setup**. **Bifrost Playbooks** and **Tools** follow it; Tools contains **Playbook Execution Log**, **Table Data**, **Table Data Worksheet**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Setup > Apps** retains the setup entry; playbooks and tools are now on **Bifröst**.
++
++
+--- a/i18n/is-IS/docusaurus-plugin-content-docs-help-orchestrator/current/playbooks.md
++++ b/i18n/is-IS/docusaurus-plugin-content-docs-help-orchestrator/current/playbooks.md
+@@ -6,0 +7,3 @@
++Opnaðu **Bifröst > Tengt > Uppsetning Bifröst stjórnanda** til að stilla stjórnandann. Aðgerðin er á eftir **Uppsetning Bifröst**. Þar á eftir eru **Bifröst keðjur** og **Verkfæri**, með **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst > Forrit** heldur uppsetningaraðgerðinni; keðjur og verkfæri eru nú á síðunni **Bifröst**.
++
++

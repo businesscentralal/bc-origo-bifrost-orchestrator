@@ -2752,9 +2752,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType HeadingTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 60656952" size-unit="char" translate="yes" xml:space="preserve">
-          <source>On **Bifrost Setup**, open **Related &gt; Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data**, **Table Data Worksheet**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Orchestrator Setup** remains under **Apps**.</source>
-          <target>Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Uppsetning Bifröst** skaltu opna **Tengt &gt; Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst stjórnanda** er áfram undir **Forrit**.</note>
+          <source>On **Bifröst**, open **Related &gt; Bifrost Orchestrator Setup** after **Bifrost Setup**, then **Bifrost Playbooks**, which sits before the **Tools** group, and **Related &gt; Tools** for **Playbook Execution Log**, **Table Data**, **Table Data Worksheet**, **Copy Tables Mapping** and **Copy Plans**. **Bifrost Setup &gt; Apps** also opens **Bifrost Orchestrator Setup**; playbooks and tools are on **Bifröst**.</source>
+          <target>Á síðunni **Bifröst** skaltu opna **Tengt &gt; Uppsetning Bifröst stjórnanda** á eftir **Uppsetning Bifröst** og síðan **Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst &gt; Forrit** opnar einnig **Uppsetning Bifröst stjórnanda**; keðjur og verkfæri eru á síðunni **Bifröst**.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Á síðunni **Bifröst** skaltu opna **Tengt &gt; Uppsetning Bifröst stjórnanda** á eftir **Uppsetning Bifröst** og síðan **Bifröst keðjur**, sem er á undan hópnum **Verkfæri**, og **Tengt &gt; Verkfæri** til að finna **Keyrsluskrá keðju**, **Töflugögn**, **Vinnublað töflugagna**, **Töfluafritun - vörpun** og **Afritunaráætlanir**. **Uppsetning Bifröst &gt; Forrit** opnar einnig **Uppsetning Bifröst stjórnanda**; keðjur og verkfæri eru á síðunni **Bifröst**.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Help ori - Method BuildToolsNavigationGuide - NamedType SetupToolsTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 293043543 - Method 1754934487 - NamedType 2977294634" size-unit="char" translate="yes" xml:space="preserve">
@@ -11445,89 +11445,101 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Tilgreinir hvort Bifröst stjórnandinn fylgist með þessari vinnsluraðarfærslu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobQueueEntryCard.PageExt ori - Control Scheduler Enabled ori - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 1837510643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
+          <source>Configure Bifrost Orchestrator: job queue scheduling, playbooks, client credentials and secrets.</source>
+          <target>Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stilla Bifröst stjórnandann: tímasetningu vinnsluraða, keðjur, auðkenni biðlara og leyndarmál.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action OrchestratorSetup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1348529347 - Action 1837510643 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
+          <source>Bifrost Orchestrator Setup</source>
+          <target>Uppsetning Bifröst stjórnanda</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifröst stjórnanda</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action OrchestratorSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1348529347 - Action 1770106874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>View and configure Bifrost message playbooks.</source>
           <target>Skoða og stilla keðjur Bifröst skilaboða.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skoða og stilla keðjur Bifröst skilaboða.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action Playbooks - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 1770106874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Bifrost Playbooks</source>
           <target>Bifröst keðjur</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst keðjur</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Playbooks - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action Playbooks - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 3587537701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Open playbook and table data tools.</source>
           <target>Opna verkfæri fyrir keðjur og töflugögn.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Opna verkfæri fyrir keðjur og töflugögn.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Tools - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action Tools - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 3587537701 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 3587537701 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Tools</source>
           <target>Verkfæri</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Verkfæri</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action Tools - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action Tools - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 2836670895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 2836670895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>View copy plans and configure table-to-table playbooks within your permissions.</source>
           <target>Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skoða afritunaráætlanir og stilla keðjur til að afrita milli taflna innan heimilda þinna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action CopyPlans - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 2836670895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 2836670895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Copy Plans</source>
           <target>Afritunaráætlanir</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Afritunaráætlanir</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyPlans - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action CopyPlans - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 1021686464 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 1021686464 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Map source tables to destination tables and copy their data through the Bifrost write guards.</source>
           <target>Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Varpa upprunatöflum á viðtökutöflur og afrita gögn þeirra í gegnum skrifvarnir Bifrastar.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyTablesMapping - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action CopyTablesMapping - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 1021686464 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 1021686464 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Copy Tables Mapping</source>
           <target>Töfluafritun - vörpun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Töfluafritun - vörpun</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action CopyTablesMapping - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action CopyTablesMapping - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 3732935745 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>View the execution log for playbook runs.</source>
           <target>Skoða keyrsluskrá keðjukeyrslna.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Skoða keyrsluskrá keðjukeyrslna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action PlaybookInstances - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action PlaybookInstances - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 3732935745 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 3732935745 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Playbook Execution Log</source>
           <target>Keyrsluskrá keðju</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Keyrsluskrá keðju</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action PlaybookInstances - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action PlaybookInstances - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 4283688906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Open Table Data Management to view, filter and export tables, or edit and import with write access.</source>
           <target>Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Opna Vinna með töflugögn til að skoða, afmarka og flytja út töflur eða breyta og flytja inn með skrifheimildum.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action TableData - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 4283688906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Table Data</source>
           <target>Töflugögn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Töflugögn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableData - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action TableData - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 441680100 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 441680100 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Open the single-table worksheet to browse and edit records within your permissions.</source>
           <target>Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Opna vinnublað fyrir eina töflu til að skoða og breyta færslum innan heimilda þinna.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableDataWorksheet - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action TableDataWorksheet - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2327273444 - Action 441680100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+        <trans-unit id="PageExtension 1348529347 - Action 441680100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 859178725">
           <source>Table Data Worksheet</source>
           <target>Vinnublað töflugagna</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Vinnublað töflugagna</note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Setup JQ ori - Action TableDataWorksheet - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Overview Orchestrator ori - Action TableDataWorksheet - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2327273444 - Action 1837510643 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Configure Bifrost Orchestrator: job queue scheduling, playbooks, client credentials and secrets.</source>
