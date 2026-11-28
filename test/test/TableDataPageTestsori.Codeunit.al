@@ -18,9 +18,9 @@ codeunit 96448 "Table Data Page Tests ori"
         ImportMarkerId: Guid;
         ReadOnlyFieldName: Text;
 
-    /// <summary>Tools open the intended pages from Setup in both supported languages.</summary>
+    /// <summary>Tools open the intended pages from Bifröst in both supported languages.</summary>
     [Test]
-    procedure Scenario_AC01_SetupTools_OpenTargetPages()
+    procedure Scenario_AC01_OverviewTools_OpenTargetPages()
     begin
         // Story #199, AC01 | Time: independent of Today/WorkDate | Risk: Foundation setup UI.
         VerifyToolsNavigation(1033, true);
@@ -113,9 +113,9 @@ codeunit 96448 "Table Data Page Tests ori"
         LowerPermissions.StopLoggingNAVPermissions();
     end;
 
-    local procedure VerifyToolsNavigation(LanguageId: Integer; FromSetup: Boolean)
+    local procedure VerifyToolsNavigation(LanguageId: Integer; FromOverview: Boolean)
     var
-        Setup: TestPage "Setup ori";
+        Overview: TestPage "Bifrost ori";
         Playbooks: TestPage "Playbooks ori";
         TableData: TestPage "Table Data ori";
         CopyPlans: TestPage "Copy Plans ori";
@@ -126,23 +126,23 @@ codeunit 96448 "Table Data Page Tests ori"
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
         // [WHEN] Each action is invoked through the real page surface.
-        if FromSetup then begin
-            Setup.OpenView();
+        if FromOverview then begin
+            Overview.OpenView();
             TableData.Trap();
-            Setup.TableDataWorksheet.Invoke();
+            Overview.TableDataWorksheet.Invoke();
             TableData.PageSizeField.AssertEquals(50);
             TableData.Close();
             CopyPlans.Trap();
-            Setup.CopyPlans.Invoke();
+            Overview.CopyPlans.Invoke();
             Assert.IsFalse(CopyPlans.Editable(), 'Copy Plans list opens');
             CopyPlans.Close();
             Playbooks.Trap();
-            Setup.Playbooks.Invoke();
+            Overview.Playbooks.Invoke();
             Playbooks.Close();
             Instances.Trap();
-            Setup.PlaybookInstances.Invoke();
+            Overview.PlaybookInstances.Invoke();
             Instances.Close();
-            Setup.Close();
+            Overview.Close();
         end else begin
             Playbooks.OpenView();
             Playbooks.Filter.SetFilter(Code, 'X199-NO-PLAYBOOK');

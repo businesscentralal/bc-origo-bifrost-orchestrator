@@ -30,6 +30,7 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
 - #261 (Table Data Management port): app tables 10035630-10035631, pages 10035627-10035631, codeunits 10035601, 10035602,
   10035604, 10035605, 10035608, permission set 10035540; test codeunit 96449, test permission set 96493 (checked against the
   sources of main on 2026-11-22; the free lists above are older than the sources, which are authoritative).
+- #273: pageextension 10035538 `Overview Orchestrator ori`; test codeunit 96467 `Overview Navigation Tests ori`.
 - #268: test codeunit 96463 `Table Data Nav Tests ori`.
 - #266: test codeunit 96459 `Copy Mapping Indent Tests ori`.
 - Used test ids: 96400-96404, 96410-96426, 96428, 96450-96454, 96490-96492.
@@ -53,17 +54,12 @@ Tests: 96400-96499 (moved 2026-09-05 from the originally proposed 96300-96399: t
   left `Help ori` (10035576), which stays for the `Help.Orchestrator.Get` overview; no object was deleted.
 
 ## Setup Page and Secrets (Bifröst platform rules)
-- The page extension on Foundation's `Setup ori` (`Setup JQ ori`, 10035537) adds the Apps action
-  `addlast(Apps)` opening page `Scheduler Setup ori`, plus its actionref in `addlast(Category_Apps)`,
-  and, in Navigate (`addlast(Navigation)`), the `Playbooks` action opening `Playbooks ori` directly before the Tools group (#260), whose actions open
-  `Playbook Instances ori`, `Table Data Management ori`, the separate `Table Data ori` worksheet, `Copy Tables Mapping ori` and `Copy Plans ori`. Existing action names are retained. No layout changes, no notification and **no `ContextSensitiveHelpPage`
-  override** - that property belongs to Foundation's own page. Client credentials, secrets and the
-  setup wizard stay on `Scheduler Setup ori`.
-- `Scheduler Setup ori` (page 10035536, caption *Bifrost Orchestrator Setup*, help slug `nornir-setup`) is
-  the application setup page. It hosts the navigation to Playbooks, Client Credentials, the Playbook
-  Execution Log and `App Secrets ori` (filtered with `SetAppFilter(GetAppId())`). It shows **no**
-  notification. The playbook list and the execution log are also opened from the Navigate area of
-  Bifröst Setup.
+- `Setup JQ ori` (10035537) retains only `OrchestratorSetup` in `Apps` and its promoted actionref.
+- `Overview Orchestrator ori` (10035538) extends `Bifrost ori`, adding Orchestrator setup after
+  `BifrostSetup`, then Playbooks and Tools (execution log, Table Data Management, Table Data Worksheet,
+  Copy Tables Mapping and Copy Plans). The actions retain the destination pages and permissions.
+- `Scheduler Setup ori` (10035536) remains the application setup page, with client credentials,
+  secrets and the setup wizard. It has no setup notification of its own.
 - **Setup notifications live on Bifröst Setup only** (Foundation's `Setup ori`). This app raises no
   setup banner of its own - no HTTP banner, no missing-credentials banner, no "run the setup wizard"
   banner, on any page. Foundation aggregates them, one banner per topic naming the applications

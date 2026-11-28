@@ -13,9 +13,9 @@ codeunit 96463 "Table Data Nav Tests ori"
     var
         Assert: Codeunit "Library Assert";
 
-    /// <summary>AC01/AC02: Setup opens the management list and the distinct worksheet in both languages.</summary>
+    /// <summary>AC01/AC02: Bifröst opens the management list and the distinct worksheet in both languages.</summary>
     [Test]
-    procedure AC01_SetupOpensManagementAndWorksheet()
+    procedure AC01_OverviewOpensManagementAndWorksheet()
     begin
         VerifyNavigation(1033, true);
         VerifyNavigation(1039, true);
@@ -147,9 +147,9 @@ codeunit 96463 "Table Data Nav Tests ori"
         GlobalLanguage(PreviousLanguage);
     end;
 
-    local procedure VerifyNavigation(LanguageId: Integer; FromSetup: Boolean)
+    local procedure VerifyNavigation(LanguageId: Integer; FromOverview: Boolean)
     var
-        Setup: TestPage "Setup ori";
+        Overview: TestPage "Bifrost ori";
         Playbooks: TestPage "Playbooks ori";
         Management: TestPage "Table Data Management ori";
         Worksheet: TestPage "Table Data ori";
@@ -157,16 +157,16 @@ codeunit 96463 "Table Data Nav Tests ori"
     begin
         PreviousLanguage := GlobalLanguage();
         GlobalLanguage(LanguageId);
-        if FromSetup then
-            Setup.OpenView()
+        if FromOverview then
+            Overview.OpenView()
         else begin
             Playbooks.OpenView();
             Playbooks.Filter.SetFilter(Code, 'X268-NO-PLAYBOOK');
             Assert.IsFalse(Playbooks.First(), 'Empty-list edge case');
         end;
         Management.Trap();
-        if FromSetup then
-            Setup.TableData.Invoke()
+        if FromOverview then
+            Overview.TableData.Invoke()
         else
             Playbooks.TableData.Invoke();
         if LanguageId = 1033 then
@@ -180,14 +180,14 @@ codeunit 96463 "Table Data Nav Tests ori"
         Assert.IsTrue(Management.TempFilterModifiedUpToField.Visible(), 'Modified up to');
         Management.Close();
         Worksheet.Trap();
-        if FromSetup then
-            Setup.TableDataWorksheet.Invoke()
+        if FromOverview then
+            Overview.TableDataWorksheet.Invoke()
         else
             Playbooks.TableDataWorksheet.Invoke();
         Worksheet.PageSizeField.AssertEquals(50);
         Worksheet.Close();
-        if FromSetup then
-            Setup.Close()
+        if FromOverview then
+            Overview.Close()
         else
             Playbooks.Close();
         GlobalLanguage(PreviousLanguage);

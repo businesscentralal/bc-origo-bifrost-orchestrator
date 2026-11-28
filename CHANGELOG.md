@@ -11,6 +11,14 @@ Business Central release versioning (`major.minor.build.revision`).
 - Deleting a **Playbook ori** (10035539) now deletes its steps, conditions and Transform mappings (new `OnDelete` trigger). Execution history (Playbook Instance and Step Log) is deliberately kept as the audit trail.
 - New `Playbook.DeleteOrphanChildren()` and a **Remove Orphan Steps** action on Bifrost Playbooks remove children left behind by earlier deletes; the message counts every removed row (steps, conditions and Transform rows). No product object IDs added (the range is full).
 - Test codeunit 96450 `Playbook Delete Tests ori`.
+## [28.0.7.0] — Unreleased — Issue #273
+
+### Changed
+- Bifröst Related now opens Orchestrator setup immediately after Bifrost Setup, then Playbooks and Tools. The original Setup extension retains only the setup entry; permissions and target pages are unchanged.
+- Runtime help, README and Icelandic translations follow the new navigation. Existing navigation tests use Bifröst.
+
+### Added
+- Pageextension 10035538 `Overview Orchestrator ori` and test codeunit 96467 `Overview Navigation Tests ori` for bilingual navigation and setup-only regression checks.
 
 ## [Unreleased] — Issue #271
 
@@ -305,7 +313,7 @@ Business Central release versioning (`major.minor.build.revision`).
 
 - Step kind and operation enums (10035623–10035624), mapping table/page (10035625–10035626) and executor/verifier (10035627–10035628) add Copy, Constant, Negate and Replace Text without a new message type or a business-table grant.
 - Runner 10035547 handles local single/forEach transformations and exposes a transformed result array to later steps. Step definitions/logs (10035540/10035543), log management (10035549), Verify (10035616–10035617) and authoring/log pages identify Transform; existing definitions retain Message ordinal zero.
-- Copy Plan fields/generator (10035578/10035608/10035622) insert Get/Transform/Set chains only when an operation is configured. Tests 96468–96470 and extended 96465 cover operations, invalid mappings, generated verification, repeated copying, logging and the legacy default.
+- Copy Plan fields/generator (10035578/10035608/10035622) insert Get/Transform/Set chains only when an operation is configured. Tests 96468–96470 and extended 96467 cover operations, invalid mappings, generated verification, repeated copying, logging and the legacy default.
 
 - Help overview (10035576) documents Copy Plan generation, field operations, Transform authoring and the unchanged seeded-only Workspace Preview contract.
 
@@ -316,7 +324,7 @@ Business Central release versioning (`major.minor.build.revision`).
 - Copy Plan and field mapping tables (10035577–10035578), list/card/field pages (10035580, 10035604, 10035608) and internal generator (10035622) create paged `Data.Records.Get` and foreach `Data.Records.Set` steps through the existing runner. Parent plans precede children, with siblings ordered by sequence.
 - Generation validates field metadata, destination keys, duplicate mappings and source views before replacing only the recorded generated playbook. It does not copy source SystemIds, grant base-table permissions, bypass Foundation guards or add message types.
 - Playbook admin/management roles can maintain plans; the view role receives read access. New captions and tooltips include Icelandic translations.
-- Test fixtures 96449/96464 and test codeunits 96465–96466 cover generation, repeated copies, ordering, replacement isolation, validation, restricted-source failures and the card action.
+- Test fixtures 96449/96464 and test codeunits 96467–96466 cover generation, repeated copies, ordering, replacement isolation, validation, restricted-source failures and the card action.
 
 
 ### Added (2026-11-03) - ReportLayout.Set accepts a staging row (#129)

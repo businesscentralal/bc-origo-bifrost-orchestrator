@@ -426,12 +426,13 @@ codeunit 96403 "Orchestr Secret Tests"
 
     [Test]
     [HandlerFunctions('SendNotificationHandler,SchedulerSetupPageHandler,PlaybooksPageHandler,PlaybookInstancesPageHandler')]
-    procedure BifrostSetupExposesOrchestratorSetupAndPlaybooks()
+    procedure BifrostPagesExposeOrchestratorNavigation()
     var
         BifrostSetup: TestPage "Setup ori";
+        Overview: TestPage "Bifrost ori";
     begin
-        // [SCENARIO] The Bifröst Setup page opens Bifrost Orchestrator Setup from Apps, and opens
-        // the playbook list and the playbook execution log from Navigate. Client credentials stay
+        // [SCENARIO] Bifrost Setup opens Bifrost Orchestrator Setup from Apps.
+        // Bifröst opens the playbook list and the playbook execution log from Related. Client credentials stay
         // on the application setup page. The setup notifications live on Bifröst Setup, raised
         // by Foundation for every application in the registry.
 
@@ -445,11 +446,13 @@ codeunit 96403 "Orchestr Secret Tests"
         BifrostSetup.OpenView();
 
         // [THEN] Navigate opens the playbook pages, and Apps still opens the application setup page
-        Assert.IsTrue(BifrostSetup.Playbooks.Enabled(), 'Bifrost Playbooks must be available on Bifrost Setup');
-        Assert.IsTrue(BifrostSetup.PlaybookInstances.Enabled(), 'The playbook execution log must be available on Bifrost Setup');
+        Overview.OpenView();
+        Assert.IsTrue(Overview.Playbooks.Enabled(), 'Bifrost Playbooks must be available on Bifröst');
+        Assert.IsTrue(Overview.PlaybookInstances.Enabled(), 'The playbook execution log must be available on Bifröst');
         Assert.IsTrue(BifrostSetup.OrchestratorSetup.Enabled(), 'The Bifrost Orchestrator Setup action must be available on Bifrost Setup');
-        BifrostSetup.Playbooks.Invoke();
-        BifrostSetup.PlaybookInstances.Invoke();
+        Overview.Playbooks.Invoke();
+        Overview.PlaybookInstances.Invoke();
+        Overview.Close();
         BifrostSetup.OrchestratorSetup.Invoke();
         BifrostSetup.Close();
     end;
