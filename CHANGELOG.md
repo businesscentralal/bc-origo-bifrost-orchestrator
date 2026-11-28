@@ -5,6 +5,13 @@ All notable changes to Bifrost Orchestrator are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this app uses
 Business Central release versioning (`major.minor.build.revision`).
 
+## [Unreleased] — Issue #275
+
+### Fixed
+- Deleting a **Playbook ori** (10035539) now deletes its steps, conditions and Transform mappings (new `OnDelete` trigger). Execution history (Playbook Instance and Step Log) is deliberately kept as the audit trail.
+- New `Playbook.DeleteOrphanChildren()` and a **Remove Orphan Steps** action on Bifrost Playbooks remove children left behind by earlier deletes; the message counts every removed row (steps, conditions and Transform rows). No product object IDs added (the range is full).
+- Test codeunit 96450 `Playbook Delete Tests ori`.
+
 ## [Unreleased] — Issue #271
 
 ### Fixed

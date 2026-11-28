@@ -67,6 +67,87 @@ table 10035539 "Playbook ori"
     }
 
     /// <summary>
+    /// Deleting a playbook deletes its steps, conditions and Transform mappings. Execution history
+    /// (Playbook Instance and Playbook Step Log) is deliberately kept: it is the audit trail of what ran.
+    /// </summary>
+    trigger OnDelete()
+    var
+        PlaybookStep: Record "Playbook Step ori";
+        PlaybookCondition: Record "Playbook Condition ori";
+        PlaybookTransform: Record "Playbook Transform ori";
+    begin
+        PlaybookStep.SetRange("Playbook Code", Code);
+        PlaybookStep.DeleteAll(true);
+        PlaybookCondition.SetRange("Playbook Code", Code);
+        PlaybookCondition.DeleteAll(true);
+        PlaybookTransform.SetRange("Playbook Code", Code);
+        PlaybookTransform.DeleteAll(true);
+    end;
+
+    /// <summary>
+    /// Deletes steps, conditions and Transform mappings whose playbook code has no playbook header
+    /// (left behind by deletes made before the OnDelete cascade existed). Execution history is kept.
+    /// </summary>
+    /// <returns>The number of orphan rows deleted.</returns>
+    procedure DeleteOrphanChildren(): Integer
+    var
+        PlaybookStep: Record "Playbook Step ori";
+        PlaybookCondition: Record "Playbook Condition ori";
+        PlaybookTransform: Record "Playbook Transform ori";
+        Playbook: Record "Playbook ori";
+        CurrentCode: Code[20];
+        Removed: Integer;
+    begin
+        if PlaybookStep.FindFirst() then
+            repeat
+                CurrentCode := PlaybookStep."Playbook Code";
+                if not Playbook.Get(CurrentCode) then
+                    Removed += DeleteStepFamily(CurrentCode);
+                PlaybookStep.SetFilter("Playbook Code", '>%1', CurrentCode);
+            until not PlaybookStep.FindFirst();
+        if PlaybookCondition.FindFirst() then
+            repeat
+                CurrentCode := PlaybookCondition."Playbook Code";
+                if not Playbook.Get(CurrentCode) then begin
+                    PlaybookCondition.SetRange("Playbook Code", CurrentCode);
+                    Removed += PlaybookCondition.Count();
+                    PlaybookCondition.DeleteAll(true);
+                end;
+                PlaybookCondition.SetFilter("Playbook Code", '>%1', CurrentCode);
+            until not PlaybookCondition.FindFirst();
+        if PlaybookTransform.FindFirst() then
+            repeat
+                CurrentCode := PlaybookTransform."Playbook Code";
+                if not Playbook.Get(CurrentCode) then begin
+                    PlaybookTransform.SetRange("Playbook Code", CurrentCode);
+                    Removed += PlaybookTransform.Count();
+                    PlaybookTransform.DeleteAll(true);
+                end;
+                PlaybookTransform.SetFilter("Playbook Code", '>%1', CurrentCode);
+            until not PlaybookTransform.FindFirst();
+        exit(Removed);
+    end;
+
+    local procedure DeleteStepFamily(PlaybookCode: Code[20]): Integer
+    var
+        PlaybookStep: Record "Playbook Step ori";
+        PlaybookCondition: Record "Playbook Condition ori";
+        PlaybookTransform: Record "Playbook Transform ori";
+        Removed: Integer;
+    begin
+        // Count conditions and Transform rows before the step OnDelete cascade removes them,
+        // so the returned number covers every orphan row of the playbook code.
+        PlaybookStep.SetRange("Playbook Code", PlaybookCode);
+        PlaybookCondition.SetRange("Playbook Code", PlaybookCode);
+        PlaybookTransform.SetRange("Playbook Code", PlaybookCode);
+        Removed := PlaybookStep.Count() + PlaybookCondition.Count() + PlaybookTransform.Count();
+        PlaybookStep.DeleteAll(true);
+        PlaybookCondition.DeleteAll(true);
+        PlaybookTransform.DeleteAll(true);
+        exit(Removed);
+    end;
+
+    /// <summary>
     /// Gets the initial request template as text.
     /// </summary>
     /// <returns>The JSON template text, or empty if not set.</returns>
