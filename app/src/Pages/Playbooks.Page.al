@@ -94,6 +94,25 @@ page 10035551 "Playbooks ori"
                     AccessByPermission = page "Copy Plans ori" = X;
                 }
             }
+            action(RemoveOrphanSteps)
+            {
+                ApplicationArea = All;
+                Caption = 'Remove Orphan Steps', Comment = 'is-IS=Fjarlægja munaðarlaus skref';
+                ToolTip = 'Deletes steps, conditions and Transform mappings whose playbook no longer exists. Execution history is kept.', Comment = 'is-IS=Eyðir skrefum, skilyrðum og umbreytingarvörpunum sem tilheyra keðju sem er ekki lengur til. Keyrsluskrá er varðveitt.';
+                Image = Delete;
+                AccessByPermission = tabledata "Playbook Step ori" = D;
+
+                trigger OnAction()
+                var
+                    Playbook: Record "Playbook ori";
+                    Removed: Integer;
+                begin
+                    if not Confirm(OrphanQst) then
+                        exit;
+                    Removed := Playbook.DeleteOrphanChildren();
+                    Message(OrphanRemovedMsg, Removed);
+                end;
+            }
             action(ExportPlaybook)
             {
                 ApplicationArea = All;
@@ -135,6 +154,8 @@ page 10035551 "Playbooks ori"
     }
 
     var
+        OrphanQst: Label 'Delete all steps, conditions and Transform mappings whose playbook no longer exists? Execution history is kept.', Comment = 'is-IS=Eyða öllum skrefum, skilyrðum og umbreytingarvörpunum sem tilheyra keðju sem er ekki lengur til? Keyrsluskrá er varðveitt.';
+        OrphanRemovedMsg: Label '%1 orphan rows deleted.', Comment = '%1 = number of rows, is-IS=%1 munaðarlausum línum var eytt.';
         FileNameTxt: Label 'Playbook-%1.json', Locked = true;
         DownloadTitleTxt: Label 'Export playbook', Comment = 'is-IS=Flytja út keðju';
         UploadTitleTxt: Label 'Import playbook', Comment = 'is-IS=Flytja inn keðju';
